@@ -1,6 +1,6 @@
 import { cloneDeep } from "lodash";
 import i18next from "i18next";
-import { i18nText } from "@next-core/brick-kit";
+import { i18nText, getRuntime } from "@next-core/brick-kit";
 import {
   Story,
   Chapter,
@@ -9,12 +9,14 @@ import {
   MenuIcon,
   StoryConf,
   SnippetConf,
+  SrcIcon,
 } from "@next-core/brick-types";
 import { atomBook } from "../stories/chapters/atom-bricks";
 import { businessBook } from "../stories/chapters/business-bricks";
 import { DemoConf } from "../interfaces";
 import { K, NS_DEVELOPERS } from "../i18n/constants";
 
+type MixedIconType = MenuIcon | SrcIcon;
 export interface BrickRecord {
   id: string;
   type: "brick" | "template";
@@ -22,7 +24,7 @@ export interface BrickRecord {
   subTitle?: string;
   description: string;
   category?: string;
-  icon?: MenuIcon;
+  icon?: MixedIconType;
   tags?: string[];
   doc?: string | StoryDoc;
 }
@@ -62,6 +64,20 @@ export const getStoryTitle = (story: Story): string => {
     : text;
 };
 
+export function processIconInPreview(icon: MixedIconType): MixedIconType {
+  const imgSrc = (icon as SrcIcon)?.imgSrc;
+  if (imgSrc) {
+    return {
+      ...icon,
+      imgSrc: /^(?:data):|^\//.test(imgSrc)
+        ? imgSrc
+        : `${location.origin}${getRuntime().getBasePath()}${imgSrc}`,
+    } as SrcIcon;
+  }
+
+  return icon;
+}
+
 export const getAllStoryListV2 = (
   categoryGroups: CategoryGroup[],
   stories: Story[],
@@ -69,6 +85,9 @@ export const getAllStoryListV2 = (
   categories?: string | string[],
   fields?: Record<string, boolean>
 ): BrickRecord[] => {
+  const enableNewBrickPreview =
+    getRuntime().getFeatureFlags()["developers-brick-preview"];
+
   const storyList: BrickRecord[] = [];
   let books: Chapter[] = [];
   fields = fields || {};
@@ -165,7 +184,9 @@ export const getAllStoryListV2 = (
           subTitle: story.author,
           description: description,
           tags: tags.map(i18nText),
-          icon: story.icon,
+          icon: enableNewBrickPreview
+            ? processIconInPreview(story.icon)
+            : story.icon,
           category: category,
         };
         if (fields.doc) {

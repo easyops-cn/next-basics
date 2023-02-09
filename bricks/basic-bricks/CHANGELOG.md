@@ -3,6 +3,69 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.7...@next-bricks/basic-bricks@1.228.8) (2023-02-07)
+
+
+### Bug Fixes
+
+* compatible with no route data ([09c3519](https://github.com/easyops-cn/next-basics/commit/09c3519108d9380bd6655507042ef906d000738a))
+
+
+
+
+
+## [1.228.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.6...@next-bricks/basic-bricks@1.228.7) (2023-02-02)
+
+
+### Bug Fixes
+
+* fix launchpad fetch everytime ([5a2a9d1](https://github.com/easyops-cn/next-basics/commit/5a2a9d1a8ee4bf7788d209f353d1af29a59aa464))
+
+
+
+
+
+## [1.228.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.5...@next-bricks/basic-bricks@1.228.6) (2023-02-01)
+
+
+### Bug Fixes
+
+* 解决launchpad没有使用cdn的问题 ([5c93246](https://github.com/easyops-cn/next-basics/commit/5c932463ebb5372a4fffd81a929aecf21868e055))
+
+
+
+
+
+## [1.228.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.4...@next-bricks/basic-bricks@1.228.5) (2023-02-01)
+
+**Note:** Version bump only for package @next-bricks/basic-bricks
+
+
+
+
+
+## [1.228.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.3...@next-bricks/basic-bricks@1.228.4) (2023-01-18)
+
+
+### Bug Fixes
+
+* 手动更改custom-antd-styles依赖 ([4292ab6](https://github.com/easyops-cn/next-basics/commit/4292ab69052005a51493e77ee75461d91fd1e86b))
+
+
+
+
+
+## [1.228.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.2...@next-bricks/basic-bricks@1.228.3) (2023-01-17)
+
+
+### Bug Fixes
+
+* 修改面包屑及micro-app样式 ([2b119fe](https://github.com/easyops-cn/next-basics/commit/2b119fe8edb2304e9f3f06a7ed8daaad883d117c))
+
+
+
+
+
 ## [1.228.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.1...@next-bricks/basic-bricks@1.228.2) (2023-01-15)
 
 

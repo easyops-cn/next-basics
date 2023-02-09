@@ -15,6 +15,7 @@ import {
   extractCommonProps,
   visualFormUtils,
   PropertyType,
+  yaml,
 } from "@next-libs/visual-builder";
 
 /**
@@ -172,6 +173,27 @@ export class VisualPropertyFormElement extends UpdatingElement {
       allValues,
     });
   };
+
+  @method()
+  getFieldsValue(): void {
+    if (this._formUtils.current) {
+      if (this._formUtils.current.getCurTypeList()?.length) {
+        const values = Object.fromEntries(
+          Object.entries(
+            processFormValue(
+              this._formUtils.current.getFieldsValue(),
+              this._formUtils.current.getCurTypeList()
+            )
+          ).map(([key, value]) => [
+            [key],
+            typeof value === "string" ? yaml(value) : value,
+          ])
+        );
+        return values;
+      }
+    }
+    return null;
+  }
 
   connectedCallback(): void {
     // Don't override user's style settings.

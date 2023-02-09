@@ -46,6 +46,7 @@ export enum K {
   RESPONSE_SAMPLE = "RESPONSE_SAMPLE",
   COPY_SUCCESS = "COPY_SUCCESS",
   DEMO = "DEMO",
+  MOVED_BY_DRAGGING = "MOVED_BY_DRAGGING",
 }
 
 export type Locale = { [key in K]: string };

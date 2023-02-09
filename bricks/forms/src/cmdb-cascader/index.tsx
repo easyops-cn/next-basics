@@ -124,7 +124,21 @@ export class CmdbCascaderElement extends FormItemElement {
   changeEvent: EventEmitter;
   handleChange = (value: valueCMDBCascaderProp[]): void => {
     this.value = value;
-    this.changeEvent.emit(value);
+    this._render();
+    Promise.resolve().then(() => {
+      this.changeEvent.emit(value);
+    });
+  };
+
+  /**
+   * @detail `{[key: string]: any}`
+   * @description 选项改变时触发
+   */
+  @event({ type: "forms.cmdb-cascader.change.v2" })
+  changeEventV2: EventEmitter;
+  handleChangeV2 = (value: valueCMDBCascaderProp[]): void => {
+    this.value = value;
+    this.changeEventV2.emit(value);
   };
 
   connectedCallback(): void {
@@ -161,6 +175,7 @@ export class CmdbCascaderElement extends FormItemElement {
             validator={this.validator}
             notRender={this.notRender}
             onChange={this.handleChange}
+            onChangeV2={this.handleChangeV2}
             helpBrick={this.helpBrick}
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}

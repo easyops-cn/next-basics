@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.280.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.280.0...@next-bricks/presentational-bricks@1.280.1) (2023-02-08)
+
+
+### Bug Fixes
+
+* update @next-libs/hooks ([3bd6a7f](https://github.com/easyops-cn/next-basics/commit/3bd6a7f9edd103d926a12b40bbe1de667e49612a))
+
+
+
+
+
+# [1.280.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.279.3...@next-bricks/presentational-bricks@1.280.0) (2023-02-07)
+
+
+### Features
+
+* support general-pagination shouldNotify ([9d87238](https://github.com/easyops-cn/next-basics/commit/9d87238439adf63a0e4c916cf1664e0bd8e6fc1e))
+
+
+
+
+
+## [1.279.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.279.2...@next-bricks/presentational-bricks@1.279.3) (2023-01-17)
+
+
+### Bug Fixes
+
+* 修改searchInput的样式 ([eaafeda](https://github.com/easyops-cn/next-basics/commit/eaafedacc7c1a1ac1a7c8426f574b72ec426f20f))
+
+
+
+
+
+## [1.279.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.279.1...@next-bricks/presentational-bricks@1.279.2) (2023-01-15)
+
+
+### Bug Fixes
+
+* presentational-bricks.brick-result的status的属性值不符合类型要求时构件直接报错 refs GS_SEC_PRO-22 ([3f05910](https://github.com/easyops-cn/next-basics/commit/3f05910a1eaa5d5b4df66071969c80217ceeb4c6))
+
+
+
+
+
 ## [1.279.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.279.0...@next-bricks/presentational-bricks@1.279.1) (2023-01-15)
 
 

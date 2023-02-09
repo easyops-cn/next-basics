@@ -3,6 +3,136 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.259.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.259.1...@next-bricks/forms@1.259.2) (2023-02-07)
+
+
+### Bug Fixes
+
+* 修复cmdb cascader无法获取value值 ([c317645](https://github.com/easyops-cn/next-basics/commit/c31764527ff54aa6eca3d19ca4f5a86b25e39d3c))
+
+
+
+
+
+## [1.259.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.259.0...@next-bricks/forms@1.259.1) (2023-02-06)
+
+**Note:** Version bump only for package @next-bricks/forms
+
+
+
+
+
+# [1.259.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.258.0...@next-bricks/forms@1.259.0) (2023-02-03)
+
+
+### Bug Fixes
+
+* **general-select:** 当mode是multiple类型，value是string类型报错 ([2036a31](https://github.com/easyops-cn/next-basics/commit/2036a31471c2d9ec53d230c6f23856b6ff12fafa))
+
+
+### Features
+
+* support general-auto-complete append mode ([6975027](https://github.com/easyops-cn/next-basics/commit/6975027065dd022b7ff64c4a7f5b1bdad44ce60f))
+* useBackend支持配置不同请求状态的插画 ([5426520](https://github.com/easyops-cn/next-basics/commit/542652049be66f483e06b398fb085e4f2ced6082))
+
+
+
+
+
+# [1.258.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.257.0...@next-bricks/forms@1.258.0) (2023-02-02)
+
+
+### Features
+
+* optionDataChangeEvent 支持多选 ([17b34d1](https://github.com/easyops-cn/next-basics/commit/17b34d1dfa0e9239a63ed0d23f71b831acce1d1e))
+
+
+
+
+
+# [1.257.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.256.1...@next-bricks/forms@1.257.0) (2023-02-01)
+
+
+### Features
+
+* cmdb-cascader支持onchangeV2，Refs: FORM_BUILDER-203 ([175fbb5](https://github.com/easyops-cn/next-basics/commit/175fbb56ad2f71c276f91f205097b32e7c6ceb04))
+
+
+
+
+
+## [1.256.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.256.0...@next-bricks/forms@1.256.1) (2023-02-01)
+
+
+### Bug Fixes
+
+* 修复时间区间选择器在dateTime模式下，点击了月份无法选择日期，Refs: NEXT_BUILDER-2529 ([551c2fb](https://github.com/easyops-cn/next-basics/commit/551c2fb5bfba01ae68684eb6754cd9d47babb67f))
+
+
+
+
+
+# [1.256.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.255.0...@next-bricks/forms@1.256.0) (2023-01-31)
+
+
+### Bug Fixes
+
+* 代码类型调整，去除cascader的onchangeV2 ([559a5e8](https://github.com/easyops-cn/next-basics/commit/559a5e854e5c31d4d6f387d4f449c53a2e224cbf))
+* 值为null不应该拉取接口 && state更新异常 ([2b3e6d2](https://github.com/easyops-cn/next-basics/commit/2b3e6d23f454bf4c7eb7d30b573c7e919259bbfb))
+
+
+### Features
+
+* 含有options的表单构件支持onchangeV2传入全量值 ([3d8e7c3](https://github.com/easyops-cn/next-basics/commit/3d8e7c30a7e5022cf86cdd86371cb355dc56ce9b))
+
+
+
+
+
+# [1.255.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.254.1...@next-bricks/forms@1.255.0) (2023-01-29)
+
+
+### Features
+
+* support dynamic-autoCompleteItem append content according to cursor position ([2eca6fe](https://github.com/easyops-cn/next-basics/commit/2eca6fe7df84b3ddac6e9b52ce8c57000faa6fef))
+
+
+
+
+
+## [1.254.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.254.0...@next-bricks/forms@1.254.1) (2023-01-17)
+
+
+### Bug Fixes
+
+* **forms:** 下拉框构件添加默认高亮第一个选项的配置 ([f5341d2](https://github.com/easyops-cn/next-basics/commit/f5341d2855ed0b70ba7b1e9a889db186c63e4ab6))
+
+
+
+
+
+# [1.254.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.253.4...@next-bricks/forms@1.254.0) (2023-01-17)
+
+
+### Features
+
+* support dynamic-form-item autoComplete append mode ([7f857a4](https://github.com/easyops-cn/next-basics/commit/7f857a4286055b3aea99e15cf447696ed6ed1954))
+
+
+
+
+
+## [1.253.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.253.3...@next-bricks/forms@1.253.4) (2023-01-16)
+
+
+### Bug Fixes
+
+* general-select增加maxTagCount属性 refs BRICK_STORE-3223 ([a9abf5f](https://github.com/easyops-cn/next-basics/commit/a9abf5f5d274340f42b3db283cd453ac86923dde))
+
+
+
+
+
 ## [1.253.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.253.2...@next-bricks/forms@1.253.3) (2023-01-15)
 
 

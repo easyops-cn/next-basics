@@ -311,6 +311,13 @@ export class GeneralSelectElement extends FormItemElement {
    */
   @property({ type: Boolean })
   filterByLabelAndValue: boolean;
+  /**
+   * @default false
+   * @required false
+   * @description 是否默认高亮第一个选项
+   */
+  @property({ type: Boolean })
+  defaultActiveFirstOption: boolean;
 
   /**
    * @kind UseBrickConf
@@ -390,7 +397,9 @@ export class GeneralSelectElement extends FormItemElement {
    * @description value对应的选项数据变化时触发
    */
   @event({ type: "value.option.data.change" })
-  optionDataChangeEvent: EventEmitter<GeneralComplexOption>;
+  optionDataChangeEvent: EventEmitter<
+    GeneralComplexOption | GeneralComplexOption[]
+  >;
   /**
    * @detail `-`
    * @description 获得焦点时触发
@@ -431,7 +440,9 @@ export class GeneralSelectElement extends FormItemElement {
     });
   };
 
-  private _handleOptionDataChange = (data: GeneralComplexOption): void => {
+  private _handleOptionDataChange = (
+    data: GeneralComplexOption | GeneralComplexOption[]
+  ): void => {
     this.optionDataChangeEvent.emit(data);
   };
 
@@ -487,6 +498,7 @@ export class GeneralSelectElement extends FormItemElement {
             onOptionDataChange={this._handleOptionDataChange}
             allowClear={this.allowClear}
             suffix={this.suffix}
+            defaultActiveFirstOption={this.defaultActiveFirstOption}
             suffixStyle={this.suffixStyle}
             suffixBrick={this.suffixBrick}
             suffixBrickStyle={this.suffixBrickStyle}

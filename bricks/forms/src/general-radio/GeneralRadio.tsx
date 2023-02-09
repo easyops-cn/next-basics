@@ -4,6 +4,7 @@ import { RadioChangeEvent, RadioGroupButtonStyle } from "antd/lib/radio";
 import {
   FormItemWrapper,
   FormItemWrapperProps,
+  GeneralComplexOption,
   GeneralOption,
 } from "@next-libs/forms";
 import { GeneralIcon } from "@next-libs/basic-components";
@@ -28,6 +29,7 @@ export interface GeneralRadioProps extends FormItemWrapperProps {
   value?: any;
   disabled?: boolean;
   onChange?: (value: any) => void;
+  onChangeV2?: (value: any) => void;
   buttonStyle?: RadioGroupButtonStyle;
   size?: "large" | "middle" | "small";
   uiType?: UiType;
@@ -48,6 +50,7 @@ interface IconRadioGroupProps {
   value?: any;
   useBrick?: UseBrickConf;
   onChange?: (value: any) => void;
+  onChangeV2?: (value: any) => void;
   customStyle?: React.CSSProperties;
 }
 
@@ -62,6 +65,9 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const curValue = e.target.value;
     setValue(curValue);
+    const _options = options as GeneralComplexOption[];
+    const newValueV2 = _options?.find((item) => curValue === item.value);
+    props.onChangeV2?.(newValueV2);
     onChange?.({ target: { value: curValue } });
   };
 
@@ -146,6 +152,9 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
   const handleChange = (e: RadioChangeEvent): void => {
     const value = e.target.value;
     props.onChange?.(value);
+    const _options = options as GeneralComplexOption[];
+    const newValueV2 = _options?.find((item) => value === item.value);
+    props.onChangeV2?.(newValueV2);
   };
 
   const renderRadio = (

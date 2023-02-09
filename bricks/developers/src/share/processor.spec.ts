@@ -1,8 +1,21 @@
-import { getAllStoryListV2, getAdjustedConf } from "./processor";
+import {
+  getAllStoryListV2,
+  getAdjustedConf,
+  processIconInPreview,
+} from "./processor";
 import i18next from "i18next";
+import * as brickKit from "@next-core/brick-kit";
 
 jest.mock("../stories/chapters/atom-bricks");
 jest.mock("../stories/chapters/business-bricks");
+const mockGetFeatureFlags = jest.fn().mockReturnValue({
+  "developers-brick-preview": false,
+});
+jest.spyOn(brickKit, "getRuntime").mockReturnValue({
+  getFeatureFlags: mockGetFeatureFlags,
+  getBasePath: jest.fn().mockReturnValue("/next/"),
+} as any);
+
 const consoleWarn = jest
   .spyOn(console, "warn")
   .mockImplementation(() => void 0);
@@ -352,5 +365,36 @@ describe("getAdjustedConf", () => {
     ],
   ])("should work", (conf, result) => {
     expect(getAdjustedConf(conf)).toEqual(result);
+  });
+});
+
+describe("processIconInPreview", () => {
+  const location = window.location;
+  delete window.location;
+  window.location = {
+    origin: "http://sit.easyops.com",
+  } as Location;
+
+  afterAll(() => {
+    window.location = location;
+  });
+
+  it.each([
+    [
+      { lib: "antd", icon: "edit" },
+      { lib: "antd", icon: "edit" },
+    ],
+    [
+      { imgSrc: "brick/demo.svg" },
+      { imgSrc: "http://sit.easyops.com/next/brick/demo.svg" },
+      {
+        imgSrc: "data:image/svg+xml,sddf",
+      },
+      {
+        imgSrc: "data:image/svg+xml,sddf",
+      },
+    ],
+  ])("should work", (icon, result) => {
+    expect(processIconInPreview(icon)).toEqual(result);
   });
 });

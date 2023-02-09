@@ -69,7 +69,7 @@ export class GeneralPaginationElement extends UpdatingElement {
       const urlSearchParams = new URLSearchParams(history.location.search);
       urlSearchParams.set("page", this.page as any);
       urlSearchParams.set("pageSize", this.pageSize as any);
-      history.push(`?${urlSearchParams}`);
+      history.push(`?${urlSearchParams}`, { notify: this.shouldNotify });
     }
   };
 
@@ -193,6 +193,17 @@ export class GeneralPaginationElement extends UpdatingElement {
     attribute: false,
   })
   shouldUpdateUrlParams = true;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否在更新 url 参数时刷新页面, 默认为true
+   */
+  @property({
+    attribute: false,
+  })
+  shouldNotify = true;
 }
 
 customElements.define(

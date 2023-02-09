@@ -44,6 +44,7 @@ export interface UserSelectFormItemProps {
   children?: ReactNode;
   objectMap?: Record<string, any>;
   onChange?: (value: any) => void;
+  onChangeV2?: (value: any) => void;
   placeholder?: string;
   value?: UserOrUserGroupSelectValue;
   hideAddMeQuickly?: boolean;
@@ -66,6 +67,7 @@ interface UserOrUserGroupSelectProps extends FormItemWrapperProps {
   hideAddMeQuickly?: boolean;
   hideSelectByCMDB?: boolean;
   onChange?: (value: any) => void;
+  onChangeV2?: (value: any) => void;
   optionsMode: "user" | "group" | "all";
   staticList?: string[];
   mergeUseAndUserGroup?: boolean;
@@ -372,6 +374,7 @@ export function LegacyUserSelectFormItem(
     });
     value.unshift(...staticValue.current);
     setSelectedValue(value);
+    props.onChangeV2?.(value);
     const resultValue = {
       selectedUser: map(
         reject(value, (v) => {
@@ -693,6 +696,7 @@ export function UserOrUserGroupSelect(
         hideAddMeQuickly={props.hideAddMeQuickly}
         hideSelectByCMDB={props.hideSelectByCMDB}
         onChange={props.onChange}
+        onChangeV2={props.onChangeV2}
         optionsMode={props.optionsMode}
         staticList={props.staticList}
         mergeUseAndUserGroup={props.mergeUseAndUserGroup}

@@ -10,6 +10,7 @@ import {
   defaults,
   isEqual,
   difference,
+  isNil,
 } from "lodash";
 import { handleHttpError } from "@next-core/brick-kit";
 import { ModeOption } from "antd/lib/select";
@@ -223,7 +224,7 @@ export function CmdbInstanceSelectItem(
     // 初始化时通过用户的 value 得出首次 label 的值
     // 由于value的不确定性，可能存在首次查询的值不唯一，初始化时也添加instanceQuery
     (async () => {
-      if (!isEqual(props.value, value) && props.value !== undefined) {
+      if (!isEqual(props.value, value) && !isNil(props.value)) {
         const option = await handleSearch(
           "",
           [
@@ -240,8 +241,8 @@ export function CmdbInstanceSelectItem(
         );
         setSelectedOptions(option);
       }
-      setValue(props.value);
     })();
+    setValue(props.value);
   }, [props.value]);
 
   React.useEffect(() => {

@@ -8,7 +8,7 @@ import {
   CmdbModels,
 } from "@next-sdk/cmdb-sdk";
 import { handleHttpError } from "@next-core/brick-kit";
-import { isEmpty, omit, uniqBy, defaults } from "lodash";
+import { isEmpty, omit, uniqBy, defaults, cloneDeep } from "lodash";
 import "./CmdbCascader.module.css";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 
@@ -22,6 +22,7 @@ export interface FieldCMDBCascaderProps {
 export interface CMDBCascaderProps extends FormItemWrapperProps {
   value: CMDBInstance[];
   onChange?: (value: CMDBCascaderProps["value"]) => void;
+  onChangeV2: (value: CascaderOptionType[]) => void;
   objectIdPath: FieldCMDBCascaderProps["objectIdPath"] | string[];
   disabled?: boolean;
   placeholder?: string;
@@ -58,7 +59,7 @@ const instanceToLabel = (value: CMDBInstance, frontKey: string[]) => {
   return frontKey.map((key) => value[key] || "unknown").join("-");
 };
 
-export function CmdbCascader(props: CMDBCascaderProps) {
+export function CascaderWrapper(props: CMDBCascaderProps) {
   const {
     value,
     objectIdPath: originObjectPath,
@@ -381,21 +382,32 @@ export function CmdbCascader(props: CMDBCascaderProps) {
     selectedOptions?: CascaderOptionType[]
   ) => {
     Promise.resolve().then(() => {
-      props.onChange &&
+      props.onChangeV2?.(
+        cloneDeep(selectedOptions).map((item) => {
+          delete item.children;
+          return item;
+        })
+      );
+      return (
+        props.onChange &&
         props.onChange(
           selectedOptions
             .map((option) => option["_instance"])
             .filter((instance) => !!instance)
-        );
+        )
+      );
     });
   };
-
+  // istanbul ignore next
   const cascaderValue = useMemo(() => {
-    return Array.isArray(value) ? value.map((item) => item.instanceId) : [];
+    return Array.isArray(value)
+      ? value.map((item) => (typeof item === "string" ? item : item.instanceId))
+      : [];
   }, [value]);
 
+  // istanbul ignore next
   useEffect(() => {
-    if (!cascaderValue.length || options.length) {
+    if (!cascaderValue.length || options.length || !objectIdPath?.length) {
       return;
     }
     const level =
@@ -435,7 +447,7 @@ export function CmdbCascader(props: CMDBCascaderProps) {
       .catch((err) => {
         handleHttpError(err);
       });
-  }, [cascaderValue]);
+  }, [cascaderValue, objectIdPath]);
 
   useEffect(() => {
     // istanbul ignore else
@@ -457,17 +469,23 @@ export function CmdbCascader(props: CMDBCascaderProps) {
   }, [objectIdPath]);
 
   return (
+    <Cascader
+      style={defaults(props.inputBoxStyle, { width: "100%" })}
+      options={options}
+      loadData={loadDataHandle}
+      disabled={disabled}
+      placeholder={placeholder}
+      onChange={handleChange}
+      value={cascaderValue}
+      onPopupVisibleChange={popupVisibleHandle}
+    />
+  );
+}
+// istanbul ignore next
+export function CmdbCascader(props: CMDBCascaderProps) {
+  return (
     <FormItemWrapper {...props}>
-      <Cascader
-        style={defaults(props.inputBoxStyle, { width: "100%" })}
-        options={options}
-        loadData={loadDataHandle}
-        disabled={disabled}
-        placeholder={placeholder}
-        onChange={handleChange}
-        value={cascaderValue}
-        onPopupVisibleChange={popupVisibleHandle}
-      />
+      <CascaderWrapper {...props} />
     </FormItemWrapper>
   );
 }

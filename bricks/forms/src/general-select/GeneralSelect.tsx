@@ -15,7 +15,7 @@ import {
   GeneralComplexOption,
 } from "@next-libs/forms";
 import style from "./GeneralSelect.module.css";
-import { debounce, groupBy, isNil, isEqual } from "lodash";
+import { debounce, groupBy, isNil, isEqual, keyBy } from "lodash";
 import { GeneralOption } from "@next-libs/forms/dist/types/interfaces";
 import { maxTagCountType } from "./index";
 export const setTooltip = (event: React.MouseEvent) => {
@@ -46,6 +46,8 @@ const applyArgs = (args: any[] | ((query: string) => any[]), query: string) => {
   return args;
 };
 
+type RequestStatus = "loading" | "success" | "error";
+
 export interface GeneralSelectProps extends FormItemWrapperProps {
   options: GeneralComplexOption[];
   fields?: Partial<GeneralComplexOption>;
@@ -57,7 +59,9 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   dropdownMatchSelectWidth?: boolean;
   onChange?: (value: any, options: GeneralComplexOption[]) => void;
   onChangeV2?: (value: any) => void;
-  onOptionDataChange?: (data: GeneralComplexOption) => void;
+  onOptionDataChange?: (
+    data: GeneralComplexOption | GeneralComplexOption[]
+  ) => void;
   allowClear?: boolean;
   showSearch?: boolean;
   disabled?: boolean;
@@ -72,6 +76,7 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   onSearch?: (value: string) => void;
   useBackend?: UseBackendConf & {
     onValueChangeArgs?: any[] | ((...args: any[]) => any[]);
+    emptyConfig?: Partial<Record<RequestStatus, EasyopsEmptyProps>>;
   };
   onDebounceSearch?: (value: string) => void;
   debounceSearchDelay?: number;
@@ -82,6 +87,7 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   dropdownStyle?: React.CSSProperties;
   bordered?: boolean;
   maxTagCount?: maxTagCountType;
+  defaultActiveFirstOption?: boolean;
 }
 
 // TODO(alex): 需要去掉`providers-of-cmdb.cmdb-object-api-list`，这里判断是为了开发者中心构件demo显示需要。
@@ -104,12 +110,13 @@ export function GeneralSelectLegacy(
     showSearch,
     filterByLabelAndValue,
     onOptionDataChange,
+    defaultActiveFirstOption = false,
   } = props;
   const [checkedValue, setCheckedValue] = useState(props.value);
   const [options, setOptions] = useState<GeneralComplexOption[]>(props.options);
-  const [loading, setLoading] = useState(false);
+  const [requestStatus, setRequestStatus] = useState<RequestStatus>();
   const shouldTriggerOnValueChangeArgs = useRef(true);
-  const curOptionData = useRef<GeneralComplexOption>();
+  const curOptionData = useRef<GeneralComplexOption | GeneralComplexOption[]>();
   const request = useProvider({ cache: false });
   React.useEffect(() => {
     if (suffixBrick) {
@@ -128,8 +135,18 @@ export function GeneralSelectLegacy(
   }, [props.options]);
 
   useEffect(() => {
-    if (Array.isArray(checkedValue)) {
-      // Todo(nlicro) 多选支持该事件
+    if (props.mode === "multiple") {
+      const optionDataMap = keyBy(options, "value");
+      const preOptionDataMap = keyBy(curOptionData.current, "value");
+
+      const newOptionsData = []
+        .concat(checkedValue ?? [])
+        .map((v) => optionDataMap[v] || preOptionDataMap[v]);
+
+      if (!isEqual(curOptionData.current, newOptionsData)) {
+        curOptionData.current = newOptionsData;
+        onOptionDataChange?.(newOptionsData);
+      }
       return;
     } else {
       const newOptionData = options?.find((v) => v.value === checkedValue);
@@ -181,7 +198,7 @@ export function GeneralSelectLegacy(
           } = props.useBackend;
           (async () => {
             try {
-              setLoading(true);
+              setRequestStatus("loading");
               const actualArgs = applyArgs(
                 type === "search" ? args : onValueChangeArgs,
                 value
@@ -193,11 +210,11 @@ export function GeneralSelectLegacy(
                 transformedData as unknown as GeneralOption[],
                 props.fields as any
               );
+              setRequestStatus("success");
               setOptions(actualData);
             } catch (e) {
+              setRequestStatus("error");
               handleHttpError(e);
-            } finally {
-              setLoading(false);
             }
           })();
         } else {
@@ -287,6 +304,14 @@ export function GeneralSelectLegacy(
     ));
   };
 
+  const notFoundContent = useMemo(() => {
+    const _emptyProps =
+      (isSearchable(props.useBackend) &&
+        props.useBackend.emptyConfig?.[requestStatus]) ||
+      emptyProps;
+    return <EasyopsEmpty {..._emptyProps} />;
+  }, [emptyProps, requestStatus, props.useBackend]);
+
   return (
     <Select
       ref={ref}
@@ -296,7 +321,7 @@ export function GeneralSelectLegacy(
       size={props.size}
       maxTagCount={props.maxTagCount}
       disabled={props.disabled}
-      defaultActiveFirstOption={false}
+      defaultActiveFirstOption={defaultActiveFirstOption}
       mode={props.mode as "multiple" | "tags"}
       placeholder={props.placeholder}
       onChange={handleChange}
@@ -310,8 +335,8 @@ export function GeneralSelectLegacy(
         ? { getPopupContainer: (triggerNode) => triggerNode.parentElement }
         : {})}
       dropdownStyle={{ padding: "2px", ...props.dropdownStyle }}
-      notFoundContent={<EasyopsEmpty {...emptyProps} />}
-      loading={loading}
+      notFoundContent={notFoundContent}
+      loading={requestStatus === "loading"}
       bordered={props.bordered}
       onFocus={() => {
         props.onFocus?.();

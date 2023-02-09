@@ -14,6 +14,7 @@ describe("GeneralAutoComplete", () => {
           { label: "d", value: "d" },
         ]}
         value="c"
+        isAppendMode={false}
       />
     );
     expect(wrapper.find(AutoComplete).length).toBe(1);
@@ -71,5 +72,58 @@ describe("GeneralAutoComplete", () => {
         ],
       },
     ]);
+  });
+
+  it("should work when isAppendMode is true", () => {
+    const handleChange = jest.fn();
+    const wrapper = mount(
+      <AutoCompleteItem
+        options={[
+          { label: "a", value: "a" },
+          { label: "b", value: "b" },
+          { label: "c", value: "c" },
+          { label: "d", value: "d" },
+        ]}
+        value="c"
+        isAppendMode={true}
+        onChange={handleChange}
+      />
+    );
+    expect(wrapper.find(AutoComplete).length).toBe(1);
+    const autoComplete = wrapper.find(AutoComplete).first();
+    expect(wrapper.find(AutoComplete).prop("options")).toEqual([
+      {
+        label: "a",
+        value: "a",
+      },
+      {
+        label: "b",
+        value: "b",
+      },
+      {
+        label: "c",
+        value: "c",
+      },
+      {
+        label: "d",
+        value: "d",
+      },
+    ]);
+    autoComplete.invoke("onChange" as any)("username");
+    expect(handleChange).toBeCalledWith("username");
+
+    autoComplete.invoke("onChange" as any)("d");
+    expect(handleChange).toBeCalledWith("cd");
+
+    autoComplete.invoke("onChange" as any)(undefined);
+    expect(handleChange).toBeCalledWith("");
+
+    autoComplete.invoke("onFocus" as any)({ target: { id: "testId" } });
+
+    autoComplete.invoke("onSelect" as any)("g");
+    expect(handleChange).toBeCalledWith("cg");
+
+    autoComplete.invoke("onSelect" as any)(undefined);
+    expect(handleChange).toHaveBeenCalledTimes(4);
   });
 });
