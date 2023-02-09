@@ -17,9 +17,6 @@ import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
 import { NS_BASIC_BRICKS, K } from "../../i18n/constants";
 import styles from "./AppSetting.module.css";
 
-const featureFlags = getRuntime().getFeatureFlags();
-const userShowValueFlag = featureFlags["user-show-value"];
-
 export function AppSetting(): React.ReactElement {
   const { t } = useTranslation(NS_BASIC_BRICKS);
   const currentApp = useCurrentApp();
@@ -28,6 +25,8 @@ export function AppSetting(): React.ReactElement {
   const currentLang = i18next.language?.split("-")[0];
   const { appsTheme }: Record<string, any> = getRuntime().getMiscSettings();
   const theme = getCurrentTheme();
+  const featureFlags = getRuntime().getFeatureFlags();
+  const userShowValueFlag = featureFlags["user-show-value"];
 
   const [avatarSrc, setAvatarSrc] = React.useState<string>();
   const [accountEntryEnabled, setAccountEntry] = React.useState<boolean>(false);

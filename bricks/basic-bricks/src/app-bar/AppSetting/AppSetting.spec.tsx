@@ -134,6 +134,7 @@ describe("AppBar", () => {
   });
 
   it("should render when userShowValue is exist", () => {
+    getFeatureFlags.mockReturnValueOnce({ "user-show-value": true });
     const wrapper = shallow(<AppSetting />);
     expect(wrapper.find('[data-id="username-text"]').text()).toBe(
       "easyops(carrel)"
