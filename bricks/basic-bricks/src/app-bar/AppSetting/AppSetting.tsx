@@ -25,6 +25,8 @@ export function AppSetting(): React.ReactElement {
   const currentLang = i18next.language?.split("-")[0];
   const { appsTheme }: Record<string, any> = getRuntime().getMiscSettings();
   const theme = getCurrentTheme();
+  const featureFlags = getRuntime().getFeatureFlags();
+  const userShowValueFlag = featureFlags["user-show-value"];
 
   const [avatarSrc, setAvatarSrc] = React.useState<string>();
   const [accountEntryEnabled, setAccountEntry] = React.useState<boolean>(false);
@@ -162,7 +164,7 @@ export function AppSetting(): React.ReactElement {
   );
 
   const getUsername = () => {
-    if (userShowValue?.length) {
+    if (userShowValue?.length && userShowValueFlag) {
       return (
         userShowValue[0] +
         (userShowValue[1] ? "(" + userShowValue[1] + ")" : "")
