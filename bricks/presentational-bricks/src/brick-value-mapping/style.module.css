@@ -64,3 +64,9 @@ html[data-theme="dark"] {
     font-weight: 400;
   }
 }
+
+.textEllipsis {
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
