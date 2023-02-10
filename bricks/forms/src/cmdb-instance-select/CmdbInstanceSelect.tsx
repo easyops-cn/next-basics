@@ -11,6 +11,7 @@ import {
   isEqual,
   difference,
   isNil,
+  trim,
 } from "lodash";
 import { handleHttpError } from "@next-core/brick-kit";
 import { ModeOption } from "antd/lib/select";
@@ -242,7 +243,9 @@ export function CmdbInstanceSelectItem(
         setSelectedOptions(option);
       }
     })();
-    setValue(props.value);
+    const _value =
+      props.mode === "multiple" && !trim(props.value) ? [] : props.value;
+    setValue(_value);
   }, [props.value]);
 
   React.useEffect(() => {
