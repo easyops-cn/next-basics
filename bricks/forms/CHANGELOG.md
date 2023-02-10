@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.260.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.259.3...@next-bricks/forms@1.260.0) (2023-02-10)
+
+
+### Features
+
+* support dynamicFormStyle ([3302ef2](https://github.com/easyops-cn/next-basics/commit/3302ef250f1758b3f53b28c67e7fc1726fc16bd3))
+
+
+
+
+
 ## [1.259.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.259.2...@next-bricks/forms@1.259.3) (2023-02-10)
 
 
