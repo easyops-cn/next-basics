@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.281.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.280.1...@next-bricks/presentational-bricks@1.281.0) (2023-02-10)
+
+
+### Features
+
+* brick-value-mapping增加文案超出隐藏属性 Closes INSTANCE-3751 ([a8ba2ee](https://github.com/easyops-cn/next-basics/commit/a8ba2ee949742da722cb87ed19466ef902676aba))
+
+
+
+
+
 ## [1.280.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.280.0...@next-bricks/presentational-bricks@1.280.1) (2023-02-08)
 
 
