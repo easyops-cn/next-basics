@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.259.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.259.2...@next-bricks/forms@1.259.3) (2023-02-10)
+
+
+### Bug Fixes
+
+* 修复下拉多选模式和cmdb实例选择默认为空时出现空tags,refs: ITSERVICE_NEXT-5594 ([2e138e2](https://github.com/easyops-cn/next-basics/commit/2e138e2fd1e8bca3b87417173d40d978a279a8ad))
+
+
+
+
+
 ## [1.259.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.259.1...@next-bricks/forms@1.259.2) (2023-02-07)
 
 
