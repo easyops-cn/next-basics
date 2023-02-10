@@ -38,6 +38,7 @@ interface LegacyDynamicFormItemV2Props extends FormItemWrapperProps {
     | ((row: Record<string, any>, index: number) => boolean);
   hideAddButton?: boolean | ((value: Record<string, any>[]) => boolean);
   disabledAddButton?: boolean | ((value: Record<string, any>[]) => boolean);
+  dynamicFormStyle?: React.CSSProperties;
 }
 
 interface LegacyDynamicFormItemV2Ref {
@@ -65,6 +66,7 @@ const LegacyDynamicFormItemV2 = forwardRef(
       disabledRemoveButton,
       hideAddButton,
       disabledAddButton,
+      dynamicFormStyle,
     } = props;
     const { t } = useTranslation(NS_FORMS);
     const [form] = Form.useForm();
@@ -107,7 +109,7 @@ const LegacyDynamicFormItemV2 = forwardRef(
     );
 
     return (
-      <div className={style.dynamicForm}>
+      <div className={style.dynamicForm} style={{ ...dynamicFormStyle }}>
         <Form
           form={form}
           layout={"vertical"}
@@ -217,6 +219,7 @@ export function DynamicFormItemV2(
     hideAddButton,
     disabledAddButton,
     upperRef,
+    dynamicFormStyle,
   } = props;
   const [columns, setColumns] = React.useState<Column[]>([]);
   const DynamicFormItemV2Ref = useRef<LegacyDynamicFormItemV2Ref>();
@@ -266,6 +269,7 @@ export function DynamicFormItemV2(
         hideRemoveButton={hideRemoveButton}
         hideAddButton={hideAddButton}
         disabledAddButton={disabledAddButton}
+        dynamicFormStyle={dynamicFormStyle}
       />
     </FormItemWrapper>
   );

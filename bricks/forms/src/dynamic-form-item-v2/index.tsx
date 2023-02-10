@@ -90,6 +90,13 @@ export class DynamicFormItemV2Element extends FormItemElement {
   disabledAddButton?: boolean | ((value: Record<string, any>[]) => boolean);
 
   /**
+   * @description 动态表单样式
+   * @group ui
+   */
+  @property({ attribute: false })
+  dynamicFormStyle?: React.CSSProperties;
+
+  /**
    * @description 表单项值改变时触发
    */
   @event({ type: "item.change" }) changeEvent: EventEmitter<
@@ -243,6 +250,7 @@ export class DynamicFormItemV2Element extends FormItemElement {
             hideAddButton={this.hideAddButton}
             disabledAddButton={this.disabledAddButton}
             upperRef={this.upperRef}
+            dynamicFormStyle={this.dynamicFormStyle}
           />
         </BrickWrapper>,
         this
