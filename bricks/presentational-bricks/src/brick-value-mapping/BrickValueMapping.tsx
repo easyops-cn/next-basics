@@ -23,6 +23,7 @@ interface BrickValueMappingProps {
   shape?: "default" | "round";
   link?: LinkProps;
   triggerClickEvent?: boolean;
+  isTextEllipsis?: boolean;
   handleClick?: () => void;
 }
 
@@ -57,14 +58,8 @@ function getMatch(
 export function BrickValueMapping(
   props: BrickValueMappingProps
 ): React.ReactElement {
-  const {
-    mapping,
-    value,
-    shape,
-    showTagCircle,
-    link,
-    triggerClickEvent,
-  } = props;
+  const { mapping, value, shape, showTagCircle, link, triggerClickEvent } =
+    props;
   const showBg = props.showBg !== false;
   const map = useMemo(() => getMatch(mapping, value), [mapping, value]);
   const match = !!map;
@@ -95,12 +90,17 @@ export function BrickValueMapping(
     return (
       <Tag
         color={color}
-        className={classNames(cssStyle.customTag, cssStyle.colorTag, {
-          [cssStyle.grayTag]: color === "gray",
-          [cssStyle.grayInverseTag]: color === "gray-inverse",
-          [cssStyle.round]: shape === "round",
-          [cssStyle.tagCircleIcon]: showTagCircle,
-        })}
+        className={classNames(
+          cssStyle.customTag,
+          cssStyle.colorTag,
+          props.isTextEllipsis && cssStyle.textEllipsis,
+          {
+            [cssStyle.grayTag]: color === "gray",
+            [cssStyle.grayInverseTag]: color === "gray-inverse",
+            [cssStyle.round]: shape === "round",
+            [cssStyle.tagCircleIcon]: showTagCircle,
+          }
+        )}
       >
         {showTagCircle && (
           <GeneralIcon

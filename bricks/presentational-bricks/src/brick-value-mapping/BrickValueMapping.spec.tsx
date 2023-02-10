@@ -205,4 +205,26 @@ describe("BrickValueMapping", () => {
     brick.simulate("click", new MouseEvent(""));
     expect(fn).toBeCalled();
   });
+
+  it("should work, isTextEllipsis is true", () => {
+    const value = "0";
+    const mapping: Record<string, MappingValue> = {
+      "0": {
+        text: "开发",
+        color: Color.blue,
+      },
+    };
+
+    const wrapper = shallow(
+      <BrickValueMapping
+        value={value}
+        mapping={mapping}
+        isTextEllipsis={true}
+      />
+    );
+    expect(wrapper.find(".textEllipsis").length).toBe(1);
+    wrapper.setProps({ isTextEllipsis: false });
+    wrapper.update();
+    expect(wrapper.find(".textEllipsis").length).toBe(0);
+  });
 });

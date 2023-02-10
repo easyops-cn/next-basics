@@ -130,6 +130,14 @@ export class BrickValueMappingElement extends UpdatingElement {
   triggerClickEvent?: boolean;
 
   /**
+   * @default false
+   * @description 文案是否超出隐藏
+   * @group other
+   */
+  @property({ type: Boolean })
+  isTextEllipsis?: boolean;
+
+  /**
    * @description 配置跳转链接，在 `triggerClickEvent` 为 false 生效
    * @group other
    */
@@ -186,6 +194,7 @@ export class BrickValueMappingElement extends UpdatingElement {
             shape="default"
             triggerClickEvent={this.triggerClickEvent}
             link={this.link}
+            isTextEllipsis={this.isTextEllipsis}
             handleClick={this.handleClick}
           />
         </BrickWrapper>,
