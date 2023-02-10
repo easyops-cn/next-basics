@@ -3,5 +3,32 @@
   width: 100%;
   padding: 15px;
   overflow: auto;
-  transition: height 0.3s ease-in;
+}
+
+.bar {
+  position: absolute;
+  bottom: -2px;
+  height: 4px;
+  left: 0;
+  width: 100%;
+
+  &:hover {
+    cursor: row-resize;
+    background: var(--color-brand);
+    transition: background 0.1s 0.3ms ease-out;
+  }
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  display: none;
+}
+
+.resizing.bar .mask {
+  display: block;
 }

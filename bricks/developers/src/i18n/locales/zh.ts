@@ -47,6 +47,7 @@ const locale: Locale = {
   [K.RESPONSE_SAMPLE]: "响应示例",
   [K.COPY_SUCCESS]: "复制成功",
   [K.DEMO]: "示例 {{index}}",
+  [K.MOVED_BY_DRAGGING]: "可拖拽移动",
 };
 
 export default locale;

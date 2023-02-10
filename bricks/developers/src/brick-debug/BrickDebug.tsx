@@ -3,8 +3,10 @@ import { useTranslation } from "react-i18next";
 import { Radio } from "antd";
 import { JsonStorage } from "@next-libs/storage";
 import { BrickConf } from "@next-core/brick-types";
+import { getRuntime } from "@next-core/brick-kit";
 import { NS_DEVELOPERS, K } from "../i18n/constants";
 import { BrickPreview } from "../components/BrickPreview/BrickPreview";
+import { NextBrickPreview } from "../components/NextBrickPreview/NextBrickPreview";
 import { BrickEditor } from "../components/BrickEditor/BrickEditor";
 import cssStyle from "./style.module.css";
 
@@ -37,6 +39,11 @@ export function BrickDebug(): React.ReactElement {
       default: "develop",
     },
   };
+
+  const enableNewBrickPreview = React.useMemo(
+    () => getRuntime().getFeatureFlags()["developers-brick-preview"],
+    []
+  );
 
   const [conf, setConf] = React.useState(defaultConf);
 
@@ -103,7 +110,11 @@ export function BrickDebug(): React.ReactElement {
             highlightActiveLine: true,
           }}
         />
-        <BrickPreview conf={conf} />
+        {enableNewBrickPreview ? (
+          <NextBrickPreview conf={conf} containerStyle={{ padding: 0 }} />
+        ) : (
+          <BrickPreview conf={conf} />
+        )}
       </div>
     </>
   );

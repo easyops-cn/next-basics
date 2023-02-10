@@ -4,6 +4,15 @@ import { BrickDebug } from "./BrickDebug";
 import { BrickPreview } from "../components/BrickPreview/BrickPreview";
 import RadioGroup from "antd/lib/radio/group";
 import { BrickEditor } from "../components/BrickEditor/BrickEditor";
+import * as brickKit from "@next-core/brick-kit";
+
+const mockGetFeatureFlags = jest.fn().mockReturnValue({
+  "developers-brick-preview": false,
+});
+jest.spyOn(brickKit, "getRuntime").mockReturnValue({
+  getFeatureFlags: mockGetFeatureFlags,
+  getBasePath: jest.fn().mockReturnValue("/next/"),
+} as any);
 
 jest.mock("@next-libs/storage", () => {
   return {

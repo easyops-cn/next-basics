@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.280.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.280.0...@next-bricks/presentational-bricks@1.280.1) (2023-02-08)
+
+
+### Bug Fixes
+
+* update @next-libs/hooks ([3bd6a7f](https://github.com/easyops-cn/next-basics/commit/3bd6a7f9edd103d926a12b40bbe1de667e49612a))
+
+
+
+
+
+# [1.280.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.279.3...@next-bricks/presentational-bricks@1.280.0) (2023-02-07)
+
+
+### Features
+
+* support general-pagination shouldNotify ([9d87238](https://github.com/easyops-cn/next-basics/commit/9d87238439adf63a0e4c916cf1664e0bd8e6fc1e))
+
+
+
+
+
 ## [1.279.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.279.2...@next-bricks/presentational-bricks@1.279.3) (2023-01-17)
 
 

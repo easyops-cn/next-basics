@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.8...@next-bricks/basic-bricks@1.228.9) (2023-02-09)
+
+
+### Bug Fixes
+
+* 增加showkey开关 refs USER-8 ([abfe0cd](https://github.com/easyops-cn/next-basics/commit/abfe0cd31407845aff8cfbd59465864dbe4c1fbe))
+* 调整featureFlags代码位置 refs USER-8 ([05d09e2](https://github.com/easyops-cn/next-basics/commit/05d09e202ba81876159198b57a15453cc0748c90))
+
+
+
+
+
+## [1.228.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.7...@next-bricks/basic-bricks@1.228.8) (2023-02-07)
+
+
+### Bug Fixes
+
+* compatible with no route data ([09c3519](https://github.com/easyops-cn/next-basics/commit/09c3519108d9380bd6655507042ef906d000738a))
+
+
+
+
+
+## [1.228.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.6...@next-bricks/basic-bricks@1.228.7) (2023-02-02)
+
+
+### Bug Fixes
+
+* fix launchpad fetch everytime ([5a2a9d1](https://github.com/easyops-cn/next-basics/commit/5a2a9d1a8ee4bf7788d209f353d1af29a59aa464))
+
+
+
+
+
+## [1.228.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.5...@next-bricks/basic-bricks@1.228.6) (2023-02-01)
+
+
+### Bug Fixes
+
+* 解决launchpad没有使用cdn的问题 ([5c93246](https://github.com/easyops-cn/next-basics/commit/5c932463ebb5372a4fffd81a929aecf21868e055))
+
+
+
+
+
 ## [1.228.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.4...@next-bricks/basic-bricks@1.228.5) (2023-02-01)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks

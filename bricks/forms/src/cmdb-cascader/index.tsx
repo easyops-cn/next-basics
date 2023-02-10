@@ -124,7 +124,10 @@ export class CmdbCascaderElement extends FormItemElement {
   changeEvent: EventEmitter;
   handleChange = (value: valueCMDBCascaderProp[]): void => {
     this.value = value;
-    this.changeEvent.emit(value);
+    this._render();
+    Promise.resolve().then(() => {
+      this.changeEvent.emit(value);
+    });
   };
 
   /**

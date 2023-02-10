@@ -55,10 +55,12 @@ interface Window {
   /** The app needs no auth guard.  */
   NO_AUTH_GUARD?: boolean;
 
-  /** The public root, E.g. "hello-world/-/" */
+  /** The public root, which is based on the public prefix and public cdn.
+   *  E.g. "sa-static/-/", "https://cdn-air.uwintech.cn/next/sa-static/-/"
+   **/
   PUBLIC_ROOT?: string;
 
-  /** The public cdn, E.g. "/sa-static/-/" */
+  /** The public cdn, should contain base href 'next' and should endswith '/'. E.g. "https://cdn-air.uwintech.cn/next/" */
   PUBLIC_CDN?: string;
 
   /** The full location where user log out from, like: /next/my-app/some-page?q=abc */

@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.259.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.259.1...@next-bricks/forms@1.259.2) (2023-02-07)
+
+
+### Bug Fixes
+
+* 修复cmdb cascader无法获取value值 ([c317645](https://github.com/easyops-cn/next-basics/commit/c31764527ff54aa6eca3d19ca4f5a86b25e39d3c))
+
+
+
+
+
+## [1.259.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.259.0...@next-bricks/forms@1.259.1) (2023-02-06)
+
+**Note:** Version bump only for package @next-bricks/forms
+
+
+
+
+
+# [1.259.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.258.0...@next-bricks/forms@1.259.0) (2023-02-03)
+
+
+### Bug Fixes
+
+* **general-select:** 当mode是multiple类型，value是string类型报错 ([2036a31](https://github.com/easyops-cn/next-basics/commit/2036a31471c2d9ec53d230c6f23856b6ff12fafa))
+
+
+### Features
+
+* support general-auto-complete append mode ([6975027](https://github.com/easyops-cn/next-basics/commit/6975027065dd022b7ff64c4a7f5b1bdad44ce60f))
+* useBackend支持配置不同请求状态的插画 ([5426520](https://github.com/easyops-cn/next-basics/commit/542652049be66f483e06b398fb085e4f2ced6082))
+
+
+
+
+
+# [1.258.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.257.0...@next-bricks/forms@1.258.0) (2023-02-02)
+
+
+### Features
+
+* optionDataChangeEvent 支持多选 ([17b34d1](https://github.com/easyops-cn/next-basics/commit/17b34d1dfa0e9239a63ed0d23f71b831acce1d1e))
+
+
+
+
+
+# [1.257.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.256.1...@next-bricks/forms@1.257.0) (2023-02-01)
+
+
+### Features
+
+* cmdb-cascader支持onchangeV2，Refs: FORM_BUILDER-203 ([175fbb5](https://github.com/easyops-cn/next-basics/commit/175fbb56ad2f71c276f91f205097b32e7c6ceb04))
+
+
+
+
+
 ## [1.256.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.256.0...@next-bricks/forms@1.256.1) (2023-02-01)
 
 

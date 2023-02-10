@@ -116,6 +116,7 @@ describe("DesktopApp", () => {
       currentVersion: "1.0.1",
       standaloneMode: true,
     };
+    window.PUBLIC_ROOT = "/sa-static/";
     const wrapper1 = shallow(<DesktopApp app={app1} />);
     expect(wrapper1.find("img").prop("src")).toBe(
       `/sa-static/hello/versions/1.0.1/webroot/-/micro-apps/hello/icons/large.png`

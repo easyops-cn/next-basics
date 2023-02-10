@@ -397,7 +397,9 @@ export class GeneralSelectElement extends FormItemElement {
    * @description value对应的选项数据变化时触发
    */
   @event({ type: "value.option.data.change" })
-  optionDataChangeEvent: EventEmitter<GeneralComplexOption>;
+  optionDataChangeEvent: EventEmitter<
+    GeneralComplexOption | GeneralComplexOption[]
+  >;
   /**
    * @detail `-`
    * @description 获得焦点时触发
@@ -438,7 +440,9 @@ export class GeneralSelectElement extends FormItemElement {
     });
   };
 
-  private _handleOptionDataChange = (data: GeneralComplexOption): void => {
+  private _handleOptionDataChange = (
+    data: GeneralComplexOption | GeneralComplexOption[]
+  ): void => {
     this.optionDataChangeEvent.emit(data);
   };
 
