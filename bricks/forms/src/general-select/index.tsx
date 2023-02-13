@@ -47,6 +47,15 @@ export class GeneralSelectElement extends FormItemElement {
    * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 选择框validateTrigger
+   * @group advancedFormItem
+   */
+  @property({ attribute: false }) declare validateTrigger: string;
   /**
    * @kind string
    * @required false
@@ -491,6 +500,7 @@ export class GeneralSelectElement extends FormItemElement {
             disabled={this.disabled}
             message={this.message}
             validator={this.validator}
+            validateTrigger={this.validateTrigger}
             notRender={this.notRender}
             inputBoxStyle={this.inputBoxStyle}
             onChange={this._handleChange}
