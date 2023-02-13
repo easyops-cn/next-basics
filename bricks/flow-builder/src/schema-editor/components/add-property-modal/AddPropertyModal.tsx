@@ -29,6 +29,7 @@ export interface AddPropertyModalProps {
   disabledModelType?: boolean;
   enableWrapper?: boolean;
   rootNodeRequired?: Record<string, boolean>;
+  hiddenRootNodeRequired?: boolean;
 }
 
 export function AddPropertyModal({
@@ -41,6 +42,7 @@ export function AddPropertyModal({
   disabledModelType,
   enableWrapper,
   rootNodeRequired,
+  hiddenRootNodeRequired,
 }: AddPropertyModalProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const [form] = Form.useForm();
@@ -275,6 +277,7 @@ export function AddPropertyModal({
             </Form.Item>
           ) : (
             <Form.Item
+              hidden={trackId === rootTraceId && hiddenRootNodeRequired}
               name="required"
               label={t(K.REQUIRED_LABEL)}
               valuePropName="checked"
@@ -285,7 +288,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    [getRefPrefix, t]
+    [getRefPrefix, hiddenRootNodeRequired, t, trackId]
   );
 
   const showWrapperFormItem = useMemo(() => {
