@@ -311,7 +311,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   };
   /**
    * @detail `{options:ComplexOption[],name:string}	`
-   * @description 单选框变化时被触发，`event.detail` 为当前整个选择项包含其他字段值
+   * @description 下拉列表变化时触发
    */
   @event({ type: "forms.cmdb-instance-select.options.change" })
   optionsChange: EventEmitter<{

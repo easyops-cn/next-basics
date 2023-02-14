@@ -143,8 +143,8 @@ export class CmdbCascaderElement extends FormItemElement {
   };
 
   /**
-   * @detail `{[key: string]: any}`
-   * @description 选项改变时触发
+   * @detail `{options: CascaderOptionType[], name: string}`
+   * @description 选项列表变化时触发
    */
   @event({ type: "forms.cmdb-cascader.options.change" })
   optionsChange: EventEmitter;

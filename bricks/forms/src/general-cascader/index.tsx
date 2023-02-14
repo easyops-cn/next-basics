@@ -229,8 +229,8 @@ export class GeneralCascaderElement extends FormItemElement {
   };
 
   /**
-   * @detail {value: string[], selectedOptions: CascaderOptionType[]}
-   * @description 级联选择项输入变化时触发，value 为选择的值，selectedOptions 为选择的值所对应的 options
+   * @detail {options: CascaderOptionType[],name: string}
+   * @description 级联选择项options变化时触发
    */
   @event({ type: "cascader.options.change" }) optionsChange: EventEmitter<
     Record<string, any>

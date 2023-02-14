@@ -220,8 +220,8 @@ export class GeneralCheckboxElement extends FormItemElement {
   >;
 
   /**
-   * @detail `options:CheckboxOptionType[],name:string`
-   * @description 复选框options变化时触发，`event.detail` 为当前选中的值列表
+   * @detail `{options:CheckboxOptionType[],name:string}`
+   * @description 复选框options变化时触发
    */
   @event({ type: "general.checkbox.options.change" })
   optionsChangeEvent: EventEmitter<{

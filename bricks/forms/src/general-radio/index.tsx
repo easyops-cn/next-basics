@@ -202,7 +202,7 @@ export class GeneralRadioElement extends FormItemElement {
 
   /**
    * @detail `{options:{label: string, value: any, [key: string]: any},name:string}	`
-   * @description 单选框变化时被触发，`event.detail` 为当前整个选择项包含其他字段值
+   * @description 单选框选项列表变化时被触发
    */
   @event({ type: "general.radio.options.change" }) optionsChange: EventEmitter<{
     options: {
