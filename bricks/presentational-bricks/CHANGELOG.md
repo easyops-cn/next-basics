@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.282.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.281.0...@next-bricks/presentational-bricks@1.282.0) (2023-02-14)
+
+
+### Features
+
+* brick-user支持显示 `showKey` ([74ca894](https://github.com/easyops-cn/next-basics/commit/74ca8942a7a560b6e264482ed20b0402ebb8a496))
+
+
+
+
+
 # [1.281.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.280.1...@next-bricks/presentational-bricks@1.281.0) (2023-02-10)
 
 
