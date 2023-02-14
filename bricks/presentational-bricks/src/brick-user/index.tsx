@@ -109,6 +109,14 @@ export class BrickUserElement extends UpdatingElement {
   showNicknameOrUsername: boolean;
 
   /**
+   * @kind "boolean"
+   * @required false
+   * @default false
+   * @description 是否显示 `showKey` ，如果有则显示`alan(hero)` or `alan`
+   */
+  @property({ type: Boolean })
+  displayShowKey: boolean;
+  /**
    * @kind "number" | "string"
    * @required false
    * @default 0
@@ -146,6 +154,7 @@ export class BrickUserElement extends UpdatingElement {
               this.showNicknameOrUsername ?? this.showNickname
             }
             iconMargin={this.iconMargin}
+            displayShowKey={this.displayShowKey}
           />
         </BrickWrapper>,
         this

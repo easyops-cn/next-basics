@@ -13,6 +13,7 @@ interface BrickUserProps {
   hideAvatar?: boolean;
   hideUsername?: boolean;
   showNicknameOrUsername?: boolean;
+  displayShowKey?: boolean;
   iconMargin?: string | number;
 }
 
@@ -20,7 +21,7 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
   const [avatarSrc, setAvatarSrc] = React.useState<string>();
   const [userName, setUserName] = React.useState(props.userNameOrId);
   const [nickName, setNickName] = React.useState("");
-
+  const [showKey, setShowKey] = React.useState<string>();
   const {
     Avatar,
     user: userInfo,
@@ -31,6 +32,13 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
     if (userInfo) {
       setUserName(userInfo.name);
       setNickName(userInfo.nickname);
+      if ((userInfo as any)["#showKey"]?.length) {
+        const [name, showKey] = (userInfo as any)["#showKey"] as [
+          string,
+          string | undefined
+        ];
+        setShowKey(showKey ? `${name}(${showKey})` : `${name}`);
+      }
     } else {
       setUserName(props.userNameOrId);
     }
@@ -76,7 +84,7 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
               [cssStyle.usernameAdjust]: !props.hideAvatar,
             })}
           >
-            {name}
+            {props?.displayShowKey ? showKey : name}
           </span>
         )}
       </span>

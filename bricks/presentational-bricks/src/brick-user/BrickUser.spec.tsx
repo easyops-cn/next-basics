@@ -10,11 +10,13 @@ const fakeUsers = [
     name: "a",
     instanceId: "1",
     user_icon: "a.jpg",
+    "#showKey": ["easyops", "foo"],
   },
   {
     name: "b",
     instanceId: "2",
     user_icon: "b.jpg",
+    "#showKey": ["easyops1", "foo1"],
   },
 ];
 (UserAdminApi_searchAllUsersInfo as jest.Mock).mockImplementation(
@@ -55,6 +57,14 @@ describe("BrickUser", () => {
       <BrickUser userNameOrId="hello, irelia" hideUsername />
     );
     expect(wrapper.find("span.username").length).toBe(0);
+  });
+
+  it("should work, displayShowkey", async () => {
+    const wrapper = mount(<BrickUser userNameOrId="a" displayShowKey />);
+    await jest.advanceTimersByTime(100);
+    await (global as any).flushPromises();
+    wrapper.update();
+    expect(wrapper.find("span.usernameAdjust").text()).toBe("easyops(foo)");
   });
 
   it("useEffect should work", async () => {
