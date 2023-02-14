@@ -226,5 +226,13 @@ describe("AddPropertyModal", () => {
     expect(wrapper.find(Link).prop("to")).toEqual(
       "/contract-center/models/create"
     );
+
+    wrapper.setProps({
+      hiddenRootNodeRequired: true,
+    });
+
+    wrapper.update();
+
+    expect(wrapper.find("FormItem[hidden=true]").length).toEqual(1);
   });
 });

@@ -35,6 +35,7 @@ export interface SchemaItemProps {
   hideDeleteBtn?: boolean;
   readonly?: boolean;
   hiddenRootNode?: boolean;
+  hiddenRootNodeRequired?: boolean;
   disabledModelType?: boolean;
   isModelDefinitionRow?: boolean;
   parentsModel?: string[];
@@ -48,6 +49,7 @@ export function SchemaItem({
   traceId,
   hideDeleteBtn,
   hiddenRootNode,
+  hiddenRootNodeRequired,
   disabledModelType,
   isModelDefinitionRow,
   parentsModel = [],
@@ -156,7 +158,9 @@ export function SchemaItem({
           )}
         </div>
         <div>
-          <Checkbox checked={itemData.required} disabled />
+          {!(traceId === rootTraceId && hiddenRootNodeRequired) && (
+            <Checkbox checked={itemData.required} disabled />
+          )}
         </div>
         <div className={styles.type}>
           <Tooltip

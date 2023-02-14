@@ -54,7 +54,7 @@ export class SchemaEditorElement extends FormItemElement {
    * @kind Record<string, boolean>
    * @required true
    * @default false
-   * @description 配置根节点项是否必填
+   * @description 配置根节点中哪些相关字段是必填
    * @group basic
    */
   @property({
@@ -65,6 +65,14 @@ export class SchemaEditorElement extends FormItemElement {
     type: false,
   };
 
+  /**
+   * @description 是否隐藏整个根节点必填项的设置
+   * @group basic
+   */
+  @property({
+    type: Boolean,
+  })
+  hiddenRootNodeRequired?: boolean;
   /**
    * @kind boolean
    * @required -️
@@ -149,6 +157,7 @@ export class SchemaEditorElement extends FormItemElement {
             customTypeList={this.customTypeList}
             rootNodeRequired={this.rootNodeRequired}
             importModelDefinition={this.importModelDefinition}
+            hiddenRootNodeRequired={this.hiddenRootNodeRequired}
           />
         </BrickWrapper>,
         this

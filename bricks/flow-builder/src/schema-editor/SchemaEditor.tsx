@@ -31,6 +31,7 @@ export interface SchemaEditorProps extends FormItemWrapperProps {
   customTypeList?: string[];
   rootNodeRequired?: Record<string, boolean>;
   importModelDefinition?: ModelDefinition[];
+  hiddenRootNodeRequired?: boolean;
 }
 
 interface ItemData {
@@ -49,6 +50,7 @@ export const SchemaEditorWrapper = forwardRef<
     enableWrapper,
     customTypeList,
     rootNodeRequired,
+    hiddenRootNodeRequired,
     importModelDefinition,
   } = props;
   const [visible, setVisible] = useState(false);
@@ -215,6 +217,7 @@ export const SchemaEditorWrapper = forwardRef<
             traceId={rootTraceId}
             hideDeleteBtn={true}
             hiddenRootNode={hiddenRootNode}
+            hiddenRootNodeRequired={hiddenRootNodeRequired}
             disabledModelType={disabledModelType}
             parentsModel={[]}
           />
@@ -225,6 +228,7 @@ export const SchemaEditorWrapper = forwardRef<
         enableWrapper={enableWrapper}
         disabledModelType={disabledModelType}
         rootNodeRequired={rootNodeRequired}
+        hiddenRootNodeRequired={hiddenRootNodeRequired}
         visible={visible}
         onClose={() => setVisible(false)}
         onSubmit={handleSubmit}
