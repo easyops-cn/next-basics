@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.261.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.260.0...@next-bricks/forms@1.261.0) (2023-02-14)
+
+
+### Features
+
+* **select:** select support validateTrigger ([e4dce98](https://github.com/easyops-cn/next-basics/commit/e4dce98ddd45ad7471a30cad4bdf3d3386f84341))
+
+
+
+
+
 # [1.260.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.259.3...@next-bricks/forms@1.260.0) (2023-02-10)
 
 
