@@ -23,6 +23,7 @@ export interface CMDBCascaderProps extends FormItemWrapperProps {
   value: CMDBInstance[];
   onChange?: (value: CMDBCascaderProps["value"]) => void;
   onChangeV2: (value: CascaderOptionType[]) => void;
+  optionsChange: (options: CascaderOptionType[], name: string) => void;
   objectIdPath: FieldCMDBCascaderProps["objectIdPath"] | string[];
   disabled?: boolean;
   placeholder?: string;
@@ -443,6 +444,7 @@ export function CascaderWrapper(props: CMDBCascaderProps) {
     task
       .then(() => {
         setOptions(initOptions);
+        props.optionsChange?.(initOptions, props.name);
       })
       .catch((err) => {
         handleHttpError(err);

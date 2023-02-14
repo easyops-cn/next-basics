@@ -62,6 +62,7 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   onOptionDataChange?: (
     data: GeneralComplexOption | GeneralComplexOption[]
   ) => void;
+  onOptionsChange?: (options: GeneralComplexOption[], name: string) => void;
   allowClear?: boolean;
   showSearch?: boolean;
   disabled?: boolean;
@@ -110,6 +111,7 @@ export function GeneralSelectLegacy(
     showSearch,
     filterByLabelAndValue,
     onOptionDataChange,
+    onOptionsChange,
     defaultActiveFirstOption = false,
   } = props;
   const [checkedValue, setCheckedValue] = useState(props.value);
@@ -134,6 +136,7 @@ export function GeneralSelectLegacy(
 
   useEffect(() => {
     setOptions(props.options);
+    onOptionsChange?.(props.options, props.name);
   }, [props.options]);
 
   useEffect(() => {

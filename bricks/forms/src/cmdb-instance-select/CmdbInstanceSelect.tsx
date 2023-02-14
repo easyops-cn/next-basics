@@ -32,6 +32,7 @@ export interface CmdbInstanceSelectProps extends FormItemWrapperProps {
   minimumInputLength?: number;
   value?: any;
   onChange?: (value: string, option?: ComplexOption) => void;
+  optionsChange: (options: ComplexOption[], name: string) => void;
   allowClear?: boolean;
   inputBoxStyle?: React.CSSProperties;
   extraSearchKey?: string[];
@@ -186,6 +187,7 @@ export function CmdbInstanceSelectItem(
             : {}),
         }));
         setOptions(option);
+        props.optionsChange?.(option, props.name);
         return option;
       } catch (e) {
         handleHttpError(e);

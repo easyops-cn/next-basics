@@ -33,33 +33,46 @@ describe("forms.general-select", () => {
 
     const dispatchEvent = jest.spyOn(element, "dispatchEvent");
 
-    const value = 'a';
+    const value = "a";
     element._handleChange(value);
     await (global as any).flushPromises();
     expect(dispatchEvent).lastCalledWith(
-      expect.objectContaining({type: 'general.select.change', detail: value})
+      expect.objectContaining({ type: "general.select.change", detail: value })
     );
 
-    const value2 = {'a': 1}
+    const value2 = { a: 1 };
     element._handleChangeV2(value2);
     await (global as any).flushPromises();
     expect(dispatchEvent).lastCalledWith(
-      expect.objectContaining({type: 'general.select.change.v2', detail: value2})
+      expect.objectContaining({
+        type: "general.select.change.v2",
+        detail: value2,
+      })
     );
 
     element._handleFocus();
     expect(dispatchEvent).lastCalledWith(
-      expect.objectContaining({type: 'general.select.focus', detail: null})
+      expect.objectContaining({ type: "general.select.focus", detail: null })
     );
 
     element._handleBlur();
     expect(dispatchEvent).lastCalledWith(
-      expect.objectContaining({type: 'general.select.blur', detail: null})
+      expect.objectContaining({ type: "general.select.blur", detail: null })
     );
 
     element._handleSearch("qq");
     expect(dispatchEvent).lastCalledWith(
-      expect.objectContaining({type: 'general.select.search', detail: "qq"})
+      expect.objectContaining({ type: "general.select.search", detail: "qq" })
+    );
+
+    const options = [{ label: "test", value: 1 }];
+    element._handleOptionsChange(options, "test");
+    await (global as any).flushPromises();
+    expect(dispatchEvent).lastCalledWith(
+      expect.objectContaining({
+        type: "general.select.options.change",
+        detail: { options, name: "test" },
+      })
     );
   });
 });

@@ -7,7 +7,11 @@ import {
   EventEmitter,
 } from "@next-core/brick-kit";
 import { formatOptions, FormItemElement } from "@next-libs/forms";
-import { GeneralCheckbox, IconCheckboxItem } from "./GeneralCheckbox";
+import {
+  CheckboxOtherOptionType,
+  GeneralCheckbox,
+  IconCheckboxItem,
+} from "./GeneralCheckbox";
 import { CheckboxValueType, CheckboxOptionType } from "antd/lib/checkbox/Group";
 
 export type CheckboxType = "default" | "icon";
@@ -215,6 +219,16 @@ export class GeneralCheckboxElement extends FormItemElement {
     CheckboxOptionType[]
   >;
 
+  /**
+   * @detail `options:CheckboxOptionType[],name:string`
+   * @description 复选框options变化时触发，`event.detail` 为当前选中的值列表
+   */
+  @event({ type: "general.checkbox.options.change" })
+  optionsChangeEvent: EventEmitter<{
+    options: CheckboxOptionType | IconCheckboxItem[] | CheckboxOtherOptionType;
+    name: string;
+  }>;
+
   private _handleChange = (value: CheckboxValueType[]): void => {
     this.value = value;
     Promise.resolve().then(() => {
@@ -225,6 +239,15 @@ export class GeneralCheckboxElement extends FormItemElement {
   private _handleChangeV2 = (value: CheckboxOptionType[]): void => {
     Promise.resolve().then(() => {
       this.changeEventV2.emit(value);
+    });
+  };
+
+  private _handleOptionsChange = (
+    options: CheckboxOptionType | IconCheckboxItem[] | CheckboxOtherOptionType,
+    name: string
+  ): void => {
+    Promise.resolve().then(() => {
+      this.optionsChangeEvent.emit({ options, name });
     });
   };
 
@@ -256,6 +279,7 @@ export class GeneralCheckboxElement extends FormItemElement {
             notRender={this.notRender}
             onChange={this._handleChange}
             onChangeV2={this._handleChangeV2}
+            optionsChange={this._handleOptionsChange}
             helpBrick={this.helpBrick}
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}

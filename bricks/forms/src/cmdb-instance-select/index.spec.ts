@@ -33,6 +33,7 @@ describe("forms.cmdb-instance-select", () => {
 
   it("updateObjectIdManual", async () => {
     const fn = jest.fn();
+    const optionsChange = jest.fn();
     const element = document.createElement("forms.cmdb-instance-select");
     // Always waiting for async `(dis)connectedCallback`
     document.body.appendChild(element);
@@ -40,5 +41,12 @@ describe("forms.cmdb-instance-select", () => {
     element.addEventListener("forms.cmdb-instance-select.change", fn);
     element.handleChange("xxx");
     expect(fn).toBeCalled();
+
+    element.addEventListener(
+      "forms.cmdb-instance-select.options.change",
+      optionsChange
+    );
+    element.handleOptionsChange([{ label: "test", value: 1 }], "test");
+    expect(optionsChange).toBeCalled();
   });
 });

@@ -200,6 +200,19 @@ export class GeneralRadioElement extends FormItemElement {
     [key: string]: any;
   }>;
 
+  /**
+   * @detail `{options:{label: string, value: any, [key: string]: any},name:string}	`
+   * @description 单选框变化时被触发，`event.detail` 为当前整个选择项包含其他字段值
+   */
+  @event({ type: "general.radio.options.change" }) optionsChange: EventEmitter<{
+    options: {
+      label: string;
+      value: any;
+      [key: string]: any;
+    };
+    name: string;
+  }>;
+
   private _handleChange = (value: any): void => {
     this.value = value;
     this._render();
@@ -215,6 +228,19 @@ export class GeneralRadioElement extends FormItemElement {
   }): void => {
     Promise.resolve().then(() => {
       this.changeEventV2.emit(value);
+    });
+  };
+
+  private _handleOptionsChange = (
+    options: {
+      label: string;
+      value: any;
+      [key: string]: any;
+    },
+    name: string
+  ): void => {
+    Promise.resolve().then(() => {
+      this.optionsChange.emit({ options, name });
     });
   };
   protected _render(): void {
@@ -239,6 +265,7 @@ export class GeneralRadioElement extends FormItemElement {
             notRender={this.notRender}
             onChange={this._handleChange}
             onChangeV2={this._handleChangeV2}
+            optionsChange={this._handleOptionsChange}
             disabled={this.disabled}
             helpBrick={this.helpBrick}
             labelBrick={this.labelBrick}
