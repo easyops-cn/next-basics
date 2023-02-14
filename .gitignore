@@ -8,7 +8,6 @@ node_modules
 .DS_Store
 .schema
 .cache
-.history
 *.log
 report.*.json
 /dev-settings.yaml
