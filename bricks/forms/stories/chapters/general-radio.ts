@@ -52,6 +52,72 @@ export const GeneralRadioStory: Story = {
         {
           brick: "forms.general-radio",
           properties: {
+            dataset: { testid: "basic-usage-demo" },
+            name: "city",
+            label: "城市",
+            value: "Shanghai",
+            options: [
+              {
+                label: "Shanghai",
+                value: "Shanghai",
+                tooltip: "大上海",
+                tooltipIcon: {
+                  icon: "info-circle",
+                  lib: "antd",
+                  theme: "filled",
+                  iconStyle: {
+                    fontSize: "18px",
+                  },
+                },
+              },
+              {
+                label: "Beijing",
+                value: "Beijing",
+                tooltip: "大北京",
+                tooltipIcon: {
+                  icon: "info-circle",
+                  lib: "antd",
+                  theme: "filled",
+                  iconStyle: {
+                    fontSize: "18px",
+                  },
+                },
+              },
+              {
+                label: "Chengdu",
+                value: "Chengdu",
+                tooltip: "天府之国",
+                tooltipIcon: {
+                  icon: "info-circle",
+                  lib: "antd",
+                  theme: "filled",
+                  iconStyle: {
+                    fontSize: "18px",
+                  },
+                },
+              },
+            ],
+          },
+          events: {
+            "general.radio.change": {
+              action: "console.log",
+              args: ["city1", "<% EVENT.detail %>"],
+            },
+          },
+        },
+      ],
+      snippetId: "forms.general-radio[basic]",
+      title: {
+        en: "Basic General Radio",
+        zh: "基础单选框,使用tooltip示例",
+      },
+      thumbnail: generalRadioBasicSvg,
+    },
+    {
+      bricks: [
+        {
+          brick: "forms.general-radio",
+          properties: {
             name: "city",
             label: "城市",
             value: "Shanghai",
@@ -60,15 +126,6 @@ export const GeneralRadioStory: Story = {
               {
                 label: "上海",
                 value: "Shanghai",
-                tooltip: "大上海",
-                tooltipIcon: {
-                  icon: "info-circle",
-                  lib: "ant",
-                  theme: " filled",
-                  iconStyle: {
-                    fontSize: "18px",
-                  },
-                },
               },
               {
                 label: "北京",
