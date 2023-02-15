@@ -297,6 +297,7 @@ export function CascaderWrapper(props: CMDBCascaderProps) {
             .flat().length,
         }));
         setOptions([...options]);
+        props.optionsChange?.(options, props.name);
       },
       (err) => {
         handleHttpError(err);
