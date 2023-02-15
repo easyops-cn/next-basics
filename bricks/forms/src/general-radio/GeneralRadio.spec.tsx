@@ -321,4 +321,43 @@ describe("GeneralRadio", () => {
     );
     expect(wrapper.find(GeneralIcon).length).toEqual(3);
   });
+
+  it("should work option set tooltipIcon", () => {
+    const wrapper = mount(
+      <GeneralRadio
+        options={[
+          {
+            label: "上海",
+            value: "Shanghai",
+            tooltip: "上海是国际化的大都市",
+            tooltipIcon: {
+              icon: "info-circle",
+              lib: "ant",
+              theme: " filled",
+              iconStyle: {
+                fontSize: "18px",
+              },
+            },
+          },
+          {
+            label: "北京",
+            value: "Beijing",
+          },
+          {
+            label: "成都",
+            value: "Chengdu",
+          },
+        ]}
+        name="city"
+        label="城市"
+      />
+    );
+
+    wrapper
+      .find(Radio.Group)
+      .simulate("change", { target: { value: "Shanghai" } });
+    expect(wrapper).toBeTruthy();
+
+    expect(wrapper.find(".tooltipIconContent").length).toBe(1);
+  });
 });

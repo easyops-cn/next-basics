@@ -60,6 +60,15 @@ export const GeneralRadioStory: Story = {
               {
                 label: "上海",
                 value: "Shanghai",
+                tooltip: "大上海",
+                tooltipIcon: {
+                  icon: "info-circle",
+                  lib: "ant",
+                  theme: " filled",
+                  iconStyle: {
+                    fontSize: "18px",
+                  },
+                },
               },
               {
                 label: "北京",
