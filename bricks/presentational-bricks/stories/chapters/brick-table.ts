@@ -75,6 +75,7 @@ export const BrickTableStory: Story = {
                       icon: {
                         lib: "fa",
                         icon: "info-circle",
+                        color: "var(--color-secondary-text)",
                       },
                       content: "这是一个 tooltips",
                       text: "Address",
@@ -483,6 +484,7 @@ export const BrickTableStory: Story = {
                 useBrick: {
                   brick: "presentational-bricks.brick-value-mapping",
                   properties: {
+                    showTagCircle: true,
                     value: "<% DATA.cellData %>",
                     mapping: {
                       success: {

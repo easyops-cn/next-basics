@@ -63,7 +63,7 @@ export class GeneralRadioElement extends FormItemElement {
   /**
    * @required true
    * @default -
-   * @description 单选框选项表
+   * @description 单选框选项表，RadioType为default时，如果设置了tooltip值,可以设置tooltipIcon图标（MenuIcon 类型）,tooltipIcon颜色默认为--color-secondary-text。
    * @group basic
    */
   @property({

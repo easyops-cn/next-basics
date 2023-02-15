@@ -169,8 +169,22 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
   ): React.ReactNode => {
     return options.map((item: any) => {
       const icon = item.icon;
-
+      const tooltipIcon = item.tooltipIcon;
       let defaultIcon: JSX.Element = null;
+      let tooltipGeneralIcon: JSX.Element = null;
+      if (Component === Radio && item.tooltip && tooltipIcon) {
+        tooltipGeneralIcon = (
+          <GeneralIcon
+            icon={item.tooltipIcon}
+            style={{
+              fontSize: "22px",
+              verticalAlign: "-0.25em",
+              color: "var(--color-secondary-text)",
+              ...tooltipIcon.iconStyle,
+            }}
+          ></GeneralIcon>
+        );
+      }
       if (Component === Radio && icon) {
         if ("imgSrc" in icon) {
           const mergedIcon: SrcIcon = {
@@ -222,7 +236,10 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
       }
 
       return (
-        <Tooltip key={item.value} title={item.tooltip}>
+        <Tooltip
+          key={item.value}
+          title={Component === Radio && tooltipGeneralIcon ? "" : item.tooltip}
+        >
           <Component value={item.value} disabled={item.disabled}>
             {Component === Radio.Button && icon ? (
               <>
@@ -235,6 +252,14 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
               <>
                 {defaultIcon}
                 {item.label}
+                {Component === Radio && tooltipGeneralIcon && (
+                  <span className={styles.tooltipIconContent}>
+                    <Tooltip title={item.tooltip}>
+                      {" "}
+                      {tooltipGeneralIcon}
+                    </Tooltip>
+                  </span>
+                )}
               </>
             )}
           </Component>
