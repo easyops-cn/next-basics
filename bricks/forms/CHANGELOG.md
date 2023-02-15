@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.262.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.261.0...@next-bricks/forms@1.262.0) (2023-02-15)
+
+
+### Bug Fixes
+
+* 修改注释 ([7d35153](https://github.com/easyops-cn/next-basics/commit/7d35153a3701634c7b8b965481580e72a25a35c3))
+
+
+### Features
+
+* 含有复杂值控件新增事件xxx.options.change ([6093e0b](https://github.com/easyops-cn/next-basics/commit/6093e0b96eda5118e824fe04a30b4ef562d01086))
+
+
+
+
+
 # [1.261.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.260.0...@next-bricks/forms@1.261.0) (2023-02-14)
 
 
