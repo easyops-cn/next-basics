@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.263.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.1...@next-bricks/forms@1.263.2) (2023-02-15)
+
+
+### Bug Fixes
+
+* 修复无默认值情况不触发options获取 ([86c8add](https://github.com/easyops-cn/next-basics/commit/86c8addbdce3eb8e2f2c10402649bd4b8111d5d3))
+
+
+
+
+
 ## [1.263.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.0...@next-bricks/forms@1.263.1) (2023-02-15)
 
 **Note:** Version bump only for package @next-bricks/forms
