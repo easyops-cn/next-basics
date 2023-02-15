@@ -309,7 +309,18 @@ export class CmdbInstanceSelectElement extends FormItemElement {
     this.changeEvent.emit(value);
     this.changeEventV2.emit(option);
   };
-
+  /**
+   * @detail `{options:ComplexOption[],name:string}	`
+   * @description 下拉列表变化时触发
+   */
+  @event({ type: "forms.cmdb-instance-select.options.change" })
+  optionsChange: EventEmitter<{
+    options: ComplexOption[];
+    name: string;
+  }>;
+  handleOptionsChange = (options: ComplexOption[], name: string): void => {
+    this.optionsChange.emit({ options, name });
+  };
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
@@ -334,6 +345,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
             notRender={this.notRender}
             firstRender={this.firstRender}
             onChange={this.handleChange}
+            optionsChange={this.handleOptionsChange}
             minimumInputLength={this.minimumInputLength}
             allowClear={this.allowClear}
             inputBoxStyle={this.inputBoxStyle}

@@ -37,6 +37,15 @@ describe("forms.general-radio", () => {
         detail: value,
       })
     );
+
+    props.optionsChange([{ label: "test", value: 1 }], "test");
+    await (global as any).flushPromises();
+    expect(dispatchEvent).lastCalledWith(
+      expect.objectContaining({
+        type: "general.radio.options.change",
+        detail: { options: [{ label: "test", value: 1 }], name: "test" },
+      })
+    );
     document.body.removeChild(element);
     await jest.runAllTimers();
     expect(unmountComponentAtNode).toBeCalled();

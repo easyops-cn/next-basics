@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Checkbox, Row, Col, Collapse } from "antd";
 import { isNil, uniq } from "lodash";
 import { CheckboxValueType, CheckboxOptionType } from "antd/lib/checkbox/Group";
@@ -16,6 +16,10 @@ export interface GeneralCheckboxProps extends FormItemWrapperProps {
   colSpan?: number;
   onChange?: (value: CheckboxValueType[] | CheckboxValueType) => void;
   onChangeV2?: (value: any) => void;
+  optionsChange?: (
+    options: CheckboxOptionType | IconCheckboxItem[] | CheckboxOtherOptionType,
+    name: string
+  ) => void;
   optionGroups?: OptionGroup[];
   isGroup?: boolean;
   text?: string;
@@ -47,6 +51,7 @@ export interface IconCheckboxProps {
   isCustom?: boolean;
   onChange?: (checkList: any[]) => void;
   onChangeV2?: (checkList: any[]) => void;
+  optionsChange?: (options: CheckboxOptionType[], name: string) => void;
 }
 export function IconCheckbox(props: IconCheckboxProps) {
   const {
@@ -121,6 +126,7 @@ export function GeneralCheckboxItem(
   const {
     formElement,
     onChange,
+    optionsChange,
     colSpan,
     optionGroups,
     isGroup,
@@ -131,6 +137,21 @@ export function GeneralCheckboxItem(
     type,
     ...inputProps
   } = props;
+
+  useEffect(() => {
+    const _options = props.isGroup
+      ? optionGroups
+        ? optionGroups.reduce(
+            (before, after) => [
+              ...before,
+              ...after.options.map((item) => ({ ...item, type: after.key })),
+            ],
+            []
+          )
+        : []
+      : props.options;
+    optionsChange?.(_options, props.name);
+  }, [props.options, props.isGroup, props.optionGroups]);
 
   const isGridType = !isNil(colSpan);
   const groupMap = useMemo(() => {

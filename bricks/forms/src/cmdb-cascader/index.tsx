@@ -8,6 +8,7 @@ import {
 } from "@next-core/brick-kit";
 import { CmdbCascader } from "./CmdbCascader";
 import { FormItemElement } from "@next-libs/forms";
+import { CascaderOptionType } from "../dynamic-form-item";
 
 export interface valueCMDBCascaderProp {
   instanceId: string;
@@ -141,6 +142,16 @@ export class CmdbCascaderElement extends FormItemElement {
     this.changeEventV2.emit(value);
   };
 
+  /**
+   * @detail `{options: CascaderOptionType[], name: string}`
+   * @description 选项列表变化时触发
+   */
+  @event({ type: "forms.cmdb-cascader.options.change" })
+  optionsChange: EventEmitter;
+  handleOptionsChange = (options: CascaderOptionType[], name: string): void => {
+    this.optionsChange.emit({ options, name });
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -176,6 +187,7 @@ export class CmdbCascaderElement extends FormItemElement {
             notRender={this.notRender}
             onChange={this.handleChange}
             onChangeV2={this.handleChangeV2}
+            optionsChange={this.handleOptionsChange}
             helpBrick={this.helpBrick}
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}

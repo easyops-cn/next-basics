@@ -31,6 +31,7 @@ export interface GeneralCascaderProps extends FormItemWrapperProps {
   style?: React.CSSProperties;
   suffixIcon?: string;
   onChange?: (value: string[], selectedOptions: CascaderOptionType[]) => void;
+  optionsChange?: (options: CascaderOptionType[], name: string) => void;
   limit?: number;
   onLoadingData?: (targetOption: CascaderOptionType[]) => void;
 }
@@ -75,6 +76,7 @@ export function LegacyGeneralCascader(
 
   useEffect(() => {
     setOptions(props.options);
+    props.optionsChange?.(props.options, props.name);
   }, [props.options]);
 
   const setChildrenOption = (

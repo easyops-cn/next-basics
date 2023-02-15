@@ -31,6 +31,7 @@ describe("forms.cmdb-cascader", () => {
 
   it("handleChangeV2 event", async () => {
     const fn = jest.fn();
+    const optionsChange = jest.fn();
     const element = document.createElement("forms.cmdb-cascader");
     // Always waiting for async `(dis)connectedCallback`
     document.body.appendChild(element);
@@ -38,5 +39,12 @@ describe("forms.cmdb-cascader", () => {
     element.addEventListener("forms.cmdb-cascader.change.v2", fn);
     element.handleChangeV2("xxx");
     expect(fn).toBeCalledTimes(1);
+
+    element.addEventListener(
+      "forms.cmdb-cascader.options.change",
+      optionsChange
+    );
+    element.handleOptionsChange([{ label: "test", value: 1 }], "test");
+    expect(optionsChange).toBeCalledTimes(1);
   });
 });

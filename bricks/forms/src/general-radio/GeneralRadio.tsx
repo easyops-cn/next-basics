@@ -30,6 +30,7 @@ export interface GeneralRadioProps extends FormItemWrapperProps {
   disabled?: boolean;
   onChange?: (value: any) => void;
   onChangeV2?: (value: any) => void;
+  optionsChange?: (options: any, name: string) => void;
   buttonStyle?: RadioGroupButtonStyle;
   size?: "large" | "middle" | "small";
   uiType?: UiType;
@@ -51,6 +52,7 @@ interface IconRadioGroupProps {
   useBrick?: UseBrickConf;
   onChange?: (value: any) => void;
   onChangeV2?: (value: any) => void;
+  optionsChange?: (options: any, name: string) => void;
   customStyle?: React.CSSProperties;
 }
 
@@ -147,7 +149,7 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
 }
 
 export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
-  const { options, disabled, uiType } = props;
+  const { options, disabled, uiType, optionsChange } = props;
 
   const handleChange = (e: RadioChangeEvent): void => {
     const value = e.target.value;
@@ -156,6 +158,10 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
     const newValueV2 = _options?.find((item) => value === item.value);
     props.onChangeV2?.(newValueV2);
   };
+
+  useEffect(() => {
+    optionsChange?.(props.options, props.name);
+  }, [props.options]);
 
   const renderRadio = (
     Component: any,

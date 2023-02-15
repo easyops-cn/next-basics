@@ -229,6 +229,22 @@ export class GeneralCascaderElement extends FormItemElement {
   };
 
   /**
+   * @detail {options: CascaderOptionType[],name: string}
+   * @description 级联选择项options变化时触发
+   */
+  @event({ type: "cascader.options.change" }) optionsChange: EventEmitter<
+    Record<string, any>
+  >;
+  private _handleOptionsChange = (
+    options: CascaderOptionType[],
+    name: string
+  ): void => {
+    Promise.resolve().then(() => {
+      this.optionsChange.emit({ options, name });
+    });
+  };
+
+  /**
    * @detail ProcessedOptionData
    * @description 当某一个 option 有设置 isLeaf = false 时(对于某个 option 需要动态拉取数据时，需要设置该属性，[isLeaf 详情信息](https://ant.design/components/cascader-cn/#components-cascader-demo-lazy))，选择当前项会触发该事件, layerIndex 表示选择当前项所处在的层级，curOption 表示当前层级选择项的详情信息，selectedOptions 会列出所有层级路径下所选过的 option 信息。
    */
@@ -290,6 +306,7 @@ export class GeneralCascaderElement extends FormItemElement {
             wrapperCol={this.wrapperCol}
             suffixIcon={this.suffixIcon}
             onChange={this._handleChange}
+            optionsChange={this._handleOptionsChange}
             size={this.size}
             limit={this.limit}
             onLoadingData={this._handleLoading}

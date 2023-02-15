@@ -410,6 +410,15 @@ export class GeneralSelectElement extends FormItemElement {
     GeneralComplexOption | GeneralComplexOption[]
   >;
   /**
+   * @detail `{options:GeneralComplexOption[],name:string}`
+   * @description 选项数据变化时触发
+   */
+  @event({ type: "general.select.options.change" })
+  optionsChangeEvent: EventEmitter<{
+    options: GeneralComplexOption[];
+    name: string;
+  }>;
+  /**
    * @detail `-`
    * @description 获得焦点时触发
    */
@@ -453,6 +462,13 @@ export class GeneralSelectElement extends FormItemElement {
     data: GeneralComplexOption | GeneralComplexOption[]
   ): void => {
     this.optionDataChangeEvent.emit(data);
+  };
+
+  private _handleOptionsChange = (
+    options: GeneralComplexOption[],
+    name: string
+  ): void => {
+    this.optionsChangeEvent.emit({ options, name });
   };
 
   private _handleFocus = (): void => {
@@ -506,6 +522,7 @@ export class GeneralSelectElement extends FormItemElement {
             onChange={this._handleChange}
             onChangeV2={this._handleChangeV2}
             onOptionDataChange={this._handleOptionDataChange}
+            onOptionsChange={this._handleOptionsChange}
             allowClear={this.allowClear}
             suffix={this.suffix}
             defaultActiveFirstOption={this.defaultActiveFirstOption}

@@ -15,12 +15,22 @@ describe("forms.general-cascader", () => {
     document.body.appendChild(element);
     expect(spyOnRender).toBeCalled();
     const spyOnDispatch = jest.spyOn(element, "dispatchEvent");
-    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
-      "props"
-    ].children.props.onChange();
+    const props =
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0]["props"]
+        .children.props;
+    props.onChange();
     await (global as any).flushPromises();
     expect(spyOnDispatch).toBeCalled();
     document.body.removeChild(element);
     expect(unmountComponentAtNode).toBeCalled();
+
+    props.optionsChange([{ label: "test", value: 1 }], "test");
+    await (global as any).flushPromises();
+    expect(spyOnDispatch).lastCalledWith(
+      expect.objectContaining({
+        type: "cascader.options.change",
+        detail: { options: [{ label: "test", value: 1 }], name: "test" },
+      })
+    );
   });
 });
