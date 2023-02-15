@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.263.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.262.0...@next-bricks/forms@1.263.0) (2023-02-15)
+
+
+### Features
+
+* BRICK_STORE-3266 forms.general-radio构件增加带辅助图标的功能。 ([1f3f55a](https://github.com/easyops-cn/next-basics/commit/1f3f55aab3f99d37b58de367f210b1c966d8fa9d))
+
+
+
+
+
 # [1.262.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.261.0...@next-bricks/forms@1.262.0) (2023-02-15)
 
 
