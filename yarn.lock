@@ -2351,6 +2351,11 @@
   resolved "https://registry.npmjs.org/@next-core/brick-http/-/brick-http-2.8.0.tgz#fa8c2cc39d034fbb46edcd1342762b855590cdd9"
   integrity sha512-WXyXc0BdUUSId4TuwklNRZ9rrhuaTSzw1kr9EWivFSpKviTrYLRrGnafvSBT9l5F+LEJEny+xt5rzA9VFzcV0A==
 
+"@next-core/brick-icons@^2.31.12":
+  version "2.31.12"
+  resolved "https://registry.npmjs.org/@next-core/brick-icons/-/brick-icons-2.31.12.tgz#203b103358e3545a3f18276b64e991ca24ea0dfe"
+  integrity sha512-Mb5CUL1Cp13kbpHZyVMkgOTxTFFsqkUZYNdAG/pw17MX9Sp/d+xK6+LwhSJKjsmDPjb8ImbJxLy2KTFhBS/dqg==
+
 "@next-core/brick-icons@^2.31.3":
   version "2.31.3"
   resolved "https://registry.npmjs.org/@next-core/brick-icons/-/brick-icons-2.31.3.tgz#8c546f8a5d531f9524f975f9264c5c7da9de1c0c"
@@ -2484,6 +2489,11 @@
   version "1.25.1"
   resolved "https://registry.npmjs.org/@next-core/custom-antd-styles/-/custom-antd-styles-1.25.1.tgz#7135dd7ade3a2e9173c567b52946a761cad69b15"
   integrity sha512-tF9L8sgc2zGeuyn8r/7PXPefAJOdvDW1BEoQs2zXR3rtHF4vWZ0hkM3YfbkCmUOyYSn7vev5e5PUMp14sSL1cA==
+
+"@next-core/custom-antd-styles@^1.25.13":
+  version "1.25.13"
+  resolved "https://registry.npmjs.org/@next-core/custom-antd-styles/-/custom-antd-styles-1.25.13.tgz#9b39cbf371b686a2121e0839166e76f59387093f"
+  integrity sha512-aaU4SbA6t7JKT0H4Gm2zxvgkz3w/WpePZygAGyy0nF0Vp2aOcrewTJ4mQMqZzwAbOgapLkid06tvhXTqnVysdQ==
 
 "@next-core/custom-antd-styles@^1.25.7":
   version "1.25.7"
