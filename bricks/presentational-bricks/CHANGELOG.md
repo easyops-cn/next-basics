@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.283.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.283.0...@next-bricks/presentational-bricks@1.283.1) (2023-02-16)
+
+
+### Bug Fixes
+
+* BRICK_STORE-3251 【表格组件】表头筛选图标颜色需替换为 [#8](https://github.com/easyops-cn/next-basics/issues/8)c8c8c ，位置应紧跟表头文字，间隔是8px ([8153e32](https://github.com/easyops-cn/next-basics/commit/8153e325bfa77ed7e6d5e0c4b966e67ffc93f518)), closes [#8c8c8](https://github.com/easyops-cn/next-basics/issues/8c8c8)
+
+
+
+
+
 # [1.283.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.282.0...@next-bricks/presentational-bricks@1.283.0) (2023-02-15)
 
 
