@@ -254,6 +254,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
           colSpanKey,
           rowSpanKey,
           filterDropdownBrick,
+          customFilterIcon,
           ...columnConf
         } = column;
         if (headerBrick?.useBrick || titleUseBrick) {
@@ -284,6 +285,17 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
             ></BrickAsComponent>
           );
         }
+        columnConf.filterIcon = (
+          <GeneralIcon
+            icon={
+              customFilterIcon || {
+                lib: "easyops",
+                icon: "condition-config-fill",
+                category: "default",
+              }
+            }
+          />
+        );
 
         if (useBrick || component) {
           let itemBrickDataMap: ItemBrickDataMap;

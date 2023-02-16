@@ -132,6 +132,10 @@ export interface CustomColumn extends ColumnProps<Record<string, any>> {
   filterDropdownBrick?: {
     useBrick: UseBrickConf;
   };
+  /**
+   * 自定义筛选图标
+   */
+  customFilterIcon?: MenuIcon;
 }
 
 export interface CellStatusProps {
