@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.263.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.2...@next-bricks/forms@1.263.3) (2023-02-16)
+
+
+### Bug Fixes
+
+* **time-range-picker:** 当类型为dateTime时，点击「确认」的时候触发多次onchange事件 ([606a4ad](https://github.com/easyops-cn/next-basics/commit/606a4ad02a222cfc39441c8392f955db7299d8fa))
+
+
+
+
+
 ## [1.263.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.1...@next-bricks/forms@1.263.2) (2023-02-15)
 
 
