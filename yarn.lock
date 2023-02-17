@@ -2490,10 +2490,10 @@
   resolved "https://registry.npmjs.org/@next-core/custom-antd-styles/-/custom-antd-styles-1.25.1.tgz#7135dd7ade3a2e9173c567b52946a761cad69b15"
   integrity sha512-tF9L8sgc2zGeuyn8r/7PXPefAJOdvDW1BEoQs2zXR3rtHF4vWZ0hkM3YfbkCmUOyYSn7vev5e5PUMp14sSL1cA==
 
-"@next-core/custom-antd-styles@^1.25.13":
-  version "1.25.13"
-  resolved "https://registry.npmjs.org/@next-core/custom-antd-styles/-/custom-antd-styles-1.25.13.tgz#9b39cbf371b686a2121e0839166e76f59387093f"
-  integrity sha512-aaU4SbA6t7JKT0H4Gm2zxvgkz3w/WpePZygAGyy0nF0Vp2aOcrewTJ4mQMqZzwAbOgapLkid06tvhXTqnVysdQ==
+"@next-core/custom-antd-styles@^1.25.16":
+  version "1.25.16"
+  resolved "https://registry.npmjs.org/@next-core/custom-antd-styles/-/custom-antd-styles-1.25.16.tgz#f449216322c352dc52a02159636e33838193ebf8"
+  integrity sha512-GaaMYyLGlGtNJBY7rdLiJKyBmIrvsNU8FutbN2UzEW7S4wVUG/VAOzgVAJbXpSCuBtbx0nsdwuM0J6Osf4HoKg==
 
 "@next-core/custom-antd-styles@^1.25.7":
   version "1.25.7"
