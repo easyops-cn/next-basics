@@ -345,10 +345,9 @@ export class GeneralFormElement
         if (typeof valueType === "string") {
           const matches = valueType.match(/^moment(?:\|(.+))?$/);
           if (matches && !isNil(value)) {
-            value = moment(value);
+            value = moment(value, matches[1]);
           }
         }
-
         acc[key] = value;
         return acc;
       },
