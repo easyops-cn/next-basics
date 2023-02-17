@@ -36,7 +36,7 @@ describe("InputWithUnit", () => {
     console.error.mockImplementation(() => null);
 
     const genFn = () =>
-      mount(<InputWithUnit value={3600} unit="xx" unitType={null} />);
+      mount(<InputWithUnit value={3600} unit="xx" unitType={UnitType.Time} />);
 
     expect(genFn).toThrowError();
     // @ts-ignore
