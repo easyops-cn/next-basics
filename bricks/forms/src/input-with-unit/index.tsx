@@ -51,7 +51,7 @@ export class InputWithUnitElement extends FormItemElement {
    * @required false
    * @description 初始值
    */
-  @property()
+  @property({ type: Number })
   value: number;
 
   /**

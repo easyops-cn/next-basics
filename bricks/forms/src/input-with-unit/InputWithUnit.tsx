@@ -32,7 +32,7 @@ export function InputGroup(
     }
   }
   const baseUnit = originUnits.find((unit) => unit.id === props.unit);
-  if (!baseUnit) {
+  if (!baseUnit && originUnits.length > 0) {
     throw new Error(
       `InputWithUnit: invalid unit '${props.unit}' as type of '${props.unitType}'`
     );
