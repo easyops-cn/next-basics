@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.263.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.4...@next-bricks/forms@1.263.5) (2023-02-17)
+
+
+### Bug Fixes
+
+* select选项支持换行 ([e113ac1](https://github.com/easyops-cn/next-basics/commit/e113ac1c4aabab7cc08a2327233864876c9b9723))
+* 增加下拉框支持换行的属性 ([3873d3a](https://github.com/easyops-cn/next-basics/commit/3873d3adb224b507523a3331870b278eb4e79294))
+
+
+
+
+
 ## [1.263.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.3...@next-bricks/forms@1.263.4) (2023-02-17)
 
 
