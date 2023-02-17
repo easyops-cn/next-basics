@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.263.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.3...@next-bricks/forms@1.263.4) (2023-02-17)
+
+
+### Bug Fixes
+
+* 修复value unit不生效以及跟popover组合使用抛错的问题 ([9ee010e](https://github.com/easyops-cn/next-basics/commit/9ee010e2ee81f1a71ef50c0fd857e95d157233cc))
+
+
+
+
+
 ## [1.263.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.2...@next-bricks/forms@1.263.3) (2023-02-16)
 
 
