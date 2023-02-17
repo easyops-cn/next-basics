@@ -12,7 +12,7 @@ function getChildren(
 ): StepTreeNodeData[] {
   const treeList: StepTreeNodeData[] = [];
 
-  let stageList;
+  let stageList: StepItem[];
   // switch / parallel 下的 branch 特殊处理
   if (["switch", "parallel"].includes(parentType)) {
     stageList = stepIds.map((id) => {
@@ -29,6 +29,14 @@ function getChildren(
     const startNode = stepMap.get(startAt || stepIds[0]);
 
     stageList = getStageList(startNode, stepMap);
+
+    if (stageList.length !== stepIds.length) {
+      stepIds.forEach((id) => {
+        if (!stageList.some((item) => item.id === id)) {
+          stageList.push(stepMap.get(id));
+        }
+      });
+    }
   }
 
   stageList?.forEach((curStepData) => {

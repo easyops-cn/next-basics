@@ -95,6 +95,7 @@ describe("getFlowGraph", () => {
             type: "task",
             parent: "branch2",
             name: "step2.5",
+            next: "step3",
           },
           {
             id: "step3",
@@ -127,6 +128,7 @@ describe("getFlowGraph", () => {
           { source: "branch1", target: "step2", type: "group" },
           { source: "branch1", target: "step2.1", type: "group" },
           { source: "branch2", target: "step2.5", type: "group" },
+          { source: "branch2", target: "step3", type: "group" },
         ],
         nodes: [
           { id: "root", type: "node" },
@@ -209,6 +211,7 @@ describe("getFlowGraph", () => {
             data: {
               id: "step2.5",
               name: "step2.5",
+              next: "step3",
               type: "task",
               parent: "branch2",
             },
@@ -464,6 +467,106 @@ describe("getFlowGraph", () => {
             },
             id: "step03",
             name: "步骤03",
+            type: "node",
+          },
+        ],
+        root: "root",
+      },
+    ],
+    [
+      {
+        relations: [
+          {
+            src: "step1",
+            dst: "branch",
+          },
+          {
+            src: "branch",
+            dst: "ch1",
+          },
+          {
+            src: "branch",
+            dst: "step2",
+          },
+        ],
+        steps: [
+          {
+            name: "step1",
+            type: "switch",
+            id: "step1",
+            children: ["branch"],
+          },
+          {
+            id: "branch",
+            name: "branch",
+            type: "branch",
+            children: ["ch1", "step2"],
+            config: { startAt: "ch1" },
+            parent: "step1",
+          },
+          {
+            id: "ch1",
+            name: "ch1",
+            type: "choice",
+            parent: "branch",
+          },
+          {
+            id: "step2",
+            name: "step2",
+            type: "pass",
+            parent: "branch",
+          },
+        ],
+      },
+      "step1",
+      {
+        edges: [
+          { source: "root", target: "step1", type: "include" },
+          { source: "step1", target: "branch", type: "container" },
+          { source: "branch", target: "ch1", type: "group" },
+          { source: "branch", target: "step2", type: "group" },
+        ],
+        nodes: [
+          { id: "root", type: "node" },
+          {
+            data: {
+              children: ["branch"],
+              id: "step1",
+              name: "step1",
+              type: "switch",
+            },
+            id: "step1",
+            name: "step1",
+            type: "container",
+          },
+          {
+            data: {
+              children: ["ch1", "step2"],
+              config: { startAt: "ch1" },
+              id: "branch",
+              name: "branch",
+              parent: "step1",
+              type: "branch",
+            },
+            id: "branch",
+            name: "branch",
+            type: "group",
+          },
+          {
+            data: { id: "ch1", name: "ch1", parent: "branch", type: "choice" },
+            id: "ch1",
+            name: "ch1",
+            type: "node",
+          },
+          {
+            data: {
+              id: "step2",
+              name: "step2",
+              parent: "branch",
+              type: "pass",
+            },
+            id: "step2",
+            name: "step2",
             type: "node",
           },
         ],

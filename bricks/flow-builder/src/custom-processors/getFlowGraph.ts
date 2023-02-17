@@ -1,5 +1,5 @@
 import { getRuntime } from "@next-core/brick-kit";
-import { isEmpty } from "lodash";
+import { isEmpty, difference } from "lodash";
 import { StepItem, StepType } from "../interfaces";
 import { getStageList, checkRecurringNode } from "./getStepTreeData";
 
@@ -135,11 +135,16 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
     }
 
     if (childrenFLow.includes(item.type) && !isEmpty(item.children)) {
-      const sortChildren = [];
+      const sortChildren: string[] = [];
       if (item.config?.startAt) {
         walkSteps(data.steps, item.config.startAt, (item) => {
           sortChildren.push(item.id);
         });
+
+        // choice 分支下的节点不能通过 next 属性去获取，需要包含进去
+        if (sortChildren.length !== item.children.length) {
+          sortChildren.push(...difference(item.children, sortChildren));
+        }
       } else {
         sortChildren.push(...item.children);
       }
