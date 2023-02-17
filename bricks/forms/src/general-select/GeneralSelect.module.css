@@ -1,3 +1,13 @@
+.wrap {
+  display: flex;
+  justify-content: space-between;
+
+  .wrapLabel {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    margin-right: 8px;
+  }
+}
 .option {
   display: flex;
   align-items: center;
@@ -26,7 +36,9 @@
 :global(.ant-select-selector) .suffixContainer {
   margin-top: -1px;
 }
-:global(.ant-select-item-option-selected:not(.ant-select-item-option-disabled)) {
+:global(
+    .ant-select-item-option-selected:not(.ant-select-item-option-disabled)
+  ) {
   color: var(--color-brand);
   background-color: var(--v8-top-menu-item-selected-bg);
 }

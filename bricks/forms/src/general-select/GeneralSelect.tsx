@@ -50,6 +50,7 @@ type RequestStatus = "loading" | "success" | "error";
 
 export interface GeneralSelectProps extends FormItemWrapperProps {
   options: GeneralComplexOption[];
+  optionsWrap?: boolean;
   fields?: Partial<GeneralComplexOption>;
   groupBy?: string;
   mode?: string;
@@ -113,6 +114,7 @@ export function GeneralSelectLegacy(
     onOptionDataChange,
     onOptionsChange,
     defaultActiveFirstOption = false,
+    optionsWrap = false,
   } = props;
   const [checkedValue, setCheckedValue] = useState(props.value);
   const [options, setOptions] = useState<GeneralComplexOption[]>(props.options);
@@ -280,8 +282,13 @@ export function GeneralSelectLegacy(
         className={style.itemOption}
         disabled={op.disabled}
       >
-        <div className={style.option} onMouseEnter={setTooltip}>
-          <span className={style.label}>{op.label}</span>
+        <div
+          className={optionsWrap ? style.wrap : style.option}
+          onMouseEnter={setTooltip}
+        >
+          <span className={optionsWrap ? style.wrapLabel : style.label}>
+            {op.label}
+          </span>
           {suffix
             ? suffix.useBrick &&
               showSuffix(op) && (

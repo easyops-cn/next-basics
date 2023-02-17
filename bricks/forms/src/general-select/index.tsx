@@ -178,6 +178,18 @@ export class GeneralSelectElement extends FormItemElement {
    * @kind boolean
    * @required false
    * @default false
+   * @description 下拉框选项是否支持换行
+   * @group basic
+   */
+  @property({
+    type: Boolean,
+  })
+  optionsWrap: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
    * @description 是否禁用
    * @group basic
    */
@@ -538,6 +550,7 @@ export class GeneralSelectElement extends FormItemElement {
             helpBrick={this.helpBrick}
             labelBrick={this.labelBrick}
             size={this.size}
+            optionsWrap={this.optionsWrap}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             tokenSeparators={this.tokenSeparators}
