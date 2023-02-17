@@ -1,12 +1,10 @@
 .option {
   display: flex;
-  align-items: center;
   justify-content: space-between;
 
   .label {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    white-space: normal;
+    overflow-wrap: anywhere;
     margin-right: 8px;
   }
 }
@@ -26,7 +24,9 @@
 :global(.ant-select-selector) .suffixContainer {
   margin-top: -1px;
 }
-:global(.ant-select-item-option-selected:not(.ant-select-item-option-disabled)) {
+:global(
+    .ant-select-item-option-selected:not(.ant-select-item-option-disabled)
+  ) {
   color: var(--color-brand);
   background-color: var(--v8-top-menu-item-selected-bg);
 }
