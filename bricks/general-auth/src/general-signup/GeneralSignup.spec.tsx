@@ -31,6 +31,7 @@ spyOnKit.mockReturnValue({
   getFeatureFlags: () => ({
     "enable-backend-password-config": true,
     "enable-nickname-config": true,
+    "enable-registration-clause": true,
   }),
 } as any);
 const spyOnGetPasswordConfig = jest.spyOn(
