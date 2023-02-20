@@ -468,6 +468,120 @@ describe("getStepTreeData", () => {
         },
       ],
     ],
+    [
+      "step1",
+      [
+        {
+          id: "step1",
+          type: "switch",
+          name: "step1",
+          children: ["branch1"],
+        },
+        {
+          id: "branch1",
+          name: "branch1",
+          type: "branch",
+          children: ["ch1", "step2"],
+          config: {
+            startAt: "ch1",
+          },
+          parent: "step1",
+        },
+        {
+          id: "ch1",
+          name: "ch1",
+          type: "choice",
+          parent: "branch1",
+        },
+        {
+          id: "step2",
+          name: "step2",
+          type: "pass",
+          parent: "branch1",
+        },
+      ],
+      getIcon,
+      [
+        {
+          children: [
+            {
+              children: [
+                {
+                  data: {
+                    id: "ch1",
+                    name: "ch1",
+                    parent: "branch1",
+                    type: "choice",
+                  },
+                  icon: {
+                    color: "var(--palette-amber-6)",
+                    icon: "control",
+                    lib: "antd",
+                    theme: "outlined",
+                  },
+                  iconTooltip: "choice",
+                  id: "ch1",
+                  key: "ch1",
+                  name: "ch1",
+                },
+                {
+                  data: {
+                    id: "step2",
+                    name: "step2",
+                    parent: "branch1",
+                    type: "pass",
+                  },
+                  icon: {
+                    color: undefined,
+                    icon: undefined,
+                    lib: "antd",
+                    theme: "outlined",
+                  },
+                  iconTooltip: "pass",
+                  id: "step2",
+                  key: "step2",
+                  name: "step2",
+                },
+              ],
+              data: {
+                children: ["ch1", "step2"],
+                config: { startAt: "ch1" },
+                id: "branch1",
+                name: "branch1",
+                parent: "step1",
+                type: "branch",
+              },
+              icon: {
+                color: "var(--palette-yellow-6)",
+                icon: "node-expand",
+                lib: "antd",
+                theme: "outlined",
+              },
+              iconTooltip: "branch",
+              id: "branch1",
+              key: "branch1",
+              name: "branch1",
+            },
+          ],
+          data: {
+            children: ["branch1"],
+            id: "step1",
+            name: "step1",
+            type: "switch",
+          },
+          icon: {
+            color: "var(--palette-indigo-6)",
+            icon: "rollback",
+            lib: "antd",
+            theme: "outlined",
+          },
+          iconTooltip: "switch",
+          id: "step1",
+          key: "step1",
+          name: "step1",
+        },
+      ],
+    ],
   ])("should work", (rootId, data, fn, result) => {
     expect(getStepTreeData(rootId, data, fn)).toEqual(result);
   });
