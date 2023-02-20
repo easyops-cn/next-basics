@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.26.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.26.0...@next-bricks/flow-builder@1.26.1) (2023-02-20)
+
+
+### Bug Fixes
+
+* fix choice node add children error ([858dff4](https://github.com/easyops-cn/next-basics/commit/858dff43d4f923f4de37171a9e5953a0efe48332))
+
+
+
+
+
 # [1.26.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.25.0...@next-bricks/flow-builder@1.26.0) (2023-02-14)
 
 
