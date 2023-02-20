@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.263.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.5...@next-bricks/forms@1.263.6) (2023-02-20)
+
+
+### Bug Fixes
+
+* 修复form的setInitvalue设置日期时间无法生效,refs: ITSERVICE_NEXT-5576 ([895dec4](https://github.com/easyops-cn/next-basics/commit/895dec4ec169e0d7483f8839b35b4f98a9bed01b))
+
+
+
+
+
 ## [1.263.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.4...@next-bricks/forms@1.263.5) (2023-02-17)
 
 
