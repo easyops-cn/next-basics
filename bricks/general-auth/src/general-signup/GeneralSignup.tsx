@@ -53,6 +53,7 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
   const enabledFeatures = runtime.getFeatureFlags();
   const { t } = useTranslation(NS_GENERAL_AUTH);
   const [, setForceUpdate] = useState<any>();
+  const showClause = enabledFeatures["enable-registration-clause"];
 
   const passwordConfigMap = {
     default: {
@@ -466,18 +467,24 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
                     />
                   </Form.Item>
                 ))}
-              {enabledFeatures["enable-registration-clause"] && (
+              {showClause && (
                 <Form.Item
                   name="terms"
                   valuePropName="checked"
-                  rules={[
-                    {
-                      validator: (_, value) =>
-                        value
-                          ? Promise.resolve()
-                          : Promise.reject(new Error(t(K.AGREE_TERMS_TIPS))),
-                    },
-                  ]}
+                  rules={
+                    showClause
+                      ? [
+                          {
+                            validator: (_, value) =>
+                              value
+                                ? Promise.resolve()
+                                : Promise.reject(
+                                    new Error(t(K.AGREE_TERMS_TIPS))
+                                  ),
+                          },
+                        ]
+                      : []
+                  }
                 >
                   <Checkbox>
                     {t(K.AGREE_TERMS)}
