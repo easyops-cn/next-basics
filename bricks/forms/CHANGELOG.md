@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.263.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.6...@next-bricks/forms@1.263.7) (2023-02-21)
+
+
+### Bug Fixes
+
+* 增加optionsWrap属性 ([58e4c64](https://github.com/easyops-cn/next-basics/commit/58e4c645410e5fd6188b050a7b130afbbdefc13d))
+
+
+
+
+
 ## [1.263.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.5...@next-bricks/forms@1.263.6) (2023-02-20)
 
 
