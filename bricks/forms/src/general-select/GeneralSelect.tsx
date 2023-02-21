@@ -279,7 +279,7 @@ export function GeneralSelectLegacy(
         key={op.value as string}
         value={op.value as string}
         label={op.label}
-        className={style.itemOption}
+        className={optionsWrap ? style.optionWrap : style.itemOption}
         disabled={op.disabled}
       >
         <div
@@ -327,7 +327,11 @@ export function GeneralSelectLegacy(
   return (
     <Select
       ref={ref}
-      className={(suffix || suffixBrick) && style.suffixBrickSelect}
+      className={
+        optionsWrap
+          ? style.optionHeight
+          : (suffix || suffixBrick) && style.suffixBrickSelect
+      }
       {...searchProps}
       value={checkedValue}
       size={props.size}
