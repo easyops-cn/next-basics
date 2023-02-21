@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.263.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.7...@next-bricks/forms@1.263.8) (2023-02-21)
+
+
+### Bug Fixes
+
+* fix optionsWrap对其他select框的错误影响 ([3e86683](https://github.com/easyops-cn/next-basics/commit/3e86683db2f5769b5884c708c02e75a1a369653b))
+
+
+
+
+
 ## [1.263.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.6...@next-bricks/forms@1.263.7) (2023-02-21)
 
 
