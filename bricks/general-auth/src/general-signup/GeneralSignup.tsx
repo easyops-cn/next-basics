@@ -476,7 +476,7 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
                       ? [
                           {
                             validator: (_, value) =>
-                              value
+                              showClause && value
                                 ? Promise.resolve()
                                 : Promise.reject(
                                     new Error(t(K.AGREE_TERMS_TIPS))
