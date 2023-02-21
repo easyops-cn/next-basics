@@ -18,6 +18,7 @@ import style from "./GeneralSelect.module.css";
 import { debounce, groupBy, isNil, isEqual, trim, keyBy } from "lodash";
 import { GeneralOption } from "@next-libs/forms/dist/types/interfaces";
 import { maxTagCountType } from "./index";
+import classNames from "classnames";
 export const setTooltip = (event: React.MouseEvent) => {
   const target = event?.target as HTMLDivElement;
   if (target?.offsetWidth < target?.scrollWidth) {
@@ -327,11 +328,10 @@ export function GeneralSelectLegacy(
   return (
     <Select
       ref={ref}
-      className={
-        optionsWrap
-          ? style.optionHeight
-          : (suffix || suffixBrick) && style.suffixBrickSelect
-      }
+      className={classNames(
+        { [style.suffixBrickSelect]: suffix || suffixBrick },
+        { [style.wrapHeight]: optionsWrap }
+      )}
       {...searchProps}
       value={checkedValue}
       size={props.size}

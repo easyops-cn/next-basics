@@ -54,7 +54,7 @@
   }
 }
 
-.optionHeight {
+.wrapHeight {
   :global(.ant-select-selector) {
     height: 60px !important;
   }
