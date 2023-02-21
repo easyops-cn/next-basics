@@ -3,8 +3,12 @@
   justify-content: space-between;
 
   .wrapLabel {
-    white-space: normal;
-    overflow-wrap: anywhere;
+    display: -webkit-inline-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre-wrap;
     margin-right: 8px;
   }
 }
@@ -31,6 +35,29 @@
 
 .itemOption {
   border-radius: 6px;
+}
+
+.optionWrap {
+  border-radius: 6px;
+  .wrap {
+    display: flex;
+    justify-content: space-between;
+
+    .wrapLabel {
+      overflow: visible;
+      margin-right: 8px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      text-overflow: initial;
+      display: inline-block;
+    }
+  }
+}
+
+.optionHeight {
+  :global(.ant-select-selector) {
+    height: 60px !important;
+  }
 }
 
 :global(.ant-select-selector) .suffixContainer {
