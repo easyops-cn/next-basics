@@ -117,7 +117,7 @@ describe("GeneralSignup", () => {
       password2: "abcd1234",
       phone: "15019361167",
       verification_code: "223333",
-      terms: false,
+      terms: true,
     });
     wrapper.find(Form).prop("form").validateFields();
   });
