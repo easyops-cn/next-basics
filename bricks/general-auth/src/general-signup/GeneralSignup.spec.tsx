@@ -31,20 +31,21 @@ spyOnKit.mockReturnValue({
   getFeatureFlags: () => ({
     "enable-backend-password-config": true,
     "enable-nickname-config": true,
+    "disable-registration-clause": false,
   }),
 } as any);
 const spyOnGetPasswordConfig = jest.spyOn(
   userServiceSdk,
   "UserAdminApi_getPasswordConfig"
 );
-spyOnGetPasswordConfig.mockResolvedValue({
-  description: "test",
-  regex: "/^abc$/",
-});
 const spyOnGetVerifyCode = jest.spyOn(
   airAdminServiceSdk,
   "CustomerApi_sendApplicationVerificationCode"
 );
+spyOnGetPasswordConfig.mockResolvedValue({
+  description: "test",
+  regex: "/^abc$/",
+});
 spyOnGetVerifyCode.mockResolvedValue({
   message_id: "344556",
 });
@@ -101,10 +102,24 @@ describe("GeneralSignup", () => {
       password: "123456",
       password2: "123456",
       invitation_code: "123456789",
-      terms: true,
+      terms: false,
     });
     await (global as any).flushPromises();
     wrapper.update();
+  });
+  it("should sign up with validateFields", async () => {
+    const wrapper = mount(<GeneralSignup />);
+    wrapper.find(Button).at(1).simulate("click");
+    wrapper.find(Form).prop("form").setFieldsValue({
+      username: "abc",
+      email: "936233505@qq.com",
+      password: "abcd1234",
+      password2: "abcd1234",
+      phone: "15019361167",
+      verification_code: "223333",
+      terms: true,
+    });
+    wrapper.find(Form).prop("form").validateFields();
   });
   it("should get verification code when phone is correct", async () => {
     const wrapper = mount(<GeneralSignup />);
