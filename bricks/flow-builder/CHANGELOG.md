@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.27.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.26.1...@next-bricks/flow-builder@1.27.0) (2023-02-22)
+
+
+### Features
+
+* support multiple select ([5d369a3](https://github.com/easyops-cn/next-basics/commit/5d369a3e97d29aecd25961a3d17f80bf33788df7))
+
+
+
+
+
 ## [1.26.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.26.0...@next-bricks/flow-builder@1.26.1) (2023-02-20)
 
 

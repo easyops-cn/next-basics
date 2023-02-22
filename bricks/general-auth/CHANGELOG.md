@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.19.3...@next-bricks/general-auth@1.19.4) (2023-02-22)
+
+
+### Bug Fixes
+
+* 同意条款改成默认显示,调整相关逻辑 refs SSO-68 ([b2f2f50](https://github.com/easyops-cn/next-basics/commit/b2f2f500bf30f17db95c064c15451e8e674415fc))
+* 增加同意条款checkbox提示判断 refs SSO-68 ([ac099da](https://github.com/easyops-cn/next-basics/commit/ac099da727198ff0ef43b60c596ae85ece2b6125))
+* 增加同意条款校验 refs SSO-68 ([93996e6](https://github.com/easyops-cn/next-basics/commit/93996e635b4b5f67f022763b5d70ce7aa1e10968))
+* 增加注册页面的同意条款 refs SSO-68 ([d3b1da0](https://github.com/easyops-cn/next-basics/commit/d3b1da037b3b0bce83aaec2b869019533908e706))
+
+
+
+
+
 ## [1.19.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.19.2...@next-bricks/general-auth@1.19.3) (2022-11-07)
 
 **Note:** Version bump only for package @next-bricks/general-auth
