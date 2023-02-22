@@ -31,7 +31,7 @@ spyOnKit.mockReturnValue({
   getFeatureFlags: () => ({
     "enable-backend-password-config": true,
     "enable-nickname-config": true,
-    "enable-registration-clause": true,
+    "disable-registration-clause": false,
   }),
 } as any);
 const spyOnGetPasswordConfig = jest.spyOn(
@@ -102,7 +102,7 @@ describe("GeneralSignup", () => {
       password: "123456",
       password2: "123456",
       invitation_code: "123456789",
-      terms: true,
+      terms: false,
     });
     await (global as any).flushPromises();
     wrapper.update();
