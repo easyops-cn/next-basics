@@ -8,6 +8,8 @@ import React, {
   useEffect,
 } from "react";
 import { useTranslation } from "react-i18next";
+import { BrickAsComponent } from "@next-core/brick-kit";
+import { UseBrickConf } from "@next-core/brick-types";
 import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { GeneralIcon } from "@next-libs/basic-components";
@@ -28,6 +30,8 @@ export interface StepTreeProps {
   selectedSteps?: StepItem[];
   activeBarActions?: StepTreeAction[];
   onActiveBarAction?: (detail: ActionClickDetail) => void;
+  activeBarUseBrick?: { useBrick: UseBrickConf };
+  activeBarStyle?: React.CSSProperties;
 }
 
 export function StepTree({
@@ -39,6 +43,8 @@ export function StepTree({
   selectedSteps,
   activeBarActions,
   onActiveBarAction,
+  activeBarUseBrick,
+  activeBarStyle,
 }: StepTreeProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const [q, setQ] = useState<string>(null);
@@ -97,22 +103,32 @@ export function StepTree({
             </div>
           )}
           {multipleSelectMode && (
-            <div className={styles.activeBar}>
-              {activeBarActions?.map((item, index) => (
-                <span
-                  key={index}
-                  className={styles.icon}
-                  title={item.title}
-                  onClick={() =>
-                    onActiveBarAction?.({
-                      action: item.action,
-                      data: getCheckStepList(checkedMap),
-                    })
-                  }
-                >
-                  <GeneralIcon icon={item.icon} />
-                </span>
-              ))}
+            <div className={styles.activeBar} style={activeBarStyle}>
+              <div>
+                {activeBarUseBrick?.useBrick && (
+                  <BrickAsComponent
+                    useBrick={activeBarUseBrick.useBrick}
+                    data={nodes}
+                  />
+                )}
+              </div>
+              <div>
+                {activeBarActions?.map((item, index) => (
+                  <span
+                    key={index}
+                    className={styles.icon}
+                    title={item.title}
+                    onClick={() =>
+                      onActiveBarAction?.({
+                        action: item.action,
+                        data: getCheckStepList(checkedMap),
+                      })
+                    }
+                  >
+                    <GeneralIcon icon={item.icon} />
+                  </span>
+                ))}
+              </div>
             </div>
           )}
           <TreeListContext.Provider
