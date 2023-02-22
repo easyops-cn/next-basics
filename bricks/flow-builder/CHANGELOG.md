@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.28.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.27.0...@next-bricks/flow-builder@1.28.0) (2023-02-22)
+
+
+### Features
+
+* support usebrick ([b5f807e](https://github.com/easyops-cn/next-basics/commit/b5f807ea9e0365dd354007cedeb7bd7b4a602044))
+
+
+
+
+
 # [1.27.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.26.1...@next-bricks/flow-builder@1.27.0) (2023-02-22)
 
 
