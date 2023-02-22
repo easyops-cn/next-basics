@@ -10,7 +10,11 @@ import {
 import { deepMatch } from "@next-libs/visual-builder";
 import { pick } from "lodash";
 import { StepTreeNodeData } from "../interfaces";
-import { StepTreeAction, ActionClickDetail } from "./interfaces";
+import {
+  StepTreeAction,
+  ActionClickDetail,
+  StepCheckedItem,
+} from "./interfaces";
 import { StepTree } from "./StepTree";
 import { WorkbenchTreeContext } from "./constants";
 
@@ -52,6 +56,17 @@ export class StepTreeElement extends UpdatingElement {
   @property({ attribute: false })
   activeKey: string;
 
+  @property({ type: Boolean })
+  multipleSelectMode: boolean;
+
+  @property({ attribute: false })
+  selectedSteps: StepCheckedItem[];
+
+  @property({
+    attribute: false,
+  })
+  activeBarActions: StepTreeAction[];
+
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
 
@@ -81,6 +96,9 @@ export class StepTreeElement extends UpdatingElement {
   @event({ type: "context.menu" })
   private _nodeContextMenuEvent: EventEmitter<unknown>;
 
+  @event({ type: "active.bar.click" })
+  private _activeBarClickEvent: EventEmitter<ActionClickDetail>;
+
   private _contextMenuFactory =
     (node: StepTreeNodeData) => (e: React.MouseEvent) => {
       e.preventDefault();
@@ -108,6 +126,10 @@ export class StepTreeElement extends UpdatingElement {
           : pick(node.data, this.matchNodeDataFields),
         lowerTrimmedQuery
       ));
+
+  private _handleActiveBarClick = (detail: ActionClickDetail): void => {
+    this._activeBarClickEvent.emit(detail);
+  };
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -145,6 +167,10 @@ export class StepTreeElement extends UpdatingElement {
               placeholder={this.placeholder}
               searchPlaceholder={this.searchPlaceholder}
               noSearch={this.noSearch}
+              multipleSelectMode={this.multipleSelectMode}
+              selectedSteps={this.selectedSteps}
+              activeBarActions={this.activeBarActions}
+              onActiveBarAction={this._handleActiveBarClick}
             />
           </WorkbenchTreeContext.Provider>
         </BrickWrapper>,

@@ -1,6 +1,6 @@
 import { MouseEvent } from "react";
 import { MenuIcon } from "@next-core/brick-types";
-import { StepTreeNodeData } from "../interfaces";
+import { StepItem, StepTreeNodeData } from "../interfaces";
 
 export interface StepTreeAction {
   action: string;
@@ -25,6 +25,19 @@ export interface ContextOfWorkbenchTree {
   matchNode?: (node: StepTreeNodeData, lowerTrimmedQuery?: string) => boolean;
 }
 
+export interface ActionClickDetail {
+  action: string;
+  data?: unknown;
+}
+
+export interface StepCheckedItem extends StepItem {
+  checked?: boolean;
+}
+export type StepCheckMap = Map<string, StepCheckedItem>;
+
 export interface ContextOfTreeList {
   q?: string;
+  multipleSelectMode?: boolean;
+  checkedMap?: StepCheckMap;
+  setCheckedMap?: (data: StepCheckMap) => void;
 }

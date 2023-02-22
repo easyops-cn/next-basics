@@ -1,7 +1,7 @@
 /* istanbul ignore file temporary */
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { Tooltip } from "antd";
+import { Tooltip, Checkbox } from "antd";
 import classnames from "classnames";
 import { last } from "lodash";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
@@ -10,6 +10,8 @@ import { NS_FLOW_BUILDER, K } from "../../../i18n/constants";
 import { WorkbenchTreeContext, TreeListContext } from "../../constants";
 import { StepTreeNodeData } from "../../../interfaces";
 import styles from "./TreeList.module.css";
+import { CheckboxChangeEvent } from "antd/lib/checkbox";
+import { getItemCheck, processCheck } from "../../CheckManagement";
 
 export interface TreeListProps {
   nodes: StepTreeNodeData[];
@@ -64,7 +66,8 @@ export function TreeNode({
     contextMenuFactory,
   } = useContext(WorkbenchTreeContext);
 
-  const { q } = useContext(TreeListContext);
+  const { q, multipleSelectMode, checkedMap, setCheckedMap } =
+    useContext(TreeListContext);
 
   const isActive = activeKey && node.key === activeKey;
 
@@ -92,6 +95,14 @@ export function TreeNode({
     },
     [contextMenuFactory, node]
   );
+
+  const handleCheckbox = (
+    node: StepTreeNodeData,
+    e: CheckboxChangeEvent
+  ): void => {
+    const nodeCheck = processCheck(node, e.target.checked);
+    setCheckedMap(new Map([...checkedMap, ...nodeCheck]));
+  };
 
   return (
     <li>
@@ -128,6 +139,15 @@ export function TreeNode({
             })}
           />
         </span>
+
+        {multipleSelectMode && (
+          <span onClick={(e) => e.stopPropagation()}>
+            <Checkbox
+              onChange={(e) => handleCheckbox(node, e)}
+              checked={getItemCheck(checkedMap, node.data)}
+            />
+          </span>
+        )}
 
         <Tooltip title={node.iconTooltip}>
           <span className={styles.iconWrapper}>
