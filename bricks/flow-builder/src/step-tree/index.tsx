@@ -7,6 +7,7 @@ import {
   EventEmitter,
   event,
 } from "@next-core/brick-kit";
+import { UseBrickConf } from "@next-core/brick-types";
 import { deepMatch } from "@next-libs/visual-builder";
 import { pick } from "lodash";
 import { StepTreeNodeData } from "../interfaces";
@@ -67,6 +68,16 @@ export class StepTreeElement extends UpdatingElement {
   })
   activeBarActions: StepTreeAction[];
 
+  @property({
+    attribute: false,
+  })
+  activeBarUseBrick: { useBrick: UseBrickConf };
+
+  @property({
+    attribute: false,
+  })
+  activeBarStyle: React.CSSProperties;
+
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
 
@@ -102,6 +113,7 @@ export class StepTreeElement extends UpdatingElement {
   private _contextMenuFactory =
     (node: StepTreeNodeData) => (e: React.MouseEvent) => {
       e.preventDefault();
+      e.stopPropagation();
       this._nodeContextMenuEvent.emit({
         active: true,
         node: node?.data,
@@ -171,6 +183,8 @@ export class StepTreeElement extends UpdatingElement {
               selectedSteps={this.selectedSteps}
               activeBarActions={this.activeBarActions}
               onActiveBarAction={this._handleActiveBarClick}
+              activeBarUseBrick={this.activeBarUseBrick}
+              activeBarStyle={this.activeBarStyle}
             />
           </WorkbenchTreeContext.Provider>
         </BrickWrapper>,

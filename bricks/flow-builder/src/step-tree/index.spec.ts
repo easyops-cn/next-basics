@@ -25,6 +25,7 @@ describe("flow-builder.step-tree", () => {
       clientX: 20,
       clientY: 30,
       preventDefault: jest.fn(),
+      stopPropagation: jest.fn(),
     });
 
     expect((sypOnDispatchEvent.mock.calls[0][0] as CustomEvent).detail).toEqual(
