@@ -81,16 +81,14 @@ export function getStageList(
 
   let node = rootStep;
 
-  const traversedNode: string[] = [];
   while (
     stepMap.get(node?.next) &&
     !nodeList.some((item) => item.id === node.next)
   ) {
-    traversedNode.push(node.next);
     const data = stepMap.get(node.next);
     nodeList.push(data);
 
-    node = stepMap.get(node.next);
+    node = data;
   }
 
   return nodeList;
