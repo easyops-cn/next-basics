@@ -54,7 +54,7 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
   const { t } = useTranslation(NS_GENERAL_AUTH);
   const [, setForceUpdate] = useState<any>();
   const disableClause = enabledFeatures["disable-registration-clause"];
-
+  const enableNicknameConfig = enabledFeatures["enable-nickname-config"];
   const passwordConfigMap = {
     default: {
       regex: /^.{6,20}$/,
@@ -290,7 +290,7 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
                   placeholder={t(K.USERNAME)}
                 />
               </Form.Item>
-              {enabledFeatures["enable-nickname-config"] && hideInvite && (
+              {enableNicknameConfig && hideInvite && (
                 <Form.Item validateFirst={false} name="nickname">
                   <Input
                     prefix={
