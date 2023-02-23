@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.19.4...@next-bricks/general-auth@1.19.5) (2023-02-23)
+
+
+### Bug Fixes
+
+* 调整enable-nickname-config开关写法 refs SSO-68 ([759c893](https://github.com/easyops-cn/next-basics/commit/759c8935659e61435d0da8580153c1b311e324c1))
+
+
+
+
+
 ## [1.19.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.19.3...@next-bricks/general-auth@1.19.4) (2023-02-22)
 
 
