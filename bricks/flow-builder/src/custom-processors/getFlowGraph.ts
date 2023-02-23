@@ -85,6 +85,7 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
   const stepMap = new Map<string, StepItem>();
   const topLevelNodes = new Set<StepItem>([]);
   const startNode = steps.find((item) => item.id == startId);
+  const childrenDagreNodes: string[] = [];
 
   if (startNode) {
     topLevelNodes.add(startNode);
@@ -136,6 +137,7 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
 
     if (childrenFLow.includes(item.type) && !isEmpty(item.children)) {
       const sortChildren: string[] = [];
+      childrenDagreNodes.push(...item.children);
       if (item.config?.startAt) {
         walkSteps(data.steps, item.config.startAt, (item) => {
           sortChildren.push(item.id);
@@ -148,13 +150,48 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
       } else {
         sortChildren.push(...item.children);
       }
+
+      const branchProxyLayout = `${item.id}_layout`;
+      nodes.push({
+        id: branchProxyLayout,
+        name: branchProxyLayout,
+        type: "node",
+      });
+
+      groupEdges.push({
+        source: item.id,
+        target: branchProxyLayout,
+        type: "group",
+      });
+
       sortChildren.forEach((c) => {
         groupEdges.push({
-          source: item.id,
+          source: branchProxyLayout,
           target: c,
-          type: "group",
+          type: "childrenLayout",
+        });
+
+        const filters = relations.filter((r) => r.src === c);
+        filters.forEach((relation) => {
+          // istanbul ignore if
+          if (sortChildren.includes(relation.dst)) {
+            groupEdges.push({
+              source: c,
+              target: relation.dst,
+              type: "childrenDagre",
+            });
+          }
         });
       });
+
+      // 去除掉原来 branch 分支与第一个步骤节点的关系(dagre), 调整为使用 childrenDagre，
+      const index = relations.findIndex(
+        (edge) => edge.src === item.id && edge.dst === sortChildren[0]
+      );
+      // istanbul ignore if
+      if (index !== -1) {
+        relations.splice(index, 1);
+      }
     }
   });
 
