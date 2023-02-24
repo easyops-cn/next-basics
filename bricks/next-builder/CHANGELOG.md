@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.222.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.221.3...@next-bricks/next-builder@1.222.0) (2023-02-24)
+
+
+### Features
+
+* add data judgement ([67001b7](https://github.com/easyops-cn/next-basics/commit/67001b73736c94a0c28fa420d0d15b9d1e91047d))
+* support workbench cache action `update.visualForm` ([b20263a](https://github.com/easyops-cn/next-basics/commit/b20263a3144ce6509809a8b743518e995642ac56))
+
+
+
+
+
 ## [1.221.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.221.2...@next-bricks/next-builder@1.221.3) (2023-02-23)
 
 **Note:** Version bump only for package @next-bricks/next-builder

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.19.1...@next-types/preview@1.20.0) (2023-02-24)
+
+
+### Features
+
+* support workbench cache action `update.visualForm` ([b20263a](https://github.com/easyops-cn/next-basics/commit/b20263a3144ce6509809a8b743518e995642ac56))
+
+
+
+
+
 ## [1.19.1](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.19.0...@next-types/preview@1.19.1) (2022-11-28)
 
 
