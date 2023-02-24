@@ -50,7 +50,7 @@ type DynamicFormValue = {
 };
 
 // eslint-disable-next-line react/display-name
-const LegacyDynamicFormItemV2 = forwardRef(
+export const LegacyDynamicFormItemV2 = forwardRef(
   (
     props: LegacyDynamicFormItemV2Props,
     ref: Ref<LegacyDynamicFormItemV2Ref>
