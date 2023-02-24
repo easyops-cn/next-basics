@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.17.0...@next-bricks/brick-visualization@1.17.1) (2023-02-24)
+
+
+### Bug Fixes
+
+* fix error caused by undefined formChildren ([921d2e7](https://github.com/easyops-cn/next-basics/commit/921d2e79be8009abfb9eb0cbaf8b1a391b948018))
+
+
+
+
+
 # [1.17.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.16.2...@next-bricks/brick-visualization@1.17.0) (2023-02-24)
 
 
