@@ -304,7 +304,7 @@ function LegacyWorkbenchCacheAction(
     data: WorkbenchBackendActionForUpdateDetail,
     nodesCache: Map<string, BuilderRuntimeNode>
   ): void => {
-    const formChildren = nodesCache.get(data.instanceId).children;
+    const formChildren = nodesCache.get(data.instanceId)?.children ?? [];
     const rules: [] =
       JSON.parse(data.property.properties).easyops_form_hidden_rules ?? [];
 
@@ -315,18 +315,20 @@ function LegacyWorkbenchCacheAction(
       const childNode = formChildren.find(
         (item) => JSON.parse(item.properties).name === childName
       );
-      const childProperties = JSON.parse(childNode.properties);
+      if (childNode) {
+        const childProperties = JSON.parse(childNode.properties);
 
-      childProperties["notRender"] = rule.conditionsExpression;
-      childNode.properties = JSON.stringify(childProperties);
+        childProperties["notRender"] = rule.conditionsExpression;
+        childNode.properties = JSON.stringify(childProperties);
 
-      const updateData = {
-        instanceId: childNode.instanceId,
-        mtime: data.mtime,
-        objectId: "STORYBOARD_BRICK",
-        property: childNode,
-      };
-      handleUpdateBrick(updateData, nodesCache);
+        const updateData = {
+          instanceId: childNode.instanceId,
+          mtime: data.mtime,
+          objectId: "STORYBOARD_BRICK",
+          property: childNode,
+        };
+        handleUpdateBrick(updateData, nodesCache);
+      }
     });
   };
 
