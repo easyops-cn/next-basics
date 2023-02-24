@@ -71,7 +71,7 @@ export function VisualFormRulesSetting(
 
   useEffect(() => {
     setTargetOptions(
-      formChildren.map((item) => {
+      (formChildren ?? []).map((item) => {
         const itemName = JSON.parse(item.properties).name;
         const itemType = (
           FormItemType.find((type) => item.brick.includes(type)) ?? "OTHER"
