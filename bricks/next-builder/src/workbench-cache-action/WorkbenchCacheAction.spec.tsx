@@ -323,5 +323,55 @@ describe("WorkbenchWorker", () => {
       } as WorkbenchBackendActionForInsertFormItem);
     });
     expect(useBuilderDataManager).toBeCalledTimes(6);
+
+    act(() => {
+      cacheAction.cacheAction({
+        action: "update.visualForm",
+        data: {
+          objectId: "STORYBOARD_BRICK",
+          instanceId: "brick-d",
+          property: {
+            properties: JSON.stringify({
+              easyops_form_hidden_rules: [
+                {
+                  title: "显示d",
+                  conditions: {
+                    groups: [
+                      {
+                        groupId: "group_13785",
+                        conditions: [
+                          {
+                            origin: "单选框(radio)",
+                            operation: "equal",
+                            value: "true",
+                            op: "and",
+                            conditionId: "condition_13784",
+                          },
+                        ],
+                      },
+                    ],
+                    op: "and",
+                  },
+                  actions: [
+                    {
+                      actionType: "show",
+                      target: "d(d)",
+                    },
+                  ],
+                  actionType: "display",
+                  eventId: "__event_13694",
+                  eventType: "",
+                  origin: "",
+                  target: "",
+                },
+              ],
+            }),
+          },
+          mtime: "1",
+        },
+      });
+    });
+
+    expect(useBuilderDataManager).toBeCalledTimes(7);
   });
 });

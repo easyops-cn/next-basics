@@ -443,7 +443,8 @@ export type WorkbenchBackendCacheAction =
   | WorkbenchBackendActionForCutBrick
   | WorkbenchBackendActionForInsertFormItem
   | WorkbenchBackendActionForDeleteFormItem
-  | WorkbenchBackendActionForUpdateFormItem;
+  | WorkbenchBackendActionForUpdateFormItem
+  | WorkbenchBackendActionForUpdateVisualForm;
 
 interface WorkbencdBackendCacheActionCommon {
   uid?: string;
@@ -600,6 +601,12 @@ export interface WorkbenchBackendActionForUpdateFormItem
   extends WorkbencdBackendCacheActionCommon {
   action: "update.formItem";
   args: updateFormItemArgs;
+}
+
+export interface WorkbenchBackendActionForUpdateVisualForm
+  extends WorkbencdBackendCacheActionCommon {
+  action: "update.visualForm";
+  data: WorkbenchBackendActionForUpdateDetail;
 }
 
 export type BackendMessage =
