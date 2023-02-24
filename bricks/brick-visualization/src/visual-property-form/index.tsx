@@ -23,6 +23,7 @@ import {
  * @author jiangzhefeng
  * @history
  * 1.x.0: 新增构件 `brick-visualization.visual-property-form`
+ * 1.16.0: 样式优化
  * @docKind brick
  * @noInheritDoc
  */
