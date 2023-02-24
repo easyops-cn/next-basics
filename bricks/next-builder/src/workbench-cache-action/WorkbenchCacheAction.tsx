@@ -306,17 +306,22 @@ function LegacyWorkbenchCacheAction(
   ): void => {
     const formChildren = nodesCache.get(data.instanceId)?.children ?? [];
     const rules: [] =
-      JSON.parse(data.property.properties).easyops_form_hidden_rules ?? [];
+      JSON.parse(data.property.properties ? data.property.properties : "{}")
+        .easyops_form_hidden_rules ?? [];
 
     rules.forEach((rule) => {
       const childName = rule.actions[0].target
         .match(/\((.+)\)/g)[0]
         .slice(1, -1);
       const childNode = formChildren.find(
-        (item) => JSON.parse(item.properties).name === childName
+        (item) =>
+          JSON.parse(item.properties ? item.properties : "{}").name ===
+          childName
       );
       if (childNode) {
-        const childProperties = JSON.parse(childNode.properties);
+        const childProperties = JSON.parse(
+          childNode.properties ? childNode.properties : "{}"
+        );
 
         childProperties["notRender"] = rule.conditionsExpression;
         childNode.properties = JSON.stringify(childProperties);
