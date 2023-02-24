@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.264.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.9...@next-bricks/forms@1.264.0) (2023-02-24)
+
+
+### Features
+
+* feat visual-form-rules-setting ([b9584af](https://github.com/easyops-cn/next-basics/commit/b9584af7a3ceb4ea4023403864f6dd5ec0e8131c))
+
+
+
+
+
 ## [1.263.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.8...@next-bricks/forms@1.263.9) (2023-02-23)
 
 **Note:** Version bump only for package @next-bricks/forms
