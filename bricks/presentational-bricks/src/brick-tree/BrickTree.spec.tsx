@@ -322,11 +322,19 @@ describe("BrickTree", () => {
     expect(onSelect).toBeCalled();
   });
 
-  it("should support search event", () => {
+  it("should support search event", async () => {
     const onSearch = jest.fn();
-    const wrapper = shallow<BrickTreeProps>(
-      <BrickTree dataSource={dataSource} isFilter onSearch={onSearch} />
+    const { getByTestId } = render(
+      <BrickTree
+        dataSource={dataSource}
+        searchable
+        isFilter
+        onSearch={onSearch}
+      />
     );
+
+    fireEvent.change(getByTestId("search-input"), { target: { value: "1-0" } });
+    await jest.runAllTimers();
 
     expect(onSearch).toBeCalled();
   });
