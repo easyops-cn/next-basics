@@ -188,6 +188,7 @@ export interface BrickTreeProps {
   defaultExpandAll?: boolean;
   deselectable?: boolean;
   alsoSearchByKey?: boolean;
+  isFilter?: boolean;
 }
 
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
@@ -208,6 +209,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     defaultExpandAll,
     deselectable,
     alsoSearchByKey,
+    isFilter,
     onSearch,
   } = props;
   const [allChecked, setAllChecked] = useState(false);
@@ -287,7 +289,9 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
         );
         setExpandedKeys(expandedKeys);
       }
-      onSearch(value);
+      if (isFilter) {
+        onSearch(value);
+      }
     }, 500),
     [treeData, searchParent, alsoSearchByKey]
   );

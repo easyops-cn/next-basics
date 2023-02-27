@@ -128,6 +128,14 @@ export class BrickTreeElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
+   * @default false
+   * @description 搜索的功能是否需要过滤
+   */
+  @property({ type: Boolean }) isFilter: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
    * @default -
    * @description 是否也根据key值搜索，启用后匹配项会整体高亮
    */
@@ -291,6 +299,7 @@ export class BrickTreeElement extends UpdatingElement {
             defaultExpandAll={this.defaultExpandAll}
             deselectable={this.deselectable}
             alsoSearchByKey={this.alsoSearchByKey}
+            isFilter={this.isFilter}
           />
         </BrickWrapper>,
         this
