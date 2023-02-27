@@ -107,6 +107,7 @@ export class GeneralTextElement extends UpdatingElement {
             text={this.text}
             display={this.display}
             customStyle={this.customStyle}
+            textAlign={this.textAlign}
           />
         </BrickWrapper>,
         this

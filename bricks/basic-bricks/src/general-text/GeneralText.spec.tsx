@@ -20,6 +20,8 @@ describe("GeneralText", () => {
     });
 
     wrapper.setProps({
+      display: "block",
+      textAlign: "center",
       fontSize: 18,
       customStyle: {
         fontSize: 20,
@@ -37,6 +39,8 @@ describe("GeneralText", () => {
       fontWight: 100,
       color: "#def",
       lineHeight: "20px",
+      display: "block",
+      textAlign: "center",
     });
   });
 });
