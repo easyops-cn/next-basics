@@ -120,7 +120,14 @@ export function CommonItem(
     setRows(filter);
     setTrackRows((trackRows) => trackRows.filter((_, i) => index !== i));
     props.onRemove?.(data);
-    encrypted.current = filter;
+    const cols = props.columns.filter((col) => col.encrypt);
+    const rowDatas = cloneDeep(filter);
+    rowDatas.forEach((row) => {
+      cols.forEach((col) => {
+        row[col.name] && (row[col.name] = encrypt(row[col.name]));
+      });
+    });
+    encrypted.current = rowDatas;
     props.onChange?.(encrypted.current);
   };
 
