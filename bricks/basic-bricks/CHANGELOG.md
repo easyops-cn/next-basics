@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.9...@next-bricks/basic-bricks@1.228.10) (2023-02-27)
+
+
+### Bug Fixes
+
+* **general-text:** textAlign属性不生效 ([53c8293](https://github.com/easyops-cn/next-basics/commit/53c829321fdeb2c29614de042702cd351bcb3e76))
+
+
+
+
+
 ## [1.228.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.8...@next-bricks/basic-bricks@1.228.9) (2023-02-09)
 
 
