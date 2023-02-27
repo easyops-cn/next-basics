@@ -321,4 +321,13 @@ describe("BrickTree", () => {
     wrapper.find(Tree).invoke("onSelect")([], {} as any);
     expect(onSelect).toBeCalled();
   });
+
+  it("should support search event", () => {
+    const onSearch = jest.fn();
+    const wrapper = shallow<BrickTreeProps>(
+      <BrickTree dataSource={dataSource} isFilter onSearch={onSearch} />
+    );
+
+    expect(onSearch).toBeCalled();
+  });
 });
