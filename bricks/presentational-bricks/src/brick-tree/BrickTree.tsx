@@ -181,6 +181,7 @@ export interface BrickTreeProps {
       | { checked: React.Key[]; halfChecked: React.Key[] }
   ): void;
   onExpand?(expandedKeys: React.Key[]): void;
+  onSearch?(value: string): void;
   suffixBrick?: { useBrick: UseBrickConf };
   afterSearchBrick?: { useBrick: UseBrickConf };
   showSpecificationTitleStyle?: boolean;
@@ -207,6 +208,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     defaultExpandAll,
     deselectable,
     alsoSearchByKey,
+    onSearch,
   } = props;
   const [allChecked, setAllChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -285,6 +287,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
         );
         setExpandedKeys(expandedKeys);
       }
+      onSearch(value);
     }, 500),
     [treeData, searchParent, alsoSearchByKey]
   );

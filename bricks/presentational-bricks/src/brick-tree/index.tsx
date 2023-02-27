@@ -71,6 +71,13 @@ export class BrickTreeElement extends UpdatingElement {
   >;
 
   /**
+   * @detail string[]| {checked: string[]; halfChecked: string[]}
+   * @description 搜索事件
+   */
+  @event({ type: "tree.search", cancelable: true })
+  treeSearch: EventEmitter<string>;
+
+  /**
    * @detail React.Key[]
    * @description 展开事件
    */
@@ -250,6 +257,10 @@ export class BrickTreeElement extends UpdatingElement {
     this.treeCheck.emit(checkedKeys);
   };
 
+  private _handleSearch = (value: string) => {
+    this.treeSearch.emit(value);
+  };
+
   private _handleExpand = (expandedKeys: React.Key[]) => {
     this.treeExpand.emit(expandedKeys);
   };
@@ -272,6 +283,7 @@ export class BrickTreeElement extends UpdatingElement {
             onSelect={this._handleSelect}
             onExpand={this._handleExpand}
             onCheck={this._handleCheck}
+            onSearch={this._handleSearch}
             checkedFilterConfig={this.checkedFilterConfig}
             suffixBrick={this.suffixBrick}
             afterSearchBrick={this.afterSearchBrick}
