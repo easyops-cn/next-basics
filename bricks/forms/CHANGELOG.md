@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.264.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.264.0...@next-bricks/forms@1.264.1) (2023-02-27)
+
+
+### Bug Fixes
+
+* dynamicCommonItem删除项时，列设置了encrypt属性为true的数据应该继续保持转码处理 ([fbd9375](https://github.com/easyops-cn/next-basics/commit/fbd9375e9a0dd5e5db3b8f1eb3050ecaab1fb5b1))
+
+
+
+
+
 # [1.264.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.263.9...@next-bricks/forms@1.264.0) (2023-02-24)
 
 
