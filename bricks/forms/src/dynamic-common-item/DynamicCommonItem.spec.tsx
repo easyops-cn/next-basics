@@ -4,7 +4,7 @@ import { shallow, mount } from "enzyme";
 import { act } from "react-dom/test-utils";
 import { DynamicCommonItem } from "./DynamicCommonItem";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-
+import { encrypt } from "../utils";
 describe("DynamicCommonItem", () => {
   const TestInput = (props: any) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,17 +79,32 @@ describe("DynamicCommonItem", () => {
       { name: "lucy", port: "50", type: "udp" },
     ]);
 
+    wrapper.setProps({
+      columns: [
+        {
+          name: "name",
+          label: "名称",
+          rules: [{ required: true, message: "这个是必填项" }],
+        },
+        { name: "port", label: "端口" },
+        { name: "type", label: "类型", encrypt: true },
+      ],
+    });
+
     wrapper.find({ type: "link" }).at(1).simulate("click");
 
     expect(setFieldsValueMock).toHaveBeenCalledWith({
       dynamic: [{ name: "abc", port: "80", type: "tcp" }],
     });
-
+    wrapper.find(TestInput).at(0).invoke("onChange")("1", "type");
+    expect(props.onChange).toBeCalledWith([
+      { name: "abc", port: "80", type: encrypt("1") },
+    ]);
     wrapper.find({ type: "dashed" }).simulate("click");
 
     expect(setFieldsValueMock).toHaveBeenCalledWith({
       dynamic: [
-        { name: "abc", port: "80", type: "tcp" },
+        { name: "abc", port: "80", type: "1" },
         { name: undefined, port: undefined, type: undefined },
       ],
     });
