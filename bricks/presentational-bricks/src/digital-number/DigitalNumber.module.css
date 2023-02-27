@@ -1,0 +1,37 @@
+.digitWrapper {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+.digitContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  overflow-y: hidden;
+  font-family: arial;
+}
+
+.digitContainer_custom {
+  gap: 12px;
+}
+
+.digitCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  box-sizing: border-box;
+}
+.digitSubBox {
+  transform: translateY(0);
+}
+
+.digitBox {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.digitDivider {
+}
