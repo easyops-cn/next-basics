@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.284.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.283.4...@next-bricks/presentational-bricks@1.284.0) (2023-02-28)
+
+
+### Bug Fixes
+
+* 增加onSearch单元测试 refs TOOL-1339 ([4a6c0b3](https://github.com/easyops-cn/next-basics/commit/4a6c0b31536a10384d7fb80a10e7f62b5fdb6662))
+* 增加是否开启过滤的开关,以免破坏之前的逻辑 refs TOOL-1339 ([7541dab](https://github.com/easyops-cn/next-basics/commit/7541dab423c97aac650e978d880bf54b0df94aaf))
+
+
+### Features
+
+* 暴露搜索事件出去 refs TOOL-1339 ([7332fae](https://github.com/easyops-cn/next-basics/commit/7332fae5742ac765f6e729cbea972cbd9050f8ca))
+
+
+
+
+
 ## [1.283.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.283.3...@next-bricks/presentational-bricks@1.283.4) (2023-02-28)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
