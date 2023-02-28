@@ -2715,16 +2715,16 @@
   resolved "https://registry.npmjs.org/@next-libs/clipboard/-/clipboard-3.0.4.tgz#51ebe3b2f2e45c5940bf343e2a19f767a683b030"
   integrity sha512-pCxzyaSBnbFLUBif4n/Sa1TkUGandGhzycRs04NY73+wbqrYquM29egum7Ji0EdmakI+5MRgLXZZQsm+HlXvSQ==
 
-"@next-libs/cmdb-instances@^7.1.6":
-  version "7.1.6"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-7.1.6.tgz#27f40903f6cc9faf77cb0b5c63ac5d908cc36a50"
-  integrity sha512-hPkqRaHeCQYUumKTXLhwWwRrtakfC9NFtdNaU8GETkycSRQpRTcFoml9gXKObjqmZQlD3NFD+IOmefHJD7Tzag==
+"@next-libs/cmdb-instances@^7.1.9":
+  version "7.1.9"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-7.1.9.tgz#45d8bc6b6fc13e2387d612de6bb2ae059e2400e9"
+  integrity sha512-gAIP2Gslar1q8FySrIdZK+jr4cXLWK/yoTOlhAk5NSGpIxxiPeI7mXzISJtdSmpbHWJuC/aON2jIeezn/6RJ8w==
   dependencies:
     "@next-core/brick-types" "^2.16.0"
     "@next-libs/basic-components" "^5.2.0"
     "@next-libs/cmdb-utils" "^3.3.3"
-    "@next-libs/code-editor-components" "^4.8.2"
-    "@next-libs/forms" "^3.3.7"
+    "@next-libs/code-editor-components" "^4.8.3"
+    "@next-libs/forms" "^3.3.8"
     "@next-libs/storage" "^2.0.4"
     "@next-sdk/cmdb-sdk" "^3.1.0"
     "@next-sdk/permission-sdk" "^2.1.1"
@@ -2753,14 +2753,14 @@
     prismjs "^1.29.0"
     resize-observer-polyfill "^1.5.1"
 
-"@next-libs/code-editor-components@4.8.2", "@next-libs/code-editor-components@^4.8.2":
-  version "4.8.2"
-  resolved "https://registry.npmjs.org/@next-libs/code-editor-components/-/code-editor-components-4.8.2.tgz#199e05424e348addbdaa75d09dc841d66d5a506b"
-  integrity sha512-1dHvUGxOET9Yvs6dMGvpCK+bfPGkGncAu01VEisDVWN1zI6JMvMzq2q0U/wR1Bfceyzc3f5nJxQQMeNv1pfmig==
+"@next-libs/code-editor-components@4.8.3", "@next-libs/code-editor-components@^4.8.3":
+  version "4.8.3"
+  resolved "https://registry.npmjs.org/@next-libs/code-editor-components/-/code-editor-components-4.8.3.tgz#efd28544593d2dbf69503cdcbcb55ba225f2f27c"
+  integrity sha512-X/rLSKoOQ+uvmjqbAYcILktjlX1ABWHbWsgdjQ3fqlSAfQbfudSX5MXEbmBUiwPBNwAAXIIVA46hCuYL1ceXJA==
   dependencies:
     "@next-libs/basic-components" "^5.2.0"
     "@next-libs/clipboard" "^3.0.4"
-    "@next-libs/forms" "^3.3.7"
+    "@next-libs/forms" "^3.3.8"
     ajv "^6.12.6"
     classnames "^2.3.2"
     file-saver "^2.0.5"
@@ -2782,10 +2782,10 @@
   resolved "https://registry.npmjs.org/@next-libs/datetime/-/datetime-2.0.4.tgz#bdfc0ff323b585c1c9e55f68dda15ab8fbf4ab33"
   integrity sha512-kWzim/bvvLxQLBNDHEjeLKrZ6jEGMxv+y9TtKsyprRTXBDAHbmrA+yUnp6lhIcQZwokzm7k2ujXE7I9nPC/DJw==
 
-"@next-libs/forms@^3.3.7":
-  version "3.3.7"
-  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.3.7.tgz#059d82ab98e5667ab99f583e923c14ab8be0585a"
-  integrity sha512-GXUGRaTrwPX15A9iZ45p9xca9FH4AHA56hrBybS/G1Poiy8dmifRuhW1TT8juDej8raFEhBnF/rXlZ+D7HvPxA==
+"@next-libs/forms@^3.3.8":
+  version "3.3.8"
+  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.3.8.tgz#eaeca63f74536b768af398e2be37822186e8e955"
+  integrity sha512-H8QxVxCY7nT3RHtnPKnvR4qizdRrzqK8CmomBxjjhXx+bIuX7cz6n5qE1CiwaA4CBqeS5ysTa3M+1DCRc7BrHA==
   dependencies:
     "@next-libs/basic-components" "^5.2.0"
 
@@ -2817,14 +2817,14 @@
   dependencies:
     "@next-libs/storage" "^2.0.4"
 
-"@next-libs/visual-builder@^1.5.1":
-  version "1.5.1"
-  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.5.1.tgz#dc5404569e5f5889008968fb038853bdfe7c0403"
-  integrity sha512-CgwcuTVbb6+X31LC1egZtlbPROy7Ni14Rol+eWVN9oFh2NPklBUR+l9jr6L1EY3Uvc1RUCZABbahV67o531p5A==
+"@next-libs/visual-builder@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.5.2.tgz#b0477c2357cd9ac735b0aeb8601307071e5492b7"
+  integrity sha512-q7h+eG6FK622omvIx2oP8JA7PXgMz6TiqJ4EEW0kbJIPnYjZFrshtWXgEgA34DL1ALhywIpXW8moXiLqkxVx7Q==
   dependencies:
     "@next-libs/basic-components" "^5.2.0"
-    "@next-libs/code-editor-components" "^4.8.2"
-    "@next-libs/forms" "^3.3.7"
+    "@next-libs/code-editor-components" "^4.8.3"
+    "@next-libs/forms" "^3.3.8"
     "@types/react-color" "^3.0.6"
     react-color "^2.19.3"
 
