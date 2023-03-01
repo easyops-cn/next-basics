@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.285.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.284.0...@next-bricks/presentational-bricks@1.285.0) (2023-03-01)
+
+
+### Features
+
+* finish digit-number ([97ceee8](https://github.com/easyops-cn/next-basics/commit/97ceee80d3dfdcd6573bba63aa688e445f361410))
+
+
+
+
+
 # [1.284.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.283.4...@next-bricks/presentational-bricks@1.284.0) (2023-02-28)
 
 
