@@ -91,19 +91,12 @@ export function VisualFormRulesSetting(
           conditions: {
             groups: [
               {
-                conditions: [
-                  {
-                    origin: value,
-                    operation: "equal",
-                    value: "some value",
-                    op: "and",
-                  },
-                ],
+                conditions: [],
               },
             ],
             op: "and",
           },
-          actions: [{ actionType: "show", target: value }],
+          actions: [],
           key: value,
         })}
         renderFormItem={renderFormItem}

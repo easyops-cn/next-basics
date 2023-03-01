@@ -144,7 +144,7 @@ export function ListEditor({
 
   const handleAddListItem = (): void => {
     key++;
-    const defaultValue = `newItem(${list.length})`;
+    const defaultValue = `RULE${list.length}`;
     const newList = list.concat([
       { ...getDefaultItem(defaultValue), [COLUMN_KEY]: key },
     ]);
