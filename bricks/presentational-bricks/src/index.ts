@@ -73,3 +73,4 @@ import "./basic-icon";
 import "./text-collapse";
 import "./table-transfer";
 import "./collapse-info-list";
+import "./digital-number";
