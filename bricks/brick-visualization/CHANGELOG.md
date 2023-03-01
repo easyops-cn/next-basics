@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.17.2...@next-bricks/brick-visualization@1.18.0) (2023-03-01)
+
+
+### Features
+
+* update rule-setting-list-editor default value ([efe6949](https://github.com/easyops-cn/next-basics/commit/efe69495362fe0638bef31d79c5153e650fbd88a))
+
+
+
+
+
 ## [1.17.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.17.1...@next-bricks/brick-visualization@1.17.2) (2023-02-28)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
