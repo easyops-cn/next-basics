@@ -104,7 +104,7 @@ export class GeneralInputElement extends FormItemElement {
   inputBoxStyle: React.CSSProperties;
 
   /**
-   * @kind `Record<string,string>`
+   * @kind Record<string,string>
    * @required false
    * @default -
    * @description 校验文本信息
@@ -214,7 +214,7 @@ export class GeneralInputElement extends FormItemElement {
   max: number;
 
   /**
-   * @detail `string`
+   * @detail string
    * @description 输入改变，`event.detail` 是当前值
    */
   @event({ type: "general.input.change" }) changeEvent: EventEmitter<string>;
@@ -226,7 +226,7 @@ export class GeneralInputElement extends FormItemElement {
     });
   };
   /**
-   * @detail `object`
+   * @detail object
    * @description 按下键盘键触发，`event.detail` 为 [Keyboard Event](https://zh-hans.reactjs.org/docs/events.html#keyboard-events)
    */
   @event({ type: "general.input.keydown" }) keydownEvent: EventEmitter<
@@ -237,7 +237,7 @@ export class GeneralInputElement extends FormItemElement {
     this.keydownEvent.emit(e);
   };
   /**
-   * @detail `object`
+   * @detail object
    * @description 释放键盘键触发，`event.detail` 为 [Keyboard Event](https://zh-hans.reactjs.org/docs/events.html#keyboard-events)
    */
   @event({ type: "general.input.keyup" }) keyupEvent: EventEmitter<
@@ -248,7 +248,7 @@ export class GeneralInputElement extends FormItemElement {
     this.keyupEvent.emit(e);
   };
   /**
-   * @detail `null`
+   * @detail null
    * @description 	获得焦点时触发
    */
   @event({ type: "general.input.focus" }) focusEvent: EventEmitter;
@@ -256,7 +256,7 @@ export class GeneralInputElement extends FormItemElement {
     this.focusEvent.emit();
   };
   /**
-   * @detail `string`
+   * @detail string
    * @description 失焦时触发, 而且会传出当前输入框当前值
    */
   @event({ type: "general.input.blur" }) blurEvent: EventEmitter<string>;
@@ -266,7 +266,7 @@ export class GeneralInputElement extends FormItemElement {
   };
 
   /**
-   * @detail `object`
+   * @detail object
    * @description 按下enter键触发，`event.detail` 为 [Keyboard Event](https://zh-hans.reactjs.org/docs/events.html#keyboard-events)
    */
   @event({ type: "general.input.press.enter" }) enterPressEvent: EventEmitter<
