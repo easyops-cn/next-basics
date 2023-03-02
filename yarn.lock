@@ -2368,7 +2368,7 @@
     request "^2.88.2"
     request-promise-native "^1.0.9"
 
-"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.82.3", "@next-core/brick-types@^2.82.4":
+"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.82.4":
   version "2.82.4"
   resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.82.4.tgz#94fa9df5a6ab5c0bd13d527145513b419f02faec"
   integrity sha512-VEybwV68Vx9nSSvCdla/4Bsx6DUy5TTGU5i1NMoMR4NZkU9EX1NNIBdesdx3BcsOqIXqE39KcNfIR3WPXITnOA==
