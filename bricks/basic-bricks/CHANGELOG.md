@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.229.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.11...@next-bricks/basic-bricks@1.229.0) (2023-03-02)
+
+
+### Features
+
+* 添加定时器是否开启的属性 ([02efa27](https://github.com/easyops-cn/next-basics/commit/02efa27dbc7a8645351ecfcc3fe881dc9917872b))
+
+
+
+
+
 ## [1.228.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.10...@next-bricks/basic-bricks@1.228.11) (2023-03-02)
 
 
