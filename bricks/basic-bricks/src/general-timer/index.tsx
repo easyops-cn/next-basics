@@ -41,6 +41,16 @@ export class GeneralTimerElement extends UpdatingElement {
   interval: number;
 
   /**
+   * @default true
+   * @required
+   * @description 是否开启定时间隔
+   */
+  @property({
+    attribute: false,
+  })
+  isInterval = true;
+
+  /**
    * @kind any
    * @required false
    * @default -
@@ -108,8 +118,9 @@ export class GeneralTimerElement extends UpdatingElement {
           new CustomEvent(this.eventName || this.defaultEventName)
         );
       }
-
-      this.startTimeout();
+      if (this.isInterval) {
+        this.startTimeout();
+      }
     }, this.interval || this.defaultInterval);
   }
 
