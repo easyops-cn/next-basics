@@ -4,6 +4,10 @@ import { Radio } from "antd";
 import { formatOptions } from "@next-libs/forms";
 import { GeneralRadio } from "./GeneralRadio";
 import { GeneralIcon } from "@next-libs/basic-components";
+import * as kit from "@next-core/brick-kit";
+
+const mockBrickAsComponent = jest.fn(() => <div>BrickAsComponent</div>);
+jest.spyOn(kit, "BrickAsComponent").mockImplementation(mockBrickAsComponent);
 
 describe("GeneralRadio", () => {
   it("should work", () => {
@@ -151,7 +155,7 @@ describe("GeneralRadio", () => {
         label="icon选择"
         value="bar-chart"
         useBrick={{
-          brick: "tpl-card-list-base-item-of-illustration",
+          brick: "div",
           properties: {
             detail: true,
             background: "blue",

@@ -1,17 +1,26 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import { SubMenu } from "./SubMenu";
-import * as brickKit from "@next-core/brick-kit";
 
-jest.spyOn(brickKit, "getHistory").mockReturnValue({
-  location: {},
-  listen: () => {
-    // do somthing
-  },
-  createHref: () => {
-    // do somthing
-  },
-} as any);
+jest.mock("@next-core/brick-kit", () => {
+  return {
+    __esModule: true,
+    BrickAsComponent(): React.ReactElement {
+      return <div>BrickAsComponent</div>;
+    },
+    getHistory: () => {
+      return {
+        location: {},
+        listen: () => {
+          // do somthing
+        },
+        createHref: () => {
+          // do somthing
+        },
+      };
+    },
+  };
+});
 
 describe("SubMenu", () => {
   afterEach(() => {

@@ -41,15 +41,28 @@ jest.mock("@next-libs/cmdb-instances", () => ({
 
 const mockInstanceList = InstanceList as any as jest.Mock;
 
-jest.spyOn(kit, "getHistory").mockReturnValue({
-  location: {
-    origin: "http://localhost",
-    pathname: "/next/a",
-    search: "?b",
-    hash: "#c:d",
-  },
-  createHref: () => "http://localhost/test",
-} as any);
+jest.mock("@next-core/brick-kit", () => {
+  return {
+    __esModule: true,
+    BrickAsComponent(): React.ReactElement {
+      return <div>BrickAsComponent</div>;
+    },
+    getHistory: () => {
+      return {
+        location: {
+          origin: "http://localhost",
+          pathname: "/next/a",
+          search: "?b",
+          hash: "#c:d",
+        },
+        createHref: () => "http://localhost/test",
+        listen: () => {
+          // do somthing
+        },
+      };
+    },
+  };
+});
 
 window.innerWidth = 1000;
 window.innerHeight = 500;
