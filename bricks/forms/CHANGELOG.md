@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.265.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.264.3...@next-bricks/forms@1.265.0) (2023-03-02)
+
+
+### Bug Fixes
+
+* update unit test ([5032b42](https://github.com/easyops-cn/next-basics/commit/5032b42c722f69c584755a79eae43ce3b2e72a71))
+
+
+### Features
+
+* update visual form dependencies ([ef760a2](https://github.com/easyops-cn/next-basics/commit/ef760a2c4eccffd82a52c9cf4d4ea6b686b90a0a))
+
+
+
+
+
 ## [1.264.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.264.2...@next-bricks/forms@1.264.3) (2023-03-01)
 
 

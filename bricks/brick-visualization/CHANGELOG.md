@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.18.0...@next-bricks/brick-visualization@1.19.0) (2023-03-02)
+
+
+### Features
+
+* update visual form dependencies ([ef760a2](https://github.com/easyops-cn/next-basics/commit/ef760a2c4eccffd82a52c9cf4d4ea6b686b90a0a))
+
+
+
+
+
 # [1.18.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.17.2...@next-bricks/brick-visualization@1.18.0) (2023-03-01)
 
 

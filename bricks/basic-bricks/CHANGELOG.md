@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.10...@next-bricks/basic-bricks@1.228.11) (2023-03-02)
+
+
+### Bug Fixes
+
+* update submenu unit test ([8df53ba](https://github.com/easyops-cn/next-basics/commit/8df53ba316cbfe601055b063d525a4c4436883f4))
+
+
+
+
+
 ## [1.228.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.9...@next-bricks/basic-bricks@1.228.10) (2023-02-27)
 
 
