@@ -38,6 +38,7 @@ import type {
   WorkbenchBackendActionForInsertFormItem,
   WorkbenchBackendActionForDeleteFormItem,
   WorkbenchBackendActionForUpdateFormItem,
+  WorkbenchBackendActionForUpdateVisualForm,
   insertFormItemArgs,
   WorkbenchSortData,
 } from "@next-types/preview";
@@ -63,7 +64,8 @@ export type QueueItem =
   | WorkbenchBackendActionForCutBrick
   | WorkbenchBackendActionForInsertFormItem
   | WorkbenchBackendActionForDeleteFormItem
-  | WorkbenchBackendActionForUpdateFormItem;
+  | WorkbenchBackendActionForUpdateFormItem
+  | WorkbenchBackendActionForUpdateVisualForm;
 
 export default class WorkbenchBackend {
   private baseInfo: WorkbenchBackendActionForInitDetail;
@@ -582,6 +584,12 @@ export default class WorkbenchBackend {
               break;
             case "copy.data":
             case "update":
+              isSuccess = await this.updateInstance(data);
+              if (isSuccess) {
+                await this.updateMTime(data.objectId, data.instanceId);
+              }
+              break;
+            case "update.visualForm":
               isSuccess = await this.updateInstance(data);
               if (isSuccess) {
                 await this.updateMTime(data.objectId, data.instanceId);
