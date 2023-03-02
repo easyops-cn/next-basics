@@ -66,7 +66,8 @@ export class BrickAlertElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 指定警告提示的样式，有四种选择 success、info、warning、error
-   * @enums "success"|"error"|"info"|"warning"
+   * @editor radio
+   * @editorProps {"options": ["success","error","info","warning"]}
    * @group basic
    */
   @property()
