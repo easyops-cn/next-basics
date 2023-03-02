@@ -2443,10 +2443,10 @@
   resolved "https://registry.npmjs.org/@next-core/custom-antd-styles/-/custom-antd-styles-1.25.17.tgz#86d6976e724d34fc1106951c95778f752d211110"
   integrity sha512-+sKUoMbADh13XyUEFbYV10pORNprgDLywYvnyOCxIQ3xPoq6UG/kAJ2a/Xbve0O0DDyEyuy3BF/H+oy3Gbjp0g==
 
-"@next-core/dev-dependencies@^1.16.33":
-  version "1.16.33"
-  resolved "https://registry.npmjs.org/@next-core/dev-dependencies/-/dev-dependencies-1.16.33.tgz#e6717c11d811d4634d66693ba31c5dd301e378a9"
-  integrity sha512-bcVNgnhCMNAEixGQYJC1tQsH0cUbUsi39snaEzsbZlx2kOvXqdEZtkbGIHkQ/0DlBqhiZ0PIXq7kc2U2jrG6Ww==
+"@next-core/dev-dependencies@^1.16.35":
+  version "1.16.35"
+  resolved "https://registry.npmjs.org/@next-core/dev-dependencies/-/dev-dependencies-1.16.35.tgz#2d842a38904d76c9274b2b77d55f4257abf54ce2"
+  integrity sha512-ZBwbgWZwxFBLBKoROMS82GZ5ODSdkkfd3XpxsmhvuC2xrrnLn8IxgOD90AFBOYU8Ffnr3fq2cbLhRFKiNPqIIg==
   dependencies:
     "@babel/core" "^7.20.5"
     "@next-core/babel-preset-next" "^0.9.16"
@@ -2459,7 +2459,7 @@
     "@next-core/build-next-libs" "^0.2.16"
     "@next-core/custom-antd-styles" "^1.25.17"
     "@next-core/eslint-config-next" "^1.0.40"
-    "@next-core/jest-config-factory" "^0.4.11"
+    "@next-core/jest-config-factory" "^0.4.13"
     "@next-core/rollup-config-factory" "^2.6.5"
     "@next-core/webpack-config-factory" "^2.19.6"
     "@next-dll/ace" "^2.0.584"
@@ -2533,10 +2533,10 @@
   dependencies:
     "@next-core/brick-types" "^2.82.4"
 
-"@next-core/jest-config-factory@^0.4.11":
-  version "0.4.11"
-  resolved "https://registry.npmjs.org/@next-core/jest-config-factory/-/jest-config-factory-0.4.11.tgz#31ae6121ccf4eceab2953b8f61708ff81d82dfec"
-  integrity sha512-wt/iUMX8/gCP5J02GlWyrWw4ZoDPyXeI55S2ucMic7HFn3M4yQFLUiq+weOxbf3jYknFJKGt72Q4K0NVmLKcrA==
+"@next-core/jest-config-factory@^0.4.13":
+  version "0.4.13"
+  resolved "https://registry.npmjs.org/@next-core/jest-config-factory/-/jest-config-factory-0.4.13.tgz#2c2917b16ac1aa69696f6a75204255820e447d82"
+  integrity sha512-Ei1rIo4AlXa+o14S1hZlDaEu27Xq9QHcWfPqCbbDG/Jsj5SX2uk8Z8lN8wwb6sqsAS+ZuBkfDUH6fK6G7f1NMg==
 
 "@next-core/less-plugin-css-variables@^0.2.8":
   version "0.2.8"
