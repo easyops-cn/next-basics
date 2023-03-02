@@ -106,6 +106,7 @@ export class IconSelectElement extends FormItemElement {
   /**
    * @group basicFormItem
    * @required false
+   * @editor color
    * @description 默认颜色
    */
   @property({ attribute: false })

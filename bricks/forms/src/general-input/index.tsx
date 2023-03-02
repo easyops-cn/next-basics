@@ -108,6 +108,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 校验文本信息
+   * @editor message
    * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;

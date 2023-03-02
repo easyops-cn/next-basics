@@ -2787,6 +2787,17 @@
     "@types/react-color" "^3.0.6"
     react-color "^2.19.3"
 
+"@next-libs/visual-builder@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.6.0.tgz#b7eb700da704febeb4113262e8d2b2cabe795b22"
+  integrity sha512-xMgCN7y0Ez/KtkwJyjFoP28MvG0IY6+TQRmSY+oDDzZpzSZpvvXp9Y9zaNJldxe7P4pfSTQYWF+Lj72OL8LTaw==
+  dependencies:
+    "@next-libs/basic-components" "^5.2.0"
+    "@next-libs/code-editor-components" "^4.8.3"
+    "@next-libs/forms" "^3.3.8"
+    "@types/react-color" "^3.0.6"
+    react-color "^2.19.3"
+
 "@next-sdk/air-admin-service-sdk@^2.1.12":
   version "2.1.12"
   resolved "https://registry.npmjs.org/@next-sdk/air-admin-service-sdk/-/air-admin-service-sdk-2.1.12.tgz#575d54d42c334adbadc72027f25b59f99461892d"
