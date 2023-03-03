@@ -30,7 +30,7 @@ export class GeneralInputElement extends FormItemElement {
    * @kind string
    * @required false
    * @default -
-   * @description 输入框字段名
+   * @description 输入框 name 值, 即唯一 id
    * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
@@ -39,8 +39,8 @@ export class GeneralInputElement extends FormItemElement {
    * @kind string
    * @required false
    * @default -
-   * @description 输入框字段说明
-   * @group basic
+   * @description 标签文字
+   * @group formLabel
    */
   @property({ attribute: false }) declare label: string;
 
@@ -48,7 +48,7 @@ export class GeneralInputElement extends FormItemElement {
    * @kind string
    * @required false
    * @default -
-   * @description 输入框初始值
+   * @description 初始值
    * @group basic
    */
   @property()
@@ -57,7 +57,7 @@ export class GeneralInputElement extends FormItemElement {
    * @kind string
    * @required false
    * @default -
-   * @description 输入框占位说明
+   * @description 占位符
    * @group basic
    */
   @property({ attribute: false }) declare placeholder: string;
@@ -67,7 +67,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 是否必填项
-   * @group basicFormItem
+   * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
 
@@ -76,7 +76,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 是否禁用
-   * @group basic
+   * @group ui
    */
   @property({ attribute: false })
   disabled: boolean;
@@ -86,7 +86,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 是否只读
-   * @group basicFormItem
+   * @group ui
    */
   @property({ type: Boolean })
   readOnly: boolean;
@@ -96,7 +96,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default
    * @description 输入框样式
-   * @group basic
+   * @group style
    */
   @property({
     attribute: false,
@@ -109,7 +109,7 @@ export class GeneralInputElement extends FormItemElement {
    * @default -
    * @description 校验文本信息
    * @editor message
-   * @group basicFormItem
+   * @group formValidation
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
@@ -117,8 +117,8 @@ export class GeneralInputElement extends FormItemElement {
    * @kind string
    * @required false
    * @default text
-   * @description 输入框类型,可输入password/email或者其他
-   * @group basic
+   * @description 输入框类型, 可输入 text / password 或者其他
+   * @group ui
    */
   @property({ attribute: false }) type: string;
 
@@ -127,7 +127,8 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 最小长度
-   * @group basicFormItem
+   * @deprecated
+   * @group formValidation
    */
   @property({
     type: Number,
@@ -139,7 +140,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 宽度调整 有XS/S/M/L/XL五种值
-   * @group basicFormItem
+   * @group ui
    */
   @property({
     type: String,
@@ -150,7 +151,7 @@ export class GeneralInputElement extends FormItemElement {
    * @kind number
    * @required false
    * @default -
-   * @description 最大长度
+   * @description 限制输入的最大长度
    * @group basicFormItem
    */
   @property({
@@ -162,8 +163,8 @@ export class GeneralInputElement extends FormItemElement {
    * @kind string
    * @required false
    * @default
-   * @description 设置前置标签
-   * @group basicFormItem
+   * @description 前置标签
+   * @group ui
    */
   @property()
   addonBefore: string;
@@ -172,8 +173,8 @@ export class GeneralInputElement extends FormItemElement {
    * @kind string
    * @required false
    * @default
-   * @description 设置后置标签
-   * @group basicFormItem
+   * @description 后置标签
+   * @group ui
    */
   @property()
   addonAfter: string;
@@ -182,7 +183,7 @@ export class GeneralInputElement extends FormItemElement {
    * @kind boolean
    * @required false
    * @default -
-   * @description 是否显示复制按钮
+   * @description 显示复制按钮
    * @group ui
    */
   @property({ type: Boolean })
@@ -207,7 +208,7 @@ export class GeneralInputElement extends FormItemElement {
    * @default -
    * @description 最大长度
    * @deprecated
-   * @group basicFormItem
+   * @group formValidation
    */
   @property({
     type: Number,
