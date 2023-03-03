@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import crontab from "@next-libs/crontab";
 import { CrontabType } from "./CrontabInput";
 
@@ -9,7 +9,7 @@ export function parseCrontab(str = "* * * * *"): Record<CrontabType, string> {
     hour,
     date,
     month,
-    dow
+    dow,
   };
 }
 
@@ -27,7 +27,7 @@ export function validateCrontab(
 
 export function useCrontab(
   crontabStr: string
-): [Record<CrontabType, string>, Function] {
+): [Record<CrontabType, string>, (type: CrontabType, value: string) => void] {
   const initStatus = parseCrontab(crontabStr);
   const [minute, setMinute] = useState(initStatus.minute);
   const [hour, setHour] = useState(initStatus.hour);
@@ -35,7 +35,16 @@ export function useCrontab(
   const [month, setMonth] = useState(initStatus.month);
   const [dow, setDow] = useState(initStatus.dow);
 
-  const setChange = (type: CrontabType, value: string) => {
+  useEffect(() => {
+    const newStatus = parseCrontab(crontabStr);
+    setMinute(newStatus.minute);
+    setHour(newStatus.hour);
+    setDate(newStatus.date);
+    setMonth(newStatus.month);
+    setDow(newStatus.dow);
+  }, [crontabStr]);
+
+  const setChange = (type: CrontabType, value: string): void => {
     switch (type) {
       case "minute":
         setMinute(value);

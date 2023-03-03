@@ -36,7 +36,7 @@ function CrontabInputItem(
   const { disabledSet = [] } = props;
   const [humanizeCrontab, setHumanizeCrontab] = useState("");
 
-  const triggerChange = (type: string, value: string) => {
+  const triggerChange = (type: string, value: string): void => {
     const time = Object.assign(
       { minute, hour, date, month, dow },
       { [type]: value }
@@ -47,7 +47,7 @@ function CrontabInputItem(
       );
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const value = e.target.value;
     const type = e.target.name;
     setChange(type, value);
@@ -128,7 +128,7 @@ export function CrontabInput(props: CrontabInputProps): React.ReactElement {
     rule: any,
     value: string,
     callback: (message?: string) => void
-  ) => {
+  ): void => {
     if (validateCrontab(parseCrontab(value))) {
       callback();
     } else {
