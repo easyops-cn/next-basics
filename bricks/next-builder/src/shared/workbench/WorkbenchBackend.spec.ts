@@ -571,6 +571,32 @@ describe("WorkbenchBackend should work", () => {
     await (global as any).flushPromises();
 
     expect(mockDeleteFormItem).toHaveBeenCalledWith(["123", ""]);
+
+    backendInstance.push({
+      action: "update.visualForm",
+      data: {
+        objectId: "STORYBOARD_BRICK",
+        instanceId: "mock_instanceId_001",
+        property: {
+          properties: {
+            textContent: "hello",
+          },
+        },
+        mtime: "1",
+      },
+      state: "pending",
+    });
+    await (global as any).flushPromises();
+
+    expect(mockUpdateIntanceByQuery).toHaveBeenNthCalledWith(1, [
+      "STORYBOARD_BRICK",
+      {
+        data: { properties: { textContent: "hello" } },
+        query: { instanceId: { $eq: "new-iid" }, mtime: { $eq: "1" } },
+      },
+    ]);
+
+    expect(mockGetDetail).toBeCalledTimes(12);
   });
 
   it("throw error should work", async () => {

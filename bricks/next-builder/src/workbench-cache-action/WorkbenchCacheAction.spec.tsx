@@ -329,7 +329,7 @@ describe("WorkbenchWorker", () => {
         action: "update.visualForm",
         data: {
           objectId: "STORYBOARD_BRICK",
-          instanceId: "brick-d",
+          instanceId: "brick-b",
           property: {
             properties: JSON.stringify({
               easyops_form_hidden_rules: [

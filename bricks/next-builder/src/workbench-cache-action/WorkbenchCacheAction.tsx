@@ -19,7 +19,7 @@ import {
   buildBricks,
   buildRoutes,
 } from "../shared/storyboard/buildStoryboardV2";
-import { omit, uniqueId } from "lodash";
+import { omit, uniqueId, pick } from "lodash";
 import type {
   BrickConf,
   BuilderBrickNode,
@@ -304,35 +304,77 @@ function LegacyWorkbenchCacheAction(
     data: WorkbenchBackendActionForUpdateDetail,
     nodesCache: Map<string, BuilderRuntimeNode>
   ): void => {
+    const pickProperty = [
+      "brick",
+      "alias",
+      "mountPoint",
+      "ref",
+      "if",
+      "context",
+      "permissionsPreCheck",
+      "bg",
+      "portal",
+      "properties",
+      "params",
+      "events",
+      "lifeCycle",
+    ];
     const formChildren = nodesCache.get(data.instanceId)?.children ?? [];
     const rules: [] =
       JSON.parse(data.property.properties ? data.property.properties : "{}")
         .easyops_form_hidden_rules ?? [];
 
-    rules.forEach((rule) => {
-      const childName = rule.actions[0].target
-        .match(/\((.+)\)/g)[0]
-        .slice(1, -1);
-      const childNode = formChildren.find(
-        (item) =>
-          JSON.parse(item.properties ? item.properties : "{}").name ===
-          childName
+    // 更新form表单子项的notRender属性, 先清空原规则所控制的notRender表达式, 根据规则重新赋值, 最后更新缓存与实例
+    formChildren.forEach((child) => {
+      let isChange = false;
+      const childProperties = JSON.parse(
+        child.properties ? child.properties : "{}"
       );
-      if (childNode) {
-        const childProperties = JSON.parse(
-          childNode.properties ? childNode.properties : "{}"
-        );
 
+      // 清空原notRender表达式
+      if (
+        typeof childProperties?.notRender === "string" &&
+        childProperties?.notRender?.includes("easyops_form_values")
+      ) {
+        delete childProperties.notRender;
+        isChange = true;
+      }
+
+      // 查找是否有新的显隐规则
+      const rule = rules.find(
+        (item) =>
+          (item.actions[0]?.target?.match(/\((.+)\)/g) ?? [])[0]?.slice(
+            1,
+            -1
+          ) === childProperties?.name
+      );
+
+      if (rule) {
         childProperties["notRender"] = rule.conditionsExpression;
-        childNode.properties = JSON.stringify(childProperties);
+        isChange = true;
+      }
 
+      if (isChange) {
+        child.properties = JSON.stringify(childProperties);
+
+        // 更新缓存
         const updateData = {
-          instanceId: childNode.instanceId,
-          mtime: data.mtime,
+          instanceId: child.instanceId,
+          mtime: child.mtime as string,
           objectId: "STORYBOARD_BRICK",
-          property: childNode,
+          property: pick(child, pickProperty),
         };
         handleUpdateBrick(updateData, nodesCache);
+
+        // 更新实例
+        const updateDetail: WorkbenchBackendCacheAction = {
+          data: updateData,
+          action: "update.visualForm",
+        };
+        updateDetail.uid = uniqueId("cache-action");
+        updateDetail.state = "pending";
+        setCacheActionList([...cacheActionList, updateData] as QueueItem[]);
+        backendInstance.push(updateDetail as QueueItem);
       }
     });
   };
@@ -445,6 +487,8 @@ function LegacyWorkbenchCacheAction(
         handleUpdateBrick(data, nodesCache);
         break;
       case "update.visualForm":
+        // 更新form brick自身缓存
+        handleUpdateBrick(data, nodesCache);
         handleUpdateVisualForm(data, nodesCache);
         break;
       case "delete":

@@ -26,6 +26,7 @@ export function CacheActionList({
     "copy.brick": "粘贴构件",
     "cut.brick": "粘贴构件",
     "insert.snippet": "新增片段",
+    "update.visualForm": "设置表单规则",
   };
 
   const stateConstants = {
@@ -44,6 +45,7 @@ export function CacheActionList({
           ? nodeCache.get(data.nodeInstanceId)?.id
           : data.nodeIds.join(",");
       case "update":
+      case "update.visualForm":
       case "delete":
         return nodeCache.get(data.instanceId)?.id;
       case "cut.brick":
