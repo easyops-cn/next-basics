@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.223.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.222.2...@next-bricks/next-builder@1.223.0) (2023-03-03)
+
+
+### Features
+
+* feat workbenchAction action update.visualForm ([f846a0e](https://github.com/easyops-cn/next-basics/commit/f846a0e46d37832a4df36ef8e16db70059de62e6))
+
+
+
+
+
 ## [1.222.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.222.1...@next-bricks/next-builder@1.222.2) (2023-03-02)
 
 

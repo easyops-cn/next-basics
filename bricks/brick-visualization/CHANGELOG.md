@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.19.0...@next-bricks/brick-visualization@1.20.0) (2023-03-03)
+
+
+### Features
+
+* feat workbenchAction action update.visualForm ([f846a0e](https://github.com/easyops-cn/next-basics/commit/f846a0e46d37832a4df36ef8e16db70059de62e6))
+
+
+
+
+
 # [1.19.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.18.0...@next-bricks/brick-visualization@1.19.0) (2023-03-02)
 
 
