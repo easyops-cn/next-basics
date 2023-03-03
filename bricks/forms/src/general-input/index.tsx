@@ -26,23 +26,16 @@ import { FormItemElement } from "@next-libs/forms";
  *| getFormElement | -      | 获得输入框所属表单元素 |
  */
 export class GeneralInputElement extends FormItemElement {
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 输入框 name 值, 即唯一 id
-   * @group basicFormItem
-   */
-  @property({ attribute: false }) declare name: string;
+  /* =========================== Group: basic =========================== */
 
   /**
    * @kind string
    * @required false
    * @default -
-   * @description 标签文字
-   * @group formLabel
+   * @description 输入框 name 值, 即唯一 id
+   * @group basic
    */
-  @property({ attribute: false }) declare label: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @kind string
@@ -53,6 +46,7 @@ export class GeneralInputElement extends FormItemElement {
    */
   @property()
   value: string;
+
   /**
    * @kind string
    * @required false
@@ -62,6 +56,19 @@ export class GeneralInputElement extends FormItemElement {
    */
   @property({ attribute: false }) declare placeholder: string;
 
+  /* =========================== Group: formLabel =========================== */
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 标签文字
+   * @group formLabel
+   */
+  @property({ attribute: false }) declare label: string;
+
+  /* =========================== Group: formValidation =========================== */
+
   /**
    * @kind boolean
    * @required false
@@ -70,6 +77,69 @@ export class GeneralInputElement extends FormItemElement {
    * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
+
+  /**
+   * @kind Record<string,string>
+   * @required false
+   * @default -
+   * @description 校验文本信息
+   * @editor message
+   * @group formValidation
+   */
+  @property({ attribute: false }) declare message: Record<string, string>;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 最小长度
+   * @deprecated
+   * @group formValidation
+   */
+  @property({
+    type: Number,
+  })
+  min: number;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 最大长度
+   * @deprecated
+   * @group formValidation
+   */
+  @property({
+    type: Number,
+  })
+  max: number;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 最小长度
+   * @deprecated
+   * @group formValidation
+   */
+  @property({
+    type: Number,
+  })
+  minLength: number;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 限制输入的最大长度
+   * @group formValidation
+   */
+  @property({
+    type: Number,
+  })
+  maxLength: number;
+
+  /* =========================== Group: ui =========================== */
 
   /**
    * @kind boolean
@@ -92,72 +162,51 @@ export class GeneralInputElement extends FormItemElement {
   readOnly: boolean;
 
   /**
-   * @kind object
-   * @required false
-   * @default
-   * @description 输入框样式
-   * @group style
-   */
-  @property({
-    attribute: false,
-  })
-  inputBoxStyle: React.CSSProperties;
-
-  /**
-   * @kind Record<string,string>
-   * @required false
-   * @default -
-   * @description 校验文本信息
-   * @editor message
-   * @group formValidation
-   */
-  @property({ attribute: false }) declare message: Record<string, string>;
-
-  /**
    * @kind string
    * @required false
    * @default text
    * @description 输入框类型, 可输入 text / password 或者其他
+   * @editor radio
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "label": "Text",
+   *       "value": "text",
+   *       "icon": {
+   *         "lib": "antd",
+   *         "icon": "font-size",
+   *         "theme": "outlined"
+   *       }
+   *     },
+   *     {
+   *       "label": "Password",
+   *       "value": "password",
+   *       "icon": {
+   *         "lib": "antd",
+   *         "icon": "lock",
+   *         "theme": "outlined"
+   *       }
+   *     }
+   *   ]
+   * }
    * @group ui
    */
   @property({ attribute: false }) type: string;
-
-  /**
-   * @kind number
-   * @required false
-   * @default -
-   * @description 最小长度
-   * @deprecated
-   * @group formValidation
-   */
-  @property({
-    type: Number,
-  })
-  minLength: number;
 
   /**
    * @kind enum["XS", "S", "M", "L","XL"]
    * @required false
    * @default -
    * @description 宽度调整 有XS/S/M/L/XL五种值
+   * @editor radio
+   * @editorProps ["XS", "S", "M", "L","XL"]
    * @group ui
    */
   @property({
     type: String,
   })
   size: widthSize;
-
-  /**
-   * @kind number
-   * @required false
-   * @default -
-   * @description 限制输入的最大长度
-   * @group basicFormItem
-   */
-  @property({
-    type: Number,
-  })
-  maxLength: number;
 
   /**
    * @kind string
@@ -189,31 +238,21 @@ export class GeneralInputElement extends FormItemElement {
   @property({ type: Boolean })
   copyButton: boolean;
 
-  /**
-   * @kind number
-   * @required false
-   * @default -
-   * @description 最小长度
-   * @deprecated
-   * @group basicFormItem
-   */
-  @property({
-    type: Number,
-  })
-  min: number;
+  /* =========================== Group: style =========================== */
 
   /**
-   * @kind number
+   * @kind object
    * @required false
-   * @default -
-   * @description 最大长度
-   * @deprecated
-   * @group formValidation
+   * @default
+   * @description 输入框样式
+   * @group style
    */
   @property({
-    type: Number,
+    attribute: false,
   })
-  max: number;
+  inputBoxStyle: React.CSSProperties;
+
+  /* =========================== events =========================== */
 
   /**
    * @detail string
@@ -290,6 +329,7 @@ export class GeneralInputElement extends FormItemElement {
             label={this.label}
             labelTooltip={this.labelTooltip}
             labelColor={this.labelColor}
+            labelAlign={this.labelAlign}
             labelBold={this.labelBold}
             placeholder={this.placeholder}
             value={this.value}
