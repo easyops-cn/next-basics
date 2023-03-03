@@ -108,6 +108,39 @@ export class GeneralFormElement
   layout: FormLayout;
 
   /**
+   * @property
+   * @kind left | right
+   * @required false
+   * @default -
+   * @description 标签对齐方式
+   * @editor radio
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "value": "left",
+   *       "icon": {
+   *         "lib": "antd",
+   *         "icon": "align-left",
+   *         "theme": "outlined"
+   *       }
+   *     },
+   *     {
+   *       "value": "right",
+   *       "icon": {
+   *         "lib": "antd",
+   *         "icon": "align-right",
+   *         "theme": "outlined"
+   *       }
+   *     }
+   *   ]
+   * }
+   * @group ui
+   */
+  @property()
+  labelAlign: string;
+
+  /**
    * @description 标签列布局样式（仅当 `layout="horizontal"` 时有效）
    * @required false
    * @group ui
