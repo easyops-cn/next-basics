@@ -39,31 +39,28 @@ export type maxTagCountType = "responsive" | number;
  * @memo
  */
 export class GeneralSelectElement extends FormItemElement {
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 选择框字段名
-   * @group basicFormItem
-   */
-  @property({ attribute: false }) declare name: string;
+  /* =========================== Group: basic =========================== */
 
   /**
    * @kind string
    * @required false
    * @default -
-   * @description 选择框validateTrigger
-   * @group advancedFormItem
-   */
-  @property({ attribute: false }) declare validateTrigger: string;
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 选择框字段说明
+   * @description 选择框 name 值, 即唯一 id
    * @group basic
    */
-  @property({ attribute: false }) declare label: string;
+  @property({ attribute: false }) declare name: string;
+
+  /**
+   * @kind string|number|string[]|number[]
+   * @required false
+   * @default -
+   * @description 初始值
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  value: any;
 
   /**
    * @required true
@@ -79,119 +76,59 @@ export class GeneralSelectElement extends FormItemElement {
    * @kind string
    * @required false
    * @default -
-   * @description 选择框占位说明
+   * @description 占位符
    * @group basic
    */
   @property({ attribute: false }) declare placeholder: string;
 
-  /**
-   * @kind string|number|string[]|number[]
-   * @required false
-   * @default -
-   * @description 选择框初始值
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  value: any;
+  /* =========================== Group: formLabel =========================== */
 
   /**
-   * @kind maxTagCountType
+   * @kind string
    * @required false
-   * @description 最多显示多少个 tag，响应式模式会对性能产生损耗
-   * @group basic
+   * @default -
+   * @description 标签文字
+   * @group formLabel
    */
-  @property({
-    attribute: false,
-  })
-  maxTagCount: maxTagCountType;
+  @property({ attribute: false }) declare label: string;
+
+  /* =========================== Group: formValidation =========================== */
 
   /**
    * @kind boolean
    * @required false
    * @default -
    * @description 是否必填
-   * @group basicFormItem
+   * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
-
-  /**
-   * @kind { useBrick: UseBrickConf }
-   * @required false
-   * @default -
-   * @description 支持在文本后添加自定义构件 具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
-   * @group basicFormItem
-   */
-  @property({
-    attribute: false,
-  })
-  suffix: {
-    useBrick: UseBrickConf;
-  };
-
-  /**
-   * @kind "multiple"|"tags"
-   * @required false
-   * @default -
-   * @description 选择框模式
-   * @enums "multiple"|"tags"
-   * @group advancedFormItem
-   */
-  @property()
-  mode: string;
 
   /**
    * @kind Record<string,string>
    * @required false
    * @default -
    * @description 校验文本信息
-   * @group basicFormItem
+   * @group formValidation
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
-   * @kind object
-   * @required false
-   * @default
-   * @description 输入框样式
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  inputBoxStyle: React.CSSProperties;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default true
-   * @description 支持清除选项
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  allowClear = true;
-
-  /**
-   * @kind boolean
+   * @kind string
    * @required false
    * @default false
-   * @description 下拉框选项是否支持换行
-   * @group basic
+   * @description 触发验证的时机
+   * @group formValidation
    */
-  @property({
-    type: Boolean,
-  })
-  optionsWrap: boolean;
+  @property({ attribute: false }) declare validateTrigger: string;
+
+  /* =========================== Group: ui =========================== */
 
   /**
    * @kind boolean
    * @required false
    * @default false
    * @description 是否禁用
-   * @group basic
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -201,26 +138,12 @@ export class GeneralSelectElement extends FormItemElement {
   /**
    * @kind boolean
    * @required false
-   * @default false
-   * @description 是否隐藏当前选中的label项的suffix构件逻辑(`false`默认显示)
+   * @default -
+   * @description 是否只读
    * @group ui
    */
-  @property({
-    attribute: false,
-  })
-  hiddenCheckedValueSuffix = false;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default true
-   * @description 支持搜索
-   * @group advancedFormItem
-   */
-  @property({
-    attribute: false,
-  })
-  showSearch = true;
+  @property({ type: Boolean })
+  readOnly: boolean;
 
   /**
    * @kind "small" | "middle" | "large"
@@ -228,17 +151,89 @@ export class GeneralSelectElement extends FormItemElement {
    * @default middle
    * @description 选择框大小
    * @enums "small"|"middle"|"large"
-   * @group advanced
+   * @editor radio
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "label": "S",
+   *       "value": "small"
+   *     },
+   *     {
+   *       "label": "M",
+   *       "value": "middle"
+   *     },
+   *     {
+   *       "label": "L",
+   *       "value": "large"
+   *     }
+   *   ]
+   * }
+   * @group ui
    */
   @property()
   size: "small" | "middle" | "large";
 
   /**
-   * @description 空候选项，将插入到候选项列表最前面
-   * @group advancedFormItem
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 支持清除选项
+   * @group ui
    */
-  @property({ attribute: false })
-  emptyOption?: GeneralComplexOption;
+  @property({
+    attribute: false,
+  })
+  allowClear = true;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 支持搜索
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  showSearch = true;
+
+  /**
+   * @required false
+   * @default true
+   * @description 无边框样式
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  bordered = true;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 下拉框选项是否支持换行
+   * @group ui
+   */
+  @property({
+    type: Boolean,
+  })
+  optionsWrap: boolean;
+
+  /**
+   * @kind { useBrick: UseBrickConf }
+   * @required false
+   * @default -
+   * @description 支持在文本后添加自定义构件 具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  suffix: {
+    useBrick: UseBrickConf;
+  };
 
   /**
    * @kind object
@@ -265,11 +260,117 @@ export class GeneralSelectElement extends FormItemElement {
   dropdownMatchSelectWidth = true;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否隐藏当前选中项的suffix构件
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  hiddenCheckedValueSuffix = false;
+
+  /**
+   * @kind "multiple"|"tags"
+   * @required false
+   * @default single
+   * @description 选择框模式， 多选 或 标签
+   * @enums "multiple"|"tags"
+   * @editor radio
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "label": "Single",
+   *       "value": ""
+   *     },
+   *     {
+   *       "label": "Multiple",
+   *       "value": "multiple"
+   *     },
+   *     {
+   *       "label": "Tags",
+   *       "value": "tags"
+   *     }
+   *   ]
+   * }
+   * @group ui
+   */
+  @property()
+  mode: string;
+
+  /**
+   * @kind string[]
+   * @required false
+   * @default -
+   * @description 在 mode 为 `多选` 和 `标签` 的模式下定义自动分词的分隔符
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  tokenSeparators: string[];
+
+  /**
+   * @kind maxTagCountType
+   * @required false
+   * @description 最多显示多少个 tag，响应式模式会对性能产生损耗
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  maxTagCount: maxTagCountType;
+
+  /**
+   * @description 空候选项，将插入到候选项列表最前面
+   * @group ui
+   */
+  @property({ attribute: false })
+  emptyOption?: GeneralComplexOption;
+
+  /**
+   * @description 空option 时候可以自定义 EasyopsEmpty 配置实现自定义的无数据提示
+   * @group ui
+   */
+  @property({ attribute: false })
+  emptyProps?: EasyopsEmptyProps;
+
+  /* =========================== Group: style =========================== */
+
+  /**
+   * @kind object
+   * @required false
+   * @default
+   * @description 输入框样式
+   * @group style
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle: React.CSSProperties;
+
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description 设置下拉框容器的样式
+   * @group style
+   */
+  @property({
+    attribute: false,
+  })
+  dropdownStyle: React.CSSProperties = {};
+
+  /* =========================== Group: advanced =========================== */
+
+  /**
    * @kind string
    * @required false
    * @default -
    * @description 基于 `options` 列表中的某个字段进行分组显示
-   * @group advancedFormItem
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -281,7 +382,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 列表指定字段作为 label 和 value
-   * @group advancedFormItem
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -289,23 +390,11 @@ export class GeneralSelectElement extends FormItemElement {
   fields: Partial<GeneralComplexOption>;
 
   /**
-   * @kind string[]
-   * @required false
-   * @default -
-   * @description 在 mode 为 `tags` 和 `multiple` 的模式下定义自动分词的分隔符
-   * @group basicFormItem
-   */
-  @property({
-    attribute: false,
-  })
-  tokenSeparators: string[];
-
-  /**
    * @kind default | parent
    * @required -
    * @default default
    * @description 下拉选项的渲染方式，`default` 为默认(表示渲染在 body 当中)，`parent` 表示渲染在该元素的父节点上，当发现下拉菜单跟随页面滚动，需要设置该属性为 `parent`
-   * @group advancedFormItem
+   * @group advanced
    */
   @property()
   popoverPositionType: GeneralSelectProps["popoverPositionType"];
@@ -313,25 +402,20 @@ export class GeneralSelectElement extends FormItemElement {
   /**
    * @default 300
    * @description 设置防抖动搜索的时间间隔。
-   * @group advancedFormItem
+   * @group advanced
    */
   @property({ type: Number })
   debounceSearchDelay?: number;
 
   /**
-   * @description 空option 时候可以自定义 EasyopsEmpty 配置实现自定义的无数据提示
-   * @group advancedFormItem
-   */
-  @property({ attribute: false })
-  emptyProps?: EasyopsEmptyProps;
-  /**
    * @default false
    * @required false
    * @description 搜索时是否同时根据value和label过滤options，否则只根据label过滤
-   * @group advancedFormItem
+   * @group advanced
    */
   @property({ type: Boolean })
   filterByLabelAndValue: boolean;
+
   /**
    * @default false
    * @required false
@@ -341,11 +425,24 @@ export class GeneralSelectElement extends FormItemElement {
   defaultActiveFirstOption: boolean;
 
   /**
+   * @required false
+   * @default -
+   * @description 后端搜索
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  useBackend: UseBackendConf;
+
+  /* =========================== Group: other =========================== */
+
+  /**
    * @kind UseBrickConf
    * @required false
    * @default -
    * @description 支持在文本后添加自定义构件 [UseBrickConf](http://docs.developers.easyops.cn/docs/brick-next/transform)
-   * @group advancedFormItem
+   * @group other
    * @deprecated
    */
   @property({
@@ -359,45 +456,14 @@ export class GeneralSelectElement extends FormItemElement {
    * @default -
    * @description [已废弃]设置后置构件容器的样式
    * @deprecated
-   * @group advancedFormItem
+   * @group other
    */
   @property({
     attribute: false,
   })
   suffixBrickStyle: React.CSSProperties = {};
 
-  /**
-   * @kind object
-   * @required false
-   * @default -
-   * @description 设置下拉框容器的样式
-   * @group advancedFormItem
-   */
-  @property({
-    attribute: false,
-  })
-  dropdownStyle: React.CSSProperties = {};
-
-  /**
-   * @required false
-   * @default -
-   * @description 后端搜索
-   * @group advancedFormItem
-   */
-  @property({
-    attribute: false,
-  })
-  useBackend: UseBackendConf;
-
-  /**
-   * @required false
-   * @default true
-   * @description 无边框样式
-   */
-  @property({
-    attribute: false,
-  })
-  bordered = true;
+  /* =========================== events =========================== */
 
   /**
    * @detail `any`
