@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.265.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.265.1...@next-bricks/forms@1.265.2) (2023-03-05)
+
+
+### Bug Fixes
+
+* 修复 general-form setInitValue 时视图不更新问题 ([221661c](https://github.com/easyops-cn/next-basics/commit/221661c325fad88eec9be2a7f4e031c4678a7f02))
+
+
+
+
+
 ## [1.265.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.265.0...@next-bricks/forms@1.265.1) (2023-03-03)
 
 **Note:** Version bump only for package @next-bricks/forms
