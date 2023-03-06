@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.364.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.364.2...@next-bricks/developers@1.364.3) (2023-03-06)
+
+
+### Bug Fixes
+
+* update basic-components ([d54d34d](https://github.com/easyops-cn/next-basics/commit/d54d34dabacd3cd97dbeb49d499bf0db4a8544bb))
+
+
+
+
+
 ## [1.364.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.364.1...@next-bricks/developers@1.364.2) (2023-02-07)
 
 
