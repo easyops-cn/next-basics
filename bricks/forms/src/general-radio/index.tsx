@@ -42,34 +42,16 @@ export type RadioType =
  * > Tips: 单选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
  */
 export class GeneralRadioElement extends FormItemElement {
+  /* =========================== Group: basic =========================== */
+
   /**
    * @kind string
    * @required true
    * @default -
    * @description 下拉框字段名
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare name: string;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 单选框字段说明
-   * @group basic
-   */
-  @property({ attribute: false }) declare label: string;
-
-  /**
-   * @required true
-   * @default -
-   * @description 单选框选项表，RadioType为default时，如果设置了tooltip值,可以设置tooltipIcon图标（MenuIcon 类型）,tooltipIcon颜色默认为--color-secondary-text。
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  options: GeneralOption[];
 
   /**
    * @kind string
@@ -82,11 +64,35 @@ export class GeneralRadioElement extends FormItemElement {
   value: any;
 
   /**
+   * @required true
+   * @default -
+   * @description 单选框选项表，RadioType为default时，如果设置了tooltip值,可以设置tooltipIcon图标（MenuIcon 类型）,tooltipIcon颜色默认为--color-secondary-text。
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  options: GeneralOption[];
+
+  /* =========================== Group: formLabel =========================== */
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 单选框字段说明
+   * @group formLabel
+   */
+  @property({ attribute: false }) declare label: string;
+
+  /* =========================== Group: formValidation =========================== */
+
+  /**
    * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
-   * @group basicFormItem
+   * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
 
@@ -95,16 +101,19 @@ export class GeneralRadioElement extends FormItemElement {
    * @required false
    * @default -
    * @description 校验文本信息
-   * @group basicFormItem
+   * @editor message
+   * @group formValidation
    */
   @property({ attribute: false }) declare message: Record<string, string>;
+
+  /* =========================== Group: ui =========================== */
 
   /**
    * @kind boolean
    * @required false
    * @default  false
    * @description 是否禁用
-   * @group basic
+   * @group ui
    */
   @property({ type: Boolean })
   disabled: boolean;
@@ -113,9 +122,9 @@ export class GeneralRadioElement extends FormItemElement {
    * @kind RadioType
    * @required false
    * @default default
-   * @description 	单选框样式类型
+   * @description 单选框样式类型
    * @enums "button"|"default"|"icon"|"icon-circle"|"icon-square"|"custom"
-   * @group basic
+   * @group ui
    */
   @property({
     attribute: false,
@@ -128,6 +137,24 @@ export class GeneralRadioElement extends FormItemElement {
    * @default -
    * @description 大小，只对按钮样式生效
    * @enums "large"|"middle"|"small"
+   * @editor radio
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "label": "S",
+   *       "value": "small"
+   *     },
+   *     {
+   *       "label": "M",
+   *       "value": "middle"
+   *     },
+   *     {
+   *       "label": "L",
+   *       "value": "large"
+   *     }
+   *   ]
+   * }
    * @group ui
    */
   @property({
@@ -136,33 +163,29 @@ export class GeneralRadioElement extends FormItemElement {
   size: "large" | "middle" | "small";
 
   /**
-   * @kind customStyle
-   * @required false
-   * @default -
-   * @description 	自定义radio的外层样式
-   * @group ui
-   */
-  @property({
-    attribute: false,
-  })
-  customStyle: React.CSSProperties;
-
-  /**
-   * @kind RadioGroupButtonStyle
-   * @required false
-   * @default solid
-   * @description 	单选框样式
-   * @group ui
-   */
-  @property({
-    attribute: false,
-  })
-  buttonStyle: RadioGroupButtonStyle = "solid";
-  /**
    * @kind UiType
    * @required -️
    * @default default
    * @description Ui样式，可选择 `dashboard` 样式，默认`default`
+   * @editor radio
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "label": "Default",
+   *       "value": "",
+   *     },
+   *     {
+   *       "label": "Dashboard",
+   *       "value": "dashboard",
+   *       "icon": {
+   *         "lib": "antd",
+   *         "icon": "dashboard",
+   *         "theme": "outlined"
+   *       }
+   *     }
+   *   ]
+   * }
    * @group ui
    */
   @property({
@@ -175,12 +198,40 @@ export class GeneralRadioElement extends FormItemElement {
    * @required false
    * @default
    * @description 自定义radio的内容
-   * @group advancedFormItem
+   * @group ui
    */
   @property({
     attribute: false,
   })
   useBrick: UseBrickConf;
+
+  /* =========================== Group: style =========================== */
+
+  /**
+   * @kind customStyle
+   * @required false
+   * @default -
+   * @description 自定义radio的外层样式
+   * @group style
+   */
+  @property({
+    attribute: false,
+  })
+  customStyle: React.CSSProperties;
+
+  /**
+   * @kind RadioGroupButtonStyle
+   * @required false
+   * @default solid
+   * @description 单选框样式
+   * @group style
+   */
+  @property({
+    attribute: false,
+  })
+  buttonStyle: RadioGroupButtonStyle = "solid";
+
+  /* =========================== events =========================== */
 
   /**
    * @detail `string | number`
