@@ -173,7 +173,7 @@ export class GeneralRadioElement extends FormItemElement {
    *   "options": [
    *     {
    *       "label": "Default",
-   *       "value": "",
+   *       "value": ""
    *     },
    *     {
    *       "label": "Dashboard",
