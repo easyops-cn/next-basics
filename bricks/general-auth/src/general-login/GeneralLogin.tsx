@@ -21,12 +21,12 @@ import {
 } from "@next-sdk/api-gateway-sdk";
 import { createLocation, Location } from "history";
 import { withTranslation, WithTranslation } from "react-i18next";
-import { ReactComponent as Logo } from "../images/logo-3.1.svg";
 import { NS_GENERAL_AUTH, K } from "../i18n/constants";
 import { GetProps } from "@ant-design/compatible/lib/form/interface";
 import { encryptValue, resetLegacyIframe, getCookieByName } from "../shared";
 import styles from "./GeneralLogin.module.css";
-import loginPng from "../images/login.png";
+import loginPng from "../images/login-new.png";
+import logoPng from "../images/logo.png";
 import { Link } from "@next-libs/basic-components";
 import { MFALogin } from "./MFALogin";
 import { AuthApi_getCaptcha } from "@next-sdk/api-gateway-sdk";
@@ -652,77 +652,101 @@ export class LegacyGeneralLogin extends React.Component<
     };
     return (
       <>
-        <div className={styles.loginWrapper}>
-          <div className={styles.loginHeader}>
-            <div className={styles.logoBar}>
-              <Link to="/">
-                {brand.auth_logo_url ? (
-                  <img
-                    src={brand.auth_logo_url}
-                    style={{ height: 32, verticalAlign: "middle" }}
-                  />
-                ) : (
-                  <Logo height={32} style={{ verticalAlign: "middle" }} />
-                )}
-              </Link>
+        <div className={styles.loginBackground}>
+          <div className={styles.loginWrapper}>
+            <div className={styles.loginHeader}>
+              <div className={styles.logoBar}>
+                <Link to="/">
+                  {brand.auth_logo_url ? (
+                    <img
+                      src={brand.auth_logo_url}
+                      style={{ height: 32, verticalAlign: "middle" }}
+                    />
+                  ) : (
+                    <img
+                      src={logoPng}
+                      style={{ height: 32, verticalAlign: "middle" }}
+                    ></img>
+                  )}
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className={styles.loginImg}>
-            <img src={loginPng} style={{ height: this.state.imageHeight }} />
-          </div>
-          <div className={styles.loginForm}>
-            {this.state.wxQRCodeLogin ? (
-              <Tabs defaultActiveKey="code">
-                <Tabs.TabPane
-                  tab={t(K.WX_LOGIN_TITLE)}
-                  key="code"
-                  className={styles.wxQRCodeLoginTab}
-                >
-                  <Card bordered={false} className={styles.wxQRCodeLoginCard}>
-                    <div id="wxQRCode"></div>
-                  </Card>
-                </Tabs.TabPane>
-                <Tabs.TabPane tab={t(K.LOGIN_TITLE)} key="normal">
-                  <Card title={t(K.LOGIN_TITLE)} bordered={false}>
+            <div
+              style={{
+                height: this.state.imageHeight,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <div className={styles.loginImg}>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <img
+                    src={loginPng}
+                    style={{ width: "540px", height: "357px" }}
+                  />
+                </div>
+              </div>
+              <div className={styles.loginForm}>
+                {this.state.wxQRCodeLogin ? (
+                  <Tabs defaultActiveKey="code">
+                    <Tabs.TabPane
+                      tab={t(K.WX_LOGIN_TITLE)}
+                      key="code"
+                      className={styles.wxQRCodeLoginTab}
+                    >
+                      <Card
+                        bordered={false}
+                        className={styles.wxQRCodeLoginCard}
+                      >
+                        <div id="wxQRCode"></div>
+                      </Card>
+                    </Tabs.TabPane>
+                    <Tabs.TabPane tab={t(K.LOGIN_TITLE)} key="normal">
+                      <Card title={t(K.LOGIN_TITLE)} bordered={false}>
+                        {renderLoginForm()}
+                      </Card>
+                    </Tabs.TabPane>
+                  </Tabs>
+                ) : this.loginMethods.length === 1 ? (
+                  <Card
+                    title={
+                      (this.loginMethodsMap as any)[
+                        this.state.currentLoginMethod
+                      ]
+                    }
+                    bordered={false}
+                  >
                     {renderLoginForm()}
                   </Card>
-                </Tabs.TabPane>
-              </Tabs>
-            ) : this.loginMethods.length === 1 ? (
-              <Card
-                title={
-                  (this.loginMethodsMap as any)[this.state.currentLoginMethod]
-                }
-                bordered={false}
-              >
-                {renderLoginForm()}
-              </Card>
-            ) : (
-              <Card>
-                <Tabs
-                  onChange={changeLoginMethod}
-                  activeKey={this.state.currentLoginMethod}
-                >
-                  {this.loginMethods.map((item: string) => {
-                    return (
-                      <Tabs.TabPane
-                        tab={(this.loginMethodsMap as any)[item]}
-                        key={item}
-                      >
-                        {renderLoginForm()}
-                      </Tabs.TabPane>
-                    );
-                  })}
-                </Tabs>
-              </Card>
-            )}
-            {this.state.MFALogin && (
-              <MFALogin
-                onCancel={this.handleCancel}
-                dataSource={this.state.mfaInfo}
-                redirect={this.redirect}
-              />
-            )}
+                ) : (
+                  <Card>
+                    <Tabs
+                      onChange={changeLoginMethod}
+                      activeKey={this.state.currentLoginMethod}
+                    >
+                      {this.loginMethods.map((item: string) => {
+                        return (
+                          <Tabs.TabPane
+                            tab={(this.loginMethodsMap as any)[item]}
+                            key={item}
+                          >
+                            {renderLoginForm()}
+                          </Tabs.TabPane>
+                        );
+                      })}
+                    </Tabs>
+                  </Card>
+                )}
+                {this.state.MFALogin && (
+                  <MFALogin
+                    onCancel={this.handleCancel}
+                    dataSource={this.state.mfaInfo}
+                    redirect={this.redirect}
+                  />
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </>
