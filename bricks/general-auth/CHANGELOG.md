@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.19.5...@next-bricks/general-auth@1.20.0) (2023-03-08)
+
+
+### Features
+
+* 登陆页页面设计替换 ([74cee8d](https://github.com/easyops-cn/next-basics/commit/74cee8d9f93b39b8e5d3f3e9836190d4783eb4a8))
+
+
+
+
+
 ## [1.19.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.19.4...@next-bricks/general-auth@1.19.5) (2023-02-23)
 
 
