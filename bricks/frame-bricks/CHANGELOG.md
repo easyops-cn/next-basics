@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.9.3...@next-bricks/frame-bricks@1.10.0) (2023-03-09)
+
+
+### Features
+
+* **sideBar:** sideBar support ui8.2 ([4551d82](https://github.com/easyops-cn/next-basics/commit/4551d829a482929c772087edc0470faeab374a3f))
+
+
+
+
+
 ## [1.9.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.9.2...@next-bricks/frame-bricks@1.9.3) (2023-03-07)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
