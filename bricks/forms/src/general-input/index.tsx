@@ -200,7 +200,31 @@ export class GeneralInputElement extends FormItemElement {
    * @default -
    * @description 宽度调整 有XS/S/M/L/XL五种值
    * @editor radio
-   * @editorProps ["XS", "S", "M", "L","XL"]
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "label": "XS",
+   *       "value": "XS"
+   *     },
+   *     {
+   *       "label": "S",
+   *       "value": "S"
+   *     },
+   *     {
+   *       "label": "M",
+   *       "value": "M"
+   *     },
+   *     {
+   *       "label": "L",
+   *       "value": "L"
+   *     },
+   *     {
+   *       "label": "XL",
+   *       "value": "XL"
+   *     }
+   *   ]
+   * }
    * @group ui
    */
   @property({
