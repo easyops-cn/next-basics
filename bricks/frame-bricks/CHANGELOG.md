@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.10.0...@next-bricks/frame-bricks@1.10.1) (2023-03-09)
+
+
+### Bug Fixes
+
+* fix general-custom-button.ts ([e8abc42](https://github.com/easyops-cn/next-basics/commit/e8abc42f69af6a8bd6a33a468f4e9b211672e11d))
+* 修改登录页面设计以及二级菜单样式 ([817821c](https://github.com/easyops-cn/next-basics/commit/817821ce724dbb3f19371f6f9682911efef2d522))
+
+
+
+
+
 # [1.10.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.9.3...@next-bricks/frame-bricks@1.10.0) (2023-03-09)
 
 
