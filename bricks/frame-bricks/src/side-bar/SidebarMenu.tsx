@@ -39,8 +39,10 @@ export function SidebarMenu(props: SidebarMenuProps): React.ReactElement {
     setLocation(location);
   });
   const { pathname, search } = location;
-  const featureFlags = getRuntime().getFeatureFlags();
-  const showTextUi = featureFlags["show-sidebar-text-ui"];
+  const showTextUi = React.useMemo(
+    () => getRuntime()?.getFeatureFlags()["show-sidebar-text-ui"],
+    []
+  );
 
   let { selectedKeys, openedKeys } = initMenuItemAndMatchCurrentPathKeys(
     menuItems,

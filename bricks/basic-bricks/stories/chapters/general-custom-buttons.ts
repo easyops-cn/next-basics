@@ -532,7 +532,12 @@ export const generalCustomButtonsStory: Story = {
                             buttonShape: "circle",
                             buttonType: "icon",
                             eventName: "instance.topology.update",
-                            icon: "plus",
+                            icon: {
+                              lib: "antd",
+                              icon: "plus-circle",
+                              theme: "filled",
+                              color: "#167be0",
+                            },
                             isDropdown: false,
                             tooltip: "Add",
                             tooltipPlacement: "left",
@@ -541,7 +546,12 @@ export const generalCustomButtonsStory: Story = {
                             buttonShape: "circle",
                             buttonType: "icon",
                             eventName: "instance.topology.update",
-                            icon: "save",
+                            icon: {
+                              lib: "antd",
+                              icon: "save",
+                              theme: "filled",
+                              color: "#167be0",
+                            },
                             isDropdown: false,
                             tooltip: "Save",
                             tooltipPlacement: "left",
@@ -653,7 +663,12 @@ export const generalCustomButtonsStory: Story = {
                     buttonShape: "circle",
                     buttonType: "icon",
                     eventName: "instance.topology.update",
-                    icon: "plus",
+                    icon: {
+                      lib: "antd",
+                      icon: "plus-circle",
+                      theme: "filled",
+                      color: "#167be0",
+                    },
                     isDropdown: false,
                     tooltip: "Add",
                     tooltipPlacement: "left",
@@ -662,7 +677,12 @@ export const generalCustomButtonsStory: Story = {
                     buttonShape: "circle",
                     buttonType: "icon",
                     eventName: "instance.topology.update",
-                    icon: "save",
+                    icon: {
+                      lib: "antd",
+                      icon: "save",
+                      theme: "filled",
+                      color: "#167be0",
+                    },
                     isDropdown: false,
                     tooltip: "Save",
                     tooltipPlacement: "left",
@@ -780,7 +800,12 @@ export const generalCustomButtonsStory: Story = {
                             buttonShape: "circle",
                             buttonType: "icon",
                             eventName: "instance.topology.update",
-                            icon: "plus",
+                            icon: {
+                              lib: "antd",
+                              icon: "plus-circle",
+                              theme: "filled",
+                              color: "#167be0",
+                            },
                             isDropdown: false,
                             tooltip: "Add",
                             tooltipPlacement: "left",
@@ -789,7 +814,12 @@ export const generalCustomButtonsStory: Story = {
                             buttonShape: "circle",
                             buttonType: "icon",
                             eventName: "instance.topology.update",
-                            icon: "save",
+                            icon: {
+                              lib: "antd",
+                              icon: "save",
+                              theme: "filled",
+                              color: "#167be0",
+                            },
                             isDropdown: false,
                             tooltip: "Save",
                             tooltipPlacement: "left",
@@ -916,7 +946,12 @@ export const generalCustomButtonsStory: Story = {
                         alignment: "end",
                         isMoreButton: true,
                         moreButtonShape: "icon",
-                        moreBtnIcon: "plus",
+                        moreBtnIcon: {
+                          lib: "antd",
+                          icon: "plus-circle",
+                          theme: "filled",
+                          color: "#167be0",
+                        },
                         customButtons: [
                           {
                             icon: {
@@ -954,7 +989,12 @@ export const generalCustomButtonsStory: Story = {
                         alignment: "end",
                         isMoreButton: true,
                         moreButtonShape: "icon",
-                        moreBtnIcon: "save",
+                        moreBtnIcon: {
+                          lib: "antd",
+                          icon: "save",
+                          theme: "filled",
+                          color: "#167be0",
+                        },
                         customButtons: [
                           {
                             icon: {
