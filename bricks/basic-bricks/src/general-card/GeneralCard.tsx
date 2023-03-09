@@ -5,6 +5,7 @@ import { CardProps } from "antd/lib/card";
 import { isEmpty } from "lodash";
 import ResizeObserver from "resize-observer-polyfill";
 import { OperationButton } from "../interfaces";
+import classNames from "classnames";
 
 export interface GeneralCardProps {
   configProps?: CardProps;
@@ -14,6 +15,7 @@ export interface GeneralCardProps {
   fillVertical?: boolean;
   verticalCenter?: boolean;
   isFixedFooter?: boolean;
+  compactMode?: boolean;
 }
 
 export function GeneralCard({
@@ -24,6 +26,7 @@ export function GeneralCard({
   fillVertical,
   verticalCenter,
   isFixedFooter,
+  compactMode,
 }: GeneralCardProps): React.ReactElement {
   const [paddingBottom, setPaddingBottom] = useState(0);
   const [fixedStyle, setFixedStyle] = useState({});
@@ -121,7 +124,9 @@ export function GeneralCard({
       extra={extra}
       title={title}
       {...configProps}
-      className="generalCardContainer"
+      className={classNames("generalCardContainer", {
+        compactCardContainer: compactMode,
+      })}
     >
       <div
         style={
