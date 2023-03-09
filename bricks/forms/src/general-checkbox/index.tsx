@@ -55,26 +55,16 @@ export interface LabeledValue {
 * > Tips: 多选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
 */
 export class GeneralCheckboxElement extends FormItemElement {
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 多选框字段说明
-   * @group basic
-   */
-  @property({ attribute: false }) declare label: string;
+  /* =========================== Group: basic =========================== */
 
   /**
-   * @kind `string[]|number[]|LabeledValue[]`
-   * @required false
+   * @kind string
+   * @required true
    * @default -
-   * @description 多选框选项表
+   * @description 多选框字段名
    * @group basic
    */
-  @property({
-    attribute: false,
-  })
-  options: (CheckboxOptionType | IconCheckboxItem)[];
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @kind any[] | boolean
@@ -89,12 +79,65 @@ export class GeneralCheckboxElement extends FormItemElement {
   value: CheckboxValueType[];
 
   /**
+   * @kind `string[]|number[]|LabeledValue[]`
+   * @required false
+   * @default -
+   * @description 多选框选项表
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  options: (CheckboxOptionType | IconCheckboxItem)[];
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 多选框字段说明
+   * @group basic
+   */
+  @property({ attribute: false }) declare placeholder: string;
+
+  /* =========================== Group: formLabel =========================== */
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 多选框字段说明
+   * @group formLabel
+   */
+  @property({ attribute: false }) declare label: string;
+
+  /* =========================== Group: ui =========================== */
+
+  /**
    * @kind CheckboxType
    * @required false
    * @default default
-   * @description 	多选框样式类型(不支持分组复选框）
+   * @description 多选框样式类型(不支持分组复选框）
    * @enums "default"|"icon"
-   * @group basic
+   * @editor radio
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "label": "Default",
+   *       "value": "default"
+   *     },
+   *     {
+   *       "label": "Icon",
+   *       "value": "icon",
+   *       "icon": {
+   *         "lib": "fa",
+   *         "icon": "icons",
+   *         "prefix": "fas"
+   *       }
+   *     }
+   *   ]
+   * }
+   * @group ui
    */
   @property({
     attribute: false,
@@ -102,63 +145,15 @@ export class GeneralCheckboxElement extends FormItemElement {
   type: CheckboxType = "default";
 
   /**
-   * @kind string
-   * @required true
-   * @default -
-   * @description 多选框字段名
-   * @group basicFormItem
-   */
-  @property({ attribute: false }) declare name: string;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 多选框字段说明
-   * @group basicFormItem
-   */
-  @property({ attribute: false }) declare placeholder: string;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否必填项
-   * @group basicFormItem
-   */
-  @property({ type: Boolean }) declare required: boolean;
-
-  /**
-   * @kind `Record<string,string>`
-   * @required false
-   * @default -
-   * @description 校验文本信息
-   * @group basicFormItem
-   */
-  @property({ attribute: false }) declare message: Record<string, string>;
-
-  /**
-   * @kind OptionGroup[]
-   * @required true
-   * @default -
-   * @description 多选框选项分组数据，需要设置 `isGroup` 为 `true` 才生效
-   * @group advancedFormItem
-   */
-  @property({
-    attribute: false,
-  })
-  optionGroups: OptionGroup[];
-
-  /**
-   * @required false
    * @default false
-   * @description 是否为分组复选框，若为 `true`，则可设置分组数据 `optionGroups`
-   * @group advancedFormItem
+   * @required false
+   * @description 在icon模式下的优化样式，增加一种自定义样式，需设置 `type` 为 `icon` 才生效
+   * @group ui
    */
   @property({
     type: Boolean,
   })
-  isGroup: boolean;
+  isCustom: boolean;
 
   /**
    * @required false
@@ -172,36 +167,75 @@ export class GeneralCheckboxElement extends FormItemElement {
 
   /**
    * @required false
-   * @default -
-   * @description 作为单个复选框使用时的选项文本
-   * @group basicFormItem
-   */
-  @property({
-    type: String,
-  })
-  text: string;
-
-  /**
-   * @required false
    * @default false
    * @description 作为单个复选框使用时的禁用状态
-   * @group basicFormItem
+   * @group ui
    */
   @property({
     type: Boolean,
   })
   disabled: boolean;
 
+  /* =========================== Group: formValidation =========================== */
+
   /**
-   * @default false
+   * @kind boolean
    * @required false
-   * @description 在icon模式下的优化样式，增加一种自定义样式，需设置 `type` 为 `icon` 才生效
-   * @group ui
+   * @default -
+   * @description 是否必填项
+   * @group formValidation
+   */
+  @property({ type: Boolean }) declare required: boolean;
+
+  /**
+   * @kind `Record<string,string>`
+   * @required false
+   * @default -
+   * @description 校验文本信息
+   * @editor message
+   * @group formValidation
+   */
+  @property({ attribute: false }) declare message: Record<string, string>;
+
+  /* =========================== Group: advanced =========================== */
+
+  /**
+   * @required false
+   * @default false
+   * @description 是否为分组复选框，若为 `true`，则可设置分组数据 `optionGroups`
+   * @group advanced
    */
   @property({
     type: Boolean,
   })
-  isCustom: boolean;
+  isGroup: boolean;
+
+  /**
+   * @kind OptionGroup[]
+   * @required true
+   * @default -
+   * @description 多选框选项分组数据，需要设置 `isGroup` 为 `true` 才生效
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  optionGroups: OptionGroup[];
+
+  /* =========================== Group: other =========================== */
+
+  /**
+   * @required false
+   * @default -
+   * @description 作为单个复选框使用时的选项文本
+   * @group other
+   */
+  @property({
+    type: String,
+  })
+  text: string;
+
+  /* =========================== events =========================== */
 
   /**
    * @detail `any[] | boolean`
