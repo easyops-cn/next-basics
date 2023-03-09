@@ -61,6 +61,18 @@ export class GeneralCardElement extends UpdatingElement {
    * @kind boolean
    * @required false
    * @default false
+   * @description 卡片是否ui8.2的紧凑模式
+   * @group ui
+   */
+  @property({
+    type: Boolean,
+  })
+  compactMode: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
    * @description 是否右上角有操作区 slot
    * @group advanced
    */
@@ -192,6 +204,7 @@ export class GeneralCardElement extends UpdatingElement {
             fillVertical={this.fillVertical}
             verticalCenter={this.verticalCenter}
             isFixedFooter={this.isFixedFooter}
+            compactMode={this.compactMode}
           />
         </BrickWrapper>,
         this._mountPoint,
