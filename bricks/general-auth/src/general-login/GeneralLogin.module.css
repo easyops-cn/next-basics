@@ -28,6 +28,11 @@
   margin-right: 80px;
 }
 
+.loginImgSize {
+  width: 540px;
+  height: 357px;
+}
+
 .loginForm {
   /* position: absolute;
   top: 23%;
@@ -174,6 +179,11 @@
 }
 
 @media screen and (max-width: 1440px) {
+  .loginImgSize {
+    width: 432px;
+    height: 285px;
+  }
+
   .loginForm {
     .wxQRCodeLoginTab {
       :global(.ant-card) {

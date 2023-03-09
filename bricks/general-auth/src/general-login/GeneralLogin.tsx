@@ -660,12 +660,12 @@ export class LegacyGeneralLogin extends React.Component<
                   {brand.auth_logo_url ? (
                     <img
                       src={brand.auth_logo_url}
-                      style={{ height: 32, verticalAlign: "middle" }}
+                      style={{ height: 28, verticalAlign: "middle" }}
                     />
                   ) : (
                     <img
                       src={logoPng}
-                      style={{ height: 32, verticalAlign: "middle" }}
+                      style={{ height: 28, verticalAlign: "middle" }}
                     ></img>
                   )}
                 </Link>
@@ -675,16 +675,13 @@ export class LegacyGeneralLogin extends React.Component<
               style={{
                 height: this.state.imageHeight,
                 display: "flex",
-                alignItems: "center",
+                marginTop: "200px",
                 justifyContent: "center",
               }}
             >
               <div className={styles.loginImg}>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <img
-                    src={loginPng}
-                    style={{ width: "540px", height: "357px" }}
-                  />
+                  <img src={loginPng} className={styles.loginImgSize} />
                 </div>
               </div>
               <div className={styles.loginForm}>

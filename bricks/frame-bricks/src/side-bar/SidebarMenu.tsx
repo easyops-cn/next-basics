@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Menu } from "antd";
 import { uniq } from "lodash";
 import { UnregisterCallback, Location } from "history";
-import { getHistory } from "@next-core/brick-kit";
+import { getHistory, getRuntime } from "@next-core/brick-kit";
 import {
   SidebarMenuSimpleItem,
   SidebarMenuItem,
@@ -39,6 +39,8 @@ export function SidebarMenu(props: SidebarMenuProps): React.ReactElement {
     setLocation(location);
   });
   const { pathname, search } = location;
+  const featureFlags = getRuntime().getFeatureFlags();
+  const showTextUi = featureFlags["show-sidebar-text-ui"];
 
   let { selectedKeys, openedKeys } = initMenuItemAndMatchCurrentPathKeys(
     menuItems,
@@ -66,16 +68,24 @@ export function SidebarMenu(props: SidebarMenuProps): React.ReactElement {
       >
         <Link to={item.to} href={item.href} target={item.target}>
           {showEmptyIcon ? (
-            <i className={style.menuItemIcon}></i>
+            <i
+              className={style.menuItemIcon}
+              style={showTextUi ? { color: "#57689C" } : {}}
+            ></i>
           ) : (
             item.icon && (
-              <i className={style.menuItemIcon}>
+              <i
+                className={style.menuItemIcon}
+                style={showTextUi ? { color: "#57689C" } : {}}
+              >
                 <GeneralIcon icon={item.icon} size={14} />
               </i>
             )
           )}
           <span
-            className={classNames(style.menuText, style.simpleMenuItemText)}
+            className={classNames(style.menuText, style.simpleMenuItemText, {
+              [style.menuTextColor]: showTextUi,
+            })}
           >
             {item.text}
           </span>

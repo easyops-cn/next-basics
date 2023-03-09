@@ -67,6 +67,9 @@
     transition: all var(--side-bar-collapse-transition-duration)
       var(--side-bar-collapse-transition-timing-function);
   }
+  .menuTextColor {
+    color: var(--v8-left-sidebar-item-normal);
+  }
 
   .menuItemIcon + .menuText {
     margin-left: 12px;
