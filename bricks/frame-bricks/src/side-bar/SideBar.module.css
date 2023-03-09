@@ -127,3 +127,11 @@
 .hiddenSidebarContentContainerShadow {
   box-shadow: none !important;
 }
+
+:global(html:not([data-theme="dark-v2"]) body.compact-layout) {
+  .sideBarContainer {
+    &::before {
+      background: #f7f8fa;
+    }
+  }
+}
