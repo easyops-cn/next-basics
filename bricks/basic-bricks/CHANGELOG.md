@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.230.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.229.1...@next-bricks/basic-bricks@1.230.0) (2023-03-09)
+
+
+### Features
+
+* **generalCard:** generalCard support ui8.2 ([e08e4fe](https://github.com/easyops-cn/next-basics/commit/e08e4fe8a5ea38a7eb8e9ab523cae83ac303c17a))
+
+
+
+
+
 ## [1.229.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.229.0...@next-bricks/basic-bricks@1.229.1) (2023-03-07)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
