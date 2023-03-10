@@ -167,6 +167,7 @@ export function WorkbenchBrickTree({
             group = {
               key: `${node.$$uid}:${edge.mountPoint}`,
               name: edge.mountPoint,
+              isContainer: true,
               icon: {
                 lib: "antd",
                 theme: "outlined",
