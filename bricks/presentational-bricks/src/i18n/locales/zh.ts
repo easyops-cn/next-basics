@@ -33,6 +33,7 @@ const locale: Locale = {
   [K.FULL_TEXT_SEARCH]: "全文搜索",
   [K.IP_SEARCH]: "IP搜索 ",
   [K.SORT]: "排序",
+  [K.PREVIEW]: "预览",
 };
 
 export default locale;
