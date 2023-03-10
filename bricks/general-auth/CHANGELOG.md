@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.20.2...@next-bricks/general-auth@1.20.3) (2023-03-10)
+
+
+### Bug Fixes
+
+* fix loginUi ([94299ef](https://github.com/easyops-cn/next-basics/commit/94299ef30cfc85e923c87598f37d874d116eab26))
+
+
+
+
+
 ## [1.20.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.20.1...@next-bricks/general-auth@1.20.2) (2023-03-10)
 
 
