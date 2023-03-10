@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.20.1...@next-bricks/general-auth@1.20.2) (2023-03-10)
+
+
+### Bug Fixes
+
+* 修改登录页面设计 ([ebdbed3](https://github.com/easyops-cn/next-basics/commit/ebdbed30c360dfab8a5641d215d1e6f38a0b7f30))
+
+
+
+
+
 ## [1.20.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.20.0...@next-bricks/general-auth@1.20.1) (2023-03-09)
 
 
