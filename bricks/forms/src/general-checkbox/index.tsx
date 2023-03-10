@@ -110,6 +110,27 @@ export class GeneralCheckboxElement extends FormItemElement {
    */
   @property({ attribute: false }) declare label: string;
 
+  /* =========================== Group: formValidation =========================== */
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否必填项
+   * @group formValidation
+   */
+  @property({ type: Boolean }) declare required: boolean;
+
+  /**
+   * @kind `Record<string,string>`
+   * @required false
+   * @default -
+   * @description 校验文本信息
+   * @editor message
+   * @group formValidation
+   */
+  @property({ attribute: false }) declare message: Record<string, string>;
+
   /* =========================== Group: ui =========================== */
 
   /**
@@ -175,27 +196,6 @@ export class GeneralCheckboxElement extends FormItemElement {
     type: Boolean,
   })
   disabled: boolean;
-
-  /* =========================== Group: formValidation =========================== */
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否必填项
-   * @group formValidation
-   */
-  @property({ type: Boolean }) declare required: boolean;
-
-  /**
-   * @kind `Record<string,string>`
-   * @required false
-   * @default -
-   * @description 校验文本信息
-   * @editor message
-   * @group formValidation
-   */
-  @property({ attribute: false }) declare message: Record<string, string>;
 
   /* =========================== Group: advanced =========================== */
 
