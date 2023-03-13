@@ -39,6 +39,8 @@ import type {
   WorkbenchBackendActionForDeleteFormItem,
   WorkbenchBackendActionForUpdateFormItem,
   WorkbenchBackendActionForUpdateVisualForm,
+  WorkbenchBackendActionForBatchOp,
+  WorkbenchBackendActionForBatchOpDetail,
   insertFormItemArgs,
   WorkbenchSortData,
 } from "@next-types/preview";
@@ -65,7 +67,8 @@ export type QueueItem =
   | WorkbenchBackendActionForInsertFormItem
   | WorkbenchBackendActionForDeleteFormItem
   | WorkbenchBackendActionForUpdateFormItem
-  | WorkbenchBackendActionForUpdateVisualForm;
+  | WorkbenchBackendActionForUpdateVisualForm
+  | WorkbenchBackendActionForBatchOp;
 
 export default class WorkbenchBackend {
   private baseInfo: WorkbenchBackendActionForInitDetail;
@@ -565,6 +568,30 @@ export default class WorkbenchBackend {
     }
   }
 
+  private async batchHandleInstance(
+    task: WorkbenchBackendActionForBatchOpDetail
+  ): Promise<boolean> {
+    try {
+      if (task.insert?.length) {
+        await Promise.all(task.insert.map((item) => this.createInstance(item)));
+      }
+
+      if (task.update?.length) {
+        await Promise.all(task.update.map((item) => this.updateInstance(item)));
+      }
+
+      if (task.delete?.length) {
+        await Promise.all(task.delete.map((item) => this.deleteInstance(item)));
+      }
+
+      this.isNeedUpdateTree = true;
+      return true;
+    } catch (e) {
+      this.handleError(e, "批量编辑失败");
+      return false;
+    }
+  }
+
   private batchDealRequest = async (): Promise<void> => {
     // 进入批量变更操作
     this.isDealing = true;
@@ -618,6 +645,9 @@ export default class WorkbenchBackend {
               break;
             case "cut.brick":
               isSuccess = await this.cutBrick(data);
+              break;
+            case "batch.op":
+              isSuccess = await this.batchHandleInstance(data);
               break;
           }
           if (isSuccess) {
