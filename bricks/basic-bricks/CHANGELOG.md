@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.230.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.230.2...@next-bricks/basic-bricks@1.230.3) (2023-03-13)
+
+
+### Bug Fixes
+
+* **subMenu:** subMenu support ui8.2 ([87ce119](https://github.com/easyops-cn/next-basics/commit/87ce119282480381889e81029d203ec0ee95823a))
+
+
+
+
+
 ## [1.230.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.230.1...@next-bricks/basic-bricks@1.230.2) (2023-03-10)
 
 

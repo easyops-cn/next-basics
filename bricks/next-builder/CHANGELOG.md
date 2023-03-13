@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.224.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.223.7...@next-bricks/next-builder@1.224.0) (2023-03-13)
+
+
+### Features
+
+* support batch operation ([7c5d1ae](https://github.com/easyops-cn/next-basics/commit/7c5d1ae46c729dacbb1b359fd2dca69a4b319adf))
+
+
+
+
+
 ## [1.223.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.223.6...@next-bricks/next-builder@1.223.7) (2023-03-10)
 
 **Note:** Version bump only for package @next-bricks/next-builder

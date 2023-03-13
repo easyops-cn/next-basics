@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.20.0...@next-types/preview@1.21.0) (2023-03-13)
+
+
+### Features
+
+* support batch operation ([7c5d1ae](https://github.com/easyops-cn/next-basics/commit/7c5d1ae46c729dacbb1b359fd2dca69a4b319adf))
+
+
+
+
+
 # [1.20.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.19.1...@next-types/preview@1.20.0) (2023-02-24)
 
 
