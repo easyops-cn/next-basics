@@ -23,19 +23,14 @@ import { AutoSizeType } from "rc-textarea/lib/ResizableTextArea";
  * @memo
  */
 export class GeneralTextAreaElement extends FormItemElement {
+  /* =========================== Group: basic =========================== */
+
   /**
    * @required true
    * @description 下拉框字段名
-   * @group basicFormItem
-   */
-  @property({ attribute: false }) declare name: string;
-
-  /**
-   * @required false
-   * @description 下拉框字段说明
    * @group basic
    */
-  @property({ attribute: false }) declare label: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @description 初始值
@@ -51,56 +46,35 @@ export class GeneralTextAreaElement extends FormItemElement {
    */
   @property({ attribute: false }) declare placeholder: string;
 
-  /**
-   * @description 是否只读
-   * @group basicFormItem
-   */
-  @property({ type: Boolean })
-  readOnly?: boolean;
+  /* =========================== Group: formLabel =========================== */
 
   /**
-   * @default false
-   * @description 是否禁用
-   * @group basic
+   * @required false
+   * @description 下拉框字段说明
+   * @group formLabel
    */
-  @property({
-    type: Boolean,
-  })
-  disabled?: boolean;
+  @property({ attribute: false }) declare label: string;
 
-  /**
-   * @description 自适应内容高度，或自配置
-   * @group basic
-   */
-  @property({ attribute: false })
-  autoSize?: boolean | AutoSizeType;
-
-  /**
-   * @description 输入框样式
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  inputBoxStyle?: React.CSSProperties;
+  /* =========================== Group: formValidation =========================== */
 
   /**
    * @required false
    * @description 是否必填项
-   * @group basicFormItem
+   * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
    * @required false
    * @description 校验文本信息
-   * @group basicFormItem
+   * @editor message
+   * @group formValidation
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
    * @description 最小长度
-   * @group advancedFormItem
+   * @group formValidation
    */
   @property({
     type: Number,
@@ -109,12 +83,51 @@ export class GeneralTextAreaElement extends FormItemElement {
 
   /**
    * @description 最大长度
-   * @group advancedFormItem
+   * @group formValidation
    */
   @property({
     type: Number,
   })
   max?: number;
+
+  /* =========================== Group: ui =========================== */
+
+  /**
+   * @default false
+   * @description 是否禁用
+   * @group ui
+   */
+  @property({
+    type: Boolean,
+  })
+  disabled?: boolean;
+
+  /**
+   * @description 是否只读
+   * @group ui
+   */
+  @property({ type: Boolean })
+  readOnly?: boolean;
+
+  /**
+   * @description 自适应内容高度，或自配置
+   * @group ui
+   */
+  @property({ attribute: false })
+  autoSize?: boolean | AutoSizeType;
+
+  /* =========================== Group: style =========================== */
+
+  /**
+   * @description 输入框样式
+   * @group style
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle?: React.CSSProperties;
+
+  /* =========================== events =========================== */
 
   /**
    * @description 输入变化时被触发，`event.detail` 为当前值
