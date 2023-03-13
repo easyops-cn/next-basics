@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import React, { useEffect, useState } from "react";
 import { Menu } from "antd";
-import { uniq } from "lodash";
+import { isEmpty, uniq } from "lodash";
 import { UnregisterCallback, Location } from "history";
 import { getHistory, getRuntime } from "@next-core/brick-kit";
 import {
@@ -70,17 +70,22 @@ export function SidebarMenu(props: SidebarMenuProps): React.ReactElement {
       >
         <Link to={item.to} href={item.href} target={item.target}>
           {showEmptyIcon ? (
-            <i
-              className={style.menuItemIcon}
-              style={showTextUi ? { color: "#57689C" } : {}}
-            ></i>
+            <i className={style.menuItemIcon}></i>
           ) : (
             item.icon && (
               <i
-                className={style.menuItemIcon}
-                style={showTextUi ? { color: "#57689C" } : {}}
+                className={
+                  showTextUi ? style.newMenuItemIcon : style.menuItemIcon
+                }
               >
-                <GeneralIcon icon={item.icon} size={14} />
+                <GeneralIcon
+                  icon={
+                    isEmpty(item.icon.color) && showTextUi
+                      ? { ...item.icon, color: "rgb(87, 104, 156,1)" }
+                      : item.icon
+                  }
+                  size={18}
+                />
               </i>
             )
           )}
