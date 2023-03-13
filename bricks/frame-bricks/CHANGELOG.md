@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.10.1...@next-bricks/frame-bricks@1.10.2) (2023-03-13)
+
+
+### Bug Fixes
+
+* 修改二级菜单icon样式 ([1f7b201](https://github.com/easyops-cn/next-basics/commit/1f7b2018bcff7f10edef0497333f67d2dc006552))
+
+
+
+
+
 ## [1.10.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.10.0...@next-bricks/frame-bricks@1.10.1) (2023-03-09)
 
 
