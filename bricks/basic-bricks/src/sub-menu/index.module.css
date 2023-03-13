@@ -82,3 +82,9 @@
     word-wrap: break-word;
   }
 }
+:global(html:not([data-theme="dark-v2"]) body.compact-layout) {
+  .subMenuContainer {
+    border: 1px solid var(--stroke-color-default);
+    height: 100%;
+  }
+}
