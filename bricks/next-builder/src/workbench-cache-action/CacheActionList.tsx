@@ -27,6 +27,7 @@ export function CacheActionList({
     "cut.brick": "粘贴构件",
     "insert.snippet": "新增片段",
     "update.visualForm": "设置表单规则",
+    "batch.op": "批量操作",
   };
 
   const stateConstants = {
@@ -55,6 +56,10 @@ export function CacheActionList({
         return item.sourceName;
       case "insert.snippet":
         return data.brick;
+      case "batch.op":
+        return `删除:${data.delete.length ?? 0}, 新增:${
+          data.insert.length ?? 0
+        }, 更新:${data.update.length ?? 0}`;
     }
   };
 

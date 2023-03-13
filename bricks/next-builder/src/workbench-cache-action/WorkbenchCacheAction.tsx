@@ -38,6 +38,7 @@ import type {
   WorkbenchBackendActionForUpdateDetail,
   WorkbenchBackendActionForDeleteDetail,
   WorkbenchBackendActionForMoveDetail,
+  WorkbenchBackendActionForBatchOpDetail,
 } from "@next-types/preview";
 import WorkbenchBackend, {
   QueueItem,
@@ -448,6 +449,23 @@ function LegacyWorkbenchCacheAction(
     nodesCacheRef.current.set(data.nodeData.instanceId, data.nodeData);
   };
 
+  const handleBatchBrick = (
+    data: WorkbenchBackendActionForBatchOpDetail,
+    nodesCache: Map<string, BuilderRuntimeNode>
+  ): void => {
+    if (data.insert?.length) {
+      data.insert.forEach((item) => handleAddBrick(item));
+    }
+
+    if (data.update?.length) {
+      data.update.forEach((item) => handleUpdateBrick(item, nodesCache));
+    }
+
+    if (data.delete?.length) {
+      data.delete.forEach((item) => handleDeleteBrick(item, nodesCache));
+    }
+  };
+
   const updateCacheActionList = useCallback(
     (
       detail: WorkbenchBackendCacheAction,
@@ -493,6 +511,9 @@ function LegacyWorkbenchCacheAction(
         break;
       case "delete":
         handleDeleteBrick(data, nodesCache);
+        break;
+      case "batch.op":
+        handleBatchBrick(data, nodesCache);
         break;
       case "move":
         handleMoveBrick(data, nodesCache);

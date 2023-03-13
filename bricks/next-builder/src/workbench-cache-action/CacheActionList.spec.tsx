@@ -136,11 +136,42 @@ describe("WorkbenchWorker", () => {
           },
         },
       },
+      {
+        action: "batch.op",
+        state: "resolve",
+        data: {
+          insert: [
+            {
+              brick: "div",
+              mountPoint: "content",
+              parent: "parent",
+              sort: 1,
+              type: "brick",
+              nodeData: {
+                instanceId: "mock_instanceId_002",
+                id: "mock_id_002",
+              },
+            },
+          ],
+          update: [],
+          delete: [
+            {
+              action: "delete",
+              state: "pending",
+              data: {
+                objectId: "STORYBOARD_ROUTE",
+                instanceId: "abc",
+              },
+            },
+          ],
+        },
+      },
     ] as QueueItem[];
 
     const nodeCache = new Map([
       ["mock_instanceId_001", { id: "new-iid-001" }],
       ["abc", { id: "abc-id" }],
+      ["new-iid", { id: "B-001" }],
       ["mock_instanceId_002", { id: "B-001" }],
     ]) as Map<string, BuilderRuntimeNode>;
 
@@ -151,7 +182,7 @@ describe("WorkbenchWorker", () => {
       />
     );
     expect(baseElement.innerHTML).toMatchInlineSnapshot(
-      `"<div><div class=\\"cacheActionListWrapper\\"><div class=\\"cacheActionItem\\"><span title=\\"设置表单规则: [new-iid-001]\\">设置表单规则: [new-iid-001]</span><span class=\\"resolve\\">完成</span></div><div class=\\"cacheActionItem\\"><span title=\\"粘贴构件: [B-456]\\">粘贴构件: [B-456]</span><span class=\\"pending\\">处理中</span></div><div class=\\"cacheActionItem\\"><span title=\\"粘贴构件: [B-123]\\">粘贴构件: [B-123]</span><span class=\\"pending\\">处理中</span></div><div class=\\"cacheActionItem\\"><span title=\\"新增片段: [base-layout.page-1]\\">新增片段: [base-layout.page-1]</span><span class=\\"pending\\">处理中</span></div><div class=\\"cacheActionItem\\"><span title=\\"粘贴数据: [test1]\\">粘贴数据: [test1]</span><span class=\\"pending\\">处理中</span></div><div class=\\"cacheActionItem\\"><span title=\\"删除实例: [abc-id]\\">删除实例: [abc-id]</span><span class=\\"pending\\">处理中</span></div><div class=\\"cacheActionItem\\"><span title=\\"删除实例: [new-iid-001]\\">删除实例: [new-iid-001]</span><span class=\\"reject\\">失败</span></div><div class=\\"cacheActionItem\\"><span title=\\"移动实例: [B-01,B-02,mock_id_001]\\">移动实例: [B-01,B-02,mock_id_001]</span><span class=\\"resolve\\">完成</span></div><div class=\\"cacheActionItem\\"><span title=\\"更新实例: [undefined]\\">更新实例: [undefined]</span><span class=\\"resolve\\">完成</span></div><div class=\\"cacheActionItem\\"><span title=\\"更新实例: [new-iid-001]\\">更新实例: [new-iid-001]</span><span class=\\"resolve\\">完成</span></div><div class=\\"cacheActionItem\\"><span title=\\"新增实例: [B-001]\\">新增实例: [B-001]</span><span class=\\"resolve\\">完成</span></div><div class=\\"cacheActionItem\\"><span title=\\"新增实例: [new-iid-001]\\">新增实例: [new-iid-001]</span><span class=\\"resolve\\">完成</span></div></div></div>"`
+      `"<div><div class=\\"cacheActionListWrapper\\"><div class=\\"cacheActionItem\\"><span title=\\"批量操作: [删除:1, 新增:1, 更新:0]\\">批量操作: [删除:1, 新增:1, 更新:0]</span><span class=\\"resolve\\">完成</span></div><div class=\\"cacheActionItem\\"><span title=\\"设置表单规则: [new-iid-001]\\">设置表单规则: [new-iid-001]</span><span class=\\"resolve\\">完成</span></div><div class=\\"cacheActionItem\\"><span title=\\"粘贴构件: [B-456]\\">粘贴构件: [B-456]</span><span class=\\"pending\\">处理中</span></div><div class=\\"cacheActionItem\\"><span title=\\"粘贴构件: [B-123]\\">粘贴构件: [B-123]</span><span class=\\"pending\\">处理中</span></div><div class=\\"cacheActionItem\\"><span title=\\"新增片段: [base-layout.page-1]\\">新增片段: [base-layout.page-1]</span><span class=\\"pending\\">处理中</span></div><div class=\\"cacheActionItem\\"><span title=\\"粘贴数据: [test1]\\">粘贴数据: [test1]</span><span class=\\"pending\\">处理中</span></div><div class=\\"cacheActionItem\\"><span title=\\"删除实例: [abc-id]\\">删除实例: [abc-id]</span><span class=\\"pending\\">处理中</span></div><div class=\\"cacheActionItem\\"><span title=\\"删除实例: [new-iid-001]\\">删除实例: [new-iid-001]</span><span class=\\"reject\\">失败</span></div><div class=\\"cacheActionItem\\"><span title=\\"移动实例: [B-01,B-02,mock_id_001]\\">移动实例: [B-01,B-02,mock_id_001]</span><span class=\\"resolve\\">完成</span></div><div class=\\"cacheActionItem\\"><span title=\\"更新实例: [B-001]\\">更新实例: [B-001]</span><span class=\\"resolve\\">完成</span></div><div class=\\"cacheActionItem\\"><span title=\\"更新实例: [new-iid-001]\\">更新实例: [new-iid-001]</span><span class=\\"resolve\\">完成</span></div><div class=\\"cacheActionItem\\"><span title=\\"新增实例: [B-001]\\">新增实例: [B-001]</span><span class=\\"resolve\\">完成</span></div><div class=\\"cacheActionItem\\"><span title=\\"新增实例: [new-iid-001]\\">新增实例: [new-iid-001]</span><span class=\\"resolve\\">完成</span></div></div></div>"`
     );
   });
 });

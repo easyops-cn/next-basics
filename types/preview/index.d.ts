@@ -444,7 +444,8 @@ export type WorkbenchBackendCacheAction =
   | WorkbenchBackendActionForInsertFormItem
   | WorkbenchBackendActionForDeleteFormItem
   | WorkbenchBackendActionForUpdateFormItem
-  | WorkbenchBackendActionForUpdateVisualForm;
+  | WorkbenchBackendActionForUpdateVisualForm
+  | WorkbenchBackendActionForBatchOp;
 
 interface WorkbencdBackendCacheActionCommon {
   uid?: string;
@@ -607,6 +608,18 @@ export interface WorkbenchBackendActionForUpdateVisualForm
   extends WorkbencdBackendCacheActionCommon {
   action: "update.visualForm";
   data: WorkbenchBackendActionForUpdateDetail;
+}
+
+export interface WorkbenchBackendActionForBatchOpDetail {
+  insert: WorkbenchBackendActionForInsertDetail[];
+  update: WorkbenchBackendActionForUpdateDetail[];
+  delete: WorkbenchBackendActionForDeleteDetail[];
+}
+
+export interface WorkbenchBackendActionForBatchOp
+  extends WorkbencdBackendCacheActionCommon {
+  action: "batch.op";
+  data: WorkbenchBackendActionForBatchOpDetail;
 }
 
 export type BackendMessage =
