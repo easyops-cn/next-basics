@@ -67,7 +67,43 @@ export class BrickAlertElement extends UpdatingElement {
    * @default -
    * @description 指定警告提示的样式，有四种选择 success、info、warning、error
    * @editor radio
-   * @editorProps {"options": ["success","error","info","warning"]}
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "value": "success",
+   *       "icon": {
+   *         "lib": "antd",
+   *         "icon": "check-circle",
+   *         "theme": "outlined"
+   *       }
+   *     },
+   *     {
+   *       "value": "error",
+   *       "icon": {
+   *         "lib": "antd",
+   *         "icon": "close-circle",
+   *         "theme": "outlined"
+   *       }
+   *     },
+   *     {
+   *       "value": "info",
+   *       "icon": {
+   *         "lib": "antd",
+   *         "icon": "exclamation-circle",
+   *         "theme": "outlined"
+   *       }
+   *     },
+   *     {
+   *       "value": "warning",
+   *       "icon": {
+   *         "lib": "antd",
+   *         "icon": "warning",
+   *         "theme": "outlined"
+   *       }
+   *     }
+   *   ]
+   * }
    * @group basic
    */
   @property()
