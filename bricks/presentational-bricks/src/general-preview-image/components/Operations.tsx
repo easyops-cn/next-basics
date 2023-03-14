@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import * as React from "react";
 import classnames from "classnames";
 import CSSMotion from "rc-motion";

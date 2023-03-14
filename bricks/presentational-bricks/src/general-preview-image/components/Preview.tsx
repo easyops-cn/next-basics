@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import React, {
   useState,
   useEffect,

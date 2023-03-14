@@ -44,7 +44,7 @@ export class GeneralPreviewImageElement extends UpdatingElement {
    * @default -
    * @description 多图预览时所有图片地址
    */
-  @property()
+  @property({ attribute: false })
   srcList: string[];
 
   /**
@@ -67,14 +67,14 @@ export class GeneralPreviewImageElement extends UpdatingElement {
    * @default -
    * @description 是否可以预览
    */
-  @property()
+  @property({ type: Boolean })
   canPreview: boolean;
 
   /**
    * @default -
    * @description 预览时图片操作按钮是否放置于图片下方
    */
-  @property()
+  @property({ type: Boolean })
   customOperationPosition: boolean;
 
   connectedCallback(): void {

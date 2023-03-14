@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import * as React from "react";
 import { useState } from "react";
 import cn from "classnames";
@@ -53,9 +52,6 @@ export interface ImageProps
   fallback?: string;
   rootClassName?: string;
   preview?: boolean | ImagePreviewType;
-  /**
-   * @deprecated since version 3.2.1
-   */
   onPreviewClose?: (value: boolean, prevValue: boolean) => void;
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
