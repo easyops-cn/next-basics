@@ -25,19 +25,14 @@ import { MenuIcon } from "@next-core/brick-types";
  * @memo
  */
 export class GeneralSwitchElement extends FormItemElement {
+  /* =========================== Group: basic =========================== */
+
   /**
    * @required true
    * @description 表单项字段名
-   * @group basicFormItem
-   */
-  @property({ attribute: false }) declare name: string;
-
-  /**
-   * @required false
-   * @description 表单项字段说明
    * @group basic
    */
-  @property({ attribute: false }) declare label: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @description 初始值
@@ -46,10 +41,21 @@ export class GeneralSwitchElement extends FormItemElement {
   @property({ type: Boolean })
   value?: boolean;
 
+  /* =========================== Group: formLabel =========================== */
+
+  /**
+   * @required false
+   * @description 表单项字段说明
+   * @group formLabel
+   */
+  @property({ attribute: false }) declare label: string;
+
+  /* =========================== Group: ui =========================== */
+
   /**
    * @default false
    * @description 是否禁用
-   * @group basic
+   * @group ui
    */
   @property({ type: Boolean })
   disabled?: boolean;
@@ -57,6 +63,20 @@ export class GeneralSwitchElement extends FormItemElement {
   /**
    * @description 开关大小
    * @enums "default"|"small"
+   * @editor radio
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "label": "Default",
+   *       "value": "default"
+   *     },
+   *     {
+   *       "label": "Small",
+   *       "value": "small"
+   *     }
+   *   ]
+   * }
    * @group ui
    */
   @property({ attribute: false })
@@ -89,6 +109,8 @@ export class GeneralSwitchElement extends FormItemElement {
    */
   @property({ attribute: false })
   unCheckedText?: string;
+
+  /* =========================== events =========================== */
 
   /**
    * @description 开关改变时触发, `event.detail` 为当前选择的值
