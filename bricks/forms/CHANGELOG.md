@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.265.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.265.6...@next-bricks/forms@1.265.7) (2023-03-14)
+
+
+### Bug Fixes
+
+* **general-date-picker:** fix onChange of InternalStateDatePicker not working as expected ([f9e0cb9](https://github.com/easyops-cn/next-basics/commit/f9e0cb96ec42d1ad667d777d89b2f11bdccfefb5))
+
+
+
+
+
 ## [1.265.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.265.5...@next-bricks/forms@1.265.6) (2023-03-10)
 
 **Note:** Version bump only for package @next-bricks/forms
