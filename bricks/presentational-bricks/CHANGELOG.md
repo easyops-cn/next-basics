@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.286.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.286.4...@next-bricks/presentational-bricks@1.286.5) (2023-03-14)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** markdownDisplay组件支持图片相册预览 ([a5cd63e](https://github.com/easyops-cn/next-basics/commit/a5cd63ececc2a2c184f914ad48a57852ea49b599))
+* **presentational-bricks:** 新增图片预览构件 ([11e2f13](https://github.com/easyops-cn/next-basics/commit/11e2f1382054606e08a7707948c56d3baa055acb))
+
+
+
+
+
 ## [1.286.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.286.3...@next-bricks/presentational-bricks@1.286.4) (2023-03-10)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
