@@ -23,19 +23,14 @@ import { FormItemElement } from "@next-libs/forms";
  * > Tips: 对于 event.detail 为 `Keyboard Event` 时， 由于 react 对于合成事件的处理，打印出来的整个 `Keyboard Event` 相关属性都为 null, 但可通过单独查看某个属性来得到值（如示例所示），相关详情信息可[查看 react 合成事件](https://zh-hans.reactjs.org/docs/events.html#event-pooling)。
  */
 export class GeneralInputNumberElement extends FormItemElement {
+  /* =========================== Group: basic =========================== */
+
   /**
    * @required true
    * @description 数字输入框字段名
-   * @group basicFormItem
-   */
-  @property({ attribute: false }) declare name: string;
-
-  /**
-   * @required false
-   * @description 数字输入框字段说明
    * @group basic
    */
-  @property({ attribute: false }) declare label: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @required false
@@ -54,62 +49,35 @@ export class GeneralInputNumberElement extends FormItemElement {
    */
   @property({ attribute: false }) declare placeholder: string;
 
+  /* =========================== Group: formLabel =========================== */
+
   /**
-   * @description 是否禁用
-   * @group basic
+   * @required false
+   * @description 数字输入框字段说明
+   * @group formLabel
    */
-  @property({ type: Boolean }) disabled?: boolean;
+  @property({ attribute: false }) declare label: string;
+
+  /* =========================== Group: formValidation =========================== */
 
   /**
    * @required false
    * @description 是否必填项
-   * @group basicFormItem
+   * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
-   * @description 输入框样式
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  inputBoxStyle?: React.CSSProperties;
-
-  /**
    * @required false
    * @description 校验文本信息
-   * @group basicFormItem
+   * @editor message
+   * @group formValidation
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
-   * @description 是否只读
-   * @group basicFormItem
-   */
-  @property({ type: Boolean }) readOnly?: boolean;
-
-  /**
-   * @description 数字输框入步长
-   * @group advancedFormItem
-   */
-  @property({
-    attribute: false,
-  })
-  step? = 1;
-
-  /**
-   * @description 数值精度
-   * @group advancedFormItem
-   */
-  @property({
-    attribute: false,
-  })
-  precision?: number;
-
-  /**
    * @description 数字输入框最小值
-   * @group advancedFormItem
+   * @group formValidation
    */
   @property({
     type: Number,
@@ -119,12 +87,59 @@ export class GeneralInputNumberElement extends FormItemElement {
   /**
    * @kind number
    * @description 数字输入框最大值
-   * @group advancedFormItem
+   * @group formValidation
    */
   @property({
     attribute: false,
   })
   max? = Infinity;
+
+  /* =========================== Group: advanced =========================== */
+
+  /**
+   * @description 数字输入框步长
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  step? = 1;
+
+  /**
+   * @description 数值精度
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  precision?: number;
+
+  /* =========================== Group: ui =========================== */
+
+  /**
+   * @description 是否禁用
+   * @group ui
+   */
+  @property({ type: Boolean }) disabled?: boolean;
+
+  /**
+   * @description 是否只读
+   * @group ui
+   */
+  @property({ type: Boolean }) readOnly?: boolean;
+
+  /* =========================== Group: style =========================== */
+
+  /**
+   * @description 输入框样式
+   * @group style
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle?: React.CSSProperties;
+
+  /* =========================== events =========================== */
 
   /**
    * @description 输入改变，`event.detail` 是当前值
