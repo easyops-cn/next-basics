@@ -26,19 +26,14 @@ import { DisabledDateType } from "../interfaces";
  * > Tips: 在与 `general-form` 组合使用时， 若通过 form 下的 values 赋值给日期选择器，需要通过 `valueTypes` 申明数据类型，同时为了更方便的提交指定时间格式给后台，在申明数据后也提供了格式化日期的选项，以`|`分隔。（如上述 demo 所示）
  */
 export class GeneralDatePickerElement extends FormItemElement {
+  /* =========================== Group: basic =========================== */
+
   /**
    * @required true
    * @description 日期选择框字段名
-   * @group basicFormItem
-   */
-  @property({ attribute: false }) declare name: string;
-
-  /**
-   * @description 日期选择框字段说明
-   * @required false
    * @group basic
    */
-  @property({ attribute: false }) declare label: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @required false
@@ -55,48 +50,40 @@ export class GeneralDatePickerElement extends FormItemElement {
    */
   @property({ attribute: false }) declare placeholder: string;
 
-  /**
-   * @description 设置选择器类型
-   * @group basic
-   */
-  @property({ attribute: false })
-  picker?: "date" | "week" = "date";
+  /* =========================== Group: formLabel =========================== */
 
   /**
-   * @description 不可选择的日期
-   * @group basic
+   * @description 日期选择框字段说明
+   * @required false
+   * @group formLabel
    */
-  @property({ attribute: false })
-  disabledDate?: DisabledDateType;
-  /**
-   * @description 是否禁用
-   * @group basic
-   */
-  @property({ type: Boolean })
-  disabled?: boolean;
+  @property({ attribute: false }) declare label: string;
 
-  /**
-   * @description 输入框样式
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  inputBoxStyle?: CSSProperties;
+  /* =========================== Group: formValidation =========================== */
 
   /**
    * @required false
    * @description 是否必填项
-   * @group basicFormItem
+   * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
    * @required false
    * @description 校验文本信息
-   * @group basicFormItem
+   * @editor message
+   * @group formValidation
    */
   @property({ attribute: false }) declare message: Record<string, string>;
+
+  /* =========================== Group: ui =========================== */
+
+  /**
+   * @description 是否禁用
+   * @group ui
+   */
+  @property({ type: Boolean })
+  disabled?: boolean;
 
   /**
    * @description 是否显示时间, 当设为 `true` 时, 请同时设置 `format` 为 `YYYY-MM-DD HH:mm:ss` 使其也显示具体时，分，秒 的时间
@@ -115,6 +102,49 @@ export class GeneralDatePickerElement extends FormItemElement {
     attribute: false,
   })
   format?: string;
+
+  /* =========================== Group: advanced =========================== */
+
+  /**
+   * @description 设置选择器类型
+   * @editor radio
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "label": "Date",
+   *       "value": "date"
+   *     },
+   *     {
+   *       "label": "Week",
+   *       "value": "week"
+   *     }
+   *   ]
+   * }
+   * @group advanced
+   */
+  @property({ attribute: false })
+  picker?: "date" | "week" = "date";
+
+  /**
+   * @description 不可选择的日期
+   * @group advanced
+   */
+  @property({ attribute: false })
+  disabledDate?: DisabledDateType;
+
+  /* =========================== Group: style =========================== */
+
+  /**
+   * @description 输入框样式
+   * @group style
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle?: CSSProperties;
+
+  /* =========================== events =========================== */
 
   /**
    * @description 	日期变化时触发
