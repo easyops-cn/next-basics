@@ -22,73 +22,85 @@ import { OptionType } from "../interfaces";
  * @memo
  */
 export class GeneralAutoCompleteElement extends FormItemElement {
+  /* =========================== Group: basic =========================== */
+
   /**
    * @required true
    * @description 字段名
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @group basicFormItem
    * @required false
-   * @description 字段说明
+   * @description 当前值
+   * @group basic
    */
-  @property({ attribute: false }) declare label: string;
+  @property()
+  value: string;
 
   /**
    * @required true
    * @description 补全选项列表
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false })
   options: string[] | OptionType[];
 
   /**
    * @required false
-   * @description 当前值
-   * @group basicFormItem
-   */
-  @property()
-  value: string;
-
-  /**
-   * @required false
    * @description 占位说明
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare placeholder: string;
 
+  /* =========================== Group: formLabel =========================== */
+
   /**
+   * @group formLabel
    * @required false
-   * @description 是否禁用
-   * @group basicFormItem
+   * @description 字段说明
    */
-  @property({ attribute: false }) declare disabled: boolean;
+  @property({ attribute: false }) declare label: string;
+
+  /* =========================== Group: formValidation =========================== */
 
   /**
    * @required false
    * @description 是否必填项
-   * @group basicFormItem
+   * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
    * @required false
    * @description 校验文本信息
-   * @group basicFormItem
+   * @group formValidation
    */
   @property({ attribute: false }) declare message: Record<string, string>;
+
+  /* =========================== Group: ui =========================== */
+
+  /**
+   * @required false
+   * @description 是否禁用
+   * @group ui
+   */
+  @property({ attribute: false }) declare disabled: boolean;
+
+  /* =========================== Group: style =========================== */
 
   /**
    * @required false
    * @description 输入框样式
-   * @group ui
+   * @group style
    */
   @property({
     attribute: false,
   })
   inputBoxStyle?: CSSProperties;
+
+  /* =========================== events =========================== */
 
   connectedCallback(): void {
     // istanbul ignore else
