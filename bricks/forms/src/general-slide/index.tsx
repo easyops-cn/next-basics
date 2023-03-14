@@ -26,29 +26,17 @@ import { UiType } from "../interfaces";
  * @memo
  */
 export class GeneralSlideElement extends FormItemElement {
+  /* =========================== Group: basic =========================== */
+
   /**
-   * @group basicFormItem
+   * @group basic
    * @required true
    * @description 表单项字段名
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @group basicFormItem
-   * @required false
-   * @description 表单项字段说明
-   */
-  @property({ attribute: false }) declare label: string;
-
-  /**
-   * @group basicFormItem
-   * @required false
-   * @description 是否必填项
-   */
-  @property({ type: Boolean }) declare required: boolean;
-
-  /**
-   * @group basicFormItem
+   * @group basic
    * @default false
    * @description 指定滑动条的值， 需要注意的是当 `range = false` 时值的类型为 `string` 格式， 当 `range = true` 时，值的类型为 `[number,number]` 的格式
    */
@@ -57,60 +45,26 @@ export class GeneralSlideElement extends FormItemElement {
   })
   value: GeneralSlideProps["value"];
 
-  /**
-   * @group basicFormItem
-   * @default false
-   * @description 是否禁止滑动
-   */
-  @property({
-    type: Boolean,
-  })
-  disabled: boolean;
+  /* =========================== Group: formLabel =========================== */
 
   /**
-   * @group basicFormItem
+   * @group formLabel
    * @required false
-   * @description 刻度标记，key 的类型必须为 number 且取值在闭区间 [min, max] 内，每个标签可以单独设置样式
+   * @description 表单项字段说明
    */
-  @property({
-    attribute: false,
-  })
-  marks: GeneralSlideProps["marks"];
+  @property({ attribute: false }) declare label: string;
+
+  /* =========================== Group: formValidation =========================== */
 
   /**
-   * @group basicFormItem
+   * @group formValidation
    * @required false
-   * @description 是否显示双滑块模式，双滑块模式时，value 的格式为 `[number, number]` 分别代表所选择的起始值和终点值
+   * @description 是否必填项
    */
-  @property({
-    type: Boolean,
-  })
-  range: boolean;
+  @property({ type: Boolean }) declare required: boolean;
 
   /**
-   * @group basicFormItem
-   * @required -false
-   * @default true
-   * @description marks 不为空对象时有效，值为 true 时表示值为包含关系，false 表示并列
-   */
-  @property({
-    attribute: false,
-  })
-  included = true;
-
-  /**
-   * @group basicFormItem
-   * @required false
-   * @default false
-   * @description 是否只能拖拽到刻度上
-   */
-  @property({
-    type: Boolean,
-  })
-  dots: boolean;
-
-  /**
-   * @group basicFormItem
+   * @group formValidation
    * @required false
    * @default 0
    * @description 滑动条的最小值
@@ -121,7 +75,7 @@ export class GeneralSlideElement extends FormItemElement {
   min = 0;
 
   /**
-   * @group basicFormItem
+   * @group formValidation
    * @required false
    * @default 100
    * @description 滑动条的最大值
@@ -131,16 +85,17 @@ export class GeneralSlideElement extends FormItemElement {
   })
   max = 100;
 
+  /* =========================== Group: ui =========================== */
+
   /**
-   * @group basicFormItem
-   * @required false
-   * @default 1
-   * @description 步长，当 marks 不为空对象时有效，取值必须大于 0，并且可被 (max - min) 整除。当 marks 不为空对象时，可以设置 step 为 null，此时滑动条的可选值仅有 marks 标出来的部分
+   * @group ui
+   * @default false
+   * @description 是否禁止滑动
    */
   @property({
-    attribute: false,
+    type: Boolean,
   })
-  step: GeneralSlideProps["step"];
+  disabled: boolean;
 
   /**
    * @group ui
@@ -157,21 +112,98 @@ export class GeneralSlideElement extends FormItemElement {
    * @group ui
    * @required false
    * @description 为空则默认，也可为 large 模式，仅在 onlyShowMode 模式下有效
+   * @editor radio
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "label": "Default",
+   *       "value": ""
+   *     },
+   *     {
+   *       "label": "Large",
+   *       "value": "large"
+   *     }
+   *   ]
+   * }
    */
   @property({
     attribute: false,
   })
   size: string;
+
   /**
    * @group ui
    * @required false
    * @default default
-   * @description Ui样式，可选择 `dashboard` 样式，默认`default`
+   * @description UI样式，可选择 `dashboard` 样式，默认`default`
+   * @editor radio
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "label": "Default",
+   *       "value": "default"
+   *     },
+   *     {
+   *       "label": "Dashboard",
+   *       "value": "dashboard",
+   *       "icon": {
+   *         "lib": "antd",
+   *         "icon": "dashboard",
+   *         "theme": "outlined"
+   *       }
+   *     }
+   *   ]
+   * }
    */
   @property({
     attribute: false,
   })
   uiType: UiType = "default";
+
+  /**
+   * @group ui
+   * @required false
+   * @default false
+   * @description 是否只能拖拽到刻度上
+   */
+  @property({
+    type: Boolean,
+  })
+  dots: boolean;
+
+  /**
+   * @group ui
+   * @required false
+   * @description 刻度标记，key 的类型必须为 number 且取值在闭区间 [min, max] 内，每个标签可以单独设置样式
+   */
+  @property({
+    attribute: false,
+  })
+  marks: GeneralSlideProps["marks"];
+
+  /**
+   * @group ui
+   * @required false
+   * @default true
+   * @description marks 不为空对象时有效，值为 true 时表示值为包含关系，false 表示并列
+   */
+  @property({
+    attribute: false,
+  })
+  included = true;
+
+  /**
+   * @group ui
+   * @required false
+   * @description 是否显示双滑块模式，双滑块模式时，value 的格式为 `[number, number]` 分别代表所选择的起始值和终点值
+   */
+  @property({
+    type: Boolean,
+  })
+  range: boolean;
+
   /**
    * @group ui
    * @required false
@@ -181,8 +213,9 @@ export class GeneralSlideElement extends FormItemElement {
     attribute: false,
   })
   tooltipVisible: boolean;
+
   /**
-   * @group advancedFormItem
+   * @group ui
    * @required false
    * @description 格式化函数，Slider 会把当前值传给 tipFormatter，并在 Tooltip 中显示 tipFormatter 的返回值，若为 null，则隐藏 Tooltip
    */
@@ -190,6 +223,22 @@ export class GeneralSlideElement extends FormItemElement {
     attribute: false,
   })
   tipFormatter: (value?: number) => string;
+
+  /* =========================== Group: advanced =========================== */
+
+  /**
+   * @group advanced
+   * @required false
+   * @default 1
+   * @description 步长，当 marks 不为空对象时有效，取值必须大于 0，并且可被 (max - min) 整除。当 marks 不为空对象时，可以设置 step 为 null，此时滑动条的可选值仅有 marks 标出来的部分
+   */
+  @property({
+    attribute: false,
+  })
+  step: GeneralSlideProps["step"];
+
+  /* =========================== events =========================== */
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
