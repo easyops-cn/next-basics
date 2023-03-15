@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>图标-次要操作备份 2</title>
+    <g id="卡片样式规范" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.649999976">
+        <g id="信息类卡片" transform="translate(-204.000000, -3463.000000)">
+            <g id="内部卡片" transform="translate(0.000000, 784.995045)">
+                <g id="基础用法" transform="translate(0.000000, 284.978849)">
+                    <g id="基础卡片" transform="translate(0.000000, 1171.919789)">
+                        <g id="样式明细" transform="translate(0.000000, 115.991661)">
+                            <g id="通用卡片" transform="translate(0.000000, 0.000000)">
+                                <g id="基本2" transform="translate(0.000000, 756.958343)">
+                                    <g id="默认态" transform="translate(156.000000, 126.989928)">
+                                        <g id="基准卡片-完整备份-2" transform="translate(0.000000, 143.166385)">
+                                            <g id="扩展2-" transform="translate(0.000000, 66.000000)">
+                                                <g id="编组-12" transform="translate(16.000000, 12.000000)">
+                                                    <g id="图标-次要操作备份-2" transform="translate(32.000000, 0.000846)">
+                                                        <rect id="矩形" fill-opacity="0.04" fill="#000000" fill-rule="nonzero" opacity="0" x="0" y="0" width="16" height="15.9987108" rx="4"></rect>
+                                                        <rect id="矩形" fill="#D8D8D8" fill-rule="nonzero" opacity="0" x="1.6" y="1.59987108" width="12.8" height="12.7989687"></rect>
+                                                        <g id="图标-标星-默认态">
+                                                            <rect id="矩形" fill-opacity="0" fill="#FFFFFF" x="0" y="0" width="16" height="15.9987108" rx="4"></rect>
+                                                            <path d="M7.80405422,3.7858303 L9.35895999,6.09581777 L12.3232129,6.61768009 L10.3005318,8.72740345 L10.7249092,11.7374901 L8.09180941,10.4669896 L5.3600514,11.8002303 L5.75636126,8.90419023 L3.64392465,6.71738618 L6.52207064,6.19867135 L7.80405422,3.7858303 Z" id="形状" stroke="#595959"></path>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

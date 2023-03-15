@@ -3,6 +3,9 @@ import {
   cardItemNormalSvg,
   cardItemSvg,
   cardItemWithRightTagSvg,
+  cardBlueSvg,
+  cardOperate1Svg,
+  cardOperate2Svg,
 } from "../images";
 export const CardItemStory: Story = {
   storyId: "presentational-bricks.card-item",
@@ -43,26 +46,24 @@ export const CardItemStory: Story = {
           },
           properties: {
             style: {
-              width: "300px",
+              width: "308px",
             },
-            iconColor: "geekblue",
             cardLayoutType: "icon-small-align-left",
             urlTemplate: "/#{id}",
             fields: {
               cardTitle: "name",
               cardSubtitle: "cardSubtitle",
               descriptionList: "descriptionList",
+              topInformation: "topInformation",
             },
-            icon: {
-              lib: "fa",
-              icon: "chart-pie",
-            },
+            imgSrc: cardBlueSvg,
+            showImg: true,
+            shape: "square",
             dataSource: {
               id: "1",
-              name: "标题在这里",
-              cardSubtitle: "副标题文字",
-              descriptionList:
-                "这里是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的辅助说明文字。",
+              name: "资源监控微应用",
+              cardSubtitle: "资源监控微应用相关前后台",
+              topInformation: "初级应用",
             },
           },
           slots: {
@@ -70,36 +71,49 @@ export const CardItemStory: Story = {
               type: "bricks",
               bricks: [
                 {
-                  brick: "basic-bricks.general-button",
+                  brick: "presentational-bricks.brick-tag",
                   properties: {
-                    buttonName: "主按钮",
-                    buttonShape: "round",
-                    buttonType: "primary",
-                    buttonSize: "small",
+                    closable: "false",
+                    showCard: "false",
+                    tagList: [
+                      { key: "1", label: "IT资源管理" },
+                      { key: "2", label: "资源套餐" },
+                      { key: "3", label: "存储设备" },
+                    ],
                   },
-                  events: {
-                    "general.button.click": {
-                      action: "console.log",
+                },
+              ],
+            },
+            extraOperate: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "presentational-bricks.basic-icon",
+                  properties: {
+                    size: "20px",
+                    icon: {
+                      lib: "easyops",
+                      category: "default",
+                      icon: "card-diff",
+                      color: "rgba(157, 168, 184, 1)",
                     },
                   },
                 },
                 {
-                  brick: "basic-bricks.general-button",
+                  brick: "presentational-bricks.basic-icon",
                   properties: {
-                    buttonName: "次按钮",
-                    buttonType: "link",
-                    buttonShape: "round",
-                    buttonSize: "small",
-                  },
-                  events: {
-                    "general.button.click": {
-                      action: "console.log",
+                    size: "20px",
+                    icon: {
+                      lib: "easyops",
+                      category: "default",
+                      icon: "card-task-delivery",
+                      color: "rgba(157, 168, 184, 1)",
                     },
                   },
                 },
               ],
             },
-            bottomRightOperate: {
+            topRightOperate: {
               type: "bricks",
               bricks: [
                 {
@@ -141,136 +155,6 @@ export const CardItemStory: Story = {
     {
       brick: "presentational-bricks.card-item",
       description: {
-        title: "卡片布局为 `icon-align-right` 类型，icon 位于右边。",
-        message: "可以配置 `operate`,`bottomRightOperate` 等操作区的插槽。",
-      },
-      properties: {
-        style: {
-          width: "300px",
-        },
-        cardLayoutType: "icon-align-right",
-        urlTemplate: "/#{id}",
-        fields: {
-          cardTitle: "name",
-          descriptionList: "descriptionList",
-        },
-        icon: {
-          lib: "easyops",
-          category: "app",
-          icon: "k8s",
-        },
-        dataSource: {
-          id: "1",
-          name: "k8s",
-          descriptionList:
-            "这里是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的辅助说明文字。",
-        },
-      },
-      slots: {
-        operate: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "basic-bricks.general-button",
-              properties: {
-                buttonName: "主按钮",
-                buttonShape: "round",
-                buttonType: "primary",
-                buttonSize: "small",
-              },
-              events: {
-                "general.button.click": {
-                  action: "console.log",
-                },
-              },
-            },
-            {
-              brick: "basic-bricks.general-button",
-              properties: {
-                buttonName: "次按钮",
-                buttonType: "link",
-                buttonShape: "round",
-                buttonSize: "small",
-              },
-              events: {
-                "general.button.click": {
-                  action: "console.log",
-                },
-              },
-            },
-          ],
-        },
-        bottomRightOperate: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "basic-bricks.general-custom-buttons",
-              properties: {
-                isMoreButton: true,
-                moreButtonShape: "no",
-                customButtons: [
-                  {
-                    isDropdown: true,
-                    text: "设为默认",
-                    icon: "setting",
-                    eventName: "instance.set.default",
-                  },
-                  {
-                    isDropdown: true,
-                    text: "删除",
-                    icon: "delete",
-                    color: "#E02020",
-                    eventName: "instance.delete",
-                  },
-                ],
-              },
-              events: {
-                "instance.set.default": {
-                  action: "console.log",
-                },
-                "instance.delete": {
-                  action: "console.log",
-                },
-              },
-            },
-          ],
-        },
-      },
-    },
-    {
-      brick: "presentational-bricks.card-item",
-      description: {
-        title: "卡片布局为 `icon-align-left` 类型，icon 位于左边。",
-        message:
-          "可以配置 `operate`,`topRightOperate`,`bottomRightOperate` 等操作区的插槽。适用场景：用户可凭借图标颜色和形状来区分不同卡片，图标具有分类意义（区分类型／状态）而存在。",
-      },
-      properties: {
-        cardLayoutType: "icon-align-left",
-        iconColor: "cyan",
-        hideDescCircle: true,
-        urlTemplate: "/#{id}",
-        fields: {
-          cardTitle: "name",
-          descriptionList: "descriptionList",
-        },
-        icon: {
-          lib: "fa",
-          icon: "check-circle",
-        },
-        dataSource: {
-          id: "1",
-          name: "Test 采集",
-          descriptionList: [
-            "采集插件：GAG 服务配置信息采集",
-            "执行目标：GAG 服务",
-            "采集频率：10分钟（00:00 到 23:59 时段执行）",
-          ],
-        },
-      },
-    },
-    {
-      brick: "presentational-bricks.card-item",
-      description: {
         title: "禁用卡片",
         message:
           "禁用的卡片不可点击跳转。操作区配置了 slot 的卡片，请按需配置子构件的属性，例如将按钮设置成 disabled 等。",
@@ -278,26 +162,24 @@ export const CardItemStory: Story = {
       properties: {
         disabled: true,
         style: {
-          width: "300px",
+          width: "308px",
         },
-        iconColor: "geekblue",
         cardLayoutType: "icon-small-align-left",
         urlTemplate: "/#{id}",
         fields: {
           cardTitle: "name",
           cardSubtitle: "cardSubtitle",
           descriptionList: "descriptionList",
+          topInformation: "topInformation",
         },
-        icon: {
-          lib: "fa",
-          icon: "chart-pie",
-        },
+        imgSrc: cardBlueSvg,
+        showImg: true,
+        shape: "square",
         dataSource: {
           id: "1",
-          name: "标题在这里",
-          cardSubtitle: "副标题文字",
-          descriptionList:
-            "这里是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的辅助说明文字。",
+          name: "资源监控微应用",
+          cardSubtitle: "资源监控微应用相关前后台",
+          topInformation: "初级应用",
         },
       },
       slots: {
@@ -305,133 +187,43 @@ export const CardItemStory: Story = {
           type: "bricks",
           bricks: [
             {
-              brick: "basic-bricks.general-button",
+              brick: "presentational-bricks.brick-tag",
               properties: {
-                disabled: true,
-                buttonName: "主按钮",
-                buttonShape: "round",
-                buttonType: "primary",
-                buttonSize: "small",
-              },
-              events: {
-                "general.button.click": {
-                  action: "console.log",
-                },
-              },
-            },
-            {
-              brick: "basic-bricks.general-button",
-              properties: {
-                disabled: true,
-                buttonName: "次按钮",
-                buttonType: "link",
-                buttonShape: "round",
-                buttonSize: "small",
-              },
-              events: {
-                "general.button.click": {
-                  action: "console.log",
-                },
-              },
-            },
-          ],
-        },
-        bottomRightOperate: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "basic-bricks.general-custom-buttons",
-              properties: {
-                isMoreButton: true,
-                moreButtonShape: "no",
-                customButtons: [
-                  {
-                    isDropdown: true,
-                    text: "设为默认",
-                    icon: "setting",
-                    disabled: true,
-                    eventName: "instance.set.default",
-                  },
-                  {
-                    isDropdown: true,
-                    text: "删除",
-                    icon: "delete",
-                    color: "#E02020",
-                    eventName: "instance.delete",
-                  },
+                closable: "false",
+                showCard: "false",
+                tagList: [
+                  { key: "1", label: "IT资源管理" },
+                  { key: "2", label: "资源套餐" },
+                  { key: "3", label: "存储设备" },
                 ],
               },
-              events: {
-                "instance.set.default": {
-                  action: "console.log",
-                },
-                "instance.delete": {
-                  action: "console.log",
-                },
-              },
             },
           ],
         },
-      },
-    },
-    {
-      brick: "presentational-bricks.card-item",
-      description: {
-        title: "卡片布局为 `icon-align-middle` 类型，icon 居中。",
-        message:
-          "可以配置 `operate`,`topRightOperate` 等操作区的插槽。适用场景：不需要用户凭借右下角图标来区分不同类型卡片，图标常作为装饰来丰富卡片样式存在。",
-      },
-      properties: {
-        style: {
-          width: "300px",
-        },
-        iconColor: "geekblue",
-        reverseBgColor: true,
-        cardLayoutType: "icon-align-middle",
-        urlTemplate: "/#{id}",
-        fields: {
-          cardTitle: "name",
-          descriptionList: "descriptionList",
-        },
-        icon: {
-          lib: "fa",
-          icon: "chart-pie",
-        },
-        dataSource: {
-          id: "1",
-          name: "标题在这里",
-          descriptionList:
-            "http://chphl pgkk boli faa iihall/15 55 5onetab.html",
-        },
-      },
-      slots: {
-        operate: {
+        extraOperate: {
           type: "bricks",
           bricks: [
             {
-              brick: "basic-bricks.general-button",
+              brick: "presentational-bricks.basic-icon",
               properties: {
-                buttonName: "编辑",
-                buttonIcon: "edit",
-                buttonSize: "small",
-              },
-              events: {
-                "general.button.click": {
-                  action: "console.log",
+                size: "20px",
+                icon: {
+                  lib: "easyops",
+                  category: "default",
+                  icon: "card-diff",
+                  color: "rgba(157, 168, 184, 1)",
                 },
               },
             },
             {
-              brick: "basic-bricks.general-button",
+              brick: "presentational-bricks.basic-icon",
               properties: {
-                buttonName: "了解详情",
-                buttonType: "text",
-                buttonSize: "small",
-                fadedText: true,
-              },
-              events: {
-                "general.button.click": {
-                  action: "console.log",
+                size: "20px",
+                icon: {
+                  lib: "easyops",
+                  category: "default",
+                  icon: "card-task-delivery",
+                  color: "rgba(157, 168, 184, 1)",
                 },
               },
             },
@@ -443,11 +235,6 @@ export const CardItemStory: Story = {
             {
               brick: "basic-bricks.general-custom-buttons",
               properties: {
-                moreBtnIcon: {
-                  lib: "antd",
-                  icon: "more",
-                  theme: "outlined",
-                },
                 isMoreButton: true,
                 moreButtonShape: "no",
                 customButtons: [
@@ -473,6 +260,236 @@ export const CardItemStory: Story = {
                 "instance.delete": {
                   action: "console.log",
                 },
+              },
+            },
+          ],
+        },
+      },
+    },
+    {
+      brick: "presentational-bricks.card-item",
+      description: {
+        title: "单个扩展区样式展示",
+        message:
+          "展示统计数，如收藏/关注次数，下载次数。统计类信息置于扩展区左侧，其他附加信息如关注人头像等置于右侧",
+      },
+      properties: {
+        disabled: true,
+        style: {
+          width: "308px",
+        },
+        cardLayoutType: "icon-small-align-left",
+        urlTemplate: "/#{id}",
+        fields: {
+          cardTitle: "name",
+          cardSubtitle: "cardSubtitle",
+          descriptionList: "descriptionList",
+        },
+        imgSrc: cardBlueSvg,
+        showImg: true,
+        shape: "square",
+        dataSource: {
+          id: "1",
+          name: "资源监控微应用",
+          cardSubtitle: "资源监控微应用相关前后台",
+        },
+      },
+      slots: {
+        operate: {
+          type: "bricks",
+          bricks: [
+            {
+              brick: "presentational-bricks.brick-tag",
+              properties: {
+                closable: "false",
+                showCard: "false",
+                tagList: [
+                  { key: "1", label: "IT资源管理" },
+                  { key: "2", label: "资源套餐" },
+                  { key: "3", label: "存储设备" },
+                ],
+              },
+            },
+          ],
+        },
+        bottomRightOperate: {
+          type: "bricks",
+          bricks: [
+            {
+              brick: "forms.general-switch",
+            },
+          ],
+        },
+      },
+    },
+    {
+      brick: "presentational-bricks.card-item",
+      description: {
+        title: "单个扩展区样式展示",
+        message: "辅助信息跟操作同时存在时，操作置于右侧",
+      },
+      properties: {
+        disabled: true,
+        style: {
+          width: "308px",
+        },
+        cardLayoutType: "icon-small-align-left",
+        urlTemplate: "/#{id}",
+        fields: {
+          cardTitle: "name",
+          cardSubtitle: "cardSubtitle",
+          descriptionList: "descriptionList",
+        },
+        imgSrc: cardBlueSvg,
+        showImg: true,
+        shape: "square",
+        dataSource: {
+          id: "1",
+          name: "资源监控微应用",
+          cardSubtitle: "资源监控微应用相关前后台",
+        },
+      },
+      slots: {
+        operate: {
+          type: "bricks",
+          bricks: [
+            {
+              brick: "presentational-bricks.basic-icon",
+              properties: {
+                size: "20px",
+                icon: {
+                  imgSrc: cardOperate2Svg,
+                },
+              },
+            },
+            {
+              brick: "span",
+              properties: {
+                textContent: "7",
+              },
+            },
+            {
+              brick: "presentational-bricks.basic-icon",
+              properties: {
+                size: "20px",
+                icon: {
+                  imgSrc: cardOperate1Svg,
+                },
+              },
+            },
+            {
+              brick: "span",
+              properties: {
+                textContent: "516",
+              },
+            },
+          ],
+        },
+        bottomRightOperate: {
+          type: "bricks",
+          bricks: [
+            {
+              brick: "presentational-bricks.brick-user",
+              properties: {
+                size: "small",
+                iconUrl:
+                  "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+              },
+            },
+          ],
+        },
+      },
+    },
+    {
+      brick: "presentational-bricks.card-item",
+      description: {
+        title: "单个扩展区样式展示",
+        message:
+          "扩展区收纳操作场景，操作应是针对卡片详情内容的快捷功能性操作，对于卡片的操作我们是放置在卡片右上角 … 收纳。",
+      },
+      properties: {
+        disabled: true,
+        style: {
+          width: "308px",
+        },
+        cardLayoutType: "icon-small-align-left",
+        urlTemplate: "/#{id}",
+        fields: {
+          cardTitle: "name",
+          cardSubtitle: "cardSubtitle",
+          descriptionList: "descriptionList",
+        },
+        imgSrc: cardBlueSvg,
+        showImg: true,
+        shape: "square",
+        dataSource: {
+          id: "1",
+          name: "资源监控微应用",
+          cardSubtitle: "资源监控微应用相关前后台",
+        },
+      },
+      slots: {
+        operate: {
+          type: "bricks",
+          bricks: [
+            {
+              brick: "presentational-bricks.brick-tag",
+              properties: {
+                closable: "false",
+                showCard: "false",
+                tagList: [
+                  { key: "1", label: "IT资源管理" },
+                  { key: "2", label: "资源套餐" },
+                  { key: "3", label: "存储设备" },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    },
+    {
+      brick: "presentational-bricks.card-item",
+      description: {
+        title: "单个扩展区样式展示",
+        message:
+          "扩展区收纳操作场景，操作应是针对卡片详情内容的快捷功能性操作，对于卡片的操作我们是放置在卡片右上角 … 收纳。",
+      },
+      properties: {
+        disabled: true,
+        style: {
+          width: "308px",
+        },
+        cardLayoutType: "icon-small-align-left",
+        urlTemplate: "/#{id}",
+        fields: {
+          cardTitle: "name",
+          cardSubtitle: "cardSubtitle",
+          descriptionList: "descriptionList",
+        },
+        imgSrc: cardBlueSvg,
+        showImg: true,
+        shape: "square",
+        dataSource: {
+          id: "1",
+          name: "资源监控微应用",
+          cardSubtitle: "资源监控微应用相关前后台",
+        },
+      },
+      slots: {
+        operate: {
+          type: "bricks",
+          bricks: [
+            {
+              brick: "presentational-bricks.brick-tag",
+              properties: {
+                closable: "false",
+                showCard: "false",
+                tagList: [
+                  { key: "1", label: "IT资源管理" },
+                  { key: "2", label: "资源套餐" },
+                  { key: "3", label: "存储设备" },
+                ],
               },
             },
           ],
@@ -495,56 +512,107 @@ export const CardItemStory: Story = {
           brick: "presentational-bricks.card-item",
           properties: {
             style: {
-              width: "300px",
+              width: "308px",
             },
-            cardLayoutType: "block-icon-align-left",
+            iconColor: "geekblue",
+            cardLayoutType: "icon-small-align-left",
             urlTemplate: "/#{id}",
             fields: {
               cardTitle: "name",
+              cardSubtitle: "cardSubtitle",
               descriptionList: "descriptionList",
+              topInformation: "topInformation",
             },
-            dataSource: {
-              id: "1",
-              name: "标题在这里",
-              descriptionList:
-                "http://chphl pgkk boli faa iihall/15 55 5onetab.html",
-            },
-            tagConfig: {
-              text: "已审批",
-              color: "blue",
-              triangle: false,
+            icon: {
+              lib: "fa",
+              icon: "chart-pie",
             },
             showImg: true,
             imgSrc:
               "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+            dataSource: {
+              id: "1",
+              name: "资源监控微应用",
+              cardSubtitle: "资源监控微应用相关前后台",
+              topInformation: "初级应用",
+            },
           },
           slots: {
             operate: {
               type: "bricks",
               bricks: [
                 {
-                  brick: "basic-bricks.general-button",
+                  brick: "presentational-bricks.brick-tag",
                   properties: {
-                    buttonName: "编辑",
-                    buttonIcon: "edit",
-                    buttonSize: "small",
+                    closable: "false",
+                    showCard: "false",
+                    tagList: [
+                      { key: "1", label: "IT资源管理" },
+                      { key: "2", label: "资源套餐" },
+                      { key: "3", label: "存储设备" },
+                    ],
                   },
-                  events: {
-                    "general.button.click": {
-                      action: "console.log",
+                },
+              ],
+            },
+            extraOperate: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "presentational-bricks.basic-icon",
+                  properties: {
+                    size: "20px",
+                    icon: {
+                      lib: "easyops",
+                      category: "default",
+                      icon: "card-diff",
+                      color: "rgba(157, 168, 184, 1)",
                     },
                   },
                 },
                 {
-                  brick: "basic-bricks.general-button",
+                  brick: "presentational-bricks.basic-icon",
                   properties: {
-                    buttonName: "了解详情",
-                    buttonType: "text",
-                    buttonSize: "small",
-                    fadedText: true,
+                    size: "20px",
+                    icon: {
+                      lib: "easyops",
+                      category: "default",
+                      icon: "card-task-delivery",
+                      color: "rgba(157, 168, 184, 1)",
+                    },
+                  },
+                },
+              ],
+            },
+            topRightOperate: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "basic-bricks.general-custom-buttons",
+                  properties: {
+                    isMoreButton: true,
+                    moreButtonShape: "no",
+                    customButtons: [
+                      {
+                        isDropdown: true,
+                        text: "设为默认",
+                        icon: "setting",
+                        eventName: "instance.set.default",
+                      },
+                      {
+                        isDropdown: true,
+                        text: "删除",
+                        icon: "delete",
+                        color: "#E02020",
+                        eventName: "instance.delete",
+                      },
+                    ],
                   },
                   events: {
-                    "general.button.click": {
+                    "instance.set.default": {
+                      action: "console.log",
+                    },
+                    "instance.delete": {
                       action: "console.log",
                     },
                   },

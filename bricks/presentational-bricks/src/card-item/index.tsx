@@ -74,7 +74,7 @@ export class CardItemElement extends UpdatingElement {
 
   /**
    * @required false
-   * @description 字段映射, 跟 dataSource 一起使用来获得运行时 cardTitle、cardSubtitle、descriptionList、icon、iconColor、iconStyle、iconSize、iconOffsetX、iconOffsetY、iconOpacity、disabled
+   * @description 字段映射, 跟 dataSource 一起使用来获得运行时 cardTitle、cardSubtitle、topInformation、descriptionList、icon、iconColor、iconStyle、iconSize、iconOffsetX、iconOffsetY、iconOpacity、disabled
    * @group other
    */
   @property({
@@ -83,6 +83,7 @@ export class CardItemElement extends UpdatingElement {
   fields: {
     cardTitle?: string;
     cardSubtitle?: string;
+    topInformation?: string;
     descriptionList?: string;
     icon?: string;
     iconColor?: string;
@@ -157,6 +158,14 @@ export class CardItemElement extends UpdatingElement {
    */
   @property()
   cardSubtitle: string;
+
+  /**
+   * @required false
+   * @description 卡片 顶部辅助信息
+   * @group basic
+   */
+  @property()
+  topInformation: string;
 
   /**
    * @required false
@@ -518,6 +527,7 @@ export class CardItemElement extends UpdatingElement {
         disabled: this.disabled,
         cardTitle: this.cardTitle,
         cardSubtitle: this.cardSubtitle,
+        topInformation: this.topInformation,
         descriptionList: this.descriptionList,
         icon: this.icon,
         iconColor: this.iconColor,
@@ -582,6 +592,7 @@ export class CardItemElement extends UpdatingElement {
             reverseBgColor={this.reverseBgColor}
             cardTitle={mutableProps.cardTitle}
             cardSubtitle={mutableProps.cardSubtitle}
+            topInformation={mutableProps.topInformation}
             descriptionList={mutableProps.descriptionList as any}
             hideDescCircle={this.hideDescCircle}
             icon={mutableProps.icon}
@@ -688,6 +699,7 @@ export class CardItemElement extends UpdatingElement {
     const pickFields = pick(this.fields, [
       "cardTitle",
       "cardSubtitle",
+      "topInformation",
       "descriptionList",
       "icon",
       "iconColor",

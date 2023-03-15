@@ -19,13 +19,19 @@
     }
   }
 
-  .newMenuItemIcon {
-    width: 18px;
-    height: 18px;
-    vertical-align: middle;
-    margin-top: 2px;
+  :global(.ant-menu-item-selected) {
     svg {
-      font-size: 18px;
+      color: white;
+    }
+  }
+
+  .newMenuItemIcon {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-top: 3px;
+    svg {
+      font-size: 20px;
     }
     > :global(.anticon) {
       margin-right: 0;

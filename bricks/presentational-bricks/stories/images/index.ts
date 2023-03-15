@@ -108,6 +108,9 @@ export { default as brickTreeFilterSvg } from "./presentational-bricks.brick-tre
 export { default as calendarNormalSvg } from "./presentational-bricks.calendar[normal].svg";
 export { default as calendarWithTagSvg } from "./presentational-bricks.calendar[with-tag].svg";
 export { default as cardItemNormalSvg } from "./presentational-bricks.card-item[normal].svg";
+export { default as cardBlueSvg } from "./presentational-bricks.card-blue.svg";
+export { default as cardOperate1Svg } from "./presentational-bricks.card-operate1.svg";
+export { default as cardOperate2Svg } from "./presentational-bricks.card-operate2.svg";
 export { default as cardItemWithRightTagSvg } from "./presentational-bricks.card-item[with-right-tag].svg";
 export { default as collapsibleCardItemNormalSvg } from "./presentational-bricks.collapsible-card-item[normal].svg";
 export { default as copyableTextNormalSvg } from "./presentational-bricks.copyable-text[normal].svg";
