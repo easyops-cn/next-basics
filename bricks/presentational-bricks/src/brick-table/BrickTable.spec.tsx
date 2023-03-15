@@ -76,6 +76,40 @@ describe("BrickTable", () => {
     ],
     showCard: true,
   };
+  it("should work with empty status", () => {
+    const wrapper = shallow(
+      <BrickTable
+        dataSource={[]}
+        emptyUseBrick={{
+          useBrick: {
+            brick: "presentational-bricks.general-tooltip",
+            properties: {
+              icon: {
+                lib: "fa",
+                icon: "info-circle",
+                color: "var(--color-secondary-text)",
+              },
+              content: "这是一个 tooltips",
+              text: "Address",
+            },
+          },
+        }}
+        columns={[
+          {
+            title: "Name",
+            dataIndex: "name",
+            key: "name",
+          },
+          {
+            title: "Age",
+            dataIndex: "age",
+            key: "age",
+          },
+        ]}
+        onChange={jest.fn}
+      />
+    );
+  });
   it("should work", () => {
     const wrapper = mount(
       <BrickTable
