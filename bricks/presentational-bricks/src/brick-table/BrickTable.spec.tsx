@@ -2,7 +2,8 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import { BrickTable } from "./BrickTable";
 import { CustomColumn } from "./index";
-import { Table } from "antd";
+import { Table, ConfigProvider } from "antd";
+import { EasyopsEmpty } from "@next-core/brick-kit";
 
 jest.mock("@next-core/brick-kit", () => {
   return {
@@ -106,9 +107,11 @@ describe("BrickTable", () => {
             key: "age",
           },
         ]}
+        showCard={true}
         onChange={jest.fn}
       />
     );
+    expect(wrapper.text()).toEqual("<ConfigProvider />");
   });
   it("should work", () => {
     const wrapper = mount(
