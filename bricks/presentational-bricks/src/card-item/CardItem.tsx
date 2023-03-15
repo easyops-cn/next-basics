@@ -12,6 +12,7 @@ interface CardItemProps {
   cardTitle: string;
   cardSubtitle?: string;
   descriptionList?: string[] | string;
+  topInformation?: string;
   hideDescCircle?: boolean;
   icon?: MenuIcon;
   iconStyle?: Record<string, any>;
@@ -146,7 +147,11 @@ export function CardItem(props: CardItemProps): React.ReactElement {
         height: `${size}px`,
       }}
     >
-      <Avatar src={props.imgSrc} size={imgSize ?? size} />
+      <Avatar
+        src={props.imgSrc}
+        size={imgSize ?? size}
+        shape={shape === "square" ? shape : "circle"}
+      />
     </span>
   );
 
@@ -196,7 +201,8 @@ export function CardItem(props: CardItemProps): React.ReactElement {
             style={{
               height:
                 descMaxLine *
-                (descriptionDataType === "list" ? lineHeight : 20),
+                  (descriptionDataType === "list" ? lineHeight : 20) -
+                3,
               WebkitLineClamp: descMaxLine,
               ...(marginBottomZero ? { marginBottom: 0 } : {}),
             }}
@@ -225,6 +231,11 @@ export function CardItem(props: CardItemProps): React.ReactElement {
   // 右上角区域的slot
   const topRightOperateArea = (
     <div
+      style={
+        props.topInformation
+          ? { position: "absolute", top: "10px", right: "24px" }
+          : {}
+      }
       className={classNames("operateContainer", "topRightOperatingArea", {
         hideOperate: props.hideOperate,
         showOperationAreaWhenHovering: props.showOperationAreaWhenHovering,
@@ -242,6 +253,18 @@ export function CardItem(props: CardItemProps): React.ReactElement {
       })}
     >
       <slot id="bottomRightOperateSlot" name="bottomRightOperate" />
+    </div>
+  );
+  //底部扩展区域
+  const bottomExtraOperateArea = (
+    <div
+      style={{ marginTop: "10px" }}
+      className={classNames("operateContainer", "operatingArea", {
+        hideOperate: props.hideOperate,
+        showOperationAreaWhenHovering: props.showOperationAreaWhenHovering,
+      })}
+    >
+      <slot id="extraBottomOperateSlot" name="extraOperate"></slot>
     </div>
   );
   // 下方区域的slot组合
@@ -295,21 +318,34 @@ export function CardItem(props: CardItemProps): React.ReactElement {
         noHover: !hoverable || props.disabled,
         disabledCard: props.disabled,
       })}
-      bodyStyle={{ padding: "20px" }}
+      bodyStyle={
+        props.topInformation
+          ? { padding: "0px 24px 10px 16px" }
+          : { padding: "16px 24px 10px 16px" }
+      }
       {...configProps}
       bordered={bordered}
     >
       {topRightTag}
-      <div className="cardHeaderContainer">
+      {props.topInformation && (
+        <div className="smallTitle">
+          <span className="smallTitleText">{props.topInformation}</span>
+        </div>
+      )}
+      <div
+        className="cardHeaderContainer"
+        style={isNil(descriptionList) ? { marginBottom: "16px" } : {}}
+      >
         {props.showImg ? avatarImg(40) : avatarIcon(40)}
         <div className="titleWrapper">
           {titleWithOperateArea}
           {props.cardSubtitle && subtitle}
-          <slot id="afterSubtitleSlot" name="afterSubtitle" />
+          <slot id="" name="afterSubtitle" />
         </div>
       </div>
       {(!isNil(descriptionList) || alwaysShowDescription) && description()}
       {bottomOperateArea}
+      {bottomExtraOperateArea}
     </Card>
   );
 
@@ -335,6 +371,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
         {props.showImg ? avatarImg(70) : avatarIcon(70)}
       </div>
       {bottomOperateArea}
+      {bottomExtraOperateArea}
     </Card>
   );
 

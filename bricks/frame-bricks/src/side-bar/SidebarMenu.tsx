@@ -84,7 +84,7 @@ export function SidebarMenu(props: SidebarMenuProps): React.ReactElement {
                       ? { ...item.icon, color: "rgb(87, 104, 156,1)" }
                       : item.icon
                   }
-                  size={18}
+                  size={20}
                 />
               </i>
             )
@@ -144,12 +144,27 @@ export function SidebarMenu(props: SidebarMenuProps): React.ReactElement {
           title={
             <span>
               {item.icon && (
-                <i className={style.menuItemIcon}>
-                  <GeneralIcon icon={item.icon} size={14} />
+                <i
+                  className={
+                    showTextUi ? style.newMenuItemIcon : style.menuItemIcon
+                  }
+                >
+                  <GeneralIcon
+                    icon={
+                      isEmpty(item.icon.color) && showTextUi
+                        ? { ...item.icon, color: "rgb(87, 104, 156,1)" }
+                        : item.icon
+                    }
+                    //icon={item.icon}
+
+                    size={20}
+                  />
                 </i>
               )}
               <span
-                className={classNames(style.menuText, style.subMenuTitleText)}
+                className={classNames(style.menuText, style.subMenuTitleText, {
+                  [style.menuTextColor]: showTextUi,
+                })}
               >
                 {item.title}
               </span>
