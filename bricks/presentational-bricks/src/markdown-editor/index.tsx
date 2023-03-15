@@ -30,6 +30,90 @@ export interface ImageInfo {
  * @noInheritDoc
  */
 export class MarkdownEditorElement extends FormItemElement {
+  /* =========================== Group: basic =========================== */
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description markdown 编辑器的值
+   * @group basic
+   */
+  @property({ attribute: false }) value: string;
+
+  /* =========================== Group: advanced =========================== */
+
+  /**
+   * @kind boolean
+   * @required -
+   * @default false
+   * @description 支持上传图片，为 `true` 时需要设置 `bucketName`。对接平台统一资源存储。
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  supportUploadImg: boolean;
+
+  /**
+   * @kind booelan
+   * @required false
+   * @default true
+   * @group advanced
+   * @description markdown 图片是否支持预览
+   */
+  @property({ attribute: false }) imagePreview: boolean;
+
+  /**
+   * @kind string
+   * @required -
+   * @default -
+   * @description 对象存储桶名字，请在业务编排的时候与后台同学商量创建，一般一个业务需求对应一个存储桶名称，相当于 namespace。需要上传图片的功能（`supportUploadImg:true`)时可用。
+   * @group advanced
+   */
+  @property()
+  bucketName: string;
+
+  /* =========================== Group: style =========================== */
+
+  /**
+   * @kind Record<string,any>
+   * @required false
+   * @default -
+   * @description 预览容器的样式
+   * @group style
+   */
+  @property({
+    attribute: false,
+  })
+  previewContainerStyle: React.CSSProperties;
+
+  /* =========================== Group: other =========================== */
+
+  /**
+   * @kind Record<string, any>
+   * @required false
+   * @default -
+   * @description [已废弃]数据来源
+   * @deprecated
+   * @group other
+   */
+  @property({ attribute: false }) dataSource: Record<string, any>;
+
+  /**
+   * @kind { value?: string; }
+   * @required false
+   * @default -
+   * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
+   * @deprecated
+   * @group other
+   */
+  @property({ attribute: false }) fields: {
+    value?: string;
+  };
+
+  /* =========================== events =========================== */
+
   /**
    * @detail string
    * @description 编辑 value 变化的值
@@ -43,75 +127,6 @@ export class MarkdownEditorElement extends FormItemElement {
    */
   @event({ type: "image.upload" })
   UploadImage: EventEmitter<ImageInfo>;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description markdown 编辑器的值
-   */
-  @property({ attribute: false }) value: string;
-
-  /**
-   * @kind Record<string,any>
-   * @required false
-   * @default -
-   * @description 预览容器的样式
-   */
-  @property({
-    attribute: false,
-  })
-  previewContainerStyle: React.CSSProperties;
-
-  /**
-   * @kind boolean
-   * @required -
-   * @default false
-   * @description 支持上传图片，为 `true` 时需要设置 `bucketName`。对接平台统一资源存储。
-   */
-  @property({
-    type: Boolean,
-  })
-  supportUploadImg: boolean;
-
-  /**
-   * @kind string
-   * @required -
-   * @default -
-   * @description 对象存储桶名字，请在业务编排的时候与后台同学商量创建，一般一个业务需求对应一个存储桶名称，相当于 namespace。需要上传图片的功能（`supportUploadImg:true`)时可用。
-   */
-  @property()
-  bucketName: string;
-
-  /**
-   * @kind Record<string, any>
-   * @required false
-   * @default -
-   * @description [已废弃]数据来源
-   * @deprecated
-   * @group advanced
-   */
-  @property({ attribute: false }) dataSource: Record<string, any>;
-
-  /**
-   * @kind { value?: string; }
-   * @required false
-   * @default -
-   * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
-   * @deprecated
-   * @group advanced
-   */
-  @property({ attribute: false }) fields: {
-    value?: string;
-  };
-
-  /**
-   * @kind booelan
-   * @required false
-   * @default true
-   * @description markdown 图片是否支持预览
-   */
-  @property({ attribute: false }) imagePreview: boolean;
 
   connectedCallback(): void {
     // istanbul ignore else

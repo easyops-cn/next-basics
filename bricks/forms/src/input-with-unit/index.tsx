@@ -32,22 +32,17 @@ import { UnitType } from "./libs/constants";
  * ```
  */
 export class InputWithUnitElement extends FormItemElement {
+  /* =========================== Group: basic =========================== */
+
   /**
-   * @group basicFormItem
+   * @group basic
    * @required true
    * @description 下拉框字段名
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @group basicFormItem
-   * @required false
-   * @description 字段说明
-   */
-  @property({ attribute: false }) declare label: string;
-
-  /**
-   * @group basicFormItem
+   * @group basic
    * @required false
    * @description 初始值
    */
@@ -55,47 +50,76 @@ export class InputWithUnitElement extends FormItemElement {
   value: number;
 
   /**
-   * @group basicFormItem
+   * @group basic
    * @required false
    * @description 占位说明
    */
   @property({ attribute: false }) declare placeholder: string;
 
   /**
-   * @group basicFormItem
-   * @required false
-   * @description 是否必填项
+   * @group basic
+   * @required true
+   * @description 单位类型，目前支持 "time" | "byte" | "byteRate"
+   * @editor radio
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "label": "Time",
+   *       "value": "time"
+   *     },
+   *     {
+   *       "label": "Byte",
+   *       "value": "byte"
+   *     },
+   *     {
+   *       "label": "ByteRate",
+   *       "value": "byteRate"
+   *     }
+   *   ]
+   * }
    */
-  @property({ type: Boolean }) declare required: boolean;
+  @property()
+  unitType: UnitType;
 
   /**
-   * @group basicFormItem
+   * @group basic
    * @required true
    * @description 使用单位
    */
   @property()
   unit: string;
 
-  /**
-   * @group basicFormItem
-   * @required true
-   * @description 单位类型，目前支持 "time" | "byte" | "byteRate"
-   */
-  @property()
-  unitType: UnitType;
+  /* =========================== Group: formLabel =========================== */
 
   /**
-   * @group ui
+   * @group formLabel
    * @required false
-   * @description 输入框样式
+   * @description 字段说明
    */
-  @property({
-    attribute: false,
-  })
-  inputBoxStyle: React.CSSProperties;
+  @property({ attribute: false }) declare label: string;
+
+  /* =========================== Group: formValidation =========================== */
 
   /**
-   * @group basicFormItem
+   * @group formValidation
+   * @required false
+   * @description 是否必填项
+   */
+  @property({ type: Boolean }) declare required: boolean;
+
+  /**
+   * @group formValidation
+   * @default Number.MIN_SAFE_INTEGER
+   * @required false
+   * @description 输入数字的最小值
+   */
+  @property({ type: Number })
+  inputNumberMin: number;
+
+  /* =========================== Group: advanced =========================== */
+
+  /**
    * @required false
    * @default 0
    * @description 单位转换精确度；如果为 0，仅当整除时才转换
@@ -105,7 +129,7 @@ export class InputWithUnitElement extends FormItemElement {
   precision: number;
 
   /**
-   * @group basicFormItem
+   * @group advanced
    * @default true
    * @required false
    * @description 默认开启整数整除自动转换
@@ -114,21 +138,27 @@ export class InputWithUnitElement extends FormItemElement {
   useAutoCalculate = true;
 
   /**
-   * @group basicFormItem
-   * @default Number.MIN_SAFE_INTEGER
-   * @required false
-   * @description 输入数字的最小值
-   */
-  @property({ type: Number })
-  inputNumberMin: number;
-
-  /**
-   * @group basicFormItem
+   * @group advanced
    * @required false
    * @description 可使用单位列表
    */
   @property({ attribute: false })
   availableUnits: string[];
+
+  /* =========================== Group: style =========================== */
+
+  /**
+   * @group style
+   * @required false
+   * @description 输入框样式
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle: React.CSSProperties;
+
+  /* =========================== events =========================== */
+
   /**
    * @detail `number`
    * @description 输入框或单位变化时触发，`event.detail` 为当前值
