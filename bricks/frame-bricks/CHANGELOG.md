@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.10.2...@next-bricks/frame-bricks@1.11.0) (2023-03-15)
+
+
+### Features
+
+* 信息卡片-信息展示卡片 优化升级一 ([d18a42a](https://github.com/easyops-cn/next-basics/commit/d18a42a8a3068093e67b4bfa25a7a43fa8fe6e43))
+
+
+
+
+
 ## [1.10.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.10.1...@next-bricks/frame-bricks@1.10.2) (2023-03-13)
 
 

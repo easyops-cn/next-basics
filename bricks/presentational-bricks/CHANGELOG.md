@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.287.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.286.6...@next-bricks/presentational-bricks@1.287.0) (2023-03-15)
+
+
+### Features
+
+* 信息卡片-信息展示卡片 优化升级一 ([d18a42a](https://github.com/easyops-cn/next-basics/commit/d18a42a8a3068093e67b4bfa25a7a43fa8fe6e43))
+
+
+
+
+
 ## [1.286.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.286.5...@next-bricks/presentational-bricks@1.286.6) (2023-03-14)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
