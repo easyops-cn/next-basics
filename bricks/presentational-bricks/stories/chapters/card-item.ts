@@ -73,8 +73,8 @@ export const CardItemStory: Story = {
                 {
                   brick: "presentational-bricks.brick-tag",
                   properties: {
-                    closable: "false",
-                    showCard: "false",
+                    closable: false,
+                    showCard: false,
                     tagList: [
                       { key: "1", label: "IT资源管理" },
                       { key: "2", label: "资源套餐" },
@@ -189,8 +189,8 @@ export const CardItemStory: Story = {
             {
               brick: "presentational-bricks.brick-tag",
               properties: {
-                closable: "false",
-                showCard: "false",
+                closable: false,
+                showCard: false,
                 tagList: [
                   { key: "1", label: "IT资源管理" },
                   { key: "2", label: "资源套餐" },
@@ -271,7 +271,7 @@ export const CardItemStory: Story = {
       description: {
         title: "单个扩展区样式展示",
         message:
-          "展示统计数，如收藏/关注次数，下载次数。统计类信息置于扩展区左侧，其他附加信息如关注人头像等置于右侧",
+          "· 扩展区展示标签信息，这里标签用于承载分类/状态之类信息。不要超过2行展示，需特殊强调的场景，可使用彩色标签",
       },
       properties: {
         disabled: true,
@@ -301,8 +301,8 @@ export const CardItemStory: Story = {
             {
               brick: "presentational-bricks.brick-tag",
               properties: {
-                closable: "false",
-                showCard: "false",
+                closable: false,
+                showCard: false,
                 tagList: [
                   { key: "1", label: "IT资源管理" },
                   { key: "2", label: "资源套餐" },
@@ -312,21 +312,14 @@ export const CardItemStory: Story = {
             },
           ],
         },
-        bottomRightOperate: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "forms.general-switch",
-            },
-          ],
-        },
       },
     },
     {
       brick: "presentational-bricks.card-item",
       description: {
         title: "单个扩展区样式展示",
-        message: "辅助信息跟操作同时存在时，操作置于右侧",
+        message:
+          "展示统计数，如收藏/关注次数，下载次数。统计类信息置于扩展区左侧，其他附加信息如关注人头像等置于右侧",
       },
       properties: {
         disabled: true,
@@ -366,6 +359,9 @@ export const CardItemStory: Story = {
               brick: "span",
               properties: {
                 textContent: "7",
+                style: {
+                  paddingTop: "2px",
+                },
               },
             },
             {
@@ -381,6 +377,9 @@ export const CardItemStory: Story = {
               brick: "span",
               properties: {
                 textContent: "516",
+                style: {
+                  paddingTop: "2px",
+                },
               },
             },
           ],
@@ -392,6 +391,8 @@ export const CardItemStory: Story = {
               brick: "presentational-bricks.brick-user",
               properties: {
                 size: "small",
+                hideUsername: true,
+                userNameOrId: "name",
                 iconUrl:
                   "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
               },
@@ -404,8 +405,7 @@ export const CardItemStory: Story = {
       brick: "presentational-bricks.card-item",
       description: {
         title: "单个扩展区样式展示",
-        message:
-          "扩展区收纳操作场景，操作应是针对卡片详情内容的快捷功能性操作，对于卡片的操作我们是放置在卡片右上角 … 收纳。",
+        message: "辅助信息跟操作同时存在时，操作置于右",
       },
       properties: {
         disabled: true,
@@ -433,16 +433,27 @@ export const CardItemStory: Story = {
           type: "bricks",
           bricks: [
             {
-              brick: "presentational-bricks.brick-tag",
+              brick: "presentational-bricks.brick-user",
               properties: {
-                closable: "false",
-                showCard: "false",
-                tagList: [
-                  { key: "1", label: "IT资源管理" },
-                  { key: "2", label: "资源套餐" },
-                  { key: "3", label: "存储设备" },
-                ],
+                size: "small",
+                userNameOrId: "张元",
+                iconUrl:
+                  "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
               },
+            },
+            {
+              brick: "span",
+              properties: {
+                textContent: "更新于2小时前",
+              },
+            },
+          ],
+        },
+        bottomRightOperate: {
+          type: "bricks",
+          bricks: [
+            {
+              brick: "forms.general-switch",
             },
           ],
         },
@@ -481,15 +492,27 @@ export const CardItemStory: Story = {
           type: "bricks",
           bricks: [
             {
-              brick: "presentational-bricks.brick-tag",
+              brick: "presentational-bricks.basic-icon",
               properties: {
-                closable: "false",
-                showCard: "false",
-                tagList: [
-                  { key: "1", label: "IT资源管理" },
-                  { key: "2", label: "资源套餐" },
-                  { key: "3", label: "存储设备" },
-                ],
+                size: "20px",
+                icon: {
+                  lib: "easyops",
+                  category: "default",
+                  icon: "card-diff",
+                  color: "rgba(157, 168, 184, 1)",
+                },
+              },
+            },
+            {
+              brick: "presentational-bricks.basic-icon",
+              properties: {
+                size: "20px",
+                icon: {
+                  lib: "easyops",
+                  category: "default",
+                  icon: "card-task-delivery",
+                  color: "rgba(157, 168, 184, 1)",
+                },
               },
             },
           ],
@@ -544,8 +567,8 @@ export const CardItemStory: Story = {
                 {
                   brick: "presentational-bricks.brick-tag",
                   properties: {
-                    closable: "false",
-                    showCard: "false",
+                    closable: false,
+                    showCard: false,
                     tagList: [
                       { key: "1", label: "IT资源管理" },
                       { key: "2", label: "资源套餐" },
