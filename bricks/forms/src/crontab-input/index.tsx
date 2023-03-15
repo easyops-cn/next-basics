@@ -24,11 +24,14 @@ import { CrontabInput, CrontabType } from "./CrontabInput";
  * @memo
  */
 export class CrontabInputElement extends FormItemElement {
+  /* =========================== Group: basic =========================== */
+
   /**
    * @kind string
    * @required true
    * @default -
    * @description 定时器字段名
+   * @group basic
    */
   @property()
   declare name: string;
@@ -36,36 +39,48 @@ export class CrontabInputElement extends FormItemElement {
   /**
    * @kind string
    * @required false
-   * @default -
-   * @description 定时器字段说明
-   */
-  @property({ attribute: false }) declare label: string;
-
-  /**
-   * @kind string
-   * @required false
    * @default * * * * *(每分钟)
+   * @group basic
    * @description 定时器时间，格式为以空格为分隔的五位字符, 按顺序分别代表分钟，小时，天，月，星期。
    */
   @property()
   value: string;
 
+  /* =========================== Group: formLabel =========================== */
+
   /**
-   * @kind CrontabType[]
+   * @kind string
    * @required false
-   * @default []
-   * @description 需要disabled的的输入框 "minute" | "hour" | "date" | "month" | "dow"
+   * @default -
+   * @group formLabel
+   * @description 定时器字段说明
    */
-  @property({ attribute: false })
-  disabledSet: CrontabType[] = [];
+  @property({ attribute: false }) declare label: string;
+
+  /* =========================== Group: formValidation =========================== */
 
   /**
    * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
+   * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
+
+  /* =========================== Group: ui =========================== */
+
+  /**
+   * @kind CrontabType[]
+   * @required false
+   * @default []
+   * @group ui
+   * @description 需要disabled的的输入框 "minute" | "hour" | "date" | "month" | "dow"
+   */
+  @property({ attribute: false })
+  disabledSet: CrontabType[] = [];
+
+  /* =========================== events =========================== */
 
   connectedCallback(): void {
     // istanbul ignore else
