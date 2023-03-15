@@ -32,23 +32,16 @@ import { FormItemElement } from "@next-libs/forms";
  * 该构件是下拉框对 cmdb 列表的一个简单封装，只适用于于简单的数据选择和搜索，如果涉及到复杂的数据选择，可能需要有高级的过滤（比如主机数据，需要按 IP，按主机名，按状态等过滤），则建议用：[CMDB 实例输入表单项 ](developers/brick-book/brick/cmdb-instances.cmdb-instances-input-form)
  */
 export class CmdbInstanceSelectElement extends FormItemElement {
+  /* =========================== Group: basic =========================== */
+
   /**
    * @kind string
    * @required true
    * @default -
    * @description 下拉框字段名
-   * @group basicFormItem
-   */
-  @property({ attribute: false }) declare name: string;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 下拉框字段说明
    * @group basic
    */
-  @property({ attribute: false }) declare label: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @kind string
@@ -61,6 +54,15 @@ export class CmdbInstanceSelectElement extends FormItemElement {
 
   /**
    * @kind string
+   * @required false
+   * @default -
+   * @description 下拉框占位说明
+   * @group basic
+   */
+  @property({ attribute: false }) declare placeholder: string;
+
+  /**
+   * @kind string
    * @required true
    * @default -
    * @description 模型 id
@@ -69,12 +71,165 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   @property()
   objectId: string;
 
+  /* =========================== Group: formLabel =========================== */
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 下拉框字段说明
+   * @group formLabel
+   */
+  @property({ attribute: false }) declare label: string;
+
+  /* =========================== Group: formValidation =========================== */
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否必填项
+   * @group formValidation
+   */
+  @property({ type: Boolean }) declare required: boolean;
+
+  /**
+   * @kind `Record<string,string>`
+   * @required false
+   * @default -
+   * @description 校验文本信息
+   * @editor message
+   * @group formValidation
+   */
+  @property({ attribute: false }) declare message: Record<string, string>;
+
+  /* =========================== Group: ui =========================== */
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否禁用
+   * @group ui
+   */
+  @property({ type: Boolean })
+  disabled: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 支持清除选项
+   * @group ui
+   */
+  @property({
+    type: Boolean,
+  })
+  allowClear: boolean;
+
+  /**
+   * @kind `multiple | tags`
+   * @required false
+   * @default -
+   * @description 多选模式，不是多选不需要填写
+   * @editor radio
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "label": "None",
+   *       "value": ""
+   *     },
+   *     {
+   *       "label": "Multiple",
+   *       "value": "multiple"
+   *     },
+   *     {
+   *       "label": "Tags",
+   *       "value": "tags"
+   *     }
+   *   ]
+   * }
+   * @group ui
+   */
+  @property()
+  mode: string;
+
+  /**
+   * @kind `default | parent`
+   * @required -
+   * @default default
+   * @description 下拉选项的渲染方式，`default` 为默认(表示渲染在 body 当中)，`parent` 表示渲染在该元素的父节点上，当发现下拉菜单跟随页面滚动，需要设置该属性为 `parent`
+   * @editor radio
+   * @editorProps {
+   *   "optionType": "button",
+   *   "options": [
+   *     {
+   *       "label": "Default",
+   *       "value": "default"
+   *     },
+   *     {
+   *       "label": "Parent",
+   *       "value": "parent"
+   *     }
+   *   ]
+   * }
+   * @group ui
+   */
+  @property()
+  popoverPositionType: CmdbInstanceSelectProps["popoverPositionType"];
+
+  /**
+   * @default false
+   * @description 下拉列表的最后一行是否显示提示：仅显示前**项，更多结果请搜索
+   * @group ui
+   */
+  @property({ type: Boolean })
+  showSearchTip?: boolean;
+
+  /**
+   * @default false
+   * @required false
+   * @description 下拉框中是否启用tooltip显示label全称,label过长时可使用
+   * @group ui
+   */
+  @property({ type: Boolean })
+  showTooltip?: boolean;
+
+  /* =========================== Group: style =========================== */
+
+  /**
+   * @kind `object`
+   * @required false
+   * @default -
+   * @description 输入框样式
+   * @group style
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle: React.CSSProperties = {};
+
+  /* =========================== Group: advanced =========================== */
+
+  /**
+   * @kind number
+   * @required false
+   * @default 30
+   * @description 配置搜索接口的pageSize，也是下拉框显示的条目数，默认30条
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  pageSize = 30;
+
   /**
    * @kind `object | array`
    * @required false
    * @default -
    * @description 下拉框选项的过滤条件， 参数同 InstanceApi.postSearch 中的 query， 其中内置了关键字搜索的过滤条件，再根据用户输入合并 query 最终格式为 `$and: [internalQuery， userQuery]`
-   * @group basic
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -86,7 +241,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default {label: name , value: instanceId}
    * @description 自定义 select 下拉选项的 label 和 value 字段， 默认 label 显示为模型的 name 值，value 为 instanceId
-   * @group basic
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -97,81 +252,18 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @kind string
    * @required false
    * @default
-   * @description 可自定义`label` 显示的模板
-   * @group basic
+   * @description 可自定义`label`显示的模板
+   * @group advanced
    */
   @property({ attribute: false })
   labelTemplate: string;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 支持清除选项
-   * @group basic
-   */
-  @property({
-    type: Boolean,
-  })
-  allowClear: boolean;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 下拉框占位说明
-   * @group basic
-   */
-  @property({ attribute: false }) declare placeholder: string;
-
-  /**
-   * @kind `object`
-   * @required false
-   * @default -
-   * @description 输入框样式
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  inputBoxStyle: React.CSSProperties = {};
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否必填项
-   * @group basicFormItem
-   */
-  @property({ type: Boolean }) declare required: boolean;
-
-  /**
-   * @kind `Record<string,string>`
-   * @required false
-   * @default -
-   * @description 校验文本信息
-   * @group basicFormItem
-   */
-  @property({ attribute: false }) declare message: Record<string, string>;
-
-  /**
-   * @kind `multiple | tags`
-   * @required false
-   * @default -
-   * @description 多选模式，不是多选不需要填写
-   * @group basicFormItem
-   */
-  @property()
-  mode: string;
-
-  firstRender = true;
 
   /**
    * @kind number
    * @required false
    * @default 0
    * @description 输入多少个字符才触发搜索动作， 默认 0 表示在点击下拉框时触发一次，后面每次输入都会进行搜索操作。
-   * @group advancedFormItem
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -183,7 +275,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 配置额外的字段进行搜索，默认的是 label，若配置为 ["memo"]，则会基于 memo 和 label 两个字段进行联合搜索
-   * @group advancedFormItem
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -195,7 +287,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 配置接口需要返回的额外字段
-   * @group advancedFormItem
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -203,59 +295,20 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   extraFields: string[];
 
   /**
-   * @kind number
-   * @required false
-   * @default 30
-   * @description 配置搜索接口的pageSize，也是下拉框显示的条目数，默认30条
-   * @group basicFormItem
-   */
-  @property({
-    attribute: false,
-  })
-  pageSize = 30;
-
-  /**
-   * @kind `default | parent`
-   * @required -
-   * @default default
-   * @description 下拉选项的渲染方式，`default` 为默认(表示渲染在 body 当中)，`parent` 表示渲染在该元素的父节点上，当发现下拉菜单跟随页面滚动，需要设置该属性为 `parent`
-   * @group ui
-   */
-  @property()
-  popoverPositionType: CmdbInstanceSelectProps["popoverPositionType"];
-
-  /**
    * @kind boolean
    * @required false
    * @default true
    * @description 控制下拉框中的label显示一个或者多个，当定义`labelTemplate`时，不起作用
-   * @group advancedFormItem
+   * @group advanced
    */
   @property({ attribute: false })
   isMultiLabel = true;
-  /**
-   * @default false
-   * @description 下拉列表的最后一行是否显示提示：仅显示前**项，更多结果请搜索
-   * @group ui
-   */
-  @property({ type: Boolean })
-  showSearchTip?: boolean;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 是否禁用
-   * @group basicFormItem
-   */
-  @property({ type: Boolean })
-  disabled: boolean;
 
   /**
    * @kind Array<"read" | "update" | "operate">
    * @default
    * @description 按照权限过滤实例
-   * @group advancedFormItem
+   * @group advanced
    */
   @property({ attribute: false })
   permission?: Array<"read" | "update" | "operate">;
@@ -264,7 +317,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @kind boolean
    * @default
    * @description 是否忽略不存在字段
-   * @group advancedFormItem
+   * @group advanced
    */
   @property({ attribute: false })
   ignoreMissingFieldError?: boolean;
@@ -273,19 +326,14 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @default boolean
    * @required
    * @description 实例通过showKey自定义展示
-   * @group advancedFormItem
+   * @group advanced
    */
   @property({ attribute: false })
   showKeyField?: boolean;
 
-  /**
-   * @default false
-   * @required false
-   * @description 下拉框中是否启用tooltip显示label全称,label过长时可使用
-   * @group basicFormItem
-   */
-  @property({ type: Boolean })
-  showTooltip?: boolean;
+  /* =========================== events =========================== */
+
+  firstRender = true;
 
   updateObjectIdManual(objectId: string) {
     this.objectId = objectId;
