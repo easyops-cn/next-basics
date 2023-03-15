@@ -541,6 +541,20 @@ export class BrickTableElement extends UpdatingElement {
   };
 
   /**
+   * @kind {useBrick:UseBrickConf}
+   * @required false
+   * @default -
+   * @description 自定义空状态的构件
+   * @group expand
+   */
+  @property({
+    attribute: false,
+  })
+  emptyUseBrick: {
+    useBrick?: UseBrickConf;
+  };
+
+  /**
    * @kind { collapsedIcon: MenuIcon,expandedIcon: MenuIcon}
    * @required false
    * @default {collapsedIcon:{lib:'antd',icon:'down',theme:'outlined'},expandedIcon:{lib:'antd',icon:'right',theme:'outlined'}}
@@ -1639,6 +1653,7 @@ export class BrickTableElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper wrapperConfig={this.wrapperConfig}>
           <BrickTable
+            emptyUseBrick={this.emptyUseBrick}
             dataSource={this._dataSource}
             columns={this.getModifyColumns()}
             configProps={this._finalConfigProps}
