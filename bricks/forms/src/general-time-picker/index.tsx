@@ -30,22 +30,17 @@ import { TimePickerProps } from "antd/lib/time-picker";
  *| getFormElement | -      | 获得输入框所属表单元素 |
  */
 export class GeneralTimePickerElement extends FormItemElement {
+  /* =========================== Group: basic =========================== */
+
   /**
-   * @group basicFormItem
+   * @group basic
    * @required true
    * @description 时间选择框字段名
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @group basicFormItem
-   * @required false
-   * @description 时间选择框字段说明
-   */
-  @property({ attribute: false }) declare label: string;
-
-  /**
-   * @group basicFormItem
+   * @group basic
    * @required false
    * @description 时间选择框框初始值
    */
@@ -53,33 +48,49 @@ export class GeneralTimePickerElement extends FormItemElement {
   value: string;
 
   /**
-   * @group basicFormItem
+   * @group basic
    * @required false
    * @description 时间选择框占位说明
    */
   @property({ attribute: false }) declare placeholder: string;
 
+  /* =========================== Group: formLabel =========================== */
+
   /**
-   * @group basicFormItem
+   * @group formLabel
+   * @required false
+   * @description 时间选择框字段说明
+   */
+  @property({ attribute: false }) declare label: string;
+
+  /* =========================== Group: formValidation =========================== */
+
+  /**
+   * @group formValidation
    * @required false
    * @description 是否必填项
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
-   * @group basicFormItem
+   * @group formValidation
    * @required false
+   * @editor message
    * @description 校验文本信息
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
+  /* =========================== Group: advanced =========================== */
+
   /**
-   * @group advancedFormItem
+   * @group advanced
    * @required false
    * @description 透传 antd timePicker 属性 [timePickerProps](https://3x.ant.design/components/time-picker-cn/)
    */
   @property({ attribute: false })
   configProps: Partial<TimePickerProps>;
+
+  /* =========================== events =========================== */
 
   /**
    * @detail `string`
