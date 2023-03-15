@@ -4,7 +4,7 @@ import { ListEditor } from "./components/ListEditor/ListEditor";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import { LegacyDynamicFormItemV2 } from "../../../forms/src/dynamic-form-item-v2/DynamicFormItemV2";
 import { ConditionalFormat } from "../../../form-builder/src/conditional-format/ConditionalFormat";
-
+import { compact } from "lodash";
 interface visualFormRulesSettingProps extends FormItemWrapperProps {
   value?: Record<string, any>[];
   formChildren: Record<string, any>[];
@@ -70,16 +70,16 @@ export function VisualFormRulesSetting(
   };
 
   useEffect(() => {
-    setTargetOptions(
-      (formChildren ?? []).map((item) => {
-        const itemName = JSON.parse(item.properties).name;
-        const itemType = (
-          FormItemType.find((type) => item.brick.includes(type)) ?? "OTHER"
-        ).toUpperCase();
-        const optionContent = `${itemType}(${itemName})`;
-        return { value: optionContent, label: optionContent };
-      })
-    );
+    const origin = (formChildren ?? []).filter((item) => item?.properties);
+    const res = origin.map((item) => {
+      const itemName = JSON.parse(item.properties)?.name;
+      const itemType = (
+        FormItemType.find((type) => item?.brick?.includes(type)) ?? "OTHER"
+      ).toUpperCase();
+      const optionContent = `${itemType}(${itemName})`;
+      return itemName ? { value: optionContent, label: optionContent } : null;
+    });
+    setTargetOptions(compact(res));
   }, [formChildren]);
 
   return (
