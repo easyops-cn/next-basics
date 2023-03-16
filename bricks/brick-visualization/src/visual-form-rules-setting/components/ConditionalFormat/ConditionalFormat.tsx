@@ -21,7 +21,9 @@ interface ConditionalFormatProps extends FormItemWrapperProps {
 interface Condition {
   origin: string;
   operation: string;
-  value: string;
+  comparisonValType: string;
+  value?: string;
+  fieldValue?: string;
   op: string;
   conditionId?: string;
 }
@@ -44,6 +46,17 @@ const opOptions = [
   {
     label: "或",
     value: "or",
+  },
+];
+
+const comparisonValType = [
+  {
+    label: "固定值",
+    value: "fixed",
+  },
+  {
+    label: "字段值",
+    value: "field",
   },
 ];
 
@@ -109,6 +122,7 @@ export function ConditionalFormat(
       origin,
       operation: operationOptions[0].value,
       value: "",
+      comparisonValType: comparisonValType[0].value,
       op: opOptions[0].value,
       conditionId: uniqueId("condition_"),
     };
@@ -149,6 +163,17 @@ export function ConditionalFormat(
     updateGroupConditions();
   };
 
+  const handleComparisonValTypeChange = (
+    value: string,
+    groupNum: number,
+    conditionNum: number
+  ) => {
+    groupConditions.groups[groupNum].conditions[
+      conditionNum
+    ].comparisonValType = value;
+    updateGroupConditions();
+  };
+
   const handleConditionOpChange = (value: string, groupNum: number) => {
     groupConditions.groups[groupNum].conditions.forEach((item) => {
       item.op = value;
@@ -166,6 +191,16 @@ export function ConditionalFormat(
     updateGroupConditions();
   };
 
+  const handleConditionFieldValueChange = (
+    fieldValue: string,
+    groupNum: number,
+    conditionNum: number
+  ) => {
+    groupConditions.groups[groupNum].conditions[conditionNum].fieldValue =
+      fieldValue;
+    updateGroupConditions();
+  };
+
   const deleteCondition = (groupNum: number, conditionNum: number) => {
     groupConditions.groups[groupNum].conditions.splice(conditionNum, 1);
     updateGroupConditions();
@@ -179,37 +214,73 @@ export function ConditionalFormat(
             return (
               <>
                 <div key={condition.conditionId} className={styles.group}>
-                  {index === 0 && (
-                    <span className={styles.groupSpanWhen}>当</span>
-                  )}
-                  {index !== 0 && (
-                    <span className={styles.groupSpanOrAnd}>
+                  <div className={styles.groupTop}>
+                    <div className={styles.groupTopLeft}>
+                      {index === 0 && (
+                        <span className={styles.groupSpanWhen}>当</span>
+                      )}
+                      {index !== 0 && (
+                        <span className={styles.groupSpanOrAnd}>
+                          <Select
+                            value={condition.op}
+                            onChange={(value) =>
+                              handleConditionOpChange(value, i)
+                            }
+                            options={opOptions}
+                            style={{ width: "60px" }}
+                            bordered={false}
+                          />
+                        </span>
+                      )}
+                      <span className={styles.groupOrigin}>
+                        {condition.origin}
+                      </span>
                       <Select
-                        value={condition.op}
-                        onChange={(value) => handleConditionOpChange(value, i)}
-                        options={opOptions}
-                        style={{ width: "60px" }}
+                        value={condition.operation}
+                        onChange={(value) =>
+                          handleConditionChange(value, i, index)
+                        }
+                        options={operationOptions}
                         bordered={false}
+                        style={{ width: "auto" }}
                       />
-                    </span>
-                  )}
-                  <span className={styles.groupOrigin}>{condition.origin}</span>
-                  <Select
-                    value={condition.operation}
-                    onChange={(value) => handleConditionChange(value, i, index)}
-                    options={operationOptions}
-                    style={{ width: "120px" }}
-                    bordered={false}
-                  />
-                  <Input
-                    style={{ width: "160px" }}
-                    value={condition.value}
-                    onChange={(e) => handleConditionValueChange(e, i, index)}
-                  />
-                  <DeleteOutlined
-                    className={styles.conditionDelete}
-                    onClick={() => deleteCondition(i, index)}
-                  />
+                    </div>
+                    <div className={styles.groupTopRight}>
+                      <DeleteOutlined
+                        className={styles.conditionDelete}
+                        onClick={() => deleteCondition(i, index)}
+                      />
+                    </div>
+                  </div>
+                  <div className={styles.groupBottom}>
+                    <Select
+                      value={condition.comparisonValType}
+                      onChange={(value) =>
+                        handleComparisonValTypeChange(value, i, index)
+                      }
+                      options={comparisonValType}
+                      style={{ width: "120px", margin: "0 12px 0 60px" }}
+                    />
+                    {condition.comparisonValType === "fixed" && (
+                      <Input
+                        style={{ width: "260px" }}
+                        value={condition.value}
+                        onChange={(e) =>
+                          handleConditionValueChange(e, i, index)
+                        }
+                      />
+                    )}
+                    {condition.comparisonValType === "field" && (
+                      <Select
+                        style={{ width: "260px" }}
+                        value={condition.fieldValue}
+                        onChange={(e) =>
+                          handleConditionFieldValueChange(e, i, index)
+                        }
+                        options={originOptions}
+                      />
+                    )}
+                  </div>
                 </div>
               </>
             );

@@ -40,13 +40,13 @@ export function VisualFormRulesSetting(
         name: "actionType",
         props: { options: actionTypeOptions },
         type: "select",
-        flex: 1.5,
+        flex: 1,
       },
       {
         name: "target",
         props: { options: targetOptions },
         type: "select",
-        flex: 2.5,
+        flex: 2,
       },
     ],
     [targetOptions]
@@ -55,18 +55,21 @@ export function VisualFormRulesSetting(
   const renderFormItem = (item: FormItemProps): React.ReactElement => {
     return (
       <>
-        <Form.Item label="Title" name="title">
+        <Form.Item label="规则名称" name="title">
           <Input />
         </Form.Item>
-        <Form.Item label="Conditions" name="conditions">
+        <Form.Item label="当满足以下条件时" name="conditions">
           <ConditionalFormat
             originOptions={targetOptions}
             operationOptions={operationOptions}
             onChange={() => null}
           />
         </Form.Item>
-        <Form.Item label="Actions" name="actions">
-          <LegacyDynamicFormItemV2 columns={actionsColumns} />
+        <Form.Item label="执行动作" name="actions">
+          <LegacyDynamicFormItemV2
+            columns={actionsColumns}
+            dynamicFormStyle={{ backgroundColor: "transparent", padding: 0 }}
+          />
         </Form.Item>
       </>
     );
