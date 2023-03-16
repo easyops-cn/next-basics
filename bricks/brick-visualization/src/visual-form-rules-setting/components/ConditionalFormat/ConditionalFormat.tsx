@@ -21,7 +21,7 @@ interface ConditionalFormatProps extends FormItemWrapperProps {
 interface Condition {
   origin: string;
   operation: string;
-  comparisonValType: string;
+  compareValType: string;
   value?: string;
   fieldValue?: string;
   op: string;
@@ -49,7 +49,7 @@ const opOptions = [
   },
 ];
 
-const comparisonValType = [
+const compareValTypeOptions = [
   {
     label: "固定值",
     value: "fixed",
@@ -122,7 +122,7 @@ export function ConditionalFormat(
       origin,
       operation: operationOptions[0].value,
       value: "",
-      comparisonValType: comparisonValType[0].value,
+      compareValType: compareValTypeOptions[0].value,
       op: opOptions[0].value,
       conditionId: uniqueId("condition_"),
     };
@@ -163,14 +163,13 @@ export function ConditionalFormat(
     updateGroupConditions();
   };
 
-  const handleComparisonValTypeChange = (
+  const handleCompareValTypeChange = (
     value: string,
     groupNum: number,
     conditionNum: number
   ) => {
-    groupConditions.groups[groupNum].conditions[
-      conditionNum
-    ].comparisonValType = value;
+    groupConditions.groups[groupNum].conditions[conditionNum].compareValType =
+      value;
     updateGroupConditions();
   };
 
@@ -254,14 +253,14 @@ export function ConditionalFormat(
                   </div>
                   <div className={styles.groupBottom}>
                     <Select
-                      value={condition.comparisonValType}
+                      value={condition.compareValType}
                       onChange={(value) =>
-                        handleComparisonValTypeChange(value, i, index)
+                        handleCompareValTypeChange(value, i, index)
                       }
-                      options={comparisonValType}
+                      options={compareValTypeOptions}
                       style={{ width: "120px", margin: "0 12px 0 60px" }}
                     />
-                    {condition.comparisonValType === "fixed" && (
+                    {condition.compareValType === "fixed" && (
                       <Input
                         style={{ width: "260px" }}
                         value={condition.value}
@@ -270,7 +269,7 @@ export function ConditionalFormat(
                         }
                       />
                     )}
-                    {condition.comparisonValType === "field" && (
+                    {condition.compareValType === "field" && (
                       <Select
                         style={{ width: "260px" }}
                         value={condition.fieldValue}
