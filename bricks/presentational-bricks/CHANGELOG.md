@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.287.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.287.2...@next-bricks/presentational-bricks@1.287.3) (2023-03-16)
+
+
+### Bug Fixes
+
+* 自定义空数据的构件 refs APPCONFIG-987 ([a63e437](https://github.com/easyops-cn/next-basics/commit/a63e4378f7f93d25d7884d744a4d395ead2b71a5))
+
+
+
+
+
 ## [1.287.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.287.1...@next-bricks/presentational-bricks@1.287.2) (2023-03-15)
 
 
