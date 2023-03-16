@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.265.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.265.10...@next-bricks/forms@1.265.11) (2023-03-16)
+
+
+### Bug Fixes
+
+* checkbox圆角调整 ([e07a3b8](https://github.com/easyops-cn/next-basics/commit/e07a3b8637657d800fa552ad9016accfb2f7bdb6))
+
+
+
+
+
 ## [1.265.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.265.9...@next-bricks/forms@1.265.10) (2023-03-15)
 
 **Note:** Version bump only for package @next-bricks/forms
