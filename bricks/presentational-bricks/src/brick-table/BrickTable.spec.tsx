@@ -2,7 +2,8 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import { BrickTable } from "./BrickTable";
 import { CustomColumn } from "./index";
-import { Table } from "antd";
+import { Table, ConfigProvider } from "antd";
+import { EasyopsEmpty } from "@next-core/brick-kit";
 
 jest.mock("@next-core/brick-kit", () => {
   return {
@@ -76,6 +77,42 @@ describe("BrickTable", () => {
     ],
     showCard: true,
   };
+  it("should work with empty status", () => {
+    const wrapper = shallow(
+      <BrickTable
+        dataSource={[]}
+        emptyUseBrick={{
+          useBrick: {
+            brick: "presentational-bricks.general-tooltip",
+            properties: {
+              icon: {
+                lib: "fa",
+                icon: "info-circle",
+                color: "var(--color-secondary-text)",
+              },
+              content: "这是一个 tooltips",
+              text: "Address",
+            },
+          },
+        }}
+        columns={[
+          {
+            title: "Name",
+            dataIndex: "name",
+            key: "name",
+          },
+          {
+            title: "Age",
+            dataIndex: "age",
+            key: "age",
+          },
+        ]}
+        showCard={true}
+        onChange={jest.fn}
+      />
+    );
+    expect(wrapper.text()).toEqual("<ConfigProvider />");
+  });
   it("should work", () => {
     const wrapper = mount(
       <BrickTable

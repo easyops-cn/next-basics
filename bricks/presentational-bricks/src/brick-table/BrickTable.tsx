@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import Icon from "@ant-design/icons";
-import { Table, Card } from "antd";
+import { Table, Card, ConfigProvider } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TableProps } from "antd/lib/table";
 import { BrickAsComponent } from "@next-core/brick-kit";
@@ -15,6 +15,8 @@ import update from "immutability-helper";
 import { CustomColumn, CustomColumnComponent } from "./index";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
+import { EasyopsEmpty } from "@next-core/brick-kit";
+
 const type = "DraggableBodyRow";
 
 const downMenuIcon: MenuIcon = {
@@ -41,6 +43,9 @@ export interface BrickTableProps {
   showCard?: boolean;
   // 展开行相关属性
   expandedRowBrick?: {
+    useBrick?: UseBrickConf;
+  };
+  emptyUseBrick?: {
     useBrick?: UseBrickConf;
   };
   expandIcon?: {
@@ -554,6 +559,21 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
       {...configProps}
     />
   );
+
+  const renderEmpty = () => {
+    return (
+      <>
+        <EasyopsEmpty></EasyopsEmpty>
+        <BrickAsComponent useBrick={props.emptyUseBrick.useBrick} />
+      </>
+    );
+  };
+
+  if (!data?.length && props.emptyUseBrick) {
+    return (
+      <ConfigProvider renderEmpty={() => renderEmpty()}>{table}</ConfigProvider>
+    );
+  }
 
   if (props.tableDraggable) {
     table = <DndProvider backend={HTML5Backend}>{table}</DndProvider>;
