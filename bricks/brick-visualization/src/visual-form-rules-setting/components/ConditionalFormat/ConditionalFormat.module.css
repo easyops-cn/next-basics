@@ -1,0 +1,62 @@
+.conditionalWrap {
+  display: flex;
+}
+.conditionalItem {
+  margin-right: 24px;
+  padding-left: 14px;
+  cursor: pointer;
+  color: gray;
+}
+.group {
+  margin-bottom: 12px;
+}
+.groupSpanWhen {
+  width: 60px;
+  display: inline-block;
+  padding-left: 14px;
+  color: gray;
+}
+.groupSpanOrAnd {
+  width: 60px;
+  display: inline-block;
+  text-align: center;
+  :global(.ant-select-selection-item) {
+    color: gray;
+  }
+}
+.groupOrigin {
+  margin: 0 12px;
+}
+.customHr {
+  width: auto;
+  height: 1px;
+  background-color: #666;
+  position: relative;
+  margin: 24px 0 24px 14px;
+}
+.groupSelect {
+  width: 60px;
+  height: 100px;
+  position: absolute;
+  left: calc(50% - 30px);
+  top: -18px;
+}
+.groupClose {
+  position: absolute;
+  right: 0;
+  top: -15px;
+  cursor: pointer;
+  display: none;
+  width: 20px;
+  text-align: center;
+}
+.customHr:hover .groupClose {
+  display: block;
+}
+.conditionDelete {
+  margin-left: 8px;
+}
+.conditionDelete:hover {
+  color: red;
+  cursor: pointer;
+}

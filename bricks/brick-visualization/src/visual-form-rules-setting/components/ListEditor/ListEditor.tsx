@@ -170,7 +170,7 @@ export function ListEditor({
       };
       return (
         <Form
-          layout="horizontal"
+          layout="vertical"
           labelAlign="left"
           labelCol={{
             style: {

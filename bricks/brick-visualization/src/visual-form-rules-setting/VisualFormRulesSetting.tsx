@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { ListEditor } from "./components/ListEditor/ListEditor";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import { LegacyDynamicFormItemV2 } from "../../../forms/src/dynamic-form-item-v2/DynamicFormItemV2";
-import { ConditionalFormat } from "../../../form-builder/src/conditional-format/ConditionalFormat";
+import { ConditionalFormat } from "./components/ConditionalFormat/ConditionalFormat";
 import { compact } from "lodash";
 interface visualFormRulesSettingProps extends FormItemWrapperProps {
   value?: Record<string, any>[];
@@ -40,8 +40,14 @@ export function VisualFormRulesSetting(
         name: "actionType",
         props: { options: actionTypeOptions },
         type: "select",
+        flex: 1.5,
       },
-      { name: "target", props: { options: targetOptions }, type: "select" },
+      {
+        name: "target",
+        props: { options: targetOptions },
+        type: "select",
+        flex: 2.5,
+      },
     ],
     [targetOptions]
   );
@@ -60,10 +66,7 @@ export function VisualFormRulesSetting(
           />
         </Form.Item>
         <Form.Item label="Actions" name="actions">
-          <LegacyDynamicFormItemV2
-            columns={actionsColumns}
-            dynamicFormStyle={{ width: "360px" }}
-          />
+          <LegacyDynamicFormItemV2 columns={actionsColumns} />
         </Form.Item>
       </>
     );
