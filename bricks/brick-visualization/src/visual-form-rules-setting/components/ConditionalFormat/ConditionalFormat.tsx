@@ -253,14 +253,14 @@ export function ConditionalFormat(
                   </div>
                   <div className={styles.groupBottom}>
                     <Select
-                      value={condition.compareValType}
+                      value={condition.compareValType ?? "fixed"}
                       onChange={(value) =>
                         handleCompareValTypeChange(value, i, index)
                       }
                       options={compareValTypeOptions}
                       style={{ width: "120px", margin: "0 12px 0 60px" }}
                     />
-                    {condition.compareValType === "fixed" && (
+                    {condition.compareValType !== "field" && (
                       <Input
                         style={{ width: "260px" }}
                         value={condition.value}
