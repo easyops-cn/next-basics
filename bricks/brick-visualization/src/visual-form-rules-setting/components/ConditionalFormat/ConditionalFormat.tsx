@@ -283,3 +283,11 @@ export function ConditionalFormat(
     </div>
   );
 }
+
+export function ConditionalFormatAdapter(props: ConditionalFormatProps) {
+  return (
+    <FormItemWrapper {...props}>
+      <ConditionalFormat {...props} />
+    </FormItemWrapper>
+  );
+}
