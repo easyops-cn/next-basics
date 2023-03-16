@@ -36,6 +36,7 @@ const props = {
             operation: "contain",
             origin: "表单项1",
             value: "aaa",
+            comparisonValType: "fixed",
           },
           {
             conditionId: "condition_40",
@@ -43,6 +44,7 @@ const props = {
             operation: "contain",
             origin: "表单项1",
             value: "aaa",
+            comparisonValType: "fixed",
           },
         ],
         groupId: "group_38",
@@ -54,6 +56,7 @@ const props = {
             operation: "equal",
             value: "bbba",
             op: "and",
+            comparisonValType: "fixed",
             conditionId: "condition_41",
           },
         ],
