@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.265.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.265.11...@next-bricks/forms@1.265.12) (2023-03-17)
+
+
+### Bug Fixes
+
+* **cmdb:** label中显示多个且第一个不存在时用"-"代替 ([0dc10af](https://github.com/easyops-cn/next-basics/commit/0dc10af870aa8007f5334415d485edb009cb3735))
+
+
+
+
+
 ## [1.265.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.265.10...@next-bricks/forms@1.265.11) (2023-03-16)
 
 
