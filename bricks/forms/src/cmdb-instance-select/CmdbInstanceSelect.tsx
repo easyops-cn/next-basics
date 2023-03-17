@@ -215,7 +215,7 @@ export function CmdbInstanceSelectItem(
             : subFirstKey ?? "";
         }
         return resKey && props.isMultiLabel
-          ? `${firstKey}(${resKey})`
+          ? `${firstKey ?? " - "}(${resKey})`
           : firstKey ?? "";
       } else {
         return label;
