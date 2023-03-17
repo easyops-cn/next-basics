@@ -20,29 +20,40 @@ import { InformMethodsForm } from "./InformMethodsForm";
  * @memo
  */
 export class InformMethodsFormElement extends FormItemElement {
+  /* =========================== Group: basic =========================== */
+
   /**
    * @kind string
    * @required true
    * @default -
    * @description 表单项字段名
+   * @group basic
    */
   @property({ attribute: false }) declare name: string;
+
+  /* =========================== Group: formLabel =========================== */
 
   /**
    * @kind string
    * @required false
    * @default -
+   * @group formLabel
    * @description 表单项字段说明
    */
   @property({ attribute: false }) declare label: string;
+
+  /* =========================== Group: formValidation =========================== */
 
   /**
    * @kind boolean
    * @required false
    * @default -
+   * @group formValidation
    * @description 是否必填项
    */
   @property({ type: Boolean }) declare required: boolean;
+
+  /* =========================== events =========================== */
 
   connectedCallback(): void {
     this.style.display = "block";

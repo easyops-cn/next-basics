@@ -28,35 +28,22 @@ import { FormItemElement } from "@next-libs/forms";
  * @memo
  */
 export class CmdbInstanceSelectPanelElement extends FormItemElement {
+  /* =========================== Group: basic =========================== */
+
   /**
    * @kind string
    * @required true
    * @default -
+   * @group basic
    * @description 下拉框字段名
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 下拉框字段说明
-   */
-  @property({ attribute: false }) declare label: string;
-
-  /**
-   * @kind string
-   * @required true
-   * @default -
-   * @description 模型 ID
-   */
-  @property({ attribute: false })
-  objectId: string;
-
-  /**
    * @kind string[]
    * @required false
    * @default []
+   * @group basic
    * @description 默认选择实例的 ID 列表
    */
   @property({ attribute: false })
@@ -64,69 +51,100 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement {
 
   /**
    * @kind string
+   * @required true
+   * @default -
+   * @group basic
+   * @description 模型 ID
+   */
+  @property({ attribute: false })
+  objectId: string;
+
+  /**
+   * @kind CmdbModels.ModelCmdbObject
+   * @required true
+   * @default -
+   * @group basic
+   * @description 模型列表
+   */
+  @property({ attribute: false })
+  objectList: Partial<CmdbModels.ModelCmdbObject>[];
+
+  /* =========================== Group: formLabel =========================== */
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @group formLabel
+   * @description 下拉框字段说明
+   */
+  @property({ attribute: false }) declare label: string;
+
+  /* =========================== Group: ui =========================== */
+
+  /**
+   * @kind string
    * @required false
    * @default 选择实例
+   * @group ui
    * @description 添加实例按钮的文本
    */
   @property({ attribute: false })
   addButtonText: string;
 
   /**
-   * @kind any
-   * @required false
-   * @default -
-   * @description 预设弹窗内实例的筛选条件，格式与参见请求数据中的 query
-   */
-  @property({ attribute: false })
-  instanceQuery: any;
-
-  /**
    * @kind string[]
    * @required false
    * @default -
+   * @group ui
    * @description 模型的属性 ID 数组，控制实例弹窗和已选表格的显示列
    */
   @property({ attribute: false })
   fields: string[];
 
   /**
-   * @kind CmdbModels.ModelCmdbObject
-   * @required true
-   * @default -
-   * @description 模型列表
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 添加实例弹窗是否展示分页
+   * @group ui
    */
-  @property({ attribute: false })
-  objectList: Partial<CmdbModels.ModelCmdbObject>[];
+  @property({ type: Boolean })
+  showSizeChanger: boolean;
 
   /**
    * @kind number
    * @required false
    * @default 10
    * @description 添加实例弹窗的默认分页个数
-   * @group advanced
+   * @group ui
    */
   @property({ type: Number })
   addInstancesModalPageSize: number;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 添加实例弹窗是否展示分页
-   * @group advanced
-   */
-  @property({ type: Boolean })
-  showSizeChanger: boolean;
 
   /**
    * @kind string[]
    * @required false
    * @default -
    * @description 添加实例弹窗的分页个数选项
-   * @group advanced
+   * @group ui
    */
   @property({ attribute: false })
   pageSizeOptions: string[];
+
+  /* =========================== Group: advanced =========================== */
+
+  /**
+   * @kind any
+   * @required false
+   * @default -
+   * @group advanced
+   * @description 预设弹窗内实例的筛选条件，格式与参见请求数据中的 query
+   */
+  @property({ attribute: false })
+  instanceQuery: any;
+
+  /* =========================== events =========================== */
 
   /**
    * @detail `string[]`
