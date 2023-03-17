@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.265.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.265.13...@next-bricks/forms@1.265.14) (2023-03-17)
+
+
+### Bug Fixes
+
+* **forms:** 应用列表下拉选项的值过长时，悬浮展示框错位 ([73279d8](https://github.com/easyops-cn/next-basics/commit/73279d846de33b4b427b295126a8749dfebd1a56))
+
+
+
+
+
 ## [1.265.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.265.12...@next-bricks/forms@1.265.13) (2023-03-17)
 
 **Note:** Version bump only for package @next-bricks/forms
