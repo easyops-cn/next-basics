@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { ListEditor } from "./components/ListEditor/ListEditor";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import { LegacyDynamicFormItemV2 } from "../../../forms/src/dynamic-form-item-v2/DynamicFormItemV2";
-import { ConditionalFormat } from "../../../form-builder/src/conditional-format/ConditionalFormat";
+import { ConditionalFormat } from "./components/ConditionalFormat/ConditionalFormat";
 import { compact } from "lodash";
 interface visualFormRulesSettingProps extends FormItemWrapperProps {
   value?: Record<string, any>[];
@@ -40,8 +40,14 @@ export function VisualFormRulesSetting(
         name: "actionType",
         props: { options: actionTypeOptions },
         type: "select",
+        flex: 1,
       },
-      { name: "target", props: { options: targetOptions }, type: "select" },
+      {
+        name: "target",
+        props: { options: targetOptions },
+        type: "select",
+        flex: 2,
+      },
     ],
     [targetOptions]
   );
@@ -49,20 +55,20 @@ export function VisualFormRulesSetting(
   const renderFormItem = (item: FormItemProps): React.ReactElement => {
     return (
       <>
-        <Form.Item label="Title" name="title">
+        <Form.Item label="规则名称" name="title">
           <Input />
         </Form.Item>
-        <Form.Item label="Conditions" name="conditions">
+        <Form.Item label="当满足以下条件时" name="conditions">
           <ConditionalFormat
             originOptions={targetOptions}
             operationOptions={operationOptions}
             onChange={() => null}
           />
         </Form.Item>
-        <Form.Item label="Actions" name="actions">
+        <Form.Item label="执行动作" name="actions">
           <LegacyDynamicFormItemV2
             columns={actionsColumns}
-            dynamicFormStyle={{ width: "360px" }}
+            dynamicFormStyle={{ backgroundColor: "transparent", padding: 0 }}
           />
         </Form.Item>
       </>
