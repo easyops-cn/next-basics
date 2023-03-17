@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.20.7...@next-bricks/brick-visualization@1.21.0) (2023-03-17)
+
+
+### Features
+
+* compatible with situations without compareValType ([13de801](https://github.com/easyops-cn/next-basics/commit/13de801adc1d7aa625eb63a29bdfca90fb42633b))
+* support visualFormRulesSetting set filed value ([2b7ec7a](https://github.com/easyops-cn/next-basics/commit/2b7ec7adba82f1ad9f8619cccda0334aa6cdc31f))
+* update filed name ([3b7dab9](https://github.com/easyops-cn/next-basics/commit/3b7dab9699bf73ebae2cc29de17da12c8692d472))
+* update visualFormRulesSetting style ([41e6e8e](https://github.com/easyops-cn/next-basics/commit/41e6e8e245138ffce4d0a941fb46f796e46cb2b3))
+
+
+
+
+
 ## [1.20.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.20.6...@next-bricks/brick-visualization@1.20.7) (2023-03-15)
 
 
