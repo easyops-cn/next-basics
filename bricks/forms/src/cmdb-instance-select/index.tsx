@@ -335,6 +335,30 @@ export class CmdbInstanceSelectElement extends FormItemElement {
 
   firstRender = true;
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 下拉菜单和选择器同宽
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  dropdownMatchSelectWidth = true;
+
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description 设置下拉框容器的样式
+   * @group style
+   */
+  @property({
+    attribute: false,
+  })
+  dropdownStyle: React.CSSProperties = {};
+
   updateObjectIdManual(objectId: string) {
     this.objectId = objectId;
     this.firstRender = false;
@@ -413,6 +437,8 @@ export class CmdbInstanceSelectElement extends FormItemElement {
             showTooltip={this.showTooltip}
             ignoreMissingFieldError={this.ignoreMissingFieldError}
             showKeyField={this.showKeyField}
+            dropdownMatchSelectWidth={this.dropdownMatchSelectWidth}
+            dropdownStyle={this.dropdownStyle}
           />
         </BrickWrapper>,
         this

@@ -15,3 +15,13 @@
   white-space: nowrap;
   font-style: italic;
 }
+.optionSpan {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.optionDiv {
+  display: flex;
+  align-items: center;
+}
