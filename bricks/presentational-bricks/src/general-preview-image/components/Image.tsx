@@ -8,6 +8,7 @@ import type { PreviewProps } from "./Preview";
 import Preview from "./Preview";
 import PreviewGroup, { context } from "./PreviewGroup";
 import type { IDialogPropTypes } from "rc-dialog/lib/IDialogPropTypes";
+import { isNil } from "lodash";
 
 export interface ImagePreviewType
   extends Omit<
@@ -192,9 +193,10 @@ const ImageInternal: CompoundedComponent<ImageProps> = ({
     }
   };
 
+  /* istanbul ignore next */
   React.useEffect(() => {
     isImageValid(src).then((isValid) => {
-      if (!isValid) {
+      if (!isNil(src) && !isValid) {
         setStatus("error");
       }
     });

@@ -77,6 +77,13 @@ export class GeneralPreviewImageElement extends UpdatingElement {
   @property({ type: Boolean })
   customOperationPosition: boolean;
 
+  /**
+   * @default -
+   * @description 预览起始图片索引
+   */
+  @property({ type: Number })
+  previewCurrentIndex: number;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -103,6 +110,7 @@ export class GeneralPreviewImageElement extends UpdatingElement {
             height={this.height}
             fallback={this.fallback}
             canPreview={this.canPreview}
+            previewCurrentIndex={this.previewCurrentIndex}
             customOperationPosition={this.customOperationPosition}
           />
         </BrickWrapper>,

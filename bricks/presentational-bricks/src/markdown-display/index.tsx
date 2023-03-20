@@ -50,6 +50,14 @@ export class MarkdownDisplayElement extends UpdatingElement {
    */
   @property({ attribute: false }) imagePreview: boolean;
 
+  /**
+   * @kind boolean
+   * @default -
+   * @description 预览图片时，图片操作(放大、缩小等操作)是否在下方显示
+   */
+  @property({ type: Boolean })
+  imagePreviewOperationInBottom: boolean;
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -77,6 +85,7 @@ export class MarkdownDisplayElement extends UpdatingElement {
           <MarkdownDisplay
             value={mutableProps.value}
             imagePreview={this.imagePreview}
+            imagePreviewOperationInBottom={this.imagePreviewOperationInBottom}
           />
         </BrickWrapper>,
         this

@@ -66,7 +66,7 @@ export function GeneralPreviewImage(
               preview={{
                 visible,
                 current: previewCurrentIndex,
-                customOperationPosition: true,
+                customOperationPosition,
                 onVisibleChange: (vis) => setVisible(vis),
               }}
             >

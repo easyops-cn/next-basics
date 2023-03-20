@@ -163,4 +163,14 @@ describe("MarkdownDisplay", () => {
       </div>"
     `);
   });
+
+  it("should work when imagePreviewOperationInBottom is true", () => {
+    const wrapper = mount(
+      <MarkdownDisplay
+        value="![img](http://www.baidu.com)"
+        imagePreviewOperationInBottom={true}
+      />
+    );
+    expect(wrapper.html().indexOf("img") >= 0).toBeTruthy();
+  });
 });
