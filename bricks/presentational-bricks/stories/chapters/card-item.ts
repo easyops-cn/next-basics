@@ -74,6 +74,9 @@ export const CardItemStory: Story = {
                   brick: "presentational-bricks.brick-tag",
                   properties: {
                     closable: false,
+                    tagStyle: {
+                      borderRadius: "3px",
+                    },
                     showCard: false,
                     tagList: [
                       { key: "1", label: "IT资源管理" },
@@ -88,26 +91,45 @@ export const CardItemStory: Story = {
               type: "bricks",
               bricks: [
                 {
-                  brick: "presentational-bricks.basic-icon",
+                  brick: "presentational-bricks.general-tooltip",
                   properties: {
-                    size: "20px",
-                    icon: {
-                      lib: "easyops",
-                      category: "default",
-                      icon: "card-diff",
-                      color: "rgba(157, 168, 184, 1)",
+                    content: "实例",
+                    style: {
+                      marginRight: "8px",
+                    },
+                    displayBrick: {
+                      useBrick: {
+                        brick: "presentational-bricks.basic-icon",
+                        properties: {
+                          size: "20px",
+                          icon: {
+                            lib: "easyops",
+                            category: "default",
+                            icon: "card-diff",
+                            color: "rgba(157, 168, 184, 1)",
+                          },
+                        },
+                      },
                     },
                   },
                 },
                 {
-                  brick: "presentational-bricks.basic-icon",
+                  brick: "presentational-bricks.general-tooltip",
                   properties: {
-                    size: "20px",
-                    icon: {
-                      lib: "easyops",
-                      category: "default",
-                      icon: "card-task-delivery",
-                      color: "rgba(157, 168, 184, 1)",
+                    content: "实例",
+                    displayBrick: {
+                      useBrick: {
+                        brick: "presentational-bricks.basic-icon",
+                        properties: {
+                          size: "20px",
+                          icon: {
+                            lib: "easyops",
+                            category: "default",
+                            icon: "card-task-delivery",
+                            color: "rgba(157, 168, 184, 1)",
+                          },
+                        },
+                      },
                     },
                   },
                 },
@@ -121,6 +143,10 @@ export const CardItemStory: Story = {
                   properties: {
                     isMoreButton: true,
                     moreButtonShape: "no",
+                    style: {
+                      marginTop: "-2px",
+                      marginRight: "-14px",
+                    },
                     customButtons: [
                       {
                         isDropdown: true,
@@ -190,6 +216,9 @@ export const CardItemStory: Story = {
               brick: "presentational-bricks.brick-tag",
               properties: {
                 closable: false,
+                tagStyle: {
+                  borderRadius: "3px",
+                },
                 showCard: false,
                 tagList: [
                   { key: "1", label: "IT资源管理" },
@@ -204,26 +233,45 @@ export const CardItemStory: Story = {
           type: "bricks",
           bricks: [
             {
-              brick: "presentational-bricks.basic-icon",
+              brick: "presentational-bricks.general-tooltip",
               properties: {
-                size: "20px",
-                icon: {
-                  lib: "easyops",
-                  category: "default",
-                  icon: "card-diff",
-                  color: "rgba(157, 168, 184, 1)",
+                content: "实例",
+                style: {
+                  marginRight: "8px",
+                },
+                displayBrick: {
+                  useBrick: {
+                    brick: "presentational-bricks.basic-icon",
+                    properties: {
+                      size: "20px",
+                      icon: {
+                        lib: "easyops",
+                        category: "default",
+                        icon: "card-diff",
+                        color: "rgba(157, 168, 184, 1)",
+                      },
+                    },
+                  },
                 },
               },
             },
             {
-              brick: "presentational-bricks.basic-icon",
+              brick: "presentational-bricks.general-tooltip",
               properties: {
-                size: "20px",
-                icon: {
-                  lib: "easyops",
-                  category: "default",
-                  icon: "card-task-delivery",
-                  color: "rgba(157, 168, 184, 1)",
+                content: "实例",
+                displayBrick: {
+                  useBrick: {
+                    brick: "presentational-bricks.basic-icon",
+                    properties: {
+                      size: "20px",
+                      icon: {
+                        lib: "easyops",
+                        category: "default",
+                        icon: "card-task-delivery",
+                        color: "rgba(157, 168, 184, 1)",
+                      },
+                    },
+                  },
                 },
               },
             },
@@ -236,6 +284,10 @@ export const CardItemStory: Story = {
               brick: "basic-bricks.general-custom-buttons",
               properties: {
                 isMoreButton: true,
+                style: {
+                  marginTop: "-2px",
+                  marginRight: "-14px",
+                },
                 moreButtonShape: "no",
                 customButtons: [
                   {
@@ -302,6 +354,9 @@ export const CardItemStory: Story = {
               brick: "presentational-bricks.brick-tag",
               properties: {
                 closable: false,
+                tagStyle: {
+                  borderRadius: "3px",
+                },
                 showCard: false,
                 tagList: [
                   { key: "1", label: "IT资源管理" },
@@ -361,6 +416,7 @@ export const CardItemStory: Story = {
                 textContent: "7",
                 style: {
                   paddingTop: "2px",
+                  marginRight: "8px",
                 },
               },
             },
@@ -492,26 +548,45 @@ export const CardItemStory: Story = {
           type: "bricks",
           bricks: [
             {
-              brick: "presentational-bricks.basic-icon",
+              brick: "presentational-bricks.general-tooltip",
               properties: {
-                size: "20px",
-                icon: {
-                  lib: "easyops",
-                  category: "default",
-                  icon: "card-diff",
-                  color: "rgba(157, 168, 184, 1)",
+                content: "实例",
+                style: {
+                  marginRight: "8px",
+                },
+                displayBrick: {
+                  useBrick: {
+                    brick: "presentational-bricks.basic-icon",
+                    properties: {
+                      size: "20px",
+                      icon: {
+                        lib: "easyops",
+                        category: "default",
+                        icon: "card-diff",
+                        color: "rgba(157, 168, 184, 1)",
+                      },
+                    },
+                  },
                 },
               },
             },
             {
-              brick: "presentational-bricks.basic-icon",
+              brick: "presentational-bricks.general-tooltip",
               properties: {
-                size: "20px",
-                icon: {
-                  lib: "easyops",
-                  category: "default",
-                  icon: "card-task-delivery",
-                  color: "rgba(157, 168, 184, 1)",
+                content: "实例",
+                displayBrick: {
+                  useBrick: {
+                    brick: "presentational-bricks.basic-icon",
+                    properties: {
+                      size: "20px",
+                      icon: {
+                        lib: "easyops",
+                        category: "default",
+                        icon: "card-task-delivery",
+                        color: "rgba(157, 168, 184, 1)",
+                      },
+                    },
+                  },
                 },
               },
             },
@@ -568,6 +643,9 @@ export const CardItemStory: Story = {
                   brick: "presentational-bricks.brick-tag",
                   properties: {
                     closable: false,
+                    tagStyle: {
+                      borderRadius: "3px",
+                    },
                     showCard: false,
                     tagList: [
                       { key: "1", label: "IT资源管理" },
@@ -582,26 +660,45 @@ export const CardItemStory: Story = {
               type: "bricks",
               bricks: [
                 {
-                  brick: "presentational-bricks.basic-icon",
+                  brick: "presentational-bricks.general-tooltip",
                   properties: {
-                    size: "20px",
-                    icon: {
-                      lib: "easyops",
-                      category: "default",
-                      icon: "card-diff",
-                      color: "rgba(157, 168, 184, 1)",
+                    content: "实例",
+                    style: {
+                      marginRight: "8px",
+                    },
+                    displayBrick: {
+                      useBrick: {
+                        brick: "presentational-bricks.basic-icon",
+                        properties: {
+                          size: "20px",
+                          icon: {
+                            lib: "easyops",
+                            category: "default",
+                            icon: "card-diff",
+                            color: "rgba(157, 168, 184, 1)",
+                          },
+                        },
+                      },
                     },
                   },
                 },
                 {
-                  brick: "presentational-bricks.basic-icon",
+                  brick: "presentational-bricks.general-tooltip",
                   properties: {
-                    size: "20px",
-                    icon: {
-                      lib: "easyops",
-                      category: "default",
-                      icon: "card-task-delivery",
-                      color: "rgba(157, 168, 184, 1)",
+                    content: "实例",
+                    displayBrick: {
+                      useBrick: {
+                        brick: "presentational-bricks.basic-icon",
+                        properties: {
+                          size: "20px",
+                          icon: {
+                            lib: "easyops",
+                            category: "default",
+                            icon: "card-task-delivery",
+                            color: "rgba(157, 168, 184, 1)",
+                          },
+                        },
+                      },
                     },
                   },
                 },
@@ -615,6 +712,10 @@ export const CardItemStory: Story = {
                   properties: {
                     isMoreButton: true,
                     moreButtonShape: "no",
+                    style: {
+                      marginTop: "-2px",
+                      marginRight: "-14px",
+                    },
                     customButtons: [
                       {
                         isDropdown: true,

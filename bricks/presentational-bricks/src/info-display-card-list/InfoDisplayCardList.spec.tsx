@@ -28,7 +28,7 @@ describe("InfoDisplayCardList", () => {
         iconBrickConf={{ useBrick: { brick: "div" } }}
       />
     );
-    expect(wrapper.find("BrickAsComponent").length).toBe(infoList.length);
+    expect(wrapper.find("BrickAsComponent").length).toBe(infoList.length + 1);
   });
 
   it("should render titleBrickConf", () => {
@@ -38,7 +38,7 @@ describe("InfoDisplayCardList", () => {
         titleBrickConf={{ useBrick: { brick: "div" } }}
       />
     );
-    expect(wrapper.find("BrickAsComponent").length).toBe(infoList.length);
+    expect(wrapper.find("BrickAsComponent").length).toBe(infoList.length + 1);
   });
 
   it("should render optionConf", () => {
@@ -48,7 +48,7 @@ describe("InfoDisplayCardList", () => {
         optionConf={{ useBrick: { brick: "div" } }}
       />
     );
-    expect(wrapper.find("BrickAsComponent").length).toBe(infoList.length);
+    expect(wrapper.find("BrickAsComponent").length).toBe(infoList.length + 1);
   });
 
   it("should render detailOfDescBrickConf", () => {
@@ -58,7 +58,7 @@ describe("InfoDisplayCardList", () => {
         detailOfDescBrickConf={{ useBrick: { brick: "div" } }}
       />
     );
-    expect(wrapper.find("BrickAsComponent").length).toBe(1);
+    expect(wrapper.find("BrickAsComponent").length).toBe(2);
   });
 
   it("should click CardItem to open new page", () => {

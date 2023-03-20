@@ -44,7 +44,7 @@ export function InfoDisplayCardList({
   ): React.ReactNode => (
     <div className={styles.infoCardDetailWrapper} key={index}>
       <h5>{item.title}</h5>
-      {(isEmptyDetailOfDescBrickConf || !item.useBrick) && (
+      {(isEmptyDetailOfDescBrickConf || !item.useBrick) && item.desc && (
         <Tooltip title={item.desc}>
           <p
             style={{
@@ -55,9 +55,17 @@ export function InfoDisplayCardList({
           </p>
         </Tooltip>
       )}
-      {!isEmptyDetailOfDescBrickConf && !!item.useBrick && (
+      {!isEmptyDetailOfDescBrickConf &&
+        !!item.useBrick &&
+        isEmpty(item.detailBrickConf?.useBrick) && (
+          <BrickAsComponent
+            useBrick={detailOfDescBrickConf.useBrick}
+            data={item}
+          ></BrickAsComponent>
+        )}
+      {!isEmpty(item.detailBrickConf?.useBrick) && (
         <BrickAsComponent
-          useBrick={detailOfDescBrickConf.useBrick}
+          useBrick={item.detailBrickConf?.useBrick}
           data={item}
         ></BrickAsComponent>
       )}
@@ -95,7 +103,7 @@ export function InfoDisplayCardList({
                 }
                 bg={true}
                 shape="square"
-                size={44}
+                size={40}
               />
             </div>
           )}
@@ -149,6 +157,14 @@ export function InfoDisplayCardList({
               ></BrickAsComponent>
             </div>
           )}
+          {!isEmpty(item.operateItemBrick?.useBrick) && (
+            <div style={{ padding: "15px 5px" }}>
+              <BrickAsComponent
+                useBrick={item.operateItemBrick?.useBrick}
+                data={item}
+              ></BrickAsComponent>
+            </div>
+          )}
         </div>
       </div>
     </Card>
@@ -159,6 +175,7 @@ export function InfoDisplayCardList({
       itemLayout="horizontal"
       dataSource={dataSource}
       renderItem={(item) => getCardItem(item)}
+      style={{ maxWidth: "1300px" }}
     />
   ) : (
     <Empty />
