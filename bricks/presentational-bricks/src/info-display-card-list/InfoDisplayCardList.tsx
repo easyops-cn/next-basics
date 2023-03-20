@@ -158,12 +158,7 @@ export function InfoDisplayCardList({
             </div>
           )}
           {!isEmpty(item.operateItemBrick?.useBrick) && (
-            <div
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-              style={{ padding: "15px 5px" }}
-            >
+            <div style={{ padding: "15px 5px" }}>
               <BrickAsComponent
                 useBrick={item.operateItemBrick?.useBrick}
                 data={item}
