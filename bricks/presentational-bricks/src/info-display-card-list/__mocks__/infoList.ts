@@ -207,6 +207,7 @@ export const infoList = [
     id: 7,
     title: "持续集成",
     desc: "支持展客户两会话健康和空间和健康和健康和健康几节课或军扩过过过过科技股科技股就开始刚开始搞是接口关键时刻哥萨克伽伽司空见惯撒十多个数据库高升控股撒奥会计噶会计师公开撒娇鬼萨科技馆萨科技会计师干撒冈萨加国盛金控hhhhhhhhhhhhh",
+    operateItemBrick: { useBrick: { brick: "div" } },
     detail: [
       {
         title: "大小",
