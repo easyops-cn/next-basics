@@ -9,6 +9,7 @@ export interface CardDetail {
   title: string;
   desc: string;
   useBrick?: boolean;
+  detailBrickConf?: { useBrick: UseBrickConf };
 }
 
 export interface CardItem {
@@ -16,6 +17,7 @@ export interface CardItem {
   desc: string;
   icon?: MenuIcon;
   detail?: CardDetail[];
+  operateItemBrick?: { useBrick: UseBrickConf };
 }
 
 /**

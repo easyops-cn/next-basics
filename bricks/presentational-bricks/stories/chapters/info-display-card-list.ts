@@ -15,20 +15,70 @@ export const infoList = [
     },
     detail: [
       {
-        title: "大小",
-        desc: "7M",
+        detailBrickConf: {
+          useBrick: {
+            brick: "presentational-bricks.brick-tag",
+            properties: {
+              closable: false,
+              showCard: false,
+              tagStyle: {
+                borderRadius: "3px",
+                lineHeight: "32px",
+                height: "32px",
+              },
+              tagList: [
+                {
+                  key: "1",
+                  label: "IT资源管理",
+                },
+              ],
+            },
+          },
+        },
       },
       {
-        title: "下载次数",
-        desc: "863",
+        detailBrickConf: {
+          useBrick: {
+            brick: "presentational-bricks.brick-tag",
+            properties: {
+              closable: false,
+              showCard: false,
+              tagStyle: {
+                borderRadius: "3px",
+                lineHeight: "32px",
+                height: "32px",
+              },
+              tagList: [
+                {
+                  key: "1",
+                  label: "存储设备",
+                },
+              ],
+            },
+          },
+        },
       },
       {
-        title: "下载率",
-        desc: "80%",
-      },
-      {
-        title: "失败率",
-        desc: "2%",
+        detailBrickConf: {
+          useBrick: {
+            brick: "presentational-bricks.brick-tag",
+            properties: {
+              closable: false,
+              showCard: false,
+              tagStyle: {
+                borderRadius: "3px",
+                lineHeight: "32px",
+                height: "32px",
+              },
+              tagList: [
+                {
+                  key: "1",
+                  label: "资源套餐",
+                },
+              ],
+            },
+          },
+        },
       },
     ],
   },
@@ -43,8 +93,17 @@ export const infoList = [
     },
     detail: [
       {
-        title: "大小",
-        desc: "8M",
+        title: "是否启用",
+        detailBrickConf: {
+          useBrick: {
+            brick: "forms.general-switch",
+            properties: {
+              name: "enabled",
+              size: "small",
+              value: true,
+            },
+          },
+        },
       },
       {
         title: "下载次数",

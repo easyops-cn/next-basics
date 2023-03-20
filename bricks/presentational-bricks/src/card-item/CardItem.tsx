@@ -320,8 +320,8 @@ export function CardItem(props: CardItemProps): React.ReactElement {
       })}
       bodyStyle={
         props.topInformation
-          ? { padding: "0px 24px 10px 16px" }
-          : { padding: "16px 24px 10px 16px" }
+          ? { padding: "0px 16px 10px 16px" }
+          : { padding: "16px 16px 10px 16px" }
       }
       {...configProps}
       bordered={bordered}
