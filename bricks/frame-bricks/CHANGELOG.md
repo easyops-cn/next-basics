@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.11.0...@next-bricks/frame-bricks@1.11.1) (2023-03-20)
+
+
+### Bug Fixes
+
+* 修改单元测试 ([5f08ac3](https://github.com/easyops-cn/next-basics/commit/5f08ac3ccede2d49fdc0a6592eac7b59fb72ffa8))
+
+
+
+
+
 # [1.11.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.10.2...@next-bricks/frame-bricks@1.11.0) (2023-03-15)
 
 

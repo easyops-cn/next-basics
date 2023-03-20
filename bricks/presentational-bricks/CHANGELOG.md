@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.288.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.287.4...@next-bricks/presentational-bricks@1.288.0) (2023-03-20)
+
+
+### Bug Fixes
+
+* 修改单元测试 ([5f08ac3](https://github.com/easyops-cn/next-basics/commit/5f08ac3ccede2d49fdc0a6592eac7b59fb72ffa8))
+* 增加单元测试 ([6c932c0](https://github.com/easyops-cn/next-basics/commit/6c932c016159c7830538d38d5cf6efa78f0d5e0e))
+
+
+### Features
+
+* 信息展示卡片 优化升级三 ([87d64f3](https://github.com/easyops-cn/next-basics/commit/87d64f3454074ba768476c316c66b532c6f5d042))
+
+
+
+
+
 ## [1.287.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.287.3...@next-bricks/presentational-bricks@1.287.4) (2023-03-20)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
