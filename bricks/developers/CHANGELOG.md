@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.365.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.364.3...@next-bricks/developers@1.365.0) (2023-03-21)
+
+
+### Bug Fixes
+
+* BRICK_STORE-3305 信息卡片-入口卡片 优化升级 ([bdafab8](https://github.com/easyops-cn/next-basics/commit/bdafab803254dd8669c63118a32276ba12874ebb))
+
+
+### Features
+
+* 入口卡片 优化升级 ([4466e67](https://github.com/easyops-cn/next-basics/commit/4466e67f6cacc28c18d6c012691fc9f69ad662dc))
+
+
+
+
+
 ## [1.364.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.364.2...@next-bricks/developers@1.364.3) (2023-03-06)
 
 
