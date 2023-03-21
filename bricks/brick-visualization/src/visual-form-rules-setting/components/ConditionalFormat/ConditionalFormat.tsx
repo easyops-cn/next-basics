@@ -110,17 +110,17 @@ export function ConditionalFormat(
     setIsModalOpen(true);
   };
 
+  const updateGroupConditions = () => {
+    const cloneData = cloneDeep(groupConditions);
+    setGroupConditions(cloneData);
+    onChange(cloneData);
+  };
+
   const getGroup = () => {
     return {
       groupId: uniqueId("group_"),
       conditions: [] as Condition[],
     };
-  };
-
-  const updateGroupConditions = () => {
-    const cloneData = cloneDeep(groupConditions);
-    setGroupConditions(cloneData);
-    onChange(cloneData);
   };
 
   const addGroup = () => {
