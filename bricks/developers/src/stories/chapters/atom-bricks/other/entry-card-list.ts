@@ -22,6 +22,11 @@ export const story: Story = {
     {
       template: "general-list.entry-card-list",
       params: {
+        cardProps: {
+          style: {
+            width: "500px",
+          },
+        },
         fields: {
           cardTitle: "name",
           icon: "icon",
@@ -109,31 +114,102 @@ export const story: Story = {
               icon: "docker-image",
             },
           },
+        ],
+      },
+    },
+    {
+      template: "general-list.entry-card-list",
+      params: {
+        cardProps: {
+          style: {
+            width: "500px",
+          },
+        },
+        fields: {
+          cardTitle: "name",
+          icon: "icon",
+        },
+        urlTemplate: "/#{id}",
+        dataSource: [
           {
-            id: "10",
-            name: "MySQL",
+            id: "1",
+            name: "应用",
             icon: {
               lib: "easyops",
               category: "model",
-              icon: "mysql",
+              icon: "app",
             },
           },
           {
-            id: "11",
-            name: "微服务",
+            id: "2",
+            name: "主机",
             icon: {
               lib: "easyops",
               category: "model",
-              icon: "micro-service",
+              icon: "host",
             },
           },
           {
-            id: "12",
-            name: "云存储",
+            id: "3",
+            name: "包管理",
             icon: {
               lib: "easyops",
               category: "model",
-              icon: "cloud-storage",
+              icon: "package",
+            },
+          },
+          {
+            id: "4",
+            name: "DNS",
+            icon: {
+              lib: "easyops",
+              category: "model",
+              icon: "dns",
+            },
+          },
+          {
+            id: "5",
+            name: "服务器资产",
+            icon: {
+              lib: "easyops",
+              category: "model",
+              icon: "pc",
+            },
+          },
+          {
+            id: "6",
+            name: "防火墙",
+            icon: {
+              lib: "easyops",
+              category: "model",
+              icon: "firewall",
+            },
+          },
+          {
+            id: "7",
+            name: "F5",
+            icon: {
+              lib: "easyops",
+              category: "model",
+              icon: "f5",
+            },
+          },
+          {
+            id: "8",
+            name: "Oracle",
+            icon: {
+              lib: "easyops",
+              category: "model",
+              icon: "oracle",
+            },
+          },
+          {
+            id: "9",
+            name: "Docker镜像",
+            icon: {
+              lib: "easyops",
+              category: "model",
+              icon: "docker-image",
             },
           },
         ],

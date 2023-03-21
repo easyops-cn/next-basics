@@ -32,6 +32,9 @@
     font-size: 32px;
     justify-self: center;
     align-self: center;
+    svg {
+      font-size: 28px;
+    }
   }
 }
 

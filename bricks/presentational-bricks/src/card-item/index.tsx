@@ -74,7 +74,7 @@ export class CardItemElement extends UpdatingElement {
 
   /**
    * @required false
-   * @description 字段映射, 跟 dataSource 一起使用来获得运行时 cardTitle、cardSubtitle、topInformation、descriptionList、icon、iconColor、iconStyle、iconSize、iconOffsetX、iconOffsetY、iconOpacity、disabled
+   * @description 字段映射, 跟 dataSource 一起使用来获得运行时 cardTitle、cardSubtitle、newDescription、topInformation、descriptionList、icon、iconColor、iconStyle、iconSize、iconOffsetX、iconOffsetY、iconOpacity、disabled
    * @group other
    */
   @property({
@@ -83,6 +83,7 @@ export class CardItemElement extends UpdatingElement {
   fields: {
     cardTitle?: string;
     cardSubtitle?: string;
+    newDescription?: string;
     topInformation?: string;
     descriptionList?: string;
     icon?: string;
@@ -158,6 +159,14 @@ export class CardItemElement extends UpdatingElement {
    */
   @property()
   cardSubtitle: string;
+
+  /**
+   * @required false
+   * @description 卡片 新的描述信息、存在时cardSubtitle、descriptionList属性不生效
+   * @group basic
+   */
+  @property()
+  newDescription: string;
 
   /**
    * @required false
@@ -527,6 +536,7 @@ export class CardItemElement extends UpdatingElement {
         disabled: this.disabled,
         cardTitle: this.cardTitle,
         cardSubtitle: this.cardSubtitle,
+        newDescription: this.newDescription,
         topInformation: this.topInformation,
         descriptionList: this.descriptionList,
         icon: this.icon,
@@ -592,6 +602,7 @@ export class CardItemElement extends UpdatingElement {
             reverseBgColor={this.reverseBgColor}
             cardTitle={mutableProps.cardTitle}
             cardSubtitle={mutableProps.cardSubtitle}
+            newDescription={mutableProps.newDescription}
             topInformation={mutableProps.topInformation}
             descriptionList={mutableProps.descriptionList as any}
             hideDescCircle={this.hideDescCircle}
@@ -699,6 +710,7 @@ export class CardItemElement extends UpdatingElement {
     const pickFields = pick(this.fields, [
       "cardTitle",
       "cardSubtitle",
+      "newDescription",
       "topInformation",
       "descriptionList",
       "icon",

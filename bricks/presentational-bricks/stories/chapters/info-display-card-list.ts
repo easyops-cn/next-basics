@@ -21,6 +21,9 @@ export const infoList = [
             properties: {
               closable: false,
               showCard: false,
+              style: {
+                marginRight: "4px",
+              },
               tagStyle: {
                 borderRadius: "3px",
                 lineHeight: "32px",
@@ -42,6 +45,9 @@ export const infoList = [
             brick: "presentational-bricks.brick-tag",
             properties: {
               closable: false,
+              style: {
+                marginRight: "4px",
+              },
               showCard: false,
               tagStyle: {
                 borderRadius: "3px",
@@ -64,6 +70,9 @@ export const infoList = [
             brick: "presentational-bricks.brick-tag",
             properties: {
               closable: false,
+              style: {
+                marginRight: "4px",
+              },
               showCard: false,
               tagStyle: {
                 borderRadius: "3px",

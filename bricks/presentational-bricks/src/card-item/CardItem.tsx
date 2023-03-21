@@ -11,6 +11,7 @@ interface CardItemProps {
   cardLayoutType?: CardLayoutType;
   cardTitle: string;
   cardSubtitle?: string;
+  newDescription?: string;
   descriptionList?: string[] | string;
   topInformation?: string;
   hideDescCircle?: boolean;
@@ -339,11 +340,16 @@ export function CardItem(props: CardItemProps): React.ReactElement {
         {props.showImg ? avatarImg(40) : avatarIcon(40)}
         <div className="titleWrapper">
           {titleWithOperateArea}
-          {props.cardSubtitle && subtitle}
+          {props.cardSubtitle && !props.newDescription && subtitle}
+          {props.newDescription && (
+            <div className="newDescription">{props.newDescription}</div>
+          )}
           <slot id="" name="afterSubtitle" />
         </div>
       </div>
-      {(!isNil(descriptionList) || alwaysShowDescription) && description()}
+      {(!isNil(descriptionList) || alwaysShowDescription) &&
+        !props.newDescription &&
+        description()}
       {bottomOperateArea}
       {bottomExtraOperateArea}
     </Card>

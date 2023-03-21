@@ -52,7 +52,7 @@ export function EntryCardItem(props: EntryCardItemProps): React.ReactElement {
 
   const contentNode = (
     <div className={styles.cardContent}>
-      {avatarIcon(56)}
+      {avatarIcon(48)}
       <div
         className={classNames(styles.textContainer, {
           [styles.hoverHighLight]: hoverHighLight,
