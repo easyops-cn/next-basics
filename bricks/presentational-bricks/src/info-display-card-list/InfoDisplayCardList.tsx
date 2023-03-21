@@ -135,7 +135,7 @@ export function InfoDisplayCardList({
         <div className={styles.infoCardRightSection}>
           <div
             style={
-              item.detail?.length === 4
+              item.detail?.length >= 4
                 ? {
                     gridTemplateColumns: `repeat(${item.detail.length}, minmax(0, 1fr))`,
                   }
