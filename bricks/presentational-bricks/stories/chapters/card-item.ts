@@ -52,7 +52,7 @@ export const CardItemStory: Story = {
             urlTemplate: "/#{id}",
             fields: {
               cardTitle: "name",
-              cardSubtitle: "cardSubtitle",
+              newDescription: "newDescription",
               descriptionList: "descriptionList",
               topInformation: "topInformation",
             },
@@ -62,7 +62,7 @@ export const CardItemStory: Story = {
             dataSource: {
               id: "1",
               name: "资源监控微应用",
-              cardSubtitle: "资源监控微应用相关前后台",
+              newDescription: "资源监控微应用相关前后台",
               topInformation: "初级应用",
             },
           },
@@ -194,7 +194,7 @@ export const CardItemStory: Story = {
         urlTemplate: "/#{id}",
         fields: {
           cardTitle: "name",
-          cardSubtitle: "cardSubtitle",
+          newDescription: "newDescription",
           descriptionList: "descriptionList",
           topInformation: "topInformation",
         },
@@ -204,7 +204,7 @@ export const CardItemStory: Story = {
         dataSource: {
           id: "1",
           name: "资源监控微应用",
-          cardSubtitle: "资源监控微应用相关前后台",
+          newDescription: "资源监控微应用相关前后台",
           topInformation: "初级应用",
         },
       },
@@ -334,7 +334,7 @@ export const CardItemStory: Story = {
         urlTemplate: "/#{id}",
         fields: {
           cardTitle: "name",
-          cardSubtitle: "cardSubtitle",
+          newDescription: "newDescription",
           descriptionList: "descriptionList",
         },
         imgSrc: cardBlueSvg,
@@ -343,7 +343,7 @@ export const CardItemStory: Story = {
         dataSource: {
           id: "1",
           name: "资源监控微应用",
-          cardSubtitle: "资源监控微应用相关前后台",
+          newDescription: "资源监控微应用相关前后台",
         },
       },
       slots: {
@@ -385,7 +385,7 @@ export const CardItemStory: Story = {
         urlTemplate: "/#{id}",
         fields: {
           cardTitle: "name",
-          cardSubtitle: "cardSubtitle",
+          newDescription: "newDescription",
           descriptionList: "descriptionList",
         },
         imgSrc: cardBlueSvg,
@@ -394,7 +394,7 @@ export const CardItemStory: Story = {
         dataSource: {
           id: "1",
           name: "资源监控微应用",
-          cardSubtitle: "资源监控微应用相关前后台",
+          newDescription: "资源监控微应用相关前后台",
         },
       },
       slots: {
@@ -472,7 +472,7 @@ export const CardItemStory: Story = {
         urlTemplate: "/#{id}",
         fields: {
           cardTitle: "name",
-          cardSubtitle: "cardSubtitle",
+          newDescription: "newDescription",
           descriptionList: "descriptionList",
         },
         imgSrc: cardBlueSvg,
@@ -481,7 +481,7 @@ export const CardItemStory: Story = {
         dataSource: {
           id: "1",
           name: "资源监控微应用",
-          cardSubtitle: "资源监控微应用相关前后台",
+          newDescription: "资源监控微应用相关前后台",
         },
       },
       slots: {
@@ -531,7 +531,7 @@ export const CardItemStory: Story = {
         urlTemplate: "/#{id}",
         fields: {
           cardTitle: "name",
-          cardSubtitle: "cardSubtitle",
+          newDescription: "newDescription",
           descriptionList: "descriptionList",
         },
         imgSrc: cardBlueSvg,
@@ -540,7 +540,7 @@ export const CardItemStory: Story = {
         dataSource: {
           id: "1",
           name: "资源监控微应用",
-          cardSubtitle: "资源监控微应用相关前后台",
+          newDescription: "资源监控微应用相关前后台",
         },
       },
       slots: {
@@ -617,8 +617,7 @@ export const CardItemStory: Story = {
             urlTemplate: "/#{id}",
             fields: {
               cardTitle: "name",
-              cardSubtitle: "cardSubtitle",
-              descriptionList: "descriptionList",
+              newDescription: "newDescription",
               topInformation: "topInformation",
             },
             icon: {
@@ -631,7 +630,7 @@ export const CardItemStory: Story = {
             dataSource: {
               id: "1",
               name: "资源监控微应用",
-              cardSubtitle: "资源监控微应用相关前后台",
+              newDescription: "资源监控微应用相关前后台",
               topInformation: "初级应用",
             },
           },

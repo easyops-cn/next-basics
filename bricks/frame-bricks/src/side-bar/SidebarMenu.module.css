@@ -18,14 +18,19 @@
       color: var(--color-normal-icon) !important;
     }
   }
+  :global(.ant-menu-item-selected) {
+    svg {
+      color: white;
+    }
+  }
 
   .newMenuItemIcon {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     vertical-align: middle;
-    margin-top: 2px;
+    margin-top: 3px;
     svg {
-      font-size: 18px;
+      font-size: 20px;
     }
     > :global(.anticon) {
       margin-right: 0;
