@@ -665,7 +665,7 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
               </>
             }
           >
-            {itemElem(false)}
+            {itemElem(true)}
           </Popover>
         ) : (
           itemElem(true)

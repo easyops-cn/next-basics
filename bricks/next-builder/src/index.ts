@@ -69,3 +69,4 @@ import "./shared/components/contract-auto-complete";
 import "./data-providers/GetMatchRoute";
 import "./data-providers/CreateRouteWithTheme";
 // !Lazy: import "./storyboard-lint-result";
+import "./custom-processors/getBrickDataFromModel";
