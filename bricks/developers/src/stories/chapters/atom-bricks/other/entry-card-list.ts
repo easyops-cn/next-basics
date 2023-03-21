@@ -120,11 +120,6 @@ export const story: Story = {
     {
       template: "general-list.entry-card-list",
       params: {
-        cardProps: {
-          style: {
-            width: "500px",
-          },
-        },
         fields: {
           cardTitle: "name",
           icon: "icon",
@@ -192,24 +187,6 @@ export const story: Story = {
               lib: "easyops",
               category: "model",
               icon: "f5",
-            },
-          },
-          {
-            id: "8",
-            name: "Oracle",
-            icon: {
-              lib: "easyops",
-              category: "model",
-              icon: "oracle",
-            },
-          },
-          {
-            id: "9",
-            name: "Docker镜像",
-            icon: {
-              lib: "easyops",
-              category: "model",
-              icon: "docker-image",
             },
           },
         ],
