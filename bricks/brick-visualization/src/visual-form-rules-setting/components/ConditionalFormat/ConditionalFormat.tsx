@@ -294,8 +294,8 @@ export function ConditionalFormat(
           [
             "equal",
             "notEqual",
-            "isNull",
-            "isNotNull",
+            "isNil",
+            "isNotNil",
             "isTrue",
             "isFalse",
           ].includes(item.value)
@@ -775,7 +775,7 @@ export function ConditionalFormat(
                       />
                     </div>
                   </div>
-                  {!["isNull", "isNotNull", "isTrue", "isFalse"].includes(
+                  {!["isNil", "isNotNil", "isTrue", "isFalse"].includes(
                     condition.operation
                   ) && (
                     <div className={styles.groupBottom}>

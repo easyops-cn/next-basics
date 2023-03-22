@@ -271,12 +271,6 @@ describe("ConditionalFormat", () => {
               },
               {
                 op: "or",
-                operation: "isNull",
-                origin: "USER(jjj)",
-                value: "aaa",
-              },
-              {
-                op: "or",
                 operation: "startWith",
                 origin: "AUTO-COMPLETE(kkk)",
                 value: "aaa",
@@ -326,7 +320,7 @@ describe("ConditionalFormat", () => {
     const wrapper = mount(<ConditionalFormatAdapter {...newProps} />);
     expect(wrapper.find(Modal).props().visible).toBeFalsy();
     expect(wrapper.find(Input).length).toBe(7);
-    expect(wrapper.find(Select).length).toBe(48);
+    expect(wrapper.find(Select).length).toBe(46);
   });
 
   it("should render correctly based on form item type 2", () => {
@@ -421,13 +415,6 @@ describe("ConditionalFormat", () => {
               },
               {
                 op: "or",
-                operation: "isNull",
-                origin: "USER(jjj)",
-                value: "aaa",
-                compareValType: "fixed",
-              },
-              {
-                op: "or",
                 operation: "startWith",
                 origin: "AUTO-COMPLETE(kkk)",
                 value: "aaa",
@@ -482,7 +469,7 @@ describe("ConditionalFormat", () => {
     const wrapper = mount(<ConditionalFormatAdapter {...newProps} />);
     expect(wrapper.find(Modal).props().visible).toBeFalsy();
     expect(wrapper.find(Input).length).toBe(5);
-    expect(wrapper.find(Select).length).toBe(50);
+    expect(wrapper.find(Select).length).toBe(48);
     wrapper
       .find(Select)
       .forEach((item) => item.invoke("onChange")("INPUT(aaa)", []));
