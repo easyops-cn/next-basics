@@ -60,6 +60,24 @@ export function GeneralTextArea(
     onHandleBlur?.(e.target.value);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent): void => {
+    const key =
+      e.key ||
+      /* istanbul ignore next: compatibility */ e.keyCode ||
+      /* istanbul ignore next: compatibility */ e.which;
+    if (["Tab", 9].includes(key)) {
+      e.preventDefault();
+      const { selectionStart, selectionEnd } =
+        ref.current.resizableTextArea.textArea;
+      ref.current.resizableTextArea.textArea.setRangeText(
+        "\t",
+        selectionStart,
+        selectionEnd,
+        "end"
+      );
+    }
+  };
+
   return (
     <FormItemWrapper {...props}>
       <Input.TextArea
@@ -67,6 +85,7 @@ export function GeneralTextArea(
         style={inputBoxStyle}
         autoSize={autoSize}
         readOnly={readOnly}
+        onKeyDown={handleKeyDown}
         disabled={disabled}
         value={value}
         placeholder={placeholder}

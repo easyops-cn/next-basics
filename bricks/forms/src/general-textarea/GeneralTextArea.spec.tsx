@@ -21,6 +21,19 @@ describe("GeneralTextArea", () => {
     await (global as any).flushPromises();
     expect(handleChange).toBeCalledWith("hello, text area");
 
+    const preventDefault = jest.fn();
+    wrapper.find(Input.TextArea).invoke("onKeyDown")({
+      key: "a",
+      preventDefault,
+    } as any);
+    expect(preventDefault).not.toBeCalled();
+
+    wrapper.find(Input.TextArea).invoke("onKeyDown")({
+      key: "Tab",
+      preventDefault,
+    } as any);
+    expect(preventDefault).toBeCalled();
+
     wrapper.find(Input.TextArea).invoke("onBlur")({
       target: { value: "hello, text area" },
     });
