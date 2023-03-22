@@ -57,9 +57,9 @@ export function CacheActionList({
       case "insert.snippet":
         return data.brick;
       case "batch.op":
-        return `删除:${data.delete.length ?? 0}, 新增:${
-          data.insert.length ?? 0
-        }, 更新:${data.update.length ?? 0}`;
+        return `删除:${data.delete?.length ?? 0}, 新增:${
+          data.insert?.length ?? 0
+        }, 更新:${data.update?.length ?? 0}`;
     }
   };
 
