@@ -91,10 +91,10 @@
   }
 
   .menuItemIcon + .menuText {
-    margin-left: 12px;
+    margin-left: 14px;
   }
   .newMenuItemIcon + .menuText {
-    margin-left: 12px;
+    margin-left: 14px;
   }
 
   .simpleMenuItem,
@@ -225,7 +225,7 @@
   .simpleMenuItem,
   .subMenuWrapper :global(.ant-menu-submenu-title),
   .groupWrapper :global(.ant-menu-item-group-title) {
-    padding: 0 13px 0 8px !important;
+    padding: 0 13px 0 7.5px !important;
   }
 
   .menuItemIcon + .menuText {
