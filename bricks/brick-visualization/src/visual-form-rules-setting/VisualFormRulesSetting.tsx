@@ -33,8 +33,8 @@ const FormItemType = [
   "TEXTAREA",
 ];
 const actionTypeOptions: Record<string, any>[] = [
-  { value: "show", label: "show" },
-  { value: "hide", label: "hide" },
+  { value: "show", label: "显示" },
+  { value: "hide", label: "隐藏" },
 ];
 export enum OpType {
   Common = "common",
@@ -46,8 +46,8 @@ export enum OpType {
 }
 
 const operationOptions: any[] = [
-  { value: "isNull", label: "为空", type: OpType.Common },
-  { value: "isNotNull", label: "不为空", type: OpType.Common },
+  { value: "isNil", label: "为空", type: OpType.Common },
+  { value: "isNotNil", label: "不为空", type: OpType.Common },
   { value: "equal", label: "等于", type: OpType.Common },
   { value: "notEqual", label: "不等于", type: OpType.Common },
   { value: "contain", label: "包含", type: OpType.String },
