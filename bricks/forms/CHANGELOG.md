@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.266.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.265.14...@next-bricks/forms@1.266.0) (2023-03-22)
+
+
+### Bug Fixes
+
+* 去掉不必要的import ([ddfb682](https://github.com/easyops-cn/next-basics/commit/ddfb68250d00d9ac4633b53077df4fb662728ed1))
+
+
+### Features
+
+* textArea支持输入tab键 close ARTIFACT-555 ([ae6a0b4](https://github.com/easyops-cn/next-basics/commit/ae6a0b432265347eda874886004bdea6c83bc8e6))
+
+
+
+
+
 ## [1.265.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.265.13...@next-bricks/forms@1.265.14) (2023-03-17)
 
 
