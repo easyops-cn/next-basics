@@ -566,7 +566,11 @@ export function ConditionalFormat(
             value={condition.value}
             placeholder="Enter a value"
             onChange={(e) =>
-              handleConditionValueChange(e.target.value, groupNum, conditionNum)
+              handleConditionValueChange(
+                e?.target?.value,
+                groupNum,
+                conditionNum
+              )
             }
           />
         );
@@ -577,7 +581,11 @@ export function ConditionalFormat(
             value={condition.value}
             placeholder="Enter a value"
             onChange={(e) =>
-              handleConditionValueChange(e.target.value, groupNum, conditionNum)
+              handleConditionValueChange(
+                e?.target?.value,
+                groupNum,
+                conditionNum
+              )
             }
           />
         ) : operation === "withinNumericalRange" ||
@@ -646,7 +654,11 @@ export function ConditionalFormat(
             value={condition.value}
             placeholder="Enter a value"
             onChange={(e) =>
-              handleConditionValueChange(e.target.value, groupNum, conditionNum)
+              handleConditionValueChange(
+                e?.target?.value,
+                groupNum,
+                conditionNum
+              )
             }
           />
         );
@@ -663,7 +675,11 @@ export function ConditionalFormat(
             value={condition.value}
             placeholder="Enter a value"
             onChange={(e) =>
-              handleConditionValueChange(e.target.value, groupNum, conditionNum)
+              handleConditionValueChange(
+                e?.target?.value,
+                groupNum,
+                conditionNum
+              )
             }
           />
         );

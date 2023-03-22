@@ -10,7 +10,7 @@ import {
   CloseCircleOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
-import { Modal, Select, Input, TimePicker } from "antd";
+import { Modal, Select, Input } from "antd";
 
 const props = {
   originOptions: [
@@ -483,5 +483,9 @@ describe("ConditionalFormat", () => {
     expect(wrapper.find(Modal).props().visible).toBeFalsy();
     expect(wrapper.find(Input).length).toBe(5);
     expect(wrapper.find(Select).length).toBe(50);
+    wrapper
+      .find(Select)
+      .forEach((item) => item.invoke("onChange")("INPUT(aaa)", []));
+    wrapper.find(Input).forEach((item) => item.invoke("onChange")(null));
   });
 });
