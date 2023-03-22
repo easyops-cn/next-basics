@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.23.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.22.0...@next-bricks/brick-visualization@1.23.0) (2023-03-22)
+
+
+### Features
+
+* edit operation value ([a8080a8](https://github.com/easyops-cn/next-basics/commit/a8080a81514148ab0bae139db76706368b3b9ab5))
+
+
+
+
+
 # [1.22.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.21.0...@next-bricks/brick-visualization@1.22.0) (2023-03-22)
 
 
