@@ -62,9 +62,7 @@ export function GeneralTextArea(
 
   const handleKeyDown = (e: React.KeyboardEvent): void => {
     const key =
-      e.key ||
-      /* istanbul ignore next: compatibility */ e.keyCode ||
-      /* istanbul ignore next: compatibility */ e.which;
+      e.key || e.keyCode || /* istanbul ignore next: compatibility */ e.which;
     if (["Tab", 9].includes(key)) {
       e.preventDefault();
       const { selectionStart, selectionEnd } =
