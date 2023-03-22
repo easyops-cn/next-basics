@@ -10,7 +10,7 @@ import {
   CloseCircleOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
-import { Modal, Select, Input } from "antd";
+import { Modal, Select, Input, TimePicker } from "antd";
 
 const props = {
   originOptions: [
@@ -261,7 +261,7 @@ describe("ConditionalFormat", () => {
                 op: "and",
                 operation: "contain",
                 origin: "DATE(hhh)",
-                value: "2000 12 1",
+                value: "2000-12-1",
               },
               {
                 op: "or",
@@ -325,5 +325,163 @@ describe("ConditionalFormat", () => {
     };
     const wrapper = mount(<ConditionalFormatAdapter {...newProps} />);
     expect(wrapper.find(Modal).props().visible).toBeFalsy();
+    expect(wrapper.find(Input).length).toBe(7);
+    expect(wrapper.find(Select).length).toBe(48);
+  });
+
+  it("should render correctly based on form item type 2", () => {
+    const newProps = {
+      ...props,
+      formChildren: [
+        {
+          brick: "forms.general-input",
+          properties: '{"label":"aaa","name":"aaa"}',
+        },
+        {
+          brick: "forms.general-select",
+          properties: '{"label":"bbb","name":"bbb"}',
+        },
+        {
+          brick: "forms.general-select",
+          properties: '{"label":"ccc","name":"ccc","mode":"multiple"}',
+        },
+        {
+          brick: "forms.general-slide",
+          properties: '{"label":"fff","name":"fff","range":false}',
+        },
+      ],
+      value: {
+        groups: [
+          {
+            conditions: [
+              {
+                op: "and",
+                operation: "contain",
+                origin: "INPUT(aaa)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SELECT(bbb)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SELECT(ccc)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "in",
+                origin: "RADIO(ddd)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "EDITOR(eee)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SLIDE(fff)",
+                value: 10,
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SWITCH(ggg)",
+                value: false,
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "withinTimeRange",
+                origin: "DATE(hhh)",
+                value: "2000-12-1",
+                compareValType: "fixed",
+                rangeValue: ["2000-12-1", "2000-12-3"],
+              },
+              {
+                op: "or",
+                operation: "withinTimeRange",
+                origin: "TIME(iii)",
+                value: "10:22:11",
+                compareValType: "fixed",
+                rangeValue: ["10:22:11", "10:22:13"],
+              },
+              {
+                op: "or",
+                operation: "isNull",
+                origin: "USER(jjj)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "or",
+                operation: "startWith",
+                origin: "AUTO-COMPLETE(kkk)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "or",
+                operation: "larger",
+                origin: "INPUT-NUMBER(lll)",
+                value: 32,
+                compareValType: "fixed",
+              },
+              {
+                op: "or",
+                operation: "endWith",
+                origin: "TEXTAREA(mmm)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "INPUT(nnn)",
+                value: "aaa",
+                compareValType: "field",
+                fieldValue: "TEXTAREA(mmm)",
+              },
+              {
+                op: "or",
+                operation: "notWithinNumericalRange",
+                origin: "INPUT-NUMBER(ooo)",
+                rangeValue: [32, 44],
+                compareValType: "fixed",
+              },
+            ],
+          },
+          {
+            conditions: [
+              {
+                origin: "CHECKBOX(ppp)",
+                operation: "equal",
+                value: ["bbba"],
+                op: "and",
+                compareValType: "fixed",
+              },
+            ],
+          },
+        ],
+        op: "and",
+      },
+    };
+    const wrapper = mount(<ConditionalFormatAdapter {...newProps} />);
+    expect(wrapper.find(Modal).props().visible).toBeFalsy();
+    expect(wrapper.find(Input).length).toBe(5);
+    expect(wrapper.find(Select).length).toBe(50);
   });
 });
