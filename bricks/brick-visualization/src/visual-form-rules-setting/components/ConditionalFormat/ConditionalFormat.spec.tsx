@@ -15,17 +15,24 @@ import { Modal, Select, Input } from "antd";
 const props = {
   originOptions: [
     {
-      label: "1",
-      value: "1",
+      label: "INPUT(aaa)",
+      value: "INPUT(aaa)",
     },
   ],
   operationOptions: [
     {
-      label: "1",
-      value: "1",
+      label: "equal",
+      value: "equal",
     },
   ],
   onChange: jest.fn(),
+  formChildren: [
+    {
+      brick: "forms.general-input",
+      properties:
+        '{"dataset":{"testid":"demo-name-input"},"label":"name","name":"name"}',
+    },
+  ],
   value: {
     groups: [
       {
@@ -34,7 +41,7 @@ const props = {
             conditionId: "condition_39",
             op: "and",
             operation: "contain",
-            origin: "表单项1",
+            origin: "INPUT(aaa)",
             value: "aaa",
             compareValType: "fixed",
           },
@@ -42,7 +49,7 @@ const props = {
             conditionId: "condition_40",
             op: "and",
             operation: "contain",
-            origin: "表单项1",
+            origin: "INPUT(bbb)",
             value: "aaa",
             compareValType: "fixed",
           },
@@ -52,7 +59,7 @@ const props = {
       {
         conditions: [
           {
-            origin: "表单项1",
+            origin: "INPUT(ccc)",
             operation: "equal",
             value: "bbba",
             op: "and",
@@ -77,7 +84,7 @@ describe("ConditionalFormat", () => {
     const wrapper = mount(<ConditionalFormatAdapter {...props} />);
     wrapper.find(PlusOutlined).at(0).simulate("click");
     wrapper.update();
-    wrapper.find(Modal).find(Select).invoke("onChange")(["1"]);
+    wrapper.find(Modal).find(Select).invoke("onChange")("INPUT(aaa)");
     wrapper.update();
     wrapper.find(Modal).invoke("onOk")();
     wrapper.update();
@@ -88,7 +95,7 @@ describe("ConditionalFormat", () => {
     const wrapper = mount(<ConditionalFormatAdapter {...props} />);
     wrapper.find(PlusOutlined).at(0).simulate("click");
     wrapper.update();
-    wrapper.find(Modal).find(Select).invoke("onChange")(["1"]);
+    wrapper.find(Modal).find(Select).invoke("onChange")("INPUT(aaa)");
     wrapper.update();
     wrapper.find(Modal).invoke("onCancel")();
     wrapper.update();
@@ -102,7 +109,7 @@ describe("ConditionalFormat", () => {
     };
     const wrapper = mount(<ConditionalFormatAdapter {...newProps} />);
     wrapper.find(PlusOutlined).at(0).simulate("click");
-    wrapper.find(Modal).find(Select).invoke("onChange")(["1"]);
+    wrapper.find(Modal).find(Select).invoke("onChange")("INPUT(aaa)");
     wrapper.update();
     wrapper.find(Modal).invoke("onOk")();
     wrapper.update();
@@ -155,13 +162,13 @@ describe("ConditionalFormat", () => {
               {
                 op: "and",
                 operation: "contain",
-                origin: "表单项1",
+                origin: "INPUT(aaa)",
                 value: "aaa",
               },
               {
                 op: "and",
                 operation: "contain",
-                origin: "表单项1",
+                origin: "INPUT(bbb)",
                 value: "aaa",
               },
             ],
@@ -169,7 +176,7 @@ describe("ConditionalFormat", () => {
           {
             conditions: [
               {
-                origin: "表单项1",
+                origin: "INPUT(ccc)",
                 operation: "equal",
                 value: "bbba",
                 op: "and",

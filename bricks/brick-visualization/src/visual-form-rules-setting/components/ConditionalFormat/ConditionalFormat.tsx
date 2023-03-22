@@ -288,7 +288,7 @@ export function ConditionalFormat(
       case "EDITOR":
         return commonStringOp;
       case "SLIDE":
-        return originProperty.range ? commonOp : numberOp;
+        return originProperty?.range ? commonOp : numberOp;
       case "SWITCH":
         return operationOptions.filter((item) =>
           [
@@ -307,8 +307,8 @@ export function ConditionalFormat(
       case "USER":
         return arrayOp;
       case "SELECT":
-        return originProperty.mode === "multiple" ||
-          originProperty.mode === "tags"
+        return originProperty?.mode === "multiple" ||
+          originProperty?.mode === "tags"
           ? arrayOp
           : advancedStringOp;
       case "AUTO-COMPLETE":
@@ -478,11 +478,11 @@ export function ConditionalFormat(
         return operation === "withinTimeRange" ||
           operation === "notWithinTimeRange" ? (
           <TimePicker.RangePicker
-            {...originProperty.configProps}
+            {...originProperty?.configProps}
             value={
               condition.rangeValue &&
               condition.rangeValue.map((r) =>
-                moment(r, originProperty.configProps?.format ?? "HH:mm:ss")
+                moment(r, originProperty?.configProps?.format ?? "HH:mm:ss")
               )
             }
             onChange={(time: moment.Moment, timeString: string) =>
@@ -495,12 +495,12 @@ export function ConditionalFormat(
           />
         ) : (
           <TimePicker
-            {...originProperty.configProps}
+            {...originProperty?.configProps}
             value={
               condition.value &&
               moment(
                 condition.value,
-                originProperty.configProps?.format ?? "HH:mm:ss"
+                originProperty?.configProps?.format ?? "HH:mm:ss"
               )
             }
             onChange={(time: moment.Moment, timeString: string) =>
@@ -518,7 +518,7 @@ export function ConditionalFormat(
               condition.rangeValue.map((r) =>
                 moment(
                   r,
-                  originProperty.configProps?.format ?? "ddd MMM DD YYYY"
+                  originProperty?.configProps?.format ?? "ddd MMM DD YYYY"
                 )
               )
             }
@@ -537,7 +537,7 @@ export function ConditionalFormat(
               condition.value &&
               moment(
                 condition.value,
-                originProperty.configProps?.format ?? "ddd MMM DD YYYY"
+                originProperty?.configProps?.format ?? "ddd MMM DD YYYY"
               )
             }
             onChange={(time: moment.Moment, timeString: string) =>
@@ -546,8 +546,8 @@ export function ConditionalFormat(
           />
         );
       case "SELECT":
-        return originProperty.mode === "multiple" ||
-          originProperty.mode === "tags" ||
+        return originProperty?.mode === "multiple" ||
+          originProperty?.mode === "tags" ||
           operation === "in" ||
           operation === "notIn" ? (
           <Select
@@ -571,7 +571,7 @@ export function ConditionalFormat(
           />
         );
       case "SLIDE":
-        return originProperty.range ? (
+        return originProperty?.range ? (
           <Input
             style={{ width: "260px" }}
             value={condition.value}
