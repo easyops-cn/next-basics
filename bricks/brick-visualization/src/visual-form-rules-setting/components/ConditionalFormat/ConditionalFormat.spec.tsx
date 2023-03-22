@@ -190,4 +190,140 @@ describe("ConditionalFormat", () => {
     const wrapper = mount(<ConditionalFormatAdapter {...newProps} />);
     expect(wrapper.find(Modal).props().visible).toBeFalsy();
   });
+
+  it("should render correctly based on form item type", () => {
+    const newProps = {
+      ...props,
+      formChildren: [
+        {
+          brick: "forms.general-input",
+          properties:
+            '{"dataset":{"testid":"demo-name-input"},"label":"aaa","name":"aaa"}',
+        },
+        {
+          brick: "forms.general-select",
+          properties:
+            '{"dataset":{"testid":"demo-name-input"},"label":"bbb","name":"bbb"}',
+        },
+        {
+          brick: "forms.general-select",
+          properties:
+            '{"dataset":{"testid":"demo-name-input"},"label":"ccc","name":"ddd","mode":"multiple"}',
+        },
+      ],
+      value: {
+        groups: [
+          {
+            conditions: [
+              {
+                op: "and",
+                operation: "contain",
+                origin: "INPUT(aaa)",
+                value: "aaa",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SELECT(bbb)",
+                value: "aaa",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SELECT(ccc)",
+                value: "aaa",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "RADIO(ddd)",
+                value: "aaa",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "EDITOR(eee)",
+                value: "aaa",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SLIDE(fff)",
+                value: 10,
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SWITCH(ggg)",
+                value: false,
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "DATE(hhh)",
+                value: "2000 12 1",
+              },
+              {
+                op: "or",
+                operation: "contain",
+                origin: "TIME(iii)",
+                value: "10:22:11",
+              },
+              {
+                op: "or",
+                operation: "isNull",
+                origin: "USER(jjj)",
+                value: "aaa",
+              },
+              {
+                op: "or",
+                operation: "startWith",
+                origin: "AUTO-COMPLETE(kkk)",
+                value: "aaa",
+              },
+              {
+                op: "or",
+                operation: "larger",
+                origin: "INPUT-NUMBER(lll)",
+                value: 32,
+              },
+              {
+                op: "or",
+                operation: "endWith",
+                origin: "TEXTAREA(mmm)",
+                value: "aaa",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "INPUT(nnn)",
+                value: "aaa",
+                compareValType: "field",
+                fieldValue: "TEXTAREA(mmm)",
+              },
+              {
+                op: "or",
+                operation: "notWithinNumericalRange",
+                origin: "INPUT-NUMBER(ooo)",
+                rangeValue: [32, 44],
+              },
+            ],
+          },
+          {
+            conditions: [
+              {
+                origin: "CHECKBOX(zzz)",
+                operation: "equal",
+                value: ["bbba"],
+                op: "and",
+              },
+            ],
+          },
+        ],
+        op: "and",
+      },
+    };
+    const wrapper = mount(<ConditionalFormatAdapter {...newProps} />);
+    expect(wrapper.find(Modal).props().visible).toBeFalsy();
+  });
 });
