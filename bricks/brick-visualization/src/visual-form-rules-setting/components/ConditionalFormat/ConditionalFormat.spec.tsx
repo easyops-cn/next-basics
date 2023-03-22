@@ -15,17 +15,24 @@ import { Modal, Select, Input } from "antd";
 const props = {
   originOptions: [
     {
-      label: "1",
-      value: "1",
+      label: "INPUT(aaa)",
+      value: "INPUT(aaa)",
     },
   ],
   operationOptions: [
     {
-      label: "1",
-      value: "1",
+      label: "equal",
+      value: "equal",
     },
   ],
   onChange: jest.fn(),
+  formChildren: [
+    {
+      brick: "forms.general-input",
+      properties:
+        '{"dataset":{"testid":"demo-name-input"},"label":"name","name":"name"}',
+    },
+  ],
   value: {
     groups: [
       {
@@ -34,7 +41,7 @@ const props = {
             conditionId: "condition_39",
             op: "and",
             operation: "contain",
-            origin: "表单项1",
+            origin: "INPUT(aaa)",
             value: "aaa",
             compareValType: "fixed",
           },
@@ -42,7 +49,7 @@ const props = {
             conditionId: "condition_40",
             op: "and",
             operation: "contain",
-            origin: "表单项1",
+            origin: "INPUT(bbb)",
             value: "aaa",
             compareValType: "fixed",
           },
@@ -52,7 +59,7 @@ const props = {
       {
         conditions: [
           {
-            origin: "表单项1",
+            origin: "INPUT(ccc)",
             operation: "equal",
             value: "bbba",
             op: "and",
@@ -77,7 +84,7 @@ describe("ConditionalFormat", () => {
     const wrapper = mount(<ConditionalFormatAdapter {...props} />);
     wrapper.find(PlusOutlined).at(0).simulate("click");
     wrapper.update();
-    wrapper.find(Modal).find(Select).invoke("onChange")(["1"]);
+    wrapper.find(Modal).find(Select).invoke("onChange")("INPUT(aaa)");
     wrapper.update();
     wrapper.find(Modal).invoke("onOk")();
     wrapper.update();
@@ -88,7 +95,7 @@ describe("ConditionalFormat", () => {
     const wrapper = mount(<ConditionalFormatAdapter {...props} />);
     wrapper.find(PlusOutlined).at(0).simulate("click");
     wrapper.update();
-    wrapper.find(Modal).find(Select).invoke("onChange")(["1"]);
+    wrapper.find(Modal).find(Select).invoke("onChange")("INPUT(aaa)");
     wrapper.update();
     wrapper.find(Modal).invoke("onCancel")();
     wrapper.update();
@@ -102,7 +109,7 @@ describe("ConditionalFormat", () => {
     };
     const wrapper = mount(<ConditionalFormatAdapter {...newProps} />);
     wrapper.find(PlusOutlined).at(0).simulate("click");
-    wrapper.find(Modal).find(Select).invoke("onChange")(["1"]);
+    wrapper.find(Modal).find(Select).invoke("onChange")("INPUT(aaa)");
     wrapper.update();
     wrapper.find(Modal).invoke("onOk")();
     wrapper.update();
@@ -155,13 +162,13 @@ describe("ConditionalFormat", () => {
               {
                 op: "and",
                 operation: "contain",
-                origin: "表单项1",
+                origin: "INPUT(aaa)",
                 value: "aaa",
               },
               {
                 op: "and",
                 operation: "contain",
-                origin: "表单项1",
+                origin: "INPUT(bbb)",
                 value: "aaa",
               },
             ],
@@ -169,7 +176,7 @@ describe("ConditionalFormat", () => {
           {
             conditions: [
               {
-                origin: "表单项1",
+                origin: "INPUT(ccc)",
                 operation: "equal",
                 value: "bbba",
                 op: "and",
@@ -182,5 +189,303 @@ describe("ConditionalFormat", () => {
     };
     const wrapper = mount(<ConditionalFormatAdapter {...newProps} />);
     expect(wrapper.find(Modal).props().visible).toBeFalsy();
+  });
+
+  it("should render correctly based on form item type", () => {
+    const newProps = {
+      ...props,
+      formChildren: [
+        {
+          brick: "forms.general-input",
+          properties:
+            '{"dataset":{"testid":"demo-name-input"},"label":"aaa","name":"aaa"}',
+        },
+        {
+          brick: "forms.general-select",
+          properties:
+            '{"dataset":{"testid":"demo-name-input"},"label":"bbb","name":"bbb"}',
+        },
+        {
+          brick: "forms.general-select",
+          properties:
+            '{"dataset":{"testid":"demo-name-input"},"label":"ccc","name":"ddd","mode":"multiple"}',
+        },
+      ],
+      value: {
+        groups: [
+          {
+            conditions: [
+              {
+                op: "and",
+                operation: "contain",
+                origin: "INPUT(aaa)",
+                value: "aaa",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SELECT(bbb)",
+                value: "aaa",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SELECT(ccc)",
+                value: "aaa",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "RADIO(ddd)",
+                value: "aaa",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "EDITOR(eee)",
+                value: "aaa",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SLIDE(fff)",
+                value: 10,
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SWITCH(ggg)",
+                value: false,
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "DATE(hhh)",
+                value: "2000-12-1",
+              },
+              {
+                op: "or",
+                operation: "contain",
+                origin: "TIME(iii)",
+                value: "10:22:11",
+              },
+              {
+                op: "or",
+                operation: "isNull",
+                origin: "USER(jjj)",
+                value: "aaa",
+              },
+              {
+                op: "or",
+                operation: "startWith",
+                origin: "AUTO-COMPLETE(kkk)",
+                value: "aaa",
+              },
+              {
+                op: "or",
+                operation: "larger",
+                origin: "INPUT-NUMBER(lll)",
+                value: 32,
+              },
+              {
+                op: "or",
+                operation: "endWith",
+                origin: "TEXTAREA(mmm)",
+                value: "aaa",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "INPUT(nnn)",
+                value: "aaa",
+                compareValType: "field",
+                fieldValue: "TEXTAREA(mmm)",
+              },
+              {
+                op: "or",
+                operation: "notWithinNumericalRange",
+                origin: "INPUT-NUMBER(ooo)",
+                rangeValue: [32, 44],
+              },
+            ],
+          },
+          {
+            conditions: [
+              {
+                origin: "CHECKBOX(zzz)",
+                operation: "equal",
+                value: ["bbba"],
+                op: "and",
+              },
+            ],
+          },
+        ],
+        op: "and",
+      },
+    };
+    const wrapper = mount(<ConditionalFormatAdapter {...newProps} />);
+    expect(wrapper.find(Modal).props().visible).toBeFalsy();
+    expect(wrapper.find(Input).length).toBe(7);
+    expect(wrapper.find(Select).length).toBe(48);
+  });
+
+  it("should render correctly based on form item type 2", () => {
+    const newProps = {
+      ...props,
+      formChildren: [
+        {
+          brick: "forms.general-input",
+          properties: '{"label":"aaa","name":"aaa"}',
+        },
+        {
+          brick: "forms.general-select",
+          properties: '{"label":"bbb","name":"bbb"}',
+        },
+        {
+          brick: "forms.general-select",
+          properties: '{"label":"ccc","name":"ccc","mode":"multiple"}',
+        },
+        {
+          brick: "forms.general-slide",
+          properties: '{"label":"fff","name":"fff","range":false}',
+        },
+      ],
+      value: {
+        groups: [
+          {
+            conditions: [
+              {
+                op: "and",
+                operation: "contain",
+                origin: "INPUT(aaa)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SELECT(bbb)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SELECT(ccc)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "in",
+                origin: "RADIO(ddd)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "EDITOR(eee)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SLIDE(fff)",
+                value: 10,
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "SWITCH(ggg)",
+                value: false,
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "withinTimeRange",
+                origin: "DATE(hhh)",
+                value: "2000-12-1",
+                compareValType: "fixed",
+                rangeValue: ["2000-12-1", "2000-12-3"],
+              },
+              {
+                op: "or",
+                operation: "withinTimeRange",
+                origin: "TIME(iii)",
+                value: "10:22:11",
+                compareValType: "fixed",
+                rangeValue: ["10:22:11", "10:22:13"],
+              },
+              {
+                op: "or",
+                operation: "isNull",
+                origin: "USER(jjj)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "or",
+                operation: "startWith",
+                origin: "AUTO-COMPLETE(kkk)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "or",
+                operation: "larger",
+                origin: "INPUT-NUMBER(lll)",
+                value: 32,
+                compareValType: "fixed",
+              },
+              {
+                op: "or",
+                operation: "endWith",
+                origin: "TEXTAREA(mmm)",
+                value: "aaa",
+                compareValType: "fixed",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "INPUT(nnn)",
+                value: "aaa",
+                compareValType: "field",
+                fieldValue: "TEXTAREA(mmm)",
+              },
+              {
+                op: "or",
+                operation: "notWithinNumericalRange",
+                origin: "INPUT-NUMBER(ooo)",
+                rangeValue: [32, 44],
+                compareValType: "fixed",
+              },
+            ],
+          },
+          {
+            conditions: [
+              {
+                origin: "CHECKBOX(ppp)",
+                operation: "equal",
+                value: ["bbba"],
+                op: "and",
+                compareValType: "fixed",
+              },
+            ],
+          },
+        ],
+        op: "and",
+      },
+    };
+    const wrapper = mount(<ConditionalFormatAdapter {...newProps} />);
+    expect(wrapper.find(Modal).props().visible).toBeFalsy();
+    expect(wrapper.find(Input).length).toBe(5);
+    expect(wrapper.find(Select).length).toBe(50);
+    wrapper
+      .find(Select)
+      .forEach((item) => item.invoke("onChange")("INPUT(aaa)", []));
+    wrapper.find(Input).forEach((item) => item.invoke("onChange")(null));
   });
 });
