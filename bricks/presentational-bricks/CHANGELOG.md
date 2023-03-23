@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.289.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.289.0...@next-bricks/presentational-bricks@1.289.1) (2023-03-23)
+
+
+### Bug Fixes
+
+* 修改单元测试 ([033ae15](https://github.com/easyops-cn/next-basics/commit/033ae15cc0d72098f99f048d66a909aae5fdb69e))
+* 单元测试 ([232eb59](https://github.com/easyops-cn/next-basics/commit/232eb59275e245cb48e47d3c54346d8eef83973b))
+* 卡片组件升级验收问题汇总 ([63f1b6c](https://github.com/easyops-cn/next-basics/commit/63f1b6c5ce4b0988aa802aef0855ee9a4463a11c))
+* 增加单元测试 ([bab6aa5](https://github.com/easyops-cn/next-basics/commit/bab6aa54ad5f7ce7757bab2be20c23dc0be45a37))
+
+
+
+
+
 # [1.289.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.288.0...@next-bricks/presentational-bricks@1.289.0) (2023-03-21)
 
 
