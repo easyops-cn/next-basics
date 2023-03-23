@@ -16,7 +16,7 @@ import {
   DatePicker,
 } from "antd";
 import { uniqueId, cloneDeep, isEmpty, isNil, keyBy } from "lodash";
-import { OpType } from "../constants";
+import { Condition, OpType } from "../constants";
 import moment from "moment";
 import { InputGroup } from "../../../../../forms/src/input-with-unit/InputWithUnit";
 import { LegacyUserSelectFormItem } from "../../../../../forms/src/user-or-user-group-select/UserOrUserGroupSelect";
@@ -30,17 +30,6 @@ interface ConditionalFormatProps extends FormItemWrapperProps {
   originOptions?: { label: string; value: string }[];
   operationOptions?: { label: string; value: string; type: string }[];
   formChildren: Record<string, any>[];
-}
-
-interface Condition {
-  origin: string;
-  operation: string;
-  compareValType?: string;
-  value?: any;
-  fieldValue?: string;
-  op: string;
-  conditionId?: string;
-  rangeValue?: any[];
 }
 
 interface Group {
@@ -472,6 +461,7 @@ export function ConditionalFormat(
                   conditionNum
                 );
               }}
+              staticList={[]}
             />
           </div>
         );
@@ -519,10 +509,7 @@ export function ConditionalFormat(
             value={
               condition.rangeValue &&
               condition.rangeValue.map((r) =>
-                moment(
-                  r,
-                  originProperty?.configProps?.format ?? "ddd MMM DD YYYY"
-                )
+                moment(r, originProperty?.configProps?.format ?? "YYYY-MM-DD")
               )
             }
             style={{ width: "260px" }}
@@ -541,7 +528,7 @@ export function ConditionalFormat(
               condition.value &&
               moment(
                 condition.value,
-                originProperty?.configProps?.format ?? "ddd MMM DD YYYY"
+                originProperty?.configProps?.format ?? "YYYY-MM-DD"
               )
             }
             style={{ width: "260px" }}

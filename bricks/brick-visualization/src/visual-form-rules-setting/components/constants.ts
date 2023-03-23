@@ -23,9 +23,9 @@ export const operationOptions: any[] = [
   { value: "withinTimeRange", label: "在时间范围内", type: OpType.Time },
   { value: "notWithinTimeRange", label: "不在时间范围内", type: OpType.Time },
   { value: "earlier", label: "早于", type: OpType.Time },
-  { value: "notEarlier", label: "晚于", type: OpType.Time },
-  { value: "later", label: "早于等于", type: OpType.Time },
-  { value: "notLater", label: "晚于等于", type: OpType.Time },
+  { value: "notLater", label: "早于等于", type: OpType.Time },
+  { value: "later", label: "晚于", type: OpType.Time },
+  { value: "notEarlier", label: "晚于等于", type: OpType.Time },
   { value: "larger", label: "大于", type: OpType.Number },
   { value: "smaller", label: "小于", type: OpType.Number },
   { value: "greaterOrEqual", label: "大于等于", type: OpType.Number },
@@ -42,3 +42,14 @@ export const operationOptions: any[] = [
   { value: "isTrue", label: "为真", type: OpType.Boolean },
   { value: "isFalse", label: "为假", type: OpType.Boolean },
 ];
+
+export interface Condition {
+  origin: string;
+  operation: string;
+  compareValType?: string;
+  value?: any;
+  fieldValue?: string;
+  op: string;
+  conditionId?: string;
+  rangeValue?: any[];
+}
