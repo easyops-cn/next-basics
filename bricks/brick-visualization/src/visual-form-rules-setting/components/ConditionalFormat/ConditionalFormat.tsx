@@ -432,7 +432,7 @@ export function ConditionalFormat(
         ) : (
           <InputGroup
             {...originProperty}
-            inputBoxStyle={{ width: "210px" }}
+            inputBoxStyle={{ width: "218px" }}
             value={condition.value}
             onChange={(value) =>
               handleConditionValueChange(value, groupNum, conditionNum)
@@ -446,6 +446,7 @@ export function ConditionalFormat(
             value={condition?.value ?? []}
             mode="multiple"
             placeholder="Select values"
+            style={{ width: "260px" }}
             onChange={(value) =>
               handleConditionValueChange(value, groupNum, conditionNum)
             }
@@ -485,6 +486,7 @@ export function ConditionalFormat(
                 moment(r, originProperty?.configProps?.format ?? "HH:mm:ss")
               )
             }
+            style={{ width: "260px" }}
             onChange={(time: moment.Moment, timeString: string) =>
               handleConditionRangeValueChange(
                 timeString,
@@ -503,6 +505,7 @@ export function ConditionalFormat(
                 originProperty?.configProps?.format ?? "HH:mm:ss"
               )
             }
+            style={{ width: "260px" }}
             onChange={(time: moment.Moment, timeString: string) =>
               handleConditionValueChange(timeString, groupNum, conditionNum)
             }
@@ -522,6 +525,7 @@ export function ConditionalFormat(
                 )
               )
             }
+            style={{ width: "260px" }}
             onChange={(time: moment.Moment, timeString: string) =>
               handleConditionRangeValueChange(
                 timeString,
@@ -540,6 +544,7 @@ export function ConditionalFormat(
                 originProperty?.configProps?.format ?? "ddd MMM DD YYYY"
               )
             }
+            style={{ width: "260px" }}
             onChange={(time: moment.Moment, timeString: string) =>
               handleConditionValueChange(timeString, groupNum, conditionNum)
             }
@@ -631,7 +636,7 @@ export function ConditionalFormat(
           <Slider
             {...originProperty}
             value={condition.value}
-            style={{ width: "260px" }}
+            style={{ width: "248px" }}
             onChange={(value: any) =>
               handleConditionValueChange(value, groupNum, conditionNum)
             }
@@ -644,6 +649,7 @@ export function ConditionalFormat(
             value={condition?.value ?? []}
             mode="multiple"
             placeholder="Select values"
+            style={{ width: "260px" }}
             onChange={(value) =>
               handleConditionValueChange(value, groupNum, conditionNum)
             }
