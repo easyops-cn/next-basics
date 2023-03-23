@@ -26,7 +26,11 @@ describe("presentational-bricks.card-item", () => {
         icon: "icon",
       },
     });
+    await (global as any).flushPromises();
+
     document.body.appendChild(element);
+    await (global as any).flushPromises();
+
     await jest.runAllTimers();
     Object.assign(element, {
       dataSource: {
@@ -37,6 +41,19 @@ describe("presentational-bricks.card-item", () => {
       },
     });
     expect(spyOnRender).toBeCalled();
+
+    const extraBottomOperateSlot = document.createElement("slot");
+    extraBottomOperateSlot.setAttribute("id", "extraBottomOperateSlot");
+    extraBottomOperateSlot.setAttribute("name", "extraOperate");
+    const extraOperateElement = document.createElement("div");
+    extraOperateElement.setAttribute("slot", "extraOperate");
+    expect(element.hasExtraOperateSlot).toBe(false);
+    element.shadowRoot.append(extraBottomOperateSlot);
+    element.append(extraOperateElement);
+    element._checkExtraOperateSlot();
+    await (global as any).flushPromises();
+    expect(element.hasExtraOperateSlot).toBe(true);
+
     const mutableProps = {};
     element.initData(mutableProps);
     expect(mutableProps).toEqual({

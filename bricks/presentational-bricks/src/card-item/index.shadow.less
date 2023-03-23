@@ -13,6 +13,16 @@
 
 :host {
   display: block;
+  
+}
+
+::slotted([slot="extraOperate"]:hover) { 
+color: rgba(101, 103, 116, 1);
+}
+
+
+::slotted([slot="extraOperate"]) {
+  color: rgb(157, 168, 184);
 }
 
 :host([hidden]) {

@@ -106,7 +106,6 @@ export const CardItemStory: Story = {
                             lib: "easyops",
                             category: "default",
                             icon: "card-diff",
-                            color: "rgba(157, 168, 184, 1)",
                           },
                         },
                       },
@@ -126,7 +125,6 @@ export const CardItemStory: Story = {
                             lib: "easyops",
                             category: "default",
                             icon: "card-task-delivery",
-                            color: "rgba(157, 168, 184, 1)",
                           },
                         },
                       },
@@ -186,7 +184,6 @@ export const CardItemStory: Story = {
           "禁用的卡片不可点击跳转。操作区配置了 slot 的卡片，请按需配置子构件的属性，例如将按钮设置成 disabled 等。",
       },
       properties: {
-        disabled: true,
         style: {
           width: "308px",
         },
@@ -248,7 +245,6 @@ export const CardItemStory: Story = {
                         lib: "easyops",
                         category: "default",
                         icon: "card-diff",
-                        color: "rgba(157, 168, 184, 1)",
                       },
                     },
                   },
@@ -268,7 +264,6 @@ export const CardItemStory: Story = {
                         lib: "easyops",
                         category: "default",
                         icon: "card-task-delivery",
-                        color: "rgba(157, 168, 184, 1)",
                       },
                     },
                   },
@@ -326,7 +321,6 @@ export const CardItemStory: Story = {
           "· 扩展区展示标签信息，这里标签用于承载分类/状态之类信息。不要超过2行展示，需特殊强调的场景，可使用彩色标签",
       },
       properties: {
-        disabled: true,
         style: {
           width: "308px",
         },
@@ -377,7 +371,6 @@ export const CardItemStory: Story = {
           "展示统计数，如收藏/关注次数，下载次数。统计类信息置于扩展区左侧，其他附加信息如关注人头像等置于右侧",
       },
       properties: {
-        disabled: true,
         style: {
           width: "308px",
         },
@@ -402,11 +395,24 @@ export const CardItemStory: Story = {
           type: "bricks",
           bricks: [
             {
-              brick: "presentational-bricks.basic-icon",
+              brick: "presentational-bricks.general-tooltip",
               properties: {
-                size: "20px",
-                icon: {
-                  imgSrc: cardOperate2Svg,
+                content: "下载",
+                style: {
+                  paddingTop: "4px",
+                },
+                displayBrick: {
+                  useBrick: {
+                    brick: "presentational-bricks.basic-icon",
+                    properties: {
+                      icon: {
+                        icon: "download",
+                        lib: "antd",
+                        theme: "outlined",
+                      },
+                      size: "16px",
+                    },
+                  },
                 },
               },
             },
@@ -421,11 +427,24 @@ export const CardItemStory: Story = {
               },
             },
             {
-              brick: "presentational-bricks.basic-icon",
+              brick: "presentational-bricks.general-tooltip",
               properties: {
-                size: "20px",
-                icon: {
-                  imgSrc: cardOperate1Svg,
+                content: "收藏",
+                style: {
+                  paddingTop: "5px",
+                },
+                displayBrick: {
+                  useBrick: {
+                    brick: "presentational-bricks.basic-icon",
+                    properties: {
+                      icon: {
+                        icon: "star",
+                        lib: "antd",
+                        theme: "outlined",
+                      },
+                      size: "16px",
+                    },
+                  },
                 },
               },
             },
@@ -464,7 +483,6 @@ export const CardItemStory: Story = {
         message: "辅助信息跟操作同时存在时，操作置于右",
       },
       properties: {
-        disabled: true,
         style: {
           width: "308px",
         },
@@ -493,6 +511,7 @@ export const CardItemStory: Story = {
               properties: {
                 size: "small",
                 userNameOrId: "张元",
+                hideUsername: true,
                 iconUrl:
                   "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
               },
@@ -500,7 +519,10 @@ export const CardItemStory: Story = {
             {
               brick: "span",
               properties: {
-                textContent: "更新于2小时前",
+                style: {
+                  paddingTop: "1.5px",
+                },
+                textContent: "张元 更新于2小时前",
               },
             },
           ],
@@ -510,6 +532,9 @@ export const CardItemStory: Story = {
           bricks: [
             {
               brick: "forms.general-switch",
+              properties: {
+                size: "small",
+              },
             },
           ],
         },
@@ -563,7 +588,6 @@ export const CardItemStory: Story = {
                         lib: "easyops",
                         category: "default",
                         icon: "card-diff",
-                        color: "rgba(157, 168, 184, 1)",
                       },
                     },
                   },
@@ -583,7 +607,6 @@ export const CardItemStory: Story = {
                         lib: "easyops",
                         category: "default",
                         icon: "card-task-delivery",
-                        color: "rgba(157, 168, 184, 1)",
                       },
                     },
                   },
@@ -674,7 +697,6 @@ export const CardItemStory: Story = {
                             lib: "easyops",
                             category: "default",
                             icon: "card-diff",
-                            color: "rgba(157, 168, 184, 1)",
                           },
                         },
                       },
@@ -694,7 +716,6 @@ export const CardItemStory: Story = {
                             lib: "easyops",
                             category: "default",
                             icon: "card-task-delivery",
-                            color: "rgba(157, 168, 184, 1)",
                           },
                         },
                       },

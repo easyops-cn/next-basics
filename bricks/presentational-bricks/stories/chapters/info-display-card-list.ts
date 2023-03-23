@@ -313,6 +313,7 @@ export const InfoDisplayCardList: Story = {
           brick: "presentational-bricks.info-display-card-list",
           properties: {
             dataSource: infoList,
+            detailDescFontSize: 16,
             optionConf: {
               useBrick: {
                 brick: "basic-bricks.general-custom-buttons",
@@ -365,8 +366,8 @@ export const InfoDisplayCardList: Story = {
       brick: "presentational-bricks.info-display-card-list",
       properties: {
         dataSource: infoList,
-        titleFontSize: 18,
-        detailDescFontSize: 14,
+        titleFontSize: 16,
+        detailDescFontSize: 16,
         iconBrickConf: {
           useBrick: {
             brick: "div",
