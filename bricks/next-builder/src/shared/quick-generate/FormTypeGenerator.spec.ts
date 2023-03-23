@@ -1,4 +1,6 @@
+import { BrickConf } from "@next-core/brick-types";
 import { FormTypeGenerator } from "./FormTypeGenerator";
+import { DragStatus } from "./interface";
 
 describe("FormTypeGenerator", () => {
   it("should work", () => {
@@ -35,7 +37,7 @@ describe("FormTypeGenerator", () => {
       ],
     ]);
 
-    const dataType = "context";
+    const dataType = "route";
 
     const contextModel = {
       id: "HOST-general-form-abc123",
@@ -60,11 +62,11 @@ describe("FormTypeGenerator", () => {
     const generatorProviderName = (): string => "<% CTX.formData %>";
 
     const instance = new FormTypeGenerator({
-      useBrickList,
       generatorProviderName,
     });
 
     instance.setData({
+      useBrickList,
       brickData,
       attrMap,
       contextModel,
@@ -182,6 +184,184 @@ describe("FormTypeGenerator", () => {
 
     expect(deleteData).toEqual({
       delete: [{ instanceId: "789", objectId: "STORYBOARD_BRICK" }],
+    });
+  });
+
+  it("process Snippet data", () => {
+    const useBrickList = [
+      {
+        brick: "forms.general-input",
+        label: "输入框",
+        propertyGenerator: (name, label, required) => ({
+          name,
+          label,
+          required,
+        }),
+      },
+      {
+        brick: "presentational-bricks.brick-link",
+        label: "链接",
+        propertyGenerator: () => ({
+          label: "查看",
+        }),
+      },
+      {
+        brick: "forms.general-date-picker",
+        label: "日期选择器",
+        propertyGenerator: (name, label, required) => ({
+          name,
+          label,
+          required,
+        }),
+      },
+    ];
+
+    const brickData = {
+      brick: "forms.general-form",
+    };
+
+    const attrMap = new Map([
+      ["name", { id: "name", name: "名称", value: { type: "string" } }],
+      ["page", { id: "page", name: "页数", value: { type: "int" } }],
+      ["time", { id: "time", name: "时间", value: { type: "date" } }],
+      [
+        "isCreate",
+        { id: "isCreate", name: "是否创建", value: { type: "bool" } },
+      ],
+      [
+        "instance",
+        { id: "instance", name: "实例数据", value: { type: "json" } },
+      ],
+    ]);
+
+    const dataType = "route";
+
+    const modelConfig = {
+      fields: [
+        {
+          name: "name",
+          id: "name",
+          type: "string",
+          brick: "forms.general-input",
+        },
+      ],
+      provider: "providers-of-cmdb-instance-postsearch",
+    };
+
+    const snippetData = {
+      nodeData: {
+        brick: "forms.geneal-form[quick-generation]",
+        bricks: [
+          {
+            brick: "forms.general-form",
+            slots: {
+              items: {
+                type: "bricks",
+                bricks: [
+                  {
+                    brick: "forms.general-buttons",
+                    properties: {
+                      name: "提交",
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ] as BrickConf[],
+        type: "bricks",
+      },
+      parentNode: {
+        brick: "general-card",
+        instanceId: "abc123",
+      },
+      dragOverInstanceId: "abc123",
+      dragStatus: "inside" as DragStatus,
+      mountPoint: "content",
+    };
+
+    const generatorProviderName = (): string => "<% CTX.formData %>";
+
+    const instance = new FormTypeGenerator({ generatorProviderName });
+
+    instance.setData({
+      useBrickList,
+      brickData,
+      attrMap,
+      dataType,
+      appId: "test-app",
+    });
+
+    expect(instance.processSnippetData({ modelConfig, snippetData })).toEqual({
+      appId: "test-app",
+      brick: "forms.geneal-form[quick-generation]",
+      dragOverInstanceId: "abc123",
+      dragStatus: "inside",
+      mountPoint: "content",
+      nodeData: {
+        brick: "forms.geneal-form[quick-generation]",
+        bricks: [
+          {
+            brick: "forms.general-form",
+            properties: {
+              values: "<% CTX.formData %>",
+            },
+            slots: {
+              items: {
+                bricks: [
+                  {
+                    brick: "forms.general-input",
+                    properties: {
+                      label: "名称",
+                      name: "name",
+                      required: false,
+                    },
+                  },
+                  {
+                    brick: "forms.general-buttons",
+                    properties: { name: "提交" },
+                  },
+                ],
+                type: "bricks",
+              },
+            },
+          },
+        ],
+        type: "bricks",
+      },
+      parent: "abc123",
+      snippetBricks: {
+        brick: "forms.geneal-form[quick-generation]",
+        bricks: [
+          {
+            brick: "forms.general-form",
+            properties: {
+              values: "<% CTX.formData %>",
+            },
+            slots: {
+              items: {
+                bricks: [
+                  {
+                    brick: "forms.general-input",
+                    properties: {
+                      label: "名称",
+                      name: "name",
+                      required: false,
+                    },
+                  },
+                  {
+                    brick: "forms.general-buttons",
+                    properties: { name: "提交" },
+                  },
+                ],
+                type: "bricks",
+              },
+            },
+          },
+        ],
+        type: "bricks",
+      },
+      type: "brick",
     });
   });
 });

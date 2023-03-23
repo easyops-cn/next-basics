@@ -70,7 +70,7 @@ describe("CommonTypeGenerator", () => {
     ["instance", { id: "instance", name: "实例数据", value: { type: "json" } }],
   ]);
 
-  const dataType = "context";
+  const dataType = "route";
 
   const contextModel = {
     id: "HOST-general-form-abc123",
@@ -86,7 +86,7 @@ describe("CommonTypeGenerator", () => {
   };
 
   it("should work", () => {
-    const instance = new TestTypeGenerator({ useBrickList });
+    const instance = new TestTypeGenerator({});
 
     const spyOnHandleInsert = jest.spyOn(instance, "handleInsert");
     const spyOnHandleUpdate = jest.spyOn(instance, "handleUpdate");
@@ -98,6 +98,7 @@ describe("CommonTypeGenerator", () => {
     );
 
     instance.setData({
+      useBrickList,
       brickData,
       attrMap,
       dataType,

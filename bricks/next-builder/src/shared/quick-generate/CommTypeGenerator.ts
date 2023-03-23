@@ -25,19 +25,20 @@ export abstract class CommonTypeGenerator {
   updatedBrickFields: string[];
 
   constructor(params: BaseParams) {
-    const { useBrickList, generatorProviderName, updatedBrickFields } = params;
-    this.useBrickList = useBrickList;
+    const { generatorProviderName, updatedBrickFields } = params;
     this.generatorProviderName = generatorProviderName;
     this.updatedBrickFields = updatedBrickFields || defaultUpdatedBrickFields;
   }
 
   setData({
+    useBrickList,
     brickData,
     attrMap,
     contextModel,
     dataType,
     appId,
   }: InitValue): void {
+    this.useBrickList = useBrickList;
     this.brickData = brickData;
     this.attrMap = attrMap;
     this.contextModel = contextModel;

@@ -21,26 +21,28 @@ describe("getBrickDataFromModel", () => {
 
     const constantMaps = {
       brickMap: {
-        link: {
-          brick: "presentational-bricks.brick-link",
-          label: "链接",
-          propertyGenerator: () => ({
-            name: "link",
-          }),
-        },
-        data: {
-          brick: "forms.general-date-picker",
-          label: "日期选择器",
-          propertyGenerator: () => ({
-            name: "data-input",
-          }),
-        },
-        input: {
-          brick: "forms.general-input",
-          label: "输入框",
-          propertyGenerator: () => ({
-            name: "input",
-          }),
+        "forms.general-form": {
+          link: {
+            brick: "presentational-bricks.brick-link",
+            label: "链接",
+            propertyGenerator: () => ({
+              name: "link",
+            }),
+          },
+          data: {
+            brick: "forms.general-date-picker",
+            label: "日期选择器",
+            propertyGenerator: () => ({
+              name: "data-input",
+            }),
+          },
+          input: {
+            brick: "forms.general-input",
+            label: "输入框",
+            propertyGenerator: () => ({
+              name: "input",
+            }),
+          },
         },
       },
       updatedBrickFields: [],
@@ -111,7 +113,7 @@ describe("getBrickDataFromModel", () => {
           brick: "forms.general-input",
           mountPoint: "items",
           parent: "abc123",
-          properties: undefined,
+          properties: '{"name":"input"}',
           type: "brick",
         },
       ],

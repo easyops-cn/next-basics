@@ -6,6 +6,8 @@ import {
   ProviderNameFn,
   SupportedBrick,
   NormalizedResult,
+  Model,
+  DataType,
 } from "../shared/quick-generate/interface";
 import { generatorFactory } from "../shared/quick-generate/factory";
 import { CommonTypeGenerator } from "../shared/quick-generate/CommTypeGenerator";
@@ -24,13 +26,9 @@ interface DataOfModel {
   generatorProviderName: ProviderNameFn;
 }
 
-interface Model {
-  attrList: Attr[];
-}
-
 interface ExtraOption {
   appId: string;
-  rootType: "route" | "template";
+  rootType: DataType;
 }
 
 export function getBrickDataFromModel(
@@ -47,7 +45,7 @@ export function getBrickDataFromModel(
     generatorProviderName,
   } = params;
 
-  const { appId, rootType } = option;
+  const { appId, rootType: dataType } = option;
   const attrMap = new Map<string, Attr>();
 
   modelData.attrList?.forEach((attr) => {
@@ -56,18 +54,17 @@ export function getBrickDataFromModel(
 
   const { brickMap, updatedBrickFields } = constantMaps;
   const useBrickList = values(brickMap[brickData.brick]);
-  const dataType = rootType === "template" ? "state" : "context";
 
   const instance: CommonTypeGenerator = generatorFactory(
     brickData.brick as SupportedBrick,
     {
-      useBrickList,
       generatorProviderName,
       updatedBrickFields,
     }
   );
 
   instance.setData({
+    useBrickList,
     brickData,
     attrMap,
     contextModel,
