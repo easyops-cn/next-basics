@@ -37,6 +37,14 @@ describe("presentational-bricks.card-item", () => {
       },
     });
     expect(spyOnRender).toBeCalled();
+
+    const extraOperateElement = document.createElement("div");
+    extraOperateElement.setAttribute("slot", "extraOperate");
+    expect(element.hasExtraOperateSlot).toBe(false);
+    element.append(extraOperateElement);
+    await (global as any).flushPromises();
+    expect(element.hasExtraOperateSlot).toBe(true);
+
     const mutableProps = {};
     element.initData(mutableProps);
     expect(mutableProps).toEqual({
