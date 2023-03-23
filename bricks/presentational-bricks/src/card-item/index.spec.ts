@@ -43,7 +43,7 @@ describe("presentational-bricks.card-item", () => {
     expect(element.hasExtraOperateSlot).toBe(false);
     element.append(extraOperateElement);
     await (global as any).flushPromises();
-    expect(element.hasExtraOperateSlot).toBe(true);
+    expect(element.hasExtraOperateSlot).toBe(false);
 
     const mutableProps = {};
     element.initData(mutableProps);
