@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.225.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.224.0...@next-bricks/next-builder@1.225.0) (2023-03-23)
+
+
+### Features
+
+* support quick generator base on model ([e729737](https://github.com/easyops-cn/next-basics/commit/e72973793b0bdef23442a6de90b24fd1e4d2920b))
+
+
+
+
+
 # [1.224.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.223.7...@next-bricks/next-builder@1.224.0) (2023-03-13)
 
 
