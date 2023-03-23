@@ -28,6 +28,7 @@ interface CardItemProps {
   iconColor?: Color;
   descMaxLine?: number;
   hasOperateSlot?: boolean;
+  hasExtraOperateSlot?: boolean;
   hasBottomRightOperateSlot?: boolean;
   onlyOperateSlot?: boolean;
   iconSize?: string | number;
@@ -60,6 +61,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
     hideDescCircle,
     iconColor,
     hasOperateSlot,
+    hasExtraOperateSlot,
     hasBottomRightOperateSlot,
     configProps = {},
     bordered,
@@ -89,6 +91,11 @@ export function CardItem(props: CardItemProps): React.ReactElement {
   const iconOffsetY = props.iconOffsetY || 0;
   const iconOpacity = props.iconOpacity || 0.45;
   const imgSize = props.imgSize;
+  const hasBottomOperate =
+    hasExtraOperateSlot ||
+    hasBottomRightOperateSlot ||
+    hasBottomSlot ||
+    hasOperateSlot;
 
   // 标题和标题后的slot
   const cardTitle = (
@@ -259,7 +266,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
   //底部扩展区域
   const bottomExtraOperateArea = (
     <div
-      style={{ marginTop: "10px" }}
+      style={hasExtraOperateSlot ? { paddingTop: "10px" } : {}}
       className={classNames("operateContainer", "operatingArea", {
         hideOperate: props.hideOperate,
         showOperationAreaWhenHovering: props.showOperationAreaWhenHovering,
@@ -321,8 +328,12 @@ export function CardItem(props: CardItemProps): React.ReactElement {
       })}
       bodyStyle={
         props.topInformation
-          ? { padding: "0px 16px 10px 16px" }
-          : { padding: "16px 16px 10px 16px" }
+          ? hasBottomOperate
+            ? { padding: "0px 16px 12px 16px" }
+            : { padding: "0px 16px 16px 16px" }
+          : hasBottomOperate
+          ? { padding: "16px 16px 12px 16px" }
+          : { padding: "16px 16px 16px 16px" }
       }
       {...configProps}
       bordered={bordered}

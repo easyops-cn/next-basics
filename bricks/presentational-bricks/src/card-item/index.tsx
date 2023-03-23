@@ -131,6 +131,11 @@ export class CardItemElement extends UpdatingElement {
   @property({
     type: Boolean,
   })
+  private hasExtraOperateSlot: boolean;
+
+  @property({
+    type: Boolean,
+  })
   private hasBottomRightOperateSlot: boolean;
 
   /**
@@ -620,6 +625,7 @@ export class CardItemElement extends UpdatingElement {
             tagTriangle={mutableProps.tagTriangle}
             descMaxLine={this.descMaxLine}
             hasOperateSlot={this.hasOperateSlot}
+            hasExtraOperateSlot={this.hasExtraOperateSlot}
             hasBottomRightOperateSlot={this.hasBottomRightOperateSlot}
             onlyOperateSlot={this.onlyOperateSlot}
             iconSize={mutableProps.iconSize}
@@ -649,6 +655,14 @@ export class CardItemElement extends UpdatingElement {
             this._checkOperateSlot();
             operateSlot.addEventListener("slotchange", this._checkOperateSlot);
           }
+          const extraOperateSlot = this._getExtraOperateSlot();
+          if (extraOperateSlot) {
+            this._checkExtraOperateSlot();
+            operateSlot.addEventListener(
+              "slotchange",
+              this._checkExtraOperateSlot
+            );
+          }
 
           const bottomRightOperateSlot = this._getBottomRightOperateSlot();
           if (bottomRightOperateSlot) {
@@ -673,6 +687,21 @@ export class CardItemElement extends UpdatingElement {
     const operateSlot = this._getOperateSlot();
     if (operateSlot) {
       this.hasOperateSlot = operateSlot.assignedNodes().length > 0;
+    }
+  };
+
+  // istanbul ignore next
+  private _getExtraOperateSlot(): HTMLSlotElement {
+    return this.shadowRoot.querySelector(
+      "#extraBottomOperateSlot"
+    ) as HTMLSlotElement;
+  }
+
+  // istanbul ignore next
+  private _checkExtraOperateSlot = (): void => {
+    const extraOperateSlot = this._getExtraOperateSlot();
+    if (extraOperateSlot) {
+      this.hasExtraOperateSlot = extraOperateSlot.assignedNodes().length > 0;
     }
   };
 
