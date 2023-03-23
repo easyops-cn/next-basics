@@ -16,7 +16,7 @@ import {
   DatePicker,
 } from "antd";
 import { uniqueId, cloneDeep, isEmpty, isNil, keyBy } from "lodash";
-import { OpType } from "../../VisualFormRulesSetting";
+import { OpType } from "../constants";
 import moment from "moment";
 import { InputGroup } from "../../../../../forms/src/input-with-unit/InputWithUnit";
 import { LegacyUserSelectFormItem } from "../../../../../forms/src/user-or-user-group-select/UserOrUserGroupSelect";

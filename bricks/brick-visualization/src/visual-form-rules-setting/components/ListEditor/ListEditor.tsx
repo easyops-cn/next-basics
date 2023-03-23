@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { Form, Popover } from "antd";
 import styles from "./ListEditor.module.css";
+import { operationOptions } from "../constants";
+import { isArray } from "lodash";
 
 const COLUMN_KEY = Symbol.for("column_key");
 
@@ -47,11 +49,14 @@ const opMap = {
   or: "或",
 };
 
-const operationMap = {
-  equal: "等于",
-  notEqual: "不等于",
-  contain: "包含",
-  notContain: "不包含",
+const operationMap = Object.fromEntries(
+  operationOptions.map((item) => {
+    return [item.value, item.label];
+  })
+);
+
+const formatValue = (value: string | any[]) => {
+  return isArray(value) ? `[ ${value.join(" , ")} ]` : value;
 };
 
 let key = 0;
@@ -109,7 +114,8 @@ export function ListEditor({
                         return (
                           <>
                             <span className={styles.highlight} key={v.origin}>
-                              {v.origin} {operationMap[v.operation]} {v.value}
+                              {v.origin} {operationMap[v.operation]}{" "}
+                              {formatValue(v.value)}
                             </span>
                             {item.conditions.length - 1 !== i && (
                               <span>{opMap[v.op]}</span>
