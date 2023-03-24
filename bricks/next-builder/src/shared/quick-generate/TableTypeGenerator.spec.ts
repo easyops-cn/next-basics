@@ -40,7 +40,7 @@ describe("TableTypeGenerator", () => {
       ],
     ]);
 
-    const dataType = "context";
+    const dataType = "route";
 
     const contextModel = {
       id: "HOST-brick-table-abc123",
@@ -59,11 +59,11 @@ describe("TableTypeGenerator", () => {
     const generatorProviderName = (): string => "<% CTX.tableData %>";
 
     const instance = new TableTypeGenerator({
-      useBrickList,
       generatorProviderName,
     });
 
     instance.setData({
+      useBrickList,
       brickData,
       attrMap,
       dataType,

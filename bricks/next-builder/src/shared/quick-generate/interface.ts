@@ -1,4 +1,4 @@
-import { UseBrickConf } from "@next-core/brick-types";
+import { UseBrickConf, BrickConf } from "@next-core/brick-types";
 
 export interface BrickInfoItem {
   label: string;
@@ -14,15 +14,15 @@ export interface BrickData {
 
 export type ProviderNameFn = (dataType: DataType, instanceId: string) => string;
 export interface BaseParams {
-  useBrickList: BrickInfoItem[];
   generatorProviderName?: ProviderNameFn;
   updatedBrickFields?: string[];
 }
 
 export interface InitValue {
+  useBrickList: BrickInfoItem[];
   brickData: BrickData;
   attrMap: Map<string, Attr>;
-  contextModel: ContextModel;
+  contextModel?: ContextModel;
   dataType: DataType;
   appId?: string;
 }
@@ -47,6 +47,10 @@ export interface Attr {
   [key: string]: any;
 }
 
+export interface Model {
+  attrList: Attr[];
+}
+
 export interface ModelConfig {
   origin?: string;
   modelId?: string;
@@ -63,7 +67,7 @@ export interface Field {
   brickInstanceId?: string;
 }
 
-export type DataType = "state" | "context";
+export type DataType = "template" | "snippet" | "route";
 
 export interface InsertType {
   appId: string;
@@ -104,4 +108,41 @@ export interface Column {
   dataIndex: string;
   title: string;
   useBrick?: UseBrickConf;
+}
+
+export interface NodeDataOfSnippet {
+  brick: string;
+  bricks: BrickConf[];
+  type: string;
+}
+
+export type DragStatus = "inside" | "top" | "bottom";
+export interface CreateSnippetConf {
+  dragOverInstanceId: string;
+  dragStatus: DragStatus;
+  mountPoint: string;
+  nodeData: NodeDataOfSnippet;
+  parent?: string;
+  parentNode?: {
+    brick: string;
+    instanceId: string;
+    [key: string]: any;
+  };
+}
+
+export interface SnippetParams {
+  modelConfig: ModelConfig;
+  snippetData: CreateSnippetConf;
+}
+
+export interface NormalizedSnippet {
+  appId: string;
+  dragOverInstanceId: string;
+  dragStatus: DragStatus;
+  mountPoint: string;
+  brick: string;
+  type: string;
+  parent: string;
+  nodeData: NodeDataOfSnippet;
+  snippetBricks: NodeDataOfSnippet;
 }
