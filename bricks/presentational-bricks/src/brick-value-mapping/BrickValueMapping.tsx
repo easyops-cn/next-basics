@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Tag } from "antd";
+import { Tag, Tooltip } from "antd";
 import { isNil, isEmpty } from "lodash";
 import classNames from "classnames";
 import { GeneralIcon, Link, LinkProps } from "@next-libs/basic-components";
@@ -88,28 +88,30 @@ export function BrickValueMapping(
     }
 
     return (
-      <Tag
-        color={color}
-        className={classNames(
-          cssStyle.customTag,
-          cssStyle.colorTag,
-          props.isTextEllipsis && cssStyle.textEllipsis,
-          {
-            [cssStyle.grayTag]: color === "gray",
-            [cssStyle.grayInverseTag]: color === "gray-inverse",
-            [cssStyle.round]: shape === "round",
-            [cssStyle.tagCircleIcon]: showTagCircle,
-          }
-        )}
-      >
-        {showTagCircle && (
-          <GeneralIcon
-            icon={circleIcon}
-            style={{ marginRight: "8px", marginLeft: 0 }}
-          />
-        )}
-        {text}
-      </Tag>
+      <Tooltip placement="bottomLeft" title={props.isTextEllipsis ? text : ""}>
+        <Tag
+          color={color}
+          className={classNames(
+            cssStyle.customTag,
+            cssStyle.colorTag,
+            props.isTextEllipsis && cssStyle.textEllipsis,
+            {
+              [cssStyle.grayTag]: color === "gray",
+              [cssStyle.grayInverseTag]: color === "gray-inverse",
+              [cssStyle.round]: shape === "round",
+              [cssStyle.tagCircleIcon]: showTagCircle,
+            }
+          )}
+        >
+          {showTagCircle && (
+            <GeneralIcon
+              icon={circleIcon}
+              style={{ marginRight: "8px", marginLeft: 0 }}
+            />
+          )}
+          {text}
+        </Tag>
+      </Tooltip>
     );
   };
 

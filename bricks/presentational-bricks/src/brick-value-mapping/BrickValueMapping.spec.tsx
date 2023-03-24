@@ -223,8 +223,10 @@ describe("BrickValueMapping", () => {
       />
     );
     expect(wrapper.find(".textEllipsis").length).toBe(1);
+    expect(wrapper.find("Tooltip").at(0).prop("title")).toBe("开发");
     wrapper.setProps({ isTextEllipsis: false });
     wrapper.update();
     expect(wrapper.find(".textEllipsis").length).toBe(0);
+    expect(wrapper.find("Tooltip").at(0).prop("title")).toBe("");
   });
 });
