@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.266.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.266.1...@next-bricks/forms@1.266.2) (2023-03-24)
+
+
+### Bug Fixes
+
+* fix bug when cancel user-select ([195a329](https://github.com/easyops-cn/next-basics/commit/195a32980c2d17afbaef845a20d1b8a590c63aa8))
+
+
+
+
+
 ## [1.266.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.266.0...@next-bricks/forms@1.266.1) (2023-03-22)
 
 
