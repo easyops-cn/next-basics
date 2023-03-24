@@ -26,6 +26,10 @@ const spyOnMFALogin = jest.spyOn(
   "MfaApi_generateRandomTotpSecret"
 );
 const spyOnMFASetRule = jest.spyOn(apiGatewaySdk, "MfaApi_verifyUserIsSetRule");
+const spyOnUnionpayMFASetRule = jest.spyOn(
+  apiGatewaySdk,
+  "UnionPayApi_unionPayLogin"
+);
 const spyOnError = jest.spyOn(Modal, "error");
 const spyOnKit = jest.spyOn(kit, "getRuntime");
 spyOnKit.mockReturnValue({
@@ -266,6 +270,50 @@ describe("GeneralLogin", () => {
     wrapper.find(Form).at(0).simulate("submit", new Event("submit"));
   });
 
+  it("should work when open unionpay mfa ", (done) => {
+    spyOnGetHistory.mockReturnValueOnce({
+      location: {
+        state: {
+          from: createLocation("/mock-from"),
+        },
+      },
+      push: spyOnHistoryPush,
+    } as any);
+    const form = {
+      getFieldDecorator: () => (comp: React.Component) => comp,
+      validateFields: jest.fn().mockImplementation(async (fn) => {
+        await fn(null, {
+          username: "mock-user",
+          password: "mock-pswd",
+        });
+        done();
+      }),
+    };
+    const wrapper = shallow(
+      <LegacyGeneralLogin form={form as any} {...i18nProps} />
+    );
+    expect(wrapper).toBeTruthy();
+    spyOnLogin.mockResolvedValueOnce({
+      loggedIn: false,
+      username: "mock-user",
+      userInstanceId: "abc",
+      org: 1,
+    });
+    spyOnMFALogin.mockResolvedValueOnce({
+      totpSecret: "xxx",
+      secret: "xxx",
+    });
+    spyOnUnionpayMFASetRule.mockResolvedValueOnce({
+      isNeedMfa: false,
+    });
+    spyOnKit.mockReturnValueOnce({
+      getFeatureFlags: () => ({
+        factors: true,
+        "is-unionpay-mfa-login": true,
+      }),
+    } as any);
+    wrapper.find(Form).at(0).simulate("submit", new Event("submit"));
+  });
   it("should login failed if give wrong password", async () => {
     spyOnGetHistory.mockReturnValueOnce({
       location: {
