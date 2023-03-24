@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.289.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.289.2...@next-bricks/presentational-bricks@1.289.3) (2023-03-24)
+
+
+### Bug Fixes
+
+* BrickValueMapping文字省略时用tooltip展示全部内容 Closes INSTANCE-4538 ([91ac502](https://github.com/easyops-cn/next-basics/commit/91ac5021cbc8ecc4148e63cb2a0375e710377178))
+
+
+
+
+
 ## [1.289.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.289.1...@next-bricks/presentational-bricks@1.289.2) (2023-03-24)
 
 
