@@ -187,6 +187,7 @@ export const CardItemStory: Story = {
         style: {
           width: "308px",
         },
+        disabled: true,
         cardLayoutType: "icon-small-align-left",
         urlTemplate: "/#{id}",
         fields: {
@@ -548,7 +549,6 @@ export const CardItemStory: Story = {
           "扩展区收纳操作场景，操作应是针对卡片详情内容的快捷功能性操作，对于卡片的操作我们是放置在卡片右上角 … 收纳。",
       },
       properties: {
-        disabled: true,
         style: {
           width: "308px",
         },
