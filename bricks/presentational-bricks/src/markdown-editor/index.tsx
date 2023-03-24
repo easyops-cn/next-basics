@@ -27,7 +27,6 @@ export interface ImageInfo {
  * 1.146.1: 支持粘贴图片，新增属性 `supportUploadImg`,`bucketName`，新增事件 `image.upload`。
  * 1.90.0: 新增属性 `previewContainerStyle`
  * @memo
- * @noInheritDoc
  */
 export class MarkdownEditorElement extends FormItemElement {
   /* =========================== Group: basic =========================== */
@@ -56,7 +55,7 @@ export class MarkdownEditorElement extends FormItemElement {
   supportUploadImg: boolean;
 
   /**
-   * @kind booelan
+   * @kind boolean
    * @required false
    * @default true
    * @group advanced
