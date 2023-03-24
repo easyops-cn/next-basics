@@ -1,9 +1,7 @@
 import { keys } from "lodash";
 import { getSingleInstance } from "./CommTypeGenerator";
 import { FormTypeGenerator } from "./FormTypeGenerator";
-
 import { TableTypeGenerator } from "./TableTypeGenerator";
-
 import { SupportedBrick } from "./interface";
 
 const brickGeneratorMap: Record<SupportedBrick, any> = {
