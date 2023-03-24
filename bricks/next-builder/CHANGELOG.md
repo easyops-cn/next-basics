@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.226.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.225.0...@next-bricks/next-builder@1.226.0) (2023-03-24)
+
+
+### Features
+
+* 优化基于模型创建 snippet ([9b8e97e](https://github.com/easyops-cn/next-basics/commit/9b8e97ef816d96e6c9c890de17deb2fe3bd042d3))
+
+
+
+
+
 # [1.225.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.224.0...@next-bricks/next-builder@1.225.0) (2023-03-23)
 
 
