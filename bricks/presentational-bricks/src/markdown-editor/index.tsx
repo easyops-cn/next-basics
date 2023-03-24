@@ -56,7 +56,7 @@ export class MarkdownEditorElement extends FormItemElement {
   supportUploadImg: boolean;
 
   /**
-   * @kind booelan
+   * @kind boolean
    * @required false
    * @default true
    * @group advanced
