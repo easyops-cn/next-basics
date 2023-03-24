@@ -228,6 +228,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   private _mergeUseAndUserGroup = (
     originValue: UserOrUserGroupSelectValue
   ): string[] | UserOrUserGroupSelectValue => {
+    if (!originValue) return [];
     return [...originValue.selectedUser, ...originValue.selectedUserGroup];
   };
 

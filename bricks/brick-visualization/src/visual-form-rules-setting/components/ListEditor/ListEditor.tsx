@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { Form, Popover } from "antd";
 import styles from "./ListEditor.module.css";
+import { Condition, operationOptions } from "../constants";
+import { isArray } from "lodash";
 
 const COLUMN_KEY = Symbol.for("column_key");
 
@@ -24,14 +26,6 @@ const actionTypeMap = {
   hide: "隐藏",
 };
 
-interface Condition {
-  origin: string;
-  operation: string;
-  value: string;
-  op: string;
-  conditionId?: string;
-}
-
 interface Group {
   groupId: string;
   conditions: Condition[];
@@ -47,11 +41,29 @@ const opMap = {
   or: "或",
 };
 
-const operationMap = {
-  equal: "等于",
-  notEqual: "不等于",
-  contain: "包含",
-  notContain: "不包含",
+const operationMap = Object.fromEntries(
+  operationOptions.map((item) => {
+    return [item.value, item.label];
+  })
+);
+
+const formatValue = (condition: Condition) => {
+  const { value, compareValType, operation, fieldValue, rangeValue } =
+    condition;
+
+  if (compareValType === "field") {
+    return fieldValue;
+  } else {
+    switch (operation) {
+      case "withinTimeRange":
+      case "notWithinTimeRange":
+      case "withinNumericalRange":
+      case "notWithinNumericalRange":
+        return isArray(rangeValue) ? ` ${rangeValue?.join(" ~ ")} ` : "";
+      default:
+        return isArray(value) ? `[ ${value?.join(" , ")} ]` : value;
+    }
+  }
 };
 
 let key = 0;
@@ -109,7 +121,8 @@ export function ListEditor({
                         return (
                           <>
                             <span className={styles.highlight} key={v.origin}>
-                              {v.origin} {operationMap[v.operation]} {v.value}
+                              {v.origin} {operationMap[v.operation]}{" "}
+                              {formatValue(v)}
                             </span>
                             {item.conditions.length - 1 !== i && (
                               <span>{opMap[v.op]}</span>
@@ -197,9 +210,10 @@ export function ListEditor({
                 key={index}
                 overlayStyle={{
                   zIndex: 999,
+                  minWidth: "494px",
                 }}
                 content={renderListForm(item)}
-                title="Detail"
+                title="规则详情"
                 trigger="click"
                 placement="left"
               >
