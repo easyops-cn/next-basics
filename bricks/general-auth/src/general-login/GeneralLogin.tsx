@@ -18,6 +18,9 @@ import {
   AuthApi_loginV2,
   AuthApi_LoginV2RequestBody,
   MfaApi_verifyUserIsSetRule,
+  MfaApi_VerifyUserIsSetRuleResponseBody,
+  UnionPayApi_UnionPayLoginResponseBody,
+  UnionPayApi_unionPayLogin,
 } from "@next-sdk/api-gateway-sdk";
 import { createLocation, Location } from "history";
 import { withTranslation, WithTranslation } from "react-i18next";
@@ -79,6 +82,7 @@ export class LegacyGeneralLogin extends React.Component<
     const featureFlags = getRuntime().getFeatureFlags();
     const esbLoginEnabled = featureFlags["esb-login"];
     const MFALoginEnabled = featureFlags["factors"];
+    const ISUNIONPAYMFALOGIN = featureFlags["is-unionpay-mfa-login"]; //银联国际定制化mfa登陆。
 
     form.validateFields(async (err, values) => {
       if (err) {
@@ -109,6 +113,7 @@ export class LegacyGeneralLogin extends React.Component<
             params = { service: this.state.service };
           }
           let loginMethod: typeof esbLogin | typeof AuthApi_loginV2;
+          const { password } = values;
           const req = values as unknown as AuthApi_LoginV2RequestBody;
           if (esbLoginEnabled) {
             loginMethod = esbLogin;
@@ -127,13 +132,25 @@ export class LegacyGeneralLogin extends React.Component<
             },
           });
           // mfa
-          if (MFALoginEnabled) {
+          if (MFALoginEnabled || ISUNIONPAYMFALOGIN) {
             // 验证用户是否设置了双因子规则
-            const { isSet } = await MfaApi_verifyUserIsSetRule({
-              username: result.username,
-              org: result.org,
-              loginBy: this.state.currentLoginMethod,
-            });
+            let verifyResult = {};
+            if (ISUNIONPAYMFALOGIN) {
+              verifyResult = await UnionPayApi_unionPayLogin({
+                username: result.username,
+                password,
+              });
+            } else {
+              verifyResult = await MfaApi_verifyUserIsSetRule({
+                username: result.username,
+                org: result.org,
+                loginBy: this.state.currentLoginMethod,
+              });
+            }
+            const isSet = ISUNIONPAYMFALOGIN
+              ? (verifyResult as UnionPayApi_UnionPayLoginResponseBody)
+                  .isNeedMfa
+              : (verifyResult as MfaApi_VerifyUserIsSetRuleResponseBody).isSet;
             if (!result.loggedIn && isSet) {
               const mfaResult = await MfaApi_generateRandomTotpSecret({
                 username: result.username,
