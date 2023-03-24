@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.289.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.289.1...@next-bricks/presentational-bricks@1.289.2) (2023-03-24)
+
+
+### Bug Fixes
+
+* close BRICK_STORE-3345 ([6568cd9](https://github.com/easyops-cn/next-basics/commit/6568cd9cb57322c8b2281134f305f37a3d94ff9d))
+
+
+
+
+
 ## [1.289.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.289.0...@next-bricks/presentational-bricks@1.289.1) (2023-03-23)
 
 
