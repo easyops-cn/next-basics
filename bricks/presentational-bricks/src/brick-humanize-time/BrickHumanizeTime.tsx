@@ -1,7 +1,12 @@
 import React from "react";
-import { humanizeTime, HumanizeTimeFormat, costTime } from "@next-libs/datetime";
+import {
+  humanizeTime,
+  HumanizeTimeFormat,
+  costTime,
+} from "@next-libs/datetime";
 import { BrickLink } from "../brick-link/BrickLink";
 import moment from "moment";
+import { isNil } from "lodash";
 
 interface BrickHumanizeTimeProps {
   value: number | string;
@@ -19,33 +24,39 @@ interface BrickHumanizeTimeProps {
 export function BrickHumanizeTime(
   props: BrickHumanizeTimeProps
 ): React.ReactElement {
-  let value;
-  if (typeof props.value === "number") {
-    value = props.isMicrosecond ? props.value : Number(props.value) * 1000;
+  const {
+    value,
+    isMicrosecond,
+    inputFormat,
+    outputFormat,
+    isCostTime,
+    formatter,
+    link,
+  } = props;
+
+  if (isNil(value)) {
+    return <span>-</span>;
+  }
+
+  let ts;
+  if (typeof value === "number") {
+    ts = isMicrosecond ? value : Number(value) * 1000;
   } else {
-    const time = moment(props.value, props.inputFormat);
-    value = time.unix() * 1000;
+    const time = moment(value, inputFormat);
+    ts = time.unix() * 1000;
   }
 
   let label: string;
-  if (props.outputFormat) {
-    label = moment(value).format(props.outputFormat);
+  if (outputFormat) {
+    label = moment(ts).format(outputFormat);
   } else {
-    label = props.isCostTime
-      ? costTime(value)
-      : value
-      ? humanizeTime(value, HumanizeTimeFormat[props.formatter])
-      : "-";
+    label = isCostTime
+      ? costTime(ts)
+      : humanizeTime(ts, HumanizeTimeFormat[formatter]);
   }
 
-  if (props.link) {
-    return (
-      <BrickLink
-        url={props.link.url}
-        target={props.link.target}
-        label={label}
-      />
-    );
+  if (link) {
+    return <BrickLink url={link.url} target={link.target} label={label} />;
   }
 
   return <span>{label}</span>;

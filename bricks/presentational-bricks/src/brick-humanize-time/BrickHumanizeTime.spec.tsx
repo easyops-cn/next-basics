@@ -23,6 +23,9 @@ describe("BrickHumanizeTime", () => {
     expect(wrapper).toMatchSnapshot();
     wrapper.setProps({ value: 0 });
     wrapper.update();
+    expect(wrapper.find("span").text()).toBe("January 1, 1970 08:00");
+    wrapper.setProps({ value: null });
+    wrapper.update();
     expect(wrapper.find("span").text()).toBe("-");
   });
 
@@ -48,11 +51,6 @@ describe("BrickHumanizeTime", () => {
     const wrapper = shallow(
       <BrickHumanizeTime value="2020-02-27 17:18" outputFormat="YYYY-MM-DD" />
     );
-    expect(
-      wrapper
-        .find("span")
-        .first()
-        .text()
-    ).toBe("2020-02-27");
+    expect(wrapper.find("span").first().text()).toBe("2020-02-27");
   });
 });
