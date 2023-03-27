@@ -5,6 +5,7 @@ import { Card, Avatar, Tooltip } from "antd";
 import classNames from "classnames";
 import styles from "./EntryCardItem.module.css";
 
+export type Size = "small" | "default";
 export type Color =
   | "purple"
   | "red"
@@ -18,6 +19,7 @@ export type Color =
 
 interface EntryCardItemProps {
   cardTitle?: string;
+  iconSize?: Size;
   icon?: MenuIcon;
   url?: string;
   iconColor?: Color;
@@ -31,7 +33,13 @@ interface EntryCardItemProps {
 }
 
 export function EntryCardItem(props: EntryCardItemProps): React.ReactElement {
-  const { cardStyle, description, hoverHighLight } = props;
+  const {
+    cardStyle,
+    description,
+    hoverHighLight,
+    iconSize = "default",
+  } = props;
+
   // 卡片图标
   const cardIcon = (
     <div className={styles.cardIcon}>
@@ -44,7 +52,7 @@ export function EntryCardItem(props: EntryCardItemProps): React.ReactElement {
       icon={cardIcon}
       size={size}
       className={classNames(
-        styles.cardAvatar,
+        iconSize === "small" ? styles.cardSmallAvatar : styles.cardAvatar,
         props.iconColor && styles[props.iconColor]
       )}
     ></Avatar>
@@ -52,13 +60,19 @@ export function EntryCardItem(props: EntryCardItemProps): React.ReactElement {
 
   const contentNode = (
     <div className={styles.cardContent}>
-      {avatarIcon(48)}
+      {avatarIcon(iconSize === "small" ? 36 : 48)}
       <div
         className={classNames(styles.textContainer, {
           [styles.hoverHighLight]: hoverHighLight,
         })}
       >
-        <div className={styles.cardTitle}>{props.cardTitle}</div>
+        <div
+          className={
+            iconSize === "small" ? styles.smallCardTitle : styles.cardTitle
+          }
+        >
+          {props.cardTitle}
+        </div>
         {description && <div className={styles.description}>{description}</div>}
       </div>
     </div>

@@ -9,6 +9,7 @@
 
   &:global(.ant-card-hoverable:hover) {
     box-shadow: var(--entry-card-item-hover-shadow);
+    background-color: rgba(244, 245, 247, 1);
   }
 
   &:global(.ant-card):not(:hover) {
@@ -38,6 +39,22 @@
   }
 }
 
+.cardSmallAvatar {
+  display: grid;
+  font-size: 32px;
+  margin-bottom: 10px;
+
+  .cardIcon {
+    display: grid;
+    font-size: 32px;
+    justify-self: center;
+    align-self: center;
+    svg {
+      font-size: 20px;
+    }
+  }
+}
+
 .textContainer {
   padding: 0 24px;
   width: 100%;
@@ -59,6 +76,13 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+
+  .smallCardTitle {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 12px;
   }
 
   .description {
