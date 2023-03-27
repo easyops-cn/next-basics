@@ -705,6 +705,7 @@ export const CardItemStory: Story = {
                             lib: "easyops",
                             category: "default",
                             icon: "card-diff",
+                            color: "rgb(157, 168, 184)",
                           },
                         },
                       },
