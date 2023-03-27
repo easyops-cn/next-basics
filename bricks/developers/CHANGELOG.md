@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.365.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.0...@next-bricks/developers@1.365.1) (2023-03-27)
+
+
+### Bug Fixes
+
+* close BRICK_STORE-3345 ([2809524](https://github.com/easyops-cn/next-basics/commit/28095247f811976f5e8658ef69b1751667db71ac))
+
+
+
+
+
 # [1.365.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.364.3...@next-bricks/developers@1.365.0) (2023-03-21)
 
 
