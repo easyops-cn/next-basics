@@ -2804,10 +2804,10 @@
   resolved "https://registry.npmjs.org/@next-sdk/api-gateway-sdk/-/api-gateway-sdk-2.7.0.tgz#2277680f2a4f59114a5e1d02257da4e85b2029f7"
   integrity sha512-MO336CYZGflnazpLAHTa4oxvDJstypVl84h56BdWOoty89SBhJSfQ4Mn7IftMW4NxZbzPfm9IsvSVvFgcOzrMQ==
 
-"@next-sdk/api-gateway-sdk@^2.8.0":
-  version "2.8.0"
-  resolved "https://registry.npmjs.org/@next-sdk/api-gateway-sdk/-/api-gateway-sdk-2.8.0.tgz#f3486803534dcadd811117050d3e9e8d87827d9c"
-  integrity sha512-K5Y9cYOD2A02wEptYL5ZfgPzAKMz1NzEe/Lapd8QVef1X5ixOfE19P6Hwf7fsn5orFerhAaLlgvDejw/tnkv1Q==
+"@next-sdk/api-gateway-sdk@^2.8.1":
+  version "2.8.1"
+  resolved "https://registry.npmjs.org/@next-sdk/api-gateway-sdk/-/api-gateway-sdk-2.8.1.tgz#441436f8b14183a2c5368117bba9e36a900e32fd"
+  integrity sha512-X3jtH1EfVXeIoBZeh/62/FToyF80q6wUQn/p1nVqCm3whcjn4xccny3ZfSjWxqEkWSgPIwU6IIA5Jw9oXXm9QQ==
 
 "@next-sdk/auth-sdk@^1.0.0", "@next-sdk/auth-sdk@^1.2.0":
   version "1.2.0"
