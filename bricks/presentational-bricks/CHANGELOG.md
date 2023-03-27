@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.289.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.289.7...@next-bricks/presentational-bricks@1.289.8) (2023-03-27)
+
+
+### Bug Fixes
+
+* **brick-humanize-time:** return hyphen when value is null or undefined and isCostTime is true ([2f4b0fc](https://github.com/easyops-cn/next-basics/commit/2f4b0fc1b14e2b7f1a125b3ac5470efb7a319646))
+
+
+
+
+
 ## [1.289.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.289.6...@next-bricks/presentational-bricks@1.289.7) (2023-03-27)
 
 
