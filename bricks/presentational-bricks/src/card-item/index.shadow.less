@@ -13,17 +13,8 @@
 
 :host {
   display: block;
-  
 }
 
-::slotted([slot="extraOperate"]:hover) { 
-color: rgba(101, 103, 116, 1);
-}
-
-
-::slotted([slot="extraOperate"]) {
-  color: rgb(157, 168, 184);
-}
 
 :host([hidden]) {
   display: none;
@@ -46,6 +37,9 @@ color: rgba(101, 103, 116, 1);
       .showOperationAreaWhenHovering {
         visibility: visible;
       }
+      .cardTitle {
+        color: rgba(26, 122, 255, 1);
+      }
     }
   }
 }
@@ -66,9 +60,6 @@ color: rgba(101, 103, 116, 1);
   white-space: nowrap;
   font-family: PingFangSC-Medium, PingFang SC;
   line-height: 20px;
-  &:hover {
-    color: rgba(26, 122, 255, 1);
-  }
 }
 
 .cardSubtitle {
