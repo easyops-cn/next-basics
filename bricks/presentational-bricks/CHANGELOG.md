@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.289.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.289.5...@next-bricks/presentational-bricks@1.289.6) (2023-03-27)
+
+
+### Bug Fixes
+
+* 修改info-display-card-list示例 ([1bee442](https://github.com/easyops-cn/next-basics/commit/1bee44238b8cea349a32885472a9be5d04c38c10))
+
+
+
+
+
 ## [1.289.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.289.4...@next-bricks/presentational-bricks@1.289.5) (2023-03-27)
 
 
