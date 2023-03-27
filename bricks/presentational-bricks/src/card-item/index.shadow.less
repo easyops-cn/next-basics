@@ -162,8 +162,13 @@
     &:hover {
       box-shadow: none;
       cursor: default;
+      .cardTitle {
+        color: var(--color-disabled-text);
+      }
     }
-  }
+ }
+}
+
 
   .cardTag {
     position: absolute;
@@ -229,7 +234,7 @@
     display: grid;
     align-items: center;
   }
-}
+
 
 .operateArea {
   display: grid;
@@ -397,6 +402,7 @@ a {
   .desc {
     color: var(--color-disabled-text);
   }
+
 
   .iconContainer {
     opacity: 0.45;
