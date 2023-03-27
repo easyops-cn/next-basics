@@ -285,8 +285,11 @@ export const infoList = [
           useBrick: {
             brick: "chart-v2.tiny-line-chart",
             properties: {
+              style: {
+                marginLeft: "-25px",
+              },
               width: 300,
-              height: 50,
+              height: 30,
               xField: "month",
               yField: "temperature",
               data: [
@@ -353,7 +356,10 @@ export const infoList = [
             brick: "chart-v2.tiny-line-chart",
             properties: {
               width: 300,
-              height: 50,
+              style: {
+                marginLeft: "-25px",
+              },
+              height: 30,
               xField: "month",
               yField: "temperature",
               data: [
