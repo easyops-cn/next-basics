@@ -32,6 +32,7 @@ export const story: Story = {
           icon: "icon",
         },
         urlTemplate: "/#{id}",
+        iconSize: "small",
         dataSource: [
           {
             id: "1",

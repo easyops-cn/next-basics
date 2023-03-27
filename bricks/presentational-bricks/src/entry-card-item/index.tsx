@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
-import { EntryCardItem, Color } from "./EntryCardItem";
+import { EntryCardItem, Color, Size } from "./EntryCardItem";
 import { MenuIcon } from "@next-core/brick-types";
 import { get, pick, forEach, set } from "lodash";
 import { parseTemplate } from "@next-libs/cmdb-utils";
@@ -81,6 +81,15 @@ export class EntryCardItemElement extends UpdatingElement {
    */
   @property()
   iconColor: Color;
+
+  /**
+   * @kind 'small/default'
+   * @required false
+   * @default -
+   * @description icon 大小
+   */
+  @property()
+  iconSize: Size;
 
   /**
    * @kind string
@@ -199,6 +208,7 @@ export class EntryCardItemElement extends UpdatingElement {
             hoverHighLight={this.hoverHighLight}
             disabled={this.disabled}
             tip={this.tip}
+            iconSize={this.iconSize}
           />
         </BrickWrapper>,
         this

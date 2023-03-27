@@ -107,6 +107,9 @@ export const infoList = [
           useBrick: {
             brick: "forms.general-switch",
             properties: {
+              style: {
+                marginTop: "-2.5px",
+              },
               name: "enabled",
               size: "small",
               value: true,
@@ -278,8 +281,134 @@ export const infoList = [
         desc: "7M",
       },
       {
+        detailBrickConf: {
+          useBrick: {
+            brick: "chart-v2.tiny-line-chart",
+            properties: {
+              width: 300,
+              height: 50,
+              xField: "month",
+              yField: "temperature",
+              data: [
+                {
+                  month: "Jan",
+                  temperature: 3.9,
+                },
+                {
+                  month: "Feb",
+                  temperature: 4.2,
+                },
+                {
+                  month: "Mar",
+                  temperature: 5.7,
+                },
+                {
+                  month: "Apr",
+                  temperature: 8.5,
+                },
+                {
+                  month: "May",
+                  temperature: 11.9,
+                },
+                {
+                  month: "Jun",
+                  temperature: 15.2,
+                },
+                {
+                  month: "Jul",
+                  temperature: 17,
+                },
+                {
+                  month: "Aug",
+                  temperature: 16.6,
+                },
+                {
+                  month: "Sep",
+                  temperature: 10.2,
+                },
+                {
+                  month: "Oct",
+                  temperature: 10.3,
+                },
+                {
+                  month: "Nov",
+                  temperature: 6.6,
+                },
+                {
+                  month: "Dec",
+                  temperature: 4.8,
+                },
+              ],
+            },
+          },
+        },
+      },
+      {
         title: "下载次数",
         desc: "863",
+      },
+      {
+        detailBrickConf: {
+          useBrick: {
+            brick: "chart-v2.tiny-line-chart",
+            properties: {
+              width: 300,
+              height: 50,
+              xField: "month",
+              yField: "temperature",
+              data: [
+                {
+                  month: "Jan",
+                  temperature: 3.9,
+                },
+                {
+                  month: "Feb",
+                  temperature: 4.2,
+                },
+                {
+                  month: "Mar",
+                  temperature: 5.7,
+                },
+                {
+                  month: "Apr",
+                  temperature: 8.5,
+                },
+                {
+                  month: "May",
+                  temperature: 11.9,
+                },
+                {
+                  month: "Jun",
+                  temperature: 15.2,
+                },
+                {
+                  month: "Jul",
+                  temperature: 17,
+                },
+                {
+                  month: "Aug",
+                  temperature: 16.6,
+                },
+                {
+                  month: "Sep",
+                  temperature: 10.2,
+                },
+                {
+                  month: "Oct",
+                  temperature: 10.3,
+                },
+                {
+                  month: "Nov",
+                  temperature: 6.6,
+                },
+                {
+                  month: "Dec",
+                  temperature: 4.8,
+                },
+              ],
+            },
+          },
+        },
       },
     ],
   },
@@ -320,6 +449,9 @@ export const InfoDisplayCardList: Story = {
                 properties: {
                   isMoreButton: true,
                   alignment: "end",
+                  moreButtonStyle: {
+                    marginRight: "-4px",
+                  },
                   moreButtonShape: "no",
                   moreBtnIcon: {
                     lib: "antd",
@@ -401,7 +533,6 @@ export const InfoDisplayCardList: Story = {
             properties: {
               showCard: false,
               style: {
-                marginBottom: "8px",
                 marginLeft: "5px",
               },
               color: "blue",
@@ -415,6 +546,9 @@ export const InfoDisplayCardList: Story = {
             properties: {
               isMoreButton: true,
               alignment: "end",
+              moreButtonStyle: {
+                marginRight: "-4px",
+              },
               moreButtonShape: "no",
               moreBtnIcon: {
                 lib: "antd",
