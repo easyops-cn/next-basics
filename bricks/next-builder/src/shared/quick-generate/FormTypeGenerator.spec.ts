@@ -74,7 +74,7 @@ describe("FormTypeGenerator", () => {
       appId: "test-app",
     });
 
-    expect(instance.processFormProvider()).toEqual({
+    expect(instance.processFormProvider({})).toEqual({
       instanceId: "abc123",
       objectId: "STORYBOARD_BRICK",
       property: {
@@ -106,6 +106,34 @@ describe("FormTypeGenerator", () => {
         },
       ],
       update: [],
+    });
+
+    expect(
+      instance.getCreateData({
+        fields: [{ name: "名称", id: "name", type: "string" }],
+        provider: "provider-of-cmdb-instance",
+      })
+    ).toEqual({
+      insert: [
+        {
+          appId: "test-app",
+          brick: undefined,
+          mountPoint: "items",
+          parent: "abc123",
+          properties: undefined,
+          type: "brick",
+        },
+      ],
+      update: [
+        {
+          instanceId: "abc123",
+          objectId: "STORYBOARD_BRICK",
+          property: {
+            brick: "forms.general-form",
+            properties: '{"layout":"horizontal","values":"<% CTX.formData %>"}',
+          },
+        },
+      ],
     });
 
     expect(instance.calcPrevFields()).toEqual([

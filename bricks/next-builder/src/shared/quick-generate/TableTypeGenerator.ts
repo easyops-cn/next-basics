@@ -19,7 +19,7 @@ export class TableTypeGenerator extends CommonTypeGenerator {
   }
 
   getCreateData(modelConfig: ModelConfig): NormalizedResult {
-    const { fields } = modelConfig;
+    const { fields, dataName } = modelConfig;
 
     const columns = fields.reduce((arr, item) => {
       const targetBrick = this.useBrickList.find(
@@ -53,10 +53,11 @@ export class TableTypeGenerator extends CommonTypeGenerator {
         properties: JSON.stringify({
           ...brickProperties,
           columns: columns,
-          dataSource: this.generatorProviderName(
-            this.dataType,
-            this.brickData.instanceId
-          ),
+          dataSource: this.generatorProviderName({
+            dataName,
+            dataType: this.dataType,
+            instanceId: this.brickData.instanceId,
+          }),
         }),
       },
     };

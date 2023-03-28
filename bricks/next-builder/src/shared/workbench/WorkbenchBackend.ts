@@ -408,7 +408,15 @@ export default class WorkbenchBackend {
   ): Promise<boolean> {
     try {
       this.replaceSnippetData(data.snippetData);
-      await ApplyStoryBoardSnippet(data.snippetData);
+      const result = await ApplyStoryBoardSnippet(data.snippetData);
+      this.publish("message", {
+        action: "snippet-success",
+        data: {
+          snippetId: data.brick,
+          nodeData: data.nodeData,
+          ...result,
+        },
+      });
       this.isNeedUpdateTree = true;
       return true;
     } catch (e) {
