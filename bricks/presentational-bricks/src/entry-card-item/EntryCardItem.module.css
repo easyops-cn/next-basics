@@ -10,6 +10,12 @@
   &:global(.ant-card-hoverable:hover) {
     box-shadow: var(--entry-card-item-hover-shadow);
     background-color: rgba(244, 245, 247, 1);
+    .cardTitle {
+      color: rgba(26, 122, 255, 1);
+    }
+    .smallCardTitle {
+      color: rgba(26, 122, 255, 1);
+    }
   }
 
   &:global(.ant-card):not(:hover) {
