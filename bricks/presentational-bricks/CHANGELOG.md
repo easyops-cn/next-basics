@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.289.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.289.8...@next-bricks/presentational-bricks@1.289.9) (2023-03-28)
+
+
+### Bug Fixes
+
+* entryCard改为hover整张卡片时改变样式 ([6a0a56d](https://github.com/easyops-cn/next-basics/commit/6a0a56d6c88ab5514d5c89746c437da34f2e0c9c))
+
+
+
+
+
 ## [1.289.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.289.7...@next-bricks/presentational-bricks@1.289.8) (2023-03-27)
 
 
