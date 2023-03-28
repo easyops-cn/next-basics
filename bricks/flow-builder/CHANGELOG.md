@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.29.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.28.9...@next-bricks/flow-builder@1.29.0) (2023-03-28)
+
+
+### Features
+
+* feat contracts show enum ([c1e7ff8](https://github.com/easyops-cn/next-basics/commit/c1e7ff8acbac11ba8bb45d616c0d7b2f42495da6))
+
+
+
+
+
 ## [1.28.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.28.8...@next-bricks/flow-builder@1.28.9) (2023-03-10)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
