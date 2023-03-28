@@ -22,7 +22,7 @@ import { titleList, EditorContext, rootTraceId } from "../../constants";
 import styles from "./SchemaItem.module.css";
 import { K, NS_FLOW_BUILDER } from "../../../i18n/constants";
 import { useTranslation } from "react-i18next";
-import { isEmpty } from "lodash";
+import { isArray, isEmpty } from "lodash";
 
 export interface SchemaItemProps {
   className?: string;
@@ -178,6 +178,20 @@ export function SchemaItem({
               {itemData.type || itemData.ref}
             </Tag>
           </Tooltip>
+          {isArray(itemData.enum) && itemData.enum.length > 0 && (
+            <Tooltip
+              title={`${itemData.enum.map((item) => `"${item}"`).join(" , ")}`}
+            >
+              <Tag
+                className={classNames({
+                  [styles.modelDefinitionTag]: isModelDefinitionRow,
+                })}
+                color="cyan"
+              >
+                enum
+              </Tag>
+            </Tooltip>
+          )}
           {!readonly && modelDefinition?.updated && (
             <Tooltip title={t(K.MODEL_DEFINITION_UPDATE_MESSAGE)}>
               <Badge color="orange" />
