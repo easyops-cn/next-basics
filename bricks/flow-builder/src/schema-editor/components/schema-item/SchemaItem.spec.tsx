@@ -1,9 +1,9 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
-import { AddPropertyModal } from "../add-property-modal/AddPropertyModal";
+import { mount } from "enzyme";
 import { SchemaItem } from "./SchemaItem";
 import { EditorContext } from "../../constants";
 import { ModelDefinition } from "../../interfaces";
+import { Tag, Tooltip } from "antd";
 
 describe("SchemaItem", () => {
   it("should work", () => {
@@ -127,5 +127,39 @@ describe("SchemaItem", () => {
 
     wrapper.find("div[title='street']").find("span").at(0).simulate("click");
     expect(hideModelDefinition).toBeCalled();
+  });
+
+  it("should work with enum", () => {
+    const onModalFn = jest.fn();
+    const onRemoveFn = jest.fn();
+
+    const modelDefinitionList: ModelDefinition[] = [];
+    const showModelDefinition = jest.fn();
+    const props = {
+      traceId: "root-0-1",
+      itemData: {
+        type: "string",
+        name: "name",
+        description: "名称",
+        enum: ["nickname", "username"],
+      },
+    };
+
+    const TestComponent = (props: any): React.ReactElement => (
+      <EditorContext.Provider
+        value={{
+          modelDefinitionList,
+          showModelDefinition,
+          onModal: onModalFn,
+          onRemove: onRemoveFn,
+        }}
+      >
+        <SchemaItem {...props} />
+      </EditorContext.Provider>
+    );
+    const wrapper = mount(<TestComponent {...props} />);
+
+    expect(wrapper.find(Tag).length).toEqual(2);
+    expect(wrapper.find(Tooltip).length).toEqual(2);
   });
 });
