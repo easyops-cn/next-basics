@@ -30,12 +30,12 @@
 
 @media (max-height: 860px), (max-width: 1280px) {
   .cellItem {
-    height: 128px;
+    height: 134px;
     min-width: 100px;
     justify-content: normal;
 
     &.small {
-      height: 104px;
+      height: 110px;
       min-width: 76px;
       justify-content: normal;
     }
