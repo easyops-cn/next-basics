@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.1](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.21.0...@next-types/preview@1.21.1) (2023-03-29)
+
+
+### Bug Fixes
+
+* refactor quick generator ([8246cbd](https://github.com/easyops-cn/next-basics/commit/8246cbd1c4104adf82fef29f7d55bfc32520c116))
+
+
+
+
+
 # [1.21.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.20.0...@next-types/preview@1.21.0) (2023-03-13)
 
 

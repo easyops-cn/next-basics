@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.226.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.226.1...@next-bricks/next-builder@1.226.2) (2023-03-29)
+
+
+### Bug Fixes
+
+* refactor quick generator ([8246cbd](https://github.com/easyops-cn/next-basics/commit/8246cbd1c4104adf82fef29f7d55bfc32520c116))
+
+
+
+
+
 ## [1.226.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.226.0...@next-bricks/next-builder@1.226.1) (2023-03-24)
 
 **Note:** Version bump only for package @next-bricks/next-builder
