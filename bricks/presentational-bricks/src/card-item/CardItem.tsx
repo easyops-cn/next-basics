@@ -51,6 +51,7 @@ interface CardItemProps {
   useLinkBehavior?: boolean;
   disabledLink?: boolean;
   onClick?: () => void;
+  useAfterDescriptionSlot?: boolean;
 }
 
 export function CardItem(props: CardItemProps): React.ReactElement {
@@ -312,6 +313,11 @@ export function CardItem(props: CardItemProps): React.ReactElement {
       {topRightTag}
       {titleWithOperateArea}
       {description()}
+      {props.useAfterDescriptionSlot && (
+        <div className="afterDescriptionArea">
+          <slot id="afterDescriptionSlot" name="afterDescription" />
+        </div>
+      )}
       {cardIconAsBackground}
       {props.icon ? bottomLeftOperateArea : bottomOperateArea}
     </Card>
