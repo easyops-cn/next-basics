@@ -22,23 +22,26 @@ export class TableTypeGenerator extends CommonTypeGenerator {
     const { fields, dataName } = modelConfig;
 
     const columns = fields.reduce((arr, item) => {
-      const targetBrick = this.useBrickList.find(
-        (row) => row.brick === item.brick
-      );
+      // istanbul ignore else
+      if (item.brick) {
+        const targetBrick = this.useBrickList.find(
+          (row) => row.brick === item.brick
+        );
 
-      arr.push({
-        dataIndex: item.id,
-        key: item.id,
-        title: item.id,
-        useBrick: [
-          {
-            brick: targetBrick.brick?.split(":")[0],
-            properties: targetBrick?.propertyGenerator?.({
-              value: `<% DATA.cellData %>`,
-            }),
-          },
-        ],
-      });
+        arr.push({
+          dataIndex: item.id,
+          key: item.id,
+          title: item.id,
+          useBrick: [
+            {
+              brick: targetBrick.brick?.split(":")[0] || item.brick,
+              properties: targetBrick?.propertyGenerator?.({
+                value: `<% DATA.cellData %>`,
+              }),
+            },
+          ],
+        });
+      }
 
       return arr;
     }, []);
@@ -101,45 +104,51 @@ export class TableTypeGenerator extends CommonTypeGenerator {
   }
 
   handleInsert(field: Field, columns: Column[]): void {
-    const targetBrick = this.useBrickList.find(
-      (row) => row.brick === field.brick
-    );
+    // istanbul ignore else
+    if (field.brick) {
+      const targetBrick = this.useBrickList.find(
+        (row) => row.brick === field.brick
+      );
 
-    columns.push({
-      key: field.id,
-      dataIndex: field.id,
-      title: field.id,
-      ...(targetBrick?.brick
-        ? {
-            useBrick: [
-              {
-                brick: field.brick,
-                properties: targetBrick?.propertyGenerator?.({
-                  value: `<% DATA.cellData %>`,
-                }),
-              },
-            ],
-          }
-        : {}),
-    });
+      columns.push({
+        key: field.id,
+        dataIndex: field.id,
+        title: field.id,
+        ...(targetBrick?.brick
+          ? {
+              useBrick: [
+                {
+                  brick: field.brick,
+                  properties: targetBrick?.propertyGenerator?.({
+                    value: `<% DATA.cellData %>`,
+                  }),
+                },
+              ],
+            }
+          : {}),
+      });
+    }
   }
 
   handleUpdate(field: Field, columns: Column[]): void {
-    const targetBrick = this.useBrickList.find(
-      (row) => row.brick === field.brick
-    );
+    // istanbul ignore else
+    if (field.brick) {
+      const targetBrick = this.useBrickList.find(
+        (row) => row.brick === field.brick
+      );
 
-    const find = columns.find((item) => item.dataIndex === field.id);
+      const find = columns.find((item) => item.dataIndex === field.id);
 
-    if (find) {
-      find.useBrick = [
-        {
-          brick: field.brick,
-          properties: targetBrick?.propertyGenerator?.({
-            value: `<% DATA.cellData %>`,
-          }),
-        },
-      ];
+      if (find) {
+        find.useBrick = [
+          {
+            brick: field.brick,
+            properties: targetBrick?.propertyGenerator?.({
+              value: `<% DATA.cellData %>`,
+            }),
+          },
+        ];
+      }
     }
   }
 
@@ -150,7 +159,11 @@ export class TableTypeGenerator extends CommonTypeGenerator {
       columns.splice(findIndex, 1);
     }
   }
-  processFinalMergeValue(columns: Column[]): NormalizedResult {
+  processFinalMergeValue(
+    columns: Column[],
+    modelConfig: ModelConfig
+  ): NormalizedResult {
+    const { dataName } = modelConfig;
     const brickProperties = this.getBrickProperties();
 
     return {
@@ -163,6 +176,11 @@ export class TableTypeGenerator extends CommonTypeGenerator {
             properties: JSON.stringify({
               ...brickProperties,
               columns: columns,
+              dataSource: this.generatorProviderName({
+                dataName,
+                dataType: this.dataType,
+                instanceId: this.brickData.instanceId,
+              }),
             }),
           },
         },

@@ -56,7 +56,8 @@ describe("TableTypeGenerator", () => {
       ],
     };
 
-    const generatorProviderName = (): string => "<% CTX.tableData %>";
+    const generatorProviderName = ({ dataName }): string =>
+      `<% CTX.${dataName} %>`;
 
     const instance = new TableTypeGenerator({
       generatorProviderName,
@@ -92,6 +93,7 @@ describe("TableTypeGenerator", () => {
             brick: "presentational-bricks.brick-tag",
           },
         ],
+        dataName: "tableData",
       })
     ).toEqual({
       update: [
@@ -208,18 +210,23 @@ describe("TableTypeGenerator", () => {
     expect(remove).toEqual([]);
 
     expect(
-      instance.processFinalMergeValue([
+      instance.processFinalMergeValue(
+        [
+          {
+            dataIndex: "name",
+            key: "name",
+            title: "name",
+            useBrick: [
+              {
+                brick: "presentational-bricks.brick-link",
+              },
+            ],
+          },
+        ],
         {
-          dataIndex: "name",
-          key: "name",
-          title: "name",
-          useBrick: [
-            {
-              brick: "presentational-bricks.brick-link",
-            },
-          ],
-        },
-      ])
+          dataName: "tableData",
+        }
+      )
     ).toEqual({
       update: [
         {
@@ -228,7 +235,7 @@ describe("TableTypeGenerator", () => {
           property: {
             brick: "presentational-bricks.brick-tag",
             properties:
-              '{"showCard":false,"columns":[{"dataIndex":"name","key":"name","title":"name","useBrick":[{"brick":"presentational-bricks.brick-link"}]}]}',
+              '{"showCard":false,"columns":[{"dataIndex":"name","key":"name","title":"name","useBrick":[{"brick":"presentational-bricks.brick-link"}]}],"dataSource":"<% CTX.tableData %>"}',
           },
         },
       ],

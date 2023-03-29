@@ -49,30 +49,35 @@ export class FormTypeGenerator extends CommonTypeGenerator {
   }
 
   getCreateData(modelConfig: ModelConfig): NormalizedResult {
-    const { fields, provider } = modelConfig;
+    const { fields, dataName } = modelConfig;
 
-    const createNodes = fields?.map((field) => {
-      const targetBrick = this.getTargetBrick(field.brick);
+    const createNodes = fields?.reduce((arr, field) => {
+      // istanbul ignore else
+      if (field.brick) {
+        const targetBrick = this.getTargetBrick(field.brick);
 
-      return {
-        appId: this.appId,
-        brick: field.brick,
-        mountPoint: "items",
-        parent: this.brickData.instanceId,
-        type: "brick",
-        properties: JSON.stringify(
-          targetBrick?.propertyGenerator(
-            field.id,
-            this.attrMap.get(field.id).name,
-            this.attrMap.get(field.id).required === "true"
-          )
-        ),
-      };
-    });
+        arr.push({
+          appId: this.appId,
+          brick: field.brick,
+          mountPoint: "items",
+          parent: this.brickData.instanceId,
+          type: "brick",
+          properties: JSON.stringify(
+            targetBrick?.propertyGenerator(
+              field.id,
+              this.attrMap.get(field.id).name,
+              this.attrMap.get(field.id).required === "true"
+            )
+          ),
+        });
+      }
+
+      return arr;
+    }, []);
 
     return {
       insert: createNodes,
-      update: provider ? [this.processFormProvider(modelConfig)] : [],
+      update: dataName ? [this.processFormProvider(modelConfig)] : [],
     };
   }
 
@@ -98,10 +103,12 @@ export class FormTypeGenerator extends CommonTypeGenerator {
     return fields;
   }
 
-  getDefaultMergeValue(): NormalizedResult {
+  getDefaultMergeValue(modelConfig: ModelConfig): NormalizedResult {
+    const formData = this.processFormProvider(modelConfig);
+
     return {
       insert: [],
-      update: [],
+      update: [formData],
       delete: [],
     };
   }
@@ -159,7 +166,7 @@ export class FormTypeGenerator extends CommonTypeGenerator {
   processSnippetData(snippetParams: SnippetParams): NormalizedSnippet {
     const { modelConfig, snippetData } = snippetParams;
 
-    const { fields = [], provider, dataName } = modelConfig;
+    const { fields = [], dataName } = modelConfig;
     const {
       nodeData,
       parentNode,
@@ -169,19 +176,24 @@ export class FormTypeGenerator extends CommonTypeGenerator {
       parent,
     } = snippetData;
 
-    const list = fields.map((field) => {
-      const targetBrick = this.useBrickList.find(
-        (item) => item.brick === item.brick
-      );
-      return {
-        brick: field.brick,
-        properties: targetBrick?.propertyGenerator(
-          field.id,
-          this.attrMap.get(field.id).name,
-          this.attrMap.get(field.id).required === "true"
-        ),
-      };
-    });
+    const list = fields.reduce((arr, field) => {
+      // istanbul ignore else
+      if (field.brick) {
+        const targetBrick = this.useBrickList.find(
+          (item) => item.brick === item.brick
+        );
+        arr.push({
+          brick: field.brick,
+          properties: targetBrick?.propertyGenerator(
+            field.id,
+            this.attrMap.get(field.id).name,
+            this.attrMap.get(field.id).required === "true"
+          ),
+        });
+      }
+
+      return arr;
+    }, []);
 
     const properties: Record<string, any> = get(
       nodeData,
@@ -189,7 +201,7 @@ export class FormTypeGenerator extends CommonTypeGenerator {
       {}
     );
 
-    if (provider) {
+    if (dataName) {
       properties.values = this.generatorProviderName({
         dataName,
         dataType: this.dataType,
