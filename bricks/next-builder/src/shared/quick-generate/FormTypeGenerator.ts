@@ -10,6 +10,7 @@ import {
   BaseParams,
   SnippetParams,
   NormalizedSnippet,
+  BrickData,
 } from "./interface";
 
 export class FormTypeGenerator extends CommonTypeGenerator {
@@ -17,7 +18,9 @@ export class FormTypeGenerator extends CommonTypeGenerator {
     super(params);
   }
 
-  processFormProvider(): UpdateType {
+  processFormProvider(modelConfig: ModelConfig): UpdateType {
+    const { dataName } = modelConfig;
+
     const brickProperties = JSON.parse(
       get(this.contextModel, "brick[0].properties", "{}")
     );
@@ -29,10 +32,11 @@ export class FormTypeGenerator extends CommonTypeGenerator {
         ...pick(this.brickData, this.updatedBrickFields),
         properties: JSON.stringify({
           ...brickProperties,
-          values: this.generatorProviderName(
-            this.dataType,
-            this.brickData.instanceId
-          ),
+          values: this.generatorProviderName({
+            dataName,
+            dataType: this.dataType,
+            instanceId: this.brickData.instanceId,
+          }),
         }),
       },
     };
@@ -68,7 +72,7 @@ export class FormTypeGenerator extends CommonTypeGenerator {
 
     return {
       insert: createNodes,
-      update: provider ? [this.processFormProvider()] : [],
+      update: provider ? [this.processFormProvider(modelConfig)] : [],
     };
   }
 
@@ -105,6 +109,7 @@ export class FormTypeGenerator extends CommonTypeGenerator {
   handleInsert(field: Field, data: NormalizedResult): void {
     const targetBrick = this.getTargetBrick(field.brick);
 
+    // istanbul ignore else
     if (field.brick) {
       data.insert.push({
         appId: this.appId,
@@ -129,6 +134,7 @@ export class FormTypeGenerator extends CommonTypeGenerator {
       (item) => item.instanceId === field.brickInstanceId
     );
 
+    // istanbul ignore else
     if (find) {
       const brickInfo = pick(find, this.updatedBrickFields);
 
@@ -153,7 +159,7 @@ export class FormTypeGenerator extends CommonTypeGenerator {
   processSnippetData(snippetParams: SnippetParams): NormalizedSnippet {
     const { modelConfig, snippetData } = snippetParams;
 
-    const { fields = [], provider } = modelConfig;
+    const { fields = [], provider, dataName } = modelConfig;
     const {
       nodeData,
       parentNode,
@@ -184,10 +190,11 @@ export class FormTypeGenerator extends CommonTypeGenerator {
     );
 
     if (provider) {
-      properties.values = this.generatorProviderName(
-        this.dataType,
-        this.brickData.instanceId
-      );
+      properties.values = this.generatorProviderName({
+        dataName,
+        dataType: this.dataType,
+        instanceId: this.brickData.instanceId,
+      });
 
       set(nodeData, "bricks[0].properties", properties);
     }

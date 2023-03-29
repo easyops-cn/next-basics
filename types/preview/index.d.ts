@@ -7,6 +7,7 @@ import {
   BuilderRuntimeNode,
   EventDetailOfSnippetApply,
   NodeInstance,
+  EventDetailOfSnippetApplyStored,
 } from "@next-core/editor-bricks-helper";
 import type {
   formSchemaProperties,
@@ -628,6 +629,7 @@ export type BackendMessage =
   | BackendMessageForUpdateGraphData
   | BackMessageForBuildStart
   | BackMessageForBuildSuccess
+  | BackMessageForSnippetSuccess
   | BackMessageForBuildFail
   | BackendMessageForError
   | BackendMessageForExecuteSuccess;
@@ -641,6 +643,14 @@ export interface BackendMessageForInsert {
 export interface BackendMessageForInstanceResponse {
   action: "instance-success" | "instance-fail";
   data: WorkbenchBackendCacheAction;
+}
+
+export interface BackMessageForSnippetSuccess {
+  action: "snippet-success";
+  data: {
+    snippetId: string;
+    nodeData: BuilderRuntimeNode;
+  } & EventDetailOfSnippetApplyStored;
 }
 
 export interface BackendMessageForUpdateGraphData {

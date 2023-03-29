@@ -18,6 +18,7 @@ import {
 import {
   BuilderProvider,
   BuilderRuntimeNode,
+  EventDetailOfSnippetApplyStored,
 } from "@next-core/editor-bricks-helper";
 import { WorkbenchBackendCacheAction } from "@next-types/preview";
 import { pipes } from "@next-core/pipes";
@@ -109,6 +110,13 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
     this._handleExecuteSuccess.emit(res);
   };
 
+  @event({ type: "snippet.success" })
+  _handleSnippetSuccessEmitter: EventEmitter<EventDetailOfSnippetApplyStored>;
+
+  handleSnippetSuccess = (data: EventDetailOfSnippetApplyStored): void => {
+    this._handleSnippetSuccessEmitter.emit(data);
+  };
+
   @event({ type: "build.and.push" })
   _buildAndPushEmitter: EventEmitter<BuildAndPushParams>;
 
@@ -145,6 +153,7 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
               onRootNodeUpdate={this.handleRootNodeUpdate}
               onGraphDataUpdate={this.handleGraphDataUpdate}
               onExecuteSuccess={this.handleExecuteSuccess}
+              onSnippetSuccess={this.handleSnippetSuccess}
               onBuildAndPush={this.handleBuildAndPush}
             />
           </BuilderProvider>

@@ -11,6 +11,7 @@ import { getHistory } from "@next-core/brick-kit";
 import {
   useBuilderData,
   useBuilderDataManager,
+  EventDetailOfSnippetApplyStored,
   type BuilderDataManager,
   type BuilderRuntimeNode,
   type BuilderRuntimeEdge,
@@ -92,6 +93,7 @@ export interface WorkbenchCacheActionProps {
   onRootNodeUpdate: (node: BuilderRuntimeNode) => void;
   onGraphDataUpdate: (graphData: pipes.GraphData) => void;
   onExecuteSuccess: (res: { res: unknown; op: string }) => void;
+  onSnippetSuccess: (data: EventDetailOfSnippetApplyStored) => void;
   onBuildAndPush?: (params: BuildAndPushParams) => void;
 }
 
@@ -108,6 +110,7 @@ function LegacyWorkbenchCacheAction(
     onRootNodeUpdate,
     onGraphDataUpdate,
     onExecuteSuccess,
+    onSnippetSuccess,
     onBuildAndPush,
   }: WorkbenchCacheActionProps,
   ref: React.Ref<WorkbenchCacheActionRef>
@@ -601,6 +604,9 @@ function LegacyWorkbenchCacheAction(
             Modal.error({
               ...data,
             });
+            break;
+          case "snippet-success":
+            onSnippetSuccess(data);
             break;
           case "execute-success":
             onExecuteSuccess(data);

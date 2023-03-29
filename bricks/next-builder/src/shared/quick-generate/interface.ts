@@ -12,7 +12,13 @@ export interface BrickData {
   properties?: string;
 }
 
-export type ProviderNameFn = (dataType: DataType, instanceId: string) => string;
+export interface ProviderParams {
+  dataType: DataType;
+  dataName: string;
+  instanceId: string;
+}
+
+export type ProviderNameFn = (params: ProviderParams) => string;
 export interface BaseParams {
   generatorProviderName?: ProviderNameFn;
   updatedBrickFields?: string[];
@@ -52,6 +58,7 @@ export interface Model {
 }
 
 export interface ModelConfig {
+  dataName?: string;
   origin?: string;
   modelId?: string;
   provider?: string;
