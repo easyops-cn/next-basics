@@ -47,9 +47,9 @@ export abstract class CommonTypeGenerator {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  processFinalMergeValue(data: any): any {}
+  processFinalMergeValue(data: any, curConf: ModelConfig): any {}
 
-  abstract getDefaultMergeValue(): any;
+  abstract getDefaultMergeValue(curConf: ModelConfig): any;
 
   abstract handleDelete(field: Field, data: any): void;
 
@@ -65,7 +65,7 @@ export abstract class CommonTypeGenerator {
     const prevFields = this.calcPrevFields() ?? [];
     const curFields = curConf.fields ?? [];
 
-    const data = this.getDefaultMergeValue();
+    const data = this.getDefaultMergeValue(curConf);
 
     prevFields.forEach((prev) => {
       if (!curFields.some((now) => now.id === prev.id)) {
@@ -93,7 +93,7 @@ export abstract class CommonTypeGenerator {
     });
 
     if (this.needCustomProcessor) {
-      return this.processFinalMergeValue(data);
+      return this.processFinalMergeValue(data, curConf);
     }
 
     return data;

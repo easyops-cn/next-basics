@@ -157,7 +157,7 @@ describe("CommonTypeGenerator", () => {
 
     instance.getMergeData({});
 
-    expect(spyOnProcessFinalMergeValue).toHaveBeenCalledWith({});
+    expect(spyOnProcessFinalMergeValue).toHaveBeenCalledWith({}, {});
   });
 
   it("should get single instance", () => {

@@ -150,7 +150,11 @@ export class TableTypeGenerator extends CommonTypeGenerator {
       columns.splice(findIndex, 1);
     }
   }
-  processFinalMergeValue(columns: Column[]): NormalizedResult {
+  processFinalMergeValue(
+    columns: Column[],
+    modelConfig: ModelConfig
+  ): NormalizedResult {
+    const { dataName } = modelConfig;
     const brickProperties = this.getBrickProperties();
 
     return {
@@ -163,6 +167,11 @@ export class TableTypeGenerator extends CommonTypeGenerator {
             properties: JSON.stringify({
               ...brickProperties,
               columns: columns,
+              dataSource: this.generatorProviderName({
+                dataName,
+                dataType: this.dataType,
+                instanceId: this.brickData.instanceId,
+              }),
             }),
           },
         },

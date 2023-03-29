@@ -59,7 +59,8 @@ describe("FormTypeGenerator", () => {
       ],
     };
 
-    const generatorProviderName = (): string => "<% CTX.formData %>";
+    const generatorProviderName = ({ dataName }): string =>
+      `<% CTX.${dataName} %>`;
 
     const instance = new FormTypeGenerator({
       generatorProviderName,
@@ -74,7 +75,7 @@ describe("FormTypeGenerator", () => {
       appId: "test-app",
     });
 
-    expect(instance.processFormProvider({})).toEqual({
+    expect(instance.processFormProvider({ dataName: "formData" })).toEqual({
       instanceId: "abc123",
       objectId: "STORYBOARD_BRICK",
       property: {
@@ -112,6 +113,7 @@ describe("FormTypeGenerator", () => {
       instance.getCreateData({
         fields: [{ name: "名称", id: "name", type: "string" }],
         provider: "provider-of-cmdb-instance",
+        dataName: "list",
       })
     ).toEqual({
       insert: [
@@ -130,7 +132,7 @@ describe("FormTypeGenerator", () => {
           objectId: "STORYBOARD_BRICK",
           property: {
             brick: "forms.general-form",
-            properties: '{"layout":"horizontal","values":"<% CTX.formData %>"}',
+            properties: '{"layout":"horizontal","values":"<% CTX.list %>"}',
           },
         },
       ],
@@ -146,10 +148,24 @@ describe("FormTypeGenerator", () => {
       },
     ]);
 
-    expect(instance.getDefaultMergeValue()).toEqual({
+    expect(
+      instance.getDefaultMergeValue({
+        dataName: "varData",
+        provider: "providers-of.instance-search",
+      })
+    ).toEqual({
       delete: [],
       insert: [],
-      update: [],
+      update: [
+        {
+          instanceId: "abc123",
+          objectId: "STORYBOARD_BRICK",
+          property: {
+            brick: "forms.general-form",
+            properties: '{"layout":"horizontal","values":"<% CTX.varData %>"}',
+          },
+        },
+      ],
     });
 
     const insertData = { insert: [] };
@@ -274,6 +290,7 @@ describe("FormTypeGenerator", () => {
         },
       ],
       provider: "providers-of-cmdb-instance-postsearch",
+      dataName: "test",
     };
 
     const snippetData = {
@@ -308,7 +325,8 @@ describe("FormTypeGenerator", () => {
       mountPoint: "content",
     };
 
-    const generatorProviderName = (): string => "<% CTX.formData %>";
+    const generatorProviderName = ({ dataName }): string =>
+      `<% CTX.${dataName} %>`;
 
     const instance = new FormTypeGenerator({ generatorProviderName });
 
@@ -332,7 +350,7 @@ describe("FormTypeGenerator", () => {
           {
             brick: "forms.general-form",
             properties: {
-              values: "<% CTX.formData %>",
+              values: "<% CTX.test %>",
             },
             slots: {
               items: {
@@ -364,7 +382,7 @@ describe("FormTypeGenerator", () => {
           {
             brick: "forms.general-form",
             properties: {
-              values: "<% CTX.formData %>",
+              values: "<% CTX.test %>",
             },
             slots: {
               items: {
@@ -377,6 +395,93 @@ describe("FormTypeGenerator", () => {
                       required: false,
                     },
                   },
+                  {
+                    brick: "forms.general-buttons",
+                    properties: { name: "提交" },
+                  },
+                ],
+                type: "bricks",
+              },
+            },
+          },
+        ],
+        type: "bricks",
+      },
+      type: "brick",
+    });
+
+    const snippetData2 = {
+      nodeData: {
+        brick: "forms.geneal-form[quick-generation]",
+        bricks: [
+          {
+            brick: "forms.general-form",
+            slots: {
+              items: {
+                type: "bricks",
+                bricks: [
+                  {
+                    brick: "forms.general-buttons",
+                    properties: {
+                      name: "提交",
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ] as BrickConf[],
+        type: "bricks",
+      },
+      parentNode: {
+        brick: "general-card",
+        instanceId: "abc123",
+      },
+      dragOverInstanceId: "abc123",
+      dragStatus: "inside" as DragStatus,
+      mountPoint: "content",
+    };
+
+    expect(
+      instance.processSnippetData({
+        modelConfig: {},
+        snippetData: snippetData2,
+      })
+    ).toEqual({
+      appId: "test-app",
+      brick: "forms.geneal-form[quick-generation]",
+      dragOverInstanceId: "abc123",
+      dragStatus: "inside",
+      mountPoint: "content",
+      nodeData: {
+        brick: "forms.geneal-form[quick-generation]",
+        bricks: [
+          {
+            brick: "forms.general-form",
+            slots: {
+              items: {
+                bricks: [
+                  {
+                    brick: "forms.general-buttons",
+                    properties: { name: "提交" },
+                  },
+                ],
+                type: "bricks",
+              },
+            },
+          },
+        ],
+        type: "bricks",
+      },
+      parent: "abc123",
+      snippetBricks: {
+        brick: "forms.geneal-form[quick-generation]",
+        bricks: [
+          {
+            brick: "forms.general-form",
+            slots: {
+              items: {
+                bricks: [
                   {
                     brick: "forms.general-buttons",
                     properties: { name: "提交" },
