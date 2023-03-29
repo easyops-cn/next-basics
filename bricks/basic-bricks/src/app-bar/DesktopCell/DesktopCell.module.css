@@ -30,24 +30,28 @@
 
 @media (max-height: 860px), (max-width: 1280px) {
   .cellItem {
-    height: 124px;
+    height: 134px;
     min-width: 100px;
+    justify-content: normal;
 
     &.small {
-      height: 100px;
+      height: 110px;
       min-width: 76px;
+      justify-content: normal;
     }
   }
 }
 
 @media (max-height: 700px), (max-width: 1024px) {
   .cellItem {
-    height: 118px;
+    height: 129px;
     min-width: 80px;
+    justify-content: normal;
 
     &.small {
-      height: 89px;
+      height: 100px;
       min-width: 60px;
+      justify-content: normal;
     }
   }
 }
