@@ -51,24 +51,29 @@ export class FormTypeGenerator extends CommonTypeGenerator {
   getCreateData(modelConfig: ModelConfig): NormalizedResult {
     const { fields, dataName } = modelConfig;
 
-    const createNodes = fields?.map((field) => {
-      const targetBrick = this.getTargetBrick(field.brick);
+    const createNodes = fields?.reduce((arr, field) => {
+      // istanbul ignore else
+      if (field.brick) {
+        const targetBrick = this.getTargetBrick(field.brick);
 
-      return {
-        appId: this.appId,
-        brick: field.brick,
-        mountPoint: "items",
-        parent: this.brickData.instanceId,
-        type: "brick",
-        properties: JSON.stringify(
-          targetBrick?.propertyGenerator(
-            field.id,
-            this.attrMap.get(field.id).name,
-            this.attrMap.get(field.id).required === "true"
-          )
-        ),
-      };
-    });
+        arr.push({
+          appId: this.appId,
+          brick: field.brick,
+          mountPoint: "items",
+          parent: this.brickData.instanceId,
+          type: "brick",
+          properties: JSON.stringify(
+            targetBrick?.propertyGenerator(
+              field.id,
+              this.attrMap.get(field.id).name,
+              this.attrMap.get(field.id).required === "true"
+            )
+          ),
+        });
+      }
+
+      return arr;
+    }, []);
 
     return {
       insert: createNodes,
@@ -171,19 +176,24 @@ export class FormTypeGenerator extends CommonTypeGenerator {
       parent,
     } = snippetData;
 
-    const list = fields.map((field) => {
-      const targetBrick = this.useBrickList.find(
-        (item) => item.brick === item.brick
-      );
-      return {
-        brick: field.brick,
-        properties: targetBrick?.propertyGenerator(
-          field.id,
-          this.attrMap.get(field.id).name,
-          this.attrMap.get(field.id).required === "true"
-        ),
-      };
-    });
+    const list = fields.reduce((arr, field) => {
+      // istanbul ignore else
+      if (field.brick) {
+        const targetBrick = this.useBrickList.find(
+          (item) => item.brick === item.brick
+        );
+        arr.push({
+          brick: field.brick,
+          properties: targetBrick?.propertyGenerator(
+            field.id,
+            this.attrMap.get(field.id).name,
+            this.attrMap.get(field.id).required === "true"
+          ),
+        });
+      }
+
+      return arr;
+    }, []);
 
     const properties: Record<string, any> = get(
       nodeData,

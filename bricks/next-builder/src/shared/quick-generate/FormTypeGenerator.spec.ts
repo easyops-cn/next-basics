@@ -93,13 +93,20 @@ describe("FormTypeGenerator", () => {
 
     expect(
       instance.getCreateData({
-        fields: [{ name: "名称", id: "name", type: "string" }],
+        fields: [
+          {
+            name: "名称",
+            id: "name",
+            type: "string",
+            brick: "forms.general-input",
+          },
+        ],
       })
     ).toEqual({
       insert: [
         {
           appId: "test-app",
-          brick: undefined,
+          brick: "forms.general-input",
           mountPoint: "items",
           parent: "abc123",
           properties: undefined,
@@ -111,7 +118,14 @@ describe("FormTypeGenerator", () => {
 
     expect(
       instance.getCreateData({
-        fields: [{ name: "名称", id: "name", type: "string" }],
+        fields: [
+          {
+            name: "名称",
+            id: "name",
+            type: "string",
+            brick: "forms.general-input",
+          },
+        ],
         provider: "provider-of-cmdb-instance",
         dataName: "list",
       })
@@ -119,7 +133,7 @@ describe("FormTypeGenerator", () => {
       insert: [
         {
           appId: "test-app",
-          brick: undefined,
+          brick: "forms.general-input",
           mountPoint: "items",
           parent: "abc123",
           properties: undefined,
