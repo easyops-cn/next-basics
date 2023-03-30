@@ -221,4 +221,18 @@ describe("WorkbenchComponentSelect", () => {
       "折叠容器V2"
     );
   });
+
+  it("should work when currentBrick is form brick", async () => {
+    render(
+      <WorkbenchComponentSelect
+        brickList={brickList}
+        storyList={storyList}
+        currentBrick="forms.general-input"
+      />
+    );
+
+    const brickElement = screen.getAllByTitle("通用的数字输入框");
+
+    expect(brickElement.length).toEqual(2);
+  });
 });
