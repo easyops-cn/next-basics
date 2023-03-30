@@ -21,6 +21,8 @@ import {
   defaultBlankListOfBricks,
   SnippetType,
   componetSortConf,
+  suggestFormBricks,
+  otherFormBrick,
 } from "./constants";
 import { i18nText, getRuntime } from "@next-core/brick-kit";
 import { Story } from "@next-core/brick-types";
@@ -42,6 +44,7 @@ interface ComponentSelectProps {
   brickList: BrickOptionItem[];
   storyList: Story[];
   isShowSuggest?: boolean;
+  currentBrick?: string;
   onActionClick?: (
     type: string,
     data: BrickOptionItem,
@@ -102,6 +105,7 @@ export function ComponentSelect(
     brickList,
     storyList,
     isShowSuggest = true,
+    currentBrick,
     onActionClick,
     onDrag,
   }: ComponentSelectProps,
@@ -269,6 +273,7 @@ export function ComponentSelect(
             storyList={storyList}
             isShowSuggest={isShowSuggest}
             onActionClick={onActionClick}
+            currentBrick={currentBrick}
           />
         </div>
       </WorkbenchTreeDndContext.Provider>
@@ -283,6 +288,7 @@ interface ComponentListProps
   q: string;
   storyList: Story[];
   isShowSuggest?: boolean;
+  currentBrick?: string;
 }
 
 function ComponentList({
@@ -292,6 +298,7 @@ function ComponentList({
   storyList,
   isShowSuggest = true,
   onActionClick,
+  currentBrick,
 }: ComponentListProps): React.ReactElement {
   const initGroup = useCallback((): groupItem[] => {
     return suggest[componentType]?.length > 0 && isShowSuggest
@@ -375,6 +382,10 @@ function ComponentList({
     }
   };
 
+  const isFormBrick = (brick: string) => {
+    return brick?.startsWith("forms.") || otherFormBrick.includes(brick);
+  };
+
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
       const { width } = refWrapper.current.getBoundingClientRect();
@@ -388,7 +399,21 @@ function ComponentList({
   });
 
   useEffect(() => {
-    if (suggest[componentType]?.length) {
+    if (componentType === "brick" && isFormBrick(currentBrick)) {
+      // 如果当前编辑构件是表单项构件，则精确推荐表单相关的构件
+      setSuggestList(
+        suggestFormBricks.map((item) => {
+          const originData = componentList.find(
+            (brick) => brick.id === item.id
+          );
+          return {
+            ...originData,
+            ...item,
+            category: "suggest",
+          };
+        })
+      );
+    } else if (suggest[componentType]?.length) {
       setSuggestList(
         suggest[componentType].map((item) => {
           const originData = componentList.find(
@@ -402,7 +427,7 @@ function ComponentList({
         })
       );
     }
-  }, [storyList, componentType, componentList]);
+  }, [currentBrick, storyList, componentType, componentList]);
 
   useEffect(() => {
     const { group, list } = getRenderData(suggestList.concat(componentList), q);

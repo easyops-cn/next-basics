@@ -225,3 +225,134 @@ export enum SnippetType {
   SelfBrick = "selfBrick",
   Scene = "scene",
 }
+
+export const suggestFormBricks: Pick<BrickOptionItem, "type" | "id">[] = [
+  {
+    type: "brick",
+    id: "forms.general-input",
+  },
+  {
+    type: "brick",
+    id: "forms.general-input-number",
+  },
+  {
+    type: "brick",
+    id: "forms.general-select",
+  },
+  {
+    type: "brick",
+    id: "forms.general-radio",
+  },
+  {
+    type: "brick",
+    id: "forms.general-checkbox",
+  },
+  {
+    type: "brick",
+    id: "forms.general-switch",
+  },
+  {
+    type: "brick",
+    id: "forms.general-time-picker",
+  },
+  {
+    type: "brick",
+    id: "forms.general-date-picker",
+  },
+  {
+    type: "brick",
+    id: "forms.time-range-picker",
+  },
+  {
+    type: "brick",
+    id: "presentational-bricks.datetime-selector",
+  },
+  {
+    type: "brick",
+    id: "forms.general-textarea",
+  },
+  {
+    type: "brick",
+    id: "forms.general-slide",
+  },
+  {
+    type: "brick",
+    id: "forms.general-auto-complete",
+  },
+  {
+    type: "brick",
+    id: "forms.input-with-unit",
+  },
+  {
+    type: "brick",
+    id: "forms.general-buttons",
+  },
+  {
+    type: "brick",
+    id: "forms.tree-select",
+  },
+  {
+    type: "brick",
+    id: "forms.icon-select",
+  },
+  {
+    type: "brick",
+    id: "forms.general-cascader",
+  },
+  {
+    type: "brick",
+    id: "forms.upload-img",
+  },
+  {
+    type: "brick",
+    id: "forms.upload-files",
+  },
+  {
+    type: "brick",
+    id: "forms.upload-files-v2",
+  },
+  {
+    type: "brick",
+    id: "forms.general-form-item",
+  },
+  {
+    type: "brick",
+    id: "code-bricks.code-editor",
+  },
+  {
+    type: "brick",
+    id: "code.vs-code-editor",
+  },
+  {
+    type: "brick",
+    id: "presentational-bricks.markdown-editor",
+  },
+  {
+    type: "brick",
+    id: "forms.general-structs-form-item",
+  },
+  {
+    type: "brick",
+    id: "forms.general-modal",
+  },
+  {
+    type: "brick",
+    id: "forms.dynamic-form-item-v2",
+  },
+  {
+    type: "brick",
+    id: "forms.advance-setting",
+  },
+  {
+    type: "brick",
+    id: "forms.form-modal",
+  },
+];
+
+// 不在forms-NB但是归类为表单项构件
+export const otherFormBrick = [
+  "presentational-bricks.datetime-selector",
+  "code-bricks.code-editor",
+  "presentational-bricks.markdown-editor",
+  "code.vs-code-editor",
+];
