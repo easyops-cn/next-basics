@@ -39,6 +39,11 @@ export class WorkbenchComponentSelectElement extends UpdatingElement {
   @property({ attribute: false })
   isShowSuggest: boolean;
 
+  @property({
+    type: String,
+  })
+  currentBrick: string;
+
   @event({ type: "action.click" })
   actionClickEmit: EventEmitter<{ type: string; data: any }>;
 
@@ -82,6 +87,7 @@ export class WorkbenchComponentSelectElement extends UpdatingElement {
             ref={this._selectRef}
             brickList={this.brickList}
             storyList={this.storyList}
+            currentBrick={this.currentBrick}
             isShowSuggest={this.isShowSuggest ?? true}
             onActionClick={this._handlerActionClick}
             onDrag={this._handleOnDrag}
