@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.290.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.289.10...@next-bricks/presentational-bricks@1.290.0) (2023-03-30)
+
+
+### Features
+
+* **card-item:** 卡片类型 cardLayoutType 为 "icon-as-background" 是否使用afterDescription插槽 ([e5135d4](https://github.com/easyops-cn/next-basics/commit/e5135d4035a791ebaa832d17a974442d09ddd630))
+
+
+
+
+
 ## [1.289.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.289.9...@next-bricks/presentational-bricks@1.289.10) (2023-03-29)
 
 

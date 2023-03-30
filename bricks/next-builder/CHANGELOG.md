@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.226.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.226.2...@next-bricks/next-builder@1.226.3) (2023-03-30)
+
+
+### Bug Fixes
+
+* Compatible without brick field ([0d0372e](https://github.com/easyops-cn/next-basics/commit/0d0372e3e78a1fc854a7462098b4c1500e711270))
+* support provider modification ([946c861](https://github.com/easyops-cn/next-basics/commit/946c8615103956912f096a1136e56400d38adc26))
+
+
+
+
+
 ## [1.226.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.226.1...@next-bricks/next-builder@1.226.2) (2023-03-29)
 
 
