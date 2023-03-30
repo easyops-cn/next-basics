@@ -352,3 +352,11 @@ export const suggestFormBricks: Pick<BrickOptionItem, "type" | "id">[] = [
     id: "forms.form-modal",
   },
 ];
+
+// 不在forms-NB但是归类为表单项构件
+export const otherFormBrick = [
+  "presentational-bricks.datetime-selector",
+  "code-bricks.code-editor",
+  "presentational-bricks.markdown-editor",
+  "code.vs-code-editor",
+];

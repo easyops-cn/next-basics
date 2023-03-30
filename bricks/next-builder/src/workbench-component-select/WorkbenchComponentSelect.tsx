@@ -22,6 +22,7 @@ import {
   SnippetType,
   componetSortConf,
   suggestFormBricks,
+  otherFormBrick,
 } from "./constants";
 import { i18nText, getRuntime } from "@next-core/brick-kit";
 import { Story } from "@next-core/brick-types";
@@ -382,12 +383,6 @@ function ComponentList({
   };
 
   const isFormBrick = (brick: string) => {
-    const otherFormBrick = [
-      "presentational-bricks.datetime-selector",
-      "code-bricks.code-editor",
-      "presentational-bricks.markdown-editor",
-      "code.vs-code-editor",
-    ];
     return brick?.startsWith("forms.") || otherFormBrick.includes(brick);
   };
 
