@@ -26,10 +26,8 @@ const spyOnMFALogin = jest.spyOn(
   "MfaApi_generateRandomTotpSecret"
 );
 const spyOnMFASetRule = jest.spyOn(apiGatewaySdk, "MfaApi_verifyUserIsSetRule");
-const spyOnUnionpayMFASetRule = jest.spyOn(
-  apiGatewaySdk,
-  "UnionPayApi_unionPayLogin"
-);
+const spyOngetCaptcha = jest.spyOn(apiGatewaySdk, "AuthApi_getCaptcha");
+
 const spyOnError = jest.spyOn(Modal, "error");
 const spyOnKit = jest.spyOn(kit, "getRuntime");
 spyOnKit.mockReturnValue({
@@ -269,51 +267,6 @@ describe("GeneralLogin", () => {
     } as any);
     wrapper.find(Form).at(0).simulate("submit", new Event("submit"));
   });
-
-  it("should work when open unionpay mfa ", (done) => {
-    spyOnGetHistory.mockReturnValueOnce({
-      location: {
-        state: {
-          from: createLocation("/mock-from"),
-        },
-      },
-      push: spyOnHistoryPush,
-    } as any);
-    const form = {
-      getFieldDecorator: () => (comp: React.Component) => comp,
-      validateFields: jest.fn().mockImplementation(async (fn) => {
-        await fn(null, {
-          username: "mock-user",
-          password: "mock-pswd",
-        });
-        done();
-      }),
-    };
-    const wrapper = shallow(
-      <LegacyGeneralLogin form={form as any} {...i18nProps} />
-    );
-    expect(wrapper).toBeTruthy();
-    spyOnLogin.mockResolvedValueOnce({
-      loggedIn: false,
-      username: "mock-user",
-      userInstanceId: "abc",
-      org: 1,
-    });
-    spyOnMFALogin.mockResolvedValueOnce({
-      totpSecret: "xxx",
-      secret: "xxx",
-    });
-    spyOnUnionpayMFASetRule.mockResolvedValueOnce({
-      isNeedMfa: false,
-    });
-    spyOnKit.mockReturnValueOnce({
-      getFeatureFlags: () => ({
-        factors: true,
-        "is-unionpay-mfa-login": true,
-      }),
-    } as any);
-    wrapper.find(Form).at(0).simulate("submit", new Event("submit"));
-  });
   it("should login failed if give wrong password", async () => {
     spyOnGetHistory.mockReturnValueOnce({
       location: {
@@ -468,6 +421,67 @@ describe("GeneralLogin", () => {
       <LegacyGeneralLogin form={form as any} {...i18nProps} />
     );
     expect(wrapper).toBeTruthy();
+    spyOnLogin.mockResolvedValueOnce({
+      loggedIn: true,
+      username: "mock-user",
+      userInstanceId: "abc",
+      org: 1,
+      accessRule: "cmdb",
+    });
+    wrapper.find(Form).at(1).simulate("submit", new Event("submit"));
+    expect(spyOnLogin).toHaveBeenCalled();
+    expect(storage["LAST_LOGIN_METHOD"]).toEqual("easyops");
+    expect(storage["LAST_LOGIN_TIME"]).toEqual(timeStamp);
+  });
+
+  it("should login width security-code", async () => {
+    spyOngetCaptcha.mockResolvedValueOnce(new Blob(["000"]));
+    spyOnKit.mockReturnValueOnce({
+      getFeatureFlags: () => ({
+        "security-code": true,
+      }),
+    } as any);
+
+    spyOnGetHistory.mockReturnValue({
+      location: {
+        state: {
+          from: createLocation("/mock-from"),
+        },
+      },
+      push: spyOnHistoryPush,
+    } as any);
+    const form = {
+      getFieldDecorator: () => (comp: React.Component) => comp,
+      validateFields: jest.fn().mockImplementation(async (fn) => {
+        await fn(null, {
+          username: "mock-user",
+          password: "mock-pswd",
+          phrase: "111",
+        });
+        expect(spyOnAuthenticate).toBeCalledWith({
+          org: 1,
+          username: "mock-user",
+          userInstanceId: "abc",
+          accessRule: "cmdb",
+        });
+        expect(spyOnReloadMicroApps).toBeCalled();
+        expect(spyOnHistoryPush).toBeCalledWith(createLocation("/mock-from"));
+      }),
+    };
+    const wrapper = shallow(
+      <LegacyGeneralLogin form={form as any} {...i18nProps} />
+    );
+
+    await jest.runAllTimers();
+    await (global as any).flushPromises();
+    expect(wrapper.find("img").last().props().src).toBe("000");
+
+    spyOngetCaptcha.mockResolvedValueOnce(new Blob(["111"]));
+    wrapper.find("img").last().simulate("click");
+    await jest.runAllTimers();
+    await (global as any).flushPromises();
+    expect(wrapper.find("img").last().props().src).toBe("111");
+
     spyOnLogin.mockResolvedValueOnce({
       loggedIn: true,
       username: "mock-user",
