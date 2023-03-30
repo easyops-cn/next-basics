@@ -32,6 +32,7 @@ spyOnKit.mockReturnValue({
     "enable-backend-password-config": true,
     "enable-nickname-config": true,
     "disable-registration-clause": false,
+    "hide-default-logo-in-login-page": false,
   }),
 } as any);
 const spyOnGetPasswordConfig = jest.spyOn(
