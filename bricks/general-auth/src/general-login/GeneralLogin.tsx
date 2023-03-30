@@ -12,11 +12,10 @@ import {
 } from "@next-core/brick-kit";
 import { JsonStorage } from "@next-libs/storage";
 import { loadScript } from "@next-core/brick-utils";
-import { esbLogin, LoginResponseBody } from "@next-sdk/auth-sdk";
+import { esbLogin } from "@next-sdk/auth-sdk";
 import { MfaApi_generateRandomTotpSecret } from "@next-sdk/api-gateway-sdk";
 import {
   AuthApi_loginV2,
-  AuthApi_LoginV2ResponseBody,
   AuthApi_LoginV2RequestBody,
   MfaApi_verifyUserIsSetRule,
   MfaApi_VerifyUserIsSetRuleResponseBody,
@@ -114,7 +113,7 @@ export class LegacyGeneralLogin extends React.Component<
             params = { service: this.state.service };
           }
           let loginMethod: typeof esbLogin | typeof AuthApi_loginV2;
-          const { password, username, phrase } = values;
+          const { password } = values;
           const req = values as unknown as AuthApi_LoginV2RequestBody;
           if (esbLoginEnabled) {
             loginMethod = esbLogin;
@@ -125,32 +124,22 @@ export class LegacyGeneralLogin extends React.Component<
           req.loginBy = this.state.currentLoginMethod;
           this.storage.setItem(lastLoginMethod, this.state.currentLoginMethod);
           this.storage.setItem(lastLoginTime, Date.now());
-          let result: AuthApi_LoginV2ResponseBody | LoginResponseBody = {};
-          if (!ISUNIONPAYMFALOGIN) {
-            result = await loginMethod(req, {
-              params,
-              interceptorParams: {
-                // show spinner above login button instead of in loading bar
-                ignoreLoadingBar: true,
-              },
-            });
-          }
+          const result = await loginMethod(req, {
+            params,
+            interceptorParams: {
+              // show spinner above login button instead of in loading bar
+              ignoreLoadingBar: true,
+            },
+          });
           // mfa
           if (MFALoginEnabled || ISUNIONPAYMFALOGIN) {
             // 验证用户是否设置了双因子规则
             let verifyResult = {};
             if (ISUNIONPAYMFALOGIN) {
               verifyResult = await UnionPayApi_unionPayLogin({
-                username,
+                username: result.username,
                 password,
-                phrase,
               });
-              result = {
-                ...verifyResult,
-                loggedIn: (
-                  verifyResult as UnionPayApi_UnionPayLoginResponseBody
-                ).isLoggedIn,
-              };
             } else {
               verifyResult = await MfaApi_verifyUserIsSetRule({
                 username: result.username,
