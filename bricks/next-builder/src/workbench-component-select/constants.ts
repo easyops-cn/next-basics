@@ -337,10 +337,6 @@ export const suggestFormBricks: Pick<BrickOptionItem, "type" | "id">[] = [
   },
   {
     type: "brick",
-    id: "forms.dynamic-form-item",
-  },
-  {
-    type: "brick",
     id: "forms.dynamic-form-item-v2",
   },
   {
