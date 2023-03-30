@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.227.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.226.3...@next-bricks/next-builder@1.227.0) (2023-03-30)
+
+
+### Features
+
+* feat workbench-component-select suggest list ([7c74456](https://github.com/easyops-cn/next-basics/commit/7c74456be49428c67e530461fcbe6e86d61c9a06))
+* feat workbench-component-select suggest list ([3c3480f](https://github.com/easyops-cn/next-basics/commit/3c3480fbb378cf8dc3c401e757048c425f446f54))
+* update suggestFormBricks ([8128177](https://github.com/easyops-cn/next-basics/commit/81281779cddade87085d02d5220cffb4b86db2b1))
+
+
+
+
+
 ## [1.226.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.226.2...@next-bricks/next-builder@1.226.3) (2023-03-30)
 
 
