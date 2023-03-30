@@ -64,6 +64,7 @@ interface GeneralLoginState {
   yzm?: any;
   yzm_value?: any;
   security_codeEnabled?: any;
+  hideDefaultLogoInLoginPage?: boolean;
 }
 export const lastLoginMethod = "LAST_LOGIN_METHOD";
 export const lastLoginTime = "LAST_LOGIN_TIME";
@@ -268,6 +269,8 @@ export class LegacyGeneralLogin extends React.Component<
       yzm: "",
       yzm_value: "",
       security_codeEnabled: featureFlags["security-code"],
+      hideDefaultLogoInLoginPage:
+        featureFlags["hide-default-logo-in-login-page"],
     };
     const enabledQRCode = featureFlags["wx-QR-code"];
     if (enabledQRCode) {
@@ -662,12 +665,12 @@ export class LegacyGeneralLogin extends React.Component<
                       src={brand.auth_logo_url}
                       style={{ height: 28, verticalAlign: "middle" }}
                     />
-                  ) : (
+                  ) : !this.state.hideDefaultLogoInLoginPage ? (
                     <img
                       src={logoPng}
                       style={{ height: 28, verticalAlign: "middle" }}
                     ></img>
-                  )}
+                  ) : null}
                 </Link>
               </div>
             </div>

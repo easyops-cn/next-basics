@@ -55,6 +55,8 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
   const [, setForceUpdate] = useState<any>();
   const disableClause = enabledFeatures["disable-registration-clause"];
   const enableNicknameConfig = enabledFeatures["enable-nickname-config"];
+  const hideDefaultLogoInLoginPage =
+    enabledFeatures["hide-default-logo-in-login-page"];
   const passwordConfigMap = {
     default: {
       regex: /^.{6,20}$/,
@@ -215,9 +217,9 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
                   src={brand.auth_logo_url}
                   style={{ height: 32, verticalAlign: "middle" }}
                 />
-              ) : (
+              ) : !hideDefaultLogoInLoginPage ? (
                 <Logo height={32} style={{ verticalAlign: "middle" }} />
-              )}
+              ) : null}
             </Link>
           </div>
         </div>
