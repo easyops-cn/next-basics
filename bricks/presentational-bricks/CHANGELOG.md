@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.290.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.290.0...@next-bricks/presentational-bricks@1.290.1) (2023-03-31)
+
+
+### Bug Fixes
+
+* close MONITOR-5331 refs MONITOR-5331 ([9d93c82](https://github.com/easyops-cn/next-basics/commit/9d93c82d62fe884c520c9f94af6479798fd14edd))
+
+
+
+
+
 # [1.290.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.289.10...@next-bricks/presentational-bricks@1.290.0) (2023-03-30)
 
 
