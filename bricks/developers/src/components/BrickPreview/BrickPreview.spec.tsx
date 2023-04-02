@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import * as kit from "@next-core/brick-kit";
-import { BrickConf } from "@next-core/brick-types";
+import { BrickConf, FeatureFlags } from "@next-core/brick-types";
 import { BrickPreview, BrickPreviewRef } from "./BrickPreview";
 
 jest.spyOn(kit, "getHistory").mockReturnValue({
@@ -27,7 +27,21 @@ jest
   .spyOn(kit.developHelper, "checkoutTplContext")
   .mockImplementation(() => void 0);
 
+const renderPreviewBricks = ((kit.developHelper as any).renderPreviewBricks =
+  jest.fn().mockReturnValue(Promise.resolve()));
+
+let flags: FeatureFlags = {};
+jest.spyOn(kit, "getRuntime").mockReturnValue({
+  getFeatureFlags() {
+    return flags;
+  },
+} as any);
+
 describe("BrickPreview", () => {
+  beforeEach(() => {
+    flags = {};
+  });
+
   it("should render the correct key", async () => {
     const conf: BrickConf = {
       brick: "div",
@@ -135,5 +149,22 @@ describe("BrickPreview", () => {
         .html()
         .includes("hello")
     ).toBe(false);
+  });
+
+  it("should migrate v3", async () => {
+    flags = { "migrate-to-brick-next-v3": true };
+    const conf: BrickConf = {
+      brick: "div",
+      properties: {
+        title: "hello",
+      },
+    };
+    const previewRef = React.createRef<BrickPreviewRef>();
+    mount(<BrickPreview conf={conf} ref={previewRef} />);
+    expect(renderPreviewBricks).toBeCalledWith([conf], {
+      main: previewRef.current.container,
+      portal: previewRef.current.portal,
+    });
+    await (global as any).flushPromises();
   });
 });

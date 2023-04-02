@@ -3,6 +3,7 @@ import { cloneDeep } from "lodash";
 import {
   developHelper,
   getHistory,
+  getRuntime,
   httpErrorToString,
 } from "@next-core/brick-kit";
 import { LocationContext } from "@next-core/brick-kit/dist/types/core/exports";
@@ -58,7 +59,19 @@ function LegacyBrickPreview(
   }));
 
   React.useEffect(() => {
+    const migrateV3 =
+      getRuntime().getFeatureFlags()["migrate-to-brick-next-v3"];
     const process = async (): Promise<void> => {
+      if (migrateV3) {
+        await (developHelper as any).renderPreviewBricks(
+          cloneDeep([].concat(config)),
+          {
+            main: containerRef.current,
+            portal: portalRef.current,
+          }
+        );
+        return;
+      }
       developHelper.unmountTree(bgRef.current);
       const fakeKernel = developHelper.getFakeKernel({
         mountPoints: {
