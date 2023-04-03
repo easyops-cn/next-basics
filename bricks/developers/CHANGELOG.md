@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.365.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.1...@next-bricks/developers@1.365.2) (2023-04-03)
+
+
+### Bug Fixes
+
+* disable next-brick-preview in v3 ([a9875c0](https://github.com/easyops-cn/next-basics/commit/a9875c02837b9acd77de43acc8b098d1033e4d2f))
+* make brick-preview compatible with brick next v3 ([1f3eab9](https://github.com/easyops-cn/next-basics/commit/1f3eab92a614ffeef04ebbde4643e25b0f0d6b93))
+
+
+
+
+
 ## [1.365.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.0...@next-bricks/developers@1.365.1) (2023-03-27)
 
 
