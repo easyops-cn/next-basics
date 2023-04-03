@@ -61,10 +61,12 @@ export function BrickBook({
 
   const [mode, setMode] = React.useState(developerStorage.mode ?? "json");
 
-  const enableNewBrickPreview = React.useMemo(
-    () => getRuntime().getFeatureFlags()["developers-brick-preview"],
-    []
-  );
+  const enableNewBrickPreview = React.useMemo(() => {
+    const flags = getRuntime().getFeatureFlags();
+    return (
+      flags["developers-brick-preview"] && !flags["migrate-to-brick-next-v3"]
+    );
+  }, []);
 
   React.useEffect(() => {
     if (story && !notToSetPageTitle) {
