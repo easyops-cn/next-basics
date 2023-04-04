@@ -65,7 +65,22 @@ const storyboard = {
               },
             ],
           },
+          properties: {
+            textContent: "<% CTX[CTX.a ? CTX.b : CTX.c] %>",
+          },
           portal: false,
+          context: [
+            {
+              name: "test",
+              value: "value",
+            },
+          ],
+          exports: {
+            xxx: "value",
+          },
+        },
+        {
+          template: "mock-template.general-list",
         },
         {
           bg: false,
@@ -145,6 +160,16 @@ const storyboard = {
       lock: false,
       path: "${APP.homepage}/test",
       public: false,
+      providers: ["provider-of-cmdb\\.get-detail"],
+      defineResolves: [
+        {
+          id: "value-1",
+          provider: "test-provider",
+        },
+      ],
+      redirect: {
+        useProvider: "provider-of-cmdb.get-detail",
+      },
       type: "bricks",
     },
   ],
@@ -163,7 +188,7 @@ const storyboard = {
             bg: false,
             brick: "basic-bricks.general-button",
             properties: {
-              buttonName: "to new",
+              buttonName: "<% STATE['a'] %>",
               buttonType: "link",
               buttonUrl: "<% PATH %>",
               dataset: {
@@ -405,6 +430,134 @@ const result = [
             type: "template",
           },
         },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "USING_OLD_TEMPLATE",
+    message: {
+      zh: "您正在使用旧的模板构件, 这种类型的构件在 v3 将决定废除，建议使用 Widget 或 自定义模板 构件进行代替: ",
+      en: "You are using old template components, which will be decided to be abolished in v3, Please use Widget or CustomTemplate instead: ",
+    },
+    list: ["mock-template.general-list"],
+    details: [
+      {
+        message: "mock-template.general-list",
+        meta: {
+          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "USING_PROVIDER_IN_ROUTE",
+    message: {
+      zh: "您在路由上面定义了 provider, 建议在 context 中使用 useProvider 替代:",
+      en: "You have defined Provider on the route, and this feature will be dropped in v3, Please use useProvider in route instead: ",
+    },
+    list: ["provider-of-cmdb\\.get-detail"],
+    details: [
+      {
+        message: "provider-of-cmdb\\.get-detail",
+        meta: {
+          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "USING_DEFINE_RESOLVES_IN_ROUTE",
+    message: {
+      zh: "您在路由上面定义了 defineResolves, 建议在 context 中使用 useProvider 替代: ",
+      en: "You have defined defineResolves on the route, and this feature will be dropped in v3, Please use useProvider in route instead: ",
+    },
+    list: ["value-1"],
+    details: [
+      {
+        message: "value-1",
+        meta: {
+          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "USING_DIRECT_IN_ROUTE",
+    message: {
+      zh: "您在路由上面定义了 redirect, 但路由类型非 redirect, 这将导致 redirect 不生效: ",
+      en: "You have defined redirect on the route, but the route type is not redirect, which will cause redirect to not take effect: ",
+    },
+    list: ["value-1"],
+    details: [
+      {
+        message: "value-1",
+        meta: {
+          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "USING_CONTEXT_IN_BRICK",
+    message: {
+      zh: "您在构件上定义了 context, 建议将其迁移至路由上: ",
+      en: "You have defined the context on the component, Please migrate it to the route: ",
+    },
+    list: ["test"],
+    details: [
+      {
+        message: "test",
+        meta: {
+          brick: { instanceId: "5eb8291903957" },
+          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "USING_EXPORTS_IN_BRICK",
+    message: {
+      zh: "您在构件上使用了 exports,该字段即将废弃, 建议使用 context 并指定 property 来声明一个上下文变量绑定到构件属性: ",
+      en: "You have used exports on a component, and this field is about to be discarded. Please use context and specify property to declare a context variable bound to the component property: ",
+    },
+    list: ["basic-bricks.easy-view"],
+    details: [
+      {
+        message: "basic-bricks.easy-view",
+        meta: {
+          brick: { instanceId: "5eb8291903957" },
+          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "USING_DYNAMIC_ARGUMENTS_IN_CTX_OR_STATE",
+    message: {
+      zh: "您通过动态访问 CTX/STATE, 这种编写方式是不推荐的, 建议使用静态访问写法替代, 例如: `CTX.a ? CTX.b : CTX.b`",
+      en: "You use dynamic access to CTX/STATE, which is not recommended. Please use static access instead, for example: ` CTX. a ? CTX.b : CTX.b`",
+    },
+    list: [
+      "测试: <% CTX[CTX.a ? CTX.b : CTX.c] %>",
+      "tpl-page-test: <% STATE['a'] %>",
+    ],
+    details: [
+      {
+        message: "测试",
+        messageSuffix: ": <% CTX[CTX.a ? CTX.b : CTX.c] %>",
+        meta: { root: { type: "route", instanceId: "5eb75014e908e" } },
+      },
+      {
+        message: "tpl-page-test",
+        messageSuffix: ": <% STATE['a'] %>",
+        meta: { root: { type: "template", templateId: "tpl-page-test" } },
       },
     ],
   },

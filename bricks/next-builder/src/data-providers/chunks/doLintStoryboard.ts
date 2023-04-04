@@ -6,6 +6,7 @@ import type {
   CustomTemplate,
   CustomTemplateState,
   I18nData,
+  RouteConf,
   Storyboard,
   UseProviderResolveConf,
 } from "@next-core/brick-types";
@@ -17,7 +18,6 @@ import {
   EstreeLiteral,
   EstreeParent,
 } from "@next-core/brick-utils";
-import { cloneDeep } from "lodash";
 
 // https://github.com/type-challenges/type-challenges/issues/18153
 type UnionToFnIntersection<T> = (
@@ -46,7 +46,14 @@ export type StoryboardErrorCode =
   | "USING_USERESOLVE_IN_BRICK_LIFECYCLE"
   | "USING_WARNED_EXPRESSION_IN_TEMPLATE"
   | "USING_OLD_PROVODERS_IN_USEPROVIDER"
-  | "USING_INJECT";
+  | "USING_INJECT"
+  | "USING_DYNAMIC_ARGUMENTS_IN_CTX_OR_STATE"
+  | "USING_OLD_TEMPLATE"
+  | "USING_PROVIDER_IN_ROUTE"
+  | "USING_DEFINE_RESOLVES_IN_ROUTE"
+  | "USING_DIRECT_IN_ROUTE"
+  | "USING_CONTEXT_IN_BRICK"
+  | "USING_EXPORTS_IN_BRICK";
 
 export interface StoryboardError {
   type: "warn" | "error";
@@ -178,6 +185,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const customProviderBrickRegExp = /\.provider-/;
   const injectExp = /[$@]\{.*?\}/;
   const routePathExp = /^\$\{APP\.homepage\}/;
+  const contextWithDynamicArgsExp = /\s(CTX|STATE)\[(.*?\])/g;
   const portalBricks = new Set([
     "basic-bricks.delete-confirm-modal",
     "basic-bricks.general-drawer",
@@ -189,12 +197,18 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const warnedTargets = new Map<string, LintDetailMeta>();
   const warnedProviders = new Map<string, LintDetailMeta>();
   const warnedPortalBricks = new Map<string, LintDetailMeta>();
+  const usingRedirectInRoute = new Map<string, LintDetailMeta>();
+  const usingProviderInRoute = new Map<string, LintDetailMeta>();
+  const usingDefineResolve = new Map<string, LintDetailMeta>();
   const usingCtxActionsInTemplate = new Map<string, Set<string>>();
   const unknownEventActions = new Map<string, LintDetailMeta>();
   const unknownEventHandlers = new Map<string, LintDetailMeta>();
   const usingWarnedOnChangeInCtxOrState = new Map<string, LintDetailMeta>();
+  const usingContextInBrick = new Map<string, LintDetailMeta>();
+  const usingExportInBrick = new Map<string, LintDetailMeta>();
   const usingUseResolveInBrickLifeCycle = new Map<string, LintDetailMeta>();
   const usingOldProvidersInUseProvider = new Map<string, LintDetailMeta>();
+  const usingOldTemplate = new Map<string, LintDetailMeta>();
 
   const errors: StoryboardError[] = [];
   const usingScriptBrick: LintDetail[] = [];
@@ -213,8 +227,29 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const ast = parseStoryboard(storyboard);
   traverseStoryboard(ast, (node, path) => {
     switch (node.type) {
+      case "Route": {
+        const { providers, defineResolves, redirect, type } =
+          node.raw as RouteConf;
+        if (providers) {
+          providers.forEach((provider) => {
+            const providerName =
+              typeof provider === "string" ? provider : provider.brick;
+            addMeta(usingProviderInRoute, providerName, node, path);
+          });
+        }
+        if (defineResolves) {
+          defineResolves.forEach((defineResolve) => {
+            addMeta(usingDefineResolve, defineResolve.id, node, path);
+          });
+        }
+        if (type !== "redirect" && redirect) {
+          addMeta(usingRedirectInRoute, node.raw.path, node, path);
+        }
+        break;
+      }
       case "Brick": {
-        const { brick, bg, portal } = node.raw as BrickConf;
+        const { brick, bg, portal, context, template, exports } =
+          node.raw as BrickConf;
         if (typeof brick === "string") {
           if (brick === "basic-bricks.script-brick") {
             const meta = getMetaByPath(path.concat(node));
@@ -233,6 +268,17 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
           } else if (portalBricks.has(brick) && !portal) {
             addMeta(warnedPortalBricks, brick, node, path);
           }
+        }
+        if (context?.length) {
+          context.forEach((item) => {
+            addMeta(usingContextInBrick, item.name, node, path);
+          });
+        }
+        if (template) {
+          addMeta(usingOldTemplate, template, node, path);
+        }
+        if (exports) {
+          addMeta(usingExportInBrick, brick, node, path);
         }
         break;
       }
@@ -343,6 +389,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const warnedUsingTplVarTemplates: LintDetail[] = [];
   const usingWarnedExpressionInTemplate: LintDetail[] = [];
   const usingInject: LintDetail[] = [];
+  const usingDynamicArgumentsInContext: LintDetail[] = [];
   let installedAppsUseDynamicArguments = false;
 
   visitStoryboardExpressions(
@@ -363,13 +410,20 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
 
   if (Array.isArray(routes)) {
     for (const route of routes) {
+      const dynamicArgumentsContext = new Set<string>();
       const injects = new Set<string>();
       visitStoryboardExpressions(
         [route],
-        // eslint-disable-next-line
-        (node) => {},
+        () => {
+          //
+        },
         {
-          matchExpressionString: (value) => true,
+          matchExpressionString: (value) => {
+            if (value && contextWithDynamicArgsExp.test(value)) {
+              dynamicArgumentsContext.add(value);
+            }
+            return true;
+          },
           visitNonExpressionString(value) {
             if (injectExp.test(value) && !routePathExp.test(value)) {
               injects.add(value);
@@ -377,7 +431,10 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
           },
         }
       );
-      for (const [collection, warned] of [[injects, usingInject]] as const) {
+      for (const [collection, warned] of [
+        [injects, usingInject],
+        [dynamicArgumentsContext, usingDynamicArgumentsInContext],
+      ] as const) {
         if (collection.size > 0) {
           warned.push({
             message: route.alias,
@@ -400,6 +457,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
       const tplVariables = new Set<string>();
       const warnedExpressionInTpl = new Set<string>();
       const injects = new Set<string>();
+      const dynamicArgumentsContext = new Set<string>();
       visitStoryboardExpressions(
         [tpl.bricks, tpl.state],
         (node, parent) => {
@@ -416,7 +474,12 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
           visitTemplateExpressionFactory(node, parent, warnedExpressionInTpl);
         },
         {
-          matchExpressionString: (value) => true,
+          matchExpressionString: (value) => {
+            if (value && contextWithDynamicArgsExp.test(value)) {
+              dynamicArgumentsContext.add(value);
+            }
+            return true;
+          },
           visitNonExpressionString(value) {
             if (injectExp.test(value)) {
               injects.add(value);
@@ -437,6 +500,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
         [tplVariables, warnedUsingTplVarTemplates],
         [warnedExpressionInTpl, usingWarnedExpressionInTemplate],
         [injects, usingInject],
+        [dynamicArgumentsContext, usingDynamicArgumentsInContext],
       ] as const) {
         if (collection.size > 0) {
           warned.push({
@@ -668,6 +732,116 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
         (detail) => `${detail.message}${detail.messageSuffix}`
       ),
       details: usingInject,
+    });
+  }
+
+  if (usingOldTemplate.size > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_OLD_TEMPLATE",
+      message: {
+        zh: "您正在使用旧的模板构件, 这种类型的构件在 v3 将决定废除，建议使用 Widget 或 自定义模板 构件进行代替: ",
+        en: "You are using old template components, which will be decided to be abolished in v3, Please use Widget or CustomTemplate instead: ",
+      },
+      list: [...usingOldTemplate.keys()],
+      details: [...usingOldTemplate.entries()].map(([message, meta]) => ({
+        message,
+        meta,
+      })),
+    });
+  }
+
+  if (usingProviderInRoute.size > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_PROVIDER_IN_ROUTE",
+      message: {
+        zh: "您在路由上面定义了 provider, 建议在 context 中使用 useProvider 替代:",
+        en: "You have defined Provider on the route, and this feature will be dropped in v3, Please use useProvider in route instead: ",
+      },
+      list: [...usingProviderInRoute.keys()],
+      details: [...usingProviderInRoute.entries()].map(([message, meta]) => ({
+        message,
+        meta,
+      })),
+    });
+  }
+
+  if (usingDefineResolve.size > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_DEFINE_RESOLVES_IN_ROUTE",
+      message: {
+        zh: "您在路由上面定义了 defineResolves, 建议在 context 中使用 useProvider 替代: ",
+        en: "You have defined defineResolves on the route, and this feature will be dropped in v3, Please use useProvider in route instead: ",
+      },
+      list: [...usingDefineResolve.keys()],
+      details: [...usingDefineResolve.entries()].map(([message, meta]) => ({
+        message,
+        meta,
+      })),
+    });
+  }
+  if (usingRedirectInRoute.size > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_DIRECT_IN_ROUTE",
+      message: {
+        zh: "您在路由上面定义了 redirect, 但路由类型非 redirect, 这将导致 redirect 不生效: ",
+        en: "You have defined redirect on the route, but the route type is not redirect, which will cause redirect to not take effect: ",
+      },
+      list: [...usingDefineResolve.keys()],
+      details: [...usingDefineResolve.entries()].map(([message, meta]) => ({
+        message,
+        meta,
+      })),
+    });
+  }
+
+  if (usingContextInBrick.size > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_CONTEXT_IN_BRICK",
+      message: {
+        zh: "您在构件上定义了 context, 建议将其迁移至路由上: ",
+        en: "You have defined the context on the component, Please migrate it to the route: ",
+      },
+      list: [...usingContextInBrick.keys()],
+      details: [...usingContextInBrick.entries()].map(([message, meta]) => ({
+        message,
+        meta,
+      })),
+    });
+  }
+
+  if (usingExportInBrick.size > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_EXPORTS_IN_BRICK",
+      message: {
+        zh: "您在构件上使用了 exports,该字段即将废弃, 建议使用 context 并指定 property 来声明一个上下文变量绑定到构件属性: ",
+        en: "You have used exports on a component, and this field is about to be discarded. Please use context and specify property to declare a context variable bound to the component property: ",
+      },
+      list: [...usingExportInBrick.keys()],
+      details: [...usingExportInBrick.entries()].map(([message, meta]) => ({
+        message,
+        meta,
+      })),
+    });
+  }
+
+  if (usingDynamicArgumentsInContext.length > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_DYNAMIC_ARGUMENTS_IN_CTX_OR_STATE",
+      message: {
+        zh: "您通过动态访问 CTX/STATE, 这种编写方式是不推荐的, 建议使用静态访问写法替代, 例如: `CTX.a ? CTX.b : CTX.b`",
+        en: "You use dynamic access to CTX/STATE, which is not recommended. Please use static access instead, for example: ` CTX. a ? CTX.b : CTX.b`",
+      },
+      list: usingDynamicArgumentsInContext.map(
+        (detail) => `${detail.message}${detail.messageSuffix}`
+      ),
+      details: usingDynamicArgumentsInContext,
     });
   }
 
