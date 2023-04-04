@@ -66,7 +66,10 @@ const storyboard = {
             ],
           },
           properties: {
-            textContent: "<% CTX[CTX.a ? CTX.b : CTX.c] %>",
+            textContent_work_1: "<% CTX.a %>",
+            textContent_work_2: "<% CTX['a'] %>",
+            textContent_error_1: "<% CTX[a] %>",
+            textContent_error_2: "<% CTX[CTX.a ? CTX.b : CTX.c] %>",
           },
           portal: false,
           context: [
@@ -188,7 +191,7 @@ const storyboard = {
             bg: false,
             brick: "basic-bricks.general-button",
             properties: {
-              buttonName: "<% STATE['a'] %>",
+              buttonName: "<% STATE[a] %>",
               buttonType: "link",
               buttonUrl: "<% PATH %>",
               dataset: {
@@ -437,8 +440,8 @@ const result = [
     type: "warn",
     code: "USING_OLD_TEMPLATE",
     message: {
-      zh: "您正在使用旧的模板构件, 这种类型的构件在 v3 将决定废除，建议使用 Widget 或 自定义模板 构件进行代替: ",
-      en: "You are using old template components, which will be decided to be abolished in v3, Please use Widget or CustomTemplate instead: ",
+      zh: "您正在使用已废弃的老模板，该方式在 v3 中已经被移除，建议使用 widget 、自定义模板或控制节点代替：",
+      en: "You are using deprecated legacy templates, which will be dropped in v3. Please use widgets, custom templates, or control nodes instead:",
     },
     list: ["mock-template.general-list"],
     details: [
@@ -523,8 +526,8 @@ const result = [
     type: "warn",
     code: "USING_EXPORTS_IN_BRICK",
     message: {
-      zh: "您在构件上使用了 exports,该字段即将废弃, 建议使用 context 并指定 property 来声明一个上下文变量绑定到构件属性: ",
-      en: "You have used exports on a component, and this field is about to be discarded. Please use context and specify property to declare a context variable bound to the component property: ",
+      zh: "您在构件上使用了已废弃的 exports 字段，该特性将在 v3 移除，建议使用 context 或 state 替代：",
+      en: "You have used the obsolete exports field on the component, which will be removed in v3. It is recommended to use context or state instead:",
     },
     list: ["basic-bricks.easy-view"],
     details: [
@@ -541,22 +544,19 @@ const result = [
     type: "warn",
     code: "USING_DYNAMIC_ARGUMENTS_IN_CTX_OR_STATE",
     message: {
-      zh: "您通过动态访问 CTX/STATE, 这种编写方式是不推荐的, 建议使用静态访问写法替代, 例如: `CTX.a ? CTX.b : CTX.b`",
-      en: "You use dynamic access to CTX/STATE, which is not recommended. Please use static access instead, for example: ` CTX. a ? CTX.b : CTX.b`",
+      zh: "您正在使用动态访问的 CTX/STATE, 这种编写方式是不推荐的、并且已在 v3 中移除支持，建议使用静态访问写法替代，例如：`CTX.a ? CTX.b : CTX.c`",
+      en: "You are using dynamic access CTX/STATE, which is not recommended and has been removed from v3. It is recommended to use static access writing instead, such as' CTX. a '? CTX.b : CTX.c`",
     },
-    list: [
-      "测试: <% CTX[CTX.a ? CTX.b : CTX.c] %>",
-      "tpl-page-test: <% STATE['a'] %>",
-    ],
+    list: ["测试: CTX[...]", "tpl-page-test: STATE[...]"],
     details: [
       {
         message: "测试",
-        messageSuffix: ": <% CTX[CTX.a ? CTX.b : CTX.c] %>",
+        messageSuffix: ": CTX[...]",
         meta: { root: { type: "route", instanceId: "5eb75014e908e" } },
       },
       {
         message: "tpl-page-test",
-        messageSuffix: ": <% STATE['a'] %>",
+        messageSuffix: ": STATE[...]",
         meta: { root: { type: "template", templateId: "tpl-page-test" } },
       },
     ],
