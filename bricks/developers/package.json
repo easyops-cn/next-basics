@@ -34,7 +34,7 @@
     "test:ci": "cross-env NODE_ENV='test' CI=true jest"
   },
   "devDependencies": {
-    "@next-libs/basic-components": "^5.3.0",
+    "@next-libs/basic-components": "^5.3.1",
     "@next-libs/clipboard": "^3.0.4",
     "@next-sdk/api-gateway-sdk": "^2.0.17",
     "change-case": "^4.1.2",
