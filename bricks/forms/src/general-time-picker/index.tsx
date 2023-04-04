@@ -43,6 +43,10 @@ export class GeneralTimePickerElement extends FormItemElement {
    * @group basic
    * @required false
    * @description 时间选择框框初始值
+   * @editor input
+   * @editorProps {
+   *   "placeholder": "eg. 2012-03-04 05:06:07"
+   * }
    */
   @property()
   value: string;
