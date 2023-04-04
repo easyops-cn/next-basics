@@ -194,13 +194,10 @@ export function RealTimeRangePicker(
   ) => {
     setStartTime(dates?.[0]);
     setEndTime(dates?.[1]);
-    // dateTime类型有【确认】按钮，此刻不需要再触发一次onchange事件，在onOk事件那里触发即可
-    if (rangeType !== "dateTime") {
-      props.onChange?.({
-        startTime: dates?.[0].format(props.format || "YYYY-MM-DD"), //week,month,quarter,year 的format为""，比如rangeType为quarter，直接返回2022-Q3的这种格式的数据，目前看起来还不是平台通用的，还是先默认转换成"YYYY-MM-DD"
-        endTime: dates?.[1].format(props.format || "YYYY-MM-DD"),
-      });
-    }
+    props.onChange?.({
+      startTime: dates?.[0].format(props.format || "YYYY-MM-DD"), //week,month,quarter,year 的format为""，比如rangeType为quarter，直接返回2022-Q3的这种格式的数据，目前看起来还不是平台通用的，还是先默认转换成"YYYY-MM-DD"
+      endTime: dates?.[1].format(props.format || "YYYY-MM-DD"),
+    });
   };
 
   const needConfirm = React.useRef(false);
@@ -218,13 +215,6 @@ export function RealTimeRangePicker(
     const dates = selectedTime;
     setPrevStartTime(dates?.[0]?.clone());
     setPrevEndTime(dates?.[1]?.clone());
-    // 对于onOk事件，应该是当两个值都有的时候，才让onChange事件吐值出去
-    if (dates?.[0] && dates?.[1]) {
-      props.onChange?.({
-        startTime: dates[0].format(props.format),
-        endTime: dates[1].format(props.format),
-      });
-    }
   };
 
   const disabledDate = (current: moment.Moment) => {
