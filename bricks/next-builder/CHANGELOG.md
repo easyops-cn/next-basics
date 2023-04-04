@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.228.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.227.1...@next-bricks/next-builder@1.228.0) (2023-04-04)
+
+
+### Features
+
+* update lint ([6168e42](https://github.com/easyops-cn/next-basics/commit/6168e4279bbc543ca65c3a4b374ad14e46ad1000))
+* update storyboard lint ([9f50b1c](https://github.com/easyops-cn/next-basics/commit/9f50b1c535098b1d65cdf355f969584813e725fa))
+* update unit test ([3da6f69](https://github.com/easyops-cn/next-basics/commit/3da6f698aef5bba9b08ed184c56c947673e2c4bb))
+
+
+
+
+
 ## [1.227.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.227.0...@next-bricks/next-builder@1.227.1) (2023-04-04)
 
 **Note:** Version bump only for package @next-bricks/next-builder
