@@ -35,6 +35,7 @@ export class GeneralTextAreaElement extends FormItemElement {
   /**
    * @description 初始值
    * @group basic
+   * @editor textarea
    */
   @property()
   value?: string;

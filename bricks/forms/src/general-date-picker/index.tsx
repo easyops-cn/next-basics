@@ -39,6 +39,10 @@ export class GeneralDatePickerElement extends FormItemElement {
    * @required false
    * @description 日期选择框初始值
    * @group basic
+   * @editor input
+   * @editorProps {
+   *   "placeholder": "eg. 2012-03-04"
+   * }
    */
   @property()
   value: string;

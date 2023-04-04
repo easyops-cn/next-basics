@@ -36,6 +36,7 @@ export class GeneralInputNumberElement extends FormItemElement {
    * @required false
    * @description 数字输入框初始值
    * @group basic
+   * @editor number
    */
   @property({
     attribute: false,
