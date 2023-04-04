@@ -203,6 +203,22 @@ describe("LintStoryboard", () => {
             en: "You're using INSTALLED_APPS.has in project with dynamic arguments, it could be get the error result. Please use INSTALLED_APPS.has with static arguments, for example: INSTALLED_APPS.has('xxx')",
           },
         }),
+        expect.objectContaining({
+          type: "warn",
+          code: "USING_DYNAMIC_ARGUMENTS_IN_CTX_OR_STATE",
+          message: {
+            zh: "您通过动态访问 CTX/STATE, 这种编写方式是不推荐的, 建议使用静态访问写法替代, 例如: `CTX.a ? CTX.b : CTX.b`",
+            en: "You use dynamic access to CTX/STATE, which is not recommended. Please use static access instead, for example: ` CTX. a ? CTX.b : CTX.b`",
+          },
+          list: ["tpl-bad: <% CTX['xyz'] %>"],
+          details: [
+            {
+              message: "tpl-bad",
+              messageSuffix: ": <% CTX['xyz'] %>",
+              meta: { root: { type: "template", templateId: "tpl-bad" } },
+            },
+          ],
+        }),
       ],
     ],
     [
