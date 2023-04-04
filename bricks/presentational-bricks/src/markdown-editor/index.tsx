@@ -36,8 +36,8 @@ export class MarkdownEditorElement extends FormItemElement {
    * @required false
    * @default -
    * @description markdown 编辑器的值
-   * @group basic
    * @editor textarea
+   * @group basic
    */
   @property({ attribute: false }) value: string;
 
