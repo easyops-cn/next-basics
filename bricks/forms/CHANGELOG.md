@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.266.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.266.3...@next-bricks/forms@1.266.4) (2023-04-04)
+
+
+### Bug Fixes
+
+* **forms:** 时间选择器无法清除数据 ([94d1465](https://github.com/easyops-cn/next-basics/commit/94d14653540c39845cac47e10821950364b2e904))
+
+
+
+
+
 ## [1.266.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.266.2...@next-bricks/forms@1.266.3) (2023-04-04)
 
 **Note:** Version bump only for package @next-bricks/forms
