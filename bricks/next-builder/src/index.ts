@@ -71,3 +71,5 @@ import "./data-providers/CreateRouteWithTheme";
 // !Lazy: import "./storyboard-lint-result";
 import "./custom-processors/getBrickDataFromModel";
 import "./custom-processors/getSnippetDataFromModel";
+import "./custom-processors/getWorkflowGraph";
+import "./workflow-node";
