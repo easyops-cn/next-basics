@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.229.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.228.0...@next-bricks/next-builder@1.229.0) (2023-04-07)
+
+
+### Features
+
+* suppport work flow node ([6f0d798](https://github.com/easyops-cn/next-basics/commit/6f0d7986b7b775d1875b93ef840bc0cf97afb8cd))
+
+
+
+
+
 # [1.228.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.227.1...@next-bricks/next-builder@1.228.0) (2023-04-04)
 
 
