@@ -524,7 +524,7 @@ export async function BuildProjectOfTemplates({
     });
     const bootstrapJsContent = replaceImageUrl(rawBootstrapJsContent);
     const bootstrapJsHash = simpleHash(bootstrapJsContent);
-    const indexJsContent = getBrickPackageIndexJsV3({
+    const indexJsContent = await getBrickPackageIndexJsV3({
       appId,
       chunkVar,
       templates: processedTemplates,

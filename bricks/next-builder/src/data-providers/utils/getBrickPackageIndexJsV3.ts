@@ -1,7 +1,6 @@
 import type { CustomTemplate } from "@next-core/brick-types";
-import widgetIndexTemplate from "../templates/widget-index.txt";
 
-export const getBrickPackageIndexJsV3 = ({
+export const getBrickPackageIndexJsV3 = async ({
   appId,
   chunkVar,
   templates,
@@ -11,8 +10,14 @@ export const getBrickPackageIndexJsV3 = ({
   chunkVar: string;
   templates: CustomTemplate[];
   bootstrapJsHash: string;
-}): string =>
-  widgetIndexTemplate
+}): Promise<string> =>
+  // `require("crypto").createHash("sha1").update(packageName).digest("hex").substr(0, 4)`
+  // returns "2a2a" when `packageName` is "next-builder".
+  (
+    await import(
+      /* webpackChunkName: "chunks/widget-index.2a2a" */ "../templates/widget-index.txt"
+    )
+  ).default
     .replace("__PLACEHOLDER_HASH__", bootstrapJsHash)
     .replace("__PLACEHOLDER_LIB_NAME__", `bricks/${appId}`)
     .replace(/__PLACEHOLDER_PKG_NAME__/g, `@widgets/${appId}`)
