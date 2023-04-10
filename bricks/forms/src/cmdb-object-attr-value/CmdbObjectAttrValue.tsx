@@ -162,6 +162,8 @@ export interface CmdbObjectAttrValueProps extends FormItemWrapperProps {
   inputBoxStyle?: React.CSSProperties;
   onChange?: (value: any) => void;
   disabled?: boolean;
+  disableProtectedAttr?: boolean;
+  isProtected?: boolean;
 }
 
 export function CmdbObjectAttrValueItem(
@@ -170,12 +172,14 @@ export function CmdbObjectAttrValueItem(
 ): React.ReactElement {
   const { t } = useTranslation(NS_FORMS);
   const [valueType, setValueType] = React.useState();
-  const [valueOptions, setValueOptions] = React.useState<ValueOptions[]>(
-    valueTypeList
-  );
-  const { placeholder, inputBoxStyle } = props;
+  const [valueOptions, setValueOptions] =
+    React.useState<ValueOptions[]>(valueTypeList);
+  const { placeholder, inputBoxStyle, isProtected, disableProtectedAttr } =
+    props;
   const [value, setValue] = React.useState();
-
+  const [attrDisabled, setAttrDisabled] = React.useState(
+    isProtected && disableProtectedAttr
+  );
   React.useEffect(() => {
     setValueType(props.value?.type);
     setValue(props.value);
@@ -189,7 +193,9 @@ export function CmdbObjectAttrValueItem(
         )
       );
   }, [props.valueType]);
-
+  React.useEffect(() => {
+    setAttrDisabled(isProtected && disableProtectedAttr);
+  }, [isProtected]);
   const onValueChange = (newValue?: any) => {
     if (!newValue.type) {
       props.onChange && props.onChange({ ...value, ...newValue });
@@ -213,37 +219,110 @@ export function CmdbObjectAttrValueItem(
   const getContentByValueType = (): React.ReactElement => {
     switch (valueType) {
       case "str":
-        return <ObjectAttrStr value={value} onChange={onValueChange} />;
+        return (
+          <ObjectAttrStr
+            value={value}
+            onChange={onValueChange}
+            disabled={attrDisabled}
+          />
+        );
       case "int":
-        return <ObjectAttrInt value={value} onChange={onValueChange} />;
+        return (
+          <ObjectAttrInt
+            value={value}
+            onChange={onValueChange}
+            disabled={attrDisabled}
+          />
+        );
       case "date":
-        return <ObjectAttrDate value={value} onChange={onValueChange} />;
+        return (
+          <ObjectAttrDate
+            value={value}
+            onChange={onValueChange}
+            disabled={attrDisabled}
+          />
+        );
       case "datetime":
-        return <ObjectAttrDatetime value={value} onChange={onValueChange} />;
+        return (
+          <ObjectAttrDatetime
+            value={value}
+            onChange={onValueChange}
+            disabled={attrDisabled}
+          />
+        );
       case "enum":
-        return <ObjectAttrEnum value={value} onChange={onValueChange} />;
+        return (
+          <ObjectAttrEnum
+            value={value}
+            onChange={onValueChange}
+            disabled={attrDisabled}
+          />
+        );
       case "enums":
         return (
           <ObjectAttrEnum
             value={value}
             onChange={onValueChange}
             isMulti={true}
+            disabled={attrDisabled}
           />
         );
       case "arr":
-        return <ObjectAttrArr value={value} onChange={onValueChange} />;
+        return (
+          <ObjectAttrArr
+            value={value}
+            onChange={onValueChange}
+            disabled={attrDisabled}
+          />
+        );
       case "struct":
-        return <ObjectAttrStruct value={value} onChange={onValueChange} />;
+        return (
+          <ObjectAttrStruct
+            value={value}
+            onChange={onValueChange}
+            disabled={attrDisabled}
+          />
+        );
       case "structs":
-        return <ObjectAttrStruct value={value} onChange={onValueChange} />;
+        return (
+          <ObjectAttrStruct
+            value={value}
+            onChange={onValueChange}
+            disabled={attrDisabled}
+          />
+        );
       case "bool":
-        return <ObjectAttrBool value={props.value} onChange={onValueChange} />;
+        return (
+          <ObjectAttrBool
+            value={props.value}
+            onChange={onValueChange}
+            disabled={attrDisabled}
+          />
+        );
       case "float":
-        return <ObjectAttrFloat value={props.value} onChange={onValueChange} />;
+        return (
+          <ObjectAttrFloat
+            value={props.value}
+            onChange={onValueChange}
+            disabled={attrDisabled}
+          />
+        );
       case "ip":
-        return <ObjectAttrIP value={props.value} onChange={onValueChange} />;
+        return (
+          <ObjectAttrIP
+            value={props.value}
+            onChange={onValueChange}
+            disabled={attrDisabled}
+          />
+        );
       case "json":
-        return <ObjectAttrJson value={props.value} onChange={onValueChange} />;
+        return (
+          <ObjectAttrJson
+            value={props.value}
+            onChange={onValueChange}
+            disabled={attrDisabled}
+          />
+        );
       default:
         return <></>;
     }

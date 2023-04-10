@@ -10,6 +10,7 @@ import i18n from "i18next";
 interface ObjectAttrDateProps {
   value: any;
   onChange: (newValue?: any) => void;
+  disabled?: boolean;
 }
 
 interface DateValueType {
@@ -57,6 +58,7 @@ export function ObjectAttrDate(props: ObjectAttrDateProps): React.ReactElement {
                   default: date?.format("YYYY-MM-DD"),
                 })
               }
+              disabled={props.disabled}
             />
           ) : (
             <DatePicker
@@ -68,6 +70,7 @@ export function ObjectAttrDate(props: ObjectAttrDateProps): React.ReactElement {
                   default: date?.format("YYYY-MM-DD"),
                 })
               }
+              disabled={props.disabled}
             />
           )}
         </Row>

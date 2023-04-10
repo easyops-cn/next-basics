@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../../i18n/constants";
 import { Input, Row, InputNumber, Select } from "antd";
+import styles from "./index.module.css";
 import { isNil } from "lodash";
 import i18n from "i18next";
 const Option = Select.Option;
@@ -10,6 +11,7 @@ interface ObjectAttrIntProps {
   value: any;
   onChange: (newValue?: any) => void;
   isMulti?: boolean;
+  disabled?: boolean;
 }
 
 interface EnumValueType {
@@ -57,6 +59,11 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
             )}
             onChange={(e) => handleValueChange({ ...value, regex: e })}
           />
+          {props.disabled && (
+            <span className={styles.helpInfomation}>
+              {i18n.t(`${NS_FORMS}:${K.PROTECTED_ENUM_CANNOT_BE_DELETED}`)}
+            </span>
+          )}
         </Row>
       </div>
       <div>
@@ -67,6 +74,7 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
             value={getDefaultEnumValue()}
             mode={props.isMulti ? "multiple" : ""}
             allowClear
+            disabled={props.disabled}
             onChange={(e) => handleValueChange({ ...value, default: e || "" })}
           >
             {value?.regex?.map((d) => (

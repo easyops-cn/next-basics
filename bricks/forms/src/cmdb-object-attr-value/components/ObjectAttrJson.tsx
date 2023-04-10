@@ -7,6 +7,7 @@ import i18n from "i18next";
 interface ObjectAttrJsonProps {
   value: any;
   onChange: (newValue?: any) => void;
+  disabled?: boolean;
 }
 
 interface JsonValueType {
@@ -38,6 +39,7 @@ export function ObjectAttrJson(props: ObjectAttrJsonProps): React.ReactElement {
           <Input
             placeholder={i18n.t(`${NS_FORMS}:${K.THIS_IS_NOT_MANDATORY}`)}
             value={value?.regex}
+            disabled={props.disabled}
             onChange={(e) =>
               handleValueChange({ ...value, regex: e.target.value })
             }
@@ -50,6 +52,7 @@ export function ObjectAttrJson(props: ObjectAttrJsonProps): React.ReactElement {
           <Input.TextArea
             value={value?.default}
             style={{ width: "100%" }}
+            disabled={props.disabled}
             onChange={(e) =>
               handleValueChange({ ...value, default: e.target.value })
             }

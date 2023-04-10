@@ -7,7 +7,7 @@ module.exports = sizeLimit({
     "calendar-bricks": "80KB",
     "presentational-bricks": "128 KB",
     "brick-visualization": "420 KB",
-    forms: "87 KB",
+    forms: "87.5 KB",
   },
   lazyBricks: {
     "*": "50 KB",

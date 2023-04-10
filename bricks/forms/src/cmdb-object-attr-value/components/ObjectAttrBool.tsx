@@ -7,6 +7,7 @@ import { isNil, toString } from "lodash";
 interface ObjectAttrBoolProps {
   value: any;
   onChange: (newValue?: any) => void;
+  disabled?: boolean;
 }
 
 interface BoolValueType {
@@ -36,6 +37,7 @@ export function ObjectAttrBool(props: ObjectAttrBoolProps): React.ReactElement {
             allowClear
             value={toString(value?.default)}
             style={{ width: "100%" }}
+            disabled={props.disabled}
             onChange={(e) =>
               handleValueChange({
                 ...value,

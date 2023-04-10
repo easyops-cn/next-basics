@@ -77,6 +77,7 @@ export interface LegacyObjectAttrStructProps extends FormComponentProps {
   value: StructValueType;
   onChange: (newValue?: any) => void;
   mode: string;
+  disabled?: boolean;
 }
 
 export function LegacyObjectAttrStructForm(
@@ -158,6 +159,7 @@ export function LegacyObjectAttrStructForm(
         <Button
           type="link"
           icon={<EditOutlined />}
+          disabled={props.disabled && record.protected}
           onClick={(e) => {
             setCurrentStruct(record);
             setCurValueType(record.type);
@@ -169,6 +171,7 @@ export function LegacyObjectAttrStructForm(
       <Button
         type="link"
         danger
+        disabled={props.disabled && record.protected}
         icon={<DeleteOutlined />}
         onClick={(e) => {
           handleDeleteStruct(record);
@@ -384,7 +387,9 @@ export function LegacyObjectAttrStructForm(
             <Radio value="new">
               {i18n.t(`${NS_FORMS}:${K.NEW_DEFINATION}`)}
             </Radio>
-            <Radio value="import">{i18n.t(`${NS_FORMS}:${K.IFEM}`)}</Radio>
+            <Radio value="import" disabled={props.disabled}>
+              {i18n.t(`${NS_FORMS}:${K.IFEM}`)}
+            </Radio>
           </Radio.Group>
         </Row>
         <Row style={{ marginTop: 8 }}>

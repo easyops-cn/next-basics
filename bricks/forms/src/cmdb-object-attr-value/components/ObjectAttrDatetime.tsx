@@ -8,6 +8,7 @@ import i18n from "i18next";
 interface ObjectAttrDatetimeProps {
   value: any;
   onChange: (newValue?: any) => void;
+  disabled?: boolean;
 }
 
 interface DateTimeType {
@@ -59,6 +60,7 @@ export function ObjectAttrDatetime(
                 handleValueChange({ ...value, default: dateString })
               }
               showTime
+              disabled={props.disabled}
             />
           ) : (
             <DatePicker
@@ -68,6 +70,7 @@ export function ObjectAttrDatetime(
                 handleValueChange({ ...value, default: dateString })
               }
               showTime
+              disabled={props.disabled}
             />
           )}
         </Row>

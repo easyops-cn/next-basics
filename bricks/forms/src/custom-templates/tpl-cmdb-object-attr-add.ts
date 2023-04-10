@@ -11,6 +11,7 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
       isEdit: {
         asVariable: true,
       },
+
       values: {
         ref: "addCmdbObjectAttrForm",
         refProperty: "values",
@@ -27,9 +28,17 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
         ref: "attrValue",
         refProperty: "disabled",
       },
+      disableProtectedAttr: {
+        ref: "attrValue",
+        refProperty: "disableProtectedAttr",
+      },
       attrOptions: {
         ref: "attrOptions",
         refProperty: "options",
+      },
+      protected: {
+        ref: "attrValue",
+        refProperty: "isProtected",
       },
     },
     events: {
