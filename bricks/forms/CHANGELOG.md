@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.267.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.266.6...@next-bricks/forms@1.267.0) (2023-04-10)
+
+
+### Features
+
+* **cmdb:** 属性编辑器可避免对受保护属性的修改 ([924ff8d](https://github.com/easyops-cn/next-basics/commit/924ff8d06774ccf2076843b81dd1586fdc395ecd))
+
+
+
+
+
 ## [1.266.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.266.5...@next-bricks/forms@1.266.6) (2023-04-07)
 
 **Note:** Version bump only for package @next-bricks/forms
