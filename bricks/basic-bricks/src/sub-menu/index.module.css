@@ -37,13 +37,15 @@
 
     :global(.ant-menu-sub.ant-menu-inline) {
       background-color: var(--sub-menu-brick-group-bg);
-      border-radius: 6px;
+      border-radius: 4px;
     }
 
     :global(.ant-menu-item) {
       margin: 0;
-      border-radius: 6px;
+      border-radius: 4px;
+      margin-bottom: 4px;
       width: 100%;
+
       &:after {
         content: none;
       }
@@ -55,10 +57,16 @@
       &:not(:global(.ant-menu-item-selected)):active {
         background-color: var(--sub-menu-brick-item-active-bg);
       }
+      svg {
+        color: var(--color-secondary-text);
+      }
     }
 
     :global(.ant-menu-item-selected) {
       background-color: var(--app-submenu-active-bg);
+      svg {
+        color: var(--antd-link-color);
+      }
     }
 
     :global(.ant-menu-submenu-title) {
