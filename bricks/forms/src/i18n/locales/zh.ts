@@ -133,6 +133,8 @@ const locale: Locale = {
   [K.USE_LINK_TO_UPLOAD_PLACEHOLDER]:
     "请输入图片的链接，多个链接之间用换行分隔",
   [K.UPLOAD_IMG_NUMBER_LIMIT]: "最多只能上传 {{maxNumber}} 张图片",
+  [K.PROTECTED_ENUM_CANNOT_BE_DELETED]:
+    "该属性为保护属性，枚举值只能新增，不能删除",
 };
 
 export default locale;

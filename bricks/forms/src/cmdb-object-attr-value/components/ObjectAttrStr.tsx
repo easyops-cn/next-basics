@@ -30,13 +30,13 @@ interface StrValueType {
 interface ObjectAttrStrProps {
   value: any;
   onChange: (newValue?: Partial<StrValueType>) => void;
+  disabled?: boolean;
 }
 
 export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
   props.value.mode = props.value.mode || "default";
   const { t } = useTranslation(NS_FORMS);
   const [popoverVisible, setPopoverVisible] = React.useState(false);
-
   const [value, setValue] = React.useState<Partial<StrValueType>>({
     mode: "default",
     default_type: "value",
@@ -50,7 +50,6 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
   React.useEffect(() => {
     !isNil(props.value) && setValue(props.value);
   }, [props.value]);
-
   const handleStrChange = (newValue: Partial<StrValueType>) => {
     props.onChange && props.onChange(newValue);
   };
@@ -149,6 +148,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
             onChange={(e) => {
               handleValueChange({ ...value, default: e.target.value });
             }}
+            disabled={props.disabled}
           />
         );
       } else {
@@ -161,6 +161,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
             onChange={(e) => {
               handleValueChange({ ...value, default: e.target.value });
             }}
+            disabled={props.disabled}
           />
         );
       }
@@ -247,13 +248,18 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
               placeholder={i18n.t(`${NS_FORMS}:${K.THIS_IS_NOT_MANDATORY}`)}
               value={value.regex}
               onChange={handleRegexChange}
+              disabled={props.disabled}
             />
           </Row>
         </div>
         <div>
           {i18n.t(`${NS_FORMS}:${K.DISPLAY_AS}`)}
           <Row>
-            <Radio.Group value={value.mode} onChange={handleStrModeChange}>
+            <Radio.Group
+              value={value.mode}
+              onChange={handleStrModeChange}
+              disabled={props.disabled}
+            >
               <Radio value="default">
                 {i18n.t(`${NS_FORMS}:${K.DEFAULT}`)}
               </Radio>
@@ -273,6 +279,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
                 value={value.default_type}
                 onChange={handleStrDefaultTypeChange}
                 style={{ width: "100%" }}
+                disabled={props.disabled}
               >
                 <Option value="value">{t(K.FIXED_VALUE)}</Option>
                 <Option value="function">{t(K.BUILT_IN_FUNCTION)}</Option>

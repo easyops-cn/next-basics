@@ -14,7 +14,13 @@ describe("ObjectAttrJson", () => {
       onChange: jest.fn(),
     };
     const wrapper = mount(<ObjectAttrJson {...props} />);
+    expect(wrapper.find(Input).at(0).prop("disabled")).toBe(undefined);
+    expect(wrapper.find("TextArea").at(0).prop("disabled")).toBe(undefined);
     expect(wrapper.find("TextArea").at(0).props().value).toBe("{test:'aa'}");
+    wrapper.setProps({ disabled: true });
+    wrapper.update();
+    expect(wrapper.find(Input).at(0).prop("disabled")).toBe(true);
+    expect(wrapper.find("TextArea").at(0).prop("disabled")).toBe(true);
   });
 
   it("should change regex", () => {

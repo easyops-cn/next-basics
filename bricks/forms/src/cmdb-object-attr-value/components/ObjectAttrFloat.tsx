@@ -8,6 +8,7 @@ import i18n from "i18next";
 interface ObjectAttrFloatProps {
   value: any;
   onChange: (newValue?: any) => void;
+  disabled?: boolean;
 }
 
 interface FloatValueType {
@@ -59,6 +60,7 @@ export function ObjectAttrFloat(
             placeholder={i18n.t(
               `${NS_FORMS}:${K.PLACEHOLDER_SYSTEM_ONLY_DISPLAYS}`
             )}
+            disabled={props.disabled}
             onChange={(e) => {
               handleValueChange({ ...value, default: e });
             }}

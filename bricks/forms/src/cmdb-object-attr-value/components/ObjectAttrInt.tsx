@@ -9,6 +9,7 @@ import i18n from "i18next";
 interface ObjectAttrIntProps {
   value: any;
   onChange: (newValue?: any) => void;
+  disabled?: boolean;
 }
 
 interface IntValueType {
@@ -43,6 +44,7 @@ export function ObjectAttrInt(props: ObjectAttrIntProps): React.ReactElement {
             onChange={(e) =>
               handleValueChange({ ...value, regex: e.target.value })
             }
+            disabled={props.disabled}
           />
         </Row>
       </div>
@@ -53,6 +55,7 @@ export function ObjectAttrInt(props: ObjectAttrIntProps): React.ReactElement {
             value={value?.default}
             style={{ width: "100%" }}
             onChange={(e) => handleValueChange({ ...value, default: e })}
+            disabled={props.disabled}
           />
         </Row>
       </div>

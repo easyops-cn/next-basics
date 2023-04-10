@@ -97,6 +97,26 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
     type: Boolean,
   })
   disabled: boolean;
+  /**
+   * @kind boolean
+   * @default
+   * @required false
+   * @description 是否受保护的属性
+   */
+  @property({
+    type: Boolean,
+  })
+  isProtected: boolean;
+  /**
+   * @kind boolean
+   * @default
+   * @required false
+   * @description 是否禁用受保护的属性
+   */
+  @property({
+    type: Boolean,
+  })
+  disableProtectedAttr: boolean;
 
   /**
    * @kind `object`
@@ -283,6 +303,8 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
             wrapperCol={this.wrapperCol}
             helpBrick={this.helpBrick}
             labelBrick={this.labelBrick}
+            isProtected={this.isProtected}
+            disableProtectedAttr={this.disableProtectedAttr}
             validator={
               this.validator
                 ? this._builtInvalidator.concat(this.validator)

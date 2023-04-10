@@ -10,6 +10,7 @@ import { IPRegex } from "./constants";
 interface ObjectAttrIPProps {
   value: any;
   onChange: (newValue?: any) => void;
+  disabled?: boolean;
 }
 
 interface IntValueType {
@@ -49,6 +50,7 @@ export function ObjectAttrIP(props: ObjectAttrIPProps): React.ReactElement {
           <Input
             value={value?.default}
             style={{ width: "100%" }}
+            disabled={props.disabled}
             onChange={(e) =>
               handleValueChange({ ...value, default: e.target.value })
             }
