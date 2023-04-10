@@ -1,4 +1,5 @@
 import { isEmpty, omit, uniq } from "lodash";
+import { getRuntime } from "@next-core/brick-kit";
 import { collectBricksByCustomTemplates } from "@next-core/brick-utils";
 import {
   BrickConfInTemplate,
@@ -32,6 +33,8 @@ import {
 import { paramCase } from "change-case";
 import { buildBricks } from "../shared/storyboard/buildStoryboardV2";
 import { getBrickPackageIndexJs } from "./utils/getBrickPackageIndexJs";
+import { getBrickPackageIndexJsV3 } from "./utils/getBrickPackageIndexJsV3";
+import { getBrickPackageBootstrapJs } from "./utils/getBrickPackageBootstrapJs";
 import { simpleHash } from "./utils/simpleHash";
 import { replaceWidgetFunctions } from "./utils/replaceWidgetFunctions";
 import { PlainObject } from "../search-tree/utils";
@@ -473,12 +476,6 @@ export async function BuildProjectOfTemplates({
       : {}),
   }));
 
-  const indexJsContent = getBrickPackageIndexJs({
-    appId,
-    templates: processedTemplates,
-    functions: projectDetailResponse.functions as StoryboardFunction[],
-    i18n: projectDetailResponse.i18n as I18nNode[],
-  });
   const storiesJSONContent = JSON.stringify(stories, null, 2);
 
   const images: ImageFiles = {
@@ -507,24 +504,81 @@ export async function BuildProjectOfTemplates({
 
   const files = [
     {
-      path: "dist/bricks.json",
-      content: JSON.stringify(
-        {
-          bricks: templates.map((tpl) => tpl.name),
-        },
-        null,
-        2
-      ),
-    },
-    {
-      path: `dist/index.${simpleHash(indexJsContent)}.js`,
-      content: replaceImageUrl(indexJsContent),
-    },
-    {
       path: "dist/stories.json",
       content: replaceImageUrl(storiesJSONContent),
     },
   ];
+
+  // Todo(steve): use project config instead of a temporary feature flag
+  const widgetsV3 =
+    getRuntime().getFeatureFlags()["visual-builder-experimental-widgets-v3"];
+  if (widgetsV3) {
+    const chunkVar = `webpackChunk_widgets_${appId.replace(/-/g, "_")}`;
+    const rawBootstrapJsContent = getBrickPackageBootstrapJs({
+      appId,
+      version,
+      chunkVar,
+      templates: processedTemplates,
+      functions: projectDetailResponse.functions as StoryboardFunction[],
+      i18n: projectDetailResponse.i18n as I18nNode[],
+    });
+    const bootstrapJsContent = replaceImageUrl(rawBootstrapJsContent);
+    const bootstrapJsHash = simpleHash(bootstrapJsContent);
+    const indexJsContent = getBrickPackageIndexJsV3({
+      appId,
+      chunkVar,
+      templates: processedTemplates,
+      bootstrapJsHash,
+    });
+    const indexJsPath = `dist/index.${simpleHash(indexJsContent)}.js`;
+    files.push(
+      {
+        path: "dist/bricks.json",
+        content: JSON.stringify(
+          {
+            id: `bricks/${appId}`,
+            bricks: templates.map((tpl) => tpl.name),
+            filePath: `bricks/${appId}/${indexJsPath}`,
+          },
+          null,
+          2
+        ),
+      },
+      {
+        path: indexJsPath,
+        content: indexJsContent,
+      },
+      {
+        path: `dist/chunks/bootstrap.${bootstrapJsHash}.js`,
+        content: bootstrapJsContent,
+      }
+    );
+  } else {
+    const indexJsContent = getBrickPackageIndexJs({
+      appId,
+      templates: processedTemplates,
+      functions: projectDetailResponse.functions as StoryboardFunction[],
+      i18n: projectDetailResponse.i18n as I18nNode[],
+    });
+    const indexJsPath = `dist/index.${simpleHash(indexJsContent)}.js`;
+    files.push(
+      {
+        path: "dist/bricks.json",
+        content: JSON.stringify(
+          {
+            bricks: templates.map((tpl) => tpl.name),
+            filePath: `bricks/${appId}/${indexJsPath}`,
+          },
+          null,
+          2
+        ),
+      },
+      {
+        path: indexJsPath,
+        content: indexJsContent,
+      }
+    );
+  }
 
   if (snippets.length > 0) {
     files.push({

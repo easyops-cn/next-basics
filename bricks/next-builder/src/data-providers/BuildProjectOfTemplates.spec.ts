@@ -3,6 +3,8 @@ import {
   InstanceApi_getDetail,
 } from "@next-sdk/cmdb-sdk";
 import { ContractCenterApi_batchSearchContract } from "@next-sdk/next-builder-sdk";
+import * as kit from "@next-core/brick-kit";
+import type { FeatureFlags } from "@next-core/brick-types";
 import {
   BuildInfoForProjectOfTemplates,
   BuildProjectOfTemplates,
@@ -14,6 +16,12 @@ import {
 
 jest.mock("@next-sdk/cmdb-sdk");
 jest.mock("@next-sdk/next-builder-sdk");
+let flags: FeatureFlags = {};
+jest.spyOn(kit, "getRuntime").mockReturnValue({
+  getFeatureFlags() {
+    return flags;
+  },
+} as any);
 const consoleError = jest
   .spyOn(console, "error")
   .mockImplementation(() => void 0);
@@ -385,6 +393,7 @@ const consoleError = jest
 
 describe("BuildProjectOfTemplates", () => {
   afterEach(() => {
+    flags = {};
     jest.clearAllMocks();
   });
 
@@ -404,7 +413,8 @@ describe("BuildProjectOfTemplates", () => {
     "app-1.template-u",
     "app-1.template-v",
     "app-1.template-w"
-  ]
+  ],
+  "filePath": "bricks/app-1/dist/index.4a11c8e8.js"
 }`,
           },
           {
@@ -983,7 +993,8 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
     "app-2.template-u",
     "app-2.template-v",
     "app-2.template-w"
-  ]
+  ],
+  "filePath": "bricks/app-2/dist/index.17cef4c4.js"
 }`,
           },
           {
@@ -1305,8 +1316,10 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
     const { files: expectFiles, ...expectRest } = result;
     expect(receivedRest).toEqual(expectRest);
     expect(receivedFiles.length).toEqual(expectFiles.length);
-    receivedFiles.forEach(({ path, content }, index) => {
-      const { path: expectPath, content: expectContent } = expectFiles[index];
+    receivedFiles.forEach(({ path, content }) => {
+      const { path: expectPath, content: expectContent } = expectFiles.find(
+        (exp) => exp.path === path
+      );
       expect(path).toEqual(expectPath);
       if (typeof expectContent !== "string" && path.endsWith(".json")) {
         // require("fs-extra").outputFileSync(require("path").resolve(".vscode/tests", `${params.appId}.json`), content);
@@ -1316,6 +1329,106 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
       }
     });
   });
+
+  it.each<[BuildProjectOfTemplatesParams, BuildInfoForProjectOfTemplates]>([
+    [
+      {
+        appId: "app-2",
+        projectId: "project-2",
+      },
+      {
+        files: [
+          {
+            path: "dist/stories.json",
+            content: [
+              "template-t",
+              "template-u",
+              "template-v",
+              "template-w",
+            ] as any,
+          },
+          {
+            path: "dist/bricks.json",
+            content: `{
+  "id": "bricks/app-2",
+  "bricks": [
+    "app-2.template-t",
+    "app-2.template-u",
+    "app-2.template-v",
+    "app-2.template-w"
+  ],
+  "filePath": "bricks/app-2/dist/index.697e37e7.js"
+}`,
+          },
+          {
+            path: "dist/index.697e37e7.js",
+            content: [
+              '"./template-t":',
+              '"./template-u":',
+              '"./template-v":',
+              '"./template-w":',
+            ] as any,
+          },
+          {
+            path: "dist/chunks/bootstrap.11ad5619.js",
+            content: [
+              'customTemplates.define("app-2.template-t",',
+              'customTemplates.define("app-2.template-u",',
+              'customTemplates.define("app-2.template-v",',
+              'customTemplates.define("app-2.template-w",',
+              "registerWidgetFunction",
+            ] as any,
+          },
+        ],
+        dependBricks: ["easy-view", "general-button", "test-provider"],
+        dependProcessorPackages: ["my-pkg"],
+        images: {
+          imagesDir: "dist/assets",
+          imagesPath: [
+            {
+              fileName: "abc.png",
+              imageOssPath: "www.xxx.com/url/abc.png",
+            },
+            {
+              fileName: "viewpoint1632809932499594914.png",
+              imageOssPath:
+                "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png",
+            },
+            {
+              fileName: "blue-bg1632809958790451533.png",
+              imageOssPath:
+                "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png",
+            },
+          ],
+        },
+      },
+    ],
+  ])(
+    "BuildProjectOfTemplates(%j) for v3 should work",
+    async (params, result) => {
+      flags = {
+        "visual-builder-experimental-widgets-v3": true,
+      };
+      const { files: receivedFiles, ...receivedRest } =
+        await BuildProjectOfTemplates(params);
+      const { files: expectFiles, ...expectRest } = result;
+      expect(receivedRest).toEqual(expectRest);
+      expect(receivedFiles.length).toEqual(expectFiles.length);
+      receivedFiles.forEach(({ path, content }) => {
+        const { path: expectPath, content: expectContent } = expectFiles.find(
+          (exp) => exp.path === path
+        );
+        expect(path).toEqual(expectPath);
+        if (Array.isArray(expectContent)) {
+          for (const exp of expectContent) {
+            expect(content).toEqual(expect.stringContaining(exp));
+          }
+        } else {
+          expect(content).toEqual(expectContent);
+        }
+      });
+    }
+  );
 
   it("safe JSON parse, test", () => {
     const rightJSON = `{

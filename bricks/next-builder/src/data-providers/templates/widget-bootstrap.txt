@@ -1,0 +1,1 @@
+"use strict";(self.__PLACEHOLDER_CHUNK_VAR__=self.__PLACEHOLDER_CHUNK_VAR__||[]).push([[672],{7872:(e,t,s)=>{s.r(t);var i=s(2431);__PLACEHOLDER__}}]);
