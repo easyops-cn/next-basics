@@ -117,4 +117,28 @@ describe("StoryboardLintResult", () => {
       "tpl-unknown"
     );
   });
+
+  it("should show notices", () => {
+    const { container } = render(
+      <StoryboardLintResult
+        errors={[
+          {
+            type: "info",
+            code: "USING_ONCHANGE_IN_CTX",
+            message: {
+              zh: "You should not bla bla",
+            },
+          },
+        ]}
+        projectId="my-project"
+        appId="my-app"
+      />
+    );
+    const title = container.querySelector(".title");
+    expect(title).toHaveTextContent("THERE_ARE_NOTICES");
+    expect(title).toHaveClass("info");
+    expect(container.querySelector(".summary")).toHaveTextContent(
+      "You should not bla bla"
+    );
+  });
 });

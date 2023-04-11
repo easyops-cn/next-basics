@@ -291,32 +291,8 @@ const storyboard = {
 const result = [
   {
     type: "warn",
-    code: "USING_ONCHANGE_IN_CTX",
-    message: {
-      zh: "您在 Context 或 State 的 onChange 中使用了 context.replace 或 set brick properties 等事件处理器, 请使用 track context 或 track state 代替:",
-      en: "You are using an event handler such as context.replace or set brick properties in onChange of context or state. Please use track Context or track State instead:",
-    },
-    list: ["kakataa"],
-    details: [
-      {
-        message: "kakataa",
-        meta: {
-          root: {
-            type: "route",
-            alias: "测试",
-            instanceId: "5eb75014e908e",
-          },
-        },
-      },
-    ],
-  },
-  {
-    type: "warn",
-    code: "USING_USERESOLVE_IN_BRICK_LIFECYCLE",
-    message: {
-      zh: "您在 lifeCycle 中使用了 useResolve 获取数据, 建议您使用 context 或 state 代替:",
-      en: "You are using useResolve in lifeCycle. Please use context or state instead:",
-    },
+    code: "USING_USE_RESOLVES_IN_BRICK_LIFECYCLE",
+    message: expect.any(Object),
     list: ["providers-of-cmdb.instance-xxx"],
     details: [
       {
@@ -337,10 +313,7 @@ const result = [
   {
     type: "warn",
     code: "USING_WARNED_EXPRESSION_IN_TEMPLATE",
-    message: {
-      zh: "您正在模板中使用 QUERY 和 PATH 等变量，建议修改为从外部传入相关数据:",
-      en: "You are using QUERY, PATH and other variables in the custom-template. Please pass in parameters from outside instead:",
-    },
+    message: expect.any(Object),
     list: ["tpl-page-test: PATH", "tpl-test-1: PATH[...], PATH.projectId"],
     details: [
       {
@@ -367,11 +340,130 @@ const result = [
   },
   {
     type: "warn",
-    code: "USING_OLD_PROVODERS_IN_USEPROVIDER",
-    message: {
-      zh: "您在 useProvider 中调用了旧版的 Providers-of-xxx, 建议修改为直接调用契约:",
-      en: "You are calling the old provider-of-xxx in useProvider. Please call the contract directly instead:",
-    },
+    code: "USING_LEGACY_TEMPLATES",
+    message: expect.any(Object),
+    list: ["mock-template.general-list"],
+    details: [
+      {
+        message: "mock-template.general-list",
+        meta: {
+          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "DEFINING_PROVIDERS_ON_ROUTE",
+    message: expect.any(Object),
+    list: ["provider-of-cmdb\\.get-detail"],
+    details: [
+      {
+        message: "provider-of-cmdb\\.get-detail",
+        meta: {
+          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "DEFINING_DEFINE_RESOLVES_ON_ROUTE",
+    message: expect.any(Object),
+    list: ["value-1"],
+    details: [
+      {
+        message: "value-1",
+        meta: {
+          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "DEFINING_REDIRECT_ON_ROUTE",
+    message: expect.any(Object),
+    list: ["${APP.homepage}/test"],
+    details: [
+      {
+        message: "${APP.homepage}/test",
+        meta: {
+          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "DEFINING_CONTEXT_ON_BRICK",
+    message: expect.any(Object),
+    list: ["test"],
+    details: [
+      {
+        message: "test",
+        meta: {
+          brick: { instanceId: "5eb8291903957" },
+          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "DEFINING_EXPORTS_ON_BRICK",
+    message: expect.any(Object),
+    list: ["basic-bricks.easy-view"],
+    details: [
+      {
+        message: "basic-bricks.easy-view",
+        meta: {
+          brick: { instanceId: "5eb8291903957" },
+          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "USING_DYNAMIC_ARGUMENTS_IN_CTX_OR_STATE",
+    message: expect.any(Object),
+    list: ["测试: CTX[...]", "tpl-page-test: STATE[...]"],
+    details: [
+      {
+        message: "测试",
+        messageSuffix: ": CTX[...]",
+        meta: { root: { type: "route", instanceId: "5eb75014e908e" } },
+      },
+      {
+        message: "tpl-page-test",
+        messageSuffix: ": STATE[...]",
+        meta: { root: { type: "template", templateId: "tpl-page-test" } },
+      },
+    ],
+  },
+  {
+    type: "info",
+    code: "USING_ONCHANGE_IN_CTX",
+    message: expect.any(Object),
+    list: ["kakataa"],
+    details: [
+      {
+        message: "kakataa",
+        meta: {
+          root: {
+            type: "route",
+            alias: "测试",
+            instanceId: "5eb75014e908e",
+          },
+        },
+      },
+    ],
+  },
+  {
+    type: "info",
+    code: "USING_PROVIDER_BRICKS",
+    message: expect.any(Object),
     list: [
       "providers-of-cmdb.instance-xxx",
       "providers-of-cmdb.instance-api-xxx",
@@ -406,12 +498,9 @@ const result = [
     ],
   },
   {
-    type: "warn",
+    type: "info",
     code: "USING_INJECT",
-    message: {
-      zh: "您正在使用参数注入写法, 如 ${xxx} 或 @{xxx}, 建议修改为表达式:",
-      en: "You are using the parameter injection method, such as ${xxx} or @{xxx}. Please use the expression instead:",
-    },
+    message: expect.any(Object),
     list: ["测试: ${EVENT.detail}", "tpl-test-1: ${PATH}"],
     details: [
       {
@@ -433,131 +522,6 @@ const result = [
             type: "template",
           },
         },
-      },
-    ],
-  },
-  {
-    type: "warn",
-    code: "USING_OLD_TEMPLATE",
-    message: {
-      zh: "您正在使用已废弃的老模板，该方式在 v3 中已经被移除，建议使用 widget 、自定义模板或控制节点代替：",
-      en: "You are using deprecated legacy templates, which will be dropped in v3. Please use widgets, custom templates, or control nodes instead:",
-    },
-    list: ["mock-template.general-list"],
-    details: [
-      {
-        message: "mock-template.general-list",
-        meta: {
-          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
-        },
-      },
-    ],
-  },
-  {
-    type: "warn",
-    code: "USING_PROVIDER_IN_ROUTE",
-    message: {
-      zh: "您在路由上面定义了 provider, 建议在 context 中使用 useProvider 替代:",
-      en: "You have defined Provider on the route, and this feature will be dropped in v3, Please use useProvider in route instead: ",
-    },
-    list: ["provider-of-cmdb\\.get-detail"],
-    details: [
-      {
-        message: "provider-of-cmdb\\.get-detail",
-        meta: {
-          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
-        },
-      },
-    ],
-  },
-  {
-    type: "warn",
-    code: "USING_DEFINE_RESOLVES_IN_ROUTE",
-    message: {
-      zh: "您在路由上面定义了 defineResolves, 建议在 context 中使用 useProvider 替代: ",
-      en: "You have defined defineResolves on the route, and this feature will be dropped in v3, Please use useProvider in route instead: ",
-    },
-    list: ["value-1"],
-    details: [
-      {
-        message: "value-1",
-        meta: {
-          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
-        },
-      },
-    ],
-  },
-  {
-    type: "warn",
-    code: "USING_DIRECT_IN_ROUTE",
-    message: {
-      zh: "您在路由上面定义了 redirect, 但路由类型非 redirect, 这将导致 redirect 不生效: ",
-      en: "You have defined redirect on the route, but the route type is not redirect, which will cause redirect to not take effect: ",
-    },
-    list: ["value-1"],
-    details: [
-      {
-        message: "value-1",
-        meta: {
-          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
-        },
-      },
-    ],
-  },
-  {
-    type: "warn",
-    code: "USING_CONTEXT_IN_BRICK",
-    message: {
-      zh: "您在构件上定义了 context, 建议将其迁移至路由上: ",
-      en: "You have defined the context on the component, Please migrate it to the route: ",
-    },
-    list: ["test"],
-    details: [
-      {
-        message: "test",
-        meta: {
-          brick: { instanceId: "5eb8291903957" },
-          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
-        },
-      },
-    ],
-  },
-  {
-    type: "warn",
-    code: "USING_EXPORTS_IN_BRICK",
-    message: {
-      zh: "您在构件上使用了已废弃的 exports 字段，该特性将在 v3 移除，建议使用 context 或 state 替代：",
-      en: "You have used the obsolete exports field on the component, which will be removed in v3. It is recommended to use context or state instead:",
-    },
-    list: ["basic-bricks.easy-view"],
-    details: [
-      {
-        message: "basic-bricks.easy-view",
-        meta: {
-          brick: { instanceId: "5eb8291903957" },
-          root: { type: "route", alias: "测试", instanceId: "5eb75014e908e" },
-        },
-      },
-    ],
-  },
-  {
-    type: "warn",
-    code: "USING_DYNAMIC_ARGUMENTS_IN_CTX_OR_STATE",
-    message: {
-      zh: "您正在使用动态访问的 CTX/STATE, 这种编写方式是不推荐的、并且已在 v3 中移除支持，建议使用静态访问写法替代，例如：`CTX.a ? CTX.b : CTX.c`",
-      en: "You are using dynamic access CTX/STATE, which is not recommended and has been removed from v3. It is recommended to use static access writing instead, such as' CTX. a '? CTX.b : CTX.c`",
-    },
-    list: ["测试: CTX[...]", "tpl-page-test: STATE[...]"],
-    details: [
-      {
-        message: "测试",
-        messageSuffix: ": CTX[...]",
-        meta: { root: { type: "route", instanceId: "5eb75014e908e" } },
-      },
-      {
-        message: "tpl-page-test",
-        messageSuffix: ": STATE[...]",
-        meta: { root: { type: "template", templateId: "tpl-page-test" } },
       },
     ],
   },

@@ -1,6 +1,6 @@
 import { i18nText } from "@next-core/brick-kit";
 import { Link } from "@next-libs/basic-components";
-import React, { useCallback, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type {
   LintDetail,
@@ -34,9 +34,11 @@ export function StoryboardLintResult({
     ? "loading"
     : errors.length === 0
     ? "ok"
-    : errors.some((item) => item.type !== "warn")
+    : errors.some((item) => item.type === "error")
     ? "error"
-    : "warn";
+    : errors.some((item) => item.type === "warn")
+    ? "warn"
+    : "info";
 
   return (
     <LintContext.Provider
@@ -52,6 +54,8 @@ export function StoryboardLintResult({
               ? K.ANALYZING
               : status === "ok"
               ? K.EVERYTHING_IS_OK
+              : status === "info"
+              ? K.THERE_ARE_NOTICES
               : K.THERE_ARE_PROBLEMS
           )}
         </div>
