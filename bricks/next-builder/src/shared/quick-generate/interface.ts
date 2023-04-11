@@ -3,6 +3,7 @@ import { UseBrickConf, BrickConf } from "@next-core/brick-types";
 export interface BrickInfoItem {
   label: string;
   brick: string;
+  brickType?: string;
   propertyGenerator(...data: any[]): Record<string, any>;
 }
 
@@ -72,6 +73,7 @@ export interface Field {
   type: string;
   brick?: string;
   brickInstanceId?: string;
+  brickType?: string;
 }
 
 export type DataType = "template" | "snippet" | "route";

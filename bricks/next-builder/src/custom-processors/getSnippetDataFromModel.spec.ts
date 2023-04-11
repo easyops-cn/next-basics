@@ -41,8 +41,8 @@ describe("getSnippetDataFromModel", () => {
             input: {
               brick: "forms.general-input",
               label: "输入框",
-              propertyGenerator: () => ({
-                name: "input",
+              propertyGenerator: ({ field }) => ({
+                name: field.id,
               }),
             },
           },
@@ -110,7 +110,7 @@ describe("getSnippetDataFromModel", () => {
                 bricks: [
                   {
                     brick: "forms.general-input",
-                    properties: { name: "link" },
+                    properties: { name: "name" },
                   },
                   {
                     brick: "forms.general-buttons",
@@ -135,7 +135,7 @@ describe("getSnippetDataFromModel", () => {
                 bricks: [
                   {
                     brick: "forms.general-input",
-                    properties: { name: "link" },
+                    properties: { name: "name" },
                   },
                   {
                     brick: "forms.general-buttons",
