@@ -32,8 +32,12 @@ function splitContract(value = ""): ProcessedContractField {
   };
 }
 
+function isContractApi(name: string): boolean {
+  return /.*@.*:\d+\.\d+\.\d+/.test(name);
+}
+
 export function checkContractRule(_rule: any, value: any, callback: any): void {
-  if (!isNil(value) && !/.*@.*:\d+\.\d+\.\d+/.test(value)) {
+  if (!isNil(value) && !isContractApi(value)) {
     callback(i18next.t(`${NS_NEXT_BUILDER}:${K.CONTRACT_VALIDATE_MESSAGE}`));
   } else {
     callback();
@@ -66,18 +70,23 @@ export function ContractAutoComplete({
   );
 
   const handlerNameChange = (name: string): void => {
-    const versionList = contractList.find(
-      (item) => item.fullContractName === name
-    )?.version;
+    //  直接 copy 契约全名
+    if (isContractApi(name)) {
+      setMixedValue(splitContract(name));
+      onChange?.(name);
+    } else {
+      const versionList = contractList.find(
+        (item) => item.fullContractName === name
+      )?.version;
 
-    const autofillVersion = versionList?.[0] ?? "";
-    setVersionOptions(versionList);
-    setMixedValue({
-      name,
-      version: autofillVersion,
-    });
-
-    onChange?.(`${name}:${autofillVersion}`);
+      const autofillVersion = versionList?.[0] ?? "";
+      setVersionOptions(versionList);
+      setMixedValue({
+        name,
+        version: autofillVersion,
+      });
+      onChange?.(`${name}:${autofillVersion}`);
+    }
   };
 
   const handleVersionChange = (version: string): void => {
