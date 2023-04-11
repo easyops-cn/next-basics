@@ -74,7 +74,7 @@ export abstract class CommonTypeGenerator {
         const find = curFields.find((now) => now.id === prev.id);
 
         // istanbul ignore else
-        if (find.brick !== prev.brick) {
+        if (find.brick && find.brick !== prev.brick) {
           this.handleUpdate(
             {
               ...find,

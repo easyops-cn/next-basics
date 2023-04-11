@@ -84,13 +84,6 @@ describe("FormTypeGenerator", () => {
       },
     });
 
-    expect(instance.getTargetBrick("forms.general-date-picker")).toEqual(
-      expect.objectContaining({
-        brick: "forms.general-date-picker",
-        label: "日期选择器",
-      })
-    );
-
     expect(
       instance.getCreateData({
         fields: [
@@ -250,10 +243,10 @@ describe("FormTypeGenerator", () => {
       {
         brick: "forms.general-input",
         label: "输入框",
-        propertyGenerator: (name, label, required) => ({
-          name,
-          label,
-          required,
+        propertyGenerator: ({ attrData }) => ({
+          name: attrData.id,
+          label: attrData.name,
+          required: attrData.required === "true",
         }),
       },
       {
@@ -266,10 +259,10 @@ describe("FormTypeGenerator", () => {
       {
         brick: "forms.general-date-picker",
         label: "日期选择器",
-        propertyGenerator: (name, label, required) => ({
-          name,
-          label,
-          required,
+        propertyGenerator: ({ attrData }) => ({
+          name: attrData.id,
+          label: attrData.name,
+          required: attrData.required === "true",
         }),
       },
     ];

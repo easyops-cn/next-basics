@@ -1,6 +1,7 @@
 import { BrickConf } from "@next-core/brick-types";
 import { get, pick, set } from "lodash";
 import { CommonTypeGenerator } from "./CommTypeGenerator";
+import { getTargetBrick } from "./processor";
 import {
   BrickInfoItem,
   ModelConfig,
@@ -44,17 +45,13 @@ export class FormTypeGenerator extends CommonTypeGenerator {
     return updatedFormNode;
   }
 
-  getTargetBrick(brick: string): BrickInfoItem {
-    return this.useBrickList.find((item) => item.brick === brick);
-  }
-
   getCreateData(modelConfig: ModelConfig): NormalizedResult {
     const { fields, dataName } = modelConfig;
 
     const createNodes = fields?.reduce((arr, field) => {
       // istanbul ignore else
       if (field.brick) {
-        const targetBrick = this.getTargetBrick(field.brick);
+        const targetBrick = getTargetBrick(this.useBrickList, field);
 
         arr.push({
           appId: this.appId,
@@ -63,11 +60,10 @@ export class FormTypeGenerator extends CommonTypeGenerator {
           parent: this.brickData.instanceId,
           type: "brick",
           properties: JSON.stringify(
-            targetBrick?.propertyGenerator(
-              field.id,
-              this.attrMap.get(field.id).name,
-              this.attrMap.get(field.id).required === "true"
-            )
+            targetBrick?.propertyGenerator({
+              field,
+              attrData: this.attrMap.get(field.id),
+            })
           ),
         });
       }
@@ -114,7 +110,7 @@ export class FormTypeGenerator extends CommonTypeGenerator {
   }
 
   handleInsert(field: Field, data: NormalizedResult): void {
-    const targetBrick = this.getTargetBrick(field.brick);
+    const targetBrick = getTargetBrick(this.useBrickList, field);
 
     // istanbul ignore else
     if (field.brick) {
@@ -125,11 +121,10 @@ export class FormTypeGenerator extends CommonTypeGenerator {
         parent: this.brickData.instanceId,
         type: "brick",
         properties: JSON.stringify(
-          targetBrick?.propertyGenerator(
-            field.id,
-            this.attrMap.get(field.id).name,
-            this.attrMap.get(field.id).required === "true"
-          )
+          targetBrick?.propertyGenerator({
+            field,
+            attrData: this.attrMap.get(field.id),
+          })
         ),
       });
     }
@@ -179,16 +174,14 @@ export class FormTypeGenerator extends CommonTypeGenerator {
     const list = fields.reduce((arr, field) => {
       // istanbul ignore else
       if (field.brick) {
-        const targetBrick = this.useBrickList.find(
-          (item) => item.brick === item.brick
-        );
+        const targetBrick = getTargetBrick(this.useBrickList, field);
+
         arr.push({
           brick: field.brick,
-          properties: targetBrick?.propertyGenerator(
-            field.id,
-            this.attrMap.get(field.id).name,
-            this.attrMap.get(field.id).required === "true"
-          ),
+          properties: targetBrick?.propertyGenerator({
+            field,
+            attrData: this.attrMap.get(field.id),
+          }),
         });
       }
 

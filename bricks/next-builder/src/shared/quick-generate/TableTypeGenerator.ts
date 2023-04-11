@@ -1,5 +1,6 @@
 import { get, pick } from "lodash";
 import { CommonTypeGenerator } from "./CommTypeGenerator";
+import { getTargetBrick } from "./processor";
 import {
   ModelConfig,
   NormalizedResult,
@@ -24,9 +25,7 @@ export class TableTypeGenerator extends CommonTypeGenerator {
     const columns = fields.reduce((arr, item) => {
       // istanbul ignore else
       if (item.brick) {
-        const targetBrick = this.useBrickList.find(
-          (row) => row.brick === item.brick
-        );
+        const targetBrick = getTargetBrick(this.useBrickList, item);
 
         arr.push({
           dataIndex: item.id,
@@ -34,9 +33,10 @@ export class TableTypeGenerator extends CommonTypeGenerator {
           title: item.id,
           useBrick: [
             {
-              brick: targetBrick.brick?.split(":")[0] || item.brick,
+              brick: targetBrick.brick || item.brick,
               properties: targetBrick?.propertyGenerator?.({
-                value: `<% DATA.cellData %>`,
+                field: item,
+                attrData: this.attrMap.get(item.id),
               }),
             },
           ],
@@ -106,9 +106,7 @@ export class TableTypeGenerator extends CommonTypeGenerator {
   handleInsert(field: Field, columns: Column[]): void {
     // istanbul ignore else
     if (field.brick) {
-      const targetBrick = this.useBrickList.find(
-        (row) => row.brick === field.brick
-      );
+      const targetBrick = getTargetBrick(this.useBrickList, field);
 
       columns.push({
         key: field.id,
@@ -120,7 +118,8 @@ export class TableTypeGenerator extends CommonTypeGenerator {
                 {
                   brick: field.brick,
                   properties: targetBrick?.propertyGenerator?.({
-                    value: `<% DATA.cellData %>`,
+                    field,
+                    attrData: this.attrMap.get(field.id),
                   }),
                 },
               ],
@@ -133,9 +132,7 @@ export class TableTypeGenerator extends CommonTypeGenerator {
   handleUpdate(field: Field, columns: Column[]): void {
     // istanbul ignore else
     if (field.brick) {
-      const targetBrick = this.useBrickList.find(
-        (row) => row.brick === field.brick
-      );
+      const targetBrick = getTargetBrick(this.useBrickList, field);
 
       const find = columns.find((item) => item.dataIndex === field.id);
 
@@ -144,7 +141,8 @@ export class TableTypeGenerator extends CommonTypeGenerator {
           {
             brick: field.brick,
             properties: targetBrick?.propertyGenerator?.({
-              value: `<% DATA.cellData %>`,
+              field,
+              attrData: this.attrMap.get(field.id),
             }),
           },
         ];
