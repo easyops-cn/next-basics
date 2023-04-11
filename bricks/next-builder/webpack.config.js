@@ -35,6 +35,10 @@ module.exports = merge(
           },
         ],
       },
+      {
+        test: /\.txt$/,
+        use: "raw-loader",
+      },
     ],
   }),
   process.env.NODE_ENV === "development"

@@ -23,6 +23,11 @@ declare module "*.md" {
   export default content;
 }
 
+declare module "*.txt" {
+  const text: string;
+  export default text;
+}
+
 interface SvgrComponent
   extends React.StatelessComponent<React.SVGAttributes<SVGElement>> {}
 
