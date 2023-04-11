@@ -1,5 +1,4 @@
 import { isEmpty, omit, uniq } from "lodash";
-import { getRuntime } from "@next-core/brick-kit";
 import { collectBricksByCustomTemplates } from "@next-core/brick-utils";
 import {
   BrickConfInTemplate,
@@ -156,22 +155,18 @@ export async function BuildProjectOfTemplates({
     })
   );
 
-  const imagesAndFunctionsReq = InstanceApi_getDetail(
+  const projectDetailReq = InstanceApi_getDetail(
     "PROJECT_MICRO_APP",
     projectId,
     {
       fields:
-        "imgs.url,imgs.name,functions.name,functions.source,functions.typescript,i18n.name,i18n.zh,i18n.en",
+        "imgs.url,imgs.name,functions.name,functions.source,functions.typescript,i18n.name,i18n.zh,i18n.en,brickNextVersion",
     }
   );
 
   // Make parallel requests.
   const [templatesResponse, snippetsResponse, projectDetailResponse] =
-    await Promise.all([
-      templatesGraphReq,
-      snippetsGraphReq,
-      imagesAndFunctionsReq,
-    ]);
+    await Promise.all([templatesGraphReq, snippetsGraphReq, projectDetailReq]);
 
   const getThumbnailList = (): ImageFiles["imagesPath"] => {
     return []
@@ -510,8 +505,7 @@ export async function BuildProjectOfTemplates({
   ];
 
   // Todo(steve): use project config instead of a temporary feature flag
-  const widgetsV3 =
-    getRuntime().getFeatureFlags()["visual-builder-experimental-widgets-v3"];
+  const widgetsV3 = projectDetailResponse.brickNextVersion === 3;
   if (widgetsV3) {
     const chunkVar = `webpackChunk_widgets_${appId.replace(/-/g, "_")}`;
     const rawBootstrapJsContent = getBrickPackageBootstrapJs({

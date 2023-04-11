@@ -3,7 +3,6 @@ import {
   InstanceApi_getDetail,
 } from "@next-sdk/cmdb-sdk";
 import { ContractCenterApi_batchSearchContract } from "@next-sdk/next-builder-sdk";
-import * as kit from "@next-core/brick-kit";
 import type { FeatureFlags } from "@next-core/brick-types";
 import {
   BuildInfoForProjectOfTemplates,
@@ -16,12 +15,7 @@ import {
 
 jest.mock("@next-sdk/cmdb-sdk");
 jest.mock("@next-sdk/next-builder-sdk");
-let flags: FeatureFlags = {};
-jest.spyOn(kit, "getRuntime").mockReturnValue({
-  getFeatureFlags() {
-    return flags;
-  },
-} as any);
+let brickNextVersion: number | undefined;
 const consoleError = jest
   .spyOn(console, "error")
   .mockImplementation(() => void 0);
@@ -341,6 +335,7 @@ const consoleError = jest
 
 (InstanceApi_getDetail as jest.Mock).mockImplementation(
   (objectId, instanceId) => ({
+    brickNextVersion,
     imgs: [
       {
         name: "viewpoint.png",
@@ -393,7 +388,7 @@ const consoleError = jest
 
 describe("BuildProjectOfTemplates", () => {
   afterEach(() => {
-    flags = {};
+    brickNextVersion = undefined;
     jest.clearAllMocks();
   });
 
@@ -1406,9 +1401,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
   ])(
     "BuildProjectOfTemplates(%j) for v3 should work",
     async (params, result) => {
-      flags = {
-        "visual-builder-experimental-widgets-v3": true,
-      };
+      brickNextVersion = 3;
       const { files: receivedFiles, ...receivedRest } =
         await BuildProjectOfTemplates(params);
       const { files: expectFiles, ...expectRest } = result;
