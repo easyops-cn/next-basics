@@ -41,6 +41,13 @@ describe("ContractSelect", () => {
     expect(changeFn).toHaveBeenCalledWith("cmdb.instance@customApi:");
 
     wrapper.find(AutoComplete).at(0).invoke("onChange")(
+      "cmdb.instance@postSearch:1.0.0",
+      null
+    );
+
+    expect(changeFn).toHaveBeenCalledWith("cmdb.instance@postSearch:1.0.0");
+
+    wrapper.find(AutoComplete).at(0).invoke("onChange")(
       "cmdb.instance@getDetail",
       null
     );
