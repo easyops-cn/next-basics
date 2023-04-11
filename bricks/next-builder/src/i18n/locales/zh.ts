@@ -152,6 +152,7 @@ const locale: Locale = {
   [K.ANALYZING]: "分析中...",
   [K.EVERYTHING_IS_OK]: "一切正常。",
   [K.THERE_ARE_PROBLEMS]: "🚨 有一些问题！",
+  [K.THERE_ARE_NOTICES]: "📢 有一些注意事项！",
   [K.VIEW_PROBLEMATIC_BRICK]: "查看有问题的构件",
   [K.VIEW_PROBLEMATIC_ROUTE]: "查看有问题的路由",
   [K.VIEW_PROBLEMATIC_TEMPLATE]: "查看有问题的模板",

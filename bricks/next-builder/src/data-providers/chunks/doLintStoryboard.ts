@@ -18,6 +18,7 @@ import {
   EstreeLiteral,
   EstreeParent,
 } from "@next-core/brick-utils";
+import { sortBy } from "lodash";
 
 // https://github.com/type-challenges/type-challenges/issues/18153
 type UnionToFnIntersection<T> = (
@@ -43,20 +44,20 @@ export type StoryboardErrorCode =
   | "UNKNOWN_EVENT_HANDLER"
   | "INSTALLED_APPS_USE_DYNAMIC_ARG"
   | "USING_ONCHANGE_IN_CTX"
-  | "USING_USERESOLVE_IN_BRICK_LIFECYCLE"
+  | "USING_USE_RESOLVES_IN_BRICK_LIFECYCLE"
   | "USING_WARNED_EXPRESSION_IN_TEMPLATE"
-  | "USING_OLD_PROVODERS_IN_USEPROVIDER"
+  | "USING_PROVIDER_BRICKS"
   | "USING_INJECT"
   | "USING_DYNAMIC_ARGUMENTS_IN_CTX_OR_STATE"
-  | "USING_OLD_TEMPLATE"
-  | "USING_PROVIDER_IN_ROUTE"
-  | "USING_DEFINE_RESOLVES_IN_ROUTE"
-  | "USING_DIRECT_IN_ROUTE"
-  | "USING_CONTEXT_IN_BRICK"
-  | "USING_EXPORTS_IN_BRICK";
+  | "USING_LEGACY_TEMPLATES"
+  | "DEFINING_PROVIDERS_ON_ROUTE"
+  | "DEFINING_DEFINE_RESOLVES_ON_ROUTE"
+  | "DEFINING_REDIRECT_ON_ROUTE"
+  | "DEFINING_CONTEXT_ON_BRICK"
+  | "DEFINING_EXPORTS_ON_BRICK";
 
 export interface StoryboardError {
-  type: "warn" | "error";
+  type: "error" | "warn" | "info";
   code: StoryboardErrorCode;
   message: I18nData;
   list?: string[];
@@ -93,7 +94,11 @@ const ACTIONS_BETTER_REPLACED_BY_TRACK = [
   "state.update",
 ] as unknown as BuiltinBrickEventHandler["action"][];
 
-export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
+export function doLintStoryboard(
+  storyboard: Storyboard,
+  brickNextVersion?: number
+): StoryboardError[] {
+  const errorOnV3WarnOnV2 = brickNextVersion === 3 ? "error" : "warn";
   const builtinActions = new Set([
     "history.push",
     "history.replace",
@@ -179,13 +184,15 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
 
     // Analytics
     "analytics.event",
+
+    // Update form state
+    "formstate.update",
   ] as UnionToTuple<BuiltinBrickEventHandler["action"]>);
   const tagNameAsTargetRegExp = /^[-\w]+(\\\.[-\w]+)*$/;
   const providerBrickRegExp = /^providers-of-/;
   const customProviderBrickRegExp = /\.provider-/;
   const injectExp = /[$@]\{.*?\}/;
   const routePathExp = /^\$\{APP\.homepage\}/;
-  const contextWithDynamicArgsExp = /\s(CTX|STATE)\[(.*?\])/g;
   const portalBricks = new Set([
     "basic-bricks.delete-confirm-modal",
     "basic-bricks.general-drawer",
@@ -207,8 +214,8 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const usingContextInBrick = new Map<string, LintDetailMeta>();
   const usingExportInBrick = new Map<string, LintDetailMeta>();
   const usingUseResolveInBrickLifeCycle = new Map<string, LintDetailMeta>();
-  const usingOldProvidersInUseProvider = new Map<string, LintDetailMeta>();
-  const usingOldTemplate = new Map<string, LintDetailMeta>();
+  const usingProviderBricks = new Map<string, LintDetailMeta>();
+  const usingLegacyTemplates = new Map<string, LintDetailMeta>();
 
   const errors: StoryboardError[] = [];
   const usingScriptBrick: LintDetail[] = [];
@@ -275,7 +282,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
           });
         }
         if (template) {
-          addMeta(usingOldTemplate, template, node, path);
+          addMeta(usingLegacyTemplates, template, node, path);
         }
         if (exports) {
           addMeta(usingExportInBrick, brick, node, path);
@@ -343,7 +350,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
           );
         }
         if (providerBrickRegExp.test(useProvider)) {
-          addMeta(usingOldProvidersInUseProvider, useProvider, node, path);
+          addMeta(usingProviderBricks, useProvider, node, path);
         }
         break;
       }
@@ -376,7 +383,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
       case "Resolvable": {
         const { useProvider } = node.raw as UseProviderResolveConf;
         if (providerBrickRegExp.test(useProvider)) {
-          addMeta(usingOldProvidersInUseProvider, useProvider, node, path);
+          addMeta(usingProviderBricks, useProvider, node, path);
         }
         break;
       }
@@ -594,7 +601,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
 
   if (warnedUsingTplVarTemplates.length > 0) {
     errors.push({
-      type: "warn",
+      type: errorOnV3WarnOnV2,
       code: "USING_TPL_VAR_IN_TPL",
       message: {
         zh: "您正在模板中使用 TPL 变量，它已废弃，建议统一修改为 STATE，它覆盖 TPL 的所有能力，同时支持追踪更新等特性：",
@@ -625,7 +632,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
 
   if (warnedPortalBricks.size > 0) {
     errors.push({
-      type: "warn",
+      type: "info",
       code: "MISUSE_OF_PORTAL_BRICK",
       message: {
         zh: "您正在使用一些模态框类的构件，但没有将其放置于 portal 中，可能引起页面布局异常：",
@@ -644,19 +651,19 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
       type: "error",
       code: "INSTALLED_APPS_USE_DYNAMIC_ARG",
       message: {
-        zh: "您在项目中使用了 INSTALLED_APPS.has 表达式, 并且使用了动态参数, 这将可能引起错误; 请将入参修改为静态参数, 例如: INSTALLED_APPS.has('xxx')",
-        en: "You're using INSTALLED_APPS.has in project with dynamic arguments, it could be get the error result. Please use INSTALLED_APPS.has with static arguments, for example: INSTALLED_APPS.has('xxx')",
+        zh: "您在项目中使用了 `INSTALLED_APPS.has` 表达式, 并且使用了动态参数, 这将可能引起错误; 请将入参修改为静态参数, 例如: INSTALLED_APPS.has('xxx')",
+        en: "You're using `INSTALLED_APPS.has` in project with dynamic arguments, it could be get the error result. Please use INSTALLED_APPS.has with static arguments, for example: INSTALLED_APPS.has('xxx')",
       },
     });
   }
 
   if (usingWarnedOnChangeInCtxOrState.size > 0) {
     errors.push({
-      type: "warn",
+      type: "info",
       code: "USING_ONCHANGE_IN_CTX",
       message: {
         zh: "您在 Context 或 State 的 onChange 中使用了 context.replace 或 set brick properties 等事件处理器, 请使用 track context 或 track state 代替:",
-        en: "You are using an event handler such as context.replace or set brick properties in onChange of context or state. Please use track Context or track State instead:",
+        en: "You are using event handlers such as context.replace or set brick properties in onChange of context or state. Please use track Context or track State instead:",
       },
       list: [...usingWarnedOnChangeInCtxOrState.keys()],
       details: [...usingWarnedOnChangeInCtxOrState.entries()].map(
@@ -670,11 +677,11 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
 
   if (usingUseResolveInBrickLifeCycle.size > 0) {
     errors.push({
-      type: "warn",
-      code: "USING_USERESOLVE_IN_BRICK_LIFECYCLE",
+      type: errorOnV3WarnOnV2,
+      code: "USING_USE_RESOLVES_IN_BRICK_LIFECYCLE",
       message: {
-        zh: "您在 lifeCycle 中使用了 useResolve 获取数据, 建议您使用 context 或 state 代替:",
-        en: "You are using useResolve in lifeCycle. Please use context or state instead:",
+        zh: "您在构件 lifeCycle 中使用了 useResolves 获取数据，这在 v3 中不再支持，建议使用 context 或 state 代替：",
+        en: "You are using useResolves in brick lifeCycle, which will be dropped in v3, please use context or state instead:",
       },
       list: [...usingUseResolveInBrickLifeCycle.keys()],
       details: [...usingUseResolveInBrickLifeCycle.entries()].map(
@@ -691,8 +698,8 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
       type: "warn",
       code: "USING_WARNED_EXPRESSION_IN_TEMPLATE",
       message: {
-        zh: "您正在模板中使用 QUERY 和 PATH 等变量，建议修改为从外部传入相关数据:",
-        en: "You are using QUERY, PATH and other variables in the custom-template. Please pass in parameters from outside instead:",
+        zh: "您正在模板中使用 QUERY 和 PATH 等变量，建议修改为从外部传入相关数据：",
+        en: "You are using QUERY, PATH and other variables in templates. Please pass in parameters from outside instead:",
       },
       list: usingWarnedExpressionInTemplate.map(
         (detail) => `${detail.message}${detail.messageSuffix}`
@@ -701,31 +708,29 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
     });
   }
 
-  if (usingOldProvidersInUseProvider.size > 0) {
+  if (usingProviderBricks.size > 0) {
     errors.push({
-      type: "warn",
-      code: "USING_OLD_PROVODERS_IN_USEPROVIDER",
+      type: "info",
+      code: "USING_PROVIDER_BRICKS",
       message: {
-        zh: "您在 useProvider 中调用了旧版的 Providers-of-xxx, 建议修改为直接调用契约:",
-        en: "You are calling the old provider-of-xxx in useProvider. Please call the contract directly instead:",
+        zh: "您正在使用 provider 构件，建议修改为直接调用契约：",
+        en: "You are using provider bricks, please use contracts directly instead:",
       },
-      list: [...usingOldProvidersInUseProvider.keys()],
-      details: [...usingOldProvidersInUseProvider.entries()].map(
-        ([message, meta]) => ({
-          message,
-          meta,
-        })
-      ),
+      list: [...usingProviderBricks.keys()],
+      details: [...usingProviderBricks.entries()].map(([message, meta]) => ({
+        message,
+        meta,
+      })),
     });
   }
 
   if (usingInject.length > 0) {
     errors.push({
-      type: "warn",
+      type: "info",
       code: "USING_INJECT",
       message: {
-        zh: "您正在使用参数注入写法, 如 ${xxx} 或 @{xxx}, 建议修改为表达式:",
-        en: "You are using the parameter injection method, such as ${xxx} or @{xxx}. Please use the expression instead:",
+        zh: "您正在使用参数注入写法, 如 `${xxx}` 或 `@{xxx}`，建议修改为表达式：",
+        en: "You are using inject placeholders, such as `${xxx}` or `@{xxx}`, please use expressions instead:",
       },
       list: usingInject.map(
         (detail) => `${detail.message}${detail.messageSuffix}`
@@ -734,16 +739,16 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
     });
   }
 
-  if (usingOldTemplate.size > 0) {
+  if (usingLegacyTemplates.size > 0) {
     errors.push({
-      type: "warn",
-      code: "USING_OLD_TEMPLATE",
+      type: errorOnV3WarnOnV2,
+      code: "USING_LEGACY_TEMPLATES",
       message: {
         zh: "您正在使用已废弃的老模板，该方式在 v3 中已经被移除，建议使用 widget 、自定义模板或控制节点代替：",
         en: "You are using deprecated legacy templates, which will be dropped in v3. Please use widgets, custom templates, or control nodes instead:",
       },
-      list: [...usingOldTemplate.keys()],
-      details: [...usingOldTemplate.entries()].map(([message, meta]) => ({
+      list: [...usingLegacyTemplates.keys()],
+      details: [...usingLegacyTemplates.entries()].map(([message, meta]) => ({
         message,
         meta,
       })),
@@ -752,11 +757,11 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
 
   if (usingProviderInRoute.size > 0) {
     errors.push({
-      type: "warn",
-      code: "USING_PROVIDER_IN_ROUTE",
+      type: errorOnV3WarnOnV2,
+      code: "DEFINING_PROVIDERS_ON_ROUTE",
       message: {
-        zh: "您在路由上面定义了 provider, 建议在 context 中使用 useProvider 替代:",
-        en: "You have defined Provider on the route, and this feature will be dropped in v3, Please use useProvider in route instead: ",
+        zh: "您在路由上面定义了 providers，这在 v3 中不再支持，建议使用 useProvider 替代：",
+        en: "You have defined providers on routes, which will be dropped in v3, please use useProvider instead:",
       },
       list: [...usingProviderInRoute.keys()],
       details: [...usingProviderInRoute.entries()].map(([message, meta]) => ({
@@ -768,11 +773,11 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
 
   if (usingDefineResolve.size > 0) {
     errors.push({
-      type: "warn",
-      code: "USING_DEFINE_RESOLVES_IN_ROUTE",
+      type: errorOnV3WarnOnV2,
+      code: "DEFINING_DEFINE_RESOLVES_ON_ROUTE",
       message: {
-        zh: "您在路由上面定义了 defineResolves, 建议在 context 中使用 useProvider 替代: ",
-        en: "You have defined defineResolves on the route, and this feature will be dropped in v3, Please use useProvider in route instead: ",
+        zh: "您在路由上面定义了 defineResolves，这在 v3 中不再支持，建议使用 useProvider 替代：",
+        en: "You have defined defineResolves on routes, which will be dropped in v3, please use useProvider instead:",
       },
       list: [...usingDefineResolve.keys()],
       details: [...usingDefineResolve.entries()].map(([message, meta]) => ({
@@ -783,14 +788,14 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   }
   if (usingRedirectInRoute.size > 0) {
     errors.push({
-      type: "warn",
-      code: "USING_DIRECT_IN_ROUTE",
+      type: errorOnV3WarnOnV2,
+      code: "DEFINING_REDIRECT_ON_ROUTE",
       message: {
-        zh: "您在路由上面定义了 redirect, 但路由类型非 redirect, 这将导致 redirect 不生效: ",
-        en: "You have defined redirect on the route, but the route type is not redirect, which will cause redirect to not take effect: ",
+        zh: "您在非 redirect 类型的路由上定义了 redirect，在 v3 中该 redirect 无法生效：",
+        en: "You have defined redirect on non-redirect routes, which will cause redirect to not take effect in v3:",
       },
-      list: [...usingDefineResolve.keys()],
-      details: [...usingDefineResolve.entries()].map(([message, meta]) => ({
+      list: [...usingRedirectInRoute.keys()],
+      details: [...usingRedirectInRoute.entries()].map(([message, meta]) => ({
         message,
         meta,
       })),
@@ -800,10 +805,10 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   if (usingContextInBrick.size > 0) {
     errors.push({
       type: "warn",
-      code: "USING_CONTEXT_IN_BRICK",
+      code: "DEFINING_CONTEXT_ON_BRICK",
       message: {
-        zh: "您在构件上定义了 context, 建议将其迁移至路由上: ",
-        en: "You have defined the context on the component, Please migrate it to the route: ",
+        zh: "您在构件上定义了 context，建议在路由上定义 context 或在模板上定义 state：",
+        en: "You have defined context on bricks, please define context on routes or state on templates:",
       },
       list: [...usingContextInBrick.keys()],
       details: [...usingContextInBrick.entries()].map(([message, meta]) => ({
@@ -815,11 +820,11 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
 
   if (usingExportInBrick.size > 0) {
     errors.push({
-      type: "warn",
-      code: "USING_EXPORTS_IN_BRICK",
+      type: errorOnV3WarnOnV2,
+      code: "DEFINING_EXPORTS_ON_BRICK",
       message: {
         zh: "您在构件上使用了已废弃的 exports 字段，该特性将在 v3 移除，建议使用 context 或 state 替代：",
-        en: "You have used the obsolete exports field on the component, which will be removed in v3. It is recommended to use context or state instead:",
+        en: "You have used the obsolete exports field on bricks, which will be removed in v3. It is recommended to use context or state instead:",
       },
       list: [...usingExportInBrick.keys()],
       details: [...usingExportInBrick.entries()].map(([message, meta]) => ({
@@ -831,11 +836,11 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
 
   if (usingDynamicArgumentsInContext.length > 0) {
     errors.push({
-      type: "warn",
+      type: errorOnV3WarnOnV2,
       code: "USING_DYNAMIC_ARGUMENTS_IN_CTX_OR_STATE",
       message: {
-        zh: "您正在使用动态访问的 CTX/STATE, 这种编写方式是不推荐的、并且已在 v3 中移除支持，建议使用静态访问写法替代，例如：`CTX.a ? CTX.b : CTX.c`",
-        en: "You are using dynamic access CTX/STATE, which is not recommended and has been removed from v3. It is recommended to use static access writing instead, such as' CTX. a '? CTX.b : CTX.c`",
+        zh: "您正在使用动态访问的 CTX/STATE, 这种编写方式是不推荐的、并且已在 v3 中移除支持，建议使用静态访问写法替代，例如：`CTX.a ? CTX.b : CTX.c`：",
+        en: "You are using dynamic access CTX/STATE, which is not recommended and has been removed from v3. It is recommended to use static access writing instead, such as' CTX. a '? CTX.b : CTX.c`:",
       },
       list: usingDynamicArgumentsInContext.map(
         (detail) => `${detail.message}${detail.messageSuffix}`
@@ -844,7 +849,10 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
     });
   }
 
-  return errors;
+  // Order errors by type: error -> warn -> info.
+  return sortBy(errors, (error) =>
+    error.type === "error" ? 0 : error.type === "warn" ? 1 : 2
+  );
 }
 
 function getMetaByPath(path: StoryboardNode[]): LintDetailMeta {
