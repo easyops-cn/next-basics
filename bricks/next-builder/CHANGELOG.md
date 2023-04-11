@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.230.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.229.1...@next-bricks/next-builder@1.230.0) (2023-04-11)
+
+
+### Bug Fixes
+
+* build widgets v3 according to project settings ([5038e46](https://github.com/easyops-cn/next-basics/commit/5038e46ab5c1e165f4212761f4b241737ba8e2d4))
+* load widget template async ([63e901f](https://github.com/easyops-cn/next-basics/commit/63e901fe8eeb424b9f2c2549c57fcfd489776f83))
+
+
+### Features
+
+* build widgets v3 ([73306b5](https://github.com/easyops-cn/next-basics/commit/73306b5731dc31cfa5ea3c1f785168cf28a0bbe3))
+
+
+
+
+
 ## [1.229.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.229.0...@next-bricks/next-builder@1.229.1) (2023-04-10)
 
 **Note:** Version bump only for package @next-bricks/next-builder
