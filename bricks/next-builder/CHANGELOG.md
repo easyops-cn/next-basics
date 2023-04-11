@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.230.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.230.0...@next-bricks/next-builder@1.230.1) (2023-04-11)
+
+
+### Bug Fixes
+
+* fix table and form generator of model ([a4fae96](https://github.com/easyops-cn/next-basics/commit/a4fae969f90502e387a747f1efbe8c304734de26))
+* refine storyboard lint for v3 ([83e33d3](https://github.com/easyops-cn/next-basics/commit/83e33d37bf90375483ed45277062fc0facd18073))
+
+
+
+
+
 # [1.230.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.229.1...@next-bricks/next-builder@1.230.0) (2023-04-11)
 
 
