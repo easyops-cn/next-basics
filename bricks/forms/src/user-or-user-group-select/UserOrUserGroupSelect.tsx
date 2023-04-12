@@ -303,7 +303,7 @@ export function LegacyUserSelectFormItem(
       $or: map(uniq([...showKey, "name"]), (v) => ({
         [v]: { $like: `%${keyword}%` },
       })),
-      ...(props.hideInvalidUser
+      ...(props.hideInvalidUser && objectId === "USER"
         ? {
             state: "valid",
           }
