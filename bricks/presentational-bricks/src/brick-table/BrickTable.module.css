@@ -73,7 +73,7 @@ html[data-theme="dark"] {
       }
     }
     :global(.ant-table-row-selected td) {
-      background: var(--antd-table-cell-fixed-body-bg) !important;
+      background: var(--antd-table-cell-fixed-body-bg);
     }
   }
 }
@@ -128,11 +128,37 @@ html[data-theme="dark"] {
   }
 }
 
+.brickTable,
 .zebraPatternTable {
   :global(.ant-table-tbody) {
     tr {
       td {
         border-bottom: 0;
+      }
+    }
+    :global(.ant-table-row-selected):not(.brickTableOddRow) {
+      td {
+        background: var(--antd-table-cell-fixed-body-bg);
+      }
+    }
+    .brickTableOddRow,
+    :global(.ant-table-row-selected) {
+      td {
+        background: var(--color-fill-bg-base-4);
+      }
+    }
+  }
+  :global(.ant-table.ant-table-middle .ant-table-thead) {
+    > tr {
+      > th:first-child {
+        padding-left: 16px;
+      }
+    }
+  }
+  :global(.ant-table.ant-table-middle .ant-table-tbody) {
+    > tr {
+      > td:first-child {
+        padding-left: 16px;
       }
     }
   }
