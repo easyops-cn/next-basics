@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.267.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.0...@next-bricks/forms@1.267.1) (2023-04-12)
+
+
+### Bug Fixes
+
+* 修复因为hideInvalidUser属性,用户组获取数据参数不对问题 refs ITSERVICE_NEXT-6101 ([3a386b6](https://github.com/easyops-cn/next-basics/commit/3a386b64e92ba2c32228d6782aea8243fd51d51a))
+
+
+
+
+
 # [1.267.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.266.6...@next-bricks/forms@1.267.0) (2023-04-10)
 
 
