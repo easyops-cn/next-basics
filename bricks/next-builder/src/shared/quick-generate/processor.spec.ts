@@ -70,9 +70,9 @@ describe("processor", () => {
           },
         ],
         {
-          name: "url",
-          id: "url",
-          label: "地址",
+          name: "id",
+          id: "id",
+          label: "id",
           type: "string",
           brick: "presentational-bricks.brick-link",
           brickType: "button",
