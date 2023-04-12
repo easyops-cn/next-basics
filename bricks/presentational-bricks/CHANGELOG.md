@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.290.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.290.4...@next-bricks/presentational-bricks@1.290.5) (2023-04-12)
+
+
+### Bug Fixes
+
+* **brickValueMapping:** 兼容v3 generalIcon ([fcbd1cb](https://github.com/easyops-cn/next-basics/commit/fcbd1cb4dbdeb225154b64e865b91249df341d93))
+
+
+
+
+
 ## [1.290.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.290.3...@next-bricks/presentational-bricks@1.290.4) (2023-04-12)
 
 
