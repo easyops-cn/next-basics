@@ -8,6 +8,7 @@ import { Color } from "../interfaces/brick-tag";
 export { Color } from "../interfaces/brick-tag";
 import cssStyle from "./style.module.css";
 import { MenuIcon } from "@next-core/brick-types";
+import { getRuntime } from "@next-core/brick-kit";
 
 export const circleIcon: MenuIcon = {
   lib: "fa",
@@ -76,7 +77,7 @@ export function BrickValueMapping(
           <span
             style={{ fontSize: map.iconSize, marginRight: map.text ? 8 : 0 }}
           >
-            <GeneralIcon icon={map.icon}></GeneralIcon>
+            <GeneralIcon icon={map.icon} />
           </span>
           <span>{map.text}</span>
         </span>
@@ -106,7 +107,12 @@ export function BrickValueMapping(
           {showTagCircle && (
             <GeneralIcon
               icon={circleIcon}
-              style={{ marginRight: "8px", marginLeft: 0 }}
+              style={{
+                marginRight: "8px",
+                marginLeft: 0,
+                verticalAlign: "middle",
+                fontSize: "6px",
+              }}
             />
           )}
           {text}

@@ -24,12 +24,6 @@
   color: red;
 }
 
-.tagCircleIcon {
-  :global(.anticon > .fa-circle) {
-    width: 6px;
-  }
-}
-
 .wrapIconText {
   display: flex;
   align-items: center;
