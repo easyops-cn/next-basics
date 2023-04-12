@@ -110,7 +110,7 @@ export function BrickValueMapping(
               style={{
                 marginRight: "8px",
                 marginLeft: 0,
-                verticalAlign: "middle",
+                verticalAlign: "0.1rem",
                 fontSize: "6px",
               }}
             />
