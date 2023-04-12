@@ -10,7 +10,7 @@
     {
       "groupName": "next-core packages",
       "matchPackagePatterns": ["^@next-core/"],
-      "matchUpdateTypes": ["minor", "patch],
+      "matchUpdateTypes": ["minor", "patch"],
       "enabled": true
     },
     {
