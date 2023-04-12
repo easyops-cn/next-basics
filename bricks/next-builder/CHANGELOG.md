@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.230.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.230.1...@next-bricks/next-builder@1.230.2) (2023-04-12)
+
+
+### Bug Fixes
+
+* 修复契约 copy 问题 ([596e00c](https://github.com/easyops-cn/next-basics/commit/596e00c0cfc2a0a27f54eb2886799ea7373af004))
+
+
+
+
+
 ## [1.230.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.230.0...@next-bricks/next-builder@1.230.1) (2023-04-11)
 
 
