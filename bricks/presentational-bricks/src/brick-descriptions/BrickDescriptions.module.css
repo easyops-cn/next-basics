@@ -2,7 +2,7 @@
   :global(.ant-descriptions-item-content) {
     word-break: break-word;
     overflow-wrap: break-word;
-
+    padding-right: 16px;
     p {
       margin: 0 0 15px 0;
     }
