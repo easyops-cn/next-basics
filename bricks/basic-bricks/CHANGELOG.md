@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.232.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.231.3...@next-bricks/basic-bricks@1.232.0) (2023-04-13)
+
+
+### Features
+
+* **general-card:** update compact mode style ([5c4a465](https://github.com/easyops-cn/next-basics/commit/5c4a4656ff51148087caafb68e70c9a414041f21))
+
+
+
+
+
 ## [1.231.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.231.2...@next-bricks/basic-bricks@1.231.3) (2023-04-10)
 
 
