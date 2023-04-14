@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.267.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.1...@next-bricks/forms@1.267.2) (2023-04-14)
+
+
+### Bug Fixes
+
+* **input-number:** 数字输入框应该只能输入数字 ([eb7fd6f](https://github.com/easyops-cn/next-basics/commit/eb7fd6fe27a6eb61686edab9260d137949d355c4))
+
+
+
+
+
 ## [1.267.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.0...@next-bricks/forms@1.267.1) (2023-04-12)
 
 
