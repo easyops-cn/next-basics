@@ -237,14 +237,14 @@ export function doLintStoryboard(
       case "Route": {
         const { providers, defineResolves, redirect, type } =
           node.raw as RouteConf;
-        if (providers) {
+        if (Array.isArray(providers)) {
           providers.forEach((provider) => {
             const providerName =
               typeof provider === "string" ? provider : provider.brick;
             addMeta(usingProviderInRoute, providerName, node, path);
           });
         }
-        if (defineResolves) {
+        if (Array.isArray(defineResolves)) {
           defineResolves.forEach((defineResolve) => {
             addMeta(usingDefineResolve, defineResolve.id, node, path);
           });
@@ -276,7 +276,7 @@ export function doLintStoryboard(
             addMeta(warnedPortalBricks, brick, node, path);
           }
         }
-        if (context?.length) {
+        if (Array.isArray(context)) {
           context.forEach((item) => {
             addMeta(usingContextInBrick, item.name, node, path);
           });
