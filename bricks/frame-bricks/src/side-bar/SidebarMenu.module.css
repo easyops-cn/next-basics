@@ -183,7 +183,7 @@
   .groupWrapper {
     .groupText {
       font-size: 12px;
-      color: var(--color-secondary-text);
+      color: var(--v8-left-secondary-text);
     }
   }
 
