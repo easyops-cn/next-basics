@@ -38,6 +38,8 @@ const locale: Locale = {
   [K.ADD_FIELD_PARAMS_TIPS]: "添加 `{{name}}` 的子属性",
   [K.MODEL_DEFINITION_UPDATE_MESSAGE]: "有更新",
   [K.MODEL_DEFINITION_CREATE_TIPS]: "找不到模型？前往新建",
+  [K.RESPONSE_WRAPPER_TIPS]:
+    'wrapper 默认为true，会在 response 返回数据后额外包装一层{"code": 0, "error": "", "message": "", "data": response}，如果想要自定义整个 response_message 可以设置为false',
 };
 
 export default locale;

@@ -23,6 +23,8 @@ import styles from "./SchemaItem.module.css";
 import { K, NS_FLOW_BUILDER } from "../../../i18n/constants";
 import { useTranslation } from "react-i18next";
 import { isArray, isEmpty } from "lodash";
+import { UseBrickConf } from "@next-core/brick-types";
+import { BrickAsComponent } from "@next-core/brick-kit";
 
 export interface SchemaItemProps {
   className?: string;
@@ -39,6 +41,9 @@ export interface SchemaItemProps {
   disabledModelType?: boolean;
   isModelDefinitionRow?: boolean;
   parentsModel?: string[];
+  titleBrick?: {
+    useBrick: UseBrickConf;
+  };
 }
 
 export function SchemaItem({
@@ -53,6 +58,7 @@ export function SchemaItem({
   disabledModelType,
   isModelDefinitionRow,
   parentsModel = [],
+  titleBrick,
 }: SchemaItemProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const editorContext = useContext(EditorContext);
@@ -156,6 +162,9 @@ export function SchemaItem({
           ) : (
             displayName
           )}
+          {titleBrick?.useBrick && (
+            <BrickAsComponent useBrick={titleBrick.useBrick} data={itemData} />
+          )}
         </div>
         <div>
           {!(traceId === rootTraceId && hiddenRootNodeRequired) && (
@@ -247,6 +256,7 @@ export function SchemaItem({
           traceId={`${traceId}-${index}`}
           itemData={item}
           disabledModelType={disabledModelType}
+          titleBrick={titleBrick}
         />
       ))}
       {!readonly && allowExpandFields(itemData.type) && (

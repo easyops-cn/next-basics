@@ -41,6 +41,8 @@ const locale: Locale = {
   [K.ADD_FIELD_PARAMS_TIPS]: "add `{{name}}` children properties",
   [K.MODEL_DEFINITION_UPDATE_MESSAGE]: "There is an update",
   [K.MODEL_DEFINITION_CREATE_TIPS]: "Can't find a model? go to create",
+  [K.RESPONSE_WRAPPER_TIPS]:
+    'wrapper is set to true by default, which adds an additional layer of {"code": 0, "error": "", "message": "", "data": response} wrapping the returned data in the response. If you want to customize the entire response_message, you can set it to false',
 };
 
 export default locale;

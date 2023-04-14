@@ -64,6 +64,8 @@ function getFlowNodeType(type: FLowNodeType): string {
       return "end";
     case "start_approval":
       return "container";
+    case "gateway":
+      return "gateway";
     default:
       return "node";
   }

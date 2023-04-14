@@ -4,6 +4,7 @@ import { BrickWrapper, property } from "@next-core/brick-kit";
 import { FormItemElement } from "@next-libs/forms";
 import { SchemaEditor } from "./SchemaEditor";
 import { SchemaRootNodeProperty, ModelDefinition } from "./interfaces";
+import { UseBrickConf } from "@next-core/brick-types";
 
 /**
  * @id shared-editors.schema-editor
@@ -121,6 +122,17 @@ export class SchemaEditorElement extends FormItemElement {
   })
   importModelDefinition: ModelDefinition[] = [];
 
+  /**
+   * @description 标题的构件配置
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  titleBrick: {
+    useBrick: UseBrickConf;
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -158,6 +170,7 @@ export class SchemaEditorElement extends FormItemElement {
             rootNodeRequired={this.rootNodeRequired}
             importModelDefinition={this.importModelDefinition}
             hiddenRootNodeRequired={this.hiddenRootNodeRequired}
+            titleBrick={this.titleBrick}
           />
         </BrickWrapper>,
         this
