@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.230.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.230.3...@next-bricks/next-builder@1.230.4) (2023-04-14)
+
+
+### Bug Fixes
+
+* fix lint error ([3a71775](https://github.com/easyops-cn/next-basics/commit/3a71775d159e58863c14e80519f38c77f1fcab25))
+
+
+
+
+
 ## [1.230.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.230.2...@next-bricks/next-builder@1.230.3) (2023-04-12)
 
 **Note:** Version bump only for package @next-bricks/next-builder
