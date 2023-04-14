@@ -21,6 +21,7 @@ import {
   filterTitleList,
 } from "./processor";
 import styles from "./SchemaEditor.module.css";
+import { UseBrickConf } from "@next-core/brick-types";
 export interface SchemaEditorProps extends FormItemWrapperProps {
   value: SchemaRootNodeProperty;
   readonly?: boolean;
@@ -32,6 +33,9 @@ export interface SchemaEditorProps extends FormItemWrapperProps {
   rootNodeRequired?: Record<string, boolean>;
   importModelDefinition?: ModelDefinition[];
   hiddenRootNodeRequired?: boolean;
+  titleBrick: {
+    useBrick: UseBrickConf;
+  };
 }
 
 interface ItemData {
@@ -52,6 +56,7 @@ export const SchemaEditorWrapper = forwardRef<
     rootNodeRequired,
     hiddenRootNodeRequired,
     importModelDefinition,
+    titleBrick,
   } = props;
   const [visible, setVisible] = useState(false);
   const [curItemData, SetCurItemData] = useState<ItemData>({
@@ -219,6 +224,7 @@ export const SchemaEditorWrapper = forwardRef<
             hiddenRootNode={hiddenRootNode}
             hiddenRootNodeRequired={hiddenRootNodeRequired}
             disabledModelType={disabledModelType}
+            titleBrick={titleBrick}
             parentsModel={[]}
           />
         </div>

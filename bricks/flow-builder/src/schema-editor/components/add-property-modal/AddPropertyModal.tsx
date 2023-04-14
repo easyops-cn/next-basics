@@ -277,7 +277,9 @@ export function AddPropertyModal({
             </Form.Item>
           ) : (
             <Form.Item
-              hidden={trackId === rootTraceId && hiddenRootNodeRequired}
+              hidden={
+                trackId === rootTraceId && isEdit && hiddenRootNodeRequired
+              }
               name="required"
               label={t(K.REQUIRED_LABEL)}
               valuePropName="checked"
@@ -310,6 +312,7 @@ export function AddPropertyModal({
               name="wrapper"
               label="wrapper"
               valuePropName="checked"
+              tooltip={t(K.RESPONSE_WRAPPER_TIPS)}
             >
               <Switch />
             </Form.Item>
