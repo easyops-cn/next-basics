@@ -1,5 +1,4 @@
 import React from "react";
-import { omit } from "lodash";
 import { InputNumber } from "antd";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 
@@ -38,6 +37,7 @@ export function GeneralInputNumber(
         onChange={props.onChange}
         style={props.inputBoxStyle}
         onBlur={props.onBlur}
+        type="number"
       />
     </FormItemWrapper>
   );
