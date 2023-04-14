@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.29.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.3...@next-bricks/flow-builder@1.29.4) (2023-04-14)
+
+
+### Bug Fixes
+
+* contract optimization ([021cedc](https://github.com/easyops-cn/next-basics/commit/021cedc375403ecfc8a0562e47d6f4a70b0b0d77))
+
+
+
+
+
 ## [1.29.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.2...@next-bricks/flow-builder@1.29.3) (2023-04-10)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
