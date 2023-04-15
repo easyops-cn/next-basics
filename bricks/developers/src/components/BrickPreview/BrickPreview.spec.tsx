@@ -20,6 +20,7 @@ jest.spyOn(kit.developHelper, "getFakeKernel").mockImplementation(
   (overrides) =>
     ({
       getFeatureFlags: () => ({}),
+      loadDynamicBricks: jest.fn(),
       ...overrides,
     } as any)
 );
@@ -27,8 +28,8 @@ jest
   .spyOn(kit.developHelper, "checkoutTplContext")
   .mockImplementation(() => void 0);
 
-const renderPreviewBricks = ((kit.developHelper as any).renderPreviewBricks =
-  jest.fn().mockReturnValue(Promise.resolve()));
+const render = jest.fn();
+(kit.developHelper as any).createRoot = jest.fn().mockReturnValue({ render });
 
 let flags: FeatureFlags = {};
 jest.spyOn(kit, "getRuntime").mockReturnValue({
@@ -119,7 +120,7 @@ describe("BrickPreview", () => {
         .find("div[data-testid='brick-container-bg']")
         .html()
         .includes("hello")
-    ).toBe(false);
+    ).toBe(true);
     expect(
       wrapper
         .find("div[data-testid='brick-container-portal']")
@@ -161,10 +162,7 @@ describe("BrickPreview", () => {
     };
     const previewRef = React.createRef<BrickPreviewRef>();
     mount(<BrickPreview conf={conf} ref={previewRef} />);
-    expect(renderPreviewBricks).toBeCalledWith([conf], {
-      main: previewRef.current.container,
-      portal: previewRef.current.portal,
-    });
+    expect(render).toBeCalledWith([conf]);
     await (global as any).flushPromises();
   });
 });
