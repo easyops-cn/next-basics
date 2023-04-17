@@ -54,7 +54,7 @@ interface GraphData {
   root: string;
 }
 
-const hasChildrenFLow = ["start_approval"];
+const hasChildrenFLow = ["start_approval", "gateway"];
 
 function getFlowNodeType(type: FLowNodeType): string {
   switch (type) {
@@ -71,6 +71,20 @@ function getFlowNodeType(type: FLowNodeType): string {
   }
 }
 
+function walkStep(startId: string, nodeMap: Map<string, FlowNode>): string[] {
+  const steps = [startId];
+  const starNode = nodeMap.get(startId);
+  // 目前node的 next 指向为1个
+  let nextNodeId = starNode.next?.[0];
+  while (nextNodeId) {
+    steps.push(nextNodeId);
+    const node = nodeMap.get(nextNodeId);
+    nextNodeId = node.next?.[0];
+  }
+
+  return steps;
+}
+
 export function getWorkflowGraph(flowData: FlowData): GraphData {
   const rootId = "root";
   const rootNode = {
@@ -81,6 +95,7 @@ export function getWorkflowGraph(flowData: FlowData): GraphData {
   const graphNodes: GraphNode[] = [];
   const layerEdges: GraphEdge[] = [];
   const containerEdges: GraphEdge[] = [];
+  const groupEdges: GraphEdge[] = [];
   const childrenLayoutEdges: GraphEdge[] = [];
   const nodeLinkEdges: GraphEdge[] = [];
   const childrenIds: string[] = [];
@@ -115,6 +130,7 @@ export function getWorkflowGraph(flowData: FlowData): GraphData {
 
     if (hasChildrenFLow.includes(node.type) && !isEmpty(node.children)) {
       const layoutId = `${node.id}Layout`;
+
       graphNodes.push({
         name: layoutId,
         id: layoutId,
@@ -127,28 +143,68 @@ export function getWorkflowGraph(flowData: FlowData): GraphData {
         type: "container",
       });
 
-      node.children.forEach((id) => {
-        childrenLayoutEdges.push({
-          source: layoutId,
-          target: id,
-          type: "childrenLayout",
+      const groupIdList = [];
+
+      if (node.type === "start_approval") {
+        const startId = node.children[0];
+        if (startId) {
+          groupIdList.push({
+            groupId: `${startId}Group`,
+            startId,
+          });
+        }
+      } else if (node.type === "gateway") {
+        node.children.forEach((id) => {
+          const type = nodeMap.get(id).type;
+
+          // istanbul ignore else
+          if (type === "condition") {
+            groupIdList.push({
+              groupId: `${id}Group`,
+              startId: id,
+            });
+          }
+        });
+      }
+
+      groupIdList.forEach(({ groupId, startId }) => {
+        graphNodes.push({
+          name: groupId,
+          id: groupId,
+          type: "node",
         });
 
-        const filter = relations.filter((r) => r.src === id);
+        groupEdges.push({
+          source: layoutId,
+          target: groupId,
+          type: "group",
+        });
 
-        filter.forEach((r) => {
-          // istanbul ignore if
-          if (node.children.includes(r.dst)) {
-            childrenLayoutEdges.push({
-              source: id,
-              target: r.dst,
-              type: "childrenDagre",
-            });
+        const children = walkStep(startId, nodeMap);
 
-            filterRelations = filterRelations.filter(
-              (item) => !(item.src == id && item.dst == r.dst)
-            );
-          }
+        children.forEach((id) => {
+          childrenLayoutEdges.push({
+            source: groupId,
+            target: id,
+            type: "childrenLayout",
+          });
+
+          const filter = filterRelations.filter((r) => r.src === id);
+
+          filter.forEach((r) => {
+            // istanbul ignore if
+            if (node.children.includes(r.dst)) {
+              childrenLayoutEdges.push({
+                source: id,
+                target: r.dst,
+                type: "childrenDagre",
+              });
+
+              filterRelations = filterRelations.filter(
+                (item) => !(item.src == id && item.dst == r.dst)
+              );
+            }
+          });
         });
       });
     }
@@ -166,6 +222,7 @@ export function getWorkflowGraph(flowData: FlowData): GraphData {
 
   const graphEdges = layerEdges.concat(
     containerEdges,
+    groupEdges,
     childrenLayoutEdges,
     nodeLinkEdges
   );
