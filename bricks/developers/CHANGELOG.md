@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.365.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.3...@next-bricks/developers@1.365.4) (2023-04-17)
+
+
+### Bug Fixes
+
+* use createRoot ([b4a52e9](https://github.com/easyops-cn/next-basics/commit/b4a52e964ffd1333ef1e6af2852cbc03d3542126))
+
+
+
+
+
 ## [1.365.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.2...@next-bricks/developers@1.365.3) (2023-04-04)
 
 **Note:** Version bump only for package @next-bricks/developers
