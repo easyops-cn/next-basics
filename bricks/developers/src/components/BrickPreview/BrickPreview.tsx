@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useMemo, useEffect, useImperativeHandle } from "react";
 import { cloneDeep } from "lodash";
 import {
   developHelper,
@@ -47,9 +47,14 @@ function LegacyBrickPreview(
   const containerRef = useRef(null);
   const portalRef = useRef(null);
   const bgRef = useRef(null);
-  const locationContextRef = React.useRef<LocationContext>(null);
+  const locationContextRef = useRef<LocationContext>(null);
+  const rootRef = useRef(null);
+  const migrateV3 = useMemo(
+    () => getRuntime().getFeatureFlags()["migrate-to-brick-next-v3"],
+    []
+  );
 
-  React.useImperativeHandle(ref, () => ({
+  useImperativeHandle(ref, () => ({
     get container() {
       return containerRef.current;
     },
@@ -58,18 +63,27 @@ function LegacyBrickPreview(
     },
   }));
 
-  React.useEffect(() => {
-    const migrateV3 =
-      getRuntime().getFeatureFlags()["migrate-to-brick-next-v3"];
+  useEffect(() => {
+    if (!migrateV3) {
+      return;
+    }
+    if (containerRef.current && portalRef.current) {
+      rootRef.current = (developHelper as any).createRoot(
+        containerRef.current,
+        {
+          portal: portalRef.current,
+        }
+      );
+    }
+    return () => {
+      rootRef.current?.unmount();
+    };
+  }, [migrateV3]);
+
+  useEffect(() => {
     const process = async (): Promise<void> => {
       if (migrateV3) {
-        await (developHelper as any).renderPreviewBricks(
-          cloneDeep([].concat(config)),
-          {
-            main: containerRef.current,
-            portal: portalRef.current,
-          }
-        );
+        rootRef.current?.render(cloneDeep([].concat(config)));
         return;
       }
       developHelper.unmountTree(bgRef.current);
@@ -142,7 +156,7 @@ function LegacyBrickPreview(
       developHelper.checkoutTplContext(null);
     };
     process();
-  }, [config]);
+  }, [config, migrateV3]);
 
   return (
     <div className={styles.previewContainer}>
