@@ -42,6 +42,8 @@ jest.mock("@next-sdk/next-builder-sdk", () => ({
   BuildApi_buildAndPush: (...args) => mockBuildAndPush(...args),
   StoryboardApi_sortStoryboardNodes: (...args) => mockMoveInstance(args),
   StoryboardApi_cloneBricks: (...args) => mockCloneBricks(args),
+  PackageAloneApi_listDependencies: jest.fn(() => ({ list: [] })),
+  PackageAloneApi_addDependencies: jest.fn(),
 }));
 
 jest.mock("@next-sdk/form-builder-service-sdk", () => ({
