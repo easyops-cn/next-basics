@@ -19,7 +19,7 @@
           width: 8px;
           height: 8px;
           border-radius: 4px;
-          background: #fff;
+          background: rgba(182, 182, 182, 1);
           opacity: 0.15;
         }
         li.slick-active button {
@@ -43,8 +43,8 @@
       }
 
       .slick-dots-bottom {
-        bottom: 20%;
-        left: 8%;
+        bottom: 10%;
+        left: 45%;
       }
 
       .slick-prev,
