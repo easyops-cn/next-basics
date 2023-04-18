@@ -54,7 +54,7 @@ import { pipes } from "@next-core/pipes";
 import styles from "./WorkbenchCacheAction.module.css";
 import { CacheActionList } from "./CacheActionList";
 import { JsonStorage } from "@next-libs/storage";
-import { normalizeBuilderNode } from "@next-core/brick-utils";
+import { isObject, normalizeBuilderNode } from "@next-core/brick-utils";
 
 export interface WorkbenchCacheActionRef {
   manager: BuilderDataManager;
@@ -139,6 +139,7 @@ function LegacyWorkbenchCacheAction(
     nodes: BuilderRuntimeNode[],
     edges: BuilderRuntimeEdge[]
   ): void => {
+    const brickList = new Set<string>();
     nodes.forEach((node) => {
       const nodeParentUid = edges.find(
         (item) => item.child === node.$$uid
@@ -149,7 +150,12 @@ function LegacyWorkbenchCacheAction(
         mountPoint: edges.find((item) => item.child === node.$$uid)?.mountPoint,
         parent: [parentNode],
       });
+
+      if ((node.brick as string)?.includes(".")) {
+        brickList.add(`${(node.brick as string).split(".")[0]}-NB`);
+      }
     });
+    backendInstance.setUsedBrickPackage([...brickList.values()]);
   };
 
   const setNewStoryboard = useCallback(
@@ -221,6 +227,23 @@ function LegacyWorkbenchCacheAction(
     [nodes, edges]
   );
 
+  const walk = (
+    node: Record<string, any>,
+    fn: (key: string, value: any) => void
+  ): void => {
+    node &&
+      isObject(node) &&
+      Object.entries(node).forEach(([k, v]) => {
+        fn(k, v);
+        if (Array.isArray(v)) {
+          v.map((item) => walk(item, fn));
+        } else if (isObject(v)) {
+          walk(v, fn);
+        }
+        return [k, v];
+      });
+  };
+
   const handleAddBrick = (
     data: WorkbenchBackendActionForInsertDetail
   ): void => {
@@ -270,6 +293,29 @@ function LegacyWorkbenchCacheAction(
     nodesCahce: Map<string, BuilderRuntimeNode>
   ): void => {
     const { instanceId, property } = data;
+    const providerList = new Set<string>();
+    walk(
+      {
+        ...property,
+        properties: data.property.properties
+          ? JSON.parse(data.property.properties)
+          : "",
+        events: data.property.events ? JSON.parse(data.property.events) : "",
+        lifeCycle: data.property.lifeCycle
+          ? JSON.parse(data.property.lifeCycle)
+          : "",
+      },
+      (key, value) => {
+        if (
+          key === "useProvider" &&
+          typeof value === "string" &&
+          !value.includes("@")
+        ) {
+          providerList.add(`${(value as string).split(".")[0]}-NB`);
+        }
+      }
+    );
+    backendInstance.setUsedBrickPackage([...providerList.values()]);
     const cacheProperty = nodesCahce.get(instanceId);
     const mergeData = Object.assign(cacheProperty, property);
     data.mtime = mergeData.mtime;

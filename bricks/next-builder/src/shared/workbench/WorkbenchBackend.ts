@@ -12,6 +12,8 @@ import {
   StoryboardApi_cloneBricks,
   type StoryboardApi_CloneBricksRequestBody,
   StoryboardApi_sortStoryboardNodes,
+  PackageAloneApi_listDependencies,
+  PackageAloneApi_addDependencies,
 } from "@next-sdk/next-builder-sdk";
 import {
   FormProjectApi_updateFormItem,
@@ -84,6 +86,7 @@ export default class WorkbenchBackend {
   private afterChangeTimer: NodeJS.Timeout;
   private isNeedUpdateTree = false;
   private mTimeMap = new Map<string, string>();
+  private dependenciesList = [];
 
   private static instance = new Map<string, WorkbenchBackend>();
 
@@ -124,7 +127,15 @@ export default class WorkbenchBackend {
 
   init(data: WorkbenchBackendActionForInitDetail): void {
     this.baseInfo = data;
+    this.setDefaultDependencies();
   }
+
+  setDefaultDependencies = async () => {
+    const result = await PackageAloneApi_listDependencies(
+      this.baseInfo.projectId
+    );
+    this.dependenciesList = result.list;
+  };
 
   push(data: QueueItem): void {
     this.cacheQueue.push(data);
@@ -695,6 +706,21 @@ export default class WorkbenchBackend {
           this.buildAndPush();
         }, (this.baseInfo.delayBuildTime ?? 10) * 1000);
       }
+    }
+  };
+
+  setUsedBrickPackage = async (list: string[]): Promise<void> => {
+    const installedPackage = this.dependenciesList.map((item) => item.name);
+    const missPackage = list.filter((pack) => !installedPackage.includes(pack));
+    if (missPackage.length) {
+      // miss brick package
+      await PackageAloneApi_addDependencies(this.baseInfo.projectId, {
+        dependencies: missPackage.map((pack) => ({
+          name: pack,
+          actualVersion: null,
+          constraint: "*",
+        })),
+      });
     }
   };
 }
