@@ -75,3 +75,4 @@ import "./table-transfer";
 import "./collapse-info-list";
 import "./digital-number";
 import "./general-preview-image";
+import "./brick-user-group";
