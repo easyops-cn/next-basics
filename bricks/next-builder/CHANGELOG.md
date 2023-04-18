@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.231.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.230.5...@next-bricks/next-builder@1.231.0) (2023-04-18)
+
+
+### Bug Fixes
+
+* process start_approval node type ([1280e20](https://github.com/easyops-cn/next-basics/commit/1280e20b11f0581b6562579e42933d1012a233cf))
+
+
+### Features
+
+* add brick or provider and auto insert dep ([8260523](https://github.com/easyops-cn/next-basics/commit/8260523bc5a14b63048449e5ae50b1fd17442db9))
+* fix unit test ([b561309](https://github.com/easyops-cn/next-basics/commit/b5613094e255604ccfd4efdcd4608acdce3b3bfd))
+* update code ([3952d33](https://github.com/easyops-cn/next-basics/commit/3952d3371f305bf007901593c77ce1a0cbba12e3))
+
+
+
+
+
 ## [1.230.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.230.4...@next-bricks/next-builder@1.230.5) (2023-04-14)
 
 
