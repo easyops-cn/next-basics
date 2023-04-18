@@ -70,6 +70,7 @@ export function EntryCardItem(props: EntryCardItemProps): React.ReactElement {
           className={
             iconSize === "small" ? styles.smallCardTitle : styles.cardTitle
           }
+          title={props.cardTitle}
         >
           {props.cardTitle}
         </div>
