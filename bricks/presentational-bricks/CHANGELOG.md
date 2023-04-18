@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.291.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.291.0...@next-bricks/presentational-bricks@1.291.1) (2023-04-18)
+
+
+### Bug Fixes
+
+* 自定义cmdb首页，资源名称显示不全 Closes CMDB_EXTEND-324 ([8879cfa](https://github.com/easyops-cn/next-basics/commit/8879cfa60f402e2edbf06130ed5b823bbf543cb0))
+
+
+
+
+
 # [1.291.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.290.7...@next-bricks/presentational-bricks@1.291.0) (2023-04-18)
 
 
