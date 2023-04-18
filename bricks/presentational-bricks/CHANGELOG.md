@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.291.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.290.7...@next-bricks/presentational-bricks@1.291.0) (2023-04-18)
+
+
+### Features
+
+* **BrickUserGroup:** add BrickUserGroup ([2f51160](https://github.com/easyops-cn/next-basics/commit/2f51160fc40bbf22716c3df4486001c6e8f2cd40))
+
+
+
+
+
 ## [1.290.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.290.6...@next-bricks/presentational-bricks@1.290.7) (2023-04-12)
 
 
