@@ -26,6 +26,8 @@ describe("EntryCardItem", () => {
     });
     wrapper.update();
     expect(wrapper.find("Card").length).toBe(1);
+    expect(wrapper.find(".cardTitle").length).toBe(1);
+    expect(wrapper.find(".cardTitle").at(0).props().title).toBe("卡片标题");
   });
   it("should work when set tip and disabled ", () => {
     const wrapper = shallow(
