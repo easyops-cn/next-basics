@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.291.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.291.1...@next-bricks/presentational-bricks@1.291.2) (2023-04-18)
+
+
+### Bug Fixes
+
+* 修改轮播构件的样式 ([09efdc2](https://github.com/easyops-cn/next-basics/commit/09efdc2426acea02c769598bfd484f9b0ce68012))
+
+
+
+
+
 ## [1.291.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.291.0...@next-bricks/presentational-bricks@1.291.1) (2023-04-18)
 
 
