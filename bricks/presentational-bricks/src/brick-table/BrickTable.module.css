@@ -128,7 +128,6 @@ html[data-theme="dark"] {
   }
 }
 
-.brickTable,
 .zebraPatternTable {
   :global(.ant-table-tbody) {
     tr {
