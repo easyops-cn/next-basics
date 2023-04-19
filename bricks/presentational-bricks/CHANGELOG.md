@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.291.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.291.2...@next-bricks/presentational-bricks@1.291.3) (2023-04-19)
+
+
+### Bug Fixes
+
+* 修改斑马纹表格调整的bug ([633eb57](https://github.com/easyops-cn/next-basics/commit/633eb57feee33e6a32eab7b8a46aa14d91245099))
+
+
+
+
+
 ## [1.291.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.291.1...@next-bricks/presentational-bricks@1.291.2) (2023-04-18)
 
 
