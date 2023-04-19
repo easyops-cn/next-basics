@@ -55,6 +55,7 @@ import styles from "./WorkbenchCacheAction.module.css";
 import { CacheActionList } from "./CacheActionList";
 import { JsonStorage } from "@next-libs/storage";
 import { isObject, normalizeBuilderNode } from "@next-core/brick-utils";
+import walk from "../utils/walk";
 
 export interface WorkbenchCacheActionRef {
   manager: BuilderDataManager;
@@ -226,23 +227,6 @@ function LegacyWorkbenchCacheAction(
     },
     [nodes, edges]
   );
-
-  const walk = (
-    node: Record<string, any>,
-    fn: (key: string, value: any) => void
-  ): void => {
-    node &&
-      isObject(node) &&
-      Object.entries(node).forEach(([k, v]) => {
-        fn(k, v);
-        if (Array.isArray(v)) {
-          v.map((item) => walk(item, fn));
-        } else if (isObject(v)) {
-          walk(v, fn);
-        }
-        return [k, v];
-      });
-  };
 
   const handleAddBrick = (
     data: WorkbenchBackendActionForInsertDetail
