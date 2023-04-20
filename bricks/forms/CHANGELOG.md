@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.267.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.2...@next-bricks/forms@1.267.3) (2023-04-20)
+
+
+### Bug Fixes
+
+* **cmdb:** 内置保护的枚举型属性直接禁用 ([5265b8f](https://github.com/easyops-cn/next-basics/commit/5265b8f377f035952edb2271c557590b54aa7183))
+
+
+
+
+
 ## [1.267.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.1...@next-bricks/forms@1.267.2) (2023-04-14)
 
 
