@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.267.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.3...@next-bricks/forms@1.267.4) (2023-04-20)
+
+
+### Bug Fixes
+
+* 修改generalgeneral-structs-form-item关闭时触发父modal关闭问题 ([6e18087](https://github.com/easyops-cn/next-basics/commit/6e180875f38995a0ebf2e9c183cd6b235b2c934a))
+* 修改generalgeneral-structs-form-item关闭时触发父modal关闭问题 ([af2374c](https://github.com/easyops-cn/next-basics/commit/af2374c4cd9d7bd2b95504d6d5b0bebfc429a670))
+* 单测 ([7c922f8](https://github.com/easyops-cn/next-basics/commit/7c922f8b72aa231e09e0c4ac3444015e97e24d30))
+* 单测 ([81c7b19](https://github.com/easyops-cn/next-basics/commit/81c7b19c24dbee677d44028c8eb4ac245881158f))
+
+
+
+
+
 ## [1.267.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.2...@next-bricks/forms@1.267.3) (2023-04-20)
 
 
