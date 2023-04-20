@@ -147,8 +147,6 @@ const locale: Locale = {
     "Please enter a link to the picture. Multiple links are separated by a new line",
   [K.UPLOAD_IMG_NUMBER_LIMIT]:
     "Only {{maxNumber}} image can be uploaded at most",
-  [K.PROTECTED_ENUM_CANNOT_BE_DELETED]:
-    "This attribute is protected. You can add new enumeration values, but the initital values can't be removed",
 };
 
 export default locale;
