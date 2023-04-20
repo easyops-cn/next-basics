@@ -29,7 +29,6 @@ spyOnKit.mockReturnValue({
   reloadMicroApps: spyOnReloadMicroApps,
   getBrandSettings: brandFn,
   getFeatureFlags: () => ({
-    "enable-backend-password-config": true,
     "enable-nickname-config": true,
     "disable-registration-clause": false,
     "hide-default-logo-in-login-page": false,

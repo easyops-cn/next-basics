@@ -57,26 +57,19 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
   const enableNicknameConfig = enabledFeatures["enable-nickname-config"];
   const hideDefaultLogoInLoginPage =
     enabledFeatures["hide-default-logo-in-login-page"];
-  const passwordConfigMap = {
-    default: {
-      regex: /^.{6,20}$/,
-      description: "请输入6至20位密码",
-    },
-    strong: {
-      regex: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9]).{8,20}$/,
-      description: "请输入8至20位密码，且同时包含大小写字母、数字、特殊字符",
-    },
-    backend: {},
-  };
-  let passwordLevel: keyof typeof passwordConfigMap = "default"; //特性开关
+  const [passwordConfig, setPasswordConfig] = useState({
+    regex: /^.{6,20}$/,
+    description: "请输入6至20位密码",
+  });
+
   useEffect(() => {
-    if (enabledFeatures["enable-backend-password-config"]) {
-      (async () => {
-        passwordLevel = "backend";
-        passwordConfigMap[passwordLevel] =
-          await UserAdminApi_getPasswordConfig();
-      })();
-    }
+    (async () => {
+      const passwordConfig = await UserAdminApi_getPasswordConfig();
+      setPasswordConfig({
+        regex: new RegExp(passwordConfig.regex),
+        description: passwordConfig.description,
+      });
+    })();
   }, []);
 
   const MIN_USERNAME_LENGTH = 3; //特性开关
@@ -357,8 +350,8 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
                     rules={[
                       { required: true, message: t(K.PLEASE_INPUT_PASSWORD) },
                       {
-                        pattern: passwordConfigMap[passwordLevel].regex,
-                        message: passwordConfigMap[passwordLevel].description,
+                        pattern: passwordConfig.regex,
+                        message: passwordConfig.description,
                       },
                     ]}
                   >
