@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.20.9...@next-bricks/general-auth@1.20.10) (2023-04-20)
+
+
+### Bug Fixes
+
+* USER_ADMIN-254 user_service修改密码强度校验，next界面不生效  refs USER_ADMIN-254 ([75a5c5d](https://github.com/easyops-cn/next-basics/commit/75a5c5dd7e400c3f6765b1d45ebbb868e22a18d8))
+
+
+
+
+
 ## [1.20.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.20.8...@next-bricks/general-auth@1.20.9) (2023-04-12)
 
 

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.232.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.231.0...@next-bricks/next-builder@1.232.0) (2023-04-20)
+
+
+### Features
+
+* support update route or template ([93caee3](https://github.com/easyops-cn/next-basics/commit/93caee395da9d98117672612eac708a60cfc75b2))
+* update code ([cd554c6](https://github.com/easyops-cn/next-basics/commit/cd554c6eacc45c35a6d6da932c429cc77548880e))
+* update track code ([02372d9](https://github.com/easyops-cn/next-basics/commit/02372d9a155b85da77cfe96994444b00fd14c895))
+
+
+
+
+
 # [1.231.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.230.5...@next-bricks/next-builder@1.231.0) (2023-04-18)
 
 
