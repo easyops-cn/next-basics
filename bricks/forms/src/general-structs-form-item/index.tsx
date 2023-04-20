@@ -376,10 +376,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   _handleChange(): void {
     this.changeEvent.emit(this.value);
   }
-  @event({ type: "struct.changeV2" }) changeEventV2: EventEmitter<string>;
-  private _handleChangeV2 = (value: any): void => {
-    this.changeEvent.emit(value);
-  };
+
   _updateAddBtnDisabled(): void {
     this.addBtnDisabled =
       this.multiple === false && this.value && this.value.length > 0;
@@ -430,7 +427,6 @@ export class GeneralStructsFormItemElement extends FormItemElement {
             labelColor={this.labelColor}
             labelBold={this.labelBold}
             value={this.value}
-            required={this.required}
             modalVisible={this.isVisible}
             container={this._mountPoint}
             confirmVisible={this.confirmVisible}
@@ -449,7 +445,6 @@ export class GeneralStructsFormItemElement extends FormItemElement {
             structItemShowRenderFN={this.structItemShowRenderFN}
             structInnerTableColumnsOrder={this.structInnerTableColumnsOrder}
             rowOperationConfig={this.rowOperationConfig}
-            //  onChange={this._handleChangeV2}
           />
         </BrickWrapper>,
         this._mountPoint
