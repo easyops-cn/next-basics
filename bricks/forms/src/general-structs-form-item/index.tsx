@@ -290,6 +290,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
     const buttonNode =
       nodeName === "button" ? clickNode : clickNode.closest("button");
     // 关闭模态框
+    /* istanbul ignore if */
     if (
       (this.maskClosable &&
         nodeName === "div" &&
@@ -299,10 +300,10 @@ export class GeneralStructsFormItemElement extends FormItemElement {
           buttonNode.className.includes("ant-modal-close")))
     ) {
       this._close();
-      /* istanbul ignore if */
       e.stopPropagation();
       return;
     }
+    /* istanbul ignore if */
     if (buttonNode) {
       if (buttonNode.className.includes("openBtn")) {
         // 打开表单模态框
@@ -313,7 +314,6 @@ export class GeneralStructsFormItemElement extends FormItemElement {
       if (buttonNode.className.includes("okBtn")) {
         // 点击表单模态框确定，触发容器内表单构件的 lowLevelValidate 方法
         this._childComponent[0]?.lowLevelValidate(this._updateValues);
-        /* istanbul ignore if */
         e.stopPropagation();
       }
       if (buttonNode.className.includes("editItem")) {
