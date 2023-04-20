@@ -6,11 +6,17 @@ import {
   CustomTemplateProxyRefProperty,
   CustomTemplateProxyTransformableProperty,
   CustomTemplateProxyVariableProperty,
-  GeneralTransform,
   SelectorProviderResolveConf,
   UseProviderResolveConf,
 } from "@next-core/brick-types";
-import { createProviderClass } from "@next-core/brick-utils";
+import { Identifier } from "@babel/types";
+import {
+  PreevaluateResult,
+  createProviderClass,
+  isEvaluable,
+  isObject,
+  preevaluate,
+} from "@next-core/brick-utils";
 import { isEmpty } from "lodash";
 import walk from "../utils/walk";
 
@@ -27,16 +33,26 @@ interface NodeDetail {
   [key: string]: any;
 }
 
+interface UpdateOptions {
+  updateProxy?: boolean;
+  updateUseResolves?: boolean;
+  updateUseBrickTransform?: boolean;
+  updateChildContext?: boolean;
+}
+
 let dataUid = 0;
-export function updateRouteOrTemplate(route: Array<NodeDetail>) {
+export function updateRouteOrTemplate(
+  route: Array<NodeDetail>,
+  options: UpdateOptions
+) {
   dataUid = 0;
   const rootNode = route[0];
   const isRoute = rootNode["_object_id"] === "STORYBOARD_ROUTE";
-  const list: Array<any> = [];
+  const list: Array<NodeDetail> = [];
   let contextList: ContextConf[] = [];
-  let refProxy: Record<string, any>;
+  let refProxy: Record<string, any> = {};
 
-  if (!isRoute) {
+  if (!isRoute && options?.updateProxy) {
     const result = updateProxy(rootNode);
     if (result) {
       contextList = result.context.concat(contextList);
@@ -77,21 +93,25 @@ export function updateRouteOrTemplate(route: Array<NodeDetail>) {
         }
       }
 
-      const resolves = updateUseResolves(node, isRoute ? "CTX" : "STATE");
-      if (resolves) {
-        const { lifeCycle, context, properties } = resolves;
-        mergeProperty(properties, {}, lifeCycle);
-        contextList = contextList.concat(context);
+      if (options?.updateUseResolves) {
+        const resolves = updateUseResolves(node, isRoute ? "CTX" : "STATE");
+        if (resolves) {
+          const { lifeCycle, context, properties } = resolves;
+          mergeProperty(properties, {}, lifeCycle);
+          contextList = contextList.concat(context);
+        }
       }
 
-      const useBrickTransfromData = replaceUseBrickTransform(node);
-      mergeProperty(
-        useBrickTransfromData.properties,
-        useBrickTransfromData.events,
-        useBrickTransfromData.lifeCycle
-      );
+      if (options?.updateUseBrickTransform) {
+        const useBrickTransfromData = replaceUseBrickTransform(node);
+        mergeProperty(
+          useBrickTransfromData.properties,
+          useBrickTransfromData.events,
+          useBrickTransfromData.lifeCycle
+        );
+      }
 
-      if (node.context && node.context.length) {
+      if (options.updateChildContext && node.context && node.context.length) {
         contextList = contextList.concat(node.context);
       }
 
@@ -124,7 +144,7 @@ export function updateRouteOrTemplate(route: Array<NodeDetail>) {
     list.unshift({
       objectId: rootNode._object_id,
       instanceId: rootNode.instanceId,
-      context: JSON.stringify(contextList.concat(rootNode.context ?? [])),
+      context: contextList.concat(rootNode.context ?? []),
     });
   }
   return list;
@@ -154,8 +174,9 @@ export function updateProxy(node: NodeDetail): Record<string, any> | void {
         if (refTransform) {
           refProxy[item.ref] = {
             ...refProxy[item.ref],
-            ...replaceTransform(refTransform, "STATE", {
-              autoInsertContext: false,
+            ...replace(refTransform as Record<string, any>, {
+              dataKey: "STATE",
+              isTrack: true,
             }),
           };
         }
@@ -193,7 +214,7 @@ export function updateUseResolves(
   const context: ContextConf[] = [];
   let undealFlag: boolean;
 
-  const properties: Record<string, any> = node.properties
+  let properties: Record<string, any> = node.properties
     ? JSON.parse(node.properties)
     : {};
   if (useResolves?.length) {
@@ -202,20 +223,27 @@ export function updateUseResolves(
         (item as UseProviderResolveConf).useProvider ||
         (item as SelectorProviderResolveConf).provider;
       if (useProvider) {
+        const key = `${dataKey}.data_${dataUid}`;
         if (typeof item.transform === "string") {
           Object.assign(properties, {
-            [item.transform]: `<% ${dataKey}.DATA${dataUid} %>`,
+            [item.transform]: `<% ${key} %>`,
           });
         } else if (
           Object.prototype.toString.call(item.transform) === "[object Object]"
         ) {
-          Object.assign(properties, replaceTransform(item.transform, dataKey));
+          properties = Object.assign(
+            properties,
+            replace(item.transform, {
+              dataKey: key,
+              isTrack: false,
+            })
+          );
         } else if (Array.isArray(item.transform)) {
           undealFlag = true;
           return;
         }
         context.push({
-          name: `DATA${dataUid}`,
+          name: `data_${dataUid}`,
           resolve: {
             useProvider: useProvider.split("\\").join(""),
             args: (item as UseProviderResolveConf).args,
@@ -237,27 +265,128 @@ export function updateUseResolves(
   return;
 }
 
+export function replaceInjectOrTranformRawToEvaluteRaw(
+  raw: string,
+  dataKey = "DATA"
+): string {
+  if (!isEvaluable(raw) && /[@|$]{(.*?)}/g.test(raw)) {
+    return raw.replace(/[@|$]{(.*?)}/g, (match, $1) => {
+      let word = $1;
+      if (/@{.*}/.test(match)) {
+        word = $1 ? `${dataKey}.${$1}` : dataKey;
+      }
+      if (word && (word as string).includes("|")) {
+        const waitTransformArray = word
+          .split("|")
+          .map((item: string) => item.trim())
+          .reverse();
+        word = waitTransformArray
+          .map((item: string, index: number) => {
+            if (index === waitTransformArray.length - 1) {
+              return item.replace("=", "??");
+            }
+            return `PIPES.${item}`;
+          })
+          .reduce((a: string, b: string, index: number) => {
+            if (index === waitTransformArray.length - 1) {
+              let i = 0;
+              let suffix = "";
+              while (i < waitTransformArray.length - 1) {
+                i++;
+                suffix += ")";
+              }
+              return `${a}${b}${suffix}`;
+            }
+            return `${a}${b}(`;
+          }, "");
+      }
+      return `<% ${word} %>`;
+    });
+  }
+  return raw;
+}
+
+export function replace<T>(
+  value: T,
+  options = {
+    dataKey: "DATA",
+    isTrack: false,
+  }
+): T {
+  if (typeof value === "string") {
+    let transformValue = replaceInjectOrTranformRawToEvaluteRaw(
+      value,
+      options.dataKey
+    );
+
+    if (isEvaluable(transformValue)) {
+      const replacements: Identifier[] = [];
+      const patterns = new Map<string, string>([["TPL", `STATE`]]);
+      options.dataKey && patterns.set("DATA", options.dataKey);
+      let result: PreevaluateResult;
+      try {
+        result = preevaluate(transformValue, {
+          hooks: {
+            beforeVisitGlobal(node) {
+              if (patterns.has(node.name)) {
+                replacements.push(node);
+              }
+            },
+          },
+        });
+      } catch (e) {
+        const message = `${e.message}, in "${transformValue}"`;
+        // eslint-disable-next-line no-console
+        console.log(message);
+      }
+      if (replacements.length > 0) {
+        const { prefix, source, suffix } = result;
+        const chunks: string[] = [];
+        let prevStart = 0;
+        for (let i = 0; i < replacements.length; i++) {
+          const { name, start, end } = replacements[i];
+          chunks.push(source.substring(prevStart, start), patterns.get(name));
+          prevStart = end;
+        }
+        chunks.push(source.substring(prevStart));
+        transformValue = `${prefix}${chunks.join("")}${suffix}` as T & string;
+      }
+    }
+    transformValue = options.isTrack
+      ? transformValue.replace(/<%(.*)%>/, (match, $1) => {
+          if ($1.trim().startsWith("track")) return match;
+          return `<% "track state",${$1}%>`;
+        })
+      : transformValue;
+    return transformValue as T & string;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) => replace(item, options)) as T & unknown[];
+  }
+
+  if (isObject(value)) {
+    return Object.fromEntries(
+      Object.entries(value).map(([k, v]) => [k, replace(v, options)])
+    ) as T & Record<string, unknown>;
+  }
+
+  return value;
+}
+
 export function updateTemplateRefAndAsVarible(
   node: NodeDetail,
   refProxy: Record<string, any>
 ): Record<string, any> | void {
   if (refProxy[node.ref]) {
-    const newProperties = JSON.parse(
-      node.properties?.replace(/(?<=\s)TPL(?!\w)/g, "STATE") ?? "{}"
-    );
-    const newEvents = JSON.parse(
-      node.events?.replace(/(?<=\s)TPL(?!\w)/g, "STATE") ?? "{}"
-    );
-    const newLifeCycle = JSON.parse(
-      node.lifeCycle?.replace(/(?<=\s)TPL(?!\w)/g, "STATE") ?? "{}"
-    );
-
     return {
-      properties: Object.assign(newProperties, {
-        ...refProxy[node.ref],
-      }),
-      events: newEvents,
-      lifeCycle: newLifeCycle,
+      properties: replace(
+        Object.assign(JSON.parse(node.properties ?? "{}"), {
+          ...refProxy[node.ref],
+        })
+      ),
+      events: replace(JSON.parse(node.events ?? "{}")),
+      lifeCycle: replace(JSON.parse(node.lifeCycle ?? "{}")),
     };
   }
   return;
@@ -269,11 +398,8 @@ export function replaceUseBrickTransform(
   const replaceSingleItem = (
     item: Record<string, any>
   ): Record<string, any> => {
-    item.properties = Object.assign(
-      item?.properties ?? {},
-      replaceTransform(item.transform, "DATA", {
-        autoInsertContext: false,
-      })
+    item.properties = replace(
+      Object.assign(item?.properties ?? {}, item.transform)
     );
     item.transform = undefined;
     return item;
@@ -297,45 +423,6 @@ export function replaceUseBrickTransform(
     events: node.events ? walkItem(JSON.parse(node.events)) : {},
     lifeCycle: node.lifeCycle ? walkItem(JSON.parse(node.lifeCycle)) : {},
   };
-}
-
-function replaceTransform(
-  transform: GeneralTransform,
-  dataKey: string,
-  options = {
-    autoInsertContext: true,
-  }
-): Record<string, any> | void {
-  let undealFlag = false;
-  const result = Object.fromEntries(
-    Object.entries(transform).map(([k, v]) => {
-      const newValue = (typeof v === "string" ? v : JSON.stringify(v)).replace(
-        /(?<=\s)DATA(?!\w)|(.*@{.*?}.*)/g,
-        (_, match) => {
-          const key = options.autoInsertContext
-            ? `${dataKey}.DATA${dataUid}`
-            : dataKey;
-          if (match) {
-            return (
-              "<% " +
-              match.replace(/"*@\{(.*?)\}"*/g, (_: string, $1: string) => {
-                if ($1.includes("|")) {
-                  undealFlag = true;
-                  return "";
-                }
-                return $1 ? `${key}.${$1}` : key;
-              }) +
-              " %>"
-            );
-          }
-          return key;
-        }
-      );
-      return [k, newValue];
-    })
-  );
-  if (undealFlag) return;
-  return result;
 }
 
 customElements.define(

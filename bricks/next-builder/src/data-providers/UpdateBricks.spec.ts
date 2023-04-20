@@ -1,9 +1,10 @@
-import { updateRouteOrTemplate } from "./UpdateBricks";
 import {
+  updateRouteOrTemplate,
   updateUseResolves,
   updateProxy,
   updateTemplateRefAndAsVarible,
   replaceUseBrickTransform,
+  replaceInjectOrTranformRawToEvaluteRaw,
 } from "./UpdateBricks";
 
 describe("updateUseResolves", () => {
@@ -33,7 +34,6 @@ describe("updateUseResolves", () => {
                 name: "@{name}",
                 age: "@{person.age}",
               },
-              evalute: "@{info}.map(item => item.id)",
             },
           },
           {
@@ -54,21 +54,21 @@ describe("updateUseResolves", () => {
     expect(updateUseResolves(mockNodeDetail, "CTX")).toEqual({
       context: [
         {
-          name: "DATA0",
+          name: "data_0",
           resolve: {
             args: { fileds: ["name", "age"] },
             useProvider: "provider-of-next-builder.get-detail",
           },
         },
         {
-          name: "DATA1",
+          name: "data_1",
           resolve: {
             args: undefined,
             useProvider: "provider-of-next-builder.get-project-detail",
           },
         },
         {
-          name: "DATA2",
+          name: "data_2",
           resolve: {
             args: undefined,
             useProvider: "provider-of-next-builder.get-instanced",
@@ -77,17 +77,19 @@ describe("updateUseResolves", () => {
       ],
       lifeCycle: {},
       properties: {
-        detail: "<% CTX.DATA2 %>",
-        id: "<% CTX.DATA2.instanceId %>",
-        info: "<% CTX.DATA1.info %>",
-        list: "<% CTX.DATA0 %>",
+        detail: "<% CTX.data_2 %>",
+        id: "<% CTX.data_2.instanceId %>",
+        info: "<% CTX.data_1.info %>",
+        list: "<% CTX.data_0 %>",
         name: "mock-name",
-        object0: '<% {"name":CTX.DATA1.name,"age":CTX.DATA1.person.age} %>',
-        object1: '{"name":"<% CTX.DATA2.name %>","age":"<% CTX.DATA2.age %>"}',
-        object2: "<% { name: CTX.DATA2.name, age: CTX.DATA2.age } %>",
-        project: "<% CTX.DATA1 %>",
-        projectDetail: "<% CTX.DATA1.project.detail %>",
-        evalute: "<% CTX.DATA1.info.map(item => item.id) %>",
+        object0: {
+          name: "<% CTX.data_1.name %>",
+          age: "<% CTX.data_1.person.age %>",
+        },
+        object1: { name: "<% CTX.data_2.name %>", age: "<% CTX.data_2.age %>" },
+        object2: "<% { name: CTX.data_2.name, age: CTX.data_2.age } %>",
+        project: "<% CTX.data_1 %>",
+        projectDetail: "<% CTX.data_1.project.detail %>",
       },
     });
   });
@@ -102,13 +104,6 @@ describe("updateUseResolves", () => {
       lifeCycle: JSON.stringify({
         useResolves: [
           {
-            provider: "provider-of-next-builder\\.get-detail",
-            args: {
-              fileds: ["name", "age"],
-            },
-            transform: "list",
-          },
-          {
             provider: "provider-of-next-builder\\.undeal-item",
             transform: [
               {
@@ -117,12 +112,6 @@ describe("updateUseResolves", () => {
                 mapArray: false,
               },
             ],
-          },
-          {
-            provider: "provider-of-next-builder\\.undeal-item",
-            transform: {
-              undealItem: "@{PRODUCT|map:instanceId}",
-            },
           },
         ],
       }),
@@ -187,9 +176,9 @@ describe("updateProxy", () => {
         },
         "mock-ref-2": {
           xx: '<% "track state", STATE.age %>',
-          hidden: "<% STATE.age === 18 %>",
+          hidden: '<% "track state", STATE.age === 18 %>',
           title: '<% "track state", STATE.name %>',
-          age: "<% STATE.age %>",
+          age: `<% "track state", STATE.age %>`,
         },
       },
     });
@@ -205,6 +194,7 @@ describe("updateTemplateRefAndAsVarible", () => {
       properties: JSON.stringify({
         a: "<% TPL.a %>",
         b: "<% TPL.b * TPL.a %>",
+        c: "<% `${TPL.c} TPL title` %>",
       }),
       events: JSON.stringify({
         click: [
@@ -252,6 +242,7 @@ describe("updateTemplateRefAndAsVarible", () => {
         a: "<% STATE.a %>",
         age: '<% "track state", STATE.name %>',
         b: "<% STATE.b * STATE.a %>",
+        c: "<% `${STATE.c} TPL title` %>",
         name: '<% "track state", STATE.name %>',
         title: '<% "track state", STATE.name %>',
       },
@@ -270,6 +261,7 @@ describe("replaceUseBrickTransform", () => {
             brick: "mock-brick.general-brick",
             transform: {
               a: "<% DATA.a %>",
+              b: "@{}",
             },
             properties: {
               name: "name",
@@ -369,7 +361,7 @@ describe("replaceUseBrickTransform", () => {
         a: {
           useBrick: {
             brick: "mock-brick.general-brick",
-            properties: { a: "<% DATA.a %>", name: "name" },
+            properties: { a: "<% DATA.a %>", name: "name", b: "<% DATA %>" },
           },
         },
         b: {
@@ -386,6 +378,30 @@ describe("replaceUseBrickTransform", () => {
         },
       },
     });
+  });
+});
+
+describe("replaceInjectOrTranformRawToEvaluteRaw", () => {
+  it.each<[string, string]>([
+    ["@{}", "<% DATA %>"],
+    ["@{rowData}", "<% DATA.rowData %>"],
+    ["@{rowData.name}", "<% DATA.rowData.name %>"],
+    [
+      "@{rowData.name='abc' | string | boolean}",
+      "<% PIPES.boolean(PIPES.string(DATA.rowData.name??'abc')) %>",
+    ],
+    ["${PATH.projectId}", "<% PATH.projectId %>"],
+    [
+      "${QUERY.name='hello'|string|boolean}",
+      "<% PIPES.boolean(PIPES.string(QUERY.name??'hello')) %>",
+    ],
+    ["<% `${a} @{}` %>", "<% `${a} @{}` %>"],
+    ["@{rowData.notWork", "@{rowData.notWork"],
+    ["${rowData.notWork", "${rowData.notWork"],
+    ["@{rowData.notWork", "@{rowData.notWork"],
+    ["$r{owData.notWork}", "$r{owData.notWork}"],
+  ])("replaceInjectOrTranformRawToEvaluteRaw should work", (params, result) => {
+    expect(replaceInjectOrTranformRawToEvaluteRaw(params)).toEqual(result);
   });
 });
 
@@ -457,6 +473,9 @@ describe("updateRouteOrTemplate", () => {
                     brick: "div",
                     transform: {
                       textContent: "@{text}",
+                      style: {
+                        width: "<% DATA.width %>",
+                      },
                     },
                   },
                 }),
@@ -501,10 +520,32 @@ describe("updateRouteOrTemplate", () => {
         ],
       },
     ];
-    expect(updateRouteOrTemplate(mockTemplateData)).toEqual([
+    expect(
+      updateRouteOrTemplate(mockTemplateData, {
+        updateProxy: true,
+        updateUseResolves: true,
+        updateUseBrickTransform: true,
+        updateChildContext: true,
+      })
+    ).toEqual([
       {
-        context:
-          '[{"name":"cardProps"},{"name":"DATA0","resolve":{"useProvider":"providers-of-cmdb.get-detail","args":["abc","STORYBOARD_TEMPLATE"]}},{"name":"DATA1","resolve":{"useProvider":"providers-of-cmdb.query-search-v3","args":["STORYBOARD_TEMPLATE","xxx"]}}]',
+        context: [
+          { name: "cardProps" },
+          {
+            name: "data_0",
+            resolve: {
+              useProvider: "providers-of-cmdb.get-detail",
+              args: ["abc", "STORYBOARD_TEMPLATE"],
+            },
+          },
+          {
+            name: "data_1",
+            resolve: {
+              useProvider: "providers-of-cmdb.query-search-v3",
+              args: ["STORYBOARD_TEMPLATE", "xxx"],
+            },
+          },
+        ],
         instanceId: "mock-instanceId-template",
         objectId: "STORYBOARD_TEMPLATE",
       },
@@ -523,14 +564,14 @@ describe("updateRouteOrTemplate", () => {
         lifeCycle: "{}",
         objectId: "STORYBOARD_BRICK",
         properties:
-          '{"textContent":"Hello, This is a card","cardProps":"<% STATE.cardProps %>","useBrick":{"brick":"div","properties":{"textContent":"<% DATA.text %>"}},"cardTitle":"<% \\"track state\\", STATE.name %>","hidden":"<% STATE.age === 18 %>","name":"<% STATE.DATA0 %>","abc":"<% STATE.DATA1 %>"}',
+          '{"textContent":"Hello, This is a card","cardProps":"<% STATE.cardProps %>","useBrick":{"brick":"div","properties":{"textContent":"<% DATA.text %>","style":{"width":"<% DATA.width %>"}}},"cardTitle":"<% \\"track state\\", STATE.name %>","hidden":"<% \\"track state\\", STATE.age === 18 %>","name":"<% STATE.data_0 %>","abc":"<% STATE.data_1 %>"}',
       },
       {
         context: null,
         instanceId: "mock-instanceId-div",
         objectId: "STORYBOARD_BRICK",
         properties:
-          '{"list-name":"<% \\"track state\\", STATE.name %>","list-age":"<% \\"track state\\", STATE.age %>","list":"<% STATE.age %>"}',
+          '{"list-name":"<% \\"track state\\", STATE.name %>","list-age":"<% \\"track state\\", STATE.age %>","list":"<% \\"track state\\", STATE.age %>"}',
       },
     ]);
   });
