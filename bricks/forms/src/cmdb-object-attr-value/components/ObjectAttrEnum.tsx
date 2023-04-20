@@ -58,12 +58,8 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
               `${NS_FORMS}:${K.PLEASE_INPUT_ENUMERATED_VALUE}`
             )}
             onChange={(e) => handleValueChange({ ...value, regex: e })}
+            disabled={props.disabled}
           />
-          {props.disabled && (
-            <span className={styles.helpInfomation}>
-              {i18n.t(`${NS_FORMS}:${K.PROTECTED_ENUM_CANNOT_BE_DELETED}`)}
-            </span>
-          )}
         </Row>
       </div>
       <div>
