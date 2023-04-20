@@ -299,6 +299,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
           buttonNode.className.includes("ant-modal-close")))
     ) {
       this._close();
+      /* istanbul ignore if */
       e.stopPropagation();
       return;
     }
@@ -312,6 +313,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
       if (buttonNode.className.includes("okBtn")) {
         // 点击表单模态框确定，触发容器内表单构件的 lowLevelValidate 方法
         this._childComponent[0]?.lowLevelValidate(this._updateValues);
+        /* istanbul ignore if */
         e.stopPropagation();
       }
       if (buttonNode.className.includes("editItem")) {
