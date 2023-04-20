@@ -324,6 +324,7 @@ export function replace<T>(
       const patterns = new Map<string, string>([["TPL", `STATE`]]);
       options.dataKey && patterns.set("DATA", options.dataKey);
       let result: PreevaluateResult;
+      let hasTrack = false;
       try {
         result = preevaluate(transformValue, {
           hooks: {
@@ -340,7 +341,7 @@ export function replace<T>(
         console.log(message);
       }
       if (replacements.length > 0) {
-        const { prefix, source, suffix } = result;
+        const { prefix, source, suffix, expression } = result;
         const chunks: string[] = [];
         let prevStart = 0;
         for (let i = 0; i < replacements.length; i++) {
@@ -349,15 +350,18 @@ export function replace<T>(
           prevStart = end;
         }
         chunks.push(source.substring(prevStart));
-        transformValue = `${prefix}${chunks.join("")}${suffix}` as T & string;
+        if (Array.isArray(expression)) {
+          hasTrack =
+            expression[0].type === "Literal" &&
+            ["track state", "track context"].includes(
+              expression[0].value as string
+            );
+        }
+        transformValue = `${prefix}${
+          !hasTrack && options?.isTrack ? '"track state", ' : ""
+        }${chunks.join("")}${suffix}` as T & string;
       }
     }
-    transformValue = options.isTrack
-      ? transformValue.replace(/<%(.*)%>/, (match, $1) => {
-          if ($1.trim().startsWith("track")) return match;
-          return `<% "track state",${$1}%>`;
-        })
-      : transformValue;
     return transformValue as T & string;
   }
 

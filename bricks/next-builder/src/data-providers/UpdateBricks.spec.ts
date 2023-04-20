@@ -5,6 +5,7 @@ import {
   updateTemplateRefAndAsVarible,
   replaceUseBrickTransform,
   replaceInjectOrTranformRawToEvaluteRaw,
+  replace,
 } from "./UpdateBricks";
 
 describe("updateUseResolves", () => {
