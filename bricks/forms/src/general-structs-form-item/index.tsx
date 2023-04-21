@@ -238,7 +238,6 @@ export class GeneralStructsFormItemElement extends FormItemElement {
     attribute: false,
   })
   rowOperationConfig: RowOperationConfig;
-
   constructor() {
     super();
     const shadowRoot = this.attachShadow({ mode: "open" });
