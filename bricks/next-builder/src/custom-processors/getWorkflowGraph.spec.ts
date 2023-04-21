@@ -10,7 +10,7 @@ describe("getWorkflowGraph", () => {
   it.each([
     [
       {
-        nodes: [
+        steps: [
           {
             name: "start",
             id: "start",
@@ -184,7 +184,7 @@ describe("getWorkflowGraph", () => {
     ],
     [
       {
-        nodes: [
+        steps: [
           {
             name: "start",
             id: "start",
