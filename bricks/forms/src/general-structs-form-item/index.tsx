@@ -238,6 +238,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
     attribute: false,
   })
   rowOperationConfig: RowOperationConfig;
+  _ref: any;
 
   constructor() {
     super();
@@ -349,6 +350,8 @@ export class GeneralStructsFormItemElement extends FormItemElement {
     this.value = cloneData;
 
     this._close();
+    this.getFormElement()?.onchange(values);
+    this._ref?.onChange(values);
     this._handleChange();
     this._updateAddBtnDisabled();
   };
@@ -374,7 +377,14 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   @event({ type: "struct.inner.form.init" }) innerFormInitEvent: EventEmitter<
     Record<string, any>
   >;
-
+  /**
+   * @detail `string`
+   * @description 配置项值改变时触发
+   */
+  @event({ type: "struct.changes" }) changeEvents: EventEmitter<string>;
+  private _handleChanges = (value: any): void => {
+    this.changeEvents.emit(value);
+  };
   _handleChange(): void {
     this.changeEvent.emit(this.value);
   }
@@ -426,6 +436,8 @@ export class GeneralStructsFormItemElement extends FormItemElement {
             name={this.name}
             formElement={this.getFormElement()}
             label={this.label}
+            required={this.required}
+            _ref={this._ref}
             labelColor={this.labelColor}
             labelBold={this.labelBold}
             value={this.value}
@@ -447,6 +459,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
             structItemShowRenderFN={this.structItemShowRenderFN}
             structInnerTableColumnsOrder={this.structInnerTableColumnsOrder}
             rowOperationConfig={this.rowOperationConfig}
+            onChange={this._handleChanges}
           />
         </BrickWrapper>,
         this._mountPoint

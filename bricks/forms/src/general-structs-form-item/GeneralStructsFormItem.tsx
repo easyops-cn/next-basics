@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import {
   DeleteOutlined,
   EditOutlined,
@@ -33,11 +33,14 @@ export interface GeneralStructsFormItemProps extends FormItemWrapperProps {
   editModalTitle?: string;
   structItemShowRenderFN?: () => any;
   structInnerTableColumnsOrder?: string[];
+  onChange?: (value: string) => void;
   rowOperationConfig?: RowOperationConfig;
+  _ref?: any;
 }
 
-export function GeneralStructsFormItem(
-  props: GeneralStructsFormItemProps
+function GeneralStructsFormItemInstance(
+  props: GeneralStructsFormItemProps,
+  ref: any
 ): React.ReactElement {
   const {
     name,
@@ -60,6 +63,9 @@ export function GeneralStructsFormItem(
     structInnerTableColumnsOrder,
     rowOperationConfig,
   } = props;
+  useEffect(() => {
+    props.onChange(value);
+  }, [value]);
   const footer = (
     <>
       <Button className="cancelBtn">{cancelText || "取消"}</Button>
@@ -124,46 +130,70 @@ export function GeneralStructsFormItem(
   const createTitle = createModalTitle || "新建结构体";
   const editTitle = editModalTitle || "编辑结构体";
   return (
-    <FormItemWrapper {...props}>
-      <div>
-        <Button type="link" className={"openBtn"} disabled={addBtnDisabled}>
-          {btnText || "添加"}
-        </Button>
-        <Modal
-          visible={modalVisible}
-          title={isEdit ? editTitle : createTitle}
-          getContainer={container}
-          footer={footer}
-          destroyOnClose={true}
-          width={modalWidth}
-        >
-          <slot id="items" name="items"></slot>
-        </Modal>
-        <Table dataSource={value} columns={columns} pagination={false}></Table>
-        <Modal
-          className="ant-modal-confirm ant-modal-confirm-confirm"
-          width={416}
-          visible={confirmVisible}
-          title="删除确认"
-          footer={null}
-          getContainer={container}
-        >
-          <div className="ant-modal-confirm-body-wrapper">
-            <div className="ant-modal-confirm-body">
-              <QuestionCircleOutlined />
-              <span className="ant-modal-confirm-title">
-                {deleteText || "确定要删除该数据吗？"}
-              </span>
-            </div>
-            <div className="ant-modal-confirm-btns">
-              <Button className="confirmCancelBtn">取消</Button>
-              <Button danger className="confirmOkBtn">
-                确定
-              </Button>
-            </div>
+    <div ref={ref}>
+      <Button type="link" className={"openBtn"} disabled={addBtnDisabled}>
+        {btnText || "添加"}
+      </Button>
+      <Modal
+        visible={modalVisible}
+        title={isEdit ? editTitle : createTitle}
+        getContainer={container}
+        footer={footer}
+        destroyOnClose={true}
+        width={modalWidth}
+        onOk={() => {
+          props.onChange && props.onChange(value);
+        }}
+      >
+        <slot id="items" name="items"></slot>
+      </Modal>
+      <Table dataSource={value} columns={columns} pagination={false}></Table>
+      <Modal
+        className="ant-modal-confirm ant-modal-confirm-confirm"
+        width={416}
+        visible={confirmVisible}
+        title="删除确认"
+        footer={null}
+        getContainer={container}
+      >
+        <div className="ant-modal-confirm-body-wrapper">
+          <div className="ant-modal-confirm-body">
+            <QuestionCircleOutlined />
+            <span className="ant-modal-confirm-title">
+              {deleteText || "确定要删除该数据吗？"}
+            </span>
           </div>
-        </Modal>
-      </div>
+          <div className="ant-modal-confirm-btns">
+            <Button className="confirmCancelBtn">取消</Button>
+            <Button danger className="confirmOkBtn">
+              确定
+            </Button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  );
+}
+
+export const GeneralStructsFormItemWrapper = forwardRef(
+  GeneralStructsFormItemInstance
+);
+
+export function GeneralStructsFormItem(
+  props: GeneralStructsFormItemProps
+): React.ReactElement {
+  const handleChange = (value: any) => {
+    Promise.resolve().then(() => {
+      props.onChange?.(value);
+    });
+  };
+  return (
+    <FormItemWrapper {...props}>
+      <GeneralStructsFormItemWrapper
+        {...props}
+        onChange={handleChange}
+        ref={props._ref}
+      ></GeneralStructsFormItemWrapper>
     </FormItemWrapper>
   );
 }
