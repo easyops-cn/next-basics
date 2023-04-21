@@ -167,7 +167,11 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
       }
     } else if (value.default_type === "function") {
       return (
-        <Select value="guid()" style={{ width: "100%" }}>
+        <Select
+          value="guid()"
+          style={{ width: "100%" }}
+          disabled={props.disabled}
+        >
           <Option value="guid()">{t(K.GLOBALLY_UNIQUE_IDENTIFIER)}</Option>
         </Select>
       );
@@ -179,21 +183,26 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
               placeholder={i18n.t(`${NS_FORMS}:${K.PREFIX_IDENTIFIER}`)}
               className="auto-increment-id-prefix"
               value={value.prefix}
+              disabled={props.disabled}
               onChange={(e) => {
                 handleValueChange({ ...value, prefix: e.target.value });
               }}
             />
           </Col>
-          <Col span={4}>
-            <Popover
-              content={getPopoverContent({ prefix: value.prefix })}
-              trigger="click"
-              visible={popoverVisible}
-              onVisibleChange={handleVisibleChange}
-            >
-              <Button type="link">{i18n.t(`${NS_FORMS}:${K.ADVANCED}`)}</Button>
-            </Popover>
-          </Col>
+          {!props.disabled && (
+            <Col span={4}>
+              <Popover
+                content={getPopoverContent({ prefix: value.prefix })}
+                trigger="click"
+                visible={popoverVisible}
+                onVisibleChange={handleVisibleChange}
+              >
+                <Button type="link" disabled={props.disabled}>
+                  {i18n.t(`${NS_FORMS}:${K.ADVANCED}`)}
+                </Button>
+              </Popover>
+            </Col>
+          )}
         </Row>
       );
     } else if (value.default_type === "series-number") {
@@ -207,6 +216,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
                 handleValueChange({ ...value, series_number_length: e });
               }}
               style={{ width: "100%" }}
+              disabled={props.disabled}
               min={1}
               max={10}
             />
@@ -216,23 +226,28 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
               placeholder={i18n.t(`${NS_FORMS}:${K.PREFIX_IDENTIFIER}`)}
               className="series-number-prefix"
               value={value.prefix}
+              disabled={props.disabled}
               onChange={(e) => {
                 handleValueChange({ ...value, prefix: e.target.value });
               }}
             />
           </Col>
-          <Col span={4}>
-            <Popover
-              content={getPopoverContent({
-                prefix: value.prefix,
-              })}
-              trigger="click"
-              visible={popoverVisible}
-              onVisibleChange={handleVisibleChange}
-            >
-              <Button type="link">{i18n.t(`${NS_FORMS}:${K.ADVANCED}`)}</Button>
-            </Popover>
-          </Col>
+          {!props.disabled && (
+            <Col span={4}>
+              <Popover
+                content={getPopoverContent({
+                  prefix: value.prefix,
+                })}
+                trigger="click"
+                visible={popoverVisible}
+                onVisibleChange={handleVisibleChange}
+              >
+                <Button type="link">
+                  {i18n.t(`${NS_FORMS}:${K.ADVANCED}`)}
+                </Button>
+              </Popover>
+            </Col>
+          )}
         </Row>
       );
     }
@@ -291,12 +306,12 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
             </Col>
             <Col
               span={value.default_type === "series-number" ? 18 : 12}
-              style={{
-                marginTop:
-                  value.mode === "multiple-lines" || value.mode === "markdown"
-                    ? "-5px"
-                    : "0px",
-              }}
+              // style={{
+              //   marginTop:
+              //     value.mode === "multiple-lines" || value.mode === "markdown"
+              //       ? "-5px"
+              //       : "0px",
+              // }}
             >
               {getDefaultControl()}
             </Col>
