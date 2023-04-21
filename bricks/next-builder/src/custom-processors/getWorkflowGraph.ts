@@ -33,7 +33,7 @@ interface FlowNodeEdge {
 }
 
 interface FlowData {
-  nodes: FlowNode[];
+  steps: FlowNode[];
   relations: FlowNodeEdge[];
 }
 
@@ -91,7 +91,7 @@ export function getWorkflowGraph(flowData: FlowData): GraphData {
     id: rootId,
     type: "node",
   };
-  const { nodes, relations } = flowData;
+  const { steps: nodes, relations } = flowData;
   const graphNodes: GraphNode[] = [];
   const layerEdges: GraphEdge[] = [];
   const containerEdges: GraphEdge[] = [];
