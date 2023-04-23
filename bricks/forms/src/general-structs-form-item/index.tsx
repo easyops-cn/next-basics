@@ -9,6 +9,7 @@ import {
 } from "@next-core/brick-kit";
 import {
   GeneralStructsFormItem,
+  GeneralStructsRef,
   RowOperationConfig,
 } from "./GeneralStructsFormItem";
 import { FormItemElement } from "@next-libs/forms";
@@ -28,7 +29,7 @@ import { clone, pullAt } from "lodash";
  *  placeholder
  *  pattern
  * @memo
- * 
+ *
  * ### RowOperationConfig
 
  *| property                    | type        | required | default | description |
@@ -40,6 +41,7 @@ import { clone, pullAt } from "lodash";
 export class GeneralStructsFormItemElement extends FormItemElement {
   private _mountPoint: HTMLElement;
   private _childComponent: any;
+  private _ref = React.createRef<GeneralStructsRef>();
   /**
    * @group basicFormItem
    * @required true
@@ -272,6 +274,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
       }
     });
   }
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -330,7 +333,6 @@ export class GeneralStructsFormItemElement extends FormItemElement {
         // 删除确认框确认
         this._deleteItem();
         this._closeConfirmModal();
-        this._handleChange();
       }
       if (buttonNode.className.includes("confirmCancelBtn")) {
         // 删除确认框取消
@@ -338,19 +340,18 @@ export class GeneralStructsFormItemElement extends FormItemElement {
       }
     }
   };
-  _updateValues = (values: any) => {
-    let cloneData = this.value && this.value.length ? clone(this.value) : [];
+  // istanbul ignore next
+  private _updateValues = (values: any): void => {
     if (this._isEdit) {
-      cloneData[this._editIndex] = values;
+      this._ref.current?.onEdit(values, this._editIndex);
     } else {
-      cloneData = [...cloneData, values];
+      this._ref.current?.onAdd(values);
     }
-    this.value = cloneData;
 
     this._close();
-    this._handleChange();
     this._updateAddBtnDisabled();
   };
+
   /**
    * @detail `Record<string, any>`
    * @description 增删改结构体时触发
@@ -365,7 +366,6 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   @event({ type: "struct.data.get" }) getDataEvent: EventEmitter<
     Record<string, any>
   >;
-
   /**
    * @detail `Record<string, any>`
    * @description 设置内部form表单
@@ -373,58 +373,61 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   @event({ type: "struct.inner.form.init" }) innerFormInitEvent: EventEmitter<
     Record<string, any>
   >;
+  /* istanbul ignore next */
+  private _handleChange = (value: Record<string, unknown>[]): void => {
+    this.value = value;
+    this.changeEvent.emit(value);
+  };
 
-  _handleChange(): void {
-    this.changeEvent.emit(this.value);
-  }
-
-  _updateAddBtnDisabled(): void {
+  private _updateAddBtnDisabled(): void {
     this.addBtnDisabled =
       this.multiple === false && this.value && this.value.length > 0;
   }
-  _deleteItem(): void {
-    const data = clone(this.value);
-    pullAt(data, this._editIndex);
-    this.value = data;
+  /* istanbul ignore next */
+  private _deleteItem(): void {
+    this._ref.current?.onRemove(this._editIndex);
     this._updateAddBtnDisabled();
   }
-  _open(): void {
+  /* istanbul ignore next */
+  private _open(): void {
     this.isVisible = true;
   }
-
-  _close(): void {
+  /* istanbul ignore next */
+  private _close(): void {
     this.isVisible = false;
   }
+
   /**
    * @description 获得结构体数组
    */
   @method() getData(): void {
     this.getDataEvent.emit(this.value);
   }
-  _openConfirmModal(): void {
+  /* istanbul ignore next */
+  private _openConfirmModal(): void {
     this.confirmVisible = true;
   }
-  _closeConfirmModal(): void {
+  /* istanbul ignore next */
+  private _closeConfirmModal(): void {
     this.confirmVisible = false;
   }
+
   disconnectedCallback(): void {
     ReactDOM.unmountComponentAtNode(this);
     this.removeEventListener("click", this._listenToClick);
   }
+
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
       this._updateAddBtnDisabled();
-      const formElement = this.getFormElement();
-      if (!this.value && formElement && formElement.formUtils) {
-        this.value = formElement.formUtils.getFieldValue(this.name);
-      }
       ReactDOM.render(
         <BrickWrapper>
           <GeneralStructsFormItem
             name={this.name}
             formElement={this.getFormElement()}
             label={this.label}
+            required={this.required}
             labelColor={this.labelColor}
             labelBold={this.labelBold}
             value={this.value}
@@ -446,6 +449,8 @@ export class GeneralStructsFormItemElement extends FormItemElement {
             structItemShowRenderFN={this.structItemShowRenderFN}
             structInnerTableColumnsOrder={this.structInnerTableColumnsOrder}
             rowOperationConfig={this.rowOperationConfig}
+            onChange={this._handleChange}
+            ref={this._ref}
           />
         </BrickWrapper>,
         this._mountPoint

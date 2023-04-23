@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 import {
   DeleteOutlined,
   EditOutlined,
@@ -6,8 +6,14 @@ import {
 } from "@ant-design/icons";
 import { Button, Table, Modal } from "antd";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
-import { set } from "antd";
-import { isObject, isFunction, isEmpty } from "lodash";
+import { isFunction, isEmpty } from "lodash";
+import update from "immutability-helper";
+
+export interface GeneralStructsRef {
+  onAdd?: (value: Record<string, unknown>) => void;
+  onEdit?: (value: Record<string, unknown>, index: number) => void;
+  onRemove?: (index: number) => void;
+}
 
 export interface RowOperationConfig {
   rowUniqueKey: string;
@@ -22,7 +28,7 @@ export interface GeneralStructsFormItemProps extends FormItemWrapperProps {
   container: any;
   isEdit: boolean;
   fieldsMap: any;
-  value: any;
+  value: Record<string, unknown>[];
   modalWidth: string | number;
   btnText: string;
   okText: string;
@@ -33,15 +39,15 @@ export interface GeneralStructsFormItemProps extends FormItemWrapperProps {
   editModalTitle?: string;
   structItemShowRenderFN?: () => any;
   structInnerTableColumnsOrder?: string[];
+  onChange?: (value: Record<string, unknown>[]) => void;
   rowOperationConfig?: RowOperationConfig;
 }
 
-export function GeneralStructsFormItem(
-  props: GeneralStructsFormItemProps
-): React.ReactElement {
+export const GeneralStructs = forwardRef<
+  GeneralStructsRef,
+  GeneralStructsFormItemProps
+>(function GeneralStructsFormItemInstance(props, ref): React.ReactElement {
   const {
-    name,
-    formElement,
     modalVisible,
     confirmVisible,
     container,
@@ -59,6 +65,7 @@ export function GeneralStructsFormItem(
     structItemShowRenderFN,
     structInnerTableColumnsOrder,
     rowOperationConfig,
+    onChange,
   } = props;
   const footer = (
     <>
@@ -68,11 +75,9 @@ export function GeneralStructsFormItem(
       </Button>
     </>
   );
-
   const columnKeys = isEmpty(structInnerTableColumnsOrder)
     ? Object.keys(fieldsMap)
     : structInnerTableColumnsOrder;
-
   const columns = columnKeys.map((key) => {
     return {
       title: fieldsMap[key],
@@ -123,47 +128,73 @@ export function GeneralStructsFormItem(
   columns.push(operationCol);
   const createTitle = createModalTitle || "新建结构体";
   const editTitle = editModalTitle || "编辑结构体";
+  // istanbul ignore next
+  useImperativeHandle(
+    ref,
+    () => ({
+      onAdd: (newValue) => {
+        onChange?.([...(value || []), newValue]);
+      },
+      onEdit: (newValue, index) => {
+        onChange?.(update(value, { [index]: { $set: newValue } }));
+      },
+      onRemove: (index) => {
+        onChange?.(update(value, { $splice: [[index, 1]] }));
+      },
+    }),
+    [value, onChange]
+  );
+
+  return (
+    <div>
+      <Button type="link" className={"openBtn"} disabled={addBtnDisabled}>
+        {btnText || "添加"}
+      </Button>
+      <Modal
+        visible={modalVisible}
+        title={isEdit ? editTitle : createTitle}
+        getContainer={container}
+        footer={footer}
+        destroyOnClose={true}
+        width={modalWidth}
+      >
+        <slot id="items" name="items"></slot>
+      </Modal>
+      <Table dataSource={value} columns={columns} pagination={false}></Table>
+      <Modal
+        className="ant-modal-confirm ant-modal-confirm-confirm"
+        width={416}
+        visible={confirmVisible}
+        title="删除确认"
+        footer={null}
+        getContainer={container}
+      >
+        <div className="ant-modal-confirm-body-wrapper">
+          <div className="ant-modal-confirm-body">
+            <QuestionCircleOutlined />
+            <span className="ant-modal-confirm-title">
+              {deleteText || "确定要删除该数据吗？"}
+            </span>
+          </div>
+          <div className="ant-modal-confirm-btns">
+            <Button className="confirmCancelBtn">取消</Button>
+            <Button danger className="confirmOkBtn">
+              确定
+            </Button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  );
+});
+
+export const GeneralStructsFormItem = forwardRef<
+  GeneralStructsRef,
+  GeneralStructsFormItemProps
+>(function GeneralStructsFormItem(props, ref): React.ReactElement {
   return (
     <FormItemWrapper {...props}>
-      <div>
-        <Button type="link" className={"openBtn"} disabled={addBtnDisabled}>
-          {btnText || "添加"}
-        </Button>
-        <Modal
-          visible={modalVisible}
-          title={isEdit ? editTitle : createTitle}
-          getContainer={container}
-          footer={footer}
-          destroyOnClose={true}
-          width={modalWidth}
-        >
-          <slot id="items" name="items"></slot>
-        </Modal>
-        <Table dataSource={value} columns={columns} pagination={false}></Table>
-        <Modal
-          className="ant-modal-confirm ant-modal-confirm-confirm"
-          width={416}
-          visible={confirmVisible}
-          title="删除确认"
-          footer={null}
-          getContainer={container}
-        >
-          <div className="ant-modal-confirm-body-wrapper">
-            <div className="ant-modal-confirm-body">
-              <QuestionCircleOutlined />
-              <span className="ant-modal-confirm-title">
-                {deleteText || "确定要删除该数据吗？"}
-              </span>
-            </div>
-            <div className="ant-modal-confirm-btns">
-              <Button className="confirmCancelBtn">取消</Button>
-              <Button danger className="confirmOkBtn">
-                确定
-              </Button>
-            </div>
-          </div>
-        </Modal>
-      </div>
+      <GeneralStructs {...props} ref={ref} />
     </FormItemWrapper>
   );
-}
+});
