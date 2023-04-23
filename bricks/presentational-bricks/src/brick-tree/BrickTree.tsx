@@ -183,6 +183,7 @@ export interface BrickTreeProps {
   onExpand?(expandedKeys: React.Key[]): void;
   onSearch?(value: string): void;
   suffixBrick?: { useBrick: UseBrickConf };
+  suffixStopEvent?: boolean;
   afterSearchBrick?: { useBrick: UseBrickConf };
   showSpecificationTitleStyle?: boolean;
   defaultExpandAll?: boolean;
@@ -204,6 +205,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     checkAllEnabled,
     checkedFilterConfig: { field, value, operator } = {},
     suffixBrick,
+    suffixStopEvent,
     afterSearchBrick,
     showSpecificationTitleStyle,
     defaultExpandAll,
@@ -515,7 +517,12 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
 
               if (!isEmpty(suffixBrick?.useBrick)) {
                 return (
-                  <div className={styles.suffixBrickWrapper}>
+                  <div
+                    className={styles.suffixBrickWrapper}
+                    onClick={(e) => {
+                      suffixStopEvent && e.stopPropagation();
+                    }}
+                  >
                     <span
                       className={
                         showSpecificationTitleStyle && allOrDefaultFlag
