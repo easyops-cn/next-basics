@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.267.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.5...@next-bricks/forms@1.267.6) (2023-04-23)
+
+
+### Bug Fixes
+
+* BRICK_STORE-3361 结构体构件bug ([de61950](https://github.com/easyops-cn/next-basics/commit/de619506afea1217200a7f749cc8b69952996fda))
+* fix general-struct-form ([7310d0c](https://github.com/easyops-cn/next-basics/commit/7310d0c04cc28a537e433ad09d17dd4c64d5fb3c))
+* fix general-struct-form ([e105c55](https://github.com/easyops-cn/next-basics/commit/e105c55faaf0bdaa57508ed249c1d81fdcfbee53))
+* fix general-structs-form ([dacc40d](https://github.com/easyops-cn/next-basics/commit/dacc40da96236504a637eab04d2685dd730fca51))
+
+
+
+
+
 ## [1.267.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.4...@next-bricks/forms@1.267.5) (2023-04-21)
 
 
