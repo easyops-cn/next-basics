@@ -207,6 +207,15 @@ export class BrickTreeElement extends UpdatingElement {
   suffixBrick: { useBrick: UseBrickConf };
 
   /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 最右自定义项事件是否冒泡
+   * @group advanced
+   */
+  @property({ type: Boolean }) suffixStopEvent: boolean;
+
+  /**
    * @kind {useBrick:[UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)}
    * @required false
    * @default -
@@ -294,6 +303,7 @@ export class BrickTreeElement extends UpdatingElement {
             onSearch={this._handleSearch}
             checkedFilterConfig={this.checkedFilterConfig}
             suffixBrick={this.suffixBrick}
+            suffixStopEvent={this.suffixStopEvent}
             afterSearchBrick={this.afterSearchBrick}
             showSpecificationTitleStyle={this.showSpecificationTitleStyle}
             defaultExpandAll={this.defaultExpandAll}
