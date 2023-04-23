@@ -23,7 +23,7 @@ describe("GeneralStructsFormItem", () => {
         description: "参数说明",
       },
     };
-    const wrapper = shallow(<GeneralStructsFormItem {...props} />);
+    const wrapper = mount(<GeneralStructsFormItem {...props} />);
     expect(wrapper.find(Table).prop("columns")[0]?.title).toEqual("参数名");
   });
 

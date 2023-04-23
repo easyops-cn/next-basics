@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef } from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 import {
   DeleteOutlined,
   EditOutlined,
@@ -6,8 +6,14 @@ import {
 } from "@ant-design/icons";
 import { Button, Table, Modal } from "antd";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
-import { set } from "antd";
-import { isObject, isFunction, isEmpty } from "lodash";
+import { isFunction, isEmpty } from "lodash";
+import update from "immutability-helper";
+
+export interface GeneralStructsRef {
+  onAdd?: (value: Record<string, unknown>) => void;
+  onEdit?: (value: Record<string, unknown>, index: number) => void;
+  onRemove?: (index: number) => void;
+}
 
 export interface RowOperationConfig {
   rowUniqueKey: string;
@@ -22,7 +28,7 @@ export interface GeneralStructsFormItemProps extends FormItemWrapperProps {
   container: any;
   isEdit: boolean;
   fieldsMap: any;
-  value: any;
+  value: Record<string, unknown>[];
   modalWidth: string | number;
   btnText: string;
   okText: string;
@@ -33,18 +39,15 @@ export interface GeneralStructsFormItemProps extends FormItemWrapperProps {
   editModalTitle?: string;
   structItemShowRenderFN?: () => any;
   structInnerTableColumnsOrder?: string[];
-  onChange?: (value: string) => void;
+  onChange?: (value: Record<string, unknown>[]) => void;
   rowOperationConfig?: RowOperationConfig;
-  _ref?: any;
 }
 
-function GeneralStructsFormItemInstance(
-  props: GeneralStructsFormItemProps,
-  ref: any
-): React.ReactElement {
+export const GeneralStructs = forwardRef<
+  GeneralStructsRef,
+  GeneralStructsFormItemProps
+>(function GeneralStructsFormItemInstance(props, ref): React.ReactElement {
   const {
-    name,
-    formElement,
     modalVisible,
     confirmVisible,
     container,
@@ -62,10 +65,8 @@ function GeneralStructsFormItemInstance(
     structItemShowRenderFN,
     structInnerTableColumnsOrder,
     rowOperationConfig,
+    onChange,
   } = props;
-  useEffect(() => {
-    props.onChange(value);
-  }, [value]);
   const footer = (
     <>
       <Button className="cancelBtn">{cancelText || "取消"}</Button>
@@ -74,11 +75,9 @@ function GeneralStructsFormItemInstance(
       </Button>
     </>
   );
-
   const columnKeys = isEmpty(structInnerTableColumnsOrder)
     ? Object.keys(fieldsMap)
     : structInnerTableColumnsOrder;
-
   const columns = columnKeys.map((key) => {
     return {
       title: fieldsMap[key],
@@ -129,8 +128,25 @@ function GeneralStructsFormItemInstance(
   columns.push(operationCol);
   const createTitle = createModalTitle || "新建结构体";
   const editTitle = editModalTitle || "编辑结构体";
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      onAdd: (newValue) => {
+        onChange?.([...(value || []), newValue]);
+      },
+      onEdit: (newValue, index) => {
+        onChange?.(update(value, { [index]: { $set: newValue } }));
+      },
+      onRemove: (index) => {
+        onChange?.(update(value, { $splice: [[index, 1]] }));
+      },
+    }),
+    [value, onChange]
+  );
+
   return (
-    <div ref={ref}>
+    <div>
       <Button type="link" className={"openBtn"} disabled={addBtnDisabled}>
         {btnText || "添加"}
       </Button>
@@ -141,9 +157,6 @@ function GeneralStructsFormItemInstance(
         footer={footer}
         destroyOnClose={true}
         width={modalWidth}
-        onOk={() => {
-          props.onChange && props.onChange(value);
-        }}
       >
         <slot id="items" name="items"></slot>
       </Modal>
@@ -173,27 +186,15 @@ function GeneralStructsFormItemInstance(
       </Modal>
     </div>
   );
-}
+});
 
-export const GeneralStructsFormItemWrapper = forwardRef(
-  GeneralStructsFormItemInstance
-);
-
-export function GeneralStructsFormItem(
-  props: GeneralStructsFormItemProps
-): React.ReactElement {
-  const handleChange = (value: any) => {
-    Promise.resolve().then(() => {
-      props.onChange?.(value);
-    });
-  };
+export const GeneralStructsFormItem = forwardRef<
+  GeneralStructsRef,
+  GeneralStructsFormItemProps
+>(function GeneralStructsFormItem(props, ref): React.ReactElement {
   return (
     <FormItemWrapper {...props}>
-      <GeneralStructsFormItemWrapper
-        {...props}
-        onChange={handleChange}
-        ref={props._ref}
-      ></GeneralStructsFormItemWrapper>
+      <GeneralStructs {...props} ref={ref} />
     </FormItemWrapper>
   );
-}
+});
