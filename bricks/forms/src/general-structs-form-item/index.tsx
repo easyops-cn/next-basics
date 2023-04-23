@@ -219,7 +219,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   @property({
     attribute: false,
   })
-  structItemShowRenderFN: () => any;
+  structItemShowRenderFN: (text: any, columnKey: any) => any;
 
   /**
    * @group basicFormItem
