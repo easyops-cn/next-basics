@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.267.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.6...@next-bricks/forms@1.267.7) (2023-04-23)
+
+
+### Bug Fixes
+
+* **forms:** structs-form-item构件的structItemShowRenderFN函数添加columnKey参数  Refs INSTANCE-4755 ([2603eae](https://github.com/easyops-cn/next-basics/commit/2603eaebee88b44aae871358e7afe00ae0a663ba))
+
+
+
+
+
 ## [1.267.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.5...@next-bricks/forms@1.267.6) (2023-04-23)
 
 
