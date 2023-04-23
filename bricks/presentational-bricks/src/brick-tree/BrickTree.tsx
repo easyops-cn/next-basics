@@ -517,12 +517,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
 
               if (!isEmpty(suffixBrick?.useBrick)) {
                 return (
-                  <div
-                    className={styles.suffixBrickWrapper}
-                    onClick={(e) => {
-                      suffixStopEvent && e.stopPropagation();
-                    }}
-                  >
+                  <div className={styles.suffixBrickWrapper}>
                     <span
                       className={
                         showSpecificationTitleStyle && allOrDefaultFlag
@@ -532,10 +527,16 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
                     >
                       {title}
                     </span>
-                    <BrickAsComponent
-                      useBrick={suffixBrick.useBrick}
-                      data={node}
-                    />
+                    <span
+                      onClick={(e) => {
+                        suffixStopEvent && e.stopPropagation();
+                      }}
+                    >
+                      <BrickAsComponent
+                        useBrick={suffixBrick.useBrick}
+                        data={node}
+                      />
+                    </span>
                   </div>
                 );
               }
