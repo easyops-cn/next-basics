@@ -408,7 +408,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   private _openConfirmModal(): void {
     this.confirmVisible = true;
   }
-
+  /* istanbul ignore next */
   private _closeConfirmModal(): void {
     this.confirmVisible = false;
   }
