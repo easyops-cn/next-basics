@@ -35,7 +35,7 @@ export interface GeneralStructsFormItemProps extends FormItemWrapperProps {
   structInnerTableColumnsOrder?: string[];
   onChange?: (value: string) => void;
   rowOperationConfig?: RowOperationConfig;
-  _ref?: any;
+  onRef?: (value: any) => void;
 }
 
 function GeneralStructsFormItemInstance(
@@ -182,18 +182,9 @@ export const GeneralStructsFormItemWrapper = forwardRef(
 export function GeneralStructsFormItem(
   props: GeneralStructsFormItemProps
 ): React.ReactElement {
-  const handleChange = (value: any) => {
-    Promise.resolve().then(() => {
-      props.onChange?.(value);
-    });
-  };
   return (
     <FormItemWrapper {...props}>
-      <GeneralStructsFormItemWrapper
-        {...props}
-        onChange={handleChange}
-        ref={props._ref}
-      ></GeneralStructsFormItemWrapper>
+      <GeneralStructsFormItemWrapper {...props}></GeneralStructsFormItemWrapper>
     </FormItemWrapper>
   );
 }

@@ -351,7 +351,6 @@ export class GeneralStructsFormItemElement extends FormItemElement {
 
     this._close();
     this.getFormElement()?.onchange(values);
-    this._ref?.onChange(values);
     this._handleChange();
     this._updateAddBtnDisabled();
   };
@@ -437,7 +436,6 @@ export class GeneralStructsFormItemElement extends FormItemElement {
             formElement={this.getFormElement()}
             label={this.label}
             required={this.required}
-            _ref={this._ref}
             labelColor={this.labelColor}
             labelBold={this.labelBold}
             value={this.value}
