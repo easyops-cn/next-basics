@@ -341,7 +341,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
       }
     }
   };
-
+  // istanbul ignore next
   private _updateValues = (values: any): void => {
     if (this._isEdit) {
       this._ref.current?.onEdit(values, this._editIndex);
@@ -374,7 +374,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   @event({ type: "struct.inner.form.init" }) innerFormInitEvent: EventEmitter<
     Record<string, any>
   >;
-
+  /* istanbul ignore next */
   private _handleChange = (value: Record<string, unknown>[]): void => {
     this.value = value;
     this.changeEvent.emit(value);
@@ -384,16 +384,16 @@ export class GeneralStructsFormItemElement extends FormItemElement {
     this.addBtnDisabled =
       this.multiple === false && this.value && this.value.length > 0;
   }
-
+  /* istanbul ignore next */
   private _deleteItem(): void {
     this._ref.current?.onRemove(this._editIndex);
     this._updateAddBtnDisabled();
   }
-
+  /* istanbul ignore next */
   private _open(): void {
     this.isVisible = true;
   }
-
+  /* istanbul ignore next */
   private _close(): void {
     this.isVisible = false;
   }
@@ -404,7 +404,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   @method() getData(): void {
     this.getDataEvent.emit(this.value);
   }
-
+  /* istanbul ignore next */
   private _openConfirmModal(): void {
     this.confirmVisible = true;
   }

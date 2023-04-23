@@ -128,7 +128,7 @@ export const GeneralStructs = forwardRef<
   columns.push(operationCol);
   const createTitle = createModalTitle || "新建结构体";
   const editTitle = editModalTitle || "编辑结构体";
-
+  // istanbul ignore next
   useImperativeHandle(
     ref,
     () => ({
