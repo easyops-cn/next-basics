@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.292.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.291.3...@next-bricks/presentational-bricks@1.292.0) (2023-04-23)
+
+
+### Features
+
+* brick tree support stopEvent ([837f847](https://github.com/easyops-cn/next-basics/commit/837f847c2ebfbeee611c033e731026e4355f3e0b))
+
+
+
+
+
 ## [1.291.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.291.2...@next-bricks/presentational-bricks@1.291.3) (2023-04-19)
 
 
