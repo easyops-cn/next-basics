@@ -219,7 +219,12 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   @property({
     attribute: false,
   })
-  structItemShowRenderFN: (text: any, columnKey: any) => any;
+  structItemShowRenderFN: (
+    text: any,
+    rowData: Record<string, any>,
+    dataIndex: any,
+    columnKey: any
+  ) => any;
 
   /**
    * @group basicFormItem

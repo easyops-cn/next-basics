@@ -37,7 +37,12 @@ export interface GeneralStructsFormItemProps extends FormItemWrapperProps {
   addBtnDisabled: boolean;
   createModalTitle?: string;
   editModalTitle?: string;
-  structItemShowRenderFN?: (text: any, columnKey: any) => any;
+  structItemShowRenderFN?: (
+    text: any,
+    rowData: Record<string, any>,
+    dataIndex: any,
+    columnKey: any
+  ) => any;
   structInnerTableColumnsOrder?: string[];
   onChange?: (value: Record<string, unknown>[]) => void;
   rowOperationConfig?: RowOperationConfig;
@@ -83,9 +88,9 @@ export const GeneralStructs = forwardRef<
       title: fieldsMap[key],
       key: key,
       dataIndex: key,
-      render: (text: any) =>
+      render: (text: any, rowData: Record<string, any>, dataIndex: any) =>
         isFunction(structItemShowRenderFN)
-          ? structItemShowRenderFN(text, key)
+          ? structItemShowRenderFN(text, rowData, dataIndex, key)
           : text,
     };
   });
