@@ -73,3 +73,4 @@ import "./custom-processors/getBrickDataFromModel";
 import "./custom-processors/getSnippetDataFromModel";
 import "./custom-processors/getWorkflowGraph";
 import "./workflow-node";
+import "./data-providers/AddDependencies";
