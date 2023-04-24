@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.267.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.7...@next-bricks/forms@1.267.8) (2023-04-24)
+
+
+### Bug Fixes
+
+* **forms:** structs-form-item构件的structItemShowRenderFN函数添加rowData,dataIndex参数  Refs INSTANCE-4755 ([5558547](https://github.com/easyops-cn/next-basics/commit/5558547feaa73e746bb6ed44e3011b6214dd41fb))
+
+
+
+
+
 ## [1.267.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.6...@next-bricks/forms@1.267.7) (2023-04-23)
 
 
