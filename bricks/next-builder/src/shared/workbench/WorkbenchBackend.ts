@@ -12,7 +12,6 @@ import {
   StoryboardApi_cloneBricks,
   type StoryboardApi_CloneBricksRequestBody,
   StoryboardApi_sortStoryboardNodes,
-  PackageAloneApi_listDependencies,
   PackageAloneApi_addDependencies,
 } from "@next-sdk/next-builder-sdk";
 import {
@@ -56,6 +55,7 @@ import {
   SnippetNodeDetail,
 } from "@next-core/editor-bricks-helper";
 import { ModelDraftTemplateInfo_itemMapList_item } from "@next-sdk/form-builder-service-sdk/dist/types/model/form_builder_service";
+import DependCache from "../../data-providers/utils/dependCache";
 
 export type QueueItem =
   | WorkbenchBackendActionForInsert
@@ -86,8 +86,7 @@ export default class WorkbenchBackend {
   private afterChangeTimer: NodeJS.Timeout;
   private isNeedUpdateTree = false;
   private mTimeMap = new Map<string, string>();
-  private dependenciesList: string[] = [];
-  private hadFetchDependenciesList = false;
+  private dependCache: DependCache;
 
   private static instance = new Map<string, WorkbenchBackend>();
 
@@ -128,15 +127,12 @@ export default class WorkbenchBackend {
 
   init(data: WorkbenchBackendActionForInitDetail): void {
     this.baseInfo = data;
+    this.dependCache = new DependCache(data.projectId);
     this.setDefaultDependencies();
   }
 
   setDefaultDependencies = async (): Promise<void> => {
-    const result = await PackageAloneApi_listDependencies(
-      this.baseInfo.projectId
-    );
-    this.dependenciesList = result.list.map((item) => item.name);
-    this.hadFetchDependenciesList = true;
+    await this.dependCache.update();
   };
 
   push(data: QueueItem): void {
@@ -712,10 +708,8 @@ export default class WorkbenchBackend {
   };
 
   setUsedBrickPackage = async (list: string[]): Promise<void> => {
-    if (!this.hadFetchDependenciesList) return;
-    const missPackage = list.filter(
-      (pack) => !this.dependenciesList.includes(pack)
-    );
+    const installedPackage = this.dependCache.getList();
+    const missPackage = list.filter((pack) => !installedPackage.includes(pack));
     if (missPackage.length) {
       // miss brick package
       await PackageAloneApi_addDependencies(this.baseInfo.projectId, {
@@ -725,6 +719,7 @@ export default class WorkbenchBackend {
           constraint: "*",
         })),
       });
+      await this.dependCache.update();
     }
   };
 }
