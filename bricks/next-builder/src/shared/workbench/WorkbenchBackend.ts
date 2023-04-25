@@ -86,7 +86,8 @@ export default class WorkbenchBackend {
   private afterChangeTimer: NodeJS.Timeout;
   private isNeedUpdateTree = false;
   private mTimeMap = new Map<string, string>();
-  private dependenciesList = [];
+  private dependenciesList: string[] = [];
+  private hadFetchDependenciesList = false;
 
   private static instance = new Map<string, WorkbenchBackend>();
 
@@ -130,11 +131,12 @@ export default class WorkbenchBackend {
     this.setDefaultDependencies();
   }
 
-  setDefaultDependencies = async () => {
+  setDefaultDependencies = async (): Promise<void> => {
     const result = await PackageAloneApi_listDependencies(
       this.baseInfo.projectId
     );
-    this.dependenciesList = result.list;
+    this.dependenciesList = result.list.map((item) => item.name);
+    this.hadFetchDependenciesList = true;
   };
 
   push(data: QueueItem): void {
@@ -710,8 +712,10 @@ export default class WorkbenchBackend {
   };
 
   setUsedBrickPackage = async (list: string[]): Promise<void> => {
-    const installedPackage = this.dependenciesList.map((item) => item.name);
-    const missPackage = list.filter((pack) => !installedPackage.includes(pack));
+    if (!this.hadFetchDependenciesList) return;
+    const missPackage = list.filter(
+      (pack) => !this.dependenciesList.includes(pack)
+    );
     if (missPackage.length) {
       // miss brick package
       await PackageAloneApi_addDependencies(this.baseInfo.projectId, {
