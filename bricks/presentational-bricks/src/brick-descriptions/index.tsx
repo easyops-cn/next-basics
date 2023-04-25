@@ -36,6 +36,16 @@ export interface BrickDescriptionsItemProps
     properties?: any;
   };
 }
+export interface DescriptionListProps {
+  itemList: BrickDescriptionsItemProps[];
+  descriptionTitle: string;
+  configProps?: DescriptionsProps;
+  column?: number;
+  size?: SizeType;
+  bordered?: boolean;
+  layout?: LayoutType;
+  hideGroups?: string[] | string;
+}
 
 export type LayoutType = "horizontal" | "vertical";
 export type SizeType = "default" | "middle" | "small";
@@ -73,8 +83,20 @@ export class BrickDescriptionsElement extends UpdatingElement {
   descriptionTitle: string;
 
   /**
+   * @kind any[]
+   * @required false
+   * @default -
+   * @description 多个描述列表时的数据入口
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  descriptionList: DescriptionListProps[];
+
+  /**
    * @kind BrickDescriptionsItemProps[]
-   * @required true
+   * @required false
    * @default -
    * @description 描述列表项，扩展自 ant-design DescriptionItem 相关配置项，额外扩展项如下，其他项查阅：[DescriptionItem](https://ant.design/components/descriptions-cn/#DescriptionItem)
    * @group basic
@@ -210,17 +232,37 @@ export class BrickDescriptionsElement extends UpdatingElement {
       });
     }
     return (
-      <BrickDescriptions
-        itemList={mutableProps.itemList}
-        configProps={this.configProps}
-        dataSource={this.dataSource}
-        descriptionTitle={this.descriptionTitle}
-        column={this.column}
-        size={this.size}
-        bordered={this.bordered}
-        layout={this.layout}
-        hideGroups={this.hideGroups}
-      />
+      <>
+        {this.descriptionList?.length ? (
+          <div className={styles.descriptionList}>
+            {this.descriptionList.map((description, index) => (
+              <BrickDescriptions
+                key={index}
+                itemList={description.itemList}
+                descriptionTitle={description.descriptionTitle}
+                configProps={description.configProps || this.configProps}
+                column={description.column || this.column}
+                size={description.size || this.size}
+                bordered={description.bordered || this.bordered}
+                layout={description.layout || this.layout}
+                hideGroups={description.hideGroups || this.hideGroups}
+              />
+            ))}
+          </div>
+        ) : (
+          <BrickDescriptions
+            itemList={mutableProps.itemList}
+            configProps={this.configProps}
+            dataSource={this.dataSource}
+            descriptionTitle={this.descriptionTitle}
+            column={this.column}
+            size={this.size}
+            bordered={this.bordered}
+            layout={this.layout}
+            hideGroups={this.hideGroups}
+          />
+        )}
+      </>
     );
   }
 
