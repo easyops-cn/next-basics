@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.234.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.233.0...@next-bricks/next-builder@1.234.0) (2023-04-25)
+
+
+### Features
+
+* support dependCahce ([91b5194](https://github.com/easyops-cn/next-basics/commit/91b5194019109641817240fcc874a1a3c0b599e2))
+
+
+
+
+
 # [1.233.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.232.1...@next-bricks/next-builder@1.233.0) (2023-04-25)
 
 
