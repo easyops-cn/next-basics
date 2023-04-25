@@ -204,11 +204,11 @@ export class LegacyGeneralLogin extends React.Component<
       isAdmin: result.isAdmin,
       csrfToken: result.csrfToken,
     });
-    const pathFromCookie = atob(
-      decodeURIComponent(getCookieByName("SALOGINPATH"))
+    const pathFromCookie = decodeURIComponent(
+      window.atob(getCookieByName("SALOGINPATH"))
     );
-    const queryFromCookie = atob(
-      decodeURIComponent(getCookieByName("SALOGINQUERY"))
+    const queryFromCookie = decodeURIComponent(
+      window.atob(getCookieByName("SALOGINQUERY"))
     );
     const { state } = getHistory().location;
     const from =
