@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.233.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.232.1...@next-bricks/next-builder@1.233.0) (2023-04-25)
+
+
+### Features
+
+* add dependencies provider ([f1bba12](https://github.com/easyops-cn/next-basics/commit/f1bba1264d707ac2da6965620c2a209d39314f97))
+
+
+
+
+
 ## [1.232.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.232.0...@next-bricks/next-builder@1.232.1) (2023-04-21)
 
 
