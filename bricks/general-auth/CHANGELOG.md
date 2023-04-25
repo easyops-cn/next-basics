@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.20.10...@next-bricks/general-auth@1.20.11) (2023-04-25)
+
+
+### Bug Fixes
+
+* fix url container chinese characters ([88ead86](https://github.com/easyops-cn/next-basics/commit/88ead86ba91bbe54bf515fd399bec97499fa6647))
+
+
+
+
+
 ## [1.20.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.20.9...@next-bricks/general-auth@1.20.10) (2023-04-20)
 
 
