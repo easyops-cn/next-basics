@@ -3,11 +3,9 @@ import {
   InstanceApi_getDetail,
   InstanceGraphApi_traverseGraphV2,
 } from "@next-sdk/cmdb-sdk";
-import {
-  PackageAloneApi_addDependencies,
-  PackageAloneApi_listDependencies,
-} from "@next-sdk/next-builder-sdk";
+import { PackageAloneApi_addDependencies } from "@next-sdk/next-builder-sdk";
 import walk from "../utils/walk";
+import DependCache from "./utils/dependCache";
 
 export interface AddDependenciesParams {
   projectId: string;
@@ -22,6 +20,7 @@ export async function AddDependencies(
   const hadWalkTemplateList: Array<string> = [];
   let hadFetchTemplate = false;
   let templatesList: Array<Record<string, unknown>> = [];
+  const dependCache = new DependCache(projectId);
 
   const fetchTemplateList = async (): Promise<
     Array<Record<string, unknown>>
@@ -92,7 +91,7 @@ export async function AddDependencies(
           },
           (key, value) => {
             if (
-              (key === "brick" && value.includes(".")) ||
+              (key === "brick" && value?.includes(".")) ||
               (key === "useProvider" &&
                 typeof value === "string" &&
                 !value.includes("@"))
@@ -108,8 +107,8 @@ export async function AddDependencies(
   await getUsedBrick(rootId, usedBricksSet);
 
   if (usedBricksSet.size) {
-    const { list } = await PackageAloneApi_listDependencies(projectId);
-    const hadInstallBrickPackage = list.map((item) => item.name);
+    await dependCache.update();
+    const hadInstallBrickPackage = dependCache.getList();
 
     const missPackage = [...usedBricksSet.values()].filter(
       (pack) => !hadInstallBrickPackage.includes(pack)
@@ -123,6 +122,7 @@ export async function AddDependencies(
           constraint: "*",
         })),
       });
+      await dependCache.update();
     }
   }
 
