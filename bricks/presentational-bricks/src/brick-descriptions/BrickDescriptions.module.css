@@ -15,6 +15,6 @@
   :global(.ant-descriptions):nth-child(n):not(:last-child) {
     margin-bottom: 24px;
     padding-bottom: 18px;
-    border-bottom: 1px solid rgba(232, 232, 232, 1);
+    border-bottom: 1px solid var(--stroke-color-default);
   }
 }

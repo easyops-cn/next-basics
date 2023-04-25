@@ -36,6 +36,16 @@ export interface BrickDescriptionsItemProps
     properties?: any;
   };
 }
+export interface DescriptionListProps {
+  itemList: BrickDescriptionsItemProps[];
+  descriptionTitle: string;
+  configProps?: DescriptionsProps;
+  column?: number;
+  size?: SizeType;
+  bordered?: boolean;
+  layout?: LayoutType;
+  hideGroups?: string[] | string;
+}
 
 export type LayoutType = "horizontal" | "vertical";
 export type SizeType = "default" | "middle" | "small";
@@ -82,7 +92,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  descriptionList: any[];
+  descriptionList: DescriptionListProps[];
 
   /**
    * @kind BrickDescriptionsItemProps[]
@@ -229,13 +239,13 @@ export class BrickDescriptionsElement extends UpdatingElement {
               <BrickDescriptions
                 key={index}
                 itemList={description.itemList}
-                configProps={description.configProps}
                 descriptionTitle={description.descriptionTitle}
-                column={description.column}
-                size={description.size}
-                bordered={description.bordered}
-                layout={description.layout}
-                hideGroups={description.hideGroups}
+                configProps={description.configProps || this.configProps}
+                column={description.column || this.column}
+                size={description.size || this.size}
+                bordered={description.bordered || this.bordered}
+                layout={description.layout || this.layout}
+                hideGroups={description.hideGroups || this.hideGroups}
               />
             ))}
           </div>
