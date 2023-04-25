@@ -176,5 +176,67 @@ export const BrickDescriptionsStory: Story = {
         hideGroups: ["b"],
       },
     },
+    {
+      brick: "presentational-bricks.brick-descriptions",
+      properties: {
+        descriptionList: [
+          {
+            itemList: [
+              {
+                text: "name",
+                label: "名称",
+              },
+              {
+                text: "无",
+                label: "环境类型",
+              },
+              {
+                text: "client",
+                label: "授权模式",
+              },
+              {
+                text: "无",
+                label: "服务提供商",
+              },
+            ],
+            descriptionTitle: "基本信息",
+          },
+          {
+            itemList: [
+              {
+                text: "导入",
+                label: "集群来源",
+              },
+              {
+                text: "3个",
+                label: "节点数量",
+              },
+              {
+                text: "可分配CPU",
+                label: "12 Cores",
+              },
+              {
+                text: "可分配内存",
+                label: "44GB",
+              },
+            ],
+            descriptionTitle: "集群规格",
+          },
+          {
+            itemList: [
+              {
+                text: "Lynette",
+                label: "UserName",
+              },
+              {
+                text: "18",
+                label: "Age",
+              },
+            ],
+            descriptionTitle: "User Info",
+          },
+        ],
+      },
+    },
   ],
 };
