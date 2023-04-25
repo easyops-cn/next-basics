@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { BrickDescriptions } from "./BrickDescriptions";
 import { Descriptions } from "antd";
 

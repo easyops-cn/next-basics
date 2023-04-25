@@ -11,3 +11,10 @@
 :global(.ant-descriptions-view) {
   overflow: initial;
 }
+.descriptionList {
+  :global(.ant-descriptions):nth-child(n):not(:last-child) {
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(232, 232, 232, 1);
+  }
+}
