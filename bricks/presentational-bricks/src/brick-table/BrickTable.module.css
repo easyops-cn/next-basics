@@ -76,6 +76,20 @@ html[data-theme="dark"] {
       background: var(--antd-table-cell-fixed-body-bg);
     }
   }
+  :global(.ant-table .ant-table-thead) {
+    > tr {
+      > th:first-child {
+        padding-left: 16px;
+      }
+    }
+  }
+  :global(.ant-table .ant-table-tbody) {
+    > tr {
+      > td:first-child {
+        padding-left: 16px;
+      }
+    }
+  }
 }
 
 .expandIconSpan {
@@ -144,20 +158,6 @@ html[data-theme="dark"] {
     :global(.ant-table-row-selected) {
       td {
         background: var(--color-fill-bg-base-4);
-      }
-    }
-  }
-  :global(.ant-table.ant-table-middle .ant-table-thead) {
-    > tr {
-      > th:first-child {
-        padding-left: 16px;
-      }
-    }
-  }
-  :global(.ant-table.ant-table-middle .ant-table-tbody) {
-    > tr {
-      > td:first-child {
-        padding-left: 16px;
       }
     }
   }
