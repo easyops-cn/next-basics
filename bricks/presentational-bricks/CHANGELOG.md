@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.293.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.293.0...@next-bricks/presentational-bricks@1.293.1) (2023-04-26)
+
+
+### Bug Fixes
+
+* 表格组件第一列左侧padding调整 ([8ddc739](https://github.com/easyops-cn/next-basics/commit/8ddc739b2ae18be0f1bb81a5bcf2c78003488ff4))
+
+
+
+
+
 # [1.293.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.292.1...@next-bricks/presentational-bricks@1.293.0) (2023-04-25)
 
 
