@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.268.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.8...@next-bricks/forms@1.268.0) (2023-04-27)
+
+
+### Features
+
+* support dynamicFormV2 support checkbox ([1abbdf7](https://github.com/easyops-cn/next-basics/commit/1abbdf7297e2e1bb017949b2a4c1474499a85fbf))
+
+
+
+
+
 ## [1.267.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.7...@next-bricks/forms@1.267.8) (2023-04-24)
 
 
