@@ -7,6 +7,9 @@ describe("bundleMenu", () => {
       items: [
         {
           text: "<% I18N('WORLD') %>",
+          icon: {
+            imgSrc: "/xxx/yyy/images20230427.png",
+          },
         },
       ],
     };
@@ -37,6 +40,12 @@ describe("bundleMenu", () => {
         WORLD: "世界",
       },
     });
+    expect(menu.items).toEqual([
+      {
+        icon: { imgSrc: '<% IMG.get("images20230427.png") %>' },
+        text: "<% I18N('WORLD') %>",
+      },
+    ]);
   });
 
   it("should bundle menu with some of i18n not found", () => {
