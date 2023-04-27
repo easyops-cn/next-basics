@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.235.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.234.0...@next-bricks/next-builder@1.235.0) (2023-04-27)
+
+
+### Features
+
+* support build menu with imgSrc ([aef1f25](https://github.com/easyops-cn/next-basics/commit/aef1f25f2fe48797846f13e8225f59f528a35cfa))
+
+
+
+
+
 # [1.234.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.233.0...@next-bricks/next-builder@1.234.0) (2023-04-25)
 
 
