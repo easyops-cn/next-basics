@@ -1,6 +1,14 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
-import { AutoComplete, Cascader, Form, Input, InputNumber, Select } from "antd";
+import {
+  AutoComplete,
+  Cascader,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  Checkbox,
+} from "antd";
 import { ColumnComponent } from "./ColumnComponent";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
 import { Column } from "../interfaces";
@@ -122,6 +130,15 @@ const selectColumnWithSuffix = {
         },
       },
     },
+  },
+} as Column;
+
+const checkboxColumn = {
+  name: "checkbox",
+  label: "checkbox",
+  type: "checkbox",
+  props: {
+    text: "checkbox",
   },
 } as Column;
 
@@ -380,5 +397,13 @@ describe("ColumnComponent", () => {
     );
     wrapper.find(Input).simulate("blur");
     expect(handleInputBlur).toBeCalled();
+  });
+
+  it("checkbox should work", () => {
+    const wrapper = shallow(
+      <ColumnComponent column={checkboxColumn} field={field} />
+    );
+
+    expect(wrapper.find(Checkbox)).toHaveLength(1);
   });
 });
