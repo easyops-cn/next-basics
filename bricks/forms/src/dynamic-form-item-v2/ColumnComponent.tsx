@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { FormListFieldData } from "antd/lib/form/FormList";
 import { Column, SelectProps } from "../interfaces";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
-import { Cascader, Form, Input, InputNumber, Select } from "antd";
+import { Cascader, Form, Input, InputNumber, Select, Checkbox } from "antd";
 import _, { groupBy, isEqual, isNil, partial } from "lodash";
 import { getRealValue } from "./util";
 import { GeneralComplexOption } from "@next-libs/forms";
@@ -340,6 +340,20 @@ export function ColumnComponent(
             placeholder={placeholder}
             isAppendMode={isAppendMode}
           />
+        </Form.Item>
+      );
+    }
+
+    case "checkbox": {
+      return (
+        <Form.Item
+          {...restField}
+          label={labelNode}
+          name={[fieldName, name]}
+          rules={rules}
+          valuePropName="checked"
+        >
+          <Checkbox {...column.props}>{column.props?.text}</Checkbox>
         </Form.Item>
       );
     }

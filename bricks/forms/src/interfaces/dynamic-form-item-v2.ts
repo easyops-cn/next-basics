@@ -8,6 +8,7 @@ import {
 import { Rule, RuleObject } from "antd/lib/form";
 import { StoreValue } from "antd/lib/form/interface";
 import { OptionType } from ".";
+import { CheckboxProps } from "antd";
 
 export enum ComponentType {
   INPUT = "input",
@@ -215,6 +216,11 @@ export interface InputColumn {
   props: InputProps;
 }
 
+export interface CheckboxColumn {
+  type: "checkbox";
+  props: CheckboxProps & { text: string };
+}
+
 export interface SelectColumn {
   // type: ComponentType.SELECT;
   type: "select";
@@ -293,4 +299,5 @@ export type Column = BasicColumn &
     | CascaderColumn
     | EditorColumn
     | AutoCompleteColumn
+    | CheckboxColumn
   );
