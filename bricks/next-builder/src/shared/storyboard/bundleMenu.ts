@@ -30,7 +30,7 @@ export function bundleMenu(
       const menuIcon = menuItem.icon as Record<string, string>;
       if (menuIcon?.imgSrc) {
         const imgSrc = menuIcon.imgSrc.match(".+/(.+)$")[1];
-        const newSrc = `<% IMG.get("${imgSrc}") %>`;
+        const newSrc = `<% IMG.get(${JSON.stringify(imgSrc)}) %>`;
         menuItem.icon.imgSrc = newSrc;
       }
     });
