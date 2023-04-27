@@ -644,7 +644,14 @@ function TreeNode({
                 {node.icon?.lib === "text" ? (
                   <WorkbenchTextIcon icon={node.icon} />
                 ) : (
-                  <GeneralIcon icon={node.icon} />
+                  <GeneralIcon
+                    icon={node.icon}
+                    size={
+                      (node.icon as unknown as Record<string, string>)?.imgSrc
+                        ? 14
+                        : null
+                    }
+                  />
                 )}
               </span>
             </span>

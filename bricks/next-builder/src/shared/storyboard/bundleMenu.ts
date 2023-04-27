@@ -25,5 +25,15 @@ export function bundleMenu(
       }
     }
   }
+  if (Array.isArray(menu.items)) {
+    menu.items.forEach((menuItem) => {
+      const menuIcon = menuItem.icon as Record<string, string>;
+      if (menuIcon?.imgSrc) {
+        const imgSrc = menuIcon.imgSrc.match(".+/(.+)$")[1];
+        const newSrc = `<% IMG.get("${imgSrc}") %>`;
+        menuItem.icon.imgSrc = newSrc;
+      }
+    });
+  }
   menu.i18n = menuI18n;
 }
