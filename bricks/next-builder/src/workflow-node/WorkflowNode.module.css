@@ -1,3 +1,10 @@
+.layout {
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+}
+
 .container {
   display: flex;
   position: relative;

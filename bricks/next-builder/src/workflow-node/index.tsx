@@ -63,6 +63,13 @@ export class WorkflowNodeElement extends UpdatingElement {
   })
   statusStyle: StatusStyle;
 
+  @property({
+    attribute: false,
+  })
+  suffixBrick: {
+    useBrick: UseBrickConf;
+  };
+
   @event({ type: "node.click" })
   nodeClickEvent: EventEmitter<void>;
 
@@ -98,6 +105,7 @@ export class WorkflowNodeElement extends UpdatingElement {
             headerBgColor={this.headerBgColor}
             icon={this.icon}
             descUseBrick={this.descUseBrick}
+            suffixBrick={this.suffixBrick}
             containerStyle={this.containerStyle}
             iconStyle={this.iconStyle}
             descStyle={this.descStyle}
