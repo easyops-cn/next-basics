@@ -87,6 +87,7 @@ export default class WorkbenchBackend {
   private isNeedUpdateTree = false;
   private mTimeMap = new Map<string, string>();
   private dependCache: DependCache;
+  private hadFetchDepend = false;
 
   private static instance = new Map<string, WorkbenchBackend>();
 
@@ -128,12 +129,7 @@ export default class WorkbenchBackend {
   init(data: WorkbenchBackendActionForInitDetail): void {
     this.baseInfo = data;
     this.dependCache = new DependCache(data.projectId);
-    this.setDefaultDependencies();
   }
-
-  setDefaultDependencies = async (): Promise<void> => {
-    await this.dependCache.update();
-  };
 
   push(data: QueueItem): void {
     this.cacheQueue.push(data);
@@ -708,6 +704,10 @@ export default class WorkbenchBackend {
   };
 
   setUsedBrickPackage = async (list: string[]): Promise<void> => {
+    if (!this.hadFetchDepend) {
+      this.hadFetchDepend = true;
+      await this.dependCache.update();
+    }
     const installedPackage = this.dependCache.getList();
     const missPackage = list.filter((pack) => !installedPackage.includes(pack));
     if (missPackage.length) {
