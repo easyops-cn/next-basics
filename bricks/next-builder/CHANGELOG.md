@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.235.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.235.0...@next-bricks/next-builder@1.235.1) (2023-04-28)
+
+
+### Bug Fixes
+
+* fix await fetch depend ([2555cec](https://github.com/easyops-cn/next-basics/commit/2555cecbcbc29b9c7a3f5a105cbfb983d551be9f))
+
+
+
+
+
 # [1.235.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.234.0...@next-bricks/next-builder@1.235.0) (2023-04-27)
 
 
