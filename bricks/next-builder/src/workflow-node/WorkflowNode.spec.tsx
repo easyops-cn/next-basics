@@ -1,5 +1,6 @@
 import React, { createRef } from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import * as brickKit from "@next-core/brick-kit";
 import { prettyDOM } from "@testing-library/dom";
 import "@testing-library/jest-dom";
 import { WorkflowNode, WorkFlowNodeRef } from "./WorkflowNode";
@@ -42,12 +43,30 @@ describe("WorkflowNode", () => {
           },
         ],
       },
+      suffixBrick: {
+        useBrick: [
+          {
+            brick: "div",
+            properties: {
+              text: "hello",
+            },
+          },
+        ],
+      },
     };
+
+    jest
+      .spyOn(brickKit, "BrickAsComponent")
+      .mockImplementation(({ useBrick }) => (
+        <div>{JSON.stringify(useBrick)}</div>
+      ));
 
     const ref = createRef<WorkFlowNodeRef>();
     const { container } = render(<WorkflowNode {...props} ref={ref} />);
 
     expect(screen.getByText("start")).toBeInTheDocument();
+
+    expect(screen.getByText(/hello/)).toBeInTheDocument();
 
     const node = container.getElementsByClassName("container")[0];
 

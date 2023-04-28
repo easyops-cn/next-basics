@@ -28,6 +28,9 @@ export interface WorkflowNodeProps {
   descUseBrick?: {
     useBrick: UseBrickConf;
   };
+  suffixBrick?: {
+    useBrick: UseBrickConf;
+  };
   containerStyle?: React.CSSProperties;
   descStyle?: React.CSSProperties;
   iconStyle?: React.CSSProperties;
@@ -45,6 +48,7 @@ export function LegacyWorkflowNode(
     header,
     icon,
     descUseBrick,
+    suffixBrick,
     containerStyle,
     headerBgColor,
     descStyle,
@@ -72,48 +76,53 @@ export function LegacyWorkflowNode(
   }));
 
   return (
-    <div
-      className={classNames(styles.container, {
-        [styles.hasDesc]: descUseBrick?.useBrick,
-      })}
-      style={{
-        ...(isHover ? { ...statusStyle?.hover } : null),
-        ...(isActive ? { ...statusStyle?.active } : null),
-        ...containerStyle,
-      }}
-      onClick={onNodeClick}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className={styles.header} style={{ background: headerBgColor }}>
-        <div
-          className={styles.iconWrapper}
-          style={{ background: headerBgColor, ...iconStyle }}
-        >
-          <GeneralIcon icon={icon} />
+    <div className={styles.layout}>
+      <div
+        className={classNames(styles.container, {
+          [styles.hasDesc]: descUseBrick?.useBrick,
+        })}
+        style={{
+          ...(isHover ? { ...statusStyle?.hover } : null),
+          ...(isActive ? { ...statusStyle?.active } : null),
+          ...containerStyle,
+        }}
+        onClick={onNodeClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className={styles.header} style={{ background: headerBgColor }}>
+          <div
+            className={styles.iconWrapper}
+            style={{ background: headerBgColor, ...iconStyle }}
+          >
+            <GeneralIcon icon={icon} />
+          </div>
+          <div>{header}</div>
         </div>
-        <div>{header}</div>
-      </div>
 
-      {!!filteredActions.length && (
-        <div
-          className={styles.actionsToolbar}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <ItemActionsComponent
-            filteredActions={filteredActions}
-            item={dataSource}
-            buttonType="text"
-          />
-        </div>
-      )}
-      {descUseBrick?.useBrick && (
-        <div className={styles.description} style={descStyle}>
-          <BrickAsComponent
-            useBrick={descUseBrick.useBrick}
-            data={dataSource}
-          />
-        </div>
+        {!!filteredActions.length && (
+          <div
+            className={styles.actionsToolbar}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <ItemActionsComponent
+              filteredActions={filteredActions}
+              item={dataSource}
+              buttonType="text"
+            />
+          </div>
+        )}
+        {descUseBrick?.useBrick && (
+          <div className={styles.description} style={descStyle}>
+            <BrickAsComponent
+              useBrick={descUseBrick.useBrick}
+              data={dataSource}
+            />
+          </div>
+        )}
+      </div>
+      {suffixBrick?.useBrick && (
+        <BrickAsComponent useBrick={suffixBrick.useBrick} data={dataSource} />
       )}
     </div>
   );
