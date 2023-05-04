@@ -1,5 +1,5 @@
 import { getRuntime } from "@next-core/brick-kit";
-import { isEmpty } from "lodash";
+import { isEmpty, uniq } from "lodash";
 
 interface FlowNode {
   name?: string;
@@ -71,18 +71,23 @@ function getFlowNodeType(type: FLowNodeType): string {
   }
 }
 
-function walkStep(startId: string, nodeMap: Map<string, FlowNode>): string[] {
+function getRelatedNodes(
+  startId: string,
+  nodeMap: Map<string, FlowNode>
+): string[] {
   const steps = [startId];
-  const starNode = nodeMap.get(startId);
-  // 目前node的 next 指向为1个
-  let nextNodeId = starNode.next?.[0];
-  while (nextNodeId) {
-    steps.push(nextNodeId);
-    const node = nodeMap.get(nextNodeId);
-    nextNodeId = node.next?.[0];
-  }
 
-  return steps;
+  const _getRelatedNodes = (id: string, nodeList: string[]): void => {
+    const starNode = nodeMap.get(id);
+    starNode?.next?.forEach((nextId) => {
+      nodeList.push(nextId);
+      _getRelatedNodes(nextId, nodeList);
+    });
+  };
+
+  _getRelatedNodes(startId, steps);
+
+  return uniq(steps);
 }
 
 export function getWorkflowGraph(flowData: FlowData): GraphData {
@@ -91,7 +96,7 @@ export function getWorkflowGraph(flowData: FlowData): GraphData {
     id: rootId,
     type: "node",
   };
-  const { steps: nodes, relations } = flowData;
+  const { steps: nodes } = flowData;
   const graphNodes: GraphNode[] = [];
   const layerEdges: GraphEdge[] = [];
   const containerEdges: GraphEdge[] = [];
@@ -99,7 +104,6 @@ export function getWorkflowGraph(flowData: FlowData): GraphData {
   const childrenLayoutEdges: GraphEdge[] = [];
   const nodeLinkEdges: GraphEdge[] = [];
   const childrenIds: string[] = [];
-  let filterRelations = relations;
 
   const nodeMap = new Map<string, FlowNode>();
 
@@ -125,6 +129,14 @@ export function getWorkflowGraph(flowData: FlowData): GraphData {
         source: rootId,
         target: node.id,
         type: "include",
+      });
+
+      node.next?.forEach((nextId) => {
+        nodeLinkEdges.push({
+          source: node.id,
+          target: nextId,
+          type: "dagre",
+        });
       });
     }
 
@@ -180,7 +192,7 @@ export function getWorkflowGraph(flowData: FlowData): GraphData {
           type: "group",
         });
 
-        const children = walkStep(startId, nodeMap);
+        const children = getRelatedNodes(startId, nodeMap);
 
         children.forEach((id) => {
           childrenLayoutEdges.push({
@@ -189,36 +201,19 @@ export function getWorkflowGraph(flowData: FlowData): GraphData {
             type: "childrenLayout",
           });
 
-          const filter = filterRelations.filter((r) => r.src === id);
+          const nodeData = nodeMap.get(id);
 
-          filter.forEach((r) => {
-            // istanbul ignore if
-            if (node.children.includes(r.dst)) {
-              childrenLayoutEdges.push({
-                source: id,
-                target: r.dst,
-                type: "childrenDagre",
-              });
-
-              filterRelations = filterRelations.filter(
-                (item) => !(item.src == id && item.dst == r.dst)
-              );
-            }
+          nodeData.next?.forEach((nextId) => {
+            childrenLayoutEdges.push({
+              source: id,
+              target: nextId,
+              type: "childrenDagre",
+            });
           });
         });
       });
     }
   });
-
-  filterRelations
-    ?.filter((relation) => relation.type === "line")
-    ?.forEach((relation) => {
-      nodeLinkEdges.push({
-        source: relation.src,
-        target: relation.dst,
-        type: "dagre",
-      });
-    });
 
   const graphEdges = layerEdges.concat(
     containerEdges,
