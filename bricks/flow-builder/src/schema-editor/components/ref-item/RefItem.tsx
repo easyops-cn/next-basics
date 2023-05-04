@@ -8,7 +8,11 @@ import { fetchModelData } from "../../hooks/useCurModel";
 import { MoreOption } from "../more-option/MoreOption";
 import { ContractContext } from "../../ContractContext";
 import { ModelFieldItem } from "../../interfaces";
-import { processRefItemData, processRefItemInitValue } from "../../processor";
+import {
+  processRefItemData,
+  processRefItemInitValue,
+  getFlattenFields,
+} from "../../processor";
 
 export interface ProcessRefItemValue {
   name?: string;
@@ -36,7 +40,7 @@ export function RefItem(props: RefItemProps): React.ReactElement {
   useEffect(() => {
     (async () => {
       const data = await fetchModelData(refValue.name);
-      setFieldList(data?.fields);
+      setFieldList(getFlattenFields(data?.fields, data?.importModelDefinition));
     })();
   }, [refValue.name]);
 
@@ -73,7 +77,7 @@ export function RefItem(props: RefItemProps): React.ReactElement {
         find.name,
         `${find.namespaceId}.${find.name}`
       );
-      setFieldList(find.fields);
+      setFieldList(getFlattenFields(find.fields, find?.importModelDefinition));
     }
   };
 
