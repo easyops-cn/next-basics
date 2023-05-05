@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.236.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.235.1...@next-bricks/next-builder@1.236.0) (2023-05-05)
+
+
+### Bug Fixes
+
+* refactor graph logic ([050c57e](https://github.com/easyops-cn/next-basics/commit/050c57e38a5bfbacdf20f184c9f3a5e1ea90bf56))
+
+
+### Features
+
+* support suffixBrick ([c8c25bc](https://github.com/easyops-cn/next-basics/commit/c8c25bca3649f26ddc88bda9590dc569b49d0962))
+
+
+
+
+
 ## [1.235.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.235.0...@next-bricks/next-builder@1.235.1) (2023-04-28)
 
 

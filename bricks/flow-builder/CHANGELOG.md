@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.29.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.4...@next-bricks/flow-builder@1.29.5) (2023-05-05)
+
+
+### Bug Fixes
+
+* Fix the problem that the reference model field in the contract center is displayed incorrectly ([aa34090](https://github.com/easyops-cn/next-basics/commit/aa34090225064b2ede32b1f4a2b90e96758dce66))
+
+
+
+
+
 ## [1.29.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.3...@next-bricks/flow-builder@1.29.4) (2023-04-14)
 
 
