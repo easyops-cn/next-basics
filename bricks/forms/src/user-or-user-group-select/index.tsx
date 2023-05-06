@@ -194,6 +194,15 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   })
   userGroupQuery?: Record<string, any>;
 
+  /**
+   * @description 是否多选，默认为多选
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  isMultiple?: boolean = true;
+
   /* =========================== events =========================== */
 
   /**
@@ -286,6 +295,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
             userQuery={this.userQuery}
             userGroupQuery={this.userGroupQuery}
             hideInvalidUser={this.hideInvalidUser}
+            isMultiple={this.isMultiple}
           />
         </BrickWrapper>,
         this

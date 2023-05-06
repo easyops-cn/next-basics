@@ -56,6 +56,7 @@ export interface UserSelectFormItemProps {
   hideInvalidUser?: boolean;
   userGroupQuery?: Record<string, any>;
   userQuery?: Record<string, any>;
+  isMultiple?: boolean;
 }
 
 type ModelObjectItem = Partial<CmdbModels.ModelCmdbObject>;
@@ -76,6 +77,7 @@ interface UserOrUserGroupSelectProps extends FormItemWrapperProps {
   userGroupQuery?: Record<string, any>;
   userQuery?: Record<string, any>;
   objectList?: ModelObjectItem[];
+  isMultiple?: boolean;
 }
 
 let objectListCache: ModelObjectItem[];
@@ -369,9 +371,12 @@ export function LegacyUserSelectFormItem(
   };
 
   const handleSelectChange = (originValue) => {
-    const value = filter(originValue, (item) => {
-      return !find(props.staticList, (v) => v === item.key);
-    });
+    const value = filter(
+      props.isMultiple ? originValue : originValue ? [originValue] : [],
+      (item) => {
+        return !find(props.staticList, (v) => v === item.key);
+      }
+    );
     value.unshift(...staticValue.current);
     setSelectedValue(value);
     props.onChangeV2?.(value);
@@ -441,10 +446,9 @@ export function LegacyUserSelectFormItem(
         }),
       ];
     }
-    const resultSelectedValue = uniqBy(
-      [...selectedValue, ...labelValue],
-      "key"
-    );
+    const resultSelectedValue = props.isMultiple
+      ? uniqBy([...selectedValue, ...labelValue], "key")
+      : labelValue;
 
     setSelectedValue(resultSelectedValue);
     const resultValue = {
@@ -549,10 +553,11 @@ export function LegacyUserSelectFormItem(
       className={styles.UserOrUserGroupSelectContainer}
     >
       <Select
+        showSearch
         className={styles.customSelect}
         ref={selectRef}
         allowClear={true}
-        mode="multiple"
+        mode={props.isMultiple ? "multiple" : null}
         labelInValue
         placeholder={props.placeholder}
         filterOption={false}
@@ -634,6 +639,7 @@ export function LegacyUserSelectFormItem(
         title={title}
         onSelected={handleModalSelected}
         onCancel={closeModal}
+        rowSelectionType={props.isMultiple ? "checkbox" : "radio"}
         showSizeChanger={true}
         {...(modalObjectId === "USER" && props.hideInvalidUser
           ? {
@@ -704,6 +710,7 @@ export function UserOrUserGroupSelect(
         hideInvalidUser={props.hideInvalidUser}
         userQuery={props.userQuery}
         userGroupQuery={props.userGroupQuery}
+        isMultiple={props.isMultiple}
       />
     </FormItemWrapper>
   );
