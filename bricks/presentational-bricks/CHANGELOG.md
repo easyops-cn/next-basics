@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.294.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.293.2...@next-bricks/presentational-bricks@1.294.0) (2023-05-06)
+
+
+### Features
+
+* add qrcode-download component ([fe44745](https://github.com/easyops-cn/next-basics/commit/fe4474531b1353539b5460cca0ffef2be08773af))
+
+
+
+
+
 ## [1.293.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.293.1...@next-bricks/presentational-bricks@1.293.2) (2023-04-26)
 
 
