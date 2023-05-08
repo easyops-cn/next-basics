@@ -7,7 +7,7 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import { BrickTree } from "./BrickTree";
+import { BrickTree, BrickTreeProps } from "./BrickTree";
 import { TreeProps, AntTreeNodeProps, DataNode } from "antd/lib/tree";
 import { checkedFilterProps } from "../interfaces/brick-tree";
 import { MenuIcon } from "@next-core/brick-types";
@@ -244,6 +244,16 @@ export class BrickTreeElement extends UpdatingElement {
    */
   @property({ attribute: false }) deselectable = true;
 
+  /**
+   * @kind {useBrick:UseBrickConf}
+   * @required true
+   * @default -
+   * @description 自定义节点icon
+   * @group basic
+   */
+  @property({ attribute: false })
+  iconUseBrick: BrickTreeProps["iconUseBrick"];
+
   connectedCallback(): void {
     this.style.display = "flex";
     this.style.flexDirection = "column";
@@ -310,6 +320,7 @@ export class BrickTreeElement extends UpdatingElement {
             deselectable={this.deselectable}
             alsoSearchByKey={this.alsoSearchByKey}
             isFilter={this.isFilter}
+            iconUseBrick={this.iconUseBrick}
           />
         </BrickWrapper>,
         this

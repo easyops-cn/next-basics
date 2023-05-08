@@ -55,12 +55,22 @@ function isMenuIcon(icon: TreeIcon): icon is MenuIcon {
   return (icon as MenuIcon).lib !== undefined;
 }
 
-function getTreeNodes(list: BrickTreeNodeProps[]): DataNode[] {
+function getTreeNodes(
+  list: BrickTreeNodeProps[],
+  iconUseBrick: { useBrick: UseBrickConf }
+): DataNode[] {
   return list.map((item) => {
     const { children, icon: _icon, key, ...itemProps } = item;
     let icon: React.ReactNode;
 
-    if (_icon) {
+    if (iconUseBrick) {
+      icon = (
+        <BrickAsComponent
+          useBrick={iconUseBrick.useBrick}
+          data={item}
+        ></BrickAsComponent>
+      );
+    } else if (_icon) {
       if (isMenuIcon(_icon)) {
         icon = <GeneralIcon icon={_icon} />;
       } else {
@@ -72,7 +82,7 @@ function getTreeNodes(list: BrickTreeNodeProps[]): DataNode[] {
       ...itemProps,
       icon,
       key: key ?? uniqueId("tree-node-"),
-      children: children && getTreeNodes(children),
+      children: children && getTreeNodes(children, iconUseBrick),
     };
   });
 }
@@ -190,6 +200,7 @@ export interface BrickTreeProps {
   deselectable?: boolean;
   alsoSearchByKey?: boolean;
   isFilter?: boolean;
+  iconUseBrick?: { useBrick: UseBrickConf };
 }
 
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
@@ -213,6 +224,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     alsoSearchByKey,
     isFilter,
     onSearch,
+    iconUseBrick,
   } = props;
   const [allChecked, setAllChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -226,7 +238,10 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
   const treeContainerRef = useRef<HTMLDivElement>();
   const nodeMatchedRef = useRef<boolean>(false);
 
-  const treeData = useMemo(() => getTreeNodes(dataSource), [dataSource]);
+  const treeData = useMemo(
+    () => getTreeNodes(dataSource, iconUseBrick),
+    [dataSource]
+  );
   const filterTreeKeys = useMemo(
     () =>
       flat(dataSource)
