@@ -125,7 +125,6 @@ export class BrickGeneralSearchElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default true
    * @description 是否支持ip搜索
    * @group basic
    */
@@ -206,6 +205,15 @@ export class BrickGeneralSearchElement extends UpdatingElement {
     attribute: false,
   })
   searchBoxStyleType: "defalut" | "round" = "defalut";
+
+  /**
+   * @description 可以点击清除图标删除内容
+   * @group ui
+   */
+  @property({
+    type: Boolean,
+  })
+  allowClear?: boolean;
 
   /**
    * @kind string
@@ -320,6 +328,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
             buttonStyle={this.buttonStyle}
             debounceTime={this.debounceTime}
             disableAutofocus={this.disableAutofocus}
+            allowClear={this.allowClear}
             ref={(ref) => {
               this.inputRef = ref;
             }}
