@@ -120,4 +120,22 @@ describe("presentational-bricks.brick-general-search", () => {
     expect(mockEventListener).toHaveBeenCalled();
     document.body.removeChild(element);
   });
+
+  it("should dispatch `input.blur` event with value", async () => {
+    const element = document.createElement(
+      "presentational-bricks.brick-general-search"
+    );
+
+    await jest.runAllTimers();
+    document.body.appendChild(element);
+    const spyOnDispatch = jest.spyOn(element, "dispatchEvent");
+
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.onBlur("easyops");
+
+    expect((spyOnDispatch.mock.calls[0][0] as CustomEvent).detail).toEqual(
+      "easyops"
+    );
+  });
 });

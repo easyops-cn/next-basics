@@ -24,6 +24,7 @@ interface TestGeneralSearchProps {
   onSearchTypeChange?: (value: string) => void;
   searchBoxStyleType?: "defalut" | "round";
   allowClear?: boolean;
+  onBlur?: (value: string) => void;
 }
 
 const sizeClassMap = {
@@ -123,6 +124,7 @@ export const BrickGeneralSearch = forwardRef<Input, TestGeneralSearchProps>(
               placeholder={props.placeholder}
               style={props.inputStyle}
               autoFocus={!props.disableAutofocus}
+              onBlur={() => props?.onBlur(query)}
             />
             <Button
               type="link"
@@ -166,6 +168,7 @@ export const BrickGeneralSearch = forwardRef<Input, TestGeneralSearchProps>(
                 onChange={handleOnChange}
                 placeholder={props.placeholder}
                 autoFocus={!props.disableAutofocus}
+                onBlur={() => props?.onBlur(query)}
               />
               <Button
                 type="link"

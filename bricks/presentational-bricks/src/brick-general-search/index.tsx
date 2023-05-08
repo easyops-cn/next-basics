@@ -256,6 +256,16 @@ export class BrickGeneralSearchElement extends UpdatingElement {
   @event({ type: "search.type.change", bubbles: true })
   searchTypeChange: EventEmitter<string>;
 
+  /**
+   * @detail string
+   * @description 失焦时触发, 而且会传出当前输入框当前值
+   */
+  @event({ type: "input.blur" }) blurEvent: EventEmitter<string>;
+
+  private _handleBlur = (value: string): void => {
+    this.blurEvent.emit(value);
+  };
+
   inputRef: Input;
 
   focus(): void {
@@ -336,6 +346,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
             searchType={this.searchType}
             onSearchTypeChange={this._handleSearchTypeChange}
             searchBoxStyleType={this.searchBoxStyleType}
+            onBlur={this._handleBlur}
           />
         </BrickWrapper>,
         this

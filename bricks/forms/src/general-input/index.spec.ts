@@ -60,5 +60,13 @@ describe("forms.general-input", () => {
     expect((dispatchEvent.mock.calls[5][0] as CustomEvent).detail).toEqual(
       "down"
     );
+
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.onBlur("easyops");
+
+    expect((dispatchEvent.mock.calls[6][0] as CustomEvent).detail).toEqual(
+      "easyops"
+    );
   });
 });
