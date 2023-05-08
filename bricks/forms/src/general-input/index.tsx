@@ -262,6 +262,15 @@ export class GeneralInputElement extends FormItemElement {
   @property({ type: Boolean })
   copyButton: boolean;
 
+  /**
+   * @description 可以点击清除图标删除内容
+   * @group ui
+   */
+  @property({
+    type: Boolean,
+  })
+  allowClear?: boolean;
+
   /* =========================== Group: style =========================== */
 
   /**
@@ -384,6 +393,7 @@ export class GeneralInputElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             trim={this.trim}
+            allowClear={this.allowClear}
           />
         </BrickWrapper>,
         this

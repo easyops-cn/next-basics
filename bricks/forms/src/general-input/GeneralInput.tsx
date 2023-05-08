@@ -35,6 +35,7 @@ interface InputGroupProps
   copyButton?: boolean;
   addonBefore?: string;
   addonAfter?: string;
+  allowClear?: boolean;
   onChange?: (vevent: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
@@ -50,8 +51,15 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
   ref
 ): React.ReactElement {
   const { t } = useTranslation(NS_FORMS);
-  const { formElement, value, inputBoxStyle, size, copyButton, ...inputProps } =
-    props;
+  const {
+    formElement,
+    value,
+    inputBoxStyle,
+    size,
+    copyButton,
+    allowClear,
+    ...inputProps
+  } = props;
 
   const handleCopy = (text: string, success: boolean) => {
     if (success) {
@@ -72,6 +80,7 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
       value={value}
       style={inputBoxStyle ?? { width: widthSize[size] }}
       ref={ref}
+      allowClear={allowClear}
       {...inputProps}
     />
   );

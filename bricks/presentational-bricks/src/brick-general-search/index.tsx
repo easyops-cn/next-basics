@@ -125,7 +125,6 @@ export class BrickGeneralSearchElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default true
    * @description 是否支持ip搜索
    * @group basic
    */
@@ -208,6 +207,15 @@ export class BrickGeneralSearchElement extends UpdatingElement {
   searchBoxStyleType: "defalut" | "round" = "defalut";
 
   /**
+   * @description 可以点击清除图标删除内容
+   * @group ui
+   */
+  @property({
+    type: Boolean,
+  })
+  allowClear?: boolean;
+
+  /**
    * @kind string
    * @required false
    * @default query
@@ -247,6 +255,16 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    */
   @event({ type: "search.type.change", bubbles: true })
   searchTypeChange: EventEmitter<string>;
+
+  /**
+   * @detail string
+   * @description 失焦时触发, 而且会传出当前输入框当前值
+   */
+  @event({ type: "input.blur" }) blurEvent: EventEmitter<string>;
+
+  private _handleBlur = (value: string): void => {
+    this.blurEvent.emit(value);
+  };
 
   inputRef: Input;
 
@@ -320,6 +338,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
             buttonStyle={this.buttonStyle}
             debounceTime={this.debounceTime}
             disableAutofocus={this.disableAutofocus}
+            allowClear={this.allowClear}
             ref={(ref) => {
               this.inputRef = ref;
             }}
@@ -327,6 +346,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
             searchType={this.searchType}
             onSearchTypeChange={this._handleSearchTypeChange}
             searchBoxStyleType={this.searchBoxStyleType}
+            onBlur={this._handleBlur}
           />
         </BrickWrapper>,
         this

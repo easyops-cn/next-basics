@@ -5,6 +5,7 @@ import { Input, Button, Select } from "antd";
 
 const onUpdate = jest.fn();
 const onChange = jest.fn();
+const onBlur = jest.fn();
 const onSearchTypeChange = jest.fn();
 
 describe("BrickGeneralSearch", () => {
@@ -13,6 +14,7 @@ describe("BrickGeneralSearch", () => {
       <BrickGeneralSearch
         onUpdate={onUpdate}
         onChange={onChange}
+        onBlur={onBlur}
         query="1"
         size="extraLarge"
         shape="round"
@@ -27,6 +29,10 @@ describe("BrickGeneralSearch", () => {
         value: "123",
       },
     });
+
+    wrapper.find(Input).simulate("blur", "easyops");
+
+    expect(onBlur).toHaveBeenCalled();
     wrapper.find(Button).simulate("click");
     expect(onUpdate).toHaveBeenCalled();
   });
@@ -68,6 +74,7 @@ describe("BrickGeneralSearch", () => {
       <BrickGeneralSearch
         onUpdate={onUpdate}
         onChange={onChange}
+        onBlur={onBlur}
         query="1"
         size="large"
         shape="default"
@@ -85,6 +92,9 @@ describe("BrickGeneralSearch", () => {
     setTimeout(() => {
       expect(wrapper.find(Select).prop("value")).toBe("ip");
       expect(onSearchTypeChange).toHaveBeenCalled();
+      wrapper.find(Input).simulate("blur", "test");
+
+      expect(onBlur).toHaveBeenLastCalledWith("test");
     }, 300);
   });
 });

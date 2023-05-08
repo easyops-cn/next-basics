@@ -1,6 +1,7 @@
 .searchBtn {
   color: var(--color-secondary-text);
   background-image: none;
+  z-index: 1;
   &:hover,
   &:focus {
     color: var(--color-normal-text);
@@ -36,6 +37,9 @@
     padding-left: 20px;
     width: 58px;
   }
+  :global(.ant-input-clear-icon) {
+    margin-right: 22px;
+  }
 }
 
 .roundSearchInputContainer {
@@ -63,6 +67,10 @@
   > .searchInput {
     height: 56px;
     padding-left: 30px;
+
+    :global(.ant-input-clear-icon) {
+      margin-right: 22px;
+    }
   }
   > .searchBtn {
     height: 44px;
@@ -72,7 +80,7 @@
 }
 .selectSearchBox {
   width: 100%;
-  display: inline-block;
+  display: inline-flex;
   background: var(--color-fill-bg-container-1);
   height: 56px;
   border-radius: 37px;
@@ -95,6 +103,7 @@
   > .searchInput {
     height: 56px;
     padding-left: 12px;
+    padding-right: 48px;
     border-radius: 0 37px 37px 0;
   }
   > .searchBtn {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, forwardRef, useCallback } from "react";
-import { SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { Input, Button, Select } from "antd";
 import style from "./index.module.css";
 import { Size, Shape } from "./index";
@@ -23,6 +23,8 @@ interface TestGeneralSearchProps {
   searchType?: "all" | "ip";
   onSearchTypeChange?: (value: string) => void;
   searchBoxStyleType?: "defalut" | "round";
+  allowClear?: boolean;
+  onBlur?: (value: string) => void;
 }
 
 const sizeClassMap = {
@@ -113,6 +115,7 @@ export const BrickGeneralSearch = forwardRef<Input, TestGeneralSearchProps>(
           >
             <Input
               ref={ref}
+              allowClear={props.allowClear}
               className={style.searchInput}
               size={sizeClassMap[props.size][props.shape].input as any}
               onPressEnter={handleOnSearch}
@@ -121,6 +124,7 @@ export const BrickGeneralSearch = forwardRef<Input, TestGeneralSearchProps>(
               placeholder={props.placeholder}
               style={props.inputStyle}
               autoFocus={!props.disableAutofocus}
+              onBlur={() => props?.onBlur(query)}
             />
             <Button
               type="link"
@@ -155,6 +159,7 @@ export const BrickGeneralSearch = forwardRef<Input, TestGeneralSearchProps>(
             </Select>
             <span className={style.selectSearchInputContainer}>
               <Input
+                allowClear={props.allowClear}
                 bordered={false}
                 className={style.searchInput}
                 size={sizeClassMap[props.size][props.shape].input as any}
@@ -163,6 +168,7 @@ export const BrickGeneralSearch = forwardRef<Input, TestGeneralSearchProps>(
                 onChange={handleOnChange}
                 placeholder={props.placeholder}
                 autoFocus={!props.disableAutofocus}
+                onBlur={() => props?.onBlur(query)}
               />
               <Button
                 type="link"
