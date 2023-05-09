@@ -246,7 +246,6 @@ export class BrickTreeElement extends UpdatingElement {
 
   /**
    * @kind {useBrick:UseBrickConf}
-   * @required true
    * @default -
    * @description 自定义节点icon
    * @group basic
