@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.269.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.269.1...@next-bricks/forms@1.269.2) (2023-05-09)
+
+
+### Bug Fixes
+
+* **dynamic-form-item-v2:** 解决密码框会被浏览器默认填充账号密码的问题 Refs ITSERVICE_NEXT-4925 ([09b1a7a](https://github.com/easyops-cn/next-basics/commit/09b1a7af6cdc5e28db9cb0b31f3849894616e9c4))
+* **dynamic-form-item-v2:** 解决密码框会被浏览器默认填充账号密码的问题 Refs ITSERVICE_NEXT-4925 ([f43b52c](https://github.com/easyops-cn/next-basics/commit/f43b52caefa3ed250bde5cc523a9cecb0e11806a))
+
+
+
+
+
 ## [1.269.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.269.0...@next-bricks/forms@1.269.1) (2023-05-09)
 
 **Note:** Version bump only for package @next-bricks/forms
