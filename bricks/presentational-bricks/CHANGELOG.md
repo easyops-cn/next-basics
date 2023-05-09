@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.295.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.294.0...@next-bricks/presentational-bricks@1.295.0) (2023-05-09)
+
+
+### Bug Fixes
+
+* brick-tree构件支持自定义图标 Refs ITSERVICE_NEXT-6226 ([865a3eb](https://github.com/easyops-cn/next-basics/commit/865a3ebbfffc16cca44ae0b780b29fa83c535e96))
+* brick-tree构件支持自定义图标 Refs ITSERVICE_NEXT-6226 ([c8a1b1d](https://github.com/easyops-cn/next-basics/commit/c8a1b1d38380bbc3e3783371a978882c64fa6731))
+* brick-tree构件支持自定义图标 Refs ITSERVICE_NEXT-6226 ([63d69e4](https://github.com/easyops-cn/next-basics/commit/63d69e45a094a11720ec23ff9b74d8d89dc56043))
+
+
+### Features
+
+* input and search support allowClear ([e0ede03](https://github.com/easyops-cn/next-basics/commit/e0ede032ae23ad91ac8b20cf2004bf5bfd5eb9a7))
+* support input.blur event ([3a72e34](https://github.com/easyops-cn/next-basics/commit/3a72e343a7d4d6012ccca4d22703f2edc626656b))
+
+
+
+
+
 # [1.294.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.293.2...@next-bricks/presentational-bricks@1.294.0) (2023-05-06)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.269.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.268.0...@next-bricks/forms@1.269.0) (2023-05-09)
+
+
+### Features
+
+* input and search support allowClear ([e0ede03](https://github.com/easyops-cn/next-basics/commit/e0ede032ae23ad91ac8b20cf2004bf5bfd5eb9a7))
+* support input.blur event ([3a72e34](https://github.com/easyops-cn/next-basics/commit/3a72e343a7d4d6012ccca4d22703f2edc626656b))
+
+
+
+
+
 # [1.268.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.267.8...@next-bricks/forms@1.268.0) (2023-04-27)
 
 
