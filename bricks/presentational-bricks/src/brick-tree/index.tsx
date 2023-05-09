@@ -252,7 +252,7 @@ export class BrickTreeElement extends UpdatingElement {
    * @group basic
    */
   @property({ attribute: false })
-  iconUseBrick: BrickTreeProps["iconUseBrick"];
+  iconUseBrick?: BrickTreeProps["iconUseBrick"];
 
   connectedCallback(): void {
     this.style.display = "flex";

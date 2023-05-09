@@ -64,12 +64,7 @@ function getTreeNodes(
     let icon: React.ReactNode;
 
     if (iconUseBrick) {
-      icon = (
-        <BrickAsComponent
-          useBrick={iconUseBrick.useBrick}
-          data={item}
-        ></BrickAsComponent>
-      );
+      icon = <BrickAsComponent useBrick={iconUseBrick.useBrick} data={item} />;
     } else if (_icon) {
       if (isMenuIcon(_icon)) {
         icon = <GeneralIcon icon={_icon} />;
