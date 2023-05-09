@@ -12,6 +12,7 @@ import {
 import { ColumnComponent } from "./ColumnComponent";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
 import { Column } from "../interfaces";
+import { act } from "react-dom/test-utils";
 
 const field = {
   name: 0,
@@ -405,5 +406,18 @@ describe("ColumnComponent", () => {
     );
 
     expect(wrapper.find(Checkbox)).toHaveLength(1);
+  });
+
+  it("should work with debounceTime", () => {
+    const wrapper = mount(
+      <ColumnComponent column={inputPasswordColumn} field={field} />
+    );
+
+    expect(wrapper.find(Input).prop("readOnly")).toBe(true);
+    act(() => {
+      jest.runOnlyPendingTimers();
+    });
+    wrapper.update();
+    expect(wrapper.find(Input).prop("readOnly")).toBe(false);
   });
 });
