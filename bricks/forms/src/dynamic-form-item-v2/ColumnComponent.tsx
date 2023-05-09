@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { FormListFieldData } from "antd/lib/form/FormList";
 import { Column, SelectProps } from "../interfaces";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
@@ -66,7 +66,7 @@ export function ColumnComponent(
   const { name: fieldName, ...restField } = field;
 
   const rowValue = formValue?.[rowIndex];
-
+  const [isReadOnly, setIsReadOnly] = useState(true);
   const labelNode = useMemo(
     () => hasLabel && rowIndex === 0 && <div>{label}</div>,
     [label, rowIndex, hasLabel]
@@ -109,6 +109,15 @@ export function ColumnComponent(
       }),
     [column.rules, formValue, name, rowIndex, rowValue]
   );
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsReadOnly(false);
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   switch (column.type) {
     case "input": {
@@ -172,6 +181,7 @@ export function ColumnComponent(
             placeholder={placeholder}
             disabled={disabled}
             visibilityToggle={visibilityToggle}
+            readOnly={isReadOnly}
           />
         </Form.Item>
       );
