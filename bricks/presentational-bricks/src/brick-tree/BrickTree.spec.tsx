@@ -6,6 +6,7 @@ import { Checkbox, Empty, Tree } from "antd";
 import { CheckboxChangeEvent } from "antd/lib/checkbox";
 import i18n from "i18next";
 import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
+import { BrickAsComponent } from "@next-core/brick-kit";
 
 Element.prototype.scrollBy = jest.fn();
 
@@ -337,5 +338,21 @@ describe("BrickTree", () => {
     await jest.runAllTimers();
 
     expect(onSearch).toBeCalled();
+  });
+
+  it("should support iconUseBrick", () => {
+    const wrapper = shallow<BrickTreeProps>(
+      <BrickTree
+        dataSource={[{ title: "123" }]}
+        iconUseBrick={{
+          useBrick: {
+            brick: "div",
+          },
+        }}
+      />
+    );
+    expect(wrapper.find(Tree).prop("treeData")[0].icon).toEqual(
+      <BrickAsComponent data={{ title: "123" }} useBrick={{ brick: "div" }} />
+    );
   });
 });
