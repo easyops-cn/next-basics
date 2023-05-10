@@ -8,6 +8,14 @@ import {
 } from "./WorkbenchTreeContext";
 import { createHistory } from "@next-core/brick-kit";
 
+jest.mock("@next-libs/hooks", () => ({
+  useAvatar: jest.fn().mockImplementation((nameOrId) => {
+    return {
+      Avatar: <div className="avatarIcon">{nameOrId}</div>,
+    } as any;
+  }),
+}));
+
 createHistory();
 
 test("WorkbenchTree with no nodes", () => {
@@ -228,6 +236,30 @@ test("WorkbenchTree with text-icon", () => {
   expect(
     (container.querySelector(".nodeIcon").firstChild as HTMLElement).style.color
   ).toBe("blue");
+});
+
+test("WorkbenchTree with avatar-icon", () => {
+  const { container } = render(
+    <WorkbenchTreeContext.Provider
+      value={{
+        basePaddingLeft: 0,
+      }}
+    >
+      <WorkbenchTree
+        nodes={[
+          {
+            key: "1",
+            name: "Text",
+            icon: {
+              lib: "avatar",
+              nameOrInstanceId: "easyops",
+            },
+          },
+        ]}
+      />
+    </WorkbenchTreeContext.Provider>
+  );
+  expect(container.querySelector(".avatarIcon").textContent).toBe("easyops");
 });
 
 test("WorkbenchTree with no-search", () => {

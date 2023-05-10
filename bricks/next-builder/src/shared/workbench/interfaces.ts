@@ -5,7 +5,7 @@ export interface WorkbenchNodeData<T = unknown> {
   if?: boolean;
   key: string | number;
   name: string;
-  icon?: MenuIcon | TextIcon;
+  icon?: MenuIcon | TextIcon | AvatarIcon;
   data?: T;
   labelColor?: string;
   link?:
@@ -47,4 +47,9 @@ export interface TextIcon {
   lib: "text";
   icon: string;
   color?: string;
+}
+
+export interface AvatarIcon {
+  lib: "avatar";
+  nameOrInstanceId: string;
 }
