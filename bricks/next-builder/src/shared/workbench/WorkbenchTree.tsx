@@ -33,6 +33,7 @@ import {
   getNodesByPathTree,
   getNodeTreeByPath,
 } from "../../utils/normalizeTreeNodeWithPath";
+import { WorkbenchAvatarIcon } from "./WorkbenchAvatarIcon";
 
 const treeLevelPadding = 10;
 const borderStyle = "0 0 0 1px #ba6d30";
@@ -643,6 +644,8 @@ function TreeNode({
               <span className={styles.nodeIcon}>
                 {node.icon?.lib === "text" ? (
                   <WorkbenchTextIcon icon={node.icon} />
+                ) : node.icon?.lib === "avatar" ? (
+                  <WorkbenchAvatarIcon icon={node.icon} />
                 ) : (
                   <GeneralIcon
                     icon={node.icon}

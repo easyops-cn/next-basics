@@ -40,6 +40,7 @@
     "@next-libs/cmdb-instances": "^7.2.0",
     "@next-libs/code-editor-components": "^4.8.10",
     "@next-libs/forms": "^3.3.15",
+    "@next-libs/hooks": "^2.2.5",
     "@next-libs/storage": "^2.0.4",
     "@next-libs/visit-history": "2.0.4",
     "@next-libs/visual-builder": "^1.10.0",
