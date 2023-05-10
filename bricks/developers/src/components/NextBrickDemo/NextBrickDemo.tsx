@@ -137,6 +137,7 @@ export function NextBrickDemo(props: NextBrickDemoProps): React.ReactElement {
           conf={conf.previewConf}
           ref={previewRef}
           onFinish={handleFinish}
+          storyId={storyId}
         />
       </Spin>
 
