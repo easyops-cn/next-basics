@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.365.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.5...@next-bricks/developers@1.365.6) (2023-05-11)
+
+
+### Bug Fixes
+
+* optimize automatic height adjustment ([871ea29](https://github.com/easyops-cn/next-basics/commit/871ea2937d54fa2ed540d86a2cb37b33d9867c8b))
+
+
+
+
+
 ## [1.365.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.4...@next-bricks/developers@1.365.5) (2023-05-09)
 
 **Note:** Version bump only for package @next-bricks/developers

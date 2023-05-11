@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.269.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.269.2...@next-bricks/forms@1.269.3) (2023-05-11)
+
+
+### Bug Fixes
+
+* forms.user-or-user-group-select支持单选  refs EASY_AGILE-1069 ([dc920d0](https://github.com/easyops-cn/next-basics/commit/dc920d02823e0bddd898248fe8738cdc320723f4))
+
+
+
+
+
 ## [1.269.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.269.1...@next-bricks/forms@1.269.2) (2023-05-09)
 
 
