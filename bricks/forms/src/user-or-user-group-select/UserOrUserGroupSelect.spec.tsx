@@ -9,8 +9,12 @@ import {
   CmdbObjectApi_getObjectRef,
 } from "@next-sdk/cmdb-sdk";
 import { mount } from "enzyme";
-import { Select } from "antd";
-
+import { Select, Button } from "antd";
+import { InstanceListModal } from "@next-libs/cmdb-instances";
+import * as brickKit from "@next-core/brick-kit";
+jest.spyOn(brickKit, "getAuth").mockReturnValue({
+  username: "tester",
+});
 const mockPostSearch = InstanceApi_postSearch as jest.Mock;
 jest.mock("@next-sdk/cmdb-sdk");
 
@@ -35,6 +39,7 @@ describe("UserOrUserGroupSelect", () => {
 
     const wrapper = mount(
       <UserOrUserGroupSelect
+        isMultiple={true}
         onChange={onChange}
         objectList={[
           {
@@ -97,6 +102,7 @@ describe("UserOrUserGroupSelect", () => {
     const onChange = jest.fn();
     const wrapper = mount(
       <UserOrUserGroupSelect
+        isMultiple={true}
         onChange={onChange}
         objectList={[
           {
@@ -167,6 +173,7 @@ describe("UserOrUserGroupSelect", () => {
           instanceId: { $in: ["59eea4ad40bf8", "59eea4ad40bw2"] },
         }}
         staticList={["easyops"]}
+        isMultiple={true}
       />
     );
     await (global as any).flushPromises();
@@ -187,5 +194,113 @@ describe("UserOrUserGroupSelect", () => {
     expect(wrapper.find(UserSelectFormItem).prop("optionsMode")).toEqual(
       "group"
     );
+  });
+
+  it("should work is not multiple", async () => {
+    mockPostSearch.mockResolvedValue({
+      list: [
+        {
+          instanceId: "instanceId",
+          name: "easyops",
+          nickname: "uwin",
+        },
+      ],
+    });
+    const onChange = jest.fn();
+
+    const wrapper = mount(
+      <UserOrUserGroupSelect
+        isMultiple={false}
+        onChange={onChange}
+        optionsMode={"all"}
+        objectList={[
+          {
+            objectId: "USER",
+            view: {
+              show_key: ["name", "nickname"],
+            },
+          },
+          {
+            objectId: "USER_GROUP",
+            view: {
+              show_key: ["name"],
+            },
+          },
+        ]}
+        value={{
+          selectedUser: ["easyops"],
+        }}
+      />
+    );
+
+    await (global as any).flushPromises();
+    wrapper.find(Select).invoke("onChange")(
+      { key: "easyops1", label: "easyops(uwin1)" },
+      null
+    );
+
+    expect(wrapper.find(Select).prop("value")).toEqual([
+      { key: "easyops1", label: "easyops(uwin1)" },
+    ]);
+
+    wrapper.setProps({
+      value: {
+        selectedUser: ["easyops"],
+      },
+    });
+
+    await (global as any).flushPromises();
+    wrapper.update();
+    expect(wrapper.find(Select).prop("value")).toEqual([
+      {
+        key: "easyops",
+        label: "easyops(uwin)",
+      },
+    ]);
+
+    expect(wrapper.find(InstanceListModal).length).toBe(1);
+    mockPostSearch
+      .mockResolvedValueOnce({
+        list: [
+          {
+            instanceId: "5dd38c53b9c25",
+            name: "easyops2",
+            nickname: "uwin2",
+          },
+        ],
+      })
+      .mockResolvedValueOnce({
+        list: [
+          {
+            instanceId: "5dd38c53b9c26",
+            name: "tester",
+            nickname: "tester",
+          },
+        ],
+      });
+    wrapper.find(InstanceListModal).at(0).invoke("onSelected")([
+      "5dd38c53b9c25",
+    ]);
+    await (global as any).flushPromises();
+    wrapper.update();
+    expect(wrapper.find(Select).prop("value")).toEqual([
+      { key: "easyops2", label: "easyops2(uwin2)" },
+    ]);
+
+    wrapper.find(Select).invoke("onChange")(undefined, null);
+    await (global as any).flushPromises();
+    expect(onChange).toBeCalledWith(null);
+
+    expect(wrapper.find(Button).length).toBe(2);
+    mockPostSearch.mockClear();
+    wrapper.find(Button).at(0).invoke("onClick")();
+    await (global as any).flushPromises();
+    wrapper.update();
+    expect(wrapper.find(Select).prop("value")).toEqual([
+      { key: "tester", label: "tester(tester)" },
+    ]);
+    expect(mockPostSearch).toBeCalledTimes(1);
+    wrapper.find(Button).at(0).invoke("onClick")();
+    expect(mockPostSearch).toBeCalledTimes(1);
   });
 });
