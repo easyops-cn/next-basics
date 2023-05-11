@@ -13,6 +13,7 @@ import { SideBarElement } from "./index";
 import ResizeObserver from "rc-resize-observer";
 import { debounce } from "lodash";
 import moment from "moment";
+import { GeneralIcon } from "@next-libs/basic-components";
 
 interface SideBarProps {
   menu?: SidebarSubMenu;
@@ -20,6 +21,7 @@ interface SideBarProps {
   expandedState?: ExpandedState;
   hiddenFixedIcon?: boolean;
   onSideBarFixed?: (isFiexed: boolean) => void;
+  onSideBarResize?: (value: string) => void;
 }
 
 export enum ExpandedState {
@@ -30,16 +32,19 @@ export enum ExpandedState {
 
 export const SIDE_BAR_HAS_BEEN_USED = "side-bar-has-been-used";
 export const SIDE_BAR_EXPAND_STATE = "side-bar-expand-state";
+export const RESIZE_WIDTH = "resize-width";
 
 export function SideBar(props: SideBarProps): React.ReactElement {
   const {
     menu = {} as SidebarSubMenu,
     onSideBarFixed,
+    onSideBarResize,
     hiddenFixedIcon,
     wrapperDOM,
   } = props;
   const contentContainerRef = useRef<HTMLDivElement>();
   const storage = React.useMemo(() => new JsonStorage(localStorage), []);
+  const [resizeWidth, setResizeWidth] = useState<string>();
   const [expandedState, setExpandedState] = useState<ExpandedState>(
     props.expandedState ||
       storage.getItem(SIDE_BAR_EXPAND_STATE) ||
@@ -53,7 +58,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   const [showContentShadow, setShowContentShadow] = useState<boolean>(true);
   const [sidebarContentHeight, setSidebarContentHeight] = useState<number>(0);
   const { t } = useTranslation(NS_FRAME_BRICKS);
-
+  // istanbul ignore next
   const handleFixedIconClick = (): void => {
     setShowFirstUsedTooltip(false);
     storage.setItem(SIDE_BAR_HAS_BEEN_USED, true);
@@ -94,17 +99,25 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   };
 
   useEffect(() => {
+    // istanbul ignore if
+    const width = storage.getItem(RESIZE_WIDTH) || "var(--side-bar-width)";
     if (wrapperDOM) {
       if (expandedState === ExpandedState.Expanded) {
+        setResizeWidth(width);
         wrapperDOM.style.width = "var(--side-bar-width)";
       } else {
         wrapperDOM.style.width = "var(--side-bar-collapsed-width)";
+        setResizeWidth("var(--side-bar-collapsed-width)");
       }
     }
+    if (expandedState === ExpandedState.Hovered) {
+      setResizeWidth(width);
+    }
   }, [wrapperDOM, expandedState]);
-
+  // istanbul ignore next
   useEffect(() => {
     const currentDom = contentContainerRef.current;
+
     const handleScroll = (e: any) => {
       if (
         e.target.scrollHeight - e.target.scrollTop - e.target.offsetHeight <=
@@ -121,6 +134,24 @@ export function SideBar(props: SideBarProps): React.ReactElement {
     };
   }, [contentContainerRef]);
 
+  const handleResizeDown = (e: any) => {
+    const drag = (e: any) => {
+      if (e.clientX >= 208) {
+        setResizeWidth(`${e.clientX}px`);
+        onSideBarResize?.(`${e.clientX}px`);
+      }
+    };
+    const dragEnd = (e: any) => {
+      storage.setItem(RESIZE_WIDTH, `${e.clientX}px`);
+      window.removeEventListener("mousemove", drag);
+      window.removeEventListener("mouseup", dragEnd);
+    };
+    if (expandedState === ExpandedState.Expanded) {
+      window.addEventListener("mousemove", drag);
+      window.addEventListener("mouseup", dragEnd);
+    }
+  };
+
   useEffect(() => {
     const currentDom = contentContainerRef.current;
     if (currentDom.scrollHeight <= currentDom.clientHeight) {
@@ -129,7 +160,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
       setShowContentShadow(true);
     }
   }, [contentContainerRef, sidebarContentHeight]);
-
+  // istanbul ignore next
   const handleShowTips = ((e: CustomEvent<NavTip[]>): void => {
     const list = (e.detail ?? []).filter((item) => {
       const isTipClosing =
@@ -165,13 +196,21 @@ export function SideBar(props: SideBarProps): React.ReactElement {
       })}
       style={{
         height: sidebarHeight,
+        width: resizeWidth,
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       data-testid="side-bar"
     >
       <div className={styles.menuTitle}>
-        <i className={styles.menuTitlePoint} />
+        <i
+          className={classNames(
+            { [styles.menuTitlePoint]: !menu?.icon },
+            styles.newMenuItemIcon
+          )}
+        >
+          <GeneralIcon icon={menu?.icon} size={20} />
+        </i>
         <div className={styles.menuTitleText} title={menu.title}>
           {menu.title}
         </div>
@@ -225,6 +264,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
           </Tooltip>
         )}
       </div>
+      <div className={styles.resizeLine} onMouseDown={handleResizeDown}></div>
     </div>
   );
 }

@@ -31,12 +31,10 @@
     width: 16px;
     height: 16px;
     vertical-align: middle;
-    margin-top: 3px;
     svg {
       font-size: 20px;
     }
     img {
-      margin-top: -8px;
       font-size: 20px;
     }
     > :global(.anticon) {
@@ -57,21 +55,16 @@
   }
 
   .groupTitlePoint {
-    width: 16px;
+    width: 22px;
     height: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all var(--side-bar-collapse-transition-duration)
       var(--side-bar-collapse-transition-timing-function);
-
-    &::before {
-      content: "";
-      width: 2px;
-      height: 2px;
-      background: var(--color-secondary-text);
-      border-radius: 50%;
-    }
+    border-bottom: 2px solid rgba(218, 223, 232, 1);
+    padding-left: 4px;
+    margin-right: -7px;
 
     &.hideGroupTitlePoint {
       width: 0;
@@ -84,14 +77,21 @@
   }
 
   .menuText {
-    white-space: nowrap;
+    white-space: pre-wrap;
+    word-wrap: normal;
     overflow: hidden;
+    display: -webkit-inline-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     font-size: 14px;
     color: var(--color-normal-text);
     flex: 1;
     transition: all var(--side-bar-collapse-transition-duration)
       var(--side-bar-collapse-transition-timing-function);
+  }
+  .collapsedMenuText {
+    white-space: nowrap;
   }
   .menuTextColor {
     color: var(--v8-left-sidebar-item-normal);
@@ -108,9 +108,11 @@
   .subMenuWrapper :global(.ant-menu-submenu-title),
   .groupWrapper :global(.ant-menu-item-group-title) {
     width: 100% !important;
-    height: 36px !important;
-    line-height: 36px !important;
+    min-height: 36px !important;
+    line-height: 20px !important;
     padding: 0 12px !important;
+    display: flex;
+    align-items: center;
     border-radius: 4px;
     transition: all var(--side-bar-collapse-transition-duration)
       var(--side-bar-collapse-transition-timing-function);
@@ -244,5 +246,12 @@
 
   :global(.ant-menu-submenu-arrow) {
     opacity: 0;
+  }
+}
+
+.collapsed {
+  .menuText {
+    white-space: nowrap;
+    margin-left: 14px !important;
   }
 }

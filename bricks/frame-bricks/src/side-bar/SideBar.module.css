@@ -29,6 +29,27 @@
     height: 52px;
     padding: 0 22px;
 
+    .newMenuItemIcon {
+      width: 16px;
+      height: 16px;
+      vertical-align: middle;
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--side-bar-collapse-transition-duration)
+        var(--side-bar-collapse-transition-timing-function);
+      svg {
+        font-size: 20px;
+        color: rgb(87, 104, 156, 1);
+      }
+      > :global(.anticon) {
+        margin-right: 0;
+        color: var(--color-normal-text);
+        line-height: inherit !important;
+      }
+    }
+
     .menuTitlePoint {
       width: 16px;
       height: 16px;
@@ -37,11 +58,12 @@
       justify-content: center;
       transition: all var(--side-bar-collapse-transition-duration)
         var(--side-bar-collapse-transition-timing-function);
-
       &::before {
         content: "";
         width: 4px;
         height: 4px;
+        margin-right: 7px;
+        margin-left: 5px;
         background: var(--antd-text-color);
         border-radius: 50%;
       }
@@ -82,12 +104,22 @@
       }
     }
   }
+  .resizeLine {
+    height: 100%;
+    width: 2px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    &:hover,
+    &:active {
+      background-color: rgba(26, 122, 255, 1);
+      cursor: all-scroll;
+    }
+  }
 }
 
 .sideBarContainer.expanded,
 .sideBarContainer.hovered {
-  width: var(--side-bar-width);
-
   .menuTitle {
     padding: 0 12px;
   }
@@ -97,6 +129,11 @@
   }
 
   .menuTitlePoint {
+    width: 0;
+    opacity: 0;
+  }
+
+  .newMenuItemIcon {
     width: 0;
     opacity: 0;
   }

@@ -29,9 +29,10 @@ jest.mock("@next-libs/storage", () => ({
 
 describe("SideBar", () => {
   it("should work when ExpandedState is Collapsed", () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <SideBar menu={menuData1} expandedState={ExpandedState.Collapsed} />
     );
+
     expect(wrapper.find(".sideBarContainer").hasClass("hovered")).toBe(false);
     expect(wrapper.find(".sideBarContainer").hasClass("expanded")).toBe(false);
     wrapper.find(".sideBarContainer").simulate("mouseenter");
@@ -47,7 +48,7 @@ describe("SideBar", () => {
   });
 
   it("should work when ExpandedState is Hovered", () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <SideBar menu={menuData1} expandedState={ExpandedState.Hovered} />
     );
     expect(wrapper.find(".sideBarContainer").hasClass("hovered")).toBe(true);
@@ -65,7 +66,7 @@ describe("SideBar", () => {
   });
 
   it("should work when ExpandedState is Expanded", () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <SideBar menu={menuData1} expandedState={ExpandedState.Expanded} />
     );
     expect(wrapper.find(".sideBarContainer").hasClass("hovered")).toBe(false);
@@ -78,6 +79,9 @@ describe("SideBar", () => {
     expect(wrapper.find(".sideBarContainer").hasClass("expanded")).toBe(true);
     wrapper.find(".sideBarContainer").simulate("mouseenter");
     wrapper.find(".fixedIcon").simulate("click");
+    expect(wrapper.find(".sideBarContainer").hasClass("hovered")).toBe(false);
+    expect(wrapper.find(".sideBarContainer").hasClass("expanded")).toBe(false);
+    wrapper.find(".resizeLine").simulate("mousedown");
     expect(wrapper.find(".sideBarContainer").hasClass("hovered")).toBe(false);
     expect(wrapper.find(".sideBarContainer").hasClass("expanded")).toBe(false);
   });
@@ -112,5 +116,35 @@ describe("SideBar", () => {
     );
 
     expect(wrapper.find(".ant-menu-item").length).toEqual(1);
+  });
+
+  it("should handle resize", () => {
+    const wrapper = mount(
+      <SideBar
+        expandedState={ExpandedState.Expanded}
+        menu={menuData1}
+        hiddenFixedIcon={false}
+      />
+    );
+    const getSideBarWidth = (): number =>
+      wrapper.find(".sideBarContainer").prop("style").width as number;
+    wrapper.find(".resizeLine").invoke("onMouseDown")({
+      clientX: 300,
+    } as any);
+    act(() => {
+      window.dispatchEvent(
+        new MouseEvent("mousemove", {
+          clientX: 310,
+        })
+      );
+    });
+    wrapper.update();
+    expect(getSideBarWidth()).toBe("310px");
+    act(() => {
+      window.dispatchEvent(new MouseEvent("mouseup"));
+    });
+    wrapper.update();
+    expect(getSideBarWidth()).toBe("310px");
+    expect(wrapper.find(".resizeLine")).toHaveLength(1);
   });
 });

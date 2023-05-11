@@ -23,6 +23,17 @@
     margin: 5px 4px;
   }
 
+  :global(.ant-tag):only-child {
+    margin: 5px 0px;
+  }
+
+  :global(.ant-tag):first-child:not(:only-child) {
+    margin: 5px 4px 5px 0px;
+  }
+  :global(.ant-tag):last-child:not(:only-child) {
+    margin: 5px 0px 5px 4px;
+  }
+
   .tagsLabel {
     margin-right: 14px;
   }

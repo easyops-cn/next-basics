@@ -61,6 +61,17 @@ export class SideBarElement extends UpdatingElement {
     this._handleSideBarFixed.emit(isFixed);
   };
 
+  /**
+   * @detail
+   * @description
+   */
+  @event({ type: "side.bar.resize" })
+  _handleSideBarResize: EventEmitter<string>;
+  // istanbul ignore next
+  handleSideBarResize = (value: string): void => {
+    this._handleSideBarResize.emit(value);
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -91,6 +102,7 @@ export class SideBarElement extends UpdatingElement {
             expandedState={this.expandedState}
             hiddenFixedIcon={this.hiddenFixedIcon}
             onSideBarFixed={this.handleSideBarFixed}
+            onSideBarResize={this.handleSideBarResize}
           />
         </BrickWrapper>,
         this

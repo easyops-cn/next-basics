@@ -194,7 +194,9 @@ export function SidebarMenu(props: SidebarMenuProps): React.ReactElement {
       defaultOpenKeys={uniq(openedKeys)}
       defaultSelectedKeys={selectedKeys}
       selectedKeys={selectedKeys}
-      className={style.menuContainer}
+      className={classNames(style.menuContainer, {
+        [style.collapsed]: collapsed,
+      })}
       inlineCollapsed={collapsed}
     >
       {menuItems.map((item) => renderMenuItem(item))}
