@@ -25,6 +25,7 @@ import "./inform-methods-form";
 import "./icon-select";
 import "./dynamic-form-input-item";
 // !Lazy: import "./general-structs-form-item";
+import "./general-structs-form-item-v2";
 import "./general-cascader";
 import "./dynamic-form-item";
 import "./general-slide";
