@@ -13,14 +13,15 @@ import { StoryConf } from "@next-core/brick-types";
 import { getRuntime, getCurrentTheme } from "@next-core/brick-kit";
 import { debounceByAnimationFrame, JsonStorage } from "@next-core/brick-utils";
 import classNames from "classnames";
+import { getStorageKey, getMutationObserver } from "./processor";
 import { NS_DEVELOPERS, K } from "../../i18n/constants";
 import { processConf } from "../BrickPreview/BrickPreview";
 import styles from "./NextBrickPreview.module.css";
 
 const storage = new JsonStorage(localStorage);
-const storageKey = "developer-brick-preview";
 interface NextBrickPreviewProps {
   conf: StoryConf | StoryConf[];
+  storyId: string;
   onFinish?: () => void;
   containerStyle?: React.CSSProperties;
 }
@@ -36,7 +37,7 @@ interface ResizerStatus {
 }
 
 export function LegacyNextBrickPreview(
-  { conf, onFinish, containerStyle }: NextBrickPreviewProps,
+  { conf, onFinish, containerStyle, storyId }: NextBrickPreviewProps,
   ref: React.Ref<BrickPreviewRef>
 ): React.ReactElement {
   const { t } = useTranslation(NS_DEVELOPERS);
@@ -58,10 +59,10 @@ export function LegacyNextBrickPreview(
         theme: getCurrentTheme(),
       });
 
-      const defaultSize = contentWindow.document.body.scrollHeight + 40;
+      const defaultSize = contentWindow.document.body.scrollHeight + 70;
       setDefaultMinSize(defaultSize);
       const refinedHeight = Math.max(
-        (storage.getItem(storageKey) as number) ?? 0,
+        (storage.getItem(getStorageKey(storyId)) as number) ?? 0,
         defaultSize
       );
 
@@ -69,7 +70,7 @@ export function LegacyNextBrickPreview(
 
       onFinish?.();
     },
-    [onFinish, debouncedSetSize]
+    [onFinish, debouncedSetSize, storyId]
   );
 
   React.useImperativeHandle(ref, () => ({
@@ -129,13 +130,32 @@ export function LegacyNextBrickPreview(
 
   useEffect(() => {
     if (!resizeStatus && finish) {
-      storage.setItem(storageKey, size);
+      storage.setItem(getStorageKey(storyId), size);
     }
   }, [finish, resizeStatus, size]);
 
   useEffect(() => {
     !loading && renderBrick(conf);
   }, [conf, loading, renderBrick]);
+
+  useEffect(() => {
+    let observer: any;
+    if (!loading) {
+      observer = getMutationObserver((maxHeight) => {
+        if (maxHeight > size) {
+          debouncedSetSize(maxHeight);
+        }
+      });
+
+      observer.observe(iframeRef.current.contentDocument.body, {
+        childList: true,
+        attributes: true,
+        subtree: true,
+      });
+    }
+
+    return () => observer?.disconnect();
+  }, [debouncedSetSize, loading, size]);
 
   const handleIframeLoad = async (): Promise<void> => {
     await renderBrick(conf);
@@ -144,22 +164,27 @@ export function LegacyNextBrickPreview(
 
   return (
     <Spin spinning={loading} tip="Loading...">
-      <iframe
-        src={`${getRuntime().getBasePath()}preview.html`}
-        ref={iframeRef}
-        onLoad={handleIframeLoad}
-        className={styles.previewContainer}
-        height={size}
-        style={containerStyle}
-      />
       <div
-        title={t(K.MOVED_BY_DRAGGING)}
-        className={classNames(styles.bar, {
-          [styles.resizing]: !!resizeStatus,
-        })}
-        onMouseDown={handleResizerMouseDown}
+        className={styles.previewContainer}
+        style={{ padding: 15, ...containerStyle }}
       >
-        <div className={styles.mask} />
+        <iframe
+          src={`${getRuntime().getBasePath()}preview.html`}
+          ref={iframeRef}
+          onLoad={handleIframeLoad}
+          className={styles.iframe}
+          height={size}
+        />
+        <Tooltip title={t(K.MOVED_BY_DRAGGING)}>
+          <div
+            className={classNames(styles.bar, {
+              [styles.resizing]: !!resizeStatus,
+            })}
+            onMouseDown={handleResizerMouseDown}
+          >
+            <div className={styles.mask} />
+          </div>
+        </Tooltip>
       </div>
     </Spin>
   );
