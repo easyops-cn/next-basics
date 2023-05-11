@@ -17,7 +17,9 @@ exports[`AppMenu should work 1`] = `
         <i
           className="menuTitleIcon"
         >
-          <GeneralIcon />
+          <GeneralIcon
+            size={20}
+          />
         </i>
         <span
           className="menuTitleText"
@@ -85,7 +87,9 @@ exports[`AppMenu should work when collapsed 1`] = `
         <i
           className="menuTitleIcon"
         >
-          <GeneralIcon />
+          <GeneralIcon
+            size={20}
+          />
         </i>
         <span
           className="menuTitleText"

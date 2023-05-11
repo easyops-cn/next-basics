@@ -36,14 +36,14 @@ export function AppMenu(props: AppMenuProps): React.ReactElement {
             {menu.link ? (
               <Link to={menu.link} className={styles.menuTitleLink}>
                 <i className={styles.menuTitleIcon}>
-                  <GeneralIcon icon={menu.icon} />
+                  <GeneralIcon icon={menu.icon} size={20} />
                 </i>
                 <span className={styles.menuTitleText}>{menu.title}</span>
               </Link>
             ) : (
               <a className={styles.menuTitleLink} role="button">
                 <i className={styles.menuTitleIcon}>
-                  <GeneralIcon icon={menu.icon} />
+                  <GeneralIcon icon={menu.icon} size={20} />
                 </i>
                 <span className={styles.menuTitleText}>{menu.title}</span>
               </a>

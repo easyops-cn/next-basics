@@ -43,7 +43,7 @@ export function AppBarBreadcrumb(
           <Breadcrumb.Item>
             {!breadcrumbItems?.length &&
               (props.showCurrentAppIcon ? (
-                <GeneralIcon icon={currentApp.menuIcon} />
+                <GeneralIcon icon={currentApp.menuIcon} size={14} />
               ) : (
                 <HomeOutlined />
               ))}
@@ -61,7 +61,7 @@ export function AppBarBreadcrumb(
         ) : null}
         {useCurrentMenuTitle && props.menu ? (
           <Breadcrumb.Item>
-            <GeneralIcon icon={props.menu.icon} />
+            <GeneralIcon icon={props.menu.icon} size={14} />
             <span>
               <Link to={props.menu.link}>{props.menu.title}</Link>
             </span>

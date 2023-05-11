@@ -2,6 +2,11 @@
   display: flex;
   height: 22px;
   align-items: center;
+
+  :global(.ant-breadcrumb-link) > img + span,
+  :global(.ant-breadcrumb-link) > img + a {
+    margin-left: 4px;
+  }
 }
 
 .workspaceButton {
