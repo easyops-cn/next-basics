@@ -139,10 +139,10 @@ export function SideBar(props: SideBarProps): React.ReactElement {
       if (e.clientX >= 208) {
         setResizeWidth(`${e.clientX}px`);
         onSideBarResize?.(`${e.clientX}px`);
+        storage.setItem(RESIZE_WIDTH, `${e.clientX}px`);
       }
     };
     const dragEnd = (e: any) => {
-      storage.setItem(RESIZE_WIDTH, `${e.clientX}px`);
       window.removeEventListener("mousemove", drag);
       window.removeEventListener("mouseup", dragEnd);
     };
