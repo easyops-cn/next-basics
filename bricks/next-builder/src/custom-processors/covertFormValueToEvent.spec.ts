@@ -185,6 +185,18 @@ describe("covertFormValueToEvent", () => {
         targetRef: "create-form-ref",
       },
     ],
+    [
+      {
+        else: "- action: console.error\n",
+        handlerType: "conditional",
+        if: "<% CTX.a %>\n",
+        then: "- action: console.log\n",
+      },
+      {
+        if: "<% CTX.a %>",
+        then: [],
+      },
+    ],
     [{}, undefined],
   ])("should work", (formValue, result) => {
     expect(covertFormValueToEvent(formValue as EventFormField)).toEqual(result);

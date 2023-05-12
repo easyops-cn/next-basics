@@ -74,6 +74,14 @@ export function covertFormValueToEvent(
         : { method: formValue.useProviderMethod }),
       ...loadFields,
     } as UseProviderEventHandler;
+  } else if (formValue.handlerType === HandlerType.Conditional) {
+    const loadFields = safeLoadFields({
+      if: formValue.if,
+    });
+    return {
+      then: [],
+      ...loadFields,
+    };
   } else if (
     formValue.handlerType === HandlerType.CustomBrick &&
     formValue.brickEventType === CustomBrickEventType.ExecuteMethod

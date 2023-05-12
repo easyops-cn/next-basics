@@ -5,6 +5,7 @@ import {
   CustomBrickEventHandler,
   ExecuteCustomBrickEventHandler,
   SetPropsCustomBrickEventHandler,
+  ConditionalEventHandler,
 } from "@next-core/brick-types";
 import { CustomBrickEventType, HandlerType } from "./interfaces";
 
@@ -36,6 +37,12 @@ export function isFlowAPiProvider(provider: string): boolean {
   return provider?.includes("@");
 }
 
+export function isConditionalEventHandler(
+  handler: BrickEventHandler
+): handler is ConditionalEventHandler {
+  return !!(handler as ConditionalEventHandler).then;
+}
+
 export function getHandlerType(
   handler: BrickEventHandler
 ): Exclude<HandlerType, HandlerType.CustomBrick> | CustomBrickEventType {
@@ -43,6 +50,8 @@ export function getHandlerType(
     return HandlerType.BuiltinAction;
   } else if (isUseProviderHandler(handler)) {
     return HandlerType.UseProvider;
+  } else if (isConditionalEventHandler(handler)) {
+    return HandlerType.Conditional;
   } else if (isExecuteCustomHandler(handler)) {
     return CustomBrickEventType.ExecuteMethod;
   } else if (isSetPropsCustomHandler(handler)) {
@@ -60,6 +69,8 @@ export function getHandlerName(handler: BrickEventHandler): string {
       return `${(handler as UseProviderEventHandler).useProvider}.${
         (handler as UseProviderEventHandler).method ?? "resolve"
       }`;
+    case HandlerType.Conditional:
+      return "Conditional";
     case CustomBrickEventType.ExecuteMethod:
       return `${
         (handler as ExecuteCustomBrickEventHandler).target ||

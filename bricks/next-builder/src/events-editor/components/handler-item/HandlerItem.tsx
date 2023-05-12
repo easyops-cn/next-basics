@@ -6,6 +6,7 @@ import React, {
   useState,
   useEffect,
   useMemo,
+  useCallback,
 } from "react";
 import {
   BrickEventHandler,
@@ -35,7 +36,7 @@ import {
 import { hasCallbackActions } from "../../../shared/visual-events/constants";
 import sharedStyle from "../../EventsEditor.module.css";
 import styles from "./HandlerItem.module.css";
-import { isNil } from "lodash";
+import { isNil, omit } from "lodash";
 import { getProcessedEvents } from "../../../shared/visual-events/getProcessedEvents";
 
 export interface HandlerItemProps {
@@ -48,6 +49,7 @@ export interface HandlerItemProps {
 const handlerIconMap = {
   [HandlerType.BuiltinAction]: "code",
   [HandlerType.UseProvider]: "database",
+  [HandlerType.Conditional]: "list",
   [CustomBrickEventType.ExecuteMethod]: "star",
   [CustomBrickEventType.SetProps]: "equals",
   [HandlerType.Unknown]: "question",
@@ -59,6 +61,8 @@ const callbackEvents = [
   { type: "finally" },
   { type: "progress" },
 ];
+
+const conditionEvents = [{ type: "then" }, { type: "else" }];
 
 export function HandlerItem(props: HandlerItemProps): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
@@ -86,86 +90,103 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
 
   const showCallback = useMemo(() => {
     return (
-      name !== LifeCycle.UseResolves &&
-      (type === HandlerType.UseProvider ||
-        (handler as UseProviderEventHandler).callback ||
-        hasCallbackActions.includes(
-          (handler as BuiltinBrickEventHandler).action
-        ))
+      (name !== LifeCycle.UseResolves &&
+        (type === HandlerType.UseProvider ||
+          (handler as UseProviderEventHandler).callback ||
+          hasCallbackActions.includes(
+            (handler as BuiltinBrickEventHandler).action
+          ))) ||
+      type === HandlerType.Conditional
     );
   }, [handler, name, type]);
 
-  const handlerCallback = (
-    <>
-      <div
-        className={classNames(sharedStyle.eventWrapper, styles.callback)}
-        ref={contentWrapperRef}
-      >
+  const handlerCallback = useCallback(() => {
+    const isConditional = type === HandlerType.Conditional;
+    const events = isConditional
+      ? omit(handler, ["if"])
+      : ((handler as UseProviderEventHandler).callback as BrickEventsMap);
+    return (
+      <>
         <div
-          className={sharedStyle.strikeLine}
-          style={{ height: lineHeight }}
-        ></div>
-        {getProcessedEvents(
-          (handler as UseProviderEventHandler).callback as BrickEventsMap
-        )?.map((item) => (
-          <div key={item.name}>
-            <div className={sharedStyle.eventName}>
-              <FontAwesomeIcon
-                icon="bolt"
-                style={{ marginRight: 12 }}
-                className={sharedStyle.eventIcon}
-              />
-              {`callback.${item.name}`}
+          className={classNames(sharedStyle.eventWrapper, styles.callback)}
+          ref={contentWrapperRef}
+        >
+          <div
+            className={sharedStyle.strikeLine}
+            style={{ height: lineHeight }}
+          ></div>
+          {getProcessedEvents(events)?.map((item) => {
+            const name = isConditional
+              ? `${item.name}`
+              : `callback-${item.name}`;
+            return (
+              <div key={item.name}>
+                <div className={sharedStyle.eventName}>
+                  <FontAwesomeIcon
+                    icon="bolt"
+                    style={{ marginRight: 12 }}
+                    className={sharedStyle.eventIcon}
+                  />
+                  {name}
 
-              <div className={sharedStyle.iconWrapper}>
-                <FontAwesomeIcon
-                  className={sharedStyle.plusIcon}
-                  icon="plus-square"
-                  onClick={() =>
-                    context?.onCreate(
-                      `${uniqKey}-callback-${item.name}`,
-                      `callback.${item.name}`
-                    )
-                  }
-                />
+                  <div className={sharedStyle.iconWrapper}>
+                    <FontAwesomeIcon
+                      className={sharedStyle.plusIcon}
+                      icon="plus-square"
+                      onClick={() =>
+                        context?.onCreate(`${uniqKey}-${name}`, name)
+                      }
+                    />
 
-                <FontAwesomeIcon
-                  className={sharedStyle.removeIcon}
-                  icon="minus-square"
-                  onClick={() =>
-                    context.removeCallback?.(`${uniqKey}-callback-${item.name}`)
-                  }
-                />
+                    <FontAwesomeIcon
+                      className={sharedStyle.removeIcon}
+                      icon="minus-square"
+                      onClick={() =>
+                        context.removeCallback?.(`${uniqKey}-${name}`)
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div className={sharedStyle.eventHandler}>
+                  {item.events.filter(Boolean).map((row, rowIndex) => (
+                    <HandlerItem
+                      key={rowIndex}
+                      name={name}
+                      type={getHandlerType(row)}
+                      handler={row}
+                      uniqKey={`${uniqKey}-${name}-${rowIndex}`}
+                    ></HandlerItem>
+                  ))}
+                </div>
               </div>
-            </div>
-
-            <div className={sharedStyle.eventHandler}>
-              {item.events.filter(Boolean).map((row, rowIndex) => (
-                <HandlerItem
-                  key={rowIndex}
-                  name={`callback.${item.name}`}
-                  type={getHandlerType(row)}
-                  handler={row}
-                  uniqKey={`${uniqKey}-callback-${item.name}-${rowIndex}`}
-                ></HandlerItem>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className={sharedStyle.actionArea} ref={actionBtnRef}>
-        <AddEventBtn
-          eventDocInfo={callbackEvents}
-          eventList={getProcessedEvents(
-            (handler as UseProviderEventHandler).callback as BrickEventsMap
-          )}
-          onClick={(name) =>
-            context.addCallback?.(`${uniqKey}-callback-${name}`)
-          }
-        />
-      </div>
-    </>
-  );
+            );
+          })}
+        </div>
+        <div className={sharedStyle.actionArea} ref={actionBtnRef}>
+          <AddEventBtn
+            eventDocInfo={isConditional ? conditionEvents : callbackEvents}
+            eventList={getProcessedEvents(events)}
+            onClick={(name) =>
+              context.addCallback?.(
+                isConditional
+                  ? `${uniqKey}-${name}`
+                  : `${uniqKey}-callback-${name}`
+              )
+            }
+          />
+        </div>
+      </>
+    );
+  }, [
+    actionBtnRef,
+    contentWrapperRef,
+    context,
+    handler,
+    lineHeight,
+    type,
+    uniqKey,
+  ]);
 
   return (
     <div className={styles[type]}>
@@ -191,7 +212,7 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
         </div>
         {!isNil(handler.if) && <span className={styles.ifTag}>if</span>}
       </div>
-      {showCallback && handlerCallback}
+      {showCallback && handlerCallback()}
     </div>
   );
 }
