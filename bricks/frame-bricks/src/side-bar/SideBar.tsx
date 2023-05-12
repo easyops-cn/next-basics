@@ -11,7 +11,7 @@ import { Tooltip } from "antd";
 import { JsonStorage } from "@next-libs/storage";
 import { SideBarElement } from "./index";
 import ResizeObserver from "rc-resize-observer";
-import { debounce } from "lodash";
+import { debounce, throttle } from "lodash";
 import moment from "moment";
 import { GeneralIcon } from "@next-libs/basic-components";
 
@@ -99,8 +99,11 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   };
 
   useEffect(() => {
-    // istanbul ignore if
+    storage.getItem(RESIZE_WIDTH) &&
+      storage.getItem(RESIZE_WIDTH)?.slice(0, -2) <= "208" &&
+      storage.setItem(RESIZE_WIDTH, "var(--side-bar-width)");
     const width = storage.getItem(RESIZE_WIDTH) || "var(--side-bar-width)";
+    // istanbul ignore if
     if (wrapperDOM) {
       if (expandedState === ExpandedState.Expanded) {
         setResizeWidth(width);
@@ -135,13 +138,13 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   }, [contentContainerRef]);
 
   const handleResizeDown = (e: any) => {
-    const drag = (e: any) => {
+    const drag = throttle((e: any) => {
       if (e.clientX >= 208) {
         setResizeWidth(`${e.clientX}px`);
         onSideBarResize?.(`${e.clientX}px`);
         storage.setItem(RESIZE_WIDTH, `${e.clientX}px`);
       }
-    };
+    }, 200);
     const dragEnd = (e: any) => {
       window.removeEventListener("mousemove", drag);
       window.removeEventListener("mouseup", dragEnd);

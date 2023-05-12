@@ -177,6 +177,7 @@ export function BrickAlert(props: BrickAlertProps): React.ReactElement {
       className={classnames(
         {
           [cssStyle.closeOnce]: props.closeOnce && props.closable,
+          [cssStyle.noDescription]: !props.description && !props.enableDescSlot,
         },
         props.noBorderRadio ? cssStyle.noBorderRadio : null
       )}
