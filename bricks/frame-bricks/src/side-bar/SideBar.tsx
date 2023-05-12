@@ -45,6 +45,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   const contentContainerRef = useRef<HTMLDivElement>();
   const storage = React.useMemo(() => new JsonStorage(localStorage), []);
   const [resizeWidth, setResizeWidth] = useState<string>();
+  const [isDrag, setIsDrag] = useState<string>("0px");
   const [expandedState, setExpandedState] = useState<ExpandedState>(
     props.expandedState ||
       storage.getItem(SIDE_BAR_EXPAND_STATE) ||
@@ -138,6 +139,8 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   }, [contentContainerRef]);
 
   const handleResizeDown = (e: any) => {
+    setIsDrag("400px");
+
     const drag = throttle((e: any) => {
       if (e.clientX >= 208) {
         setResizeWidth(`${e.clientX}px`);
@@ -146,6 +149,8 @@ export function SideBar(props: SideBarProps): React.ReactElement {
       }
     }, 200);
     const dragEnd = (e: any) => {
+      e.preventDefault();
+      setIsDrag("0px");
       window.removeEventListener("mousemove", drag);
       window.removeEventListener("mouseup", dragEnd);
     };
@@ -268,6 +273,9 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         )}
       </div>
       <div className={styles.resizeLine} onMouseDown={handleResizeDown}></div>
+      <div className={styles.resizeMask}>
+        <div className={styles.resizeMaskRight} style={{ width: isDrag }}></div>
+      </div>
     </div>
   );
 }

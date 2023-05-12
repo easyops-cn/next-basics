@@ -3,8 +3,8 @@
   display: flex;
   flex-direction: column;
   width: var(--side-bar-collapsed-width);
-  transition: all var(--side-bar-collapse-transition-duration)
-    var(--side-bar-collapse-transition-timing-function);
+  /* transition: all var(--side-bar-collapse-transition-duration)
+    var(--side-bar-collapse-transition-timing-function); */
 
   border-right: 1px solid;
   border-image: var(--v8-left-sidebar-border-right) 1;
@@ -115,6 +115,19 @@
       background-color: rgba(26, 122, 255, 1);
       cursor: all-scroll;
     }
+  }
+  .resizeMask {
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    width: 2px;
+    right: -2px;
+  }
+  .resizeMaskRight {
+    position: absolute;
+    background-color: transparent;
+    width: 500px;
+    height: 100%;
   }
 }
 
