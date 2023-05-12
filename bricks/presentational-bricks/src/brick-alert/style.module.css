@@ -20,3 +20,9 @@
   font-weight: var(--font-weight-400);
   color: var(--color-normal-text);
 }
+.noDescription {
+  :global(.ant-alert-icon) {
+    align-self: start;
+    margin-top: 4px;
+  }
+}
