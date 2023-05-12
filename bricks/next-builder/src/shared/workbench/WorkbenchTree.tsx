@@ -70,6 +70,7 @@ export function WorkbenchTree({
   searchPlaceholder,
   isDrag,
   noSearch,
+  allowDrag,
   allowDragToRoot,
   allowDragToInside,
   dropEmit,
@@ -225,55 +226,62 @@ export function WorkbenchTree({
         overStatus,
       });
     } else {
-      let realOverNode = overNode;
-      const findRealNode = (nodes: WorkbenchNodeData[], key: string): void => {
-        for (let i = 0; i < nodes.length; i++) {
-          if (nodes[i].key === key) {
-            realOverNode = nodes[i];
-            break;
+      if (allowDragToRoot || Number(overElement.dataset.level) !== 1) {
+        let realOverNode = overNode;
+        const findRealNode = (
+          nodes: WorkbenchNodeData[],
+          key: string
+        ): void => {
+          for (let i = 0; i < nodes.length; i++) {
+            if (nodes[i].key === key) {
+              realOverNode = nodes[i];
+              break;
+            }
+            if (nodes[i].children) {
+              findRealNode(nodes[i].children, key);
+            }
           }
-          if (nodes[i].children) {
-            findRealNode(nodes[i].children, key);
+        };
+        const overUid = overElement.dataset.uid;
+        findRealNode(nodes, overUid);
+        const filterNodes = (
+          nodes: WorkbenchNodeData[]
+        ): WorkbenchNodeData[] => {
+          let flag = false;
+          const { container, uid } = overElement.dataset;
+          const realOverKey = container ? realOverNode.originKey : uid;
+          const newNodes = nodes.filter((node) => {
+            if (node.children) {
+              node.children = filterNodes(node.children);
+            }
+            if (node.key === realOverKey) flag = true;
+            return node.key !== curNode.key;
+          });
+          if (flag) {
+            newNodes.splice(
+              newNodes.findIndex((item) => item.key === realOverKey) +
+                (overStatus === "bottom" ? 1 : 0),
+              0,
+              curNode
+            );
           }
-        }
-      };
-      const overUid = overElement.dataset.uid;
-      findRealNode(nodes, overUid);
-      const filterNodes = (nodes: WorkbenchNodeData[]): WorkbenchNodeData[] => {
-        let flag = false;
-        const { container, uid } = overElement.dataset;
-        const realOverKey = container ? realOverNode.originKey : uid;
-        const newNodes = nodes.filter((node) => {
-          if (node.children) {
-            node.children = filterNodes(node.children);
-          }
-          if (node.key === realOverKey) flag = true;
-          return node.key !== curNode.key;
+          return newNodes;
+        };
+
+        const normalizeNode = getNodesByPathTree(nodes);
+        const realCurNode = curNode.isContainer
+          ? normalizeNode.find((item) => item.key === curNode.originKey)
+          : curNode;
+        const curNodeData = realCurNode.data as Record<string, unknown>;
+        curNodeData.path = realOverNode.parentPath || realOverNode.path;
+
+        dropEmit({
+          nodes: filterNodes(normalizeNode),
+          curNode: realCurNode,
+          overNode: realOverNode,
+          status: overStatus,
         });
-        if (flag) {
-          newNodes.splice(
-            newNodes.findIndex((item) => item.key === realOverKey) +
-              (overStatus === "bottom" ? 1 : 0),
-            0,
-            curNode
-          );
-        }
-        return newNodes;
-      };
-
-      const normalizeNode = getNodesByPathTree(nodes);
-      const realCurNode = curNode.isContainer
-        ? normalizeNode.find((item) => item.key === curNode.originKey)
-        : curNode;
-      const curNodeData = realCurNode.data as Record<string, unknown>;
-      curNodeData.path = realOverNode.parentPath || realOverNode.path;
-
-      dropEmit({
-        nodes: filterNodes(normalizeNode),
-        curNode: realCurNode,
-        overNode: realOverNode,
-        status: overStatus,
-      });
+      }
     }
     handleOnDragEnd();
   };
@@ -317,7 +325,7 @@ export function WorkbenchTree({
           <SearchingContext.Provider value={!!q}>
             <WorkbenchTreeDndContext.Provider
               value={{
-                allow: true,
+                allow: allowDrag,
                 allowDragToRoot: allowDragToRoot,
                 dragElement: curElement,
                 dragOverElement: overElement,
@@ -573,6 +581,7 @@ function TreeNode({
         draggable={allow}
         onDragStart={(e) => onDragStart(e, node)}
         data-uid={nodeUid}
+        data-level={level}
         style={nodeStyle}
         {...(isContainer
           ? {
