@@ -5,18 +5,19 @@
   "semanticCommits": "enabled",
   "commitMessagePrefix": "chore(deps):",
   "ignorePresets": [":ignoreModulesAndTests"],
-  "enabled": false,
   "packageRules": [
     {
       "groupName": "next-core packages",
       "matchPackagePatterns": ["^@next-core/"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "enabled": true
+      "matchUpdateTypes": ["minor", "patch"]
     },
     {
       "groupName": "next-libs packages",
-      "matchPackagePatterns": ["^@next-libs/"],
-      "enabled": true
+      "matchPackagePatterns": ["^@next-libs/"]
+    },
+    {
+      "enabled": false,
+      "excludePackagePatterns": ["^@next-core/", "^@next-libs/"]
     }
   ],
   "postUpdateOptions": ["yarnDedupeHighest"]
