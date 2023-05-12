@@ -99,10 +99,11 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   };
 
   useEffect(() => {
-    // istanbul ignore if
-    storage.getItem(RESIZE_WIDTH).slice(0, -2) <= "208" &&
+    storage.getItem(RESIZE_WIDTH) &&
+      storage.getItem(RESIZE_WIDTH)?.slice(0, -2) <= "208" &&
       storage.setItem(RESIZE_WIDTH, "var(--side-bar-width)");
     const width = storage.getItem(RESIZE_WIDTH) || "var(--side-bar-width)";
+    // istanbul ignore if
     if (wrapperDOM) {
       if (expandedState === ExpandedState.Expanded) {
         setResizeWidth(width);
