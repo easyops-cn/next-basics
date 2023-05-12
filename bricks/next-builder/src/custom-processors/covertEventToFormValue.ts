@@ -5,6 +5,7 @@ import {
   UseProviderEventHandler,
   SetPropsCustomBrickEventHandler,
   ExecuteCustomBrickEventHandler,
+  ConditionalEventHandler,
 } from "@next-core/brick-types";
 import { safeDumpFields } from "../builder-container/DataView/utils";
 import {
@@ -87,6 +88,20 @@ export function covertEventToFormValue(
             args: (handler as UseProviderEventHandler).args,
             callback: (handler as UseProviderEventHandler).callback,
             poll: poll ? omit(poll, "enabled") : undefined,
+          },
+          isNil
+        )
+      ),
+    };
+  } else if (handlerType === HandlerType.Conditional) {
+    return {
+      handlerType,
+      ...safeDumpFields(
+        omitBy(
+          {
+            if: handler.if,
+            then: (handler as ConditionalEventHandler).then,
+            else: (handler as ConditionalEventHandler).else,
           },
           isNil
         )

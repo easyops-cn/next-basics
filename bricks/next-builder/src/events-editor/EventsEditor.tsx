@@ -157,7 +157,11 @@ export function LegacyEventsEditor(
     const callback = get(mutableEvents, pathArr.slice(0, -1));
     if (callback) {
       const name = pathArr.pop();
-      delete callback[name];
+      if (name === "then") {
+        callback[name] = [];
+      } else {
+        delete callback[name];
+      }
     }
 
     setEventList(mutableEvents);

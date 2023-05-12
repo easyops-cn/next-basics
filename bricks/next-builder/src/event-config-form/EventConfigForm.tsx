@@ -155,6 +155,9 @@ export function LegacyEventConfigForm(
           <Radio value={HandlerType.CustomBrick}>
             {t(K.EVENTS_CUSTOM_BRICK_INTERACTION)}
           </Radio>
+          <Radio value={HandlerType.Conditional}>
+            {t(K.EVENTS_HANLDER_CONDITIONAL)}
+          </Radio>
         </Radio.Group>
       </Form.Item>
     ),

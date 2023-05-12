@@ -147,6 +147,28 @@ describe("covertToEventFormValue", () => {
         selectorType: "targetRef",
       },
     ],
+    [
+      {
+        handlerType: "conditional",
+        if: "<% CTX.a %>",
+        then: [
+          {
+            action: "console.log",
+          },
+        ],
+        else: [
+          {
+            action: "console.error",
+          },
+        ],
+      },
+      {
+        else: "- action: console.error\n",
+        handlerType: "conditional",
+        if: "<% CTX.a %>\n",
+        then: "- action: console.log\n",
+      },
+    ],
     [{}, {}],
   ])("case %# should work", (handler, result) => {
     expect(covertEventToFormValue(handler as BrickEventHandler)).toEqual(

@@ -4,6 +4,7 @@ export enum HandlerType {
   BuiltinAction = "builtinAction",
   UseProvider = "useProvider",
   CustomBrick = "customBrick",
+  Conditional = "conditional",
   Unknown = "unknown",
 }
 

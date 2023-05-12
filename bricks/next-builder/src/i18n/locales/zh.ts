@@ -93,6 +93,7 @@ const locale: Locale = {
   [K.METHOD]: "方法",
   [K.EVENTS_HANDLER_BUILTIN_ACTION]: "内置动作",
   [K.EVENTS_HANDLER_USE_PROVIDER]: "调用Provider",
+  [K.EVENTS_HANLDER_CONDITIONAL]: "条件判断",
   [K.CUSTOM_EVENTS_SET_PROP]: "设置构件属性",
   [K.CUSTOM_EVENTS_USE_METHOD]: "调用构件方法",
   [K.EVENTS_CUSTOM_BRICK_INTERACTION]: "构件交互",

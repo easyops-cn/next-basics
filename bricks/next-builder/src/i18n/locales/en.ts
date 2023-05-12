@@ -94,6 +94,7 @@ const locale: Locale = {
   [K.METHOD]: "Method",
   [K.EVENTS_HANDLER_BUILTIN_ACTION]: "Builtin Action",
   [K.EVENTS_HANDLER_USE_PROVIDER]: "Use Provider",
+  [K.EVENTS_HANLDER_CONDITIONAL]: "Conditional",
   [K.CUSTOM_EVENTS_SET_PROP]: "Set Brick Properties",
   [K.CUSTOM_EVENTS_USE_METHOD]: "Use Brick Method",
   [K.EVENTS_CUSTOM_BRICK_INTERACTION]: "Custom Brick Interaction",
