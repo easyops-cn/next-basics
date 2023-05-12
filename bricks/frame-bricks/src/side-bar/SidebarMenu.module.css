@@ -90,9 +90,7 @@
     transition: all var(--side-bar-collapse-transition-duration)
       var(--side-bar-collapse-transition-timing-function);
   }
-  .collapsedMenuText {
-    white-space: nowrap;
-  }
+
   .menuTextColor {
     color: var(--v8-left-sidebar-item-normal);
   }
