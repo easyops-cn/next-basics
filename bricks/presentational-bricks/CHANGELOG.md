@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.296.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.296.0...@next-bricks/presentational-bricks@1.296.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* **sidebar:** 二级菜单拖拽修复以及brick-tag样式修改 ([a1f9cde](https://github.com/easyops-cn/next-basics/commit/a1f9cdee0591925968d2ed68d9ed00a6881900b4))
+
+
+
+
+
 # [1.296.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.295.1...@next-bricks/presentational-bricks@1.296.0) (2023-05-11)
 
 
