@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.238.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.237.1...@next-bricks/next-builder@1.238.0) (2023-05-12)
+
+
+### Features
+
+* event form support if/else syntax ([21ed1d4](https://github.com/easyops-cn/next-basics/commit/21ed1d44262582e4f11d68601d0343fd2d7d2fa3))
+
+
+
+
+
 ## [1.237.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.237.0...@next-bricks/next-builder@1.237.1) (2023-05-12)
 
 **Note:** Version bump only for package @next-bricks/next-builder
