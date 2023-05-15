@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.238.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.238.0...@next-bricks/next-builder@1.238.1) (2023-05-15)
+
+
+### Bug Fixes
+
+* allowDrag and allowDragToRoot not working ([56b6fa8](https://github.com/easyops-cn/next-basics/commit/56b6fa83183948afe09de0a8556b327aaa99c925))
+
+
+
+
+
 # [1.238.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.237.1...@next-bricks/next-builder@1.238.0) (2023-05-12)
 
 
