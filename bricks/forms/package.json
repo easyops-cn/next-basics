@@ -45,7 +45,7 @@
     "@next-libs/clipboard": "^3.0.4",
     "@next-libs/cmdb-instances": "^7.2.8",
     "@next-libs/code-editor-components": "4.10.2",
-    "@next-libs/crontab": "^2.0.6",
+    "@next-libs/crontab": "^2.0.7",
     "@next-libs/forms": "^3.3.18",
     "@next-libs/user-components": "^0.1.9",
     "@next-sdk/cmdb-sdk": "^2.1.1",
