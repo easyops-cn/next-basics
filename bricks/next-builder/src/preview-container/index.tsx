@@ -9,7 +9,11 @@ import {
   method,
 } from "@next-core/brick-kit";
 import type { BuilderSnippetNode, Storyboard } from "@next-core/brick-types";
-import { ExcuteProxyMethodResult, PreviewSettings } from "@next-types/preview";
+import {
+  ExcuteProxyMethodResult,
+  PreviewSettings,
+  PreviewDataOption,
+} from "@next-types/preview";
 import {
   BuilderProvider,
   EventDetailOfNodeAddStored,
@@ -162,6 +166,20 @@ export class PreviewContainerElement extends UpdatingElement {
     this._handlePreviewResizeEvent.emit(resize);
   };
 
+  @event({ type: "preview.data.value.success" })
+  private _handlePreviewDataValueSuccessEvent: EventEmitter<unknown>;
+
+  private _handlePreviewDataValueSuccess = (value: unknown): void => {
+    this._handlePreviewDataValueSuccessEvent.emit(value);
+  };
+
+  @event({ type: "preview.data.value.error" })
+  private _handlePreviewDataValueErrorEvent: EventEmitter<unknown>;
+
+  private _handlePreviewDataValueError = (value: unknown): void => {
+    this._handlePreviewDataValueErrorEvent.emit(value);
+  };
+
   private _previewContainerRef = createRef<PreviewContainerRef>();
 
   @method()
@@ -201,6 +219,11 @@ export class PreviewContainerElement extends UpdatingElement {
   @method()
   capture(): void {
     this._previewContainerRef.current.capture();
+  }
+
+  @method()
+  previewDataValue(name: string, option: PreviewDataOption): any {
+    return this._previewContainerRef.current.previewDataValue(name, option);
   }
 
   // istanbul ignore next
@@ -263,6 +286,8 @@ export class PreviewContainerElement extends UpdatingElement {
               onScreenshotCapture={this._handleScreenshotCapture}
               onPreviewerDrop={this._handlePreviewerDrop}
               onPreviewerResize={this._handlePreivewResize}
+              onPreviewDataValueSuccess={this._handlePreviewDataValueSuccess}
+              onPreviewDataValueError={this._handlePreviewDataValueError}
               onExcuteProxyMethodSuccess={this._handleExcuteProxyMethodSuccess}
               onExcuteProxyMethodError={this._handleExcuteProxyMethodError}
               onPreviewDebug={this._handlePreviwDebug}

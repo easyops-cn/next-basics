@@ -11,6 +11,7 @@ import type {
   BrickOutline,
   HighLightNode,
   Position,
+  PreviewDataOption,
   PreviewMessageFromPreviewer,
   PreviewMessagePreviewerCaptureFailed,
   PreviewMessagePreviewerCaptureOk,
@@ -20,6 +21,8 @@ import type {
   PreviewMessagePreviewerRouteMatchChange,
   PreviewMessagePreviewerScroll,
   PreviewMessagePreviewerUrlChange,
+  PreviewMessagePreviewDataValueSuccess,
+  PreviewMessagePreviewDataValueError,
   PreviewMessageToPreviewer,
   PreviewSettings,
   PreviewStartOptions,
@@ -154,6 +157,56 @@ export function previewStart(
     getHistory().reload();
   };
 
+  const handlePreviewData = (name: string, option: PreviewDataOption): void => {
+    try {
+      const { dataType } = option;
+      let value;
+
+      if (dataType === "state") {
+        const mainMountPoint = document.querySelector("#main-mount-point");
+
+        const tplContextId = (mainMountPoint.lastChild as HTMLElement).dataset
+          .tplContextId;
+
+        if (!tplContextId) {
+          sendMessage<PreviewMessagePreviewDataValueError>({
+            type: "preview-data-value-error",
+            data: {
+              error: {
+                message:
+                  "tplContextId not found, unable to preview STATE value",
+              },
+            },
+          });
+
+          return;
+        }
+
+        value = developHelper.getStateValue(name, {
+          tplContextId,
+        });
+      } else {
+        value = developHelper.getContextValue(name);
+      }
+
+      sendMessage<PreviewMessagePreviewDataValueSuccess>({
+        type: "preview-data-value-success",
+        data: {
+          value,
+        },
+      });
+
+      // istanbul ignore next
+    } catch (error) {
+      sendMessage<PreviewMessagePreviewDataValueError>({
+        type: "preview-data-value-error",
+        data: {
+          message: error.message,
+        },
+      });
+    }
+  };
+
   const history = getHistory();
 
   window.addEventListener(
@@ -260,6 +313,9 @@ export function previewStart(
                 });
               }
             );
+            break;
+          case "preview-data-value":
+            handlePreviewData(data.name, data.option);
             break;
           case "update-preview-url": {
             // Remove origin first.

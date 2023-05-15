@@ -30,6 +30,8 @@ import type {
   PreviewMessageToContainer,
   PreviewSettings,
   UpdateStoryboardType,
+  PreviewBaseMessage,
+  PreviewDataOption,
 } from "@next-types/preview";
 
 import styles from "./PreviewContainer.module.css";
@@ -68,6 +70,8 @@ export interface PreviewContainerProps {
   onScreenshotCapture?(screenshot: Blob): void;
   onPreviewerDrop?(params: Record<string, any>): void;
   onPreviewerResize?(resize: PreviewerResize): void;
+  onPreviewDataValueSuccess?(value: unknown): void;
+  onPreviewDataValueError?(value: unknown): void;
   onExcuteProxyMethodSuccess?(result: ExcuteProxyMethodResult): void;
   onExcuteProxyMethodError?(result: ExcuteProxyMethodResult): void;
   onPreviewDebug?(result: any[]): void;
@@ -90,6 +94,7 @@ export interface PreviewContainerRef {
   toggleTheme(): void;
   back(): void;
   forward(): void;
+  previewDataValue(name: string, option: PreviewDataOption): void;
   manager: BuilderDataManager;
 }
 
@@ -138,6 +143,8 @@ export function LegacyPreviewContainer(
     onScreenshotCapture,
     onPreviewerDrop,
     onPreviewerResize,
+    onPreviewDataValueSuccess,
+    onPreviewDataValueError,
     onExcuteProxyMethodSuccess,
     onExcuteProxyMethodError,
     onPreviewDebug,
@@ -517,6 +524,21 @@ export function LegacyPreviewContainer(
     );
   }, [previewOrigin, screenshotMaxHeight, screenshotMaxWidth]);
 
+  const previewDataValue = useCallback(
+    (name: string, option: PreviewDataOption) => {
+      iframeRef.current.contentWindow.postMessage(
+        {
+          sender: "preview-container",
+          type: "preview-data-value",
+          name,
+          option,
+        } as PreviewBaseMessage,
+        previewOrigin
+      );
+    },
+    [previewOrigin]
+  );
+
   const handleUrlChange = useCallback(
     (url: string) => {
       onUrlChange?.(url);
@@ -596,6 +618,7 @@ export function LegacyPreviewContainer(
     toggleTheme,
     back,
     forward,
+    previewDataValue,
   }));
 
   useEffect(() => {
@@ -720,6 +743,12 @@ export function LegacyPreviewContainer(
           case "match-api-cache":
             onMatchApiCache(data.num);
             break;
+          case "preview-data-value-success":
+            onPreviewDataValueSuccess(data.data);
+            break;
+          case "preview-data-value-error":
+            onPreviewDataValueError(data.data);
+            break;
         }
       }
     };
@@ -741,6 +770,8 @@ export function LegacyPreviewContainer(
     onExcuteProxyMethodError,
     onPreviewDebug,
     onMatchApiCache,
+    onPreviewDataValueSuccess,
+    onPreviewDataValueError,
   ]);
 
   useEffect(() => {
