@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.297.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.296.4...@next-bricks/presentational-bricks@1.297.0) (2023-05-16)
+
+
+### Features
+
+* **carousel:** 支持配置上下自动滚动 ([73e8c54](https://github.com/easyops-cn/next-basics/commit/73e8c54238dc0d46003dbafe8d31de33644d10da))
+
+
+
+
+
 ## [1.296.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.296.3...@next-bricks/presentational-bricks@1.296.4) (2023-05-15)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
