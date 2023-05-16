@@ -97,7 +97,9 @@ export function WorkbenchDataTree({
         nodes={trees}
         placeholder={placeholder}
         searchPlaceholder={searchPlaceholder}
+        allowDrag={true}
         allowDragToRoot={true}
+        allowDragToInside={false}
         dropEmit={dropEmit}
       />
     </WorkbenchTreeContext.Provider>

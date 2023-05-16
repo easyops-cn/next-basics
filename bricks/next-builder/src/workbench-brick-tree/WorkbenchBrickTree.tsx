@@ -394,6 +394,8 @@ export function WorkbenchBrickTree({
         nodes={tree}
         placeholder={placeholder}
         searchPlaceholder={searchPlaceholder}
+        allowDrag={true}
+        allowDragToRoot={false}
         allowDragToInside={true}
         isDrag={isDrag}
       />
