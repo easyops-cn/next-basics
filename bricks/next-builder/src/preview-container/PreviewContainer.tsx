@@ -15,6 +15,7 @@ import type {
   BuilderSnippetNode,
   SiteTheme,
   Storyboard,
+  StoryboardContextItem,
 } from "@next-core/brick-types";
 import type {
   BrickOutline,
@@ -70,8 +71,11 @@ export interface PreviewContainerProps {
   onScreenshotCapture?(screenshot: Blob): void;
   onPreviewerDrop?(params: Record<string, any>): void;
   onPreviewerResize?(resize: PreviewerResize): void;
-  onPreviewDataValueSuccess?(value: unknown): void;
-  onPreviewDataValueError?(value: unknown): void;
+  onInspectSingleDataValueSuccess?(value: unknown): void;
+  onInspectAllDataValuesSuccess?(
+    value: Map<string, StoryboardContextItem>
+  ): void;
+  onInspectDataValueError?(value: unknown): void;
   onExcuteProxyMethodSuccess?(result: ExcuteProxyMethodResult): void;
   onExcuteProxyMethodError?(result: ExcuteProxyMethodResult): void;
   onPreviewDebug?(result: any[]): void;
@@ -94,7 +98,7 @@ export interface PreviewContainerRef {
   toggleTheme(): void;
   back(): void;
   forward(): void;
-  previewDataValue(name: string, option: PreviewDataOption): void;
+  inspectDataValue(name: string, option: PreviewDataOption): void;
   manager: BuilderDataManager;
 }
 
@@ -143,8 +147,9 @@ export function LegacyPreviewContainer(
     onScreenshotCapture,
     onPreviewerDrop,
     onPreviewerResize,
-    onPreviewDataValueSuccess,
-    onPreviewDataValueError,
+    onInspectSingleDataValueSuccess,
+    onInspectAllDataValuesSuccess,
+    onInspectDataValueError,
     onExcuteProxyMethodSuccess,
     onExcuteProxyMethodError,
     onPreviewDebug,
@@ -524,12 +529,12 @@ export function LegacyPreviewContainer(
     );
   }, [previewOrigin, screenshotMaxHeight, screenshotMaxWidth]);
 
-  const previewDataValue = useCallback(
+  const inspectDataValue = useCallback(
     (name: string, option: PreviewDataOption) => {
       iframeRef.current.contentWindow.postMessage(
         {
           sender: "preview-container",
-          type: "preview-data-value",
+          type: "inspect-data-value",
           name,
           option,
         } as PreviewBaseMessage,
@@ -618,7 +623,7 @@ export function LegacyPreviewContainer(
     toggleTheme,
     back,
     forward,
-    previewDataValue,
+    inspectDataValue,
   }));
 
   useEffect(() => {
@@ -743,11 +748,16 @@ export function LegacyPreviewContainer(
           case "match-api-cache":
             onMatchApiCache(data.num);
             break;
-          case "preview-data-value-success":
-            onPreviewDataValueSuccess(data.data);
+          case "inspect-single-data-value-success":
+            onInspectSingleDataValueSuccess(data.data);
             break;
-          case "preview-data-value-error":
-            onPreviewDataValueError(data.data);
+          case "inspect-all-data-values-success":
+            onInspectAllDataValuesSuccess(
+              data.data as Map<string, StoryboardContextItem>
+            );
+            break;
+          case "inspect-data-value-error":
+            onInspectDataValueError(data.data);
             break;
         }
       }
@@ -770,8 +780,9 @@ export function LegacyPreviewContainer(
     onExcuteProxyMethodError,
     onPreviewDebug,
     onMatchApiCache,
-    onPreviewDataValueSuccess,
-    onPreviewDataValueError,
+    onInspectSingleDataValueSuccess,
+    onInspectAllDataValuesSuccess,
+    onInspectDataValueError,
   ]);
 
   useEffect(() => {

@@ -262,13 +262,13 @@ export interface PreviewMessagePreviewerCaptureFailed
 
 export interface PreviewMessagePreviewDataValueSuccess {
   sender: "previewer";
-  type: "preview-data-value-success";
+  type: "inspect-single-data-value-success" | "inspect-all-data-values-success";
   data: unknown;
 }
 
 export interface PreviewMessagePreviewDataValueError {
   sender: "previewer";
-  type: "preview-data-value-error";
+  type: "inspect-data-value-error";
   data: unknown;
 }
 
@@ -323,7 +323,7 @@ export interface PreviewMessageContainerCapture extends PreviewBaseMessage {
 
 export interface PreviewMessageDataValue extends PreviewBaseMessage {
   sender: "preview-container";
-  type: "preview-data-value";
+  type: "inspect-data-value";
   name: string;
   option: PreviewDataOption;
 }

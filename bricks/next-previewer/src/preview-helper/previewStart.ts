@@ -5,6 +5,7 @@ import type {
   CustomTemplate,
   PluginLocation,
   RouteConf,
+  StoryboardContextItemFreeVariable,
 } from "@next-core/brick-types";
 import { matchPath } from "@next-core/brick-utils";
 import type {
@@ -160,17 +161,17 @@ export function previewStart(
   const handlePreviewData = (name: string, option: PreviewDataOption): void => {
     try {
       const { dataType } = option;
-      let value;
+      let tplContextId;
 
       if (dataType === "state") {
         const mainMountPoint = document.querySelector("#main-mount-point");
 
-        const tplContextId = (mainMountPoint.lastChild as HTMLElement).dataset
+        tplContextId = (mainMountPoint.firstChild as HTMLElement).dataset
           .tplContextId;
 
         if (!tplContextId) {
           sendMessage<PreviewMessagePreviewDataValueError>({
-            type: "preview-data-value-error",
+            type: "inspect-data-value-error",
             data: {
               error: {
                 message:
@@ -181,17 +182,32 @@ export function previewStart(
 
           return;
         }
+      }
 
-        value = developHelper.getStateValue(name, {
+      let value, type: PreviewMessagePreviewDataValueSuccess["type"];
+      if (name) {
+        type = "inspect-single-data-value-success";
+        value = developHelper.getContextValue(name, {
           tplContextId,
         });
       } else {
-        value = developHelper.getContextValue(name);
+        value = [];
+        type = "inspect-all-data-values-success";
+
+        const data = developHelper.getAllContextValues({ tplContextId });
+
+        for (const [k, v] of data) {
+          value.push({
+            name: k,
+            value: (v as StoryboardContextItemFreeVariable).value,
+          });
+        }
       }
 
       sendMessage<PreviewMessagePreviewDataValueSuccess>({
-        type: "preview-data-value-success",
+        type,
         data: {
+          name,
           value,
         },
       });
@@ -199,7 +215,7 @@ export function previewStart(
       // istanbul ignore next
     } catch (error) {
       sendMessage<PreviewMessagePreviewDataValueError>({
-        type: "preview-data-value-error",
+        type: "inspect-data-value-error",
         data: {
           message: error.message,
         },
@@ -314,7 +330,7 @@ export function previewStart(
               }
             );
             break;
-          case "preview-data-value":
+          case "inspect-data-value":
             handlePreviewData(data.name, data.option);
             break;
           case "update-preview-url": {
