@@ -21,6 +21,10 @@ import {
 import { WorkbenchTreeContext } from "../shared/workbench/WorkbenchTreeContext";
 import { deepMatch } from "../builder-container/utils";
 
+function defaultGetCollapsedId(node: WorkbenchNodeData): string | number {
+  return node.key;
+}
+
 /**
  * @id next-builder.workbench-tree
  * @author steve
@@ -65,6 +69,9 @@ export class WorkbenchTreeElement extends UpdatingElement {
 
   @property({ type: Boolean })
   collapsible: boolean;
+
+  @property({ attribute: false })
+  collapsedNodes: string[];
 
   @property({ type: Boolean })
   allowDrag: boolean;
@@ -116,6 +123,16 @@ export class WorkbenchTreeElement extends UpdatingElement {
       });
     };
 
+  @event({ type: "node.toggle" })
+  private _nodeToggleEvent: EventEmitter<{
+    nodeId: string;
+    collapsed: boolean;
+  }>;
+
+  private _handleNodeToggle = (nodeId: string, collapsed: boolean): void => {
+    this._nodeToggleEvent.emit({ nodeId, collapsed });
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -150,6 +167,9 @@ export class WorkbenchTreeElement extends UpdatingElement {
                 fixedActionsFor: this.fixedActionsFor,
                 nodeKey: this.nodeKey,
                 collapsible: this.collapsible,
+                collapsedNodes: this.collapsedNodes,
+                getCollapsedId: defaultGetCollapsedId,
+                onNodeToggle: this._handleNodeToggle,
                 skipNotify: this.skipNotify,
                 clickFactory: this._nodeClickFactory,
                 contextMenuFactory: this._contextMenuFactory,
