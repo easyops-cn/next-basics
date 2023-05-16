@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.238.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.238.1...@next-bricks/next-builder@1.238.2) (2023-05-16)
+
+
+### Bug Fixes
+
+* brick-tree && data-tree can't drag ([7b232fd](https://github.com/easyops-cn/next-basics/commit/7b232fdd90fe21248213b1be7c67aade3b03847e))
+
+
+
+
+
 ## [1.238.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.238.0...@next-bricks/next-builder@1.238.1) (2023-05-15)
 
 
