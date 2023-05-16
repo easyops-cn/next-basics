@@ -5,7 +5,7 @@ import { GeneralIcon } from "@next-libs/basic-components";
 import styles from "./PopoverContainer.module.css";
 import { Popover } from "antd";
 import { TooltipPlacement } from "antd/lib/tooltip";
-import { ActionType } from "rc-trigger/lib/interface";
+import { ActionType, AlignType } from "rc-trigger/lib/interface";
 import classNames from "classnames";
 import { merge } from "lodash";
 
@@ -20,6 +20,11 @@ interface PopoverContainerProps {
     useBrick: UseBrickConf;
     data?: any;
   };
+  popoverTitleBrick?: {
+    useBrick: UseBrickConf;
+  };
+  align?: AlignType;
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
   onVisibleChange?: (visible: boolean) => void;
   popoverIcon?: MenuIcon;
   placement?: TooltipPlacement;
@@ -168,6 +173,18 @@ export function PopoverContainer(
         overlayClassName={props.showPopoverBg ? "" : styles.customOverlay}
         onVisibleChange={onVisibleChange}
         zIndex={props.zIndex ?? 1030}
+        align={props.align}
+        getPopupContainer={props.getPopupContainer}
+        {...(props.popoverTitleBrick?.useBrick
+          ? {
+              title: (
+                <BrickAsComponent
+                  useBrick={props.popoverTitleBrick.useBrick}
+                  data={props.data}
+                />
+              ),
+            }
+          : {})}
       >
         <div
           data-testid="trigger-container"
