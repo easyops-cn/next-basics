@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.238.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.238.2...@next-bricks/next-builder@1.238.3) (2023-05-16)
+
+
+### Bug Fixes
+
+* workbench-tree support onNodeToggle ([8e0b8d0](https://github.com/easyops-cn/next-basics/commit/8e0b8d0791e27affb136040e4bfb7277de7a69df))
+
+
+
+
+
 ## [1.238.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.238.1...@next-bricks/next-builder@1.238.2) (2023-05-16)
 
 
