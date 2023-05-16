@@ -27,6 +27,7 @@ export interface GeneralCarouselProps {
   useBrick: UseBrickConf;
   dataSource: any[];
   autoplaySpeed?: number;
+  dotPosition?: "top" | "bottom" | "left" | "right";
 }
 
 export function renderCustomComp(
@@ -82,6 +83,7 @@ export function GeneralCarousel({
   useBrick,
   dataSource,
   autoplaySpeed,
+  dotPosition,
 }: GeneralCarouselProps): React.ReactElement {
   const comps = Array.isArray(components) ? components : compact([components]);
   const data = Array.isArray(dataSource) ? dataSource : compact([dataSource]);
@@ -105,6 +107,7 @@ export function GeneralCarousel({
       responsive={responsive}
       prevArrow={<LeftOutlined />}
       nextArrow={<RightOutlined />}
+      dotPosition={dotPosition}
     >
       {useBrick
         ? renderCustomBrick(useBrick, data, onHandleClick)

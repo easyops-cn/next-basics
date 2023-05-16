@@ -24,6 +24,7 @@ describe("GeneralCarousel", () => {
     );
     expect(wrapper).toBeTruthy();
   });
+
   it("should work if useBrick is falsy", () => {
     const components = {
       brick: "div",

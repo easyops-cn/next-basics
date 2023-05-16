@@ -227,6 +227,16 @@ export class GeneralCarouselElement extends UpdatingElement {
   dotsTheme: GeneralCarouselProps["dotsTheme"] = "light";
 
   /**
+   * @kind top | bottom | left | right
+   * @required false
+   * @default bottom
+   * @description 面板指示点的位置,走马灯的滑动方向，“top、bottom"为从左至右，“left 、right”为从上至下
+   * @group advanced
+   */
+  @property({ attribute: false })
+  dotPosition: "top" | "bottom" | "left" | "right" = "bottom";
+
+  /**
    * @kind CustomCompProps|CustomCompProps[]
    * @required false
    * @default -
@@ -280,6 +290,7 @@ export class GeneralCarouselElement extends UpdatingElement {
             arrows={this.arrows}
             dotsTheme={this.dotsTheme}
             autoplaySpeed={this.autoplaySpeed}
+            dotPosition={this.dotPosition}
           />
         </BrickWrapper>,
         this
