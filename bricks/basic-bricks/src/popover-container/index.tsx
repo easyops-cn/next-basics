@@ -9,8 +9,8 @@ import {
 } from "@next-core/brick-kit";
 import { PopoverContainer } from "./PopoverContainer";
 import { UseBrickConf, MenuIcon } from "@next-core/brick-types";
-import { TooltipPlacement } from "antd/lib/tooltip";
-import { ActionType } from "rc-trigger/lib/interface";
+import { TooltipPlacement, TooltipAlignConfig } from "antd/lib/tooltip";
+import { ActionType, AlignType } from "rc-trigger/lib/interface";
 
 /**
  * @id basic-bricks.popover-container
@@ -68,6 +68,28 @@ export class PopoverContainerElement extends UpdatingElement {
     useBrick: UseBrickConf;
     data?: any;
   };
+
+  /**
+   * @kind UseBrickConf
+   * @description 弹出框title构件
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  popoverTitleBrick: {
+    useBrick: UseBrickConf;
+  };
+
+  /**
+   * @kind AlignType
+   * @description popover 的对其配置详情可查看 [AlignType](https://4x-ant-design.antgroup.com/components/tooltip-cn/)
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  align: AlignType;
 
   /**
    * @kind CustomBrick
@@ -240,6 +262,16 @@ export class PopoverContainerElement extends UpdatingElement {
   transferGraphAttrs: boolean;
 
   /**
+   * @kind (triggerNode: HTMLElement) => HTMLElement;
+   * @description 浮层渲染父节点，默认渲染到 body 上
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  getPopupContainer: (triggerNode: HTMLElement) => HTMLElement;
+
+  /**
    * @detail any
    * @description 鼠标移动到元素上发出的事件，事件详情为用户设置的 data
    */
@@ -292,6 +324,7 @@ export class PopoverContainerElement extends UpdatingElement {
           <PopoverContainer
             displayBrick={this.displayBrick}
             popoverBrick={this.popoverBrick}
+            popoverTitleBrick={this.popoverTitleBrick}
             visible={this.visible}
             onVisibleChange={this._handleVisibleChange}
             data={this.data}
@@ -307,6 +340,8 @@ export class PopoverContainerElement extends UpdatingElement {
             faded={this.faded}
             transferGraphAttrs={this.transferGraphAttrs}
             zIndex={this.zIndex}
+            align={this.align}
+            getPopupContainer={this.getPopupContainer}
             itemMouseEnter={this._itemMouseEnter}
             itemMouseLeave={this._itemMouseLeave}
           />
