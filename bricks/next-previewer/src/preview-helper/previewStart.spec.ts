@@ -44,7 +44,11 @@ jest
   .mockImplementation();
 jest.spyOn(kit.developHelper, "updateStoryboardBySnippet").mockImplementation();
 jest.spyOn(kit.developHelper, "updateFormPreviewSettings").mockImplementation();
+
+jest.spyOn(kit.developHelper, "getContextValue").mockImplementation();
 const mockCapture = capture as jest.Mock;
+
+jest.spyOn(kit.developHelper, "getAllContextValues").mockImplementation();
 
 delete window.location;
 window.location = {
@@ -64,6 +68,18 @@ const addEventListener = jest.spyOn(window, "addEventListener");
 const brick = document.createElement("div");
 brick.dataset.iid = "i-01";
 document.body.appendChild(brick);
+
+const mainElement = document.createElement("div");
+
+mainElement.setAttribute("id", "main-mount-point");
+
+const span = document.createElement("span");
+
+span.dataset.tplContextId = "tpl-ctx-8";
+
+mainElement.appendChild(span);
+
+document.body.appendChild(mainElement);
 
 describe("previewStart", () => {
   it("should work", async () => {
@@ -511,5 +527,102 @@ describe("previewStart", () => {
     } as any);
 
     expect(history.goForward).toBeCalledTimes(1);
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "inspect-data-value",
+        name: "pageSize",
+        option: {
+          dataType: "context",
+        },
+      },
+    } as any);
+
+    expect(kit.developHelper.getContextValue).toHaveBeenLastCalledWith(
+      "pageSize",
+      {
+        tplContextId: undefined,
+      }
+    );
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "inspect-data-value",
+        name: undefined,
+        option: {
+          dataType: "context",
+        },
+      },
+    } as any);
+
+    expect(kit.developHelper.getAllContextValues).toHaveBeenLastCalledWith({
+      tplContextId: undefined,
+    });
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "inspect-data-value",
+        name: "name",
+        option: {
+          dataType: "state",
+        },
+      },
+    } as any);
+
+    expect(kit.developHelper.getContextValue).toHaveBeenLastCalledWith("name", {
+      tplContextId: "tpl-ctx-8",
+    });
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "inspect-data-value",
+        name: undefined,
+        option: {
+          dataType: "state",
+          tplContextId: "tpl-ctx-6",
+        },
+      },
+    } as any);
+
+    expect(kit.developHelper.getAllContextValues).toHaveBeenLastCalledWith({
+      tplContextId: "tpl-ctx-8",
+    });
+
+    span.dataset.tplContextId = "";
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "inspect-data-value",
+        name: "name",
+        option: {
+          dataType: "state",
+          tplContextId: "tpl-ctx-6",
+        },
+      },
+    } as any);
+
+    expect(parentPostMessage).toHaveBeenNthCalledWith(
+      18,
+      {
+        sender: "previewer",
+        type: "inspect-data-value-error",
+        data: {
+          error: {
+            message: "tplContextId not found, unable to preview STATE value",
+          },
+        },
+      },
+      "http://localhost:8081"
+    );
   });
 });

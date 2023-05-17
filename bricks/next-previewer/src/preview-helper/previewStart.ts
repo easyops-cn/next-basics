@@ -5,12 +5,14 @@ import type {
   CustomTemplate,
   PluginLocation,
   RouteConf,
+  StoryboardContextItemFreeVariable,
 } from "@next-core/brick-types";
 import { matchPath } from "@next-core/brick-utils";
 import type {
   BrickOutline,
   HighLightNode,
   Position,
+  PreviewDataOption,
   PreviewMessageFromPreviewer,
   PreviewMessagePreviewerCaptureFailed,
   PreviewMessagePreviewerCaptureOk,
@@ -20,6 +22,8 @@ import type {
   PreviewMessagePreviewerRouteMatchChange,
   PreviewMessagePreviewerScroll,
   PreviewMessagePreviewerUrlChange,
+  PreviewMessagePreviewDataValueSuccess,
+  PreviewMessagePreviewDataValueError,
   PreviewMessageToPreviewer,
   PreviewSettings,
   PreviewStartOptions,
@@ -154,6 +158,71 @@ export function previewStart(
     getHistory().reload();
   };
 
+  const handlePreviewData = (name: string, option: PreviewDataOption): void => {
+    try {
+      const { dataType } = option;
+      let tplContextId;
+
+      if (dataType === "state") {
+        const mainMountPoint = document.querySelector("#main-mount-point");
+
+        tplContextId = (mainMountPoint.firstChild as HTMLElement).dataset
+          .tplContextId;
+
+        if (!tplContextId) {
+          sendMessage<PreviewMessagePreviewDataValueError>({
+            type: "inspect-data-value-error",
+            data: {
+              error: {
+                message:
+                  "tplContextId not found, unable to preview STATE value",
+              },
+            },
+          });
+
+          return;
+        }
+      }
+
+      let value, type: PreviewMessagePreviewDataValueSuccess["type"];
+      if (name) {
+        type = "inspect-single-data-value-success";
+        value = developHelper.getContextValue(name, {
+          tplContextId,
+        });
+      } else {
+        value = [];
+        type = "inspect-all-data-values-success";
+
+        const data = developHelper.getAllContextValues({ tplContextId });
+
+        for (const [k, v] of data) {
+          value.push({
+            name: k,
+            value: (v as StoryboardContextItemFreeVariable).value,
+          });
+        }
+      }
+
+      sendMessage<PreviewMessagePreviewDataValueSuccess>({
+        type,
+        data: {
+          name,
+          value,
+        },
+      });
+
+      // istanbul ignore next
+    } catch (error) {
+      sendMessage<PreviewMessagePreviewDataValueError>({
+        type: "inspect-data-value-error",
+        data: {
+          message: error.message,
+        },
+      });
+    }
+  };
+
   const history = getHistory();
 
   window.addEventListener(
@@ -260,6 +329,9 @@ export function previewStart(
                 });
               }
             );
+            break;
+          case "inspect-data-value":
+            handlePreviewData(data.name, data.option);
             break;
           case "update-preview-url": {
             // Remove origin first.

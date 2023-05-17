@@ -8,8 +8,16 @@ import {
   UpdatingElement,
   method,
 } from "@next-core/brick-kit";
-import type { BuilderSnippetNode, Storyboard } from "@next-core/brick-types";
-import { ExcuteProxyMethodResult, PreviewSettings } from "@next-types/preview";
+import type {
+  BuilderSnippetNode,
+  Storyboard,
+  StoryboardContextItem,
+} from "@next-core/brick-types";
+import {
+  ExcuteProxyMethodResult,
+  PreviewSettings,
+  PreviewDataOption,
+} from "@next-types/preview";
 import {
   BuilderProvider,
   EventDetailOfNodeAddStored,
@@ -162,6 +170,31 @@ export class PreviewContainerElement extends UpdatingElement {
     this._handlePreviewResizeEvent.emit(resize);
   };
 
+  @event({ type: "inspect.single.data.value.success" })
+  private _handleInspectSingleDataValueSuccessEvent: EventEmitter<unknown>;
+
+  private _handleInspectSingleDataValueSuccess = (value: unknown): void => {
+    this._handleInspectSingleDataValueSuccessEvent.emit(value);
+  };
+
+  @event({ type: "inspect.all.data.values.success" })
+  private _handleInspectAllDataValuesSuccessEvent: EventEmitter<
+    Map<string, StoryboardContextItem>
+  >;
+
+  private _handleInspectAllDataValuesSuccess = (
+    value: Map<string, StoryboardContextItem>
+  ): void => {
+    this._handleInspectAllDataValuesSuccessEvent.emit(value);
+  };
+
+  @event({ type: "inspect.data.value.error" })
+  private _handleInspectDataValueErrorEvent: EventEmitter<unknown>;
+
+  private _handleInspectDataValueError = (value: unknown): void => {
+    this._handleInspectDataValueErrorEvent.emit(value);
+  };
+
   private _previewContainerRef = createRef<PreviewContainerRef>();
 
   @method()
@@ -201,6 +234,21 @@ export class PreviewContainerElement extends UpdatingElement {
   @method()
   capture(): void {
     this._previewContainerRef.current.capture();
+  }
+
+  // istanbul ignore next
+  @method()
+  inspectDataValue(name: string, option: PreviewDataOption): any {
+    return this._previewContainerRef.current.inspectDataValue(name, option);
+  }
+
+  // istanbul ignore next
+  @method()
+  inspectAllDataValue(option: PreviewDataOption): any {
+    return this._previewContainerRef.current.inspectDataValue(
+      undefined,
+      option
+    );
   }
 
   // istanbul ignore next
@@ -263,6 +311,13 @@ export class PreviewContainerElement extends UpdatingElement {
               onScreenshotCapture={this._handleScreenshotCapture}
               onPreviewerDrop={this._handlePreviewerDrop}
               onPreviewerResize={this._handlePreivewResize}
+              onInspectSingleDataValueSuccess={
+                this._handleInspectSingleDataValueSuccess
+              }
+              onInspectAllDataValuesSuccess={
+                this._handleInspectAllDataValuesSuccess
+              }
+              onInspectDataValueError={this._handleInspectDataValueError}
               onExcuteProxyMethodSuccess={this._handleExcuteProxyMethodSuccess}
               onExcuteProxyMethodError={this._handleExcuteProxyMethodError}
               onPreviewDebug={this._handlePreviwDebug}

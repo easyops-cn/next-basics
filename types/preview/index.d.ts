@@ -104,13 +104,16 @@ export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerRouteMatchChange
   | PreviewMessagePreviewerScroll
   | PreviewMessagePreviewerCaptureOk
-  | PreviewMessagePreviewerCaptureFailed;
+  | PreviewMessagePreviewerCaptureFailed
+  | PreviewMessagePreviewDataValueSuccess
+  | PreviewMessagePreviewDataValueError;
 
 export type PreviewMessageToPreviewer =
   | PreviewMessageContainerBuilderHoverOnIframe
   | PreviewMessageContainerBuilderHoverOnMain
   | PreviewMessageContainerBuilderHoverOnBrick
   | PreviewMessageContainerBuilderHoverOnContext
+  | PreviewMessageDataValue
   | PreviewMessageContainerBuilderSelectBrick
   | PreviewMessageContainerToggleInspecting
   | PreviewMessageContainerBack
@@ -156,7 +159,9 @@ export type PreviewMessageToContainer =
   | PreviewMessagePreviewerCaptureFailed
   | PreviewMessageContainerProxyMethodSuccess
   | PreviewMessageContainerProxyMethodError
-  | PreviewMessageContainerMatchApiCache;
+  | PreviewMessageContainerMatchApiCache
+  | PreviewMessagePreviewDataValueSuccess
+  | PreviewMessagePreviewDataValueError;
 
 export type PreviewerMessageToBuilder =
   | PreviewMessageContainerPreviewerHoverOnMain
@@ -255,6 +260,18 @@ export interface PreviewMessagePreviewerCaptureFailed
   type: "capture-failed";
 }
 
+export interface PreviewMessagePreviewDataValueSuccess {
+  sender: "previewer";
+  type: "inspect-single-data-value-success" | "inspect-all-data-values-success";
+  data: unknown;
+}
+
+export interface PreviewMessagePreviewDataValueError {
+  sender: "previewer";
+  type: "inspect-data-value-error";
+  data: unknown;
+}
+
 export interface PreviewMessageContainerStartPreview
   extends PreviewBaseMessage {
   sender: "preview-container";
@@ -302,6 +319,13 @@ export interface PreviewMessageContainerCapture extends PreviewBaseMessage {
   type: "capture";
   maxWidth: number;
   maxHeight: number;
+}
+
+export interface PreviewMessageDataValue extends PreviewBaseMessage {
+  sender: "preview-container";
+  type: "inspect-data-value";
+  name: string;
+  option: PreviewDataOption;
 }
 
 export interface PreviewMessageContainerBuilderHoverOnIframe
@@ -694,4 +718,8 @@ export interface BackendMessageForExecuteSuccess {
     res: any;
     op: string;
   };
+}
+
+export interface PreviewDataOption {
+  dataType: "state" | "context";
 }

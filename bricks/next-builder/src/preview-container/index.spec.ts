@@ -14,6 +14,33 @@ describe("next-builder.preview-container", () => {
     expect(spyOnRender).not.toBeCalled();
     document.body.appendChild(element);
     expect(spyOnRender).toBeCalled();
+
+    const spyonDispatchEvent = jest.spyOn(element, "dispatchEvent");
+
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.children.props.onInspectSingleDataValueSuccess("test");
+
+    expect((spyonDispatchEvent.mock.calls[0][0] as CustomEvent).detail).toEqual(
+      "test"
+    );
+
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.children.props.onInspectAllDataValuesSuccess("hello");
+
+    expect((spyonDispatchEvent.mock.calls[1][0] as CustomEvent).detail).toEqual(
+      "hello"
+    );
+
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.children.props.onInspectDataValueError("error");
+
+    expect((spyonDispatchEvent.mock.calls[2][0] as CustomEvent).detail).toEqual(
+      "error"
+    );
+
     document.body.removeChild(element);
     expect(unmountComponentAtNode).toBeCalled();
   });

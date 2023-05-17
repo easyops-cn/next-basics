@@ -15,6 +15,7 @@ import type {
   BuilderSnippetNode,
   SiteTheme,
   Storyboard,
+  StoryboardContextItem,
 } from "@next-core/brick-types";
 import type {
   BrickOutline,
@@ -30,6 +31,8 @@ import type {
   PreviewMessageToContainer,
   PreviewSettings,
   UpdateStoryboardType,
+  PreviewBaseMessage,
+  PreviewDataOption,
 } from "@next-types/preview";
 
 import styles from "./PreviewContainer.module.css";
@@ -68,6 +71,11 @@ export interface PreviewContainerProps {
   onScreenshotCapture?(screenshot: Blob): void;
   onPreviewerDrop?(params: Record<string, any>): void;
   onPreviewerResize?(resize: PreviewerResize): void;
+  onInspectSingleDataValueSuccess?(value: unknown): void;
+  onInspectAllDataValuesSuccess?(
+    value: Map<string, StoryboardContextItem>
+  ): void;
+  onInspectDataValueError?(value: unknown): void;
   onExcuteProxyMethodSuccess?(result: ExcuteProxyMethodResult): void;
   onExcuteProxyMethodError?(result: ExcuteProxyMethodResult): void;
   onPreviewDebug?(result: any[]): void;
@@ -90,6 +98,7 @@ export interface PreviewContainerRef {
   toggleTheme(): void;
   back(): void;
   forward(): void;
+  inspectDataValue(name: string, option: PreviewDataOption): void;
   manager: BuilderDataManager;
 }
 
@@ -138,6 +147,9 @@ export function LegacyPreviewContainer(
     onScreenshotCapture,
     onPreviewerDrop,
     onPreviewerResize,
+    onInspectSingleDataValueSuccess,
+    onInspectAllDataValuesSuccess,
+    onInspectDataValueError,
     onExcuteProxyMethodSuccess,
     onExcuteProxyMethodError,
     onPreviewDebug,
@@ -517,6 +529,21 @@ export function LegacyPreviewContainer(
     );
   }, [previewOrigin, screenshotMaxHeight, screenshotMaxWidth]);
 
+  const inspectDataValue = useCallback(
+    (name: string, option: PreviewDataOption) => {
+      iframeRef.current.contentWindow.postMessage(
+        {
+          sender: "preview-container",
+          type: "inspect-data-value",
+          name,
+          option,
+        } as PreviewBaseMessage,
+        previewOrigin
+      );
+    },
+    [previewOrigin]
+  );
+
   const handleUrlChange = useCallback(
     (url: string) => {
       onUrlChange?.(url);
@@ -596,6 +623,7 @@ export function LegacyPreviewContainer(
     toggleTheme,
     back,
     forward,
+    inspectDataValue,
   }));
 
   useEffect(() => {
@@ -720,6 +748,17 @@ export function LegacyPreviewContainer(
           case "match-api-cache":
             onMatchApiCache(data.num);
             break;
+          case "inspect-single-data-value-success":
+            onInspectSingleDataValueSuccess(data.data);
+            break;
+          case "inspect-all-data-values-success":
+            onInspectAllDataValuesSuccess(
+              data.data as Map<string, StoryboardContextItem>
+            );
+            break;
+          case "inspect-data-value-error":
+            onInspectDataValueError(data.data);
+            break;
         }
       }
     };
@@ -741,6 +780,9 @@ export function LegacyPreviewContainer(
     onExcuteProxyMethodError,
     onPreviewDebug,
     onMatchApiCache,
+    onInspectSingleDataValueSuccess,
+    onInspectAllDataValuesSuccess,
+    onInspectDataValueError,
   ]);
 
   useEffect(() => {
