@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.20.12...@next-bricks/general-auth@1.21.0) (2023-05-17)
+
+
+### Features
+
+* add featureFlag hidden-login-footer and brand.auth_login_bg_url ([7165dc2](https://github.com/easyops-cn/next-basics/commit/7165dc272b7aaf5960f7add235b63b39299b0ce4))
+
+
+
+
+
 ## [1.20.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.20.11...@next-bricks/general-auth@1.20.12) (2023-05-09)
 
 **Note:** Version bump only for package @next-bricks/general-auth
