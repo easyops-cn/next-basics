@@ -371,6 +371,13 @@ export class BrickTableElement extends UpdatingElement {
   }>;
 
   /**
+   * @description 表头过滤变化的事件
+   */
+  @event({ type: "column.filters.update" }) columnFiltersUpdate: EventEmitter<
+    Record<string, string[]>
+  >;
+
+  /**
    * @kind CustomColumn[]
    * @required false
    * @default -
@@ -1405,6 +1412,7 @@ export class BrickTableElement extends UpdatingElement {
           ? urlSearchParams.delete(key)
           : urlSearchParams.set(key, value);
       });
+      this.columnFiltersUpdate.emit(filters);
     }
     // 排序: 切换分页和页码的时候不应该触发sort.update事件  排序触发/取消的时候，order的类型 'descend' | 'ascend' | null，没触发是false
     if (
