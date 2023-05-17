@@ -2728,10 +2728,10 @@
     classnames "^2.3.2"
     file-saver "^2.0.5"
 
-"@next-libs/crontab@^2.0.7":
-  version "2.0.7"
-  resolved "https://registry.npmjs.org/@next-libs/crontab/-/crontab-2.0.7.tgz#da8e7c77cc7c45bb12623ba845dc8a80ff686ffd"
-  integrity sha512-ovgybGNZ7Cp699QPB4/Qk2JwDct6+QpuYyOKQCgSpiHbzbZ1p6dvof58BRqEiTJe8PW2RnBMl1waYCSm3CqoDw==
+"@next-libs/crontab@^2.0.8":
+  version "2.0.8"
+  resolved "https://registry.npmjs.org/@next-libs/crontab/-/crontab-2.0.8.tgz#75e8f2a0383919fe3d5549081ece20df47da912d"
+  integrity sha512-n/aqiYJnJ23peiHCywD0J962ayAmkCMmsZ+9IWWE3dWTuiRc62LQLDbQBWl5oz+yL9L/Kdf3oiBJqV08pLFcyg==
   dependencies:
     cronstrue "^1.88.0"
 
@@ -2780,10 +2780,10 @@
   dependencies:
     "@next-libs/storage" "^2.0.4"
 
-"@next-libs/visual-builder@^1.10.5":
-  version "1.10.5"
-  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.10.5.tgz#9cc696856d5d7bf048b2f9667842308c7a6da421"
-  integrity sha512-EogtSTOcTrp7LEAktllL5F61OBNBQz2/WjNK9dgysTbzkPVSqXjYFdEJlapdmQhDhElF2gZyKdNUxWKWcI/5nw==
+"@next-libs/visual-builder@^1.11.0":
+  version "1.11.0"
+  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.11.0.tgz#5d1d13c74bab2d46e60f17a5a85754f5acc5a5bb"
+  integrity sha512-cl+T4y+Cx6+t0D39ym8Dfrw/jC6aryCqRuMuD7RUVjdnTL1CCRhzMTLR0iVOsiftdpuWX3XmF28EpWtlKRkH5w==
   dependencies:
     "@next-libs/basic-components" "^5.3.3"
     "@next-libs/code-editor-components" "^4.10.2"
