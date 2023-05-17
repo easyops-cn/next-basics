@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.298.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.297.2...@next-bricks/presentational-bricks@1.298.0) (2023-05-17)
+
+
+### Features
+
+* **brick-table:** add column.filters.update event ([38ccd8a](https://github.com/easyops-cn/next-basics/commit/38ccd8a42fef5808d46475380c95986eaae67d5b))
+
+
+
+
+
 ## [1.297.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.297.1...@next-bricks/presentational-bricks@1.297.2) (2023-05-17)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
