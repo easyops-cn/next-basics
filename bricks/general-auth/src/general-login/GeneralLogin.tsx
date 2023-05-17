@@ -684,7 +684,10 @@ export class LegacyGeneralLogin extends React.Component<
             >
               <div className={styles.loginImg}>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <img src={loginPng} className={styles.loginImgSize} />
+                  <img
+                    src={brand.auth_login_image_url || loginPng}
+                    className={styles.loginImgSize}
+                  />
                 </div>
               </div>
               <div className={styles.loginForm}>
