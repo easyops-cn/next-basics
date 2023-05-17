@@ -17,7 +17,9 @@ jest.mock("@next-libs/storage");
 const spyOnAuthenticate = jest.spyOn(kit, "authenticate");
 const spyOnHandleHttpError = jest.spyOn(kit, "handleHttpError");
 const spyOnReloadMicroApps = jest.fn();
-const brandFn = jest.fn().mockReturnValue({});
+const brandFn = jest.fn().mockReturnValue({
+  auth_login_image_url: "http://static.runoob.com/images/demo/demo1.jpg",
+});
 
 const spyOnLogin = jest.spyOn(apiGatewaySdk, "AuthApi_loginV2");
 const spyOnEsbLogin = jest.spyOn(authSdk, "esbLogin");
