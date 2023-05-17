@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.239.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.238.3...@next-bricks/next-builder@1.239.0) (2023-05-17)
+
+
+### Bug Fixes
+
+* refactor preivew ([34d1eeb](https://github.com/easyops-cn/next-basics/commit/34d1eebb0d269943062865784bec0ea94118d330))
+
+
+### Features
+
+* support preview context/state value ([8e14eb4](https://github.com/easyops-cn/next-basics/commit/8e14eb4e0576ff5b7aa24454a542c788b742e2fd))
+
+
+
+
+
 ## [1.238.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.238.2...@next-bricks/next-builder@1.238.3) (2023-05-16)
 
 
