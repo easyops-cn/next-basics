@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.234.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.233.0...@next-bricks/basic-bricks@1.234.0) (2023-05-18)
+
+
+### Features
+
+* support resize property ([6b3d7b1](https://github.com/easyops-cn/next-basics/commit/6b3d7b189f6f404463b21b9f634d12c91bdcb983))
+
+
+
+
+
 # [1.233.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.232.4...@next-bricks/basic-bricks@1.233.0) (2023-05-16)
 
 

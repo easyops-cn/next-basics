@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.239.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.239.0...@next-bricks/next-builder@1.239.1) (2023-05-18)
+
+
+### Bug Fixes
+
+* allowDrag is false still trigger dragOver ([3664e6f](https://github.com/easyops-cn/next-basics/commit/3664e6f4c862859561b54d30ecb50690ab895bfc))
+
+
+
+
+
 # [1.239.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.238.3...@next-bricks/next-builder@1.239.0) (2023-05-17)
 
 
