@@ -183,6 +183,7 @@ export function WorkbenchTree({
     node: WorkbenchNodeData
   ): void => {
     e.stopPropagation();
+    if (!allowDrag) return;
     const element = e.target as HTMLElement;
     if (element.dataset?.container) return;
     setIsDragging(true);
