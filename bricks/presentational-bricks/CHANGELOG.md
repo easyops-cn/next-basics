@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.299.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.298.0...@next-bricks/presentational-bricks@1.299.0) (2023-05-18)
+
+
+### Features
+
+* **datetime:** 增加rangeDays属性 ([1afb781](https://github.com/easyops-cn/next-basics/commit/1afb7818853c9df44dc92143b47b46fb0331850f))
+
+
+
+
+
 # [1.298.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.297.2...@next-bricks/presentational-bricks@1.298.0) (2023-05-17)
 
 
