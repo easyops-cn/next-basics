@@ -2735,10 +2735,10 @@
   dependencies:
     cronstrue "^1.88.0"
 
-"@next-libs/datetime-components@^3.1.2":
-  version "3.1.2"
-  resolved "https://registry.npmjs.org/@next-libs/datetime-components/-/datetime-components-3.1.2.tgz#f889ea3f36beb4c8786c07f6e35a2e10ef35750e"
-  integrity sha512-Y+LBfGCF1ToT+K4NfvWV2Xo4VqBrqWq+FmxBQcbqbnfbIZaxiCSTEdoblR2vMiWYnr5lFOxKVfIAU/1+ORQNxw==
+"@next-libs/datetime-components@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.npmjs.org/@next-libs/datetime-components/-/datetime-components-3.2.2.tgz#17f43f62c0092dd85663c1d061db6e4fa376768f"
+  integrity sha512-WCbnnII7bjkmuEZGneaLp4QPt+CItLcz3877kyTpPBuJEBMNtfuyu2A3D73TlHPGUyt4a6SDLYMaOhy7kNI5Zw==
 
 "@next-libs/datetime@^2.0.4":
   version "2.0.4"

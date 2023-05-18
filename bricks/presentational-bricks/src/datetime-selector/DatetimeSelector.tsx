@@ -25,6 +25,7 @@ export interface DatetimeSelectorProps {
   resolution?: ResolutionProps;
   size?: ButtonSize;
   selectNearDays?: number;
+  rangeDays?: number;
 }
 
 export function DatetimeSelector(
@@ -76,6 +77,7 @@ export function DatetimeSelector(
       placement={props.placement}
       size={size}
       selectNearDays={props.selectNearDays}
+      rangeDays={props.rangeDays}
     />
   );
 }
