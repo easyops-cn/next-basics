@@ -93,6 +93,15 @@ export class GeneralPopupElement extends UpdatingElement {
   dragWrapperStyle: Record<string, any> = {};
 
   /**
+   * @description 是否可调整尺寸
+   * @group ui
+   */
+  @property({
+    type: Boolean,
+  })
+  resize?: boolean;
+
+  /**
    * @description 显示弹窗
    */
   @method()
@@ -147,6 +156,7 @@ export class GeneralPopupElement extends UpdatingElement {
               openDirection={this.openDirection}
               dragHeaderStyle={this.dragHeaderStyle}
               dragWrapperStyle={this.dragWrapperStyle}
+              resize={this.resize}
             />
           </BrickWrapper>
         </>,
