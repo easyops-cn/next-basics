@@ -28,6 +28,7 @@ export interface GeneralPopupProps {
   dragHeaderStyle?: Record<string, any>;
   dragWrapperStyle?: Record<string, any>;
   openDirection?: OpenDirection;
+  resize?: boolean;
 }
 
 let headerHeight = parseInt(getCssPropertyValue("--app-bar-height")) || 56;
@@ -42,6 +43,7 @@ export function GeneralPopup({
   dragWrapperStyle,
   openDirection,
   closePopup,
+  resize,
 }: GeneralPopupProps): React.ReactElement {
   const popupRef = useRef<HTMLDivElement>();
   const headerRef = useRef<HTMLDivElement>();
@@ -222,7 +224,12 @@ export function GeneralPopup({
           className="content"
           style={{
             width: popupWidth ?? "500px",
-            maxHeight: popupHeight,
+            ...(resize
+              ? {
+                  resize: "both",
+                  height: popupHeight,
+                }
+              : { maxHeight: popupHeight }),
           }}
         >
           <slot name="content" />

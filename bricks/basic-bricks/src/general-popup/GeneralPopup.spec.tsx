@@ -190,4 +190,19 @@ describe("GeneralPopup", () => {
       "translate(66px, 66px)"
     );
   });
+
+  it("should work with resize", () => {
+    const props = {
+      visible: true,
+      modalTitle: "title",
+      popupWidth: 600,
+      popupHeight: 400,
+      resize: true,
+    };
+
+    const { baseElement } = render(<GeneralPopup {...props} />);
+    const contentElement = baseElement.getElementsByClassName("content")[0];
+
+    expect((contentElement as HTMLElement).style.resize).toEqual("both");
+  });
 });
