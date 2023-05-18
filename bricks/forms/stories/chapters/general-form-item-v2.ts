@@ -1,17 +1,17 @@
 import { Story } from "@next-core/brick-types";
 import { generalFormItemSvg } from "../images";
-export const generalFormItemStory: Story = {
-  storyId: "forms.general-form-item",
+export const generalFormItemV2Story: Story = {
+  storyId: "forms.general-form-item-v2",
   type: "brick",
   category: "form-input-basic",
   author: "william",
   text: {
-    en: "Form Item",
-    zh: "表单项",
+    en: "Form Item v2",
+    zh: "表单项 v2",
   },
   description: {
-    en: "If you use properties such as `labelTooltip`, `labelBrick`, `helpBrick`, etc. as exceptions, use the forms.general-form-item-v2 brick instead.",
-    zh: "如使用 `labelTooltip`、`labelBrick`、`helpBrick` 等属性异常时，请改用 forms.general-form-item-v2 构件",
+    en: "",
+    zh: "",
   },
   icon: {
     imgSrc: generalFormItemSvg,
@@ -30,7 +30,7 @@ export const generalFormItemStory: Story = {
                   type: "bricks",
                   bricks: [
                     {
-                      brick: "forms.general-form-item",
+                      brick: "forms.general-form-item-v2",
                       properties: {
                         name: "a",
                         label: "一个字段",
@@ -38,11 +38,8 @@ export const generalFormItemStory: Story = {
                         message: {
                           required: "当前值为空，请点击按钮赋值",
                         },
-                      },
-                      slots: {
-                        control: {
-                          type: "bricks",
-                          bricks: [
+                        controlBrick: {
+                          useBrick: [
                             {
                               brick: "basic-bricks.general-button",
                               properties: {
@@ -52,7 +49,7 @@ export const generalFormItemStory: Story = {
                               },
                               events: {
                                 "general.button.click": {
-                                  target: "forms\\.general-form-item",
+                                  target: "forms\\.general-form-item-v2",
                                   properties: {
                                     value: "${EVENT.target.value}",
                                   },
@@ -63,7 +60,7 @@ export const generalFormItemStory: Story = {
                         },
                       },
                       events: {
-                        "general-form-item.change": [
+                        "general-form-item-v2.change": [
                           {
                             action: "console.log",
                           },

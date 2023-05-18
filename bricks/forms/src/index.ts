@@ -20,6 +20,7 @@ import "./general-auto-complete";
 import "./input-with-unit";
 import "./upload-img";
 // !Lazy: import "./general-form-item";
+import "./general-form-item-v2";
 import "./inform-methods-form";
 import "./icon-select";
 import "./dynamic-form-input-item";

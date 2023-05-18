@@ -1,24 +1,26 @@
 import React from "react";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 
-import { AbstractFormControl } from "./AbstractFormControl";
-import { ControlConfig } from ".";
+import {
+  AbstractFormControl,
+  AbstractFormControlProps,
+} from "./AbstractFormControl";
 
-export interface GeneralFormItemProps extends FormItemWrapperProps {
-  control?: ControlConfig;
-  value?: any;
-  onChange?(value: any): void;
+export interface GeneralFormItemProps
+  extends FormItemWrapperProps,
+    Pick<AbstractFormControlProps, "controlBrick" | "value"> {
+  onChange?(value: unknown): void;
 }
 
 export function GeneralFormItem(
   props: GeneralFormItemProps
 ): React.ReactElement {
-  const { control, value } = props;
+  const { controlBrick, value } = props;
 
   return (
     <FormItemWrapper {...props}>
       <AbstractFormControl
-        control={control}
+        controlBrick={controlBrick}
         controlValue={value}
         onControlValueChange={props.onChange}
       />
