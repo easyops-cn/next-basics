@@ -18,6 +18,7 @@ import { generalButtonStory } from "./general-buttons";
 import { generalCascaderStory } from "./general-cascader";
 import { datePickerStory } from "./general-date-picker";
 import { generalFormItemStory } from "./general-form-item";
+import { generalFormItemV2Story } from "./general-form-item-v2";
 import { generalInputStory } from "./general-input";
 import { generalInputNumberStory } from "./general-input-number";
 import { generalSlideStory } from "./general-slide";
@@ -54,6 +55,7 @@ export const Chapters = [
   generalCascaderStory,
   datePickerStory,
   generalFormItemStory,
+  generalFormItemV2Story,
   generalInputStory,
   generalInputNumberStory,
   generalSlideStory,

@@ -1,27 +1,22 @@
 import React, { useEffect, forwardRef, useRef } from "react";
 import { BrickAsComponent } from "@next-core/brick-kit";
 
-import { ControlConfig } from ".";
+import { ControlBrickConfig } from "../interfaces";
 
 export interface AbstractFormControlProps {
-  control?: ControlConfig;
-  value?: any;
-  controlValue?: any;
-  onChange?(value: any): void;
-  onControlValueChange?(value: any): void;
+  controlBrick?: ControlBrickConfig;
+  value?: unknown;
+  controlValue?: unknown;
+  onChange?(value: unknown): void;
+  onControlValueChange?(value: unknown): void;
 }
 
 export const AbstractFormControl = forwardRef<
-  HTMLElement, // antd 3.x 的自定义表单控件需要支持 ref，升到 4.x 以后可移除
+  HTMLDivElement, // antd 3.x 的自定义表单控件需要支持 ref，升到 4.x 以后可移除
   AbstractFormControlProps
 >(function AbstractFormControl(props, ref): React.ReactElement {
-  const {
-    control,
-    value,
-    controlValue,
-    onChange,
-    onControlValueChange,
-  } = props;
+  const { controlBrick, value, controlValue, onChange, onControlValueChange } =
+    props;
   const valueRef = useRef();
 
   useEffect(() => {
@@ -30,7 +25,7 @@ export const AbstractFormControl = forwardRef<
 
       onChange?.(controlValue);
     }
-  }, [controlValue]);
+  }, [controlValue, onChange]);
 
   useEffect(() => {
     if (value !== valueRef.current) {
@@ -41,9 +36,9 @@ export const AbstractFormControl = forwardRef<
   }, [value]);
 
   return (
-    <>
-      <slot id="controlSlot" name="control" ref={ref} />
-      {control && <BrickAsComponent useBrick={control.useBrick} />}
-    </>
+    <div style={{ display: "contents" }} ref={ref}>
+      <slot id="controlSlot" name="control" />
+      {controlBrick && <BrickAsComponent useBrick={controlBrick.useBrick} />}
+    </div>
   );
 });

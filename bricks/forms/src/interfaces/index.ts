@@ -6,3 +6,4 @@ export * from "./general-cascader";
 export * from "./dynamic-form-item-v2";
 export * from "./upload-img";
 export * from "./user-or-user-group-select";
+export * from "./general-form-item";
