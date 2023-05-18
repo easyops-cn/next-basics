@@ -180,6 +180,15 @@ export class DatetimeSelectorElement extends UpdatingElement {
   @property()
   selectNearDays: number;
 
+  /**
+   * @kind number
+   * @required false
+   * @description 限制选择范围天数
+   * @group other
+   */
+  @property()
+  rangeDays: number;
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -228,6 +237,7 @@ export class DatetimeSelectorElement extends UpdatingElement {
             resolution={this.resolution}
             size={this.size}
             selectNearDays={this.selectNearDays}
+            rangeDays={this.rangeDays}
           />
         </BrickWrapper>,
         this
