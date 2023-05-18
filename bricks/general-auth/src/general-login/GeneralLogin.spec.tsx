@@ -39,6 +39,7 @@ spyOnKit.mockReturnValue({
     "forgot-password-enabled": true,
     "sign-up-for-free-enabled": true,
     "hide-default-logo-in-login-page": false,
+    "south-network-login": true,
   }),
   getMiscSettings: () => ({
     wxAppid: "abc",

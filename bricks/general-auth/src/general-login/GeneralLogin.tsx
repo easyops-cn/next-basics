@@ -31,6 +31,7 @@ import { Link } from "@next-libs/basic-components";
 import { MFALogin } from "./MFALogin";
 import { AuthApi_getCaptcha } from "@next-sdk/api-gateway-sdk";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import classNames from "classnames";
 export interface LoginEvent {
   redirect: Location;
 }
@@ -653,11 +654,25 @@ export class LegacyGeneralLogin extends React.Component<
     const changeLoginMethod = (event: string) => {
       this.setState({ currentLoginMethod: event });
     };
+
+    const wrapperCls = classNames(styles.loginWrapper, {
+      [`${styles.loginSouthWrapper}`]: enabledFeatures["south-network-login"],
+    });
+    const bgCls = classNames(styles.loginBackground, {
+      [`${styles.loginSouthBg}`]: enabledFeatures["south-network-login"],
+    });
+    const loginImgCls = classNames(styles.loginImgSize, {
+      [`${styles.loginSouthImgSize}`]: enabledFeatures["south-network-login"],
+    });
+    const headerCls = classNames(styles.loginHeader, {
+      [`${styles.loginSouthHeader}`]: enabledFeatures["south-network-login"],
+    });
+
     return (
       <>
-        <div className={styles.loginBackground}>
-          <div className={styles.loginWrapper}>
-            <div className={styles.loginHeader}>
+        <div className={bgCls}>
+          <div className={wrapperCls}>
+            <div className={headerCls}>
               <div className={styles.logoBar}>
                 <Link to="/">
                   {brand.auth_logo_url ? (
@@ -676,7 +691,9 @@ export class LegacyGeneralLogin extends React.Component<
             </div>
             <div
               style={{
-                height: this.state.imageHeight,
+                height: enabledFeatures["south-network-login"]
+                  ? this.state.imageHeight - 200
+                  : this.state.imageHeight,
                 display: "flex",
                 marginTop: "200px",
                 justifyContent: "center",
@@ -686,10 +703,11 @@ export class LegacyGeneralLogin extends React.Component<
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <img
                     src={brand.auth_login_image_url || loginPng}
-                    className={styles.loginImgSize}
+                    className={loginImgCls}
                   />
                 </div>
               </div>
+
               <div className={styles.loginForm}>
                 {this.state.wxQRCodeLogin ? (
                   <Tabs defaultActiveKey="code">

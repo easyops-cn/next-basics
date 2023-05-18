@@ -1,6 +1,14 @@
 .loginBackground {
   background-color: rgba(234, 243, 255, 1);
 }
+.loginSouthBg {
+  background-color: #edf0f7;
+  background-repeat: no-repeat;
+  background-size: contain, contain;
+  background-position: left top, right top;
+  background-image: url("../images/login-bg-left.png"),
+    url("../images/login-bg-right.png");
+}
 .loginWrapper {
   width: 100%;
   height: 100%;
@@ -11,6 +19,9 @@
     rgba(138, 255, 246, 0.08),
     rgba(127, 110, 255, 0.08)
   );
+}
+.loginSouthWrapper {
+  background: none;
 }
 
 .loginHeader {
@@ -23,6 +34,10 @@
   background-color: rgba(234, 243, 255, 1);
 }
 
+.loginSouthHeader {
+  background-color: rgba(237, 240, 247, 1);
+}
+
 .loginImg {
   max-width: 100%;
   margin-right: 80px;
@@ -32,6 +47,13 @@
   width: 540px;
   height: 357px;
   margin-top: 40px;
+}
+
+.loginSouthImgSize {
+  width: 540px;
+  height: 490px;
+  margin-top: 0px;
+  object-fit: contain;
 }
 
 .loginForm {
@@ -184,6 +206,12 @@
     width: 432px;
     height: 285px;
     margin-top: 35px;
+  }
+  .loginSouthImgSize {
+    width: 540px;
+    height: 392px;
+    margin-top: 0px;
+    object-fit: contain;
   }
 
   .loginForm {
