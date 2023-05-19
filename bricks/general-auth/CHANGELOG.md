@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.22.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.21.0...@next-bricks/general-auth@1.22.0) (2023-05-19)
+
+
+### Features
+
+* 支持南网背景图 ([ec57408](https://github.com/easyops-cn/next-basics/commit/ec57408dd4a9ef5bc70f9a42f8a4b4e195c1e9fb))
+
+
+
+
+
 # [1.21.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.20.12...@next-bricks/general-auth@1.21.0) (2023-05-17)
 
 
