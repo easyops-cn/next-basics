@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.272.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.271.0...@next-bricks/forms@1.272.0) (2023-05-19)
+
+
+### Features
+
+* add general-structs-form-item-v2 brick ([6b01620](https://github.com/easyops-cn/next-basics/commit/6b0162075a5470654bf590b0e6a7004d56d66474))
+
+
+
+
+
 # [1.271.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.270.4...@next-bricks/forms@1.271.0) (2023-05-18)
 
 
