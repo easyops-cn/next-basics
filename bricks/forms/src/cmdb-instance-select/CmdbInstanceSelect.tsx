@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Select, Spin, Avatar, Tooltip } from "antd";
 import i18n from "i18next";
 import { NS_FORMS, K } from "../i18n/constants";
@@ -48,6 +48,7 @@ export interface CmdbInstanceSelectProps extends FormItemWrapperProps {
   showKeyField?: boolean;
   dropdownMatchSelectWidth?: boolean;
   dropdownStyle?: React.CSSProperties;
+  blurAfterValueChanged?: boolean;
 }
 
 export interface ComplexOption<T = string | number> {
@@ -85,6 +86,7 @@ export function CmdbInstanceSelectItem(
     showSearchTip,
     permission,
     ignoreMissingFieldError,
+    blurAfterValueChanged,
   } = props;
   const userQuery = formatUserQuery(props.instanceQuery);
   //istanbul ignore else
@@ -92,6 +94,7 @@ export function CmdbInstanceSelectItem(
     fields.value = "instanceId";
   }
 
+  const selectRef = useRef();
   const [value, setValue] = React.useState();
   const [options, setOptions] = React.useState<ComplexOption[]>([]);
   const [selectedOptions, setSelectedOptions] = React.useState<ComplexOption[]>(
@@ -130,6 +133,7 @@ export function CmdbInstanceSelectItem(
     } else {
       selected = options.find((item) => item.value === newValue);
     }
+    blurAfterValueChanged && selectRef.current.blur();
     setValue(newValue);
     setSelectedOptions(selected);
     props.onChange && props.onChange(newValue, selected);
@@ -267,7 +271,7 @@ export function CmdbInstanceSelectItem(
   return (
     <Spin spinning={loading}>
       <Select
-        ref={ref}
+        ref={selectRef}
         allowClear={allowClear}
         style={defaults(props.inputBoxStyle, { width: "100%" })}
         showSearch

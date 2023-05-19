@@ -359,6 +359,17 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   })
   dropdownStyle: React.CSSProperties = {};
 
+  /**
+   * @default boolean
+   * @required
+   * @description 是否在选完值后取消聚焦
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  blurAfterValueChanged: boolean;
+
   updateObjectIdManual(objectId: string) {
     this.objectId = objectId;
     this.firstRender = false;
@@ -439,6 +450,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
             showKeyField={this.showKeyField}
             dropdownMatchSelectWidth={this.dropdownMatchSelectWidth}
             dropdownStyle={this.dropdownStyle}
+            blurAfterValueChanged={this.blurAfterValueChanged}
           />
         </BrickWrapper>,
         this
