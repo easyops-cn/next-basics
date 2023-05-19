@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.272.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.272.0...@next-bricks/forms@1.272.1) (2023-05-19)
+
+
+### Bug Fixes
+
+* 修复cmdb实例选择构件选完值后依然聚焦导致再次点击时不触发onFocus重新请求数据 ([301e2a2](https://github.com/easyops-cn/next-basics/commit/301e2a2110c31c92509ee3f46dd5846a79af1066))
+
+
+
+
+
 # [1.272.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.271.0...@next-bricks/forms@1.272.0) (2023-05-19)
 
 
