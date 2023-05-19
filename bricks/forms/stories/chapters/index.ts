@@ -23,6 +23,7 @@ import { generalInputStory } from "./general-input";
 import { generalInputNumberStory } from "./general-input-number";
 import { generalSlideStory } from "./general-slide";
 import { structsFormItemStory } from "./general-structs-form-item";
+import { structsFormItemV2Story } from "./general-structs-form-item-v2";
 import { generalSwitch } from "./general-switch";
 import { generalTextareaStory } from "./general-textarea";
 import { generalTimePickerStory } from "./general-time-picker";
@@ -60,6 +61,7 @@ export const Chapters = [
   generalInputNumberStory,
   generalSlideStory,
   structsFormItemStory,
+  structsFormItemV2Story,
   generalSwitch,
   generalTextareaStory,
   generalTimePickerStory,
