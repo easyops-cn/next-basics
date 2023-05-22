@@ -71,6 +71,32 @@ const storyboard = {
             textContent_error_1: "<% CTX[a] %>",
             textContent_error_2: "<% CTX[CTX.a ? CTX.b : CTX.c] %>",
           },
+          events: {
+            click: {
+              action: "context.replace",
+              args: [
+                {
+                  name: "test",
+                },
+                {
+                  value: "test",
+                },
+              ],
+            },
+            focus: {
+              if: "<% true %>",
+              then: [
+                {
+                  action: "no action",
+                },
+              ],
+              else: [
+                {
+                  action: "no action",
+                },
+              ],
+            },
+          },
           portal: false,
           context: [
             {
@@ -111,6 +137,30 @@ const storyboard = {
                 },
               },
             ],
+            click: {
+              action: "context.replace",
+              args: [
+                {
+                  name: "test1",
+                  value: "1",
+                },
+                {
+                  name: "test1",
+                  value: "2",
+                },
+              ],
+            },
+            move: {
+              if: "<% true %>",
+              then: [
+                {
+                  action: "console.log",
+                },
+              ],
+              else: {
+                action: "console.log",
+              },
+            },
           },
           iid: "5ed931cf38aad",
           injectDeep: true,
@@ -196,6 +246,19 @@ const storyboard = {
               buttonUrl: "<% PATH %>",
               dataset: {
                 testid: "new link",
+              },
+            },
+            events: {
+              click: {
+                action: "state.update",
+                args: [
+                  {
+                    name: "xxx",
+                  },
+                  {
+                    value: "xxx",
+                  },
+                ],
               },
             },
           },
@@ -289,6 +352,51 @@ const storyboard = {
 };
 
 const result = [
+  {
+    code: "UNKNOWN_EVENT_ACTION",
+    details: [
+      {
+        message: "action: no action",
+        meta: {
+          brick: { instanceId: "5eb8291903957" },
+          root: { alias: "测试", instanceId: "5eb75014e908e", type: "route" },
+        },
+      },
+    ],
+    list: ["action: no action"],
+    message: {
+      en: "You're using unknown event actions:",
+      zh: "您正在使用一些未知的事件动作：",
+    },
+    type: "error",
+  },
+  {
+    code: "INVALID_BATCH_CONTEXT",
+    details: [
+      {
+        message: "action: context.replace",
+        meta: {
+          brick: { instanceId: "5eb8291903957" },
+          root: { alias: "测试", instanceId: "5eb75014e908e", type: "route" },
+        },
+      },
+      {
+        message: "action: state.update",
+        meta: {
+          root: {
+            templateId: "tpl-page-test",
+            type: "template",
+          },
+        },
+      },
+    ],
+    list: ["action: context.replace", "action: state.update"],
+    message: {
+      en: "You're using batch Update Context with illegal params",
+      zh: "您使用的批量变更传参非法：",
+    },
+    type: "error",
+  },
   {
     type: "warn",
     code: "USING_USE_RESOLVES_IN_BRICK_LIFECYCLE",
