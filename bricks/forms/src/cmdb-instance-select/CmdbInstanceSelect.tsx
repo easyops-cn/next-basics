@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Select, Spin, Avatar, Tooltip } from "antd";
 import i18n from "i18next";
 import { NS_FORMS, K } from "../i18n/constants";
@@ -94,7 +94,6 @@ export function CmdbInstanceSelectItem(
     fields.value = "instanceId";
   }
 
-  const selectRef = useRef();
   const [value, setValue] = React.useState();
   const [options, setOptions] = React.useState<ComplexOption[]>([]);
   const [selectedOptions, setSelectedOptions] = React.useState<ComplexOption[]>(
@@ -133,7 +132,15 @@ export function CmdbInstanceSelectItem(
     } else {
       selected = options.find((item) => item.value === newValue);
     }
-    blurAfterValueChanged && selectRef.current.blur();
+
+    if (blurAfterValueChanged) {
+      const selectNodes = document.getElementsByClassName(
+        "formsCmdbInstSelect"
+      );
+      for (let i = 0; i < selectNodes.length; i++) {
+        selectNodes[i].getElementsByTagName("input")?.[0]?.blur();
+      }
+    }
     setValue(newValue);
     setSelectedOptions(selected);
     props.onChange && props.onChange(newValue, selected);
@@ -271,7 +278,8 @@ export function CmdbInstanceSelectItem(
   return (
     <Spin spinning={loading}>
       <Select
-        ref={selectRef}
+        ref={ref}
+        className="formsCmdbInstSelect"
         allowClear={allowClear}
         style={defaults(props.inputBoxStyle, { width: "100%" })}
         showSearch
