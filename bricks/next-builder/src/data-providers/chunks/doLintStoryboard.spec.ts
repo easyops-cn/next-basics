@@ -248,6 +248,19 @@ const storyboard = {
                 testid: "new link",
               },
             },
+            events: {
+              click: {
+                action: "state.update",
+                args: [
+                  {
+                    name: "xxx",
+                  },
+                  {
+                    value: "xxx",
+                  },
+                ],
+              },
+            },
           },
         ],
         name: "tpl-page-test",
@@ -367,8 +380,17 @@ const result = [
           root: { alias: "测试", instanceId: "5eb75014e908e", type: "route" },
         },
       },
+      {
+        message: "action: state.update",
+        meta: {
+          root: {
+            templateId: "tpl-page-test",
+            type: "template",
+          },
+        },
+      },
     ],
-    list: ["action: context.replace"],
+    list: ["action: context.replace", "action: state.update"],
     message: {
       en: "You're using batch Update Context with illegal params",
       zh: "您使用的批量变更传参非法：",

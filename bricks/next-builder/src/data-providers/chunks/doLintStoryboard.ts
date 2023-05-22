@@ -342,7 +342,7 @@ export function doLintStoryboard(
                   path
                 );
               }
-              if (meta.root?.type === "template") {
+              if (meta.root?.type === "template" && action !== "state.update") {
                 let list = usingCtxActionsInTemplate.get(meta.root.templateId);
                 if (!list) {
                   usingCtxActionsInTemplate.set(
