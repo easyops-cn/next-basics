@@ -343,13 +343,6 @@ const result = [
     code: "UNKNOWN_EVENT_ACTION",
     details: [
       {
-        message: "action: context.replace",
-        meta: {
-          brick: { instanceId: "5eb8291903957" },
-          root: { alias: "测试", instanceId: "5eb75014e908e", type: "route" },
-        },
-      },
-      {
         message: "action: no action",
         meta: {
           brick: { instanceId: "5eb8291903957" },
@@ -357,10 +350,28 @@ const result = [
         },
       },
     ],
-    list: ["action: context.replace", "action: no action"],
+    list: ["action: no action"],
     message: {
       en: "You're using unknown event actions:",
       zh: "您正在使用一些未知的事件动作：",
+    },
+    type: "error",
+  },
+  {
+    code: "INVALID_BATCH_CONTEXT",
+    details: [
+      {
+        message: "action: context.replace",
+        meta: {
+          brick: { instanceId: "5eb8291903957" },
+          root: { alias: "测试", instanceId: "5eb75014e908e", type: "route" },
+        },
+      },
+    ],
+    list: ["action: context.replace"],
+    message: {
+      en: "You're using batch Update Context with illegal params",
+      zh: "您使用的批量变更传参非法：",
     },
     type: "error",
   },

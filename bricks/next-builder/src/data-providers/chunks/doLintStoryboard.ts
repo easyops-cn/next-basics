@@ -45,6 +45,7 @@ export type StoryboardErrorCode =
   | "USING_TPL_VAR_IN_TPL"
   | "UNKNOWN_EVENT_ACTION"
   | "UNKNOWN_EVENT_HANDLER"
+  | "INVALID_BATCH_CONTEXT"
   | "INSTALLED_APPS_USE_DYNAMIC_ARG"
   | "USING_ONCHANGE_IN_CTX"
   | "USING_USE_RESOLVES_IN_BRICK_LIFECYCLE"
@@ -97,8 +98,8 @@ export interface NodeRaw {
   method?: unknown;
   properties?: unknown;
   args?: unknown[];
-  else?: BrickEventHandler | BrickEventHandler[];
-  then?: BrickEventHandler | BrickEventHandler[];
+  else?: StoryboardNodeEventHandler[];
+  then?: StoryboardNodeEventHandler[];
 }
 
 const INSTALLED_APPS = "INSTALLED_APPS";
@@ -225,6 +226,7 @@ export function doLintStoryboard(
   const usingCtxActionsInTemplate = new Map<string, Set<string>>();
   const unknownEventActions = new Map<string, LintDetailMeta>();
   const unknownEventHandlers = new Map<string, LintDetailMeta>();
+  const inValidBatchContextAction = new Map<string, LintDetailMeta>();
   const usingWarnedOnChangeInCtxOrState = new Map<string, LintDetailMeta>();
   const usingContextInBrick = new Map<string, LintDetailMeta>();
   const usingExportInBrick = new Map<string, LintDetailMeta>();
@@ -305,95 +307,87 @@ export function doLintStoryboard(
         break;
       }
       case "EventHandler": {
-        const handleEventHandlerItem = (
-          node: StoryboardNodeEventHandler
-        ): void => {
-          const {
-            target,
-            targetRef,
-            action,
-            useProvider,
-            method,
-            properties,
-            args,
-          } = node.raw as NodeRaw;
-          const isBuiltinAction = typeof action === "string";
-          if (isBuiltinAction) {
-            switch (action) {
-              case "context.assign":
-              case "context.load":
-              case "context.refresh":
-              case "context.replace": {
-                const meta = getMetaByPath(path.concat(node));
-                if (
-                  Array.isArray(args) &&
-                  !args.every((item) =>
-                    isObject(item)
-                      ? item.name !== undefined && item.value !== undefined
-                      : true
-                  )
-                ) {
-                  addMeta(unknownEventActions, `action: ${action}`, node, path);
-                }
-                if (meta.root?.type === "template") {
-                  let list = usingCtxActionsInTemplate.get(
-                    meta.root.templateId
-                  );
-                  if (!list) {
-                    usingCtxActionsInTemplate.set(
-                      meta.root.templateId,
-                      (list = new Set())
-                    );
-                  }
-                  list.add(action);
-                }
-                break;
+        const {
+          target,
+          targetRef,
+          action,
+          useProvider,
+          method,
+          properties,
+          args,
+          then,
+        } = node.raw as NodeRaw;
+        const isBuiltinAction = typeof action === "string";
+        const isConditionAction = then?.length > 0;
+        if (isBuiltinAction) {
+          switch (action) {
+            case "context.assign":
+            case "context.load":
+            case "context.refresh":
+            case "context.replace":
+            case "state.update": {
+              const meta = getMetaByPath(path.concat(node));
+              if (
+                Array.isArray(args) &&
+                !args.every((item) =>
+                  isObject(item)
+                    ? item.name !== undefined && item.value !== undefined
+                    : true
+                )
+              ) {
+                addMeta(
+                  inValidBatchContextAction,
+                  `action: ${action}`,
+                  node,
+                  path
+                );
               }
-              default:
-                // Unknown actions.
-                if (!builtinActions.has(action)) {
-                  addMeta(unknownEventActions, `action: ${action}`, node, path);
+              if (meta.root?.type === "template") {
+                let list = usingCtxActionsInTemplate.get(meta.root.templateId);
+                if (!list) {
+                  usingCtxActionsInTemplate.set(
+                    meta.root.templateId,
+                    (list = new Set())
+                  );
                 }
+                list.add(action);
+              }
+              break;
             }
-          } else if (typeof target === "string") {
-            // Tag name as target.
-            if (target !== "_self" && tagNameAsTargetRegExp.test(target)) {
-              addMeta(warnedTargets, target, node, path);
-            }
+            default:
+              // Unknown actions.
+              if (!builtinActions.has(action)) {
+                addMeta(unknownEventActions, `action: ${action}`, node, path);
+              }
           }
-          // Unknown event handlers.
-          let reason = "";
-          const condtionHandler = (
-            condition: StoryboardNodeEventHandler[]
-          ): void => {
-            condition.forEach((action) => {
-              handleEventHandlerItem(action);
-            });
-          };
-          node.then && condtionHandler(node.then);
-          node.else && condtionHandler(node.else);
-          if (
-            !(
-              isBuiltinAction ||
-              typeof useProvider === "string" ||
-              ((target || targetRef) &&
-                ((reason = "Missing `method` or `properties`: "),
-                method || properties)) ||
-              node.then
-            )
-          ) {
-            addMeta(
-              unknownEventHandlers,
-              limitString(`${reason}${JSON.stringify(node.raw)}`, 100),
-              node,
-              path
-            );
+        } else if (typeof target === "string") {
+          // Tag name as target.
+          if (target !== "_self" && tagNameAsTargetRegExp.test(target)) {
+            addMeta(warnedTargets, target, node, path);
           }
-          if (providerBrickRegExp.test(useProvider)) {
-            addMeta(usingProviderBricks, useProvider, node, path);
-          }
-        };
-        handleEventHandlerItem(node);
+        }
+        // Unknown event handlers.
+        let reason = "";
+        if (
+          !(
+            isBuiltinAction ||
+            isConditionAction ||
+            typeof useProvider === "string" ||
+            ((target || targetRef) &&
+              ((reason = "Missing `method` or `properties`: "),
+              method || properties))
+          )
+        ) {
+          addMeta(
+            unknownEventHandlers,
+            limitString(`${reason}${JSON.stringify(node.raw)}`, 100),
+            node,
+            path
+          );
+        }
+        if (providerBrickRegExp.test(useProvider)) {
+          addMeta(usingProviderBricks, useProvider, node, path);
+        }
         break;
       }
       case "Context": {
@@ -595,6 +589,24 @@ export function doLintStoryboard(
         message,
         meta,
       })),
+    });
+  }
+
+  if (inValidBatchContextAction.size > 0) {
+    errors.push({
+      type: "error",
+      code: "INVALID_BATCH_CONTEXT",
+      message: {
+        zh: "您使用的批量变更传参非法：",
+        en: "You're using batch Update Context with illegal params",
+      },
+      list: [...inValidBatchContextAction.keys()],
+      details: [...inValidBatchContextAction.entries()].map(
+        ([message, meta]) => ({
+          message,
+          meta,
+        })
+      ),
     });
   }
 
