@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.240.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.239.1...@next-bricks/next-builder@1.240.0) (2023-05-22)
+
+
+### Features
+
+* do lint storyboard support new syntax ([8a0b483](https://github.com/easyops-cn/next-basics/commit/8a0b4831d15321008ca007e6d11859d2d9f8e9b3))
+* update code ([f3752a8](https://github.com/easyops-cn/next-basics/commit/f3752a8309611bde4bca39b99d9f0e867173a6a9))
+* update code ([99a3848](https://github.com/easyops-cn/next-basics/commit/99a3848abd25f0be8f32fbffe97886abf4834bdc))
+
+
+
+
+
 ## [1.239.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.239.0...@next-bricks/next-builder@1.239.1) (2023-05-18)
 
 
