@@ -1,0 +1,84 @@
+.TreeShuttleBox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.CustomTransferBox {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+}
+.CustomTransferButtonBox {
+  width: 24px;
+  margin: 0 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconColor {
+  color: rgba(0, 0, 0, 0.25);
+}
+.iconColorActive {
+  color: #ffffff;
+}
+.CustomTransferButton {
+  width: 23px;
+  height: 23px;
+  /* background: rgba(0, 0, 0, 0.04); */
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  & + & {
+    margin-top: 12px;
+  }
+}
+.CustomTransferHead {
+  height: 39px;
+  border-bottom: 1px solid #dddddd;
+  padding: 13px 0 12px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.CustomTransferHeadLeft {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  line-height: 14px;
+}
+.CustomTransferHeadRight {
+  padding: 0 16px 0 0;
+}
+.selectCount {
+  font-size: 12px;
+  font-family: Helvetica, Helvetica-Regular;
+  font-weight: 400;
+  text-align: left;
+  color: #555555;
+  padding: 0;
+  margin: 0 0 0 8px;
+}
+.CustomTransferBody {
+  padding: 8px;
+}
+.CustomTransferTree {
+  height: 300px;
+  overflow: auto;
+  margin-top: 6px;
+
+  /* 最多显示两行，超过就隐藏 */
+  .ant-tree-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+  }
+}
