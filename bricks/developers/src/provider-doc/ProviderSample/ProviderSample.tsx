@@ -22,10 +22,10 @@ export function ProviderSample(props: ProviderSampleProps): React.ReactElement {
   const { examples = [], endpoint } = props;
 
   const getHeaderInfo = useCallback(
-    (headers: Record<string, string> = {}): React.ReactElement => {
+    (headers: Record<string, string>): React.ReactElement => {
       return (
         <dl>
-          {Object.entries(headers).map(([key, value]) => (
+          {Object.entries(headers || {}).map(([key, value]) => (
             <>
               <dt>{key}:</dt>
               <dd>{value}</dd>
