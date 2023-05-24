@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.300.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.300.1...@next-bricks/presentational-bricks@1.300.2) (2023-05-24)
+
+
+### Bug Fixes
+
+* 修复树型穿梭框数量准确性与切换dataSource时展开数据 ([dffbf30](https://github.com/easyops-cn/next-basics/commit/dffbf307553f904c356f7a3cc8a8c7d046701934))
+
+
+
+
+
 ## [1.300.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.300.0...@next-bricks/presentational-bricks@1.300.1) (2023-05-24)
 
 
