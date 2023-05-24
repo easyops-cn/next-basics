@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.365.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.7...@next-bricks/developers@1.365.8) (2023-05-24)
+
+
+### Bug Fixes
+
+* Fix the situation where the value is null ([b02e11a](https://github.com/easyops-cn/next-basics/commit/b02e11af8e4dbfe51c8e256446fdeffd0f706e2c))
+
+
+
+
+
 ## [1.365.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.6...@next-bricks/developers@1.365.7) (2023-05-12)
 
 **Note:** Version bump only for package @next-bricks/developers
