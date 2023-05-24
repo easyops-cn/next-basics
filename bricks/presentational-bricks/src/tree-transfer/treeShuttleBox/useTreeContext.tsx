@@ -17,8 +17,7 @@ function TreeProvider({ children, value }: TreeProviderProps) {
 }
 
 function useTreeContext() {
-  const context = useContext(TreeShuttleContext);
-  return context;
+  return useContext(TreeShuttleContext);
 }
 
 export { TreeProvider, useTreeContext };

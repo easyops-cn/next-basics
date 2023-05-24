@@ -122,8 +122,6 @@ export const getRealCheckListKey = (
   treeData.forEach((item: DataNode) => {
     if (item.children?.length) {
       getRealCheckListKey(item.children, selectedAllKeys);
-    }
-    if (item.children?.length) {
       item.children.every((childItem: Record<string, any>) =>
         selectedAllKeys.includes(childItem.key)
       )
@@ -228,7 +226,5 @@ export function createNewTreeData(
   // 得到选中的key 所对应的节点
   const selectNode = flatArray.filter(({ key }) => rightAllKey.includes(key));
   // 重组树形数据结构
-  const treeData = arrayToTree(cloneDeep(selectNode));
-
-  return treeData;
+  return arrayToTree(cloneDeep(selectNode));
 }

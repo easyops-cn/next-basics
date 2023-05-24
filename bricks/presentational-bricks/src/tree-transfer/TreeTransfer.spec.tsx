@@ -77,6 +77,11 @@ describe("TreeTransfer", () => {
       .find("[data-testid='leftSearch']")
       .at(0)
       .invoke("onSearch")("");
+    wrapper
+      .find(Tree)
+      .find("[data-testid='leftTree']")
+      .at(0)
+      .invoke("onExpand")(["host.cpu_util.iowait"] as any);
     wrapper.find(Tree).find("[data-testid='leftTree']").at(0).invoke("onCheck")(
       ["host.cpu_util.system"],
       {} as any
@@ -148,6 +153,7 @@ describe("TreeTransfer", () => {
       .find("[data-testid='rightSearch']")
       .at(0)
       .invoke("onSearch")("");
+
     wrapper
       .find(Tree)
       .find("[data-testid='rightTree']")
@@ -199,6 +205,50 @@ describe("TreeTransfer", () => {
       .find("[data-testid='leftButton']")
       .at(0)
       .invoke("onClick")({} as any);
+    wrapper.unmount();
+  });
+  it("test tree", async () => {
+    const props = {
+      dataSource: [
+        {
+          key: "host.cpu_util.user",
+          title: "cpu user",
+          uselessKey1: "useless key 1",
+          uselessKey2: "useless key 2",
+        },
+        {
+          key: "host.cpu_util.system",
+          title: "cpu system",
+          uselessKey1: "useless key 1",
+          uselessKey2: "useless key 2",
+        },
+        {
+          key: "host.cpu_util.iowait",
+          title: "io wait",
+          uselessKey1: "useless key 1",
+          uselessKey2: "useless key 2",
+          children: [
+            {
+              key: "host.cpu_util.iowaita 1",
+              title: "io wait 1",
+              uselessKey1: "useless key 1",
+              uselessKey2: "useless key 2",
+            },
+          ],
+        },
+      ],
+      selectedKeys: ["host.cpu_util.user"],
+      titles: ["titleLeft", "titleRight"],
+      showSearch: true,
+      defaultExpandAll: false,
+      shownumItem: true,
+      replaceFields: { key: "key", title: "title" },
+    };
+
+    const changeFn = jest.fn();
+
+    const wrapper = mount(<TreeTransfer {...props} handleChange={changeFn} />);
+    await (global as any).flushPromises();
     wrapper.unmount();
   });
 });

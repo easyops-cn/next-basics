@@ -127,7 +127,7 @@ const TreeShuttleButton: FC<TreeShuttleButtonProps> = ({ handleChange }) => {
             data-testid="rightButton"
             className={`${shareStyle.CustomTransferButton}`}
             onClick={handleClickToRight}
-            disabled={isBrightRight ? false : true}
+            disabled={!isBrightRight}
             type={isBrightRight ? "primary" : "default"}
           >
             <RightOutlined
@@ -147,7 +147,7 @@ const TreeShuttleButton: FC<TreeShuttleButtonProps> = ({ handleChange }) => {
             data-testid="leftButton"
             className={`${shareStyle.CustomTransferButton}`}
             onClick={handleClickToLeft}
-            disabled={isBrightLeft ? false : true}
+            disabled={!isBrightLeft}
             type={isBrightLeft ? "primary" : "default"}
           >
             <LeftOutlined
