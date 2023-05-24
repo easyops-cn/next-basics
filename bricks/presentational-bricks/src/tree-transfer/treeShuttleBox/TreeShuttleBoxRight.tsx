@@ -3,7 +3,7 @@ import shareStyle from "./share.module.css";
 import { Checkbox, Input, Tree } from "antd";
 const { Search } = Input;
 import { useTreeContext } from "./useTreeContext";
-import { createNewTreeData, getTreeDataAllKey, searchTree } from "./tool";
+import { createNewTreeData, getRootKeys, searchTree } from "./tool";
 
 import { DataNode } from "rc-tree-select/lib/interface";
 import { treeDataType } from "./interfaceType";
@@ -18,7 +18,6 @@ const TreeShuttleBoxRight: FC<TreeShuttleBoxRightPropsType> = ({
   showSearch,
   titles,
   shownumItem,
-  defaultExpandAll,
 }) => {
   const {
     dataSourceRight,
@@ -30,11 +29,12 @@ const TreeShuttleBoxRight: FC<TreeShuttleBoxRightPropsType> = ({
     sonParMap,
     setCheckListRight,
     setIsBrightLeft,
+    allRootKeySet,
   } = useTreeContext();
   const [indeterminate, setIndeterminate] = useState<boolean>(false); // 控制半选
   const [checkAll, setCheckAll] = useState<boolean>(false); // 控制全选
   const [searchText, setSearchText] = useState<string>(""); // 用于搜索title
-  const [finVal, setFinVal] = useState([]); // 用于搜索title
+  const [finVal, setFinVal] = useState([]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value.trim());
@@ -56,42 +56,34 @@ const TreeShuttleBoxRight: FC<TreeShuttleBoxRightPropsType> = ({
     setSearchText(value);
   };
   const handleSelectNode = (keyArr: any) => {
-    if (readOnlyAllKeyRight.length === keyArr.length) {
-      setCheckAll(true);
-      setIndeterminate(false);
-    } else if (keyArr.length === 0) {
-      setCheckAll(false);
-      setIndeterminate(false);
-    } else {
-      setCheckAll(false);
-      setIndeterminate(true);
-    }
     setCheckListRight(keyArr);
     // 处理 to Right 高亮
     setIsBrightLeft(!!keyArr.length);
   };
   const handleCheckBoxChange = (e: CheckboxChangeEvent) => {
     if (e.target.checked) {
-      setCheckAll(true);
-      setIndeterminate(false);
       setCheckListRight(readOnlyAllKeyRight);
       setIsBrightLeft(true);
     } else {
-      setCheckAll(false);
       setCheckListRight([]);
       setIsBrightLeft(false);
     }
   };
   useEffect(() => {
-    if (!checkListRight.length) {
+    if (checkListRight.length === 0) {
       setIndeterminate(false);
       setCheckAll(false);
+    } else if (readOnlyAllKeyRight.length === checkListRight.length) {
+      setCheckAll(true);
+      setIndeterminate(false);
+    } else {
+      setCheckAll(false);
+      setIndeterminate(true);
     }
   }, [checkListRight]);
   useEffect(() => {
-    const { treeData } = dataSourceRight;
-    if (treeData.length !== 0) {
-      const allKeys = getTreeDataAllKey(treeData);
+    if (readOnlyAllKeyRight.length !== 0) {
+      const allKeys = readOnlyAllKeyRight;
       setFinVal(allKeys);
     }
   }, [dataSourceRight]);
@@ -114,10 +106,11 @@ const TreeShuttleBoxRight: FC<TreeShuttleBoxRightPropsType> = ({
             () =>
               shownumItem ? (
                 <p className={shareStyle.selectCount}>
-                  {checkListRight.length}/{readOnlyAllKeyRight.length}项
+                  {getRootKeys(checkListRight, allRootKeySet).length}/
+                  {selectedRootKeys.length}项
                 </p>
               ) : null,
-            [readOnlyAllKeyRight, checkListRight]
+            [selectedRootKeys, checkListRight, allRootKeySet]
           )}
         </div>
         <div className={shareStyle.CustomTransferHeadRight}>{titles[1]}</div>
@@ -144,7 +137,6 @@ const TreeShuttleBoxRight: FC<TreeShuttleBoxRightPropsType> = ({
               checkedKeys={checkListRight}
               onCheck={handleSelectNode}
               treeData={dataSourceRight.treeData}
-              defaultExpandAll={defaultExpandAll}
               expandedKeys={finVal}
             />
           )}
