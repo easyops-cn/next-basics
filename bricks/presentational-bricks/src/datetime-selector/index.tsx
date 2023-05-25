@@ -183,6 +183,15 @@ export class DatetimeSelectorElement extends UpdatingElement {
   /**
    * @kind number
    * @required false
+   * @description 日期格式
+   * @group other
+   */
+  @property()
+  format: string;
+
+  /**
+   * @kind number
+   * @required false
    * @description 限制选择范围天数
    * @group other
    */
@@ -238,6 +247,7 @@ export class DatetimeSelectorElement extends UpdatingElement {
             size={this.size}
             selectNearDays={this.selectNearDays}
             rangeDays={this.rangeDays}
+            format={this.format}
           />
         </BrickWrapper>,
         this
