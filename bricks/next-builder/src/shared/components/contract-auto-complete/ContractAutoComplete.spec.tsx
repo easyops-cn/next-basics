@@ -1,6 +1,7 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import { AutoComplete } from "antd";
+import * as brickKit from "@next-core/brick-kit";
 import {
   ContractAutoComplete,
   ContractAutoCompleteLegacyWrapper,
@@ -9,6 +10,10 @@ import { useContract } from "./useContract";
 import { FormItemWrapper } from "@next-libs/forms";
 
 jest.mock("./useContract");
+
+const spyOnBrickAsComponent = jest
+  .spyOn(brickKit, "BrickAsComponent")
+  .mockImplementation(() => <div>FakeBrickAsComponent</div>);
 
 (useContract as jest.Mock).mockReturnValue([
   [
@@ -26,11 +31,36 @@ jest.mock("./useContract");
 describe("ContractSelect", () => {
   it("should work", () => {
     const changeFn = jest.fn();
+    const suffix = {
+      useBrick: [
+        {
+          brick: "div",
+          properties: {
+            textContent: "test",
+          },
+        },
+      ],
+    };
     const wrapper = mount(
       <ContractAutoComplete
+        suffix={suffix}
         value="cmdb.instance@postSearch:1.0.0"
         onChange={changeFn}
       />
+    );
+
+    expect(spyOnBrickAsComponent).toBeCalledWith(
+      {
+        useBrick: [
+          {
+            brick: "div",
+            properties: {
+              textContent: "test",
+            },
+          },
+        ],
+      },
+      {}
     );
 
     wrapper.find(AutoComplete).at(0).invoke("onChange")(
