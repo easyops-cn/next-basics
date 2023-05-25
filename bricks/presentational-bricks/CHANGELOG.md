@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.300.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.300.2...@next-bricks/presentational-bricks@1.300.3) (2023-05-25)
+
+
+### Bug Fixes
+
+* **general-pagination:** fix page and pageSize which maybe undefined ([f3fc4e0](https://github.com/easyops-cn/next-basics/commit/f3fc4e0bd6acf5220b3187b5a1a65dc6bc0a4527))
+
+
+
+
+
 ## [1.300.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.300.1...@next-bricks/presentational-bricks@1.300.2) (2023-05-24)
 
 
