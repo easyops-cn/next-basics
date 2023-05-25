@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.300.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.300.3...@next-bricks/presentational-bricks@1.300.4) (2023-05-25)
+
+
+### Bug Fixes
+
+* **datetime:** 增加format属性 ([6dc4d3d](https://github.com/easyops-cn/next-basics/commit/6dc4d3d784bb82feb22ad44c03d1ef457ea3b82d))
+
+
+
+
+
 ## [1.300.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.300.2...@next-bricks/presentational-bricks@1.300.3) (2023-05-25)
 
 
