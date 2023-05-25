@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.241.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.240.0...@next-bricks/next-builder@1.241.0) (2023-05-25)
+
+
+### Features
+
+* support suffix ([2a91ffd](https://github.com/easyops-cn/next-basics/commit/2a91ffd8bf670732cdd5db123e4976cd0aa4d364))
+
+
+
+
+
 # [1.240.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.239.1...@next-bricks/next-builder@1.240.0) (2023-05-22)
 
 
