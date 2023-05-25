@@ -6,6 +6,7 @@ import {
   property,
   EventEmitter,
 } from "@next-core/brick-kit";
+import { UseBrickConf } from "@next-core/brick-types";
 import { ContractAutoCompleteLegacyWrapper } from "./ContractAutoComplete";
 import { FormItemElement } from "@next-libs/forms";
 
@@ -25,6 +26,13 @@ export class ContractAutoCompleteElement extends FormItemElement {
     attribute: false,
   })
   inputBoxStyle: React.CSSProperties;
+
+  @property({
+    attribute: false,
+  })
+  suffix: {
+    useBrick: UseBrickConf;
+  };
 
   @event({ type: "contract.change" })
   private _contractChange: EventEmitter<string>;
@@ -70,6 +78,7 @@ export class ContractAutoCompleteElement extends FormItemElement {
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            suffix={this.suffix}
           />
         </BrickWrapper>,
         this

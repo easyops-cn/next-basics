@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import { AutoComplete } from "antd";
+import { BrickAsComponent } from "@next-core/brick-kit";
+import { UseBrickConf } from "@next-core/brick-types";
 import { useContract } from "./useContract";
 import { debounce, isNil } from "lodash";
 import { NS_NEXT_BUILDER, K } from "../../../i18n/constants";
@@ -13,6 +15,9 @@ export interface ContractAutoComplete {
   value?: string;
   placeholder?: string;
   inputBoxStyle?: React.CSSProperties;
+  suffix?: {
+    useBrick: UseBrickConf;
+  };
   onChange?(value: string): void;
 }
 
@@ -49,6 +54,7 @@ export function ContractAutoComplete({
   placeholder,
   onChange,
   inputBoxStyle,
+  suffix,
 }: ContractAutoComplete): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const [q, setQ] = useState();
@@ -128,6 +134,7 @@ export function ContractAutoComplete({
         options={versionOptions?.map((v) => ({ value: v }))}
         onChange={handleVersionChange}
       ></AutoComplete>
+      {suffix?.useBrick && <BrickAsComponent useBrick={suffix.useBrick} />}
     </div>
   );
 }
