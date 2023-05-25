@@ -26,6 +26,7 @@ export interface DatetimeSelectorProps {
   size?: ButtonSize;
   selectNearDays?: number;
   rangeDays?: number;
+  format?: string;
 }
 
 export function DatetimeSelector(
@@ -78,6 +79,7 @@ export function DatetimeSelector(
       size={size}
       selectNearDays={props.selectNearDays}
       rangeDays={props.rangeDays}
+      format={props.format}
     />
   );
 }
