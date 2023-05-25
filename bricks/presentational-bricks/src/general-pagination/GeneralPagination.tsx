@@ -33,8 +33,8 @@ export function GeneralPagination(
   // 默认分页配置
   const defaultPagination: PaginationProps = {
     showTotal,
-    current: props.page,
-    pageSize: props.pageSize,
+    current: props.page ?? 1,
+    pageSize: props.pageSize ?? 10,
     total: props.total,
     showSizeChanger: true,
     pageSizeOptions: ["10", "20", "50"],
