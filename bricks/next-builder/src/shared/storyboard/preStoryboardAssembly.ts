@@ -16,6 +16,7 @@ const MODEL_STORYBOARD_ROUTE = "STORYBOARD_ROUTE";
 const MODEL_STORYBOARD_TEMPLATE = "STORYBOARD_TEMPLATE";
 const MODEL_STORYBOARD_SNIPPET = "STORYBOARD_SNIPPET";
 const MODEL_PROJECT_MICRO_APP = "PROJECT_MICRO_APP";
+const MODEL_MICRO_APP_RESOURCE_MENU = "MICRO_APP_RESOURCE_MENU";
 
 /**
  * Do pre-requests before storyboard assembly.
@@ -65,6 +66,30 @@ export async function preStoryboardAssembly({
     })
   );
 
+  const menuGraphReq = hasTheme
+    ? null
+    : InstanceGraphApi_traverseGraphV2({
+        object_id: MODEL_MICRO_APP_RESOURCE_MENU,
+        query: {
+          "project.instanceId": projectId,
+        },
+        select_fields: ["*"],
+        child: [
+          {
+            child: [
+              {
+                depth: -1,
+                parentOut: "children",
+                select_fields: ["*"],
+              },
+            ],
+            depth: -1,
+            parentOut: "items",
+            select_fields: ["*"],
+          },
+        ],
+      });
+
   const projectInfoReq = options?.minimal
     ? null
     : InstanceApi_getDetail(MODEL_PROJECT_MICRO_APP, projectId, {
@@ -80,7 +105,7 @@ export async function preStoryboardAssembly({
           "mockRule.method",
           ...(hasTheme
             ? ["pageTemplates.pageTypeId", "pageTemplates.snippet.instanceId"]
-            : ["menus.*", "menus.items", "menus.items.children"]),
+            : []),
         ].join(","),
       });
 
@@ -88,11 +113,13 @@ export async function preStoryboardAssembly({
     routeGraphResponse,
     themeGraphResponse,
     templateGraphResponse,
+    menuGraphResponse,
     projectInfoResponse,
   ] = await Promise.all([
     routeGraphReq,
     themeGraphReq,
     templateGraphReq,
+    menuGraphReq,
     projectInfoReq,
   ]);
 
@@ -118,6 +145,10 @@ export async function preStoryboardAssembly({
       )
     : [];
 
+  const menus = hasTheme
+    ? undefined
+    : pipes.graphTree(menuGraphResponse as pipes.GraphData);
+
   return {
     minimalBuildInfo: {
       routeList: sortBy(routes, (item) => item.sort ?? -Infinity).concat(
@@ -140,6 +171,6 @@ export async function preStoryboardAssembly({
         })),
     },
 
-    projectInfo: projectInfoResponse,
+    projectInfo: { ...projectInfoResponse, menus },
   };
 }
