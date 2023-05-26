@@ -43,6 +43,11 @@ export interface EventsDoc {
   description?: string;
 }
 
+export interface Workflow {
+  label?: string;
+  value?: string;
+}
+
 export interface EventFormField {
   handlerType: HandlerType;
   if?: string;
@@ -50,9 +55,10 @@ export interface EventFormField {
   segueId?: string;
   path?: string;
   brickEventType?: CustomBrickEventType;
-  providerType?: "provider" | "flow";
+  providerType?: "provider" | "flow" | "workflow";
   provider?: string;
   flow?: string;
+  workflow?: string;
   pollEnabled?: boolean;
   poll?: string;
   callback?: string;

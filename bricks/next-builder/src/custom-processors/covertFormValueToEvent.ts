@@ -54,6 +54,8 @@ export function covertFormValueToEvent(
     const useProvider =
       formValue.providerType === "provider"
         ? formValue.provider
+        : formValue.providerType === "workflow"
+        ? formValue.workflow
         : formValue.flow;
 
     const loadFields = safeLoadFields({

@@ -127,6 +127,7 @@ const locale: Locale = {
     "Use the specified field of the returned data as the data source.",
   [K.POLLING_ITEM_PLACEHOLDER]: "Please input polling parameters",
   [K.FLOW_API]: "Contract",
+  [K.WORKFLOW]: "Workflow",
   [K.VISUAL_EVENT_ADD_CUSTOM_EVENT_PLACEHOLDER]:
     "Press enter to complete the input",
   [K.LINK_TO_DEVELOPER_PROVIDER_DOC]:

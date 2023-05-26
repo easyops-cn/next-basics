@@ -131,6 +131,19 @@ describe("covertFormValueToEvent", () => {
     ],
     [
       {
+        handlerType: HandlerType.UseProvider,
+        workflow: "easyops.api.micro_app.workflow@Get:1.0.0",
+        useProviderMethod: "resolve",
+        providerType: "workflow",
+        args: "- bcd\n",
+      },
+      {
+        useProvider: "easyops.api.micro_app.workflow@Get:1.0.0",
+        args: ["bcd"],
+      },
+    ],
+    [
+      {
         handlerType: HandlerType.CustomBrick,
         brickEventType: CustomBrickEventType.ExecuteMethod,
         selectorType: "target",

@@ -11,6 +11,7 @@ describe("covertToEventFormValue", () => {
   it.each([
     [
       { action: "console.log", args: ["title"] },
+      undefined,
       {
         action: "console.log",
         args: "- title\n",
@@ -22,6 +23,7 @@ describe("covertToEventFormValue", () => {
         action: "history.push",
         args: ["${APP.homepage}/test", { notify: false }],
       },
+      undefined,
       {
         action: "history.push",
         handlerType: "builtinAction",
@@ -31,6 +33,7 @@ describe("covertToEventFormValue", () => {
     ],
     [
       { action: "history.push" },
+      undefined,
       {
         action: "history.push",
         handlerType: "builtinAction",
@@ -38,6 +41,7 @@ describe("covertToEventFormValue", () => {
     ],
     [
       { action: "segue.push", args: ["go-to-detail", { id: "abc" }] },
+      undefined,
       {
         action: "segue.push",
         handlerType: "builtinAction",
@@ -47,6 +51,7 @@ describe("covertToEventFormValue", () => {
     ],
     [
       { useProvider: "api.cmdb.provider", args: ["abc"] },
+      undefined,
       {
         provider: "api.cmdb.provider",
         args: "- abc\n",
@@ -64,6 +69,7 @@ describe("covertToEventFormValue", () => {
           success: [{ action: "console.log" }],
         },
       },
+      undefined,
       {
         action: "message.subscribe",
         args: "- abc\n",
@@ -73,6 +79,7 @@ describe("covertToEventFormValue", () => {
     ],
     [
       { useProvider: "mynamespace@getDetail:1.0.0", args: ["abc"] },
+      undefined,
       {
         flow: "mynamespace@getDetail:1.0.0",
         handlerType: "useProvider",
@@ -84,6 +91,24 @@ describe("covertToEventFormValue", () => {
     ],
     [
       {
+        useProvider: "easyops.api.micro_app.workflow@Get:1.0.0",
+        args: ["bc13"],
+      },
+      {
+        isWorkflow: (provider: string) =>
+          ["easyops.api.micro_app.workflow@Get:1.0.0"].includes(provider),
+      },
+      {
+        args: "- bc13\n",
+        handlerType: "useProvider",
+        pollEnabled: undefined,
+        providerType: "workflow",
+        useProviderMethod: "resolve",
+        workflow: "easyops.api.micro_app.workflow@Get:1.0.0",
+      },
+    ],
+    [
+      {
         useProvider: "api.cmdb.provider",
         args: ["abc"],
         poll: {
@@ -91,6 +116,7 @@ describe("covertToEventFormValue", () => {
           expectPollEnd: '<% (result) => result.status === "done" %>',
         },
       },
+      undefined,
       {
         handlerType: "useProvider",
         providerType: "provider",
@@ -103,6 +129,7 @@ describe("covertToEventFormValue", () => {
     ],
     [
       { target: "#create-form", properties: { value: { a: 4 } } },
+      undefined,
       {
         handlerType: "customBrick",
         brickEventType: "setProps",
@@ -113,6 +140,7 @@ describe("covertToEventFormValue", () => {
     ],
     [
       { targetRef: "create-form-ref", properties: { value: { a: 4 } } },
+      undefined,
       {
         handlerType: "customBrick",
         brickEventType: "setProps",
@@ -123,6 +151,7 @@ describe("covertToEventFormValue", () => {
     ],
     [
       { target: "#create-form", method: "setInitValue", args: [{ a: 3 }] },
+      undefined,
       {
         handlerType: "customBrick",
         brickEventType: "executeMethod",
@@ -138,6 +167,7 @@ describe("covertToEventFormValue", () => {
         method: "setInitValue",
         args: [{ a: 3 }],
       },
+      undefined,
       {
         args: "- a: 3\n",
         brickSelector: "create-form-ref",
@@ -162,6 +192,7 @@ describe("covertToEventFormValue", () => {
           },
         ],
       },
+      undefined,
       {
         else: "- action: console.error\n",
         handlerType: "conditional",
@@ -169,10 +200,10 @@ describe("covertToEventFormValue", () => {
         then: "- action: console.log\n",
       },
     ],
-    [{}, {}],
-  ])("case %# should work", (handler, result) => {
-    expect(covertEventToFormValue(handler as BrickEventHandler)).toEqual(
-      result
-    );
+    [{}, undefined, {}],
+  ])("case %# should work", (handler, option, result) => {
+    expect(
+      covertEventToFormValue(handler as BrickEventHandler, option)
+    ).toEqual(result);
   });
 });
