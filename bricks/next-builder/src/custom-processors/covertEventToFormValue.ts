@@ -19,9 +19,15 @@ import {
 } from "../shared/visual-events/interfaces";
 import { isNil, omitBy, omit } from "lodash";
 
+interface CovertOption {
+  isWorkflow?: (provider: string) => boolean;
+}
+
 export function covertEventToFormValue(
-  handler: BrickEventHandler
+  handler: BrickEventHandler,
+  option: CovertOption = {}
 ): EventFormField {
+  const { isWorkflow } = option;
   const handlerType = getHandlerType(handler);
 
   if (handlerType === HandlerType.BuiltinAction) {
@@ -66,9 +72,11 @@ export function covertEventToFormValue(
       ),
     };
   } else if (handlerType === HandlerType.UseProvider) {
-    const providerType = isFlowAPiProvider(
+    const providerType = isWorkflow?.(
       (handler as UseProviderEventHandler).useProvider
     )
+      ? "workflow"
+      : isFlowAPiProvider((handler as UseProviderEventHandler).useProvider)
       ? "flow"
       : "provider";
 
@@ -80,7 +88,11 @@ export function covertEventToFormValue(
       useProviderMethod:
         (handler as UseProviderEventHandler).method || "resolve",
       pollEnabled: poll?.enabled,
-      ...(providerType === "flow" ? { flow: provider } : { provider }),
+      ...(providerType === "workflow"
+        ? { workflow: provider }
+        : providerType === "flow"
+        ? { flow: provider }
+        : { provider }),
       ...safeDumpFields(
         omitBy(
           {

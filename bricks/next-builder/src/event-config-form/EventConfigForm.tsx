@@ -37,6 +37,7 @@ import {
   LifeCycle,
   BuiltinAction,
   CustomBrickEventType,
+  Workflow,
 } from "../shared/visual-events/interfaces";
 import { isNil, debounce } from "lodash";
 import { getActionOptions } from "../shared/visual-events/getActionOptions";
@@ -52,6 +53,7 @@ export interface EventConfigFormProps {
   segueList?: { label: string; value: string }[];
   docUrl?: string;
   lifeCycle?: LifeCycle;
+  workflowList?: Workflow[];
   highlightTokens?: HighlightTokenSettings[];
   onValuesChange?: FormProps["onValuesChange"];
   onClickHighlightToken?: (token: { type: string; value: string }) => void;
@@ -73,6 +75,7 @@ export function LegacyEventConfigForm(
     lifeCycle,
     pathList,
     segueList,
+    workflowList,
     useInCustomTemplate,
     highlightTokens,
     onClickHighlightToken,
@@ -323,6 +326,7 @@ export function LegacyEventConfigForm(
                   {t(K.BUILTIN_PROVIDER)}
                 </Radio.Button>
                 <Radio.Button value="flow">{t(K.FLOW_API)}</Radio.Button>
+                <Radio.Button value="workflow">{t(K.WORKFLOW)}</Radio.Button>
               </Radio.Group>
             </Form.Item>
           )
@@ -375,6 +379,24 @@ export function LegacyEventConfigForm(
     [providerList, t, inlineFormItemStyle]
   );
 
+  const contractTooltip = useMemo(
+    () => (
+      <Tooltip title={t(K.LINK_TO_FLOWER_BUILDER)}>
+        <Link
+          target="_blank"
+          to={
+            getRuntime().hasInstalledApp("contract-center")
+              ? "/contract-center"
+              : "/flow-builder"
+          }
+        >
+          <FileSearchOutlined />
+        </Link>
+      </Tooltip>
+    ),
+    [t]
+  );
+
   const flowApiItem = useMemo(
     () => (
       <Form.Item
@@ -396,24 +418,49 @@ export function LegacyEventConfigForm(
               >
                 <ContractAutoComplete />
               </Form.Item>
-              <Tooltip title={t(K.LINK_TO_FLOWER_BUILDER)}>
-                <Link
-                  target="_blank"
-                  to={
-                    getRuntime().hasInstalledApp("contract-center")
-                      ? "/contract-center"
-                      : "/flow-builder"
-                  }
-                >
-                  <FileSearchOutlined />
-                </Link>
-              </Tooltip>
+              {contractTooltip}
             </Form.Item>
           )
         }
       </Form.Item>
     ),
-    [t, inlineFormItemStyle]
+    [inlineFormItemStyle, contractTooltip]
+  );
+
+  const workflowItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.handlerType !== currentValues.handlerType ||
+          prevValues.providerType !== currentValues.providerType
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("handlerType") === HandlerType.UseProvider &&
+          getFieldValue("providerType") === "workflow" && (
+            <Form.Item label="Workflow" required>
+              <Form.Item
+                name="workflow"
+                rules={[{ required: true }]}
+                messageVariables={{ label: "workflow" }}
+                style={inlineFormItemStyle}
+              >
+                <Select>
+                  {workflowList?.map((item) => (
+                    <Select.Option key={item.value} value={item.value}>
+                      {item.label}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+              {contractTooltip}
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    [inlineFormItemStyle, contractTooltip, workflowList]
   );
 
   const useProviderMethod = useMemo(
@@ -732,6 +779,7 @@ export function LegacyEventConfigForm(
       {historyPathItem}
       {providerItem}
       {flowApiItem}
+      {workflowItem}
       {useProviderMethod}
       {brickItem}
       {brickMethodItem}

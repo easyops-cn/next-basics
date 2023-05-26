@@ -11,7 +11,7 @@ import {
 import { ColProps } from "antd/lib/col";
 import { FormInstance } from "antd/lib/form";
 import { HighlightTokenSettings } from "@next-libs/code-editor-components";
-import { LifeCycle } from "../shared/visual-events/interfaces";
+import { LifeCycle, Workflow } from "../shared/visual-events/interfaces";
 import { EventConfigForm, EventConfigFormProps } from "./EventConfigForm";
 
 /**
@@ -68,6 +68,11 @@ export class EventConfigFormElement extends UpdatingElement {
     attribute: false,
   })
   providerList: string[] = [];
+
+  @property({
+    attribute: false,
+  })
+  workflowList: Workflow[];
 
   @property()
   type: "event" | "lifeCycle";
@@ -214,6 +219,7 @@ export class EventConfigFormElement extends UpdatingElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             providerList={this.providerList}
+            workflowList={this.workflowList}
             type={this.type}
             docUrl={this.docUrl}
             lifeCycle={this.lifeCycle}
