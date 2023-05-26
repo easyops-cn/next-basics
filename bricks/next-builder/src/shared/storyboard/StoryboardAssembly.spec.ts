@@ -253,6 +253,39 @@ const mockFactory: Record<string, Record<string, any>> = {
         },
       ],
     },
+    MICRO_APP_RESOURCE_MENU: {
+      topic_vertices: [
+        {
+          instanceId: "5fc94f31bbd76",
+          menuId: "main-menu-test",
+          title: "main-menu-test",
+        },
+      ],
+      vertices: [
+        {
+          instanceId: "5fc94f464643a",
+          text: "menu-items-01",
+          to: "/menu-items-01",
+        },
+        {
+          instanceId: "5fc94f4d5a276",
+          text: "menu-items-02",
+          to: "/menu-items-02",
+        },
+      ],
+      edges: [
+        {
+          out: "5fc94f31bbd76",
+          in: "5fc94f464643a",
+          out_name: "items",
+        },
+        {
+          out: "5fc94f31bbd76",
+          in: "5fc94f4d5a276",
+          out_name: "items",
+        },
+      ],
+    },
     detail: {
       projectId: "P-239",
       menus: [
@@ -583,39 +616,21 @@ describe("StoryboardAssembly", () => {
 
             menus: [
               {
-                menuId: "menu-a",
+                menuId: "main-menu-test",
+                title: "main-menu-test",
+                i18n: {},
                 items: [
                   {
                     children: undefined,
-                    text: "Menu Item 1",
+                    text: "menu-items-01",
+                    to: "/menu-items-01",
                   },
-
                   {
-                    text: "Menu Item 2",
-                    children: [
-                      {
-                        text: "Menu Item 2-1",
-                        children: [
-                          {
-                            children: undefined,
-                            text: "Menu Item 2-1-1",
-                          },
-                        ],
-                      },
-                    ],
+                    children: undefined,
+                    text: "menu-items-02",
+                    to: "/menu-items-02",
                   },
                 ],
-                i18n: {},
-              },
-
-              {
-                menuId: "menu-b",
-                items: undefined,
-                dynamicItems: true,
-                itemsResolve: {
-                  useProvider: "my.menu-provider",
-                },
-                i18n: {},
               },
             ],
 
@@ -886,39 +901,21 @@ describe("StoryboardAssembly", () => {
 
             menus: [
               {
-                menuId: "menu-a",
+                menuId: "main-menu-test",
+                title: "main-menu-test",
+                i18n: {},
                 items: [
                   {
                     children: undefined,
-                    text: "Menu Item 1",
+                    text: "menu-items-01",
+                    to: "/menu-items-01",
                   },
-
                   {
-                    text: "Menu Item 2",
-                    children: [
-                      {
-                        text: "Menu Item 2-1",
-                        children: [
-                          {
-                            children: undefined,
-                            text: "Menu Item 2-1-1",
-                          },
-                        ],
-                      },
-                    ],
+                    children: undefined,
+                    text: "menu-items-02",
+                    to: "/menu-items-02",
                   },
                 ],
-                i18n: {},
-              },
-
-              {
-                menuId: "menu-b",
-                dynamicItems: true,
-                items: undefined,
-                itemsResolve: {
-                  useProvider: "my.menu-provider",
-                },
-                i18n: {},
               },
             ],
 
