@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.241.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.241.0...@next-bricks/next-builder@1.241.1) (2023-05-26)
+
+
+### Bug Fixes
+
+* storyboard菜单数据多层 ([6d01478](https://github.com/easyops-cn/next-basics/commit/6d01478055fb9692db2553d7f3fa7d2b01661e7b))
+
+
+
+
+
 # [1.241.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.240.0...@next-bricks/next-builder@1.241.0) (2023-05-25)
 
 
