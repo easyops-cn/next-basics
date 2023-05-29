@@ -17,6 +17,7 @@ import type { ColumnsType } from "antd/es/table/interface";
  * @docKind brick
  * @noInheritDoc
  */
+
 export class TableTransferElement extends UpdatingElement {
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -100,6 +101,13 @@ export class TableTransferElement extends UpdatingElement {
   @property({ attribute: false })
   titles: string[];
   /**
+   * @default
+   * @required false
+   * @description 搜索框placeholder
+   */
+  @property({ attribute: false })
+  searchPlaceholder: string;
+  /**
    * @detail
    * @description 当选项发生转移时发出的事件，event.detail是	右侧框数据的 key 集合
    */
@@ -134,6 +142,7 @@ export class TableTransferElement extends UpdatingElement {
             maxSelected={this.maxSelected}
             listStyle={this.listStyle}
             titles={this.titles}
+            searchPlaceholder={this.searchPlaceholder}
           />
         </BrickWrapper>,
         this

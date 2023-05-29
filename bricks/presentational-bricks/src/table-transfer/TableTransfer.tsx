@@ -28,6 +28,7 @@ interface TableTransferProps {
   maxSelected?: number;
   listStyle?: React.CSSProperties;
   titles?: string[];
+  searchPlaceholder?: string;
 }
 export function arrayMoveImmutable(array, fromIndex, toIndex) {
   const newArray = [...array];
@@ -121,6 +122,7 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
     maxSelected,
     listStyle,
     titles,
+    searchPlaceholder,
   } = props;
   // let modifiedDataSource;
   const [dataSource, setDataSource] = useState([]);
@@ -193,6 +195,7 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
       onSelectChange={onSelectChange}
       showSelectAll={false}
       listStyle={listStyle}
+      locale={searchPlaceholder ? { searchPlaceholder } : null}
       showSearch
       filterOption={(inputValue: string, item: Record<string, any>) => {
         return filterOptions(inputValue, item, originColumns);
