@@ -63,13 +63,18 @@ describe("GeneralSelect", () => {
     expect(handleChange).toBeCalledWith("one", options);
   });
 
-  it("should render suffix brick", () => {
+  it("should render suffix brick & caption", () => {
     const wrapper = shallow(
       <GeneralSelectLegacy
         name="gender"
         options={
           [
-            { label: "1.0.0", value: "abc", status: "success" },
+            {
+              label: "1.0.0",
+              value: "abc",
+              status: "success",
+              caption: "version 1",
+            },
             { label: "2.0.0", value: "bcd", status: "failed" },
           ] as any[]
         }
@@ -99,10 +104,13 @@ describe("GeneralSelect", () => {
       />
     );
 
+    expect(wrapper.find(".caption").length).toBe(1);
+    expect(wrapper.find(".caption").at(0).text()).toBe("version 1");
     expect(wrapper.find("BrickAsComponent").at(0).prop("data")).toEqual({
       label: "1.0.0",
       status: "success",
       value: "abc",
+      caption: "version 1",
     });
     expect(wrapper.find("BrickAsComponent").at(1).prop("data")).toEqual({
       label: "2.0.0",

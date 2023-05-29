@@ -31,11 +31,13 @@ export const match = (input: string, field: string | number) => {
 export const filterSearch = (
   input: string,
   option: any,
-  filterByLabelAndValue?: boolean
-) => {
+  filterByLabelAndValue?: boolean,
+  filterByCaption?: boolean
+): boolean => {
   return (
     match(input, option.label) ||
-    (filterByLabelAndValue && match(input, option.value))
+    (filterByLabelAndValue && match(input, option.value)) ||
+    (filterByCaption && match(input, option.caption))
   );
 };
 
@@ -87,6 +89,7 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   tokenSeparators?: string[];
   popoverPositionType?: "default" | "parent";
   filterByLabelAndValue?: boolean;
+  filterByCaption?: boolean;
   dropdownStyle?: React.CSSProperties;
   bordered?: boolean;
   maxTagCount?: maxTagCountType;
@@ -112,6 +115,7 @@ export function GeneralSelectLegacy(
     emptyProps,
     showSearch,
     filterByLabelAndValue,
+    filterByCaption,
     onOptionDataChange,
     onOptionsChange,
     defaultActiveFirstOption = false,
@@ -260,7 +264,12 @@ export function GeneralSelectLegacy(
     const filterOption = isSearchable(props.useBackend)
       ? false
       : (input: string, option: any) => {
-          return filterSearch(input, option, filterByLabelAndValue);
+          return filterSearch(
+            input,
+            option,
+            filterByLabelAndValue,
+            filterByCaption
+          );
         };
     return showSearch
       ? {
@@ -270,29 +279,42 @@ export function GeneralSelectLegacy(
       : {
           showSearch: false,
         };
-  }, [filterByLabelAndValue, showSearch, props.useBackend]);
+  }, [filterByLabelAndValue, filterByCaption, showSearch, props.useBackend]);
 
-  const showSuffix = (op: GeneralComplexOption) =>
+  const showSuffix = (op: GeneralComplexOption): boolean =>
     hiddenCheckedValueSuffix ? op.value !== checkedValue : true;
-  const getOptions = (options: GeneralComplexOption[]) => {
+  const getOptions = (options: Record<string, any>[]): React.ReactNode => {
     return options.map((op) => (
       <Select.Option
         key={op.value as string}
         value={op.value as string}
         label={op.label}
-        className={optionsWrap ? style.optionWrap : style.itemOption}
+        caption={op.caption}
+        className={classNames(style.itemOption, {
+          [style.itemOptionWrap]: optionsWrap,
+        })}
         disabled={op.disabled}
       >
         <div
-          className={optionsWrap ? style.wrap : style.option}
+          className={classNames(style.option, {
+            [style.wrapOption]: optionsWrap,
+          })}
           onMouseEnter={setTooltip}
         >
-          <span className={optionsWrap ? style.wrapLabel : style.label}>
-            {op.label}
-          </span>
+          <div className={style.textContainer}>
+            <span
+              className={classNames(style.label, {
+                [style.wrapLabel]: optionsWrap,
+              })}
+            >
+              {" "}
+              {op.label}{" "}
+            </span>
+            {op.caption && <span className={style.caption}>{op.caption}</span>}
+          </div>
           {suffix
             ? suffix.useBrick &&
-              showSuffix(op) && (
+              showSuffix(op as GeneralComplexOption) && (
                 <div className={style.suffixContainer} style={suffixStyle}>
                   <BrickAsComponent useBrick={suffix.useBrick} data={op} />
                 </div>

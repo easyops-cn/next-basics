@@ -48,6 +48,15 @@ export class GeneralAutoCompleteElement extends FormItemElement {
   options: string[] | OptionType[];
 
   /**
+   * @default false
+   * @required false
+   * @description 搜索时是否根据caption过滤options
+   * @group advanced
+   */
+  @property({ type: Boolean })
+  filterByCaption: boolean;
+
+  /**
    * @required false
    * @description 占位说明
    * @group basic
@@ -151,6 +160,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             disabled={this.disabled}
+            filterByCaption={this.filterByCaption}
           />
         </BrickWrapper>,
         this
