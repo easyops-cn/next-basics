@@ -419,6 +419,15 @@ export class GeneralSelectElement extends FormItemElement {
   /**
    * @default false
    * @required false
+   * @description 搜索时是否根据caption过滤options
+   * @group advanced
+   */
+  @property({ type: Boolean })
+  filterByCaption: boolean;
+
+  /**
+   * @default false
+   * @required false
    * @description 是否默认高亮第一个选项
    */
   @property({ type: Boolean })
@@ -624,6 +633,7 @@ export class GeneralSelectElement extends FormItemElement {
             popoverPositionType={this.popoverPositionType}
             {...(this.mode === "tags" ? { pattern: this.pattern } : {})}
             filterByLabelAndValue={this.filterByLabelAndValue}
+            filterByCaption={this.filterByCaption}
             dropdownStyle={this.dropdownStyle}
             bordered={this.bordered}
             maxTagCount={this.maxTagCount}
