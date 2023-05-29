@@ -51,4 +51,16 @@ describe("BrickUserGroup", () => {
     wrapper.update();
     expect(wrapper.find("Tooltip").get(0).props["title"]).toBe("a(showA)");
   });
+
+  it("should render maxCount", async () => {
+    const wrapper = mount(
+      <BrickUserGroup
+        userNameOrIds={["a", "b"]}
+        configProps={{ maxCount: 1 }}
+      />
+    );
+    await jest.advanceTimersByTime(100);
+    await (global as any).flushPromises();
+    expect(wrapper.find("Avatar.Group").get(0).props["maxCount"]).toBe(1);
+  });
 });
