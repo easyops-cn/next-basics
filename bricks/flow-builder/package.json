@@ -44,9 +44,9 @@
   "devDependencies": {
     "@next-libs/basic-components": "^5.3.3",
     "@next-libs/code-display-components": "^2.0.4",
-    "@next-libs/code-editor-components": "^4.10.2",
-    "@next-libs/forms": "^3.3.18",
-    "@next-libs/visual-builder": "^1.11.0",
+    "@next-libs/code-editor-components": "^4.10.4",
+    "@next-libs/forms": "^3.5.0",
+    "@next-libs/visual-builder": "^1.12.0",
     "@next-sdk/cmdb-sdk": "^2.1.1",
     "change-case": "^4.1.2",
     "file-saver": "^2.0.5",
