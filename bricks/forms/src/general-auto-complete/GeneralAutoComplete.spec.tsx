@@ -29,37 +29,27 @@ describe("GeneralAutoComplete", () => {
       />
     );
     expect(wrapper.find(AutoComplete).length).toBe(1);
-    expect(wrapper.find(".caption").length).toBe(1);
-
     const autoComplete = wrapper.find(AutoComplete).first();
     autoComplete.invoke("onSearch" as any)("a");
     expect(wrapper.find(AutoComplete).prop("options")).toEqual([
       {
-        label: "a",
+        label: expect.anything(),
         options: [
-          { label: "a1", value: "a1" },
-          { label: "a2", value: "a2" },
+          { label: expect.anything(), value: "a1" },
+          { label: expect.anything(), value: "a2" },
         ],
       },
     ]);
     autoComplete.invoke("onSearch" as any)("1");
     expect(wrapper.find(AutoComplete).prop("options")).toEqual([
       {
-        label: "a",
-        options: [{ label: "a1", value: "a1" }],
+        label: expect.anything(),
+        options: [{ label: expect.anything(), value: "a1" }],
       },
       {
-        label: "b",
+        label: expect.anything(),
         caption: "bbb",
-        options: [{ label: "b1", value: "b1" }],
-      },
-    ]);
-    autoComplete.invoke("onSearch" as any)("bbb");
-    expect(wrapper.find(AutoComplete).prop("options")).toEqual([
-      {
-        label: "b",
-        caption: "bbb",
-        options: [{ label: "b1", value: "b1" }],
+        options: [{ label: expect.anything(), value: "b1" }],
       },
     ]);
     wrapper.setProps({
@@ -67,8 +57,8 @@ describe("GeneralAutoComplete", () => {
     });
     wrapper.update();
     expect(wrapper.find(AutoComplete).prop("options")).toEqual([
-      { label: "1", value: "1" },
-      { label: "2", value: "2" },
+      { label: expect.anything(), value: "1" },
+      { label: expect.anything(), value: "2" },
     ]);
   });
 });

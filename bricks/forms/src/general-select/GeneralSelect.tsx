@@ -34,10 +34,10 @@ export const filterSearch = (
   filterByLabelAndValue?: boolean,
   filterByCaption?: boolean
 ): boolean => {
-  return (
+  return Boolean(
     match(input, option.label) ||
-    (filterByLabelAndValue && match(input, option.value)) ||
-    (filterByCaption && match(input, option.caption))
+      (filterByLabelAndValue && match(input, option.value)) ||
+      (filterByCaption && match(input, option.caption))
   );
 };
 
@@ -307,8 +307,7 @@ export function GeneralSelectLegacy(
                 [style.wrapLabel]: optionsWrap,
               })}
             >
-              {" "}
-              {op.label}{" "}
+              {op.label}
             </span>
             {op.caption && <span className={style.caption}>{op.caption}</span>}
           </div>

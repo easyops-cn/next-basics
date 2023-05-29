@@ -422,13 +422,33 @@ describe("functions", () => {
   });
   it("should work with filterSearch", () => {
     expect(
-      filterSearch("sh", { value: "shanghai", label: "上海" }, false)
-    ).toEqual(false);
+      filterSearch(
+        "sh",
+        { value: "shanghai", label: "上海", caption: "city" },
+        false
+      )
+    ).toBeFalsy();
     expect(
-      filterSearch("sh", { value: "shanghai", label: "上海" }, true)
-    ).toEqual(true);
+      filterSearch(
+        "sh",
+        { value: "shanghai", label: "上海", caption: "city" },
+        true
+      )
+    ).toBeTruthy();
     expect(
-      filterSearch("上", { value: "shanghai", label: "上海" }, true)
-    ).toEqual(true);
+      filterSearch(
+        "上",
+        { value: "shanghai", label: "上海", caption: "city" },
+        true
+      )
+    ).toBeTruthy();
+    expect(
+      filterSearch(
+        "ci",
+        { value: "shanghai", label: "上海", caption: "city" },
+        true,
+        true
+      )
+    ).toBeTruthy();
   });
 });
