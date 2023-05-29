@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.235.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.234.0...@next-bricks/basic-bricks@1.235.0) (2023-05-29)
+
+
+### Features
+
+* **fold-brick-v2:** support foldIcon ([7fcd857](https://github.com/easyops-cn/next-basics/commit/7fcd857329ad09b924ef88eee1d9ecbd94bd4a81))
+
+
+
+
+
 # [1.234.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.233.0...@next-bricks/basic-bricks@1.234.0) (2023-05-18)
 
 
