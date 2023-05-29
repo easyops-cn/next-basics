@@ -5,6 +5,7 @@ import { BrickUserGroup } from "./BrickUserGroup";
 import { UserAdminApi_searchAllUsersInfo } from "@next-sdk/user-service-sdk";
 import { getAvatar } from "@next-libs/hooks";
 import { shallow, mount } from "enzyme";
+import { act } from "react-test-renderer";
 
 jest.mock("@next-sdk/user-service-sdk");
 jest.mock("@next-libs/hooks");
@@ -37,7 +38,9 @@ describe("BrickUserGroup", () => {
   });
   it("should render userNameOrIds", async () => {
     render(<BrickUserGroup userNameOrIds={["a", "b"]} />);
-    await (global as any).flushPromises();
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
     expect(screen.getByText("a")).toBeTruthy();
     expect(screen.getByText("b")).toBeTruthy();
   });
@@ -46,8 +49,10 @@ describe("BrickUserGroup", () => {
     const wrapper = mount(
       <BrickUserGroup userNameOrIds={["a", "b"]} displayShowKey />
     );
-    await jest.advanceTimersByTime(100);
-    await (global as any).flushPromises();
+    await act(async () => {
+      await jest.advanceTimersByTime(100);
+      await (global as any).flushPromises();
+    });
     wrapper.update();
     expect(wrapper.find("Tooltip").get(0).props["title"]).toBe("a(showA)");
   });
