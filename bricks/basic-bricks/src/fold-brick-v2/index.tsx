@@ -4,6 +4,7 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { FoldBrickV2 } from "./FoldBrickV2";
 import style from "./style.shadow.less";
 import { uniqueId } from "lodash";
+import { MenuIcon } from "@next-core/brick-types";
 
 /**
  * @id basic-bricks.fold-brick-v2
@@ -136,6 +137,30 @@ export class FoldBrickV2Element extends UpdatingElement {
   })
   show: boolean;
 
+  /**
+   * @private
+   */
+  @property({
+    type: Boolean,
+  })
+  hideFoldName: boolean;
+
+  /**
+   * @private
+   */
+  @property({
+    attribute: false,
+  })
+  foldIcon: MenuIcon;
+
+  /**
+   * @private
+   */
+  @property({
+    attribute: false,
+  })
+  foldIconStyle: any;
+
   constructor() {
     super();
     this._shadowRoot = this.attachShadow({ mode: "open" });
@@ -192,6 +217,9 @@ export class FoldBrickV2Element extends UpdatingElement {
             dividerDashed={this.dividerDashed}
             isShowFoldIcon={this.isShowFoldIcon}
             type={this.type}
+            hideFoldName={this.hideFoldName}
+            foldIcon={this.foldIcon}
+            foldIconStyle={this.foldIconStyle}
           />
         </BrickWrapper>,
         this._mountPoint
