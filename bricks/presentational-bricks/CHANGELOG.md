@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.300.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.300.4...@next-bricks/presentational-bricks@1.300.5) (2023-05-29)
+
+
+### Bug Fixes
+
+* **transfer:** 表格穿梭框加一个搜索框placeholder配置项 ([2bffc74](https://github.com/easyops-cn/next-basics/commit/2bffc7468491431bb885390b7ac76389611a77cd))
+
+
+
+
+
 ## [1.300.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.300.3...@next-bricks/presentational-bricks@1.300.4) (2023-05-25)
 
 
