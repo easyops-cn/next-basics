@@ -40,7 +40,13 @@ export function FoldBrickV2(props: FoldBrickV2Props): React.ReactElement {
               style={{ marginLeft: "2px", lineHeight: "0px" }}
             />
           ) : (
-            <GeneralIcon icon={foldIcon} style={foldIconStyle} />
+            <GeneralIcon
+              icon={foldIcon}
+              style={{
+                ...foldIconStyle,
+                transform: props.show ? "rotate(0deg)" : "rotate(180deg)",
+              }}
+            />
           )
         ) : (
           ""
