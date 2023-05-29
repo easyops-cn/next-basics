@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.235.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.235.0...@next-bricks/basic-bricks@1.235.1) (2023-05-29)
+
+
+### Bug Fixes
+
+* **FoldBrickV2:** css fix ([93d13b3](https://github.com/easyops-cn/next-basics/commit/93d13b3cef4a80acf156e52dc4b730afa45c972c))
+
+
+
+
+
 # [1.235.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.234.0...@next-bricks/basic-bricks@1.235.0) (2023-05-29)
 
 

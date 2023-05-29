@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.273.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.272.3...@next-bricks/forms@1.273.0) (2023-05-29)
+
+
+### Features
+
+* auto-complete、general-select构件 options 支持 caption ([99393de](https://github.com/easyops-cn/next-basics/commit/99393de03e8ab1bd77ca6c5609782f01b93541e3))
+* auto-complete、general-select构件 options 支持 caption ([75b8874](https://github.com/easyops-cn/next-basics/commit/75b8874847e3f09b18b69824e1bf77cfc59d29a5))
+
+
+
+
+
 ## [1.272.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.272.2...@next-bricks/forms@1.272.3) (2023-05-25)
 
 **Note:** Version bump only for package @next-bricks/forms
