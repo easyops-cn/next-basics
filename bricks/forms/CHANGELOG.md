@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.273.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.273.2...@next-bricks/forms@1.273.3) (2023-05-30)
+
+
+### Bug Fixes
+
+* **user-or-user-group-select:** fix $or in userQuery property not work ([7d9497e](https://github.com/easyops-cn/next-basics/commit/7d9497e75d8c8cd8154cffdd01b00bda833db89d))
+
+
+
+
+
 ## [1.273.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.273.1...@next-bricks/forms@1.273.2) (2023-05-30)
 
 
