@@ -58,7 +58,7 @@ export function GeneralAutoComplete(
   const { t } = useTranslation(NS_FORMS);
   const originalOptions: OptionType[] = useMemo(() => {
     const walkOptions = (options: (OptionType | string)[]): OptionType[] => {
-      return options.map((op) => {
+      return options?.map((op) => {
         if (typeof op === "string") {
           return {
             label: op,

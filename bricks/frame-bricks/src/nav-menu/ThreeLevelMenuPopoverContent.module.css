@@ -1,3 +1,15 @@
+html[data-theme="light"] {
+  --menu-header-background: linear-gradient(
+    90deg,
+    rgb(230, 236, 245, 0.7) 0%,
+    rgb(255, 255, 255, 0.7) 100%
+  );
+}
+
+html[data-theme="dark-v2"] {
+  --menu-header-background: linear-gradient(90deg, #343b4d 0%, #2a2a2b 100%);
+}
+
 .wrapper {
   display: flex;
   max-height: 456px;
@@ -10,7 +22,7 @@
   flex-direction: column;
   gap: 8px;
   overflow-y: scroll;
-  border-right: 1px solid #e8e8e8;
+  border-right: 1px solid var(--color-text-divider-line);
 
   .groupItem {
     flex-shrink: 0;
@@ -25,7 +37,7 @@
       position: absolute;
       width: 5px;
       height: 5px;
-      background: #8c8c8c;
+      background: var(--color-secondary-text);
       border-radius: 50%;
       left: 11px;
       bottom: 50%;
@@ -38,7 +50,7 @@
       position: absolute;
       width: 28px;
       height: 2px;
-      background: #1a7aff;
+      background: var(--color-brand);
       left: 24px;
       bottom: 0;
       opacity: 0;
@@ -49,7 +61,7 @@
       margin-left: 24px;
       margin-right: 10px;
       font-size: 14px;
-      color: #595959;
+      color: var(--color-normal-text);
       line-height: 20px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -64,7 +76,7 @@
 
     &.groupItemActive {
       &::before {
-        background: #1a7aff;
+        background: var(--color-brand);
       }
 
       &::after {
@@ -72,13 +84,13 @@
       }
 
       .groupItemText {
-        color: #1a7aff;
+        color: var(--color-brand);
       }
     }
 
     &:hover {
       &::before {
-        background: #1a7aff;
+        background: var(--color-brand);
       }
 
       &::after {
@@ -86,7 +98,7 @@
       }
 
       .groupItemText {
-        color: #1a7aff;
+        color: var(--color-brand);
       }
     }
   }
@@ -102,13 +114,13 @@
     flex-shrink: 0;
     display: flex;
     align-items: center;
-    background: linear-gradient(90deg, #f2f4f8 0%, #ffffff 100%);
+    background: var(--menu-header-background);
 
     .menuHeaderText {
       margin-left: 20px;
       font-size: 16px;
-      font-weight: 500;
-      color: #595959;
+      font-weight: var(--font-weight-500);
+      color: var(--color-normal-text);
       line-height: 20px;
     }
   }
@@ -134,7 +146,7 @@
         position: absolute;
         width: 4px;
         height: 4px;
-        background: #595959;
+        background: var(--color-normal-text);
         border-radius: 50%;
         left: 12px;
         bottom: 50%;
@@ -147,7 +159,7 @@
         margin-left: 24px;
         margin-right: 10px;
         font-size: 14px;
-        color: #595959;
+        color: var(--color-normal-text);
         line-height: 20px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -160,29 +172,29 @@
         }
 
         .menuItemText {
-          font-weight: 500;
-          color: #262626;
+          font-weight: var(--font-weight-500);
+          color: var(--color-strong-text);
           line-height: 22px;
         }
       }
 
       &.menuItemActive {
         &::before {
-          background: #1a7aff;
+          background: var(--color-brand);
         }
 
         .menuItemText {
-          color: #1a7aff;
+          color: var(--color-brand);
         }
       }
 
       &:hover {
         &::before {
-          background: #1a7aff;
+          background: var(--color-brand);
         }
 
         .menuItemText {
-          color: #1a7aff;
+          color: var(--color-brand);
         }
       }
     }
