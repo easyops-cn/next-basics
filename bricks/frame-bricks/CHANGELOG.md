@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.1...@next-bricks/frame-bricks@1.14.2) (2023-05-30)
+
+
+### Bug Fixes
+
+* 三级菜单交互改为mouseEnter ([a3454a2](https://github.com/easyops-cn/next-basics/commit/a3454a21e9b1c4a1d383773f70c3ce46f7152e8a))
+
+
+
+
+
 ## [1.14.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.0...@next-bricks/frame-bricks@1.14.1) (2023-05-30)
 
 
