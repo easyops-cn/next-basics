@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 import { Avatar, Tooltip } from "antd";
@@ -23,6 +23,9 @@ export function BrickUserGroup({
 }: BrickUserGroupProps): React.ReactElement {
   const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
   const [userList, setUserList] = useState<UserInfoWithShowKey[]>([]);
+  const [maxCount, setMaxCount] = useState<number>(0);
+  const [singleSize, setSingleSize] = useState<number>(0);
+  const groupRef = useRef(null);
 
   const getUserList = async (userNameOrIds: string[]) => {
     const resultList = (
@@ -56,23 +59,54 @@ export function BrickUserGroup({
     userNameOrIds.length && getUserList(userNameOrIds);
   }, [userNameOrIds]);
 
+  useEffect(() => {
+    const groupParentElement = groupRef?.current?.parentElement?.parentElement;
+    setTimeout(() => {
+      setSingleSize(
+        groupRef?.current?.firstElementChild.children[0]?.clientWidth * 0.84
+      );
+    }, 200);
+
+    const paddingRight =
+      Number(groupParentElement?.style?.paddingRight?.slice(0, -2)) || 0;
+    const paddingLeft =
+      Number(groupParentElement?.style?.paddingLeft?.slice(0, -2)) || 0;
+    const count =
+      Math.floor(
+        (groupParentElement?.clientWidth - paddingRight - paddingLeft) /
+          singleSize
+      ) - 1;
+    setMaxCount(count > 1 ? count : 1);
+  }, [singleSize]);
+
   return (
-    <Avatar.Group {...configProps}>
-      {userList?.map((user) => {
-        const [name, showKey] = user["#showKey"];
-        const userName = name || user.nickname || user.instanceId;
-        const userTooltip =
-          displayShowKey && showKey ? `${userName}(${showKey})` : userName;
-        return (
-          <Tooltip
-            title={userTooltip}
-            placement="topLeft"
-            key={user.instanceId}
-          >
-            {getAvatar(user)}
-          </Tooltip>
-        );
-      })}
-    </Avatar.Group>
+    <div ref={groupRef}>
+      <Avatar.Group
+        {...configProps}
+        maxCount={configProps.maxCount || maxCount}
+        maxStyle={
+          configProps.maxStyle || {
+            color: "#f56a00",
+            backgroundColor: "#fde3cf",
+          }
+        }
+      >
+        {userList?.map((user) => {
+          const [name, showKey] = user["#showKey"];
+          const userName = name || user.nickname || user.instanceId;
+          const userTooltip =
+            displayShowKey && showKey ? `${userName}(${showKey})` : userName;
+          return (
+            <Tooltip
+              title={userTooltip}
+              placement="topLeft"
+              key={user.instanceId}
+            >
+              {getAvatar(user)}
+            </Tooltip>
+          );
+        })}
+      </Avatar.Group>
+    </div>
   );
 }

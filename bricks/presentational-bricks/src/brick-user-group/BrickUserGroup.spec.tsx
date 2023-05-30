@@ -39,7 +39,6 @@ describe("BrickUserGroup", () => {
     render(<BrickUserGroup userNameOrIds={["a", "b"]} />);
     await (global as any).flushPromises();
     expect(screen.getByText("a")).toBeTruthy();
-    expect(screen.getByText("b")).toBeTruthy();
   });
 
   it("should render showKey", async () => {
