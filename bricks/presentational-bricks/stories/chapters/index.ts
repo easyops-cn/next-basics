@@ -60,6 +60,8 @@ import { DropdownButtonStory } from "./dropdown-button";
 import { BasicIconStory } from "./basic-icon";
 import { TextCollapseStory } from "./text-collapse";
 import { TableTransferStory } from "./table-transfer";
+import { BrickUserGroupStory } from "./brick-user-group";
+
 export const Chapters = [
   AgentStatusStory,
   BasicProgressStory,
@@ -123,4 +125,5 @@ export const Chapters = [
   DropdownButtonStory,
   BasicIconStory,
   TableTransferStory,
+  BrickUserGroupStory,
 ];
