@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.301.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.300.6...@next-bricks/presentational-bricks@1.301.0) (2023-05-30)
+
+
+### Bug Fixes
+
+* fix ([b594b19](https://github.com/easyops-cn/next-basics/commit/b594b198fd822104c0153fbdb91805e7ed668a2a))
+* fix ([6dfdc73](https://github.com/easyops-cn/next-basics/commit/6dfdc7311d1d597be4064d432a2a95a9037a14c3))
+* fix test ([4f87fab](https://github.com/easyops-cn/next-basics/commit/4f87fab839c8c2480b170dd328ba25c82e74a7ff))
+* fix test ([5631f5d](https://github.com/easyops-cn/next-basics/commit/5631f5d44d0ffc2f80876e37c01a34a427f4bcaa))
+* fix test ([2fd6ef1](https://github.com/easyops-cn/next-basics/commit/2fd6ef11b45c48a0e5dad67433745c257bf9cd6b))
+* fix 头像过多时会收起，通过hover展示全部 ([ba5b276](https://github.com/easyops-cn/next-basics/commit/ba5b276dbb6c5d19664160061fd224db6a8d7454))
+
+
+### Features
+
+* **brickUserGroup:** 头像过多时会收起，通过hover展示全部 ([c6d6826](https://github.com/easyops-cn/next-basics/commit/c6d6826eb265d3d75bb924b75f4b64452eb2338a))
+
+
+
+
+
 ## [1.300.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.300.5...@next-bricks/presentational-bricks@1.300.6) (2023-05-30)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
