@@ -326,18 +326,15 @@ export function LegacyUserSelectFormItem(
         query:
           props.userQuery && objectId === "USER"
             ? {
-                ...props.userQuery,
-                ...showKeyQuery,
+                $and: [props.userQuery, showKeyQuery],
               }
             : props.userGroupQuery && objectId === "USER_GROUP"
             ? {
-                ...props.userGroupQuery,
-                ...showKeyQuery,
+                $and: [props.userGroupQuery, showKeyQuery],
               }
-            : props.query || showKeyQuery
+            : props.query
             ? {
-                ...props.query,
-                ...showKeyQuery,
+                $and: [props.query, showKeyQuery],
               }
             : showKeyQuery,
       })
