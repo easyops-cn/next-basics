@@ -60,6 +60,7 @@ export function BrickUserGroup({
   }, [userNameOrIds]);
 
   useEffect(() => {
+    const groupParentElement = groupRef?.current?.parentElement?.parentElement;
     setTimeout(() => {
       setSingleSize(
         groupRef?.current?.firstElementChild.children[0]?.clientWidth * 0.84
@@ -67,24 +68,12 @@ export function BrickUserGroup({
     }, 200);
 
     const paddingRight =
-      Number(
-        groupRef?.current?.parentElement?.parentElement?.style?.paddingRight?.slice(
-          0,
-          -2
-        )
-      ) || 0;
+      Number(groupParentElement?.style?.paddingRight?.slice(0, -2)) || 0;
     const paddingLeft =
-      Number(
-        groupRef?.current?.parentElement?.parentElement?.style?.paddingLeft?.slice(
-          0,
-          -2
-        )
-      ) || 0;
+      Number(groupParentElement?.style?.paddingLeft?.slice(0, -2)) || 0;
     const count =
       Math.floor(
-        (groupRef?.current?.parentElement?.parentElement?.clientWidth -
-          paddingRight -
-          paddingLeft) /
+        (groupParentElement?.clientWidth - paddingRight - paddingLeft) /
           singleSize
       ) - 1;
     setMaxCount(count > 1 ? count : 1);
@@ -94,9 +83,13 @@ export function BrickUserGroup({
     <div ref={groupRef}>
       <Avatar.Group
         {...configProps}
-        size="large"
         maxCount={configProps.maxCount || maxCount}
-        maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+        maxStyle={
+          configProps.maxStyle || {
+            color: "#f56a00",
+            backgroundColor: "#fde3cf",
+          }
+        }
       >
         {userList?.map((user) => {
           const [name, showKey] = user["#showKey"];
