@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.273.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.273.1...@next-bricks/forms@1.273.2) (2023-05-30)
+
+
+### Bug Fixes
+
+* 三级菜单样式修改 ([c5726e5](https://github.com/easyops-cn/next-basics/commit/c5726e5a863953cb7a667c55cc255eac131783d8))
+
+
+
+
+
 ## [1.273.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.273.0...@next-bricks/forms@1.273.1) (2023-05-29)
 
 **Note:** Version bump only for package @next-bricks/forms
