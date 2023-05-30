@@ -75,7 +75,9 @@ export function BrickUserGroup({
       ) || 0;
     const count =
       Math.floor(
-        groupRef?.current?.parentElement?.parentElement?.clientWidth / 26
+        groupRef?.current?.parentElement?.parentElement?.clientWidth -
+          paddingRight -
+          paddingLeft / 26
       ) - 1;
     setMaxCount(count > 1 ? count : 1);
   }, []);
