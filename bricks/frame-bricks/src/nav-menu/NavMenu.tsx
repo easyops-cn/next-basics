@@ -152,7 +152,11 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
       selectedKeys={selectedKey}
       className={style.navMenuContainer}
     >
-      {menuItems.map((item) => renderMenuItem(item, true))}
+      {menuItems.map((item) =>
+        isSubMenu(item, true) && item.childLayout === "category"
+          ? renderThreeLevelMenu(item)
+          : renderMenuItem(item, true)
+      )}
     </Menu>
   );
 }
