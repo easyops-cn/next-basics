@@ -157,7 +157,7 @@ describe("ThreeLevelMenuPopoverContent", () => {
     expect(wrapper.find(".groupItemActive")).toHaveLength(0);
     expect(wrapper.find(".menuContainer")).toHaveLength(0);
 
-    wrapper.find(".groupItem").at(1).simulate("click");
+    wrapper.find(".groupItem").at(1).simulate("mouseenter");
     expect(
       wrapper.find(".groupItem").at(1).hasClass("groupItemActive")
     ).toBeTruthy();

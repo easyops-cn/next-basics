@@ -73,7 +73,7 @@ export function ThreeLevelMenuPopoverContent(
                   ),
                   [styles.groupItemActive]: activeKeys[0] === item.key,
                 })}
-                onClick={() => {
+                onMouseEnter={() => {
                   setCurrentGroupKey(item.key);
                   setActiveKeys([item.key]);
                 }}
