@@ -24,6 +24,7 @@ export function BrickUserGroup({
   const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
   const [userList, setUserList] = useState<UserInfoWithShowKey[]>([]);
   const [maxCount, setMaxCount] = useState<number>(0);
+  const [singleSize, setSingleSize] = useState<number>(0);
   const groupRef = useRef(null);
 
   const getUserList = async (userNameOrIds: string[]) => {
@@ -59,6 +60,12 @@ export function BrickUserGroup({
   }, [userNameOrIds]);
 
   useEffect(() => {
+    setTimeout(() => {
+      setSingleSize(
+        groupRef?.current?.firstElementChild.children[0]?.clientWidth * 0.84
+      );
+    }, 200);
+
     const paddingRight =
       Number(
         groupRef?.current?.parentElement?.parentElement?.style?.paddingRight?.slice(
@@ -75,17 +82,19 @@ export function BrickUserGroup({
       ) || 0;
     const count =
       Math.floor(
-        groupRef?.current?.parentElement?.parentElement?.clientWidth -
+        (groupRef?.current?.parentElement?.parentElement?.clientWidth -
           paddingRight -
-          paddingLeft / 26
+          paddingLeft) /
+          singleSize
       ) - 1;
     setMaxCount(count > 1 ? count : 1);
-  }, []);
+  }, [singleSize]);
 
   return (
     <div ref={groupRef}>
       <Avatar.Group
         {...configProps}
+        size="large"
         maxCount={configProps.maxCount || maxCount}
         maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
       >
