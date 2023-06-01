@@ -176,6 +176,7 @@ describe("buildStoryboardV2", () => {
             menuId: "menu-a",
             items: [
               {
+                if: null,
                 text: "Menu Item 1",
               },
               {
