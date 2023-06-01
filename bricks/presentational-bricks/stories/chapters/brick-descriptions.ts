@@ -238,5 +238,52 @@ export const BrickDescriptionsStory: Story = {
         ],
       },
     },
+    {
+      brick: "presentational-bricks.brick-descriptions",
+      properties: {
+        itemList: [
+          {
+            text: "Lynette",
+            label: "UserName",
+          },
+          {
+            text: "18",
+            label: "Age",
+          },
+          {
+            label: "Tags",
+            useBrick: {
+              brick: "presentational-bricks.brick-tag",
+              properties: {
+                tagList: "<% DATA.tags %>",
+                configProps: {
+                  color: "orange",
+                },
+                showCard: false,
+              },
+            },
+          },
+          {
+            text: " 2018-01-24",
+            label: "Order time",
+          },
+          {
+            text: "2019-04-24 18:00:00",
+            label: "Usage Time",
+            span: 2,
+          },
+          {
+            text: "Data disk type: MongoDB",
+            label: "Config Info",
+            span: 3,
+          },
+        ],
+        descriptionTitle: "User Info",
+        bordered: true,
+        dataSource: {
+          tags: ["user", "admin"],
+        },
+      },
+    },
   ],
 };

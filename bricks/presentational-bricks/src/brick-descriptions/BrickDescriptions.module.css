@@ -11,6 +11,15 @@
 :global(.ant-descriptions-view) {
   overflow: initial;
 }
+:global(.ant-descriptions-bordered) {
+  :global(.ant-descriptions-item-label) {
+    background-color: rgba(240, 247, 255, 1);
+  }
+  :global(.ant-descriptions-view) {
+    overflow: initial;
+    padding-left: 0;
+  }
+}
 .descriptionList {
   :global(.ant-descriptions):nth-child(n):not(:last-child) {
     margin-bottom: 24px;
