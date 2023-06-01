@@ -52,7 +52,6 @@ export async function buildStoryboardV2(
   const customTemplates = builderCustomTemplates(data.templateList, ctx);
 
   const menus = data.menus?.map(normalizeMenu);
-
   menus?.forEach((menu) => {
     bundleMenu(menu, data.i18n);
   });
