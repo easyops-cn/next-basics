@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.303.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.302.0...@next-bricks/presentational-bricks@1.303.0) (2023-06-02)
+
+
+### Features
+
+* **table-transfer:** add`search.change`event ([56272ab](https://github.com/easyops-cn/next-basics/commit/56272ab0abdfd0789757794e38eb7442fd3b8c26))
+
+
+
+
+
 # [1.302.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.301.1...@next-bricks/presentational-bricks@1.302.0) (2023-06-01)
 
 
