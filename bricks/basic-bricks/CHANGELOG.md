@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.236.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.235.2...@next-bricks/basic-bricks@1.236.0) (2023-06-02)
+
+
+### Features
+
+* 希望双态应用提供接入指引，引导用户做好部署准备工作并完成部署 ([4aa9a3c](https://github.com/easyops-cn/next-basics/commit/4aa9a3c1a28f699132bc10a66ab8ab62ea72d7c3))
+
+
+
+
+
 ## [1.235.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.235.1...@next-bricks/basic-bricks@1.235.2) (2023-05-30)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
