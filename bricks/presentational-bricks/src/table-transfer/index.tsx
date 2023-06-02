@@ -108,7 +108,7 @@ export class TableTransferElement extends UpdatingElement {
   @property({ attribute: false })
   searchPlaceholder: string;
   /**
-   * @detail
+   * @kind string[]
    * @description 当选项发生转移时发出的事件，event.detail是	右侧框数据的 key 集合
    */
   @event({ type: "table.transfer.change" })
@@ -117,12 +117,24 @@ export class TableTransferElement extends UpdatingElement {
     this.tableTransferChangeEvent.emit(keys);
   };
   /**
-   * @detail
+   * @kind string[]
    * @description 右栏表格拖拽排序发出的事件，event.detail是右栏表格排序后的key数组
    */
   @event({ type: "sort.change" }) sortChangeEvent: EventEmitter<string[]>;
   sortChange = (keys: string[]) => {
     this.sortChangeEvent.emit(keys);
+  };
+
+  /**
+   * @kind {direction: "left" | "right", value: any}
+   * @description 搜索框发出的事件，event.detail是搜索框的值
+   */
+  @event({ type: "search.change" }) searchChangeEvent: EventEmitter<{
+    direction: "left" | "right";
+    value: any;
+  }>;
+  onSearch = (direction: "left" | "right", value: string) => {
+    this.searchChangeEvent.emit({ direction, value });
   };
   protected _render(): void {
     // istanbul ignore else
@@ -142,6 +154,7 @@ export class TableTransferElement extends UpdatingElement {
             maxSelected={this.maxSelected}
             listStyle={this.listStyle}
             titles={this.titles}
+            onSearch={this.onSearch}
             searchPlaceholder={this.searchPlaceholder}
           />
         </BrickWrapper>,

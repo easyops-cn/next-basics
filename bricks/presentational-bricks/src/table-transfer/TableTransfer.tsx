@@ -29,6 +29,7 @@ interface TableTransferProps {
   listStyle?: React.CSSProperties;
   titles?: string[];
   searchPlaceholder?: string;
+  onSearch?: (direction: "left" | "right", value: string) => void;
 }
 export function arrayMoveImmutable(array, fromIndex, toIndex) {
   const newArray = [...array];
@@ -123,6 +124,7 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
     listStyle,
     titles,
     searchPlaceholder,
+    onSearch,
   } = props;
   // let modifiedDataSource;
   const [dataSource, setDataSource] = useState([]);
@@ -186,8 +188,13 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
     setSelectedKeys([...sourceSelectedKeys, ...targetSelectedKeys]);
   };
 
+  const handleSearch = (direction: "left" | "right", value: string) => {
+    onSearch?.(direction, value);
+  };
+
   return (
     <Transfer
+      onSearch={handleSearch}
       targetKeys={targetKeys}
       selectedKeys={selectedKeys}
       dataSource={dataSource}
