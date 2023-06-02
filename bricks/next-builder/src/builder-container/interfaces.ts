@@ -20,6 +20,9 @@ export interface BrickOptionItem {
   $searchTextPool?: string[];
   isExport?: boolean;
   useInBricks?: string[];
+  originBrick?: {
+    id?: string;
+  };
 }
 
 export interface GroupedBricks {

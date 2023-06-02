@@ -552,6 +552,13 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
       brick: componentData.id,
       bricks: componentData.bricks,
       type: "brick",
+      ...(componentData.originBrick?.id
+        ? {
+            originBrick: {
+              id: componentData.originBrick.id,
+            },
+          }
+        : {}),
     };
     e.dataTransfer.setData("nodeData", JSON.stringify(nodeData));
     onDragStart(null, null);
@@ -666,7 +673,7 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
         }}
       >
         {snippets.map((row) => (
-          <ComponentItem key={row.id} {...row} />
+          <ComponentItem key={row.id} {...row} originBrick={componentData} />
         ))}
       </div>
     );
