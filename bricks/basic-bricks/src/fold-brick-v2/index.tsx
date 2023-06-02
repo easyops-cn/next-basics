@@ -1,6 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
+import {
+  BrickWrapper,
+  UpdatingElement,
+  EventEmitter,
+  property,
+  event,
+} from "@next-core/brick-kit";
 import { FoldBrickV2 } from "./FoldBrickV2";
 import style from "./style.shadow.less";
 import { uniqueId } from "lodash";
@@ -161,6 +167,13 @@ export class FoldBrickV2Element extends UpdatingElement {
   })
   foldIconStyle: any;
 
+  /**
+   * @detail `Record<string, any>`
+   * @description 切换折叠时触发, detail boolean
+   */
+  @event({ type: "fold.change", cancelable: true })
+  foldChange: EventEmitter<boolean>;
+
   constructor() {
     super();
     this._shadowRoot = this.attachShadow({ mode: "open" });
@@ -180,6 +193,7 @@ export class FoldBrickV2Element extends UpdatingElement {
     for (const path of paths) {
       if (path.id === this._id) {
         this.show = !this.show;
+        this.foldChange.emit(this.show);
         this._render();
         break;
       }
