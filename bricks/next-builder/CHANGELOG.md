@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.243.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.242.2...@next-bricks/next-builder@1.243.0) (2023-06-02)
+
+
+### Features
+
+* snippet增加原构件id ([8701d0e](https://github.com/easyops-cn/next-basics/commit/8701d0e4a3c422cffbfd508105704af394bf9563))
+
+
+
+
+
 ## [1.242.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.242.1...@next-bricks/next-builder@1.242.2) (2023-06-01)
 
 **Note:** Version bump only for package @next-bricks/next-builder
