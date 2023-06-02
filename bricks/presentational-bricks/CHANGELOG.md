@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.303.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.303.0...@next-bricks/presentational-bricks@1.303.1) (2023-06-02)
+
+
+### Bug Fixes
+
+* 修改table及timeline样式 ([8688f42](https://github.com/easyops-cn/next-basics/commit/8688f42b1106626ef4e2487fee7e7b69681df998))
+
+
+
+
+
 # [1.303.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.302.0...@next-bricks/presentational-bricks@1.303.0) (2023-06-02)
 
 
