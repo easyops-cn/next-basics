@@ -1,6 +1,8 @@
 import type {
   BrickConf,
   BuilderBrickNode,
+  ContextConf,
+  ResolveConf,
   Storyboard,
 } from "@next-core/brick-types";
 import {
@@ -506,6 +508,22 @@ export interface WorkbenchSortData {
   nodeInstanceIds: string[];
 }
 
+interface SnippetParams {
+  type: string;
+  defaultValue: string;
+}
+interface SnippetRuntimeNode {
+  data?: ContextConf[];
+  params?: Record<string, SnippetParams>;
+}
+
+export interface SnippetRuntimeContext {
+  rootType: string;
+  rootInstanceId: string;
+  dataList?: ContextConf[];
+  inputParams?: Record<string, unknown>;
+}
+
 export type WorkbenchBackendActionForInsertDetail = {
   parentInstanceId?: string;
   parent: string;
@@ -514,11 +532,12 @@ export type WorkbenchBackendActionForInsertDetail = {
   sort?: number;
   portal?: boolean;
   bg?: boolean;
-  nodeData: BuilderRuntimeNode;
+  nodeData: BuilderRuntimeNode & SnippetRuntimeNode;
   dragOverInstanceId?: string;
   dragStatus?: dragStatus;
   sortData?: WorkbenchSortData;
   type: "brick" | "provider";
+  snippetContext?: SnippetRuntimeContext;
 };
 export interface WorkbenchBackendActionForInsert
   extends WorkbencdBackendCacheActionCommon {

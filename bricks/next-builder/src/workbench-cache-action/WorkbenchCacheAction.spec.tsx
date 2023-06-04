@@ -99,11 +99,12 @@ jest.spyOn(brickKit, "getRuntime").mockReturnValue({
 } as any);
 
 describe("WorkbenchWorker", () => {
-  it("should work", () => {
+  it("should work", async () => {
     const onStoryboardUpdate = jest.fn();
     const onRootNodeUpdate = jest.fn();
     const onGraphDataUpdate = jest.fn();
     const onExecuteSuccess = jest.fn();
+    const onSnippetSuccess = jest.fn();
     const node = {
       $$uid: 1,
       id: "B-1",
@@ -123,6 +124,7 @@ describe("WorkbenchWorker", () => {
       onRootNodeUpdate: onRootNodeUpdate,
       onGraphDataUpdate: onGraphDataUpdate,
       onExecuteSuccess: onExecuteSuccess,
+      onSnippetSuccess: onSnippetSuccess,
     } as WorkbenchCacheActionProps;
     const { baseElement } = render(<WorkbenchCacheAction {...props} />);
     const cacheAction = cacheActionRef.current;
@@ -373,5 +375,90 @@ describe("WorkbenchWorker", () => {
     });
 
     expect(useBuilderDataManager).toBeCalledTimes(7);
+
+    act(() => {
+      cacheAction.cacheAction({
+        action: "insert.snippet",
+        data: {
+          nodeData: {
+            brick: "presentational-bricks.brick-table[normal]",
+            params: {
+              test: {
+                type: "string",
+                defaultValue: "come from snippetParams",
+              },
+            },
+            data: [
+              {
+                name: "testGood",
+                value: "<%! SNIPPET_PARAMS.test %>",
+              },
+              {
+                name: "dataSourceList",
+                resolve: {
+                  useProvider: "providers-of-cmdb.instance-api-post-search",
+                  args: [
+                    "APP",
+                    {
+                      fields: {
+                        "*": true,
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            bricks: [
+              {
+                brick: "presentational-bricks.brick-table",
+                properties: {
+                  columns: [
+                    {
+                      title: "Name",
+                      dataIndex: "name",
+                    },
+                    {
+                      title: "ctime",
+                      dataIndex: "ctime",
+                      useBrick: [
+                        {
+                          brick: "span",
+                          properties: {
+                            textContent: "<% DATA.cellData %>",
+                          },
+                        },
+                      ],
+                    },
+                    {
+                      title: "test",
+                      dataIndex: "test",
+                      useBrick: [
+                        {
+                          brick: "span",
+                          properties: {
+                            textContent: "<%! SNIPPET_PARAMS.test %>",
+                          },
+                        },
+                      ],
+                    },
+                  ],
+
+                  dataSource: "<%@ CTX_OR_STATE.dataSourceList %>",
+                },
+              },
+            ],
+          },
+          snippetContext: {
+            rootInstanceId: "route-a",
+            rootType: "route",
+            inputParams: {
+              test: "hello",
+            },
+          },
+        },
+      });
+    });
+
+    expect(useBuilderDataManager).toBeCalledTimes(8);
   });
 });
