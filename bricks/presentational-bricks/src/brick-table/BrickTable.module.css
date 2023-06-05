@@ -57,6 +57,7 @@ html[data-theme="dark"] {
   }
   :global(.ant-table-middle .ant-table-thead th) {
     padding: 6px 8px !important;
+    /* 改变高度 */
   }
 
   :global(.ant-table-tbody) {
