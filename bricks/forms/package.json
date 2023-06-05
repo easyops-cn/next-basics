@@ -40,7 +40,7 @@
     "test:ci": "cross-env NODE_ENV='test' CI=true jest"
   },
   "devDependencies": {
-    "@next-core/custom-antd-styles": "^1.25.22",
+    "@next-core/custom-antd-styles": "^1.25.24",
     "@next-libs/basic-components": "^5.3.3",
     "@next-libs/clipboard": "^3.0.4",
     "@next-libs/cmdb-instances": "^7.3.2",
