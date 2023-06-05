@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.304.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.303.3...@next-bricks/presentational-bricks@1.304.0) (2023-06-05)
+
+
+### Features
+
+* 希望配置中心提供友好的接入指引，便于用户快速入门 ([42d82f4](https://github.com/easyops-cn/next-basics/commit/42d82f456db2f63b929ccc4d32c61d1ebd63021c))
+
+
+
+
+
 ## [1.303.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.303.2...@next-bricks/presentational-bricks@1.303.3) (2023-06-05)
 
 
