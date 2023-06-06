@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.23.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.22.0...@next-types/preview@1.23.0) (2023-06-06)
+
+
+### Features
+
+* support dynamic snippet ([751a1b4](https://github.com/easyops-cn/next-basics/commit/751a1b41704be1e6f856e5986a70b9adc3d76a7b))
+
+
+
+
+
 # [1.22.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.21.2...@next-types/preview@1.22.0) (2023-05-17)
 
 
