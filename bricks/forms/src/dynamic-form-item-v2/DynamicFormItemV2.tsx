@@ -107,7 +107,6 @@ export const LegacyDynamicFormItemV2 = forwardRef(
         ),
       [columns]
     );
-
     return (
       <div className={style.dynamicForm} style={{ ...dynamicFormStyle }}>
         <Form
@@ -124,23 +123,35 @@ export const LegacyDynamicFormItemV2 = forwardRef(
                   const rowValue = value?.[name];
 
                   return (
-                    <Row key={key} className={style.row} gutter={12}>
-                      {columns?.map((column) => (
-                        <Col
-                          key={column.name}
-                          style={{ flex: column.flex ?? "1", minWidth: 0 }}
-                        >
-                          <ColumnComponent
-                            hasLabel={hasLabel}
-                            rowIndex={name}
-                            column={column}
-                            formValue={value}
-                            field={{ key, name, ...restField }}
-                            handleInputBlur={handleInputBlur}
-                          />
-                        </Col>
-                      ))}
-                      <Col>
+                    <Row key={key} className={style.row}>
+                      <Row gutter={[12, 8]} style={{ flex: 1 }}>
+                        {columns?.map((column) => (
+                          <Col
+                            key={column.name}
+                            style={{
+                              flex: column.flex ?? "1",
+                              width: "fit-content",
+                            }}
+                          >
+                            <ColumnComponent
+                              hasLabel={hasLabel}
+                              rowIndex={name}
+                              column={column}
+                              formValue={value}
+                              field={{ key, name, ...restField }}
+                              handleInputBlur={handleInputBlur}
+                            />
+                          </Col>
+                        ))}
+                      </Row>
+                      <Col
+                        span={3}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
                         <Button
                           type="link"
                           className={classNames(style.removeRowBtn, [
