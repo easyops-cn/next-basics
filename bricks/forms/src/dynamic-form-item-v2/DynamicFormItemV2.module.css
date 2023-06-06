@@ -8,7 +8,7 @@
   }
 
   .row {
-    margin-bottom: 10px;
+    margin-bottom: 16px;
   }
 
   .hidden {
@@ -20,7 +20,7 @@
   }
 
   .addRowBtn {
-    width: calc(100% - 38px);
+    width: calc(100% - 47px);
   }
 
   .removeRowBtn {
