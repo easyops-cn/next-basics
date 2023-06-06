@@ -1,12 +1,120 @@
 import {
-  updateRouteOrTemplate,
+  UpdateRouteOrTemplate,
   updateUseResolves,
   updateProxy,
   updateTemplateRefAndAsVarible,
   replaceUseBrickTransform,
   replaceInjectOrTranformRawToEvaluteRaw,
-  replace,
 } from "./UpdateBricks";
+
+jest.mock("@next-sdk/cmdb-sdk", () => ({
+  InstanceGraphApi_traverseGraphV2: () =>
+    Promise.resolve({
+      topic_vertices: [
+        {
+          _object_id: "STORYBOARD_BRICK",
+          instanceId: "mock-instanceId",
+          brick: "div",
+          alias: "v3",
+          type: "brick",
+        },
+      ],
+      vertices: [
+        {
+          brick: "basic.micro-view",
+          instanceId: "a",
+          ref: "view",
+          _object_id: "STORYBOARD_BRICK",
+          properties: JSON.stringify({
+            width: "800px",
+          }),
+        },
+        {
+          brick: "basic.general-card",
+          instanceId: "b",
+          _object_id: "STORYBOARD_BRICK",
+          ref: "card",
+          properties: JSON.stringify({
+            textContent: "Hello, This is a card",
+            cardProps: "<% TPL.cardProps %>",
+            useBrick: {
+              brick: "div",
+              transform: {
+                textContent: "@{text}",
+                style: {
+                  width: "<% DATA.width %>",
+                },
+              },
+            },
+          }),
+          events: JSON.stringify({
+            click: [
+              {
+                action: "console.log",
+                args: ["<% TPL.cardProps %>"],
+              },
+            ],
+          }),
+          lifeCycle: JSON.stringify({
+            useResolves: [
+              {
+                useProvider: "providers-of-cmdb.get-detail",
+                args: ["abc", "STORYBOARD_TEMPLATE"],
+                transform: {
+                  name: "@{}",
+                },
+              },
+              {
+                useProvider: "providers-of-cmdb.query-search-v3",
+                args: ["STORYBOARD_TEMPLATE", "xxx"],
+                transform: {
+                  abc: "@{}",
+                },
+              },
+            ],
+          }),
+        },
+        {
+          brick: "div",
+          ref: "list",
+          instanceId: "c",
+          _object_id: "STORYBOARD_BRICK",
+          properties: JSON.stringify({}),
+        },
+        {
+          brick: "not-change-brick-and-should-ingore",
+          ref: "no-change",
+          instanceId: "d",
+          _object_id: "STORYBOARD_BRICK",
+          properties: JSON.stringify({
+            textContent: "no change",
+          }),
+        },
+      ],
+      edges: [
+        {
+          out: "mock-instanceId",
+          in: "a",
+          out_name: "children",
+        },
+        {
+          out: "a",
+          in: "b",
+          out_name: "children",
+        },
+        {
+          out: "b",
+          in: "c",
+          out_name: "children",
+        },
+        {
+          out: "b",
+          in: "d",
+          out_name: "children",
+        },
+      ],
+    }),
+}));
 
 describe("updateUseResolves", () => {
   it("updateUseResolves should work", () => {
@@ -165,23 +273,37 @@ describe("updateProxy", () => {
             asVariable: true,
           },
         },
+        events: {
+          test: {
+            ref: "mock-ref-1",
+            refEvent: "click",
+          },
+        },
       }),
     };
 
     expect(updateProxy(mockNodeDetail)).toEqual({
-      context: [{ name: "sex" }],
+      context: [{ name: "name" }, { name: "age" }, { name: "sex" }],
       refProxy: {
         "mock-ref-1": {
-          name: '<% "track state", STATE.name %>',
-          age: '<% "track state", STATE.name %>',
+          name: "<%= STATE.name %>",
+          age: "<%= STATE.name %>",
         },
         "mock-ref-2": {
-          xx: '<% "track state", STATE.age %>',
-          hidden: '<% "track state", STATE.age === 18 %>',
-          title: '<% "track state", STATE.name %>',
-          age: `<% "track state", STATE.age %>`,
+          xx: "<%= STATE.age %>",
+          hidden: "<%= STATE.age === 18 %>",
+          title: "<%= STATE.name %>",
+          age: `<%= STATE.age %>`,
         },
       },
+      newProxy: JSON.stringify({
+        events: {
+          test: {
+            ref: "mock-ref-1",
+            refEvent: "click",
+          },
+        },
+      }),
     });
   });
 });
@@ -216,12 +338,12 @@ describe("updateTemplateRefAndAsVarible", () => {
 
     const refProxy = {
       "mock-ref-1": {
-        name: '<% "track state", STATE.name %>',
-        age: '<% "track state", STATE.name %>',
-        title: '<% "track state", STATE.name %>',
+        name: "<%= STATE.name %>",
+        age: "<%= STATE.name %>",
+        title: "<%= STATE.name %>",
       },
       "mock-ref-2": {
-        xx: '<% "track state", STATE.age %>',
+        xx: "<%= STATE.age %>",
         hidden: "<% STATE.age === 18 %>",
         age: "<% STATE.age %>",
       },
@@ -241,11 +363,11 @@ describe("updateTemplateRefAndAsVarible", () => {
       lifeCycle: {},
       properties: {
         a: "<% STATE.a %>",
-        age: '<% "track state", STATE.name %>',
+        age: "<%= STATE.name %>",
         b: "<% STATE.b * STATE.a %>",
         c: "<% `${STATE.c} TPL title` %>",
-        name: '<% "track state", STATE.name %>',
-        title: '<% "track state", STATE.name %>',
+        name: "<%= STATE.name %>",
+        title: "<%= STATE.name %>",
       },
     });
   });
@@ -406,123 +528,54 @@ describe("replaceInjectOrTranformRawToEvaluteRaw", () => {
   });
 });
 
-describe("updateRouteOrTemplate", () => {
-  it("updateRouteOrTemplate should work", () => {
-    const mockTemplateData = [
-      {
-        brick: "tpl-template",
-        instanceId: "mock-instanceId-template",
-        _object_id: "STORYBOARD_TEMPLATE",
-        proxy: JSON.stringify({
-          properties: {
-            name: {
-              ref: "view",
-              refProperty: "pageTitle",
-              extraOneWayRefs: [
-                {
-                  ref: "card",
-                  refProperty: "cardTitle",
-                },
-                {
-                  ref: "list",
-                  refProperty: "list-name",
-                },
-              ],
-            },
-            age: {
-              ref: "card",
-              refTransform: {
-                hidden: "<% DATA.age === 18 %>",
-              },
-              extraOneWayRefs: [
-                {
-                  ref: "list",
-                  refProperty: "list-age",
-                },
-                {
-                  ref: "list",
-                  refTransform: {
-                    list: "<% DATA.age %>",
-                  },
-                },
-              ],
-            },
-            cardProps: {
-              asVariable: true,
-            },
-          },
-        }),
-        children: [
-          {
-            brick: "basic.micro-view",
-            instanceId: "mock-instnaceId-view",
+describe("UpdateRouteOrTemplate", () => {
+  it("UpdateRouteOrTemplate should work", async () => {
+    const rootNode = {
+      brick: "tpl-template",
+      instanceId: "mock-instanceId-template",
+      _object_id: "STORYBOARD_TEMPLATE",
+      proxy: JSON.stringify({
+        properties: {
+          name: {
             ref: "view",
-            _object_id: "STORYBOARD_BRICK",
-            properties: JSON.stringify({
-              width: "800px",
-            }),
-            children: [
+            refProperty: "pageTitle",
+            extraOneWayRefs: [
               {
-                brick: "basic.general-card",
-                instanceId: "mock-instanceId-card",
-                _object_id: "STORYBOARD_BRICK",
                 ref: "card",
-                properties: JSON.stringify({
-                  textContent: "Hello, This is a card",
-                  cardProps: "<% TPL.cardProps %>",
-                  useBrick: {
-                    brick: "div",
-                    transform: {
-                      textContent: "@{text}",
-                      style: {
-                        width: "<% DATA.width %>",
-                      },
-                    },
-                  },
-                }),
-                events: JSON.stringify({
-                  click: [
-                    {
-                      action: "console.log",
-                      args: ["<% TPL.cardProps %>"],
-                    },
-                  ],
-                }),
-                lifeCycle: JSON.stringify({
-                  useResolves: [
-                    {
-                      useProvider: "providers-of-cmdb.get-detail",
-                      args: ["abc", "STORYBOARD_TEMPLATE"],
-                      transform: {
-                        name: "@{}",
-                      },
-                    },
-                    {
-                      useProvider: "providers-of-cmdb.query-search-v3",
-                      args: ["STORYBOARD_TEMPLATE", "xxx"],
-                      transform: {
-                        abc: "@{}",
-                      },
-                    },
-                  ],
-                }),
-                children: [
-                  {
-                    brick: "div",
-                    ref: "list",
-                    instanceId: "mock-instanceId-div",
-                    _object_id: "STORYBOARD_BRICK",
-                    properties: JSON.stringify({}),
-                  },
-                ],
+                refProperty: "cardTitle",
+              },
+              {
+                ref: "list",
+                refProperty: "list-name",
               },
             ],
           },
-        ],
-      },
-    ];
+          age: {
+            ref: "card",
+            refTransform: {
+              hidden: "<% DATA.age === 18 %>",
+            },
+            extraOneWayRefs: [
+              {
+                ref: "list",
+                refProperty: "list-age",
+              },
+              {
+                ref: "list",
+                refTransform: {
+                  list: "<% DATA.age %>",
+                },
+              },
+            ],
+          },
+          cardProps: {
+            asVariable: true,
+          },
+        },
+      }),
+    };
     expect(
-      updateRouteOrTemplate(mockTemplateData, {
+      await UpdateRouteOrTemplate(rootNode, "mock-id", {
         updateProxy: true,
         updateUseResolves: true,
         updateUseBrickTransform: true,
@@ -530,49 +583,34 @@ describe("updateRouteOrTemplate", () => {
       })
     ).toEqual([
       {
-        context: [
-          { name: "cardProps" },
-          {
-            name: "data_0",
-            resolve: {
-              useProvider: "providers-of-cmdb.get-detail",
-              args: ["abc", "STORYBOARD_TEMPLATE"],
-            },
-          },
-          {
-            name: "data_1",
-            resolve: {
-              useProvider: "providers-of-cmdb.query-search-v3",
-              args: ["STORYBOARD_TEMPLATE", "xxx"],
-            },
-          },
-        ],
+        _object_id: "STORYBOARD_TEMPLATE",
         instanceId: "mock-instanceId-template",
-        objectId: "STORYBOARD_TEMPLATE",
+        state:
+          '[{"name":"name"},{"name":"age"},{"name":"cardProps"},{"name":"data_0","resolve":{"useProvider":"providers-of-cmdb.get-detail","args":["abc","STORYBOARD_TEMPLATE"]}},{"name":"data_1","resolve":{"useProvider":"providers-of-cmdb.query-search-v3","args":["STORYBOARD_TEMPLATE","xxx"]}}]',
+        proxy: "{}",
       },
       {
+        _object_id: "STORYBOARD_BRICK",
+        instanceId: "a",
+        properties: '{"width":"800px","pageTitle":"<%= STATE.name %>"}',
         context: null,
-        instanceId: "mock-instnaceId-view",
-        objectId: "STORYBOARD_BRICK",
+      },
+      {
+        _object_id: "STORYBOARD_BRICK",
+        instanceId: "b",
         properties:
-          '{"width":"800px","pageTitle":"<% \\"track state\\", STATE.name %>"}',
-      },
-      {
-        context: null,
+          '{"textContent":"Hello, This is a card","cardProps":"<% STATE.cardProps %>","useBrick":{"brick":"div","properties":{"textContent":"<% DATA.text %>","style":{"width":"<% DATA.width %>"}}},"cardTitle":"<%= STATE.name %>","hidden":"<%= STATE.age === 18 %>","name":"<% STATE.data_0 %>","abc":"<% STATE.data_1 %>"}',
         events:
           '{"click":[{"action":"console.log","args":["<% STATE.cardProps %>"]}]}',
-        instanceId: "mock-instanceId-card",
         lifeCycle: "{}",
-        objectId: "STORYBOARD_BRICK",
-        properties:
-          '{"textContent":"Hello, This is a card","cardProps":"<% STATE.cardProps %>","useBrick":{"brick":"div","properties":{"textContent":"<% DATA.text %>","style":{"width":"<% DATA.width %>"}}},"cardTitle":"<% \\"track state\\", STATE.name %>","hidden":"<% \\"track state\\", STATE.age === 18 %>","name":"<% STATE.data_0 %>","abc":"<% STATE.data_1 %>"}',
+        context: null,
       },
       {
-        context: null,
-        instanceId: "mock-instanceId-div",
-        objectId: "STORYBOARD_BRICK",
+        _object_id: "STORYBOARD_BRICK",
+        instanceId: "c",
         properties:
-          '{"list-name":"<% \\"track state\\", STATE.name %>","list-age":"<% \\"track state\\", STATE.age %>","list":"<% \\"track state\\", STATE.age %>"}',
+          '{"list-name":"<%= STATE.name %>","list-age":"<%= STATE.age %>","list":"<%= STATE.age %>"}',
+        context: null,
       },
     ]);
   });
