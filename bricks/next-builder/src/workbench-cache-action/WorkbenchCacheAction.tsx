@@ -20,7 +20,7 @@ import {
   buildBricks,
   buildRoutes,
 } from "../shared/storyboard/buildStoryboardV2";
-import { omit, uniqueId, pick } from "lodash";
+import { omit, uniqueId, pick, compact } from "lodash";
 import type {
   BrickConf,
   BuilderBrickNode,
@@ -28,6 +28,7 @@ import type {
   RouteConf,
   CustomTemplate,
   Storyboard,
+  ContextConf,
 } from "@next-core/brick-types";
 import type {
   WorkbenchBackendActionForInsertDetail,
@@ -40,6 +41,7 @@ import type {
   WorkbenchBackendActionForDeleteDetail,
   WorkbenchBackendActionForMoveDetail,
   WorkbenchBackendActionForBatchOpDetail,
+  SnippetRuntimeContext,
 } from "@next-types/preview";
 import WorkbenchBackend, {
   QueueItem,
@@ -54,8 +56,9 @@ import { pipes } from "@next-core/pipes";
 import styles from "./WorkbenchCacheAction.module.css";
 import { CacheActionList } from "./CacheActionList";
 import { JsonStorage } from "@next-libs/storage";
-import { isObject, normalizeBuilderNode } from "@next-core/brick-utils";
+import { normalizeBuilderNode } from "@next-core/brick-utils";
 import walk from "../utils/walk";
+import { processWithParamsSnippet } from "./processDynamicSnippet";
 
 export interface WorkbenchCacheActionRef {
   manager: BuilderDataManager;
@@ -436,10 +439,55 @@ function LegacyWorkbenchCacheAction(
     });
   };
 
+  const handleContextUpdate = (
+    dataList: ContextConf[],
+    snippetContext: SnippetRuntimeContext
+  ): void => {
+    const isTemplate = snippetContext.rootType === "template";
+    const finalList = compact(snippetContext.dataList).concat(dataList);
+
+    const updateData: WorkbenchBackendActionForUpdateDetail = isTemplate
+      ? {
+          objectId: "STORYBOARD_TEMPLATE",
+          instanceId: snippetContext.rootInstanceId,
+          property: {
+            state: JSON.stringify(finalList),
+          },
+        }
+      : {
+          objectId: "STORYBOARD_ROUTE",
+          instanceId: snippetContext.rootInstanceId,
+          property: {
+            context: finalList,
+          },
+        };
+
+    handleUpdateBrick(updateData, nodesCacheRef.current);
+
+    backendInstance.push({
+      action: "update",
+      data: updateData,
+      uid: uniqueId("cache-action"),
+      state: "pending",
+    } as QueueItem);
+  };
+
   const handleAddSnippet = (
     detail: WorkbenchBackendActionForInsertSnippet
   ): void => {
     const { data } = detail;
+
+    const processedData = processWithParamsSnippet(
+      data.nodeData,
+      data.snippetContext
+    );
+    const { data: snippetDataList, ...finalSnippetData } = processedData;
+
+    if (snippetDataList) {
+      handleContextUpdate(snippetDataList, data.snippetContext);
+    }
+
+    data.nodeData = finalSnippetData;
     const snippetData = manager.workbenchNodeAdd(data, false);
     if (snippetData) {
       data.snippetData = snippetData;
