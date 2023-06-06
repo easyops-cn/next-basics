@@ -41,6 +41,7 @@ export const story: Story = {
           },
           properties: {
             name: "basic-form",
+            layout: "vertical",
             values: {
               nickname: "lucy",
               username: "easyops",
@@ -123,6 +124,7 @@ export const story: Story = {
               brick: "forms.general-form",
               properties: {
                 name: "hello",
+                layout: "vertical",
                 values: {
                   username: "easyops",
                   nickname: "lucy",
@@ -307,6 +309,7 @@ export const story: Story = {
           },
           properties: {
             name: "hello",
+            layout: "vertical",
             values: {
               change: "descriptionA",
               username: "easyops",
@@ -470,6 +473,7 @@ export const story: Story = {
               },
               properties: {
                 name: "hello",
+                layout: "vertical",
                 values: {
                   nickname: "lucy",
                   username: "easyops",
@@ -574,6 +578,7 @@ export const story: Story = {
       },
       properties: {
         id: "preview-form",
+        layout: "vertical",
         values: {
           description: "lucy",
           username: "easyops",
