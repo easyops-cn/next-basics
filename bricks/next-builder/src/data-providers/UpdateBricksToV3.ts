@@ -29,9 +29,10 @@ export async function UpdateBrickToV3({
       }
     );
 
-    await InstanceApi_mixUpdateInstance({
-      data: list,
-    });
+    list.length &&
+      (await InstanceApi_mixUpdateInstance({
+        data: list,
+      }));
 
     return true;
   }

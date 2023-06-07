@@ -60,29 +60,32 @@ export async function BackupBricks({
   const backupWrapperBrick = await InstanceApi_createInstance(
     "STORYBOARD_BRICK",
     {
-      brick: "div",
+      brick: ":if",
       alias: "v2",
       mountPoint: "bricks",
       parent: graphData.topic_vertices[0].instanceId,
+      dataSource: false,
       type: "brick",
       if: "false",
     }
   );
 
   const newWrapperBrick = await InstanceApi_createInstance("STORYBOARD_BRICK", {
-    brick: "div",
+    brick: ":if",
     alias: "v3",
     mountPoint: "bricks",
     parent: graphData.topic_vertices[0].instanceId,
+    dataSource: true,
     type: "brick",
   });
 
   // move the old instance to backupBricks
   await InstanceApi_mixUpdateInstance({
-    data: rootBricks.map((instance) => {
-      instance.parent = backupWrapperBrick.instanceId;
-      return instance;
-    }),
+    data: rootBricks.map((instance) => ({
+      parent: backupWrapperBrick.instanceId,
+      _object_id: instance._object_id,
+      instanceId: instance.instanceId,
+    })),
   });
 
   await StoryboardApi_cloneBricks({

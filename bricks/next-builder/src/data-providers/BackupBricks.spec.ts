@@ -24,14 +24,17 @@ jest.mock("@next-sdk/cmdb-sdk", () => ({
       vertices: [
         {
           instanceId: "b",
+          _object_id: "STORYBOARD_BRICK",
           brick: "tpl-basic-header",
         },
         {
           instanceId: "c",
+          _object_id: "STORYBOARD_BRICK",
           brick: "tpl-basic-footer",
         },
         {
           instanceId: "d",
+          _object_id: "STORYBOARD_BRICK",
           brick: "brick-content",
         },
       ],
@@ -70,8 +73,9 @@ describe("BackupBricks", () => {
       "STORYBOARD_BRICK",
       {
         alias: "v2",
-        brick: "div",
+        brick: ":if",
         if: "false",
+        dataSource: false,
         mountPoint: "bricks",
         parent: "brick-tpl-basic-view",
         type: "brick",
@@ -81,7 +85,8 @@ describe("BackupBricks", () => {
       "STORYBOARD_BRICK",
       {
         alias: "v3",
-        brick: "div",
+        brick: ":if",
+        dataSource: true,
         mountPoint: "bricks",
         parent: "brick-tpl-basic-view",
         type: "brick",
@@ -92,19 +97,19 @@ describe("BackupBricks", () => {
       {
         data: [
           {
-            brick: "tpl-basic-header",
             instanceId: "b",
             parent: "mock-create-instanceId",
+            _object_id: "STORYBOARD_BRICK",
           },
           {
-            brick: "tpl-basic-footer",
             instanceId: "c",
             parent: "mock-create-instanceId",
+            _object_id: "STORYBOARD_BRICK",
           },
           {
-            brick: "brick-content",
             instanceId: "d",
             parent: "mock-create-instanceId",
+            _object_id: "STORYBOARD_BRICK",
           },
         ],
       },
