@@ -16,6 +16,7 @@ import { ColumnComponent } from "./ColumnComponent";
 import style from "./DynamicFormItemV2.module.css";
 import { getRealValue } from "./util";
 import classNames from "classnames";
+import { isBoolean } from "lodash";
 
 const FORM_LIST_NAME = "dynamicForm";
 
@@ -57,7 +58,7 @@ export const LegacyDynamicFormItemV2 = forwardRef(
   ): React.ReactElement => {
     const {
       value,
-      columns,
+      columns = [],
       onChange,
       onAdd,
       onRemove,
@@ -121,7 +122,10 @@ export const LegacyDynamicFormItemV2 = forwardRef(
                 {fields.map(({ key, name, ...restField }) => {
                   const showLabel = hasLabel && name === 0;
                   const rowValue = value?.[name];
-
+                  const hideRemoveBtn = getRealValue(hideRemoveButton, [
+                    rowValue,
+                    name,
+                  ]);
                   return (
                     <Row key={key} className={style.row}>
                       <Row gutter={[12, 8]} style={{ flex: 1 }}>
@@ -147,7 +151,7 @@ export const LegacyDynamicFormItemV2 = forwardRef(
                       <Col
                         span={3}
                         style={{
-                          display: "flex",
+                          display: hideRemoveBtn ? "none" : "flex",
                           alignItems: "center",
                           justifyContent: "center",
                         }}
@@ -156,10 +160,6 @@ export const LegacyDynamicFormItemV2 = forwardRef(
                           type="link"
                           className={classNames(style.removeRowBtn, [
                             {
-                              [style.hidden]: getRealValue(hideRemoveButton, [
-                                rowValue,
-                                name,
-                              ]),
                               [style.inLabelRow]: showLabel,
                             },
                           ])}
@@ -187,6 +187,12 @@ export const LegacyDynamicFormItemV2 = forwardRef(
                       [style.displayNone]: getRealValue(hideAddButton, [value]),
                     },
                   ])}
+                  style={{
+                    width:
+                      isBoolean(hideRemoveButton) && hideRemoveButton
+                        ? "100%"
+                        : "calc(100% - 34px)",
+                  }}
                   disabled={getRealValue(disabledAddButton, [value])}
                   type="dashed"
                   onClick={() => {

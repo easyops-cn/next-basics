@@ -77,7 +77,6 @@ describe("DynamicFormItemV2", () => {
     wrapper.find(".addRowBtn").at(0).simulate("click");
     expect(wrapper.find(".addRowBtn.displayNone")).toHaveLength(0);
     expect(wrapper.find(".addRowBtn[disabled=true]")).toHaveLength(0);
-    expect(wrapper.find(".removeRowBtn.hidden")).toHaveLength(0);
     expect(wrapper.find(".removeRowBtn[disabled=true]")).toHaveLength(0);
 
     wrapper.setProps({
@@ -88,7 +87,6 @@ describe("DynamicFormItemV2", () => {
     });
     expect(wrapper.find(".addRowBtn.displayNone")).not.toHaveLength(0);
     expect(wrapper.find(".addRowBtn[disabled=true]")).not.toHaveLength(0);
-    expect(wrapper.find(".removeRowBtn.hidden")).not.toHaveLength(0);
     expect(wrapper.find(".removeRowBtn[disabled=true]")).not.toHaveLength(0);
   });
 });
