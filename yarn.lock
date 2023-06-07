@@ -2678,14 +2678,14 @@
   resolved "https://registry.npmjs.org/@next-libs/clipboard/-/clipboard-3.0.4.tgz#51ebe3b2f2e45c5940bf343e2a19f767a683b030"
   integrity sha512-pCxzyaSBnbFLUBif4n/Sa1TkUGandGhzycRs04NY73+wbqrYquM29egum7Ji0EdmakI+5MRgLXZZQsm+HlXvSQ==
 
-"@next-libs/cmdb-instances@^7.3.2":
-  version "7.3.2"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-7.3.2.tgz#358ec20467411fcd3e71e60118f519e37a4be383"
-  integrity sha512-D0Supwlfug3jnYN63ZjaJqspRAyuLHwNqfPOzM1A5nKfD8vfAUqzpf3iiNw79w/22VPK60o5VE3j0GzE6Yi3/A==
+"@next-libs/cmdb-instances@^7.3.5":
+  version "7.3.5"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-7.3.5.tgz#e398667dc83a28bec9684e48aa6986d014b87468"
+  integrity sha512-quFcbf7ihbyo/FCmgR45Nma7273roWlS5hcGwaLMD3QKRUPKGI8Mq+Bojhw4qzCFITg7nbx6cce+f+rvHd22Aw==
   dependencies:
     "@next-core/brick-types" "^2.16.0"
     "@next-libs/basic-components" "^5.3.3"
-    "@next-libs/cmdb-utils" "^3.3.4"
+    "@next-libs/cmdb-utils" "^3.4.0"
     "@next-libs/code-editor-components" "^4.10.4"
     "@next-libs/forms" "^3.5.0"
     "@next-libs/storage" "^2.0.4"
@@ -2698,10 +2698,10 @@
     immutability-helper "^3.1.1"
     marked "^2.1.3"
 
-"@next-libs/cmdb-utils@^3.3.4":
-  version "3.3.4"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-3.3.4.tgz#26014541040f0274dc49d1b99d750458134aa804"
-  integrity sha512-/I3s9Z9JsPusBIJXNdguc/7tMVZX0lpcyYZ0eZmhh3Dyqx1SEKcpzS44wPSO6r+PXMaj/dAN7ftOzffUjmulfw==
+"@next-libs/cmdb-utils@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-3.4.0.tgz#b8eea6341b016489c3398107930c740d839462fc"
+  integrity sha512-ZNuAlapPyFq1Z+aPlZQ/fsbgcSqeQf2pXwgY7lbl/jxI/icgeo+eKL5aEPU1vo7Fzn4vQNROVlIQOq93FeY14g==
   dependencies:
     "@next-sdk/cmdb-sdk" "^2.3.1"
 
