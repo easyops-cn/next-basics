@@ -85,6 +85,7 @@ export async function BackupBricks({
       parent: backupWrapperBrick.instanceId,
       _object_id: instance._object_id,
       instanceId: instance.instanceId,
+      mountPoint: "",
     })),
   });
 
