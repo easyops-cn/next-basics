@@ -169,7 +169,7 @@ function LegacyWorkbenchCacheAction(
       edges: BuilderRuntimeEdge[]
     ): void => {
       let storyboard: UpdateStoryboard;
-      let settings: unknown;
+
       const graphTree = getGraphTreeByBuilderData({
         rootId,
         nodes: nodes.filter((item) => !item.$$isMock),
@@ -177,13 +177,17 @@ function LegacyWorkbenchCacheAction(
       });
       let updateStoryboardType: UpdateStoryboardType;
       const rootNode = nodes.find((item) => item.$$uid === rootId);
+
+      const settings =
+        rootNode.previewSettings && Array.isArray(rootNode.previewSettings)
+          ? rootNode.previewSettings.find((item) => item.active) ??
+            rootNode.previewSettings[0]
+          : rootNode.previewSettings;
+
       if (graphTree) {
         if (rootNode.type === "custom-template") {
           updateStoryboardType = "template";
-          settings = Array.isArray(rootNode.previewSettings)
-            ? rootNode.previewSettings.find((item) => item.active) ??
-              rootNode.previewSettings[0]
-            : rootNode.previewSettings;
+
           storyboard = {
             name: rootNode.templateId,
             proxy: rootNode.proxy ? JSON.parse(rootNode.proxy) : null,
@@ -196,6 +200,8 @@ function LegacyWorkbenchCacheAction(
           updateStoryboardType = "snippet";
           storyboard = {
             snippetId: rootNode.snippetId,
+            params: rootNode.snippetParams,
+            data: rootNode.snippetData,
             bricks: buildBricks(graphTree.children as BuilderBrickNode[], {
               keepIds: false,
             }),

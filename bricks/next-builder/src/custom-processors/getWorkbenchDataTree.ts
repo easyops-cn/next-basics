@@ -4,16 +4,19 @@ import {
   BuilderCustomTemplateNode,
   BuilderRouteNode,
   ContextConf,
+  BuilderSnippetNode,
 } from "@next-core/brick-types";
 import { pipes } from "@next-core/pipes";
 import { uniqueId } from "lodash";
 import { WorkbenchNodeData } from "../shared/workbench/interfaces";
 
 export function getWorkbenchDataTree(
-  node: BuilderRouteNode | BuilderCustomTemplateNode
+  node: BuilderRouteNode | BuilderCustomTemplateNode | BuilderSnippetNode
 ): WorkbenchNodeData[] {
   return (
-    (node.type === "custom-template"
+    (node.type === "snippet"
+      ? node.snippetData
+      : node.type === "custom-template"
       ? (pipes.json((node as { state?: string }).state) as ContextConf[])
       : node.context
     )?.map((item) => {

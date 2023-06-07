@@ -478,6 +478,9 @@ describe("previewStart", () => {
         storyboardPatch: { snippetId: "test-snippet", bricks: [] },
         options: {
           updateStoryboardType: "snippet",
+          settings: {
+            rootType: "route",
+          },
         },
       },
     } as any);
@@ -487,6 +490,9 @@ describe("previewStart", () => {
       {
         snippetId: "test-snippet",
         bricks: [],
+      },
+      {
+        rootType: "route",
       }
     );
 

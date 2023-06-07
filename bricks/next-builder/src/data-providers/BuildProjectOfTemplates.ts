@@ -234,6 +234,8 @@ export async function BuildProjectOfTemplates({
       subCategory: item.subCategory,
       layerType: item.layerType,
       text: item.text,
+      params: item.snippetParams,
+      data: item.snippetData,
       description: item.description,
       thumbnail:
         item.thumbnail &&
