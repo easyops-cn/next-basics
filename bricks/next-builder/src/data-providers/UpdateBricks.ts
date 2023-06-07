@@ -5,7 +5,6 @@ import {
   CustomTemplateProxyBasicProperty,
   CustomTemplateProxyRefProperty,
   CustomTemplateProxyTransformableProperty,
-  CustomTemplateProxyVariableProperty,
   SelectorProviderResolveConf,
   UseProviderResolveConf,
 } from "@next-core/brick-types";
@@ -17,10 +16,11 @@ import {
   isObject,
   preevaluate,
 } from "@next-core/brick-utils";
-import { isEmpty } from "lodash";
+import { isEmpty, isEqual, omit } from "lodash";
 import walk from "../utils/walk";
+import { InstanceGraphApi_traverseGraphV2 } from "@next-sdk/cmdb-sdk";
 
-interface NodeDetail {
+export interface NodeDetail {
   instanceId: string;
   properties?: string;
   events?: string;
@@ -41,22 +41,24 @@ interface UpdateOptions {
 }
 
 let dataUid = 0;
-export function updateRouteOrTemplate(
-  route: Array<NodeDetail>,
+export async function UpdateRouteOrTemplate(
+  rootNode: NodeDetail,
+  updateBrickId: string,
   options: UpdateOptions
-) {
+): Promise<NodeDetail[]> {
   dataUid = 0;
-  const rootNode = route[0];
   const isRoute = rootNode["_object_id"] === "STORYBOARD_ROUTE";
   const list: Array<NodeDetail> = [];
   let contextList: ContextConf[] = [];
   let refProxy: Record<string, any> = {};
+  let newProxy: string;
 
   if (!isRoute && options?.updateProxy) {
     const result = updateProxy(rootNode);
     if (result) {
       contextList = result.context.concat(contextList);
       refProxy = result.refProxy;
+      newProxy = result.newProxy;
     }
   }
 
@@ -71,18 +73,35 @@ export function updateRouteOrTemplate(
       const newLifeCycle: Record<string, any> = node.lifeCycle
         ? JSON.parse(node.lifeCycle)
         : {};
+      let flag = false;
       const mergeProperty = (
         properties: Record<string, any>,
         events: Record<string, any>,
         lifeCycle: Record<string, any>
       ): void => {
-        Object.assign(newProperties, properties);
-        Object.assign(newEvents, events);
-        Object.assign(newLifeCycle, lifeCycle);
+        if (
+          !isEqual(
+            {
+              properties: newProperties,
+              events: newEvents,
+              lifeCycle: newLifeCycle,
+            },
+            {
+              properties,
+              events,
+              lifeCycle,
+            }
+          )
+        ) {
+          Object.assign(newProperties, properties);
+          Object.assign(newEvents, events);
+          Object.assign(newLifeCycle, lifeCycle);
 
-        node.properties = JSON.stringify(newProperties);
-        node.events = JSON.stringify(newEvents);
-        node.lifeCycle = JSON.stringify(newLifeCycle);
+          node.properties = JSON.stringify(newProperties);
+          node.events = JSON.stringify(newEvents);
+          node.lifeCycle = JSON.stringify(newLifeCycle);
+          flag = true;
+        }
       };
 
       if (!isRoute && refProxy[node.ref]) {
@@ -99,6 +118,7 @@ export function updateRouteOrTemplate(
           const { lifeCycle, context, properties } = resolves;
           mergeProperty(properties, {}, lifeCycle);
           contextList = contextList.concat(context);
+          flag = true;
         }
       }
 
@@ -113,6 +133,7 @@ export function updateRouteOrTemplate(
 
       if (options.updateChildContext && node.context && node.context.length) {
         contextList = contextList.concat(node.context);
+        flag = true;
       }
 
       const newProperty = Object.fromEntries(
@@ -124,12 +145,13 @@ export function updateRouteOrTemplate(
           .filter(([_, v]) => !isEmpty(v))
           .map(([k, v]) => [k, JSON.stringify(v)])
       );
-      list.push({
-        objectId: node._object_id,
-        instanceId: node.instanceId,
-        ...newProperty,
-        context: null,
-      });
+      flag &&
+        list.push({
+          _object_id: node._object_id,
+          instanceId: node.instanceId,
+          ...newProperty,
+          context: null,
+        });
 
       if (node.children) {
         updateBricks(node.children);
@@ -138,13 +160,36 @@ export function updateRouteOrTemplate(
     return route;
   }
 
-  updateBricks(rootNode.children);
+  const graphData = await InstanceGraphApi_traverseGraphV2({
+    child: [
+      {
+        depth: -1,
+        parentOut: "children",
+        select_fields: ["*"],
+      },
+    ],
+    object_id: "STORYBOARD_NODE",
+    query: {
+      id: updateBrickId,
+    },
+    select_fields: ["*"],
+  });
+
+  updateBricks(graphData.vertices as NodeDetail[]);
 
   if (contextList.length) {
+    const context = contextList.concat(rootNode.context ?? []);
     list.unshift({
-      objectId: rootNode._object_id,
+      _object_id: rootNode._object_id,
       instanceId: rootNode.instanceId,
-      context: contextList.concat(rootNode.context ?? []),
+      [isRoute ? "context" : "state"]: isRoute
+        ? context
+        : JSON.stringify(context),
+      ...(isRoute
+        ? {}
+        : {
+            proxy: newProxy,
+          }),
     });
   }
   return list;
@@ -168,7 +213,7 @@ export function updateProxy(node: NodeDetail): Record<string, any> | void {
         if (refProperty) {
           refProxy[item.ref] = {
             ...refProxy[item.ref],
-            [refProperty]: `<% "track state", STATE.${propsName} %>`,
+            [refProperty]: `<%= STATE.${propsName} %>`,
           };
         }
         if (refTransform) {
@@ -188,15 +233,14 @@ export function updateProxy(node: NodeDetail): Record<string, any> | void {
       }
       setRefProxyItem(proxyItem as CustomTemplateProxyRefProperty);
     }
-    if ((proxyItem as CustomTemplateProxyVariableProperty).asVariable) {
-      context.push({
-        name: propsName,
-      });
-    }
+    context.push({
+      name: propsName,
+    });
   });
   return {
     context,
     refProxy,
+    newProxy: JSON.stringify(omit(parseProxy, ["properties"])),
   };
 }
 
@@ -357,8 +401,9 @@ export function replace<T>(
               expression[0].value as string
             );
         }
-        transformValue = `${prefix}${
-          !hasTrack && options?.isTrack ? '"track state", ' : ""
+        const needTrack = !hasTrack && options?.isTrack;
+        transformValue = `${needTrack ? prefix.trim() : prefix}${
+          needTrack ? "= " : ""
         }${chunks.join("")}${suffix}` as T & string;
       }
     }
@@ -431,5 +476,5 @@ export function replaceUseBrickTransform(
 
 customElements.define(
   "next-builder.provider-update-bricks",
-  createProviderClass(updateRouteOrTemplate)
+  createProviderClass(UpdateRouteOrTemplate)
 );
