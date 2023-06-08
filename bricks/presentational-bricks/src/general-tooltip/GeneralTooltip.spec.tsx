@@ -11,6 +11,15 @@ jest.mock("@next-libs/basic-components", () => {
   };
 });
 
+jest.mock("@next-core/brick-kit", () => {
+  return {
+    __esModule: true,
+    BrickAsComponent(): React.ReactElement {
+      return <div className="brick-as-component">BrickAsComponent</div>;
+    },
+  };
+});
+
 const displayBrick = {
   useBrick: {
     brick: "div",
@@ -115,7 +124,7 @@ describe("GeneralTooltip", () => {
       />
     );
     expect(wrapper.find("BrickAsComponent").length).toBe(1);
-    wrapper.find(".contentContainer").simulate("mouseenter");
+    wrapper.find(".brick-as-component").simulate("mouseover");
     const tooltip = wrapper.find(Tooltip).at(0);
     expect(tooltip.props().title).toEqual("this is a tooltip");
   });
