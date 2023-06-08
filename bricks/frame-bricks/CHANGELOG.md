@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.3...@next-bricks/frame-bricks@1.14.4) (2023-06-08)
+
+
+### Bug Fixes
+
+* 二级菜单交互动效优化 ([2185ee3](https://github.com/easyops-cn/next-basics/commit/2185ee37c019673742ffda13610c8eb6b0148673))
+
+
+
+
+
 ## [1.14.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.2...@next-bricks/frame-bricks@1.14.3) (2023-06-08)
 
 

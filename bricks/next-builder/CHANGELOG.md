@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.245.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.245.1...@next-bricks/next-builder@1.245.2) (2023-06-08)
+
+
+### Bug Fixes
+
+* 没有扫描到子构件 properties/events/lifeCycle/context/state 上的依赖 ([fcdf8e5](https://github.com/easyops-cn/next-basics/commit/fcdf8e50380c16c69d96d54fef613015ced1ec9c))
+
+
+
+
+
 ## [1.245.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.245.0...@next-bricks/next-builder@1.245.1) (2023-06-07)
 
 **Note:** Version bump only for package @next-bricks/next-builder
