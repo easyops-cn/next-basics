@@ -44,7 +44,14 @@ export function ThreeLevelMenuPopoverContent(
   }, [menuItem, selectedKey]);
 
   useEffect(() => {
-    relatedGroupKeys[0] && setCurrentGroupKey(relatedGroupKeys[0]);
+    if (relatedGroupKeys[0]) {
+      setCurrentGroupKey(relatedGroupKeys[0]);
+      setActiveKeys([relatedGroupKeys[0]]);
+    } else {
+      const defaultGroupKey = menuItem.items[0].key;
+      setCurrentGroupKey(defaultGroupKey);
+      setActiveKeys([defaultGroupKey]);
+    }
   }, []);
 
   const curGroup = useMemo(() => {

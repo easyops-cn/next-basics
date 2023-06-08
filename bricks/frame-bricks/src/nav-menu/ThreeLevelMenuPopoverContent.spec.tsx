@@ -154,8 +154,11 @@ describe("ThreeLevelMenuPopoverContent", () => {
 
     expect(wrapper.find(".groupItem")).toHaveLength(4);
     expect(wrapper.find(".groupItemChecked")).toHaveLength(0);
-    expect(wrapper.find(".groupItemActive")).toHaveLength(0);
-    expect(wrapper.find(".menuContainer")).toHaveLength(0);
+    expect(
+      wrapper.find(".groupItem").at(0).hasClass("groupItemActive")
+    ).toBeTruthy();
+    expect(wrapper.find(".menuContainer")).toHaveLength(1);
+    expect(wrapper.find(".menuHeaderText").text()).toBe("menu-group-04-01");
 
     wrapper.find(".groupItem").at(1).simulate("mouseenter");
     expect(
@@ -181,7 +184,9 @@ describe("ThreeLevelMenuPopoverContent", () => {
     expect(
       wrapper.find(".groupItem").at(0).hasClass("groupItemChecked")
     ).toBeTruthy();
-    expect(wrapper.find(".groupItemActive")).toHaveLength(0);
+    expect(
+      wrapper.find(".groupItem").at(0).hasClass("groupItemActive")
+    ).toBeTruthy();
 
     expect(wrapper.find(".menuItem")).toHaveLength(3);
     expect(

@@ -153,7 +153,9 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
       className={style.navMenuContainer}
     >
       {menuItems.map((item) =>
-        isSubMenu(item, true) && item.childLayout === "category"
+        isSubMenu(item, true) &&
+        item.childLayout === "category" &&
+        item.items?.length
           ? renderThreeLevelMenu(item)
           : renderMenuItem(item, true)
       )}
