@@ -92,6 +92,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
           key={item.key}
           className={style.subMenuWrapper}
           popupClassName={style.popupWrapper}
+          popupOffset={[0, 3]}
           title={
             item.useBrick
               ? renderBrickCom(item)
@@ -109,6 +110,8 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
       <Menu.Item key={item.key} className={style.threeLevelMenuItem}>
         <Popover
           zIndex={1060}
+          align={{ offset: [0, -3] }}
+          overlayInnerStyle={{ overflow: "hidden" }}
           overlayClassName={style.threeLevelMenuPopover}
           placement={"bottom"}
           content={
