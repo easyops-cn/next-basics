@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.246.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.245.2...@next-bricks/next-builder@1.246.0) (2023-06-08)
+
+
+### Bug Fixes
+
+* ignore workflow ([0a61daf](https://github.com/easyops-cn/next-basics/commit/0a61daf2e3f11ade9ee167b5cdc4dc8de89af1e3))
+
+
+### Features
+
+* support brick upgrade to v3 ([16a97ce](https://github.com/easyops-cn/next-basics/commit/16a97ce7440e073347299cf8ec629a2a29b6729c))
+* support dynamic snippet preview ([3ba7dda](https://github.com/easyops-cn/next-basics/commit/3ba7ddad8f18e69ca777ae0730ec7d4f3ae15936))
+* update boostrap ([3674c88](https://github.com/easyops-cn/next-basics/commit/3674c88bc242c92eea9536bc52dee10762e4e9d4))
+* update code ([eeab4c8](https://github.com/easyops-cn/next-basics/commit/eeab4c8689dc4a787742f32e2c4913349478f05f))
+* update field ([aaeba57](https://github.com/easyops-cn/next-basics/commit/aaeba571c1cee3fbb8054a60e393b00426bd1a8c))
+
+
+
+
+
 ## [1.245.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.245.1...@next-bricks/next-builder@1.245.2) (2023-06-08)
 
 
