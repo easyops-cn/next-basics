@@ -1,119 +1,120 @@
 import {
-  UpdateRouteOrTemplate,
+  UpdateBricksArrange,
   updateUseResolves,
   updateProxy,
   updateTemplateRefAndAsVarible,
   replaceUseBrickTransform,
   replaceInjectOrTranformRawToEvaluteRaw,
-} from "./UpdateBricks";
+} from "./UpdateBricksArrange";
+
+const mockGraphData = {
+  topic_vertices: [
+    {
+      _object_id: "STORYBOARD_BRICK",
+      instanceId: "mock-instanceId",
+      brick: "div",
+      alias: "v3",
+      type: "brick",
+    },
+  ],
+  vertices: [
+    {
+      brick: "basic.micro-view",
+      instanceId: "a",
+      ref: "view",
+      _object_id: "STORYBOARD_BRICK",
+      properties: JSON.stringify({
+        width: "800px",
+      }),
+    },
+    {
+      brick: "basic.general-card",
+      instanceId: "b",
+      _object_id: "STORYBOARD_BRICK",
+      ref: "card",
+      properties: JSON.stringify({
+        textContent: "Hello, This is a card",
+        cardProps: "<% TPL.cardProps %>",
+        useBrick: {
+          brick: "div",
+          transform: {
+            textContent: "@{text}",
+            style: {
+              width: "<% DATA.width %>",
+            },
+          },
+        },
+      }),
+      events: JSON.stringify({
+        click: [
+          {
+            action: "console.log",
+            args: ["<% TPL.cardProps %>"],
+          },
+        ],
+      }),
+      lifeCycle: JSON.stringify({
+        useResolves: [
+          {
+            useProvider: "providers-of-cmdb.get-detail",
+            args: ["abc", "STORYBOARD_TEMPLATE"],
+            transform: {
+              name: "@{}",
+            },
+          },
+          {
+            useProvider: "providers-of-cmdb.query-search-v3",
+            args: ["STORYBOARD_TEMPLATE", "xxx"],
+            transform: {
+              abc: "@{}",
+            },
+          },
+        ],
+      }),
+    },
+    {
+      brick: "div",
+      ref: "list",
+      instanceId: "c",
+      _object_id: "STORYBOARD_BRICK",
+      properties: JSON.stringify({}),
+    },
+    {
+      brick: "not-change-brick-and-should-ingore",
+      ref: "no-change",
+      instanceId: "d",
+      _object_id: "STORYBOARD_BRICK",
+      properties: JSON.stringify({
+        textContent: "no change",
+      }),
+    },
+  ],
+  edges: [
+    {
+      out: "mock-instanceId",
+      in: "a",
+      out_name: "children",
+    },
+    {
+      out: "a",
+      in: "b",
+      out_name: "children",
+    },
+    {
+      out: "b",
+      in: "c",
+      out_name: "children",
+    },
+    {
+      out: "b",
+      in: "d",
+      out_name: "children",
+    },
+  ],
+};
 
 jest.mock("@next-sdk/cmdb-sdk", () => ({
-  InstanceGraphApi_traverseGraphV2: () =>
-    Promise.resolve({
-      topic_vertices: [
-        {
-          _object_id: "STORYBOARD_BRICK",
-          instanceId: "mock-instanceId",
-          brick: "div",
-          alias: "v3",
-          type: "brick",
-        },
-      ],
-      vertices: [
-        {
-          brick: "basic.micro-view",
-          instanceId: "a",
-          ref: "view",
-          _object_id: "STORYBOARD_BRICK",
-          properties: JSON.stringify({
-            width: "800px",
-          }),
-        },
-        {
-          brick: "basic.general-card",
-          instanceId: "b",
-          _object_id: "STORYBOARD_BRICK",
-          ref: "card",
-          properties: JSON.stringify({
-            textContent: "Hello, This is a card",
-            cardProps: "<% TPL.cardProps %>",
-            useBrick: {
-              brick: "div",
-              transform: {
-                textContent: "@{text}",
-                style: {
-                  width: "<% DATA.width %>",
-                },
-              },
-            },
-          }),
-          events: JSON.stringify({
-            click: [
-              {
-                action: "console.log",
-                args: ["<% TPL.cardProps %>"],
-              },
-            ],
-          }),
-          lifeCycle: JSON.stringify({
-            useResolves: [
-              {
-                useProvider: "providers-of-cmdb.get-detail",
-                args: ["abc", "STORYBOARD_TEMPLATE"],
-                transform: {
-                  name: "@{}",
-                },
-              },
-              {
-                useProvider: "providers-of-cmdb.query-search-v3",
-                args: ["STORYBOARD_TEMPLATE", "xxx"],
-                transform: {
-                  abc: "@{}",
-                },
-              },
-            ],
-          }),
-        },
-        {
-          brick: "div",
-          ref: "list",
-          instanceId: "c",
-          _object_id: "STORYBOARD_BRICK",
-          properties: JSON.stringify({}),
-        },
-        {
-          brick: "not-change-brick-and-should-ingore",
-          ref: "no-change",
-          instanceId: "d",
-          _object_id: "STORYBOARD_BRICK",
-          properties: JSON.stringify({
-            textContent: "no change",
-          }),
-        },
-      ],
-      edges: [
-        {
-          out: "mock-instanceId",
-          in: "a",
-          out_name: "children",
-        },
-        {
-          out: "a",
-          in: "b",
-          out_name: "children",
-        },
-        {
-          out: "b",
-          in: "c",
-          out_name: "children",
-        },
-        {
-          out: "b",
-          in: "d",
-          out_name: "children",
-        },
-      ],
-    }),
+  InstanceGraphApi_traverseGraphV2: () => Promise.resolve(mockGraphData),
 }));
 
 describe("updateUseResolves", () => {
@@ -528,8 +529,8 @@ describe("replaceInjectOrTranformRawToEvaluteRaw", () => {
   });
 });
 
-describe("UpdateRouteOrTemplate", () => {
-  it("UpdateRouteOrTemplate should work", async () => {
+describe("UpdateBricks", () => {
+  it("UpdateBricks should work", async () => {
     const rootNode = {
       brick: "tpl-template",
       instanceId: "mock-instanceId-template",
@@ -575,7 +576,7 @@ describe("UpdateRouteOrTemplate", () => {
       }),
     };
     expect(
-      await UpdateRouteOrTemplate(rootNode, "mock-id", {
+      await UpdateBricksArrange(rootNode, mockGraphData, {
         updateProxy: true,
         updateUseResolves: true,
         updateUseBrickTransform: true,
