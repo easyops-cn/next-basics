@@ -281,7 +281,8 @@ export function previewStart(
                   data.storyboardPatch as {
                     snippetId: string;
                     bricks: BrickConf[];
-                  }
+                  },
+                  data.options.settings
                 );
               } else if (data.options.updateStoryboardType === "form") {
                 developHelper.updateFormPreviewSettings(

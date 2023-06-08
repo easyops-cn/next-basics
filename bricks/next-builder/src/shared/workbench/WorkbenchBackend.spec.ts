@@ -184,6 +184,7 @@ describe("WorkbenchBackend should work", () => {
       ignoredResources: {
         menus: true,
         image: true,
+        workflow: true,
       },
     });
 

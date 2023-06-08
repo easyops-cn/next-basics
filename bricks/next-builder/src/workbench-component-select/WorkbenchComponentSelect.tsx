@@ -559,6 +559,12 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
             },
           }
         : {}),
+      ...(componentData.type === "snippet"
+        ? {
+            snippetParams: componentData.snippetParams,
+            snippetData: componentData.snippetData,
+          }
+        : {}),
     };
     e.dataTransfer.setData("nodeData", JSON.stringify(nodeData));
     onDragStart(null, null);

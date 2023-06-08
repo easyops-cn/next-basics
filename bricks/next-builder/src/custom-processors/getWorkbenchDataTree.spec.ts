@@ -119,6 +119,46 @@ test("getWorkbenchDataTree for tpl", () => {
   `);
 });
 
+test("getWorkbenchDataTree for snippet", () => {
+  const tree = getWorkbenchDataTree({
+    type: "snippet",
+    snippetData: [
+      {
+        name: "test",
+        value: "hello",
+      },
+    ],
+    snippetParams: {
+      count: {
+        type: "number",
+        value: 1,
+      },
+    },
+  } as any);
+
+  expect(tree).toMatchInlineSnapshot(`
+    Array [
+      Object {
+        "data": Object {
+          "$key": "context-key-0",
+          "name": "test",
+          "value": "hello",
+        },
+        "icon": Object {
+          "color": "cyan",
+          "icon": "code",
+          "lib": "antd",
+          "theme": "outlined",
+        },
+        "key": "context-key-0",
+        "name": "test",
+        "path": undefined,
+        "unreachable": false,
+      },
+    ]
+  `);
+});
+
 test("getWorkbenchDataTree for tpl with no state", () => {
   const tree = getWorkbenchDataTree({
     type: "custom-template",

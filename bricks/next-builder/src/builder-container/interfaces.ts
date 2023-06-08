@@ -2,6 +2,8 @@ import {
   BrickConf,
   BuilderRouteOrBrickNode,
   MenuIcon,
+  SnippetParam,
+  ContextConf,
 } from "@next-core/brick-types";
 import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 
@@ -20,6 +22,8 @@ export interface BrickOptionItem {
   $searchTextPool?: string[];
   isExport?: boolean;
   useInBricks?: string[];
+  snippetParams?: SnippetParam;
+  snippetData?: ContextConf[];
   originBrick?: {
     id?: string;
   };
