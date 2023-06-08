@@ -21,6 +21,13 @@ const locale: Locale = {
   [K.FORBIDDEN]: "无访问权限",
   [K.NOT_FOUND]: "请求资源不存在",
   [K.SERVER_ERROR]: "服务端异常",
+  [K.QUICK_ACCESS]: "快捷访问",
+  [K.NO_VISIT_ACCESS]: "暂未添加快捷访问的资源，可从上方搜索后快速添加",
+  [K.RECOMMEND_SEARCH]: "搜索推荐",
+  [K.SEARCH_RESULT_EMPTY]: "搜索结果为空，请重新输入",
+  [K.ENTER_KEY_WORDS]: "输入关键词搜索",
+  [K.ADD_TO_QUICK_ACCESS]: "添加至快捷访问",
+  [K.REMOVE_FROM_QUICK_ACCESS]: "从快捷访问移除",
 };
 
 export default locale;
