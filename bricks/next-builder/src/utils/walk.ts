@@ -4,7 +4,9 @@ export default function walk(
   node: Record<string, any>,
   fn: (key: string, value: any) => void | [string, any]
 ): Record<string, any> {
-  return node && isObject(node)
+  return Array.isArray(node)
+    ? node.map((item) => walk(item, fn))
+    : node && isObject(node)
     ? Object.fromEntries(
         Object.entries(node).map(([k, v]) => {
           const result = fn(k, v);
@@ -12,9 +14,9 @@ export default function walk(
             return result;
           }
           if (Array.isArray(v)) {
-            v.map((item) => walk(item, fn));
+            v = v.map((item) => walk(item, fn));
           } else if (isObject(v)) {
-            walk(v, fn);
+            v = walk(v, fn);
           }
           return [k, v];
         })

@@ -75,4 +75,4 @@ import "./custom-processors/getWorkflowGraph";
 import "./workflow-node";
 import "./data-providers/AddDependencies";
 import "./data-providers/BackupBricks";
-import "./data-providers/UpdateBricksToV3";
+import "./data-providers/UpgradeBricks";

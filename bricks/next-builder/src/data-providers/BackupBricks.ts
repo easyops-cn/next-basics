@@ -64,7 +64,7 @@ export async function BackupBricks({
       alias: "v2",
       mountPoint: "bricks",
       parent: graphData.topic_vertices[0].instanceId,
-      dataSource: false,
+      dataSource: "false",
       type: "brick",
       if: "false",
     }
@@ -75,7 +75,7 @@ export async function BackupBricks({
     alias: "v3",
     mountPoint: "bricks",
     parent: graphData.topic_vertices[0].instanceId,
-    dataSource: true,
+    dataSource: "true",
     type: "brick",
   });
 

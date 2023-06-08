@@ -11,14 +11,13 @@ import {
 import { Identifier } from "@babel/types";
 import {
   PreevaluateResult,
-  createProviderClass,
   isEvaluable,
   isObject,
+  pipes,
   preevaluate,
 } from "@next-core/brick-utils";
 import { isEmpty, isEqual, omit } from "lodash";
 import walk from "../utils/walk";
-import { InstanceGraphApi_traverseGraphV2 } from "@next-sdk/cmdb-sdk";
 
 export interface NodeDetail {
   instanceId: string;
@@ -41,9 +40,9 @@ interface UpdateOptions {
 }
 
 let dataUid = 0;
-export async function UpdateRouteOrTemplate(
+export async function UpdateBricksArrange(
   rootNode: NodeDetail,
-  updateBrickId: string,
+  graphData: pipes.GraphData,
   options: UpdateOptions
 ): Promise<NodeDetail[]> {
   dataUid = 0;
@@ -62,7 +61,7 @@ export async function UpdateRouteOrTemplate(
     }
   }
 
-  function updateBricks(route: Array<NodeDetail>): Array<NodeDetail> {
+  function update(route: Array<NodeDetail>): Array<NodeDetail> {
     route.forEach((node) => {
       const newProperties: Record<string, any> = node.properties
         ? JSON.parse(node.properties)
@@ -154,28 +153,13 @@ export async function UpdateRouteOrTemplate(
         });
 
       if (node.children) {
-        updateBricks(node.children);
+        update(node.children);
       }
     });
     return route;
   }
 
-  const graphData = await InstanceGraphApi_traverseGraphV2({
-    child: [
-      {
-        depth: -1,
-        parentOut: "children",
-        select_fields: ["*"],
-      },
-    ],
-    object_id: "STORYBOARD_NODE",
-    query: {
-      id: updateBrickId,
-    },
-    select_fields: ["*"],
-  });
-
-  updateBricks(graphData.vertices as NodeDetail[]);
+  update(graphData.vertices as NodeDetail[]);
 
   if (contextList.length) {
     const context = contextList.concat(rootNode.context ?? []);
@@ -460,9 +444,8 @@ export function replaceUseBrickTransform(
         if (Array.isArray(v)) {
           v = v.map((item) => replaceSingleItem(item));
         } else {
-          replaceSingleItem(v);
+          return [k, replaceSingleItem(v)];
         }
-        return [k, v];
       }
     });
   };
@@ -473,8 +456,3 @@ export function replaceUseBrickTransform(
     lifeCycle: node.lifeCycle ? walkItem(JSON.parse(node.lifeCycle)) : {},
   };
 }
-
-customElements.define(
-  "next-builder.provider-update-bricks",
-  createProviderClass(UpdateRouteOrTemplate)
-);
