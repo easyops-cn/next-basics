@@ -20,6 +20,7 @@ import style from "./SidebarMenu.module.css";
 interface SidebarMenuProps {
   menuItems: SidebarMenuItem[];
   collapsed?: boolean;
+  sideBarWidthTransitioning?: boolean;
 }
 
 function isGroup(item: SidebarMenuItem): item is SidebarMenuGroup {
@@ -31,7 +32,7 @@ function isSubMenu(item: SidebarMenuItem): item is SidebarMenuGroup {
 }
 
 export function SidebarMenu(props: SidebarMenuProps): React.ReactElement {
-  const { menuItems, collapsed } = props;
+  const { menuItems, collapsed, sideBarWidthTransitioning } = props;
 
   const history = getHistory();
   const [location, setLocation] = useState<Location>(history.location);
@@ -196,6 +197,7 @@ export function SidebarMenu(props: SidebarMenuProps): React.ReactElement {
       selectedKeys={selectedKeys}
       className={classNames(style.menuContainer, {
         [style.collapsed]: collapsed,
+        [style.sideBarWidthTransitioning]: sideBarWidthTransitioning,
       })}
       inlineCollapsed={collapsed}
     >

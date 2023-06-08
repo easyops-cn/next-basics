@@ -253,3 +253,9 @@
     margin-left: 14px !important;
   }
 }
+
+.sideBarWidthTransitioning {
+  .menuText {
+    white-space: nowrap;
+  }
+}

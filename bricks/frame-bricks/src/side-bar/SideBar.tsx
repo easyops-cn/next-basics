@@ -11,9 +11,11 @@ import { Tooltip } from "antd";
 import { JsonStorage } from "@next-libs/storage";
 import { SideBarElement } from "./index";
 import ResizeObserver from "rc-resize-observer";
-import { debounce, throttle } from "lodash";
+import { debounce } from "lodash";
 import moment from "moment";
 import { GeneralIcon } from "@next-libs/basic-components";
+import { debounceByAnimationFrame } from "@next-core/brick-utils";
+import { getCssPropertyValue } from "@next-core/brick-kit";
 
 interface SideBarProps {
   menu?: SidebarSubMenu;
@@ -32,7 +34,12 @@ export enum ExpandedState {
 
 export const SIDE_BAR_HAS_BEEN_USED = "side-bar-has-been-used";
 export const SIDE_BAR_EXPAND_STATE = "side-bar-expand-state";
-export const RESIZE_WIDTH = "resize-width";
+const DEPRECATED_RESIZE_WIDTH = "resize-width";
+export const SIDE_BAR_RESIZE_WIDTH = "side-bar-resize-width";
+const sideBarWidth =
+  parseInt(getCssPropertyValue("--side-bar-width"), 10) || 208;
+const sideBarCollapsedWidth =
+  parseInt(getCssPropertyValue("--side-bar-collapsed-width"), 10) || 60;
 
 export function SideBar(props: SideBarProps): React.ReactElement {
   const {
@@ -44,8 +51,22 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   } = props;
   const contentContainerRef = useRef<HTMLDivElement>();
   const storage = React.useMemo(() => new JsonStorage(localStorage), []);
-  const [resizeWidth, setResizeWidth] = useState<string>();
-  const [isDrag, setIsDrag] = useState<string>("0px");
+  const [resizeWidth, setResizeWidth] = useState<number>(() => {
+    // Use parseInt to compatible non-number types
+    let width = parseInt(
+      storage.getItem(SIDE_BAR_RESIZE_WIDTH) ||
+        storage.getItem(DEPRECATED_RESIZE_WIDTH),
+      10
+    );
+    if (width < sideBarWidth || Number.isNaN(width)) {
+      width = sideBarWidth;
+    }
+    storage.removeItem(DEPRECATED_RESIZE_WIDTH);
+    return width;
+  });
+  const [dragging, setDragging] = useState<boolean>();
+  const [sideBarWidthTransitioning, setSideBarWidthTransitioning] =
+    useState<boolean>();
   const [expandedState, setExpandedState] = useState<ExpandedState>(
     props.expandedState ||
       storage.getItem(SIDE_BAR_EXPAND_STATE) ||
@@ -70,20 +91,13 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         : ExpandedState.Expanded;
 
     setExpandedState(currentState);
-
-    if (wrapperDOM) {
-      if (currentState === ExpandedState.Expanded) {
-        wrapperDOM.style.width = "var(--side-bar-width)";
-      } else {
-        wrapperDOM.style.width = "var(--side-bar-collapsed-width)";
-      }
-    }
-
     storage.setItem(SIDE_BAR_EXPAND_STATE, currentState);
     onSideBarFixed?.(currentState === ExpandedState.Expanded);
   };
 
   const handleMouseEnter = (): void => {
+    expandedState !== ExpandedState.Expanded &&
+      setSideBarWidthTransitioning(true);
     setExpandedState(
       expandedState === ExpandedState.Expanded
         ? expandedState
@@ -92,6 +106,8 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   };
 
   const handleMouseLeave = (): void => {
+    expandedState !== ExpandedState.Expanded &&
+      setSideBarWidthTransitioning(true);
     setExpandedState(
       expandedState === ExpandedState.Expanded
         ? expandedState
@@ -100,24 +116,23 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   };
 
   useEffect(() => {
-    storage.getItem(RESIZE_WIDTH) &&
-      storage.getItem(RESIZE_WIDTH)?.slice(0, -2) <= "208" &&
-      storage.setItem(RESIZE_WIDTH, "var(--side-bar-width)");
-    const width = storage.getItem(RESIZE_WIDTH) || "var(--side-bar-width)";
-    // istanbul ignore if
-    if (wrapperDOM) {
-      if (expandedState === ExpandedState.Expanded) {
-        setResizeWidth(width);
-        wrapperDOM.style.width = "var(--side-bar-width)";
-      } else {
-        wrapperDOM.style.width = "var(--side-bar-collapsed-width)";
-        setResizeWidth("var(--side-bar-collapsed-width)");
+    storage.setItem(SIDE_BAR_RESIZE_WIDTH, resizeWidth);
+  }, [resizeWidth]);
+
+  useEffect(() => {
+    switch (expandedState) {
+      case ExpandedState.Expanded: {
+        wrapperDOM && (wrapperDOM.style.width = resizeWidth + "px");
+        break;
+      }
+      case ExpandedState.Hovered:
+      case ExpandedState.Collapsed:
+      default: {
+        wrapperDOM &&
+          (wrapperDOM.style.width = "var(--side-bar-collapsed-width)");
       }
     }
-    if (expandedState === ExpandedState.Hovered) {
-      setResizeWidth(width);
-    }
-  }, [wrapperDOM, expandedState]);
+  }, [wrapperDOM, expandedState, resizeWidth]);
   // istanbul ignore next
   useEffect(() => {
     const currentDom = contentContainerRef.current;
@@ -139,25 +154,29 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   }, [contentContainerRef]);
 
   const handleResizeDown = (e: any) => {
-    setIsDrag("400px");
+    setDragging(true);
 
-    const drag = throttle((e: any) => {
-      if (e.clientX >= 208) {
-        setResizeWidth(`${e.clientX}px`);
-        onSideBarResize?.(`${e.clientX}px`);
-        storage.setItem(RESIZE_WIDTH, `${e.clientX}px`);
-      }
-    }, 200);
-    const dragEnd = (e: any) => {
+    // Prevent text selection when dragging
+    if (e.cancelable) {
       e.preventDefault();
-      setIsDrag("0px");
+    }
+
+    const drag = debounceByAnimationFrame((e: any) => {
+      const width = e.clientX >= sideBarWidth ? e.clientX : sideBarWidth;
+
+      setResizeWidth(width);
+      onSideBarResize?.(`${width}px`);
+    });
+    const dragEnd = (e: any) => {
+      setDragging(false);
+      e.preventDefault();
+
       window.removeEventListener("mousemove", drag);
       window.removeEventListener("mouseup", dragEnd);
     };
-    if (expandedState === ExpandedState.Expanded) {
-      window.addEventListener("mousemove", drag);
-      window.addEventListener("mouseup", dragEnd);
-    }
+
+    window.addEventListener("mousemove", drag, { passive: true });
+    window.addEventListener("mouseup", dragEnd);
   };
 
   useEffect(() => {
@@ -201,13 +220,22 @@ export function SideBar(props: SideBarProps): React.ReactElement {
       className={classNames(styles.sideBarContainer, {
         [styles.hovered]: expandedState === ExpandedState.Hovered,
         [styles.expanded]: expandedState === ExpandedState.Expanded,
+        [styles.dragging]: !!dragging,
       })}
       style={{
         height: sidebarHeight,
-        width: resizeWidth,
+        width:
+          expandedState === ExpandedState.Collapsed
+            ? "var(--side-bar-collapsed-width)"
+            : resizeWidth,
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTransitionEnd={(e) => {
+        if (e.target === e.currentTarget && e.propertyName === "width") {
+          setSideBarWidthTransitioning(false);
+        }
+      }}
       data-testid="side-bar"
     >
       <div className={styles.menuTitle}>
@@ -237,6 +265,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
           <SideBarComponent.SidebarMenu
             menuItems={menu?.menuItems || []}
             collapsed={expandedState === ExpandedState.Collapsed}
+            sideBarWidthTransitioning={sideBarWidthTransitioning}
           />
         </div>
       </ResizeObserver>
@@ -272,10 +301,9 @@ export function SideBar(props: SideBarProps): React.ReactElement {
           </Tooltip>
         )}
       </div>
-      <div className={styles.resizeLine} onMouseDown={handleResizeDown}></div>
-      <div className={styles.resizeMask}>
-        <div className={styles.resizeMaskRight} style={{ width: isDrag }}></div>
-      </div>
+      {expandedState === ExpandedState.Expanded && (
+        <div className={styles.resizeLine} onMouseDown={handleResizeDown} />
+      )}
     </div>
   );
 }

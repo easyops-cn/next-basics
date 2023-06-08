@@ -23,9 +23,15 @@ jest.mock("@next-libs/storage", () => ({
     return {
       getItem: () => mockStorageValue,
       setItem: (_: string, value: any): void => (mockStorageValue = value),
+      removeItem: jest.fn(),
     };
   }),
 }));
+
+jest.spyOn(window, "requestAnimationFrame").mockImplementation((cb) => {
+  cb(0);
+  return 1;
+});
 
 describe("SideBar", () => {
   it("should work when ExpandedState is Collapsed", () => {
@@ -81,9 +87,6 @@ describe("SideBar", () => {
     wrapper.find(".fixedIcon").simulate("click");
     expect(wrapper.find(".sideBarContainer").hasClass("hovered")).toBe(false);
     expect(wrapper.find(".sideBarContainer").hasClass("expanded")).toBe(false);
-    wrapper.find(".resizeLine").simulate("mousedown");
-    expect(wrapper.find(".sideBarContainer").hasClass("hovered")).toBe(false);
-    expect(wrapper.find(".sideBarContainer").hasClass("expanded")).toBe(false);
   });
 
   it("should work with no props", async () => {
@@ -126,11 +129,9 @@ describe("SideBar", () => {
         hiddenFixedIcon={false}
       />
     );
-    const getSideBarWidth = (): number =>
-      wrapper.find(".sideBarContainer").prop("style").width as number;
-    wrapper.find(".resizeLine").invoke("onMouseDown")({
-      clientX: 300,
-    } as any);
+    const getSideBarWidth = (): string | number =>
+      wrapper.find(".sideBarContainer").prop("style").width;
+    wrapper.find(".resizeLine").invoke("onMouseDown")({} as any);
     act(() => {
       window.dispatchEvent(
         new MouseEvent("mousemove", {
@@ -139,12 +140,13 @@ describe("SideBar", () => {
       );
     });
     wrapper.update();
-    expect(getSideBarWidth()).toBe("310px");
+    expect(wrapper.find(".sideBarContainer").hasClass("dragging")).toBe(true);
+    expect(getSideBarWidth()).toBe(310);
     act(() => {
       window.dispatchEvent(new MouseEvent("mouseup"));
     });
     wrapper.update();
-    expect(getSideBarWidth()).toBe("310px");
-    expect(wrapper.find(".resizeLine")).toHaveLength(1);
+    expect(getSideBarWidth()).toBe(310);
+    expect(wrapper.find(".sideBarContainer").hasClass("dragging")).toBe(false);
   });
 });
