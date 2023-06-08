@@ -55,12 +55,26 @@ export async function AddDependencies(
             {
               depth: -1,
               parentOut: "children",
-              select_fields: ["brick"],
+              select_fields: [
+                "brick",
+                "properties",
+                "events",
+                "lifeCycle",
+                "context",
+                "state",
+              ],
             },
           ],
           depth: -1,
           parentOut: "children",
-          select_fields: ["brick"],
+          select_fields: [
+            "brick",
+            "properties",
+            "events",
+            "lifeCycle",
+            "context",
+            "state",
+          ],
         },
       ],
     });
