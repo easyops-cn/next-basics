@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { Popover, Tooltip } from "antd";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { UseBrickConf, MenuIcon } from "@next-core/brick-types";
@@ -7,7 +7,7 @@ import style from "./GeneralTooltip.module.css";
 import { TooltipConfig } from ".";
 
 export interface GeneralTooltipProps {
-  icon: MenuIcon;
+  icon?: MenuIcon;
   iconContainerStyle?: React.CSSProperties;
   content: string | string[];
   title?: string;
@@ -34,27 +34,7 @@ export function GeneralTooltip(props: GeneralTooltipProps): React.ReactElement {
     displayBrick,
   } = props;
   let element: React.ReactElement;
-  const customElementRef = useRef<HTMLDivElement>();
   const { placement, arrowPointAtCenter, overlayStyle } = tooltipConfig || {};
-
-  useEffect(() => {
-    if (displayBrick?.useBrick) {
-      const handleMouseover = (): void => {
-        customElementRef.current?.parentNode?.dispatchEvent(
-          new MouseEvent("mouseover", {
-            bubbles: true,
-          })
-        );
-      };
-      customElementRef.current?.addEventListener("mouseover", handleMouseover);
-      return () => {
-        customElementRef.current?.removeEventListener(
-          "mouseover",
-          handleMouseover
-        );
-      };
-    }
-  }, []);
 
   let tipsElem;
   if (Array.isArray(content)) {
@@ -144,7 +124,15 @@ export function GeneralTooltip(props: GeneralTooltipProps): React.ReactElement {
     displayBrick?.useBrick ? (
       <Component {...componentProps}>
         <div className="contentContainer">
-          <div ref={customElementRef}>
+          <div
+            onMouseOver={(e) => {
+              e.currentTarget?.parentNode?.dispatchEvent(
+                new MouseEvent("mouseover", {
+                  bubbles: true,
+                })
+              );
+            }}
+          >
             <BrickAsComponent
               data={displayBrick.data}
               useBrick={displayBrick.useBrick}
