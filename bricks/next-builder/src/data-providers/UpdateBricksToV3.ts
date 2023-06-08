@@ -1,15 +1,18 @@
 import { brickMap } from "./brickMap";
-import { omit, isEmpty } from "lodash";
+import { isEmpty, omit } from "lodash";
 import walk from "../utils/walk";
 import { pipes } from "@next-core/pipes";
 import { NodeDetail } from "./UpdateBricksArrange";
+import { hasOwnProperty } from "@next-core/brick-utils";
 
 export function UpdateBricksToV3(graphData: pipes.GraphData): NodeDetail[] {
   const list: Array<NodeDetail> = [];
   const mountPointMap = new Map<string, string>();
+  const getBrick = (brick: string) =>
+    hasOwnProperty(brickMap, brick) ? brickMap[brick] : null;
   function update(route: Array<NodeDetail>): NodeDetail[] {
     route.forEach((node) => {
-      const matchV3Brick: Record<string, any> = brickMap[node.brick];
+      const matchV3Brick = getBrick(node.brick);
       if (matchV3Brick) {
         const properties = node.properties ? JSON.parse(node.properties) : {};
         const events = node.events ? JSON.parse(node.events) : {};
@@ -21,11 +24,14 @@ export function UpdateBricksToV3(graphData: pipes.GraphData): NodeDetail[] {
           matchV3Brick: Record<string, any>
         ): Record<string, unknown> => {
           return data
-            ? Object.fromEntries(
+            ? mergeFromEntries(
                 Object.entries(data).map(([k, v]) => {
-                  if (typeof matchV3Brick[key]?.[k] === "string") {
+                  const matchItem = hasOwnProperty(matchV3Brick, key)
+                    ? matchV3Brick[key]?.[k]
+                    : null;
+                  if (typeof matchItem === "string") {
                     return [matchV3Brick[key][k], v];
-                  } else if (typeof matchV3Brick[key]?.[k] === "function") {
+                  } else if (typeof matchItem === "function") {
                     return matchV3Brick[key][k](v);
                   }
                   // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -37,7 +43,7 @@ export function UpdateBricksToV3(graphData: pipes.GraphData): NodeDetail[] {
         };
 
         const replaceSingleNode = (node: Record<string, any>) => {
-          const matchV3Brick: Record<string, any> = brickMap[node.brick];
+          const matchV3Brick = getBrick(node.brick);
           if (matchV3Brick) {
             const properties = Object.assign(
               replaceNode(node.properties, "properties", matchV3Brick) || {},
@@ -69,17 +75,12 @@ export function UpdateBricksToV3(graphData: pipes.GraphData): NodeDetail[] {
           });
         };
 
-        const newData = replaceSingleNode(
-          omit(
-            {
-              ...node,
-              properties,
-              events,
-              lifeCycle,
-            },
-            ["children"]
-          )
-        );
+        const newData = replaceSingleNode({
+          brick: node.brick,
+          properties,
+          events,
+          lifeCycle,
+        });
 
         if (matchV3Brick.slots && node.children?.length) {
           Object.entries(matchV3Brick.slots).forEach(([k, v]) => {
@@ -97,22 +98,21 @@ export function UpdateBricksToV3(graphData: pipes.GraphData): NodeDetail[] {
             });
           });
         }
-        const obj = Object.fromEntries(
-          Object.entries(newData)
-            .filter(([_, v]) => !isEmpty(v))
-            .map(([k, v]) => {
-              if (["properties", "events", "lifeCycle"].includes(k)) {
-                return [k, JSON.stringify(v)];
-              }
-              return [k, v];
-            })
-        );
+
+        const getValue = (data: any, key: string) =>
+          hasOwnProperty(newData, key)
+            ? isEmpty(data[key])
+              ? {}
+              : { [key]: JSON.stringify(newData[key]) }
+            : "";
         list.push({
           _object_id: node._object_id,
           instanceId: node.instanceId,
           brick: matchV3Brick?.brick,
-          ...obj,
           mountPoint: mountPointMap.get(node.instanceId) ?? node.mountPoint,
+          ...getValue(newData, "properties"),
+          ...getValue(newData, "events"),
+          ...getValue(newData, "lifeCycle"),
         });
       } else if (mountPointMap.get(node.instanceId)) {
         list.push({
@@ -133,4 +133,22 @@ export function UpdateBricksToV3(graphData: pipes.GraphData): NodeDetail[] {
   update(tree[0].children);
 
   return list;
+}
+
+function mergeFromEntries(list: Array<[string, any]>) {
+  const obj: Record<string, any> = {};
+  list.forEach(([key, value]) => {
+    if (obj[key]) {
+      if (Array.isArray(obj[key])) {
+        obj[key] = obj[key].concat(Array.isArray(value) ? value : [value]);
+      } else if (typeof obj[key] === "object") {
+        Object.assign(obj[key], value);
+      } else {
+        obj[key] = value;
+      }
+    } else {
+      obj[key] = value;
+    }
+  });
+  return obj;
 }

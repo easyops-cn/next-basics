@@ -75,7 +75,7 @@ describe("BackupBricks", () => {
         alias: "v2",
         brick: ":if",
         if: "false",
-        dataSource: false,
+        dataSource: "false",
         mountPoint: "bricks",
         parent: "brick-tpl-basic-view",
         type: "brick",
@@ -86,7 +86,7 @@ describe("BackupBricks", () => {
       {
         alias: "v3",
         brick: ":if",
-        dataSource: true,
+        dataSource: "true",
         mountPoint: "bricks",
         parent: "brick-tpl-basic-view",
         type: "brick",

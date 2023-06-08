@@ -43,7 +43,7 @@ export const brickMap: Record<
       buttonIcon: "icon",
       buttonShape: "shape",
       buttonType: "type",
-      buttonUrl: "href",
+      buttonUrl: "url",
       buttonHref: "href",
       buttonDanger: "danger",
     },
@@ -56,7 +56,6 @@ export const brickMap: Record<
     properties: {
       label: "textContent",
       underLine: "underline",
-      to: "url",
     },
     events: {
       "link.click": "click",
@@ -78,8 +77,7 @@ export const brickMap: Record<
       "checked.update.v2": (value: Record<string, any>) => {
         return [
           "checked",
-          // JSON.stringify(value).replace(/EVENT.detail/g, "EVENT.detail.item"),
-          replaceKeyWordInEvents(value, /EVENT.detail/g, "EVENT.detail.item"),
+          replaceKeyWordInEvents(value, /EVENT.detail/g, "EVENT.detail.list"),
         ];
       },
       "tag.close": (value: Record<string, any>) => {

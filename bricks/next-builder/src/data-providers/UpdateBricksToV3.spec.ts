@@ -162,7 +162,6 @@ describe("updateBrickToV3", () => {
           properties: JSON.stringify({
             label: "label",
             underLine: true,
-            to: "/page",
           }),
           events: JSON.stringify({
             "link.click": [
@@ -199,7 +198,7 @@ describe("updateBrickToV3", () => {
             "checked.update": [
               {
                 action: "console.log",
-                args: ["<% EVENT.detail %>"],
+                args: ["<% `checked.v1`, EVENT.detail %>"],
               },
               {
                 target: "#button",
@@ -210,7 +209,7 @@ describe("updateBrickToV3", () => {
             ],
             "checked.update.v2": {
               action: "console.log",
-              args: ["<% `checked: ${EVENT.detail}` %>"],
+              args: ["<% `checked.v2`, EVENT.detail %>"],
             },
             "tag.close": [
               {
@@ -331,7 +330,6 @@ describe("updateBrickToV3", () => {
         mountPoint: "bricks",
         properties:
           '{"width":"800px","toolbarUseBrick":{"useBrick":[{"brick":"basic-bricks.general-button","properties":{"buttonName":"toolbarBtn"},"events":{"general.button.click":{"action":"console.log"}}}]}}',
-        ref: "view",
       },
       {
         _object_id: "STORYBOARD_BRICK",
@@ -344,7 +342,6 @@ describe("updateBrickToV3", () => {
         mountPoint: "",
         properties:
           '{"textContent":"Hello, This is a card","cardProps":"<% TPL.cardProps %>","toolbar":{"useBrick":{"brick":"containers.general-card","transform":{"cardTitle":"@{text}","style":{"width":"<% DATA.width %>"}},"slots":{"content":{"bricks":[{"brick":"div"},{"brick":"span"}]}},"properties":{"cardTitle":"@{text}","style":{"width":"<% DATA.width %>"}}}}}',
-        ref: "card",
       },
       {
         _object_id: "STORYBOARD_BRICK",
@@ -360,13 +357,13 @@ describe("updateBrickToV3", () => {
         events: '{"click":[{"action":"console.log"}]}',
         instanceId: "d",
         mountPoint: "",
-        properties: '{"textContent":"label","underline":true,"url":"/page"}',
+        properties: '{"textContent":"label","underline":true}',
       },
       {
         _object_id: "STORYBOARD_BRICK",
         brick: "basic.general-tag-list",
         events:
-          '{"checked":{"action":"console.log","args":["<% `checked: ${EVENT.detail.item}` %>"]},"close":[{"action":"console.log","args":["<% EVENT.detail.list.map(item => ({...EVENT.detail.item, key: \'a\'})) %>",{"args":{"params":"<% EVENT.detail.item %>"}}]},{"useProvider":"mock-provider","args":[],"callback":{"success":[{"action":"no change","args":["<% \'still event.detail.current\', EVENT.detail.current %>"]}]}}]}',
+          '{"checked":[{"action":"console.log","args":["<% `checked.v1`, EVENT.detail.item %>"]},{"target":"#button","properties":{"buttonName":"<% \'noChange\', EVENT.detail %>"}},{"action":"console.log","args":["<% `checked.v2`, EVENT.detail.list %>"]}],"close":[{"action":"console.log","args":["<% EVENT.detail.list.map(item => ({...EVENT.detail.item, key: \'a\'})) %>",{"args":{"params":"<% EVENT.detail.item %>"}}]},{"useProvider":"mock-provider","args":[],"callback":{"success":[{"action":"no change","args":["<% \'still event.detail.current\', EVENT.detail.current %>"]}]}}]}',
         instanceId: "tag-list",
         mountPoint: "",
         properties:
