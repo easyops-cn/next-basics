@@ -62,6 +62,8 @@ const locale: Locale = {
   [K.WRONG_VERIFICATION_CODE]: "Wrong verification code",
   [K.WRONG_INVITE_CODE]:
     "The validation of the invitation code failed.Please ask the administrator for a new one.",
+  [K.LOCAL_LOGIN]: "Local Login",
+  [K.UNIFIED_IDENTITY_AUTH]: "Unified Identity Auth",
 };
 
 export default locale;

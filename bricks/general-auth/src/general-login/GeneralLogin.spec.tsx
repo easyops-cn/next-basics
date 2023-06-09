@@ -22,6 +22,10 @@ const brandFn = jest.fn().mockReturnValue({
 });
 
 const spyOnLogin = jest.spyOn(apiGatewaySdk, "AuthApi_loginV2");
+const ssoAuthRedirect = jest.spyOn(
+  apiGatewaySdk,
+  "SsoApi_ssoAuthorizeRedirect"
+);
 const spyOnEsbLogin = jest.spyOn(authSdk, "esbLogin");
 const spyOnMFALogin = jest.spyOn(
   apiGatewaySdk,
@@ -39,7 +43,6 @@ spyOnKit.mockReturnValue({
     "forgot-password-enabled": true,
     "sign-up-for-free-enabled": true,
     "hide-default-logo-in-login-page": false,
-    "south-network-login": true,
   }),
   getMiscSettings: () => ({
     wxAppid: "abc",
@@ -497,5 +500,68 @@ describe("GeneralLogin", () => {
     expect(spyOnLogin).toHaveBeenCalled();
     expect(storage["LAST_LOGIN_METHOD"]).toEqual("easyops");
     expect(storage["LAST_LOGIN_TIME"]).toEqual(timeStamp);
+  });
+
+  it("should login width ssoAuthRedirect and loginType is 4a", async () => {
+    ssoAuthRedirect.mockImplementation(async (): Promise<any> => {
+      const response = {
+        status: 302,
+        headers: {
+          location: "https://example.com",
+        },
+      };
+      return response; // 返回一个Promise包装的响应对象
+    });
+    spyOnKit.mockReturnValue({
+      getBrandSettings: brandFn,
+      getFeatureFlags: () => ({
+        "forgot-password-enabled": true,
+        "sign-up-for-free-enabled": true,
+        "hide-default-logo-in-login-page": false,
+        "south-network-login": true,
+      }),
+      getMiscSettings: () => ({
+        wxAppid: "abc",
+        wxAgentid: "abc",
+        wxRedirect: "http://example.com",
+        enabled_login_types: ["easyops", "ldap"],
+      }),
+      getBasePath: () => "/",
+    } as any);
+    spyOnGetHistory.mockReturnValueOnce({
+      location: {
+        state: {
+          from: createLocation("/mock-from"),
+        },
+      },
+      push: spyOnHistoryPush,
+    } as any);
+    brandFn.mockReturnValue({ auth_logo_url: "/x/y/z" });
+    const form = {
+      getFieldDecorator: () => (comp: React.Component) => comp,
+      validateFields: jest.fn().mockImplementation(async (fn) => {
+        await fn(null, {
+          username: "mock-user",
+          password: "mock-pswd",
+          phrase: "111",
+        });
+      }),
+    };
+    const wrapper = shallow(
+      <LegacyGeneralLogin form={form as any} {...i18nProps} />
+    );
+
+    await jest.runAllTimers();
+    await (global as any).flushPromises();
+    wrapper
+      .find("[data-testid='southNetWorkLoginType']")
+      .at(0)
+      .simulate("click");
+    wrapper
+      .find("[data-testid='southNetWorkLoginType']")
+      .at(0)
+      .simulate("click");
+    wrapper.find(Form).at(1).simulate("submit", new Event("submit"));
+    expect(ssoAuthRedirect).toHaveBeenCalled();
   });
 });
