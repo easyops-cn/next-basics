@@ -476,7 +476,6 @@ export default class WorkbenchBackend {
         ignoredResources: {
           menus: true,
           image: true,
-          workflow: true,
         },
       });
       // eslint-disable-next-line no-console
