@@ -561,8 +561,8 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
         : {}),
       ...(componentData.type === "snippet"
         ? {
-            snippetParams: componentData.snippetParams,
-            snippetData: componentData.snippetData,
+            params: componentData.snippetParams,
+            data: componentData.snippetData,
           }
         : {}),
     };
