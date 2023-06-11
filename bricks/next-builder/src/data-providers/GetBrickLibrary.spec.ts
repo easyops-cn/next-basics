@@ -49,6 +49,18 @@ jest.spyOn(window.customElements, "define").mockImplementation(() => void 0);
         zh: "片段 X",
         en: "Snippet X",
       },
+      snippetParams: {
+        test: {
+          type: "string",
+          defaultValue: "hello",
+        },
+      },
+      snippetData: [
+        {
+          name: "name",
+          value: "host",
+        },
+      ],
       category: "hosted",
       thumbnail: "url-x",
     },
@@ -382,6 +394,18 @@ describe("GetBrickLibrary", () => {
           "isHostedSnippet": true,
           "layerType": undefined,
           "nodeId": "S-01",
+          "snippetData": Array [
+            Object {
+              "name": "name",
+              "value": "host",
+            },
+          ],
+          "snippetParams": Object {
+            "test": Object {
+              "defaultValue": "hello",
+              "type": "string",
+            },
+          },
           "thumbnail": "url-x",
           "title": "片段 X",
           "type": "snippet",
@@ -422,6 +446,8 @@ describe("GetBrickLibrary", () => {
           "isHostedSnippet": true,
           "layerType": undefined,
           "nodeId": "S-02",
+          "snippetData": undefined,
+          "snippetParams": undefined,
           "thumbnail": "url-y",
           "title": "hosted-snippet-y",
           "type": "snippet",

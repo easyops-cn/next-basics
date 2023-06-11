@@ -144,7 +144,8 @@ export function previewStart(
   const updateSnippetPreviewSettings = (): void => {
     developHelper.updateSnippetPreviewSettings(
       options.appId,
-      JSON.parse(options.snippetData)
+      JSON.parse(options.snippetData),
+      options.settings
     );
     getHistory().reload();
   };

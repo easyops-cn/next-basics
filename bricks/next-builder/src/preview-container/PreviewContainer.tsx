@@ -205,6 +205,8 @@ export function LegacyPreviewContainer(
   const getSnippetData = (snippetGraphData: BuilderSnippetNode[]) => {
     if (Array.isArray(snippetGraphData) && snippetGraphData.length > 0) {
       return {
+        data: snippetGraphData[0].snippetData,
+        params: snippetGraphData[0].snippetParams,
         snippetId: snippetGraphData[0].snippetId,
         bricks: buildBricks(
           snippetGraphData[0].children as BuilderBrickNode[],
