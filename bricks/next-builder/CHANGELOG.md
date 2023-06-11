@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.246.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.246.0...@next-bricks/next-builder@1.246.1) (2023-06-11)
+
+
+### Bug Fixes
+
+* Temporarily removes the flag for ignoring workflow ([b518d90](https://github.com/easyops-cn/next-basics/commit/b518d90e97352b4686a519bf0611ed16e97dcbde))
+
+
+
+
+
 # [1.246.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.245.2...@next-bricks/next-builder@1.246.0) (2023-06-08)
 
 
