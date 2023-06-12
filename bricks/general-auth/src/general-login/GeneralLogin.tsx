@@ -12,12 +12,16 @@ import {
 } from "@next-core/brick-kit";
 import { JsonStorage } from "@next-libs/storage";
 import { loadScript } from "@next-core/brick-utils";
-import { esbLogin } from "@next-sdk/auth-sdk";
-import { MfaApi_generateRandomTotpSecret } from "@next-sdk/api-gateway-sdk";
+import { esbLogin, LoginResponseBody } from "@next-sdk/auth-sdk";
+import {
+  AuthApi_LoginV2ResponseBody,
+  MfaApi_generateRandomTotpSecret,
+} from "@next-sdk/api-gateway-sdk";
 import {
   AuthApi_loginV2,
   AuthApi_LoginV2RequestBody,
   MfaApi_verifyUserIsSetRule,
+  SsoApi_ssoAuthorizeRedirect,
 } from "@next-sdk/api-gateway-sdk";
 import { createLocation, Location } from "history";
 import { withTranslation, WithTranslation } from "react-i18next";
@@ -66,6 +70,7 @@ interface GeneralLoginState {
   yzm_value?: any;
   security_codeEnabled?: any;
   hideDefaultLogoInLoginPage?: boolean;
+  southNetWorkLoginType?: "local" | "4a";
 }
 export const lastLoginMethod = "LAST_LOGIN_METHOD";
 export const lastLoginTime = "LAST_LOGIN_TIME";
@@ -81,6 +86,7 @@ export class LegacyGeneralLogin extends React.Component<
     const featureFlags = getRuntime().getFeatureFlags();
     const esbLoginEnabled = featureFlags["esb-login"];
     const MFALoginEnabled = featureFlags["factors"];
+    const southNetworkLogin = featureFlags["south-network-login"];
 
     form.validateFields(async (err, values) => {
       if (err) {
@@ -121,13 +127,29 @@ export class LegacyGeneralLogin extends React.Component<
           req.loginBy = this.state.currentLoginMethod;
           this.storage.setItem(lastLoginMethod, this.state.currentLoginMethod);
           this.storage.setItem(lastLoginTime, Date.now());
-          const result = await loginMethod(req, {
-            params,
-            interceptorParams: {
-              // show spinner above login button instead of in loading bar
-              ignoreLoadingBar: true,
-            },
-          });
+          let result: AuthApi_LoginV2ResponseBody | LoginResponseBody;
+          if (
+            southNetworkLogin &&
+            this.state.southNetWorkLoginType !== "local"
+          ) {
+            // 结果302重定向
+            await SsoApi_ssoAuthorizeRedirect("yd", req, {
+              params,
+              interceptorParams: {
+                ignoreLoadingBar: true,
+              },
+            });
+            return;
+          } else {
+            result = await loginMethod(req, {
+              params,
+              interceptorParams: {
+                // show spinner above login button instead of in loading bar
+                ignoreLoadingBar: true,
+              },
+            });
+          }
+
           // mfa
           if (MFALoginEnabled) {
             // 验证用户是否设置了双因子规则
@@ -288,6 +310,14 @@ export class LegacyGeneralLogin extends React.Component<
         },
       };
     }
+    const southNetworkLogin = featureFlags["south-network-login"];
+    if (southNetworkLogin) {
+      this.state = {
+        ...this.state,
+        southNetWorkLoginType: "4a",
+      };
+    }
+
     this.onWindowResized = debounce(this.onWindowResized, 500, {
       leading: false,
     });
@@ -351,7 +381,12 @@ export class LegacyGeneralLogin extends React.Component<
         return false;
       }
     };
-
+    const ChangeLoginType = () => {
+      this.setState({
+        southNetWorkLoginType:
+          this.state.southNetWorkLoginType == "local" ? "4a" : "local",
+      });
+    };
     const renderLoginForm = () => {
       return (
         <Form onSubmit={this.handleSubmit}>
@@ -645,6 +680,18 @@ export class LegacyGeneralLogin extends React.Component<
                 >
                   {t(K.FORGET_PASSWORD)}
                 </a>
+              )}
+              {enabledFeatures["south-network-login"] && (
+                <Button
+                  type="link"
+                  style={{ display: "block", flexGrow: 1, textAlign: "end" }}
+                  onClick={ChangeLoginType}
+                  data-testid="southNetWorkLoginType"
+                >
+                  {this.state.southNetWorkLoginType === "local"
+                    ? t(K.UNIFIED_IDENTITY_AUTH)
+                    : t(K.LOCAL_LOGIN)}
+                </Button>
               )}
             </div>
           </Form.Item>
