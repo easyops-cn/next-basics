@@ -118,7 +118,7 @@ export async function preStoryboardAssembly({
           ...(hasTheme
             ? ["pageTemplates.pageTypeId", "pageTemplates.snippet.instanceId"]
             : []),
-          ...workflowFields.map((field) => `workflow.${field}`),
+          ...workflowFields.map((field) => `workflows.${field}`),
         ].join(","),
       });
 
