@@ -1,9 +1,46 @@
 .searchIcon {
   color: var(--color-auxiliary-text);
 }
-:global(.ant-drawer-content-wrapper) {
-  max-height: 640px;
-  min-height: 226px;
+.appNameWrapper {
+  width: max-content;
+  margin-right: -6px;
+  cursor: pointer;
+}
+.appName {
+  color: var(--color-normal-text);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  &:hover {
+    background: var(--color-fill-bg-base-1);
+  }
+}
+.popoverInMenu {
+  width: 100%;
+  padding-top: 15px;
+  top: auto;
+  :global(.ant-popover-arrow) {
+    display: none;
+  }
+  :global(.ant-popover-inner) {
+    border-radius: 0;
+  }
+}
+.menuPopover {
+  position: relative;
+  &:hover {
+    .appName {
+      z-index: 1000;
+      background: var(--color-fill-bg-base-1);
+    }
+  }
+}
+.quickVisitContainer {
+  position: absolute;
+  height: 50px;
+  top: -1px;
+  left: 0;
+  padding-top: 18px;
 }
 .outerWrapper {
   padding: 5px 36px;

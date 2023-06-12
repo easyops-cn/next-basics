@@ -356,6 +356,11 @@ describe("QuickVisitMenu", () => {
     content.simulate("mouseleave");
     wrapper.find(Drawer).invoke("onClose")({});
     expect(wrapper.find(Drawer).prop("visible")).toEqual(false);
+    const spy = jest.spyOn(document, "getElementById");
+    const mockElement = document.createElement("div");
+    spy.mockReturnValue(mockElement);
+    wrapper.find(Drawer).prop("getContainer")();
+    expect(spy).toBeCalledWith("quickVisitContainer");
   });
   it("should work when the window is small", () => {
     Object.defineProperty(window, "innerHeight", {
