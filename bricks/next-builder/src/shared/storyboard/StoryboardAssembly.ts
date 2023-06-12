@@ -2,11 +2,13 @@ import { buildStoryboardV2 } from "./buildStoryboardV2";
 import {
   StoryboardAssemblyParams,
   StoryboardAssemblyResult,
+  WorkflowField,
 } from "./interfaces";
-import { preStoryboardAssembly } from "./preStoryboardAssembly";
+import { preStoryboardAssembly, workflowFields } from "./preStoryboardAssembly";
 import { simpleHash } from "../../data-providers/utils/simpleHash";
 import { removeDeadConditions } from "@next-core/brick-utils";
 import { RuntimeStoryboard } from "@next-core/brick-types";
+import { pick } from "lodash";
 
 /**
  * Assemble a full storyboard.
@@ -29,7 +31,9 @@ export async function StoryboardAssembly({
     menus: projectInfo.menus,
     i18n: projectInfo.i18n,
     functions: projectInfo.functions,
-    workflows: projectInfo.workflows,
+    workflows: projectInfo.workflows?.map((item: WorkflowField) =>
+      pick(item, workflowFields)
+    ),
     mocks: projectInfo.mockRule && {
       mockId: simpleHash(`${projectId}.${new Date().getTime()}`),
       mockList: projectInfo.mockRule
