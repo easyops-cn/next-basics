@@ -185,6 +185,9 @@ export function MenuContainer({
     </div>
   );
 }
+export function getContainer() {
+  return document.getElementById("quickVisitContainer");
+}
 export function QuickVisitMenu(props: QuickVisitMenuProps): React.ReactElement {
   const {
     buttonName,
@@ -217,35 +220,46 @@ export function QuickVisitMenu(props: QuickVisitMenuProps): React.ReactElement {
   return (
     <div
       data-testid="wrapper"
+      className={styles.menuPopover}
       onMouseEnter={() => triggerDrawerVisible(true)}
       onMouseLeave={() => {
         triggerDrawerVisible(false);
       }}
     >
-      <span data-testid="buttonName">{buttonName}</span>
-      <Drawer
-        visible={drawerVisible}
-        placement="top"
-        maskClosable={true}
-        onClose={() => triggerDrawerVisible(false)}
-        height={
-          window.innerHeight * 0.6 > 664
-            ? 640
-            : window.innerHeight * 0.6 < 240
-            ? 226
-            : window.innerHeight * 0.6 - 24
-        }
-      >
-        <MenuContainer
-          allMenus={allMenus}
-          searchPlaceholder={searchPlaceholder ?? t(K.ENTER_KEY_WORDS)}
-          favouriteMenus={favouriteMenus}
-          handleMenuAdd={handleMenuAdd}
-          handleMenuRemove={removeMenuItem}
-          handleMenuDrag={handleMenuDrag}
-          handleMenuClick={handleMenuClick}
-        />
-      </Drawer>
+      <div className={styles.appNameWrapper}>
+        <span data-testid="buttonName" className={styles.appName}>
+          {buttonName}
+        </span>
+      </div>
+      <div id="quickVisitContainer" className={styles.quickVisitContainer}>
+        <Drawer
+          visible={drawerVisible}
+          title={null}
+          placement="top"
+          maskClosable={true}
+          onClose={() => triggerDrawerVisible(false)}
+          className={styles.popoverInMenu}
+          getContainer={getContainer}
+          height={
+            window.innerHeight * 0.6 > 664
+              ? 640
+              : window.innerHeight * 0.6 < 240
+              ? 226
+              : window.innerHeight * 0.6 - 24
+          }
+          zIndex={-1}
+        >
+          <MenuContainer
+            allMenus={allMenus}
+            searchPlaceholder={searchPlaceholder ?? t(K.ENTER_KEY_WORDS)}
+            favouriteMenus={favouriteMenus}
+            handleMenuAdd={handleMenuAdd}
+            handleMenuRemove={removeMenuItem}
+            handleMenuDrag={handleMenuDrag}
+            handleMenuClick={handleMenuClick}
+          />
+        </Drawer>
+      </div>
     </div>
   );
 }
