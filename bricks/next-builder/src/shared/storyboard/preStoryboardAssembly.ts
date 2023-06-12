@@ -18,7 +18,7 @@ const MODEL_STORYBOARD_SNIPPET = "STORYBOARD_SNIPPET";
 const MODEL_PROJECT_MICRO_APP = "PROJECT_MICRO_APP";
 const MODEL_MICRO_APP_RESOURCE_MENU = "MICRO_APP_RESOURCE_MENU";
 
-const workflowFields = [
+export const workflowFields = [
   "id",
   "name",
   "appId",
