@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.23.0...@next-bricks/general-auth@1.23.1) (2023-06-12)
+
+
+### Bug Fixes
+
+* 4a登录重定向方式调整 ([9129cd8](https://github.com/easyops-cn/next-basics/commit/9129cd895ad837c4f9774042928324ad4af2fcbf))
+
+
+
+
+
 # [1.23.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.22.0...@next-bricks/general-auth@1.23.0) (2023-06-12)
 
 
