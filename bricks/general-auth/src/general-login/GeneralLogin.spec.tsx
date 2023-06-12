@@ -22,10 +22,7 @@ const brandFn = jest.fn().mockReturnValue({
 });
 
 const spyOnLogin = jest.spyOn(apiGatewaySdk, "AuthApi_loginV2");
-const ssoAuthRedirect = jest.spyOn(
-  apiGatewaySdk,
-  "SsoApi_ssoAuthorizeRedirect"
-);
+const ssoAuthorization = jest.spyOn(apiGatewaySdk, "SsoApi_ssoAuthorization");
 const spyOnEsbLogin = jest.spyOn(authSdk, "esbLogin");
 const spyOnMFALogin = jest.spyOn(
   apiGatewaySdk,
@@ -502,16 +499,8 @@ describe("GeneralLogin", () => {
     expect(storage["LAST_LOGIN_TIME"]).toEqual(timeStamp);
   });
 
-  it("should login width ssoAuthRedirect and loginType is 4a", async () => {
-    ssoAuthRedirect.mockImplementation(async (): Promise<any> => {
-      const response = {
-        status: 302,
-        headers: {
-          location: "https://example.com",
-        },
-      };
-      return response; // 返回一个Promise包装的响应对象
-    });
+  it("should login width ssoAuthorization and loginType is 4a", async () => {
+    ssoAuthorization.mockReturnValue(null);
     spyOnKit.mockReturnValue({
       getBrandSettings: brandFn,
       getFeatureFlags: () => ({
@@ -562,6 +551,6 @@ describe("GeneralLogin", () => {
       .at(0)
       .simulate("click");
     wrapper.find(Form).at(1).simulate("submit", new Event("submit"));
-    expect(ssoAuthRedirect).toHaveBeenCalled();
+    expect(ssoAuthorization).toHaveBeenCalled();
   });
 });
