@@ -29,6 +29,7 @@ export async function StoryboardAssembly({
     menus: projectInfo.menus,
     i18n: projectInfo.i18n,
     functions: projectInfo.functions,
+    workflows: projectInfo.workflows,
     mocks: projectInfo.mockRule && {
       mockId: simpleHash(`${projectId}.${new Date().getTime()}`),
       mockList: projectInfo.mockRule

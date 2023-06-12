@@ -225,6 +225,15 @@ describe("buildStoryboardV2", () => {
             typescript: true,
           },
         ],
+        workflows: [
+          {
+            appId: "test-app",
+            name: "test-workflow",
+            id: "test-worfkow",
+            triggerMethod: "manual",
+            variables: [],
+          },
+        ],
         dependsAll: false,
       },
       // Output
@@ -361,6 +370,15 @@ describe("buildStoryboardV2", () => {
                 useProvider: "my.menu-provider",
               },
               i18n: {},
+            },
+          ],
+          workflows: [
+            {
+              appId: "test-app",
+              name: "test-workflow",
+              id: "test-worfkow",
+              triggerMethod: "manual",
+              variables: [],
             },
           ],
           i18n: {
