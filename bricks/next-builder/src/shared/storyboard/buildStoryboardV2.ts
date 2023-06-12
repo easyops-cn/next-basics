@@ -79,6 +79,7 @@ export async function buildStoryboardV2(
     menus,
     i18n,
     functions,
+    workflows: data.workflows,
     mocks: data.mocks,
   };
 

@@ -18,6 +18,18 @@ const MODEL_STORYBOARD_SNIPPET = "STORYBOARD_SNIPPET";
 const MODEL_PROJECT_MICRO_APP = "PROJECT_MICRO_APP";
 const MODEL_MICRO_APP_RESOURCE_MENU = "MICRO_APP_RESOURCE_MENU";
 
+const workflowFields = [
+  "id",
+  "name",
+  "appId",
+  "description",
+  "workflowYaml",
+  "triggerMethod",
+  "dataChangedConfig",
+  "schedulerConfig",
+  "variables",
+];
+
 /**
  * Do pre-requests before storyboard assembly.
  */
@@ -106,6 +118,7 @@ export async function preStoryboardAssembly({
           ...(hasTheme
             ? ["pageTemplates.pageTypeId", "pageTemplates.snippet.instanceId"]
             : []),
+          ...workflowFields.map((field) => `workflow.${field}`),
         ].join(","),
       });
 

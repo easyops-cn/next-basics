@@ -56,11 +56,28 @@ export interface PreStoryboardAssemblyResult {
   mocks?: MockRule[];
 }
 
+export interface WorkflowField {
+  name: string;
+  id: string;
+  appId: string;
+  variables?: any[];
+  triggerMethod: "manual" | "dataChanged" | "periodic";
+  schedulerConfig?: {
+    crontab: string;
+    disable?: 0 | 1;
+  };
+  dataChangedConfig?: {
+    objectId: string;
+    triggerEvent: string;
+  };
+}
+
 export interface BuildInfo {
   routeList: BuilderRouteNode[];
   brickList: BuilderBrickNode[];
   templateList?: TemplateNode[];
   menus?: MenuNode[];
+  workflows?: WorkflowField[];
   i18n?: I18nNode[];
   dependsAll?: boolean;
   options?: BuildOptions;
@@ -111,6 +128,7 @@ export interface StoryboardToBuild {
     customTemplates?: CustomTemplate[];
     menus?: Record<string, unknown>[];
     i18n?: MetaI18n;
+    workflows?: WorkflowField[];
     functions?: Pick<FunctionNode, "name" | "source" | "typescript">[];
     mocks?: Mocks;
     contracts?: Contract[];
