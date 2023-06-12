@@ -21,7 +21,7 @@ import {
   AuthApi_loginV2,
   AuthApi_LoginV2RequestBody,
   MfaApi_verifyUserIsSetRule,
-  SsoApi_ssoAuthorizeRedirect,
+  SsoApi_ssoAuthorization,
 } from "@next-sdk/api-gateway-sdk";
 import { createLocation, Location } from "history";
 import { withTranslation, WithTranslation } from "react-i18next";
@@ -84,6 +84,7 @@ export class LegacyGeneralLogin extends React.Component<
     e.preventDefault();
     const { t, form, onLogin } = this.props;
     const featureFlags = getRuntime().getFeatureFlags();
+    const basePath = getRuntime().getBasePath();
     const esbLoginEnabled = featureFlags["esb-login"];
     const MFALoginEnabled = featureFlags["factors"];
     const southNetworkLogin = featureFlags["south-network-login"];
@@ -132,13 +133,14 @@ export class LegacyGeneralLogin extends React.Component<
             southNetworkLogin &&
             this.state.southNetWorkLoginType !== "local"
           ) {
-            // 结果302重定向
-            await SsoApi_ssoAuthorizeRedirect("yd", req, {
+            // 结果写死重定向地址
+            await SsoApi_ssoAuthorization("default", req, {
               params,
               interceptorParams: {
                 ignoreLoadingBar: true,
               },
             });
+            window.location.href = `${location.origin}${basePath}sso-auth/authorize`;
             return;
           } else {
             result = await loginMethod(req, {
