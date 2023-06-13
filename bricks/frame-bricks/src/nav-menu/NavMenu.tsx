@@ -114,6 +114,16 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
           overlayInnerStyle={{ overflow: "hidden" }}
           overlayClassName={style.threeLevelMenuPopover}
           placement={"bottom"}
+          onVisibleChange={(visible: boolean) => {
+            // 阻止滚动穿透
+            if (visible) {
+              document.body.style.overflow = "hidden";
+              document.body.style.touchAction = "none";
+            } else {
+              document.body.style.overflow = "";
+              document.body.style.touchAction = "";
+            }
+          }}
           content={
             <ThreeLevelMenuPopoverContent
               menuItem={item}

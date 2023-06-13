@@ -22,6 +22,12 @@ html[data-theme="dark-v2"] {
   gap: 8px;
   overflow-y: scroll;
   border-right: 1px solid var(--color-text-divider-line);
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
 
   .groupItem {
     width: 160px;
@@ -130,6 +136,12 @@ html[data-theme="dark-v2"] {
     display: grid;
     grid-template-columns: repeat(2, 160px);
     gap: 2px 0;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      background: transparent;
+    }
 
     .menuItem {
       height: 36px;
