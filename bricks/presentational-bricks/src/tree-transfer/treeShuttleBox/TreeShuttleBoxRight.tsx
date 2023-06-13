@@ -69,6 +69,9 @@ const TreeShuttleBoxRight: FC<TreeShuttleBoxRightPropsType> = ({
       setIsBrightLeft(false);
     }
   };
+  const handleExpand = (e: any) => {
+    setFinVal(e);
+  };
   useEffect(() => {
     if (checkListRight.length === 0) {
       setIndeterminate(false);
@@ -83,8 +86,7 @@ const TreeShuttleBoxRight: FC<TreeShuttleBoxRightPropsType> = ({
   }, [checkListRight]);
   useEffect(() => {
     if (readOnlyAllKeyRight.length !== 0) {
-      const allKeys = readOnlyAllKeyRight;
-      setFinVal(allKeys);
+      setFinVal(readOnlyAllKeyRight);
     }
   }, [dataSourceRight]);
   return (
@@ -136,6 +138,7 @@ const TreeShuttleBoxRight: FC<TreeShuttleBoxRightPropsType> = ({
               checkable
               checkedKeys={checkListRight}
               onCheck={handleSelectNode}
+              onExpand={handleExpand}
               treeData={dataSourceRight.treeData}
               expandedKeys={finVal}
             />
