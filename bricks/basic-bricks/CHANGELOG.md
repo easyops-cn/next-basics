@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.238.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.237.1...@next-bricks/basic-bricks@1.238.0) (2023-06-13)
+
+
+### Features
+
+* 公告栏虚拟滚动列表 ([7253903](https://github.com/easyops-cn/next-basics/commit/72539034cd7bae81dfb77999c8dc4c5862da6280))
+
+
+
+
+
 ## [1.237.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.237.0...@next-bricks/basic-bricks@1.237.1) (2023-06-12)
 
 
