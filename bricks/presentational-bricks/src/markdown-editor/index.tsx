@@ -88,6 +88,18 @@ export class MarkdownEditorElement extends FormItemElement {
   })
   previewContainerStyle: React.CSSProperties;
 
+  /**
+   * @kind Record<string,any>
+   * @required false
+   * @default -
+   * @description Editor容器的样式
+   * @group style
+   */
+  @property({
+    attribute: false,
+  })
+  markdownEditorContainerStyle: React.CSSProperties;
+
   /* =========================== Group: other =========================== */
 
   /**
@@ -111,6 +123,26 @@ export class MarkdownEditorElement extends FormItemElement {
   @property({ attribute: false }) fields: {
     value?: string;
   };
+
+  /**
+   * @kind number
+   * @required -
+   * @default -
+   * @description 输入框最小显示行数
+   * @group advanced
+   */
+  @property()
+  inputMinRows: number;
+
+  /**
+   * @kind number
+   * @required -
+   * @default -
+   * @description 输入框最大显示行数
+   * @group advanced
+   */
+  @property()
+  inputMaxRows: number;
 
   /* =========================== events =========================== */
 
@@ -182,6 +214,9 @@ export class MarkdownEditorElement extends FormItemElement {
             supportUploadImg={this.supportUploadImg}
             bucketName={this.bucketName}
             onUploadImage={this.handleUploadImage}
+            inputMinRows={this.inputMinRows}
+            inputMaxRows={this.inputMaxRows}
+            markdownEditorContainerStyle={this.markdownEditorContainerStyle}
           />
         </BrickWrapper>,
         this
