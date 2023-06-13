@@ -47,7 +47,16 @@
   /* min-height: 178px; */
   max-height: 592px;
 }
+
 .menuSearchContainer {
+  .clearBtn {
+    position: absolute;
+    top: 9px;
+    right: 11px;
+    z-index: 1;
+    color: var(--text-color-disabled);
+  }
+  position: relative;
   margin-bottom: 20px;
   .searchIcon {
     color: var(--color-auxiliary-text);
@@ -65,7 +74,6 @@
   display: flex;
   gap: 8px;
   flex-flow: wrap;
-  padding: ;
 }
 .favouriteEmpty {
   color: var(--color-secondary-text);
@@ -156,7 +164,7 @@
   display: flex;
   .textContainer {
     padding-left: 6px;
-    width: 180px;
+    width: 170px;
     overflow: hidden;
     text-overflow: ellipsis;
     text-wrap: nowrap;
@@ -171,6 +179,7 @@
     }
   }
   .operation {
+    padding: 0 10px;
     .collectStar {
       visibility: hidden;
       font-size: 12px;
