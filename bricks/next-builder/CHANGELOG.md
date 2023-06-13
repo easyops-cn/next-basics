@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.247.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.247.1...@next-bricks/next-builder@1.247.2) (2023-06-13)
+
+
+### Bug Fixes
+
+* NT构件依赖添加错误 ([2a1749c](https://github.com/easyops-cn/next-basics/commit/2a1749c3d5cc1fe8ea663a2d1d4589695be58129))
+
+
+
+
+
 ## [1.247.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.247.0...@next-bricks/next-builder@1.247.1) (2023-06-12)
 
 
