@@ -44,24 +44,28 @@ export function MenuTag(props: MenuTagProps): React.ReactElement {
           {text}
         </Tooltip>
       </div>
-      <div className={styles.operation}>
-        {!selected && (
+      {!selected && (
+        <div
+          className={styles.operation}
+          data-testid="collect-btn"
+          onClick={handleOnStarClick}
+        >
           <Tooltip title={t(K.ADD_TO_QUICK_ACCESS)}>
-            <StarOutlined
-              className={styles.collectStar}
-              onClick={handleOnStarClick}
-            />
+            <StarOutlined className={styles.collectStar} />
           </Tooltip>
-        )}
-        {selected && (
+        </div>
+      )}
+      {selected && (
+        <div
+          className={styles.operation}
+          data-testid="remove-btn"
+          onClick={handleOnRemove}
+        >
           <Tooltip title={t(K.REMOVE_FROM_QUICK_ACCESS)}>
-            <StarFilled
-              className={styles.favouriteStar}
-              onClick={handleOnRemove}
-            />
+            <StarFilled className={styles.favouriteStar} />
           </Tooltip>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -12,7 +12,7 @@ import {
   removeItemFromList,
 } from "./QuickVisitMenu";
 import { Input, Drawer, Tooltip } from "antd";
-import { StarFilled, StarOutlined } from "@ant-design/icons";
+import { StarFilled, StarOutlined, CloseCircleFilled } from "@ant-design/icons";
 import { arrayMoveImmutable, FavouriteMenu } from "./FavouriteMenu";
 import { MenuTag } from "./MenuTag";
 describe("QuickVisitMenu", () => {
@@ -456,10 +456,10 @@ describe("QuickVisitMenu", () => {
       />
     );
     expect(wrapper.find(Tooltip).at(0).prop("trigger")).toEqual([]);
-    wrapper.find(StarOutlined).simulate("click");
+    wrapper.find('[data-testid="collect-btn"]').simulate("click");
     expect(mockMenuAdd).toBeCalledWith(menu);
     expect(wrapper.find(StarFilled)).toHaveLength(1);
-    wrapper.find(StarFilled).simulate("click");
+    wrapper.find('[data-testid="remove-btn"]').simulate("click");
     expect(mockMenuRemove).toBeCalledWith(menu);
     const textContainer = wrapper.find(".textContainer");
     expect(textContainer).toHaveLength(1);
@@ -483,6 +483,7 @@ describe("QuickVisitMenu", () => {
       />
     );
     const searchInput = wrapper.find(Input);
+    expect(searchInput.prop("value")).toEqual("");
     expect(wrapper.find(MenuTag)).toHaveLength(0);
     expect(wrapper.find(".favouriteEmpty")).toHaveLength(1);
     searchInput.invoke("onChange")({ target: { value: "s" } });
@@ -500,7 +501,7 @@ describe("QuickVisitMenu", () => {
     expect(mockMenuAdd).toHaveBeenLastCalledWith([mssqlMenu]);
     tags.at(3).invoke("handleMenuRemove")(mssqlMenu);
     expect(mockMenuRemove).toHaveBeenLastCalledWith([]);
-    searchInput.invoke("onChange")({ target: { value: "" } });
+    wrapper.find(CloseCircleFilled).simulate("click");
     expect(wrapper.find(MenuTag)).toHaveLength(0);
     wrapper.setProps({ favouriteMenus });
     wrapper.update();

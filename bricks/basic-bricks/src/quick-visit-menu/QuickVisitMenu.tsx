@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Drawer, Input } from "antd";
+import { Button, Drawer, Input } from "antd";
 import styles from "./index.module.css";
 import { MenuTag } from "./MenuTag";
 import { FavouriteMenu } from "./FavouriteMenu";
 import { reject } from "lodash";
 import { BrickAsComponent } from "@next-core/brick-kit";
-import { SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined, CloseCircleFilled } from "@ant-design/icons";
 import { K, NS_BASIC_BRICKS } from "../i18n/constants";
 import { useTranslation } from "react-i18next";
 interface QuickVisitMenuProps {
@@ -98,9 +98,11 @@ export function MenuContainer({
 }: MenuContainerProps): React.ReactElement {
   const [isSearching, setIsSearching] = useState(false);
   const [filterMenus, setFilterMenus] = useState([]);
+  const [searchKey, setSearchKey] = useState("");
   const { t } = useTranslation(NS_BASIC_BRICKS);
 
   const onSearch = (event) => {
+    setSearchKey(event.target.value);
     setIsSearching(!!event.target.value);
     const searchResult = searchMenu(allMenus, event.target.value);
     setFilterMenus(searchResult);
@@ -132,6 +134,14 @@ export function MenuContainer({
           prefix={<SearchOutlined className={styles.searchIcon} />}
           onChange={onSearch}
           placeholder={searchPlaceholder}
+          value={searchKey}
+        />
+        <CloseCircleFilled
+          className={styles.clearBtn}
+          onClick={() => {
+            setSearchKey("");
+            onSearch({ target: { value: "" } });
+          }}
         />
       </div>
       {!isSearching && (
@@ -237,6 +247,7 @@ export function QuickVisitMenu(props: QuickVisitMenuProps): React.ReactElement {
           title={null}
           placement="top"
           maskClosable={true}
+          closable={false}
           onClose={() => triggerDrawerVisible(false)}
           className={styles.popoverInMenu}
           getContainer={getContainer}
