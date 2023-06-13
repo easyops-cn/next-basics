@@ -164,7 +164,7 @@ export function ComponentSelect(
         }
         // don't show legacy template
         else if (item.type !== "template") {
-          const key = item.type;
+          const key = item.category === "workflow" ? item.category : item.type;
           const brickItem: BrickOptionItem = {
             ...item,
             category: item.category,

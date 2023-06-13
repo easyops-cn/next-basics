@@ -91,6 +91,8 @@ export async function GetBrickLibrary(
               "thumbnail",
               "bricks",
               "layerType",
+              "snippetParams",
+              "snippetData",
             ],
             page_size: 3000,
           },
@@ -181,6 +183,8 @@ export async function GetBrickLibrary(
         category: item.category,
         description: i18nText(item.description),
         thumbnail: item.thumbnail,
+        snippetParams: item.snippetParams,
+        snippetData: item.snippetData,
         bricks: item.bricks,
         layerType: item.layerType,
         $searchTextPool: (item.text
