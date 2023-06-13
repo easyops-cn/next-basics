@@ -156,7 +156,11 @@ function LegacyWorkbenchCacheAction(
       });
 
       if ((node.brick as string)?.includes(".")) {
-        brickList.add(`${(node.brick as string).split(".")[0]}-NB`);
+        brickList.add(
+          `${(node.brick as string).split(".")[0]}-${
+            node.type === "template" ? "NT" : "NB"
+          }`
+        );
       }
     });
     backendInstance.setUsedBrickPackage([...brickList.values()]);
