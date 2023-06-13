@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.304.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.304.4...@next-bricks/presentational-bricks@1.304.5) (2023-06-13)
+
+
+### Bug Fixes
+
+* 穿梭框右侧无法点击展开和收拢 ([4beb409](https://github.com/easyops-cn/next-basics/commit/4beb409ca8784d99f37b7a6125055f6df6a94bfa))
+
+
+
+
+
 ## [1.304.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.304.3...@next-bricks/presentational-bricks@1.304.4) (2023-06-09)
 
 
