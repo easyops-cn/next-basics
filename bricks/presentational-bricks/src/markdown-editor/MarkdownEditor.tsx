@@ -17,6 +17,9 @@ interface MarkdownEditorProps extends FormItemWrapperProps {
   supportUploadImg?: boolean;
   imagePreview?: boolean;
   bucketName?: string;
+  inputMinRows?: number;
+  inputMaxRows?: number;
+  markdownEditorContainerStyle?: React.CSSProperties;
 }
 
 export function MarkdownEditorItem(
@@ -30,6 +33,9 @@ export function MarkdownEditorItem(
     supportUploadImg,
     imagePreview,
     bucketName,
+    inputMinRows,
+    inputMaxRows,
+    markdownEditorContainerStyle,
     onUploadImage,
   } = props;
   const [value, setValue] = useState(props.value || "");
@@ -90,7 +96,11 @@ export function MarkdownEditorItem(
   };
 
   return (
-    <Tabs defaultActiveKey="1" className={style.markdownEditorContainer}>
+    <Tabs
+      defaultActiveKey="1"
+      className={style.markdownEditorContainer}
+      style={markdownEditorContainerStyle}
+    >
       <Tabs.TabPane tab="编辑" key="1">
         <Input.TextArea
           ref={ref}
@@ -98,6 +108,9 @@ export function MarkdownEditorItem(
           value={value}
           {...(supportUploadImg && bucketName ? { onPaste: filesPasted } : {})}
           {...configProps}
+          {...(inputMinRows || inputMaxRows
+            ? { autoSize: { minRows: inputMinRows, maxRows: inputMaxRows } }
+            : {})}
         />
       </Tabs.TabPane>
       <Tabs.TabPane tab="预览" key="2">
@@ -126,6 +139,9 @@ export function MarkdownEditor(props: MarkdownEditorProps): React.ReactElement {
         supportUploadImg={props.supportUploadImg}
         imagePreview={props.imagePreview}
         bucketName={props.bucketName}
+        inputMinRows={props.inputMinRows}
+        inputMaxRows={props.inputMaxRows}
+        markdownEditorContainerStyle={props.markdownEditorContainerStyle}
       />
     </FormItemWrapper>
   );
