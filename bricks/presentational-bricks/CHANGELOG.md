@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.304.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.304.5...@next-bricks/presentational-bricks@1.304.6) (2023-06-13)
+
+
+### Bug Fixes
+
+* markdown编辑输入框支持配置显示行数 ([a9b227d](https://github.com/easyops-cn/next-basics/commit/a9b227dbed714e8c7ace5de33844e3963d5a8032))
+
+
+
+
+
 ## [1.304.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.304.4...@next-bricks/presentational-bricks@1.304.5) (2023-06-13)
 
 
