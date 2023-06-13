@@ -683,20 +683,22 @@ export class LegacyGeneralLogin extends React.Component<
                   {t(K.FORGET_PASSWORD)}
                 </a>
               )}
-              {enabledFeatures["south-network-login"] && (
-                <Button
-                  type="link"
-                  style={{ display: "block", flexGrow: 1, textAlign: "end" }}
-                  onClick={ChangeLoginType}
-                  data-testid="southNetWorkLoginType"
-                >
-                  {this.state.southNetWorkLoginType === "local"
-                    ? t(K.UNIFIED_IDENTITY_AUTH)
-                    : t(K.LOCAL_LOGIN)}
-                </Button>
-              )}
             </div>
           </Form.Item>
+          {enabledFeatures["south-network-login"] && (
+            <Form.Item className={styles.southNetWorkLoginType}>
+              <Button
+                type="link"
+                style={{ display: "block", flexGrow: 1, textAlign: "end" }}
+                onClick={ChangeLoginType}
+                data-testid="southNetWorkLoginType"
+              >
+                {this.state.southNetWorkLoginType === "local"
+                  ? t(K.UNIFIED_IDENTITY_AUTH)
+                  : t(K.LOCAL_LOGIN)}
+              </Button>
+            </Form.Item>
+          )}
         </Form>
       );
     };

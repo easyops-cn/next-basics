@@ -168,6 +168,11 @@
       padding-top: 40px;
     }
   }
+  .southNetWorkLoginType {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
 }
 
 .loginAppendix {
