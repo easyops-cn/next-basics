@@ -33,6 +33,11 @@ describe("UserOrUserGroupSelect", () => {
           name: "easyops",
           nickname: "uwin",
         },
+        {
+          instanceId: "instanceId1",
+          name: "tester",
+          nickname: "test",
+        },
       ],
     });
     const onChange = jest.fn();
@@ -84,11 +89,39 @@ describe("UserOrUserGroupSelect", () => {
         key: "easyops",
         label: "easyops(uwin)",
       },
+      {
+        key: "tester",
+        label: "tester(test)",
+      },
     ]);
 
     wrapper.find(Select).invoke("onChange")([], null);
     await (global as any).flushPromises();
     expect(onChange).toBeCalledWith(null);
+
+    wrapper.setProps({
+      value: {
+        selectedUser: ["easyops"],
+      },
+      staticList: ["tester"],
+    });
+
+    await (global as any).flushPromises();
+    wrapper.update();
+    expect(wrapper.find(Select).prop("value")).toEqual([
+      {
+        key: "tester",
+        label: (
+          <div style={{ color: "var(--bg-color-button-link)" }}>
+            tester(test)
+          </div>
+        ),
+      },
+      {
+        key: "easyops",
+        label: "easyops(uwin)",
+      },
+    ]);
   });
   it("should work showkey's attribute value of UserOrGroup is null", async () => {
     mockPostSearch.mockResolvedValue({
@@ -172,7 +205,7 @@ describe("UserOrUserGroupSelect", () => {
         query={{
           instanceId: { $in: ["59eea4ad40bf8", "59eea4ad40bw2"] },
         }}
-        staticList={["easyops"]}
+        staticList={["easyops", ":59eea4ad40jbk"]}
         isMultiple={true}
       />
     );
@@ -194,6 +227,13 @@ describe("UserOrUserGroupSelect", () => {
     expect(wrapper.find(UserSelectFormItem).prop("optionsMode")).toEqual(
       "group"
     );
+    expect(CmdbObjectApi_getObjectRef as jest.Mock).toBeCalledTimes(1);
+    wrapper.setProps({
+      notRender: false,
+    });
+    await (global as any).flushPromises();
+    wrapper.update();
+    expect(CmdbObjectApi_getObjectRef as jest.Mock).toBeCalledTimes(1);
   });
 
   it("should work is not multiple", async () => {

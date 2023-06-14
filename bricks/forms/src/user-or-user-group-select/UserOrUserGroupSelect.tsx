@@ -662,29 +662,31 @@ export function UserOrUserGroupSelect(
   );
 
   useEffect(() => {
-    (async () => {
-      if (!props.objectList) {
-        if (objectListCache) {
-          setObjectList(objectListCache);
-        } else {
-          try {
-            const list = (
-              await CmdbObjectApi_getObjectRef({
-                ref_object: "USER,USER_GROUP",
-              })
-            ).data;
-            setObjectList(list);
-            objectListCache = list;
-          } catch (e) {
-            // istanbul ignore next
-            handleHttpError(e);
+    if (!props.notRender) {
+      (async () => {
+        if (!props.objectList) {
+          if (objectListCache) {
+            setObjectList(objectListCache);
+          } else {
+            try {
+              const list = (
+                await CmdbObjectApi_getObjectRef({
+                  ref_object: "USER,USER_GROUP",
+                })
+              ).data;
+              setObjectList(list);
+              objectListCache = list;
+            } catch (e) {
+              // istanbul ignore next
+              handleHttpError(e);
+            }
           }
+        } else {
+          setObjectList(props.objectList);
         }
-      } else {
-        setObjectList(props.objectList);
-      }
-    })();
-  }, [props.objectList]);
+      })();
+    }
+  }, [props.objectList, props.notRender]);
 
   if (!objectList) {
     return null;
