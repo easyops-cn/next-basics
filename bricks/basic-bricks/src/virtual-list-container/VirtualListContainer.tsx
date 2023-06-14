@@ -10,6 +10,7 @@ import { List } from "antd";
 import { UseBrickConf } from "@next-core/brick-types";
 import style from "./style.module.css";
 import VirtualList from "rc-virtual-list";
+import { uniqBy } from "lodash";
 
 export interface VirtualListContainerProps {
   data: Record<string, any>[];
@@ -26,7 +27,6 @@ export function VirtualListContainer(
   const [height, setHeight] = useState(500);
   const [data, setData] = useState<any[]>([]);
   const domRef = useRef() as React.RefObject<any>;
-  const loadTimes = useRef(1);
 
   // istanbul ignore next
   useImperativeHandle(ref, () => ({
@@ -41,14 +41,13 @@ export function VirtualListContainer(
       return;
     }
     if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === height) {
-      props.onScrollData && props.onScrollData(loadTimes.current);
+      props.onScrollData && props.onScrollData();
     }
   };
 
   useEffect(() => {
     if (props.data?.length) {
-      loadTimes.current++;
-      setData([...data, ...props.data]);
+      setData(uniqBy([...props.data], "uniqId"));
     }
   }, [props.data]);
 

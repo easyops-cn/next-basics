@@ -19,7 +19,7 @@ describe("basic-bricks.virtual-list-container", () => {
     document.body.appendChild(element);
     const eventTrigger = jest.fn();
     element.addEventListener("basic-bricks.scroll", eventTrigger);
-    element._onScrollData(1);
+    element._onScrollData();
     await jest.runAllTimers();
     expect(spyOnRender).toBeCalled();
     document.body.removeChild(element);
