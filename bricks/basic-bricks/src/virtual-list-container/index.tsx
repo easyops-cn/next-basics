@@ -86,8 +86,8 @@ export class VirtualListContainerElement extends UpdatingElement {
   };
 
   @event({ type: "basic-bricks.scroll" }) scrollEvent: EventEmitter<any>;
-  private _onScrollData = (loadTimes: number) => {
-    this.scrollEvent.emit(loadTimes);
+  private _onScrollData = () => {
+    this.scrollEvent.emit();
   };
 
   protected _render(): void {
