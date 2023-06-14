@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.247.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.247.2...@next-bricks/next-builder@1.247.3) (2023-06-14)
+
+
+### Bug Fixes
+
+* support workflow category ([3afbbcf](https://github.com/easyops-cn/next-basics/commit/3afbbcfd8596703b8b30ce886007ea5f238cd274))
+
+
+
+
+
 ## [1.247.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.247.1...@next-bricks/next-builder@1.247.2) (2023-06-13)
 
 
