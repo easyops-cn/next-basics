@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.238.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.238.1...@next-bricks/basic-bricks@1.238.2) (2023-06-14)
+
+
+### Bug Fixes
+
+* 滚动列表数据不进行添加操作 ([811170a](https://github.com/easyops-cn/next-basics/commit/811170a8ad7a8389f82c1a9772afb220dd102e17))
+
+
+
+
+
 ## [1.238.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.238.0...@next-bricks/basic-bricks@1.238.1) (2023-06-13)
 
 
