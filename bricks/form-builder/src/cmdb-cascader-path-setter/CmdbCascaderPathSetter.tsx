@@ -171,6 +171,11 @@ export function CmdbCascaderPathSetter(
               onChange={(e) => handleModelChange(item, e)}
               value={item.objectId}
               showSearch
+              filterOption={(input, option) =>
+                ((option?.label ?? "") as any)
+                  .toLowerCase()
+                  .includes(input.toLowerCase())
+              }
               options={optionsData[index]}
               disabled={!!props.disabled}
               style={{ width: "100%" }}
