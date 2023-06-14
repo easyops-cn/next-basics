@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.273.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.273.8...@next-bricks/forms@1.273.9) (2023-06-14)
+
+
+### Bug Fixes
+
+* **general-form:** fix fields not in values not reset when values changes ([035b850](https://github.com/easyops-cn/next-basics/commit/035b8504a644c0454ee9527c477168278368b272))
+
+
+
+
+
 ## [1.273.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.273.7...@next-bricks/forms@1.273.8) (2023-06-08)
 
 **Note:** Version bump only for package @next-bricks/forms
