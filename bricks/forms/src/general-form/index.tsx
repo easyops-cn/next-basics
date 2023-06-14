@@ -57,7 +57,11 @@ export class GeneralFormElement
     this._values = value;
 
     if (this.isConnected) {
-      this.setInitValue(value, { runInMacrotask: true });
+      this.resetFields();
+
+      if (value) {
+        this.setInitValue(value, { runInMacrotask: true });
+      }
     }
   }
   get values(): Record<string, any> {
@@ -433,7 +437,7 @@ export class GeneralFormElement
    * @description 重置表单项的值，传入的是每个表单项的 `name`, 如果需要重置所有表单项传递 `null` 即可
    */
   @method()
-  resetFields(names: string[]): void {
+  resetFields(names?: string[]): void {
     this.formUtils.resetFields(names);
 
     // workaround for dynamic-form-item reset value
