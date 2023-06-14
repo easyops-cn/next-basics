@@ -188,6 +188,18 @@ jest.spyOn(window.customElements, "define").mockImplementation(() => void 0);
               },
               category: "layout",
               thumbnail: "url-1",
+              snippetParams: {
+                test: {
+                  type: "string",
+                  defaultValue: "hello",
+                },
+              },
+              snippetData: [
+                {
+                  name: "name",
+                  value: "host",
+                },
+              ],
               bricks: [],
             },
             {
@@ -330,6 +342,18 @@ describe("GetBrickLibrary", () => {
           "description": undefined,
           "id": "installed-snippet-a",
           "layerType": undefined,
+          "snippetData": Array [
+            Object {
+              "name": "name",
+              "value": "host",
+            },
+          ],
+          "snippetParams": Object {
+            "test": Object {
+              "defaultValue": "hello",
+              "type": "string",
+            },
+          },
           "thumbnail": "url-1",
           "title": "片段 A",
           "type": "snippet",
@@ -343,6 +367,8 @@ describe("GetBrickLibrary", () => {
           "description": undefined,
           "id": "installed-snippet-b",
           "layerType": undefined,
+          "snippetData": undefined,
+          "snippetParams": undefined,
           "thumbnail": "url-2",
           "title": "installed-snippet-b",
           "type": "snippet",

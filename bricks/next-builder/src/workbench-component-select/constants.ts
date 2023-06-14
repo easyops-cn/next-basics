@@ -30,6 +30,7 @@ export const componetSortConf: Record<string, number> = {
   customTemplate: 5,
   customSnippet: 6,
   formItem: 7,
+  workflow: 8,
 };
 
 export const i18nTransform: Record<string, string> = {
@@ -40,6 +41,7 @@ export const i18nTransform: Record<string, string> = {
   widget: i18next.t(`${NS_NEXT_BUILDER}:${K.WIDGET}`),
   snippet: i18next.t(`${NS_NEXT_BUILDER}:${K.SNIPPET}`),
   formItem: i18next.t(`${NS_NEXT_BUILDER}:${K.FORMITEM}`),
+  workflow: i18next.t(`${NS_NEXT_BUILDER}:${K.WORKFLOW}`),
 };
 
 const brickGroup = [

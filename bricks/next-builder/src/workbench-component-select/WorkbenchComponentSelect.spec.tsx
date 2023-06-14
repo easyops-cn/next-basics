@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import * as brickKit from "@next-core/brick-kit";
 import { WorkbenchComponentSelect } from "./WorkbenchComponentSelect";
@@ -143,6 +143,20 @@ describe("WorkbenchComponentSelect", () => {
         "basic-bricks-widgets.fold-brick-v2-normal",
       ],
     },
+    {
+      type: "snippet",
+      id: "workflow-widgets.workflow-approval",
+      title: "工作流审批",
+      category: "workflow",
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-table",
+          properties: {
+            showCard: false,
+          },
+        },
+      ],
+    },
   ];
 
   const storyList = [
@@ -220,6 +234,8 @@ describe("WorkbenchComponentSelect", () => {
     expect(brickElement.querySelector(".name").textContent).toEqual(
       "折叠容器V2"
     );
+
+    expect(screen.getByText("next-builder:WORKFLOW")).toBeInTheDocument();
   });
 
   it("should work when currentBrick is form brick", async () => {
