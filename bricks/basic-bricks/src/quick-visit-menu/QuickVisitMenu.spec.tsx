@@ -148,6 +148,7 @@ describe("QuickVisitMenu", () => {
   const mockMenuRemove = jest.fn();
   const mockMenuDrag = jest.fn();
   const mockMenuClick = jest.fn();
+  const mockMenuCollectFailed = jest.fn();
   const favouriteMenus = [
     { text: "腾讯云·云硬盘cbs", to: "storage/cbs" },
     { text: "阿里云·SSL证书", to: "network/ali-ssl" },
@@ -453,11 +454,13 @@ describe("QuickVisitMenu", () => {
         handleCollect={mockMenuAdd}
         handleMenuClick={mockMenuClick}
         handleMenuRemove={mockMenuRemove}
+        handleCollectFailed={mockMenuCollectFailed}
       />
     );
     expect(wrapper.find(Tooltip).at(0).prop("trigger")).toEqual([]);
     wrapper.find('[data-testid="collect-btn"]').simulate("click");
     expect(mockMenuAdd).toBeCalledWith(menu);
+    expect(mockMenuAdd).toBeCalledTimes(1);
     expect(wrapper.find(StarFilled)).toHaveLength(1);
     wrapper.find('[data-testid="remove-btn"]').simulate("click");
     expect(mockMenuRemove).toBeCalledWith(menu);
@@ -470,6 +473,11 @@ describe("QuickVisitMenu", () => {
     });
     wrapper.update();
     expect(wrapper.find(Tooltip).at(0).prop("trigger")).toBe("hover");
+    wrapper.setProps({ maxFavouriteCount: 2, favouriteCount: 2 });
+    wrapper.update();
+    wrapper.find('[data-testid="collect-btn"]').simulate("click");
+    expect(mockMenuAdd).toBeCalledTimes(1);
+    expect(mockMenuCollectFailed).toBeCalledTimes(1);
   });
   it("should work with MenuContainer", () => {
     const wrapper = mount(
@@ -480,6 +488,8 @@ describe("QuickVisitMenu", () => {
         handleMenuRemove={mockMenuRemove}
         handleMenuClick={mockMenuClick}
         handleMenuDrag={mockMenuDrag}
+        maxFavouriteCount={2}
+        handleCollectFailed={mockMenuCollectFailed}
       />
     );
     const searchInput = wrapper.find(Input);
@@ -490,6 +500,8 @@ describe("QuickVisitMenu", () => {
     expect(wrapper.find(".favouriteEmpty")).toHaveLength(0);
     const tags = wrapper.find(MenuTag);
     expect(tags).toHaveLength(4);
+    tags.at(3).invoke("handleCollectFailed")();
+    expect(mockMenuCollectFailed).toBeCalledTimes(2);
     const mssqlMenu = {
       categoryTitle: "服务",
       groupTitle: "数据库",
@@ -531,8 +543,6 @@ describe("QuickVisitMenu", () => {
       1
     );
     expect(mockMenuDrag).toBeCalledTimes(1);
-
-    // expect(mockMenuDrag).toBeCalledTimes(2);
     favourite.invoke("handleMenuRemove")([
       { text: "阿里云·SSL证书", to: "network/ali-ssl" },
     ]);
@@ -540,9 +550,6 @@ describe("QuickVisitMenu", () => {
       { text: "阿里云·SSL证书", to: "network/ali-ssl" },
     ]);
     expect(wrapper.find(".favouriteEmpty")).toHaveLength(0);
-    searchInput.invoke("onChange")({ target: { value: "s" } });
-
-    // expect(wrapper.find('[data-testid="quick-visit"]')).toHaveLength(0);
   });
   it("should work with searchMenu", () => {
     const allMenus = flattenMenus(menu2);

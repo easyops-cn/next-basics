@@ -4,6 +4,7 @@ import { StarOutlined, StarFilled } from "@ant-design/icons";
 import { Tooltip } from "antd";
 import { K, NS_BASIC_BRICKS } from "../i18n/constants";
 import { useTranslation } from "react-i18next";
+import { isNumber } from "lodash";
 
 interface MenuTagProps {
   menu: Record<string, unknown>;
@@ -11,19 +12,41 @@ interface MenuTagProps {
   target?: string;
   handleMenuClick: (item: Record<string, unknown>) => void;
   handleMenuRemove: (item: Record<string, unknown>) => void;
+  canCollect?: boolean;
+  handleCollectFailed?: () => void;
+  favouriteCount?: number;
+  maxFavouriteCount?: number;
 }
 export function MenuTag(props: MenuTagProps): React.ReactElement {
-  const { menu, handleCollect, handleMenuClick, handleMenuRemove } = props;
+  const {
+    menu,
+    handleCollect,
+    handleMenuClick,
+    handleMenuRemove,
+    favouriteCount,
+    maxFavouriteCount,
+    handleCollectFailed,
+  } = props;
   const [selected, setSelected] = useState(false);
+  const [canCollect, setCanCollect] = useState(true);
   const { t } = useTranslation(NS_BASIC_BRICKS);
 
   useEffect(() => {
     const { isFavourite } = menu;
     setSelected(isFavourite as boolean);
   }, [menu]);
+  useEffect(() => {
+    if (isNumber(maxFavouriteCount)) {
+      setCanCollect(favouriteCount < maxFavouriteCount);
+    }
+  }, [favouriteCount]);
   const handleOnStarClick = () => {
-    setSelected(true);
-    handleCollect(menu);
+    if (canCollect) {
+      setSelected(true);
+      handleCollect(menu);
+    } else {
+      handleCollectFailed();
+    }
   };
   const handleOnTextClick = () => {
     handleMenuClick(menu);
