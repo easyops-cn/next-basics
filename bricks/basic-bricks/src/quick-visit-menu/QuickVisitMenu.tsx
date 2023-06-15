@@ -8,6 +8,7 @@ import { BrickAsComponent } from "@next-core/brick-kit";
 import { SearchOutlined, CloseCircleFilled } from "@ant-design/icons";
 import { K, NS_BASIC_BRICKS } from "../i18n/constants";
 import { useTranslation } from "react-i18next";
+import { Timer } from "d3";
 interface QuickVisitMenuProps {
   buttonName: string;
   searchPlaceholder?: string;
@@ -17,6 +18,8 @@ interface QuickVisitMenuProps {
   handleMenuRemove: (items: Record<string, unknown>[]) => void;
   handleMenuAdd: (items: Record<string, unknown>[]) => void;
   handleMenuClick: (item: Record<string, unknown>) => void;
+  handleCollectFailed?: () => void;
+  maxFavouriteCount?: number;
 }
 interface MenuContainerProps {
   searchPlaceholder?: string;
@@ -26,6 +29,8 @@ interface MenuContainerProps {
   handleMenuRemove?: (items: Record<string, unknown>[]) => void;
   handleMenuAdd?: (items: Record<string, unknown>[]) => void;
   handleMenuClick?: (item: Record<string, unknown>) => void;
+  handleCollectFailed?: () => void;
+  maxFavouriteCount?: number;
 }
 
 export function filterMenuTitle(title: string, key: string) {
@@ -95,12 +100,17 @@ export function MenuContainer({
   handleMenuRemove,
   handleMenuClick,
   handleMenuDrag,
+  handleCollectFailed,
+  maxFavouriteCount,
 }: MenuContainerProps): React.ReactElement {
   const [isSearching, setIsSearching] = useState(false);
   const [filterMenus, setFilterMenus] = useState([]);
   const [searchKey, setSearchKey] = useState("");
+  const [favouriteCount, setFavouriteCount] = useState(0);
   const { t } = useTranslation(NS_BASIC_BRICKS);
-
+  useEffect(() => {
+    setFavouriteCount(favouriteMenus.length);
+  }, [favouriteMenus]);
   const onSearch = (event) => {
     setSearchKey(event.target.value);
     setIsSearching(!!event.target.value);
@@ -110,6 +120,9 @@ export function MenuContainer({
   const handleCollect = (item) => {
     const newFavouriteList = [...favouriteMenus, item];
     handleMenuAdd(newFavouriteList);
+  };
+  const handleCollectMenuFailed = () => {
+    handleCollectFailed();
   };
   const removeSingleMenu = (item) => {
     const newFavouriteList = removeItemFromList(favouriteMenus, item);
@@ -190,6 +203,9 @@ export function MenuContainer({
                 handleCollect={handleCollect}
                 handleMenuClick={handleMenuClick}
                 handleMenuRemove={removeSingleMenu}
+                favouriteCount={favouriteCount}
+                maxFavouriteCount={maxFavouriteCount}
+                handleCollectFailed={handleCollectMenuFailed}
               />
             ))}
           </div>
@@ -211,18 +227,27 @@ export function QuickVisitMenu(props: QuickVisitMenuProps): React.ReactElement {
     handleMenuAdd,
     handleMenuClick,
     searchPlaceholder,
+    handleCollectFailed,
+    maxFavouriteCount,
   } = props;
 
   const [allMenus, setAllMenus] = useState([]);
   const { t } = useTranslation(NS_BASIC_BRICKS);
   useEffect(() => {
     setAllMenus(flattenMenus(menu, favouriteMenus));
-  }, [favouriteMenus]);
-
+  }, [favouriteMenus, menu]);
+  let timer;
   const [drawerVisible, setDrawerVisible] = useState(false);
   function triggerDrawerVisible(visible: boolean) {
-    if (drawerVisible !== visible) {
-      setDrawerVisible(visible);
+    if (!visible && drawerVisible) {
+      timer = setTimeout(() => {
+        setDrawerVisible(false);
+      }, 100);
+    } else {
+      setDrawerVisible(true);
+      if (timer) {
+        clearTimeout(timer);
+      }
     }
   }
 
@@ -236,7 +261,9 @@ export function QuickVisitMenu(props: QuickVisitMenuProps): React.ReactElement {
       className={styles.menuPopover}
       onMouseEnter={() => triggerDrawerVisible(true)}
       onMouseLeave={() => {
-        triggerDrawerVisible(false);
+        if (drawerVisible) {
+          triggerDrawerVisible(false);
+        }
       }}
     >
       <div className={styles.appNameWrapper}>
@@ -251,7 +278,7 @@ export function QuickVisitMenu(props: QuickVisitMenuProps): React.ReactElement {
           placement="top"
           maskClosable={true}
           closable={false}
-          onClose={() => triggerDrawerVisible(false)}
+          onClose={() => setDrawerVisible(false)}
           className={styles.popoverInMenu}
           getContainer={getContainer}
           height={
@@ -271,6 +298,8 @@ export function QuickVisitMenu(props: QuickVisitMenuProps): React.ReactElement {
             handleMenuRemove={removeMenuItem}
             handleMenuDrag={handleMenuDrag}
             handleMenuClick={handleMenuClick}
+            handleCollectFailed={handleCollectFailed}
+            maxFavouriteCount={maxFavouriteCount}
           />
         </Drawer>
       </div>

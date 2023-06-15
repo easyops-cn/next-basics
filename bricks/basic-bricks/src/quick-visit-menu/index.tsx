@@ -50,7 +50,12 @@ export class QuickVisitMenuElement extends UpdatingElement {
    * @detail 快捷访问全量菜单
    * @description 拖拽快捷访问的菜单标签时发出的事件
    */
-
+  /**
+   * @default
+   * @required false
+   * @description 支持收藏的最大数量
+   */
+  @property({ attribute: false }) maxFavouriteCount: number;
   @event({ type: "menu.drag" }) menuDragEvent: EventEmitter<
     Record<string, any>
   >;
@@ -84,8 +89,19 @@ export class QuickVisitMenuElement extends UpdatingElement {
   @event({ type: "menu.click" }) menuClickEvent: EventEmitter<
     Record<string, any>
   >;
+
   private _handleMenuClick = (item) => {
     this.menuClickEvent.emit(item);
+  };
+  /**
+   * @detail
+   * @description 收藏超过最大数量时发出的事件
+   */
+  @event({ type: "collect.failed" }) menuCollectFailedEvent: EventEmitter<
+    Record<string, any>
+  >;
+  private _handleCollectFailed = () => {
+    this.menuCollectFailedEvent.emit({});
   };
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -114,6 +130,8 @@ export class QuickVisitMenuElement extends UpdatingElement {
             handleMenuAdd={this._handleMenuAdd}
             handleMenuClick={this._handleMenuClick}
             searchPlaceholder={this.searchPlaceholder}
+            handleCollectFailed={this._handleCollectFailed}
+            maxFavouriteCount={this.maxFavouriteCount}
           />
         </BrickWrapper>,
         this
