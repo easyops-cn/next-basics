@@ -33,7 +33,7 @@ describe("forms.user-or-user-group-select", () => {
     expect(spyOnRender).not.toBeCalled();
     document.body.appendChild(element);
     await jest.runAllTimers();
-    expect(spyOnRender).not.toBeCalled();
+    expect(spyOnRender).toBeCalled();
     document.body.removeChild(element);
     await jest.runAllTimers();
     expect(unmountComponentAtNode).toBeCalled();
@@ -58,12 +58,23 @@ describe("forms.user-or-user-group-select", () => {
       selectedUserGroup: ["test group"],
     });
 
+    element.mergeUseAndUserGroup = true;
+    element._handleChange({
+      selectedUser: ["easyops"],
+      selectedUserGroup: ["test group"],
+    });
+    await (global as any).flushPromises();
+    expect((dispatchEvent.mock.calls[1][0] as CustomEvent).detail).toEqual([
+      "easyops",
+      "test group",
+    ]);
+
     element._handleChangeV2([
       { label: "tester", value: "tester" },
       { label: "test group", value: "test-group" },
     ]);
     await (global as any).flushPromises();
-    expect((dispatchEvent.mock.calls[1][0] as CustomEvent).detail).toEqual([
+    expect((dispatchEvent.mock.calls[2][0] as CustomEvent).detail).toEqual([
       { label: "tester", value: "tester" },
       { label: "test group", value: "test-group" },
     ]);

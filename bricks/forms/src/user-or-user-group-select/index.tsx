@@ -253,9 +253,6 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
-      if (this.notRender) {
-        return;
-      }
       const mutableProps = {
         value: this.value,
       };
