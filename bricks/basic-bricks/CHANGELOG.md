@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.238.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.238.4...@next-bricks/basic-bricks@1.238.5) (2023-06-15)
+
+
+### Bug Fixes
+
+* **basic-bricks:** 优化快捷访问菜单闪烁的问题 ([0c5f23d](https://github.com/easyops-cn/next-basics/commit/0c5f23da8f1667e4a7f2f098b575d17ee61301a5))
+
+
+
+
+
 ## [1.238.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.238.3...@next-bricks/basic-bricks@1.238.4) (2023-06-15)
 
 
