@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.238.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.238.2...@next-bricks/basic-bricks@1.238.3) (2023-06-15)
+
+
+### Bug Fixes
+
+* **basic-bricks:** 快捷访问输入框有字且鼠标悬浮时才出现删除按钮 ([9a4c35d](https://github.com/easyops-cn/next-basics/commit/9a4c35d36a17b0b94499a3ee01444e8c90364983))
+
+
+
+
+
 ## [1.238.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.238.1...@next-bricks/basic-bricks@1.238.2) (2023-06-14)
 
 
