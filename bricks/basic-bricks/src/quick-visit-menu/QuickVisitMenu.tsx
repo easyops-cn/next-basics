@@ -3,7 +3,7 @@ import { Button, Drawer, Input } from "antd";
 import styles from "./index.module.css";
 import { MenuTag } from "./MenuTag";
 import { FavouriteMenu } from "./FavouriteMenu";
-import { reject } from "lodash";
+import { reject, isEmpty } from "lodash";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { SearchOutlined, CloseCircleFilled } from "@ant-design/icons";
 import { K, NS_BASIC_BRICKS } from "../i18n/constants";
@@ -131,18 +131,21 @@ export function MenuContainer({
     <div className={styles.outerWrapper}>
       <div className={styles.menuSearchContainer}>
         <Input
+          className={styles.searchInput}
           prefix={<SearchOutlined className={styles.searchIcon} />}
           onChange={onSearch}
           placeholder={searchPlaceholder}
           value={searchKey}
         />
-        <CloseCircleFilled
-          className={styles.clearBtn}
-          onClick={() => {
-            setSearchKey("");
-            onSearch({ target: { value: "" } });
-          }}
-        />
+        {!isEmpty(searchKey) && (
+          <CloseCircleFilled
+            className={styles.clearBtn}
+            onClick={() => {
+              setSearchKey("");
+              onSearch({ target: { value: "" } });
+            }}
+          />
+        )}
       </div>
       {!isSearching && (
         <div>

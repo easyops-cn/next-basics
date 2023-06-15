@@ -49,12 +49,16 @@
 }
 
 .menuSearchContainer {
+  .searchInput:hover + .clearBtn {
+    visibility: visible;
+  }
   .clearBtn {
     position: absolute;
     top: 9px;
     right: 11px;
     z-index: 1;
     color: var(--text-color-disabled);
+    visibility: hidden;
   }
   position: relative;
   margin-bottom: 20px;
