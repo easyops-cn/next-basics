@@ -59,6 +59,9 @@
     z-index: 1;
     color: var(--text-color-disabled);
     visibility: hidden;
+    &:hover {
+      visibility: visible;
+    }
   }
   position: relative;
   margin-bottom: 20px;
