@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.273.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.273.9...@next-bricks/forms@1.273.10) (2023-06-15)
+
+
+### Bug Fixes
+
+* ITSERVICE_NEXT-6317 forms.user-or-user-group-select必填情况下，动态切换notRender为true，form仍然对字段进行了校验 ref ITSERVICE_NEXT-6317 ([0e6f446](https://github.com/easyops-cn/next-basics/commit/0e6f4462755db69eb9e2313b6edcaaaf502455ca))
+
+
+
+
+
 ## [1.273.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.273.8...@next-bricks/forms@1.273.9) (2023-06-14)
 
 
