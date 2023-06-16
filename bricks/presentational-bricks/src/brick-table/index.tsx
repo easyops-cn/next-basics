@@ -839,6 +839,17 @@ export class BrickTableElement extends UpdatingElement {
 
   /**
    * @required false
+   * @default "DraggableBodyRow"
+   * @description 指定元素的类型，只有类型相同的元素才能进行drop操作
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  acceptType: string;
+
+  /**
+   * @required false
    * @default false
    * @description 是否展示斑马纹
    * @group ui
@@ -1687,6 +1698,7 @@ export class BrickTableElement extends UpdatingElement {
             optimizedColumns={this.optimizedColumns}
             ellipsisInfo={this.ellipsisInfo}
             thTransparent={this.thTransparent}
+            acceptType={this.acceptType}
           />
         </BrickWrapper>,
         this

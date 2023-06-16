@@ -69,18 +69,20 @@ export interface BrickTableProps {
   ellipsisInfo?: boolean;
   thTransparent?: boolean;
   showHeader?: boolean;
+  acceptType?: string;
 }
 
 const DraggableBodyRow = ({
   index,
   moveRow,
+  acceptType,
   className,
   style,
   ...restProps
 }) => {
   const ref = React.useRef();
   const [{ isOver, dropClassName }, drop] = useDrop({
-    accept: type,
+    accept: acceptType || type,
     collect: (monitor) => {
       const { index: dragIndex } = monitor.getItem() || {};
       if (dragIndex === index) {
@@ -99,7 +101,7 @@ const DraggableBodyRow = ({
     },
   });
   const [, drag] = useDrag({
-    item: { type, index },
+    item: { type: acceptType || type, index },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -529,6 +531,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
             onRow: (record, index) => ({
               index,
               moveRow: moveRow,
+              acceptType: props.acceptType,
             }),
           }
         : {})}
