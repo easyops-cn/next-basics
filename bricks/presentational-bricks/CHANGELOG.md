@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.304.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.304.6...@next-bricks/presentational-bricks@1.304.7) (2023-06-16)
+
+
+### Bug Fixes
+
+* 指定拖拽元素类型可配置 ([6a63c77](https://github.com/easyops-cn/next-basics/commit/6a63c77e4b8b6bbfedaa0db8e55b826eabb50cad))
+
+
+
+
+
 ## [1.304.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.304.5...@next-bricks/presentational-bricks@1.304.6) (2023-06-13)
 
 
