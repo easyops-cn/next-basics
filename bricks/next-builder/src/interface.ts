@@ -6,3 +6,18 @@ export interface RouteTreeNode extends BuilderRouteNode {
   selected?: boolean;
   children?: RouteTreeNode[];
 }
+export interface TypeFieldItem {
+  id: string;
+  name: string;
+  type: string;
+  required?: boolean;
+}
+
+interface WorkflowDataChildrenOption {
+  label: string;
+  value: string;
+}
+
+export interface WorkflowDataItem extends WorkflowDataChildrenOption {
+  options?: WorkflowDataChildrenOption[];
+}

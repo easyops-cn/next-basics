@@ -3,6 +3,7 @@ lazyBricks:
   - event-config-form
   - search-tree
   - storyboard-lint-result
+  - workflow-create-data-item
   - group: function-debugger
     bricks:
       - function-debugger-sidebar

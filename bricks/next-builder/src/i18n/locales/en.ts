@@ -164,6 +164,12 @@ const locale: Locale = {
   [K.VIEW_PROBLEMATIC_BRICK]: "View problematic brick",
   [K.VIEW_PROBLEMATIC_ROUTE]: "View problematic route",
   [K.VIEW_PROBLEMATIC_TEMPLATE]: "View problematic template",
+  [K.REQUIRED_FIELD_MESSAGE]: "Please input {{name}}",
+  [K.SELECT_WORKFLOW_FIELD_PLACEHOLDER]:
+    "Please select the field under this process node object",
+  [K.SEARCH_WORKFLOW_NODE_FIELD]:
+    "Search the fields under the process node object",
+  [K.USE_WORKFLOW_NODE_VALUE]: "Use the value of this process node object",
 };
 
 export default locale;
