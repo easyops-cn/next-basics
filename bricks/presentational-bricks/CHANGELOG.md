@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.304.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.304.7...@next-bricks/presentational-bricks@1.304.8) (2023-06-19)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** 次要标题字号与颜色调整 ([772b36b](https://github.com/easyops-cn/next-basics/commit/772b36b3aec3c523c96a1b5905c24d741028b188))
+
+
+
+
+
 ## [1.304.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.304.6...@next-bricks/presentational-bricks@1.304.7) (2023-06-16)
 
 
