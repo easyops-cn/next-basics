@@ -109,7 +109,7 @@ export class AgendaCalendarElement extends UpdatingElement {
   /**
    * @kind number
    * @required false
-   * @description 月/周视图的开始时间，默认为0。
+   * @description 月/周视图的开始时间，默认值为0。
    * @group basic
    */
   @property({ attribute: false })
@@ -119,7 +119,7 @@ export class AgendaCalendarElement extends UpdatingElement {
    * @kind boolean
    * @default  false
    * @required false
-   * @description 日程任务过多时，是否折叠日程
+   * @description 日程任务过多时，是否折叠日程。
    * @group basic
    */
   @property({ attribute: false })
@@ -129,7 +129,7 @@ export class AgendaCalendarElement extends UpdatingElement {
    * @kind boolean
    * @default  true
    * @required false
-   * @description 月/周视图是否展示一天的日程任务数
+   * @description 月/周视图是否展示一天的日程任务数。
    * @group basic
    */
   @property({ attribute: false })
