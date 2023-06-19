@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/calendar-bricks@0.1.13...@next-bricks/calendar-bricks@0.1.14) (2023-06-19)
+
+
+### Bug Fixes
+
+* 修改示例文案，重新触发流水线 ref NEXT_BUILDER-3447 ([2e014b3](https://github.com/easyops-cn/next-basics/commit/2e014b355bc0b1bff690428596cba2db4a29e220))
+
+
+
+
+
 ## [0.1.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/calendar-bricks@0.1.12...@next-bricks/calendar-bricks@0.1.13) (2023-06-19)
 
 
