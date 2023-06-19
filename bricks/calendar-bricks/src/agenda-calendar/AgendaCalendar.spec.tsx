@@ -33,7 +33,7 @@ export const mockDayData = [
   {
     id: "event2",
     calendarId: "cal2",
-    title: "Weekly meeting",
+    title: "Weekly meeting1",
     start: "2022-09-28T00:00:00",
     end: "2022-09-28T10:08:00",
   },
