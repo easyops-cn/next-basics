@@ -158,6 +158,10 @@ const locale: Locale = {
   [K.VIEW_PROBLEMATIC_BRICK]: "查看有问题的构件",
   [K.VIEW_PROBLEMATIC_ROUTE]: "查看有问题的路由",
   [K.VIEW_PROBLEMATIC_TEMPLATE]: "查看有问题的模板",
+  [K.REQUIRED_FIELD_MESSAGE]: "请输入{{name}}",
+  [K.SELECT_WORKFLOW_FIELD_PLACEHOLDER]: "请选择本流程节点对象的下的字段",
+  [K.SEARCH_WORKFLOW_NODE_FIELD]: "搜索流程节点对象下的字段",
+  [K.USE_WORKFLOW_NODE_VALUE]: "使用本流程节点对象的值",
 };
 
 export default locale;
