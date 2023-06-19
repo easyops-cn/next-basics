@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/calendar-bricks@0.1.11...@next-bricks/calendar-bricks@0.1.12) (2023-06-19)
+
+
+### Bug Fixes
+
+* Date.toLocaleString兼容性问题，使用moment.js代替 ref NEXT_BUILDER-3447 ([d4f9797](https://github.com/easyops-cn/next-basics/commit/d4f97972e8c3fe07ea9e81fed55f3de2db4bd398))
+
+
+
+
+
 ## [0.1.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/calendar-bricks@0.1.10...@next-bricks/calendar-bricks@0.1.11) (2023-05-09)
 
 **Note:** Version bump only for package @next-bricks/calendar-bricks
