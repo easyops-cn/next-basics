@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.248.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.247.3...@next-bricks/next-builder@1.248.0) (2023-06-19)
+
+
+### Features
+
+* workflow-create-data-item brick ([c7f77cc](https://github.com/easyops-cn/next-basics/commit/c7f77ccd8aeb99d6b1f71d835e32d25559134258))
+
+
+
+
+
 ## [1.247.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.247.2...@next-bricks/next-builder@1.247.3) (2023-06-14)
 
 
