@@ -4,6 +4,7 @@ import {
   customDayViewContext,
   viewTypeEnum,
 } from "../component/agendaCalendarContext";
+import moment from "moment";
 const TIME_ZONE = [
   "00:00",
   "01:00",
@@ -82,9 +83,10 @@ class CustomView extends React.Component {
                     className="customDayEventsDiv"
                     onClick={() =>
                       this.context.eventClick(
-                        (
-                          this.props as ViewProps
-                        ).dateProfile.currentRange.start.toLocaleString(),
+                        moment(
+                          (this.props as ViewProps).dateProfile.currentRange
+                            .start
+                        ).format("YYYY-MM-DD HH:mm:ss"),
                         i
                       )
                     }

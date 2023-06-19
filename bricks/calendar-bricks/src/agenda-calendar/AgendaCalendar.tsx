@@ -166,7 +166,11 @@ export function CalendarRender(props: calendarProps, ref: any) {
       calendarApiRef.current.next();
     }
     const currentDate = calendarApiRef.current.getDate() as Date;
-    props.onQuickSwitchDate(viewType, type, currentDate.toLocaleString());
+    props.onQuickSwitchDate(
+      viewType,
+      type,
+      moment(currentDate).format("YYYY-MM-DD HH:mm:ss")
+    );
     setHeaderTitle(
       `${currentDate.getFullYear()}年${currentDate.getMonth() + 1}月${
         viewType === viewTypeEnum.CUSTOM_DAY ? currentDate.getDate() + "日" : ""
@@ -379,7 +383,7 @@ export function CalendarRender(props: calendarProps, ref: any) {
                     }
                   );
                   props.onDateSelect(
-                    e.date.toLocaleString(),
+                    moment(e.date).format("YYYY-MM-DD HH:mm:ss"),
                     currentDaysAgenda
                   );
                 }
