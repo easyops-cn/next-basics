@@ -4,18 +4,18 @@ import React, {
   forwardRef,
   useImperativeHandle,
   Ref,
+  useEffect,
 } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../i18n/constants";
 import { Form, Tooltip, FormInstance } from "antd";
-import { SettingOutlined } from "@ant-design/icons";
+import { SwapOutlined } from "@ant-design/icons";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import styles from "./WorkflowCreateDataItem.module.css";
 import { WorkflowDataField } from "../shared/components/workflow-data-field/WorkflowDataField";
 import { ValueTypeField } from "../shared/components/value-type-field/ValueTypeField";
 import classNames from "classnames";
 import { TypeFieldItem, WorkflowDataItem } from "../interface";
-import { isObject } from "lodash";
 
 export interface WorkflowCreateDataItemProps extends FormItemWrapperProps {
   fieldList: TypeFieldItem[];
@@ -54,6 +54,10 @@ export const LegacyWorkflowCreateDataItem = forwardRef(
       },
       [form, onChange]
     );
+
+    useEffect(() => {
+      form.setFieldsValue(value);
+    }, [form, value]);
 
     const handleDataChange = (
       type: ValueType,
@@ -96,10 +100,10 @@ export const LegacyWorkflowCreateDataItem = forwardRef(
     const RenderLabelNode = useCallback(
       (field: TypeFieldItem, type: string): React.ReactNode => {
         return (
-          <Tooltip title={t(K.USE_WORKFLOW_NODE_VALUE)}>
+          <Tooltip title={t(K.SWITCH_MODEL)}>
             <span className={styles.labelWrapper}>
               {field.name}
-              <SettingOutlined
+              <SwapOutlined
                 onClick={() => handleLabelClick(field, type)}
                 className={classNames(styles.labelIcon, {
                   [styles.selected]: type === ValueType.EXPR,
@@ -112,15 +116,11 @@ export const LegacyWorkflowCreateDataItem = forwardRef(
       [handleLabelClick, t]
     );
 
-    const requiredValidator = ({ field }: any, v: unknown, cb: any): void => {
-      if (!v) {
+    const requiredValidator = ({ field }: any, v: any, cb: any): void => {
+      if (!v?.value) {
         cb(t(K.REQUIRED_FIELD_MESSAGE, { name: field }));
       } else {
-        if (isObject(v) && !(v as Record<string, any>).value) {
-          cb(t(K.REQUIRED_FIELD_MESSAGE, { name: field }));
-        } else {
-          cb();
-        }
+        cb();
       }
     };
 
@@ -138,6 +138,7 @@ export const LegacyWorkflowCreateDataItem = forwardRef(
                 ...(item.required ? [{ validator: requiredValidator }] : []),
               ]}
               getValueProps={(field) => ({ value: field?.value })}
+              getValueFromEvent={(v) => ({ type: fieldValue?.type, value: v })}
             >
               {fieldValue?.type === ValueType.EXPR ? (
                 <WorkflowDataField

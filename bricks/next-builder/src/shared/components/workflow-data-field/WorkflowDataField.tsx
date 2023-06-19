@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Select, Input } from "antd";
 import { useTranslation } from "react-i18next";
 import {
@@ -7,6 +7,7 @@ import {
   DownOutlined,
   UpOutlined,
 } from "@ant-design/icons";
+import { EasyopsEmpty } from "@next-core/brick-kit";
 import { NS_NEXT_BUILDER, K } from "../../../i18n/constants";
 import { getFilterDataList, findFieldLabelOfData } from "./processor";
 import { WorkflowDataItem } from "../../../interface";
@@ -141,44 +142,47 @@ export function WorkflowFieldDropdown(
         suffix={<SearchOutlined className={styles.icon} />}
         onChange={handleSearch}
       />
-
-      {curStepDataList?.map((item, index) => {
-        return (
-          <div
-            key={index}
-            className={classNames({
-              [styles.active]: activeItems.includes(item.value),
-            })}
-          >
+      {!curStepDataList?.length ? (
+        <EasyopsEmpty />
+      ) : (
+        curStepDataList?.map((item, index) => {
+          return (
             <div
-              className={styles.titleWrapper}
-              onClick={() => handleTitleClick(item.value)}
-            >
-              <DatabaseOutlined className={styles.icon} />
-              <div className={styles.name}>{item.label}</div>
-              {activeItems.includes(item.value) ? (
-                <UpOutlined className={styles.icon} />
-              ) : (
-                <DownOutlined className={styles.icon} />
-              )}
-            </div>
-
-            <ul className={styles.contentWrapper}>
-              {item.options?.map((child, rowIndex) => {
-                return (
-                  <li
-                    className={styles.field}
-                    key={rowIndex}
-                    onClick={() => onChange?.(child.value)}
-                  >
-                    {child.label}
-                  </li>
-                );
+              key={index}
+              className={classNames({
+                [styles.active]: activeItems.includes(item.value),
               })}
-            </ul>
-          </div>
-        );
-      })}
+            >
+              <div
+                className={styles.titleWrapper}
+                onClick={() => handleTitleClick(item.value)}
+              >
+                <DatabaseOutlined className={styles.icon} />
+                <div className={styles.name}>{item.label}</div>
+                {activeItems.includes(item.value) ? (
+                  <UpOutlined className={styles.icon} />
+                ) : (
+                  <DownOutlined className={styles.icon} />
+                )}
+              </div>
+
+              <ul className={styles.contentWrapper}>
+                {item.options?.map((child, rowIndex) => {
+                  return (
+                    <li
+                      className={styles.field}
+                      key={rowIndex}
+                      onClick={() => onChange?.(child.value)}
+                    >
+                      {child.label}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        })
+      )}
     </div>
   );
 }

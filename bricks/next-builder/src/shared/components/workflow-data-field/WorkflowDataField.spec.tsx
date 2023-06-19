@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, screen, act } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { WorkflowDataField, WorkflowFieldDropdown } from "./WorkflowDataField";
 
@@ -52,6 +52,16 @@ describe("WorkflowStepDataItem", () => {
     fireEvent.click(screen.getByText("数量"));
 
     expect(mockOnChange).toHaveBeenCalledWith("test.count");
+  });
+
+  it("should render empty image if no data", () => {
+    const mockOnChange = jest.fn();
+    render(<WorkflowDataField dataList={[]} onChange={mockOnChange} />);
+
+    const selectElement = screen.getByRole("combobox");
+    fireEvent.keyDown(selectElement);
+
+    expect(document.body.querySelector(".ant-empty-image")).toBeInTheDocument();
   });
 
   describe("WorkflowFieldDropdown", () => {
