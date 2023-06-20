@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.238.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.238.5...@next-bricks/basic-bricks@1.238.6) (2023-06-20)
+
+
+### Bug Fixes
+
+* **basic-bricks.app-bar.DesktopCell:** Launchpad最近访问项支持两行 ([c7f6a30](https://github.com/easyops-cn/next-basics/commit/c7f6a3066340df181c2ce23c3de7cd549812f8ec))
+* **basic-bricks.app-bar.DesktopCell:** 更新单元测试 ([79ea527](https://github.com/easyops-cn/next-basics/commit/79ea527456b1b722b34423581aff04288951fd0a))
+
+
+
+
+
 ## [1.238.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.238.4...@next-bricks/basic-bricks@1.238.5) (2023-06-15)
 
 
