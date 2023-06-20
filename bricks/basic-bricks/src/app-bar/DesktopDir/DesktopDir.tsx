@@ -51,7 +51,9 @@ export function DesktopDir(props: NormalizedDesktopDir): React.ReactElement {
             )
           )}
       </a>
-      <span className={styles.dirName}>{props.name}</span>
+      <div className={styles.dirName} title={props.name}>
+        {props.name}
+      </div>
     </>
   );
 }

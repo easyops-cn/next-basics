@@ -73,12 +73,12 @@ export function DesktopApp({
           />
         )}
       </Link>
-      <span className={styles.appName}>
+      <div className={styles.appName} title={app.localeName}>
         {installing && (
           <Loading3QuartersOutlined spin style={{ paddingRight: 5 }} />
         )}
         {app.localeName}
-      </span>
+      </div>
     </>
   );
 }

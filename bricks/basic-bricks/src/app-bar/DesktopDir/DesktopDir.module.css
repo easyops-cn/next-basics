@@ -37,11 +37,15 @@
 }
 
 .dirName {
-  display: block;
+  display: -webkit-box;
   font-size: 16px;
   line-height: 1.5;
-  height: 24px;
+  height: 48px;
   text-align: center;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (max-height: 860px), (max-width: 1280px) {
@@ -50,7 +54,7 @@
   }
   .dirName {
     font-size: 14px;
-    height: 21px;
+    height: 42px;
   }
 }
 
@@ -60,7 +64,7 @@
   }
   .dirName {
     font-size: 12px;
-    height: 18px;
+    height: 36px;
   }
 }
 
