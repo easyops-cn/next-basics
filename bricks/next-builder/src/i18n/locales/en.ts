@@ -170,6 +170,7 @@ const locale: Locale = {
   [K.SEARCH_WORKFLOW_NODE_FIELD]:
     "Search the fields under the process node object",
   [K.USE_WORKFLOW_NODE_VALUE]: "Use the value of this process node object",
+  [K.SWITCH_MODEL]: "Switch model",
 };
 
 export default locale;

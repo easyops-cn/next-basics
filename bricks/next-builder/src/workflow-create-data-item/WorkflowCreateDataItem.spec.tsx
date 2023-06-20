@@ -167,7 +167,7 @@ describe("WorkflowStepDataItem", () => {
         name: { type: "const", value: "" },
       });
 
-      fireEvent.click(screen.getAllByLabelText("setting")[0]);
+      fireEvent.click(screen.getAllByLabelText("swap")[0]);
 
       expect(mockOnChange.mock.calls[2][0]).toEqual({
         age: undefined,
@@ -175,7 +175,7 @@ describe("WorkflowStepDataItem", () => {
         name: { type: "expr", value: undefined },
       });
 
-      fireEvent.click(screen.getAllByLabelText("setting")[2]);
+      fireEvent.click(screen.getAllByLabelText("swap")[2]);
 
       expect(mockOnChange.mock.calls[3][0]).toEqual({
         age: undefined,
