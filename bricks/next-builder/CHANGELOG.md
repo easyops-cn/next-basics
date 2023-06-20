@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.248.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.248.1...@next-bricks/next-builder@1.248.2) (2023-06-20)
+
+
+### Bug Fixes
+
+* fix doLint match batch update problem ([6c8d185](https://github.com/easyops-cn/next-basics/commit/6c8d18587b62990acfd4e3c28eae0b6ae9f8e3aa))
+
+
+
+
+
 ## [1.248.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.248.0...@next-bricks/next-builder@1.248.1) (2023-06-20)
 
 
