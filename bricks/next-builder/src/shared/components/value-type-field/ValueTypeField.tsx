@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { Input, InputNumber, Switch } from "antd";
+import { Input, InputNumber, Switch, DatePicker } from "antd";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
 import { NS_NEXT_BUILDER, K } from "../../../i18n/constants";
+import moment from "moment";
 import { TypeFieldItem } from "../../../interface";
 
 export interface ValueTypeFieldProps {
@@ -13,7 +14,7 @@ export interface ValueTypeFieldProps {
 
 export function ValueTypeField(props: ValueTypeFieldProps): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
-  const { onChange, value, field } = props;
+  const { onChange, value, field, timeFormat } = props;
 
   const getCodeEditorItem = (): React.ReactElement => {
     return (
@@ -32,6 +33,15 @@ export function ValueTypeField(props: ValueTypeFieldProps): React.ReactElement {
     );
   };
 
+  const formatDateValue = useCallback(
+    (value: string): moment.Moment => {
+      if (value) {
+        return moment(value, timeFormat);
+      }
+    },
+    [timeFormat]
+  );
+
   switch (field.type) {
     case "string":
       return <Input onChange={(e) => onChange(e.target.value)} value={value} />;
@@ -39,6 +49,16 @@ export function ValueTypeField(props: ValueTypeFieldProps): React.ReactElement {
       return <InputNumber onChange={onChange} value={value} />;
     case "boolean":
       return <Switch onChange={onChange} checked={value} />;
+    case "date":
+    case "datetime":
+      return (
+        <DatePicker
+          showTime={field.type === "datetime"}
+          onChange={(_, dateString) => onChange(dateString)}
+          format={field.timeFormat}
+          value={formatDateValue(value)}
+        />
+      );
     default:
       return getCodeEditorItem();
   }

@@ -11,6 +11,7 @@ export interface TypeFieldItem {
   name: string;
   type: string;
   required?: boolean;
+  timeFormat?: string;
 }
 
 interface WorkflowDataChildrenOption {
