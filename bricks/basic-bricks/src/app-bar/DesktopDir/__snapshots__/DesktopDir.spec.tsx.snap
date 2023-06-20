@@ -13,11 +13,12 @@ exports[`DesktopDir should render a custom item 1`] = `
       src="png-url"
     />
   </a>
-  <span
+  <div
     className="dirName"
+    title="hello"
   >
     hello
-  </span>
+  </div>
 </Fragment>
 `;
 
@@ -34,11 +35,12 @@ exports[`DesktopDir should render absolute url icon 1`] = `
       src="/large.png"
     />
   </a>
-  <span
+  <div
     className="dirName"
+    title="hello"
   >
     hello
-  </span>
+  </div>
 </Fragment>
 `;
 
@@ -55,11 +57,12 @@ exports[`DesktopDir should render relative url icon 1`] = `
       src="micro-apps/hello/large.png"
     />
   </a>
-  <span
+  <div
     className="dirName"
+    title="hello"
   >
     hello
-  </span>
+  </div>
 </Fragment>
 `;
 
@@ -76,10 +79,11 @@ exports[`DesktopDir should work 1`] = `
       src="png-url"
     />
   </a>
-  <span
+  <div
     className="dirName"
+    title="hello"
   >
     hello
-  </span>
+  </div>
 </Fragment>
 `;

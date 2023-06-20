@@ -54,7 +54,9 @@ export function DesktopCustom({
           />
         )}
       </Link>
-      <span className={styles.appName}>{name}</span>
+      <div className={styles.appName} title={name}>
+        {name}
+      </div>
     </>
   );
 }
