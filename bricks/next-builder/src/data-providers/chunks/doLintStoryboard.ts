@@ -22,6 +22,7 @@ import {
   StoryboardNodeEventHandler,
 } from "@next-core/brick-utils";
 import { sortBy } from "lodash";
+import isEmpty from "lodash";
 
 // https://github.com/type-challenges/type-challenges/issues/18153
 type UnionToFnIntersection<T> = (
@@ -329,10 +330,9 @@ export function doLintStoryboard(
               const meta = getMetaByPath(path.concat(node));
               if (
                 Array.isArray(args) &&
-                !args.every((item) =>
-                  isObject(item)
-                    ? item.name !== undefined && item.value !== undefined
-                    : true
+                args.every(
+                  (item) =>
+                    isObject(item) && (!item.name || item.value === undefined)
                 )
               ) {
                 addMeta(

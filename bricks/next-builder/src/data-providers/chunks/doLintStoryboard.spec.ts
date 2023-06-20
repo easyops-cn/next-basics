@@ -285,6 +285,12 @@ const storyboard = {
                 testid: "new link",
               },
             },
+            events: [
+              {
+                action: "state.update",
+                args: ["test", {}],
+              },
+            ],
           },
         ],
         name: "tpl-test-1",
