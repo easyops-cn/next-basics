@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent, prettyDOM } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { ValueTypeField } from "./ValueTypeField";
 
@@ -46,5 +46,40 @@ describe("ValueTypeItem", () => {
     render(<ValueTypeField field={field} />);
 
     expect(screen.getByText("code editor")).toBeInTheDocument();
+  });
+
+  it("should work with date type", () => {
+    const field = {
+      id: "date",
+      name: "日期",
+      type: "date",
+    };
+
+    const mockChange = jest.fn();
+    render(
+      <ValueTypeField field={field} value="2023-06-20" onChange={mockChange} />
+    );
+
+    fireEvent.keyDown(screen.getByRole("textbox"));
+
+    fireEvent.click(screen.getByText("21"));
+
+    expect(mockChange.mock.calls[0][0]).toEqual("2023-06-21");
+
+    expect(screen.getByLabelText("calendar")).toBeInTheDocument();
+  });
+
+  it("should work with datetime type", () => {
+    const field = {
+      id: "datetime",
+      name: "时间",
+      type: "datetime",
+    };
+    render(<ValueTypeField field={field} />);
+
+    fireEvent.keyDown(screen.getByRole("textbox"));
+    expect(
+      document.body.querySelector(".ant-picker-time-panel")
+    ).toBeInTheDocument();
   });
 });

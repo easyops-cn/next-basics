@@ -1,30 +1,6 @@
 import { getRuntime } from "@next-core/brick-kit";
+import { WorkFlowNode, WorkFLowNodeType } from "../interface";
 import { isEmpty, uniq } from "lodash";
-
-interface FlowNode {
-  name?: string;
-  id: string;
-  type: FLowNodeType;
-  actType?: string;
-  sendContent?: string;
-  allowRevoke?: boolean;
-  gatewayType?: "inclusive" | "exclusive";
-  approver?: string[];
-  ccPerson?: string[];
-  pre?: string[];
-  next?: string[];
-  parent?: string;
-  children?: string[];
-}
-
-type FLowNodeType =
-  | "approval"
-  | "start_approval"
-  | "cc"
-  | "condition"
-  | "gateway"
-  | "start"
-  | "end";
 
 interface FlowNodeEdge {
   src: string;
@@ -33,11 +9,11 @@ interface FlowNodeEdge {
 }
 
 interface FlowData {
-  steps: FlowNode[];
+  steps: WorkFlowNode[];
   relations: FlowNodeEdge[];
 }
 
-interface GraphNode extends Omit<FlowNode, "type"> {
+interface GraphNode extends Omit<WorkFlowNode, "type"> {
   data?: Record<string, any>;
   type: string;
 }
@@ -56,7 +32,7 @@ interface GraphData {
 
 const hasChildrenFLow = ["start_approval", "gateway"];
 
-function getFlowNodeType(type: FLowNodeType): string {
+function getFlowNodeType(type: WorkFLowNodeType): string {
   switch (type) {
     case "start":
       return "start";
@@ -73,7 +49,7 @@ function getFlowNodeType(type: FLowNodeType): string {
 
 function getRelatedNodes(
   startId: string,
-  nodeMap: Map<string, FlowNode>
+  nodeMap: Map<string, WorkFlowNode>
 ): string[] {
   const steps = [startId];
 
@@ -105,7 +81,7 @@ export function getWorkflowGraph(flowData: FlowData): GraphData {
   const nodeLinkEdges: GraphEdge[] = [];
   const childrenIds: string[] = [];
 
-  const nodeMap = new Map<string, FlowNode>();
+  const nodeMap = new Map<string, WorkFlowNode>();
 
   nodes?.forEach((node) => {
     nodeMap.set(node.id, node);
