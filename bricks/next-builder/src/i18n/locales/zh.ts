@@ -139,6 +139,9 @@ const locale: Locale = {
   [K.CONTRACT_OPTIONS_TIPS_PREFIX]: "仅展示前",
   [K.CONTRACT_OPTIONS_TIPS_SUFFIX]: "项,更多结果请搜索",
   [K.CONTRACT_VALIDATE_MESSAGE]: "请填写正确的契约名称",
+  [K.ADD_FIELD]: "添加字段",
+  [K.CURRENT_FIELD]: "将字段",
+  [K.SET_TO_NEW_VALUE]: "设为",
   [K.BRICK_SUGGEST]: "推荐",
   [K.BRICK]: "原子构件",
   [K.WIDGET]: "挂件",
@@ -163,6 +166,7 @@ const locale: Locale = {
   [K.SEARCH_WORKFLOW_NODE_FIELD]: "搜索流程节点对象下的字段",
   [K.USE_WORKFLOW_NODE_VALUE]: "使用本流程节点对象的值",
   [K.SWITCH_MODEL]: " 切换模式",
+  [K.ADD_FIELD]: "添加字段",
 };
 
 export default locale;

@@ -4,6 +4,7 @@ lazyBricks:
   - search-tree
   - storyboard-lint-result
   - workflow-create-data-item
+  - workflow-edit-data-item
   - group: function-debugger
     bricks:
       - function-debugger-sidebar
