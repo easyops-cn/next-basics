@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.249.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.248.2...@next-bricks/next-builder@1.249.0) (2023-06-25)
+
+
+### Bug Fixes
+
+* traverse node processor ([66ec96a](https://github.com/easyops-cn/next-basics/commit/66ec96ad1620c3809e3eddba86ec3eb64ee0b444))
+
+
+### Features
+
+* support date,datetime field ([c916026](https://github.com/easyops-cn/next-basics/commit/c9160268eef3412e99072b5522e176893ed8e7a2))
+
+
+
+
+
 ## [1.248.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.248.1...@next-bricks/next-builder@1.248.2) (2023-06-20)
 
 

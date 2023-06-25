@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.238.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.238.6...@next-bricks/basic-bricks@1.238.7) (2023-06-25)
+
+
+### Bug Fixes
+
+* virtual list add empty status ([b9e7c6d](https://github.com/easyops-cn/next-basics/commit/b9e7c6d0e8df0afc67fa09c410cb6ccbfcac8b1e))
+
+
+
+
+
 ## [1.238.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.238.5...@next-bricks/basic-bricks@1.238.6) (2023-06-20)
 
 
