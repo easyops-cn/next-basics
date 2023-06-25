@@ -15,7 +15,11 @@ import styles from "./WorkflowCreateDataItem.module.css";
 import { WorkflowDataField } from "../shared/components/workflow-data-field/WorkflowDataField";
 import { ValueTypeField } from "../shared/components/value-type-field/ValueTypeField";
 import classNames from "classnames";
-import { TypeFieldItem, WorkflowDataItem } from "../interface";
+import {
+  TypeFieldItem,
+  WorkflowDataItem,
+  WorkFLowValueType,
+} from "../interface";
 
 export interface WorkflowCreateDataItemProps extends FormItemWrapperProps {
   fieldList: TypeFieldItem[];
@@ -26,11 +30,6 @@ export interface WorkflowCreateDataItemProps extends FormItemWrapperProps {
 
 export interface LegacyWorkflowCreateDataItemRef {
   validateFields: FormInstance["validateFields"];
-}
-
-export enum ValueType {
-  CONST = "const",
-  EXPR = "expr",
 }
 
 // eslint-disable-next-line react/display-name
@@ -60,7 +59,7 @@ export const LegacyWorkflowCreateDataItem = forwardRef(
     }, [form, value]);
 
     const handleDataChange = (
-      type: ValueType,
+      type: WorkFLowValueType,
       name: string,
       fieldValue: any
     ): void => {
@@ -79,7 +78,9 @@ export const LegacyWorkflowCreateDataItem = forwardRef(
     const handleLabelClick = useCallback(
       (field: TypeFieldItem, type: string): void => {
         const newType =
-          type === ValueType.EXPR ? ValueType.CONST : ValueType.EXPR;
+          type === WorkFLowValueType.EXPR
+            ? WorkFLowValueType.CONST
+            : WorkFLowValueType.EXPR;
         const currenValue = form.getFieldsValue();
 
         const originField = value?.[field.id];
@@ -106,7 +107,7 @@ export const LegacyWorkflowCreateDataItem = forwardRef(
               <SwapOutlined
                 onClick={() => handleLabelClick(field, type)}
                 className={classNames(styles.labelIcon, {
-                  [styles.selected]: type === ValueType.EXPR,
+                  [styles.selected]: type === WorkFLowValueType.EXPR,
                 })}
               />
             </span>
@@ -140,16 +141,18 @@ export const LegacyWorkflowCreateDataItem = forwardRef(
               getValueProps={(field) => ({ value: field?.value })}
               getValueFromEvent={(v) => ({ type: fieldValue?.type, value: v })}
             >
-              {fieldValue?.type === ValueType.EXPR ? (
+              {fieldValue?.type === WorkFLowValueType.EXPR ? (
                 <WorkflowDataField
                   dataList={dataList}
-                  onChange={(v) => handleDataChange(ValueType.EXPR, item.id, v)}
+                  onChange={(v) =>
+                    handleDataChange(WorkFLowValueType.EXPR, item.id, v)
+                  }
                 />
               ) : (
                 <ValueTypeField
                   field={item}
                   onChange={(v) =>
-                    handleDataChange(ValueType.CONST, item.id, v)
+                    handleDataChange(WorkFLowValueType.CONST, item.id, v)
                   }
                 />
               )}

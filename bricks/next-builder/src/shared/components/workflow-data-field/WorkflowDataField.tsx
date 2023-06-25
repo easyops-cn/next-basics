@@ -16,7 +16,7 @@ import styles from "./WorkflowDataField.module.css";
 
 export interface WorkflowDataFieldProps {
   dataList?: WorkflowDataItem[];
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
   value?: any;
 }
 

@@ -75,3 +75,8 @@ export interface WorkFlowNode {
   parent?: string;
   children?: string[];
 }
+
+export enum WorkFLowValueType {
+  CONST = "const",
+  EXPR = "expr",
+}
