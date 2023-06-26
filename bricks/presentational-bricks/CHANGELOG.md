@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.305.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.304.8...@next-bricks/presentational-bricks@1.305.0) (2023-06-26)
+
+
+### Features
+
+* 走马灯支持按需加载幻灯片 ([ef76a9b](https://github.com/easyops-cn/next-basics/commit/ef76a9bd00a590f7e19e19f7c0d661d1800a5aef))
+
+
+
+
+
 ## [1.304.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.304.7...@next-bricks/presentational-bricks@1.304.8) (2023-06-19)
 
 
