@@ -82,6 +82,7 @@ describe("GeneralCarousel", () => {
         dots={true}
         slidesToShow={1}
         slidesToScroll={1}
+        useLazyLoad={true}
       />
     );
     expect(wrapper.find(".slick-dots li").length).toEqual(3);
