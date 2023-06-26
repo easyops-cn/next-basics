@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.250.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.249.0...@next-bricks/next-builder@1.250.0) (2023-06-26)
+
+
+### Features
+
+* workflow edit form item ([8358fed](https://github.com/easyops-cn/next-basics/commit/8358fedbaa89475c7f96cf9617b02e77f88569ac))
+
+
+
+
+
 # [1.249.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.248.2...@next-bricks/next-builder@1.249.0) (2023-06-25)
 
 
