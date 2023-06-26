@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { compact } from "lodash";
 import classNames from "classnames";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
@@ -28,6 +28,7 @@ export interface GeneralCarouselProps {
   dataSource: any[];
   autoplaySpeed?: number;
   dotPosition?: "top" | "bottom" | "left" | "right";
+  useLazyLoad?: boolean;
 }
 
 export function renderCustomComp(
@@ -84,10 +85,16 @@ export function GeneralCarousel({
   dataSource,
   autoplaySpeed,
   dotPosition,
+  useLazyLoad,
 }: GeneralCarouselProps): React.ReactElement {
   const comps = Array.isArray(components) ? components : compact([components]);
   const data = Array.isArray(dataSource) ? dataSource : compact([dataSource]);
-
+  const setEleDisplay = useCallback((selector, display) => {
+    const slickSlideEles = document.querySelectorAll(selector);
+    slickSlideEles.forEach((ele) => {
+      (ele.firstChild as HTMLElement).style.display = display;
+    });
+  }, []);
   const carousel = (
     <Carousel
       className={classNames({
@@ -108,6 +115,21 @@ export function GeneralCarousel({
       prevArrow={<LeftOutlined />}
       nextArrow={<RightOutlined />}
       dotPosition={dotPosition}
+      onInit={() =>
+        useLazyLoad &&
+        setEleDisplay(
+          `.slick-slide:not([data-index="0"]):not([data-index="${data.length}"])`,
+          "none"
+        )
+      }
+      beforeChange={(currentSlide, nextSlide) =>
+        useLazyLoad &&
+        setEleDisplay(`.slick-slide[data-index="${nextSlide}"]`, "block")
+      }
+      afterChange={(currentSlide) =>
+        useLazyLoad &&
+        setEleDisplay(`.slick-slide[data-index="${--currentSlide}"]`, "none")
+      }
     >
       {useBrick
         ? renderCustomBrick(useBrick, data, onHandleClick)

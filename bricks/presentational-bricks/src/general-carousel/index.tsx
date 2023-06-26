@@ -249,6 +249,18 @@ export class GeneralCarouselElement extends UpdatingElement {
   })
   components: GeneralCarouselProps["components"];
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 幻灯片懒加载（目前保持渲染首尾以及当前的幻灯片）
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  useLazyLoad: boolean;
+
   connectedCallback(): void {
     this._render();
   }
@@ -291,6 +303,7 @@ export class GeneralCarouselElement extends UpdatingElement {
             dotsTheme={this.dotsTheme}
             autoplaySpeed={this.autoplaySpeed}
             dotPosition={this.dotPosition}
+            useLazyLoad={this.useLazyLoad}
           />
         </BrickWrapper>,
         this
