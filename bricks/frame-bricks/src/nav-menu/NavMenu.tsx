@@ -113,7 +113,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
           align={{ offset: [0, -3] }}
           overlayInnerStyle={{ overflow: "hidden" }}
           overlayClassName={style.threeLevelMenuPopover}
-          placement={"bottom"}
+          placement={"bottomLeft"}
           onVisibleChange={(visible: boolean) => {
             // 阻止滚动穿透
             if (visible) {
