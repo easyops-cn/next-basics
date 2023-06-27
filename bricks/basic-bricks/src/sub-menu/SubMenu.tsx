@@ -4,6 +4,9 @@ import style from "./index.module.css";
 import { SidebarMenu, UseBrickConf } from "@next-core/brick-types";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { Tooltip } from "antd";
+import { getRuntime } from "@next-core/brick-kit";
+
+const featureFlags = getRuntime()?.getFeatureFlags();
 interface SubMenuProps {
   dataSource: SidebarMenu;
   topOperationConf?: { useBrick: UseBrickConf };
@@ -16,6 +19,8 @@ export function SubMenu({
   isThirdLevel,
 }: SubMenuProps): React.ReactElement {
   const thirdLevelHeaderTitle = React.useRef();
+  const enableCompactUi = featureFlags["support-ui-8.2-compact-layout"];
+
   const [isShowTooltip, setIsShowTooltip] = React.useState(false);
   React.useEffect(() => {
     const thirdLevelHeaderTitleRef = thirdLevelHeaderTitle?.current;
@@ -32,7 +37,7 @@ export function SubMenu({
     <div
       className={`${style.subMenuContainer} ${
         isThirdLevel ? style.isThirdLevel : ""
-      }`}
+      } ${enableCompactUi ? style.isCompact : ""}`}
     >
       {(dataSource.icon || dataSource.title || topOperationConf?.useBrick) && (
         <div className={style.header}>

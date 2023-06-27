@@ -19,6 +19,11 @@ jest.mock("@next-core/brick-kit", () => {
         },
       };
     },
+    getRuntime: jest.fn(() => ({
+      getFeatureFlags: jest.fn(() => ({
+        "support-ui-8.2-compact-layout": true,
+      })),
+    })),
   };
 });
 
