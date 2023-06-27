@@ -160,79 +160,80 @@
   &.noHover {
     &:hover {
       box-shadow: none;
+      border-color: var(--card-item-border-color);
       cursor: default;
       .cardTitle {
-        color: var(--color-disabled-text);
+        color: var(--card-item-title-color);
       }
     }
- }
+  }
 }
 
 
-  .cardTag {
-    position: absolute;
-    box-sizing: border-box;
-    width: 80px;
-    color: #ffffff;
-    text-align: center;
-    transform: rotate(45deg);
-    z-index: 1;
-    line-height: 24px;
-    height: 22px;
-    font-size: 10px;
-    top: 8px;
-    right: -24px;
+.cardTag {
+  position: absolute;
+  box-sizing: border-box;
+  width: 80px;
+  color: #ffffff;
+  text-align: center;
+  transform: rotate(45deg);
+  z-index: 1;
+  line-height: 24px;
+  height: 22px;
+  font-size: 10px;
+  top: 8px;
+  right: -24px;
 
-    &.tagTriangle {
-      padding-top: 20px;
-      right: -32px;
-      top: -10px;
-      height: 40px;
-      line-height: normal;
-    }
-
-    &.blue {
-      background: linear-gradient(90deg, #56b8ff 0%, #0169da 100%);
-    }
-
-    &.green {
-      background: linear-gradient(90deg, #4ceaa2 0%, #1db049 100%);
-    }
-
-    &.orange {
-      background: linear-gradient(90deg, #f9d760 0%, #e29725 100%);
-    }
-
-    &.red {
-      background: linear-gradient(90deg, #fe9c6d 0%, #de382b 100%);
-    }
-
-    &.cyan {
-      background: linear-gradient(90deg, #6ad3f8 0%, #10a9ae 100%);
-    }
-
-    &.geekblue {
-      background: linear-gradient(90deg, #67b7f6 0%, #1452cc 100%);
-    }
-
-    &.purple {
-      background: linear-gradient(90deg, #9da0fc 0%, #8347d8 100%);
-    }
-
-    &.gray {
-      background: linear-gradient(49deg, #f5f5f5 0%, #d9d9d9 100%);
-      color: #8c8c8c;
-    }
+  &.tagTriangle {
+    padding-top: 20px;
+    right: -32px;
+    top: -10px;
+    height: 40px;
+    line-height: normal;
   }
 
-  .hideOperate {
-    visibility: hidden;
+  &.blue {
+    background: linear-gradient(90deg, #56b8ff 0%, #0169da 100%);
   }
 
-  .titleWrapper {
-    display: grid;
-    align-items: center;
+  &.green {
+    background: linear-gradient(90deg, #4ceaa2 0%, #1db049 100%);
   }
+
+  &.orange {
+    background: linear-gradient(90deg, #f9d760 0%, #e29725 100%);
+  }
+
+  &.red {
+    background: linear-gradient(90deg, #fe9c6d 0%, #de382b 100%);
+  }
+
+  &.cyan {
+    background: linear-gradient(90deg, #6ad3f8 0%, #10a9ae 100%);
+  }
+
+  &.geekblue {
+    background: linear-gradient(90deg, #67b7f6 0%, #1452cc 100%);
+  }
+
+  &.purple {
+    background: linear-gradient(90deg, #9da0fc 0%, #8347d8 100%);
+  }
+
+  &.gray {
+    background: linear-gradient(49deg, #f5f5f5 0%, #d9d9d9 100%);
+    color: #8c8c8c;
+  }
+}
+
+.hideOperate {
+  visibility: hidden;
+}
+
+.titleWrapper {
+  display: grid;
+  align-items: center;
+}
 
 
 .operateArea {
