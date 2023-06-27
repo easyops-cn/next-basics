@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.239.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.238.7...@next-bricks/basic-bricks@1.239.0) (2023-06-27)
+
+
+### Features
+
+* 三级菜单背景颜色调整 ([38f91ab](https://github.com/easyops-cn/next-basics/commit/38f91ab21e3e60c50506b509c31204b51272b894))
+
+
+
+
+
 ## [1.238.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.238.6...@next-bricks/basic-bricks@1.238.7) (2023-06-25)
 
 

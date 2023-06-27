@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.8...@next-bricks/frame-bricks@1.15.0) (2023-06-27)
+
+
+### Features
+
+* 三级菜单背景颜色调整 ([38f91ab](https://github.com/easyops-cn/next-basics/commit/38f91ab21e3e60c50506b509c31204b51272b894))
+
+
+
+
+
 ## [1.14.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.7...@next-bricks/frame-bricks@1.14.8) (2023-06-26)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
