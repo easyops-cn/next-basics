@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.305.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.305.0...@next-bricks/presentational-bricks@1.305.1) (2023-06-27)
+
+
+### Bug Fixes
+
+* 选择模板文件，过滤所属该文件的key实例不生效 ([1ee3612](https://github.com/easyops-cn/next-basics/commit/1ee36122fdf8b5b1231ff7d3c80e1d30661fc262))
+
+
+
+
+
 # [1.305.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.304.8...@next-bricks/presentational-bricks@1.305.0) (2023-06-26)
 
 
