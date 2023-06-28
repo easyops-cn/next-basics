@@ -12,6 +12,7 @@ import {
   useBuilderData,
   useBuilderDataManager,
   EventDetailOfSnippetApplyStored,
+  getUniqueNodeId,
   type BuilderDataManager,
   type BuilderRuntimeNode,
   type BuilderRuntimeEdge,
@@ -244,9 +245,9 @@ function LegacyWorkbenchCacheAction(
   const handleAddBrick = (
     data: WorkbenchBackendActionForInsertDetail
   ): void => {
-    const nodeUid = Number(uniqueId());
-    const nodeInstanceId = uniqueId("mock_instanceId_");
-    const nodeId = uniqueId("mock_id_");
+    const nodeUid = getUniqueNodeId();
+    const nodeInstanceId = `mock_instanceId_${nodeUid}`;
+    const nodeId = `mock_id_${nodeUid}`;
     data.nodeData = {
       ...data.nodeData,
       $$uid: nodeUid,
@@ -505,7 +506,7 @@ function LegacyWorkbenchCacheAction(
   };
 
   const handleAddFormItem = (data: any): void => {
-    const nodeUid = Number(uniqueId());
+    const nodeUid = getUniqueNodeId();
     const nodeInstanceId = uniqueId("mock_instanceId_");
     data.parent = data.nodeData?.parentItemId;
     data.nodeData = {
