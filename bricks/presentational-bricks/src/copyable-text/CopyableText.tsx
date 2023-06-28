@@ -11,9 +11,10 @@ interface CopyableTextProps {
   type?: "custom" | "input" | "text";
   dataSource?: Record<string, any>;
   textClick?: (detail: any) => void;
+  suffixCount?: number;
 }
 export function CopyableText(props: CopyableTextProps): React.ReactElement {
-  const { text, tooltips, hiddenText, type, dataSource } = props;
+  const { text, tooltips, hiddenText, type, dataSource, suffixCount } = props;
   const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
   const ParagraphCom = () => (
     <Typography.Paragraph
@@ -40,14 +41,16 @@ export function CopyableText(props: CopyableTextProps): React.ReactElement {
     </Input.Group>
   );
   const TextCom = () => {
-    const suffix = text?.slice(-10).trim();
+    const _suffixCount = text.length < suffixCount ? text.length : suffixCount;
+    const start = text.slice(0, text.length - _suffixCount).trim();
+    const suffix = text?.slice(-_suffixCount).trim();
     return (
       <Text
         style={{ maxWidth: "100%" }}
         ellipsis={{ suffix }}
         copyable={{ tooltips: [tooltips ?? t(K.COPY), t(K.COPIED)], text }}
       >
-        {text}
+        {start}
       </Text>
     );
   };

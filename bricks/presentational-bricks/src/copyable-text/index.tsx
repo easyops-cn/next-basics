@@ -62,6 +62,15 @@ export class CopyableTextElement extends UpdatingElement {
    */
   @property({ attribute: false })
   dataSource: Record<string, any>;
+
+  /**
+   * @kind number
+   * @required false
+   * @default  10
+   * @description  当`type: text`，中间省略时，保留文本末尾字段的的数量
+   */
+  @property({ attribute: false })
+  suffixCount = 10;
   /**
    * @detail any
    * @description 文本点击时触发的事件
@@ -96,6 +105,7 @@ export class CopyableTextElement extends UpdatingElement {
             type={this.type}
             dataSource={this.dataSource}
             textClick={this._handleTextClick}
+            suffixCount={this.suffixCount}
           />
         </BrickWrapper>,
         this
