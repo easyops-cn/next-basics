@@ -26,11 +26,11 @@ describe("CopyableText", () => {
   });
   it("should type = text", () => {
     const wrapper = mount(
-      <CopyableText text={"this is a text"} type="text" suffixCount={14} />
+      <CopyableText text={"this is a text"} type="text" suffixCount={13} />
     );
     expect(wrapper.find(Text)).toHaveLength(1);
     expect(wrapper.find(Text).prop("ellipsis")).toMatchObject({
-      suffix: "this is a text",
+      suffix: "his is a text",
     });
   });
   it("should type = text && suffixCount ", () => {

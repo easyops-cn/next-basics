@@ -1,7 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
 import { TreeTransfer } from "./TreeTransfer";
-import { render, fireEvent } from "@testing-library/react";
 import { Button, Checkbox, Input, Tree } from "antd";
 const { Search } = Input;
 describe("TreeTransfer", () => {
@@ -80,6 +79,11 @@ describe("TreeTransfer", () => {
     wrapper
       .find(Tree)
       .find("[data-testid='leftTree']")
+      .at(0)
+      .invoke("onExpand")(["host.cpu_util.iowait"] as any);
+    wrapper
+      .find(Tree)
+      .find("[data-testid='rightTree']")
       .at(0)
       .invoke("onExpand")(["host.cpu_util.iowait"] as any);
     wrapper.find(Tree).find("[data-testid='leftTree']").at(0).invoke("onCheck")(
