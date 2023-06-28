@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.306.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.305.1...@next-bricks/presentational-bricks@1.306.0) (2023-06-28)
+
+
+### Features
+
+* **presentational-bricks:** 增加suffixCount属性&&修复当文本长度小于10或者宽度大于文本长度，会重复显示文本 ([8f21ff2](https://github.com/easyops-cn/next-basics/commit/8f21ff2ec873447289d9d3cdc2f1bd59b6d0651f))
+
+
+
+
+
 ## [1.305.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.305.0...@next-bricks/presentational-bricks@1.305.1) (2023-06-27)
 
 
