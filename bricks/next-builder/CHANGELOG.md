@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.250.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.250.0...@next-bricks/next-builder@1.250.1) (2023-06-28)
+
+
+### Bug Fixes
+
+* mock uid error ([#2345](https://github.com/easyops-cn/next-basics/issues/2345)) ([bd5738f](https://github.com/easyops-cn/next-basics/commit/bd5738fc87eb668e61650f3e469f8e09b0c3454c))
+
+
+
+
+
 # [1.250.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.249.0...@next-bricks/next-builder@1.250.0) (2023-06-26)
 
 
