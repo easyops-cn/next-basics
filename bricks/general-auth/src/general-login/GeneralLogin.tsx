@@ -273,6 +273,10 @@ export class LegacyGeneralLogin extends React.Component<
     ldap: this.props.t(K.LDAP_LOGIN_TITLE),
     custom: this.props.t(K.CUSTOM_LOGIN_TITLE),
   };
+  nwloginMethodsMap = {
+    local: this.props.t(K.LOCAL_LOGIN),
+    "4a": this.props.t(K.UNIFIED_IDENTITY_AUTH),
+  };
   constructor(props: GeneralLoginProps) {
     super(props);
     const history = getHistory();
@@ -695,7 +699,7 @@ export class LegacyGeneralLogin extends React.Component<
               >
                 {this.state.southNetWorkLoginType === "local"
                   ? t(K.UNIFIED_IDENTITY_AUTH)
-                  : t(K.LOCAL_LOGIN)}
+                  : `${t(K.LOCAL_LOGIN)}>>`}
               </Button>
             </Form.Item>
           )}
@@ -783,9 +787,13 @@ export class LegacyGeneralLogin extends React.Component<
                 ) : this.loginMethods.length === 1 ? (
                   <Card
                     title={
-                      (this.loginMethodsMap as any)[
-                        this.state.currentLoginMethod
-                      ]
+                      enabledFeatures["south-network-login"]
+                        ? (this.nwloginMethodsMap as any)[
+                            this.state.southNetWorkLoginType
+                          ]
+                        : (this.loginMethodsMap as any)[
+                            this.state.currentLoginMethod
+                          ]
                     }
                     bordered={false}
                   >

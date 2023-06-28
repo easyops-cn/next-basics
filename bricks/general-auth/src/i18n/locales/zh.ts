@@ -58,8 +58,8 @@ const locale: Locale = {
   [K.PLEASE_INPUT_VALID_PHRASE]: "请输入有效的验证码",
   [K.WRONG_VERIFICATION_CODE]: "验证码校验错误",
   [K.WRONG_INVITE_CODE]: "邀请码已失效，请联系管理员重新获取",
-  [K.LOCAL_LOGIN]: "本地登录>>",
-  [K.UNIFIED_IDENTITY_AUTH]: "统一身份认证>>",
+  [K.LOCAL_LOGIN]: "本地登录",
+  [K.UNIFIED_IDENTITY_AUTH]: "统一身份认证",
 };
 
 export default locale;
