@@ -25,7 +25,29 @@ describe("CopyableText", () => {
     expect(wrapper.find("button")).toHaveLength(1);
   });
   it("should type = text", () => {
-    const wrapper = mount(<CopyableText text={"this is a text"} type="text" />);
+    const wrapper = mount(
+      <CopyableText text={"this is a text"} type="text" suffixCount={14} />
+    );
     expect(wrapper.find(Text)).toHaveLength(1);
+    expect(wrapper.find(Text).prop("ellipsis")).toMatchObject({
+      suffix: "this is a text",
+    });
+  });
+  it("should type = text && suffixCount ", () => {
+    const wrapper = mount(
+      <CopyableText
+        text={
+          "In the process of internal desktop applications development, many different design specs and\n" +
+          "    implementations would be involved, which might cause designers and developers difficulties and\n" +
+          "    duplication and reduce the efficiency of development."
+        }
+        type="text"
+        suffixCount={12}
+      />
+    );
+    expect(wrapper.find(Text)).toHaveLength(1);
+    expect(wrapper.find(Text).prop("ellipsis")).toMatchObject({
+      suffix: "development.",
+    });
   });
 });
