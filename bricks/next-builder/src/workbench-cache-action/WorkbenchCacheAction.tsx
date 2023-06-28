@@ -182,7 +182,7 @@ function LegacyWorkbenchCacheAction(
       });
       let updateStoryboardType: UpdateStoryboardType;
       const rootNode = nodes.find((item) => item.$$uid === rootId);
-
+      if (!rootNode) return;
       const settings =
         rootNode.previewSettings && Array.isArray(rootNode.previewSettings)
           ? rootNode.previewSettings.find((item) => item.active) ??
