@@ -4,11 +4,11 @@ import { WorkFLowValueType } from "../../../interface";
 
 export const conditionValueTypeList = [
   {
-    label: i18next.t(`${NS_NEXT_BUILDER}:${K.FIXED_VALUE}`),
-    value: WorkFLowValueType.CONST,
+    name: i18next.t(`${NS_NEXT_BUILDER}:${K.FIXED_VALUE}`),
+    id: WorkFLowValueType.CONST,
   },
   {
-    label: i18next.t(`${NS_NEXT_BUILDER}:${K.DYNAMIC_VALUE}`),
-    value: WorkFLowValueType.EXPR,
+    name: i18next.t(`${NS_NEXT_BUILDER}:${K.DYNAMIC_VALUE}`),
+    id: WorkFLowValueType.EXPR,
   },
 ];

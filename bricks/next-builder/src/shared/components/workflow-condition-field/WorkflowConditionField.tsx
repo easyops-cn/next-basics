@@ -56,6 +56,14 @@ export function WorkflowConditionField(
     [logicTypeList, logicTypeValue]
   );
 
+  const curValueType = useMemo(
+    () =>
+      value?.valueInfo?.type &&
+      conditionValueTypeList.find((item) => item.id === value.valueInfo.type)
+        ?.name,
+    [value?.valueInfo?.type]
+  );
+
   const handleValueChange = (type: WorkFLowValueType, v: any): void => {
     onChange({ ...value, valueInfo: { type, value: v } });
   };
@@ -75,28 +83,31 @@ export function WorkflowConditionField(
           >
             {curLogicType} <DownOutlined />
           </FieldDropdownButton>
-        )}{" "}
-        <span>{field.name}</span>{" "}
+        )}
+
+        <span>{field.name}</span>
         <FieldDropdownButton
           options={comparatorList}
           onClick={(id) => onChange({ ...value, comparator: id })}
         >
           {curLabel} <DownOutlined />
         </FieldDropdownButton>
-        <DeleteOutlined className={styles.deleteIcon} onClick={onDelete} />
-      </div>
-      <div className={styles.fieldValueWrapper}>
-        <Select
+
+        <FieldDropdownButton
+          hiddenSearch
           options={conditionValueTypeList}
-          value={curValueInfo?.type}
-          style={{ width: 120 }}
-          onChange={(v) =>
+          onClick={(v) =>
             onChange({
               ...value,
-              valueInfo: { type: v, value: undefined },
+              valueInfo: { type: v as WorkFLowValueType, value: undefined },
             })
           }
-        />
+        >
+          {curValueType} <DownOutlined />
+        </FieldDropdownButton>
+        <DeleteOutlined className={styles.deleteIcon} onClick={onDelete} />
+      </div>
+      <div>
         {curValueInfo?.type === WorkFLowValueType.EXPR ? (
           <WorkflowDataField
             dataList={dataList}
