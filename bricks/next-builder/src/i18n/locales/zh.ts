@@ -166,7 +166,13 @@ const locale: Locale = {
   [K.SEARCH_WORKFLOW_NODE_FIELD]: "搜索流程节点对象下的字段",
   [K.USE_WORKFLOW_NODE_VALUE]: "使用本流程节点对象的值",
   [K.SWITCH_MODEL]: " 切换模式",
-  [K.ADD_FIELD]: "添加字段",
+  [K.FIXED_VALUE]: "固定值",
+  [K.DYNAMIC_VALUE]: "动态值",
+  [K.WHEN]: "当",
+  [K.SEARCH_FIELD]: "搜索字段",
+  [K.SET_FILTER_CONDITION]: "设置筛选条件",
+  [K.CONDITION]: "条件",
+  [K.CONDITION_GROUP]: "条件组",
 };
 
 export default locale;
