@@ -36,15 +36,17 @@ interface WorkflowStepInfo {
   condition: any;
 }
 
+interface WorkflowValueInfo {
+  type: WorkFLowValueType;
+  value: any;
+}
+
 interface WorkflowVariable {
   id: string;
   name: string;
   required: "true" | "false";
   value?: Record<string, any>;
-  valueInfo?: {
-    type: "string";
-    value: any;
-  };
+  valueInfo?: WorkflowValueInfo;
 }
 
 export type WorkFLowNodeType =
@@ -79,4 +81,14 @@ export interface WorkFlowNode {
 export enum WorkFLowValueType {
   CONST = "const",
   EXPR = "expr",
+}
+
+export interface WorkflowCondition {
+  fieldKey: string;
+  comparator: string;
+  valueInfo: WorkflowValueInfo;
+}
+export interface ComparatorOption {
+  id: string;
+  name: string;
 }
