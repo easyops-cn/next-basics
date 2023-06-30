@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/calendar-bricks@0.1.14...@next-bricks/calendar-bricks@0.1.15) (2023-06-30)
+
+
+### Bug Fixes
+
+* CUSTOMIZE-338 日历构件优化 ref CUSTOMIZE-338 ([09b01cb](https://github.com/easyops-cn/next-basics/commit/09b01cb6eec63449ec5769ff69053adbadbdbd20))
+
+
+
+
+
 ## [0.1.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/calendar-bricks@0.1.13...@next-bricks/calendar-bricks@0.1.14) (2023-06-19)
 
 
