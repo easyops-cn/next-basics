@@ -111,17 +111,11 @@ describe("WorkflowConditionField", () => {
 
     fireEvent.click(screen.getByText("不等于"));
 
-    fireEvent.change(screen.getByRole("combobox"), {
-      target: { value: "$ne" },
-    });
-
     expect(mockChange.mock.calls[1][0]).toEqual({
       comparator: "$ne",
       fieldKey: "name",
       valueInfo: { type: "const", value: "test" },
     });
-
-    screen.debug();
   });
 });
 
