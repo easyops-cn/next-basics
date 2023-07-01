@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Select, Input } from "antd";
 import { useTranslation } from "react-i18next";
 import {
@@ -25,10 +25,10 @@ interface WorkflowTagProps {
   fieldLabel: string;
 }
 
-type WorkflowFieldDropdownProps = Pick<
-  WorkflowDataFieldProps,
-  "dataList" | "onChange"
->;
+interface WorkflowFieldDropdownProps
+  extends Pick<WorkflowDataFieldProps, "dataList" | "onChange"> {
+  open?: boolean;
+}
 
 export function WorkflowDataField(
   props: WorkflowDataFieldProps
@@ -53,11 +53,12 @@ export function WorkflowDataField(
   const dropdownRender = useCallback(() => {
     return (
       <WorkflowFieldDropdown
+        open={open}
         dataList={dataList}
         onChange={handleDropdownValue}
       />
     );
-  }, [handleDropdownValue, dataList]);
+  }, [handleDropdownValue, dataList, open]);
 
   const tagRender = useCallback(
     (params: any): React.ReactElement => {
@@ -109,17 +110,18 @@ export function WorkflowFieldDropdown(
   props: WorkflowFieldDropdownProps
 ): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
-  const { dataList, onChange } = props;
+  const { dataList, open, onChange } = props;
   const [curStepDataList, setCurStepDataList] = useState(dataList);
   const [activeItems, setActiveItems] = useState<string[]>([]);
+  const [q, setQ] = useState<string>();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const q = e.target.value;
+    setQ(q);
 
     const list = getFilterDataList(dataList, q);
     setCurStepDataList(list);
-
-    setActiveItems(list.map((item) => item.value));
+    setActiveItems(q ? list.map((item) => item.value) : []);
   };
 
   const handleTitleClick = useCallback(
@@ -133,6 +135,14 @@ export function WorkflowFieldDropdown(
     [activeItems]
   );
 
+  useEffect(() => {
+    if (open) {
+      setQ("");
+      setActiveItems([]);
+      setCurStepDataList(dataList);
+    }
+  }, [open, dataList]);
+
   return (
     <div className={styles.drownDownContainer}>
       <Input
@@ -140,6 +150,7 @@ export function WorkflowFieldDropdown(
         placeholder={t(K.SEARCH_WORKFLOW_NODE_FIELD)}
         className={styles.search}
         suffix={<SearchOutlined className={styles.icon} />}
+        value={q}
         onChange={handleSearch}
       />
       {!curStepDataList?.length ? (
