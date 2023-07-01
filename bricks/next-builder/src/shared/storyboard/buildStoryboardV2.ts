@@ -105,24 +105,19 @@ export async function buildStoryboardV2(
 
   let contractList: Contract[];
   if (!isEmpty(contracts)) {
-    try {
-      contractList = (
-        await ContractCenterApi_batchSearchContract({
-          contract: contracts.map((item) => {
-            const arr = item.contract.split(".");
-            const apiName = arr.pop();
+    contractList = (
+      await ContractCenterApi_batchSearchContract({
+        contract: contracts.map((item) => {
+          const arr = item.contract.split(".");
+          const apiName = arr.pop();
 
-            return {
-              fullContractName: `${arr.join(".")}@${apiName}`,
-              version: item.version,
-            };
-          }),
-        })
-      ).list as Contract[];
-    } catch (e) {
-      /* istanbul ignore next */
-      contractList = [];
-    }
+          return {
+            fullContractName: `${arr.join(".")}@${apiName}`,
+            version: item.version,
+          };
+        }),
+      })
+    ).list as Contract[];
   }
 
   return {
