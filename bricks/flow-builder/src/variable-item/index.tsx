@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { VariableItem } from "./VariableItem";
+import { UseBrickConf } from "@next-core/brick-types";
 
 /**
  * @id flow-builder.variable-item
@@ -13,6 +14,13 @@ import { VariableItem } from "./VariableItem";
  */
 export class VariableItemElement extends UpdatingElement {
   @property() propName: string;
+
+  @property({
+    attribute: false,
+  })
+  labelBrick: {
+    useBrick: UseBrickConf;
+  };
 
   @property({
     attribute: false,
@@ -55,6 +63,7 @@ export class VariableItemElement extends UpdatingElement {
           <VariableItem
             propName={this.propName}
             propValue={this.propValue}
+            labelBrick={this.labelBrick}
             standalone={this.standalone}
             expand={this.expand}
             ellipsis={this.ellipsis}
