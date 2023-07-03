@@ -226,18 +226,20 @@ export const LegacyWorkflowConditionItem = forwardRef(
                                 key={row.key}
                                 name={[row.name]}
                               >
-                                <WorkflowConditionField
-                                  isFirst={row.name === 0}
-                                  logicTypeList={logicTypeList}
-                                  logicTypeValue={curGroupValue.operator}
-                                  comparatorList={comparatorList}
-                                  dataList={dataList}
-                                  field={curFieldData}
-                                  onDelete={() => innerRemove(row.name)}
-                                  onLogicTypeChange={(type) =>
-                                    handleConditionTypeChange(type, item.name)
-                                  }
-                                />
+                                {curFieldData && (
+                                  <WorkflowConditionField
+                                    isFirst={row.name === 0}
+                                    logicTypeList={logicTypeList}
+                                    logicTypeValue={curGroupValue.operator}
+                                    comparatorList={comparatorList}
+                                    dataList={dataList}
+                                    field={curFieldData}
+                                    onDelete={() => innerRemove(row.name)}
+                                    onLogicTypeChange={(type) =>
+                                      handleConditionTypeChange(type, item.name)
+                                    }
+                                  />
+                                )}
                               </Form.Item>
                             );
                           })}

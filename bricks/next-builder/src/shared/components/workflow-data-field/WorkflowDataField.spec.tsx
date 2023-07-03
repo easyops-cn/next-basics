@@ -115,6 +115,10 @@ describe("WorkflowStepDataItem", () => {
       fireEvent.change(inputElement, { target: { value: "ip" } });
 
       expect(screen.getByText("ip")).toBeInTheDocument();
+
+      fireEvent.change(inputElement, { target: { value: "" } });
+
+      expect(container.querySelectorAll(".name").length).toEqual(2);
     });
   });
 });

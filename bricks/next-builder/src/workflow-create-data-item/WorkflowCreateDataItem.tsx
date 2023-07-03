@@ -14,6 +14,7 @@ import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import styles from "./WorkflowCreateDataItem.module.css";
 import { WorkflowDataField } from "../shared/components/workflow-data-field/WorkflowDataField";
 import { ValueTypeField } from "../shared/components/value-type-field/ValueTypeField";
+import { wrapperWorkflowDataItem } from "../shared/components/wrapper-workflow-data-item/wrapperWorkflowDataItem";
 import classNames from "classnames";
 import {
   TypeFieldItem,
@@ -164,42 +165,6 @@ export const LegacyWorkflowCreateDataItem = forwardRef(
   }
 );
 
-export function WorkflowCreateDataItem(
-  props: WorkflowCreateDataItemProps
-): React.ReactElement {
-  const workflowCreateDataItemRef = useRef<LegacyWorkflowCreateDataItemRef>();
-
-  const validators = [
-    {
-      validator: () => {
-        // istanbul ignore next
-        return new Promise((resolve, reject) => {
-          // To avoid outOfDate
-          setTimeout(() => {
-            workflowCreateDataItemRef.current
-              .validateFields()
-              .then(() => {
-                resolve(null);
-              })
-              .catch(() => {
-                reject(`${props.name} validate failed`);
-              });
-          });
-        });
-      },
-    },
-  ];
-
-  return (
-    <FormItemWrapper
-      {...props}
-      validator={validators.concat(props.validator || ([] as any))}
-    >
-      <LegacyWorkflowCreateDataItem
-        fieldList={props.fieldList}
-        dataList={props.dataList}
-        ref={workflowCreateDataItemRef}
-      />
-    </FormItemWrapper>
-  );
-}
+export const WorkflowCreateDataItem = wrapperWorkflowDataItem(
+  LegacyWorkflowCreateDataItem
+);
