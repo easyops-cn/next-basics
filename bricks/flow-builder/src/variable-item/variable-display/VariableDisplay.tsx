@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { NS_FLOW_BUILDER, K } from "../../i18n/constants";
 import { VariableContext } from "../constants";
 import styles from "./VariableDisplay.module.css";
+import { UseBrickConf } from "@next-core/brick-types";
 
 export function isObject(value: unknown): value is Record<string, any> {
   return typeof value === "object" && !!value;
@@ -14,6 +15,9 @@ interface VariableDisplayProps<T = any> {
   minimal?: boolean;
   expanded?: boolean;
   ellipsis?: boolean;
+  labelBrick?: {
+    useBrick: UseBrickConf;
+  };
 }
 
 export function VariableDisplay(
