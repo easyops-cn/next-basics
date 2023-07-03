@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.251.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.250.2...@next-bricks/next-builder@1.251.0) (2023-07-03)
+
+
+### Bug Fixes
+
+* fix style ([f3454ed](https://github.com/easyops-cn/next-basics/commit/f3454eddc368a93e6ea592178903eee5fa0ce647))
+* fix workflow field error ([6c4a515](https://github.com/easyops-cn/next-basics/commit/6c4a5156d238cb7099489c60991b3a9a0358a9c1))
+* search optimization ([06f97bb](https://github.com/easyops-cn/next-basics/commit/06f97bb4cb8813e6edc81db2d5106fa5c36dd65d))
+* throw an error if the contract cannot be found ([5ae824d](https://github.com/easyops-cn/next-basics/commit/5ae824dc337ba4982f373e60a336d646d4ec33d9))
+
+
+### Features
+
+* suppport workflow condition item ([e0a78d4](https://github.com/easyops-cn/next-basics/commit/e0a78d4d168f09671517755c6c873076e5709f37))
+
+
+
+
+
 ## [1.250.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.250.1...@next-bricks/next-builder@1.250.2) (2023-06-28)
 
 
