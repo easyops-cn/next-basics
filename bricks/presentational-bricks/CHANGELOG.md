@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.306.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.306.1...@next-bricks/presentational-bricks@1.306.2) (2023-07-04)
+
+
+### Bug Fixes
+
+* **presentational-bricks.general-badge:** 去掉徽标描边 ([6ce4e85](https://github.com/easyops-cn/next-basics/commit/6ce4e8584bc9610d3ad5601532d13ff9b6b7516f))
+
+
+
+
+
 ## [1.306.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.306.0...@next-bricks/presentational-bricks@1.306.1) (2023-06-28)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
