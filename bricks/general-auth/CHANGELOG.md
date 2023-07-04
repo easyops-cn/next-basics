@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.23.3...@next-bricks/general-auth@1.24.0) (2023-07-04)
+
+
+### Features
+
+* 通过cookie名称获取cookie值 ([a7e0c44](https://github.com/easyops-cn/next-basics/commit/a7e0c4448a7c5b03de4eec6f3588b997952aa75f))
+
+
+
+
+
 ## [1.23.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.23.2...@next-bricks/general-auth@1.23.3) (2023-06-28)
 
 
