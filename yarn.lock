@@ -2541,6 +2541,11 @@
   resolved "https://registry.npmjs.org/@next-core/less-plugin-css-variables/-/less-plugin-css-variables-0.2.8.tgz#58ab26e5c9231b8071fe6c4d79ac0df91db58898"
   integrity sha512-JAy1XgmockHEpG78SDnKP2y0I8fMEHR4r1A+oweYPBNjBM4CzCSS52UsxsuTfdFgUQG/7SUo5AaMQTARxEsgyw==
 
+"@next-core/loader@^1.3.1":
+  version "1.3.7"
+  resolved "https://registry.npmjs.org/@next-core/loader/-/loader-1.3.7.tgz#ca3e2c5e8989b65985f80ffccc778d83f258bf0a"
+  integrity sha512-M5ZeGyM4k71UXa0QjYp8qYrvgeZv2QE195EPKjlDQlLSoeyEmYSoULipE70LxViTg0wOdxv/DXuGo2Z1UM5sqA==
+
 "@next-core/pipes@^1.0.16":
   version "1.0.16"
   resolved "https://registry.npmjs.org/@next-core/pipes/-/pipes-1.0.16.tgz#2f3f5f7a4307558cfd3b3efb1e3458f70972fe12"
