@@ -1,0 +1,69 @@
+.dropdownTrigger {
+  display: flex;
+  align-items: center;
+  color: var(--color-header-text);
+  font-size: 16px;
+  cursor: pointer;
+}
+.dropdownTriggerShape {
+  font-size: 14px;
+  padding: 3px 10px;
+  box-shadow: var(--dropdown-select-shape-type-trigger-shadow);
+  border-radius: 6px;
+  border: 1px solid var(--color-border-divider-line);
+}
+.dropdownLabel {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.dropdownLabelBox {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 150px;
+}
+.dropdownArrow {
+  flex-shrink: 0;
+  margin-left: 12px;
+  color: var(--color-header-text);
+}
+
+.placeholder {
+  color: var(--color-secondary-text);
+}
+
+.optionTitle {
+  margin-bottom: 1px;
+  color: var(--color-header-text);
+}
+
+.optionContent {
+  margin-bottom: 0;
+  color: var(--color-normal-text);
+}
+
+:global(.ant-dropdown-menu-item) {
+  &:global(.active) {
+    background-color: var(--menu-dropdown-bg);
+  }
+}
+.menuBox {
+  :global(.ant-dropdown-menu-item) {
+    &:global(.active) {
+      background-color: var(--menu-dropdown-bg);
+    }
+  }
+  :global(.ant-dropdown-menu-item-selected) {
+    background-color: var(--menu-dropdown-bg);
+  }
+  :global(.ant-dropdown-menu-item:hover) {
+    background-color: var(--antd-item-hover-bg);
+  }
+}
+.selectTipText {
+  font-size: var(--sub-title-font-size-small);
+  font-weight: var(--font-weight-400);
+  color: var(--color-secondary-text);
+  padding: 5px 12px;
+}

@@ -1,0 +1,49 @@
+.alertContainer {
+  display: flex;
+  gap: 15px;
+  padding: var(--card-content-gap);
+  border-radius: var(--editor-brick-border-radius);
+  border: 1px solid var(--editor-brick-stroke-color);
+
+  .icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: #0071eb;
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 2px;
+      height: 12px;
+      background-color: #fff;
+      border-radius: 50%;
+    }
+  }
+
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .title {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+
+      .message {
+        flex: 1;
+        height: 28px;
+        background-color: var(--editor-brick-stroke-color);
+      }
+    }
+
+    .description {
+      height: 28px;
+      background-color: var(--editor-brick-skeleton-bg-light);
+    }
+  }
+}

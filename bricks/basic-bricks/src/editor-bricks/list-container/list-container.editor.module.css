@@ -1,0 +1,14 @@
+.listContainer {
+  display: flex;
+  gap: 8px;
+  border: 1px solid var(--editor-brick-stroke-color);
+  border-radius: var(--editor-brick-border-radius);
+  padding: var(--editor-brick-gap);
+
+  .content {
+    flex: 1;
+    height: 60px;
+    border-radius: var(--editor-brick-border-radius);
+    background: var(--editor-brick-skeleton-bg-light);
+  }
+}

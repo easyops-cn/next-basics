@@ -1,0 +1,10 @@
+.main .icons {
+  width: 50px;
+  margin: 0 auto;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.main:hover .icons {
+  visibility: visible;
+}

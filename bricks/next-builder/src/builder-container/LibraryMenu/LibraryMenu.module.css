@@ -1,0 +1,6 @@
+.menuContainer {
+  overflow: auto;
+  :global(.ant-menu) {
+    min-height: 100%;
+  }
+}

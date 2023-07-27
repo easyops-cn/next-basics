@@ -1,0 +1,11 @@
+.generalImage {
+  :global(.ant-image) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.extraContainer {
+  margin-top: 15px;
+}

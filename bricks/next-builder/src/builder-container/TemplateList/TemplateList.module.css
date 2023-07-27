@@ -1,0 +1,7 @@
+.customTree {
+  height: 400px;
+  width: 220px;
+  :global(.ant-tree-switcher) {
+    display: none;
+  }
+}

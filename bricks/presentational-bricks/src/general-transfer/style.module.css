@@ -1,0 +1,15 @@
+.container {
+  :global(.ant-transfer-list-with-footer):first-child {
+    :global(.ant-transfer-list-footer) {
+      display: none;
+    }
+  }
+}
+
+.footer {
+  text-align: right;
+  padding: 10px;
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-weight-400);
+  color: var(--color-secondary-text);
+}

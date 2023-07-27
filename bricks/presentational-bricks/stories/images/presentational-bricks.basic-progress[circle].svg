@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>presentational-bricks.basic-progress[circle]</title>
+    <g id="snippet截图" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="snippet" transform="translate(-5997.000000, -587.000000)">
+            <g id="presentational-bricks.basic-progress[circle]" transform="translate(5997.000000, 587.000000)">
+                <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <circle id="椭圆形备份-2" stroke="#D6DBEC" stroke-width="4" cx="52" cy="27" r="16"></circle>
+                <path d="M36,27 C36,35.836556 43.163444,43 52,43 C60.836556,43 68,35.836556 68,27 C68,18.163444 60.836556,11 52,11" id="路径" stroke="#52C41A" stroke-width="4" stroke-linecap="round"></path>
+                <text id="75%" fill="#52C41A" fill-rule="nonzero" font-family="PingFang-SC-Medium, PingFang SC" font-size="10" font-weight="400">
+                    <tspan x="42.295" y="29">75%</tspan>
+                </text>
+                <g id="编组-12备份-6" transform="translate(46.000000, 32.000000)" fill="#D6DBEC">
+                    <rect id="矩形备份-48" x="0" y="0" width="1" height="4"></rect>
+                    <rect id="矩形备份-73" x="10" y="0" width="1" height="4"></rect>
+                    <rect id="矩形备份-54" x="2" y="0" width="1" height="4"></rect>
+                    <rect id="矩形备份-57" x="8" y="0" width="1" height="4"></rect>
+                    <rect id="矩形备份-68" x="4" y="0" width="1" height="4"></rect>
+                    <rect id="矩形备份-69" x="6" y="0" width="1" height="4"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

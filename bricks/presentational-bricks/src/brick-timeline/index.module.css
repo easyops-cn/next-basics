@@ -1,0 +1,88 @@
+.itemContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 20px;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  .leftArea {
+    flex: 1;
+
+    .title {
+      line-height: 20px;
+      margin-bottom: 6px;
+    }
+
+    .description,
+    .dateTime {
+      line-height: 17px;
+      font-weight: var(--antd-timeline-datetime-font-weight);
+    }
+
+    .description {
+      color: var(--antd-timeline-description-color);
+      font-size: var(--antd-timeline-description-font-size);
+      margin-bottom: 4px;
+      white-space: pre-wrap;
+    }
+
+    .dateTime {
+      color: var(--antd-timeline-datetime-color);
+      font-size: var(--antd-timeline-datetime-font-size);
+    }
+
+    .link {
+      cursor: pointer;
+
+      color: var(--antd-timeline-title-color);
+      font-weight: var(--antd-timeline-title-font-weight);
+      font-size: var(--antd-timeline-title-font-size);
+
+      &:hover {
+        color: var(--antd-timeline-title-color-hover);
+      }
+    }
+  }
+
+  .rightArea {
+    .time {
+      line-height: 17px;
+      font-weight: var(--antd-timeline-extension-font-weight);
+      font-size: var(--antd-timeline-extension-font-size);
+      color: var(--antd-timeline-extension-color);
+      margin-right: 24px;
+    }
+
+    .dateContainer {
+      position: absolute;
+      left: -48px;
+      top: 0;
+      text-align: center;
+
+      .month {
+        line-height: 17px;
+        font-weight: var(--antd-timeline-extension-font-weight);
+        font-size: var(--antd-timeline-extension-font-size);
+        color: var(--antd-timeline-extension-color);
+      }
+
+      .day {
+        line-height: 25px;
+        font-weight: var(--antd-timeline-extension-day-font-weight);
+        font-size: var(--antd-timeline-extension-day-font-size);
+        color: var(--antd-timeline-extension-day-color);
+      }
+    }
+  }
+}
+
+.groupName {
+  font-weight: var(--antd-timeline-extension-font-weight);
+  font-size: var(--antd-timeline-extension-font-size);
+  color: var(--antd-timeline-extension-color);
+  line-height: 20px;
+  margin-left: 9px;
+}

@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContractContainer should work 1`] = `
+<LegacyBrickForm
+  confirmText="确定"
+  fields={
+    Array [
+      Object {
+        "component": "Input",
+        "field": "name",
+        "label": "标签",
+      },
+    ]
+  }
+  form={
+    Object {
+      "getFieldDecorator": [Function],
+      "getFieldError": [Function],
+      "getFieldInstance": [Function],
+      "getFieldProps": [Function],
+      "getFieldValue": [Function],
+      "getFieldsError": [Function],
+      "getFieldsValue": [Function],
+      "isFieldTouched": [Function],
+      "isFieldValidating": [Function],
+      "isFieldsTouched": [Function],
+      "isFieldsValidating": [Function],
+      "isSubmitting": [Function],
+      "resetFields": [Function],
+      "setFields": [Function],
+      "setFieldsInitialValue": [Function],
+      "setFieldsValue": [Function],
+      "submit": [Function],
+      "validateFields": [Function],
+      "validateFieldsAndScroll": [Function],
+    }
+  }
+  i18n={
+    Object {
+      "language": "zh-CN",
+    }
+  }
+  onBrickFormRef={[MockFunction]}
+  showCancel={true}
+  showConfirm={true}
+  t={[Function]}
+/>
+`;

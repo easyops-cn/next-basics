@@ -1,0 +1,29 @@
+.microViewHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--page-title-margin-bottom);
+}
+
+.pageTitle {
+  flex: 1;
+  font-size: 18px;
+  line-height: 32px;
+}
+
+.untitled {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.toolbar {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.minorSlots {
+  margin-bottom: var(--page-title-margin-bottom);
+
+  > * + * {
+    margin-top: var(--editor-brick-gap);
+  }
+}

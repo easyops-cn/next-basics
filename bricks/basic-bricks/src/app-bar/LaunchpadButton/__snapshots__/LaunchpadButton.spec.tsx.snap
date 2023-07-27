@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LaunchpadButton should work 1`] = `
+<Fragment>
+  <a
+    className="launchpadLink"
+    onClick={[Function]}
+    role="button"
+  >
+    <svgr-mock
+      className="launchpadIcon"
+      height={16}
+      width={16}
+    />
+  </a>
+  <LaunchpadPortal
+    onClose={[Function]}
+    onWillClose={[Function]}
+    visible={false}
+  />
+</Fragment>
+`;

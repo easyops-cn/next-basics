@@ -1,0 +1,17 @@
+@media print {
+  .printDisplay {
+    display: none;
+  }
+}
+
+.printModalBody
+  :global(.ant-modal-confirm-body
+    > .anticon
+    + .ant-modal-confirm-title
+    + .ant-modal-confirm-content) {
+  margin-left: 0px;
+}
+
+:global(.print-hide .ant-popover-inner-content) {
+  padding: 6px 16px;
+}

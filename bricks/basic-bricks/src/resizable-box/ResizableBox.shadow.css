@@ -1,0 +1,79 @@
+:host {
+  display: block;
+  position: relative;
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+:host([resize-direction="left"]),
+:host([resize-direction="right"]) {
+  height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.box {
+  height: 100%;
+}
+
+.bar {
+  position: absolute;
+  width: 4px;
+  top: 0;
+  bottom: 0;
+}
+
+.top.bar,
+.bottom.bar {
+  position: absolute;
+  height: 4px;
+  left: 0;
+  width: 100%;
+}
+
+.top {
+  top: -2px;
+}
+
+.bottom: {
+  bottom: -2px;
+}
+
+.left {
+  left: -2px;
+}
+
+.right {
+  right: -2px;
+}
+
+.hoverBar:hover {
+  cursor: col-resize;
+  background: #007fd4;
+  transition: background 0.1s 0.3ms ease-out;
+
+  &.top,
+  &.bottom {
+    cursor: row-resize;
+  }
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  display: none;
+}
+
+.resizing + .bar .mask {
+  display: block;
+}

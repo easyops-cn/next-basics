@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>presentational-bricks-widgets.conditional-display-base</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="105" height="55" rx="4"></rect>
+    </defs>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图七" transform="translate(-573.000000, -598.000000)">
+            <g id="presentational-bricks-widgets.conditional-display-base" transform="translate(573.000000, 598.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="矩形备份-46"></g>
+                <rect id="矩形" fill="#52C41A" mask="url(#mask-2)" x="8" y="21" width="27" height="12" rx="1"></rect>
+                <rect id="矩形备份-6" fill="#1A7AFF" mask="url(#mask-2)" x="39" y="21" width="27" height="12" rx="1"></rect>
+                <rect id="矩形备份-7" fill="#F24C25" mask="url(#mask-2)" x="70" y="21" width="27" height="12" rx="1"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

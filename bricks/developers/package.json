@@ -1,0 +1,50 @@
+{
+  "name": "@next-bricks/developers",
+  "version": "1.365.9",
+  "description": "> TODO: description",
+  "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/developers",
+  "license": "GPL-3.0",
+  "files": [
+    "dist",
+    "deploy"
+  ],
+  "nx": {
+    "targets": {
+      "build": {
+        "outputs": [
+          "{projectRoot}/dist",
+          "{projectRoot}/deploy",
+          "{projectRoot}/.pkgbuild",
+          "{projectRoot}/src/lazy-bricks"
+        ]
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:easyops-cn/next-basics.git"
+  },
+  "scripts": {
+    "prestart": "node scripts/pre-build.js",
+    "start": "cross-env NODE_ENV='development' webpack --config webpack.config.js --watch",
+    "prebuild": "node scripts/pre-build.js",
+    "build": "cross-env NODE_ENV='production' webpack --config webpack.config.js",
+    "postbuild": "node scripts/post-build.js",
+    "test": "cross-env NODE_ENV='test' jest",
+    "test:ci": "cross-env NODE_ENV='test' CI=true jest"
+  },
+  "devDependencies": {
+    "@next-libs/basic-components": "^5.3.5",
+    "@next-libs/clipboard": "^3.0.4",
+    "@next-sdk/api-gateway-sdk": "^2.0.17",
+    "change-case": "^4.1.2",
+    "classnames": "^2.3.2",
+    "react-markdown": "^5.0.3",
+    "remark-gfm": "^1.0.0",
+    "typedoc": "^0.20.37"
+  },
+  "sideEffects": true,
+  "peerDependencies": {
+    "@next-dll/ace": "*"
+  }
+}

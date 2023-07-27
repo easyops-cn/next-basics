@@ -1,0 +1,9 @@
+.cardList {
+  :global(.ant-list-items) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  :global(.ant-list-item) {
+    padding: 12px;
+  }
+}

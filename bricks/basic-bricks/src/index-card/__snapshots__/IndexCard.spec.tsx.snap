@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IndexCard should work 1`] = `
+<div>
+  <div
+    className="indexCardHeader"
+  >
+    <div
+      className="indexCardTitle"
+    >
+      title
+    </div>
+    <div
+      className="indexCardToolbar"
+    >
+      <slot
+        id="toolbarSlot"
+        name="toolbar"
+      />
+    </div>
+  </div>
+  <div
+    className="indexCardBody"
+    style={
+      Object {
+        "gridGap": undefined,
+      }
+    }
+  >
+    <slot
+      id="contentSlot"
+      name="content"
+    />
+  </div>
+</div>
+`;

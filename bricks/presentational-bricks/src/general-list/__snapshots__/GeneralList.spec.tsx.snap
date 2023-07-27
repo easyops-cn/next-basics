@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GeneralList should work 1`] = `
+<div
+  className="listContainer cardListContainer"
+  style={Object {}}
+>
+  <slot
+    id="itemsSlot"
+    name="items"
+  />
+</div>
+`;

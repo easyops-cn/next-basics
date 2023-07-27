@@ -1,0 +1,20 @@
+lazyBricks:
+  - code-editor
+  - crontab-display
+  - brick-code-display
+  - card-item
+  - brick-collapse-card
+  - brick-placeholder
+  - single-field-edit
+  - qrcode-download
+
+  - group: bricks-use-form-and-markdown
+    bricks:
+      - brick-form
+      - markdown-editor
+      - markdown-display
+
+  - group: bricks-use-html-to-react
+    bricks:
+      - modal-confirm
+      - statistic-card

@@ -1,0 +1,14 @@
+.optionContainer {
+  display: flex;
+  flex-direction: column;
+
+  .label {
+    line-height: 22px;
+  }
+
+  .caption {
+    font-size: var(--auxiliary-font-size-small);
+    color: var(--color-secondary-text);
+    line-height: 20px;
+  }
+}

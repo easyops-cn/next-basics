@@ -1,0 +1,10 @@
+.treeView {
+  white-space: nowrap;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.treeWrapper {
+  padding: 0 12px;
+}

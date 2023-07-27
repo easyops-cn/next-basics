@@ -1,0 +1,45 @@
+.builderWrapper {
+  height: calc(100vh - 148px);
+  overflow: hidden;
+}
+
+.fullscreen {
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 110;
+  padding: var(--editor-brick-overlay-padding);
+}
+
+.builderOverlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: rgba(11, 26, 47, 0.45);
+}
+
+.fullscreen .builderOverlay {
+  display: block;
+}
+
+.builderContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background-color: #f3f4f7;
+  border-radius: var(--card-default-border-radius);
+}
+
+.builderBodyWrapper {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+}

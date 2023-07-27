@@ -1,0 +1,114 @@
+.awards {
+  display: inline-block;
+  font-family: "Roboto", sans-serif;
+  font-size: var(--card-title-font-size);
+  font-weight: var(--font-weight-500);
+  width: 38px;
+  height: 38px;
+  line-height: 30px;
+  min-width: 38px;
+  border-radius: 100%;
+  color: var(--color-normal-icon);
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  border-width: 4px;
+  border-style: solid;
+  z-index: 1;
+  span {
+    font-size: var(--sub-title-font-size-small);
+  }
+}
+
+.topThree {
+  font-size: 16px;
+  line-height: 30px;
+}
+
+.small {
+  height: 26px;
+  width: 26px;
+  min-width: 26px;
+  font-size: 12px;
+  border-width: 2px;
+  line-height: 22px;
+  span {
+    font-size: 6px;
+  }
+}
+
+.medalGold {
+  background-image: var(--rank-table-medal-gold-background-image);
+  border-color: var(--rank-table-medal-gold-border-color);
+  text-shadow: var(--rank-table-medal-gold-text-shadow);
+  background-clip: content-box;
+}
+
+.medalSilver {
+  background-image: var(--rank-table-medal-silver-background-image);
+  border-color: var(--rank-table-medal-silver-border-color);
+  text-shadow: var(--rank-table-medal-silver-text-shadow);
+  background-clip: content-box;
+}
+
+.medalBronze {
+  background-image: var(--rank-table-medal-bronze-background-image);
+  border-color: var(--rank-table-medal-bronze-border-color);
+  text-shadow: var(--rank-table-medal-bronze-text-shadow);
+  background-clip: content-box;
+}
+
+.normalAwards {
+  background: var(--color-info-bg);
+  color: #5685eb;
+  border-color: var(--color-info-bg);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  grid-gap: 10px;
+  padding-bottom: 16px;
+  justify-content: space-between;
+  .leftCell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--card-title-font-size);
+    font-weight: var(--font-weight-500);
+    color: var(--color-header-text);
+  }
+  .rightCell {
+    font-size: 17px;
+    color: var(--color-header-text);
+  }
+}
+
+.trendBar {
+  display: grid;
+  grid-column-gap: 0;
+  height: 16px;
+  width: 16px;
+  span {
+    border-radius: 2px 2px 0 0;
+  }
+}
+
+.yellowBar {
+  grid-row-start: 30;
+  grid-row-end: 101;
+  background-color: #fcca1e;
+}
+
+.blueBar {
+  grid-row-start: 1;
+  grid-row-end: 101;
+  background-color: #2953ff;
+}
+
+.redBar {
+  grid-row-start: 50;
+  grid-row-end: 101;
+  background-color: #ff354a;
+}

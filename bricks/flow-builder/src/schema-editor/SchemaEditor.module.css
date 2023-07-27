@@ -1,0 +1,41 @@
+.editor {
+  background: var(--custom-form-item-wrapper-bg);
+  border-radius: 6px;
+  padding: 16px;
+
+  .title {
+    display: grid;
+    gap: 10px;
+    height: 40px;
+    border-bottom: 1px solid var(--palette-gray-4);
+  }
+
+  .content {
+    margin: 15px 0;
+  }
+
+  .schemaItem {
+    display: grid;
+    gap: 10px;
+  }
+}
+
+.iconBtn {
+  padding: 4px 0px;
+  &,
+  &:focus {
+    color: var(--antd-text-color);
+  }
+
+  &:hover {
+    color: var(--bg-color-button-link-hover);
+  }
+}
+
+.deleteBtn {
+  color: var(--bg-color-button-danger);
+
+  &:hover {
+    color: var(--bg-color-button-danger-pressed);
+  }
+}

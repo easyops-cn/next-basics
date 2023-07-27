@@ -1,0 +1,22 @@
+.timeRange {
+  .timeRangeSplit {
+    width: 32px !important;
+    background: var(--input-fill-bg);
+    pointer-events: none;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  :global(.ant-picker):first-child {
+    margin-right: 0;
+  }
+}
+
+:global(.ant-picker-dropdown
+    .ant-picker-range-wrapper
+    .ant-picker-footer
+    .ant-picker-ranges
+    .ant-picker-preset
+    > .ant-tag-blue) {
+  background: none;
+}

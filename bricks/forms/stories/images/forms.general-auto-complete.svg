@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>forms.general-auto-complete</title>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图三" transform="translate(-1480.000000, -103.000000)">
+            <g id="forms.general-auto-complete" transform="translate(1480.000000, 103.000000)">
+                <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="编组-17" transform="translate(28.000000, 14.000000)">
+                    <rect id="矩形备份-104" fill="#D6DBEC" x="0" y="0" width="69" height="32" rx="1"></rect>
+                    <rect id="矩形" fill="#1A7AFF" x="2" y="2" width="65" height="8" rx="1"></rect>
+                    <rect id="矩形备份-4" fill="#F4F5F9" x="2" y="12" width="65" height="8" rx="1"></rect>
+                    <rect id="矩形备份-5" fill="#F4F5F9" x="2" y="22" width="65" height="8" rx="1"></rect>
+                </g>
+                <g id="编组-16" transform="translate(8.000000, 6.000000)">
+                    <rect id="矩形备份-104" fill="#F4F5F9" x="20" y="0" width="69" height="6" rx="1"></rect>
+                    <rect id="矩形" fill="#D6DBEC" x="0" y="0" width="16" height="6" rx="1"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,47 @@
+.card,
+[data-override-theme="light"] .card {
+  --card-head-background: #fff;
+  --card-body-background: #fff;
+}
+
+html[data-theme="dark-v2"] .card,
+[data-override-theme="dark-v2"] .card {
+  --card-head-background: #333335;
+  --card-body-background: #1e1e1e;
+}
+.cardHead {
+  font-size: 16px;
+  padding: 6px 20px;
+  background: var(--card-head-background);
+  display: flex;
+  justify-content: space-between;
+}
+.cardHead h4 {
+  margin: 0;
+  font-size: 16px;
+}
+.toolItem {
+  cursor: pointer;
+  margin: 6px 0;
+}
+.toolItem span {
+  margin-left: 6px;
+}
+.danger {
+  color: red;
+}
+.cardBody {
+  align-items: left;
+  background: var(--card-body-background);
+  display: grid;
+  justify-items: left;
+  padding: 20px;
+}
+.normal {
+  font-size: 14px;
+}
+.highlight {
+  color: #587fff;
+  font-size: 14px;
+  margin: 0 6px;
+}

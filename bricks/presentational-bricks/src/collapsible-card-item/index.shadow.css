@@ -1,0 +1,93 @@
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+.headerContainer {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  padding: 16px 24px;
+  align-items: center;
+  position: relative;
+  &.borderButtom {
+    border-bottom-width: var(--border-width-base);
+    border-bottom-color: var(--color-text-divider-line);
+    border-bottom-style: solid;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+  .subscriptContainer {
+    width: 60px;
+    height: 30px;
+    transform: rotate(40deg);
+    background: var(--theme-blue-color);
+    position: absolute;
+    right: -16px;
+    bottom: 41px;
+    svg {
+      color: #fff;
+      width: 16px;
+      position: absolute;
+      bottom: 4px;
+      right: 16px;
+      transform: rotate(-40deg);
+    }
+  }
+  .collapsibleCardItemInfo {
+    display: grid;
+    grid-gap: 16px;
+    justify-content: left;
+    grid-auto-flow: column;
+    align-items: center;
+    .collapsibleCardItemIcon {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+    }
+    .collapsibleTitle {
+      font-size: var(--card-title-font-size);
+      color: var(--color-normal-text);
+      font-weight: var(--font-weight-400);
+    }
+  }
+}
+
+.brickCollapsibleCardContainer {
+  position: relative;
+  background: var(--color-fill-bg-container-1);
+  border-radius: var(--larger-border-radius);
+  overflow: hidden;
+  border-width: var(--border-width-base);
+  border-color: var(--color-border-divider-line);
+  border-style: solid;
+  .operatingArea {
+    opacity: 0;
+    display: grid;
+    grid-gap: 10px;
+    justify-content: left;
+    grid-auto-flow: column;
+    align-items: center;
+  }
+  &.hoverable:hover {
+    border-radius: var(--larger-border-radius);
+    box-shadow: var(--hover-shadow);
+    .operatingArea {
+      opacity: 1;
+    }
+  }
+}
+
+.contentContainer {
+  padding: 32px 72px;
+}
+
+.defaultTag {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  z-index: 1;
+}

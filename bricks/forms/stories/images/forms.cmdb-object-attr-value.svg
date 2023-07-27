@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>forms.cmdb-object-attr-value</title>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图五" transform="translate(-670.000000, -103.000000)">
+            <g id="forms.cmdb-object-attr-value" transform="translate(670.000000, 103.000000)">
+                <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="编组-10" transform="translate(11.000000, 12.000000)">
+                    <rect id="矩形备份-49" fill="#F4F5F9" x="24" y="0" width="54" height="6" rx="1"></rect>
+                    <g id="编组-12" transform="translate(5.000000, 10.000000)" fill="#D6DBEC">
+                        <rect id="矩形备份-48" x="0" y="0" width="1" height="6"></rect>
+                        <rect id="矩形备份-54" x="2" y="0" width="1" height="6"></rect>
+                        <rect id="矩形备份-57" x="4" y="0" width="1" height="6"></rect>
+                        <rect id="矩形备份-68" x="6" y="0" width="1" height="6"></rect>
+                        <rect id="矩形备份-69" x="8" y="0" width="1" height="6"></rect>
+                        <rect id="矩形备份-70" x="10" y="0" width="1" height="6"></rect>
+                        <rect id="矩形备份-71" x="12" y="0" width="1" height="6"></rect>
+                        <rect id="矩形备份-72" x="14" y="0" width="1" height="6"></rect>
+                    </g>
+                    <g id="编组-12备份-2" transform="translate(5.000000, 0.000000)" fill="#D6DBEC">
+                        <rect id="矩形备份-48" x="0" y="0" width="1" height="6"></rect>
+                        <rect id="矩形备份-54" x="2" y="0" width="1" height="6"></rect>
+                        <rect id="矩形备份-57" x="4" y="0" width="1" height="6"></rect>
+                        <rect id="矩形备份-68" x="6" y="0" width="1" height="6"></rect>
+                        <rect id="矩形备份-69" x="8" y="0" width="1" height="6"></rect>
+                        <rect id="矩形备份-70" x="10" y="0" width="1" height="6"></rect>
+                        <rect id="矩形备份-71" x="12" y="0" width="1" height="6"></rect>
+                        <rect id="矩形备份-72" x="14" y="0" width="1" height="6"></rect>
+                    </g>
+                    <g id="编组-37" transform="translate(0.000000, 2.000000)" stroke="#F24C25" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5">
+                        <line x1="0" y1="1.12460064" x2="2.73412737" y2="1.12460064" id="路径-34"></line>
+                        <line x1="2.2875153" y1="-4.50847056e-17" x2="0.511188266" y2="2.37639845" id="路径-35"></line>
+                        <line x1="0.511188266" y1="-5.32727307e-17" x2="2.2875153" y2="2.37639845" id="路径-36"></line>
+                    </g>
+                    <g id="编组-37备份" transform="translate(0.000000, 12.000000)" stroke="#F24C25" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5">
+                        <line x1="0" y1="1.12460064" x2="2.73412737" y2="1.12460064" id="路径-34"></line>
+                        <line x1="2.2875153" y1="-4.50847056e-17" x2="0.511188266" y2="2.37639845" id="路径-35"></line>
+                        <line x1="0.511188266" y1="-5.32727307e-17" x2="2.2875153" y2="2.37639845" id="路径-36"></line>
+                    </g>
+                    <rect id="矩形备份-52" fill="#1A7AFF" x="24" y="22" width="16" height="6" rx="1"></rect>
+                    <rect id="矩形备份-53" fill="#D6DBEC" x="44" y="22" width="16" height="6" rx="1"></rect>
+                    <rect id="矩形备份-49" fill="#F4F5F9" x="24" y="10" width="54" height="6" rx="1"></rect>
+                    <polyline id="路径-2" stroke="#778DC3" stroke-linecap="round" stroke-linejoin="round" transform="translate(73.900000, 13.000000) rotate(-270.000000) translate(-73.900000, -13.000000) " points="73 11.5 74.8 13 73 14.5"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

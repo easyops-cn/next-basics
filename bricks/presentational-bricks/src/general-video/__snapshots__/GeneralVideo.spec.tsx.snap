@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GeneralVideo should work with preview=false 1`] = `
+<div>
+  <video
+    className="player"
+    controls={true}
+    height={720}
+  >
+    <source
+      src="a.mp4"
+      type="video/mp4"
+    />
+    Your browser does not support the video tag.
+  </video>
+</div>
+`;
+
+exports[`GeneralVideo should work with preview=true 1`] = `
+<div>
+  <div
+    className="title"
+  />
+  <a
+    href="a.mp4"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <video
+      className="player"
+      height={150}
+    >
+      <source
+        src="a.mp4"
+        type="video/mp4"
+      />
+      Your browser does not support the video tag.
+    </video>
+  </a>
+</div>
+`;

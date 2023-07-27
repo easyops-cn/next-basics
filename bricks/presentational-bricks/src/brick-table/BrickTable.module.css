@@ -1,0 +1,177 @@
+.brickTableOddRow {
+  background-color: var(--color-fill-bg-base-4);
+}
+
+html[data-theme="dark"] {
+  .brickTableOddRow {
+    background-color: #ffffff0a;
+  }
+  .tableThTransparent {
+    :global(thead.ant-table-thead) {
+      tr {
+        th {
+          background: rgba(32, 45, 75, 0.5);
+        }
+      }
+    }
+  }
+}
+
+.customDropTable {
+  :global(.ant-table-tbody) {
+    tr.dropOverDownward {
+      td {
+        border-bottom: 2px dashed var(--antd-table-drop-hover-border-color);
+      }
+    }
+
+    tr.dropOverUpward {
+      td {
+        border-top: 2px dashed var(--antd-table-drop-hover-border-color);
+      }
+    }
+  }
+}
+
+.brickTable {
+  :global(.ant-table-small .ant-table-body) {
+    margin: 0;
+  }
+
+  :global(.ant-table-small .ant-table-thead) {
+    background: var(--antd-table-header-bg);
+  }
+
+  :global(.ant-table-small .ant-table-row) {
+    line-height: 26px;
+  }
+
+  :global(.ant-table-small .ant-table-row td) {
+    padding: 1px 8px !important;
+  }
+  :global(.ant-table-small .ant-table-thead th) {
+    padding: 2px 8px !important;
+  }
+  :global(.ant-table-middle .ant-table-row td) {
+    padding: 6px 8px !important;
+  }
+  :global(.ant-table-middle .ant-table-thead th) {
+    padding: 6px 8px !important;
+    /* 改变高度 */
+  }
+
+  :global(.ant-table-tbody) {
+    > tr.invalidRow {
+      > td {
+        background-color: var(--color-error-bg);
+      }
+      &:hover {
+        > td {
+          background-color: var(--color-error-bg);
+        }
+      }
+    }
+
+    > tr.disabledRow {
+      > td {
+        background-color: var(--theme-gray-border-color);
+      }
+      &:hover {
+        > td {
+          background-color: var(--theme-gray-border-color);
+        }
+      }
+    }
+    :global(.ant-table-row-selected td) {
+      background: var(--antd-table-cell-fixed-body-bg);
+    }
+  }
+  :global(.ant-table .ant-table-thead) {
+    > tr {
+      > th:first-child {
+        padding-left: 16px;
+      }
+    }
+  }
+  :global(.ant-table .ant-table-tbody) {
+    > tr {
+      > td:first-child {
+        padding-left: 16px;
+      }
+    }
+  }
+  :global(.ant-table .ant-table-selection-col) {
+    width: 48px;
+  }
+}
+
+.expandIconSpan {
+  cursor: pointer;
+  margin-right: 9px;
+  color: var(--antd-table-row-expand-icon-color);
+  font-size: 11px;
+
+  :global(.anticon) {
+    background: var(--antd-table-row-expand-icon-action-bg);
+    border-radius: 2px;
+    padding: 3px;
+  }
+}
+
+.expandIconCellHidden {
+  :global(.ant-table-row-expand-icon-cell),
+  :global(.ant-table-expand-icon-col) {
+    width: 1px;
+    min-width: auto;
+
+    > * {
+      display: none;
+    }
+  }
+}
+
+:global(td.alignTop) {
+  vertical-align: top;
+}
+
+:global(td.alignBottom) {
+  vertical-align: bottom;
+}
+
+.ellipsisInfoCell {
+  max-width: 240px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tableThTransparent {
+  :global(thead.ant-table-thead) {
+    tr {
+      th {
+        background: var(--antd-table-header-bg);
+      }
+    }
+  }
+}
+
+.zebraPatternTable {
+  :global(.ant-table-tbody) {
+    tr {
+      td {
+        border-bottom: 0;
+      }
+    }
+    :global(.ant-table-row-selected):not(.brickTableOddRow) {
+      td {
+        background: var(--antd-table-cell-fixed-body-bg);
+      }
+    }
+    .brickTableOddRow,
+    :global(.ant-table-row-selected) {
+      td {
+        background: var(--color-fill-bg-base-4);
+      }
+    }
+  }
+}

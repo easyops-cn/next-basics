@@ -1,0 +1,141 @@
+.taskCalendar {
+  --antd-calendar-bg: var(--color-fill-bg-container-1);
+  padding: 0 15px;
+  background: var(--antd-component-background);
+
+  /* ================== Date Panel ================== */
+  :global(.ant-picker-date-panel .ant-picker-content .ant-picker-cell) {
+    &:not(:global(.ant-picker-cell-in-view)) {
+      .dateNumber,
+      .dateText {
+        color: var(--color-disabled-text) !important;
+      }
+    }
+
+    &:hover {
+      .dateContainer {
+        border-color: var(--palette-gray-8);
+      }
+    }
+
+    .dateContainer {
+      &.today {
+        border-color: purple;
+      }
+
+      &.importantDay {
+        border-color: inherit;
+
+        .dateNumber {
+          color: var(--color-normal-icon) !important;
+        }
+      }
+
+      height: 50px;
+      border-radius: 10%;
+      border: 1px solid var(--color-border-divider-line);
+      position: relative;
+
+      .briefText {
+        position: absolute;
+        left: 2px;
+        top: -1px;
+        font-size: 12px;
+        color: var(--color-error);
+      }
+
+      .taskPoint {
+        position: absolute;
+        left: 3px;
+        bottom: 3px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+      }
+
+      .dateMain {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+
+        .dateNumber {
+          color: var(--color-header-text);
+        }
+
+        .dateText {
+          font-size: 12px;
+          color: var(--color-auxiliary-text);
+        }
+      }
+    }
+  }
+}
+
+/* Footer */
+.calendarFooter {
+  padding: 5px 0px 15px 0;
+
+  .dateInfo {
+    height: 30px;
+    border-top: 1px solid var(--color-text-divider-line);
+    border-bottom: 1px solid var(--color-text-divider-line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .importantItem {
+      color: var(--color-normal-icon);
+      margin-right: 8px;
+      padding: 3px 4px;
+      border-radius: 5px;
+    }
+  }
+
+  .taskInfo {
+    .taskTitle {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .taskList {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .taskItem {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 26px;
+        line-height: 22px;
+
+        &.taskLinkItem {
+          cursor: pointer;
+        }
+
+        .taskItemColor {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 5px;
+          height: 100%;
+        }
+
+        .taskItemTime {
+          background: var(--color-fill-bg-base-1);
+          padding: 0 4px;
+          margin-left: 8px;
+        }
+
+        .taskItemText {
+          margin-left: 8px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}

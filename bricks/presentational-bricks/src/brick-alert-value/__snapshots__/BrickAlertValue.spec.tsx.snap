@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrickAlertValue should work, value is not number 1`] = `
+<span>
+  192.168.100.162
+</span>
+`;
+
+exports[`BrickAlertValue should work, with bigger 1`] = `
+<span>
+  98% ↑
+</span>
+`;
+
+exports[`BrickAlertValue should work, without bigger or smaller 1`] = `
+<span>
+  99.00% 
+</span>
+`;

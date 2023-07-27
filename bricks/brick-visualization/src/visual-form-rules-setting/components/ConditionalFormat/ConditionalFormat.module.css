@@ -1,0 +1,114 @@
+.conditionalWrap {
+  display: flex;
+}
+
+.conditionalItem {
+  margin-right: 24px;
+  padding-left: 14px;
+  cursor: pointer;
+  color: gray;
+}
+
+.group {
+  margin-bottom: 12px;
+}
+
+.groupTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.groupTopLeft {
+  display: flex;
+  justify-content: center;
+}
+
+.groupTopRight {
+  display: flex;
+  justify-content: center;
+}
+
+.groupBottom {
+  display: flex;
+  align-items: center;
+}
+
+.groupBottom .userSelectContainer {
+  :global(.ant-select-selector) {
+    width: 200px;
+  }
+}
+
+.groupSpanWhen {
+  width: 60px;
+  display: inline-block;
+  padding-left: 14px;
+  color: gray;
+}
+
+.groupSpanOrAnd {
+  width: 60px;
+  display: inline-block;
+  text-align: center;
+
+  :global(.ant-select-selection-item) {
+    color: gray;
+  }
+}
+
+.groupOrigin {
+  margin-right: 6px;
+}
+
+.customHr {
+  width: auto;
+  height: 1px;
+  background-color: #666;
+  position: relative;
+  margin: 24px 0 24px 14px;
+}
+
+.groupSelect {
+  width: 60px;
+  height: 100px;
+  position: absolute;
+  left: calc(50% - 30px);
+  top: -18px;
+}
+
+.groupClose {
+  position: absolute;
+  right: 0;
+  top: -15px;
+  cursor: pointer;
+  display: none;
+  width: 20px;
+  text-align: center;
+}
+
+.customHr:hover .groupClose {
+  display: block;
+}
+
+.groupClose:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.conditionDelete {
+  margin-left: 8px;
+  visibility: hidden;
+}
+
+.group:hover .conditionDelete {
+  visibility: visible;
+}
+
+.conditionDelete:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.rangeContainer {
+  display: flex;
+}

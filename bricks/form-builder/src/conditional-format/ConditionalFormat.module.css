@@ -1,0 +1,49 @@
+.conditionalWrap {
+  display: flex;
+}
+.conditionalItem {
+  margin-right: 24px;
+  cursor: pointer;
+}
+.group {
+  margin-bottom: 12px;
+}
+.groupSpan {
+  width: 60px;
+  display: inline-block;
+  text-align: center;
+}
+.groupOrigin {
+  margin: 0 12px;
+}
+.customHr {
+  width: 415px;
+  height: 1px;
+  background-color: #666;
+  position: relative;
+  margin: 24px 0;
+}
+.groupSelect {
+  width: 60px;
+  height: 100px;
+  position: absolute;
+  left: calc(50% - 30px);
+  top: -18px;
+}
+.groupClose {
+  position: absolute;
+  right: 0;
+  top: -15px;
+  cursor: pointer;
+  display: none;
+}
+.customHr:hover .groupClose {
+  display: block;
+}
+.conditionDelete {
+  margin-left: 8px;
+}
+.conditionDelete:hover {
+  color: red;
+  cursor: pointer;
+}

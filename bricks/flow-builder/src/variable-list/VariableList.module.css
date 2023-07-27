@@ -1,0 +1,49 @@
+.propList {
+  --caret-color: #999;
+  --var-code-color: rgb(33, 33, 33);
+  --var-code-name: rgb(136, 19, 145);
+  padding-left: 14px;
+  margin: 0;
+}
+
+html[data-theme="dark-v2"] .propList {
+  --caret-color: #727272;
+  --var-code-color: rgb(213, 213, 213);
+  --var-code-name: rgb(227, 110, 236);
+}
+
+.propList,
+.propItem {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro",
+    "monospace";
+  list-style: none;
+  font-size: 14px;
+  color: var(--var-code-color);
+}
+
+.propItemLabel {
+  cursor: default;
+}
+
+.propItemLabel > span > :global(.anticon) {
+  vertical-align: middle;
+  color: var(--caret-color);
+}
+
+.propName {
+  color: var(--var-code-name);
+}
+
+.blankCube {
+  display: inline-block;
+  vertical-align: middle;
+  width: 12px;
+  height: 12px;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}

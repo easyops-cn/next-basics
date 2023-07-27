@@ -1,0 +1,13 @@
+.illustrationCard {
+  :global(.ant-card-body) {
+    background-color: var(--theme-gray-border-color);
+    text-align: center;
+  }
+  .imgCss {
+    height: 180px;
+    object-fit: contain;
+    width: 98%;
+    display: block;
+    margin: 0 auto;
+  }
+}

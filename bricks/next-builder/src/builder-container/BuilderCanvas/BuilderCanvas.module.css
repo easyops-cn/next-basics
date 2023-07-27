@@ -1,0 +1,26 @@
+.builderCanvas {
+  position: relative;
+  flex: auto;
+  min-height: 0;
+  margin: var(--page-card-gap) 0 0 var(--page-card-gap);
+}
+
+.fullscreen {
+  margin: var(--page-card-gap);
+}
+
+.hasTabs {
+  margin-top: calc(var(--page-card-gap) + 10px);
+}
+
+.builderCanvasInner {
+  position: relative;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.85);
+  border-radius: var(--editor-brick-border-radius);
+  height: 100%;
+}
+
+.builderCanvasInner > :global(.ant-card) > :global(.ant-card-body) {
+  padding: 0;
+}

@@ -1,0 +1,19 @@
+.searchContainer {
+  display: flex;
+  height: var(--editor-brick-base-height);
+  border-radius: var(--editor-brick-border-radius);
+  border: 1px solid var(--editor-brick-stroke-color);
+  padding: 4px 12px;
+  align-items: center;
+  justify-content: space-between;
+  .searchIcon {
+    color: var(--editor-brick-stroke-color);
+  }
+
+  .placeholder {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--antd-input-placeholder-color);
+  }
+}

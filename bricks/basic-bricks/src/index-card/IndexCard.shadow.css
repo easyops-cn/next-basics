@@ -1,0 +1,27 @@
+.indexCardHeader {
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.indexCardTitle {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.indexCardToolbar {
+  display: flex;
+  margin-left: auto;
+}
+
+::slotted([slot="toolbar"]) {
+  margin-left: 10px;
+}
+
+::slotted([slot="content"]) {
+  grid-column: span 12;
+}
+
+.indexCardBody {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}

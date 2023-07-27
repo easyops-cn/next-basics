@@ -1,0 +1,150 @@
+@import '~@fullcalendar/common/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+
+.toastui-calendar-weekday-event{
+    border-left: none !important;
+    .test{
+        background-color: blue;
+    }
+    
+}
+.fc .fc-daygrid-day-events{
+    margin-top: 5px;
+}
+.fc-h-event .fc-event-title{
+    text-overflow: ellipsis;
+    color: rgb(51,51,51);
+}
+.eventCell{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgb(51,51,51);
+    width: 100%;
+    border-radius: 3px;
+}
+.fc .fc-scrollgrid, .fc .fc-scrollgrid table{
+    table-layout: fixed;
+}
+
+.fc .fc-daygrid-day-frame .fc-daygrid-day-top .dayTopContainer{
+    visibility: visible !important;
+    position: relative;
+}
+.fc .fc-toolbar.fc-header-toolbar{
+    display: none;//自定义头部
+}
+.fc-h-event{
+    border: none;
+}
+.customHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px 20px 10px;
+    border-left: 1px solid var(--fc-border-color, #ddd);
+    border-right: 1px solid var(--fc-border-color, #ddd);
+
+}
+.fc .fc-daygrid-event{
+    margin-top: 5px;
+}
+.fc .fc-popover{
+    z-index: 1;
+    max-width: 100%;
+}
+.fc-popover .fc-popover-body {
+    max-height: 80vh;
+    overflow: scroll;
+    display: grid;
+}
+.fc-view-harness{
+    overflow: scroll;
+}
+.headerTitle{
+    font-size: var(--page-title-font-size);
+    font-weight: var(--page-title-font-size);
+    color: var(--antd-heading-color);
+    
+}
+.holidayContainer{
+    white-space: nowrap;
+    color: red;
+    display: inline-block;
+    right: 30px;
+    top: 15px;
+    overflow: hidden;
+    position: absolute;
+    text-overflow: ellipsis;
+
+}
+.todaySpan{
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    background-color: yellow;
+    height: 20px;
+    width: 20px;
+}
+.headerEndContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.headerStartContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.customDayEventsDiv{
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: grab;
+    border-radius: 3px;
+}
+.customDayEventsContainerDiv{
+    padding-top: 10px;
+    background-color: #F7F8FA;
+    height: 80vh;
+    overflow: scroll;
+}
+.customTimeZoneDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid var(--fc-border-color, #ddd);
+    border-right: none;
+    flex-shrink: 1;
+    flex: 1;
+}
+.customTimeZoneContainerDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.customDayContainer{
+    min-width: 100%;
+    display: inline-block;
+    background-color: #F7F8FA;
+}
+.customContainer .fc-view-harness-active{
+    height: 80vh !important;
+    }
+ .fc .fc-daygrid-day-number{
+     width: 100% !important;
+ }
+ .dayTopFlexDiv{
+     display: flex;
+     justify-content: space-between;
+     flex-direction: row-reverse;
+     color: rgb(51,51,51);
+ }
+ .eventCountDiv{
+     color: #409EFF;
+ }
+ .fc .fc-daygrid-day-top{
+     margin-bottom: 5px;
+ }

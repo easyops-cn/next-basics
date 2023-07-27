@@ -1,0 +1,117 @@
+// --- 官方样式 ---
+@import "~antd/lib/drawer/style/index.less";
+// --- 官方Spin ---
+@import "~antd/lib/spin/style/index.less";
+// --- 自定义样式 ---
+@import "~@next-core/custom-antd-styles/src/var.less";
+@import "~@next-core/custom-antd-styles/src/drawer.less";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  height: 100%;
+}
+
+.@{drawer-prefix-cls}-footer {
+  padding: 0;
+  border: none;
+
+  .footer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    background: var(--antd-modal-footer-bg);
+
+    .footer-inner {
+      flex: 1
+    }
+  }
+}
+
+.flexContainer {
+  display: flex;
+}
+
+.ant-drawer-open.no-mask:focus-visible {
+  outline: none;
+}
+
+.floatDrawer.ant-drawer-open {
+  .ant-drawer-content-wrapper {
+    margin: 30px;
+    height: calc(~"100% - 60px");
+
+    .ant-drawer-content {
+      box-shadow: 0px 2px 3px 4px rgba(170, 170, 170, 0.2);
+      border-radius: 8px;
+
+      .ant-drawer-header {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.defaultOuterBtn {
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 16px;
+  height: 35px;
+  color: #fff;
+  box-shadow: 2px 8px 12px 0px rgba(170, 170, 170, 0.2);
+  border-radius: 8px 0 0 8px;
+  left: -16px;
+  top: calc(~"50% - 32px");
+  padding-top: 20px;
+}
+
+.outerBtn {
+  position: absolute;
+  cursor: pointer;
+}
+
+.bigOuterBtn {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #00aaf7 0%, #0071eb 100%);
+  box-shadow: -2px 8px 12px 0px rgba(0, 113, 235, 0.5);
+  border-radius: 10px 0px 0px 10px;
+  top: 170px;
+  left: -48px;
+  text-align: center;
+  color: #fff;
+
+  .anticon {
+    width: 20px;
+    height: 20px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.switch {
+  .ant-drawer-content {
+    overflow: visible;
+  }
+}
+
+.outerText {
+  max-width: 28px;
+  line-height: 1.3;
+}
+
+:host-context(html[data-theme="dark-v2"]) {
+  .bigOuterBtn {
+    box-shadow: -2px 8px 12px 0px rgb(37 56 95);
+  }
+}

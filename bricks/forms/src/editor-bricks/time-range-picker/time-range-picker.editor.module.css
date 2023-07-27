@@ -1,0 +1,29 @@
+.rangePickerItem {
+  flex: 0 0 200px;
+  display: flex;
+  height: var(--editor-brick-base-height);
+
+  .leftPicker,
+  .rightPicker {
+    flex: 1;
+    padding: 4px 11px;
+    border: 1px solid var(--editor-brick-skeleton-bg);
+    text-align: right;
+    color: var(--editor-brick-stroke-color);
+  }
+  .leftPicker {
+    border-top-left-radius: var(--editor-brick-border-radius);
+    border-bottom-left-radius: var(--editor-brick-border-radius);
+    margin-right: -1px;
+  }
+  .union {
+    width: 32px;
+    border: 1px solid var(--editor-brick-skeleton-bg);
+    background-color: var(--editor-brick-skeleton-bg-light);
+  }
+  .rightPicker {
+    border-top-right-radius: var(--editor-brick-border-radius);
+    border-bottom-right-radius: var(--editor-brick-border-radius);
+    margin-left: -1px;
+  }
+}

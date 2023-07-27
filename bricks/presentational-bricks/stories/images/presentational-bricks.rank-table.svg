@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>presentational-bricks.rank-table</title>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图四" transform="translate(-670.000000, -371.000000)">
+            <g id="presentational-bricks.rank-table" transform="translate(670.000000, 371.000000)">
+                <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="编组-4" transform="translate(4.000000, 6.000000)">
+                    <line x1="0" y1="20.5" x2="97" y2="20.5" id="路径" stroke="#F4F5F9"></line>
+                    <line x1="0" y1="31.5" x2="97" y2="31.5" id="路径备份" stroke="#F4F5F9"></line>
+                    <line x1="0" y1="42.5" x2="97" y2="42.5" id="路径备份-2" stroke="#F4F5F9"></line>
+                    <g id="编组-11备份-2">
+                        <path d="M1,0 L96,0 C96.5522847,-1.01453063e-16 97,0.44771525 97,1 L97,10 L97,10 L0,10 L0,1 C-6.76353751e-17,0.44771525 0.44771525,-1.20591542e-16 1,0 Z" id="矩形备份-48" fill="#D6DBEC"></path>
+                        <g id="编组-34" transform="translate(8.000000, 11.000000)">
+                            <circle id="椭圆形" fill="#F24C25" cx="4" cy="4" r="4"></circle>
+                            <text id="1" font-family="PingFang-SC-Medium, PingFang SC" font-size="6" font-weight="400" fill="#FFFFFF">
+                                <tspan x="2.5" y="6">1</tspan>
+                            </text>
+                        </g>
+                        <g id="编组-33" transform="translate(8.000000, 22.000000)">
+                            <circle id="椭圆形" fill="#F7BF02" cx="4" cy="4" r="4"></circle>
+                            <text id="2" font-family="PingFang-SC-Medium, PingFang SC" font-size="6" font-weight="400" fill="#FFFFFF">
+                                <tspan x="2" y="6">2</tspan>
+                            </text>
+                        </g>
+                        <g id="编组-35" transform="translate(8.000000, 33.000000)">
+                            <circle id="椭圆形" fill="#855800" cx="4" cy="4" r="4"></circle>
+                            <text id="3" font-family="PingFang-SC-Medium, PingFang SC" font-size="6" font-weight="400" fill="#FFFFFF">
+                                <tspan x="2" y="6">3</tspan>
+                            </text>
+                        </g>
+                        <rect id="矩形备份-62" fill="#778DC3" x="4" y="3" width="16" height="4" rx="1"></rect>
+                        <rect id="矩形备份-63" fill="#778DC3" x="40" y="3" width="16" height="4" rx="1"></rect>
+                        <rect id="矩形备份-64" fill="#778DC3" x="77" y="3" width="16" height="4" rx="1"></rect>
+                    </g>
+                    <g id="编组-11备份-3" transform="translate(77.000000, 13.000000)" fill="#1A7AFF">
+                        <rect id="矩形备份-48" x="0" y="0" width="16" height="4" rx="1"></rect>
+                    </g>
+                    <rect id="矩形备份-49" fill="#D6DBEC" x="40" y="13" width="16" height="4" rx="1"></rect>
+                    <rect id="矩形备份-55" fill="#D6DBEC" x="40" y="24" width="16" height="4" rx="1"></rect>
+                    <rect id="矩形备份-58" fill="#1A7AFF" x="77" y="24" width="16" height="4" rx="1"></rect>
+                    <rect id="矩形备份-56" fill="#D6DBEC" x="40" y="35" width="16" height="4" rx="1"></rect>
+                    <rect id="矩形备份-59" fill="#1A7AFF" x="77" y="35" width="16" height="4" rx="1"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
