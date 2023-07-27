@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrickAlertLevel should work 1`] = `
+<BrickValueMapping
+  mapping={
+    Object {
+      "0": Object {
+        "color": "blue",
+        "text": "通知",
+      },
+      "1": Object {
+        "color": "orange",
+        "text": "警告",
+      },
+      "2": Object {
+        "color": "red",
+        "text": "紧急",
+      },
+      "critical": Object {
+        "color": "red",
+        "text": "紧急",
+      },
+      "info": Object {
+        "color": "blue",
+        "text": "通知",
+      },
+      "warning": Object {
+        "color": "orange",
+        "text": "警告",
+      },
+    }
+  }
+  value={1}
+/>
+`;

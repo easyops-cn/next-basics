@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>presentational-bricks.agent-status[normal]</title>
+    <g id="snippet截图" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="snippet" transform="translate(-5997.000000, -147.000000)">
+            <g id="presentational-bricks.agent-status[normal]" transform="translate(5997.000000, 147.000000)">
+                <rect id="矩形备份-52" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="编组-6" transform="translate(17.000000, 14.000000)" fill="#52C41A">
+                    <rect id="矩形备份-50" fill-opacity="0.12" x="0" y="0" width="71" height="26" rx="13"></rect>
+                    <circle id="椭圆形" cx="13" cy="13" r="4"></circle>
+                    <text id="正常" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal">
+                        <tspan x="26" y="18">正常</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

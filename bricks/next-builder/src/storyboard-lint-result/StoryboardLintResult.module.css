@@ -1,0 +1,51 @@
+.container {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro",
+    monospace;
+}
+
+.title {
+  font-size: var(--title-font-size);
+  margin-bottom: var(--card-content-gap);
+}
+
+.ok {
+  color: var(--color-success);
+}
+
+.error {
+  color: var(--color-error);
+}
+
+.warn {
+  color: var(--color-warning);
+}
+
+.item:not(:last-child) {
+  margin-bottom: var(--card-content-gap);
+}
+
+.detail {
+  list-style-type: disc;
+}
+
+.summary,
+.detail > li {
+  padding: 1px 0;
+}
+
+.loading,
+.detail,
+.link {
+  color: var(--text-color-secondary);
+}
+
+.link,
+.link:hover {
+  transition: none;
+  text-decoration: none;
+  box-shadow: 0 1px 0 0 currentColor;
+}
+
+.link:hover {
+  color: var(--antd-text-color);
+}

@@ -1,0 +1,424 @@
+// --- 官方样式 ---
+@import "~antd/lib/avatar/style/index.less";
+@import "~antd/lib/card/style/index.less";
+@import "~antd/lib/button/style/index.less";
+@import "~antd/lib/style/index.less";
+// --- 自定义样式 ---
+@import "~@next-core/custom-antd-styles/src/var.less";
+@import "~@next-core/custom-antd-styles/src/var.less";
+@import "~@next-core/custom-antd-styles/src/card.less";
+@import "~@next-core/custom-antd-styles/src/button.less";
+
+@import "~@fortawesome/fontawesome-svg-core/styles.css";
+
+:host {
+  display: block;
+}
+
+
+:host([hidden]) {
+  display: none;
+}
+
+.easyops-icon {
+  width: 1em;
+}
+
+.showOperationAreaWhenHovering {
+  visibility: hidden;
+}
+
+.cardItem {
+  &.ant-card {
+    background: var(--card-item-bg);
+    &:hover {
+      border-color: transparent;
+
+      .showOperationAreaWhenHovering {
+        visibility: visible;
+      }
+      .cardTitle {
+        color: rgba(26, 122, 255, 1);
+      }
+    }
+  }
+}
+
+.cardTitleWithTagSlot {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 8px;
+  align-items: center;
+}
+
+.cardTitle {
+  font-size: 14px;
+  color: var(--card-item-title-color);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: PingFangSC-Medium, PingFang SC;
+  line-height: 20px;
+}
+
+.cardSubtitle {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--card-item-sub-title-color);
+  line-height: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: PingFangSC-Regular, PingFang SC;
+  max-height: 34px;
+  white-space: nowrap;
+}
+
+.newDescription {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--card-item-sub-title-color);
+  line-height: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: PingFangSC-Regular, PingFang SC;
+  max-height: 34px;
+  word-break: break-all;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.desc {
+  margin-top: 8px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: var(--card-item-desc-color);
+  line-height: 17px;
+  position: relative;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  overflow: hidden;
+  font-family: PingFangSC-Regular, PingFang SC;
+  /* Todo(lynette): 这里多行文本ellipsis暂时只支持webkit内核浏览器，尝试了网上几种方式效果都不如意。 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.descList {
+  list-style: none;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  padding-left: 0px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 2;
+  overflow: hidden;
+
+  li {
+    line-height: 20px;
+    color: var(--color-secondary-text);
+    font-size: 14px;
+    padding-bottom: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .withCircle:before {
+    content: ".";
+    padding-right: 8px;
+    color: #999;
+    position: relative;
+    bottom: 4px;
+  }
+}
+
+.cardItem {
+  position: relative;
+  overflow: hidden;
+
+  &.@{card-prefix-cls} {
+    box-shadow: none;
+    border: 1px solid var(--card-item-border-color);
+    border-radius: var(--card-item-border-radius);
+
+    &:hover {
+      box-shadow: var(--card-item-hover-shadow);
+      background: var(--card-item-hover-bg);
+    }
+  }
+
+  &.noBordered {
+    border: none;
+  }
+
+  &.noHover {
+    &:hover {
+      box-shadow: none;
+      border-color: var(--card-item-border-color);
+      cursor: default;
+      .cardTitle {
+        color: var(--card-item-title-color);
+      }
+    }
+  }
+}
+
+
+.cardTag {
+  position: absolute;
+  box-sizing: border-box;
+  width: 80px;
+  color: #ffffff;
+  text-align: center;
+  transform: rotate(45deg);
+  z-index: 1;
+  line-height: 24px;
+  height: 22px;
+  font-size: 10px;
+  top: 8px;
+  right: -24px;
+
+  &.tagTriangle {
+    padding-top: 20px;
+    right: -32px;
+    top: -10px;
+    height: 40px;
+    line-height: normal;
+  }
+
+  &.blue {
+    background: linear-gradient(90deg, #56b8ff 0%, #0169da 100%);
+  }
+
+  &.green {
+    background: linear-gradient(90deg, #4ceaa2 0%, #1db049 100%);
+  }
+
+  &.orange {
+    background: linear-gradient(90deg, #f9d760 0%, #e29725 100%);
+  }
+
+  &.red {
+    background: linear-gradient(90deg, #fe9c6d 0%, #de382b 100%);
+  }
+
+  &.cyan {
+    background: linear-gradient(90deg, #6ad3f8 0%, #10a9ae 100%);
+  }
+
+  &.geekblue {
+    background: linear-gradient(90deg, #67b7f6 0%, #1452cc 100%);
+  }
+
+  &.purple {
+    background: linear-gradient(90deg, #9da0fc 0%, #8347d8 100%);
+  }
+
+  &.gray {
+    background: linear-gradient(49deg, #f5f5f5 0%, #d9d9d9 100%);
+    color: #8c8c8c;
+  }
+}
+
+.hideOperate {
+  visibility: hidden;
+}
+
+.titleWrapper {
+  display: grid;
+  align-items: center;
+}
+
+
+.operateArea {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.operatingArea {
+  display: grid;
+  grid-gap: 2px;
+  justify-content: left;
+  grid-auto-flow: column;
+  color: var(--card-item-desc-color);
+}
+
+a {
+  text-decoration: none;
+}
+
+.cardItemA {
+  position: relative;
+  overflow: hidden;
+
+  .cardIcon {
+    position: absolute;
+  }
+
+  .descList,
+  .desc {
+    margin-top: 8px;
+  }
+
+  .afterDescriptionArea {
+    display: grid;
+    grid-gap: 2px;
+    justify-content: left;
+    grid-auto-flow: column;
+    margin-bottom: 16px
+  }
+}
+
+.cardItemB {
+  .cardHeaderContainer {
+    display: grid;
+    grid-template-columns: 56px auto;
+  }
+
+  .descList {
+    margin-top: 12px;
+  }
+  .smallTitle {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .smallTitleText {
+    font-size: 11px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(185, 185, 185, 1);
+    line-height: 16px;
+  }
+}
+
+.cardItemC {
+  .cardHeaderContainer {
+    display: grid;
+    column-gap: 16px;
+    grid-template-columns: auto 70px;
+  }
+
+  .desc {
+    margin-top: 8px;
+  }
+}
+
+.cardItemD {
+  .cardHeaderContainer {
+    display: grid;
+    grid-template-columns: 70px auto;
+  }
+
+  .desc {
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  .descList {
+    margin-bottom: 12px;
+    margin-top: 6px;
+
+    li {
+      font-size: 12px;
+      line-height: 17px;
+    }
+  }
+}
+
+.cardItemE {
+  .cardHeaderContainer {
+    display: grid;
+    margin-bottom: 28px;
+
+    .topRightOperatingArea {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+    }
+
+    .iconContainer {
+      justify-self: center;
+    }
+  }
+
+  .desc {
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  .descList {
+    margin-bottom: 12px;
+    margin-top: 6px;
+
+    li {
+      font-size: 12px;
+      line-height: 17px;
+    }
+  }
+}
+
+.cardItemF {
+  .cardHeaderContainer {
+    display: grid;
+    margin-bottom: 28px;
+
+    .topRightOperatingArea {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+    }
+  }
+
+  .desc {
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  .descList {
+    margin-bottom: 12px;
+    margin-top: 6px;
+
+    li {
+      font-size: 12px;
+      line-height: 17px;
+    }
+  }
+}
+
+.disabledCard {
+  .cardItem&:hover {
+    border-color: var(--stroke-color-default);
+    cursor: not-allowed;
+  }
+
+  .cardTitle,
+  .cardSubtitle,
+  .descList,
+  .newDescription,
+  .descList li,
+  .desc {
+    color: var(--color-disabled-text);
+  }
+
+
+  .iconContainer {
+    opacity: 0.45;
+  }
+}
+
+.iconContainer {
+  .ant-avatar-round-square {
+    border-radius: 10%;
+  }
+}

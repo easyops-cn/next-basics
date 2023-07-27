@@ -1,0 +1,91 @@
+/* Make two nested wrappers to make the scrollbar invisible */
+.tabsOuterWrapper {
+  position: absolute;
+  top: -21px;
+  width: 100%;
+  height: 21px;
+  overflow: hidden;
+}
+
+.tabsInnerWrapper {
+  width: 100%;
+  /* Given a height greater than `21px + 8px` (scrollbar height) */
+  height: 30px;
+  overflow: hidden;
+  overflow-x: auto;
+  display: flex;
+}
+
+.tabs {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0 20px;
+  height: 21px;
+
+  > li {
+    border-width: 1px 1px 0;
+    border-style: solid;
+    border-color: var(--antd-border-color-base);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    line-height: 12px;
+    min-width: 80px;
+    max-width: 140px;
+    height: 100%;
+    padding: 0 8px;
+    color: var(--antd-text-color-secondary);
+
+    .tab {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      text-align: center;
+    }
+
+    :global(.anticon) {
+      color: rgba(0, 0, 0, 0.3);
+    }
+
+    &:not(:first-child) {
+      margin-left: 8px;
+    }
+
+    &.active {
+      color: var(--antd-text-color);
+      border-color: #fff;
+      background-color: #fff;
+
+      :global(.anticon) {
+        color: rgba(0, 0, 0, 0.65);
+      }
+    }
+
+    &.hover {
+      border-color: var(--editor-brick-stroke-color-active);
+      box-shadow: 0 0 2px var(--editor-brick-stroke-color-active);
+    }
+
+    &:not(.active) {
+      cursor: pointer;
+    }
+
+    &.isPortalCanvas {
+      min-width: 0;
+    }
+
+    &.highlighted {
+      border-color: var(--theme-orange-color);
+      box-shadow: 0 0 2px var(--theme-orange-color);
+    }
+  }
+}
+
+.portalAlias {
+  margin-left: 4px;
+}

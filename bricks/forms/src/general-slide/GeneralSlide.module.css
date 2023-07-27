@@ -1,0 +1,85 @@
+.onlyShowMode {
+  :global(.ant-slider-handle) {
+    display: none;
+  }
+  &:global(.ant-slider-disabled) {
+    cursor: default;
+  }
+  :global(.ant-slider-track) {
+    background-color: #7ac8ff !important;
+  }
+}
+
+.onlyShowMode.bigMode {
+  &:global(.ant-slider-disabled) {
+    margin: 0px 6px;
+    height: 22px;
+  }
+  :global(.ant-slider-rail) {
+    border-radius: 0px;
+    height: 14px;
+  }
+  :global(.ant-slider-track) {
+    background-color: #00ca4c !important;
+    border-radius: 0px;
+    height: 14px;
+  }
+  :global(.ant-slider-step) {
+    height: 14px;
+  }
+}
+.dashboardSlider {
+  :global(.ant-slider),
+  :global(.ant-slider-rail),
+  :global(.ant-slider-step),
+  :global(.ant-slider-track) {
+    height: 16px;
+  }
+
+  :global(.ant-slider):hover {
+    :global(.ant-slider-track) {
+      background: var(--antd-slider-dashboard-track-background-color-hover);
+    }
+    :global(.ant-slider-handle):not(:global(.ant-tooltip-open)) {
+      border-color: var(--antd-slide-dashboard-hander-color-hover);
+    }
+  }
+
+  :global(.ant-slider-track) {
+    background-color: var(--antd-slide-dashboard-track-background-color);
+    opacity: 0.2;
+  }
+
+  :global(.ant-slider-handle) {
+    width: 32px;
+    height: 32px;
+    margin-top: -8px;
+    background: var(--antd-slider-dashboard-hander-background-color);
+    border: 8px solid var(--antd-slider-dashboard-hander-border-color);
+    box-shadow: var(--antd-slide-dashboard-hander-boxShadow);
+
+    &::before {
+      position: absolute;
+      content: "";
+      width: 1px;
+      height: 9px;
+      border: 1px solid var(--antd-slider-dashboard-hander-icon-color);
+      background: var(--antd-slider-dashboard-hander-icon-color);
+      top: 50%;
+      left: 50%;
+      transform: translate(-3px, -50%);
+    }
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 1px;
+      height: 9px;
+      border: 1px solid var(--antd-slider-dashboard-hander-icon-color);
+      background: var(--antd-slider-dashboard-hander-icon-color);
+      top: 50%;
+      left: 50%;
+      transform: translate(1px, -50%);
+    }
+  }
+}

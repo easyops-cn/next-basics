@@ -1,0 +1,6 @@
+.dynamicGridContainer {
+  display: grid;
+  width: 100%;
+  grid-gap: var(--card-content-gap);
+  height: 100%;
+}

@@ -1,0 +1,30 @@
+.itemContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.itemContainerInner {
+  display: flex;
+  align-items: center;
+}
+.itemIcon {
+  margin-right: 12px;
+}
+.itemContentTitle {
+  display: -webkit-box;
+  color: rgb(38, 38, 38);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.itemContentHeader {
+  font-size: 12px;
+}
+.itemContentDesc {
+  color: rgb(140, 140, 140);
+  font-size: 12px;
+}
+.itemFooter {
+  display: flex;
+}

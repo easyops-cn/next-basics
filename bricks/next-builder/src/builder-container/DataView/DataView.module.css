@@ -1,0 +1,20 @@
+.wrapper {
+  padding: 0 12px;
+  display: grid;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.varList {
+  overflow: auto;
+  display: grid;
+}
+
+.dangerText {
+  padding-left: 3px;
+  padding-right: 3px;
+  color: var(--theme-red-color);
+  font-weight: normal;
+  background-color: var(--theme-red-background);
+  border-radius: 2px;
+}

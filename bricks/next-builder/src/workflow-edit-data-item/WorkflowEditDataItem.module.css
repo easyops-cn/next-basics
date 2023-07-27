@@ -1,0 +1,19 @@
+.formItem {
+  position: relative;
+  padding-right: 20px;
+
+  .removeIcon {
+    display: none;
+    position: absolute;
+    right: -20px;
+    top: 30px;
+  }
+
+  &:hover .removeIcon {
+    display: block;
+  }
+}
+
+.errorMsg {
+  color: var(--palette-red-6);
+}

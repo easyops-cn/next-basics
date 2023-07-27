@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>table-widgets.brick-table-drag</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="105" height="55" rx="4"></rect>
+        <rect id="path-3" x="0" y="0" width="97" height="10"></rect>
+        <filter x="-14.4%" y="-100.0%" width="128.9%" height="380.0%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="4" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.6   0 0 0 0 0.6   0 0 0 0 0.6  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图七" transform="translate(-1072.000000, -103.000000)">
+            <g id="table-widgets.brick-table-drag" transform="translate(1072.000000, 103.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="矩形备份-46"></g>
+                <g id="编组-4" mask="url(#mask-2)">
+                    <g transform="translate(4.000000, 6.000000)">
+                        <line x1="0" y1="31.5" x2="97" y2="31.5" id="路径备份" stroke="#F4F5F9" stroke-width="1" fill="none"></line>
+                        <line x1="0" y1="20.5" x2="97" y2="20.5" id="路径备份-3" stroke="#F4F5F9" stroke-width="1" fill="none"></line>
+                        <line x1="0" y1="42.5" x2="97" y2="42.5" id="路径备份-2" stroke="#F4F5F9" stroke-width="1" fill="none"></line>
+                        <g id="编组-11备份-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <path d="M1,0 L96,0 C96.5522847,-1.01453063e-16 97,0.44771525 97,1 L97,10 L97,10 L0,10 L0,1 C-6.76353751e-17,0.44771525 0.44771525,-1.20591542e-16 1,0 Z" id="矩形备份-48" fill="#D6DBEC"></path>
+                            <line x1="0" y1="9.5" x2="97" y2="9.5" id="路径" stroke="#1F7BFC" stroke-dasharray="2"></line>
+                            <rect id="矩形备份-62" fill="#778DC3" x="4" y="3" width="16" height="4" rx="1"></rect>
+                            <rect id="矩形备份-63" fill="#778DC3" x="40" y="3" width="16" height="4" rx="1"></rect>
+                            <rect id="矩形备份-64" fill="#778DC3" x="77" y="3" width="16" height="4" rx="1"></rect>
+                        </g>
+                        <g id="编组-11备份-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(77.000000, 13.000000)">
+                            <rect id="矩形备份-48" fill="#1A7AFF" x="0" y="0" width="16" height="4" rx="1"></rect>
+                        </g>
+                        <rect id="矩形备份-49" stroke="none" fill="#D6DBEC" fill-rule="evenodd" x="40" y="13" width="16" height="4" rx="1"></rect>
+                        <rect id="矩形备份-50" stroke="none" fill="#D6DBEC" fill-rule="evenodd" x="4" y="13" width="16" height="4" rx="1"></rect>
+                        <g id="编组-6" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(6.000000, 15.000000)">
+                            <g id="矩形">
+                                <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                                <use fill="#E3EBF9" fill-rule="evenodd" xlink:href="#path-3"></use>
+                            </g>
+                            <rect id="矩形备份-51" fill="#D6DBEC" x="4" y="3" width="16" height="4" rx="1"></rect>
+                            <rect id="矩形备份-55" fill="#D6DBEC" x="40" y="3" width="16" height="4" rx="1"></rect>
+                            <rect id="矩形备份-58" fill="#1A7AFF" x="77" y="3" width="16" height="4" rx="1"></rect>
+                        </g>
+                        <rect id="矩形备份-53" stroke="none" fill="#D6DBEC" fill-rule="evenodd" x="4" y="35" width="16" height="4" rx="1"></rect>
+                        <rect id="矩形备份-56" stroke="none" fill="#D6DBEC" fill-rule="evenodd" x="40" y="35" width="16" height="4" rx="1"></rect>
+                        <rect id="矩形备份-59" stroke="none" fill="#1A7AFF" fill-rule="evenodd" x="77" y="35" width="16" height="4" rx="1"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

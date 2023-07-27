@@ -1,0 +1,88 @@
+.brickTag {
+  margin: -5px 0;
+
+  .closableTag:not(.disabledTag) {
+    &:hover {
+      background-color: var(--antd-tag-closable-hover-bg);
+    }
+  }
+
+  .closableTag.disabledTag {
+    color: var(--antd-tag-closable-disabled-color);
+    background-color: var(--antd-tag-closable-disabled-bg) !important;
+    > span:global(.ant-tag-close-icon) {
+      display: none;
+    }
+  }
+
+  .round {
+    border-radius: 12px;
+  }
+
+  :global(.ant-tag) {
+    margin: 5px 4px;
+  }
+
+  :global(.ant-tag):only-child {
+    margin: 5px 0px;
+  }
+
+  .tagsLabel {
+    margin-right: 14px;
+  }
+
+  &.tagTextOverflow {
+    :global(.ant-tag) {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 10px;
+    }
+  }
+
+  .tagCircleIcon {
+    :global(.anticon > .fa-circle) {
+      width: 6px;
+    }
+  }
+
+  .grayTag {
+    color: var(--tag-gray-color);
+    background-color: var(--tag-gray-background) !important;
+    border-color: var(--tag-gray-border-color) !important;
+  }
+
+  .grayInverseTag {
+    color: var(--tag-inverse-text-color);
+    background: var(--tag-gray-inverse-color) !important;
+  }
+
+  .colorTag {
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+
+    &:global(.ant-tag-has-color) {
+      font-weight: 400;
+    }
+  }
+
+  .disabledTag {
+    cursor: not-allowed;
+  }
+  .checkableTag:active {
+    color: #ffffff;
+  }
+
+  :global(.ant-tag-checkable-checked) {
+    &.grayTag {
+      background-color: var(--theme-blue-border-color) !important;
+      color: #fff;
+    }
+  }
+}
+
+html[data-theme="dark"] {
+  .grayTag {
+    border: 1px solid #ffffff33 !important;
+  }
+}

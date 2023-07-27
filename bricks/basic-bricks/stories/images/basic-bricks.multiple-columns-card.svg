@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>brick:basic-bricks.multiple-columns-card</title>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图九" transform="translate(-960.000000, -727.000000)">
+            <g id="brick:basic-bricks.multiple-columns-card" transform="translate(960.000000, 727.000000)">
+                <rect id="矩形" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="编组-4" transform="translate(4.000000, 6.000000)">
+                    <line x1="0" y1="20.5" x2="69" y2="20.5" id="路径" stroke="#F4F5F9"></line>
+                    <line x1="0" y1="31.5" x2="69" y2="31.5" id="路径备份" stroke="#F4F5F9"></line>
+                    <line x1="0" y1="42.5" x2="97" y2="42.5" id="路径备份-2" stroke="#F4F5F9"></line>
+                    <g id="编组-11备份-2">
+                        <path d="M1,0 L96,0 C96.5522847,-1.01453063e-16 97,0.44771525 97,1 L97,10 L97,10 L0,10 L0,1 C-6.76353751e-17,0.44771525 0.44771525,-1.20591542e-16 1,0 Z" id="矩形备份-48" fill="#D6DBEC"></path>
+                        <rect id="矩形备份-62" fill="#778DC3" x="4" y="3" width="16" height="4" rx="1"></rect>
+                        <rect id="矩形备份-63" fill="#778DC3" x="40" y="3" width="16" height="4" rx="1"></rect>
+                        <rect id="矩形备份-64" fill="#778DC3" x="77" y="3" width="16" height="4" rx="1"></rect>
+                    </g>
+                    <rect id="矩形备份-49" fill="#F4F5F9" x="40" y="13" width="16" height="4" rx="1"></rect>
+                    <rect id="矩形备份-50" fill="#D6DBEC" x="4" y="13" width="16" height="4" rx="1"></rect>
+                    <rect id="矩形备份-51" fill="#D6DBEC" x="4" y="24" width="16" height="4" rx="1"></rect>
+                    <rect id="矩形备份-55" fill="#F4F5F9" x="40" y="24" width="16" height="4" rx="1"></rect>
+                    <rect id="矩形备份-53" fill="#D6DBEC" x="4" y="35" width="16" height="4" rx="1"></rect>
+                    <rect id="矩形备份-56" fill="#F4F5F9" x="40" y="35" width="16" height="4" rx="1"></rect>
+                </g>
+                <g id="编辑色块" transform="translate(77.000000, 19.000000)" fill="#1A7AFF">
+                    <path d="M16.2275419,7.5816996 L12.5229724,3.48859119 L1.5459894,13.5306139 L0.630158723,17.9938196 L5.17875896,17.6890783 L16.2275419,7.5816996 Z M19.9061412,3.71505727 L16.7744433,0.130357606 L16.7675688,0.122758073 C16.6249194,-0.0315587725 16.3835988,-0.0417611583 16.2283057,0.0999594744 L13.0973717,2.96346346 L16.8011773,7.05657187 L19.8763519,4.2432248 C20.0288364,4.10444942 20.0420633,3.8699345 19.9061412,3.71505727 L19.9061412,3.71505727 Z M0,19.532725 L19.8595476,19.532725 L19.8595476,21.0526316 L0,21.0526316 L0,19.532725 Z" id="形状"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

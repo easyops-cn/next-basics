@@ -1,0 +1,19 @@
+.descContainer {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.iconContainer {
+  position: relative;
+  top: 0px;
+  color: var(--color-brand);
+}
+
+.iconContainer:hover {
+  color: var(--color-brand-hover);
+}
+
+.text {
+  margin-right: 5px;
+}

@@ -1,0 +1,12 @@
+.menuItem {
+  display: flex;
+  align-items: center;
+  color: rgba(137, 137, 137, 0.8);
+  font-size: 14px;
+}
+
+html[data-theme="dark-v2"] {
+  .menuItem {
+    color: var(--color-normal-text);
+  }
+}

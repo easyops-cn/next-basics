@@ -1,0 +1,15 @@
+.onlyShowTotal {
+  li {
+    &:not(:global(.ant-pagination-total-text)) {
+      display: none;
+    }
+  }
+}
+
+.totalText {
+  color: var(--antd-pagination-total-text);
+  .total {
+    font-weight: normal;
+    color: var(--antd-pagination-total-strong-text);
+  }
+}

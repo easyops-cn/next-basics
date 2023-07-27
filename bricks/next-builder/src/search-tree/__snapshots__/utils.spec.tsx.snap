@@ -1,0 +1,401 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`searchConfig should work supportKey should work 1`] = `
+Object {
+  "matchKey": Array [
+    "meta/customTemplates/0",
+    "meta/customTemplates/1",
+    "meta/functions/0",
+    "meta/functions/1",
+  ],
+  "tree": Array [
+    Object {
+      "$$info": Object {},
+      "children": Array [
+        Object {
+          "$$info": Object {},
+          "children": Array [
+            Object {
+              "$$info": Object {
+                "name": "tpl-test-1",
+                "nodeId": "t-01",
+                "parentId": "t-01",
+                Symbol(nodeId): "t-01",
+                Symbol(hightlight): true,
+              },
+              "icon": <span
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "height": 12,
+                    "margin": "0 2px",
+                    "width": 12,
+                  }
+                }
+              />,
+              "isTpl": true,
+              "key": "meta/customTemplates/0",
+              "title": "tpl-test-1",
+              Symbol(hightlight): true,
+            },
+            Object {
+              "$$info": Object {
+                "name": "tpl-test-2",
+                "nodeId": "t-02",
+                "parentId": "t-02",
+                Symbol(nodeId): "t-02",
+                Symbol(hightlight): true,
+              },
+              "icon": <span
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "height": 12,
+                    "margin": "0 2px",
+                    "width": 12,
+                  }
+                }
+              />,
+              "isTpl": true,
+              "key": "meta/customTemplates/1",
+              "title": "tpl-test-2",
+              Symbol(hightlight): true,
+            },
+          ],
+          "icon": <span
+            style={
+              Object {
+                "display": "inline-block",
+                "height": 12,
+                "margin": "0 2px",
+                "width": 12,
+              }
+            }
+          />,
+          "isTpl": true,
+          "key": "meta/customTemplates",
+          "title": "customTemplates",
+        },
+        Object {
+          "$$info": Object {},
+          "children": Array [
+            Object {
+              "$$info": Object {
+                "name": "getFunctionsByCondition",
+                "parentId": "",
+                "source": "function testA() {console.log(a)}",
+                "typescript": true,
+                Symbol(hightlight): true,
+              },
+              "icon": <span
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "height": 12,
+                    "margin": "0 2px",
+                    "width": 12,
+                  }
+                }
+              />,
+              "isTpl": false,
+              "key": "meta/functions/0",
+              "title": "getFunctionsByCondition",
+              Symbol(hightlight): true,
+            },
+            Object {
+              "$$info": Object {
+                "name": "getFunctionsByCondition",
+                "parentId": "",
+                "source": "function testB() {console.log(b)}",
+                Symbol(hightlight): true,
+              },
+              "icon": <span
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "height": 12,
+                    "margin": "0 2px",
+                    "width": 12,
+                  }
+                }
+              />,
+              "isTpl": false,
+              "key": "meta/functions/1",
+              "title": "getFunctionsByCondition",
+              Symbol(hightlight): true,
+            },
+          ],
+          "icon": <span
+            style={
+              Object {
+                "display": "inline-block",
+                "height": 12,
+                "margin": "0 2px",
+                "width": 12,
+              }
+            }
+          />,
+          "isTpl": false,
+          "key": "meta/functions",
+          "title": "functions",
+        },
+      ],
+      "icon": <span
+        style={
+          Object {
+            "display": "inline-block",
+            "height": 12,
+            "margin": "0 2px",
+            "width": 12,
+          }
+        }
+      />,
+      "isTpl": false,
+      "key": "meta",
+      "title": "meta",
+    },
+  ],
+}
+`;
+
+exports[`searchInfo should work work 1`] = `
+Object {
+  "matchKey": Array [
+    "routes/0/bricks/0",
+    "routes/0/bricks/2",
+  ],
+  "tree": Array [
+    Object {
+      "$$info": Object {},
+      "children": Array [
+        Object {
+          "$$info": Object {
+            "nodeId": "B-01",
+            "parentId": "B-01",
+            "type": "bricks",
+            Symbol(nodeId): "B-01",
+          },
+          "children": Array [
+            Object {
+              "$$info": Object {
+                "brick": "general-button",
+                "instanceId": "123123",
+                "nodeId": "B-02",
+                "parentId": "B-01",
+                "path": "\${APP.homepage}/test-1",
+                "properties": Object {
+                  "test": 1,
+                },
+                Symbol(nodeInstanceId): "123123",
+                Symbol(nodeId): "B-02",
+              },
+              "children": Array [
+                Object {
+                  "$$info": Object {
+                    "parentId": "B-01",
+                  },
+                  "children": Array [
+                    Object {
+                      "$$info": Object {
+                        "brick": "general-button",
+                        "instanceId": "slots-brick",
+                        "nodeId": "s-01-01",
+                        "parentId": "B-01",
+                        Symbol(nodeInstanceId): "slots-brick",
+                        Symbol(nodeId): "s-01-01",
+                      },
+                      "icon": <GeneralIcon
+                        icon={
+                          Object {
+                            "color": "cyan",
+                            "icon": "codepen",
+                            "lib": "antd",
+                            "theme": "outlined",
+                          }
+                        }
+                        style={
+                          Object {
+                            "fontSize": 12,
+                            "margin": "0 2px",
+                          }
+                        }
+                      />,
+                      "isTpl": false,
+                      "key": "routes/0/bricks/0/slots/content/bricks/0",
+                      "title": "general-button",
+                    },
+                  ],
+                  "icon": <GeneralIcon
+                    icon={
+                      Object {
+                        "category": "app",
+                        "color": "cyan",
+                        "icon": "container",
+                        "lib": "easyops",
+                      }
+                    }
+                    style={
+                      Object {
+                        "fontSize": 12,
+                        "margin": "0 2px",
+                      }
+                    }
+                  />,
+                  "isTpl": false,
+                  "key": "routes/0/bricks/0/slots/content",
+                  "title": "content",
+                  "unlink": true,
+                },
+              ],
+              "icon": <GeneralIcon
+                icon={
+                  Object {
+                    "color": "cyan",
+                    "icon": "codepen",
+                    "lib": "antd",
+                    "theme": "outlined",
+                  }
+                }
+                style={
+                  Object {
+                    "fontSize": 12,
+                    "margin": "0 2px",
+                  }
+                }
+              />,
+              "isTpl": false,
+              "key": "routes/0/bricks/0",
+              "title": "general-button",
+              Symbol(hightlight): true,
+            },
+            Object {
+              "$$info": Object {
+                "brick": "general-button",
+                "instanceId": "123123",
+                "nodeId": "B-03",
+                "parentId": "B-01",
+                "path": "\${APP.homepage}/test-1",
+                "properties": Object {
+                  "test": 1,
+                },
+                Symbol(nodeInstanceId): "123123",
+                Symbol(nodeId): "B-03",
+              },
+              "children": Array [
+                Object {
+                  "$$info": Object {
+                    "parentId": "B-01",
+                  },
+                  "children": Array [
+                    Object {
+                      "$$info": Object {
+                        "brick": "general-button",
+                        "instanceId": "slots-brick",
+                        "nodeId": "s-03-01",
+                        "parentId": "B-01",
+                        Symbol(nodeInstanceId): "slots-brick",
+                        Symbol(nodeId): "s-03-01",
+                      },
+                      "icon": <GeneralIcon
+                        icon={
+                          Object {
+                            "color": "cyan",
+                            "icon": "codepen",
+                            "lib": "antd",
+                            "theme": "outlined",
+                          }
+                        }
+                        style={
+                          Object {
+                            "fontSize": 12,
+                            "margin": "0 2px",
+                          }
+                        }
+                      />,
+                      "isTpl": false,
+                      "key": "routes/0/bricks/2/slots/content/bricks/0",
+                      "title": "general-button",
+                    },
+                  ],
+                  "icon": <GeneralIcon
+                    icon={
+                      Object {
+                        "category": "app",
+                        "color": "cyan",
+                        "icon": "container",
+                        "lib": "easyops",
+                      }
+                    }
+                    style={
+                      Object {
+                        "fontSize": 12,
+                        "margin": "0 2px",
+                      }
+                    }
+                  />,
+                  "isTpl": false,
+                  "key": "routes/0/bricks/2/slots/content",
+                  "title": "content",
+                  "unlink": true,
+                },
+              ],
+              "icon": <GeneralIcon
+                icon={
+                  Object {
+                    "color": "cyan",
+                    "icon": "codepen",
+                    "lib": "antd",
+                    "theme": "outlined",
+                  }
+                }
+                style={
+                  Object {
+                    "fontSize": 12,
+                    "margin": "0 2px",
+                  }
+                }
+              />,
+              "isTpl": false,
+              "key": "routes/0/bricks/2",
+              "title": "general-button",
+              Symbol(hightlight): true,
+            },
+          ],
+          "icon": <GeneralIcon
+            icon={
+              Object {
+                "category": "app",
+                "color": "cyan",
+                "icon": "container",
+                "lib": "easyops",
+              }
+            }
+            style={
+              Object {
+                "fontSize": 12,
+                "margin": "0 2px",
+              }
+            }
+          />,
+          "isTpl": false,
+          "key": "routes/0",
+          "title": "bricks",
+        },
+      ],
+      "icon": <span
+        style={
+          Object {
+            "display": "inline-block",
+            "height": 12,
+            "margin": "0 2px",
+            "width": 12,
+          }
+        }
+      />,
+      "isTpl": false,
+      "key": "routes",
+      "title": "routes",
+    },
+  ],
+}
+`;

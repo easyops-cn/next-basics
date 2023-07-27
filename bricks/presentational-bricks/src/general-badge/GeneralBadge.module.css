@@ -1,0 +1,25 @@
+.generalBadge {
+  :global(.ant-badge) {
+    :global(.ant-badge-count) {
+      transform: translate(100%, -10px);
+      height: 16px;
+      line-height: 16px;
+      border-radius: 8px;
+      padding: 0 5px;
+      min-width: 0;
+      box-shadow: none;
+    }
+
+    :global(.ant-badge-dot) {
+      transform: translate(100%, 0);
+    }
+  }
+  :global(presentational-bricks\.brick-user + .ant-badge-count) {
+    top: 5px;
+    right: 15px;
+  }
+  :global(presentational-bricks\.brick-user + .ant-badge-dot) {
+    top: 0;
+    right: 12px;
+  }
+}

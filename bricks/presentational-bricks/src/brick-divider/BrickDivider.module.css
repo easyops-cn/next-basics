@@ -1,0 +1,42 @@
+.DividerRadiation {
+  display: flex;
+  clear: both;
+  width: 100%;
+  min-width: 100%;
+  margin: 24px 0;
+}
+.DividerRadiationText {
+  color: var(--antd-divider-radiation-text-color);
+  display: flex;
+  white-space: nowrap;
+}
+.DividerRadiation:after {
+  content: "";
+  position: relative;
+  top: 13px;
+  width: 95%;
+  transform: translateY(50%);
+  height: 1px;
+  background: var(--antd-divider-radiation-color);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #f9f9f9 6px,
+    #979797 6px,
+    transparent 0px
+  );
+  -webkit-mask-size: 8px 2px;
+}
+.DividerRadiationTitle {
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.DividerRadiation .ProportionText {
+  font-size: 12px;
+  color: var(--antd-divider-radiation-proportion-normal-text-color);
+  line-height: 25px;
+}
+.DividerRadiation .ProportionText strong {
+  color: var(--antd-divider-radiation-proportion-strong-text-color);
+}

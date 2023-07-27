@@ -1,0 +1,14 @@
+.docLinkContainer {
+  padding: 0 16px;
+}
+
+.docLinkContainer a {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  color: var(--antd-btn-default-color);
+}
+
+.docLinkContainer a:hover {
+  color: var(--antd-link-hover-color);
+}

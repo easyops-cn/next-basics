@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>月视图日历构件</title>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图十" transform="translate(-48.000000, -103.000000)">
+            <g id="月视图日历构件" transform="translate(48.000000, 103.000000)">
+                <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g transform="translate(11.000000, 6.000000)">
+                    <rect id="矩形" stroke="#D6DBEC" x="0" y="0" width="82" height="42"></rect>
+                    <g id="编组-18" transform="translate(0.000000, 1.000000)">
+                        <g id="编组-16" transform="translate(0.000000, 8.000000)" fill="#778DC3">
+                            <rect id="矩形备份-76" x="0" y="0" width="82" height="1" rx="0.5"></rect>
+                        </g>
+                        <g id="编组-15" transform="translate(0.000000, 16.000000)" fill="#D6DBEC">
+                            <rect id="矩形备份-76" x="0" y="0" width="82" height="1" rx="0.5"></rect>
+                        </g>
+                        <g id="编组-11" transform="translate(0.000000, 24.000000)" fill="#D6DBEC">
+                            <rect id="矩形备份-116" x="0" y="0" width="82" height="1" rx="0.5"></rect>
+                        </g>
+                        <g id="编组-12" transform="translate(0.000000, 32.000000)" fill="#D6DBEC">
+                            <rect id="矩形备份-123" x="0" y="0" width="82" height="1" rx="0.5"></rect>
+                        </g>
+                        <g id="编组-13" transform="translate(2.000000, 0.000000)" fill="#778DC3" font-family="PingFang-SC-Medium, PingFang SC" font-size="6" font-weight="400">
+                            <text id="二">
+                                <tspan x="12" y="6">二</tspan>
+                            </text>
+                            <text id="一">
+                                <tspan x="0" y="6">一</tspan>
+                            </text>
+                            <text id="三">
+                                <tspan x="24" y="6">三</tspan>
+                            </text>
+                            <text id="四">
+                                <tspan x="36" y="6">四</tspan>
+                            </text>
+                            <text id="五">
+                                <tspan x="48" y="6">五</tspan>
+                            </text>
+                            <text id="六">
+                                <tspan x="60" y="6">六</tspan>
+                            </text>
+                            <text id="七">
+                                <tspan x="72" y="6">七</tspan>
+                            </text>
+                        </g>
+                    </g>
+                    <line x1="11" y1="0" x2="11" y2="42" id="路径-48" stroke="#D6DBEC"></line>
+                    <line x1="23" y1="0" x2="23" y2="42" id="路径-48备份" stroke="#D6DBEC"></line>
+                    <line x1="35" y1="0" x2="35" y2="42" id="路径-48备份-2" stroke="#D6DBEC"></line>
+                    <line x1="47" y1="0" x2="47" y2="42" id="路径-48备份-3" stroke="#D6DBEC"></line>
+                    <line x1="59" y1="0" x2="59" y2="42" id="路径-48备份-4" stroke="#D6DBEC"></line>
+                    <line x1="71" y1="0" x2="71" y2="42" id="路径-48备份-5" stroke="#D6DBEC"></line>
+                    <rect id="矩形" fill="#F7BF02" x="1.5" y="11" width="8" height="2"></rect>
+                    <rect id="矩形备份" fill="#F7BF02" x="25" y="19" width="8" height="2"></rect>
+                    <rect id="矩形备份-3" fill="#F7BF02" x="49" y="27" width="8" height="2"></rect>
+                    <rect id="矩形备份-4" fill="#F7BF02" x="37" y="35" width="8" height="2"></rect>
+                    <rect id="矩形备份-2" fill="#F7BF02" x="25" y="22" width="8" height="2"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

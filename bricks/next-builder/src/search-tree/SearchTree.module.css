@@ -1,0 +1,23 @@
+.searchWrapper {
+  display: flex;
+}
+
+.SearchTree {
+  flex: 1;
+}
+
+.searchContent {
+  flex: 1;
+  overflow: auto;
+}
+
+.searchContentTopTools {
+  padding: 5px;
+  text-align: right;
+}
+
+.externalIcon {
+  margin-left: 6px;
+  color: #bdbdbd;
+  display: inline-block;
+}

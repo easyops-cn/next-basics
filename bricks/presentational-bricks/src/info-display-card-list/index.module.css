@@ -1,0 +1,119 @@
+.infoCard {
+  margin-top: 20px;
+  box-shadow: none;
+
+  &:nth-child(1) {
+    margin-top: 0;
+  }
+
+  &:global(.ant-card) {
+    &:hover {
+      background-color: var(--card-item-hover-bg);
+      border-color: transparent;
+    }
+  }
+}
+
+html[data-theme="dark"] .infoCard {
+  border-color: transparent;
+  background: url(../images/card-bg-top-left.svg) top left no-repeat,
+    url(../images/card-bg-top-right.svg) top right no-repeat,
+    url(../images/card-bg-bottom-right.svg) bottom right no-repeat,
+    url(../images/card-bg-bottom-left.svg) bottom left no-repeat,
+    var(--antd-card-background);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.infoCardWrapper {
+  display: grid;
+  padding: 4px;
+  align-items: center;
+  width: 100%;
+  color: var(--text-color-secondary);
+  box-sizing: border-box;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+}
+
+.infoCardMain {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  max-width: 90%;
+
+  .infoCardDetail {
+    margin-left: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    h5 {
+      margin: 0;
+      color: var(--text-color-title);
+      font-size: 16px;
+      font-weight: 500;
+      padding: 0;
+    }
+
+    p {
+      text-overflow: ellipsis;
+      word-break: break-word;
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .cardIcon {
+    min-width: 44px;
+  }
+}
+
+.infoCardDetailDiv {
+  display: flex;
+  align-items: center;
+}
+
+.infoCardRightSection {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  height: 40px;
+  justify-content: flex-end;
+
+  > div {
+    &:first-child {
+      display: grid;
+      align-items: center;
+      width: 90%;
+      grid-auto-rows: min-content;
+
+      h5 {
+        color: var(--text-color-disabled);
+        font-size: 14px;
+        font-weight: 400;
+        margin: 0;
+        padding: 0;
+      }
+
+      p {
+        color: var(--text-color-default);
+        font-size: 18px;
+        font-weight: 400;
+        text-align: left;
+        margin: 0;
+        padding: 0;
+        min-height: 28px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      div {
+        max-width: 80%;
+        white-space: nowrap;
+      }
+    }
+  }
+}

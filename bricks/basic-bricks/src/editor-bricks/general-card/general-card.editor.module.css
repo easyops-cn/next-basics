@@ -1,0 +1,14 @@
+.card {
+  border-radius: var(--editor-brick-border-radius);
+  border: 1px solid var(--editor-brick-stroke-color);
+  background-color: #fff;
+}
+
+.cardHead {
+  border-bottom: 1px solid var(--editor-brick-stroke-color);
+  padding: 5px 12px;
+}
+
+.cardBody {
+  padding: 20px;
+}

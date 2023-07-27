@@ -1,0 +1,59 @@
+.cardContainer {
+  border-radius: var(--editor-brick-border-radius);
+  border: 1px solid var(--editor-brick-stroke-color);
+
+  .header {
+    border-bottom: 1px solid var(--editor-brick-stroke-color);
+    height: 50px;
+    padding: 12px 20px;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 150px;
+      height: 100%;
+      background-color: var(--editor-brick-skeleton-bg-light);
+      border-radius: var(--editor-brick-border-radius);
+    }
+  }
+
+  .body {
+    padding: 20px;
+
+    .noSlots {
+      height: 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .content {
+        flex: 1;
+        height: 100%;
+        background-color: var(--editor-brick-skeleton-bg-light);
+        border-radius: var(--editor-brick-border-radius);
+      }
+
+      .text {
+        &:nth-child(1) {
+          width: 80px;
+          height: 40px;
+          background-color: var(--editor-brick-skeleton-bg);
+          margin-bottom: 15px;
+        }
+
+        &:nth-child(2) {
+          width: 150px;
+          height: 16px;
+          background: var(--editor-brick-skeleton-bg-light);
+        }
+      }
+
+      .icon {
+        width: 50px;
+        height: 50px;
+        background-color: var(--editor-brick-skeleton-bg-light);
+        border-radius: 50%;
+      }
+    }
+  }
+}

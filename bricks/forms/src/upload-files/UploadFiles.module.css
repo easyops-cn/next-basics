@@ -1,0 +1,103 @@
+.uploadFiles {
+  background: #f8f9fc !important;
+  border-color: #b9c6de !important;
+
+  &:hover {
+    background: #ebf3fd !important;
+    border-color: #0071eb !important;
+  }
+
+  &:global(.ant-upload-drag-hover) {
+    background: #ebf3fd !important;
+    border-color: #0071eb !important;
+  }
+
+  :global(.ant-upload-btn) {
+    padding: 24px 0 !important;
+
+    :global(.ant-upload-drag-icon) {
+      margin-bottom: 10px !important;
+    }
+  }
+}
+
+.uploadFilesList {
+  :global(.ant-upload-list .ant-tooltip) {
+    display: none;
+  }
+
+  /* text style */
+  :global(.ant-upload-list-text) {
+    margin-top: 6px;
+  }
+
+  :global(.ant-upload-list-item-list-type-text) {
+    /* 上传失败 */
+    &:global(.ant-upload-list-item-error) {
+      :global(.ant-upload-list-item-name) {
+        color: var(--bg-color-button-danger) !important;
+      }
+
+      :global(.ant-upload-list-item-card-actions-btn .anticon) {
+        position: initial;
+        opacity: 1;
+        color: var(--bg-color-button-danger) !important;
+      }
+    }
+
+    &:hover {
+      background-color: var(--theme-blue-background);
+
+      :global(.ant-upload-list-item-info) {
+        background-color: inherit;
+      }
+    }
+
+    /* 上传信息 */
+    margin-top: 2px;
+    padding: 5px 8px 5px 8px;
+    height: auto;
+    border-radius: 6px;
+
+    :global(.ant-upload-list-item-info) {
+      height: auto;
+      padding: 0;
+    }
+
+    :global(.ant-upload-list-item-info > span) {
+      height: auto;
+      position: relative;
+
+      /* 文件名 */
+      :global(.ant-upload-list-item-name) {
+        color: var(--text-color-default);
+        overflow: inherit;
+      }
+
+      /* 删除按钮 */
+      :global(.ant-upload-list-item-card-actions) {
+        :global(.ant-upload-list-item-card-actions-btn) {
+          &:hover {
+            background-color: transparent;
+          }
+
+          :global(.anticon) {
+            color: var(--text-color-disabled);
+            font-size: 14px;
+
+            &:hover {
+              color: #ed493c;
+            }
+          }
+        }
+      }
+    }
+
+    /* 进度条 */
+    :global(.ant-upload-list-item-progress) {
+      bottom: -4px;
+      padding-left: 22px;
+      width: calc(100% - 18px);
+    }
+  }
+}

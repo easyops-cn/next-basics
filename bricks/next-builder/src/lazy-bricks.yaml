@@ -1,0 +1,35 @@
+lazyBricks:
+  - builder-container
+  - event-config-form
+  - search-tree
+  - storyboard-lint-result
+  - group: workflow
+    bricks:
+      - workflow-create-data-item
+      - workflow-edit-data-item
+      - workflow-condition-item
+  - group: function-debugger
+    bricks:
+      - function-debugger-sidebar
+      - function-debugger-toolbar
+      - function-debugger-toolbar-v2
+      - function-debugger-store
+      - function-debugger-statusbar
+  - group: workbench
+    bricks:
+      - preview-container
+      - workbench-action
+      - workbench-action-list
+      - workbench-brick-tree
+      - workbench-data-tree
+      - workbench-context-menu
+      - workbench-brick-context-menu
+      - workbench-mini-action-bar
+      - workbench-pane
+      - workbench-sidebar
+      - workbench-store
+      - workbench-tabs
+      - workbench-tree
+      - workbench-quick-entry
+      - workbench-component-select
+      - workbench-cache-action

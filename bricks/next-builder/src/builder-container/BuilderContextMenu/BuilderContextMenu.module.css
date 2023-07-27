@@ -1,0 +1,27 @@
+.menuWrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 110;
+}
+
+.dropdownMenu {
+  width: fit-content;
+  width: -moz-fit-content;
+}
+
+.pasteNameWrapper {
+  color: var(--text-color-disabled);
+  margin-left: 0.5em;
+}
+
+.pasteName {
+  display: inline-block;
+  vertical-align: bottom;
+  max-width: 8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MultipleColumnsCard should work 1`] = `
+<Card
+  bordered={true}
+>
+  <div
+    className="multiple-columns-container"
+    style={
+      Object {
+        "gridTemplateColumns": "400px 200px ",
+      }
+    }
+  >
+    <slot
+      id="contentSlot"
+      name="content"
+    />
+  </div>
+</Card>
+`;

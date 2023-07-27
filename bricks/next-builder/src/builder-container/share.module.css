@@ -1,0 +1,15 @@
+.tabLink {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  transition: none;
+  color: var(--text-color-default);
+}
+
+.customAnimation {
+  animation-duration: 0s !important;
+  z-index: 999;
+}

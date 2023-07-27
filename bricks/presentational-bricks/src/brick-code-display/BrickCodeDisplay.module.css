@@ -1,0 +1,11 @@
+.customCodeDisplay {
+  pre[class*="language-"],
+  code[class*="language-"] {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  pre[class*="language-"] {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}

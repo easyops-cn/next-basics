@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>presentational-bricks-widgets.snipped-of-brick-illustration</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="105" height="55" rx="4"></rect>
+    </defs>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图七" transform="translate(-573.000000, -1291.000000)">
+            <g id="presentational-bricks-widgets.snipped-of-brick-illustration" transform="translate(573.000000, 1291.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="矩形备份-46"></g>
+                <g id="编组-16" mask="url(#mask-2)">
+                    <g transform="translate(18.000000, 6.000000)">
+                        <rect id="矩形备份-104" fill="#F4F5F9" fill-rule="evenodd" x="0" y="0" width="69" height="31" rx="1"></rect>
+                        <text id="XXXX" fill="#778DC3" fill-rule="nonzero" font-family="PingFang-SC-Medium, PingFang SC" font-size="10" font-weight="400">
+                            <tspan x="22" y="41">XXXX</tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

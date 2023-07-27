@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrickCollapseCard should work when isActive is false 1`] = `
+<Collapse
+  activeKey=""
+  ghost={true}
+>
+  <CollapsePanel
+    extra={
+      <span
+        className="toggleCollapse"
+      >
+        <span
+          className="expandText"
+        >
+          展开
+        </span>
+        <Icon
+          className="expandIcon"
+          type="down"
+        />
+      </span>
+    }
+    forceRender={true}
+    header={
+      <div
+        className="collapseTitle"
+      >
+        工具
+      </div>
+    }
+    key="content"
+    showArrow={false}
+  >
+    <div
+      className="contentContainer"
+    >
+      <slot
+        id="contentSlot"
+        name="content"
+      />
+    </div>
+  </CollapsePanel>
+</Collapse>
+`;
+
+exports[`BrickCollapseCard should work when isActive is true 1`] = `
+<Collapse
+  activeKey="content"
+  ghost={true}
+>
+  <CollapsePanel
+    extra={
+      <span
+        className="toggleCollapse"
+      >
+        <span
+          className="expandText"
+        >
+          收起
+        </span>
+        <Icon
+          className="expandIcon"
+          type="up"
+        />
+      </span>
+    }
+    forceRender={true}
+    header={
+      <slot
+        id="headerSlot"
+        name="header"
+      />
+    }
+    key="content"
+    showArrow={false}
+  >
+    <div
+      className="contentContainer"
+    >
+      <slot
+        id="contentSlot"
+        name="content"
+      />
+    </div>
+  </CollapsePanel>
+</Collapse>
+`;

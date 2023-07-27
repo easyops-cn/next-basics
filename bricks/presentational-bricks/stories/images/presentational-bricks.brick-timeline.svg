@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>presentational-bricks.brick-timeline</title>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图四" transform="translate(-48.000000, -232.000000)">
+            <g id="presentational-bricks.brick-timeline" transform="translate(48.000000, 232.000000)">
+                <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="编组-2" transform="translate(20.000000, 6.000000)">
+                    <line x1="2" y1="4" x2="2" y2="40" id="路径-19" stroke="#D6DBEC"></line>
+                    <circle id="椭圆形" stroke="#1A7AFF" fill="#FFFFFF" cx="2" cy="3" r="2"></circle>
+                    <circle id="椭圆形备份-2" stroke="#1A7AFF" fill="#FFFFFF" cx="2" cy="15" r="2"></circle>
+                    <circle id="椭圆形备份-3" stroke="#1A7AFF" fill="#FFFFFF" cx="2" cy="27" r="2"></circle>
+                    <circle id="椭圆形备份-4" stroke="#1A7AFF" fill="#FFFFFF" cx="2" cy="39" r="2"></circle>
+                    <rect id="矩形备份-84" fill="#D6DBEC" x="8" y="0" width="63" height="6" rx="1"></rect>
+                    <rect id="矩形备份-85" fill="#1A7AFF" x="8" y="12" width="52.1333333" height="6" rx="1"></rect>
+                    <rect id="矩形备份-86" fill="#D6DBEC" x="8" y="24" width="57" height="6" rx="1"></rect>
+                    <rect id="矩形备份-87" fill="#D6DBEC" x="8" y="36" width="34" height="6" rx="1"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

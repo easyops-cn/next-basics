@@ -1,0 +1,13 @@
+.labelWrapper {
+  display: flex;
+  cursor: pointer;
+  gap: 8px;
+  align-items: center;
+  .labelIcon {
+    color: var(--color-secondary-text);
+
+    &.selected {
+      color: var(--antd-link-hover-color);
+    }
+  }
+}

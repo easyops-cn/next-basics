@@ -1,0 +1,15 @@
+export const defaultUpdatedBrickFields = [
+  "brick",
+  "alias",
+  "bg",
+  "brick",
+  "context",
+  "events",
+  "if",
+  "lifeCycle",
+  "mountPoint",
+  "permissionsPreCheck",
+  "portal",
+  "properties",
+  "ref",
+];

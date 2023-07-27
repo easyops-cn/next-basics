@@ -1,0 +1,44 @@
+.fadedText {
+  &:global(.ant-btn-text) {
+    color: var(--antd-btn-fade-text-color);
+  }
+}
+
+.iconButton {
+  &:global(.ant-btn-icon) {
+    color: var(--antd-btn-special-icon-type-color);
+    background: var(--antd-btn-special-icon-type-bg);
+    border: none;
+
+    &:hover {
+      color: var(--antd-btn-special-icon-type-hover-color);
+      background: var(--antd-btn-special-icon-type-hover-bg);
+    }
+
+    &:active {
+      color: var(--antd-btn-special-icon-type-active-color);
+      background: var(--antd-btn-special-icon-type-active-bg);
+    }
+
+    &[disabled] {
+      color: var(--antd-btn-special-icon-type-disabled-color);
+      background: var(--antd-btn-special-icon-type-disabled-bg);
+    }
+    &:global(.ant-btn) {
+      font-size: 16px;
+      :global(.anticon) {
+        vertical-align: -0.125em;
+      }
+    }
+    &:global(.ant-btn-sm) {
+      font-size: 14px;
+      width: 28px;
+    }
+    &:global(.ant-btn-lg) {
+      font-size: 18px;
+      :global(.anticon) {
+        vertical-align: middle;
+      }
+    }
+  }
+}

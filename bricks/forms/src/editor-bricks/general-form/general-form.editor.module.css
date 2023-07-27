@@ -1,0 +1,4 @@
+.form {
+  border-radius: var(--editor-brick-border-radius);
+  border: 1px solid var(--editor-brick-stroke-color);
+}

@@ -1,0 +1,165 @@
+.searchBox,
+[data-override-theme="light"] .searchBox {
+  --search-box-background: #fff;
+}
+html[data-theme="dark-v2"] .searchBox,
+[data-override-theme="dark-v2"] .searchBox {
+  --search-box-background: #181818;
+}
+.tree,
+[data-override-theme="light"] .tree {
+  --search-box-background: #fff;
+  --node-color: #595959;
+  --node-color-focus: #595959;
+  --node-background-active: #e0eeff;
+  --node-background-focus: #e0eeff;
+  --node-icon-background-hover: #fff;
+}
+html[data-theme="dark-v2"] .tree,
+[data-override-theme="dark-v2"] .tree {
+  --search-box-background: #181818;
+  --node-color: #c5c5c5;
+  --node-color-focus: #fff;
+  --node-background-active: rgba(255, 255, 255, 0.08);
+  --node-background-focus: #1a7aff;
+  --node-icon-background-hover: rgba(90, 93, 94, 0.31);
+}
+
+.searchBox {
+  position: sticky;
+  top: 0;
+  background-color: var(--search-box-background);
+  padding: 5px 10px 10px;
+  z-index: 1;
+  :global(.ant-input-affix-wrapper) {
+    background-color: var(--search-box-background);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    :global(input.ant-input) {
+      background-color: var(--search-box-background);
+    }
+  }
+}
+
+.tree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.placeholder {
+  color: var(--antd-input-placeholder-color);
+  padding: 0 15px;
+}
+
+.nodeLabelRow {
+  display: flex;
+  cursor: pointer;
+  height: 22px;
+  padding-right: 10px;
+}
+
+.nodeLabelRow:hover,
+.nodeLabelRow.hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.nodeLabelRow:focus {
+  outline-width: 1px;
+  outline-style: solid;
+  outline-offset: -1px;
+  outline-color: var(--node-background-focus);
+}
+
+.nodeLabelRow.active:focus {
+  background-color: var(--node-background-focus);
+}
+
+.nodeLabel {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex: 1;
+}
+
+.unreachable {
+  opacity: 0.3;
+}
+
+.nodeAction,
+.nodeAction:hover,
+.nodeLabelRow .nodeLabel {
+  color: var(--node-color);
+}
+
+.nodeLabelRow:focus .nodeLabel {
+  color: var(--node-color-focus);
+}
+
+.nodeLabelRow.matched .nodeLabel {
+  color: var(--palette-orange-6);
+}
+
+.nodeLabelRow.active {
+  background-color: var(--node-background-active);
+}
+
+.nodeIconWrapper {
+  display: flex;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.nodeIcon,
+.collapseIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+.collapseIcon {
+  display: none;
+}
+
+.nodeLabelRow.collapsed .nodeIcon,
+.nodeLabelRow.collapsible .nodeIconWrapper:hover .nodeIcon {
+  display: none;
+}
+
+.nodeLabelRow.collapsed .collapseIcon,
+.nodeLabelRow.collapsible .nodeIconWrapper:hover .collapseIcon {
+  display: flex;
+}
+
+.nodeLabelRow.collapsible .nodeIcon:hover,
+.nodeLabelRow.collapsible .collapseIcon:hover {
+  background-color: var(--node-icon-background-hover);
+}
+
+.nodeName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nodeLabelRow:not(:hover, .fixedActions) .nodeActionsBar {
+  display: none;
+}
+
+.badge {
+  margin: 0 3px;
+}
+
+.collapsed + .tree {
+  display: none;
+}
+
+.hightlight {
+  outline-width: 1px;
+  outline-style: solid;
+  outline-offset: -1px;
+  outline-color: #fcd93f;
+}

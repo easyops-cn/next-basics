@@ -1,0 +1,96 @@
+.menuContainer {
+  &:global(.ant-menu) {
+    background: #2d3c59;
+    border-right: none !important;
+
+    :global(.ant-menu-submenu-title) {
+      margin: 0;
+    }
+    > :global(.ant-menu-submenu) {
+      color: hsla(0, 0%, 100%, 0.7) !important;
+      :global(.ant-menu-submenu-arrow) {
+        color: hsla(0, 0%, 100%, 0.7) !important;
+      }
+    }
+    > :global(.ant-menu-item) a {
+      color: hsla(0, 0%, 100%, 0.7) !important;
+    }
+    > :global(.ant-menu-submenu),
+    > :global(.ant-menu-item) {
+      margin: 0 !important;
+      .iconStyle {
+        color: hsla(0, 0%, 100%, 0.7) !important;
+      }
+    }
+
+    > :global(.ant-menu-submenu-active),
+    > :global(.ant-menu-submenu-selected) {
+      :global(.ant-menu-submenu-title) {
+        color: #ffffff !important;
+
+        :global(.ant-menu-submenu-arrow) {
+          color: #ffffff !important;
+        }
+      }
+
+      .iconStyle {
+        color: #ffffff !important;
+      }
+    }
+
+    :global(.ant-menu-submenu-title):hover {
+      color: #ffffff !important;
+    }
+    :global(.ant-menu-submenu-title):active {
+      background: #344561 !important;
+    }
+    :global(.ant-menu-submenu-open) {
+      background: #344561 !important;
+    }
+    > :global(.ant-menu-item-active),
+    > :global(.ant-menu-item-selected) {
+      background: #344561 !important;
+      a {
+        color: #ffffff !important;
+        .iconStyle {
+          color: #ffffff !important;
+        }
+      }
+    }
+    :global(.ant-menu-item-selected)::after {
+      border-right: 2px solid #3aa2eb !important;
+    }
+    :global(.ant-menu-item-only-child):active {
+      background: #344561 !important;
+    }
+  }
+
+  :global(.ant-menu-submenu) {
+    :global(.ant-menu) {
+      background: #344561 !important;
+    }
+    :global(.ant-menu-item) {
+      margin: 0 !important;
+    }
+    a {
+      color: hsla(0, 0%, 100%, 0.7) !important;
+    }
+    :global(.ant-menu-item-active) a {
+      color: #ffffff !important;
+    }
+
+    :global(.ant-menu-item-active):active {
+      background: #344561 !important;
+    }
+
+    :global(.ant-menu-item-selected) {
+      background: #3aa2eb !important;
+      a {
+        color: #ffffff !important;
+      }
+    }
+    :global(.ant-menu-item-selected)::after {
+      border-right: none !important;
+    }
+  }
+}

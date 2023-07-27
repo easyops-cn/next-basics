@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrickResult should work 1`] = `
+<Result
+  status="success"
+  title="Success"
+>
+  <slot
+    id="content"
+    name="content"
+  />
+</Result>
+`;
+
+exports[`BrickResult should work, with custom icon 1`] = `
+<Result
+  icon={
+    <Icon
+      type="question"
+    />
+  }
+  status="success"
+  title="Success"
+>
+  <slot
+    id="content"
+    name="content"
+  />
+</Result>
+`;

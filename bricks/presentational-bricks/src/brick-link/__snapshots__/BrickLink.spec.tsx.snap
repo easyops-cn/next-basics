@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrickLink should work 1`] = `
+<Tooltip
+  arrowPointAtCenter={false}
+  autoAdjustOverflow={true}
+  mouseEnterDelay={0.1}
+  mouseLeaveDelay={0.1}
+  placement="top"
+  title="tips.."
+  transitionName="zoom-big-fast"
+>
+  <a
+    className=""
+    href="/url"
+    icon={
+      Object {
+        "lib": "antd",
+        "theme": "outlined",
+        "type": "file-search",
+      }
+    }
+  >
+    <GeneralIcon
+      icon={
+        Object {
+          "lib": "antd",
+          "theme": "outlined",
+          "type": "file-search",
+        }
+      }
+      style={
+        Object {
+          "marginRight": 6,
+        }
+      }
+    />
+    <span
+      className={null}
+      style={
+        Object {
+          "borderBottomColor": undefined,
+        }
+      }
+    >
+      aaa
+    </span>
+  </a>
+</Tooltip>
+`;
+
+exports[`BrickLink should work 2`] = `
+<Tooltip
+  arrowPointAtCenter={false}
+  autoAdjustOverflow={true}
+  mouseEnterDelay={0.1}
+  mouseLeaveDelay={0.1}
+  placement="top"
+  title="tips.."
+  transitionName="zoom-big-fast"
+>
+  <Link
+    className=""
+    icon={
+      Object {
+        "lib": "antd",
+        "theme": "outlined",
+        "type": "file-search",
+      }
+    }
+    to="/url"
+  >
+    <GeneralIcon
+      icon={
+        Object {
+          "lib": "antd",
+          "theme": "outlined",
+          "type": "file-search",
+        }
+      }
+      style={
+        Object {
+          "marginRight": 6,
+        }
+      }
+    />
+    <span
+      className={null}
+      style={
+        Object {
+          "borderBottomColor": undefined,
+        }
+      }
+    >
+      aaa
+    </span>
+  </Link>
+</Tooltip>
+`;
+
+exports[`BrickLink target="_blank" should have external-link icon 1`] = `
+<span>
+  <Link
+    className=""
+    target="_blank"
+    to="/url"
+  >
+    <span
+      className={null}
+      style={
+        Object {
+          "borderBottomColor": undefined,
+        }
+      }
+    >
+      aaa
+    </span>
+  </Link>
+  <span
+    className="externalIcon"
+  >
+    <GeneralIcon
+      icon={
+        Object {
+          "icon": "external-link-alt",
+          "lib": "fa",
+        }
+      }
+    />
+  </span>
+</span>
+`;

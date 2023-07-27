@@ -1,0 +1,10 @@
+.codeContainer {
+  display: flex;
+  min-height: 150px;
+  border-radius: var(--editor-brick-border-radius);
+  border: 1px solid var(--editor-brick-stroke-color);
+  .leftView {
+    width: 35px;
+    background: #f5f6f8;
+  }
+}

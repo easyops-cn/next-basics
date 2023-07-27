@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>presentational-bricks.basic-progress</title>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图四" transform="translate(-1179.000000, -103.000000)">
+            <g id="presentational-bricks.basic-progress" transform="translate(1179.000000, 103.000000)">
+                <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="编组-39" transform="translate(9.000000, 10.000000)">
+                    <g id="编组-16">
+                        <rect id="矩形备份-104" fill="#D6DBEC" x="0" y="0" width="77" height="4" rx="2"></rect>
+                        <rect id="矩形" fill="#1A7AFF" x="0" y="0" width="42" height="4" rx="2"></rect>
+                    </g>
+                    <g id="编组-16备份" transform="translate(0.000000, 10.000000)">
+                        <rect id="矩形备份-104" fill="#D6DBEC" x="0" y="0" width="77" height="4" rx="2"></rect>
+                        <rect id="矩形" fill="#1A7AFF" x="0" y="0" width="35" height="4" rx="2"></rect>
+                    </g>
+                    <g id="编组-16备份-2" transform="translate(0.000000, 20.000000)">
+                        <rect id="矩形备份-104" fill="#D6DBEC" x="0" y="0" width="77" height="4" rx="2"></rect>
+                        <rect id="矩形" fill="#F24C25" fill-rule="nonzero" x="0" y="0" width="26" height="4" rx="2"></rect>
+                    </g>
+                    <g id="编组-16备份-3" transform="translate(0.000000, 29.000000)">
+                        <rect id="矩形备份-104" fill="#D6DBEC" x="0" y="1" width="77" height="4" rx="2"></rect>
+                        <rect id="矩形" fill="#52C41A" x="0" y="1" width="77" height="4" rx="2"></rect>
+                        <g id="编组-37" transform="translate(80.000000, 0.000000)">
+                            <circle id="椭圆形备份" fill="#52C41A" cx="3" cy="3" r="3"></circle>
+                            <path d="M5.068125,2.07075 L2.834625,4.303875 L2.825625,4.312125 L2.815875,4.32075 L2.804625,4.329 L2.794125,4.3365 L2.7825,4.343625 L2.771625,4.35 L2.75925,4.356 L2.748,4.36125 L2.734875,4.366125 L2.723625,4.37025 L2.710125,4.373625 L2.698875,4.37625 L2.684625,4.3785 L2.622375,4.3785 L2.60775,4.376625 L2.59725,4.376625 L2.582625,4.37325 L2.5725,4.370625 L2.557875,4.36575 L2.548125,4.362375 L2.533875,4.355625 L2.5245,4.351125 L2.51025,4.342875 L2.501625,4.338 C2.496375,4.334625 2.4915,4.330875 2.486625,4.327125 L2.479875,4.32225 C2.47282556,4.31659558 2.46606691,4.31058789 2.459625,4.30425 L1.275,3.11925 C1.22475317,3.06907385 1.19676897,3.00081612 1.19732471,2.92980857 C1.19789719,2.85880102 1.22696233,2.79099651 1.278,2.741625 C1.38590187,2.64173413 1.5537609,2.64605954 1.656375,2.751375 L2.6475,3.742125 L4.6935,1.696125 C4.7604873,1.6291377 4.85812341,1.60297618 4.94962976,1.62749524 C5.04113611,1.65201429 5.11261071,1.72348889 5.13712976,1.81499524 C5.16164882,1.90650159 5.1354873,2.0041377 5.0685,2.071125 L5.068125,2.07075 Z" id="路径" fill="#FFFFFF"></path>
+                        </g>
+                    </g>
+                    <circle id="椭圆形" fill="#F24C25" fill-rule="nonzero" cx="83" cy="22" r="3"></circle>
+                    <g id="编组-38" transform="translate(82.995644, 22.046026) rotate(-315.000000) translate(-82.995644, -22.046026) translate(81.197325, 20.257779)" stroke="#FFFFFF" stroke-linecap="round" stroke-width="0.5">
+                        <line x1="0" y1="1.7422211" x2="3.59663918" y2="1.7422211" id="路径-31"></line>
+                        <line x1="1.79831959" y1="-4.4141397e-14" x2="1.80267529" y2="3.57649515" id="路径-32"></line>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

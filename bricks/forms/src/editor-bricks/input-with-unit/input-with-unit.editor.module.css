@@ -1,0 +1,51 @@
+.stepMark {
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-top: 1px solid var(--editor-brick-stroke-color);
+    border-left: 1px solid var(--editor-brick-stroke-color);
+  }
+
+  &::before {
+    top: 4px;
+    right: 5px;
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    bottom: 4px;
+    right: 5px;
+    transform: rotate(-135deg);
+  }
+}
+
+.unitFormItem {
+  flex: 1;
+  display: flex;
+  .input {
+    flex: 1;
+    height: var(--editor-brick-base-height);
+    border-top-left-radius: var(--editor-brick-border-radius);
+    border-bottom-left-radius: var(--editor-brick-border-radius);
+    border: 1px solid var(--editor-brick-stroke-color);
+    padding: 4px 12px;
+    min-width: 0;
+    .placeholder {
+      position: relative;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--antd-input-placeholder-color);
+    }
+  }
+
+  .unit {
+    width: 60px;
+    background-color: var(--editor-brick-skeleton-bg-light);
+    border-top-right-radius: var(--editor-brick-border-radius);
+    border-bottom-right-radius: var(--editor-brick-border-radius);
+  }
+}

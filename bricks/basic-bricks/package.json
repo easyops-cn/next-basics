@@ -1,0 +1,55 @@
+{
+  "name": "@next-bricks/basic-bricks",
+  "version": "1.244.1",
+  "description": "> TODO: description",
+  "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/basic-bricks",
+  "license": "GPL-3.0",
+  "files": [
+    "dist",
+    "deploy"
+  ],
+  "nx": {
+    "targets": {
+      "build": {
+        "outputs": [
+          "{projectRoot}/dist",
+          "{projectRoot}/deploy",
+          "{projectRoot}/.pkgbuild",
+          "{projectRoot}/src/lazy-bricks"
+        ]
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:easyops-cn/next-basics.git"
+  },
+  "scripts": {
+    "prestart": "node scripts/pre-build.js",
+    "start": "cross-env NODE_ENV='development' webpack --config webpack.config.js --watch",
+    "start:editors": "cross-env NODE_ENV='development' webpack --config webpack.editors.js --watch",
+    "start:snippets": "cross-env NODE_ENV='development' rollup --config rollup.snippets.js --watch",
+    "start:all": "concurrently -k -n main,editors,snippets \"npm run start\" \"npm run start:editors\" \"npm run start:snippets\"",
+    "prebuild": "node scripts/pre-build.js",
+    "build": "cross-env NODE_ENV='production' npm run build:webpack && npm run build:stories && npm run build:snippets",
+    "build:webpack": "npm run build:webpack:main && npm run build:webpack:editors",
+    "build:webpack:main": "webpack --config webpack.config.js",
+    "build:webpack:editors": "webpack --config webpack.editors.js",
+    "build:stories": "if [ -d stories ];then  rollup --config rollup.stories.js; else echo \" no stories \"; fi",
+    "build:snippets": "if [ -d snippets ]; then rollup --config rollup.snippets.js; else echo \"no snippets.\"; fi",
+    "postbuild": "ENABLE_GENERATE_DOC=true node scripts/post-build.js",
+    "test": "cross-env NODE_ENV='test' jest",
+    "test:ci": "cross-env NODE_ENV='test' CI=true jest"
+  },
+  "devDependencies": {
+    "@next-core/custom-antd-styles": "^1.26.1",
+    "@next-libs/basic-components": "^5.3.5",
+    "@next-libs/storage": "^2.0.4",
+    "@next-sdk/air-admin-service-sdk": "^2.1.12",
+    "@next-sdk/micro-app-standalone-sdk": "^1.1.1",
+    "classnames": "^2.3.2",
+    "hotkeys-js": "^3.10.1",
+    "immutability-helper": "^3.1.1"
+  },
+  "sideEffects": true
+}

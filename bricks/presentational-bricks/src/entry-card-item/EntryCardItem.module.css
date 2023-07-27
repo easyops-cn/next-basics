@@ -1,0 +1,136 @@
+.cardItem {
+  &:global(.ant-card) {
+    background: var(--entry-card-item-bg);
+  }
+  &:global(.ant-card-bordered) {
+    border: 0;
+    border-radius: var(--entry-card-item-radius);
+  }
+
+  &:global(.ant-card-hoverable:hover) {
+    box-shadow: var(--entry-card-item-hover-shadow);
+    background-color: rgba(244, 245, 247, 1);
+    .cardTitle {
+      color: rgba(26, 122, 255, 1);
+    }
+    .smallCardTitle {
+      color: rgba(26, 122, 255, 1);
+    }
+  }
+
+  &:global(.ant-card):not(:hover) {
+    box-shadow: none;
+  }
+}
+
+.cardContent {
+  display: grid;
+  justify-items: center;
+  padding: 14px 0 12px 0;
+}
+
+.cardAvatar {
+  display: grid;
+  font-size: 32px;
+  margin-bottom: 10px;
+
+  .cardIcon {
+    display: grid;
+    font-size: 32px;
+    justify-self: center;
+    align-self: center;
+    svg {
+      font-size: 28px;
+    }
+  }
+}
+
+.cardSmallAvatar {
+  display: grid;
+  font-size: 32px;
+  margin-bottom: 10px;
+
+  .cardIcon {
+    display: grid;
+    font-size: 32px;
+    justify-self: center;
+    align-self: center;
+    svg {
+      font-size: 20px;
+    }
+  }
+}
+
+.textContainer {
+  padding: 0 14px;
+  width: 100%;
+  text-align: center;
+  color: var(--text-color-default);
+  overflow: hidden;
+
+  &:hover {
+    &.hoverHighLight {
+      color: var(--entry-card-item-highlight-hover-color);
+    }
+
+    &:not(.hoverHighLight) {
+      color: var(--entry-card-item-default-hover-color);
+    }
+  }
+
+  .cardTitle {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .smallCardTitle {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 12px;
+  }
+
+  .description {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}
+
+.purple {
+  background: #964dff;
+}
+
+.red {
+  background: #f15b3e;
+}
+
+.softOrange {
+  background: #fcb94c;
+}
+
+.cyan {
+  background: #2bacc3;
+}
+
+.blue {
+  background: #4d8fff;
+}
+
+.darkPurple {
+  background: #a75da9;
+}
+
+.lightCyan {
+  background: #00acc3;
+}
+
+.brightOrange {
+  background: #efa83b;
+}
+
+.white {
+  background: #fff;
+}

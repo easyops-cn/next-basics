@@ -1,0 +1,91 @@
+.brickItem {
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  cursor: grab;
+
+  &.layer-layout,
+  &.layer-widget {
+    flex-direction: column;
+    gap: 8px;
+    height: auto;
+    padding: 8px 0;
+    .brickIcon {
+      width: 60px;
+      height: 55px;
+      justify-content: center;
+      align-items: center;
+    }
+    .brickName {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+.brickName {
+  flex: auto;
+  padding: 0 10px;
+  min-width: 0;
+  color: var(--text-color-title);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.brickItem:hover {
+  background-color: #4e93ef;
+
+  .brickName {
+    color: #fff;
+  }
+}
+
+.brickIcon {
+  width: 26px;
+  height: 22px;
+  color: var(--text-color-secondary);
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.brick .brickIcon {
+  color: var(--text-color-secondary);
+}
+
+.brick:hover .brickIcon {
+  color: #fff;
+}
+
+.provider .brickIcon {
+  color: var(--theme-orange-color);
+}
+
+.template .brickIcon {
+  color: var(--theme-red-color);
+}
+
+.customTemplate .brickIcon {
+  color: var(--theme-green-color);
+}
+
+.snippet .brickIcon {
+  color: var(--theme-purple-color);
+}
+
+.brickIcon > img {
+  width: 48px;
+  height: 48px;
+}
+
+.layer-brick .brickIcon > img {
+  width: auto;
+  height: 100%;
+}
+
+.thumbnailType {
+  font-size: 42px;
+}

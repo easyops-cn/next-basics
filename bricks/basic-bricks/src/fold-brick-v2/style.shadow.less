@@ -1,0 +1,23 @@
+@import "~antd/lib/divider/style/index.less";
+
+.foldActive {
+  display: block;
+}
+.foldInactive {
+  display: none;
+}
+.foldContainer {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  color: var(--color-normal-text);
+  font-size: 14px;
+}
+.foldPrimaryActive {
+  color: var(--antd-btn-link-color);
+
+  &:hover,
+  &:focus {
+    color: var(--antd-btn-link-hover-color);
+  }
+}

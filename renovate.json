@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json.schemastore.org/renovate",
+  "extends": ["config:base"],
+  "rangeStrategy": "bump",
+  "semanticCommits": "enabled",
+  "commitMessagePrefix": "chore(deps):",
+  "ignorePresets": [":ignoreModulesAndTests"],
+  "packageRules": [
+    {
+      "excludePackagePatterns": ["^@next-core/", "^@next-libs/"],
+      "enabled": false
+    },
+    {
+      "matchPackagePatterns": ["^@next-core/"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "groupName": "next-core packages",
+      "matchPackagePatterns": ["^@next-core/"],
+      "matchUpdateTypes": ["minor", "patch"]
+    },
+    {
+      "groupName": "next-libs packages",
+      "matchPackagePatterns": ["^@next-libs/"],
+      "separateMajorMinor": false
+    }
+  ],
+  "postUpdateOptions": ["yarnDedupeHighest"]
+}

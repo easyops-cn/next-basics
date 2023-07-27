@@ -1,0 +1,37 @@
+.displayBrickContainer {
+  display: flex;
+  align-items: center;
+  .editIcon {
+    visibility: hidden;
+    padding: 0 10px;
+  }
+  &:hover {
+    .editIcon {
+      visibility: visible;
+    }
+  }
+  .editIconVisible {
+    visibility: visible;
+  }
+}
+.cursorPointer {
+  cursor: pointer;
+}
+.customOverlay {
+  &:global(.ant-popover-placement-bottom) {
+    padding-top: 0;
+  }
+  :global(.ant-popover-arrow) {
+    display: none;
+  }
+  :global(.ant-popover-inner) {
+    background: none;
+    box-shadow: none;
+  }
+  :global(.ant-popover-inner-content) {
+    padding: 0;
+  }
+}
+.displayBrickContainerFaded {
+  opacity: 0.3;
+}

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image snapshot 1`] = `
+<div
+  class="rc-image"
+  style="width: 200px;"
+>
+  <img
+    class="rc-image-img"
+    src="./1.jpg"
+    width="200"
+  />
+</div>
+`;
