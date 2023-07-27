@@ -37,7 +37,7 @@
   "devDependencies": {
     "@next-core/storyboard-function-types": "^0.2.15",
     "@next-libs/basic-components": "^5.3.5",
-    "@next-libs/cmdb-instances": "^7.3.12",
+    "@next-libs/cmdb-instances": "^7.4.0",
     "@next-libs/code-editor-components": "^4.10.7",
     "@next-libs/forms": "^3.5.2",
     "@next-libs/hooks": "^2.2.6",
