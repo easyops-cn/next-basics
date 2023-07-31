@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.18.0 (2023-07-31)
+
+
+### Features
+
+* 二级菜单折叠后，产品名称默认展示项目图标 ([89133d1](https://github.com/easyops-cn/next-basics/commit/89133d19bcd17fa43175debc0bae897a77a7b6d7))
+
+
+
+
+
 ## [1.17.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.17.0...@next-bricks/frame-bricks@1.17.1) (2023-07-20)
 
 
