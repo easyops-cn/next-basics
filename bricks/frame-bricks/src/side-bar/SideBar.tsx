@@ -15,7 +15,11 @@ import { debounce } from "lodash";
 import moment from "moment";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { debounceByAnimationFrame } from "@next-core/brick-utils";
-import { getCssPropertyValue } from "@next-core/brick-kit";
+import {
+  getCssPropertyValue,
+  useRecentApps,
+  getRuntime,
+} from "@next-core/brick-kit";
 
 interface SideBarProps {
   menu?: SidebarSubMenu;
@@ -114,6 +118,13 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         : ExpandedState.Collapsed
     );
   };
+
+  const { currentApp } = useRecentApps();
+
+  const showUserDefinedIcon = React.useMemo(
+    () => getRuntime()?.getFeatureFlags()["sidebar-show-user-defined-icon"],
+    []
+  );
 
   useEffect(() => {
     storage.setItem(SIDE_BAR_RESIZE_WIDTH, resizeWidth);
@@ -241,11 +252,14 @@ export function SideBar(props: SideBarProps): React.ReactElement {
       <div className={styles.menuTitle}>
         <i
           className={classNames(
-            { [styles.menuTitlePoint]: !menu?.icon },
+            { [styles.menuTitlePoint]: !menu?.icon && !currentApp?.menuIcon },
             styles.newMenuItemIcon
           )}
         >
-          <GeneralIcon icon={menu?.icon} size={20} />
+          <GeneralIcon
+            icon={showUserDefinedIcon ? menu?.icon : currentApp?.menuIcon}
+            size={20}
+          />
         </i>
         <div className={styles.menuTitleText} title={menu.title}>
           {menu.title}
