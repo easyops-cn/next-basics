@@ -17,6 +17,9 @@ jest.spyOn(brickKit, "getHistory").mockReturnValue({
   createHref: () => {},
 } as any);
 
+const spyOnUseRecentApps = jest.spyOn(brickKit, "useRecentApps");
+spyOnUseRecentApps.mockReturnValue({});
+
 jest.mock("@next-libs/storage", () => ({
   JsonStorage: jest.fn(() => {
     let mockStorageValue: any;
