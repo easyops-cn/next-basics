@@ -234,7 +234,6 @@ describe("WorkflowConditionField", () => {
     fireEvent.click(screen.getByText("next-builder:DYNAMIC_VALUE"));
 
     fireEvent.click(screen.getByText("next-builder:FIXED_VALUE"));
-    screen.debug();
     expect(mockChange.mock.calls[0][0]).toEqual({
       comparator: "$eq",
       fieldKey: "name",
@@ -284,5 +283,52 @@ describe("FieldDropdownButton", () => {
     fireEvent.click(screen.queryAllByRole("menuitem")[0]);
 
     expect(mockClick.mock.calls[0][0]).toEqual("name");
+  });
+
+  it("should work with group", () => {
+    const options = [
+      {
+        id: "name",
+        name: "名称",
+        groupLabel: "开始",
+        groupId: "start",
+      },
+      {
+        id: "age",
+        name: "年龄",
+        groupLabel: "开始",
+        groupId: "start",
+      },
+      {
+        id: "id",
+        name: "id",
+        groupLabel: "基本",
+        groupId: "basic",
+      },
+      {
+        id: "data",
+        name: "数据",
+        groupLabel: "基本",
+        groupId: "basic",
+      },
+    ];
+
+    const mockClick = jest.fn();
+
+    render(
+      <FieldDropdownButton options={options} onClick={mockClick}>
+        条件
+      </FieldDropdownButton>
+    );
+
+    fireEvent.click(screen.getByText("条件"));
+
+    fireEvent.change(screen.getByRole("textbox"), {
+      target: { value: "name" },
+    });
+
+    screen.debug();
+
+    expect(screen.getByText("开始")).toBeInTheDocument();
   });
 });
