@@ -18,6 +18,8 @@ export interface TypeFieldItem {
   model?: "multiple" | "tags";
   placeholder?: string;
   regex?: string;
+  groupId?: string;
+  groupLabel?: string;
 }
 
 interface WorkflowDataChildrenOption {
@@ -97,4 +99,10 @@ export interface WorkflowCondition {
 export interface ComparatorOption {
   id: string;
   name: string;
+}
+
+export interface TypeFieldGroup {
+  groupId: string;
+  groupLabel: string;
+  children?: Partial<TypeFieldItem>[];
 }

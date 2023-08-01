@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../../../i18n/constants";
-import { Select, Menu, Input, Dropdown, Button } from "antd";
+import { Menu, Input, Dropdown, Button } from "antd";
 import { DownOutlined, DeleteOutlined } from "@ant-design/icons";
 import { WorkflowDataField } from "../workflow-data-field/WorkflowDataField";
 import { ValueTypeField } from "../value-type-field/ValueTypeField";
@@ -12,7 +12,9 @@ import {
   ComparatorOption,
   WorkflowDataItem,
   WorkFLowValueType,
+  TypeFieldGroup,
 } from "../../../interface";
+import { processFieldGroup, filterFieldOptions } from "./processor";
 import styles from "./WorkflowConditionField.module.css";
 
 interface WorkflowConditionFieldProps {
@@ -109,7 +111,9 @@ export function WorkflowConditionField(
           </FieldDropdownButton>
         )}
 
-        <span>{field.name}</span>
+        <span>
+          {field.groupLabel ? `${field.groupLabel}.${field.name}` : field.name}
+        </span>
         <FieldDropdownButton
           options={comparatorMap[field.originType]}
           onClick={(id) => handleComparatorChange(id)}
@@ -156,8 +160,9 @@ export function WorkflowConditionField(
   );
 }
 
+type FieldDropdownOption = Partial<TypeFieldItem>;
 interface FieldDropdownButtonProps {
-  options: Partial<TypeFieldItem>[];
+  options: FieldDropdownOption[];
   onClick?: (id: string) => void;
   children?: React.ReactNode;
   hiddenSearch?: boolean;
@@ -176,17 +181,8 @@ export function FieldDropdownButton(
     (e: React.ChangeEvent<HTMLInputElement>): void => {
       const v = e.target.value;
       setQ(v);
-      if (!v) {
-        setFilterOptions(options);
-      } else {
-        const filter = options.filter(
-          (item) =>
-            item.name?.toLowerCase().includes(v.toLowerCase()) ||
-            item.id?.toLowerCase().includes(v.toLowerCase())
-        );
-
-        setFilterOptions(filter);
-      }
+      const filter = filterFieldOptions(options, v);
+      setFilterOptions(filter);
     },
     [options]
   );
@@ -206,6 +202,17 @@ export function FieldDropdownButton(
     }
   }, [visible, options]);
 
+  const getMenuItem = useCallback(
+    (item: FieldDropdownOption) => {
+      return (
+        <Menu.Item key={item.id} onClick={() => handleItemClick(item.id)}>
+          {item.name}
+        </Menu.Item>
+      );
+    },
+    [handleItemClick]
+  );
+
   const menu = useMemo(
     () => (
       <Menu className={styles.dropdownMenu}>
@@ -216,14 +223,20 @@ export function FieldDropdownButton(
           onChange={handleChange}
           placeholder={t(K.SEARCH_FIELD)}
         />
-        {filterOptions?.map((item) => (
-          <Menu.Item key={item.id} onClick={() => handleItemClick(item.id)}>
-            {item.name}
-          </Menu.Item>
-        ))}
+        {processFieldGroup(filterOptions)?.map((item, index) =>
+          item.groupId ? (
+            <Menu.ItemGroup title={item.groupLabel} key={index}>
+              {(item as TypeFieldGroup).children?.map((child) =>
+                getMenuItem(child)
+              )}
+            </Menu.ItemGroup>
+          ) : (
+            getMenuItem(item)
+          )
+        )}
       </Menu>
     ),
-    [filterOptions, handleChange, handleItemClick, q, hiddenSearch, t]
+    [filterOptions, getMenuItem, handleChange, hiddenSearch, q, t]
   );
 
   return (
