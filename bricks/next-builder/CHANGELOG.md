@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.255.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.254.2...@next-bricks/next-builder@1.255.0) (2023-08-01)
+
+
+### Features
+
+* condition support group ([a6f40f0](https://github.com/easyops-cn/next-basics/commit/a6f40f0af014a05cb5f03171a056efae5f5e90e1))
+
+
+
+
+
 ## 1.254.2 (2023-07-31)
 
 **Note:** Version bump only for package @next-bricks/next-builder
