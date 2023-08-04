@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.244.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.244.2...@next-bricks/basic-bricks@1.244.3) (2023-08-04)
+
+
+### Bug Fixes
+
+* **basic-bricks:** fix快捷访问菜单连续点击死循环问题 ([e54a53a](https://github.com/easyops-cn/next-basics/commit/e54a53ad723050986bf0cf05c19e5eb61247fca3))
+
+
+
+
+
 ## 1.244.2 (2023-07-31)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
