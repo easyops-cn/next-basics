@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Drawer, Input } from "antd";
+import { Drawer, Input } from "antd";
 import styles from "./index.module.css";
 import { MenuTag } from "./MenuTag";
 import { FavouriteMenu } from "./FavouriteMenu";
@@ -8,7 +8,6 @@ import { BrickAsComponent } from "@next-core/brick-kit";
 import { SearchOutlined, CloseCircleFilled } from "@ant-design/icons";
 import { K, NS_BASIC_BRICKS } from "../i18n/constants";
 import { useTranslation } from "react-i18next";
-import { Timer } from "d3";
 interface QuickVisitMenuProps {
   buttonName: string;
   searchPlaceholder?: string;
@@ -24,7 +23,7 @@ interface QuickVisitMenuProps {
 interface MenuContainerProps {
   searchPlaceholder?: string;
   allMenus: Record<string, unknown>[];
-  favouriteMenus?: Record<string, unknown>[];
+  favouriteMenus: Record<string, unknown>[];
   handleMenuDrag?: (items: Record<string, unknown>[]) => void;
   handleMenuRemove?: (items: Record<string, unknown>[]) => void;
   handleMenuAdd?: (items: Record<string, unknown>[]) => void;
@@ -95,7 +94,7 @@ export function searchMenu(menus, key: string) {
 export function MenuContainer({
   searchPlaceholder,
   allMenus,
-  favouriteMenus = [],
+  favouriteMenus,
   handleMenuAdd,
   handleMenuRemove,
   handleMenuClick,
@@ -109,7 +108,7 @@ export function MenuContainer({
   const [favouriteCount, setFavouriteCount] = useState(0);
   const { t } = useTranslation(NS_BASIC_BRICKS);
   useEffect(() => {
-    setFavouriteCount(favouriteMenus.length);
+    setFavouriteCount(favouriteMenus?.length ?? 0);
   }, [favouriteMenus]);
   const onSearch = (event) => {
     setSearchKey(event.target.value);
@@ -221,7 +220,7 @@ export function QuickVisitMenu(props: QuickVisitMenuProps): React.ReactElement {
   const {
     buttonName,
     menu,
-    favouriteMenus = [],
+    favouriteMenus,
     handleMenuDrag,
     handleMenuRemove,
     handleMenuAdd,
