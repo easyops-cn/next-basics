@@ -115,7 +115,6 @@ export class QuickVisitMenuElement extends UpdatingElement {
   disconnectedCallback(): void {
     ReactDOM.unmountComponentAtNode(this);
   }
-
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
