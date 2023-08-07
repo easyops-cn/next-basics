@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.306.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.306.9...@next-bricks/presentational-bricks@1.306.10) (2023-08-07)
+
+
+### Bug Fixes
+
+* **prestational-bricks:** 警告构件展开折叠按钮支持另起一行 ([14d7b5d](https://github.com/easyops-cn/next-basics/commit/14d7b5d28dc1e6c393ddbb89af8f4a149ad7131b))
+
+
+
+
+
 ## 1.306.9 (2023-07-31)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
