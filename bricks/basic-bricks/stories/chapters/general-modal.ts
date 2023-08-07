@@ -382,5 +382,95 @@ export const generalModalStory: Story = {
       ],
       thumbnail: generalModalFullScreenSvg,
     },
+    {
+      description: {
+        title: "模态框里放tabs容器",
+      },
+      brick: "div",
+      slots: {
+        content: {
+          type: "bricks",
+          bricks: [
+            {
+              brick: "basic-bricks.general-button",
+              events: {
+                "general.button.click": {
+                  method: "open",
+                  target: "#tabsModal",
+                },
+              },
+              properties: {
+                buttonName: "点击弹出模态框",
+              },
+            },
+            {
+              brick: "basic-bricks.general-modal",
+              properties: {
+                id: "tabsModal",
+                okText: "确定",
+                isHiddenBodyPadding: true,
+              },
+              slots: {
+                content: {
+                  type: "bricks",
+                  bricks: [
+                    {
+                      brick: "container-brick.tabs-container",
+                      properties: {
+                        activeTabIndex: 2,
+                        showCard: false,
+                        slotType: "bricks",
+                        style: {
+                          marginTop: "6px",
+                        },
+                        tabList: [
+                          {
+                            key: "0",
+                            text: "Tab1",
+                          },
+                          {
+                            key: "1",
+                            text: "Tab2",
+                          },
+                          {
+                            key: "2",
+                            text: "Tab3",
+                          },
+                        ],
+                      },
+                      slots: {
+                        content: {
+                          type: "bricks",
+                          bricks: [
+                            {
+                              brick: "div",
+                              properties: {
+                                textContent: "small Panel 1",
+                              },
+                            },
+                            {
+                              brick: "div",
+                              properties: {
+                                textContent: "small Panel 2",
+                              },
+                            },
+                            {
+                              brick: "div",
+                              properties: {
+                                textContent: "small Panel 3",
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
   ],
 };
