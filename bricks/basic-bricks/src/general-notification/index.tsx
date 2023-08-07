@@ -6,11 +6,13 @@ import {
   event,
   EventEmitter,
   method,
+  BrickAsComponent,
 } from "@next-core/brick-kit";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { notification } from "antd";
 import { NotificationPlacement } from "antd/lib/notification";
 import { NotificationApi } from "antd/es/notification";
+import type { UseBrickConf } from "@next-core/brick-types";
 
 /**
  * @id basic-bricks.general-notification
@@ -24,6 +26,9 @@ import { NotificationApi } from "antd/es/notification";
  * @memo
  * @noInheritDoc
  */
+interface DescriptionBrickprops {
+  useBrick: UseBrickConf;
+}
 export class GeneralNotificationElement extends UpdatingElement {
   /**
    * @kind string
@@ -44,6 +49,16 @@ export class GeneralNotificationElement extends UpdatingElement {
    */
   @property()
   description: string;
+
+  /**
+   * @kind DescriptionBrickprops
+   * @required false
+   * @default -
+   * @description 自定义通知提醒内容
+   * @group basic
+   */
+  @property({ attribute: false })
+  descriptionBrick: DescriptionBrickprops;
 
   /**
    * @kind string
@@ -123,6 +138,13 @@ export class GeneralNotificationElement extends UpdatingElement {
   renderIcon = () => {
     return this.icon && <LegacyIcon type={this.icon} style={this.iconStyle} />;
   };
+  renderDescription = () => {
+    return this.descriptionBrick ? (
+      <BrickAsComponent {...this.descriptionBrick} />
+    ) : (
+      this.description
+    );
+  };
   /**
    *
    * @params `success` | `error` | `info` | `warning` | `warn` | `open`
@@ -133,7 +155,7 @@ export class GeneralNotificationElement extends UpdatingElement {
     typeof mtd !== "string" && (mtd = "open");
     notification[mtd]({
       message: this.message,
-      description: this.description,
+      description: this.renderDescription(),
       duration: this.duration,
       icon: this.renderIcon(),
       placement: this.placement || "topRight",

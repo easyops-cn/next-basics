@@ -39,9 +39,11 @@ describe("basic-bricks.general-notification", () => {
       `handle${event.charAt(0).toUpperCase() + event.slice(1)}`
     ]();
     expect(
-      (mockEventListener.mock.calls[
-        mockEventListener.mock.calls.length - 1
-      ][0] as CustomEvent).detail
+      (
+        mockEventListener.mock.calls[
+          mockEventListener.mock.calls.length - 1
+        ][0] as CustomEvent
+      ).detail
     ).toEqual({});
     document.body.removeChild(element);
   });
@@ -121,7 +123,14 @@ describe("basic-bricks.general-notification", () => {
       "open",
       {
         message: "open title",
-        description: "description open",
+        descriptionBrick: {
+          useBrick: {
+            brick: "div",
+            properties: {
+              textContent: "description open",
+            },
+          },
+        },
         duration: 5,
         placement: "topLeft",
         icon: "smile",
@@ -129,7 +138,6 @@ describe("basic-bricks.general-notification", () => {
       },
       {
         message: "open title",
-        description: "description open",
         duration: 5,
         placement: "topLeft",
       },
