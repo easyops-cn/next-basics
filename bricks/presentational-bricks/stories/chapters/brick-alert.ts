@@ -654,6 +654,198 @@ export const BrickAlertStory: Story = {
         },
       },
     },
+    {
+      description: {
+        title: "折叠按钮换行展示",
+        message: "配置messageStyle，使折叠按钮换行展示",
+      },
+      brick: "presentational-bricks.brick-alert",
+      properties: {
+        id: "pseudoSlot",
+        type: "info",
+        message: "这是一段通知信息的标题",
+        messageStyle: {
+          fontSize: "14px",
+          display: "block",
+          marginTop: "-20px",
+        },
+        showIcon: true,
+        enableDescSlot: true,
+        enableMessageSlot: true,
+        iconSize: "small",
+        foldDesc: true,
+      },
+      slots: {
+        message: {
+          bricks: [
+            {
+              brick: "span",
+              slots: {
+                "": {
+                  bricks: [
+                    {
+                      brick: "span",
+                      properties: {
+                        textContent:
+                          "展示当前运行的采集实例。因为采集范围是动态的，可能与预期不符，请等待最长10分钟后查看，你也可以点击",
+                      },
+                    },
+                    {
+                      brick: "presentational-bricks.brick-link",
+                      events: {
+                        "link.click": {
+                          action: "console.log",
+                        },
+                      },
+                      properties: {
+                        style: {
+                          padding: "0 3px",
+                          position: "relative",
+                          bottom: "1px",
+                        },
+                        label: "立即同步",
+                      },
+                    },
+                    {
+                      brick: "span",
+                      properties: {
+                        textContent:
+                          "。如果发现有采集实例，但没数据上报，请点击查看",
+                      },
+                    },
+                  ],
+                  type: "bricks",
+                },
+              },
+            },
+          ],
+          type: "bricks",
+        },
+        description: {
+          type: "bricks",
+          bricks: [
+            {
+              brick: "div",
+              slots: {
+                "": {
+                  type: "bricks",
+                  bricks: [
+                    {
+                      brick: "span",
+                      properties: {
+                        style: {
+                          fontWeight: 500,
+                        },
+                        textContent: '1、采集状态为"失败"：',
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              brick: "div",
+              slots: {
+                "": {
+                  type: "bricks",
+                  bricks: [
+                    {
+                      brick: "span",
+                      properties: {
+                        style: {
+                          paddingLeft: "2em",
+                        },
+                        textContent:
+                          "﹣ 如果报错信息为get metric none，strategy:5ab3beb512b40，instance:5a14561111841，该instance是指主机的instanceid，请升级该主机Agent至3.24.14以上，且agent有与服务端8823端口的长链接",
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              brick: "div",
+              slots: {
+                "": {
+                  type: "bricks",
+                  bricks: [
+                    {
+                      brick: "span",
+                      properties: {
+                        style: {
+                          paddingLeft: "2em",
+                        },
+                        textContent:
+                          "﹣ 如果报错信息为get metric error，session timeout，请确认对应的agent升级到3.24.10以上，且agent有与服务端8823端口的长链接",
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              brick: "div",
+              slots: {
+                "": {
+                  type: "bricks",
+                  bricks: [
+                    {
+                      brick: "span",
+                      properties: {
+                        style: {
+                          paddingLeft: "2em",
+                        },
+                        textContent:
+                          "﹣ 如果是Prometheus插件，报错信息为connection refused，请确保exporter启动正常或可尝试手动curl对应的metrics接口",
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              brick: "div",
+              slots: {
+                "": {
+                  type: "bricks",
+                  bricks: [
+                    {
+                      brick: "span",
+                      properties: {
+                        style: {
+                          fontWeight: 500,
+                        },
+                        textContent:
+                          '2、如果采集状态为"正常"，那说明采集通道是正常的，是数据处理层的问题，可查看clickhouse或flink_taskmanager/log/monitor.log查看日志',
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              brick: "div",
+              slots: {
+                "": {
+                  type: "bricks",
+                  bricks: [
+                    {
+                      brick: "span",
+                      properties: {
+                        style: {
+                          fontWeight: 500,
+                        },
+                        textContent: "3、如果还有问题，请咨询技术人员。",
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
   ],
   previewColumns: 2,
 };

@@ -67,11 +67,15 @@ export function BrickAlert(props: BrickAlertProps): React.ReactElement {
           >
             <span style={{ ...props.messageStyle }}>
               {props.foldDescLabel ?? "故障排查"}
+              <UpOutlined
+                rotate={show ? 0 : 180}
+                style={{
+                  marginLeft: "4px",
+                  lineHeight: "0px",
+                  fontSize: "12px",
+                }}
+              />
             </span>
-            <UpOutlined
-              rotate={show ? 0 : 180}
-              style={{ marginLeft: "4px", lineHeight: "0px", fontSize: "12px" }}
-            />
           </span>
         </>
       ) : (
