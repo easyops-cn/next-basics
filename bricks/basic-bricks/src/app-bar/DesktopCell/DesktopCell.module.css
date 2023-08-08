@@ -3,6 +3,7 @@
   justify-content: center;
   /* https://stackoverflow.com/a/43312314 */
   overflow: hidden;
+  align-items: center;
   &.positionLeft {
     justify-content: flex-start;
   }
