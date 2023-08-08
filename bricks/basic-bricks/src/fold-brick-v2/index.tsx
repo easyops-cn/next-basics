@@ -136,7 +136,11 @@ export class FoldBrickV2Element extends UpdatingElement {
   dividerDashed: boolean;
 
   /**
-   * @private
+   * @kind boolean
+   * @required false
+   * @default
+   * @description 是否展开
+   * @group divider
    */
   @property({
     type: Boolean,
