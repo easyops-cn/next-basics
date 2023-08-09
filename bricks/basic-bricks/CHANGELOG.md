@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.246.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.245.0...@next-bricks/basic-bricks@1.246.0) (2023-08-09)
+
+
+### Bug Fixes
+
+* modal构件basic-bricks.general-modal.confirm事件没传dataSource ([e17f705](https://github.com/easyops-cn/next-basics/commit/e17f70587def1bcaf2bdc25c2da555de57566a13))
+
+
+### Features
+
+* 目录组件考虑增加回之前的padding ([4490c4e](https://github.com/easyops-cn/next-basics/commit/4490c4e83150628dc6e3bad87490e0aabe665f24))
+
+
+
+
+
 # [1.245.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.244.7...@next-bricks/basic-bricks@1.245.0) (2023-08-09)
 
 
