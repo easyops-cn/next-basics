@@ -342,7 +342,7 @@ export class GeneralModalElement extends UpdatingElement {
           (!isInFooterContainer &&
             buttonNode.className.includes("ant-btn-primary"))
         ) {
-          this.generalModalConfirm.emit();
+          this.generalModalConfirm.emit(this.dataSource);
           if (this.closeWhenOk) {
             this.close();
           }
