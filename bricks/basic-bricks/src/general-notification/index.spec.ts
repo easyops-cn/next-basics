@@ -142,6 +142,7 @@ describe("basic-bricks.general-notification", () => {
         placement: "topLeft",
       },
     ],
+    ["close", {}, {}],
   ];
   it.each<[string, Record<string, any>, Record<string, any>]>(cases)(
     "should call method %s of notification",
