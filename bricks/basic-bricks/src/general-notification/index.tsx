@@ -64,6 +64,16 @@ export class GeneralNotificationElement extends UpdatingElement {
    * @kind string
    * @required false
    * @default -
+   * @description 当前通知唯一标志
+   * @group basic
+   */
+  @property()
+  key: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
    * @description icon，具体查阅：[react icon](https://3x.ant.design/components/icon-cn/)
    * @group basic
    */
@@ -151,9 +161,17 @@ export class GeneralNotificationElement extends UpdatingElement {
    * @description  显示通知栏，默认为`open`
    */
   @method()
-  open(mtd: keyof Omit<NotificationApi, "config" | "close" | "destroy">) {
+  open(
+    mtd: keyof Omit<NotificationApi, "config" | "close" | "destroy">,
+    key?: string
+  ) {
     typeof mtd !== "string" && (mtd = "open");
+    if (mtd === ("close" as string)) {
+      notification.close(key);
+      return;
+    }
     notification[mtd]({
+      key: this.key,
       message: this.message,
       description: this.renderDescription(),
       duration: this.duration,
