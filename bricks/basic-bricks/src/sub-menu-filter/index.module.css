@@ -2,7 +2,7 @@
   background: var(--antd-app-submenu-bg);
   border-radius: 6px;
   height: 100%;
-
+  padding: 20px 12px;
   .blockLink {
     display: flex;
     justify-content: space-between;
@@ -39,7 +39,7 @@
 
   > :global(.ant-menu) {
     background: transparent;
-    padding: 20px 12px;
+    padding: 12px 0px;
 
     :global(.ant-menu-item-group) {
       :global(.ant-menu-item-group-title) {
