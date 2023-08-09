@@ -39,7 +39,7 @@
 
   > :global(.ant-menu) {
     background: transparent;
-    padding: 12px 0;
+    padding: 20px 12px;
 
     :global(.ant-menu-item-group) {
       :global(.ant-menu-item-group-title) {
