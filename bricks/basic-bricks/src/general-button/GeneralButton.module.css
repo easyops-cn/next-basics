@@ -3,13 +3,22 @@
     color: var(--antd-btn-fade-text-color);
   }
 }
-
+.navIcon {
+  &:global(.ant-btn-nav) {
+    border: none;
+    border-radius: var(--antd-button-border-radius);
+    font-size: 14px;
+    height: 24px;
+    &:hover {
+      background: var(--color-fill-bg-base-3);
+    }
+  }
+}
 .iconButton {
   &:global(.ant-btn-icon) {
     color: var(--antd-btn-special-icon-type-color);
     background: var(--antd-btn-special-icon-type-bg);
     border: none;
-
     &:hover {
       color: var(--antd-btn-special-icon-type-hover-color);
       background: var(--antd-btn-special-icon-type-hover-bg);
