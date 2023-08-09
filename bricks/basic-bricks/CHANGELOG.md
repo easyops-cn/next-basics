@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.245.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.244.7...@next-bricks/basic-bricks@1.245.0) (2023-08-09)
+
+
+### Features
+
+* 目录组件考虑增加回之前的padding ([58ded10](https://github.com/easyops-cn/next-basics/commit/58ded10af8beab382843b5431a21c557b0d9d520))
+
+
+
+
+
 ## [1.244.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.244.6...@next-bricks/basic-bricks@1.244.7) (2023-08-09)
 
 
