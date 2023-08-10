@@ -257,6 +257,36 @@ export const generalButtonStory: Story = {
       },
       thumbnail: generalButtonDangerSvg,
     },
+    {
+      bricks: [
+        {
+          brick: "basic-bricks.general-button",
+          description: {
+            title: "用在导航栏里的按钮",
+            message:
+              "buttonType设为nav后，按钮的大小和形状固定，buttonSize和buttonShape无效",
+          },
+          events: {
+            "general.button.click": [
+              {
+                action: "message.info",
+                args: ["click button"],
+              },
+            ],
+          },
+          properties: {
+            buttonType: "nav",
+            buttonIcon: "question-circle",
+            tooltip: "help",
+          },
+        },
+      ],
+      snippetId: "basic-bricks.general-button[nav]",
+      title: {
+        en: "nav General Button",
+        zh: "nav类型按钮",
+      },
+    },
   ],
   previewColumns: 2,
 };

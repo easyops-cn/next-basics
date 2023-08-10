@@ -16,6 +16,15 @@ export class AppBarDocumentLinkElement extends UpdatingElement {
     attribute: false,
   })
   iconStyle: React.CSSProperties;
+  /**
+   * @default false
+   * @required false
+   * @description 是否在导航栏中显示，为true时显示为nav类型的通用按钮（高度为24px,圆角3px,hover颜色为灰色））
+   */
+  @property({
+    type: Boolean,
+  })
+  isInNavbar: boolean;
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -35,7 +44,10 @@ export class AppBarDocumentLinkElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <AppDocumentLink iconStyle={this.iconStyle} />
+          <AppDocumentLink
+            iconStyle={this.iconStyle}
+            isInNavbar={this.isInNavbar}
+          />
         </BrickWrapper>,
         this
       );

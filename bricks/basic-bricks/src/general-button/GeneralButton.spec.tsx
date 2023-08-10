@@ -42,7 +42,32 @@ describe("GeneralButton", () => {
   });
 
   it("should work with disabled button", () => {
-    render(<GeneralButton {...props} disabled disabledTooltip="没有权限" />);
+    render(
+      <GeneralButton
+        {...props}
+        disabled
+        disabledTooltip="没有权限"
+        buttonSize="large"
+        buttonShape="circle"
+      />
+    );
     expect(screen.getByRole("button").style.pointerEvents).toBe("none");
+    const classArr = screen.getByRole("button").className.split(" ");
+    expect(classArr.includes("ant-btn-lg")).toBe(true);
+    expect(classArr.includes("ant-btn-circle")).toBe(true);
+  });
+  it("should work with buttonStyle nav", () => {
+    render(
+      <GeneralButton
+        {...props}
+        buttonType="nav"
+        buttonSize="large"
+        buttonShape="circle"
+      />
+    );
+    const classArr = screen.getByRole("button").className.split(" ");
+    expect(classArr.includes("navIcon")).toBe(true);
+    expect(classArr.includes("ant-btn-lg")).toBe(false);
+    expect(classArr.includes("ant-btn-circle")).toBe(false);
   });
 });

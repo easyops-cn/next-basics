@@ -4,6 +4,7 @@ import * as kit from "@next-core/brick-kit";
 import { MicroApp } from "@next-core/brick-types";
 import { Link } from "@next-libs/basic-components";
 import { AppDocumentLink } from "./AppDocumentLink";
+import { GeneralButton } from "../../general-button/GeneralButton";
 
 jest.mock("@next-libs/basic-components");
 
@@ -16,9 +17,9 @@ jest.spyOn(kit, "getRuntime").mockReturnValue({
 } as any);
 
 const mockUseRecentApps = jest.spyOn(kit, "useRecentApps").mockReturnValue({
-  currentApp: ({
+  currentApp: {
     id: "app-a",
-  } as Partial<MicroApp>) as MicroApp,
+  } as Partial<MicroApp> as MicroApp,
 });
 
 describe("AppDocumentLink", () => {
@@ -50,5 +51,10 @@ describe("AppDocumentLink", () => {
     mockGetFeatureFlags.mockReturnValueOnce({});
     const wrapper = shallow(<AppDocumentLink />);
     expect(wrapper.html()).toBe(null);
+    expect(wrapper.find(GeneralButton)).toHaveLength(0);
+  });
+  it("should render button when isInNavbar is true", () => {
+    const wrapper = shallow(<AppDocumentLink isInNavbar={true} />);
+    expect(wrapper.find(GeneralButton)).toHaveLength(1);
   });
 });

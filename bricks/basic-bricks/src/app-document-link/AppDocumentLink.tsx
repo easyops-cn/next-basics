@@ -3,6 +3,12 @@ import * as originAppDocumentLink from "../app-bar/AppDocumentLink/AppDocumentLi
 
 export function AppDocumentLink(props: {
   iconStyle: React.CSSProperties;
+  isInNavbar?: boolean;
 }): React.ReactElement {
-  return <originAppDocumentLink.AppDocumentLink iconStyle={props.iconStyle} />;
+  return (
+    <originAppDocumentLink.AppDocumentLink
+      iconStyle={props.iconStyle}
+      isInNavbar={props.isInNavbar}
+    />
+  );
 }

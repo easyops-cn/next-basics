@@ -14,7 +14,8 @@ declare const ButtonTypes: [
   "dashed",
   "link",
   "text",
-  "icon"
+  "icon",
+  "nav"
 ];
 declare type ButtonType = typeof ButtonTypes[number];
 
@@ -67,9 +68,10 @@ export function GeneralButton({
     <Button
       className={classNames(styles.iconButton, {
         [styles.fadedText]: fadedText && buttonType === "text",
+        [styles.navIcon]: buttonType === "nav",
       })}
       style={{
-        ...(buttonSize == "xs"
+        ...(buttonSize == "xs" && buttonType !== "nav"
           ? { height: "22px", lineHeight: "11px", fontSize: "11px" }
           : null),
         ...buttonStyle,
@@ -79,8 +81,8 @@ export function GeneralButton({
             }
           : null),
       }}
-      shape={buttonShape}
-      size={buttonSize !== "xs" ? buttonSize : null}
+      shape={buttonType !== "nav" ? buttonShape : null}
+      size={buttonSize !== "xs" && buttonType !== "nav" ? buttonSize : null}
       onClick={onClick}
       type={buttonType}
       danger={buttonDanger}

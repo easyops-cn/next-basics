@@ -90,8 +90,8 @@ export class GeneralButtonElement extends UpdatingElement {
    * @kind ButtonType
    * @required false
    * @default -
-   * @description 按钮类型  ButtonType(`"link" | "default" | "primary" | "ghost" | "dashed" | "danger" | "icon"|"text"`)
-   * @enums "link"|"default"|"primary"|"ghost"|"dashed"|"danger"|"icon"|"text"
+   * @description 按钮类型  ButtonType(`"link" | "default" | "primary" | "ghost" | "dashed" | "danger" | "icon"| "text" | "nav"`)
+   * @enums "link"|"default"|"primary"|"ghost"|"dashed"|"danger"|"icon"|"text"|"nav"
    * @group basic
    */
   @property()
