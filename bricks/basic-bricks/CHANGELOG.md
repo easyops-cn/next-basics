@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.247.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.246.0...@next-bricks/basic-bricks@1.247.0) (2023-08-10)
+
+
+### Features
+
+* **basic-bricks:** 调整顶部导航栏右侧按钮的样式 ([7649a22](https://github.com/easyops-cn/next-basics/commit/7649a22d673b42faa4b2092e41dbe58c2bb67efc))
+
+
+
+
+
 # [1.246.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.245.0...@next-bricks/basic-bricks@1.246.0) (2023-08-09)
 
 
