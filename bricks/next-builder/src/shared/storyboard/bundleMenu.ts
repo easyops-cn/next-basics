@@ -36,7 +36,7 @@ export function bundleMenu(
 
 function menuIconProcessor(menuIcon: Record<string, string>): void {
   if (menuIcon?.imgSrc) {
-    const imgSrc = menuIcon.imgSrc.match(".+/(.+)$")[1];
+    const imgSrc = menuIcon.imgSrc.match(/[^/]+$/)[0];
     const newSrc = `<% IMG.get(${JSON.stringify(imgSrc)}) %>`;
     menuIcon.imgSrc = newSrc;
   }
