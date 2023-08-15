@@ -4,6 +4,9 @@ describe("bundleMenu", () => {
   it("should bundle menu with i18n", () => {
     const menu: Record<string, unknown> = {
       title: "<% I18N('HELLO') %>",
+      icon: {
+        imgSrc: "/xxx/yyy/test.png",
+      },
       items: [
         {
           text: "<% I18N('WORLD') %>",
@@ -40,6 +43,7 @@ describe("bundleMenu", () => {
         WORLD: "世界",
       },
     });
+    expect(menu.icon).toEqual({ imgSrc: '<% IMG.get("test.png") %>' });
     expect(menu.items).toEqual([
       {
         icon: { imgSrc: '<% IMG.get("images20230427.png") %>' },

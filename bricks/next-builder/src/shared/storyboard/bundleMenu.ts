@@ -25,15 +25,19 @@ export function bundleMenu(
       }
     }
   }
+  menuIconProcessor(menu.icon as Record<string, string>);
   if (Array.isArray(menu.items)) {
     menu.items.forEach((menuItem) => {
-      const menuIcon = menuItem.icon as Record<string, string>;
-      if (menuIcon?.imgSrc) {
-        const imgSrc = menuIcon.imgSrc.match(".+/(.+)$")[1];
-        const newSrc = `<% IMG.get(${JSON.stringify(imgSrc)}) %>`;
-        menuItem.icon.imgSrc = newSrc;
-      }
+      menuIconProcessor(menuItem.icon as Record<string, string>);
     });
   }
   menu.i18n = menuI18n;
+}
+
+function menuIconProcessor(menuIcon: Record<string, string>): void {
+  if (menuIcon?.imgSrc) {
+    const imgSrc = menuIcon.imgSrc.match(/[^/]+$/)[0];
+    const newSrc = `<% IMG.get(${JSON.stringify(imgSrc)}) %>`;
+    menuIcon.imgSrc = newSrc;
+  }
 }
