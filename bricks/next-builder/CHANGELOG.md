@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.255.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.255.1...@next-bricks/next-builder@1.255.2) (2023-08-15)
+
+
+### Bug Fixes
+
+* men.icon.imgSrc can not work ([d4e24b3](https://github.com/easyops-cn/next-basics/commit/d4e24b3563f0d2d7dc01706432fee81c37cc081b))
+* men.icon.imgSrc can not work ([884f2b9](https://github.com/easyops-cn/next-basics/commit/884f2b9d570ab6d386f5bb1ad46b876319f877d0))
+
+
+
+
+
 ## [1.255.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.255.0...@next-bricks/next-builder@1.255.1) (2023-08-15)
 
 **Note:** Version bump only for package @next-bricks/next-builder
