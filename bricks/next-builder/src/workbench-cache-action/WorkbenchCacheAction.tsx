@@ -217,6 +217,7 @@ function LegacyWorkbenchCacheAction(
             snippetId: rootNode.snippetId,
             params: rootNode.snippetParams,
             data: rootNode.snippetData,
+            context: rootNode.context,
             bricks: buildBricks(graphTree.children as BuilderBrickNode[], {
               keepIds: false,
             }),

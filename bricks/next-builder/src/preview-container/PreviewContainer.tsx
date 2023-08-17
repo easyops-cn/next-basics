@@ -215,6 +215,7 @@ export function LegacyPreviewContainer(
       return {
         data: snippetGraphData[0].snippetData,
         params: snippetGraphData[0].snippetParams,
+        context: snippetGraphData[0].context,
         snippetId: snippetGraphData[0].snippetId,
         bricks: buildBricks(
           snippetGraphData[0].children as BuilderBrickNode[],
