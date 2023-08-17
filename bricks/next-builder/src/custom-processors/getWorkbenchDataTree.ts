@@ -9,13 +9,21 @@ import {
 import { pipes } from "@next-core/pipes";
 import { uniqueId } from "lodash";
 import { WorkbenchNodeData } from "../shared/workbench/interfaces";
+import { StoryboardType } from "../shared/storyboard/interfaces";
+
+interface PartialProject {
+  storyboardType: StoryboardType;
+}
 
 export function getWorkbenchDataTree(
-  node: BuilderRouteNode | BuilderCustomTemplateNode | BuilderSnippetNode
+  node: BuilderRouteNode | BuilderCustomTemplateNode | BuilderSnippetNode,
+  projectDetail?: PartialProject
 ): WorkbenchNodeData[] {
   return (
     (node.type === "snippet"
-      ? node.snippetData
+      ? projectDetail?.storyboardType === "theme-template"
+        ? node.context
+        : node.snippetData
       : node.type === "custom-template"
       ? (pipes.json((node as { state?: string }).state) as ContextConf[])
       : node.context

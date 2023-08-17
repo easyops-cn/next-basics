@@ -159,6 +159,45 @@ test("getWorkbenchDataTree for snippet", () => {
   `);
 });
 
+test("getWorkbenchDataTree for theme-template snippet", () => {
+  const tree = getWorkbenchDataTree(
+    {
+      type: "snippet",
+      context: [
+        {
+          name: "test",
+          value: "hello",
+        },
+      ],
+    } as any,
+    {
+      storyboardType: "theme-template",
+    }
+  );
+
+  expect(tree).toMatchInlineSnapshot(`
+    Array [
+      Object {
+        "data": Object {
+          "$key": "context-key-0",
+          "name": "test",
+          "value": "hello",
+        },
+        "icon": Object {
+          "color": "cyan",
+          "icon": "code",
+          "lib": "antd",
+          "theme": "outlined",
+        },
+        "key": "context-key-0",
+        "name": "test",
+        "path": undefined,
+        "unreachable": false,
+      },
+    ]
+  `);
+});
+
 test("getWorkbenchDataTree for tpl with no state", () => {
   const tree = getWorkbenchDataTree({
     type: "custom-template",
