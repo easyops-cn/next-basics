@@ -606,6 +606,7 @@ function TreeNode({
             [styles.collapsed]: allowCollapse && collapsed,
             [styles.collapsible]: allowCollapse,
           })}
+          useNativeEvent
           tabIndex={0}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
