@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.3](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.23.2...@next-types/preview@1.23.3) (2023-08-18)
+
+
+### Bug Fixes
+
+* build storyboard error ([20e0d35](https://github.com/easyops-cn/next-basics/commit/20e0d3546e56de619928dd8797b70dd6f07c93a7))
+
+
+
+
+
 ## 1.23.2 (2023-07-31)
 
 **Note:** Version bump only for package @next-types/preview
