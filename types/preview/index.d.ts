@@ -495,6 +495,7 @@ interface WorkbencdBackendCacheActionCommon {
 export interface WorkbenchBackendActionForInitDetail {
   appId: string;
   projectId: string;
+  storyboardType: "micro-app" | "theme-template";
   objectId: string;
   rootNode: BuilderRuntimeNode;
   delayBuildTime: number;

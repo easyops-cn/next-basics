@@ -95,6 +95,7 @@ export type BuildAndPushState = "building" | "success" | "fail";
 export interface WorkbenchCacheActionProps {
   appId: string;
   projectId: string;
+  storyboardType: "micro-app" | "theme-template";
   objectId: string;
   rootNode: BuilderRuntimeNode;
   onStoryboardUpdate: (params: StoryboardUpdateParams) => void;
@@ -118,6 +119,7 @@ function LegacyWorkbenchCacheAction(
   {
     appId,
     projectId,
+    storyboardType,
     objectId,
     rootNode,
     onStoryboardUpdate,
@@ -148,6 +150,7 @@ function LegacyWorkbenchCacheAction(
     rootNode,
     objectId,
     delayBuildTime: Number(delayBuildTime),
+    storyboardType,
   });
 
   const setNodesCache = (

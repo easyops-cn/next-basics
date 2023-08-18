@@ -40,6 +40,9 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
   @property({ type: String })
   projectId: string;
 
+  @property({ type: String })
+  storyboardType: "micro-app" | "theme-template";
+
   @property({ attribute: false })
   rootNode: BuilderRuntimeNode;
 
@@ -161,6 +164,7 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
               ref={this._backendRef}
               appId={this.appId}
               projectId={this.projectId}
+              storyboardType={this.storyboardType}
               rootNode={this.rootNode}
               objectId={this.objectId}
               onStoryboardUpdate={this.handleStoryboardUpdate}

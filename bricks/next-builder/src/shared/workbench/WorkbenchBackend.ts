@@ -468,8 +468,7 @@ export default class WorkbenchBackend {
       });
       const result = await StoryboardAssembly({
         projectId: this.baseInfo.projectId,
-        storyboardType: "micro-app",
-        useTheme: true,
+        storyboardType: this.baseInfo.storyboardType || "micro-app",
       });
       await BuildApi_buildAndPush({
         projectId: result.projectId,
