@@ -681,6 +681,7 @@ function TreeNode({
             isFirst={isFirst}
             isLast={isLast}
             actions={actions}
+            useNativeEvent
             onActionClick={onActionClick}
             actionsHidden={actionsHidden}
           />
