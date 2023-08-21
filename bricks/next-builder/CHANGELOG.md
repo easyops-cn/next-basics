@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.255.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.255.5...@next-bricks/next-builder@1.255.6) (2023-08-21)
+
+
+### Bug Fixes
+
+* **workbench-tree:** use native event for mini actions ([647eff0](https://github.com/easyops-cn/next-basics/commit/647eff03f663cd9a4f03b7875209383028e54635))
+
+
+
+
+
 ## [1.255.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.255.4...@next-bricks/next-builder@1.255.5) (2023-08-18)
 
 
