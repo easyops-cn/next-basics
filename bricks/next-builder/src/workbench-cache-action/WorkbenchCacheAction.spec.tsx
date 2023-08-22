@@ -56,6 +56,12 @@ let mockData = {
       },
       type: "brick",
     },
+    {
+      brick: "eo-button",
+      $$uid: 4,
+      instanceId: "brick-d",
+      type: "brick",
+    },
   ],
   edges: [
     {
@@ -69,6 +75,12 @@ let mockData = {
       child: 3,
       mountPoint: "content",
       sort: 1,
+    },
+    {
+      parent: 1,
+      child: 4,
+      mountPoint: "content",
+      sort: 2,
     },
   ],
 };
@@ -215,6 +227,7 @@ describe("WorkbenchWorker", () => {
         bricks: [
           { brick: "brick-b", iid: "brick-b" },
           { brick: "brick-c", iid: "brick-c" },
+          { brick: "eo-button", iid: "brick-d" },
         ],
         type: "bricks",
       },

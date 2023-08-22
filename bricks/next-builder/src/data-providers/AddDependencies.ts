@@ -6,6 +6,7 @@ import {
 import { PackageAloneApi_addDependencies } from "@next-sdk/next-builder-sdk";
 import walk from "../utils/walk";
 import DependCache from "./utils/dependCache";
+import commonBricks from "@next-shared/common-bricks/common-bricks.json";
 
 export interface AddDependenciesParams {
   projectId: string;
@@ -104,14 +105,26 @@ export async function AddDependencies(
             state: item.state ? JSON.parse(item.state) : "",
           },
           (key, value) => {
-            if (
-              (key === "brick" && value?.includes(".")) ||
-              (key === "useProvider" &&
-                typeof value === "string" &&
-                !value.includes("@"))
+            let pkgName: string;
+            if (key === "brick") {
+              if (value?.includes(".")) {
+                pkgName = `${(value as string).split(".")[0]}-NB`;
+              } else {
+                const pkg = Object.entries(commonBricks).find((pkg) =>
+                  pkg[1].includes(value)
+                );
+                if (pkg) {
+                  pkgName = `${pkg[0]}-NB`;
+                }
+              }
+            } else if (
+              key === "useProvider" &&
+              typeof value === "string" &&
+              !value.includes("@")
             ) {
-              usedBricksSet.add(`${(value as string).split(".")[0]}-NB`);
+              pkgName = `${(value as string).split(".")[0]}-NB`;
             }
+            pkgName && usedBricksSet.add(pkgName);
           }
         );
       }

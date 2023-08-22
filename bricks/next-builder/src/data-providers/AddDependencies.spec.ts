@@ -50,6 +50,10 @@ jest.mock("@next-sdk/cmdb-sdk");
           id: "B-007",
           brick: "brick-in-tpl.xxx",
         },
+        {
+          id: "B-008",
+          brick: "eo-button",
+        },
       ],
       edges: [],
     };
@@ -199,6 +203,7 @@ describe("AddDependencies", () => {
           name: "provider-of-use-in-template-NB",
         },
         { actualVersion: null, constraint: "*", name: "brick-in-tpl-NB" },
+        { actualVersion: null, constraint: "*", name: "basic-NB" },
       ],
     });
   });

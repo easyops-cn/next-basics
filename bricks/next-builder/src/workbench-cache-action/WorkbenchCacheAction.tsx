@@ -61,6 +61,7 @@ import { normalizeBuilderNode } from "@next-core/brick-utils";
 import walk from "../utils/walk";
 import { processWithParamsSnippet } from "./processDynamicSnippet";
 import classNames from "classnames";
+import commonBricks from "@next-shared/common-bricks/common-bricks.json";
 
 export interface WorkbenchCacheActionRef {
   manager: BuilderDataManager;
@@ -175,6 +176,13 @@ function LegacyWorkbenchCacheAction(
             node.type === "template" ? "NT" : "NB"
           }`
         );
+      } else {
+        const pkg = Object.entries(commonBricks).find((pkg) =>
+          pkg[1].includes(node.brick as string)
+        );
+        if (pkg) {
+          brickList.add(`${pkg[0]}-NB`);
+        }
       }
     });
     backendInstance.setUsedBrickPackage([...brickList.values()]);
