@@ -27,6 +27,9 @@ export interface BrickOptionItem {
   originBrick?: {
     id?: string;
   };
+  v3Brick?: boolean;
+  source?: string;
+  alias?: string[];
 }
 
 export interface GroupedBricks {

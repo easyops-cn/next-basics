@@ -25,6 +25,9 @@ export interface BrickLibraryItem {
   editorProps?: Record<string, unknown>;
   nodeId?: string;
   $searchTextPool?: string[];
+  v3Brick?: boolean;
+  source?: string;
+  alias?: string[];
 }
 
 export interface GetBrickLibraryParams {
@@ -73,6 +76,9 @@ export async function GetBrickLibrary(
               "editorProps",
               "thumbnail",
               "layerType",
+              "source",
+              "v3Brick",
+              "alias",
             ],
             page_size: 3000,
           },
@@ -150,14 +156,19 @@ export async function GetBrickLibrary(
                 icon: installedBrick.icon,
                 editor: installedBrick.editor,
                 editorProps: installedBrick.editorProps,
-                $searchTextPool: (installedBrick.text
-                  ? (Object.values(installedBrick.text) as string[]).filter(
-                      Boolean
-                    )
-                  : []
-                )
-                  .concat(name)
+                $searchTextPool: []
+                  .concat(
+                    installedBrick.text
+                      ? (Object.values(installedBrick.text) as string[])
+                      : [],
+                    name,
+                    installedBrick.alias
+                  )
+                  .filter(Boolean)
                   .map((text) => text.toLocaleLowerCase()),
+                v3Brick: installedBrick.v3Brick,
+                alias: installedBrick.alias,
+                source: installedBrick.source,
               }
             : {
                 title: getBrickLastName(name),

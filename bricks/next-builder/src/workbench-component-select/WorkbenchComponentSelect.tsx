@@ -8,7 +8,7 @@ import React, {
   useImperativeHandle,
   forwardRef,
 } from "react";
-import { Input, Collapse, Popover } from "antd";
+import { Input, Collapse, Popover, Badge } from "antd";
 import { BrickOptionItem } from "../builder-container/interfaces";
 import {
   suggest,
@@ -23,12 +23,13 @@ import {
   componetSortConf,
   suggestFormBricks,
   otherFormBrick,
+  suggestV3FormBricks,
 } from "./constants";
 import { i18nText, getRuntime } from "@next-core/brick-kit";
 import { Story } from "@next-core/brick-types";
 import { SearchOutlined, SettingFilled } from "@ant-design/icons";
 import { debounce, compact, isEmpty } from "lodash";
-import { GeneralIcon } from "@next-libs/basic-components";
+import { GeneralIcon, Link } from "@next-libs/basic-components";
 import ResizeObserver from "resize-observer-polyfill";
 import { adjustBrickSort, getSnippetsOfBrickMap } from "./processor";
 import styles from "./WorkbenchComponentSelect.module.css";
@@ -39,6 +40,8 @@ import {
 } from "../shared/workbench/WorkbenchTreeDndContext";
 import { TooltipPlacement } from "antd/lib/tooltip";
 import classnames from "classnames";
+import { NS_NEXT_BUILDER, K } from "../i18n/constants";
+import { useTranslation } from "react-i18next";
 
 interface ComponentSelectProps {
   brickList: BrickOptionItem[];
@@ -51,6 +54,7 @@ interface ComponentSelectProps {
     e: React.MouseEvent
   ) => void;
   onDrag?: (isDrag: boolean) => void;
+  onFeedbackClick?: (type: string) => void;
 }
 
 export function setDragImage(
@@ -108,9 +112,11 @@ export function ComponentSelect(
     currentBrick,
     onActionClick,
     onDrag,
+    onFeedbackClick,
   }: ComponentSelectProps,
   ref: React.Ref<ComponentSelectRef>
 ): React.ReactElement {
+  const { t } = useTranslation(NS_NEXT_BUILDER);
   const [filterValue, setFilterValue] = useState<string>("");
   const [curComponentType, setCurComponentType] = useState<string>("");
   const [curComponentList, setCurComponentList] = useState<BrickOptionItem[]>(
@@ -164,7 +170,12 @@ export function ComponentSelect(
         }
         // don't show legacy template
         else if (item.type !== "template") {
-          const key = item.category === "workflow" ? item.category : item.type;
+          const key =
+            item.category === "workflow"
+              ? item.category
+              : item.type === "brick" && item.v3Brick
+              ? "v3Brick"
+              : item.type;
           const brickItem: BrickOptionItem = {
             ...item,
             category: item.category,
@@ -214,7 +225,9 @@ export function ComponentSelect(
 
   useEffect(() => {
     if (!componentList || Object.keys(componentList).length <= 0) return;
-    const [k, v] = Object.entries(componentList)[0];
+    const [k, v] = Object.entries(componentList).sort(
+      (a, b) => componetSortConf[a[0]] - componetSortConf[b[0]]
+    )[0];
     handleChangeTabs(k, v);
   }, [componentList]);
 
@@ -252,17 +265,27 @@ export function ComponentSelect(
                 .sort((a, b) => componetSortConf[a[0]] - componetSortConf[b[0]])
                 // 组件库暂时不展示"片段"这个tab
                 .filter(([k]) => k !== "snippet")
-                .map(([k, v]) => (
-                  <div
-                    onClick={() => handleChangeTabs(k, v)}
-                    key={k}
-                    className={classnames(styles.tabBtn, {
-                      [styles.tabBtnSelected]: curComponentType === k,
-                    })}
-                  >
-                    {i18nTransform[k]}
-                  </div>
-                ))}
+                .map(([k, v]) => {
+                  const tab = (
+                    <div
+                      onClick={() => handleChangeTabs(k, v)}
+                      key={k}
+                      className={classnames(styles.tabBtn, {
+                        [styles.tabBtnSelected]: curComponentType === k,
+                      })}
+                    >
+                      {i18nTransform[k]}
+                    </div>
+                  );
+
+                  return k === "v3Brick" ? (
+                    <Badge key={k} count={t(K.BRICK_CATEGORY_RECOMMENDED)}>
+                      {tab}
+                    </Badge>
+                  ) : (
+                    tab
+                  );
+                })}
             </div>
           )}
           <ComponentList
@@ -274,6 +297,7 @@ export function ComponentSelect(
             isShowSuggest={isShowSuggest}
             onActionClick={onActionClick}
             currentBrick={currentBrick}
+            onFeedbackClick={onFeedbackClick}
           />
         </div>
       </WorkbenchTreeDndContext.Provider>
@@ -282,7 +306,7 @@ export function ComponentSelect(
 }
 
 interface ComponentListProps
-  extends Pick<ComponentSelectProps, "onActionClick"> {
+  extends Pick<ComponentSelectProps, "onActionClick" | "onFeedbackClick"> {
   componentType: string;
   componentList: BrickOptionItem[];
   q: string;
@@ -298,8 +322,10 @@ function ComponentList({
   storyList,
   isShowSuggest = true,
   onActionClick,
+  onFeedbackClick,
   currentBrick,
 }: ComponentListProps): React.ReactElement {
+  const { t } = useTranslation(NS_NEXT_BUILDER);
   const initGroup = useCallback((): groupItem[] => {
     return suggest[componentType]?.length > 0 && isShowSuggest
       ? suggestGroup.concat(defaultGroup[componentType] ?? [])
@@ -382,8 +408,21 @@ function ComponentList({
     }
   };
 
-  const isFormBrick = (brick: string) => {
-    return brick?.startsWith("forms.") || otherFormBrick.includes(brick);
+  const isFormBrick = (componentType: string, currentBrick: string) => {
+    if (componentType === "brick") {
+      const originData = componentList.find(
+        (brick) => brick.id === currentBrick
+      );
+      return (
+        originData?.source === "forms-NB" ||
+        otherFormBrick.includes(currentBrick)
+      );
+    } else if (componentType === "v3Brick") {
+      const originData = componentList.find(
+        (brick) => brick.id === currentBrick
+      );
+      return originData?.source === "form-NB";
+    }
   };
 
   useEffect(() => {
@@ -399,10 +438,12 @@ function ComponentList({
   });
 
   useEffect(() => {
-    if (componentType === "brick" && isFormBrick(currentBrick)) {
+    if (isFormBrick(componentType, currentBrick)) {
       // 如果当前编辑构件是表单项构件，则精确推荐表单相关的构件
+      const suggestBricks =
+        componentType === "brick" ? suggestFormBricks : suggestV3FormBricks;
       setSuggestList(
-        suggestFormBricks.map((item) => {
+        suggestBricks.map((item) => {
           const originData = componentList.find(
             (brick) => brick.id === item.id
           );
@@ -446,6 +487,14 @@ function ComponentList({
 
   return (
     <div ref={refWrapper}>
+      {componentType === "v3Brick" && (
+        <Link
+          className={styles.feedbackLink}
+          onClick={() => onFeedbackClick?.(componentType)}
+        >
+          {t(K.V3_BRICK_FEEDBACK)}
+        </Link>
+      )}
       {group?.every((item) => item.children?.length === 0) &&
       list.length === 0 ? (
         <div className={styles.noDataTips}>No Data</div>
@@ -473,7 +522,10 @@ function ComponentList({
         </Collapse>
       ) : (
         <div
-          className={styles.componentWrapper}
+          className={classNames(styles.componentWrapper, {
+            [styles.brickWrapper]:
+              componentType === "brick" || componentType === "v3Brick",
+          })}
           style={{
             gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
             padding: "0 15px",
@@ -515,7 +567,8 @@ function ComponentGroup({
   return (
     <div
       className={classNames(styles.componentWrapper, {
-        [styles.brickWrapper]: componentType === "brick",
+        [styles.brickWrapper]:
+          componentType === "brick" || componentType === "v3Brick",
       })}
       style={{
         gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,

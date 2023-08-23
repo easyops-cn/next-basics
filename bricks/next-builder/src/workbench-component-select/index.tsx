@@ -65,6 +65,13 @@ export class WorkbenchComponentSelectElement extends UpdatingElement {
     });
   };
 
+  @event({ type: "feedback.click" })
+  feedClickEmit: EventEmitter<{ type: string }>;
+
+  private _handleFeedbackClick = (type: string): void => {
+    this.feedClickEmit.emit({ type });
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -91,6 +98,7 @@ export class WorkbenchComponentSelectElement extends UpdatingElement {
             isShowSuggest={this.isShowSuggest ?? true}
             onActionClick={this._handlerActionClick}
             onDrag={this._handleOnDrag}
+            onFeedbackClick={this._handleFeedbackClick}
           />
         </BrickWrapper>,
         this

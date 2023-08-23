@@ -37,6 +37,8 @@ export async function getStoriesJSON(info?: installInfo) {
         "type",
         "originData.isExport",
         "icon",
+        "v3Brick",
+        "source",
       ],
     });
   }

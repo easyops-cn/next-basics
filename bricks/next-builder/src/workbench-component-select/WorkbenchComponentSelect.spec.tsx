@@ -3,11 +3,23 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import * as brickKit from "@next-core/brick-kit";
 import { WorkbenchComponentSelect } from "./WorkbenchComponentSelect";
+import { act } from "react-dom/test-utils";
 
 jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getCurrentApp: jest.fn(() => ({
     config: { brickLibrarySort: [] },
   })),
+});
+
+jest.mock("@next-libs/basic-components", () => {
+  return {
+    Link: function Link() {
+      return <div>Link</div>;
+    },
+    GeneralIcon: function GeneralIcon() {
+      return <div>GeneralIcon</div>;
+    },
+  };
 });
 
 describe("WorkbenchComponentSelect", () => {
@@ -34,6 +46,7 @@ describe("WorkbenchComponentSelect", () => {
         "折叠容器v2",
         "basic-bricks.fold-brick-v2",
       ],
+      source: "basic-bricks-NB",
     },
     {
       type: "brick",
@@ -50,6 +63,7 @@ describe("WorkbenchComponentSelect", () => {
         "普通下拉选择框",
         "forms.general-select",
       ],
+      source: "forms-NB",
     },
     {
       type: "brick",
@@ -66,6 +80,7 @@ describe("WorkbenchComponentSelect", () => {
         "普通日期选择框",
         "forms.general-date-picker",
       ],
+      source: "forms-NB",
     },
     {
       type: "brick",
@@ -83,6 +98,7 @@ describe("WorkbenchComponentSelect", () => {
         "cmdb 实例下拉框",
         "forms.cmdb-instance-select",
       ],
+      source: "forms-NB",
     },
     {
       type: "brick",
@@ -100,6 +116,28 @@ describe("WorkbenchComponentSelect", () => {
         "普通数字输入框",
         "forms.general-input-number",
       ],
+      source: "forms-NB",
+    },
+    {
+      type: "brick",
+      id: "eo-input",
+      title: "v3 输入框",
+      category: "form-input",
+      description: "v3 输入框",
+      layerType: "brick",
+      icon: {
+        lib: "antd",
+        type: "box",
+      },
+      $searchTextPool: [
+        "v3 输入框",
+        "v3 input",
+        "eo-input",
+        "form.general-input",
+      ],
+      alias: ["form.general-input"],
+      source: "form-NB",
+      v3Brick: true,
     },
     {
       type: "snippet",
@@ -227,6 +265,10 @@ describe("WorkbenchComponentSelect", () => {
       <WorkbenchComponentSelect brickList={brickList} storyList={storyList} />
     );
 
+    act(() => {
+      fireEvent.click(screen.getByText("next-builder:BRICK"));
+    });
+
     const brickElement = screen.getByTitle(
       "折叠容器，只折叠单个内容，支持slot"
     );
@@ -239,16 +281,34 @@ describe("WorkbenchComponentSelect", () => {
   });
 
   it("should work when currentBrick is form brick", async () => {
-    render(
+    const { rerender } = render(
       <WorkbenchComponentSelect
         brickList={brickList}
         storyList={storyList}
-        currentBrick="forms.general-input"
+        currentBrick="forms.general-input-number"
       />
     );
 
-    const brickElement = screen.getAllByTitle("通用的数字输入框");
+    act(() => {
+      fireEvent.click(screen.getByText("next-builder:BRICK"));
+    });
 
+    const brickElement = screen.getAllByTitle("通用的数字输入框");
     expect(brickElement.length).toEqual(2);
+
+    rerender(
+      <WorkbenchComponentSelect
+        brickList={brickList}
+        storyList={storyList}
+        currentBrick="eo-input"
+      />
+    );
+
+    act(() => {
+      fireEvent.click(screen.getByText("next-builder:V3_BRICK"));
+    });
+
+    const v3BrickElement = screen.getAllByTitle("v3 输入框");
+    expect(v3BrickElement.length).toEqual(2);
   });
 });
