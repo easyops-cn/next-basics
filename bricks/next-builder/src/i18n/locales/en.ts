@@ -150,6 +150,9 @@ const locale: Locale = {
   [K.SET_TO_NEW_VALUE]: "Set as",
   [K.BRICK_SUGGEST]: "Suggest",
   [K.BRICK]: "Atom Brick",
+  [K.V3_BRICK]: "Atom Brick (v3)",
+  [K.V3_BRICK_FEEDBACK]:
+    "There is a bug in the brick, or missing the brick? Click here to create an issue!",
   [K.WIDGET]: "Widget",
   [K.SNIPPET]: "Snippet",
   [K.TEMPLATE]: "Template",

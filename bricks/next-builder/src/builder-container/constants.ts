@@ -105,6 +105,89 @@ export const frequentlyUsedBricks: Pick<BrickOptionItem, "type" | "id">[] = [
   },
 ];
 
+export const frequentlyUsedV3Bricks: Pick<BrickOptionItem, "type" | "id">[] = [
+  {
+    type: "brick",
+    id: "eo-micro-view",
+  },
+  {
+    type: "brick",
+    id: "eo-button",
+  },
+  {
+    type: "brick",
+    id: "eo-card",
+  },
+  {
+    type: "brick",
+    id: "eo-easy-view",
+  },
+  {
+    type: "brick",
+    id: "eo-modal",
+  },
+  {
+    type: "brick",
+    id: "eo-drawer",
+  },
+  {
+    type: "brick",
+    id: "eo-dropdown-actions",
+  },
+  {
+    type: "brick",
+    id: "eo-popover",
+  },
+  {
+    type: "brick",
+    id: "eo-form",
+  },
+  {
+    type: "brick",
+    id: "eo-input",
+  },
+  {
+    type: "brick",
+    id: "eo-select",
+  },
+  {
+    type: "brick",
+    id: "eo-radio",
+  },
+  {
+    type: "brick",
+    id: "eo-submit-buttons",
+  },
+  {
+    type: "brick",
+    id: "eo-link",
+  },
+  {
+    type: "brick",
+    id: "eo-table",
+  },
+  {
+    type: "brick",
+    id: "eo-descriptions",
+  },
+  {
+    type: "brick",
+    id: "eo-tag",
+  },
+  {
+    type: "brick",
+    id: "eo-search-bar",
+  },
+  {
+    type: "brick",
+    id: "eo-search",
+  },
+  {
+    type: "brick",
+    id: "eo-image",
+  },
+];
+
 export const frequentlyUsedLayout: Pick<BrickOptionItem, "type" | "id">[] = [
   {
     type: "snippet",

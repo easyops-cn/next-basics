@@ -1,6 +1,9 @@
 import React from "react";
 import i18next from "i18next";
-import { frequentlyUsedBricks } from "../builder-container/constants";
+import {
+  frequentlyUsedBricks,
+  frequentlyUsedV3Bricks,
+} from "../builder-container/constants";
 import { BrickOptionItem } from "../builder-container/interfaces";
 import { K, NS_NEXT_BUILDER } from "../i18n/constants";
 
@@ -14,6 +17,7 @@ export interface BrickSortField {
 }
 
 export const suggest: suggestType = {
+  v3Brick: frequentlyUsedV3Bricks,
   brick: frequentlyUsedBricks,
   layout: [],
   customTemplate: [],
@@ -23,6 +27,7 @@ export const suggest: suggestType = {
 };
 
 export const componetSortConf: Record<string, number> = {
+  v3Brick: 0,
   brick: 1,
   widget: 2,
   snippet: 3,
@@ -34,6 +39,7 @@ export const componetSortConf: Record<string, number> = {
 };
 
 export const i18nTransform: Record<string, string> = {
+  v3Brick: i18next.t(`${NS_NEXT_BUILDER}:${K.V3_BRICK}`),
   brick: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK}`),
   layout: i18next.t(`${NS_NEXT_BUILDER}:${K.LAYOUT}`),
   customTemplate: i18next.t(`${NS_NEXT_BUILDER}:${K.CUSTOMTEMPLATE}`),
@@ -131,6 +137,13 @@ const brickGroup = [
   },
 ];
 
+const v3BrickGroup = [
+  {
+    key: "other",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_OTHER}`),
+  },
+];
+
 const layoutGroup = [
   {
     key: "classic",
@@ -193,6 +206,7 @@ export const suggestGroup: groupItem[] = [
 type componentGroup = Record<string, groupItem[]>;
 
 export const defaultGroup: componentGroup = {
+  v3Brick: v3BrickGroup,
   brick: brickGroup,
   widget: widgetGroup,
   layout: layoutGroup,
@@ -348,6 +362,57 @@ export const suggestFormBricks: Pick<BrickOptionItem, "type" | "id">[] = [
   {
     type: "brick",
     id: "forms.form-modal",
+  },
+];
+
+export const suggestV3FormBricks: Pick<BrickOptionItem, "type" | "id">[] = [
+  {
+    type: "brick",
+    id: "eo-input",
+  },
+  {
+    type: "brick",
+    id: "eo-select",
+  },
+  {
+    type: "brick",
+    id: "eo-radio",
+  },
+  {
+    type: "brick",
+    id: "eo-checkbox",
+  },
+  {
+    type: "brick",
+    id: "eo-switch",
+  },
+  {
+    type: "brick",
+    id: "eo-textarea",
+  },
+  {
+    type: "brick",
+    id: "eo-submit-buttons",
+  },
+  {
+    type: "brick",
+    id: "eo-icon-select",
+  },
+  {
+    type: "brick",
+    id: "eo-upload-image",
+  },
+  {
+    type: "brick",
+    id: "eo-upload-file",
+  },
+  {
+    type: "brick",
+    id: "eo-form-item",
+  },
+  {
+    type: "brick",
+    id: "eo-dynamic-form-item",
   },
 ];
 

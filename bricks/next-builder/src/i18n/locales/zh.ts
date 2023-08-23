@@ -144,6 +144,8 @@ const locale: Locale = {
   [K.SET_TO_NEW_VALUE]: "设为",
   [K.BRICK_SUGGEST]: "推荐",
   [K.BRICK]: "原子构件",
+  [K.V3_BRICK]: "原子构件 (v3)",
+  [K.V3_BRICK_FEEDBACK]: "构件有 BUG，缺少构件？点击我快速提单！",
   [K.WIDGET]: "挂件",
   [K.SNIPPET]: "片段",
   [K.TEMPLATE]: "业务模板",
