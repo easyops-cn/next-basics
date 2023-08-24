@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.256.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.255.6...@next-bricks/next-builder@1.256.0) (2023-08-24)
+
+
+### Bug Fixes
+
+* add dependency support v3 brick ([a71fe98](https://github.com/easyops-cn/next-basics/commit/a71fe9831ff3edc290b11ef532a63fc4db51ce3d))
+* use app config to control v3 brick display ([5047c85](https://github.com/easyops-cn/next-basics/commit/5047c85c64f914bf8aff4203f6cc3dd827e0b282))
+
+
+### Features
+
+* component select support v3 bricks ([6f665f6](https://github.com/easyops-cn/next-basics/commit/6f665f69526a5fc8c853686103c973b297752879))
+
+
+
+
+
 ## [1.255.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.255.5...@next-bricks/next-builder@1.255.6) (2023-08-21)
 
 
