@@ -88,7 +88,7 @@ function transformInfo(
   if (find) {
     return {
       ...brick,
-      title: i18nText(find.text),
+      title: i18nText(find.text) || brick.id,
       description: i18nText(find.description),
       $searchTextPool: (brick.$searchTextPool || []).concat(
         find.text ? Object.values(find.text).filter(Boolean) : []
