@@ -5,9 +5,15 @@ import * as brickKit from "@next-core/brick-kit";
 import { WorkbenchComponentSelect } from "./WorkbenchComponentSelect";
 import { act } from "react-dom/test-utils";
 
-jest.spyOn(brickKit, "getRuntime").mockReturnValue({
+const mockGetRuntime = jest.spyOn(brickKit, "getRuntime");
+
+mockGetRuntime.mockReturnValue({
   getCurrentApp: jest.fn(() => ({
-    config: { brickLibrarySort: [] },
+    config: {
+      brickLibrarySort: [],
+      libraryShowV3Brick: true,
+      showV3BrickFeedback: true,
+    },
   })),
 });
 
@@ -277,7 +283,21 @@ describe("WorkbenchComponentSelect", () => {
       "折叠容器V2"
     );
 
+    expect(screen.getByText("next-builder:V3_BRICK")).toBeInTheDocument();
     expect(screen.getByText("next-builder:WORKFLOW")).toBeInTheDocument();
+  });
+
+  it("should work when libraryShowV3Brick is false", async () => {
+    mockGetRuntime.mockReturnValueOnce({
+      getCurrentApp: jest.fn(() => ({
+        config: { brickLibrarySort: [], libraryShowV3Brick: false },
+      })),
+    });
+    render(
+      <WorkbenchComponentSelect brickList={brickList} storyList={storyList} />
+    );
+
+    expect(screen.queryByText("next-builder:V3_BRICK")).toBeNull();
   });
 
   it("should work when currentBrick is form brick", async () => {

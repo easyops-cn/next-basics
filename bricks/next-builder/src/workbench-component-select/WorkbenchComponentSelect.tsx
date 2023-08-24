@@ -225,9 +225,12 @@ export function ComponentSelect(
 
   useEffect(() => {
     if (!componentList || Object.keys(componentList).length <= 0) return;
-    const [k, v] = Object.entries(componentList).sort(
-      (a, b) => componetSortConf[a[0]] - componetSortConf[b[0]]
-    )[0];
+    const [k, v] = Object.entries(componentList)
+      .sort((a, b) => componetSortConf[a[0]] - componetSortConf[b[0]])
+      .filter(
+        ([k]) =>
+          !["snippet", config.libraryShowV3Brick ? "" : "v3Brick"].includes(k)
+      )[0];
     handleChangeTabs(k, v);
   }, [componentList]);
 
@@ -264,7 +267,13 @@ export function ComponentSelect(
               {Object.entries(componentList)
                 .sort((a, b) => componetSortConf[a[0]] - componetSortConf[b[0]])
                 // 组件库暂时不展示"片段"这个tab
-                .filter(([k]) => k !== "snippet")
+                .filter(
+                  ([k]) =>
+                    ![
+                      "snippet",
+                      config.libraryShowV3Brick ? "" : "v3Brick",
+                    ].includes(k)
+                )
                 .map(([k, v]) => {
                   const tab = (
                     <div
@@ -487,7 +496,7 @@ function ComponentList({
 
   return (
     <div ref={refWrapper}>
-      {componentType === "v3Brick" && (
+      {config.showV3BrickFeedback && componentType === "v3Brick" && (
         <Link
           className={styles.feedbackLink}
           onClick={() => onFeedbackClick?.(componentType)}
