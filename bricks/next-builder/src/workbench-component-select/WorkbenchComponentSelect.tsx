@@ -288,7 +288,16 @@ export function ComponentSelect(
                   );
 
                   return k === "v3Brick" ? (
-                    <Badge key={k} count={t(K.BRICK_CATEGORY_RECOMMENDED)}>
+                    <Badge
+                      style={{
+                        color: "var(--antd-text-color)",
+                        background: "var(--theme-red-color)",
+                        boxShadow: "none",
+                      }}
+                      offset={[-20, -2]}
+                      key={k}
+                      count={t(K.BRICK_CATEGORY_RECOMMENDED)}
+                    >
                       {tab}
                     </Badge>
                   ) : (
