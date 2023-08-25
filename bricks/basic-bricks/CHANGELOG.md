@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.247.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.247.1...@next-bricks/basic-bricks@1.247.2) (2023-08-25)
+
+
+### Bug Fixes
+
+* 挂载后更改fillVertical属性不生效 ([a5f78df](https://github.com/easyops-cn/next-basics/commit/a5f78df72ce85a30dc8280722ba41639a262fcdd))
+
+
+
+
+
 ## [1.247.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.247.0...@next-bricks/basic-bricks@1.247.1) (2023-08-15)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
