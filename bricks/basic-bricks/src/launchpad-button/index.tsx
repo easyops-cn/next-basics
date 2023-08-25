@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement } from "@next-core/brick-kit";
-import { LaunchpadButton } from "./LaunchpadButton";
+import { LaunchpadButton } from "../app-bar/LaunchpadButton/LaunchpadButton";
 
 /**
  * @id basic-bricks.launchpad-button

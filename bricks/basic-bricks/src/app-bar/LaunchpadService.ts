@@ -15,6 +15,7 @@ import {
 } from "@next-sdk/user-service-sdk";
 import { LaunchpadApi_getLaunchpadInfo } from "@next-sdk/micro-app-standalone-sdk";
 import { getRuntime, getAuth } from "@next-core/brick-kit";
+import { HttpAbortError } from "@next-core/brick-http";
 import { pick } from "lodash";
 import i18next from "i18next";
 import { LaunchpadSettings } from "./LaunchpadSettingsContext";
@@ -107,48 +108,57 @@ export class LaunchpadService {
     }
   }
 
-  async fetchLaunchpadInfo(): Promise<boolean> {
+  async fetchLaunchpadInfo(): Promise<void> {
     if (typeof window.cancelIdleCallback === "function") {
       cancelIdleCallback(this.preFetchId);
     } else {
       clearTimeout(this.preFetchId);
     }
-    if (this.isFetching) return false;
+    if (this.isFetching) return;
     this.isFetching = true;
-    const launchpadInfo = await LaunchpadApi_getLaunchpadInfo(null);
+    try {
+      const launchpadInfo = await LaunchpadApi_getLaunchpadInfo(null, {
+        interceptorParams: { ignoreLoadingBar: true },
+      });
 
-    for (const storyboard of launchpadInfo.storyboards) {
-      const app = storyboard.app as unknown as MicroApp;
-      if (app) {
-        if (app.locales) {
-          // Prefix to avoid conflict between brick package's i18n namespace.
-          const ns = `$tmp-${app.id}`;
-          // Support any languages in `app.locales`.
-          Object.entries(app.locales).forEach(([lang, resources]) => {
-            i18next.addResourceBundle(lang, ns, resources);
-          });
-          // Use `app.name` as the fallback `app.localeName`.
-          app.localeName = i18next.getFixedT(null, ns)("name", app.name);
-          // Remove the temporary i18n resource bundles.
-          Object.keys(app.locales).forEach((lang) => {
-            i18next.removeResourceBundle(lang, ns);
-          });
-        } else {
-          app.localeName = app.name;
+      for (const storyboard of launchpadInfo.storyboards) {
+        const app = storyboard.app as unknown as MicroApp;
+        if (app) {
+          if (app.locales) {
+            // Prefix to avoid conflict between brick package's i18n namespace.
+            const ns = `$tmp-${app.id}`;
+            // Support any languages in `app.locales`.
+            Object.entries(app.locales).forEach(([lang, resources]) => {
+              i18next.addResourceBundle(lang, ns, resources);
+            });
+            // Use `app.name` as the fallback `app.localeName`.
+            app.localeName = i18next.getFixedT(null, ns)("name", app.name);
+            // Remove the temporary i18n resource bundles.
+            Object.keys(app.locales).forEach((lang) => {
+              i18next.removeResourceBundle(lang, ns);
+            });
+          } else {
+            app.localeName = app.name;
+          }
         }
       }
-    }
 
-    this.baseInfo = {
-      ...launchpadInfo,
-      settings: launchpadInfo.settings.launchpad as LaunchpadSettings,
-      microApps: launchpadInfo.storyboards
-        .map((storyboard) => storyboard.app)
-        .filter(Boolean) as unknown as MicroApp[],
-    } as unknown as LaunchpadBaseInfo;
-    this.initValue();
-    this.isFetching = false;
-    return true;
+      this.baseInfo = {
+        ...launchpadInfo,
+        settings: launchpadInfo.settings.launchpad as LaunchpadSettings,
+        microApps: launchpadInfo.storyboards
+          .map((storyboard) => storyboard.app)
+          .filter(Boolean) as unknown as MicroApp[],
+      } as unknown as LaunchpadBaseInfo;
+      this.initValue();
+    } catch (e) {
+      if (!(e instanceof HttpAbortError)) {
+        // eslint-disable-next-line no-console
+        console.error("Get launchpad info failed:", e);
+      }
+    } finally {
+      this.isFetching = false;
+    }
   }
 
   getBaseInfo(): LaunchpadBaseInfo {
