@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.247.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.247.3...@next-bricks/basic-bricks@1.247.4) (2023-08-25)
+
+
+### Bug Fixes
+
+* do not abort on route change for loading launchpad ([b18e3b9](https://github.com/easyops-cn/next-basics/commit/b18e3b9f4d85f5910c847a87f9c2be676e7f350f))
+
+
+
+
+
 ## [1.247.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.247.2...@next-bricks/basic-bricks@1.247.3) (2023-08-25)
 
 
