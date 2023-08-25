@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.247.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.247.2...@next-bricks/basic-bricks@1.247.3) (2023-08-25)
+
+
+### Bug Fixes
+
+* catch launchpad error ([68a4a63](https://github.com/easyops-cn/next-basics/commit/68a4a63ad2dfff368efe6b80bd01e9b9361a59ec))
+
+
+
+
+
 ## [1.247.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.247.1...@next-bricks/basic-bricks@1.247.2) (2023-08-25)
 
 
