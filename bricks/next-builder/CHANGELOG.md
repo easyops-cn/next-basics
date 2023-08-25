@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.256.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.256.1...@next-bricks/next-builder@1.256.2) (2023-08-25)
+
+
+### Bug Fixes
+
+* recommend badge style ([95cba83](https://github.com/easyops-cn/next-basics/commit/95cba8383474c1882711643b3eaa65a61f01a2a0))
+
+
+
+
+
 ## [1.256.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.256.0...@next-bricks/next-builder@1.256.1) (2023-08-24)
 
 
