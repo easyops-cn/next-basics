@@ -15,7 +15,6 @@ import {
 } from "@next-sdk/user-service-sdk";
 import { LaunchpadApi_getLaunchpadInfo } from "@next-sdk/micro-app-standalone-sdk";
 import { getRuntime, getAuth } from "@next-core/brick-kit";
-import { HttpAbortError } from "@next-core/brick-http";
 import { pick } from "lodash";
 import i18next from "i18next";
 import { LaunchpadSettings } from "./LaunchpadSettingsContext";
@@ -119,6 +118,7 @@ export class LaunchpadService {
     try {
       const launchpadInfo = await LaunchpadApi_getLaunchpadInfo(null, {
         interceptorParams: { ignoreLoadingBar: true },
+        noAbortOnRouteChange: true,
       });
 
       for (const storyboard of launchpadInfo.storyboards) {
@@ -152,10 +152,9 @@ export class LaunchpadService {
       } as unknown as LaunchpadBaseInfo;
       this.initValue();
     } catch (e) {
-      if (!(e instanceof HttpAbortError)) {
-        // eslint-disable-next-line no-console
-        console.error("Get launchpad info failed:", e);
-      }
+      // eslint-disable-next-line no-console
+      console.error("Get launchpad info failed:", e);
+      this.fetched = false;
     } finally {
       this.isFetching = false;
     }
