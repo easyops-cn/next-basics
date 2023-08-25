@@ -145,9 +145,6 @@ export class GeneralCardElement extends UpdatingElement {
   }
 
   connectedCallback(): void {
-    if (this.fillVertical) {
-      this._mountPoint.style.height = "100%";
-    }
     this.listenOnClick();
     this._render();
   }
@@ -188,6 +185,9 @@ export class GeneralCardElement extends UpdatingElement {
 
   protected _render(): void {
     if (this.isConnected) {
+      if (this.fillVertical) {
+        this._mountPoint.style.height = "100%";
+      }
       for (const button of this.operationButtons) {
         this.idEventNameMap.set(button.id, button.eventName);
         if (button.needData) {
