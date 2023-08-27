@@ -49,10 +49,10 @@ function getFunctionDebugger(): FunctionDebugger {
   return functionDebugger;
 }
 
-export function RunStoryboardFunctionTests({
+export async function RunStoryboardFunctionTests({
   functions,
   keepProcessedCoverage,
-}: RunStoryboardFunctionTestsParams): RunStoryboardFunctionTestsResult {
+}: RunStoryboardFunctionTestsParams): Promise<RunStoryboardFunctionTestsResult> {
   const { registerStoryboardFunctions, run, getCoverage } =
     getFunctionDebugger();
   registerStoryboardFunctions(functions);
@@ -60,7 +60,13 @@ export function RunStoryboardFunctionTests({
   let passed = 0;
   const coverageByFunction: Record<string, CoverageReport> = {};
   const validCoverages: CoverageCounts[] = [];
-  for (const fn of functions) {
+
+  let cursor = 0;
+  async function one(): Promise<void> {
+    if (cursor === functions.length) {
+      return;
+    }
+    const fn = functions[cursor];
     let fnTotal = 0;
     let fnPassed = 0;
     const list: boolean[] = [];
@@ -96,7 +102,16 @@ export function RunStoryboardFunctionTests({
     } else {
       coverageByFunction[fn.name] = null;
     }
+    cursor++;
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(one());
+      }, 0);
+    });
   }
+
+  await one();
+
   return {
     coverage: accumulateCoverageReport(validCoverages, {
       total,
