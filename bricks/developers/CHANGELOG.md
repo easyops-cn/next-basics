@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.365.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.11...@next-bricks/developers@1.365.12) (2023-08-29)
+
+
+### Bug Fixes
+
+* brick document properties/events/methods 兼容 v3 brick ([d5608f6](https://github.com/easyops-cn/next-basics/commit/d5608f670b1f512feff8366650d1eb30a12cb72c))
+
+
+
+
+
 ## [1.365.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.10...@next-bricks/developers@1.365.11) (2023-08-15)
 
 **Note:** Version bump only for package @next-bricks/developers
