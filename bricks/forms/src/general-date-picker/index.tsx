@@ -8,7 +8,7 @@ import {
 } from "@next-core/brick-kit";
 import { GeneralDatePicker } from "./GeneralDatePicker";
 import { FormItemElement } from "@next-libs/forms";
-import { DisabledDateType } from "../interfaces";
+import { DisabledDateType, PickerMode } from "../interfaces";
 
 /**
  * @id forms.general-date-picker
@@ -128,7 +128,14 @@ export class GeneralDatePickerElement extends FormItemElement {
    * @group advanced
    */
   @property({ attribute: false })
-  picker?: "date" | "week" = "date";
+  picker?: PickerMode = "date";
+
+  /**
+   * @description 不可选择未来日期,优先级高于disabledDate
+   * @group advanced
+   */
+  @property({ type: Boolean })
+  disabledFutureDate?: boolean;
 
   /**
    * @description 不可选择的日期
@@ -136,6 +143,13 @@ export class GeneralDatePickerElement extends FormItemElement {
    */
   @property({ attribute: false })
   disabledDate?: DisabledDateType;
+
+  /**
+   * @description 快速选项
+   * @group advanced
+   */
+  @property({ type: Boolean })
+  useFastSelectBtn?: boolean;
 
   /* =========================== Group: style =========================== */
 
@@ -199,6 +213,8 @@ export class GeneralDatePickerElement extends FormItemElement {
             picker={this.picker}
             disabledDate={this.disabledDate}
             disabled={this.disabled}
+            disabledFutureDate={this.disabledFutureDate}
+            useFastSelectBtn={this.useFastSelectBtn}
           />
         </BrickWrapper>,
         this

@@ -7,6 +7,7 @@ import {
   GeneralDatePicker,
   InternalStateDatePicker,
 } from "./GeneralDatePicker";
+import { truncate } from "fs/promises";
 
 describe("GeneralDatePicker", () => {
   let clock: InstalledClock;
@@ -76,6 +77,109 @@ describe("GeneralDatePicker", () => {
     expect(
       wrapper.find(InternalStateDatePicker).prop("value").format("YYYY-ww周")
     ).toBe("2020-20周");
+  });
+  it("should update picker=date", () => {
+    const wrapper = mount(
+      <GeneralDatePicker
+        value="2023-08-29"
+        picker="date"
+        disabledFutureDate={true}
+      />
+    );
+    expect(
+      wrapper.find(InternalStateDatePicker).prop("value").format("YYYY-MM-DD")
+    ).toBe("2023-08-29");
+    expect(wrapper.find(".pre").length).toBe(0);
+
+    wrapper.setProps({
+      useFastSelectBtn: true,
+    });
+    wrapper.update();
+    wrapper.find(".pre").simulate("click");
+    expect(wrapper.find(DatePicker).prop("value").format("YYYY-MM-DD")).toBe(
+      "2023-08-28"
+    );
+    wrapper.find(".next").simulate("click");
+    expect(wrapper.find(DatePicker).prop("value").format("YYYY-MM-DD")).toBe(
+      "2023-08-29"
+    );
+    wrapper.find(".current").simulate("click");
+  });
+
+  it("should update picker=week", () => {
+    const wrapper = mount(
+      <GeneralDatePicker
+        value="2023-31周"
+        picker="week"
+        disabledFutureDate={true}
+        useFastSelectBtn={true}
+      />
+    );
+    expect(
+      wrapper.find(InternalStateDatePicker).prop("value").format("gggg-ww周")
+    ).toBe("2023-31周");
+
+    wrapper.find(".pre").simulate("click");
+    wrapper.find(".current").simulate("click");
+    wrapper.find(".next").simulate("click");
+  });
+  it("should update picker=quarter", () => {
+    const wrapper = mount(
+      <GeneralDatePicker
+        value="2023-第1季度"
+        picker="quarter"
+        disabledFutureDate={true}
+        useFastSelectBtn={true}
+      />
+    );
+    expect(
+      wrapper.find(InternalStateDatePicker).prop("value").format("YYYY-第Q季度")
+    ).toBe("2023-第1季度");
+    expect(
+      wrapper
+        .find(DatePicker)
+        .prop("dropdownClassName")
+        .includes("quarterPicker")
+    ).toBeTruthy();
+
+    wrapper.find(".pre").simulate("click");
+    wrapper.find(".current").simulate("click");
+    wrapper.find(".next").simulate("click");
+  });
+  it("should update picker=month", () => {
+    const wrapper = mount(
+      <GeneralDatePicker
+        value="2023-02"
+        picker="month"
+        disabledFutureDate={true}
+        useFastSelectBtn={true}
+      />
+    );
+    expect(
+      wrapper.find(InternalStateDatePicker).prop("value").format("YYYY-MM月")
+    ).toBe("2023-02月");
+
+    wrapper.find(".pre").simulate("click");
+    wrapper.find(".current").simulate("click");
+    wrapper.find(".next").simulate("click");
+  });
+
+  it("should update picker=year", () => {
+    const wrapper = mount(
+      <GeneralDatePicker
+        value="2023"
+        picker="year"
+        disabledFutureDate={true}
+        useFastSelectBtn={true}
+      />
+    );
+    expect(
+      wrapper.find(InternalStateDatePicker).prop("value").format("YYYY")
+    ).toBe("2023");
+
+    wrapper.find(".pre").simulate("click");
+    wrapper.find(".current").simulate("click");
+    wrapper.find(".next").simulate("click");
   });
 
   describe("test disabled", () => {
