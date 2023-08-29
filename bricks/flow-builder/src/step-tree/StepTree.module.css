@@ -1,9 +1,25 @@
+.searchBox,
+[data-override-theme="light"] .searchBox {
+  --search-box-background: #fff;
+}
+html[data-theme="dark-v2"] .searchBox,
+[data-override-theme="dark-v2"] .searchBox {
+  --search-box-background: #181818;
+}
+
 .searchBox {
   position: sticky;
   z-index: 999;
   top: 0;
-  background-color: rgb(37, 37, 38);
+  background-color: var(--search-box-background);
   padding: 5px 10px 10px;
+  :global(.ant-input-affix-wrapper) {
+    background-color: var(--search-box-background);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    :global(input.ant-input) {
+      background-color: var(--search-box-background);
+    }
+  }
 }
 
 .placeholder {
