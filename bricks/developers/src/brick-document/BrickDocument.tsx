@@ -26,6 +26,29 @@ import { TypeDescItem } from "../interfaces";
 import * as gfm from "remark-gfm";
 import { collectSharedTypeList } from "./processor";
 
+interface V3StoryDocEvent
+  extends Pick<StoryDocEvent, "description" | "deprecated"> {
+  name?: string;
+  detail?: {
+    type?: string;
+    description?: string;
+  };
+}
+
+interface V3StoryDocMethod
+  extends Pick<StoryDocMethod, "name" | "description" | "deprecated"> {
+  params: {
+    name: string;
+    type?: string;
+    description?: string;
+    isRestElement?: boolean;
+  }[];
+  returns?: {
+    type?: string;
+    description?: string;
+  };
+}
+
 function flatten(text: any, child: any): any {
   return typeof child === "string"
     ? text + child
@@ -43,6 +66,7 @@ export interface BrickDocumentProps
   extends Pick<BrickBookProps, "storyId" | "storyType"> {
   doc: StoryDoc | null;
   renderLink?: boolean;
+  v3Brick?: boolean;
 }
 
 export function BrickDocument({
@@ -50,11 +74,16 @@ export function BrickDocument({
   storyType: brickType,
   doc,
   renderLink = true,
+  v3Brick,
 }: BrickDocumentProps): React.ReactElement {
   const { t } = useTranslation(NS_DEVELOPERS);
   const [brickDoc, setBrickDoc] = useState<StoryDoc>(null);
   const [rotate, setRotate] = useState(180);
   const [interfaceIds, setInterfaceIds] = useState([]);
+
+  const isV3Brick = <V2Doc, V3Doc>(event: V2Doc | V3Doc): event is V3Doc => {
+    return v3Brick;
+  };
 
   const presentedSharedDescList = useMemo(
     () => collectSharedTypeList(doc),
@@ -208,6 +237,7 @@ export function BrickDocument({
       case "detail":
       case "type":
       case "params":
+      case "returns":
         return renderTypeAnnotation(value[column.key]);
       case "description":
       case "change":
@@ -291,16 +321,14 @@ export function BrickDocument({
       },
     ];
 
-    return (
-      history && (
-        <>
-          <details>
-            <summary>History</summary>
-            {renderTable(columns, history)}
-          </details>
-        </>
-      )
-    );
+    return history?.length ? (
+      <>
+        <details>
+          <summary>History</summary>
+          {renderTable(columns, history)}
+        </details>
+      </>
+    ) : null;
   };
 
   const renderEnum = (enums: StoryDocEnum): React.ReactElement => {
@@ -504,17 +532,17 @@ export function BrickDocument({
       .flatten()
       .value();
 
-    return (
-      sortedProperties && (
-        <>
-          <h1>Properties</h1>
-          {renderTable(columns, sortedProperties)}
-        </>
-      )
-    );
+    return sortedProperties?.length ? (
+      <>
+        <h1>Properties</h1>
+        {renderTable(columns, sortedProperties)}
+      </>
+    ) : null;
   };
 
-  const renderEvents = (events: StoryDocEvent[]): React.ReactElement => {
+  const renderEvents = (
+    events: StoryDocEvent[] | V3StoryDocEvent[]
+  ): React.ReactElement => {
     const columns = [
       { title: "name", key: "name" },
       {
@@ -527,35 +555,52 @@ export function BrickDocument({
     // 文档中事件的 type 转成 name 字段统一展示
     const processedEvents = events?.map((item) => ({
       ...omit(item, ["type"]),
-      name: item.type,
+      name: isV3Brick<StoryDocEvent, V3StoryDocEvent>(item)
+        ? item.name
+        : item.type,
+      detail: isV3Brick<StoryDocEvent, V3StoryDocEvent>(item)
+        ? item.detail?.type
+        : item.detail,
     }));
-    return (
-      processedEvents && (
-        <>
-          <h1>Events</h1>
-          {renderTable(columns, processedEvents)}
-        </>
-      )
-    );
+    return processedEvents?.length ? (
+      <>
+        <h1>Events</h1>
+        {renderTable(columns, processedEvents)}
+      </>
+    ) : null;
   };
 
-  const renderMethods = (methods: StoryDocMethod[]): React.ReactElement => {
+  const renderMethods = (
+    methods: StoryDocMethod[] | V3StoryDocMethod[]
+  ): React.ReactElement => {
     const columns = [
       { title: "name", key: "name" },
       {
         title: "params",
         key: "params",
       },
+      ...(v3Brick ? [{ title: "returns", key: "returns" }] : []),
       { title: "description", key: "description" },
     ];
-    return (
-      methods && (
-        <>
-          <h1>Methods</h1>
-          {renderTable(columns, methods)}
-        </>
-      )
-    );
+    const processedMethods = methods?.map((item) => ({
+      ...item,
+      params: isV3Brick<StoryDocMethod, V3StoryDocMethod>(item)
+        ? item.params
+            ?.map((param) =>
+              param.type ? `${param.name}: ${param.type}` : param.name
+            )
+            .join(", ")
+        : (item as any).params,
+      returns: isV3Brick<StoryDocMethod, V3StoryDocMethod>(item)
+        ? item.returns?.type
+        : undefined,
+    }));
+    return processedMethods?.length ? (
+      <>
+        <h1>Methods</h1>
+        {renderTable(columns, processedMethods)}
+      </>
+    ) : null;
   };
 
   const renderSlots = (slots: StoryDocSlot[]): React.ReactElement => {
@@ -563,14 +608,16 @@ export function BrickDocument({
       { title: "name", key: "name" },
       { title: "description", key: "description" },
     ];
-    return (
-      slots && (
-        <>
-          <h1>Slots</h1>
-          {renderTable(columns, slots)}
-        </>
-      )
-    );
+    const processedSlots = slots?.map((item) => ({
+      ...item,
+      name: item.name ?? "(default)",
+    }));
+    return processedSlots?.length ? (
+      <>
+        <h1>Slots</h1>
+        {renderTable(columns, processedSlots)}
+      </>
+    ) : null;
   };
 
   const renderSharedContent = (

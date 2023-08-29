@@ -2,6 +2,8 @@ import React from "react";
 import { mount } from "enzyme";
 import { Empty } from "antd";
 import { BrickDocument } from "./BrickDocument";
+import * as brickKit from "@next-core/brick-kit";
+import { pick } from "lodash";
 
 const doc = {
   id: "presentational-bricks.calendar",
@@ -340,7 +342,104 @@ const doc = {
     },
   ],
 };
-import * as brickKit from "@next-core/brick-kit";
+
+const v3Doc = {
+  id: "eo-form",
+  slots: [
+    {
+      description: "表单内容",
+      name: null,
+    },
+    {
+      description: "操作区",
+      name: "toolbar",
+    },
+  ],
+  properties: [
+    {
+      description: "布局方式",
+      name: "layout",
+      type: "Layout",
+    },
+    {
+      description: "表单组件尺寸",
+      name: "size",
+      type: "ComponentSize",
+    },
+    {
+      attribute: false,
+      name: "formStyle",
+      type: "React.CSSProperties",
+    },
+  ],
+  events: [
+    {
+      description: "表单值变更事件",
+      detail: {
+        description: null,
+        type: "Record<string, unknown>",
+      },
+      name: "values.change",
+    },
+    {
+      description: "表单验证成功时触发事件",
+      detail: {
+        type: "Record<string, unknown>",
+      },
+      name: "validate.success",
+    },
+    {
+      description: "表单验证报错时触发事件",
+      detail: {
+        type: "MessageBody[]",
+      },
+      name: "validate.error",
+    },
+  ],
+  methods: [
+    {
+      description: "表单校验方法",
+      name: "validate",
+      params: [],
+      returns: {
+        type: "boolean | Record<string, unknown>",
+      },
+    },
+    {
+      description: "表单设置值方法",
+      name: "setInitValue",
+      params: [
+        {
+          name: "values",
+          type: "Record<string, unknown>",
+        },
+      ],
+      returns: null,
+    },
+    {
+      description: "表单重置值方法",
+      name: "resetFields",
+      params: [
+        {
+          name: "name",
+          type: "string",
+        },
+      ],
+      returns: null,
+    },
+    {
+      description: "获取表单值方法",
+      name: "getFieldsValue",
+      params: [
+        {
+          name: "name",
+          type: "string",
+        },
+      ],
+      returns: null,
+    },
+  ],
+};
 
 jest.mock("@next-core/brick-kit");
 
@@ -361,12 +460,20 @@ describe("BrickDocument", () => {
     await (global as any).flushPromises();
 
     expect(wrapper).toBeTruthy();
+
+    wrapper.setProps({
+      doc: pick(doc, "id"),
+    });
+    wrapper.update();
+    await (global as any).flushPromises();
+    expect(wrapper.find(".brickDocCard")).toBeTruthy();
   });
 
   it("should show up empty when docs equal to null", async () => {
     const wrapper = mount(<BrickDocument {...props} doc={null} />);
     await (global as any).flushPromises();
     expect(wrapper.find(Empty).length).toBe(1);
+    wrapper.find("Button").invoke("onClick")(null);
   });
 
   it("should show up empty when docs equal to null when doc not found", async () => {
@@ -375,5 +482,28 @@ describe("BrickDocument", () => {
     );
     await (global as any).flushPromises();
     expect(wrapper.find(Empty).length).toBe(1);
+  });
+});
+
+describe("V3 BrickDocument", () => {
+  const props = {
+    storyId: "eo-form",
+    storyType: "bricks",
+  };
+  it("should work", async () => {
+    const wrapper = mount(
+      <BrickDocument {...props} v3Brick={true} doc={v3Doc} />
+    );
+    await (global as any).flushPromises();
+
+    // properties
+    expect(wrapper.find("table").at(0).find("tbody tr").length).toBe(3);
+    // events
+    expect(wrapper.find("table").at(1).find("tbody tr").length).toBe(3);
+    // methods
+    expect(wrapper.find("table").at(2).find("tbody tr").length).toBe(4);
+    expect(wrapper.find("table").at(2).find("thead th").length).toBe(4);
+    // slots
+    expect(wrapper.find("table").at(3).find("tbody tr").length).toBe(2);
   });
 });

@@ -13,7 +13,7 @@ export function collectSharedTypeList(doc: StoryDoc | null): TypeDescItem[] {
 
   doc?.properties?.forEach((item) => {
     sharedTypeDescList.forEach((row) => {
-      if (item.type.includes(row.type)) {
+      if (item.type?.includes(row.type)) {
         typeSet.add(row);
       }
     });
