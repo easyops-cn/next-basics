@@ -167,6 +167,7 @@ export function BrickBook({
               storyType={storyType}
               doc={story?.doc as StoryDoc}
               renderLink={renderDocLink}
+              v3Brick={story?.v3Brick}
             />
           ) : brickDoc ? (
             // 兼容第一版构件文档（docs.jsons)
@@ -175,6 +176,7 @@ export function BrickBook({
               storyType={storyType}
               doc={brickDoc}
               renderLink={renderDocLink}
+              v3Brick={story?.v3Brick}
             />
           ) : (
             // 兼容最老的一般文档（手写markdown）
