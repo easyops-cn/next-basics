@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.274.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.273.18...@next-bricks/forms@1.274.0) (2023-08-30)
+
+
+### Features
+
+* 日期选择器，支持、、、快速选择 ([7875986](https://github.com/easyops-cn/next-basics/commit/787598637c2fc0d4be6ba2de7e6f995445f32ebb))
+
+
+
+
+
 ## [1.273.18](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.273.17...@next-bricks/forms@1.273.18) (2023-08-15)
 
 **Note:** Version bump only for package @next-bricks/forms
