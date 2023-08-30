@@ -16,6 +16,7 @@ export interface GeneralCardProps {
   verticalCenter?: boolean;
   isFixedFooter?: boolean;
   compactMode?: boolean;
+  cardContentWrapperStyle?: React.CSSProperties;
 }
 
 export function GeneralCard({
@@ -27,6 +28,7 @@ export function GeneralCard({
   verticalCenter,
   isFixedFooter,
   compactMode,
+  cardContentWrapperStyle,
 }: GeneralCardProps): React.ReactElement {
   const [paddingBottom, setPaddingBottom] = useState(0);
   const [fixedStyle, setFixedStyle] = useState({});
@@ -129,16 +131,17 @@ export function GeneralCard({
       })}
     >
       <div
-        style={
-          verticalCenter
+        style={{
+          ...(verticalCenter
             ? {
                 height: "100%",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
               }
-            : {}
-        }
+            : {}),
+          ...(cardContentWrapperStyle || {}),
+        }}
       >
         <slot id="contentSlot" name="content" />
       </div>
