@@ -5,6 +5,10 @@ import {
 } from "./RunStoryboardFunctionTests";
 
 describe("RunStoryboardFunctionTests", () => {
+  beforeAll(() => {
+    jest.useRealTimers();
+  });
+
   it.each<[RunStoryboardFunctionTestsParams, RunStoryboardFunctionTestsResult]>(
     [
       [
@@ -186,7 +190,7 @@ describe("RunStoryboardFunctionTests", () => {
                 list: [true, false],
               },
             },
-            invalidFn: null,
+            invalidFn: null as any,
             noTests: {
               percentage: 0,
               stats: {
