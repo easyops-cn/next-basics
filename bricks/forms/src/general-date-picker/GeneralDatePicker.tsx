@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
-import Icon from "@ant-design/icons";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import Icon, { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { DatePicker } from "antd";
 import moment, { Moment } from "moment";
 import { BrickIcon } from "@next-core/brick-icons";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
-import { DisabledDateType } from "../interfaces";
+import { DisabledDateType, PickerMode } from "../interfaces";
 import classNames from "classnames";
 import style from "./GeneralDatePicker.module.css";
 
@@ -14,8 +14,10 @@ interface InternalStateDatePickerProps {
   showTime?: boolean;
   inputBoxStyle?: React.CSSProperties;
   format?: string;
-  picker?: "date" | "week";
+  picker?: PickerMode;
   disabledDate?: DisabledDateType;
+  useFastSelectBtn?: boolean;
+  disabledFutureDate?: boolean;
   disabled?: boolean;
   onChange?: (value: Moment | null, dateString: string) => void;
   onOk?: (date: Moment) => void;
@@ -33,6 +35,9 @@ interface FieldSetAndRanges {
   fieldSet: Set<number>;
   ranges: [number, number][];
 }
+type PickerModeMap = {
+  [K in PickerMode]: string[];
+};
 
 const getFieldSetAndRanges = (
   expression: string | number
@@ -90,6 +95,8 @@ export function InternalStateDatePicker(
     showTime,
     inputBoxStyle,
     disabledDate,
+    disabledFutureDate,
+    useFastSelectBtn,
     placeholder,
     disabled,
     onChange,
@@ -158,6 +165,10 @@ export function InternalStateDatePicker(
     });
   };
 
+  const handleDisabledFutureDate = (date: Moment): boolean => {
+    return date && date > moment();
+  };
+
   const handleDisabledTime = (date: Moment) => {
     if (!date) return;
     const curYear = date.year();
@@ -223,25 +234,143 @@ export function InternalStateDatePicker(
   };
 
   const isDatePicker = picker === "date";
+  const isQuarterPicker = picker === "quarter";
+
+  const PickerBtn = useCallback(() => {
+    const strMap: PickerModeMap = {
+      date: ["上日", "今日", "下日"],
+      week: ["上周", "本周", "下周"],
+      month: ["上月", "本月", "下月"],
+      quarter: ["上季度", "本季度", "下季度"],
+      year: ["上年", "今年", "下年"],
+    };
+    const strs = strMap[picker];
+    const currentDate = value || moment();
+    const handlePreTime = () => {
+      let preDate: moment.Moment;
+      switch (picker) {
+        case "date":
+          preDate = currentDate.clone().subtract(1, "days");
+          break;
+        case "week":
+          preDate = currentDate.clone().subtract(1, "weeks");
+          break;
+        case "month":
+          preDate = currentDate.clone().subtract(1, "months");
+          break;
+        case "quarter":
+          preDate = currentDate.clone().subtract(1, "quarters");
+          break;
+        case "year":
+          preDate = currentDate.clone().subtract(1, "years");
+          break;
+        default:
+          preDate = currentDate;
+          break;
+      }
+      setValue(preDate);
+    };
+    const handleCurTime = () => {
+      let curDate: moment.Moment;
+      switch (picker) {
+        case "date":
+          curDate = moment();
+          break;
+        case "week":
+          curDate = moment().startOf("week");
+          break;
+        case "month":
+          curDate = moment();
+          break;
+        case "quarter":
+          curDate = moment().startOf("quarter");
+          break;
+        case "year":
+          curDate = moment();
+          break;
+        default:
+          curDate = currentDate;
+          break;
+      }
+      setValue(curDate);
+    };
+    const handleNextTime = () => {
+      let nextDate: moment.Moment;
+      switch (picker) {
+        case "date":
+          nextDate = currentDate.clone().add(1, "days");
+          break;
+        case "week":
+          nextDate = currentDate.clone().add(1, "weeks");
+          break;
+        case "month":
+          nextDate = currentDate.clone().add(1, "months");
+          break;
+        case "quarter":
+          nextDate = currentDate.clone().add(1, "quarters");
+          break;
+        case "year":
+          nextDate = currentDate.clone().add(1, "years");
+          break;
+        default:
+          nextDate = currentDate;
+          break;
+      }
+      setValue(nextDate);
+    };
+
+    return (
+      <div className={style.pickerBtnWrap}>
+        <div className={style.pre} onClick={() => handlePreTime()}>
+          <LeftOutlined />
+          <span>{strs[0]}</span>
+        </div>
+        <div className={style.current} onClick={() => handleCurTime()}>
+          {strs[1]}
+        </div>
+        <div
+          className={classNames({
+            [style.next]: true,
+            [style.nextDisabled]:
+              disabledFutureDate &&
+              handleDisabledFutureDate(
+                currentDate.clone().add(1, picker === "date" ? "days" : picker)
+              ),
+          })}
+          onClick={() => handleNextTime()}
+        >
+          <span>{strs[2]}</span>
+          <RightOutlined />
+        </div>
+      </div>
+    );
+  }, [value, picker, disabledFutureDate]);
 
   return (
-    <DatePicker
-      value={value}
-      dropdownClassName={classNames({
-        [style.confirmDisabled]: confirmDisabled,
-      })}
-      format={format}
-      showTime={isDatePicker ? showTime : undefined}
-      onChange={onChange}
-      style={inputBoxStyle}
-      placeholder={placeholder}
-      onOk={onOk}
-      suffixIcon={<Icon component={() => <BrickIcon icon="calendar" />} />}
-      picker={picker}
-      disabledDate={disabledDate && handleDisabledDate}
-      disabledTime={disabledDate && handleDisabledTime}
-      disabled={disabled}
-    />
+    <div className={style.pickerWrap}>
+      <DatePicker
+        value={value}
+        dropdownClassName={classNames({
+          [style.quarterPicker]: isQuarterPicker,
+          [style.confirmDisabled]: confirmDisabled,
+        })}
+        format={format}
+        showTime={isDatePicker ? showTime : undefined}
+        onChange={onChange}
+        style={inputBoxStyle}
+        placeholder={placeholder}
+        onOk={onOk}
+        suffixIcon={<Icon component={() => <BrickIcon icon="calendar" />} />}
+        picker={picker}
+        disabledDate={
+          (disabledFutureDate && handleDisabledFutureDate) ||
+          (disabledDate && handleDisabledDate)
+        }
+        disabledTime={disabledDate && handleDisabledTime}
+        disabled={disabled}
+      />
+      {useFastSelectBtn && <PickerBtn />}
+    </div>
   );
 }
 
@@ -249,8 +378,15 @@ export function GeneralDatePicker(
   props: GeneralDatePickerProps
 ): React.ReactElement {
   const { name, formElement, value, picker, ...restProps } = props;
+  const PickerFormatMap = {
+    date: "YYYY-MM-DD",
+    week: "gggg-ww周",
+    month: "YYYY-MM月",
+    quarter: "YYYY-第Q季度",
+    year: "YYYY",
+  };
   const isDatePicker = picker === "date";
-  const format = props.format || (isDatePicker ? "YYYY-MM-DD" : "gggg-ww周");
+  const format = props.format || PickerFormatMap[picker];
 
   const handleChange = (date: moment.Moment, dateString: string): void => {
     props.onChange?.(dateString);
@@ -259,7 +395,6 @@ export function GeneralDatePicker(
   const handleOk = (date: moment.Moment): void => {
     props.onOk?.(date?.format(props.format));
   };
-
   return (
     <FormItemWrapper {...props}>
       <InternalStateDatePicker

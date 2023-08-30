@@ -8,7 +8,7 @@ module.exports = sizeLimit({
     "presentational-bricks": "128 KB",
     "brick-visualization": "435 KB",
     "next-builder": "58 KB",
-    forms: "90 KB",
+    forms: "95 KB",
   },
   lazyBricks: {
     "*": "50 KB",

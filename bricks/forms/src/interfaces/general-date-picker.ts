@@ -9,3 +9,4 @@ export interface DisabledDate {
 }
 
 export type DisabledDateType = DisabledDate | DisabledDate[];
+export type PickerMode = "date" | "week" | "month" | "year" | "quarter";
