@@ -24,6 +24,10 @@ describe("forms.general-cascader", () => {
     document.body.removeChild(element);
     expect(unmountComponentAtNode).toBeCalled();
 
+    props.dropdownVisibleChange();
+    await (global as any).flushPromises();
+    expect(spyOnDispatch).toBeCalled();
+
     props.optionsChange([{ label: "test", value: 1 }], "test");
     await (global as any).flushPromises();
     expect(spyOnDispatch).lastCalledWith(

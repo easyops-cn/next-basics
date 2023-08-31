@@ -10,7 +10,7 @@ import {
 import { FormItemElement } from "@next-libs/forms";
 import { GeneralCascader, GeneralCascaderProps } from "./GeneralCascader";
 import { CascaderOptionType } from "antd/lib/cascader";
-import { ProcessedOptionData } from "../interfaces";
+import { ProcessedOptionData, selectedDataType } from "../interfaces";
 
 type popupPlacementType = "bottomLeft" | "bottomRight" | "topLeft" | "topRight";
 type sizeType = "large" | "default" | "small";
@@ -211,6 +211,17 @@ export class GeneralCascaderElement extends FormItemElement {
   limit = 50;
 
   /**
+   * @group basic
+   * @required false
+   * @default false
+   * @description （单选时生效）当此项为 true 时，点选每级菜单选项值都会发生变化
+   */
+  @property({
+    attribute: false,
+  })
+  changeOnSelect = false;
+
+  /**
    * @detail {value: string[], selectedOptions: CascaderOptionType[]}
    * @description 级联选择项输入变化时触发，value 为选择的值，selectedOptions 为选择的值所对应的 options
    */
@@ -218,7 +229,7 @@ export class GeneralCascaderElement extends FormItemElement {
     Record<string, any>
   >;
   private _handleChange = (
-    value: string[],
+    value: (string | number)[],
     selectedOptions: CascaderOptionType[]
   ): void => {
     this.value = value;
@@ -255,6 +266,21 @@ export class GeneralCascaderElement extends FormItemElement {
       layerIndex: selectedOptions.length - 1,
       selectedOptions,
       curOption: selectedOptions[selectedOptions.length - 1],
+    });
+  };
+
+  /**
+   * @detail {selectedData:{value: string[], selectedOptions: CascaderOptionType[]},visible: boolean}
+   * @description 显示/隐藏浮层的回调
+   */
+  @event({ type: "cascader.dropdownVisible.change" })
+  dropdownVisibleChange: EventEmitter<Record<string, any>>;
+  private _handleDropdownVisibleChange = (
+    selectedData: selectedDataType,
+    visible: boolean
+  ): void => {
+    Promise.resolve().then(() => {
+      this.dropdownVisibleChange.emit({ selectedData, visible });
     });
   };
 
@@ -307,9 +333,11 @@ export class GeneralCascaderElement extends FormItemElement {
             suffixIcon={this.suffixIcon}
             onChange={this._handleChange}
             optionsChange={this._handleOptionsChange}
+            dropdownVisibleChange={this._handleDropdownVisibleChange}
             size={this.size}
             limit={this.limit}
             onLoadingData={this._handleLoading}
+            changeOnSelect={this.changeOnSelect}
           />
         </BrickWrapper>,
         this
