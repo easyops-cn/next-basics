@@ -140,7 +140,7 @@ export function GeneralCard({
                 alignItems: "center",
               }
             : {}),
-          ...(cardContentWrapperStyle || {}),
+          ...cardContentWrapperStyle,
         }}
       >
         <slot id="contentSlot" name="content" />
