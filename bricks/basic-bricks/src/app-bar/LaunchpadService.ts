@@ -36,6 +36,7 @@ export class LaunchpadService {
   private maxVisitorLength = 7;
   private preFetchId: any;
   private fetched = false;
+  private initialized = false;
   private baseInfo: LaunchpadBaseInfo = {
     settings: {
       columns: 7,
@@ -50,6 +51,7 @@ export class LaunchpadService {
     this.storage = new JsonStorage(localStorage);
 
     this.init();
+    this.initialized = true;
   }
 
   init(): void {
@@ -196,19 +198,24 @@ export class LaunchpadService {
   }
 
   syncValidRecentlyVisitor() {
-    if (window.STANDALONE_MICRO_APPS) {
-      // standalone模式时，刷新页面不会请求launchpad数据，拿不全microApps和customList，所以 syncValidRecentlyVisitor 直接返回
+    if (window.STANDALONE_MICRO_APPS && !this.initialized) {
+      // standalone 模式时，初始化不会请求 launchpad 数据，拿不全 microApps 和 customList，所以 syncValidRecentlyVisitor 直接返回。后面调用 getLaunchpadInfo 能正常拿到 microApps 和 customList 数据，正常进行同步。
       return;
     }
     const visitors = this.getAllVisitors();
-    const result = visitors.filter((v) => {
+    const result = visitors.reduce((pre, v) => {
+      let find: MicroApp | DesktopItemCustom;
       if (v.type === "app") {
-        return this.microApps.some((app) => app.id === v.id);
+        find = this.microApps.find((app) => app.id === v.id);
       } else {
-        return this.customList.some((f) => f.type === v.type && f.id === v.id);
+        find = this.customList.find((f) => f.type === v.type && f.id === v.id);
       }
-    });
 
+      if (find) {
+        return pre.concat(this.processVisitor(v.type, find));
+      }
+      return pre;
+    }, []);
     this.setAllVisitors(result);
   }
 
@@ -290,13 +297,13 @@ export class LaunchpadService {
     this.storage.setItem(this.storageKey, visitors);
   }
 
-  pushVisitor(
+  processVisitor(
     type: "app" | "custom",
     item: MicroApp | DesktopItemCustom
-  ): void {
+  ): DesktopItemApp | DesktopItemCustom {
     if (type === "app") {
       const app = item as MicroApp;
-      item = {
+      return {
         id: app.id,
         app: {
           name: app.name,
@@ -309,10 +316,16 @@ export class LaunchpadService {
             .standaloneMode,
         } as MicroApp,
         type: "app",
-      } as any;
+      } as DesktopItemApp;
     }
+    return item as DesktopItemCustom;
+  }
 
-    this.setItem(type, item as DesktopItemApp | DesktopItemCustom);
+  pushVisitor(
+    type: "app" | "custom",
+    item: MicroApp | DesktopItemCustom
+  ): void {
+    this.setItem(type, this.processVisitor(type, item));
   }
 
   getVisitor(
