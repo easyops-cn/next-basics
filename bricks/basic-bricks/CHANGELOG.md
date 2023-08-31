@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.248.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.247.4...@next-bricks/basic-bricks@1.248.0) (2023-08-31)
+
+
+### Features
+
+* card构件支持设置contentSlot外层包裹元素样式 ([13f2c66](https://github.com/easyops-cn/next-basics/commit/13f2c665949416a826a4b95784c51fdede297deb))
+
+
+
+
+
 ## [1.247.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.247.3...@next-bricks/basic-bricks@1.247.4) (2023-08-25)
 
 
