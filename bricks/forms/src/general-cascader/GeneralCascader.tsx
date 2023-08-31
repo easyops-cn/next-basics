@@ -3,6 +3,7 @@ import React, {
   useEffect,
   useImperativeHandle,
   useState,
+  useRef,
 } from "react";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { Cascader } from "antd";
@@ -14,7 +15,7 @@ import {
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import style from "./GeneralCascader.module.css";
 import { getTargetOption } from "./processor";
-import { ProcessedOptionData } from "../interfaces";
+import { ProcessedOptionData, selectedDataType } from "../interfaces";
 
 export interface GeneralCascaderProps extends FormItemWrapperProps {
   value?: any;
@@ -30,10 +31,18 @@ export interface GeneralCascaderProps extends FormItemWrapperProps {
   size?: string;
   style?: React.CSSProperties;
   suffixIcon?: string;
-  onChange?: (value: string[], selectedOptions: CascaderOptionType[]) => void;
+  onChange?: (
+    value: (string | number)[],
+    selectedOptions: CascaderOptionType[]
+  ) => void;
   optionsChange?: (options: CascaderOptionType[], name: string) => void;
   limit?: number;
   onLoadingData?: (targetOption: CascaderOptionType[]) => void;
+  changeOnSelect?: boolean;
+  dropdownVisibleChange?: (
+    selectedData: selectedDataType,
+    visible: boolean
+  ) => void;
 }
 
 export function LegacyGeneralCascader(
@@ -53,6 +62,8 @@ export function LegacyGeneralCascader(
     showSearch,
     size,
     suffixIcon,
+    changeOnSelect,
+    dropdownVisibleChange,
   } = props;
   const filter = (inputValue: string, path: CascaderOptionType[]): boolean => {
     const label = props.fieldNames.label;
@@ -73,6 +84,10 @@ export function LegacyGeneralCascader(
   };
 
   const [options, setOptions] = useState(props.options);
+  const selectedDataRef = useRef<selectedDataType>({
+    value: [],
+    selectedOptions: [],
+  });
 
   useEffect(() => {
     setOptions(props.options);
@@ -132,6 +147,10 @@ export function LegacyGeneralCascader(
     return label.join(" / ");
   };
 
+  const handleDropdownVisibleChange = (visible: boolean) => {
+    dropdownVisibleChange?.(selectedDataRef.current, visible);
+  };
+
   return (
     <FormItemWrapper {...props}>
       <Cascader
@@ -149,11 +168,14 @@ export function LegacyGeneralCascader(
         size={size}
         style={props.style}
         suffixIcon={suffixIcon && <LegacyIcon type={suffixIcon} />}
-        onChange={(value, selectedOptions) =>
-          props.onChange?.(value, selectedOptions)
-        }
+        onChange={(value, selectedOptions) => {
+          selectedDataRef.current = { value, selectedOptions };
+          props.onChange?.(value, selectedOptions);
+        }}
         loadData={handleLoadingData}
+        changeOnSelect={changeOnSelect}
         displayRender={handlerDisplayRender}
+        onPopupVisibleChange={handleDropdownVisibleChange}
       />
     </FormItemWrapper>
   );

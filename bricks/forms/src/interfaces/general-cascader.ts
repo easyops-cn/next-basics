@@ -5,3 +5,7 @@ export interface ProcessedOptionData {
   curOption: CascaderOptionType;
   selectedOptions: CascaderOptionType[];
 }
+export interface selectedDataType {
+  value: (string | number)[];
+  selectedOptions: CascaderOptionType[];
+}

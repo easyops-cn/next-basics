@@ -7,11 +7,13 @@ import { GeneralCascader } from "./GeneralCascader";
 describe("GeneralCascader", () => {
   it("should work", () => {
     const changeMock = jest.fn();
+    const visibleChangeMock = jest.fn();
     const props = {
       fieldNames: { label: "label", value: "value", children: "children" },
       showSearch: true,
       suffixIcon: "search",
       onChange: changeMock,
+      dropdownVisibleChange: visibleChangeMock,
       options: [
         {
           value: "zhejiang",
@@ -64,7 +66,7 @@ describe("GeneralCascader", () => {
     wrapper.find("input").invoke("onChange")({ target: { value: "Jiangsu" } });
     wrapper.find("Trigger").simulate("click");
     wrapper.update();
-
+    expect(visibleChangeMock.mock.calls[1][1]).toBe(false);
     expect(wrapper.find(".ant-cascader-menu-item-keyword").text()).toEqual(
       "Jiangsu"
     );
