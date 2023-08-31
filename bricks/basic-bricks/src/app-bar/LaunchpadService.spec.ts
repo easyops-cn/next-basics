@@ -318,12 +318,38 @@ describe("LaunchpadService", () => {
     expect(spyOnGetLaunchpadInfo).toBeCalledTimes(1);
   });
 
-  it("should not syncValidRecentlyVisitor when window.STANDALONE_MICRO_APPS was true", async () => {
+  it("syncValidRecentlyVisitor should work when window.STANDALONE_MICRO_APPS was true", async () => {
     window.STANDALONE_MICRO_APPS = true;
+    spyOnGetLaunchpadInfo.mockResolvedValue({
+      settings: {
+        launchpad: {
+          columns: 7,
+          rows: 4,
+        },
+      },
+      microApps: [],
+      desktops: [],
+      siteSort: [],
+      storyboards: [
+        { app: { id: "app-1", currentVersion: "2.0.0" } },
+        { app: { id: "app-3" } },
+      ],
+    });
     const service = new LaunchpadService();
-    await service.setAllVisitors([{ id: "app-1" }, { id: "app-2" }]);
-    await service.syncValidRecentlyVisitor();
+    service.setAllVisitors([
+      { id: "app-1", app: { currentVersion: "1.0.0" }, type: "app" },
+      { id: "app-2", type: "app" },
+    ]);
+    await service.preFetchLaunchpadInfo();
+    await jest.runAllTimers();
+
     const visitors = service.getAllVisitors();
-    expect(visitors.length).toBe(2);
+    expect(visitors).toEqual([
+      {
+        id: "app-1",
+        app: { id: "app-1", currentVersion: "2.0.0" },
+        type: "app",
+      },
+    ]);
   });
 });
