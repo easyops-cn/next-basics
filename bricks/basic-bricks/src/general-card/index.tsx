@@ -119,6 +119,15 @@ export class GeneralCardElement extends UpdatingElement {
    */
   @property({ attribute: false }) configProps: CardProps;
 
+  /**
+   * @description content slot外层元素样式
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  cardContentWrapperStyle: React.CSSProperties;
+
   private _mountPoint: HTMLElement;
   private _shadowRoot: ShadowRoot;
   private _operationBtns: OperationButton[] = [];
@@ -205,6 +214,7 @@ export class GeneralCardElement extends UpdatingElement {
             verticalCenter={this.verticalCenter}
             isFixedFooter={this.isFixedFooter}
             compactMode={this.compactMode}
+            cardContentWrapperStyle={this.cardContentWrapperStyle}
           />
         </BrickWrapper>,
         this._mountPoint,
