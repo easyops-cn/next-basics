@@ -144,6 +144,29 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement {
   @property({ attribute: false })
   instanceQuery: any;
 
+  /**
+   * @default false
+   * @required false
+   * @description 弹窗左下方是否显示新建并绑定按钮
+   */
+  @property({ type: Boolean })
+  showBindButton: boolean;
+  /**
+   * @default false
+   * @required false
+   * @description 新建并绑定按钮是否禁用
+   */
+  @property({ type: Boolean }) bindButtonDisabled: boolean;
+
+  /**
+   * @kind string
+   * @required false
+   * @group ui
+   * @description 选择实例的弹窗左下方按钮文案
+   */
+  @property({ attribute: false })
+  bindButtonText: string;
+
   /* =========================== events =========================== */
 
   /**
@@ -160,6 +183,18 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement {
   @event({ type: "instance.select.change.v2" }) changeEventV2: EventEmitter<
     any[]
   >;
+
+  /**
+   * @detail
+   * @description 点击新建并绑定按钮发出的事件
+   */
+  @event({ type: "bind.button.click" }) bindClickEvent: EventEmitter<
+    Record<string, any>
+  >;
+  private _handBinkClick = () => {
+    this.bindClickEvent.emit();
+  };
+
   private _handleChange = (value: string[]): void => {
     this.value = value;
     this.changeEvent.emit(value);
@@ -195,7 +230,11 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             label={this.label}
+            bindEvent={this._handBinkClick}
             addButtonText={this.addButtonText}
+            showBindButton={this.showBindButton}
+            bindButtonDisabled={this.bindButtonDisabled}
+            bindButtonText={this.bindButtonText}
             instanceQuery={this.instanceQuery}
             fields={this.fields}
             addInstancesModalPageSize={this.addInstancesModalPageSize}
