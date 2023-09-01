@@ -13,12 +13,14 @@ import {
   isNil,
   trim,
 } from "lodash";
-import { handleHttpError } from "@next-core/brick-kit";
+import { BrickAsComponent, handleHttpError } from "@next-core/brick-kit";
+import { UseBrickConf } from "@next-core/brick-types";
 import { ModeOption } from "antd/lib/select";
 import { InstanceApi_postSearchV3 } from "@next-sdk/cmdb-sdk";
 import { getInstanceNameKey, parseTemplate } from "@next-libs/cmdb-utils";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import classNames from "classnames";
+
 import style from "./CmdbInstanceSelect.module.css";
 
 export interface CmdbInstanceSelectProps extends FormItemWrapperProps {
@@ -50,6 +52,9 @@ export interface CmdbInstanceSelectProps extends FormItemWrapperProps {
   dropdownStyle?: React.CSSProperties;
   blurAfterValueChanged?: boolean;
   sort?: Array<Record<string, number | string>>;
+  suffix?: {
+    useBrick: UseBrickConf;
+  };
 }
 
 export interface ComplexOption<T = string | number> {
@@ -88,6 +93,7 @@ export function CmdbInstanceSelectItem(
     permission,
     ignoreMissingFieldError,
     blurAfterValueChanged,
+    suffix,
   } = props;
   const userQuery = formatUserQuery(props.instanceQuery);
   //istanbul ignore else
@@ -318,28 +324,8 @@ export function CmdbInstanceSelectItem(
           const optionLabel = getLabelOptions(op);
           return (
             <Select.Option key={index} value={op.value} label={optionLabel}>
-              {props.showTooltip ? (
-                <Tooltip title={optionLabel}>
-                  <div className={classNames(style.optionDiv)}>
-                    {op.user_icon && (
-                      <Avatar
-                        src={op.user_icon}
-                        size={24}
-                        className={classNames(style.avatar, {
-                          [style.defaultIcon]: op.user_icon === "defaultIcon",
-                        })}
-                      >
-                        {op.user_icon === "defaultIcon" &&
-                          op.label?.slice(0, 2)}
-                      </Avatar>
-                    )}
-                    <span className={classNames(style.optionSpan)}>
-                      {optionLabel}
-                    </span>
-                  </div>
-                </Tooltip>
-              ) : (
-                <>
+              <Tooltip title={props.showTooltip ? optionLabel : undefined}>
+                <div className={classNames(style.optionDiv)}>
                   {op.user_icon && (
                     <Avatar
                       src={op.user_icon}
@@ -351,9 +337,19 @@ export function CmdbInstanceSelectItem(
                       {op.user_icon === "defaultIcon" && op.label?.slice(0, 2)}
                     </Avatar>
                   )}
-                  {optionLabel}
-                </>
-              )}
+                  <span
+                    className={classNames(style.optionSpan)}
+                    data-testid="option-label"
+                  >
+                    {optionLabel}
+                  </span>
+                  {suffix?.useBrick && (
+                    <div className={style.suffixContainer}>
+                      <BrickAsComponent useBrick={suffix.useBrick} data={op} />
+                    </div>
+                  )}
+                </div>
+              </Tooltip>
             </Select.Option>
           );
         })}

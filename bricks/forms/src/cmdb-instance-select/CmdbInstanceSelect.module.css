@@ -1,6 +1,4 @@
 .avatar {
-  margin-right: 10px;
-
   &.defaultIcon {
     background-color: #167be0;
     vertical-align: middle;
@@ -16,7 +14,6 @@
   font-style: italic;
 }
 .optionSpan {
-  display: inline-block;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -24,4 +21,9 @@
 .optionDiv {
   display: flex;
   align-items: center;
+  gap: 6px;
+}
+
+.suffixContainer {
+  margin-left: auto;
 }

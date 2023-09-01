@@ -12,6 +12,7 @@ import {
   ComplexOption,
 } from "./CmdbInstanceSelect";
 import { FormItemElement } from "@next-libs/forms";
+import { UseBrickConf } from "@next-core/brick-types";
 
 /**
  * @id forms.cmdb-instance-select
@@ -331,6 +332,20 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   @property({ attribute: false })
   showKeyField?: boolean;
 
+  /**
+   * @kind { useBrick: UseBrickConf }
+   * @required false
+   * @default -
+   * @description 支持在文本后添加自定义构件 具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  suffix: {
+    useBrick: UseBrickConf;
+  };
+
   /* =========================== events =========================== */
 
   firstRender = true;
@@ -464,6 +479,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
             dropdownStyle={this.dropdownStyle}
             blurAfterValueChanged={this.blurAfterValueChanged}
             sort={this.sort}
+            suffix={this.suffix}
           />
         </BrickWrapper>,
         this
