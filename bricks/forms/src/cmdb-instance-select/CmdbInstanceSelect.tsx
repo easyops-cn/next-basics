@@ -300,7 +300,6 @@ export function CmdbInstanceSelectItem(
         onChange={handleChange}
         onSearch={debounceSearch}
         onFocus={fetchInstanceData}
-        optionLabelProp="label"
         disabled={props.disabled}
         dropdownStyle={{ padding: "2px", ...props.dropdownStyle }}
         dropdownMatchSelectWidth={props.dropdownMatchSelectWidth}
