@@ -13,6 +13,10 @@ export interface CmdbInstanceSelectPanelWrapperProps
   onChange?: (value: string[]) => void;
   onChangeV2?: (value: any[]) => void;
   addButtonText?: string;
+  showBindButton?: boolean;
+  bindEvent?: () => void;
+  bindButtonDisabled?: boolean;
+  bindButtonText?: string;
   instanceQuery: any;
   fields: string[];
   addInstancesModalPageSize?: number;
@@ -48,6 +52,10 @@ export function CmdbInstanceSelectPanelWrapper(
         addInstancesModalPageSize={props.addInstancesModalPageSize}
         showSizeChanger={props.showSizeChanger}
         pageSizeOptions={props.pageSizeOptions}
+        bindEvent={props.bindEvent}
+        showBindButton={props.showBindButton}
+        bindButtonDisabled={props.bindButtonDisabled}
+        bindButtonText={props.bindButtonText}
       />
     </FormItemWrapper>
   );
