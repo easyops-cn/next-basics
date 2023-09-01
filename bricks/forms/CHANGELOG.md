@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.276.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.275.0...@next-bricks/forms@1.276.0) (2023-09-01)
+
+
+### Features
+
+* **cmdb-instance-select:** add suffix property ([8afe370](https://github.com/easyops-cn/next-basics/commit/8afe37021cf4f3b9ed609f57510b41714be50671))
+
+
+
+
+
 # [1.275.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.274.1...@next-bricks/forms@1.275.0) (2023-09-01)
 
 
