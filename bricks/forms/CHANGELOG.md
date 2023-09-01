@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.275.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.274.1...@next-bricks/forms@1.275.0) (2023-09-01)
+
+
+### Features
+
+* 在新建/编辑系统时，可前往新建应用 ([35c54ce](https://github.com/easyops-cn/next-basics/commit/35c54ce47e5f0168e78d6ab9eba2d6a349a9abb0))
+
+
+
+
+
 ## [1.274.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.274.0...@next-bricks/forms@1.274.1) (2023-08-31)
 
 **Note:** Version bump only for package @next-bricks/forms
