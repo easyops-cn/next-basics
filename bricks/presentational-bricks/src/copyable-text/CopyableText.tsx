@@ -28,7 +28,7 @@ export function CopyableText(props: CopyableTextProps): React.ReactElement {
   );
   const InputCom = () => (
     <Input.Group compact style={{ width: "100%", whiteSpace: "nowrap" }}>
-      <Button>
+      <Button className={style.typographyButton}>
         <Typography.Paragraph
           copyable={{
             tooltips: [tooltips ?? t(K.COPY), t(K.COPIED)],
