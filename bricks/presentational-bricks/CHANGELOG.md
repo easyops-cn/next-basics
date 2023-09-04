@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.306.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.306.11...@next-bricks/presentational-bricks@1.306.12) (2023-09-04)
+
+
+### Bug Fixes
+
+* 下拉选择选中label支持不显示 ([8ea0a8a](https://github.com/easyops-cn/next-basics/commit/8ea0a8af0e6a8e5343bf0aa3b583b970f7518929))
+
+
+
+
+
 ## [1.306.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.306.10...@next-bricks/presentational-bricks@1.306.11) (2023-08-15)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
