@@ -4,10 +4,14 @@ import type {
   BrickEventHandler,
   BuiltinBrickEventHandler,
   ContextConf,
+  CustomBrickEventHandler,
   CustomTemplate,
   CustomTemplateState,
   I18nData,
+  RefResolveConf,
   RouteConf,
+  SelectorProviderResolveConf,
+  SetPropsCustomBrickEventHandler,
   Storyboard,
   UseProviderResolveConf,
 } from "@next-core/brick-types";
@@ -19,10 +23,8 @@ import {
   EstreeLiteral,
   EstreeParent,
   isObject,
-  StoryboardNodeEventHandler,
 } from "@next-core/brick-utils";
 import { sortBy } from "lodash";
-import isEmpty from "lodash";
 
 // https://github.com/type-challenges/type-challenges/issues/18153
 type UnionToFnIntersection<T> = (
@@ -91,16 +93,18 @@ export interface LintDetailMeta {
   };
 }
 
+type BuiltinAction = BuiltinBrickEventHandler["action"];
+
 export interface NodeRaw {
   target?: string;
   targetRef?: string;
-  action?: BuiltinBrickEventHandler["action"];
+  action?: BuiltinAction;
   useProvider?: string;
   method?: unknown;
   properties?: unknown;
   args?: unknown[];
-  else?: StoryboardNodeEventHandler[];
-  then?: StoryboardNodeEventHandler[];
+  else?: BrickEventHandler | BrickEventHandler[];
+  then?: BrickEventHandler | BrickEventHandler[];
 }
 
 const INSTALLED_APPS = "INSTALLED_APPS";
@@ -109,7 +113,7 @@ const ACTIONS_BETTER_REPLACED_BY_TRACK = [
   "context.replace",
   "context.assign",
   "state.update",
-] as unknown as BuiltinBrickEventHandler["action"][];
+] as unknown as BuiltinAction[];
 
 export function doLintStoryboard(
   storyboard: Storyboard,
@@ -204,7 +208,7 @@ export function doLintStoryboard(
 
     // Update form state
     "formstate.update",
-  ] as UnionToTuple<BuiltinBrickEventHandler["action"]>);
+  ] as UnionToTuple<BuiltinAction>);
   const tagNameAsTargetRegExp = /^[-\w]+(\\\.[-\w]+)*$/;
   const providerBrickRegExp = /^providers-of-/;
   const customProviderBrickRegExp = /\.provider-/;
@@ -319,7 +323,7 @@ export function doLintStoryboard(
           then,
         } = node.raw as NodeRaw;
         const isBuiltinAction = typeof action === "string";
-        const isConditionAction = then?.length > 0;
+        const isConditionalAction = !!then;
         if (isBuiltinAction) {
           switch (action) {
             case "context.assign":
@@ -371,7 +375,7 @@ export function doLintStoryboard(
         if (
           !(
             isBuiltinAction ||
-            isConditionAction ||
+            isConditionalAction ||
             typeof useProvider === "string" ||
             ((target || targetRef) &&
               ((reason = "Missing `method` or `properties`: "),
@@ -395,8 +399,11 @@ export function doLintStoryboard(
         if (node.onChange?.length) {
           const isWarned = node.onChange.every(
             (item) =>
-              ACTIONS_BETTER_REPLACED_BY_TRACK.includes(item.raw?.action) ||
-              (item.raw?.target && item.raw?.properties)
+              ACTIONS_BETTER_REPLACED_BY_TRACK.includes(
+                (item.raw as BuiltinBrickEventHandler)?.action
+              ) ||
+              ((item.raw as CustomBrickEventHandler)?.target &&
+                (item.raw as SetPropsCustomBrickEventHandler)?.properties)
           );
           isWarned &&
             addMeta(usingWarnedOnChangeInCtxOrState, name, node, path);
@@ -408,7 +415,9 @@ export function doLintStoryboard(
           node.resolves.forEach((item) =>
             addMeta(
               usingUseResolveInBrickLifeCycle,
-              item.raw?.useProvider || item.raw?.provider || item.raw?.ref,
+              (item.raw as UseProviderResolveConf)?.useProvider ||
+                (item.raw as SelectorProviderResolveConf)?.provider ||
+                (item.raw as RefResolveConf)?.ref,
               node,
               path
             )
