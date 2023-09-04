@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.257.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.257.0...@next-bricks/next-builder@1.257.1) (2023-09-04)
+
+
+### Bug Fixes
+
+* **lint:** fix false negative error for conditional action ([e695a13](https://github.com/easyops-cn/next-basics/commit/e695a13ad004503eb8e8d13bde2a7db7c344eb22))
+
+
+
+
+
 # [1.257.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.256.2...@next-bricks/next-builder@1.257.0) (2023-09-01)
 
 
