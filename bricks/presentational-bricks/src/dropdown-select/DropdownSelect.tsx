@@ -33,6 +33,7 @@ interface DropdownSelectProps {
   minSelectedItemLength?: number;
   selectTipText?: string;
   selectBoxStyle?: React.CSSProperties;
+  hideLabel?: boolean;
 }
 
 export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
@@ -47,6 +48,7 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
     options,
     selectTipText,
     selectBoxStyle,
+    hideLabel,
   } = props;
   if (!dataSource) {
     dataSource = [];
@@ -115,7 +117,13 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
                 onClick={(e) => onClick(option)}
                 key={String(option.value)}
               >
-                <h4 className={styles.optionTitle}>{option.label}</h4>
+                <h4 className={styles.optionTitle}>
+                  <GeneralIcon
+                    style={{ marginRight: "7px" }}
+                    icon={option.icon}
+                  />
+                  {option.label}
+                </h4>
                 {option.content && (
                   <p className={styles.optionContent}>{option.content}</p>
                 )}
@@ -367,9 +375,13 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
           style={{ fontSize: labelFontSize }}
           data-testid="dropdown-trigger"
         >
-          <div className={styles.dropdownLabel}>
-            {label || <span className={styles.placeholder}>{placeholder}</span>}
-          </div>
+          {!hideLabel && (
+            <div className={styles.dropdownLabel}>
+              {label || (
+                <span className={styles.placeholder}>{placeholder}</span>
+              )}
+            </div>
+          )}
           <LegacyIcon
             type={visible ? "caret-up" : "caret-down"}
             className={styles.dropdownArrow}

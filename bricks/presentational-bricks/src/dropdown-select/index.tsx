@@ -209,6 +209,16 @@ export class DropdownSelectElement extends UpdatingElement {
   })
   tipBrick: { useBrick: UseBrickConf };
 
+  /**
+   * @required false
+   * @description 不展示label
+   * @group other
+   */
+  @property({
+    attribute: false,
+  })
+  hideLabel: boolean;
+
   connectedCallback(): void {
     this.style.display = "inline-block";
     this._render();
@@ -257,6 +267,7 @@ export class DropdownSelectElement extends UpdatingElement {
             minSelectedItemLength={this.minSelectedItemLength}
             selectTipText={this.selectTipText}
             selectBoxStyle={this.selectBoxStyle}
+            hideLabel={this.hideLabel}
           />
         </BrickWrapper>,
         this
