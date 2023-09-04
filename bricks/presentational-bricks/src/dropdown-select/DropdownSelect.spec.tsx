@@ -247,6 +247,7 @@ describe("DropdownSelect", () => {
             brick: "span",
           },
         }}
+        hideLabel={true}
       />
     );
     const dropdownTrigger = getByTestId("dropdown-trigger-multiple");
