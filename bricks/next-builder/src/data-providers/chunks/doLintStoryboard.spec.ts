@@ -152,11 +152,9 @@ const storyboard = {
             },
             move: {
               if: "<% true %>",
-              then: [
-                {
-                  action: "console.log",
-                },
-              ],
+              then: {
+                action: "console.log",
+              },
               else: {
                 action: "console.log",
               },
