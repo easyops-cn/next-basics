@@ -7,6 +7,7 @@ import React, {
   createContext,
   useContext,
   useEffect,
+  useRef,
 } from "react";
 import { Input } from "antd";
 import { get, isMatch, pick } from "lodash";
@@ -440,6 +441,7 @@ function TreeNode({
   const [collapsed, setCollapsed] = useState(
     collapsedNodes?.includes(getCollapsedId?.(node)) ?? false
   );
+  const collapseButtonRef = useRef<HTMLSpanElement>(null);
 
   const onMouseEnter = useMemo(
     () => mouseEnterFactory?.(node),
@@ -538,10 +540,13 @@ function TreeNode({
     setCollapsed((prev) => !prev);
   }, []);
 
-  const preventMouseEvent = useCallback((event: React.MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-  }, []);
+  const preventMouseEvent = useCallback(
+    (event: React.MouseEvent | MouseEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+    },
+    []
+  );
 
   const onLinkClick = useCallback(
     (e: MouseEvent | React.MouseEvent) => {
@@ -559,6 +564,18 @@ function TreeNode({
       onNodeToggle?.(getCollapsedId?.(node), collapsed);
     }
   }, [collapseClicked, collapsed, getCollapsedId, node, onNodeToggle]);
+
+  useEffect(() => {
+    const collapseButton = collapseButtonRef.current;
+    if (collapseButton) {
+      collapseButton.addEventListener("click", handleCollapse);
+      collapseButton.addEventListener("mousedown", preventMouseEvent);
+      return () => {
+        collapseButton.removeEventListener("click", handleCollapse);
+        collapseButton.removeEventListener("mousedown", preventMouseEvent);
+      };
+    }
+  }, [handleCollapse, preventMouseEvent]);
 
   // Disallow collapse leaf nodes, or any nodes when searching.
   const allowCollapse = collapsible && !isLeaf && !searching;
@@ -637,9 +654,8 @@ function TreeNode({
             <span className={styles.nodeIconWrapper}>
               {allowCollapse && (
                 <span
+                  ref={collapseButtonRef}
                   className={styles.collapseIcon}
-                  onClick={handleCollapse}
-                  onMouseDown={preventMouseEvent}
                   title={collapsed ? "Expand" : "Collapse"}
                   role="button"
                 >
