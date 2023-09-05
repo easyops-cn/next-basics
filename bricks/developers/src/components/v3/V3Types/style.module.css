@@ -1,0 +1,18 @@
+.interfaceTitle {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.badge {
+  line-height: 20px;
+}
+
+.unsupported {
+  color: var(--bg-color-button-danger);
+}
+
+.deprecated {
+  text-decoration: line-through;
+}

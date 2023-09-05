@@ -25,6 +25,7 @@ import styles from "./BrickDocument.module.css";
 import { TypeDescItem } from "../interfaces";
 import * as gfm from "remark-gfm";
 import { collectSharedTypeList } from "./processor";
+import { V3BrickDocTypes } from "../components/v3/V3Types";
 
 interface V3StoryDocEvent
   extends Pick<StoryDocEvent, "description" | "deprecated"> {
@@ -86,16 +87,20 @@ export function BrickDocument({
   };
 
   const presentedSharedDescList = useMemo(
-    () => collectSharedTypeList(doc),
-    [doc]
+    () => (v3Brick ? [] : collectSharedTypeList(doc)),
+    [v3Brick, doc]
   );
 
   useEffect(() => {
     if (brickId && brickType && doc) {
       setBrickDoc(doc);
-      setInterfaceIds([...(doc?.interface?.map((i) => i.name) || [])]);
+      setInterfaceIds(
+        (v3Brick
+          ? doc?.interface?.types?.map((i) => i.name)
+          : doc?.interface?.map((i) => i.name)) || []
+      );
     }
-  }, [brickId, brickType, doc]);
+  }, [brickId, brickType, v3Brick, doc]);
 
   const handleCreateButtonClick = (): void => {
     if (rotate === 180) {
@@ -663,7 +668,11 @@ export function BrickDocument({
           {renderEvents(brickDoc.events)}
           {renderMethods(brickDoc.methods)}
           {renderSlots(brickDoc.slots)}
-          {renderInterfaceMix(brickDoc.interface)}
+          {v3Brick ? (
+            <V3BrickDocTypes types={brickDoc.interface?.types} />
+          ) : (
+            renderInterfaceMix(brickDoc.interface)
+          )}
           {renderSharedContent(presentedSharedDescList)}
           {renderMemo(brickDoc.memo)}
         </div>
