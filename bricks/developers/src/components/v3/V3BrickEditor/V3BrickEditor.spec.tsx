@@ -2,6 +2,7 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import AceEditor from "react-ace";
 import { V3BrickEditor } from "./V3BrickEditor";
+import { Clipboard } from "@next-libs/clipboard";
 
 jest.mock("brace/mode/yaml");
 jest.mock("brace/mode/html");
@@ -22,6 +23,8 @@ describe("V3BrickEditor", () => {
     wrapper.find(AceEditor).invoke("onChange")(`brick: span`);
     jest.runAllTimers();
     expect(onDebouncedChange).lastCalledWith("brick: span", "yaml");
+    wrapper.find(Clipboard).invoke("onCopy")(`brick: span`, true);
+    wrapper.find(Clipboard).invoke("onCopy")(`brick: span`, false);
   });
 
   it("should work handle code editing", () => {

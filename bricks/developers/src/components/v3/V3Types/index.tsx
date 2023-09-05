@@ -25,7 +25,7 @@ export function V3BrickDocTypes({
 
   return (
     <>
-      <h1>Type references</h1>
+      <h2>Type references</h2>
       <TypeReferencesContext.Provider value={typeReferences}>
         {types
           .sort((a, b) => {
