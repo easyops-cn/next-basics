@@ -24,7 +24,7 @@ import { BrickDemo } from "../BrickDemo/BrickDemo";
 import { getAdjustedConf } from "../../share/processor";
 import { NextBrickDemo } from "../../components/NextBrickDemo/NextBrickDemo";
 import { BrickDocument } from "../../brick-document/BrickDocument";
-
+import { V3BrickDoc } from "../../components/v3/V3BrickDoc/V3BrickDoc";
 import cssStyle from "./style.module.css";
 
 export interface BrickBookProps {
@@ -51,10 +51,11 @@ export function BrickBook({
   renderDocLink,
 }: BrickBookProps): React.ReactElement {
   const story = findStoryById(storyId, storyType, stories);
+  const v3Brick = story?.v3Brick;
   const actions = story ? story.actions : null;
-  const confList: (BrickConf | SnippetConf)[] = []
-    .concat(story?.conf)
-    .filter(Boolean);
+  const confList: (BrickConf | SnippetConf)[] = v3Brick
+    ? []
+    : [].concat(story?.conf).filter(Boolean);
   const developerStorage = storage.getItem(NS_DEVELOPERS) ?? {};
 
   const { t } = useTranslation(NS_DEVELOPERS);
@@ -121,39 +122,45 @@ export function BrickBook({
               {story.category}:{story.type}:{story.storyId}
             </span>
           </div>
-          <Radio.Group
-            defaultValue={mode}
-            buttonStyle="solid"
-            onChange={onChange}
-          >
-            <Radio.Button value="json">JSON</Radio.Button>
-            <Radio.Button value="yaml">YAML</Radio.Button>
-          </Radio.Group>
-        </div>
-        <div
-          className={cssStyle.brickPreview}
-          style={{
-            gridTemplateColumns: `repeat(${story.previewColumns || 1}, 1fr)`,
-          }}
-        >
-          {enableNewBrickPreview ? (
-            <NextBrickDemo
-              storyId={storyId}
-              confList={adjustedConfList}
-              mode={mode}
-              activeTabIndex={0}
-            />
-          ) : (
-            confList.map((item, i) => (
-              <BrickDemo
-                key={`${storyId}-${i}`}
-                mode={mode}
-                defaultConf={item}
-                actions={actions}
-              />
-            ))
+          {!v3Brick && (
+            <Radio.Group
+              defaultValue={mode}
+              buttonStyle="solid"
+              onChange={onChange}
+            >
+              <Radio.Button value="json">JSON</Radio.Button>
+              <Radio.Button value="yaml">YAML</Radio.Button>
+            </Radio.Group>
           )}
         </div>
+        {v3Brick ? (
+          <V3BrickDoc doc={story.conf?.doc} />
+        ) : (
+          <div
+            className={cssStyle.brickPreview}
+            style={{
+              gridTemplateColumns: `repeat(${story.previewColumns || 1}, 1fr)`,
+            }}
+          >
+            {enableNewBrickPreview ? (
+              <NextBrickDemo
+                storyId={storyId}
+                confList={adjustedConfList}
+                mode={mode}
+                activeTabIndex={0}
+              />
+            ) : (
+              confList.map((item, i) => (
+                <BrickDemo
+                  key={`${storyId}-${i}`}
+                  mode={mode}
+                  defaultConf={item}
+                  actions={actions}
+                />
+              ))
+            )}
+          </div>
+        )}
       </section>
       <section className={cssStyle.sectionTitle}>
         <h2 style={{ marginBottom: "10px" }}>
