@@ -14,6 +14,13 @@ jest.mock("@next-libs/basic-components", () => ({
     return "<a></a>";
   }),
 }));
+jest.mock("../../components/v3/V3BrickDoc/V3BrickDoc", () => {
+  return {
+    V3BrickDoc() {
+      return <div className="V3BrickDoc">V3BrickDoc</div>;
+    },
+  };
+});
 
 const applyPageTitle = jest.fn();
 (getRuntime as jest.Mock).mockReturnValue({
@@ -56,5 +63,16 @@ describe("BrickBook", () => {
       <BrickBook stories={[]} storyId="not-existed-story" storyType="brick" />
     );
     expect(wrapper.html()).toBe(null);
+  });
+
+  it("should render v3 brick story", () => {
+    const wrapper = shallow(
+      <BrickBook
+        stories={[{ storyId: "eo-button" }]}
+        storyId="eo-button"
+        storyType="brick"
+      />
+    );
+    expect(wrapper.find(".V3BrickDoc")).toBeTruthy();
   });
 });

@@ -2,6 +2,7 @@ import React from "react";
 import { mount } from "enzyme";
 import { Empty } from "antd";
 import { BrickDocument } from "./BrickDocument";
+import { V3BrickDocTypes } from "../components/v3/V3Types";
 import * as brickKit from "@next-core/brick-kit";
 import { pick } from "lodash";
 
@@ -439,6 +440,35 @@ const v3Doc = {
       returns: null,
     },
   ],
+  interface: {
+    types: [
+      {
+        annotation: {
+          type: "union",
+          types: [
+            {
+              type: "jsLiteral",
+              value: "large",
+            },
+            {
+              type: "jsLiteral",
+              value: "medium",
+            },
+            {
+              type: "jsLiteral",
+              value: "small",
+            },
+            {
+              type: "jsLiteral",
+              value: "xs",
+            },
+          ],
+        },
+        name: "ComponentSize",
+        type: "typeAlias",
+      },
+    ],
+  },
 };
 
 jest.mock("@next-core/brick-kit");
@@ -505,5 +535,14 @@ describe("V3 BrickDocument", () => {
     expect(wrapper.find("table").at(2).find("thead th").length).toBe(4);
     // slots
     expect(wrapper.find("table").at(3).find("tbody tr").length).toBe(2);
+  });
+
+  it("interface should work", async () => {
+    const wrapper = mount(
+      <BrickDocument {...props} v3Brick={true} doc={v3Doc} />
+    );
+    await (global as any).flushPromises();
+
+    expect(wrapper.find(V3BrickDocTypes)).toBeTruthy();
   });
 });
