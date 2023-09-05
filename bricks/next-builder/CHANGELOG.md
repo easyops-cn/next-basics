@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.257.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.257.1...@next-bricks/next-builder@1.257.2) (2023-09-05)
+
+
+### Bug Fixes
+
+* **workbench-tree:** fix collapse button mouse event ([f94faab](https://github.com/easyops-cn/next-basics/commit/f94faabbf0a067a8821ad28793c4a8ff9fc0c86e))
+
+
+
+
+
 ## [1.257.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.257.0...@next-bricks/next-builder@1.257.1) (2023-09-04)
 
 
