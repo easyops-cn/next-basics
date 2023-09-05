@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.306.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.306.12...@next-bricks/presentational-bricks@1.306.13) (2023-09-05)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** fix copyable-text按钮可点击范围太小问题 ([5f24ff8](https://github.com/easyops-cn/next-basics/commit/5f24ff8e8e9a483fdb55df4fdf2e94896b936a06))
+
+
+
+
+
 ## [1.306.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.306.11...@next-bricks/presentational-bricks@1.306.12) (2023-09-04)
 
 
