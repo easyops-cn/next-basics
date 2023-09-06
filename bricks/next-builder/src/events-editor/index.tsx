@@ -5,7 +5,11 @@ import {
   MenuIcon,
   UseBrickConf,
 } from "@next-core/brick-types";
-import { EventConfig, EventsDoc } from "../shared/visual-events/interfaces";
+import {
+  EventConfig,
+  EventsDoc,
+  V3EventsDoc,
+} from "../shared/visual-events/interfaces";
 import {
   BrickWrapper,
   UpdatingElement,
@@ -58,7 +62,7 @@ export class EventsEditorElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  eventDocInfo: EventsDoc[];
+  eventDocInfo: EventsDoc[] | V3EventsDoc[];
 
   /**
    * @kind BrickEventsMap
@@ -162,12 +166,19 @@ export class EventsEditorElement extends UpdatingElement {
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
+      const eventDocInfo = this.eventDocInfo?.map((v) => {
+        if ("name" in v && v.name) {
+          return { ...v, type: v.name, detail: v.detail?.description };
+        }
+        return v;
+      }) as EventsDoc[];
+
       ReactDOM.render(
         <BrickWrapper>
           <EventsEditor
             ref={this._editorRef}
             updatedViewKey={this.updatedViewKey}
-            eventDocInfo={this.eventDocInfo}
+            eventDocInfo={eventDocInfo}
             eventList={this.eventList}
             titleIcon={this.titleIcon}
             onCreate={this._handleCreate}

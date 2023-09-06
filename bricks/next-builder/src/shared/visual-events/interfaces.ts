@@ -41,6 +41,16 @@ export interface EventConfig {
 export interface EventsDoc {
   type: string;
   description?: string;
+  detail?: string;
+}
+
+export interface V3EventsDoc {
+  name: string;
+  description?: string;
+  detail?: {
+    description?: string;
+    type?: string;
+  };
 }
 
 export interface Workflow {

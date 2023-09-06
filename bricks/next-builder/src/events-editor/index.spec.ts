@@ -9,10 +9,51 @@ const unmountComponentAtNode = jest
   .mockImplementation(() => null);
 
 describe("next-builder.events-editor", () => {
-  it("should create a custom element", () => {
+  it("should create a custom element", async () => {
     const element = document.createElement("next-builder.events-editor") as any;
     expect(spyOnRender).not.toBeCalled();
     document.body.appendChild(element);
+
+    element.eventDocInfo = [
+      {
+        description: "表单验证成功时触发事件",
+        detail: {
+          type: "Record<string, unknown>",
+        },
+        name: "validate.success",
+      },
+    ];
+    await jest.runAllTimers();
+    expect(
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0]["props"]
+        .children["props"].eventDocInfo
+    ).toEqual([
+      {
+        description: "表单验证成功时触发事件",
+        detail: undefined,
+        name: "validate.success",
+        type: "validate.success",
+      },
+    ]);
+
+    element.eventDocInfo = [
+      {
+        description: "表单验证成功时触发",
+        detail: "Record<string, any>",
+        type: "validate.success",
+      },
+    ];
+    await jest.runAllTimers();
+    expect(
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0]["props"]
+        .children["props"].eventDocInfo
+    ).toEqual([
+      {
+        description: "表单验证成功时触发",
+        detail: "Record<string, any>",
+        type: "validate.success",
+      },
+    ]);
 
     const editorRefMock = {
       addEventHandler: jest.fn(),
