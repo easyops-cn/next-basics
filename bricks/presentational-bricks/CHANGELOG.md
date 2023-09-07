@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.306.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.306.13...@next-bricks/presentational-bricks@1.306.14) (2023-09-07)
+
+
+### Bug Fixes
+
+* 增加额外下拉开关样式属性 ([04addcb](https://github.com/easyops-cn/next-basics/commit/04addcb0e84a753ce9cd8ed8818e24806b809ea1))
+
+
+
+
+
 ## [1.306.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.306.12...@next-bricks/presentational-bricks@1.306.13) (2023-09-05)
 
 
