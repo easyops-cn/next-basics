@@ -33,6 +33,7 @@ interface DropdownSelectProps {
   minSelectedItemLength?: number;
   selectTipText?: string;
   selectBoxStyle?: React.CSSProperties;
+  dropdownTriggerStyle?: React.CSSProperties;
   hideLabel?: boolean;
 }
 
@@ -300,6 +301,7 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
       onVisibleChange={(visible) => {
         setVisible(visible);
       }}
+      placement={"bottomLeft"}
     >
       {props.dropdownButtonType === "shape" ? (
         <div
@@ -372,7 +374,10 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
       ) : (
         <div
           className={styles.dropdownTrigger}
-          style={{ fontSize: labelFontSize }}
+          style={{
+            fontSize: labelFontSize,
+            ...props.dropdownTriggerStyle,
+          }}
           data-testid="dropdown-trigger"
         >
           {!hideLabel && (
