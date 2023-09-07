@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.248.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.248.2...@next-bricks/basic-bricks@1.248.3) (2023-09-07)
+
+
+### Bug Fixes
+
+* refine launchpad info loading ([5b10994](https://github.com/easyops-cn/next-basics/commit/5b10994b6b1523e4f27d23e01f76be5c3e89b93b))
+
+
+
+
+
 ## [1.248.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.248.1...@next-bricks/basic-bricks@1.248.2) (2023-09-07)
 
 
