@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.248.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.248.3...@next-bricks/basic-bricks@1.248.4) (2023-09-07)
+
+
+### Bug Fixes
+
+* defer requests for launchpad apps and favorites ([75c57c2](https://github.com/easyops-cn/next-basics/commit/75c57c2bac8ec340264a292f28a27918f154a933))
+
+
+
+
+
 ## [1.248.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.248.2...@next-bricks/basic-bricks@1.248.3) (2023-09-07)
 
 
