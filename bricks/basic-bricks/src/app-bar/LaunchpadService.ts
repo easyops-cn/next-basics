@@ -89,7 +89,12 @@ export class LaunchpadService {
 
   async fetchFavoriteList() {
     const result = (
-      await LaunchpadApi_listCollection({ page: 1, pageSize: 25 })
+      await LaunchpadApi_listCollection(
+        { page: 1, pageSize: 25 },
+        {
+          interceptorParams: { ignoreLoadingBar: true },
+        }
+      )
     ).list;
     this.setFavorites(result);
     return result;
@@ -109,13 +114,13 @@ export class LaunchpadService {
     }
   }
 
-  async fetchLaunchpadInfo(): Promise<void> {
+  async fetchLaunchpadInfo(): Promise<boolean> {
     if (typeof window.cancelIdleCallback === "function") {
       cancelIdleCallback(this.preFetchId);
     } else {
       clearTimeout(this.preFetchId);
     }
-    if (this.isFetching) return;
+    if (this.isFetching) return false;
     this.isFetching = true;
     try {
       const launchpadInfo = await LaunchpadApi_getLaunchpadInfo(null, {
@@ -160,6 +165,7 @@ export class LaunchpadService {
     } finally {
       this.isFetching = false;
     }
+    return true;
   }
 
   getBaseInfo(): LaunchpadBaseInfo {
