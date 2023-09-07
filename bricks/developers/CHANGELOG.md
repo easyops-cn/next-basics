@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.366.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.12...@next-bricks/developers@1.366.0) (2023-09-07)
+
+
+### Features
+
+* 文档展示 v3 构件 example ([8808ea5](https://github.com/easyops-cn/next-basics/commit/8808ea5b9220a989bc9cd5b5a76b8de8ecd6abbc))
+* 文档展示 v3 构件 interface ([917128b](https://github.com/easyops-cn/next-basics/commit/917128b056fa5f38782bd95bfb552e2bdb2b7f2c))
+* 文档展示 v3 构件 interface ([7a3a028](https://github.com/easyops-cn/next-basics/commit/7a3a0288fec14ac4cdadd5f075c6e536e7f0dfaa))
+
+
+
+
+
 ## [1.365.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.11...@next-bricks/developers@1.365.12) (2023-08-29)
 
 

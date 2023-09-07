@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.257.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.257.2...@next-bricks/next-builder@1.257.3) (2023-09-07)
+
+
+### Bug Fixes
+
+* event editor 兼容 v3 构件 ([50b0d18](https://github.com/easyops-cn/next-basics/commit/50b0d18483cfb9e4ad419997745f3fae165bd921))
+
+
+
+
+
 ## [1.257.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.257.1...@next-bricks/next-builder@1.257.2) (2023-09-05)
 
 

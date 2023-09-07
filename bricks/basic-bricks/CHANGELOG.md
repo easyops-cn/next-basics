@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.248.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.248.1...@next-bricks/basic-bricks@1.248.2) (2023-09-07)
+
+
+### Bug Fixes
+
+* fix launchpad flickering ([31426a9](https://github.com/easyops-cn/next-basics/commit/31426a9d5200b7a59bfa62198aa6b145ed9d2c3e))
+
+
+
+
+
 ## [1.248.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.248.0...@next-bricks/basic-bricks@1.248.1) (2023-08-31)
 
 
