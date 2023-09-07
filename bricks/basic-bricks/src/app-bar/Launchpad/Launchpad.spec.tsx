@@ -1,12 +1,10 @@
 import React from "react";
-import { act } from "react-dom/test-utils";
 import { shallow, mount } from "enzyme";
 import { getRuntime } from "@next-core/brick-kit";
 import { MicroApp, DesktopData } from "@next-core/brick-types";
 import { Launchpad } from "./Launchpad";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { DesktopSlider } from "../DesktopSlider/DesktopSlider";
-import { GeneralIcon } from "@next-libs/basic-components";
 
 jest.mock("@next-core/brick-kit");
 jest.mock("../SearchBar/SearchBar");
@@ -28,6 +26,7 @@ jest.mock("../LaunchpadService", () => {
         siteSort: [],
       }),
       init: (): any => ({}),
+      loaded: true,
     },
   };
 });
@@ -36,6 +35,9 @@ jest.mock("@next-libs/basic-components", () => {
   return {
     Link: function Link() {
       return <div>Link</div>;
+    },
+    GeneralIcon: function GeneralIcon() {
+      return <span>GeneralIcon</span>;
     },
   };
 });
@@ -104,9 +106,10 @@ describe("Launchpad", () => {
     expect(wrapper.find(DesktopSlider).prop("q")).toBe("hello");
   });
 
-  it("should handle Escape keydown", () => {
+  it("should handle Escape keydown", async () => {
     const handleWillClose = jest.fn();
     mount(<Launchpad onWillClose={handleWillClose} />);
+    await (global as any).flushPromises();
     window.dispatchEvent(
       new KeyboardEvent("keydown", {
         key: "a",

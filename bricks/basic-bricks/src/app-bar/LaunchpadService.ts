@@ -34,8 +34,10 @@ export class LaunchpadService {
   private microApps: MicroApp[] = [];
   private customList: DesktopItemCustom[] = [];
   private maxVisitorLength = 7;
-  private preFetchId: any;
-  private fetched = false;
+  private preFetchId: number;
+  private preFetchScheduled = false;
+  private firstFetchPromise: Promise<void>;
+  private isFetching = false;
   private initialized = false;
   private baseInfo: LaunchpadBaseInfo = {
     settings: {
@@ -46,7 +48,7 @@ export class LaunchpadService {
     desktops: [],
     siteSort: [],
   };
-  public isFetching = false;
+  public loaded = false;
   constructor() {
     this.storage = new JsonStorage(localStorage);
 
@@ -101,28 +103,33 @@ export class LaunchpadService {
   }
 
   async preFetchLaunchpadInfo(): Promise<void> {
-    if (window.STANDALONE_MICRO_APPS && !this.fetched) {
-      this.fetched = true;
+    if (window.STANDALONE_MICRO_APPS && !this.preFetchScheduled) {
+      this.preFetchScheduled = true;
       const preFetchLaunchpadInfo = async (): Promise<void> => {
-        await this.fetchLaunchpadInfo();
+        this.preFetchId = null;
+        this.fetchLaunchpadInfo();
       };
       if (typeof window.requestIdleCallback === "function") {
         this.preFetchId = window.requestIdleCallback(preFetchLaunchpadInfo);
       } else {
-        this.preFetchId = setTimeout(preFetchLaunchpadInfo);
+        this.preFetchId = setTimeout(
+          preFetchLaunchpadInfo
+        ) as unknown as number;
       }
     }
   }
 
-  async fetchLaunchpadInfo(): Promise<boolean> {
-    if (typeof window.cancelIdleCallback === "function") {
-      cancelIdleCallback(this.preFetchId);
-    } else {
-      clearTimeout(this.preFetchId);
+  fetchLaunchpadInfo(): Promise<void> {
+    if (this.preFetchId) {
+      if (typeof window.cancelIdleCallback === "function") {
+        cancelIdleCallback(this.preFetchId);
+      } else {
+        clearTimeout(this.preFetchId);
+      }
+      this.preFetchId = null;
     }
-    if (this.isFetching) return false;
-    this.isFetching = true;
-    try {
+
+    const task = async (): Promise<void> => {
       const launchpadInfo = await LaunchpadApi_getLaunchpadInfo(null, {
         interceptorParams: { ignoreLoadingBar: true },
         noAbortOnRouteChange: true,
@@ -158,14 +165,25 @@ export class LaunchpadService {
           .filter(Boolean) as unknown as MicroApp[],
       } as unknown as LaunchpadBaseInfo;
       this.initValue();
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error("Get launchpad info failed:", e);
-      this.fetched = false;
-    } finally {
-      this.isFetching = false;
+      this.loaded = true;
+    };
+
+    let promise: Promise<void>;
+    if (!this.isFetching) {
+      this.isFetching = true;
+      promise = task();
+      promise.catch((error) => {
+        this.firstFetchPromise = null;
+        throw error;
+      });
+      promise.finally(() => {
+        this.isFetching = false;
+      });
     }
-    return true;
+    if (!this.firstFetchPromise) {
+      this.firstFetchPromise = promise;
+    }
+    return this.firstFetchPromise;
   }
 
   getBaseInfo(): LaunchpadBaseInfo {
