@@ -34,8 +34,8 @@ export function Launchpad(props: LaunchpadProps): React.ReactElement {
   const [q, setQ] = React.useState("");
   const [microApps, setMicroApps] = React.useState(getFilterMicroApps());
   const [desktopDir, setDesktopDir] = React.useState<DirWithCoordinates>();
-  const [loading, setLoading] = React.useState<boolean>(
-    !launchpadService.loaded
+  const [loading, setLoading] = React.useState(
+    !!window.STANDALONE_MICRO_APPS && !launchpadService.loaded
   );
 
   React.useEffect((): (() => void) => {

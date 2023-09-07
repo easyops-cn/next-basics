@@ -18,6 +18,7 @@ import { getRuntime, getAuth } from "@next-core/brick-kit";
 import { pick } from "lodash";
 import i18next from "i18next";
 import { LaunchpadSettings } from "./LaunchpadSettingsContext";
+import { DeferredService } from "../shared/DeferredService";
 
 interface LaunchpadBaseInfo {
   settings: LaunchpadSettings;
@@ -34,10 +35,6 @@ export class LaunchpadService {
   private microApps: MicroApp[] = [];
   private customList: DesktopItemCustom[] = [];
   private maxVisitorLength = 7;
-  private preFetchId: number;
-  private preFetchScheduled = false;
-  private firstFetchPromise: Promise<void>;
-  private isFetching = false;
   private initialized = false;
   private baseInfo: LaunchpadBaseInfo = {
     settings: {
@@ -49,8 +46,15 @@ export class LaunchpadService {
     siteSort: [],
   };
   public loaded = false;
+  public favoritesLoaded = false;
+
+  private readonly deferredLaunchpadInfo: DeferredService;
+  private readonly deferredFavorites: DeferredService;
+
   constructor() {
     this.storage = new JsonStorage(localStorage);
+    this.deferredLaunchpadInfo = new DeferredService(this.doFetchLaunchpadInfo);
+    this.deferredFavorites = new DeferredService(this.doFetchFavorites);
 
     this.init();
     this.initialized = true;
@@ -85,106 +89,83 @@ export class LaunchpadService {
     this.setMicroApps(microApps);
   }
 
-  setMaxVisitorLength(value: number) {
+  setMaxVisitorLength(value: number): void {
     this.maxVisitorLength = value;
   }
 
-  async fetchFavoriteList() {
+  preFetchFavorites(): void {
+    this.deferredFavorites.schedulePrefetch();
+  }
+
+  async fetchFavoriteList(
+    eager?: boolean
+  ): Promise<LaunchpadApi_ListCollectionResponseItem[]> {
+    await this.deferredFavorites.fetch(eager);
+    return this.favoriteList;
+  }
+
+  private doFetchFavorites = async (): Promise<void> => {
     const result = (
       await LaunchpadApi_listCollection(
         { page: 1, pageSize: 25 },
         {
           interceptorParams: { ignoreLoadingBar: true },
+          noAbortOnRouteChange: true,
         }
       )
     ).list;
     this.setFavorites(result);
-    return result;
-  }
+    this.favoritesLoaded = true;
+  };
 
-  async preFetchLaunchpadInfo(): Promise<void> {
-    if (window.STANDALONE_MICRO_APPS && !this.preFetchScheduled) {
-      this.preFetchScheduled = true;
-      const preFetchLaunchpadInfo = async (): Promise<void> => {
-        this.preFetchId = null;
-        this.fetchLaunchpadInfo();
-      };
-      if (typeof window.requestIdleCallback === "function") {
-        this.preFetchId = window.requestIdleCallback(preFetchLaunchpadInfo);
-      } else {
-        this.preFetchId = setTimeout(
-          preFetchLaunchpadInfo
-        ) as unknown as number;
-      }
+  preFetchLaunchpadInfo(): void {
+    if (window.STANDALONE_MICRO_APPS) {
+      this.deferredLaunchpadInfo.schedulePrefetch();
     }
   }
 
-  fetchLaunchpadInfo(): Promise<void> {
-    if (this.preFetchId) {
-      if (typeof window.cancelIdleCallback === "function") {
-        cancelIdleCallback(this.preFetchId);
-      } else {
-        clearTimeout(this.preFetchId);
-      }
-      this.preFetchId = null;
-    }
+  fetchLaunchpadInfo(): Promise<unknown> {
+    return this.deferredLaunchpadInfo.fetch();
+  }
 
-    const task = async (): Promise<void> => {
-      const launchpadInfo = await LaunchpadApi_getLaunchpadInfo(null, {
-        interceptorParams: { ignoreLoadingBar: true },
-        noAbortOnRouteChange: true,
-      });
+  private doFetchLaunchpadInfo = async (): Promise<void> => {
+    const launchpadInfo = await LaunchpadApi_getLaunchpadInfo(null, {
+      interceptorParams: { ignoreLoadingBar: true },
+      noAbortOnRouteChange: true,
+    });
 
-      for (const storyboard of launchpadInfo.storyboards) {
-        const app = storyboard.app as unknown as MicroApp;
-        if (app) {
-          if (app.locales) {
-            // Prefix to avoid conflict between brick package's i18n namespace.
-            const ns = `$tmp-${app.id}`;
-            // Support any languages in `app.locales`.
-            Object.entries(app.locales).forEach(([lang, resources]) => {
-              i18next.addResourceBundle(lang, ns, resources);
-            });
-            // Use `app.name` as the fallback `app.localeName`.
-            app.localeName = i18next.getFixedT(null, ns)("name", app.name);
-            // Remove the temporary i18n resource bundles.
-            Object.keys(app.locales).forEach((lang) => {
-              i18next.removeResourceBundle(lang, ns);
-            });
-          } else {
-            app.localeName = app.name;
-          }
+    for (const storyboard of launchpadInfo.storyboards) {
+      const app = storyboard.app as unknown as MicroApp;
+      if (app) {
+        if (app.locales) {
+          // Prefix to avoid conflict between brick package's i18n namespace.
+          const ns = `$tmp-${app.id}`;
+          // Support any languages in `app.locales`.
+          Object.entries(app.locales).forEach(([lang, resources]) => {
+            i18next.addResourceBundle(lang, ns, resources);
+          });
+          // Use `app.name` as the fallback `app.localeName`.
+          app.localeName = i18next.getFixedT(null, ns)("name", app.name);
+          // Remove the temporary i18n resource bundles.
+          Object.keys(app.locales).forEach((lang) => {
+            i18next.removeResourceBundle(lang, ns);
+          });
+        } else {
+          app.localeName = app.name;
         }
       }
-
-      this.baseInfo = {
-        ...launchpadInfo,
-        settings: launchpadInfo.settings.launchpad as LaunchpadSettings,
-        microApps: launchpadInfo.storyboards
-          .map((storyboard) => storyboard.app)
-          .filter(Boolean) as unknown as MicroApp[],
-      } as unknown as LaunchpadBaseInfo;
-      this.initValue();
-      this.loaded = true;
-    };
-
-    let promise: Promise<void>;
-    if (!this.isFetching) {
-      this.isFetching = true;
-      promise = task();
-      promise.catch((error) => {
-        this.firstFetchPromise = null;
-        throw error;
-      });
-      promise.finally(() => {
-        this.isFetching = false;
-      });
     }
-    if (!this.firstFetchPromise) {
-      this.firstFetchPromise = promise;
-    }
-    return this.firstFetchPromise;
-  }
+
+    this.baseInfo = {
+      ...launchpadInfo,
+      settings: launchpadInfo.settings.launchpad as LaunchpadSettings,
+      microApps: launchpadInfo.storyboards
+        .map((storyboard) => storyboard.app)
+        .filter(Boolean) as unknown as MicroApp[],
+    } as unknown as LaunchpadBaseInfo;
+    this.initValue();
+    this.loaded = true;
+  };
 
   getBaseInfo(): LaunchpadBaseInfo {
     return this.baseInfo;
