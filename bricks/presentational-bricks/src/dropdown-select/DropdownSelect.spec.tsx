@@ -248,6 +248,9 @@ describe("DropdownSelect", () => {
           },
         }}
         hideLabel={true}
+        dropdownTriggerStyle={{
+          justifyContent: "end",
+        }}
       />
     );
     const dropdownTrigger = getByTestId("dropdown-trigger-multiple");

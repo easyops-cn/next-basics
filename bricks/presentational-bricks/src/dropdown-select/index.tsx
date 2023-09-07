@@ -219,6 +219,16 @@ export class DropdownSelectElement extends UpdatingElement {
   })
   hideLabel: boolean;
 
+  /**
+   * @required false
+   * @description 额外的下拉开关样式
+   * @group other
+   */
+  @property({
+    attribute: false,
+  })
+  dropdownTriggerStyle: React.CSSProperties;
+
   connectedCallback(): void {
     this.style.display = "inline-block";
     this._render();
@@ -268,6 +278,7 @@ export class DropdownSelectElement extends UpdatingElement {
             selectTipText={this.selectTipText}
             selectBoxStyle={this.selectBoxStyle}
             hideLabel={this.hideLabel}
+            dropdownTriggerStyle={this.dropdownTriggerStyle}
           />
         </BrickWrapper>,
         this
