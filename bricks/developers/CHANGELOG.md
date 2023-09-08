@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.366.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.366.0...@next-bricks/developers@1.366.1) (2023-09-08)
+
+
+### Bug Fixes
+
+* modify v3 preview url ([f7af732](https://github.com/easyops-cn/next-basics/commit/f7af73226a3095169690f56c9b66eda48ed7f5c2))
+
+
+
+
+
 # [1.366.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.12...@next-bricks/developers@1.366.0) (2023-09-07)
 
 
