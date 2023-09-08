@@ -21,8 +21,9 @@ jest.spyOn(window.customElements, "define").mockImplementation(() => void 0);
     "next-builder.provider-get-all-providers",
     "providers-of-cmdb.get-instance-list",
     "providers-of-cmdb.get-instance-detail",
+    "basic.provider",
   ],
-  providers: ["next-builder.provider-get-all-providers"],
+  providers: ["next-builder.provider-get-all-providers", "basic.provider"],
   templates: [
     "test-a.template-a1",
     "test-a.template-a2",
@@ -185,6 +186,22 @@ jest.spyOn(window.customElements, "define").mockImplementation(() => void 0);
               icon: { lib: "antd", type: "box" },
               source: "basic-NB",
               alias: ["basic.general-button"],
+              v3Brick: true,
+            },
+            {
+              id: "basic.provider",
+              text: {
+                zh: "v3 provider",
+                en: "v3 provider",
+              },
+              category: "other",
+              description: {
+                zh: "v3 provider",
+                en: "v3 provider",
+              },
+              icon: { lib: "antd", type: "box" },
+              source: "basic-NB",
+              alias: [],
               v3Brick: true,
             },
             {
@@ -357,6 +374,29 @@ describe("GetBrickLibrary", () => {
           "id": "providers-of-cmdb.get-instance-detail",
           "title": "get-instance-detail",
           "type": "provider",
+        },
+        Object {
+          "$searchTextPool": Array [
+            "v3 provider",
+            "v3 provider",
+            "basic.provider",
+          ],
+          "alias": Array [],
+          "category": "other",
+          "description": "v3 provider",
+          "editor": undefined,
+          "editorProps": undefined,
+          "icon": Object {
+            "lib": "antd",
+            "type": "box",
+          },
+          "id": "basic.provider",
+          "layerType": "brick",
+          "source": "basic-NB",
+          "thumbnail": undefined,
+          "title": "v3 provider",
+          "type": "provider",
+          "v3Brick": true,
         },
         Object {
           "$searchTextPool": Array [
