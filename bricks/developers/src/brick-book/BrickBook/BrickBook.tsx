@@ -30,7 +30,7 @@ import cssStyle from "./style.module.css";
 export interface BrickBookProps {
   storyId: string;
   stories: Story[];
-  storyType: "brick" | "template";
+  storyType: "brick" | "template" | "provider";
   titleLinkEnabled: boolean;
   titleLinkTarget?: string;
   notToSetPageTitle?: boolean;

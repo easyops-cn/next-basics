@@ -26,6 +26,7 @@ import { TypeDescItem } from "../interfaces";
 import * as gfm from "remark-gfm";
 import { collectSharedTypeList } from "./processor";
 import { V3BrickDocTypes } from "../components/v3/V3Types";
+import { V3ProviderInterface } from "../components/v3/V3ProviderInterface";
 
 interface V3StoryDocEvent
   extends Pick<StoryDocEvent, "description" | "deprecated"> {
@@ -664,10 +665,16 @@ export function BrickDocument({
       <Card className={style.brickDocCard}>
         <div className={style.brickDocContainer}>
           {renderHistory(brickDoc.history)}
-          {renderProperties(brickDoc.properties)}
-          {renderEvents(brickDoc.events)}
-          {renderMethods(brickDoc.methods)}
-          {renderSlots(brickDoc.slots)}
+          {v3Brick && brickType === "provider" ? (
+            <V3ProviderInterface data={brickDoc.interface} />
+          ) : (
+            <>
+              {renderProperties(brickDoc.properties)}
+              {renderEvents(brickDoc.events)}
+              {renderMethods(brickDoc.methods)}
+              {renderSlots(brickDoc.slots)}
+            </>
+          )}
           {v3Brick ? (
             <V3BrickDocTypes types={brickDoc.interface?.types} />
           ) : (
