@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.367.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.366.1...@next-bricks/developers@1.367.0) (2023-09-08)
+
+
+### Features
+
+* 文档展示 v3 provider ([aead6e8](https://github.com/easyops-cn/next-basics/commit/aead6e805c48f2ba1a8cfe0021d3f4f4488e8276))
+
+
+
+
+
 ## [1.366.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.366.0...@next-bricks/developers@1.366.1) (2023-09-08)
 
 

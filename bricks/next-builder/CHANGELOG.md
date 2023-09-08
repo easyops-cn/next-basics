@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.258.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.258.0...@next-bricks/next-builder@1.258.1) (2023-09-08)
+
+
+### Bug Fixes
+
+* library should collect v3 provider info ([f239ce9](https://github.com/easyops-cn/next-basics/commit/f239ce9b9e0fa058e136be869c0ffdeacc29a998))
+
+
+
+
+
 # [1.258.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.257.3...@next-bricks/next-builder@1.258.0) (2023-09-08)
 
 
