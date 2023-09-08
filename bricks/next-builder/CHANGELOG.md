@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.258.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.257.3...@next-bricks/next-builder@1.258.0) (2023-09-08)
+
+
+### Features
+
+* component-select support v3 provider & move getClassifiedBrickList ([583d0b1](https://github.com/easyops-cn/next-basics/commit/583d0b108ec7aca59f2ba0a7832fa746ffbcb607))
+
+
+
+
+
 ## [1.257.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.257.2...@next-bricks/next-builder@1.257.3) (2023-09-07)
 
 
