@@ -27,7 +27,11 @@ import {
 } from "./constants";
 import { i18nText, getRuntime } from "@next-core/brick-kit";
 import { Story } from "@next-core/brick-types";
-import { SearchOutlined, SettingFilled } from "@ant-design/icons";
+import {
+  QuestionCircleOutlined,
+  SearchOutlined,
+  SettingFilled,
+} from "@ant-design/icons";
 import { debounce, compact, isEmpty } from "lodash";
 import { GeneralIcon, Link } from "@next-libs/basic-components";
 import ResizeObserver from "resize-observer-polyfill";
@@ -42,8 +46,9 @@ import { TooltipPlacement } from "antd/lib/tooltip";
 import classnames from "classnames";
 import { NS_NEXT_BUILDER, K } from "../i18n/constants";
 import { useTranslation } from "react-i18next";
+import { ProviderItem } from "./ProviderItem";
 
-interface ComponentSelectProps {
+export interface ComponentSelectProps {
   brickList: BrickOptionItem[];
   storyList: Story[];
   isShowSuggest?: boolean;
@@ -55,6 +60,7 @@ interface ComponentSelectProps {
   ) => void;
   onDrag?: (isDrag: boolean) => void;
   onFeedbackClick?: (type: string) => void;
+  onInstructionsClick?: (type: string) => void;
 }
 
 export function setDragImage(
@@ -113,6 +119,7 @@ export function ComponentSelect(
     onActionClick,
     onDrag,
     onFeedbackClick,
+    onInstructionsClick,
   }: ComponentSelectProps,
   ref: React.Ref<ComponentSelectRef>
 ): React.ReactElement {
@@ -170,12 +177,14 @@ export function ComponentSelect(
         }
         // don't show legacy template
         else if (item.type !== "template") {
-          const key =
-            item.category === "workflow"
-              ? item.category
-              : item.type === "brick" && item.v3Brick
-              ? "v3Brick"
-              : item.type;
+          let key;
+          if (item.category === "workflow") {
+            key = item.category;
+          } else if (item.v3Brick) {
+            key = item.type === "provider" ? "v3Provider" : "v3Brick";
+          } else {
+            key = item.type;
+          }
           const brickItem: BrickOptionItem = {
             ...item,
             category: item.category,
@@ -191,7 +200,7 @@ export function ComponentSelect(
   useEffect(() => {
     if (brickList) {
       const componentList = brickList.filter(
-        (item) => item.type !== "provider"
+        (item) => item.v3Brick || item.type !== "provider"
       );
       const data = getBrickTransfromByType(componentList);
       setComponetList(data);
@@ -316,6 +325,7 @@ export function ComponentSelect(
             onActionClick={onActionClick}
             currentBrick={currentBrick}
             onFeedbackClick={onFeedbackClick}
+            onInstructionsClick={onInstructionsClick}
           />
         </div>
       </WorkbenchTreeDndContext.Provider>
@@ -324,7 +334,10 @@ export function ComponentSelect(
 }
 
 interface ComponentListProps
-  extends Pick<ComponentSelectProps, "onActionClick" | "onFeedbackClick"> {
+  extends Pick<
+    ComponentSelectProps,
+    "onActionClick" | "onFeedbackClick" | "onInstructionsClick"
+  > {
   componentType: string;
   componentList: BrickOptionItem[];
   q: string;
@@ -341,6 +354,7 @@ function ComponentList({
   isShowSuggest = true,
   onActionClick,
   onFeedbackClick,
+  onInstructionsClick,
   currentBrick,
 }: ComponentListProps): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
@@ -446,14 +460,15 @@ function ComponentList({
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
       const { width } = refWrapper.current.getBoundingClientRect();
-      setColumnNumber(Math.round(width / 140));
+      const itemWidth = componentType === "v3Provider" ? 240 : 140;
+      setColumnNumber(Math.round(width / itemWidth));
       handleSetWrapperTop();
     });
     resizeObserver.observe(refWrapper.current);
     return () => {
       resizeObserver.disconnect();
     };
-  });
+  }, [componentType]);
 
   useEffect(() => {
     if (isFormBrick(componentType, currentBrick)) {
@@ -505,14 +520,24 @@ function ComponentList({
 
   return (
     <div ref={refWrapper}>
-      {config.showV3BrickFeedback && componentType === "v3Brick" && (
+      {componentType === "v3Provider" && (
         <Link
-          className={styles.feedbackLink}
-          onClick={() => onFeedbackClick?.(componentType)}
+          className={styles.instructions}
+          onClick={() => onInstructionsClick?.(componentType)}
         >
-          {t(K.V3_BRICK_FEEDBACK)}
+          {t(K.INSTRUCTIONS_FOR_USE)}
+          <QuestionCircleOutlined />
         </Link>
       )}
+      {config.showV3BrickFeedback &&
+        ["v3Brick", "v3Provider"].includes(componentType) && (
+          <Link
+            className={styles.feedbackLink}
+            onClick={() => onFeedbackClick?.(componentType)}
+          >
+            {t(K.V3_BRICK_FEEDBACK)}
+          </Link>
+        )}
       {group?.every((item) => item.children?.length === 0) &&
       list.length === 0 ? (
         <div className={styles.noDataTips}>No Data</div>
@@ -549,13 +574,21 @@ function ComponentList({
             padding: "0 15px",
           }}
         >
-          {list.map((item, index) => (
-            <ComponentItem
-              key={index}
-              {...item}
-              onActionClick={onActionClick}
-            />
-          ))}
+          {list.map((item, index) =>
+            componentType === "v3Provider" ? (
+              <ProviderItem
+                key={index}
+                {...item}
+                onActionClick={onActionClick}
+              />
+            ) : (
+              <ComponentItem
+                key={index}
+                {...item}
+                onActionClick={onActionClick}
+              />
+            )
+          )}
         </div>
       )}
     </div>

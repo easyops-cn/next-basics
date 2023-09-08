@@ -28,18 +28,20 @@ export const suggest: suggestType = {
 
 export const componetSortConf: Record<string, number> = {
   v3Brick: 0,
-  brick: 1,
-  widget: 2,
-  snippet: 3,
-  layout: 4,
-  customTemplate: 5,
-  customSnippet: 6,
-  formItem: 7,
-  workflow: 8,
+  v3Provider: 10,
+  brick: 20,
+  widget: 30,
+  snippet: 40,
+  layout: 50,
+  customTemplate: 60,
+  customSnippet: 70,
+  formItem: 80,
+  workflow: 90,
 };
 
 export const i18nTransform: Record<string, string> = {
   v3Brick: i18next.t(`${NS_NEXT_BUILDER}:${K.V3_BRICK}`),
+  v3Provider: i18next.t(`${NS_NEXT_BUILDER}:${K.V3_PROVIDER}`),
   brick: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK}`),
   layout: i18next.t(`${NS_NEXT_BUILDER}:${K.LAYOUT}`),
   customTemplate: i18next.t(`${NS_NEXT_BUILDER}:${K.CUSTOMTEMPLATE}`),

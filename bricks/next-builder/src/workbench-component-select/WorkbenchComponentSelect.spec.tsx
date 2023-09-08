@@ -19,8 +19,8 @@ mockGetRuntime.mockReturnValue({
 
 jest.mock("@next-libs/basic-components", () => {
   return {
-    Link: function Link() {
-      return <div>Link</div>;
+    Link: function Link({ className }) {
+      return <div className={className}>Link</div>;
     },
     GeneralIcon: function GeneralIcon() {
       return <div>GeneralIcon</div>;
@@ -143,6 +143,21 @@ describe("WorkbenchComponentSelect", () => {
       ],
       alias: ["form.general-input"],
       source: "form-NB",
+      v3Brick: true,
+    },
+    {
+      type: "provider",
+      id: "basic.show-dialog",
+      title: "显示对话框",
+      category: "",
+      description: "显示对话框",
+      layerType: "brick",
+      icon: {
+        lib: "antd",
+        type: "box",
+      },
+      $searchTextPool: ["显示对话框", "basic.show-dialog"],
+      source: "basic-NB",
       v3Brick: true,
     },
     {
@@ -301,7 +316,7 @@ describe("WorkbenchComponentSelect", () => {
   });
 
   it("should work when currentBrick is form brick", async () => {
-    const { rerender } = render(
+    const { container, rerender } = render(
       <WorkbenchComponentSelect
         brickList={brickList}
         storyList={storyList}
@@ -330,5 +345,10 @@ describe("WorkbenchComponentSelect", () => {
 
     const v3BrickElement = screen.getAllByTitle("v3 输入框");
     expect(v3BrickElement.length).toEqual(2);
+
+    act(() => {
+      fireEvent.click(screen.getByText("next-builder:V3_PROVIDER"));
+    });
+    expect(container.querySelector(".instructions")).toBeTruthy();
   });
 });
