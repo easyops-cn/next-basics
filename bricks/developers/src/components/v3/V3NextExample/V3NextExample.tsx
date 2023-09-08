@@ -126,7 +126,7 @@ export function V3NextExample(props: V3NextExampleProps): React.ReactElement {
           <div className={styles.preview}>
             <iframe
               ref={iframeRef}
-              src={`${getRuntime().getBasePath()}preview/`}
+              src={`${getRuntime().getBasePath()}_brick-preview-v3_/preview/`}
               loading="lazy"
               onLoad={handleIframeLoad}
               className={styles.iframe}
