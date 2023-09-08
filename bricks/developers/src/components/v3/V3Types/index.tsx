@@ -21,7 +21,7 @@ export function V3BrickDocTypes({
     [types]
   );
 
-  if (!types?.length) return;
+  if (!types?.length) return null;
 
   return (
     <>

@@ -140,13 +140,14 @@ export async function GetBrickLibrary(
           ? "provider"
           : "brick";
         const installedBrick =
-          installedBricksEnabled &&
-          type === "brick" &&
-          installedBricksMap.get(name);
+          installedBricksEnabled && installedBricksMap.get(name);
+        const useInstalledBrick =
+          installedBrick &&
+          (type === "brick" || (type === "provider" && installedBrick.v3Brick));
         return {
           type,
           id: name,
-          ...(installedBrick
+          ...(useInstalledBrick
             ? {
                 title: i18nText(installedBrick.text) || getBrickLastName(name),
                 category: installedBrick.category,

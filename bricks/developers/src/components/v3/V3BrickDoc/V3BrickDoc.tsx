@@ -27,7 +27,7 @@ export function V3BrickDoc(props: V3BrickDocProps): React.ReactElement {
     <ReactMarkdown
       renderers={{
         code({ language, node, value }) {
-          const meta = node.meta.split(/\s+/);
+          const meta = node.meta?.split(/\s+/) || [];
           if (meta.includes("preview")) {
             const fullCode = (value as string).trim();
             const type = language;

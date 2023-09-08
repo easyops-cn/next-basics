@@ -7,6 +7,7 @@ import React, {
   useContext,
   useImperativeHandle,
   forwardRef,
+  CSSProperties,
 } from "react";
 import { Input, Collapse, Popover, Badge } from "antd";
 import { BrickOptionItem } from "../builder-container/interfaces";
@@ -275,7 +276,7 @@ export function ComponentSelect(
             <div className={styles.tabBtnWrapper}>
               {Object.entries(componentList)
                 .sort((a, b) => componetSortConf[a[0]] - componetSortConf[b[0]])
-                // 组件库暂时不展示"片段"这个tab
+                // 组件库暂时不展示"片段"这个 tab
                 .filter(
                   ([k]) =>
                     ![
@@ -553,7 +554,7 @@ function ComponentList({
               return (
                 <Collapse.Panel header={item.text} key={item.key}>
                   <ComponentGroup
-                    {...item}
+                    list={item.children}
                     onActionClick={onActionClick}
                     columnNumber={columnNumber}
                     componentType={componentType}
@@ -564,48 +565,32 @@ function ComponentList({
           })}
         </Collapse>
       ) : (
-        <div
-          className={classNames(styles.componentWrapper, {
-            [styles.brickWrapper]:
-              componentType === "brick" || componentType === "v3Brick",
-          })}
-          style={{
-            gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
-            padding: "0 15px",
-          }}
-        >
-          {list.map((item, index) =>
-            componentType === "v3Provider" ? (
-              <ProviderItem
-                key={index}
-                {...item}
-                onActionClick={onActionClick}
-              />
-            ) : (
-              <ComponentItem
-                key={index}
-                {...item}
-                onActionClick={onActionClick}
-              />
-            )
-          )}
-        </div>
+        <ComponentGroup
+          list={list}
+          onActionClick={onActionClick}
+          columnNumber={columnNumber}
+          componentType={componentType}
+          wrapperStyle={{ padding: "0 15px" }}
+        />
       )}
     </div>
   );
 }
 
-interface ComponentGroupProps extends groupItem {
+interface ComponentGroupProps {
+  list: groupItem["children"];
   columnNumber: number;
   componentType: string;
   onActionClick?: ComponentSelectProps["onActionClick"];
+  wrapperStyle?: CSSProperties;
 }
 
 function ComponentGroup({
   componentType,
-  children,
+  list,
   columnNumber,
   onActionClick,
+  wrapperStyle,
 }: ComponentGroupProps): React.ReactElement {
   const handleActionClick = (
     type: string,
@@ -623,15 +608,20 @@ function ComponentGroup({
       })}
       style={{
         gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
+        ...wrapperStyle,
       }}
     >
-      {children.map((item) => (
-        <ComponentItem
-          key={item.id}
-          {...item}
-          onActionClick={(type, data, e) => handleActionClick(type, data, e)}
-        />
-      ))}
+      {list.map((item) =>
+        componentType === "v3Provider" ? (
+          <ProviderItem key={item.id} {...item} onActionClick={onActionClick} />
+        ) : (
+          <ComponentItem
+            key={item.id}
+            {...item}
+            onActionClick={(type, data, e) => handleActionClick(type, data, e)}
+          />
+        )
+      )}
     </div>
   );
 }

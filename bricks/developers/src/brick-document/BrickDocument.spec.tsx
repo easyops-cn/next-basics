@@ -5,6 +5,7 @@ import { BrickDocument } from "./BrickDocument";
 import { V3BrickDocTypes } from "../components/v3/V3Types";
 import * as brickKit from "@next-core/brick-kit";
 import { pick } from "lodash";
+import { V3ProviderInterface } from "../components/v3/V3ProviderInterface";
 
 const doc = {
   id: "presentational-bricks.calendar",
@@ -544,5 +545,54 @@ describe("V3 BrickDocument", () => {
     await (global as any).flushPromises();
 
     expect(wrapper.find(V3BrickDocTypes)).toBeTruthy();
+  });
+
+  it("provider should work", async () => {
+    const wrapper = mount(
+      <BrickDocument
+        storyId="basic.provider"
+        v3Brick={true}
+        storyType="provider"
+        doc={
+          {
+            id: "basic.provider",
+            interface: {
+              params: [
+                {
+                  annotation: {
+                    type: "keyword",
+                    value: "string",
+                  },
+                  description: "语言",
+                  name: "lang",
+                },
+              ],
+              returns: {
+                annotation: {
+                  type: "reference",
+                  typeName: {
+                    name: "Promise",
+                    type: "identifier",
+                  },
+                  typeParameters: {
+                    params: [
+                      {
+                        type: "keyword",
+                        value: "void",
+                      },
+                    ],
+                    type: "typeParameterInstantiation",
+                  },
+                },
+              },
+              type: "provider",
+            },
+          } as any
+        }
+      />
+    );
+    await (global as any).flushPromises();
+
+    expect(wrapper.find(V3ProviderInterface)).toBeTruthy();
   });
 });
