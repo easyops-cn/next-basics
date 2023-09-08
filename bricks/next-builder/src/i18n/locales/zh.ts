@@ -145,6 +145,7 @@ const locale: Locale = {
   [K.BRICK_SUGGEST]: "推荐",
   [K.BRICK]: "原子构件",
   [K.V3_BRICK]: "原子构件 (v3)",
+  [K.V3_PROVIDER]: "Provider (v3)",
   [K.V3_BRICK_FEEDBACK]: "构件有 BUG，缺少构件？点击我快速提单！",
   [K.WIDGET]: "挂件",
   [K.SNIPPET]: "片段",
@@ -178,6 +179,8 @@ const locale: Locale = {
   [K.SET_FILTER_CONDITION]: "设置筛选条件",
   [K.CONDITION]: "条件",
   [K.CONDITION_GROUP]: "条件组",
+  [K.INSTRUCTIONS_FOR_USE]: "使用说明",
+  [K.ALL]: "全部",
 };
 
 export default locale;

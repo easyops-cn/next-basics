@@ -71,6 +71,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  word-break: break-word;
 }
 
 @keyframes shake-top {
@@ -213,6 +214,41 @@
   color: gray;
 }
 
-.feedbackLink {
+.instructions {
   padding: 0 16px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.feedbackLink {
+  display: inline-block;
+  padding: 0 16px;
+  margin-bottom: 10px;
+}
+
+.providerItem {
+  padding: 8px;
+  background: var(--tag-gray-background);
+  border-radius: 6px;
+  overflow: hidden;
+
+  .providerName,
+  .providerId {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .providerName {
+    margin-bottom: 4px;
+    color: var(--antd-text-color);
+    font-size: 14px;
+  }
+
+  .providerId {
+    color: var(--antd-text-color-secondary);
+    font-size: 14px;
+  }
 }

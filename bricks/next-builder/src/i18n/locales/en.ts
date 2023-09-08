@@ -151,6 +151,7 @@ const locale: Locale = {
   [K.BRICK_SUGGEST]: "Suggest",
   [K.BRICK]: "Atom Brick",
   [K.V3_BRICK]: "Atom Brick (v3)",
+  [K.V3_PROVIDER]: "Provider (v3)",
   [K.V3_BRICK_FEEDBACK]:
     "There is a bug in the brick, or missing the brick? Click here to create an issue!",
   [K.WIDGET]: "Widget",
@@ -188,6 +189,8 @@ const locale: Locale = {
   [K.SET_FILTER_CONDITION]: "Set filter conditions",
   [K.CONDITION]: "Condition",
   [K.CONDITION_GROUP]: "Condition Group",
+  [K.INSTRUCTIONS_FOR_USE]: "Instructions for use",
+  [K.ALL]: "All",
 };
 
 export default locale;
