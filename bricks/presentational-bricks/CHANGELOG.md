@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.307.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.306.14...@next-bricks/presentational-bricks@1.307.0) (2023-09-11)
+
+
+### Features
+
+* **brick-descriptions:** add extraBrick property ([9bc0b2f](https://github.com/easyops-cn/next-basics/commit/9bc0b2f59a7f5bb5d16829b8c2d511cf89434505))
+
+
+
+
+
 ## [1.306.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.306.13...@next-bricks/presentational-bricks@1.306.14) (2023-09-07)
 
 
