@@ -34,6 +34,18 @@
       min-width: 0;
     }
   }
+  :global(.ant-tree-directory) {
+    :global(.ant-tree-treenode-selected) {
+      &:hover::before,
+      &::before {
+        background: var(--antd-item-hover-bg);
+      }
+      :global(.ant-tree-switcher),
+      :global(.ant-tree-node-selected) {
+        color: var(--antd-text-color) !important;
+      }
+    }
+  }
 }
 
 .matchText {

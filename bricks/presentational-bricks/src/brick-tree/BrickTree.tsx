@@ -34,6 +34,8 @@ import classNames from "classnames";
 import i18n from "i18next";
 import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 
+const { DirectoryTree } = Tree;
+
 export const compareFunMap: Record<string, any> = {
   $eq: eq,
   $lt: lt,
@@ -196,6 +198,7 @@ export interface BrickTreeProps {
   alsoSearchByKey?: boolean;
   isFilter?: boolean;
   iconUseBrick?: { useBrick: UseBrickConf };
+  isDirectory?: boolean;
 }
 
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
@@ -220,6 +223,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     isFilter,
     onSearch,
     iconUseBrick,
+    isDirectory,
   } = props;
   const [allChecked, setAllChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -381,6 +385,126 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     props.onExpand(expandedKeys);
   };
 
+  const titleRender = (node: any) => {
+    const { title: _title, children, key: _key } = node;
+    let title: React.ReactNode = _title;
+    //根据ui规范，全部或者默认的节点，字体加粗，间距加宽
+    const allOrDefaultFlag =
+      (title === "全部" || title === "默认") && !children;
+    if (
+      typeof _title === "string" &&
+      searchValue &&
+      (searchParent ? true : !children?.length)
+    ) {
+      const lowerCaseSearchValue = searchValue.toLocaleLowerCase();
+      const index = _title.toLocaleLowerCase().indexOf(lowerCaseSearchValue);
+      const kIndex = alsoSearchByKey
+        ? _key.toString()?.toLocaleLowerCase().indexOf(lowerCaseSearchValue)
+        : -1;
+
+      if (index >= 0) {
+        const beforeStr = _title.substring(0, index);
+        const matchStr = _title.substring(index, searchValueLength + index);
+        const afterStr = _title.substring(searchValueLength + index);
+
+        title = (
+          <span
+            ref={(() => {
+              if (!nodeMatchedRef.current) {
+                nodeMatchedRef.current = true;
+
+                return (el: HTMLElement) => {
+                  if (el) {
+                    const nodeEl = el.closest(".ant-tree-treenode") || el;
+                    const treeContainerEl = treeContainerRef.current;
+
+                    treeContainerEl.scrollBy(
+                      undefined,
+                      nodeEl.getBoundingClientRect().top -
+                        treeContainerEl.getBoundingClientRect().top
+                    );
+                  }
+                };
+              } else {
+                return null;
+              }
+            })()}
+          >
+            {alsoSearchByKey ? (
+              // 如果也按key搜索，就整体高亮（因为key不会展示）
+              <span className={styles.matchTextTotal}>{_title}</span>
+            ) : (
+              <>
+                {beforeStr}
+                <span className={styles.matchText}>{matchStr}</span>
+                {afterStr}
+              </>
+            )}
+          </span>
+        );
+      } else if (kIndex >= 0) {
+        title = (
+          <span
+            ref={(() => {
+              if (!nodeMatchedRef.current) {
+                nodeMatchedRef.current = true;
+
+                return (el: HTMLElement) => {
+                  if (el) {
+                    const nodeEl = el.closest(".ant-tree-treenode") || el;
+                    const treeContainerEl = treeContainerRef.current;
+
+                    treeContainerEl.scrollBy(
+                      undefined,
+                      nodeEl.getBoundingClientRect().top -
+                        treeContainerEl.getBoundingClientRect().top
+                    );
+                  }
+                };
+              } else {
+                return null;
+              }
+            })()}
+          >
+            <span className={styles.matchTextTotal}>{_title}</span>
+          </span>
+        );
+      }
+    }
+
+    if (!isEmpty(suffixBrick?.useBrick)) {
+      return (
+        <div className={styles.suffixBrickWrapper}>
+          <span
+            className={
+              showSpecificationTitleStyle && allOrDefaultFlag
+                ? styles.allOrDefault
+                : null
+            }
+          >
+            {title}
+          </span>
+          <span
+            onClick={(e) => {
+              suffixStopEvent && e.stopPropagation();
+            }}
+          >
+            <BrickAsComponent useBrick={suffixBrick.useBrick} data={node} />
+          </span>
+        </div>
+      );
+    }
+
+    return showSpecificationTitleStyle && allOrDefaultFlag ? (
+      <span className={styles.allOrDefault}>{title}</span>
+    ) : (
+      title
+    );
+  };
+
+  const getTreeElement = (props: any): React.ReactNode =>
+    isDirectory ? <DirectoryTree {...props} /> : <Tree {...props} />;
+
   return (
     <>
       {searchable && (
@@ -425,146 +549,18 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
         ref={treeContainerRef}
       >
         {treeData?.length ? (
-          <Tree
-            {...configProps}
-            treeData={treeData}
-            titleRender={(node) => {
-              const { title: _title, children, key: _key } = node;
-              let title: React.ReactNode = _title;
-              //根据ui规范，全部或者默认的节点，字体加粗，间距加宽
-              const allOrDefaultFlag =
-                (title === "全部" || title === "默认") && !children;
-              if (
-                typeof _title === "string" &&
-                searchValue &&
-                (searchParent ? true : !children?.length)
-              ) {
-                const lowerCaseSearchValue = searchValue.toLocaleLowerCase();
-                const index = _title
-                  .toLocaleLowerCase()
-                  .indexOf(lowerCaseSearchValue);
-                const kIndex = alsoSearchByKey
-                  ? _key
-                      .toString()
-                      ?.toLocaleLowerCase()
-                      .indexOf(lowerCaseSearchValue)
-                  : -1;
-
-                if (index >= 0) {
-                  const beforeStr = _title.substring(0, index);
-                  const matchStr = _title.substring(
-                    index,
-                    searchValueLength + index
-                  );
-                  const afterStr = _title.substring(searchValueLength + index);
-
-                  title = (
-                    <span
-                      ref={(() => {
-                        if (!nodeMatchedRef.current) {
-                          nodeMatchedRef.current = true;
-
-                          return (el: HTMLElement) => {
-                            if (el) {
-                              const nodeEl =
-                                el.closest(".ant-tree-treenode") || el;
-                              const treeContainerEl = treeContainerRef.current;
-
-                              treeContainerEl.scrollBy(
-                                undefined,
-                                nodeEl.getBoundingClientRect().top -
-                                  treeContainerEl.getBoundingClientRect().top
-                              );
-                            }
-                          };
-                        } else {
-                          return null;
-                        }
-                      })()}
-                    >
-                      {alsoSearchByKey ? (
-                        // 如果也按key搜索，就整体高亮（因为key不会展示）
-                        <span className={styles.matchTextTotal}>{_title}</span>
-                      ) : (
-                        <>
-                          {beforeStr}
-                          <span className={styles.matchText}>{matchStr}</span>
-                          {afterStr}
-                        </>
-                      )}
-                    </span>
-                  );
-                } else if (kIndex >= 0) {
-                  title = (
-                    <span
-                      ref={(() => {
-                        if (!nodeMatchedRef.current) {
-                          nodeMatchedRef.current = true;
-
-                          return (el: HTMLElement) => {
-                            if (el) {
-                              const nodeEl =
-                                el.closest(".ant-tree-treenode") || el;
-                              const treeContainerEl = treeContainerRef.current;
-
-                              treeContainerEl.scrollBy(
-                                undefined,
-                                nodeEl.getBoundingClientRect().top -
-                                  treeContainerEl.getBoundingClientRect().top
-                              );
-                            }
-                          };
-                        } else {
-                          return null;
-                        }
-                      })()}
-                    >
-                      <span className={styles.matchTextTotal}>{_title}</span>
-                    </span>
-                  );
-                }
-              }
-
-              if (!isEmpty(suffixBrick?.useBrick)) {
-                return (
-                  <div className={styles.suffixBrickWrapper}>
-                    <span
-                      className={
-                        showSpecificationTitleStyle && allOrDefaultFlag
-                          ? styles.allOrDefault
-                          : null
-                      }
-                    >
-                      {title}
-                    </span>
-                    <span
-                      onClick={(e) => {
-                        suffixStopEvent && e.stopPropagation();
-                      }}
-                    >
-                      <BrickAsComponent
-                        useBrick={suffixBrick.useBrick}
-                        data={node}
-                      />
-                    </span>
-                  </div>
-                );
-              }
-
-              return showSpecificationTitleStyle && allOrDefaultFlag ? (
-                <span className={styles.allOrDefault}>{title}</span>
-              ) : (
-                title
-              );
-            }}
-            selectedKeys={selectedKeys}
-            checkedKeys={checkedKeys}
-            {...(expandedKeys ? { expandedKeys: expandedKeys } : {})}
-            defaultExpandAll={defaultExpandAll}
-            onSelect={onSelect}
-            onCheck={onCheck}
-            onExpand={onExpand}
-          />
+          getTreeElement({
+            ...configProps,
+            ...(expandedKeys ? { expandedKeys: expandedKeys } : {}),
+            treeData,
+            titleRender,
+            checkedKeys,
+            selectedKeys,
+            defaultExpandAll,
+            onSelect,
+            onCheck,
+            onExpand,
+          })
         ) : (
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
         )}
