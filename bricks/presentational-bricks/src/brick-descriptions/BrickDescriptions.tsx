@@ -1,10 +1,12 @@
 import React from "react";
-import { Descriptions, Card } from "antd";
+import { Descriptions } from "antd";
 import { DescriptionsProps } from "antd/lib/descriptions";
 import { isPlainObject } from "lodash";
 import { BrickAsComponent } from "@next-core/brick-kit";
-import styles from "./BrickDescriptions.module.css";
+import { UseBrickConf } from "@next-core/brick-types";
 import { BrickDescriptionsItemProps } from "./index";
+
+import styles from "./BrickDescriptions.module.css";
 
 export interface BrickDescriptionsProps {
   configProps?: DescriptionsProps;
@@ -16,12 +18,26 @@ export interface BrickDescriptionsProps {
   bordered?: boolean;
   layout?: "horizontal" | "vertical";
   hideGroups?: string[] | string;
+  extraBrick?: {
+    useBrick: UseBrickConf;
+  };
 }
 
 export function BrickDescriptions(
   props: BrickDescriptionsProps
 ): React.ReactElement {
-  const { configProps, itemList, hideGroups } = props;
+  const {
+    descriptionTitle,
+    column,
+    size,
+    bordered,
+    layout,
+    dataSource,
+    configProps,
+    itemList,
+    hideGroups,
+    extraBrick,
+  } = props;
 
   const hideGroupsSet = new Set([].concat(hideGroups).filter(Boolean));
   // istanbul ignore next
@@ -33,8 +49,8 @@ export function BrickDescriptions(
       "`<presentational-bricks.brick-descriptions>.itemList[].component` are deprecated, use `useBrick` instead."
     );
     const { field, component } = item;
-    if (field && Array.isArray(props.dataSource[field])) {
-      return props.dataSource[field].map((data: any, i: number) => (
+    if (field && Array.isArray(dataSource[field])) {
+      return dataSource[field].map((data: any, i: number) => (
         <component.brick
           key={`${item.id}-${i}`}
           ref={(el: any) => {
@@ -55,7 +71,7 @@ export function BrickDescriptions(
             el &&
               Object.assign(el, {
                 item,
-                dataSource: props.dataSource,
+                dataSource: dataSource,
                 ...component.properties,
               });
           }}
@@ -65,21 +81,20 @@ export function BrickDescriptions(
   };
 
   // istanbul ignore next
-  const renderBrick = (
-    item: BrickDescriptionsItemProps
-  ): React.ReactElement => {
-    return (
-      <BrickAsComponent useBrick={item.useBrick} data={props.dataSource} />
-    );
+  const renderBrick = (item: {
+    useBrick?: UseBrickConf;
+  }): React.ReactElement => {
+    return <BrickAsComponent useBrick={item.useBrick} data={dataSource} />;
   };
 
   return (
     <Descriptions
-      title={props.descriptionTitle}
-      column={props.column}
-      size={props.size}
-      bordered={props.bordered}
-      layout={props.layout}
+      title={descriptionTitle}
+      column={column}
+      size={size}
+      bordered={bordered}
+      layout={layout}
+      extra={extraBrick && renderBrick(extraBrick)}
       className={styles.descriptionWrapper}
       {...configProps}
     >

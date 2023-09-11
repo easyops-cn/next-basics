@@ -45,6 +45,9 @@ export interface DescriptionListProps {
   bordered?: boolean;
   layout?: LayoutType;
   hideGroups?: string[] | string;
+  extraBrick?: {
+    useBrick: UseBrickConf;
+  };
 }
 
 export type LayoutType = "horizontal" | "vertical";
@@ -191,6 +194,14 @@ export class BrickDescriptionsElement extends UpdatingElement {
   hideGroups: string[] | string;
 
   /**
+   * @required false
+   * @description 描述列表的操作区域构件配置，显示在右上方
+   */
+  extraBrick?: {
+    useBrick: UseBrickConf;
+  };
+
+  /**
    * @kind Record<string, any>
    * @required false
    * @default -
@@ -246,6 +257,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
                 bordered={description.bordered || this.bordered}
                 layout={description.layout || this.layout}
                 hideGroups={description.hideGroups || this.hideGroups}
+                extraBrick={description.extraBrick || this.extraBrick}
               />
             ))}
           </div>
@@ -260,6 +272,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
             bordered={this.bordered}
             layout={this.layout}
             hideGroups={this.hideGroups}
+            extraBrick={this.extraBrick}
           />
         )}
       </>
