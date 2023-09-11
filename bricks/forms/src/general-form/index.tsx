@@ -20,6 +20,7 @@ import styles from "./GeneralForm.shadow.less";
 import moment from "moment";
 import { merge, cloneDeep, isNil } from "lodash";
 import { FormAlignment } from "../interfaces";
+import { parseFormValues } from "./parseFormValues";
 
 export const LAYOUT_ENUMS = ["horizontal", "vertical", "inline"];
 /**
@@ -375,32 +376,22 @@ export class GeneralFormElement
   }
 
   private _setInitValue(value: any): void {
-    // 日期格式的字符串需要 moment 包裹一层
-    const formatValues = Object.entries(value).reduce<Record<string, any>>(
-      (acc, [key, value]) => {
-        const valueType = this.valueTypes?.[key];
-        if (typeof valueType === "string") {
-          const matches = valueType.match(/^moment(?:\|(.+))?$/);
-          if (matches && !isNil(value)) {
-            value = moment(value, matches[1]);
-          }
-        }
-        acc[key] = value;
-        return acc;
-      },
-      {}
-    );
+    if (!value) {
+      return;
+    }
 
-    this.formUtils.setFieldsValue(formatValues);
+    const parsedValues = parseFormValues(value, this.valueTypes);
+
+    this.formUtils.setFieldsValue(parsedValues);
 
     // workaround for dynamic-form-item set value
     this.childNodes.forEach((node: any) => {
       /* istanbul ignore next */
       if (
         node.nodeName === "FORMS.DYNAMIC-FORM-ITEM" &&
-        formatValues[node.name]
+        parsedValues[node.name]
       ) {
-        node.setDynamicValue(formatValues[node.name]);
+        node.setDynamicValue(parsedValues[node.name]);
       }
     });
     this._forceUpdate();

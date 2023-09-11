@@ -10,6 +10,8 @@ import moment from "moment";
 import { AbstractGeneralFormElement } from "@next-libs/forms";
 import ResizeObserver from "resize-observer-polyfill";
 import { FormAlignment } from "../interfaces";
+import { parseFormValues } from "./parseFormValues";
+import { mapValues } from "lodash";
 
 const AlignmentJustifyContentValueMap: Record<FormAlignment, string> = {
   [FormAlignment.Left]: "flex-start",
@@ -81,29 +83,17 @@ export const GeneralFormGen = (
   return Form.create<LegacyGeneralFormProps>({
     name,
     mapPropsToFields(props: LegacyGeneralFormProps) {
-      return props.values
-        ? Object.entries(props.values).reduce<Record<string, any>>(
-            (acc, [key, value]) => {
-              let newValue = value;
-              if (value) {
-                const valueType = props.valueTypes?.[key];
-                if (typeof valueType === "string") {
-                  // The value of date-picker must be a moment object.
-                  const matches = valueType.match(/^moment(?:\|(.+))?$/);
-                  if (matches) {
-                    newValue = moment(value, matches[1]);
-                  }
-                }
-              }
+      if (!props.values) {
+        return {};
+      }
 
-              acc[key] = Form.createFormField({
-                value: newValue,
-              });
-              return acc;
-            },
-            {}
-          )
-        : {};
+      const parsedValues = parseFormValues(props.values, props.valueTypes);
+
+      return mapValues(parsedValues, (value) =>
+        Form.createFormField({
+          value: value,
+        })
+      );
     },
     onValuesChange(_, values) {
       onValuesChange?.(values);
