@@ -57,6 +57,17 @@ jobs:
     - run: yarn build
     - run: yarn test:ci
 
+    - name: Package size report
+      id: pkg-size-report
+      uses: privatenumber/pkg-size-action@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        hide-files: '*.{js,css}.map'   
+        unchanged-files: hide  
+        display-size: uncompressed, gzip
+        build-command: yarn build        
+
     - name: Codecov
       uses: codecov/codecov-action@v3
       with:
@@ -65,4 +76,5 @@ jobs:
     - uses: easyops-cn/actions-next-publish-from-tags@master
       with:
         npm-token: ${{ secrets.NPM_TOKEN }}
-      if: github.event_name == 'push'
+      if: github.event_name == 'push' 
+

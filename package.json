@@ -11,7 +11,6 @@
     "build:bricks": "if [ -d bricks ]; then lerna run build --scope \"@next-bricks/*\"; else echo \"no bricks\"; fi",
     "build:templates": "if [ -d templates ]; then lerna run build --scope \"@next-legacy-templates/*\"; else echo \"no templates\"; fi",
     "build:micro-apps": "if [ -d micro-apps ]; then lerna run build --scope \"@next-micro-apps/*\"; else echo \"no micro-apps\"; fi",
-    "postbuild": "npm run size-limit",
     "size-limit": "size-limit",
     "serve": "brick-container-serve",
     "test": "next-jest",
