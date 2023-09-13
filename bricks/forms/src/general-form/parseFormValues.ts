@@ -25,8 +25,6 @@ export function parseFormValues(
         parsedValues,
         path
       );
-
-      return;
     }
 
     const valueType = valueTypes?.[path];
