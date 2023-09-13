@@ -9,7 +9,7 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import { Input } from "antd";
+import { Alert, Input } from "antd";
 import { get, isMatch, pick } from "lodash";
 import classNames from "classnames";
 import { SearchOutlined } from "@ant-design/icons";
@@ -51,11 +51,18 @@ export interface WorkbenchTreeProps {
   placeholder?: string;
   searchPlaceholder?: string;
   noSearch?: boolean;
+  alerts?: AlertConf[];
   isDrag?: boolean;
   allowDrag?: boolean;
   allowDragToRoot?: boolean;
   allowDragToInside?: boolean;
   dropEmit?: (detail: dropEmitProps) => void;
+}
+
+export interface AlertConf {
+  type?: "success" | "info" | "warning" | "error";
+  message: string;
+  description?: string;
 }
 
 export interface TreeListProps {
@@ -71,6 +78,7 @@ export function WorkbenchTree({
   searchPlaceholder,
   isDrag,
   noSearch,
+  alerts,
   allowDrag,
   allowDragToRoot,
   allowDragToInside,
@@ -324,6 +332,8 @@ export function WorkbenchTree({
               />
             </div>
           )}
+          {Array.isArray(alerts) &&
+            alerts.map((item, index) => <Alert key={index} {...item} />)}
           <SearchingContext.Provider value={!!q}>
             <WorkbenchTreeDndContext.Provider
               value={{

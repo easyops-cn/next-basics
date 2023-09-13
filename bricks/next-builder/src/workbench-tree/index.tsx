@@ -17,6 +17,7 @@ import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsCon
 import {
   WorkbenchTree,
   dropEmitProps,
+  AlertConf,
 } from "../shared/workbench/WorkbenchTree";
 import { WorkbenchTreeContext } from "../shared/workbench/WorkbenchTreeContext";
 import { deepMatch } from "../builder-container/utils";
@@ -87,6 +88,9 @@ export class WorkbenchTreeElement extends UpdatingElement {
 
   @property({ type: Boolean })
   skipNotify: boolean;
+
+  @property({ attribute: false })
+  alerts: AlertConf[];
 
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
@@ -189,6 +193,7 @@ export class WorkbenchTreeElement extends UpdatingElement {
                 placeholder={this.placeholder}
                 searchPlaceholder={this.searchPlaceholder}
                 noSearch={this.noSearch}
+                alerts={this.alerts}
                 dropEmit={this._handleNodeDrop}
                 allowDrag={this.allowDrag}
                 allowDragToInside={this.allowDragToInside}

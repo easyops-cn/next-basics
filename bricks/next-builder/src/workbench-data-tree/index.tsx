@@ -15,7 +15,7 @@ import {
   WorkbenchNodeData,
   WorkbenchTreeAction,
 } from "../shared/workbench/interfaces";
-import { dropEmitProps } from "../shared/workbench/WorkbenchTree";
+import { AlertConf, dropEmitProps } from "../shared/workbench/WorkbenchTree";
 import { BuilderProvider } from "@next-core/editor-bricks-helper";
 
 /**
@@ -74,6 +74,9 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
 
   @property({ type: String })
   nodeKey: string;
+
+  @property({ attribute: false })
+  alerts: AlertConf[];
 
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
@@ -144,6 +147,7 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
                 dropEmit={this._handleNodeDrop}
                 activeKey={this.activeKey}
                 nodeKey={this.nodeKey}
+                alerts={this.alerts}
                 clickFactory={this._nodeClickFactory}
                 contextMenuFactory={this._contextMenuFactory}
                 matchNodeDataFields={this.matchNodeDataFields}

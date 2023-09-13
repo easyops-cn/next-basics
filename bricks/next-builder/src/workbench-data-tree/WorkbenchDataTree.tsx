@@ -5,6 +5,7 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { WorkbenchNodeData } from "../shared/workbench/interfaces";
 import {
+  AlertConf,
   dropEmitProps,
   WorkbenchTree,
 } from "../shared/workbench/WorkbenchTree";
@@ -22,6 +23,7 @@ export interface WorkbenchDataTreeProps extends ContextOfWorkbenchTree {
   placeholder?: string;
   searchPlaceholder?: string;
   noSearch?: boolean;
+  alerts?: AlertConf[];
   dropEmit?: (detail: dropEmitProps) => void;
   matchNodeDataFields?: string | string[];
 }
@@ -33,6 +35,7 @@ export function WorkbenchDataTree({
   dropEmit,
   activeKey,
   nodeKey,
+  alerts,
   clickFactory,
   contextMenuFactory,
   matchNodeDataFields,
@@ -97,6 +100,7 @@ export function WorkbenchDataTree({
         nodes={trees}
         placeholder={placeholder}
         searchPlaceholder={searchPlaceholder}
+        alerts={alerts}
         allowDrag={true}
         allowDragToRoot={true}
         allowDragToInside={false}

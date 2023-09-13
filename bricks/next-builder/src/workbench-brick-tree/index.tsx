@@ -15,6 +15,7 @@ import type {
 } from "../shared/workbench/interfaces";
 import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
 import { WorkbenchBackendActionForInsertDetail } from "@next-types/preview";
+import { AlertConf } from "../shared/workbench/WorkbenchTree";
 
 /**
  * @id next-builder.workbench-brick-tree
@@ -39,6 +40,9 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
 
   @property({ attribute: false })
   collapsedNodes: string[];
+
+  @property({ attribute: false })
+  alerts: AlertConf[];
 
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
@@ -99,6 +103,7 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
                 searchPlaceholder={this.searchPlaceholder}
                 activeInstanceId={this.activeInstanceId}
                 collapsedNodes={this.collapsedNodes}
+                alerts={this.alerts}
                 isDrag={this.isDrag}
                 onNodeToggle={this._handleNodeToggle}
                 onAddBrickDrop={this._handleAddBrickDrop}

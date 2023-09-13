@@ -24,7 +24,7 @@ import {
   dropOptions,
   WorkbenchTreeContext,
 } from "../shared/workbench/WorkbenchTreeContext";
-import { WorkbenchTree } from "../shared/workbench/WorkbenchTree";
+import { AlertConf, WorkbenchTree } from "../shared/workbench/WorkbenchTree";
 import { deepMatch } from "../builder-container/utils";
 import { WorkbenchBackendActionForInsertDetail } from "@next-types/preview";
 
@@ -33,6 +33,7 @@ export interface WorkbenchBrickTreeProps {
   searchPlaceholder?: string;
   activeInstanceId?: string;
   collapsedNodes?: string[];
+  alerts: AlertConf[];
   isDrag?: boolean;
   onNodeToggle?(nodeId: string, collapsed: boolean): void;
   onAddBrickDrop?(params: WorkbenchBackendActionForInsertDetail): void;
@@ -58,6 +59,7 @@ export function WorkbenchBrickTree({
   searchPlaceholder,
   activeInstanceId,
   collapsedNodes,
+  alerts,
   isDrag,
   onNodeToggle,
   onAddBrickDrop,
@@ -394,6 +396,7 @@ export function WorkbenchBrickTree({
         nodes={tree}
         placeholder={placeholder}
         searchPlaceholder={searchPlaceholder}
+        alerts={alerts}
         allowDrag={true}
         allowDragToRoot={false}
         allowDragToInside={true}
