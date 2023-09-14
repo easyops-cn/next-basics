@@ -16,7 +16,10 @@ describe("parseFormValues", () => {
       )
     ).toEqual({
       a: moment("2023-09-11", "YYYY-MM-DD"),
+      b: { value: "b.value value" },
       "b.value": "b.value value",
+      c: [{ value: "c[0].value value" }],
+      "c[0]": { value: "c[0].value value" },
       "c[0].value": "c[0].value value",
     });
   });
