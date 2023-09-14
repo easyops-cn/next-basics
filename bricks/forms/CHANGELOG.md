@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.277.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.277.0...@next-bricks/forms@1.277.1) (2023-09-14)
+
+
+### Bug Fixes
+
+* **general-form:** fix for object and array value ([24f227e](https://github.com/easyops-cn/next-basics/commit/24f227e6e93c595d4da3a946b3c8c5c94206d29b))
+
+
+
+
+
 # [1.277.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.276.1...@next-bricks/forms@1.277.0) (2023-09-11)
 
 
