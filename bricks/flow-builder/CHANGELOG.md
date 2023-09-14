@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.29.16](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.15...@next-bricks/flow-builder@1.29.16) (2023-09-14)
+
+
+### Bug Fixes
+
+* emit node data when dispatch event `node.leave` ([ae22b5d](https://github.com/easyops-cn/next-basics/commit/ae22b5da490ec93a57a2a20ad25607f00d7a3dfb))
+
+
+
+
+
 ## [1.29.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.14...@next-bricks/flow-builder@1.29.15) (2023-08-29)
 
 
