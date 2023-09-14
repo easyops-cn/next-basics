@@ -72,7 +72,7 @@ export function TreeNode({
   const isActive = activeKey && node.key === activeKey;
 
   const onClick = useCallback(
-    (e: React.MouseEvent) => {
+    (e: MouseEvent | React.MouseEvent) => {
       return nodeClickFactory?.(node)(e);
     },
     [node, nodeClickFactory]
@@ -84,8 +84,8 @@ export function TreeNode({
   );
 
   const onMouseLeave = useCallback(
-    () => mouseLeaveFactory?.()(),
-    [mouseLeaveFactory]
+    () => mouseLeaveFactory?.(node)(),
+    [mouseLeaveFactory, node]
   );
 
   const onContextMenu = useCallback(

@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import React from "react";
 import { MenuIcon } from "@next-core/brick-types";
 import { StepItem, StepTreeNodeData } from "../interfaces";
 
@@ -18,10 +18,14 @@ export interface ContextOfWorkbenchTree {
   actionsHidden?: boolean;
   onActionClick?(detail: ActionClickDetail): void;
   activeKey?: string;
-  nodeClickFactory?: (data: StepTreeNodeData) => (event: MouseEvent) => void;
-  contextMenuFactory?(node?: StepTreeNodeData): (event: MouseEvent) => void;
+  nodeClickFactory?: (
+    data: StepTreeNodeData
+  ) => (event: MouseEvent | React.MouseEvent) => void;
+  contextMenuFactory?(
+    node?: StepTreeNodeData
+  ): (event: React.MouseEvent) => void;
   mouseEnterFactory?: (data: StepTreeNodeData) => () => void;
-  mouseLeaveFactory?: () => () => void;
+  mouseLeaveFactory?: (data: StepTreeNodeData) => () => void;
   matchNode?: (node: StepTreeNodeData, lowerTrimmedQuery?: string) => boolean;
 }
 
