@@ -116,10 +116,10 @@
 }
 
 .alert {
+  display: none;
   padding: 6px 10px;
   margin: 0.5em 0;
   word-wrap: break-word;
-  display: flex;
   gap: 8px;
 
   .icon {
@@ -127,6 +127,10 @@
     align-self: start;
     margin-top: 4px;
   }
+}
+
+:host([active]) .alert {
+  display: flex;
 }
 
 .alert + .alert {

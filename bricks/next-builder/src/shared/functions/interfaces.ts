@@ -7,6 +7,10 @@ export interface SerializableValue {
   error?: string;
 }
 
+export interface TestRunResult extends SerializableValue {
+  duration: number | null;
+}
+
 export interface RawCoverageOk {
   status?: "ok";
   statements: Map<EstreeNode, number>;

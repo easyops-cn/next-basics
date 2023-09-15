@@ -3,7 +3,7 @@ import {
   StoryboardFunctionRegistry,
 } from "@next-core/brick-kit";
 import MockDate from "mockdate";
-import { RawCoverage, SerializableValue } from "./interfaces";
+import { RawCoverage, SerializableValue, TestRunResult } from "./interfaces";
 import { CoverageFactory } from "./CoverageFactory";
 import { generalizedJsonParse } from "./processSerializableValue";
 
@@ -11,7 +11,7 @@ export type FunctionDebugger = Omit<
   StoryboardFunctionRegistry,
   "storyboardFunctions"
 > & {
-  run(fn: string, input: SerializableValue): SerializableValue;
+  run(fn: string, input: SerializableValue): TestRunResult;
   getCoverage(fn: string): RawCoverage;
   resetCoverage(fn: string): void;
 };
@@ -28,13 +28,15 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
       createCollector,
     },
   });
-  function run(fn: string, input: SerializableValue): SerializableValue {
+  function run(fn: string, input: SerializableValue): TestRunResult {
     let error: string;
     let ok = false;
     let raw: string;
+    let duration: number | null = null;
     if (input.ok) {
       MockDate.set("2015-07-20T09:15:00+08:00");
       try {
+        const start = performance.now();
         const value = storyboardFunctions[fn](
           // Re-parse input to avoid mutating after tests run.
           ...generalizedJsonParse<unknown[]>(input.raw)
@@ -42,6 +44,7 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
         raw =
           value === undefined ? "undefined" : JSON.stringify(value, null, 2);
         ok = true;
+        duration = Math.round(performance.now() - start);
       } catch (e) {
         error = String(e);
       }
@@ -49,7 +52,7 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
     } else {
       error = input.error;
     }
-    return { ok, raw, error };
+    return { ok, raw, error, duration };
   }
 
   return {

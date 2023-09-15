@@ -1,3 +1,4 @@
+import { omit } from "lodash";
 import { Reducer } from "react";
 import { FunctionTestCase } from "../../shared/functions/interfaces";
 import {
@@ -32,7 +33,7 @@ export const tests: Reducer<DebuggerStateTestCase[], DebuggerAction> = (
             functionName: undefined,
             userInput: undefined,
           },
-          testExpect: action.debugOutput,
+          testExpect: omit(action.debugOutput, ["duration"]),
           testReceived: action.debugOutput,
           testMatched: true,
           testModified: true,
@@ -113,7 +114,7 @@ export const tests: Reducer<DebuggerStateTestCase[], DebuggerAction> = (
           input: testInput.raw,
           output: item.testReceived.raw,
           testInput,
-          testExpect: item.testReceived,
+          testExpect: omit(item.testReceived, "duration"),
           testMatched: true,
           testModified: true,
           testUpdatable: false,

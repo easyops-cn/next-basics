@@ -506,7 +506,6 @@ export async function BuildProjectOfTemplates({
     },
   ];
 
-  // Todo(steve): use project config instead of a temporary feature flag
   const widgetsV3 = projectDetailResponse.brickNextVersion === 3;
   if (widgetsV3) {
     const chunkVar = `webpackChunk_widgets_${appId.replace(/-/g, "_")}`;
