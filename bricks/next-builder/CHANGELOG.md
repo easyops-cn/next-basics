@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.259.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.258.1...@next-bricks/next-builder@1.259.0) (2023-09-15)
+
+
+### Features
+
+* **workbench-pane:** allow set alerts ([5f92a54](https://github.com/easyops-cn/next-basics/commit/5f92a543fdc9961d7b4e56ed69b0bbe183586ef8))
+
+
+
+
+
 ## [1.258.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.258.0...@next-bricks/next-builder@1.258.1) (2023-09-08)
 
 
