@@ -30,10 +30,17 @@ export function CollapsibleCardItem(
     >
       <div
         className={classNames(
-          "headerContainer",
-          props.isActive ? "borderButtom" : null
+          "headerContainer"
+          // props.isActive ? "borderButtom" : null
         )}
-        // style={props.isActive ? { borderBottom: "solid 1px #e8e8e8" } : {}}
+        style={
+          props.isActive
+            ? {
+                borderBottom:
+                  "var(--border-width-base) solid var(--color-text-divider-line)",
+              }
+            : {}
+        }
       >
         {props.showSubscript && (
           <div className="subscriptContainer">
