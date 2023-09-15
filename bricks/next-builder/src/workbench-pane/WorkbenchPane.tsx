@@ -8,19 +8,27 @@ import React, {
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
 import classNames from "classnames";
 import { debounceByAnimationFrame } from "@next-core/brick-utils";
+import { GeneralIcon } from "@next-libs/basic-components";
 
 export interface WorkbenchPaneProps {
   titleLabel?: string;
   active?: boolean;
   badge?: number;
+  alerts?: AlertConf[];
   onActiveChange?(active: boolean): void;
   onFirstActivated?(): void;
+}
+
+export interface AlertConf {
+  type?: "success" | "info" | "warning" | "error";
+  message: string;
 }
 
 export function WorkbenchPane({
   titleLabel,
   active,
   badge,
+  alerts,
   onActiveChange,
   onFirstActivated,
 }: WorkbenchPaneProps): React.ReactElement {
@@ -73,6 +81,31 @@ export function WorkbenchPane({
         {badge !== null && <div className="badge">{badge}</div>}
         <div className="pane-scroll-shadow"></div>
       </div>
+
+      {Array.isArray(alerts) &&
+        alerts.map((item, index) => (
+          <div key={index} className={classNames("alert", item.type)}>
+            {item.type && (
+              <GeneralIcon
+                icon={{
+                  lib: "antd",
+                  theme: "filled",
+                  icon:
+                    item.type === "warning"
+                      ? "exclamation-circle"
+                      : item.type === "error"
+                      ? "close-circle"
+                      : item.type === "success"
+                      ? "check-circle"
+                      : "info-circle",
+                }}
+                iconClassName="icon"
+              />
+            )}
+            {item.message}
+          </div>
+        ))}
+
       <div
         className="pane-body custom-scrollbar-container"
         onScroll={handleScroll}

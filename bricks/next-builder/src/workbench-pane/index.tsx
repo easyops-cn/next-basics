@@ -7,7 +7,7 @@ import {
   property,
   UpdatingElement,
 } from "@next-core/brick-kit";
-import { WorkbenchPane } from "./WorkbenchPane";
+import { AlertConf, WorkbenchPane } from "./WorkbenchPane";
 
 import styles from "./WorkbenchPane.shadow.css";
 import sharedStyles from "../shared/scrollbar.shadow.css";
@@ -29,6 +29,9 @@ export class WorkbenchPaneElement extends UpdatingElement {
 
   @property({ type: Number })
   badge: number;
+
+  @property({ attribute: false })
+  alerts: AlertConf[];
 
   @event({ type: "active.change" })
   private _onActiveChangeEvent: EventEmitter<boolean>;
@@ -79,6 +82,7 @@ export class WorkbenchPaneElement extends UpdatingElement {
               titleLabel={this.titleLabel}
               active={this.active}
               badge={this.badge}
+              alerts={this.alerts}
               onActiveChange={this._onActiveChange}
               onFirstActivated={this._onFirstActivated}
             />

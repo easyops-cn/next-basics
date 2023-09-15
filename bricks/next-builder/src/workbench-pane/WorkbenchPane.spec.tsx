@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
 import { WorkbenchPane } from "./WorkbenchPane";
 import { act } from "react-dom/test-utils";
@@ -55,5 +55,33 @@ describe("WorkbenchPane", () => {
       wrapper.update();
     });
     expect(wrapper.find(".pane").hasClass("scrolled")).toBe(true);
+  });
+
+  it("should show alerts", async () => {
+    const wrapper = shallow(
+      <WorkbenchPane
+        titleLabel="Hello"
+        alerts={[
+          { type: "warning", message: "Oops" },
+          { type: "error", message: "Yaks" },
+          { type: "success", message: "ok" },
+          { type: "info", message: "note" },
+        ]}
+      />
+    );
+    expect(wrapper.find(".alert").length).toBe(4);
+    expect(wrapper.find("GeneralIcon").length).toBe(4);
+    expect(wrapper.find("GeneralIcon").at(0).props()).toMatchObject({
+      icon: { icon: "exclamation-circle" },
+    });
+    expect(wrapper.find("GeneralIcon").at(1).props()).toMatchObject({
+      icon: { icon: "close-circle" },
+    });
+    expect(wrapper.find("GeneralIcon").at(2).props()).toMatchObject({
+      icon: { icon: "check-circle" },
+    });
+    expect(wrapper.find("GeneralIcon").at(3).props()).toMatchObject({
+      icon: { icon: "info-circle" },
+    });
   });
 });
