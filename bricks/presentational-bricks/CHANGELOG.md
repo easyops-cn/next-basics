@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.0...@next-bricks/presentational-bricks@1.308.1) (2023-09-15)
+
+
+### Bug Fixes
+
+* 修复不能折叠的问题 ([04763c0](https://github.com/easyops-cn/next-basics/commit/04763c03ae0a5ee0d180e014c5b3d3b102ae8d64))
+
+
+
+
+
 # [1.308.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.307.0...@next-bricks/presentational-bricks@1.308.0) (2023-09-11)
 
 
