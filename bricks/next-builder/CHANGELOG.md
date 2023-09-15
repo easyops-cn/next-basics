@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.260.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.259.0...@next-bricks/next-builder@1.260.0) (2023-09-15)
+
+
+### Features
+
+* emit `nodes.count` ([096cc0c](https://github.com/easyops-cn/next-basics/commit/096cc0cb629ad451bb5f400eac9b07e4b98ab85a))
+
+
+
+
+
 # [1.259.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.258.1...@next-bricks/next-builder@1.259.0) (2023-09-15)
 
 
