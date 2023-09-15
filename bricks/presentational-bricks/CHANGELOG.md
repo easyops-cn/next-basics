@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.1...@next-bricks/presentational-bricks@1.308.2) (2023-09-15)
+
+
+### Bug Fixes
+
+* **brick-tree:** 增加内容fontSize设置为16px的能力 ([fe3647c](https://github.com/easyops-cn/next-basics/commit/fe3647c4e20ddf4b1af72484afb37f86d91af8c9))
+
+
+
+
+
 ## [1.308.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.0...@next-bricks/presentational-bricks@1.308.1) (2023-09-15)
 
 
