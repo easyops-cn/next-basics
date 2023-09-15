@@ -52,7 +52,7 @@
   right: 0;
   height: 3px;
   box-shadow: #000000 0 6px 6px -6px inset;
-  z-index: 1;
+  z-index: 2;
 }
 
 .scrolled .pane-scroll-shadow {
@@ -113,4 +113,54 @@
   line-height: 13px;
   margin: 0 3px;
   font-size: 12px;
+}
+
+.alert {
+  padding: 6px 10px;
+  margin: 0.5em 0;
+  word-wrap: break-word;
+  display: flex;
+  gap: 8px;
+
+  .icon {
+    display: inline-flex;
+    align-self: start;
+    margin-top: 4px;
+  }
+}
+
+.alert + .alert {
+  margin-top: 0;
+}
+
+.alert.warning {
+  background-color: var(--color-warning-bg);
+
+  .icon {
+    color: var(--color-warning);
+  }
+}
+
+.alert.error {
+  background-color: var(--color-error-bg);
+
+  .icon {
+    color: var(--color-error);
+  }
+}
+
+.alert.info {
+  background-color: var(--color-info-bg);
+
+  .icon {
+    color: var(--color-info);
+  }
+}
+
+.alert.success {
+  background-color: var(--color-success-bg);
+
+  .icon {
+    color: var(--color-success);
+  }
 }
