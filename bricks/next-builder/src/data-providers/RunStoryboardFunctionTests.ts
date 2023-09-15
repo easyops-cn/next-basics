@@ -26,6 +26,7 @@ export interface RunStoryboardFunctionTestsParams {
 export interface RunStoryboardFunctionTestsResult {
   coverage: CoverageReport;
   coverageByFunction: Record<string, CoverageReport>;
+  maxDurationByFunction: Record<string, number>;
 }
 
 interface CoverageReport {
@@ -59,11 +60,13 @@ export function RunStoryboardFunctionTests({
   let total = 0;
   let passed = 0;
   const coverageByFunction: Record<string, CoverageReport> = {};
+  const maxDurationByFunction: Record<string, number> = {};
   const validCoverages: CoverageCounts[] = [];
   for (const fn of functions) {
     let fnTotal = 0;
     let fnPassed = 0;
     const list: boolean[] = [];
+    let maxDuration = -Infinity;
     if (Array.isArray(fn.tests)) {
       for (const testCase of fn.tests) {
         fnTotal++;
@@ -74,6 +77,9 @@ export function RunStoryboardFunctionTests({
           list.push(true);
         } else {
           list.push(false);
+        }
+        if (output.duration !== null) {
+          maxDuration = Math.max(maxDuration, output.duration);
         }
       }
     }
@@ -96,6 +102,9 @@ export function RunStoryboardFunctionTests({
     } else {
       coverageByFunction[fn.name] = null;
     }
+    if (maxDuration >= 0) {
+      maxDurationByFunction[fn.name] = maxDuration;
+    }
   }
   return {
     coverage: accumulateCoverageReport(validCoverages, {
@@ -104,6 +113,7 @@ export function RunStoryboardFunctionTests({
       failed: total - passed,
     }),
     coverageByFunction,
+    maxDurationByFunction,
   };
 }
 

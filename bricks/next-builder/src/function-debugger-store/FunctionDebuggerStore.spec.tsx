@@ -209,6 +209,7 @@ describe("FunctionDebuggerStore", () => {
             ok: true,
             raw: '"my"',
             error: undefined,
+            duration: 0,
           },
           testUpdatable: false,
         },
@@ -249,6 +250,7 @@ describe("FunctionDebuggerStore", () => {
         ok: true,
         raw: '"my"',
         error: undefined,
+        duration: 0,
       });
       expectRestHandlersNotBeCalled(restHandlers, "run");
     }
@@ -294,6 +296,7 @@ describe("FunctionDebuggerStore", () => {
         ok: true,
         raw: '"my"',
         error: undefined,
+        duration: 0,
       });
       expect(onTestMatchedChange).toBeCalledTimes(1);
       expect(onTestMatchedChange).toBeCalledWith(true);
@@ -485,6 +488,7 @@ describe("FunctionDebuggerStore", () => {
             ok: true,
             raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
+            duration: 0,
           },
           testUpdatable: true,
         },
@@ -494,6 +498,7 @@ describe("FunctionDebuggerStore", () => {
         ok: true,
         raw: '"my treasure 2015-07-20T09:15:00+08:00"',
         error: undefined,
+        duration: 0,
       });
       expect(onTestMatchedChange).toBeCalledTimes(1);
       expect(onTestMatchedChange).toBeCalledWith(false);
@@ -555,6 +560,7 @@ describe("FunctionDebuggerStore", () => {
             ok: true,
             raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
+            duration: 0,
           },
           testUpdatable: false,
         },
@@ -633,6 +639,7 @@ describe("FunctionDebuggerStore", () => {
             ok: true,
             raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
+            duration: 0,
           },
           testUpdatable: false,
         },
@@ -684,6 +691,7 @@ describe("FunctionDebuggerStore", () => {
             ok: false,
             raw: undefined,
             error: "SyntaxError: Unexpected token , in JSON at position 1",
+            duration: null,
           },
           testUpdatable: false,
         },
@@ -706,6 +714,7 @@ describe("FunctionDebuggerStore", () => {
             ok: true,
             raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
+            duration: 0,
           },
           testUpdatable: false,
         },
@@ -715,6 +724,7 @@ describe("FunctionDebuggerStore", () => {
         ok: false,
         raw: undefined,
         error: "SyntaxError: Unexpected token , in JSON at position 1",
+        duration: null,
       });
       expect(onTestMatchedChange).toBeCalledTimes(1);
       expect(onTestMatchedChange).toBeCalledWith(false);
@@ -774,6 +784,7 @@ describe("FunctionDebuggerStore", () => {
             ok: true,
             raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
+            duration: 0,
           },
           testUpdatable: false,
         },
@@ -829,6 +840,7 @@ describe("FunctionDebuggerStore", () => {
             ok: true,
             raw: '"my pleasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
+            duration: 0,
           },
           testUpdatable: true,
         },
@@ -851,6 +863,7 @@ describe("FunctionDebuggerStore", () => {
             ok: true,
             raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
+            duration: 0,
           },
           testUpdatable: false,
         },
@@ -860,6 +873,7 @@ describe("FunctionDebuggerStore", () => {
         ok: true,
         raw: '"my pleasure 2015-07-20T09:15:00+08:00"',
         error: undefined,
+        duration: 0,
       });
       expect(onTestMatchedChange).toBeCalledTimes(1);
       expect(onTestMatchedChange).toBeCalledWith(false);
@@ -1105,6 +1119,7 @@ describe("FunctionDebuggerStore", () => {
         ok: false,
         raw: undefined,
         error: "oops",
+        duration: null,
       });
       expectRestHandlersNotBeCalled(restHandlers, "run which throws");
     }
@@ -1129,6 +1144,7 @@ describe("FunctionDebuggerStore", () => {
         ok: true,
         raw: "undefined",
         error: undefined,
+        duration: 0,
       });
       expectRestHandlersNotBeCalled(restHandlers, "run which returns");
     }

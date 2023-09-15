@@ -4,6 +4,7 @@ import {
   RawCoverage,
   SerializableValue,
   StoryboardFunctionWithTests,
+  TestRunResult,
 } from "../../shared/functions/interfaces";
 
 // Actions:
@@ -125,7 +126,7 @@ export interface DebuggerStateDebugInput extends SerializableValue {
   userInput?: boolean;
 }
 
-export interface DebuggerStateDebugOutput extends SerializableValue {}
+export interface DebuggerStateDebugOutput extends TestRunResult {}
 
 export interface DebuggerStateTestCase extends FunctionTestCase {
   testInput: DebuggerStateTestInput;

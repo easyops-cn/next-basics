@@ -6,7 +6,6 @@ import React, {
   useEffect,
   useImperativeHandle,
   useMemo,
-  useState,
 } from "react";
 import type {
   BuilderCustomTemplateNode,

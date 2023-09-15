@@ -43,6 +43,7 @@ describe("RunStoryboardFunctionTests", () => {
             },
           },
           coverageByFunction: {},
+          maxDurationByFunction: {},
         },
       ],
       [
@@ -219,6 +220,10 @@ describe("RunStoryboardFunctionTests", () => {
               },
             },
           },
+          maxDurationByFunction: {
+            fb: 0,
+            sayHello: 0,
+          },
         },
       ],
       [
@@ -318,6 +323,9 @@ describe("RunStoryboardFunctionTests", () => {
                 },
               },
             },
+          },
+          maxDurationByFunction: {
+            fb: 0,
           },
         },
       ],
