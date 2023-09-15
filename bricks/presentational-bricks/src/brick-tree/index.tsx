@@ -261,6 +261,15 @@ export class BrickTreeElement extends UpdatingElement {
   @property({ attribute: false })
   iconUseBrick?: BrickTreeProps["iconUseBrick"];
 
+  /**
+   * @kind
+   * @default -
+   * @description 内容fontSize设置为16px
+   * @group basic
+   */
+  @property({ attribute: false })
+  contentFontSize16?: boolean;
+
   connectedCallback(): void {
     this.style.display = "flex";
     this.style.flexDirection = "column";
@@ -329,6 +338,7 @@ export class BrickTreeElement extends UpdatingElement {
             isFilter={this.isFilter}
             iconUseBrick={this.iconUseBrick}
             isDirectory={this.isDirectory}
+            contentFontSize16={this.contentFontSize16}
           />
         </BrickWrapper>,
         this
