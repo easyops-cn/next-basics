@@ -349,6 +349,7 @@ describe("BrickTree", () => {
             brick: "div",
           },
         }}
+        contentFontSize16={true}
       />
     );
     expect(wrapper.find(Tree).prop("treeData")[0].icon).toEqual(

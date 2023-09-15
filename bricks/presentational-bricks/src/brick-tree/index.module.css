@@ -63,3 +63,12 @@
 .allOrDefault {
   font-weight: 600;
 }
+.contentFontSize16 {
+  :global(.ant-tree-node-content-wrapper) {
+    font-size: 16px;
+    line-height: 36px;
+  }
+  :global(.ant-tree-switcher) {
+    line-height: 36px;
+  }
+}

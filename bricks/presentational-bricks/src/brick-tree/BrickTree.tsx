@@ -199,6 +199,7 @@ export interface BrickTreeProps {
   isFilter?: boolean;
   iconUseBrick?: { useBrick: UseBrickConf };
   isDirectory?: boolean;
+  contentFontSize16?: boolean;
 }
 
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
@@ -545,6 +546,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
         className={classNames(styles.treeWrapper, {
           [styles.withSuffix]: !isEmpty(suffixBrick?.useBrick),
           [styles.titleSpace]: showSpecificationTitleStyle,
+          [styles.contentFontSize16]: props.contentFontSize16,
         })}
         ref={treeContainerRef}
       >
