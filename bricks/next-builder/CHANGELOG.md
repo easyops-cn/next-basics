@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.260.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.260.0...@next-bricks/next-builder@1.260.1) (2023-09-15)
+
+
+### Bug Fixes
+
+* report function run duration ([7178131](https://github.com/easyops-cn/next-basics/commit/71781314a3d78d90d3aea232724770df39ae8bc3))
+
+
+
+
+
 # [1.260.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.259.0...@next-bricks/next-builder@1.260.0) (2023-09-15)
 
 
