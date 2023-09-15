@@ -6,6 +6,7 @@ import React, {
   useEffect,
   useImperativeHandle,
   useMemo,
+  useState,
 } from "react";
 import type {
   BuilderCustomTemplateNode,
@@ -36,6 +37,7 @@ export interface WorkbenchStoreProps {
   ): void;
   onNodeAdd?: (event: CustomEvent<EventDetailOfNodeAdd>) => void;
   onSnippetApply?: (event: CustomEvent<EventDetailOfSnippetApply>) => void;
+  onNodesCountChange?: (count: number) => void;
 }
 
 export interface WorkbenchStoreRef {
@@ -53,6 +55,7 @@ export function LegacyWorkbenchStore(
     onWorkbenchTreeNodeMove,
     onNodeAdd,
     onSnippetApply,
+    onNodesCountChange,
   }: WorkbenchStoreProps,
   ref: React.Ref<WorkbenchStoreRef>
 ): React.ReactElement {
@@ -123,6 +126,10 @@ export function LegacyWorkbenchStore(
   useHighlightBrick("hover", manager);
   useHighlightBrick("active", manager);
   useListenOnPreviewMessage(manager);
+
+  useEffect(() => {
+    onNodesCountChange?.(nodes.length);
+  }, [nodes, onNodesCountChange]);
 
   return null;
 }

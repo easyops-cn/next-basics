@@ -139,6 +139,14 @@ export class WorkbenchStoreElement extends UpdatingElement {
   })
   private _nodeDeleteEmitter: EventEmitter<BuilderRuntimeNode>;
 
+  @event({
+    type: "nodes.count",
+  })
+  private _nodesCountEmitter: EventEmitter<number>;
+  private _handleNodesCountChange = (count: number): void => {
+    this._nodesCountEmitter.emit(count);
+  };
+
   // istanbul ignore next
   @method()
   nodeAddStored(detail: EventDetailOfNodeAddStored): void {
@@ -218,6 +226,7 @@ export class WorkbenchStoreElement extends UpdatingElement {
               onWorkbenchTreeNodeMove={this._handleNodeMove}
               onNodeAdd={this._handleNodeAdd}
               onSnippetApply={this._handleSnippetApply}
+              onNodesCountChange={this._handleNodesCountChange}
             />
           </BuilderProvider>
         </BrickWrapper>,
