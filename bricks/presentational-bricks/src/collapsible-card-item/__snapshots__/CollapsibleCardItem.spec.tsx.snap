@@ -10,7 +10,12 @@ exports[`CollapsibleCardItem should work 1`] = `
   }
 >
   <div
-    className="headerContainer borderButtom"
+    className="headerContainer"
+    style={
+      Object {
+        "borderBottom": "var(--border-width-base) solid var(--color-text-divider-line)",
+      }
+    }
   >
     <div
       className="collapsibleCardItemInfo"
@@ -67,6 +72,7 @@ exports[`CollapsibleCardItem should work 2`] = `
 >
   <div
     className="headerContainer"
+    style={Object {}}
   >
     <div
       className="collapsibleCardItemInfo"
