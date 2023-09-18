@@ -270,6 +270,15 @@ export class BrickTreeElement extends UpdatingElement {
   @property({ attribute: false })
   contentFontSize16?: boolean;
 
+  /**
+   * @kind
+   * @default -
+   * @description 是否展示已选择数量
+   * @group basic
+   */
+  @property({ attribute: false })
+  hideSelectedNum?: boolean;
+
   connectedCallback(): void {
     this.style.display = "flex";
     this.style.flexDirection = "column";
@@ -339,6 +348,7 @@ export class BrickTreeElement extends UpdatingElement {
             iconUseBrick={this.iconUseBrick}
             isDirectory={this.isDirectory}
             contentFontSize16={this.contentFontSize16}
+            hideSelectedNum={this.hideSelectedNum}
           />
         </BrickWrapper>,
         this

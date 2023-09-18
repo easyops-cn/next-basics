@@ -200,6 +200,7 @@ export interface BrickTreeProps {
   iconUseBrick?: { useBrick: UseBrickConf };
   isDirectory?: boolean;
   contentFontSize16?: boolean;
+  hideSelectedNum?: boolean;
 }
 
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
@@ -533,13 +534,15 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
           >
             {i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECT_ALL}`)}
           </Checkbox>
-          <span style={{ marginLeft: "auto" }} className="checkedNum">
-            {i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECTED_OPTIONS}`, {
-              number: props.checkedFilterConfig
-                ? filterCheckedKeys?.length
-                : (Array.isArray(checkedKeys) && checkedKeys?.length) || 0,
-            })}
-          </span>
+          {!props.hideSelectedNum && (
+            <span style={{ marginLeft: "auto" }} className="checkedNum">
+              {i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECTED_OPTIONS}`, {
+                number: props.checkedFilterConfig
+                  ? filterCheckedKeys?.length
+                  : (Array.isArray(checkedKeys) && checkedKeys?.length) || 0,
+              })}
+            </span>
+          )}
         </div>
       )}
       <div

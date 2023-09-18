@@ -350,6 +350,7 @@ describe("BrickTree", () => {
           },
         }}
         contentFontSize16={true}
+        hideSelectedNum={true}
       />
     );
     expect(wrapper.find(Tree).prop("treeData")[0].icon).toEqual(
