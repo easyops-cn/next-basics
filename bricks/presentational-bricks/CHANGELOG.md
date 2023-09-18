@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.2...@next-bricks/presentational-bricks@1.308.3) (2023-09-18)
+
+
+### Bug Fixes
+
+* 增加是否隐藏已选择数量 ([c37fdca](https://github.com/easyops-cn/next-basics/commit/c37fdca8e71a5361aa2bcc4e9e804025d486c730))
+
+
+
+
+
 ## [1.308.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.1...@next-bricks/presentational-bricks@1.308.2) (2023-09-15)
 
 
