@@ -7,7 +7,7 @@
   "ignorePresets": [":ignoreModulesAndTests"],
   "packageRules": [
     {
-      "excludePackagePatterns": ["^@next-core/", "^@next-libs/"],
+      "excludePackagePatterns": ["^@next-core/", "^@next-libs/", "^@next-shared/"],
       "enabled": false
     },
     {
