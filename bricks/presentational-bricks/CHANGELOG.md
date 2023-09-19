@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.3...@next-bricks/presentational-bricks@1.308.4) (2023-09-19)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** 复制构件样式问题 ([af9ed0f](https://github.com/easyops-cn/next-basics/commit/af9ed0f5e521fb2b76931324b73b5d1ebfe410e2))
+
+
+
+
+
 ## [1.308.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.2...@next-bricks/presentational-bricks@1.308.3) (2023-09-18)
 
 
