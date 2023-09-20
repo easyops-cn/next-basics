@@ -188,7 +188,7 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
         cancelButtonProps: merge({ type: "text" }, cancelButtonProps),
       });
     }
-  }, [props.confirmLoading, cancelButtonProps, okDisabled]);
+  }, [props.confirmLoading, cancelButtonProps, okDisabled, okButtonProps]);
 
   useEffect(() => {
     if (visible && modal) {
