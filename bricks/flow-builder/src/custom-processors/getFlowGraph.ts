@@ -109,11 +109,13 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
 
   stageList.forEach((stage) => {
     stage.forEach((item) => {
-      edges.push({
-        source: rootId,
-        target: item.id,
-        type: "include",
-      });
+      if (!edges.some((e) => e.target === item.id && e.source === rootId)) {
+        edges.push({
+          source: rootId,
+          target: item.id,
+          type: "include",
+        });
+      }
     });
   });
 
