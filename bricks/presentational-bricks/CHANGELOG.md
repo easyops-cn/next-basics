@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.4...@next-bricks/presentational-bricks@1.308.5) (2023-09-20)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** okButtonProps 无法触发更新 ([ecd213f](https://github.com/easyops-cn/next-basics/commit/ecd213f13df587ad10d14eef71bf1e6e5c6fbc3e))
+
+
+
+
+
 ## [1.308.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.3...@next-bricks/presentational-bricks@1.308.4) (2023-09-19)
 
 
