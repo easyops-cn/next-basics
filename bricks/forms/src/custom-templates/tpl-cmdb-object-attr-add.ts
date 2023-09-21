@@ -40,6 +40,10 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
         ref: "attrValue",
         refProperty: "isProtected",
       },
+      attrDescOptions: {
+        ref: "attrDesc",
+        refProperty: "options",
+      },
     },
     events: {
       "validate.success": {
@@ -126,7 +130,8 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
               },
             },
             {
-              brick: "forms.general-input",
+              brick: "forms.general-auto-complete",
+              ref: "attrDesc",
               properties: {
                 dataset: {
                   testid: "cmdb-object-attr-add-description-input",
@@ -142,6 +147,9 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                 placeholder: i18n.t(
                   `${NS_FORMS}:${K.PLEASE_INPUT_ATTRIBUTE_DESCRIPTION}`
                 ),
+                inputBoxStyle: {
+                  width: "100%",
+                },
               },
             },
             {
