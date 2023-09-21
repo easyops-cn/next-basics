@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.278.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.277.1...@next-bricks/forms@1.278.0) (2023-09-21)
+
+
+### Features
+
+* 我希望新增模型「属性分类」，可以用已有属性分类做候选项，也可以直接填 ([498ef5d](https://github.com/easyops-cn/next-basics/commit/498ef5dac05641c48d92ef5aab3e428c58aa8bfd))
+
+
+
+
+
 ## [1.277.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.277.0...@next-bricks/forms@1.277.1) (2023-09-14)
 
 
