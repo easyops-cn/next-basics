@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.278.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.278.0...@next-bricks/forms@1.278.1) (2023-09-22)
+
+
+### Bug Fixes
+
+* **forms.tpl-cmdb-object-attr-add:** 属性分类支持options Ref NWYD-452 ([7ba6102](https://github.com/easyops-cn/next-basics/commit/7ba6102f4f6deb0e92cf3d865ba35413e4c61d5f))
+
+
+
+
+
 # [1.278.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.277.1...@next-bricks/forms@1.278.0) (2023-09-21)
 
 
