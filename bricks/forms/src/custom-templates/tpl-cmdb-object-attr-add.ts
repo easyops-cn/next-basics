@@ -44,6 +44,10 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
         ref: "attrDesc",
         refProperty: "options",
       },
+      attrCategoryOptions: {
+        ref: "attrCategory",
+        refProperty: "options",
+      },
     },
     events: {
       "validate.success": {
@@ -253,7 +257,8 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
               },
             },
             {
-              brick: "forms.general-input",
+              brick: "forms.general-auto-complete",
+              ref: "attrCategory",
               properties: {
                 dataset: {
                   testid: "cmdb-object-attr-add-tag-input",
@@ -263,6 +268,9 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                 placeholder: i18n.t(
                   `${NS_FORMS}:${K.PLEASE_INPUT_ATTRIBUTE_CATEGROY}`
                 ),
+                inputBoxStyle: {
+                  width: "100%",
+                },
               },
             },
             {
