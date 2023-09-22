@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.5...@next-bricks/presentational-bricks@1.308.6) (2023-09-22)
+
+
+### Bug Fixes
+
+* brick tree background color ([e8c41fd](https://github.com/easyops-cn/next-basics/commit/e8c41fdb9e916c155fd4125fb45f88825ae5284a))
+
+
+
+
+
 ## [1.308.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.4...@next-bricks/presentational-bricks@1.308.5) (2023-09-20)
 
 
