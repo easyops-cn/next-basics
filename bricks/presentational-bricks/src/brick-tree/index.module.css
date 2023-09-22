@@ -1,7 +1,7 @@
 .treeWrapper {
   overflow: auto;
   flex-grow: 1;
-  background: var(--color-fill-bg-container-4);
+  background: var(--color-fill-bg-container-1);
   border-radius: var(--larger-border-radius);
 
   &.withSuffix {
