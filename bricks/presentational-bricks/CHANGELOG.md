@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.6...@next-bricks/presentational-bricks@1.308.7) (2023-09-25)
+
+
+### Bug Fixes
+
+* 增加list样式控制 ([4df99bf](https://github.com/easyops-cn/next-basics/commit/4df99bf363c0a9c62076c781d75ba1792a541452))
+
+
+
+
+
 ## [1.308.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.5...@next-bricks/presentational-bricks@1.308.6) (2023-09-22)
 
 
