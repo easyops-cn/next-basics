@@ -100,6 +100,7 @@ describe("InfoDisplayCardList", () => {
         detailOfDescBrickConf={{ useBrick: { brick: "div" } }}
         urlTemplate="/management/list/detail?id=#{id}"
         optionConf={{ useBrick: { brick: "div" } }}
+        listStyle={{ maxWidth: "auth" }}
       />
     );
     spyOnHistoryPush.mockClear();

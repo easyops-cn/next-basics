@@ -144,6 +144,17 @@ export class InfoDisplayCardListElement extends UpdatingElement {
   })
   detailDescFontSize: number | string;
 
+  /**
+   * @kind React.CSSProperties
+   * @required false
+   * @default false
+   * @description list样式
+   */
+  @property({
+    attribute: false,
+  })
+  listStyle: React.CSSProperties;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -174,6 +185,7 @@ export class InfoDisplayCardListElement extends UpdatingElement {
             url={this.url}
             urlTemplate={this.urlTemplate}
             target={this.target}
+            listStyle={this.listStyle}
           />
         </BrickWrapper>,
         this

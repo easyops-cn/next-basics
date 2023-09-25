@@ -20,6 +20,7 @@ interface InfoDisplayCardListProps {
   url?: string;
   urlTemplate?: string;
   target?: string;
+  listStyle: React.CSSProperties;
 }
 
 export function InfoDisplayCardList({
@@ -34,6 +35,7 @@ export function InfoDisplayCardList({
   url,
   urlTemplate,
   target,
+  listStyle,
 }: InfoDisplayCardListProps): React.ReactElement {
   const isEmptyDetailOfDescBrickConf = isEmpty(detailOfDescBrickConf?.useBrick);
   const isEmptyIconBrickConf = isEmpty(iconBrickConf?.useBrick);
@@ -175,7 +177,7 @@ export function InfoDisplayCardList({
       itemLayout="horizontal"
       dataSource={dataSource}
       renderItem={(item) => getCardItem(item)}
-      style={{ maxWidth: "1300px" }}
+      style={{ maxWidth: "1300px", ...listStyle }}
     />
   ) : (
     <Empty />
