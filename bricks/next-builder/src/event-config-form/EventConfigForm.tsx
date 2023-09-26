@@ -8,6 +8,8 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { useCurrentTheme, getRuntime } from "@next-core/brick-kit";
+import { copyToClipboard } from "@next-libs/clipboard";
+import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 import { FormInstance, FormProps } from "antd/lib/form";
 import { NS_NEXT_BUILDER, K } from "../i18n/constants";
 import {
@@ -22,6 +24,7 @@ import {
   Input,
   Select,
   Switch,
+  message,
 } from "antd";
 import { FileSearchOutlined } from "@ant-design/icons";
 import { ColProps } from "antd/lib/col";
@@ -31,7 +34,7 @@ import {
   hasCallbackActions,
   recommendActionIds,
 } from "../shared/visual-events/constants";
-import { Link } from "@next-libs/basic-components";
+import { GeneralIcon, Link } from "@next-libs/basic-components";
 import {
   HandlerType,
   LifeCycle,
@@ -52,6 +55,7 @@ export interface EventConfigFormProps {
   pathList?: string[];
   segueList?: { label: string; value: string }[];
   docUrl?: string;
+  mockTipsUrl?: string;
   lifeCycle?: LifeCycle;
   workflowList?: Workflow[];
   highlightTokens?: HighlightTokenSettings[];
@@ -72,6 +76,7 @@ export function LegacyEventConfigForm(
     providerList,
     type,
     docUrl,
+    mockTipsUrl,
     lifeCycle,
     pathList,
     segueList,
@@ -211,7 +216,7 @@ export function LegacyEventConfigForm(
               {docUrl && (
                 <Tooltip title={t(K.LINK_TO_NEXT_DOCS)}>
                   <Link target="_blank" href={docUrl}>
-                    <FileSearchOutlined />
+                    <FileSearchOutlined style={{ lineHeight: "32px" }} />
                   </Link>
                 </Tooltip>
               )}
@@ -366,31 +371,130 @@ export function LegacyEventConfigForm(
                   }
                 ></AutoComplete>
               </Form.Item>
-              <Tooltip title={t(K.LINK_TO_DEVELOPER_PROVIDER_DOC)}>
-                <Link target="_blank" to="/developers/providers">
-                  <FileSearchOutlined />
-                </Link>
-              </Tooltip>
             </Form.Item>
           )
         }
       </Form.Item>
     ),
-    [providerList, t, inlineFormItemStyle]
+    [providerList, inlineFormItemStyle]
+  );
+
+  const mockTipsItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.handlerType !== currentValues.handlerType ||
+          prevValues.providerType !== currentValues.providerType
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("handlerType") === HandlerType.UseProvider && (
+            <Form.Item
+              style={{
+                color: "var(--color-disabled-text)",
+                margin: "-26px 0 0 0",
+              }}
+              colon={false}
+              label=" "
+            >
+              <span>{t(K.MOCK_TIPS_PREFIX)}</span>
+              <span>
+                <Link
+                  onClick={async () => {
+                    const flowApiFullName = getFieldValue(
+                      getFieldValue("providerType")
+                    ) as string;
+                    if (flowApiFullName) {
+                      const base_url = getRuntime()
+                        .getBasePath()
+                        .replace(/\/$/, "");
+                      const url =
+                        base_url +
+                        mockTipsUrl +
+                        "?q=" +
+                        flowApiFullName.split(":")?.[0];
+                      window.open(url, "_blank");
+                    }
+                  }}
+                >
+                  Mock
+                </Link>
+                <GeneralIcon
+                  icon={{ lib: "fa", icon: "external-link-alt" }}
+                  style={{ marginLeft: "6px" }}
+                />
+              </span>
+              <span>{t(K.MOCK_TIPS_SUFFIX)}</span>
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    [t, inlineFormItemStyle]
   );
 
   const contractTooltip = useMemo(
     () => (
-      <Tooltip title={t(K.LINK_TO_FLOWER_BUILDER)}>
+      <Tooltip title={t(K.LINK_TO_CONTRACT_CENTER)}>
         <Link
-          target="_blank"
-          to={
-            getRuntime().hasInstalledApp("contract-center")
-              ? "/contract-center"
-              : "/flow-builder"
-          }
+          onClick={async () => {
+            const base_url = getRuntime().getBasePath().replace(/\/$/, "");
+            const flowApiFullName = form.getFieldValue(
+              form.getFieldValue("providerType")
+            );
+            if (!flowApiFullName) {
+              return;
+            }
+            const resp = await InstanceApi_postSearch(
+              "FLOW_BUILDER_API_CONTRACT@EASYOPS",
+              {
+                fields: { namespaceId: true, name: true },
+                page: 1,
+                page_size: 10,
+                query: {
+                  namespaceId: flowApiFullName.split("@")[0],
+                  name: flowApiFullName.split("@")[1]?.split(":")?.[0],
+                  version: flowApiFullName.split("@")[1]?.split(":")?.[1],
+                },
+              }
+            );
+            let url = base_url + "/contract-center";
+            if (resp.list?.length === 1) {
+              url = url + "/contracts/" + resp.list[0].instanceId;
+            }
+            window.open(url, "_blank");
+          }}
         >
-          <FileSearchOutlined />
+          <GeneralIcon
+            icon={{ lib: "antd", icon: "file-text" }}
+            style={{ lineHeight: "32px" }}
+          />
+        </Link>
+      </Tooltip>
+    ),
+    [t]
+  );
+
+  const copyFlowApi = useMemo(
+    () => (
+      <Tooltip title={t(K.COPY)}>
+        <Link
+          onClick={() => {
+            const flowApiFullName =
+              (form.getFieldValue("flow") as string) || "";
+            const result = copyToClipboard(flowApiFullName);
+            if (result) {
+              message.success(t(K.COPY_SUCCESS));
+            } else {
+              message.error(t(K.COPY_FAILED));
+            }
+          }}
+        >
+          <GeneralIcon
+            icon={{ lib: "antd", icon: "copy" }}
+            style={{ lineHeight: "32px", marginRight: "6px" }}
+          />
         </Link>
       </Tooltip>
     ),
@@ -414,10 +518,14 @@ export function LegacyEventConfigForm(
                 name="flow"
                 rules={[{ required: true }]}
                 messageVariables={{ label: "flow" }}
-                style={inlineFormItemStyle}
+                style={{
+                  ...inlineFormItemStyle,
+                  ...{ width: "calc(100% - 44px)" },
+                }}
               >
                 <ContractAutoComplete />
               </Form.Item>
+              {copyFlowApi}
               {contractTooltip}
             </Form.Item>
           )
@@ -726,6 +834,7 @@ export function LegacyEventConfigForm(
         {providerTypeItem}
         {providerItem}
         {flowApiItem}
+        {mockTipsItem}
         {argsItem}
         <Form.Item noStyle>
           <Form.Item name="transform" label={t(K.TRANSFORM_LABEL)}>
@@ -780,6 +889,7 @@ export function LegacyEventConfigForm(
       {providerItem}
       {flowApiItem}
       {workflowItem}
+      {mockTipsItem}
       {useProviderMethod}
       {brickItem}
       {brickMethodItem}

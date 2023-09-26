@@ -181,6 +181,12 @@ const locale: Locale = {
   [K.CONDITION_GROUP]: "条件组",
   [K.INSTRUCTIONS_FOR_USE]: "使用说明",
   [K.ALL]: "全部",
+  [K.COPY]: "复制",
+  [K.COPY_SUCCESS]: "复制成功",
+  [K.COPY_FAILED]: "复制失败",
+  [K.LINK_TO_CONTRACT_CENTER]: "前往契约中心查看",
+  [K.MOCK_TIPS_PREFIX]: "接口未 ready ? 您可以使用 ",
+  [K.MOCK_TIPS_SUFFIX]: " 来进行接口调试!",
 };
 
 export default locale;
