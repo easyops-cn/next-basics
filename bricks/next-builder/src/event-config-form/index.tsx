@@ -95,6 +95,15 @@ export class EventConfigFormElement extends UpdatingElement {
   docUrl: string;
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 跳转到 Mock 配置地址
+   */
+  @property()
+  mockTipsUrl: string;
+
+  /**
    * @description 高亮标记设置。
    */
   @property({
@@ -222,6 +231,7 @@ export class EventConfigFormElement extends UpdatingElement {
             workflowList={this.workflowList}
             type={this.type}
             docUrl={this.docUrl}
+            mockTipsUrl={this.mockTipsUrl}
             lifeCycle={this.lifeCycle}
             useInCustomTemplate={this.useInCustomTemplate}
             highlightTokens={this.highlightTokens}

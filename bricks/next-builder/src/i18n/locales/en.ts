@@ -191,6 +191,12 @@ const locale: Locale = {
   [K.CONDITION_GROUP]: "Condition Group",
   [K.INSTRUCTIONS_FOR_USE]: "Instructions for use",
   [K.ALL]: "All",
+  [K.COPY]: "Copy",
+  [K.COPY_SUCCESS]: "Copied",
+  [K.COPY_FAILED]: "Copy Failed",
+  [K.LINK_TO_CONTRACT_CENTER]: "View in contract center",
+  [K.MOCK_TIPS_PREFIX]: "Api ready ? You can use ",
+  [K.MOCK_TIPS_SUFFIX]: " to send mock requests!",
 };
 
 export default locale;
