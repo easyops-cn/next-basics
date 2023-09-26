@@ -17,6 +17,10 @@ export interface ContextOfWorkbenchTree {
   actions?: StepTreeAction[];
   actionsHidden?: boolean;
   onActionClick?(detail: ActionClickDetail): void;
+  collapsible?: boolean;
+  collapsedNodes?: string[];
+  getCollapsedId?: (data: StepTreeNodeData) => string;
+  onNodeToggle?(nodeId: string, collapsed: boolean): void;
   activeKey?: string;
   nodeClickFactory?: (
     data: StepTreeNodeData

@@ -37,6 +37,29 @@ describe("flow-builder.step-tree", () => {
       }
     );
 
+    const onNodeToggle =
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0]["props"]
+        .children.props.value.onNodeToggle;
+
+    onNodeToggle("step1", true);
+
+    expect((sypOnDispatchEvent.mock.calls[1][0] as CustomEvent).detail).toEqual(
+      { collapsed: true, nodeId: "step1" }
+    );
+
+    const getCollapsedId =
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0]["props"]
+        .children.props.value.getCollapsedId;
+
+    expect(
+      getCollapsedId({
+        key: "abc123",
+        name: "step1",
+        id: "step1",
+        type: "task",
+      })
+    ).toEqual("abc123");
+
     document.body.removeChild(element);
     expect(unmountComponentAtNode).toBeCalled();
   });

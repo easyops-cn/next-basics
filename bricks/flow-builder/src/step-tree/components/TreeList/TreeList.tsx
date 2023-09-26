@@ -1,5 +1,11 @@
 /* istanbul ignore file temporary */
-import React, { useCallback, useContext } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { Tooltip, Checkbox } from "antd";
 import classnames from "classnames";
@@ -55,11 +61,16 @@ export function TreeNode({
   isStart,
   isEnd,
 }: TreeNodeProps): React.ReactElement {
+  const isLeaf = !node.children?.length;
   const {
     activeKey,
     nodeClickFactory,
     actions,
     actionsHidden,
+    collapsible,
+    getCollapsedId,
+    collapsedNodes,
+    onNodeToggle,
     onActionClick,
     mouseEnterFactory,
     mouseLeaveFactory,
@@ -68,6 +79,12 @@ export function TreeNode({
 
   const { q, multipleSelectMode, checkedMap, setCheckedMap } =
     useContext(TreeListContext);
+
+  const [collapseClicked, setCollapseClicked] = useState(false);
+  const [collapsed, setCollapsed] = useState(
+    collapsedNodes?.includes(getCollapsedId?.(node)) ?? false
+  );
+  const collapseButtonRef = useRef<HTMLSpanElement>(null);
 
   const isActive = activeKey && node.key === activeKey;
 
@@ -104,12 +121,48 @@ export function TreeNode({
     setCheckedMap(new Map([...checkedMap, ...nodeCheck]));
   };
 
+  const handleCollapse = useCallback((event: React.MouseEvent | MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setCollapseClicked(true);
+    setCollapsed((prev) => !prev);
+  }, []);
+
+  const preventMouseEvent = useCallback(
+    (event: React.MouseEvent | MouseEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (collapseClicked) {
+      onNodeToggle?.(getCollapsedId?.(node), collapsed);
+    }
+  }, [collapseClicked, collapsed, getCollapsedId, node, onNodeToggle]);
+
+  useEffect(() => {
+    const collapseButton = collapseButtonRef.current;
+    if (collapseButton) {
+      collapseButton.addEventListener("click", handleCollapse);
+      collapseButton.addEventListener("mousedown", preventMouseEvent);
+      return () => {
+        collapseButton.removeEventListener("click", handleCollapse);
+        collapseButton.removeEventListener("mousedown", preventMouseEvent);
+      };
+    }
+  }, [handleCollapse, preventMouseEvent]);
+
+  const allowCollapse = collapsible && !isLeaf;
+
   return (
     <li>
       <Link
         className={classnames(styles.nodeItem, {
           [styles.active]: isActive,
           [styles.matched]: !!q && node.matchedSelf,
+          [styles.collapsed]: allowCollapse && collapsed,
         })}
         tabIndex={0}
         noEmptyHref
@@ -149,6 +202,23 @@ export function TreeNode({
           </span>
         )}
 
+        {allowCollapse && (
+          <span
+            ref={collapseButtonRef}
+            className={styles.collapseIcon}
+            title={collapsed ? "Expand" : "Collapse"}
+            role="button"
+          >
+            <GeneralIcon
+              icon={{
+                lib: "antd",
+                theme: "outlined",
+                icon: collapsed ? "right" : "down",
+              }}
+            />
+          </span>
+        )}
+
         <Tooltip title={node.iconTooltip}>
           <span className={styles.iconWrapper}>
             <GeneralIcon icon={node.icon} />
@@ -166,7 +236,7 @@ export function TreeNode({
           onActionClick={onActionClick}
         />
       </Link>
-      {!!node.children?.length && (
+      {!isLeaf && (
         <TreeList
           nodes={node.children}
           level={level + 1}
