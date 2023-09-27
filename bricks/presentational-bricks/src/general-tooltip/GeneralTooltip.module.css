@@ -17,3 +17,11 @@
 .text {
   margin-right: 5px;
 }
+
+.textEllipsis {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

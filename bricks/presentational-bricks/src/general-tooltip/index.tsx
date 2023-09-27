@@ -140,6 +140,14 @@ export class GeneralTooltipElement extends UpdatingElement {
   })
   displayBrick: DisplayBrick;
 
+  /**
+   * @required false
+   * @description 内容是否收起以省略号展示
+   * @group other
+   */
+  @property({ type: Boolean })
+  textEllipsis: boolean;
+
   connectedCallback(): void {
     this.style.display = "inline-block";
     this._render();
@@ -164,6 +172,7 @@ export class GeneralTooltipElement extends UpdatingElement {
             tooltipConfig={this.tooltipConfig}
             triggerByIcon={this.triggerByIcon}
             displayBrick={this.displayBrick}
+            textEllipsis={this.textEllipsis}
           />
         </BrickWrapper>,
         this

@@ -9,6 +9,7 @@ import { Rule, RuleObject } from "antd/lib/form";
 import { StoreValue } from "antd/lib/form/interface";
 import { OptionType } from ".";
 import { CheckboxProps } from "antd";
+import { TextAreaProps } from "antd/lib/input";
 
 export enum ComponentType {
   INPUT = "input",
@@ -255,6 +256,11 @@ export interface AutoCompleteColumn {
   props: AutoCompleteProps;
 }
 
+export interface TextAreaColumn {
+  type: "textArea";
+  props: TextAreaProps;
+}
+
 export interface BasicColumn {
   /**
    * 表单项字段说明
@@ -300,4 +306,5 @@ export type Column = BasicColumn &
     | EditorColumn
     | AutoCompleteColumn
     | CheckboxColumn
+    | TextAreaColumn
   );
