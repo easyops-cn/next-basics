@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.309.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.7...@next-bricks/presentational-bricks@1.309.0) (2023-09-27)
+
+
+### Features
+
+* 1.动态formItem构件支持textArea; 2.tooltip构件支持content省略号显示 ([32b6b4d](https://github.com/easyops-cn/next-basics/commit/32b6b4dc26e37c8741cb74f5cfe9b8735c9bfaec))
+
+
+
+
+
 ## [1.308.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.6...@next-bricks/presentational-bricks@1.308.7) (2023-09-25)
 
 
