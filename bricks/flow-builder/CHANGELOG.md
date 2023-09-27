@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.30.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.17...@next-bricks/flow-builder@1.30.0) (2023-09-27)
+
+
+### Features
+
+* step tree support collapse ([cf70798](https://github.com/easyops-cn/next-basics/commit/cf70798e00bc55bc06958741a71cbbf33f0c2db7))
+
+
+
+
+
 ## [1.29.17](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.16...@next-bricks/flow-builder@1.29.17) (2023-09-20)
 
 
