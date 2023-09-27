@@ -621,6 +621,7 @@ export interface WorkbenchBackendActionForCutBrick
   action: "cut.brick";
   data: Partial<ModelInstanceRelationRequest> & {
     sourceBrickId: string;
+    objectId: string;
   };
 }
 export interface WorkbenchBackendActionForCopyBrick

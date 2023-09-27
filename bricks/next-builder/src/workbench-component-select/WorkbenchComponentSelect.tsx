@@ -281,7 +281,9 @@ export function ComponentSelect(
                   ([k]) =>
                     ![
                       "snippet",
-                      config.libraryShowV3Brick ? "" : "v3Brick",
+                      ...(config.libraryShowV3Brick
+                        ? []
+                        : ["v3Brick", "v3Provider"]),
                     ].includes(k)
                 )
                 .map(([k, v]) => {
