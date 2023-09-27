@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { TreeList } from "./TreeList";
 import { WorkbenchTreeContext } from "../../constants";
@@ -174,12 +174,27 @@ describe("TreeList", () => {
       isEnd: [] as boolean[],
     };
 
-    render(
-      <WorkbenchTreeContext.Provider value={{ actions: [] }}>
+    const { container } = render(
+      <WorkbenchTreeContext.Provider value={{ actions: [], collapsible: true }}>
         <TreeList {...props} />
       </WorkbenchTreeContext.Provider>
     );
 
     expect(screen.getByText(/root/i)).toBeInTheDocument();
+
+    expect(container.querySelectorAll(".collapseIcon").length).toEqual(3);
+
+    const firstCollapseNode = container.querySelectorAll(".collapseIcon")[0];
+    fireEvent.mouseDown(firstCollapseNode);
+    fireEvent.click(firstCollapseNode);
+
+    expect(container.querySelectorAll(".collapsed").length).toEqual(1);
+    expect(
+      container.querySelector(".collapsed .nodeLabel").textContent
+    ).toEqual("step1");
+
+    fireEvent.click(firstCollapseNode);
+
+    expect(container.querySelectorAll(".collapsed").length).toEqual(0);
   });
 });

@@ -78,6 +78,12 @@ export class StepTreeElement extends UpdatingElement {
   })
   activeBarStyle: React.CSSProperties;
 
+  @property({ type: Boolean })
+  collapsible: boolean;
+
+  @property({ attribute: false })
+  collapsedNodes: string[];
+
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
 
@@ -109,6 +115,16 @@ export class StepTreeElement extends UpdatingElement {
 
   @event({ type: "active.bar.click" })
   private _activeBarClickEvent: EventEmitter<ActionClickDetail>;
+
+  @event({ type: "node.toggle" })
+  private _nodeToggleEvent: EventEmitter<{
+    nodeId: string;
+    collapsed: boolean;
+  }>;
+
+  private _handleNodeToggle = (nodeId: string, collapsed: boolean): void => {
+    this._nodeToggleEvent.emit({ nodeId, collapsed });
+  };
 
   private _contextMenuFactory =
     (node: StepTreeNodeData) => (e: React.MouseEvent) => {
@@ -152,6 +168,10 @@ export class StepTreeElement extends UpdatingElement {
     this._render();
   }
 
+  private _getCollapsedId(data: StepTreeNodeData): string {
+    return data.key;
+  }
+
   disconnectedCallback(): void {
     ReactDOM.unmountComponentAtNode(this);
   }
@@ -165,7 +185,11 @@ export class StepTreeElement extends UpdatingElement {
             value={{
               activeKey: this.activeKey,
               actions: this.actions,
+              collapsible: this.collapsible,
+              collapsedNodes: this.collapsedNodes,
               actionsHidden: this.actionsHidden,
+              getCollapsedId: this._getCollapsedId,
+              onNodeToggle: this._handleNodeToggle,
               onActionClick: this._handleActionClick,
               nodeClickFactory: this._nodeClickFactory,
               mouseEnterFactory: this._nodeEnterFactory,
