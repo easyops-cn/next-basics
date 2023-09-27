@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.4](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.23.3...@next-types/preview@1.23.4) (2023-09-27)
+
+
+### Bug Fixes
+
+* VB cmdb操作更换业务接口记录变更历史 ([e2b52e7](https://github.com/easyops-cn/next-basics/commit/e2b52e702ce923c8029db23611da0cbef02f31d2))
+
+
+
+
+
 ## [1.23.3](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.23.2...@next-types/preview@1.23.3) (2023-08-18)
 
 
