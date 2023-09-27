@@ -302,8 +302,9 @@ export default class WorkbenchBackend {
           null,
           "实例修改冲突，可能有其他人正在修改当前页面，请尝试刷新页面"
         );
+      } else {
+        this.handleError(e, "更新实例失败");
       }
-      this.handleError(e, "更新实例失败");
       return false;
     }
   }
