@@ -120,6 +120,18 @@ export function ColumnComponent(
   }, []);
 
   switch (column.type) {
+    case "textArea": {
+      return (
+        <Form.Item
+          {...restField}
+          label={labelNode}
+          name={[fieldName, name]}
+          rules={rules}
+        >
+          <Input.TextArea {...column.props} />
+        </Form.Item>
+      );
+    }
     case "input": {
       const { placeholder, type, maxLength, allowClear } = column.props || {};
 

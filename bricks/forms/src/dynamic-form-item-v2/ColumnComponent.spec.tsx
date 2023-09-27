@@ -143,6 +143,15 @@ const checkboxColumn = {
   },
 } as Column;
 
+const textAreaColumn = {
+  name: "textArea",
+  label: "textArea",
+  type: "textArea",
+  props: {
+    autoSize: true,
+  },
+} as Column;
+
 describe("ColumnComponent", () => {
   it("default should work", () => {
     const wrapper = shallow(
@@ -401,16 +410,26 @@ describe("ColumnComponent", () => {
   });
 
   it("checkbox should work", () => {
+    const handleInputBlur = jest.fn();
     const wrapper = shallow(
-      <ColumnComponent column={checkboxColumn} field={field} />
+      <ColumnComponent
+        column={checkboxColumn}
+        field={field}
+        handleInputBlur={handleInputBlur}
+      />
     );
 
     expect(wrapper.find(Checkbox)).toHaveLength(1);
   });
 
   it("should work with debounceTime", () => {
+    const handleInputBlur = jest.fn();
     const wrapper = mount(
-      <ColumnComponent column={inputPasswordColumn} field={field} />
+      <ColumnComponent
+        column={inputPasswordColumn}
+        field={field}
+        handleInputBlur={handleInputBlur}
+      />
     );
 
     expect(wrapper.find(Input).prop("readOnly")).toBe(true);
@@ -419,5 +438,18 @@ describe("ColumnComponent", () => {
     });
     wrapper.update();
     expect(wrapper.find(Input).prop("readOnly")).toBe(false);
+  });
+
+  it("textArea should work", () => {
+    const handleInputBlur = jest.fn();
+    const wrapper = shallow(
+      <ColumnComponent
+        column={textAreaColumn}
+        field={field}
+        handleInputBlur={handleInputBlur}
+      />
+    );
+
+    expect(wrapper.find(Input.TextArea)).toHaveLength(1);
   });
 });

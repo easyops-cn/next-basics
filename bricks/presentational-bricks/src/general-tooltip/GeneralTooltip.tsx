@@ -5,6 +5,7 @@ import { UseBrickConf, MenuIcon } from "@next-core/brick-types";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import style from "./GeneralTooltip.module.css";
 import { TooltipConfig } from ".";
+import classnames from "classnames";
 
 export interface GeneralTooltipProps {
   icon?: MenuIcon;
@@ -19,6 +20,7 @@ export interface GeneralTooltipProps {
     useBrick: UseBrickConf;
     data?: any;
   };
+  textEllipsis?: boolean;
 }
 
 export function GeneralTooltip(props: GeneralTooltipProps): React.ReactElement {
@@ -32,6 +34,7 @@ export function GeneralTooltip(props: GeneralTooltipProps): React.ReactElement {
     tooltipConfig,
     triggerByIcon,
     displayBrick,
+    textEllipsis,
   } = props;
   let element: React.ReactElement;
   const { placement, arrowPointAtCenter, overlayStyle } = tooltipConfig || {};
@@ -144,7 +147,15 @@ export function GeneralTooltip(props: GeneralTooltipProps): React.ReactElement {
       <>
         {triggerByIcon && text && <span className={style.text}>{text}</span>}
         <Component {...componentProps}>
-          {!triggerByIcon && text && <span className={style.text}>{text}</span>}
+          {!triggerByIcon && text && (
+            <span
+              className={classnames(style.text, {
+                [style.textEllipsis]: textEllipsis,
+              })}
+            >
+              {text}
+            </span>
+          )}
           {iconNode}
         </Component>
       </>
