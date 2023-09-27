@@ -1,10 +1,6 @@
 import { omit } from "lodash";
 import {
-  InstanceApi_createInstance,
-  InstanceArchiveApi_archiveInstance,
   InstanceGraphApi_traverseGraphV2,
-  InstanceRelationApi_set,
-  InstanceApi_updateByQuery,
   InstanceApi_getDetail,
 } from "@next-sdk/cmdb-sdk";
 import {
@@ -13,6 +9,9 @@ import {
   type StoryboardApi_CloneBricksRequestBody,
   StoryboardApi_sortStoryboardNodes,
   PackageAloneApi_addDependencies,
+  StoryboardApi_addNode,
+  StoryboardApi_editNode,
+  StoryboardApi_deleteNode,
 } from "@next-sdk/next-builder-sdk";
 import {
   FormProjectApi_updateFormItem,
@@ -240,9 +239,9 @@ export default class WorkbenchBackend {
     data: WorkbenchBackendActionForInsertDetail
   ): Promise<boolean> {
     try {
-      const res = await InstanceApi_createInstance(
-        "STORYBOARD_BRICK",
-        omit(
+      const res = await StoryboardApi_addNode(this.baseInfo.projectId, {
+        objectId: "STORYBOARD_BRICK",
+        instance: omit(
           {
             ...data,
             parent: this.mockInstanceIdCache.get(data.parent) || data.parent,
@@ -255,10 +254,13 @@ export default class WorkbenchBackend {
             "parentInstanceId",
             "sortData",
           ]
-        )
+        ),
+      });
+      this.mockInstanceIdCache.set(
+        data.nodeData.instanceId,
+        res.instance.instanceId
       );
-      this.mockInstanceIdCache.set(data.nodeData.instanceId, res.instanceId);
-      this.mockNodeIdCache.set(data.nodeData.id, res.id);
+      this.mockNodeIdCache.set(data.nodeData.id, res.instance.id);
       if (data.sortData) {
         await this.sortInstance({
           objectId: "STORYBOARD_BRICK",
@@ -268,7 +270,7 @@ export default class WorkbenchBackend {
       this.publish("message", {
         action: "insert",
         data,
-        newData: res as BuilderBrickNode,
+        newData: res.instance as BuilderBrickNode,
       });
       return true;
     } catch (e) {
@@ -284,36 +286,23 @@ export default class WorkbenchBackend {
       const instanceId =
         this.mockInstanceIdCache.get(data.instanceId) || data.instanceId;
       const mtime = this.mTimeMap.get(instanceId) || data.mtime;
-      const res = await InstanceApi_updateByQuery(data.objectId, {
-        query: {
-          instanceId: {
-            $eq: instanceId,
-          },
-          ...(mtime
-            ? {
-                mtime: {
-                  $eq: mtime,
-                },
-              }
-            : {}),
-        },
-        data: data.property,
+      const res = await StoryboardApi_editNode(this.baseInfo.projectId, {
+        objectId: data.objectId,
+        instanceId: instanceId,
+        mtime: mtime,
+        instance: data.property,
       });
-      if (res.total === 0) {
+      return true;
+    } catch (e) {
+      if (
+        e.name === "HttpResponseError" &&
+        [100000, 100005].includes(e.responseJson.code)
+      ) {
         this.handleError(
           null,
-          "实例修改冲突,可能有其他人正在修改当前页面,请尝试刷新页面"
+          "实例修改冲突，可能有其他人正在修改当前页面，请尝试刷新页面"
         );
-        return false;
       }
-      if (res.failTotal > 0) {
-        this.handleError(null, "更新实例失败");
-        return false;
-      }
-      if (res.successTotal > 0) {
-        return true;
-      }
-    } catch (e) {
       this.handleError(e, "更新实例失败");
       return false;
     }
@@ -376,10 +365,11 @@ export default class WorkbenchBackend {
     data: WorkbenchBackendActionForDeleteDetail
   ): Promise<boolean> {
     try {
-      await InstanceArchiveApi_archiveInstance(
-        data.objectId,
-        this.mockInstanceIdCache.get(data.instanceId) || data.instanceId
-      );
+      await StoryboardApi_deleteNode(this.baseInfo.projectId, {
+        objectId: data.objectId,
+        instanceId:
+          this.mockInstanceIdCache.get(data.instanceId) || data.instanceId,
+      });
       return true;
     } catch (e) {
       this.handleError(e, "删除实例失败");
@@ -413,7 +403,9 @@ export default class WorkbenchBackend {
   ): Promise<boolean> {
     try {
       this.replaceSnippetData(data.snippetData);
-      const result = await ApplyStoryBoardSnippet(data.snippetData);
+      const result = await ApplyStoryBoardSnippet(data.snippetData, {
+        projectId: this.baseInfo.projectId,
+      });
       this.publish("message", {
         action: "snippet-success",
         data: {
@@ -444,10 +436,18 @@ export default class WorkbenchBackend {
   }
 
   private async cutBrick(
-    data: Partial<ModelInstanceRelationRequest>
+    data: Partial<ModelInstanceRelationRequest> & {
+      objectId: string;
+    }
   ): Promise<boolean> {
     try {
-      await InstanceRelationApi_set("STORYBOARD_NODE", "parent", data);
+      StoryboardApi_editNode(this.baseInfo.projectId, {
+        objectId: data.objectId,
+        instanceId: data.instance_ids[0],
+        instance: {
+          parent: data.related_instance_ids[0],
+        },
+      });
       this.isNeedUpdateTree = true;
       return true;
     } catch (e) {

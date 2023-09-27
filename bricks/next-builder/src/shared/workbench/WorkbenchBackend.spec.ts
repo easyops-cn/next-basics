@@ -10,33 +10,29 @@ import {
 const mockGetDetail = jest.fn((_) => ({
   mTime: "2",
 }));
-const mockCreateInstance = jest.fn((_objectId, params) => ({
-  ...params,
-  instanceId: "new-iid",
-  id: "new-id",
+const mockAddNode = jest.fn((projectId, { objectId, instance }) => ({
+  instance: {
+    ...instance,
+    instanceId: "new-iid",
+    id: "new-id",
+  },
 }));
-const mockUpdateIntanceByQuery = jest.fn((_) => ({
-  successTotal: 1,
+const mockEditNode = jest.fn((projectId, { instance }) => ({
+  instanceInfo: instance,
 }));
 const mockMoveInstance = jest.fn();
-const mockDeleteInstance = jest.fn();
+const mockDeleteNode = jest.fn();
 const mockBuildAndPush = jest.fn();
 const mockGetGraphData = jest.fn();
 const mockApplyStoryBoardSnippet = jest.fn((_) => ({}));
 const mockCloneBricks = jest.fn();
-const mockCutBricks = jest.fn();
 const mockUpdateFormItem = jest.fn();
 const mockDeleteFormItem = jest.fn();
 const mockCreateFormItem = jest.fn();
 
 jest.mock("@next-sdk/cmdb-sdk", () => ({
   InstanceApi_getDetail: (...args) => mockGetDetail(args),
-  InstanceApi_createInstance: (objectId, params) =>
-    mockCreateInstance(objectId, params),
-  InstanceApi_updateByQuery: (...args) => mockUpdateIntanceByQuery(args),
-  InstanceArchiveApi_archiveInstance: (...args) => mockDeleteInstance(args),
   InstanceGraphApi_traverseGraphV2: (...args) => mockGetGraphData(args),
-  InstanceRelationApi_set: (...args) => mockCutBricks(args),
 }));
 jest.mock("@next-sdk/next-builder-sdk", () => ({
   BuildApi_buildAndPush: (...args) => mockBuildAndPush(...args),
@@ -44,6 +40,10 @@ jest.mock("@next-sdk/next-builder-sdk", () => ({
   StoryboardApi_cloneBricks: (...args) => mockCloneBricks(args),
   PackageAloneApi_listDependencies: jest.fn(() => ({ list: [] })),
   PackageAloneApi_addDependencies: jest.fn(),
+  StoryboardApi_addNode: (projectId, params) => mockAddNode(projectId, params),
+  StoryboardApi_editNode: (projectId, params) =>
+    mockEditNode(projectId, params),
+  StoryboardApi_deleteNode: (...args) => mockDeleteNode(...args),
 }));
 
 jest.mock("@next-sdk/form-builder-service-sdk", () => ({
@@ -89,6 +89,7 @@ const backendInstance = WorkbenchBackend.getInstance({
   appId: "app-a",
   projectId: "project-a",
   objectId: "STORYBOARD_ROUTE",
+  storyboardType: "micro-app",
   rootNode,
   delayBuildTime: 30,
 });
@@ -122,12 +123,15 @@ describe("WorkbenchBackend should work", () => {
 
     await (global as any).flushPromises();
 
-    expect(mockCreateInstance).toHaveBeenNthCalledWith(1, "STORYBOARD_BRICK", {
-      brick: "div",
-      mountPoint: "content",
-      parent: "parent",
-      sort: 1,
-      type: "brick",
+    expect(mockAddNode).toHaveBeenNthCalledWith(1, "project-a", {
+      objectId: "STORYBOARD_BRICK",
+      instance: {
+        brick: "div",
+        mountPoint: "content",
+        parent: "parent",
+        sort: 1,
+        type: "brick",
+      },
     });
 
     await (global as any).flushPromises();
@@ -218,13 +222,12 @@ describe("WorkbenchBackend should work", () => {
     });
     await (global as any).flushPromises();
 
-    expect(mockUpdateIntanceByQuery).toHaveBeenNthCalledWith(1, [
-      "STORYBOARD_BRICK",
-      {
-        data: { properties: { textContent: "hello" } },
-        query: { instanceId: { $eq: "new-iid" }, mtime: { $eq: "1" } },
-      },
-    ]);
+    expect(mockEditNode).toHaveBeenNthCalledWith(1, "project-a", {
+      objectId: "STORYBOARD_BRICK",
+      instanceId: "new-iid",
+      mtime: "1",
+      instance: { properties: { textContent: "hello" } },
+    });
 
     expect(mockGetDetail).toBeCalledTimes(1);
 
@@ -259,13 +262,12 @@ describe("WorkbenchBackend should work", () => {
       state: "pending",
     });
     await (global as any).flushPromises();
-    expect(mockUpdateIntanceByQuery).toHaveBeenNthCalledWith(2, [
-      "STORYBOARD_BRICK",
-      {
-        data: { properties: { textContent: "hello world" } },
-        query: { instanceId: { $eq: "new-iid" }, mtime: { $eq: "2" } },
-      },
-    ]);
+    expect(mockEditNode).toHaveBeenNthCalledWith(2, "project-a", {
+      objectId: "STORYBOARD_BRICK",
+      instanceId: "new-iid",
+      mtime: "2",
+      instance: { properties: { textContent: "hello world" } },
+    });
 
     expect(handleBackendMessage).toHaveBeenLastCalledWith("message", {
       action: "instance-success",
@@ -292,7 +294,7 @@ describe("WorkbenchBackend should work", () => {
       state: "pending",
     } as WorkbenchBackendActionForMove);
 
-    expect(mockUpdateIntanceByQuery).toBeCalledTimes(2);
+    expect(mockEditNode).toBeCalledTimes(2);
 
     expect(mockMoveInstance).toHaveBeenNthCalledWith(1, [
       { nodeIds: ["B-01", "B-02", "new-id"] },
@@ -316,13 +318,11 @@ describe("WorkbenchBackend should work", () => {
       state: "pending",
     } as WorkbenchBackendActionForMove);
 
-    expect(mockUpdateIntanceByQuery).toHaveBeenNthCalledWith(3, [
-      "STORYBOARD_BRICK",
-      {
-        data: { mountPoint: "new-content", parent: "new-parent" },
-        query: { instanceId: { $eq: "new-iid" } },
-      },
-    ]);
+    expect(mockEditNode).toHaveBeenNthCalledWith(3, "project-a", {
+      objectId: "STORYBOARD_BRICK",
+      instanceId: "new-iid",
+      instance: { mountPoint: "new-content", parent: "new-parent" },
+    });
     await (global as any).flushPromises();
 
     expect(mockMoveInstance).toHaveBeenNthCalledWith(2, [
@@ -340,10 +340,10 @@ describe("WorkbenchBackend should work", () => {
       state: "pending",
     });
 
-    expect(mockDeleteInstance).toHaveBeenNthCalledWith(1, [
-      "STORYBOARD_ROUTE",
-      "new-iid",
-    ]);
+    expect(mockDeleteNode).toHaveBeenNthCalledWith(1, "project-a", {
+      objectId: "STORYBOARD_ROUTE",
+      instanceId: "new-iid",
+    });
 
     backendInstance.push({
       action: "delete",
@@ -355,10 +355,10 @@ describe("WorkbenchBackend should work", () => {
     });
     await (global as any).flushPromises();
 
-    expect(mockDeleteInstance).toHaveBeenNthCalledWith(2, [
-      "STORYBOARD_ROUTE",
-      "abc",
-    ]);
+    expect(mockDeleteNode).toHaveBeenNthCalledWith(2, "project-a", {
+      objectId: "STORYBOARD_ROUTE",
+      instanceId: "abc",
+    });
 
     expect(handleBackendMessage).toBeCalledTimes(10);
     backendInstance.unsubscribe(listener);
@@ -443,6 +443,9 @@ describe("WorkbenchBackend should work", () => {
         ],
         nodeIds: ["new-id", "B-1"],
       },
+      {
+        projectId: "project-a",
+      },
     ]);
 
     backendInstance.push({
@@ -465,13 +468,12 @@ describe("WorkbenchBackend should work", () => {
     });
     await (global as any).flushPromises();
 
-    expect(mockUpdateIntanceByQuery).toHaveBeenNthCalledWith(4, [
-      "STORYBOARD_ROUTE",
-      {
-        data: { context: [{ text: "test", value: "test" }] },
-        query: { instanceId: { $eq: "route-a" }, mtime: { $eq: "3" } },
-      },
-    ]);
+    expect(mockEditNode).toHaveBeenNthCalledWith(4, "project-a", {
+      objectId: "STORYBOARD_ROUTE",
+      instanceId: "route-a",
+      mtime: "3",
+      instance: { context: [{ text: "test", value: "test" }] },
+    });
 
     backendInstance.push({
       action: "copy.brick",
@@ -490,14 +492,19 @@ describe("WorkbenchBackend should work", () => {
       action: "cut.brick",
       data: {
         sourceBrickId: "general-text",
-        instance_ids: ["B-1", "B-2"],
+        instance_ids: ["B-1"],
         related_instance_ids: ["efg"],
+        objectId: "STORYBOARD_BRICK",
       },
       state: "pending",
     });
     await (global as any).flushPromises();
 
-    expect(mockCutBricks).toBeCalled();
+    expect(mockEditNode).toHaveBeenNthCalledWith(5, "project-a", {
+      objectId: "STORYBOARD_BRICK",
+      instanceId: "B-1",
+      instance: { parent: "efg" },
+    });
 
     expect(mockGetDetail).toBeCalledTimes(9);
     expect(mockMoveInstance).toBeCalledTimes(2);
@@ -524,11 +531,14 @@ describe("WorkbenchBackend should work", () => {
 
     await (global as any).flushPromises();
 
-    expect(mockCreateInstance).toHaveBeenNthCalledWith(2, "STORYBOARD_BRICK", {
-      brick: "div",
-      mountPoint: "content",
-      parent: "parent",
-      type: "brick",
+    expect(mockAddNode).toHaveBeenNthCalledWith(2, "project-a", {
+      objectId: "STORYBOARD_BRICK",
+      instance: {
+        brick: "div",
+        mountPoint: "content",
+        parent: "parent",
+        type: "brick",
+      },
     });
 
     expect(mockMoveInstance).toHaveBeenNthCalledWith(3, [
@@ -591,13 +601,12 @@ describe("WorkbenchBackend should work", () => {
     });
     await (global as any).flushPromises();
 
-    expect(mockUpdateIntanceByQuery).toHaveBeenNthCalledWith(1, [
-      "STORYBOARD_BRICK",
-      {
-        data: { properties: { textContent: "hello" } },
-        query: { instanceId: { $eq: "new-iid" }, mtime: { $eq: "1" } },
-      },
-    ]);
+    expect(mockEditNode).toHaveBeenNthCalledWith(6, "project-a", {
+      objectId: "STORYBOARD_BRICK",
+      instanceId: "new-iid",
+      mtime: "1",
+      instance: { properties: { textContent: "hello" } },
+    });
 
     expect(mockGetDetail).toBeCalledTimes(12);
   });
