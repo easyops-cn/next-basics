@@ -442,8 +442,16 @@ export default class WorkbenchBackend {
     }
   ): Promise<boolean> {
     try {
-      StoryboardApi_editNode(this.baseInfo.projectId, {
-        objectId: data.objectId,
+      let objectId = data.objectId;
+      if (!objectId) {
+        objectId = (
+          await InstanceApi_getDetail("STORYBOARD_NODE", data.instance_ids[0], {
+            fields: "_object_id",
+          })
+        )._object_id;
+      }
+      await StoryboardApi_editNode(this.baseInfo.projectId, {
+        objectId: objectId,
         instanceId: data.instance_ids[0],
         instance: {
           parent: data.related_instance_ids[0],
