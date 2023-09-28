@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.260.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.260.5...@next-bricks/next-builder@1.260.6) (2023-09-28)
+
+
+### Bug Fixes
+
+* 兼容没有传递objectId场景 ([1765243](https://github.com/easyops-cn/next-basics/commit/1765243b6273dad72a218fdb2f96481d737e12b5))
+
+
+
+
+
 ## [1.260.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.260.4...@next-bricks/next-builder@1.260.5) (2023-09-27)
 
 
