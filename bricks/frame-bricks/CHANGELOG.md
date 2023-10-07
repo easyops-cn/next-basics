@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.1...@next-bricks/frame-bricks@1.18.2) (2023-10-07)
+
+
+### Bug Fixes
+
+* 公网拨测机的二级菜单图标显示不正确 ([#87](https://github.com/easyops-cn/next-basics/issues/87)) ([a094134](https://github.com/easyops-cn/next-basics/commit/a094134078fca202b3c2992308f6ca0a7ddb9d24))
+
+
+
+
+
 ## [1.18.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.0...@next-bricks/frame-bricks@1.18.1) (2023-08-15)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
