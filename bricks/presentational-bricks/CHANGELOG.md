@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.309.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.309.0...@next-bricks/presentational-bricks@1.309.1) (2023-10-07)
+
+
+### Bug Fixes
+
+* 增加隐藏背景色属性 ([368c1f6](https://github.com/easyops-cn/next-basics/commit/368c1f61c000e6584a005763bb3ef4097ad3388b))
+
+
+
+
+
 # [1.309.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.308.7...@next-bricks/presentational-bricks@1.309.0) (2023-09-27)
 
 
