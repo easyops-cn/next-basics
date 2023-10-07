@@ -264,20 +264,20 @@ export class BrickTreeElement extends UpdatingElement {
   /**
    * @kind
    * @default -
-   * @description 内容fontSize设置为16px
-   * @group basic
-   */
-  @property({ attribute: false })
-  contentFontSize16?: boolean;
-
-  /**
-   * @kind
-   * @default -
    * @description 是否展示已选择数量
    * @group basic
    */
   @property({ attribute: false })
   hideSelectedNum?: boolean;
+
+  /**
+   * @kind
+   * @default -
+   * @description 隐藏背景颜色
+   * @group basic
+   */
+  @property({ attribute: false })
+  hideBackground?: boolean;
 
   connectedCallback(): void {
     this.style.display = "flex";
@@ -347,8 +347,8 @@ export class BrickTreeElement extends UpdatingElement {
             isFilter={this.isFilter}
             iconUseBrick={this.iconUseBrick}
             isDirectory={this.isDirectory}
-            contentFontSize16={this.contentFontSize16}
             hideSelectedNum={this.hideSelectedNum}
+            hideBackground={this.hideBackground}
           />
         </BrickWrapper>,
         this
