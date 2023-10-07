@@ -47,6 +47,15 @@
     width: 16px;
     height: 16px;
 
+    svg {
+      font-size: 20px;
+    }
+    img {
+      font-size: 20px;
+    }
+    eo-easyops-icon {
+      font-size: 20px;
+    }
     > :global(.anticon) {
       margin-right: 0;
       color: var(--color-normal-text);
