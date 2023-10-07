@@ -53,7 +53,7 @@
     img {
       font-size: 20px;
     }
-    eo-easyops-icon {
+    eo-easyops-icon, eo-fa-icon {
       font-size: 20px;
     }
     > :global(.anticon) {
