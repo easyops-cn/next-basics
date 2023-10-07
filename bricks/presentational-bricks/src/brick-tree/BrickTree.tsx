@@ -199,8 +199,8 @@ export interface BrickTreeProps {
   isFilter?: boolean;
   iconUseBrick?: { useBrick: UseBrickConf };
   isDirectory?: boolean;
-  contentFontSize16?: boolean;
   hideSelectedNum?: boolean;
+  hideBackground?: boolean;
 }
 
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
@@ -226,6 +226,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     onSearch,
     iconUseBrick,
     isDirectory,
+    hideBackground,
   } = props;
   const [allChecked, setAllChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -549,7 +550,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
         className={classNames(styles.treeWrapper, {
           [styles.withSuffix]: !isEmpty(suffixBrick?.useBrick),
           [styles.titleSpace]: showSpecificationTitleStyle,
-          [styles.contentFontSize16]: props.contentFontSize16,
+          [styles.hideBackground]: hideBackground,
         })}
         ref={treeContainerRef}
       >
