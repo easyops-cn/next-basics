@@ -316,7 +316,9 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         )}
       </div>
       {expandedState === ExpandedState.Expanded && (
-        <div className={styles.resizeLine} onMouseDown={handleResizeDown} />
+        <div className={styles.resizeLine} onMouseDown={handleResizeDown}>
+          <div className={styles.mask} />
+        </div>
       )}
     </div>
   );
