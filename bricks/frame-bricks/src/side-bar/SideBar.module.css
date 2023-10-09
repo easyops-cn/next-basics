@@ -124,6 +124,14 @@
       background-color: rgba(26, 122, 255, 1);
       cursor: col-resize;
     }
+
+    &.minWidth,
+    &.minWidth {
+      &:hover,
+      &:active {
+        cursor: e-resize;
+      }
+    }
   }
 }
 
