@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.2...@next-bricks/frame-bricks@1.18.3) (2023-10-09)
+
+
+### Bug Fixes
+
+* fix style ([fcfb693](https://github.com/easyops-cn/next-basics/commit/fcfb693a664517d8a03c5b1a5224331d7cb5a6db))
+* refactor cursor style ([1f56461](https://github.com/easyops-cn/next-basics/commit/1f56461feff14d840dc9e40556494a1c159f85c0))
+* 修复拖拽闪动问题 ([e400793](https://github.com/easyops-cn/next-basics/commit/e400793453bf17a8acb81e2bfb70351929992ae9))
+
+
+
+
+
 ## [1.18.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.1...@next-bricks/frame-bricks@1.18.2) (2023-10-07)
 
 

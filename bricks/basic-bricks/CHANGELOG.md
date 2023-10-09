@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.249.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.248.4...@next-bricks/basic-bricks@1.249.0) (2023-10-09)
+
+
+### Bug Fixes
+
+* fix style ([fcfb693](https://github.com/easyops-cn/next-basics/commit/fcfb693a664517d8a03c5b1a5224331d7cb5a6db))
+
+
+### Features
+
+* popover透传给子组件visible && input/cmdb-instance-select支持popover透传的属性 ([a11c8d0](https://github.com/easyops-cn/next-basics/commit/a11c8d0cd1d6185e28db12a8946481b219f3bb28))
+
+
+
+
+
 ## [1.248.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.248.3...@next-bricks/basic-bricks@1.248.4) (2023-09-07)
 
 

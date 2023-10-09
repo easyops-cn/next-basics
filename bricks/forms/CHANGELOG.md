@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.280.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.279.0...@next-bricks/forms@1.280.0) (2023-10-09)
+
+
+### Features
+
+* popover透传给子组件visible && input/cmdb-instance-select支持popover透传的属性 ([a11c8d0](https://github.com/easyops-cn/next-basics/commit/a11c8d0cd1d6185e28db12a8946481b219f3bb28))
+
+
+
+
+
 # [1.279.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.278.1...@next-bricks/forms@1.279.0) (2023-09-27)
 
 
