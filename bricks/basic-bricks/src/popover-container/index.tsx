@@ -270,6 +270,17 @@ export class PopoverContainerElement extends UpdatingElement {
     attribute: false,
   })
   getPopupContainer: (triggerNode: HTMLElement) => HTMLElement;
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否透传 popover 构件的 visible给 popoverBrick 的子构件，以便用户对子构件做特殊处理
+   * @group ui
+   */
+  @property({
+    type: Boolean,
+  })
+  transferVisible: boolean;
 
   /**
    * @detail any
@@ -344,6 +355,7 @@ export class PopoverContainerElement extends UpdatingElement {
             getPopupContainer={this.getPopupContainer}
             itemMouseEnter={this._itemMouseEnter}
             itemMouseLeave={this._itemMouseLeave}
+            transferVisible={this.transferVisible}
           />
         </BrickWrapper>,
         this

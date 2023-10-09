@@ -7,7 +7,6 @@ import { Clipboard } from "@next-libs/clipboard";
 import { GeneralInput, widthSize } from "./GeneralInput";
 
 const spyOnMessageSuccess = jest.spyOn(message, "success");
-
 describe("GeneralInput", () => {
   it("should work", async () => {
     const handleChange = jest.fn();
@@ -60,5 +59,32 @@ describe("GeneralInput", () => {
 
     clipboard.invoke("onCopy")(value, true);
     expect(spyOnMessageSuccess).toBeCalledWith(i18next.t(K.COPY_SUCCESS));
+  });
+  it("should work with useBrickVisible ", async () => {
+    const value = "value";
+    const handleBlur = jest.fn();
+    const handleFocus = jest.fn();
+    const wrapper = mount(
+      <GeneralInput
+        value={value}
+        useBrickVisible={true}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+      />
+    );
+    wrapper.find(Input).invoke("onFocus")({} as any);
+    await (global as any).flushPromises();
+    expect(handleFocus).toBeCalled();
+    wrapper.setProps({
+      useBrickVisible: false,
+    });
+    wrapper.update();
+    await (global as any).flushPromises();
+    wrapper.find(Input).invoke("onBlur")({
+      target: {
+        value: "good",
+      },
+    } as any);
+    expect(handleBlur).toBeCalledWith("good");
   });
 });

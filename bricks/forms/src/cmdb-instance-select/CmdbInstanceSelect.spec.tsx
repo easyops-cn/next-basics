@@ -7,7 +7,7 @@ import {
 } from "./CmdbInstanceSelect";
 import * as kit from "@next-core/brick-kit";
 import { InstanceApi_postSearchV3 } from "@next-sdk/cmdb-sdk";
-import { Select } from "antd";
+import { Input, Select } from "antd";
 import i18n from "i18next";
 import { act } from "react-dom/test-utils";
 
@@ -618,6 +618,17 @@ describe("CmdbInstanceSelect", () => {
         },
       ]
     );
+    wrapper.setProps({
+      useBrickVisible: true,
+    });
+    wrapper.update();
+    await (global as any).flushPromises();
+    wrapper.find(Select).invoke("onFocus")({} as any);
+    wrapper.setProps({
+      useBrickVisible: false,
+    });
+    wrapper.update();
+    await (global as any).flushPromises();
   });
 
   describe("formatUserQuery processor test", () => {

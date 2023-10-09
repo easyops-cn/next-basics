@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";
 import { Button, Input, message } from "antd";
@@ -38,6 +38,7 @@ interface InputGroupProps
   allowClear?: boolean;
   onChange?: (vevent: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  useBrickVisible?: boolean;
 }
 
 interface GeneralInputProps
@@ -97,6 +98,7 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
 
 export function GeneralInput(props: GeneralInputProps): React.ReactElement {
   const { onChange, onBlur } = props;
+  const inputRef = useRef<Input>();
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement> | string
   ): void => {
@@ -106,10 +108,24 @@ export function GeneralInput(props: GeneralInputProps): React.ReactElement {
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
     onBlur?.(e.target.value);
   };
+  useEffect(() => {
+    Promise.resolve().then(() => {
+      if (props.useBrickVisible) {
+        inputRef.current.focus();
+      } else {
+        inputRef.current.blur();
+      }
+    });
+  }, [props.useBrickVisible]);
 
   return (
     <FormItemWrapper {...props}>
-      <InputGroup {...props} onChange={handleChange} onBlur={handleBlur} />
+      <InputGroup
+        {...props}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        ref={inputRef}
+      />
     </FormItemWrapper>
   );
 }
