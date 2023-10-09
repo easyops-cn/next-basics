@@ -40,6 +40,7 @@ interface PopoverContainerProps {
   zIndex?: number;
   itemMouseEnter?: () => void;
   itemMouseLeave?: () => void;
+  transferVisible?: boolean;
 }
 
 export function PopoverContainer(
@@ -54,26 +55,34 @@ export function PopoverContainer(
     setVisible(props.visible);
   }, [props.visible]);
 
-  const popoverBrickNode = (
-    <>
-      {props.popoverBrick?.useBrick && (
-        <div
-          className={styles.popoverBrick}
-          style={
-            props.popoverContentStyle ?? {
-              width: 200,
-            }
+  const popoverBrickNode = React.useMemo(() => {
+    let useBrick = props.popoverBrick?.useBrick;
+    if (!useBrick) {
+      return null;
+    }
+    if (props.transferVisible) {
+      useBrick = [].concat(useBrick).map((v) => ({
+        ...v,
+        properties: { ...(v.properties ?? {}), useBrickVisible: visible },
+      }));
+    }
+    return (
+      <div
+        className={styles.popoverBrick}
+        style={
+          props.popoverContentStyle ?? {
+            width: 200,
           }
-        >
-          <BrickAsComponent
-            data={props.popoverBrick.data ?? props.data}
-            useBrick={props.popoverBrick.useBrick}
-            parentRefForUseBrickInPortal={ref}
-          />
-        </div>
-      )}
-    </>
-  );
+        }
+      >
+        <BrickAsComponent
+          data={props.popoverBrick.data ?? props.data}
+          useBrick={useBrick}
+          parentRefForUseBrickInPortal={ref}
+        />
+      </div>
+    );
+  }, [props.popoverBrick, visible, props.transferVisible]);
 
   useEffect(() => {
     const handleClick = (): void => {

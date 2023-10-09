@@ -61,6 +61,17 @@ const props = {
     },
   },
 };
+jest.mock("@next-core/brick-kit", () => {
+  return {
+    __esModule: true,
+    BrickAsComponent(): React.ReactElement {
+      return <div>BrickAsComponent</div>;
+    },
+    developHelper: {
+      loadDynamicBricksInBrickConf: jest.fn().mockResolvedValue(undefined),
+    },
+  };
+});
 
 describe("PopoverContainer", () => {
   it("should work", () => {
@@ -119,6 +130,7 @@ describe("PopoverContainer", () => {
         trigger="hover"
         triggerByIcon={false}
         showIcon="always"
+        transferVisible={false}
       />
     );
     expect(wrapper.find(".editIconVisible").length).toBe(1);
@@ -131,5 +143,20 @@ describe("PopoverContainer", () => {
     expect(wrapper.find("BrickAsComponent").length).toBe(2);
     wrapper.find(".displayBrick").simulate("click");
     expect(wrapper.find(Popover).prop("visible")).toBe(false);
+    wrapper.setProps({
+      transferVisible: true,
+    });
+    wrapper.update();
+    wrapper.find(".displayBrick").simulate("click");
+    const properties = (
+      wrapper.find("BrickAsComponent").last().prop("useBrick") as any[]
+    )[0].properties;
+    expect(properties).toMatchObject({
+      useBrickVisible: true,
+    });
+    wrapper.setProps({
+      popoverBrick: null,
+    });
+    expect(wrapper.find("BrickAsComponent").length).toBe(1);
   });
 });

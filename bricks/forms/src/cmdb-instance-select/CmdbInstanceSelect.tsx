@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Select, Spin, Avatar, Tooltip } from "antd";
 import i18n from "i18next";
 import { NS_FORMS, K } from "../i18n/constants";
@@ -55,6 +55,7 @@ export interface CmdbInstanceSelectProps extends FormItemWrapperProps {
   suffix?: {
     useBrick: UseBrickConf;
   };
+  useBrickVisible?: boolean;
 }
 
 export interface ComplexOption<T = string | number> {
@@ -363,16 +364,28 @@ export const RefCmdbInstanceSelectItem = React.forwardRef(
 export function CmdbInstanceSelect(
   props: CmdbInstanceSelectProps
 ): React.ReactElement {
+  const selectRef = useRef<any>();
   const handleChange = (value: any, option: ComplexOption) => {
     Promise.resolve().then(() => {
       props.onChange?.(value, option);
     });
   };
+  useEffect(() => {
+    Promise.resolve().then(() => {
+      if (props.useBrickVisible) {
+        selectRef.current.focus();
+      } else {
+        selectRef.current.blur();
+      }
+    });
+  }, [props.useBrickVisible]);
+
   return (
     <FormItemWrapper {...props}>
       <RefCmdbInstanceSelectItem
         {...props}
         onChange={handleChange}
+        ref={selectRef}
       ></RefCmdbInstanceSelectItem>
     </FormItemWrapper>
   );
