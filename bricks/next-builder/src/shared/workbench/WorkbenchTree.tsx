@@ -559,23 +559,32 @@ function TreeNode({
     [clickFactory, handleCollapse, isContainer, node]
   );
 
+  const collapseRefCallback = useCallback(
+    (element: HTMLSpanElement) => {
+      if (element) {
+        collapseButtonRef.current = element;
+        collapseButtonRef.current.addEventListener("click", handleCollapse);
+        collapseButtonRef.current.addEventListener(
+          "mousedown",
+          preventMouseEvent
+        );
+      } else {
+        collapseButtonRef.current.removeEventListener("click", handleCollapse);
+        collapseButtonRef.current.removeEventListener(
+          "mousedown",
+          preventMouseEvent
+        );
+        collapseButtonRef.current = element;
+      }
+    },
+    [handleCollapse, preventMouseEvent]
+  );
+
   useEffect(() => {
     if (collapseClicked) {
       onNodeToggle?.(getCollapsedId?.(node), collapsed);
     }
   }, [collapseClicked, collapsed, getCollapsedId, node, onNodeToggle]);
-
-  useEffect(() => {
-    const collapseButton = collapseButtonRef.current;
-    if (collapseButton) {
-      collapseButton.addEventListener("click", handleCollapse);
-      collapseButton.addEventListener("mousedown", preventMouseEvent);
-      return () => {
-        collapseButton.removeEventListener("click", handleCollapse);
-        collapseButton.removeEventListener("mousedown", preventMouseEvent);
-      };
-    }
-  }, [handleCollapse, preventMouseEvent]);
 
   // Disallow collapse leaf nodes, or any nodes when searching.
   const allowCollapse = collapsible && !isLeaf && !searching;
@@ -654,7 +663,7 @@ function TreeNode({
             <span className={styles.nodeIconWrapper}>
               {allowCollapse && (
                 <span
-                  ref={collapseButtonRef}
+                  ref={collapseRefCallback}
                   className={styles.collapseIcon}
                   title={collapsed ? "Expand" : "Collapse"}
                   role="button"
