@@ -31,7 +31,6 @@ const menuData = {
     },
     {
       text: "item2",
-      type: "default",
       to: "/page-2",
       icon: {
         color: "geekblue",
