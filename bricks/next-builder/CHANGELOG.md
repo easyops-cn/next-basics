@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.260.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.260.8...@next-bricks/next-builder@1.260.9) (2023-10-10)
+
+
+### Bug Fixes
+
+* **workbenchTree:** fix handleSearch then collapse not work ([8f2d403](https://github.com/easyops-cn/next-basics/commit/8f2d40363c0917ef5000af8cbb484288dc9a7446))
+
+
+
+
+
 ## [1.260.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.260.7...@next-bricks/next-builder@1.260.8) (2023-10-10)
 
 **Note:** Version bump only for package @next-bricks/next-builder
