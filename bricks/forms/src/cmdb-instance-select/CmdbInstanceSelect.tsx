@@ -102,7 +102,8 @@ export function CmdbInstanceSelectItem(
     fields.value = "instanceId";
   }
 
-  const [value, setValue] = React.useState();
+  const [value, setValue] = React.useState<unknown>();
+  const [objectId, setObjectId] = React.useState<string>();
   const [options, setOptions] = React.useState<ComplexOption[]>([]);
   const [selectedOptions, setSelectedOptions] = React.useState<ComplexOption[]>(
     []
@@ -248,8 +249,12 @@ export function CmdbInstanceSelectItem(
   React.useEffect(() => {
     // 初始化时通过用户的 value 得出首次 label 的值
     // 由于value的不确定性，可能存在首次查询的值不唯一，初始化时也添加instanceQuery
-    (async () => {
-      if (!isEqual(props.value, value) && !isNil(props.value)) {
+    if (
+      props.objectId &&
+      (!isEqual(props.objectId, objectId) ||
+        (!isEqual(props.value, value) && !isNil(props.value)))
+    ) {
+      (async () => {
         const option = await handleSearch(
           "",
           [
@@ -265,12 +270,13 @@ export function CmdbInstanceSelectItem(
           props.value?.length >= pageSize ? props.value.length : pageSize
         );
         setSelectedOptions(option);
-      }
-    })();
+      })();
+    }
     const _value =
       props.mode === "multiple" && !trim(props.value) ? [] : props.value;
     setValue(_value);
-  }, [props.value]);
+    setObjectId(props.objectId);
+  }, [props.value, props.objectId]);
 
   React.useEffect(() => {
     if (!props.firstRender) {
