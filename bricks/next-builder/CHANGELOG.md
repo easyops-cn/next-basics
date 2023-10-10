@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.260.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.260.9...@next-bricks/next-builder@1.260.10) (2023-10-10)
+
+
+### Bug Fixes
+
+* v3 框架下侧栏菜单不显示 ([dfc4d04](https://github.com/easyops-cn/next-basics/commit/dfc4d0467a8e40ebbd0ca2208bfa5969d9b1d241))
+
+
+
+
+
 ## [1.260.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.260.8...@next-bricks/next-builder@1.260.9) (2023-10-10)
 
 
