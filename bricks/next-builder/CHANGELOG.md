@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.260.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.260.6...@next-bricks/next-builder@1.260.7) (2023-10-10)
+
+
+### Bug Fixes
+
+* fix inspecting state when switching route tabs ([3d57f74](https://github.com/easyops-cn/next-basics/commit/3d57f74d91d173b99b7a9f23770d2593a45d3b95))
+
+
+
+
+
 ## [1.260.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.260.5...@next-bricks/next-builder@1.260.6) (2023-09-28)
 
 
