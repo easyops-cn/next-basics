@@ -759,7 +759,11 @@ export function LegacyPreviewContainer(
           }
           case "preview-started":
             // Once the preview is started, send the message again.
-            sendToggleInspecting(inspecting, iframeRef, previewOrigin);
+            sendToggleInspecting(
+              inspecting && routeMatch,
+              iframeRef,
+              previewOrigin
+            );
             setPreviewStarted(true);
             onPreviewStart();
             break;
@@ -828,6 +832,7 @@ export function LegacyPreviewContainer(
     onInspectAllDataValuesSuccess,
     onInspectDataValueError,
     onContractUpdate,
+    routeMatch,
   ]);
 
   useEffect(() => {
