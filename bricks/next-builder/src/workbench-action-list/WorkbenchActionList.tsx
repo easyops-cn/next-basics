@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { SidebarSubMenu, SidebarMenuSimpleItem } from "@next-core/brick-types";
+import {
+  SidebarSubMenu,
+  SidebarMenuSimpleItem,
+  SidebarMenuItem,
+} from "@next-core/brick-types";
 import { WorkbenchAction } from "../workbench-action/WorkbenchAction";
 import styles from "./WorkbenchActionList.module.css";
 import { getHistory } from "@next-core/brick-kit";
@@ -54,11 +58,17 @@ export function WorkbenchActionList(
     historyMap.set(activeIndex, `${location.pathname}${location.search}`);
   };
 
+  const isSimpleMenuItem = (
+    item: SidebarMenuItem
+  ): item is SidebarMenuSimpleItem => {
+    return item.type === "default" || !item.type;
+  };
+
   return (
     <div className={styles.workBenchActionList}>
       {menu?.menuItems
         ?.map((item, index) => {
-          if (item.type === "default") {
+          if (isSimpleMenuItem(item)) {
             let url = item.to;
             if (activeIndex !== index && historyMap.has(index)) {
               url = historyMap.get(index);
