@@ -251,8 +251,8 @@ export function CmdbInstanceSelectItem(
     // 由于value的不确定性，可能存在首次查询的值不唯一，初始化时也添加instanceQuery
     if (
       props.objectId &&
-      (!isEqual(props.objectId, objectId) ||
-        (!isEqual(props.value, value) && !isNil(props.value)))
+      !isNil(props.value) &&
+      (!isEqual(props.objectId, objectId) || !isEqual(props.value, value))
     ) {
       (async () => {
         const option = await handleSearch(
