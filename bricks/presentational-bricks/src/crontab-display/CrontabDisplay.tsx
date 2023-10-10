@@ -19,7 +19,7 @@ export function CrontabDisplay(props: CrontabDisplayProps): React.ReactElement {
 
   return value ? (
     <div>
-      {value}（{crontab.format(crontabObj)}）
+      {value}（{crontab.format(crontabObj, true)}）
     </div>
   ) : null;
 }

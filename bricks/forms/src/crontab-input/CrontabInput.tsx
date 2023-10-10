@@ -57,7 +57,7 @@ function CrontabInputItem(
   useEffect(() => {
     const crontabObj = { minute, hour, date, month, dow };
     if (validateCrontab(crontabObj)) {
-      setHumanizeCrontab(crontab.format(crontabObj));
+      setHumanizeCrontab(crontab.format(crontabObj, true));
     } else {
       setHumanizeCrontab("");
     }

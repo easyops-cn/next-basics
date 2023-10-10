@@ -59,6 +59,9 @@
   align-items: center;
   position: relative;
 }
+:host(:not([dashboard-mode])) .header-container {
+  justify-content: space-between;
+}
 
 .page-title,
 .banner-page-title {

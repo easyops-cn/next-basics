@@ -45,7 +45,7 @@
     "@next-libs/basic-components": "^5.3.6",
     "@next-libs/clipboard": "^3.0.4",
     "@next-libs/cmdb-utils": "^3.4.1",
-    "@next-libs/crontab": "^2.0.8",
+    "@next-libs/crontab": "^2.0.9",
     "@next-libs/datetime": "^2.0.4",
     "@next-libs/datetime-components": "^3.2.2",
     "@next-libs/forms": "^3.5.3",
