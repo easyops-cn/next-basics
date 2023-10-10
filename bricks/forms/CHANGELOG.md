@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.280.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.280.1...@next-bricks/forms@1.280.2) (2023-10-10)
+
+
+### Bug Fixes
+
+* **cmdb-instance-select:** fix selectedOptions not loading when used in useBrick ([86a9aaf](https://github.com/easyops-cn/next-basics/commit/86a9aaf25800ce511999f419bdb4f048e748d71d))
+
+
+
+
+
 ## [1.280.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.280.0...@next-bricks/forms@1.280.1) (2023-10-10)
 
 **Note:** Version bump only for package @next-bricks/forms
