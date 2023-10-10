@@ -2728,10 +2728,10 @@
     classnames "^2.3.2"
     file-saver "^2.0.5"
 
-"@next-libs/crontab@^2.0.8":
-  version "2.0.8"
-  resolved "https://registry.npmjs.org/@next-libs/crontab/-/crontab-2.0.8.tgz#75e8f2a0383919fe3d5549081ece20df47da912d"
-  integrity sha512-n/aqiYJnJ23peiHCywD0J962ayAmkCMmsZ+9IWWE3dWTuiRc62LQLDbQBWl5oz+yL9L/Kdf3oiBJqV08pLFcyg==
+"@next-libs/crontab@^2.0.9":
+  version "2.0.9"
+  resolved "https://registry.npmjs.org/@next-libs/crontab/-/crontab-2.0.9.tgz#1cb10286962f2bd36dcd04f5dfad0b5db3649f62"
+  integrity sha512-fUhKU6XdMWzFLr6ehvBxQxmYuOLFlSVFeTVXOWEy933ZqmG8l9uO+YCwadWs3v0u0JdERqYgHvqH2bbsKInFOg==
   dependencies:
     cronstrue "^1.88.0"
 
