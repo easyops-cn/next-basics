@@ -56,7 +56,7 @@ export async function DeleteUnusedImages({
   }
 
   const regexString = `${escapeRegExp(
-    `/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/${bucketName}/object/`
+    `api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/${bucketName}/object/`
   )}(.+?\\.(?:png|jpe?g|gif))`;
   const regexSingleMatch = new RegExp(regexString);
   const regexMultipleMatch = new RegExp(regexSingleMatch, "g");
