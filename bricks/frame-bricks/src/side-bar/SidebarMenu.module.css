@@ -36,6 +36,7 @@
     }
     img {
       font-size: 20px;
+      vertical-align: initial;
     }
     > :global(.anticon) {
       margin-right: 0;
@@ -53,7 +54,8 @@
     img {
       font-size: 20px;
     }
-    eo-easyops-icon, eo-fa-icon {
+    eo-easyops-icon,
+    eo-fa-icon {
       font-size: 20px;
     }
     > :global(.anticon) {
