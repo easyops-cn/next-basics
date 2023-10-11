@@ -49,6 +49,10 @@
         color: rgb(87, 104, 156, 1);
       }
 
+      img {
+        vertical-align: initial;
+      }
+
       > :global(.anticon) {
         margin-right: 0;
         color: var(--color-normal-text);
