@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.260.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.260.10...@next-bricks/next-builder@1.260.11) (2023-10-11)
+
+
+### Bug Fixes
+
+* Compatible with image url without baseUrl ([371a160](https://github.com/easyops-cn/next-basics/commit/371a1601acafc8a7375638931d43e0ff7b490a50))
+
+
+
+
+
 ## [1.260.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.260.9...@next-bricks/next-builder@1.260.10) (2023-10-10)
 
 

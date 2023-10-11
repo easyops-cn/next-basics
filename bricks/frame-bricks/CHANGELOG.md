@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.3...@next-bricks/frame-bricks@1.18.4) (2023-10-11)
+
+
+### Bug Fixes
+
+* modify style ([d0ecb35](https://github.com/easyops-cn/next-basics/commit/d0ecb35b309da8c9921e7d8ca9c688b3a02744dc))
+
+
+
+
+
 ## [1.18.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.2...@next-bricks/frame-bricks@1.18.3) (2023-10-09)
 
 
