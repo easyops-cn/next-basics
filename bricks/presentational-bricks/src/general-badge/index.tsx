@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { Badge } from "@next-libs/basic-components";
 import { MenuIcon, UseBrickConf } from "@next-core/brick-types";
+import classNames from "classnames";
 import styles from "./GeneralBadge.module.css";
 
 /**
@@ -110,6 +111,16 @@ export class GeneralBadgeElement extends UpdatingElement {
   })
   showZero: boolean;
 
+  /**
+   * @required false
+   * @default false
+   * @description 是否禁用鼠标事件，通常配合按钮使用时设置
+   */
+  @property({
+    type: Boolean,
+  })
+  disablePointerEvents: boolean;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -128,7 +139,11 @@ export class GeneralBadgeElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <div className={styles.generalBadge}>
+          <div
+            className={classNames(styles.generalBadge, {
+              [styles.noPointerEvents]: this.disablePointerEvents,
+            })}
+          >
             <Badge
               dataSource={this.dataSource}
               content={this.content}
