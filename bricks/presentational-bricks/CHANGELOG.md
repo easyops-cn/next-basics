@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.309.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.309.3...@next-bricks/presentational-bricks@1.309.4) (2023-10-13)
+
+
+### Bug Fixes
+
+* 火狐浏览器采集套件前端显示异常 ([be8f5aa](https://github.com/easyops-cn/next-basics/commit/be8f5aa218249aae967344008c7275f6c061e6cf))
+
+
+
+
+
 ## [1.309.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.309.2...@next-bricks/presentational-bricks@1.309.3) (2023-10-10)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
