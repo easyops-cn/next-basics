@@ -470,6 +470,7 @@ export default class WorkbenchBackend {
     if (this.isBuilding) return;
     this.isBuilding = true;
     try {
+      await this.updateBrickTree();
       // eslint-disable-next-line no-console
       console.log("=== building ===");
       this.publish("message", {
