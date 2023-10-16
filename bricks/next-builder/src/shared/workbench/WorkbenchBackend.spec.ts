@@ -177,7 +177,14 @@ describe("WorkbenchBackend should work", () => {
     jest.runAllTimers();
     await (global as any).flushPromises();
 
-    expect(handleBackendMessage).toHaveBeenNthCalledWith(3, "message", {
+    expect(handleBackendMessage).toHaveBeenNthCalledWith(
+      3,
+      "message",
+      expect.objectContaining({
+        action: "update-graph-data",
+      })
+    );
+    expect(handleBackendMessage).toHaveBeenNthCalledWith(4, "message", {
       action: "build-start",
     });
 
@@ -192,7 +199,7 @@ describe("WorkbenchBackend should work", () => {
       },
     });
 
-    expect(handleBackendMessage).toHaveBeenNthCalledWith(4, "message", {
+    expect(handleBackendMessage).toHaveBeenNthCalledWith(5, "message", {
       action: "build-success",
       data: {
         storyboard: {
@@ -360,7 +367,7 @@ describe("WorkbenchBackend should work", () => {
       instanceId: "abc",
     });
 
-    expect(handleBackendMessage).toBeCalledTimes(10);
+    expect(handleBackendMessage).toBeCalledTimes(11);
     backendInstance.unsubscribe(listener);
 
     backendInstance.push({
@@ -373,7 +380,7 @@ describe("WorkbenchBackend should work", () => {
     });
     await (global as any).flushPromises();
 
-    expect(handleBackendMessage).toBeCalledTimes(10);
+    expect(handleBackendMessage).toBeCalledTimes(11);
 
     // @ts-ignore
     backendInstance.mockNodeIdCache.set("mock_id_1", "new-id");
