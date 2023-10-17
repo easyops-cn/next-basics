@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.310.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.309.4...@next-bricks/presentational-bricks@1.310.0) (2023-10-17)
+
+
+### Features
+
+* **general-badge:** allow to disable pointer events ([7d0e18c](https://github.com/easyops-cn/next-basics/commit/7d0e18c72cc86078687087537db6de36bab33561))
+
+
+
+
+
 ## [1.309.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.309.3...@next-bricks/presentational-bricks@1.309.4) (2023-10-13)
 
 
