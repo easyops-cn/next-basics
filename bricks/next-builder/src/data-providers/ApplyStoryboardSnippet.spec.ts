@@ -22,7 +22,7 @@ const mockCreateInstance = (
 );
 const mockAddNode = (
   StoryboardApi_addNode as jest.MockedFunction<typeof StoryboardApi_addNode>
-).mockImplementation((projectInstanceId, { objectId, instance }) =>
+).mockImplementation((appId, { objectId, instance }) =>
   Promise.resolve({
     instance: {
       ...instance,
@@ -131,7 +131,7 @@ describe("ApplyStoryboardSnippet", () => {
     } as Partial<EventDetailOfSnippetApply> as EventDetailOfSnippetApply;
 
     const result = await ApplyStoryBoardSnippet(params, {
-      projectId: "project-a",
+      appId: "project-a",
     });
 
     expect(mockAddNode).toHaveBeenNthCalledWith(1, "project-a", {

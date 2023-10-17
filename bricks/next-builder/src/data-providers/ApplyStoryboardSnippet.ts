@@ -13,7 +13,7 @@ import {
 import { omit } from "lodash";
 
 async function createNodes(
-  projectInfo: { projectId: string },
+  projectInfo: { appId: string },
   nodeDetails: SnippetNodeDetail[],
   flattenNodeDetails: EventDetailOfNodeAddStored[],
   storedNodeIds?: string[]
@@ -26,14 +26,14 @@ async function createNodes(
 }
 
 async function createNode(
-  projectInfo: { projectId: string },
+  projectInfo: { appId: string },
   nodeDetail: SnippetNodeDetail,
   flattenNodeDetails: EventDetailOfNodeAddStored[]
 ): Promise<string> {
   const instanceData = (
-    projectInfo?.projectId
+    projectInfo?.appId
       ? (
-          await StoryboardApi_addNode(projectInfo.projectId, {
+          await StoryboardApi_addNode(projectInfo.appId, {
             objectId: "STORYBOARD_BRICK",
             instance: omit(nodeDetail.nodeData, ["children"]),
           })
@@ -68,7 +68,7 @@ async function createNode(
 
 export async function ApplyStoryBoardSnippet(
   { nodeDetails, nodeIds }: EventDetailOfSnippetApply,
-  projectInfo?: { projectId: string }
+  projectInfo?: { appId: string }
 ): Promise<EventDetailOfSnippetApplyStored> {
   const result: EventDetailOfSnippetApplyStored = {
     flattenNodeDetails: [],

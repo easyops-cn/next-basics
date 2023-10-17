@@ -239,7 +239,7 @@ export default class WorkbenchBackend {
     data: WorkbenchBackendActionForInsertDetail
   ): Promise<boolean> {
     try {
-      const res = await StoryboardApi_addNode(this.baseInfo.projectId, {
+      const res = await StoryboardApi_addNode(this.baseInfo.appId, {
         objectId: "STORYBOARD_BRICK",
         instance: omit(
           {
@@ -286,7 +286,7 @@ export default class WorkbenchBackend {
       const instanceId =
         this.mockInstanceIdCache.get(data.instanceId) || data.instanceId;
       const mtime = this.mTimeMap.get(instanceId) || data.mtime;
-      const res = await StoryboardApi_editNode(this.baseInfo.projectId, {
+      const res = await StoryboardApi_editNode(this.baseInfo.appId, {
         objectId: data.objectId,
         instanceId: instanceId,
         mtime: mtime,
@@ -366,7 +366,7 @@ export default class WorkbenchBackend {
     data: WorkbenchBackendActionForDeleteDetail
   ): Promise<boolean> {
     try {
-      await StoryboardApi_deleteNode(this.baseInfo.projectId, {
+      await StoryboardApi_deleteNode(this.baseInfo.appId, {
         objectId: data.objectId,
         instanceId:
           this.mockInstanceIdCache.get(data.instanceId) || data.instanceId,
@@ -405,7 +405,7 @@ export default class WorkbenchBackend {
     try {
       this.replaceSnippetData(data.snippetData);
       const result = await ApplyStoryBoardSnippet(data.snippetData, {
-        projectId: this.baseInfo.projectId,
+        appId: this.baseInfo.appId,
       });
       this.publish("message", {
         action: "snippet-success",
@@ -450,7 +450,7 @@ export default class WorkbenchBackend {
           })
         )._object_id;
       }
-      await StoryboardApi_editNode(this.baseInfo.projectId, {
+      await StoryboardApi_editNode(this.baseInfo.appId, {
         objectId: objectId,
         instanceId: data.instance_ids[0],
         instance: {
