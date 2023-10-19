@@ -99,6 +99,7 @@ export interface WorkbenchCacheActionProps {
   storyboardType: "micro-app" | "theme-template";
   objectId: string;
   rootNode: BuilderRuntimeNode;
+  onlyShowActionCount?: boolean;
   onStoryboardUpdate: (params: StoryboardUpdateParams) => void;
   onRootNodeUpdate: (node: BuilderRuntimeNode) => void;
   onGraphDataUpdate: (graphData: pipes.GraphData) => void;
@@ -123,6 +124,7 @@ function LegacyWorkbenchCacheAction(
     storyboardType,
     objectId,
     rootNode,
+    onlyShowActionCount,
     onStoryboardUpdate,
     onRootNodeUpdate,
     onGraphDataUpdate,
@@ -778,30 +780,30 @@ function LegacyWorkbenchCacheAction(
     const nodeCache = nodesCacheRef.current;
     return (
       <>
-        <div>
-          <div className={styles.setBuildTimeWrapper}>
-            <span>设置定时自动推送间隔</span>
-            <Tooltip title="推送将于推送任务全部执行完后,定时执行">
-              <Input
-                size="small"
-                addonAfter="秒"
-                style={{ width: "100px" }}
-                value={delayBuildTime}
-                onChange={(e) => setDelayBuildTime(e.target.value)}
-                onBlur={handleOnBlur}
-                type="number"
-                min="-1"
-              />
-            </Tooltip>
-          </div>
+        <div className={styles.setBuildTimeWrapper}>
+          <span>设置定时自动推送间隔</span>
+          <Tooltip title="推送将于推送任务全部执行完后,定时执行">
+            <Input
+              size="small"
+              addonAfter="秒"
+              style={{ width: "100px" }}
+              value={delayBuildTime}
+              onChange={(e) => setDelayBuildTime(e.target.value)}
+              onBlur={handleOnBlur}
+              type="number"
+              min="-1"
+            />
+          </Tooltip>
         </div>
-        <CacheActionList
-          cacheActionList={cacheActionList}
-          nodeCache={nodeCache}
-        />
+        {!onlyShowActionCount && (
+          <CacheActionList
+            cacheActionList={cacheActionList}
+            nodeCache={nodeCache}
+          />
+        )}
       </>
     );
-  }, [cacheActionList, delayBuildTime]);
+  }, [cacheActionList, delayBuildTime, onlyShowActionCount]);
 
   const updateStoryboard = useCallback(() => {
     setNewStoryboard(rootId, [...nodesCacheRef.current.values()], edges);
@@ -862,10 +864,20 @@ function LegacyWorkbenchCacheAction(
     };
   }, [backendInstance, handleBackendMessage]);
 
+  const noRejectActionLength = cacheActionList.filter(
+    (item) => item.state !== "reject"
+  ).length;
+
   return (
     <div className={styles.cacheActionWrapper}>
       <Popover
-        title="待推送变更列表"
+        title={
+          onlyShowActionCount
+            ? noRejectActionLength
+              ? `${noRejectActionLength}个变更待推送`
+              : "暂无待推送变更"
+            : "待推送变更列表"
+        }
         content={renderCacheActionList}
         visible={showCaheActionList}
         onVisibleChange={setShowCacheActionList}
@@ -884,14 +896,14 @@ function LegacyWorkbenchCacheAction(
           />
         </Tooltip>
       </Popover>
-      {cacheActionList.filter((item) => item.state !== "reject").length ? (
+      {noRejectActionLength ? (
         <span
           className={styles.tips}
           style={{
             backgroundColor: "#0071eb",
           }}
         >
-          {cacheActionList.filter((item) => item.state !== "reject").length}
+          {noRejectActionLength}
         </span>
       ) : null}
       <div

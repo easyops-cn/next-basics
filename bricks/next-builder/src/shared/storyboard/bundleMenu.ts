@@ -25,12 +25,7 @@ export function bundleMenu(
       }
     }
   }
-  menuIconProcessor(menu.icon as Record<string, string>);
-  if (Array.isArray(menu.items)) {
-    menu.items.forEach((menuItem) => {
-      menuIconProcessor(menuItem.icon as Record<string, string>);
-    });
-  }
+  walkMenu(menu);
   menu.i18n = menuI18n;
 }
 
@@ -40,4 +35,16 @@ function menuIconProcessor(menuIcon: Record<string, string>): void {
     const newSrc = `<% IMG.get(${JSON.stringify(imgSrc)}) %>`;
     menuIcon.imgSrc = newSrc;
   }
+}
+
+function walkMenu(menu: Record<string, any>): void {
+  menuIconProcessor(menu.icon);
+  walkMenuItems(menu.items);
+}
+
+function walkMenuItems(menuItems: Record<string, any>[]): void {
+  menuItems?.forEach((item) => {
+    menuIconProcessor(item.icon);
+    walkMenuItems(item.children);
+  });
 }

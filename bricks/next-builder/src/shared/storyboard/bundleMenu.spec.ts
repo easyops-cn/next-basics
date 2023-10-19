@@ -13,6 +13,14 @@ describe("bundleMenu", () => {
           icon: {
             imgSrc: "/xxx/yyy/images20230427.png",
           },
+          children: [
+            {
+              text: "<% I18N('WORLD') %>",
+              icon: {
+                imgSrc: "/xxx/yyy/images20231018.png",
+              },
+            },
+          ],
         },
       ],
     };
@@ -48,6 +56,12 @@ describe("bundleMenu", () => {
       {
         icon: { imgSrc: '<% IMG.get("images20230427.png") %>' },
         text: "<% I18N('WORLD') %>",
+        children: [
+          {
+            icon: { imgSrc: '<% IMG.get("images20231018.png") %>' },
+            text: "<% I18N('WORLD') %>",
+          },
+        ],
       },
     ]);
   });
