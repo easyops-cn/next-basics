@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.261.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.260.12...@next-bricks/next-builder@1.261.0) (2023-10-19)
+
+
+### Bug Fixes
+
+* 接口参数更换为 appId ([9f6103d](https://github.com/easyops-cn/next-basics/commit/9f6103db895f794f1cfd35214ce7f68585ec1a29))
+
+
+### Features
+
+* support onlyShowActionCount & fix not bundle menu icon ([a8b4162](https://github.com/easyops-cn/next-basics/commit/a8b4162af20f512d76799be96e1db7dbb4683685))
+
+
+
+
+
 ## [1.260.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.260.11...@next-bricks/next-builder@1.260.12) (2023-10-17)
 
 
