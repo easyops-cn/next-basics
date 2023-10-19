@@ -10,14 +10,14 @@ import {
 const mockGetDetail = jest.fn((_) => ({
   mTime: "2",
 }));
-const mockAddNode = jest.fn((projectId, { objectId, instance }) => ({
+const mockAddNode = jest.fn((appId, { objectId, instance }) => ({
   instance: {
     ...instance,
     instanceId: "new-iid",
     id: "new-id",
   },
 }));
-const mockEditNode = jest.fn((projectId, { instance }) => ({
+const mockEditNode = jest.fn((appId, { instance }) => ({
   instanceInfo: instance,
 }));
 const mockMoveInstance = jest.fn();
@@ -40,9 +40,8 @@ jest.mock("@next-sdk/next-builder-sdk", () => ({
   StoryboardApi_cloneBricks: (...args) => mockCloneBricks(args),
   PackageAloneApi_listDependencies: jest.fn(() => ({ list: [] })),
   PackageAloneApi_addDependencies: jest.fn(),
-  StoryboardApi_addNode: (projectId, params) => mockAddNode(projectId, params),
-  StoryboardApi_editNode: (projectId, params) =>
-    mockEditNode(projectId, params),
+  StoryboardApi_addNode: (appId, params) => mockAddNode(appId, params),
+  StoryboardApi_editNode: (appId, params) => mockEditNode(appId, params),
   StoryboardApi_deleteNode: (...args) => mockDeleteNode(...args),
 }));
 
@@ -123,7 +122,7 @@ describe("WorkbenchBackend should work", () => {
 
     await (global as any).flushPromises();
 
-    expect(mockAddNode).toHaveBeenNthCalledWith(1, "project-a", {
+    expect(mockAddNode).toHaveBeenNthCalledWith(1, "app-a", {
       objectId: "STORYBOARD_BRICK",
       instance: {
         brick: "div",
@@ -229,7 +228,7 @@ describe("WorkbenchBackend should work", () => {
     });
     await (global as any).flushPromises();
 
-    expect(mockEditNode).toHaveBeenNthCalledWith(1, "project-a", {
+    expect(mockEditNode).toHaveBeenNthCalledWith(1, "app-a", {
       objectId: "STORYBOARD_BRICK",
       instanceId: "new-iid",
       mtime: "1",
@@ -269,7 +268,7 @@ describe("WorkbenchBackend should work", () => {
       state: "pending",
     });
     await (global as any).flushPromises();
-    expect(mockEditNode).toHaveBeenNthCalledWith(2, "project-a", {
+    expect(mockEditNode).toHaveBeenNthCalledWith(2, "app-a", {
       objectId: "STORYBOARD_BRICK",
       instanceId: "new-iid",
       mtime: "2",
@@ -325,7 +324,7 @@ describe("WorkbenchBackend should work", () => {
       state: "pending",
     } as WorkbenchBackendActionForMove);
 
-    expect(mockEditNode).toHaveBeenNthCalledWith(3, "project-a", {
+    expect(mockEditNode).toHaveBeenNthCalledWith(3, "app-a", {
       objectId: "STORYBOARD_BRICK",
       instanceId: "new-iid",
       instance: { mountPoint: "new-content", parent: "new-parent" },
@@ -347,7 +346,7 @@ describe("WorkbenchBackend should work", () => {
       state: "pending",
     });
 
-    expect(mockDeleteNode).toHaveBeenNthCalledWith(1, "project-a", {
+    expect(mockDeleteNode).toHaveBeenNthCalledWith(1, "app-a", {
       objectId: "STORYBOARD_ROUTE",
       instanceId: "new-iid",
     });
@@ -362,7 +361,7 @@ describe("WorkbenchBackend should work", () => {
     });
     await (global as any).flushPromises();
 
-    expect(mockDeleteNode).toHaveBeenNthCalledWith(2, "project-a", {
+    expect(mockDeleteNode).toHaveBeenNthCalledWith(2, "app-a", {
       objectId: "STORYBOARD_ROUTE",
       instanceId: "abc",
     });
@@ -451,7 +450,7 @@ describe("WorkbenchBackend should work", () => {
         nodeIds: ["new-id", "B-1"],
       },
       {
-        projectId: "project-a",
+        appId: "app-a",
       },
     ]);
 
@@ -475,7 +474,7 @@ describe("WorkbenchBackend should work", () => {
     });
     await (global as any).flushPromises();
 
-    expect(mockEditNode).toHaveBeenNthCalledWith(4, "project-a", {
+    expect(mockEditNode).toHaveBeenNthCalledWith(4, "app-a", {
       objectId: "STORYBOARD_ROUTE",
       instanceId: "route-a",
       mtime: "3",
@@ -507,7 +506,7 @@ describe("WorkbenchBackend should work", () => {
     });
     await (global as any).flushPromises();
 
-    expect(mockEditNode).toHaveBeenNthCalledWith(5, "project-a", {
+    expect(mockEditNode).toHaveBeenNthCalledWith(5, "app-a", {
       objectId: "STORYBOARD_BRICK",
       instanceId: "B-1",
       instance: { parent: "efg" },
@@ -538,7 +537,7 @@ describe("WorkbenchBackend should work", () => {
 
     await (global as any).flushPromises();
 
-    expect(mockAddNode).toHaveBeenNthCalledWith(2, "project-a", {
+    expect(mockAddNode).toHaveBeenNthCalledWith(2, "app-a", {
       objectId: "STORYBOARD_BRICK",
       instance: {
         brick: "div",
@@ -608,7 +607,7 @@ describe("WorkbenchBackend should work", () => {
     });
     await (global as any).flushPromises();
 
-    expect(mockEditNode).toHaveBeenNthCalledWith(6, "project-a", {
+    expect(mockEditNode).toHaveBeenNthCalledWith(6, "app-a", {
       objectId: "STORYBOARD_BRICK",
       instanceId: "new-iid",
       mtime: "1",
