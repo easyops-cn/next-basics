@@ -49,6 +49,9 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
   @property({ type: String })
   objectId: string;
 
+  @property({ type: Boolean })
+  onlyShowActionCount: boolean;
+
   private _backendRef = createRef<WorkbenchCacheActionRef>();
 
   @event({ type: "cache.action" })
@@ -167,6 +170,7 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
               storyboardType={this.storyboardType}
               rootNode={this.rootNode}
               objectId={this.objectId}
+              onlyShowActionCount={this.onlyShowActionCount}
               onStoryboardUpdate={this.handleStoryboardUpdate}
               onRootNodeUpdate={this.handleRootNodeUpdate}
               onGraphDataUpdate={this.handleGraphDataUpdate}
