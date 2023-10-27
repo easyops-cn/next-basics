@@ -93,7 +93,7 @@ export default class WorkbenchBackend {
   static getInstance(
     initData: WorkbenchBackendActionForInitDetail
   ): WorkbenchBackend {
-    const key = initData.rootNode.instanceId;
+    const key = `${initData.appId}-${initData.rootNode.instanceId}`;
     const instance = this.instance.get(key);
     if (!instance) {
       const newInstance = new WorkbenchBackend(initData);
