@@ -76,6 +76,16 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   /* =========================== Group: ui =========================== */
 
   /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否禁用
+   * @group ui
+   */
+  @property({ attribute: false })
+  disabled: boolean;
+
+  /**
    * @default false
    * @description 是否隐藏“快速选择我”按钮
    * @group ui
@@ -273,6 +283,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
             labelBold={this.labelBold}
             message={this.message}
             required={this.required}
+            disabled={this.disabled}
             validator={this.validator}
             notRender={this.notRender}
             placeholder={this.placeholder}
