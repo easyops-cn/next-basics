@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.282.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.281.1...@next-bricks/forms@1.282.0) (2023-10-30)
+
+
+### Features
+
+* **user-or-user-group-select:** add filterPermissionActions property ([f1b6e22](https://github.com/easyops-cn/next-basics/commit/f1b6e222f4cc6e494eb6d04e83eef350d483898c))
+
+
+
+
+
 ## [1.281.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.281.0...@next-bricks/forms@1.281.1) (2023-10-30)
 
 
