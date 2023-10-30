@@ -110,8 +110,9 @@
       }
     }
 
-    :global(.ant-upload-drag-icon .easyops-icon) {
+    :global(.ant-upload-drag-icon eo-easyops-icon) {
       font-size: 3.2em;
+      height: 42px;
     }
   }
 }
