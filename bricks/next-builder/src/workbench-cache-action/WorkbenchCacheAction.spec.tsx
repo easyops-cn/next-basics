@@ -225,9 +225,9 @@ describe("WorkbenchWorker", () => {
         path: "/page-a",
         iid: "route-a",
         bricks: [
-          { brick: "brick-b", iid: "brick-b" },
-          { brick: "brick-c", iid: "brick-c" },
-          { brick: "eo-button", iid: "brick-d" },
+          { alias: "brick-b", brick: "brick-b", iid: "brick-b" },
+          { alias: "brick-c", brick: "brick-c", iid: "brick-c" },
+          { alias: "eo-button", brick: "eo-button", iid: "brick-d" },
         ],
         type: "bricks",
       },
