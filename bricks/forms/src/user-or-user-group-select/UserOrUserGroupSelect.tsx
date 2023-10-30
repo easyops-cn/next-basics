@@ -41,6 +41,7 @@ import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";
 
 export interface UserSelectFormItemProps {
+  disabled?: boolean;
   children?: ReactNode;
   objectMap?: Record<string, any>;
   onChange?: (value: any) => void;
@@ -61,23 +62,10 @@ export interface UserSelectFormItemProps {
 
 type ModelObjectItem = Partial<CmdbModels.ModelCmdbObject>;
 
-interface UserOrUserGroupSelectProps extends FormItemWrapperProps {
-  objectMap?: Record<string, any>;
-  placeholder?: string;
-  value?: UserOrUserGroupSelectValue;
-  hideAddMeQuickly?: boolean;
-  hideSelectByCMDB?: boolean;
-  onChange?: (value: any) => void;
-  onChangeV2?: (value: any) => void;
-  optionsMode: "user" | "group" | "all";
-  staticList?: string[];
-  mergeUseAndUserGroup?: boolean;
-  query?: Record<string, any>;
-  hideInvalidUser?: boolean;
-  userGroupQuery?: Record<string, any>;
-  userQuery?: Record<string, any>;
+interface UserOrUserGroupSelectProps
+  extends Omit<UserSelectFormItemProps, "children">,
+    FormItemWrapperProps {
   objectList?: ModelObjectItem[];
-  isMultiple?: boolean;
 }
 
 let objectListCache: ModelObjectItem[];
@@ -559,6 +547,7 @@ export function LegacyUserSelectFormItem(
         placeholder={props.placeholder}
         filterOption={false}
         value={selectedValue}
+        disabled={props.disabled}
         onChange={handleSelectChange}
         onSearch={debounce((value) => {
           searchUserOrUserGroupInstances(value as string);
@@ -696,6 +685,7 @@ export function UserOrUserGroupSelect(
     <FormItemWrapper {...props}>
       <UserSelectFormItem
         objectMap={keyBy(objectList, "objectId")}
+        disabled={props.disabled}
         placeholder={props.placeholder}
         value={props.value}
         hideAddMeQuickly={props.hideAddMeQuickly}
