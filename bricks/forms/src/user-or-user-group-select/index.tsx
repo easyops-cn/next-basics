@@ -178,7 +178,16 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   objectList?: Partial<CmdbModels.ModelCmdbObject>[];
 
   /**
-   * @description  用户和用户组`search`接口的`query`，此参数比较适用于，两者接口需要参数相同的情况
+   * @description 按权限过滤的权限 action 列表
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  filterPermissionActions?: string[];
+
+  /**
+   * @description 用户和用户组`search`接口的`query`，此参数比较适用于，两者接口需要参数相同的情况
    * @group advanced
    */
   @property({
@@ -299,6 +308,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
             wrapperCol={this.wrapperCol}
             staticList={this.staticList}
             mergeUseAndUserGroup={this.mergeUseAndUserGroup}
+            filterPermissionActions={this.filterPermissionActions}
             query={this.query}
             userQuery={this.userQuery}
             userGroupQuery={this.userGroupQuery}

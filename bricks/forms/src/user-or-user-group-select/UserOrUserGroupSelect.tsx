@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import { Select, Button, Divider } from "antd";
-import styles from "./UserOrUserGroupSelect.module.css";
 import {
   InstanceApi_postSearch,
   CmdbModels,
@@ -30,15 +29,23 @@ import {
   compact,
   some,
   keyBy,
+  intersection,
 } from "lodash";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import { getInstanceNameKeys } from "@next-libs/cmdb-utils";
 import { InstanceListModal } from "@next-libs/cmdb-instances";
 import { getAuth, handleHttpError } from "@next-core/brick-kit";
 import { GeneralIcon } from "@next-libs/basic-components";
-import { UserOrUserGroupSelectValue } from "../interfaces";
 import { useTranslation } from "react-i18next";
+import {
+  PermissionApi_getPermissionList,
+  PermissionModels,
+} from "@next-sdk/permission-sdk";
+
+import { UserOrUserGroupSelectValue } from "../interfaces";
 import { NS_FORMS, K } from "../i18n/constants";
+
+import styles from "./UserOrUserGroupSelect.module.css";
 
 export interface UserSelectFormItemProps {
   disabled?: boolean;
@@ -58,6 +65,7 @@ export interface UserSelectFormItemProps {
   userGroupQuery?: Record<string, any>;
   userQuery?: Record<string, any>;
   isMultiple?: boolean;
+  filterPermissionActions?: string[];
 }
 
 type ModelObjectItem = Partial<CmdbModels.ModelCmdbObject>;
@@ -74,6 +82,7 @@ export function LegacyUserSelectFormItem(
   props: UserSelectFormItemProps,
   ref: React.Ref<HTMLDivElement>
 ): React.ReactElement {
+  const { filterPermissionActions, userQuery, userGroupQuery, query } = props;
   const selectRef = useRef();
   const [selectedValue, setSelectedValue] = useState([]);
   const staticValue = useRef([]);
@@ -149,6 +158,81 @@ export function LegacyUserSelectFormItem(
   const [modalObjectId, setModalObjectId] = useState(
     props.optionsMode === "group" ? "USER_GROUP" : "USER"
   );
+  const [permissionUsers, setPermissionUsers] = useState<
+    [string[]?, string[]?]
+  >([]);
+  const [permissionUserNames, permissionUserGroupInstances] = permissionUsers;
+
+  useEffect(() => {
+    setSearchValue(null);
+  }, [filterPermissionActions, userQuery, userGroupQuery, query]);
+
+  useEffect(() => {
+    (async () => {
+      if (isEmpty(filterPermissionActions)) {
+        setPermissionUsers([]);
+
+        return;
+      }
+
+      let permissions: Partial<PermissionModels.ModelPermission>[];
+
+      setFetching(true);
+
+      try {
+        permissions = (
+          await PermissionApi_getPermissionList({
+            action__in: filterPermissionActions.join(),
+            page_size: filterPermissionActions.length,
+          })
+        ).data;
+      } catch (e) {
+        handleHttpError(e);
+
+        return;
+      } finally {
+        setFetching(false);
+      }
+
+      if (isEmpty(permissions)) {
+        setPermissionUsers([]);
+
+        return;
+      }
+
+      setPermissionUsers([
+        intersection(...map(permissions, "user")),
+        intersection(...map(permissions, "user_group")).map((item) =>
+          item.slice(1)
+        ),
+      ]);
+    })();
+  }, [filterPermissionActions]);
+
+  const getQueries = (objectId: string): Record<string, any>[] =>
+    compact([
+      (objectId === "USER"
+        ? userQuery
+        : objectId === "USER_GROUP" && userGroupQuery) || query,
+      objectId === "USER"
+        ? (permissionUserNames?.length ||
+            permissionUserGroupInstances?.length) && {
+            $or: compact([
+              permissionUserNames.length && {
+                name: { $in: permissionUserNames },
+              },
+              permissionUserGroupInstances.length && {
+                "__members_USER_GROUP.instanceId": {
+                  $in: permissionUserGroupInstances,
+                },
+              },
+            ]),
+          }
+        : objectId === "USER_GROUP" &&
+          permissionUserGroupInstances?.length && {
+            instanceId: { $in: permissionUserGroupInstances },
+          },
+    ]);
 
   const triggerChange = (changedValue: any) => {
     props.onChange?.(
@@ -311,20 +395,9 @@ export function LegacyUserSelectFormItem(
 
           name: true,
         },
-        query:
-          props.userQuery && objectId === "USER"
-            ? {
-                $and: [props.userQuery, showKeyQuery],
-              }
-            : props.userGroupQuery && objectId === "USER_GROUP"
-            ? {
-                $and: [props.userGroupQuery, showKeyQuery],
-              }
-            : props.query
-            ? {
-                $and: [props.query, showKeyQuery],
-              }
-            : showKeyQuery,
+        query: {
+          $and: [...getQueries(objectId), showKeyQuery],
+        },
       })
     ).list;
   };
@@ -700,6 +773,7 @@ export function UserOrUserGroupSelect(
         userQuery={props.userQuery}
         userGroupQuery={props.userGroupQuery}
         isMultiple={props.isMultiple}
+        filterPermissionActions={props.filterPermissionActions}
       />
     </FormItemWrapper>
   );

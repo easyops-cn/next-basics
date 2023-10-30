@@ -2851,10 +2851,10 @@
   resolved "https://registry.npmjs.org/@next-sdk/object-store-sdk/-/object-store-sdk-2.1.2.tgz#93cdcb8c6296c6724684719a260f5b1b0e277ca0"
   integrity sha512-H+x59GyXBRP8SjEun5Tw658N21kz3DPc2atBd4njL2P7wj2EeMvvoDzfqwFBbGQtF4GjytiL5K2LS1Det1WeQA==
 
-"@next-sdk/permission-sdk@^2.1.1":
-  version "2.1.3"
-  resolved "https://registry.npmjs.org/@next-sdk/permission-sdk/-/permission-sdk-2.1.3.tgz#1f6f5c1e351488288f35e05263a4607bda05d51f"
-  integrity sha512-MAuqsgnwvtotTgLVjZ4jmztLRamF2PrIDbjvjdp5jQICW8P8xWeBJdGw3I8YdZg3XEleJBBw2+z6mQ/9IDBI0A==
+"@next-sdk/permission-sdk@^2.1.1", "@next-sdk/permission-sdk@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.npmjs.org/@next-sdk/permission-sdk/-/permission-sdk-2.3.1.tgz#b431fa0efd3f9a3c010a7c366a11a901c8e3d5eb"
+  integrity sha512-MECMdKVpp0nfcTBNlmH2vj8xR2pn2V8FPS+ccS4Ns2IJJPe/e2FTfk0KvBowjN8LEzeEwqgyLpCOYOCkQG0bgQ==
 
 "@next-sdk/user-service-sdk@^2.1.1", "@next-sdk/user-service-sdk@^2.1.5":
   version "2.2.2"
