@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.281.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.280.3...@next-bricks/forms@1.281.0) (2023-10-30)
+
+
+### Features
+
+* **user-or-user-group-select:** add disabled property ([35c8ca7](https://github.com/easyops-cn/next-basics/commit/35c8ca7820718700d48e8ee0322797b8757d1e61))
+
+
+
+
+
 ## [1.280.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.280.2...@next-bricks/forms@1.280.3) (2023-10-10)
 
 
