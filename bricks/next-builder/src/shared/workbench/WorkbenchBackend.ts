@@ -470,7 +470,6 @@ export default class WorkbenchBackend {
     if (this.isBuilding) return;
     this.isBuilding = true;
     try {
-      await this.updateBrickTree();
       // eslint-disable-next-line no-console
       console.log("=== building ===");
       this.publish("message", {
@@ -491,6 +490,7 @@ export default class WorkbenchBackend {
       });
       // eslint-disable-next-line no-console
       console.log("=== build finsh ===");
+      await this.updateBrickTree();
       this.isBuilding = false;
       this.publish("message", {
         action: "build-success",

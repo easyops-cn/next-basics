@@ -176,14 +176,7 @@ describe("WorkbenchBackend should work", () => {
     jest.runAllTimers();
     await (global as any).flushPromises();
 
-    expect(handleBackendMessage).toHaveBeenNthCalledWith(
-      3,
-      "message",
-      expect.objectContaining({
-        action: "update-graph-data",
-      })
-    );
-    expect(handleBackendMessage).toHaveBeenNthCalledWith(4, "message", {
+    expect(handleBackendMessage).toHaveBeenNthCalledWith(3, "message", {
       action: "build-start",
     });
 
@@ -197,6 +190,14 @@ describe("WorkbenchBackend should work", () => {
         workflow: true,
       },
     });
+
+    expect(handleBackendMessage).toHaveBeenNthCalledWith(
+      4,
+      "message",
+      expect.objectContaining({
+        action: "update-graph-data",
+      })
+    );
 
     expect(handleBackendMessage).toHaveBeenNthCalledWith(5, "message", {
       action: "build-success",
