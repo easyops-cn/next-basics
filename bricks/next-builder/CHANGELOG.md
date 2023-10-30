@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.261.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.261.0...@next-bricks/next-builder@1.261.1) (2023-10-30)
+
+
+### Bug Fixes
+
+* key use appid as namespace to prevent using the same instance when linking templates ([1c0a2c4](https://github.com/easyops-cn/next-basics/commit/1c0a2c4a44ccc573f1033f52fda660e01038533b))
+* 修改 updateBrickTree 时机 ([228fa8a](https://github.com/easyops-cn/next-basics/commit/228fa8a23e74bdf3902afe8d37d9720bda78a496))
+
+
+
+
+
 # [1.261.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.260.12...@next-bricks/next-builder@1.261.0) (2023-10-19)
 
 
