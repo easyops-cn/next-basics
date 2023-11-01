@@ -40,3 +40,17 @@
   display: grid;
   grid-template-rows: auto;
 }
+
+:host-context(html[data-ui="v8-2"]) .ant-card:not(.ant-card-bordered) {
+  ::slotted([slot="content"]) {
+    padding: 0;
+  }
+
+  ::slotted([slot="content"]:not(:first-child):not(.columns-card-no-padding)) {
+    padding-left: 20px;
+  }
+
+  ::slotted([slot="content"]:not(:last-child):not(.columns-card-no-padding)) {
+    padding-right: 20px;
+  }
+}
