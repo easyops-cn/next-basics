@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.311.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.310.1...@next-bricks/presentational-bricks@1.311.0) (2023-11-01)
+
+
+### Features
+
+* table支持树状数据，同层级间排序 ([5397d8c](https://github.com/easyops-cn/next-basics/commit/5397d8c46c917fc1fd04b156c40e320ff90aafc8))
+
+
+
+
+
 ## [1.310.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.310.0...@next-bricks/presentational-bricks@1.310.1) (2023-10-31)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
