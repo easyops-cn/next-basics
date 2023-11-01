@@ -29,13 +29,14 @@ describe("calcMaxHeight", () => {
 
     container.appendChild(ul);
 
-    expect(calcMaxHeight(container)).toEqual(500);
+    // Non-element node
+    expect(calcMaxHeight(container.querySelector("li").firstChild)).toEqual(0);
   });
 });
 
 describe("getMutationObserver", () => {
   it("should observer dom", async () => {
-    const spyConsole = jest.spyOn(console, "log");
+    const spyConsole = jest.spyOn(console, "log").mockReturnValue();
 
     const div = document.createElement("div");
 
@@ -62,5 +63,6 @@ describe("getMutationObserver", () => {
     await (global as any).flushPromises();
 
     expect(spyConsole).toBeCalledTimes(2);
+    spyConsole.mockRestore();
   });
 });
