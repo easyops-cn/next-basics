@@ -97,11 +97,16 @@ const DraggableBodyRow = ({
       };
     },
     drop: (item: any) => {
-      moveRow(item.index, index);
+      /* istanbul ignore next */
+      moveRow(item.index, index, item.rowKey);
     },
   });
   const [, drag] = useDrag({
-    item: { type: acceptType || type, index },
+    item: {
+      type: acceptType || type,
+      index,
+      rowKey: restProps["data-row-key"],
+    },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -443,13 +448,67 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
     },
   };
 
-  const moveRow = (dragIndex: number, hoverIndex: number) => {
-    const dragRow = data[dragIndex];
-    const newData = update(data, {
-      $splice: [
-        [dragIndex, 1],
-        [hoverIndex, 0, dragRow],
-      ],
+  /* istanbul ignore next */
+  const getNewDateAfterMoving = ({
+    oldData,
+    dragIndex,
+    hoverIndex,
+    dragRowKey,
+    rowKeyField,
+    childrenColumnName,
+  }: {
+    oldData: Record<string, any>[];
+    dragIndex: number;
+    hoverIndex: number;
+    dragRowKey: string;
+    rowKeyField: string;
+    childrenColumnName: string;
+  }): Record<string, any>[] => {
+    const recursion = (list: Record<string, any>[]): Record<string, any>[] => {
+      return list.map((item) =>
+        update(item, {
+          [childrenColumnName]: {
+            $apply: (subItems: Record<string, any>[]) => {
+              if (!subItems?.length) return subItems;
+              const dragRow = subItems.find(
+                (x: Record<string, any>) => x[rowKeyField] === dragRowKey
+              );
+              return dragRow
+                ? update(subItems, {
+                    $splice: [
+                      [dragIndex, 1],
+                      [hoverIndex, 0, dragRow],
+                    ],
+                  })
+                : recursion(subItems);
+            },
+          },
+        })
+      );
+    };
+
+    return oldData?.find((item) => item[rowKeyField] === dragRowKey)
+      ? update(oldData, {
+          $splice: [
+            [dragIndex, 1],
+            [hoverIndex, 0, oldData[dragIndex]],
+          ],
+        })
+      : recursion(oldData);
+  };
+  const moveRow = (
+    dragIndex: number,
+    hoverIndex: number,
+    dragRowKey: string
+  ) => {
+    /* istanbul ignore next */
+    const newData = getNewDateAfterMoving({
+      oldData: data,
+      dragIndex,
+      hoverIndex,
+      dragRowKey,
+      rowKeyField: rowKey,
+      childrenColumnName,
     });
     setData(newData);
     props.onDrag && props.onDrag(newData);
@@ -531,7 +590,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
             onRow: (record, index) => ({
               index,
               moveRow: moveRow,
-              acceptType: props.acceptType,
+              acceptType: record.__acceptType || props.acceptType,
             }),
           }
         : {})}

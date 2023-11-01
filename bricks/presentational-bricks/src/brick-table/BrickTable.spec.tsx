@@ -474,18 +474,21 @@ describe("BrickTable", () => {
         packageName: "container",
         installPath: "/usr/local/easyops/container",
         version: "1.10.0",
+        __acceptType: "level-1",
       },
       {
         id: "2",
         packageName: "webshell",
         installPath: "/usr/local/easyops/webshell",
         version: "1.0.0",
+        __acceptType: "level-1",
       },
       {
         id: "3",
         packageName: "nginx",
         installPath: "/usr/local/easyops/nginx",
         version: "3.6.0",
+        __acceptType: "level-1",
       },
     ];
     const wrapper = mount(
