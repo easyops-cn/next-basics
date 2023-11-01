@@ -829,7 +829,8 @@ export class BrickTableElement extends UpdatingElement {
   /**
    * @required false
    * @default false
-   * @description 表格行是否可拖拽，注意，树形数据的表格不支持该功能
+   * @description 表格行是否可拖拽，注意，如果是树形数据的表格，则各行需要设置__acceptType，并保证同层级的__acceptType值相同
+   * [ { id: "parent1", __acceptType: "level-1", children: [ { id: "sub1", __acceptType: "parent1-sub" }, { id: "sub2", __acceptType: "parent1-sub" } ] }, { id: "parent2", __acceptType: "level-1", children: [ { id: "sub3", __acceptType: "parent2-sub" } ] } ]
    * @group basic
    */
   @property({
