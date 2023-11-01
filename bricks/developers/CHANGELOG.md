@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.367.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.367.0...@next-bricks/developers@1.367.1) (2023-11-01)
+
+
+### Bug Fixes
+
+* handle non-element nodes ([fb1a198](https://github.com/easyops-cn/next-basics/commit/fb1a198902a32431e185e53da38c3253c628952c))
+
+
+
+
+
 # [1.367.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.366.1...@next-bricks/developers@1.367.0) (2023-09-08)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.249.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.2...@next-bricks/basic-bricks@1.249.3) (2023-11-01)
+
+
+### Bug Fixes
+
+* **multiple-columns-card:** support ui v8.2 ([6e84ec8](https://github.com/easyops-cn/next-basics/commit/6e84ec83efbff06c91175fcd1a45fc6ae84d004a))
+
+
+
+
+
 ## [1.249.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.1...@next-bricks/basic-bricks@1.249.2) (2023-10-31)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
