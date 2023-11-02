@@ -11,18 +11,22 @@ import {
 import { mount } from "enzyme";
 import { Select, Button } from "antd";
 import { InstanceListModal } from "@next-libs/cmdb-instances";
+import { PermissionApi_getPermissionList } from "@next-sdk/permission-sdk";
 import * as brickKit from "@next-core/brick-kit";
+
 jest.spyOn(brickKit, "getAuth").mockReturnValue({
   username: "tester",
 });
-const mockPostSearch = InstanceApi_postSearch as jest.Mock;
 jest.mock("@next-sdk/cmdb-sdk");
-
+jest.mock("@next-sdk/permission-sdk");
 jest.mock("@next-libs/cmdb-instances", () => ({
   InstanceListModal: jest.fn(() => {
     return "<div>Fake instance list modal loaded!</div>";
   }),
 }));
+
+const mockPostSearch = InstanceApi_postSearch as jest.Mock;
+const mockGetPermissionList = PermissionApi_getPermissionList as jest.Mock;
 
 describe("UserOrUserGroupSelect", () => {
   it("should work", async () => {
@@ -234,6 +238,94 @@ describe("UserOrUserGroupSelect", () => {
     await (global as any).flushPromises();
     wrapper.update();
     expect(CmdbObjectApi_getObjectRef as jest.Mock).toBeCalledTimes(1);
+  });
+  it("should work with filterPermissionActions", async () => {
+    mockPostSearch.mockResolvedValue({
+      list: [
+        {
+          instanceId: "59eea4ad40bf8",
+          name: "easyops",
+          nickname: "uwin",
+        },
+        {
+          instanceId: "59eea4ad40bw2",
+          name: "test",
+          nickname: "xxx",
+        },
+      ],
+    });
+    mockGetPermissionList.mockResolvedValue({
+      code: 0,
+      total: 1,
+      page: 1,
+      page_size: 1,
+      data: [
+        {
+          id: "0123456789abc",
+          org: 8888,
+          system: "测试业务",
+          action: "test_permission",
+          remark: "测试权限",
+          remark_translation: "测试权限",
+          roles: ["系统管理员", "权限测试人员"],
+          disable: false,
+          user: ["easyops", "user1"],
+          user_group: [":123456789abcd", ":23456789abcde"],
+        },
+      ],
+    });
+    (CmdbObjectApi_getObjectRef as jest.Mock).mockResolvedValue({
+      data: [
+        {
+          objectId: "USER",
+          view: {
+            show_key: ["name", "nickname"],
+          },
+        },
+        {
+          objectId: "USER_GROUP",
+          view: {
+            show_key: ["name"],
+          },
+        },
+      ],
+    });
+    const onChange = jest.fn();
+
+    const wrapper = mount(
+      <UserOrUserGroupSelect
+        onChange={onChange}
+        optionsMode="user"
+        filterPermissionActions={["test_permission"]}
+      />
+    );
+    await (global as any).flushPromises();
+    wrapper.update();
+    wrapper.find(Select).invoke("onFocus")({} as React.FocusEvent<HTMLElement>);
+    await (global as any).flushPromises();
+    expect(mockGetPermissionList).toBeCalledWith({
+      action__in: "test_permission",
+      page_size: 1,
+    });
+    expect(mockPostSearch).toBeCalledWith(
+      "USER",
+      expect.objectContaining({
+        query: {
+          $and: expect.arrayContaining([
+            {
+              $or: [
+                { name: { $in: ["easyops", "user1"] } },
+                {
+                  "__members_USER_GROUP.instanceId": {
+                    $in: ["123456789abcd", "23456789abcde"],
+                  },
+                },
+              ],
+            },
+          ]),
+        },
+      })
+    );
   });
 
   it("should work is not multiple", async () => {
