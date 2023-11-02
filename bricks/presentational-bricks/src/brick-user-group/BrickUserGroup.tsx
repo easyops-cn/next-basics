@@ -4,10 +4,35 @@ import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 import { Avatar, Tooltip } from "antd";
 import { UserInfo } from "@next-core/brick-types";
 import { GroupProps } from "antd/lib/avatar";
-import { getAvatar } from "@next-libs/hooks";
+import { useAvatar } from "@next-libs/hooks";
 
-import { UserAdminApi_searchAllUsersInfo } from "@next-sdk/user-service-sdk";
+function BasicUser({
+  userNameOrId = "",
+  displayShowKey,
+}: {
+  userNameOrId: string;
+  displayShowKey: boolean;
+}) {
+  const { Avatar, user } = useAvatar(userNameOrId);
 
+  const [userTooltip, setUserTooltip] = useState<string>("");
+
+  useEffect(() => {
+    if (user) {
+      const [name, showKey] = (user as any)["#showKey"];
+      const userName = name || user.nickname || user.instanceId;
+      setUserTooltip(
+        displayShowKey && showKey ? `${userName}(${showKey})` : userName
+      );
+    }
+  }, [user, displayShowKey]);
+
+  return user ? (
+    <Tooltip title={userTooltip} placement="topLeft" key={user.instanceId}>
+      {Avatar}
+    </Tooltip>
+  ) : null;
+}
 interface BrickUserGroupProps {
   userNameOrIds: any;
   configProps?: GroupProps;
@@ -22,42 +47,9 @@ export function BrickUserGroup({
   displayShowKey,
 }: BrickUserGroupProps): React.ReactElement {
   const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
-  const [userList, setUserList] = useState<UserInfoWithShowKey[]>([]);
   const [maxCount, setMaxCount] = useState<number>(0);
   const [singleSize, setSingleSize] = useState<number>(0);
   const groupRef = useRef(null);
-
-  const getUserList = async (userNameOrIds: string[]) => {
-    const resultList = (
-      await UserAdminApi_searchAllUsersInfo({
-        query: {
-          $or: [
-            {
-              name: {
-                $in: userNameOrIds,
-              },
-            },
-            {
-              instanceId: {
-                $in: userNameOrIds,
-              },
-            },
-          ],
-        },
-        fields: {
-          name: true,
-          nickname: true,
-          user_icon: true,
-          "#showKey": true,
-        },
-      })
-    ).list as UserInfoWithShowKey[];
-    setUserList(resultList);
-  };
-
-  useEffect(() => {
-    userNameOrIds.length && getUserList(userNameOrIds);
-  }, [userNameOrIds]);
 
   useEffect(() => {
     const groupParentElement = groupRef?.current?.parentElement?.parentElement;
@@ -91,19 +83,13 @@ export function BrickUserGroup({
           }
         }
       >
-        {userList?.map((user) => {
-          const [name, showKey] = user["#showKey"];
-          const userName = name || user.nickname || user.instanceId;
-          const userTooltip =
-            displayShowKey && showKey ? `${userName}(${showKey})` : userName;
+        {userNameOrIds.map((userNameOrId: string, index: number) => {
           return (
-            <Tooltip
-              title={userTooltip}
-              placement="topLeft"
-              key={user.instanceId}
-            >
-              {getAvatar(user)}
-            </Tooltip>
+            <BasicUser
+              userNameOrId={userNameOrId}
+              displayShowKey={displayShowKey}
+              key={`${userNameOrId}${index}`}
+            ></BasicUser>
           );
         })}
       </Avatar.Group>

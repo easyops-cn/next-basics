@@ -3,15 +3,9 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { BrickUserGroup } from "./BrickUserGroup";
 import { UserAdminApi_searchAllUsersInfo } from "@next-sdk/user-service-sdk";
-import { getAvatar } from "@next-libs/hooks";
 import { shallow, mount } from "enzyme";
 
 jest.mock("@next-sdk/user-service-sdk");
-jest.mock("@next-libs/hooks");
-
-(getAvatar as jest.Mock).mockImplementation((user: any) => (
-  <span data-testid={user.name}>{user.name}</span>
-));
 
 const fakeUsers = [
   {
@@ -37,6 +31,7 @@ describe("BrickUserGroup", () => {
   });
   it("should render userNameOrIds", async () => {
     render(<BrickUserGroup userNameOrIds={["a", "b"]} />);
+    await jest.advanceTimersByTime(100);
     await (global as any).flushPromises();
     expect(screen.getByText("a")).toBeTruthy();
   });
