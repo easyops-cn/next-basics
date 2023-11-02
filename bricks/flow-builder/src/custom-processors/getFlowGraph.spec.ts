@@ -10,6 +10,36 @@ describe("getFlowGraph", () => {
   it.each([
     [
       {
+        relations: [],
+        steps: [],
+      },
+      undefined,
+      {
+        root: "root",
+        nodes: [
+          { id: "root", type: "node" },
+          {
+            id: "startFlow",
+            name: "request",
+            type: "vnode",
+            data: { id: "startFlow", name: "request" },
+          },
+          {
+            id: "endFlow",
+            name: "response",
+            type: "vnode",
+            data: { id: "endFlow", name: "response" },
+          },
+        ],
+        edges: [
+          { source: "root", target: "startFlow", type: "rootInclude" },
+          { source: "root", target: "endFlow", type: "rootInclude" },
+          { source: "startFlow", target: "endFlow", type: "contentDagre" },
+        ],
+      },
+    ],
+    [
+      {
         relations: [
           {
             src: "start",
@@ -116,9 +146,14 @@ describe("getFlowGraph", () => {
       "start",
       {
         edges: [
-          { source: "root", target: "start", type: "include" },
-          { source: "root", target: "step1", type: "include" },
-          { source: "root", target: "step5", type: "include" },
+          { source: "root", target: "startFlow", type: "rootInclude" },
+          { source: "root", target: "contentFlow", type: "rootInclude" },
+          { source: "root", target: "endFlow", type: "rootInclude" },
+          { source: "startFlow", target: "contentFlow", type: "contentDagre" },
+          { source: "contentFlow", target: "endFlow", type: "contentDagre" },
+          { source: "contentFlow", target: "start", type: "include" },
+          { source: "contentFlow", target: "step1", type: "include" },
+          { source: "contentFlow", target: "step5", type: "include" },
           { source: "start", target: "step1", type: "dagre" },
           { source: "step1", target: "step5", type: "dagre" },
           { source: "step1", target: "branch1", type: "container" },
@@ -162,6 +197,24 @@ describe("getFlowGraph", () => {
         ],
         nodes: [
           { id: "root", type: "node" },
+          {
+            id: "startFlow",
+            name: "request",
+            type: "vnode",
+            data: { id: "startFlow", name: "request" },
+          },
+          {
+            id: "contentFlow",
+            name: "content",
+            type: "vnode",
+            data: { id: "contentFlow", name: "content" },
+          },
+          {
+            id: "endFlow",
+            name: "response",
+            type: "vnode",
+            data: { id: "endFlow", name: "response" },
+          },
           {
             data: { id: "start", name: "start", next: "step1", type: "task" },
             id: "start",
@@ -314,16 +367,40 @@ describe("getFlowGraph", () => {
       "ch1",
       {
         edges: [
-          { source: "root", target: "ch1", type: "include" },
-          { source: "root", target: "task1", type: "include" },
-          { source: "root", target: "ch2", type: "include" },
-          { source: "root", target: "task2", type: "include" },
+          { source: "root", target: "startFlow", type: "rootInclude" },
+          { source: "root", target: "contentFlow", type: "rootInclude" },
+          { source: "root", target: "endFlow", type: "rootInclude" },
+          { source: "startFlow", target: "contentFlow", type: "contentDagre" },
+          { source: "contentFlow", target: "endFlow", type: "contentDagre" },
+
+          { source: "contentFlow", target: "ch1", type: "include" },
+          { source: "contentFlow", target: "task1", type: "include" },
+          { source: "contentFlow", target: "ch2", type: "include" },
+          { source: "contentFlow", target: "task2", type: "include" },
           { source: "ch1", target: "task1", type: "dagre" },
           { source: "ch1", target: "ch2", type: "dagre" },
           { source: "ch2", target: "task2", type: "dagre" },
         ],
         nodes: [
           { id: "root", type: "node" },
+          {
+            id: "startFlow",
+            name: "request",
+            type: "vnode",
+            data: { id: "startFlow", name: "request" },
+          },
+          {
+            id: "contentFlow",
+            name: "content",
+            type: "vnode",
+            data: { id: "contentFlow", name: "content" },
+          },
+          {
+            id: "endFlow",
+            name: "response",
+            type: "vnode",
+            data: { id: "endFlow", name: "response" },
+          },
           {
             data: { id: "ch1", name: "ch1", type: "choice" },
             id: "ch1",
@@ -417,12 +494,17 @@ describe("getFlowGraph", () => {
       "name",
       {
         edges: [
-          { source: "root", target: "name", type: "include" },
-          { source: "root", target: "stepabc", type: "include" },
-          { source: "root", target: "stepabc1", type: "include" },
-          { source: "root", target: "step01", type: "include" },
-          { source: "root", target: "step02", type: "include" },
-          { source: "root", target: "step03", type: "include" },
+          { source: "root", target: "startFlow", type: "rootInclude" },
+          { source: "root", target: "contentFlow", type: "rootInclude" },
+          { source: "root", target: "endFlow", type: "rootInclude" },
+          { source: "startFlow", target: "contentFlow", type: "contentDagre" },
+          { source: "contentFlow", target: "endFlow", type: "contentDagre" },
+          { source: "contentFlow", target: "name", type: "include" },
+          { source: "contentFlow", target: "stepabc", type: "include" },
+          { source: "contentFlow", target: "stepabc1", type: "include" },
+          { source: "contentFlow", target: "step01", type: "include" },
+          { source: "contentFlow", target: "step02", type: "include" },
+          { source: "contentFlow", target: "step03", type: "include" },
           { source: "name", target: "stepabc", type: "dagre" },
           { source: "stepabc", target: "stepabc1", type: "dagre" },
           { source: "step01", target: "step02", type: "dagre" },
@@ -430,6 +512,24 @@ describe("getFlowGraph", () => {
         ],
         nodes: [
           { id: "root", type: "node" },
+          {
+            id: "startFlow",
+            name: "request",
+            type: "vnode",
+            data: { id: "startFlow", name: "request" },
+          },
+          {
+            id: "contentFlow",
+            name: "content",
+            type: "vnode",
+            data: { id: "contentFlow", name: "content" },
+          },
+          {
+            id: "endFlow",
+            name: "response",
+            type: "vnode",
+            data: { id: "endFlow", name: "response" },
+          },
           {
             data: { id: "name", name: "name", next: "stepabc", type: "pass" },
             id: "name",
@@ -542,7 +642,12 @@ describe("getFlowGraph", () => {
       "step1",
       {
         edges: [
-          { source: "root", target: "step1", type: "include" },
+          { source: "root", target: "startFlow", type: "rootInclude" },
+          { source: "root", target: "contentFlow", type: "rootInclude" },
+          { source: "root", target: "endFlow", type: "rootInclude" },
+          { source: "startFlow", target: "contentFlow", type: "contentDagre" },
+          { source: "contentFlow", target: "endFlow", type: "contentDagre" },
+          { source: "contentFlow", target: "step1", type: "include" },
           { source: "step1", target: "branch", type: "container" },
           { source: "branch", target: "branch_layout", type: "group" },
           { source: "branch_layout", target: "ch1", type: "childrenLayout" },
@@ -550,6 +655,24 @@ describe("getFlowGraph", () => {
         ],
         nodes: [
           { id: "root", type: "node" },
+          {
+            id: "startFlow",
+            name: "request",
+            type: "vnode",
+            data: { id: "startFlow", name: "request" },
+          },
+          {
+            id: "contentFlow",
+            name: "content",
+            type: "vnode",
+            data: { id: "contentFlow", name: "content" },
+          },
+          {
+            id: "endFlow",
+            name: "response",
+            type: "vnode",
+            data: { id: "endFlow", name: "response" },
+          },
           {
             data: {
               children: ["branch"],
@@ -595,14 +718,6 @@ describe("getFlowGraph", () => {
         ],
         root: "root",
       },
-    ],
-    [
-      {
-        relations: [],
-        steps: [],
-      },
-      undefined,
-      { edges: [], nodes: [{ id: "root", type: "node" }], root: "root" },
     ],
   ])("should work", (data, startId, result) => {
     expect(getFlowGraph(data, startId)).toEqual(result);

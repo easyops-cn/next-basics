@@ -1,5 +1,5 @@
 import { getRuntime } from "@next-core/brick-kit";
-import { isEmpty, difference } from "lodash";
+import { isEmpty, difference, includes } from "lodash";
 import { StepItem, StepType } from "../interfaces";
 import { getStageList, checkRecurringNode } from "./getStepTreeData";
 
@@ -111,7 +111,7 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
     stage.forEach((item) => {
       if (!edges.some((e) => e.target === item.id && e.source === rootId)) {
         edges.push({
-          source: rootId,
+          source: "contentFlow",
           target: item.id,
           type: "include",
         });
@@ -211,10 +211,74 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
     }
   });
 
+  const startFlowNode = {
+    id: "startFlow",
+    name: "request",
+    type: "vnode",
+    data: { id: "startFlow", name: "request" },
+  };
+  const endFlowNode = {
+    id: "endFlow",
+    name: "response",
+    type: "vnode",
+    data: { id: "endFlow", name: "response" },
+  };
+  const contentFlowNode = {
+    id: "contentFlow",
+    name: "content",
+    type: "vnode",
+    data: { id: "contentFlow", name: "content" },
+  };
+
+  const startEdges = {
+    source: "root",
+    target: "startFlow",
+    type: "rootInclude",
+  };
+  const endEdges = { source: "root", target: "endFlow", type: "rootInclude" };
+  const contentEdges = {
+    source: "root",
+    target: "contentFlow",
+    type: "rootInclude",
+  };
+
+  const startToContentEdges = {
+    source: "startFlow",
+    target: "contentFlow",
+    type: "contentDagre",
+  };
+  const contentToEndEdges = {
+    source: "contentFlow",
+    target: "endFlow",
+    type: "contentDagre",
+  };
+
+  const startToEndEdges = {
+    source: "startFlow",
+    target: "endFlow",
+    type: "contentDagre",
+  };
+
+  if (!nodes.length) {
+    return {
+      root: rootId,
+      nodes: [rootNode, startFlowNode, endFlowNode],
+      edges: [startEdges, endEdges, startToEndEdges],
+    };
+  }
+
   return {
     root: rootId,
-    nodes: [rootNode, ...nodes],
-    edges: [...edges, ...groupEdges],
+    nodes: [rootNode, startFlowNode, contentFlowNode, endFlowNode, ...nodes],
+    edges: [
+      startEdges,
+      contentEdges,
+      endEdges,
+      startToContentEdges,
+      contentToEndEdges,
+      ...edges,
+      ...groupEdges,
+    ],
   };
 }
 
