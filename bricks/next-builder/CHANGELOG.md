@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.262.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.261.3...@next-bricks/next-builder@1.262.0) (2023-11-03)
+
+
+### Features
+
+* 编排时课可以快速滚动到当前选中的“路由”和“元素节点” ([0b49afc](https://github.com/easyops-cn/next-basics/commit/0b49afca21d792928f2debb9853978571e5e9102))
+
+
+
+
+
 ## [1.261.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.261.2...@next-bricks/next-builder@1.261.3) (2023-11-03)
 
 
