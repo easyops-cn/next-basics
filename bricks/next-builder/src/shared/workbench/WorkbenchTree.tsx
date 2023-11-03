@@ -55,12 +55,14 @@ export interface WorkbenchTreeProps {
   allowDrag?: boolean;
   allowDragToRoot?: boolean;
   allowDragToInside?: boolean;
+  onNodeActive?: (node: HTMLElement) => void;
   dropEmit?: (detail: dropEmitProps) => void;
 }
 
 export interface TreeListProps {
   nodes: WorkbenchNodeData[];
   level: number;
+  onNodeActive: (node: HTMLElement) => void;
 }
 
 const SearchingContext = createContext(false);
@@ -71,6 +73,7 @@ export function WorkbenchTree({
   searchPlaceholder,
   isDrag,
   noSearch,
+  onNodeActive,
   allowDrag,
   allowDragToRoot,
   allowDragToInside,
@@ -342,7 +345,11 @@ export function WorkbenchTree({
                 onDragOver={handleOnDragOver}
                 onDrop={handleOnDrop}
               >
-                <TreeList nodes={filteredNodes} level={1} />
+                <TreeList
+                  nodes={filteredNodes}
+                  level={1}
+                  onNodeActive={onNodeActive}
+                />
               </div>
             </WorkbenchTreeDndContext.Provider>
           </SearchingContext.Provider>
@@ -354,7 +361,7 @@ export function WorkbenchTree({
   );
 }
 
-function TreeList({ nodes, level }: TreeListProps): ReactElement {
+function TreeList({ nodes, level, onNodeActive }: TreeListProps): ReactElement {
   const lastIndex = nodes.length - 1;
   return (
     <ul className={styles.tree}>
@@ -367,6 +374,7 @@ function TreeList({ nodes, level }: TreeListProps): ReactElement {
             level={level}
             isFirst={index === 0}
             isLast={index === lastIndex}
+            onNodeActive={onNodeActive}
           />
         ))}
     </ul>
@@ -394,6 +402,7 @@ export interface TreeNodeProps {
   isFirst?: boolean;
   isLast?: boolean;
   skipNotify?: boolean;
+  onNodeActive?: (node: HTMLElement) => void;
 }
 
 function TreeNode({
@@ -401,6 +410,7 @@ function TreeNode({
   level,
   isFirst,
   isLast,
+  onNodeActive,
 }: TreeNodeProps): ReactElement {
   const isLeaf = !node.children?.length;
   const isContainer = node.isContainer;
@@ -466,16 +476,19 @@ function TreeNode({
     () =>
       isActive
         ? (element: HTMLElement) => {
-            element?.scrollIntoView({
-              block: "center",
-              inline: "center",
-              // behavior: "smooth",
-            });
+            if (element) {
+              element.scrollIntoView({
+                block: "center",
+                inline: "center",
+                // behavior: "smooth",
+              });
+              onNodeActive?.(element);
+            }
           }
         : null,
     // Only for initial active node.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [isActive]
   );
 
   const nodeUid = useMemo(() => {
@@ -716,7 +729,13 @@ function TreeNode({
             </span>
           )}
         </Link>
-        {isLeaf || <TreeList nodes={node.children} level={level + 1} />}
+        {isLeaf || (
+          <TreeList
+            nodes={node.children}
+            level={level + 1}
+            onNodeActive={onNodeActive}
+          />
+        )}
       </li>
       {isDragActive &&
         (allowDragToRoot || level !== 1) &&

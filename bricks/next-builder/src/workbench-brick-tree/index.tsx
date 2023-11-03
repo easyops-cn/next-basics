@@ -4,6 +4,7 @@ import {
   BrickWrapper,
   event,
   type EventEmitter,
+  method,
   property,
   UpdatingElement,
 } from "@next-core/brick-kit";
@@ -65,6 +66,21 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
     collapsed: boolean;
   }>;
 
+  private _activeNode: HTMLElement;
+
+  @method()
+  scrollActiveNodeIntoView(): void {
+    this._activeNode?.scrollIntoView({
+      block: "center",
+      behavior: "smooth",
+      inline: "center",
+    });
+  }
+
+  private _handleNodeActive = (node: HTMLElement): void => {
+    this._activeNode = node;
+  };
+
   private _handleNodeToggle = (nodeId: string, collapsed: boolean): void => {
     this._nodeToggleEvent.emit({ nodeId, collapsed });
   };
@@ -100,6 +116,7 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
                 activeInstanceId={this.activeInstanceId}
                 collapsedNodes={this.collapsedNodes}
                 isDrag={this.isDrag}
+                onNodeActive={this._handleNodeActive}
                 onNodeToggle={this._handleNodeToggle}
                 onAddBrickDrop={this._handleAddBrickDrop}
               />

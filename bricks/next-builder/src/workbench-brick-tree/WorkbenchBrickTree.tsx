@@ -34,6 +34,7 @@ export interface WorkbenchBrickTreeProps {
   activeInstanceId?: string;
   collapsedNodes?: string[];
   isDrag?: boolean;
+  onNodeActive?(node: HTMLElement): void;
   onNodeToggle?(nodeId: string, collapsed: boolean): void;
   onAddBrickDrop?(params: WorkbenchBackendActionForInsertDetail): void;
 }
@@ -59,6 +60,7 @@ export function WorkbenchBrickTree({
   activeInstanceId,
   collapsedNodes,
   isDrag,
+  onNodeActive,
   onNodeToggle,
   onAddBrickDrop,
 }: WorkbenchBrickTreeProps): React.ReactElement {
@@ -394,6 +396,7 @@ export function WorkbenchBrickTree({
         nodes={tree}
         placeholder={placeholder}
         searchPlaceholder={searchPlaceholder}
+        onNodeActive={onNodeActive}
         allowDrag={true}
         allowDragToRoot={false}
         allowDragToInside={true}
