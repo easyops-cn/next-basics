@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.282.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.282.1...@next-bricks/forms@1.282.2) (2023-11-03)
+
+
+### Bug Fixes
+
+* **user-or-user-group-select:** Fixed the problem that the display content remained unchanged when the value was set to null. ([bfff6b8](https://github.com/easyops-cn/next-basics/commit/bfff6b8e405307e83cf97ac432f9ad0fc3573abc))
+
+
+
+
+
 ## [1.282.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.282.0...@next-bricks/forms@1.282.1) (2023-10-31)
 
 **Note:** Version bump only for package @next-bricks/forms
