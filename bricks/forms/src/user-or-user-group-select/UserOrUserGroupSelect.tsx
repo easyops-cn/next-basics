@@ -244,124 +244,120 @@ export function LegacyUserSelectFormItem(
   };
 
   useEffect(() => {
-    const initializeSelectedValue = async () => {
-      if (props.value) {
-        let selectedUser: any[] = [];
-        let selectedUserGroup: any[] = [];
-        const staticKeys = initializeStaticList();
-        const user = compact(
-          uniq([].concat(staticKeys.user).concat(props.value.selectedUser))
-        );
+    const initializeSelectedValue = async (): Promise<void> => {
+      let selectedUser: any[] = [];
+      let selectedUserGroup: any[] = [];
+      const staticKeys = initializeStaticList();
+      const user = compact(
+        uniq([].concat(staticKeys.user).concat(props.value?.selectedUser))
+      );
 
-        const userGroup = compact(
-          uniq(
-            []
-              .concat(staticKeys.userGroup)
-              .concat(props.value.selectedUserGroup)
-          )
-        );
+      const userGroup = compact(
+        uniq(
+          [].concat(staticKeys.userGroup).concat(props.value?.selectedUserGroup)
+        )
+      );
 
-        if (
-          (staticKeys.user &&
-            some(
-              staticKeys.user,
-              (v) => !props.value?.selectedUser?.includes(v)
-            )) ||
-          (staticKeys.userGroup &&
-            some(
-              staticKeys.userGroup,
-              (v) => !props.value?.selectedUserGroup?.includes(v)
-            ))
-        ) {
-          triggerChange({
-            selectedUser: user,
-            selectedUserGroup: userGroup,
-          });
-        }
-        const staticValueToSet = [];
-        if (user.length && props.optionsMode !== "group") {
-          selectedUser = (
-            await InstanceApi_postSearch("USER", {
-              query: {
-                name: {
-                  $in: user,
-                },
-              },
-
-              page: 1,
-              page_size: user.length,
-              fields: {
-                ...zipObject(
-                  userShowKey,
-                  map(userShowKey, (v) => true)
-                ),
-
-                name: true,
-              },
-            })
-          ).list;
-        }
-        if (userGroup.length && props.optionsMode !== "user") {
-          selectedUserGroup = (
-            await InstanceApi_postSearch("USER_GROUP", {
-              query: {
-                instanceId: {
-                  // 默认带为":"+instanceId，这里查询的时候去掉前面的冒号
-                  $in: map(userGroup, (v) => v.slice(1)),
-                },
-              },
-
-              page: 1,
-              page_size: userGroup.length,
-              fields: {
-                ...zipObject(
-                  userGroupShowKey,
-                  map(userGroupShowKey, (v) => true)
-                ),
-
-                name: true,
-              },
-            })
-          ).list;
-        }
-        let labelValue = [
-          ...map(selectedUser, (v) => {
-            const labelText = getLabel("USER", v);
-            const result = {
-              key: v.name,
-              label: props.staticList?.includes(v.name)
-                ? getStaticLabel(labelText)
-                : labelText,
-            };
-
-            if (props.staticList?.includes(v.name)) {
-              staticValueToSet.push(result);
-            }
-            return result;
-          }),
-          ...map(selectedUserGroup, (v) => {
-            const labelText = getLabel("USER_GROUP", v);
-            const result = {
-              key: ":" + v.instanceId,
-              label: props.staticList?.includes(":" + v.instanceId)
-                ? getStaticLabel(labelText)
-                : labelText,
-            };
-
-            if (props.staticList?.includes(":" + v.instanceId)) {
-              staticValueToSet.push(result);
-            }
-            return result;
-          }),
-        ];
-
-        labelValue = [
-          ...staticValueToSet,
-          ...filter(labelValue, (v) => !props.staticList?.includes(v.key)),
-        ];
-        setSelectedValue(labelValue);
-        staticValue.current = staticValueToSet;
+      if (
+        (staticKeys.user &&
+          some(
+            staticKeys.user,
+            (v) => !props.value?.selectedUser?.includes(v)
+          )) ||
+        (staticKeys.userGroup &&
+          some(
+            staticKeys.userGroup,
+            (v) => !props.value?.selectedUserGroup?.includes(v)
+          ))
+      ) {
+        triggerChange({
+          selectedUser: user,
+          selectedUserGroup: userGroup,
+        });
       }
+      const staticValueToSet = [];
+      if (user.length && props.optionsMode !== "group") {
+        selectedUser = (
+          await InstanceApi_postSearch("USER", {
+            query: {
+              name: {
+                $in: user,
+              },
+            },
+
+            page: 1,
+            page_size: user.length,
+            fields: {
+              ...zipObject(
+                userShowKey,
+                map(userShowKey, (v) => true)
+              ),
+
+              name: true,
+            },
+          })
+        ).list;
+      }
+      if (userGroup.length && props.optionsMode !== "user") {
+        selectedUserGroup = (
+          await InstanceApi_postSearch("USER_GROUP", {
+            query: {
+              instanceId: {
+                // 默认带为":"+instanceId，这里查询的时候去掉前面的冒号
+                $in: map(userGroup, (v) => v.slice(1)),
+              },
+            },
+
+            page: 1,
+            page_size: userGroup.length,
+            fields: {
+              ...zipObject(
+                userGroupShowKey,
+                map(userGroupShowKey, (v) => true)
+              ),
+
+              name: true,
+            },
+          })
+        ).list;
+      }
+      let labelValue = [
+        ...map(selectedUser, (v) => {
+          const labelText = getLabel("USER", v);
+          const result = {
+            key: v.name,
+            label: props.staticList?.includes(v.name)
+              ? getStaticLabel(labelText)
+              : labelText,
+          };
+
+          if (props.staticList?.includes(v.name)) {
+            staticValueToSet.push(result);
+          }
+          return result;
+        }),
+        ...map(selectedUserGroup, (v) => {
+          const labelText = getLabel("USER_GROUP", v);
+          const result = {
+            key: ":" + v.instanceId,
+            label: props.staticList?.includes(":" + v.instanceId)
+              ? getStaticLabel(labelText)
+              : labelText,
+          };
+
+          if (props.staticList?.includes(":" + v.instanceId)) {
+            staticValueToSet.push(result);
+          }
+          return result;
+        }),
+      ];
+
+      labelValue = [
+        ...staticValueToSet,
+        ...filter(labelValue, (v) => !props.staticList?.includes(v.key)),
+      ];
+      setSelectedValue(labelValue);
+      staticValue.current = staticValueToSet;
     };
     if (isDifferent()) {
       initializeSelectedValue();
