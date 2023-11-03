@@ -169,6 +169,7 @@ export function LegacyPreviewContainer(
   const iframeRef = useRef<HTMLIFrameElement>();
   const containerRef = useRef<HTMLDivElement>();
   const [scroll, setScroll] = useState({ x: 0, y: 0 });
+  const [contentScroll, setContentScroll] = useState({ x: 0, y: 0 });
   const [scaleX, setScaleX] = useState(1);
   const [scaleY, setScaleY] = useState(1);
   const minScale = Math.min(scaleX, scaleY, 1);
@@ -184,6 +185,7 @@ export function LegacyPreviewContainer(
   const [dragDirection, setDragDirection] = useState<Direction>();
   const [isShowMask, setIsShowMask] = useState<boolean>(false);
   const refScroll = useRef(scroll);
+  const refContentScroll = useRef(contentScroll);
   const loadedRef = useRef(false);
   const refHoverIid = useRef<string>();
   const refHoverOutlines = useRef<BrickOutline[]>();
@@ -445,15 +447,23 @@ export function LegacyPreviewContainer(
     (outlines: BrickOutline[]): BrickOutline[] => {
       const offsetLeft = iframeRef.current.offsetLeft;
       const offsetTop = iframeRef.current.offsetTop;
-      return outlines.map(({ width, height, left, top, alias }) => ({
-        width: width * minScale,
-        height: height * minScale,
-        left: (left - scroll.x) * minScale + offsetLeft,
-        top: (top - scroll.y) * minScale + offsetTop,
-        ...(alias ? { alias } : {}),
-      }));
+      return outlines.map(
+        ({ width, height, left, top, alias, hasContentScroll }) => ({
+          width: width * minScale,
+          height: height * minScale,
+          left:
+            (left - scroll.x - (hasContentScroll ? contentScroll.x : 0)) *
+              minScale +
+            offsetLeft,
+          top:
+            (top - scroll.y - (hasContentScroll ? contentScroll.y : 0)) *
+              minScale +
+            offsetTop,
+          ...(alias ? { alias } : {}),
+        })
+      );
     },
-    [minScale, scroll.x, scroll.y]
+    [minScale, scroll.x, scroll.y, contentScroll.x, contentScroll.y]
   );
 
   const [adjustedHoverOutlines, setAdjustedHoverOutlines] = useState<
@@ -725,6 +735,10 @@ export function LegacyPreviewContainer(
           case "scroll":
             setScroll(data.scroll);
             refScroll.current = data.scroll;
+            break;
+          case "content-scroll":
+            setContentScroll(data.scroll);
+            refContentScroll.current = data.scroll;
             break;
           case "highlight-brick":
             if (data.highlightType === "active") {
