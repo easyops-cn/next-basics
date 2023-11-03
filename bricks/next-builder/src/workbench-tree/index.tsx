@@ -5,6 +5,7 @@ import {
   BrickWrapper,
   event,
   type EventEmitter,
+  method,
   property,
   UpdatingElement,
 } from "@next-core/brick-kit";
@@ -133,6 +134,17 @@ export class WorkbenchTreeElement extends UpdatingElement {
     this._nodeToggleEvent.emit({ nodeId, collapsed });
   };
 
+  private _activeNode: HTMLElement;
+
+  @method()
+  scrollActiveNodeIntoView(): void {
+    this._activeNode?.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+
+  private _handleNodeActive = (node: HTMLElement): void => {
+    this._activeNode = node;
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -190,6 +202,7 @@ export class WorkbenchTreeElement extends UpdatingElement {
                 searchPlaceholder={this.searchPlaceholder}
                 noSearch={this.noSearch}
                 dropEmit={this._handleNodeDrop}
+                onNodeActive={this._handleNodeActive}
                 allowDrag={this.allowDrag}
                 allowDragToInside={this.allowDragToInside}
                 allowDragToRoot={this.allowDragToRoot}
