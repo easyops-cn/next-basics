@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.5](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.23.4...@next-types/preview@1.23.5) (2023-11-03)
+
+
+### Bug Fixes
+
+* **preview:** handle content scroll ([d831bb5](https://github.com/easyops-cn/next-basics/commit/d831bb526d44a54003470dfbc0c58e6a05a8b1d3))
+
+
+
+
+
 ## [1.23.4](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.23.3...@next-types/preview@1.23.4) (2023-09-27)
 
 

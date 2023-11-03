@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/next-previewer",
-  "version": "1.15.4",
+  "version": "1.15.5",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/next-previewer",
   "license": "GPL-3.0",
@@ -42,7 +42,7 @@
   },
   "sideEffects": true,
   "devDependencies": {
-    "@next-types/preview": "^1.23.4",
+    "@next-types/preview": "^1.23.5",
     "html2canvas": "^1.4.1"
   }
 }
