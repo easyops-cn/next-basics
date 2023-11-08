@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.249.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.5...@next-bricks/basic-bricks@1.249.6) (2023-11-08)
+
+
+### Bug Fixes
+
+* 优化 virtual list 字体颜色展示 ([63021b4](https://github.com/easyops-cn/next-basics/commit/63021b4f3a3678e35870acadd20e8ecce666268d))
+
+
+
+
+
 ## [1.249.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.4...@next-bricks/basic-bricks@1.249.5) (2023-11-08)
 
 
