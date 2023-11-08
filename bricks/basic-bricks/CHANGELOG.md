@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.249.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.3...@next-bricks/basic-bricks@1.249.4) (2023-11-08)
+
+
+### Bug Fixes
+
+* sub-menu-filter兼容UI 8.2 ([a46d056](https://github.com/easyops-cn/next-basics/commit/a46d056d52941b5e16925d3f070adeabc638f8c5))
+
+
+
+
+
 ## [1.249.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.2...@next-bricks/basic-bricks@1.249.3) (2023-11-01)
 
 
