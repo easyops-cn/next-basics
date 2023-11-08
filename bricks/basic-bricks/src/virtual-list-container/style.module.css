@@ -12,7 +12,7 @@
 }
 .itemContentTitle {
   display: -webkit-box;
-  color: rgb(38, 38, 38);
+  color: var(--antd-btn-default-color);
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
@@ -22,7 +22,7 @@
   font-size: 12px;
 }
 .itemContentDesc {
-  color: rgb(140, 140, 140);
+  color: var(--antd-btn-fade-text-color);
   font-size: 12px;
 }
 .itemFooter {
