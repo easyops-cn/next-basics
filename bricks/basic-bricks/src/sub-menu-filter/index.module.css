@@ -102,6 +102,9 @@
 
 html[data-ui="v8-2"] .subMenuContainer {
   padding: 0;
+  > :global(.ant-input-search) {
+    margin-bottom: 12px;
+  }
   > :global(.ant-menu) {
     padding: 0px 0px;
   }
