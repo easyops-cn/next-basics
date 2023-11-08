@@ -12,10 +12,13 @@ export interface BasicIconProps {
   icon?: MenuIcon | ImgIcon;
   size?: string;
   renderBg?: boolean;
+  iconStyle?: React.CSSProperties;
   bg?: string;
   bgSize?: string;
   bgBorderRadius?: string;
   itemClick?: () => void;
+  itemMouseEnter?: () => void;
+  itemMouseLeave?: () => void;
 }
 
 export function BasicIcon(props: BasicIconProps): React.ReactElement {
@@ -26,7 +29,10 @@ export function BasicIcon(props: BasicIconProps): React.ReactElement {
     bgSize = "46px",
     bg = "var(--theme-gray-color)",
     bgBorderRadius = "50%",
+    iconStyle,
     itemClick,
+    itemMouseEnter,
+    itemMouseLeave,
   } = props;
 
   return icon ? (
@@ -37,11 +43,15 @@ export function BasicIcon(props: BasicIconProps): React.ReactElement {
         width={size}
         style={icon.imgStyle}
         onClick={itemClick}
+        onMouseEnter={itemMouseEnter}
+        onMouseLeave={itemMouseLeave}
       />
     ) : (
       <div
         style={{ fontSize: size, lineHeight: size, width: "min-content" }}
         onClick={itemClick}
+        onMouseEnter={itemMouseEnter}
+        onMouseLeave={itemMouseLeave}
       >
         {renderBg ? (
           <div
@@ -53,10 +63,10 @@ export function BasicIcon(props: BasicIconProps): React.ReactElement {
             }}
             className={cssStyle.iconWrapper}
           >
-            <GeneralIcon icon={icon} />
+            <GeneralIcon style={iconStyle} icon={icon} />
           </div>
         ) : (
-          <GeneralIcon icon={icon} />
+          <GeneralIcon style={iconStyle} icon={icon} />
         )}
       </div>
     )

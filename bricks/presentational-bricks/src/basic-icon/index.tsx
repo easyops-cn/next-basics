@@ -41,6 +41,11 @@ export class BasicIconElement extends UpdatingElement {
   @property({ attribute: false })
   size: string;
 
+  @property({
+    attribute: false,
+  })
+  iconStyle: React.CSSProperties;
+
   /**
    * @kind boolean
    * @required false
@@ -96,6 +101,20 @@ export class BasicIconElement extends UpdatingElement {
   @event({ type: "icon.click", cancelable: true })
   itemClick: EventEmitter<any>;
 
+  /**
+   * @detail `any`
+   * @description 鼠标进入icon区域时被触发
+   */
+  @event({ type: "icon.mouseenter", cancelable: true })
+  itemMouseEnter: EventEmitter<any>;
+
+  /**
+   * @detail `any`
+   * @description 鼠标离开icon区域时被触发
+   */
+  @event({ type: "icon.mouseleave", cancelable: true })
+  itemMouseLeave: EventEmitter<any>;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -113,6 +132,13 @@ export class BasicIconElement extends UpdatingElement {
     this.itemClick.emit(this.dataSource);
   };
 
+  private _itemMouseEnter = (): void => {
+    this.itemMouseEnter.emit(this.dataSource);
+  };
+
+  private _itemMouseLeave = (): void => {
+    this.itemMouseLeave.emit(this.dataSource);
+  };
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
@@ -125,7 +151,10 @@ export class BasicIconElement extends UpdatingElement {
             bg={this.bg}
             bgSize={this.bgSize}
             bgBorderRadius={this.bgBorderRadius}
+            iconStyle={this.iconStyle}
             itemClick={this._itemClick}
+            itemMouseEnter={this._itemMouseEnter}
+            itemMouseLeave={this._itemMouseLeave}
           />
         </BrickWrapper>,
         this
