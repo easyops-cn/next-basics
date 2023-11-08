@@ -100,6 +100,13 @@
   }
 }
 
+html[data-ui="v8-2"] .subMenuContainer {
+  padding: 0;
+  > :global(.ant-menu) {
+    padding: 0px 0px;
+  }
+}
+
 .itemContainerInner {
   padding: 8px 8px 8px 0;
   height: 100%;
