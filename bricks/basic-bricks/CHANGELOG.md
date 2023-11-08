@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.249.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.4...@next-bricks/basic-bricks@1.249.5) (2023-11-08)
+
+
+### Bug Fixes
+
+* sub-menu-filter遗漏有搜索的情况 ([d096265](https://github.com/easyops-cn/next-basics/commit/d0962656e72b5fb739092fbf2c9eb9eb9f647f56))
+
+
+
+
+
 ## [1.249.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.3...@next-bricks/basic-bricks@1.249.4) (2023-11-08)
 
 
