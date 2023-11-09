@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.30.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.30.2...@next-bricks/flow-builder@1.30.3) (2023-11-09)
+
+
+### Bug Fixes
+
+* fix click collapse button do not work ([856c4e8](https://github.com/easyops-cn/next-basics/commit/856c4e88a42881fd4efdc12aec80588ca4ad85b3))
+
+
+
+
+
 ## [1.30.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.30.1...@next-bricks/flow-builder@1.30.2) (2023-11-02)
 
 
