@@ -1,9 +1,6 @@
-import {
-  BuilderCustomTemplateNode,
-  BuilderRouteNode,
-} from "@next-core/brick-types";
-import { getWorkbenchDataTree } from "./getWorkbenchDataTree";
 import _ from "lodash";
+import { BuilderRouteNode } from "@next-core/brick-types";
+import { getWorkbenchDataTree } from "./getWorkbenchDataTree";
 
 jest.mock("@next-core/brick-kit", () => ({
   getRuntime: () => ({
@@ -48,6 +45,7 @@ test("getWorkbenchDataTree for route", () => {
           "theme": "outlined",
         },
         "key": "context-key-0",
+        "labelPrefix": undefined,
         "name": "a",
         "path": undefined,
         "unreachable": false,
@@ -66,6 +64,7 @@ test("getWorkbenchDataTree for route", () => {
           "theme": "outlined",
         },
         "key": "context-key-0",
+        "labelPrefix": undefined,
         "name": "b",
         "path": undefined,
         "unreachable": true,
@@ -84,6 +83,7 @@ test("getWorkbenchDataTree for route", () => {
           "theme": "outlined",
         },
         "key": "context-key-0",
+        "labelPrefix": undefined,
         "name": "c",
         "path": undefined,
         "unreachable": false,
@@ -93,10 +93,16 @@ test("getWorkbenchDataTree for route", () => {
 });
 
 test("getWorkbenchDataTree for tpl", () => {
-  const tree = getWorkbenchDataTree({
-    type: "custom-template",
-    state: '[{"name":"a"}]',
-  } as any);
+  const tree = getWorkbenchDataTree(
+    {
+      type: "custom-template",
+      state: '[{"name":"a"},{"name":"b","expose":false}]',
+    } as any,
+    undefined,
+    {
+      distinguishExposedStates: true,
+    }
+  );
   expect(tree).toMatchInlineSnapshot(`
     Array [
       Object {
@@ -111,7 +117,31 @@ test("getWorkbenchDataTree for tpl", () => {
           "theme": "outlined",
         },
         "key": "context-key-0",
+        "labelPrefix": undefined,
         "name": "a",
+        "path": undefined,
+        "unreachable": false,
+      },
+      Object {
+        "data": Object {
+          "$key": "context-key-0",
+          "expose": false,
+          "name": "b",
+        },
+        "icon": Object {
+          "color": "cyan",
+          "icon": "code",
+          "lib": "antd",
+          "theme": "outlined",
+        },
+        "key": "context-key-0",
+        "labelPrefix": Object {
+          "style": Object {
+            "color": "var(--palette-purple-7)",
+          },
+          "text": "# ",
+        },
+        "name": "b",
         "path": undefined,
         "unreachable": false,
       },
@@ -151,6 +181,7 @@ test("getWorkbenchDataTree for snippet", () => {
           "theme": "outlined",
         },
         "key": "context-key-0",
+        "labelPrefix": undefined,
         "name": "test",
         "path": undefined,
         "unreachable": false,
@@ -190,6 +221,7 @@ test("getWorkbenchDataTree for theme-template snippet", () => {
           "theme": "outlined",
         },
         "key": "context-key-0",
+        "labelPrefix": undefined,
         "name": "test",
         "path": undefined,
         "unreachable": false,

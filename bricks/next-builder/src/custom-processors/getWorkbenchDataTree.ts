@@ -17,7 +17,10 @@ interface PartialProject {
 
 export function getWorkbenchDataTree(
   node: BuilderRouteNode | BuilderCustomTemplateNode | BuilderSnippetNode,
-  projectDetail?: PartialProject
+  projectDetail?: PartialProject,
+  options?: {
+    distinguishExposedStates?: boolean;
+  }
 ): WorkbenchNodeData[] {
   return (
     (node.type === "snippet"
@@ -47,6 +50,17 @@ export function getWorkbenchDataTree(
           icon: item.resolve ? "link" : "code",
           color: item.resolve ? "orange" : "cyan",
         },
+        labelPrefix:
+          node.type === "custom-template" &&
+          options?.distinguishExposedStates &&
+          !(item.expose ?? true)
+            ? {
+                text: "# ",
+                style: {
+                  color: "var(--palette-purple-7)",
+                },
+              }
+            : undefined,
         data: {
           ...item,
           $key: key,
