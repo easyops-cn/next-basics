@@ -3,3 +3,11 @@
   align-items: center;
   justify-content: center;
 }
+
+.iconControl {
+  opacity: 0;
+}
+
+.iconControl:hover {
+  opacity: 1;
+}

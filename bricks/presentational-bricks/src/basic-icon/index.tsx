@@ -57,6 +57,16 @@ export class BasicIconElement extends UpdatingElement {
   renderBg: boolean;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否hover的时候再展示
+   * @group basic
+   */
+  @property({ type: Boolean })
+  showWhenHover: boolean;
+
+  /**
    * @kind string
    * @required false
    * @default
@@ -101,20 +111,6 @@ export class BasicIconElement extends UpdatingElement {
   @event({ type: "icon.click", cancelable: true })
   itemClick: EventEmitter<any>;
 
-  /**
-   * @detail `any`
-   * @description 鼠标进入icon区域时被触发
-   */
-  @event({ type: "icon.mouseenter", cancelable: true })
-  itemMouseEnter: EventEmitter<any>;
-
-  /**
-   * @detail `any`
-   * @description 鼠标离开icon区域时被触发
-   */
-  @event({ type: "icon.mouseleave", cancelable: true })
-  itemMouseLeave: EventEmitter<any>;
-
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -131,14 +127,6 @@ export class BasicIconElement extends UpdatingElement {
   private _itemClick = (): void => {
     this.itemClick.emit(this.dataSource);
   };
-
-  private _itemMouseEnter = (): void => {
-    this.itemMouseEnter.emit(this.dataSource);
-  };
-
-  private _itemMouseLeave = (): void => {
-    this.itemMouseLeave.emit(this.dataSource);
-  };
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
@@ -153,8 +141,7 @@ export class BasicIconElement extends UpdatingElement {
             bgBorderRadius={this.bgBorderRadius}
             iconStyle={this.iconStyle}
             itemClick={this._itemClick}
-            itemMouseEnter={this._itemMouseEnter}
-            itemMouseLeave={this._itemMouseLeave}
+            showWhenHover={this.showWhenHover}
           />
         </BrickWrapper>,
         this
