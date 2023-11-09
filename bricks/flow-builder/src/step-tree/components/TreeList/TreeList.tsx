@@ -142,17 +142,26 @@ export function TreeNode({
     }
   }, [collapseClicked, collapsed, getCollapsedId, node, onNodeToggle]);
 
-  useEffect(() => {
-    const collapseButton = collapseButtonRef.current;
-    if (collapseButton) {
-      collapseButton.addEventListener("click", handleCollapse);
-      collapseButton.addEventListener("mousedown", preventMouseEvent);
-      return () => {
-        collapseButton.removeEventListener("click", handleCollapse);
-        collapseButton.removeEventListener("mousedown", preventMouseEvent);
-      };
-    }
-  }, [handleCollapse, preventMouseEvent]);
+  const collapseRefCallback = useCallback(
+    (element: HTMLSpanElement) => {
+      if (element) {
+        collapseButtonRef.current = element;
+        collapseButtonRef.current.addEventListener("click", handleCollapse);
+        collapseButtonRef.current.addEventListener(
+          "mousedown",
+          preventMouseEvent
+        );
+      } else {
+        collapseButtonRef.current.removeEventListener("click", handleCollapse);
+        collapseButtonRef.current.removeEventListener(
+          "mousedown",
+          preventMouseEvent
+        );
+        collapseButtonRef.current = element;
+      }
+    },
+    [handleCollapse, preventMouseEvent]
+  );
 
   const allowCollapse = collapsible && !isLeaf;
 
@@ -204,7 +213,7 @@ export function TreeNode({
 
         {allowCollapse && (
           <span
-            ref={collapseButtonRef}
+            ref={collapseRefCallback}
             className={styles.collapseIcon}
             title={collapsed ? "Expand" : "Collapse"}
             role="button"
