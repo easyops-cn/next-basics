@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.262.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.262.0...@next-bricks/next-builder@1.262.1) (2023-11-09)
+
+
+### Bug Fixes
+
+* distinguish exposed states in data tree ([436d84a](https://github.com/easyops-cn/next-basics/commit/436d84a1948861cff59a3a7edf7139c3e5e01357))
+
+
+
+
+
 # [1.262.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.261.3...@next-bricks/next-builder@1.262.0) (2023-11-03)
 
 
