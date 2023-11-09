@@ -9,7 +9,7 @@ html[data-theme="dark-v2"] .searchBox,
 
 .searchBox {
   position: sticky;
-  z-index: 999;
+  z-index: 1;
   top: 0;
   background-color: var(--search-box-background);
   padding: 5px 10px 10px;
