@@ -13,6 +13,7 @@ export interface GeneralStructsRef {
   onAdd?: (value: Record<string, unknown>) => void;
   onEdit?: (value: Record<string, unknown>, index: number) => void;
   onRemove?: (index: number) => void;
+  onGetData?: () => Record<string, unknown>[];
 }
 
 export interface RowOperationConfig {
@@ -146,6 +147,9 @@ export const GeneralStructs = forwardRef<
       },
       onRemove: (index) => {
         onChange?.(update(value, { $splice: [[index, 1]] }));
+      },
+      onGetData: () => {
+        return value;
       },
     }),
     [value, onChange]

@@ -19,7 +19,17 @@ export const InformMethodsFormItem = forwardRef<
   HTMLDivElement,
   InformMethodsFormItemProps
 >((props, ref) => {
-  const { value, informMethodList, onChange } = props;
+  const { value, onChange } = props;
+
+  const [informMethodList, setInformMethodList] = useState<InformMethod[]>([]);
+
+  useEffect(() => {
+    const fetchInformMethodList = async (): Promise<void> => {
+      const informMethodList = await CustomSenderApi_listSupportInform();
+      setInformMethodList(informMethodList.data);
+    };
+    fetchInformMethodList();
+  }, []);
 
   const renderGroup = (): React.ReactElement => {
     const options = informMethodList.map((informMethods) => ({
@@ -40,19 +50,9 @@ export interface InformMethodsFormProps extends FormItemWrapperProps {}
 export function InformMethodsForm(
   props: InformMethodsFormProps
 ): React.ReactElement {
-  const [informMethodList, setInformMethodList] = useState<InformMethod[]>([]);
-
-  useEffect(() => {
-    const fetchInformMethodList = async (): Promise<void> => {
-      const informMethodList = await CustomSenderApi_listSupportInform();
-      setInformMethodList(informMethodList.data);
-    };
-    fetchInformMethodList();
-  }, []);
-
   return (
     <FormItemWrapper {...props}>
-      <InformMethodsFormItem informMethodList={informMethodList} />
+      <InformMethodsFormItem />
     </FormItemWrapper>
   );
 }

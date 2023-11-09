@@ -2,6 +2,87 @@
 
 exports[`InformMethodsForm should work 1`] = `
 <DocumentFragment>
-  <span />
+  <span>
+    <div
+      class="ant-checkbox-group"
+    >
+      <label
+        class="ant-checkbox-wrapper ant-checkbox-group-item"
+      >
+        <span
+          class="ant-checkbox"
+        >
+          <input
+            class="ant-checkbox-input"
+            type="checkbox"
+            value="phone"
+          />
+          <span
+            class="ant-checkbox-inner"
+          />
+        </span>
+        <span>
+          电话
+        </span>
+      </label>
+      <label
+        class="ant-checkbox-wrapper ant-checkbox-group-item"
+      >
+        <span
+          class="ant-checkbox"
+        >
+          <input
+            class="ant-checkbox-input"
+            type="checkbox"
+            value="message"
+          />
+          <span
+            class="ant-checkbox-inner"
+          />
+        </span>
+        <span>
+          短信
+        </span>
+      </label>
+      <label
+        class="ant-checkbox-wrapper ant-checkbox-group-item"
+      >
+        <span
+          class="ant-checkbox"
+        >
+          <input
+            class="ant-checkbox-input"
+            type="checkbox"
+            value="email"
+          />
+          <span
+            class="ant-checkbox-inner"
+          />
+        </span>
+        <span>
+          邮件
+        </span>
+      </label>
+      <label
+        class="ant-checkbox-wrapper ant-checkbox-group-item"
+      >
+        <span
+          class="ant-checkbox"
+        >
+          <input
+            class="ant-checkbox-input"
+            type="checkbox"
+            value="wework"
+          />
+          <span
+            class="ant-checkbox-inner"
+          />
+        </span>
+        <span>
+          企业微信
+        </span>
+      </label>
+    </div>
+  </span>
 </DocumentFragment>
 `;

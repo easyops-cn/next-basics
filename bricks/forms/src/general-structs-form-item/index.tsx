@@ -260,12 +260,13 @@ export class GeneralStructsFormItemElement extends FormItemElement {
         this._childComponent[0].reset &&
         this._childComponent[0].reset();
       if (this._isEdit) {
+        const realValue = this._ref.current?.onGetData();
         // 如果编辑，给表单赋值
         this._childComponent[0].formUtils.resetFields();
-        this._childComponent[0].setInitValue(this.value[this._editIndex], {
+        this._childComponent[0].setInitValue(realValue[this._editIndex], {
           runInMacrotask: true,
         });
-        this.innerFormInitEvent.emit(this.value[this._editIndex]);
+        this.innerFormInitEvent.emit(realValue[this._editIndex]);
       } else {
         // 如果新建
         if (this.structDefaultValues) {
@@ -385,8 +386,9 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   };
 
   private _updateAddBtnDisabled(): void {
+    const realValue = this._ref.current?.onGetData();
     this.addBtnDisabled =
-      this.multiple === false && this.value && this.value.length > 0;
+      this.multiple === false && realValue && realValue.length > 0;
   }
   /* istanbul ignore next */
   private _deleteItem(): void {
@@ -406,7 +408,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
    * @description 获得结构体数组
    */
   @method() getData(): void {
-    this.getDataEvent.emit(this.value);
+    this.getDataEvent.emit(this._ref.current?.onGetData());
   }
   /* istanbul ignore next */
   private _openConfirmModal(): void {
