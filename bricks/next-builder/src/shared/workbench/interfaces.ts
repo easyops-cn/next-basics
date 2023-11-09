@@ -8,6 +8,10 @@ export interface WorkbenchNodeData<T = unknown> {
   icon?: MenuIcon | TextIcon | AvatarIcon;
   data?: T;
   labelColor?: string;
+  labelPrefix?: {
+    text: string;
+    style?: React.CSSProperties;
+  };
   link?:
     | {
         to: string;

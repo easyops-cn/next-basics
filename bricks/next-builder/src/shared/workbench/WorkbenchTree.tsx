@@ -673,7 +673,11 @@ function TreeNode({
             }}
             ref={nodeLabelCallback}
           >
-            <span className={styles.nodeIconWrapper}>
+            <span
+              className={classNames(styles.nodeIconWrapper, {
+                [styles.withExtraIcon]: !!node.extraIcon,
+              })}
+            >
               {allowCollapse && (
                 <span
                   ref={collapseRefCallback}
@@ -708,6 +712,11 @@ function TreeNode({
               </span>
             </span>
             <span className={styles.nodeName}>
+              {node.labelPrefix && (
+                <span style={node.labelPrefix.style}>
+                  {node.labelPrefix.text}
+                </span>
+              )}
               {isTransformName
                 ? smartDisplayForEvaluableString(node.name)
                 : node.name}
