@@ -14,7 +14,6 @@ export interface BasicIconProps {
   size?: string;
   renderBg?: boolean;
   showWhenHover?: boolean;
-  iconStyle?: React.CSSProperties;
   bg?: string;
   bgSize?: string;
   bgBorderRadius?: string;
@@ -29,7 +28,6 @@ export function BasicIcon(props: BasicIconProps): React.ReactElement {
     bgSize = "46px",
     bg = "var(--theme-gray-color)",
     bgBorderRadius = "50%",
-    iconStyle,
     showWhenHover,
     itemClick,
   } = props;
@@ -60,10 +58,10 @@ export function BasicIcon(props: BasicIconProps): React.ReactElement {
             }}
             className={cssStyle.iconWrapper}
           >
-            <GeneralIcon style={iconStyle} icon={icon} />
+            <GeneralIcon icon={icon} />
           </div>
         ) : (
-          <GeneralIcon style={iconStyle} icon={icon} />
+          <GeneralIcon icon={icon} />
         )}
       </div>
     )

@@ -41,11 +41,6 @@ export class BasicIconElement extends UpdatingElement {
   @property({ attribute: false })
   size: string;
 
-  @property({
-    attribute: false,
-  })
-  iconStyle: React.CSSProperties;
-
   /**
    * @kind boolean
    * @required false
@@ -139,7 +134,6 @@ export class BasicIconElement extends UpdatingElement {
             bg={this.bg}
             bgSize={this.bgSize}
             bgBorderRadius={this.bgBorderRadius}
-            iconStyle={this.iconStyle}
             itemClick={this._itemClick}
             showWhenHover={this.showWhenHover}
           />
