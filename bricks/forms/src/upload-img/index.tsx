@@ -213,6 +213,15 @@ export class UploadImgElement extends FormItemElement {
   })
   useLinkToUpload?: boolean;
 
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 接受上传的文件类型
+   */
+  @property()
+  accept: string;
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -290,6 +299,7 @@ export class UploadImgElement extends FormItemElement {
             labelTooltip={this.labelTooltip}
             multiple={this.multiple}
             useLinkToUpload={this.useLinkToUpload}
+            accept={this.accept}
           />
         </BrickWrapper>,
         this

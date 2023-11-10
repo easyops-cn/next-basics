@@ -55,6 +55,7 @@ interface UploadImgProps extends FormItemWrapperProps {
   showMentions?: boolean;
   multiple?: boolean;
   useLinkToUpload?: boolean;
+  accept?: string;
 }
 
 interface ImageItem {
@@ -706,6 +707,7 @@ export function RealUploadImg(
     beforeUpload: handleBeforeUpload,
     supportServerRender: true,
     disabled,
+    accept: props.accept,
     maxCount: props.maxNumber,
   };
 
@@ -797,6 +799,7 @@ export function UploadImg(props: UploadImgProps): React.ReactElement {
         showMentions={props.showMentions}
         multiple={props.multiple}
         useLinkToUpload={props.useLinkToUpload}
+        accept={props.accept}
       />
     </FormItemWrapper>
   );
