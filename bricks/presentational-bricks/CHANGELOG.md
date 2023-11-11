@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.311.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.311.1...@next-bricks/presentational-bricks@1.311.2) (2023-11-11)
+
+
+### Bug Fixes
+
+* 修改hover后再出现的实现方式 refs FLOW_BUILDER-975 ([85b98f2](https://github.com/easyops-cn/next-basics/commit/85b98f269d7562c3880ad1e63516b869020d0925))
+* 去掉iconStyle refs FLOW_BUILDER-958 ([718b854](https://github.com/easyops-cn/next-basics/commit/718b854f301cf16f35dc4e19c42e1a58aebcbddd))
+* 增加事件暴露 refs FLOW_BUILDER-975 ([6763211](https://github.com/easyops-cn/next-basics/commit/6763211fd629bc72c35811abf0a504189b14fc1a))
+
+
+
+
+
 ## [1.311.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.311.0...@next-bricks/presentational-bricks@1.311.1) (2023-11-03)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
