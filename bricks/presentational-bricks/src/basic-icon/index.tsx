@@ -52,6 +52,16 @@ export class BasicIconElement extends UpdatingElement {
   renderBg: boolean;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否hover的时候再展示
+   * @group basic
+   */
+  @property({ type: Boolean })
+  showWhenHover: boolean;
+
+  /**
    * @kind string
    * @required false
    * @default
@@ -112,7 +122,6 @@ export class BasicIconElement extends UpdatingElement {
   private _itemClick = (): void => {
     this.itemClick.emit(this.dataSource);
   };
-
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
@@ -126,6 +135,7 @@ export class BasicIconElement extends UpdatingElement {
             bgSize={this.bgSize}
             bgBorderRadius={this.bgBorderRadius}
             itemClick={this._itemClick}
+            showWhenHover={this.showWhenHover}
           />
         </BrickWrapper>,
         this

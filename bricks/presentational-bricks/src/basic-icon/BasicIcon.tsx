@@ -2,6 +2,7 @@ import React from "react";
 import { MenuIcon } from "@next-core/brick-types";
 import cssStyle from "./BasicIcon.module.css";
 import { GeneralIcon } from "@next-libs/basic-components";
+import classNames from "classnames";
 
 export type ImgIcon = {
   imgSrc?: string;
@@ -12,6 +13,7 @@ export interface BasicIconProps {
   icon?: MenuIcon | ImgIcon;
   size?: string;
   renderBg?: boolean;
+  showWhenHover?: boolean;
   bg?: string;
   bgSize?: string;
   bgBorderRadius?: string;
@@ -26,6 +28,7 @@ export function BasicIcon(props: BasicIconProps): React.ReactElement {
     bgSize = "46px",
     bg = "var(--theme-gray-color)",
     bgBorderRadius = "50%",
+    showWhenHover,
     itemClick,
   } = props;
 
@@ -36,11 +39,13 @@ export function BasicIcon(props: BasicIconProps): React.ReactElement {
         height={size}
         width={size}
         style={icon.imgStyle}
+        className={classNames({ [cssStyle.iconControl]: showWhenHover })}
         onClick={itemClick}
       />
     ) : (
       <div
         style={{ fontSize: size, lineHeight: size, width: "min-content" }}
+        className={classNames({ [cssStyle.iconControl]: showWhenHover })}
         onClick={itemClick}
       >
         {renderBg ? (
