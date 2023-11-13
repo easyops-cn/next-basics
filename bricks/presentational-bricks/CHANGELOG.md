@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.311.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.311.2...@next-bricks/presentational-bricks@1.311.3) (2023-11-13)
+
+
+### Bug Fixes
+
+* brick-descriptions 适配UI8.2 ([88475fe](https://github.com/easyops-cn/next-basics/commit/88475fe913c19a70135addfdd1196dadaca25f98))
+
+
+
+
+
 ## [1.311.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.311.1...@next-bricks/presentational-bricks@1.311.2) (2023-11-11)
 
 
