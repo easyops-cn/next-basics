@@ -11,11 +11,14 @@
 
 # INPUTS
 
-| property            | type           | required | default | description                  |
-| ------------------- | -------------- | -------- | ------- | ---------------------------- |
-| values              | ModelAttrValue | true     | -       | 模型属性表单初始值           |
-| attrIdInputDisabled | boolean        | false    | -       | 编辑模式下，属性 id 禁止编辑 |
-| submitBtnHidden     | boolean        | false    | -       | 提交按钮是否渲染             |
+| property            | type           | required | default      | description                  |
+| ------------------- | -------------- | -------- | ------------ | ---------------------------- |
+| values              | ModelAttrValue | true     | -            | 模型属性表单初始值           |
+| attrIdInputDisabled | boolean        | false    | -            | 编辑模式下，属性 id 禁止编辑 |
+| submitBtnHidden     | boolean        | false    | -            | 提交按钮是否渲染             |
+| layout              | enum           | false    | "horizontal" | 表单布局                     |
+
+|
 
 ```typescript
 interface ModelAttrValue {

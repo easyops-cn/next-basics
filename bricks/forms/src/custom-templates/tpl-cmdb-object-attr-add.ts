@@ -48,6 +48,10 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
         ref: "attrCategory",
         refProperty: "options",
       },
+      layout: {
+        ref: "addCmdbObjectAttrForm",
+        refProperty: "layout",
+      },
     },
     events: {
       "validate.success": {
