@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.368.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.367.2...@next-bricks/developers@1.368.0) (2023-11-15)
+
+
+### Features
+
+* **brick-book:**  add v3 tag ([771ad2b](https://github.com/easyops-cn/next-basics/commit/771ad2b99a6d52a90b581e36533fc03375b14ef7))
+
+
+
+
+
 ## [1.367.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.367.1...@next-bricks/developers@1.367.2) (2023-11-14)
 
 **Note:** Version bump only for package @next-bricks/developers
