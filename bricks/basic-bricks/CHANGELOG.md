@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.249.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.6...@next-bricks/basic-bricks@1.249.7) (2023-11-15)
+
+
+### Bug Fixes
+
+* 适配UI8.2 ([86767df](https://github.com/easyops-cn/next-basics/commit/86767dfdb2cf2f4c383f804800fdc1a92b630bdf))
+
+
+
+
+
 ## [1.249.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.5...@next-bricks/basic-bricks@1.249.6) (2023-11-08)
 
 
