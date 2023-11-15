@@ -51,6 +51,14 @@ export class MarkdownDisplayElement extends UpdatingElement {
   @property({ attribute: false }) imagePreview: boolean;
 
   /**
+   * @required false
+   * @default true
+   * @description 是否隐藏图片预览遮罩
+   * @group basic
+   */
+  @property({ attribute: false }) hideImgPreviewMask: boolean;
+
+  /**
    * @kind boolean
    * @default -
    * @description 预览图片时，图片操作(放大、缩小等操作)是否在下方显示
@@ -93,6 +101,7 @@ export class MarkdownDisplayElement extends UpdatingElement {
           <MarkdownDisplay
             value={mutableProps.value}
             imagePreview={this.imagePreview}
+            hideImgPreviewMask={this.hideImgPreviewMask}
             imagePreviewOperationInBottom={this.imagePreviewOperationInBottom}
             linkTarget={this.linkTarget}
           />
