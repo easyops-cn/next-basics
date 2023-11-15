@@ -5,6 +5,8 @@ import {
   UpdatingElement,
   property,
   method,
+  event,
+  EventEmitter,
 } from "@next-core/brick-kit";
 import { CollapsibleCardItem } from "./CollapsibleCardItem";
 import { MenuIcon } from "@next-core/brick-types";
@@ -167,6 +169,13 @@ export class CollapsibleCardItemElement extends UpdatingElement {
     attribute: false,
   })
   subscriptConfig: any;
+
+  /**
+   * @detail boolean
+   * @description 折叠状态改变
+   */
+  @event({ type: "collapse.change" }) collapseChange: EventEmitter<boolean>;
+
   private _mountPoint: HTMLElement;
   private _shadowRoot: ShadowRoot;
 
@@ -302,6 +311,7 @@ export class CollapsibleCardItemElement extends UpdatingElement {
   @method()
   open(): void {
     this.isActive = true;
+    this.collapseChange.emit(true);
   }
 
   /**
@@ -310,6 +320,7 @@ export class CollapsibleCardItemElement extends UpdatingElement {
   @method()
   close(): void {
     this.isActive = false;
+    this.collapseChange.emit(false);
   }
 
   /**
@@ -318,6 +329,7 @@ export class CollapsibleCardItemElement extends UpdatingElement {
   @method()
   toggle(): void {
     this.isActive = !this.isActive;
+    this.collapseChange.emit(this.isActive);
   }
 }
 

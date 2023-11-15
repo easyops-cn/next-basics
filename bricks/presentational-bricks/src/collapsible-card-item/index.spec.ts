@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom";
 import "./";
+import { CollapsibleCardItemElement } from "./";
 
 const spyOnRender = jest
   .spyOn(ReactDOM, "render")
@@ -10,9 +11,11 @@ const unmountComponentAtNode = jest
 
 describe("presentational-bricks.collapsible-card-item", () => {
   it("should create a custom element", async () => {
+    const onCollapseChange = jest.fn();
     const element = document.createElement(
       "presentational-bricks.collapsible-card-item"
-    );
+    ) as CollapsibleCardItemElement;
+    element.addEventListener("collapse.change", onCollapseChange);
     Object.assign(element, {
       fields: {
         cardTitle: "name",
@@ -31,10 +34,25 @@ describe("presentational-bricks.collapsible-card-item", () => {
     document.body.appendChild(element);
     await jest.runAllTimers();
     element.open();
+    expect(onCollapseChange).lastCalledWith(
+      expect.objectContaining({
+        detail: true,
+      })
+    );
     expect(element.isActive).toBe(true);
     element.close();
+    expect(onCollapseChange).lastCalledWith(
+      expect.objectContaining({
+        detail: false,
+      })
+    );
     expect(element.isActive).toBe(false);
     element.toggle();
+    expect(onCollapseChange).lastCalledWith(
+      expect.objectContaining({
+        detail: true,
+      })
+    );
     expect(element.isActive).toBe(true);
     expect(spyOnRender).toBeCalled();
     element.dispatchEvent(
