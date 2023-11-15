@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.313.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.312.1...@next-bricks/presentational-bricks@1.313.0) (2023-11-15)
+
+
+### Features
+
+* markdown查看图片不需要展示preview按钮及其遮罩层 Closes product-management-108 ([2641ecc](https://github.com/easyops-cn/next-basics/commit/2641ecc7a1c70fd78b43f0237d45318f2d1694c7))
+
+
+
+
+
 ## [1.312.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.312.0...@next-bricks/presentational-bricks@1.312.1) (2023-11-15)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
