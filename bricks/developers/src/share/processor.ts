@@ -27,6 +27,7 @@ export interface BrickRecord {
   icon?: MixedIconType;
   tags?: string[];
   doc?: string | StoryDoc;
+  v3Brick?: boolean;
 }
 
 export const DEFAULT_DESCRIPTION = "~";
@@ -89,7 +90,7 @@ export const getAllStoryListV2 = (
     getRuntime().getFeatureFlags()["developers-brick-preview"];
 
   const storyList: BrickRecord[] = [];
-  let books: Chapter[] = [];
+  let books: Array<Chapter & { v3Brick?: boolean }> = [];
   fields = fields || {};
   const externalBook: Chapter[] = [];
   const groups = cloneDeep(categoryGroups);
@@ -188,6 +189,7 @@ export const getAllStoryListV2 = (
             ? processIconInPreview(story.icon)
             : story.icon,
           category: category,
+          v3Brick: (story as Story & { v3Brick: boolean }).v3Brick,
         };
         if (fields.doc) {
           item.doc = story.doc;

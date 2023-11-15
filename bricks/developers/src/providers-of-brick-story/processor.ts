@@ -33,7 +33,7 @@ export function findStoryById(
   id: string,
   storyType: "brick" | "template",
   stories: Story[] = []
-): Story {
+): Story & { v3Brick?: boolean } {
   const story = ALL_BOOKS.reduce<Story[]>(
     (acc, chapter) => acc.concat(chapter.stories),
     []
@@ -95,7 +95,7 @@ export const listBrickStory = (
   pageSize: number;
 }> => {
   const storyList: BrickRecord[] = [];
-  let books: Chapter[] = [];
+  let books: Array<Chapter & { v3Brick?: boolean }> = [];
   page = page || 1;
   pageSize = pageSize || 20;
   fields = fields || {};
@@ -129,6 +129,7 @@ export const listBrickStory = (
           tags: tags.map(i18nText),
           icon: story.icon,
           category: category,
+          v3Brick: (story as Story & { v3Brick?: boolean }).v3Brick,
         };
         if (fields.doc) {
           item.doc = story.doc;
