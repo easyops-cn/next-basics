@@ -25,7 +25,7 @@ describe("MarkdownDisplay", () => {
       value: "#123",
     });
     expect(wrapper.find("div").html()).toEqual(
-      `<div class="customMarkdown"><p>#123</p>\n</div>`
+      `<div class="customMarkdown hideImgPreviewMask"><p>#123</p>\n</div>`
     );
   });
 
@@ -90,7 +90,7 @@ describe("MarkdownDisplay", () => {
     );
 
     expect(wrapper1.html()).toMatchInlineSnapshot(`
-      "<div class=\\"customMarkdown\\"><p><img height=\\"200\\" width=\\"200\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
+      "<div class=\\"customMarkdown hideImgPreviewMask\\"><p><img height=\\"200\\" width=\\"200\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
       </div>"
     `);
 
@@ -102,7 +102,7 @@ describe("MarkdownDisplay", () => {
     );
 
     expect(wrapper2.html()).toMatchInlineSnapshot(`
-      "<div class=\\"customMarkdown\\"><p><img width=\\"400\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
+      "<div class=\\"customMarkdown hideImgPreviewMask\\"><p><img width=\\"400\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
       </div>"
     `);
 
@@ -114,7 +114,7 @@ describe("MarkdownDisplay", () => {
     );
 
     expect(wrapper3.html()).toMatchInlineSnapshot(`
-      "<div class=\\"customMarkdown\\"><p><img height=\\"400\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
+      "<div class=\\"customMarkdown hideImgPreviewMask\\"><p><img height=\\"400\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
       </div>"
     `);
 
@@ -126,7 +126,7 @@ describe("MarkdownDisplay", () => {
     );
 
     expect(wrapper4.html()).toMatchInlineSnapshot(`
-      "<div class=\\"customMarkdown\\"><p>![img](<a href=\\"http://www.baidu.com/a.jpg\\">http://www.baidu.com/a.jpg</a> =200x200)</p>
+      "<div class=\\"customMarkdown hideImgPreviewMask\\"><p>![img](<a href=\\"http://www.baidu.com/a.jpg\\">http://www.baidu.com/a.jpg</a> =200x200)</p>
       </div>"
     `);
 
@@ -137,7 +137,7 @@ describe("MarkdownDisplay", () => {
       />
     );
     expect(wrapper5.html()).toMatchInlineSnapshot(`
-      "<div class=\\"customMarkdown\\"><p><img height=\\"400\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
+      "<div class=\\"customMarkdown hideImgPreviewMask\\"><p><img height=\\"400\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
       </div>"
     `);
 
@@ -148,7 +148,7 @@ describe("MarkdownDisplay", () => {
       />
     );
     expect(wrapper6.html()).toMatchInlineSnapshot(`
-      "<div class=\\"customMarkdown\\"><p><img height=\\"250\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
+      "<div class=\\"customMarkdown hideImgPreviewMask\\"><p><img height=\\"250\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
       </div>"
     `);
 
@@ -159,7 +159,7 @@ describe("MarkdownDisplay", () => {
       />
     );
     expect(wrapper7.html()).toMatchInlineSnapshot(`
-      "<div class=\\"customMarkdown\\"><p><img height=\\"150\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
+      "<div class=\\"customMarkdown hideImgPreviewMask\\"><p><img height=\\"150\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
       </div>"
     `);
   });
