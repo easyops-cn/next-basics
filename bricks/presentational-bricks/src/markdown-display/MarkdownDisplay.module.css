@@ -17,9 +17,11 @@
     position: relative;
     color: #262626;
   }
+
   mark {
     background: #ffee7d 45%;
   }
+
   h1:hover a,
   h2:hover a,
   h3:hover a,
@@ -140,13 +142,16 @@
     padding-bottom: 16px;
     margin-bottom: 4px;
   }
+
   ul li {
     margin: 4px 0;
   }
+
   p + ul,
   ul li ul > li:first-child {
     margin-top: 4px;
   }
+
   h1 + ul,
   h2 + ul,
   h3 + ul,
@@ -193,13 +198,16 @@
   li > ul:last-child {
     padding-bottom: 0;
   }
+
   li > p:first-child + p {
     margin: 20px 0 20px;
     padding: 0;
   }
+
   li > p:first-child + blockquote {
     margin-bottom: 20px;
   }
+
   li > blockquote:last-child {
     margin-top: 20px;
   }
@@ -253,6 +261,7 @@
   dl dd > :last-child {
     margin-bottom: 0;
   }
+
   h1 + blockquote,
   h2 + blockquote,
   h3 + blockquote,
@@ -270,6 +279,7 @@
   p + ol {
     margin-top: 0px;
   }
+
   blockquote {
     border-left: 6px solid #bcc0c5;
     padding: 16px 12px;
@@ -361,10 +371,12 @@
     background-color: #f8f8f8;
     border-radius: 3px;
   }
+
   code {
     color: #b30056;
     background: #ffe6ec;
   }
+
   pre code {
     margin: 0;
     padding: 0;
@@ -396,10 +408,12 @@ html[data-theme="dark-v2"] {
   .customMarkdown {
     a {
       color: var(--color-brand);
+
       &:hover,
       &:focus {
         color: var(--color-brand-hover);
       }
+
       &:active {
         color: var(--color-brand-active);
       }
@@ -446,6 +460,7 @@ html[data-theme="dark-v2"] {
     code {
       color: #f3679a;
     }
+
     pre code {
       border: none;
       background: transparent;
@@ -468,4 +483,9 @@ html[data-theme="dark-v2"] {
       border: 1px solid var(--color-border-divider-line);
     }
   }
+}
+
+.hideImgPreviewMask :global(.ant-image-mask) {
+  opacity: 0;
+  cursor: pointer;
 }
