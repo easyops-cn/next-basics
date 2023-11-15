@@ -31,3 +31,8 @@ html[data-ui="v8-2"] :global(.ant-descriptions-view) {
     border-bottom: 1px solid var(--stroke-color-default);
   }
 }
+.descriptionWrapper {
+  :global(.ant-descriptions-title) {
+    font-weight: 500;
+  }
+}
