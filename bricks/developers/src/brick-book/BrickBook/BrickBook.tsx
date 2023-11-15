@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   AppstoreOutlined,
   CodeOutlined,
   FileSearchOutlined,
 } from "@ant-design/icons";
-import { Radio } from "antd";
+import { Radio, Tag } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import { useTranslation } from "react-i18next";
 import { getRuntime, i18nText } from "@next-core/brick-kit";
@@ -106,6 +106,9 @@ export function BrickBook({
             title
           )}
           <span className={cssStyle.subTitle}> {story.author}</span>
+          <span className={cssStyle.v3Tag}>
+            {story.v3Brick ? <Tag color="blue">V3</Tag> : null}
+          </span>
         </h1>
         <p style={{ marginBottom: "20px", color: "var(--text-color-default)" }}>
           {" "}
