@@ -352,7 +352,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
       )}
       <div
         className="cardHeaderContainer"
-        style={isNil(descriptionList) ? { marginBottom: "16px" } : {}}
+        style={isNil(descriptionList) ? { margin: "8px 0" } : {}}
       >
         {props.showImg ? avatarImg(40) : avatarIcon(40)}
         <div className="titleWrapper">
