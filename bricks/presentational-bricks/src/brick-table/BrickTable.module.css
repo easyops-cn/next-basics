@@ -170,7 +170,7 @@ html[data-theme="dark"] {
     .brickTableOddRow,
     :global(.ant-table-row-selected) {
       td {
-        background: var(--color-fill-bg-base-4);
+        background: var(--color-fill-bg-base-1);
       }
     }
   }
