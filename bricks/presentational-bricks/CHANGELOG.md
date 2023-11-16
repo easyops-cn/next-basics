@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.314.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.313.1...@next-bricks/presentational-bricks@1.314.0) (2023-11-16)
+
+
+### Features
+
+* presentational-bricks.brick-link构件支持tooltipProps ([6aa4d4e](https://github.com/easyops-cn/next-basics/commit/6aa4d4edcce16a03ec886961e41898de3aeb2a04))
+
+
+
+
+
 ## [1.313.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.313.0...@next-bricks/presentational-bricks@1.313.1) (2023-11-16)
 
 
