@@ -319,7 +319,6 @@ a {
     display: grid;
     grid-template-columns: 70px auto;
   }
-
   .desc {
     font-size: 12px;
     margin-top: 6px;
@@ -335,7 +334,13 @@ a {
     }
   }
 }
-
+:host-context(html[data-ui="v8-2"]) .cardItemD {
+    .topRightOperatingArea {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+  }
+}
 .cardItemE {
   .cardHeaderContainer {
     display: grid;
