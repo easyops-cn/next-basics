@@ -132,7 +132,9 @@ export function MarkdownDisplay({
     previewImgUrls.current = [];
     return (
       <div
-        className={style.customMarkdown}
+        className={classNames(style.customMarkdown, {
+          [style.hideImgPreviewMask]: hideImgPreviewMask,
+        })}
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(
             marked(value || "", {
