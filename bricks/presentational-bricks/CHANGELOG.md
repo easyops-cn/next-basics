@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.313.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.313.0...@next-bricks/presentational-bricks@1.313.1) (2023-11-16)
+
+
+### Bug Fixes
+
+* 支持隐藏md-display的预览遮罩层,兼容操作按钮在底部的情况 ([8676105](https://github.com/easyops-cn/next-basics/commit/8676105a108130271568979b9bbcc7a157f94e51))
+
+
+
+
+
 # [1.313.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.312.1...@next-bricks/presentational-bricks@1.313.0) (2023-11-15)
 
 
