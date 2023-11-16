@@ -87,6 +87,18 @@ export class BrickLinkElement extends UpdatingElement {
    * @kind Record<string, any>
    * @required false
    * @default -
+   * @description 提示
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  tooltipProps: Record<string, any>;
+
+  /**
+   * @kind Record<string, any>
+   * @required false
+   * @default -
    * @description `link.click` 事件传出的数据， 替代之前的 `detail`
    * @group basic
    */
@@ -283,6 +295,7 @@ export class BrickLinkElement extends UpdatingElement {
             handleClick={this._handleClick}
             disabled={this.disabled}
             tooltip={this.tooltip}
+            tooltipProps={this.tooltipProps}
             notToJumpWhenEmpty={this.notToJumpWhenEmpty}
             icon={this.icon}
             type={this.type}

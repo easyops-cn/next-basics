@@ -13,6 +13,7 @@ export interface BrickLinkProps extends Pick<LinkProps, "replace" | "target"> {
   href?: string;
   disabled?: boolean;
   tooltip?: string;
+  tooltipProps?: Record<string, any>;
   handleClick?: () => void;
   notToJumpWhenEmpty?: boolean;
   icon?: MenuIcon;
@@ -30,6 +31,7 @@ export function BrickLink(props: BrickLinkProps): React.ReactElement {
     url,
     href,
     tooltip,
+    tooltipProps,
     type,
     iconAlign = "left",
     ...linkProps
@@ -115,5 +117,11 @@ export function BrickLink(props: BrickLinkProps): React.ReactElement {
     }
   }
 
-  return tooltip ? <Tooltip title={tooltip}>{link}</Tooltip> : link;
+  return tooltip ? (
+    <Tooltip {...tooltipProps} title={tooltip}>
+      {link}
+    </Tooltip>
+  ) : (
+    link
+  );
 }
