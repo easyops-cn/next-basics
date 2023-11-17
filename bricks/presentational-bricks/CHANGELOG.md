@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.315.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.314.2...@next-bricks/presentational-bricks@1.315.0) (2023-11-17)
+
+
+### Features
+
+* tree构件支持父子节点选中状态不再关联 ([c583fa5](https://github.com/easyops-cn/next-basics/commit/c583fa5133cbd1462a4b221a7b5d078d5d5c91b3))
+
+
+
+
+
 ## [1.314.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.314.1...@next-bricks/presentational-bricks@1.314.2) (2023-11-16)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
