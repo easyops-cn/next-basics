@@ -204,6 +204,17 @@ export class BrickTreeElement extends UpdatingElement {
   checkedFilterConfig: checkedFilterProps;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 父子节点选中状态是否关联
+   */
+  @property({
+    type: Boolean,
+  })
+  checkedRelevant: boolean;
+
+  /**
    * @kind {useBrick:[UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)}
    * @required false
    * @default -
@@ -337,6 +348,7 @@ export class BrickTreeElement extends UpdatingElement {
             onCheck={this._handleCheck}
             onSearch={this._handleSearch}
             checkedFilterConfig={this.checkedFilterConfig}
+            checkedRelevant={this.checkedRelevant}
             suffixBrick={this.suffixBrick}
             suffixStopEvent={this.suffixStopEvent}
             afterSearchBrick={this.afterSearchBrick}
