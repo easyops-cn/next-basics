@@ -47,7 +47,7 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
 
   return (
     <>
-      <div>
+      <div className={styles.typeSelected}>
         {i18n.t(`${NS_FORMS}:${K.ENUMERATION_VALUE}`)}
         <Row>
           <Select

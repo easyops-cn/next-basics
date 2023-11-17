@@ -5,6 +5,7 @@ import { DatePicker, Row, Alert } from "antd";
 import { isNil } from "lodash";
 import moment from "moment";
 import i18n from "i18next";
+import styles from "./index.module.css";
 interface ObjectAttrDatetimeProps {
   value: any;
   onChange: (newValue?: any) => void;
@@ -34,7 +35,7 @@ export function ObjectAttrDatetime(
 
   return (
     <>
-      <div>
+      <div className={styles.typeSelected}>
         {i18n.t(`${NS_FORMS}:${K.FORMAT}`)}
         <Row>
           <Alert

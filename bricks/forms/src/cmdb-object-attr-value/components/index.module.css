@@ -33,3 +33,6 @@
   line-height: 20px;
   margin-top: 4px;
 }
+html[data-ui="v8-2"] .typeSelected {
+  margin-bottom: 20px;
+}

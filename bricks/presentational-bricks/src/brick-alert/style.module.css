@@ -26,3 +26,8 @@
     margin-top: 4px;
   }
 }
+html[data-ui="v8-2"] {
+  :global(.ant-alert-with-description) {
+    padding: 10px;
+  }
+}

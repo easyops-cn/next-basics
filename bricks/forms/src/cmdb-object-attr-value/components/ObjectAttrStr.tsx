@@ -15,6 +15,7 @@ import {
 import { RadioChangeEvent } from "antd/lib/radio";
 import { isNil, isNumber } from "lodash";
 import i18n from "i18next";
+import styles from "./index.module.css";
 const Option = Select.Option;
 
 interface StrValueType {
@@ -256,7 +257,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
   return (
     <>
       <div>
-        <div>
+        <div className={styles.typeSelected}>
           {i18n.t(`${NS_FORMS}:${K.REGULAR}`)}
           <Row>
             <Input
@@ -267,7 +268,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
             />
           </Row>
         </div>
-        <div>
+        <div className={styles.typeSelected}>
           {i18n.t(`${NS_FORMS}:${K.DISPLAY_AS}`)}
           <Row>
             <Radio.Group
