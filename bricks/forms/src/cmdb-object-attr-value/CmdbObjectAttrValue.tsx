@@ -18,7 +18,7 @@ import {
   ObjectAttrJson,
   ObjectAttrStruct,
 } from "./components";
-
+import styles from "./components/index.module.css";
 const Option = Select.Option;
 
 export const ValueTypeMap = {
@@ -332,6 +332,7 @@ export function CmdbObjectAttrValueItem(
     <div ref={ref}>
       <Select
         style={defaults(inputBoxStyle, { width: "100%" })}
+        className={valueType ? styles.typeSelected : ""}
         placeholder={placeholder || t(K.PLEASE_SELECT_VALUE_TYPE)}
         value={valueType}
         onChange={handleValueTypeChange}

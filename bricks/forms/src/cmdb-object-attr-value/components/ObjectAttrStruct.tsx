@@ -382,7 +382,7 @@ export function LegacyObjectAttrStructForm(
     <div>
       {i18n.t(`${NS_FORMS}:${K.STRUCTURE_BODY_DEFINATION}`)}
       <div>
-        <Row>
+        <Row className={styles.typeSelected}>
           <Radio.Group value={addStructMode} onChange={handleModeChange}>
             <Radio value="new">
               {i18n.t(`${NS_FORMS}:${K.NEW_DEFINATION}`)}
@@ -392,7 +392,7 @@ export function LegacyObjectAttrStructForm(
             </Radio>
           </Radio.Group>
         </Row>
-        <Row style={{ marginTop: 8 }}>
+        <Row style={{ marginTop: 8 }} className={styles.typeSelected}>
           {addStructMode === "new" ? (
             <Button
               icon={<PlusOutlined />}

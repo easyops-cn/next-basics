@@ -4,6 +4,7 @@ import { NS_FORMS, K } from "../../i18n/constants";
 import { Input, Row, InputNumber, Alert } from "antd";
 import { isNil } from "lodash";
 import i18n from "i18next";
+import styles from "./index.module.css";
 interface ObjectAttrJsonProps {
   value: any;
   onChange: (newValue?: any) => void;
@@ -33,7 +34,7 @@ export function ObjectAttrJson(props: ObjectAttrJsonProps): React.ReactElement {
 
   return (
     <>
-      <div>
+      <div className={styles.typeSelected}>
         JSON Schema：
         <Row>
           <Input

@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../../i18n/constants";
 import { Row, Select } from "antd";
 import { isNil, toString } from "lodash";
-
 interface ObjectAttrBoolProps {
   value: any;
   onChange: (newValue?: any) => void;

@@ -34,7 +34,7 @@ export function ObjectAttrDate(props: ObjectAttrDateProps): React.ReactElement {
 
   return (
     <>
-      <div>
+      <div className={styles.typeSelected}>
         {i18n.t(`${NS_FORMS}:${K.FORMAT}`)}
         <Row>
           <Alert

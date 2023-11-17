@@ -34,7 +34,7 @@ export function ObjectAttrIP(props: ObjectAttrIPProps): React.ReactElement {
 
   return (
     <>
-      <div>
+      <div className={styles.typeSelected}>
         {i18n.t(`${NS_FORMS}:${K.REGULAR}`)}
         <Row>
           <Alert
