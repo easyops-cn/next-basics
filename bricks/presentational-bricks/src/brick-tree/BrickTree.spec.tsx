@@ -1,5 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 import { BrickTree, BrickTreeProps } from "./BrickTree";
 import { mount, shallow } from "enzyme";
 import { Checkbox, Empty, Tree } from "antd";
@@ -356,5 +357,78 @@ describe("BrickTree", () => {
     expect(wrapper.find(Tree).prop("treeData")[0].icon).toEqual(
       <BrickAsComponent data={{ title: "123" }} useBrick={{ brick: "div" }} />
     );
+  });
+
+  it("checkedRelevant should work", async () => {
+    const onCheck = jest.fn();
+    const wrapper = shallow<BrickTreeProps>(
+      <BrickTree
+        dataSource={dataSource}
+        onCheck={onCheck}
+        configProps={{ checkable: true }}
+        checkAllEnabled={true}
+        checkedRelevant={true}
+      />
+    );
+
+    const getCheckAllCheckbox = () =>
+      wrapper.find(Checkbox).filter("[data-testid='check-all-checkbox']");
+
+    // 全选
+    act(() => {
+      getCheckAllCheckbox().invoke("onChange")({
+        target: { checked: true },
+      } as CheckboxChangeEvent);
+    });
+    wrapper.update();
+    expect(onCheck).lastCalledWith(["0", "01", "010", "0100", "1", "10"]);
+
+    // 取消全选
+    act(() => {
+      getCheckAllCheckbox().invoke("onChange")({
+        target: { checked: false },
+      } as CheckboxChangeEvent);
+    });
+    wrapper.update();
+    expect(onCheck).lastCalledWith([]);
+
+    // 树部分选择
+    act(() => {
+      wrapper.find(Tree).invoke("onCheck")(["0", "1"], null);
+    });
+    wrapper.update();
+    expect(getCheckAllCheckbox().prop("checked")).toBe(false);
+    expect(getCheckAllCheckbox().prop("indeterminate")).toBe(true);
+    expect(wrapper.find(".checkedNum").text()).toEqual(
+      i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECTED_OPTIONS}`, { number: 2 })
+    );
+    expect(onCheck).lastCalledWith(["0", "1"]);
+
+    // // 树全选
+    act(() => {
+      wrapper.find(Tree).invoke("onCheck")(
+        ["0", "01", "010", "0100", "1", "10"],
+        null
+      );
+    });
+    wrapper.update();
+    expect(getCheckAllCheckbox().prop("checked")).toBe(true);
+    expect(getCheckAllCheckbox().prop("indeterminate")).toBe(false);
+    expect(wrapper.find(".checkedNum").text()).toEqual(
+      i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECTED_OPTIONS}`, { number: 6 })
+    );
+    expect(onCheck).lastCalledWith(["0", "01", "010", "0100", "1", "10"]);
+
+    // // 树全不勾选
+    act(() => {
+      wrapper.find(Tree).invoke("onCheck")([], null);
+    });
+    wrapper.update();
+    expect(getCheckAllCheckbox().prop("checked")).toBe(false);
+    expect(getCheckAllCheckbox().prop("indeterminate")).toBe(false);
+    expect(wrapper.find(".checkedNum").text()).toEqual(
+      i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECTED_OPTIONS}`, { number: 0 })
+    );
+    expect(onCheck).lastCalledWith([]);
   });
 });

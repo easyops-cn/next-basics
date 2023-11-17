@@ -84,6 +84,10 @@ function getTreeNodes(
   });
 }
 
+function nodeCheckable(node: DataNode): boolean {
+  return !node.disabled && !node.disableCheckbox && node.checkable !== false;
+}
+
 function getAllKeys(nodes: DataNode[], keys?: React.Key[]): React.Key[] {
   if (!keys) {
     keys = [];
@@ -92,7 +96,7 @@ function getAllKeys(nodes: DataNode[], keys?: React.Key[]): React.Key[] {
   nodes.forEach((node) => {
     const children = node.children;
 
-    if (!node.disabled && !node.disableCheckbox && node.checkable !== false) {
+    if (nodeCheckable(node)) {
       keys.push(node.key);
     }
 
@@ -172,6 +176,7 @@ export interface BrickTreeProps {
   searchParent?: boolean;
   checkAllEnabled?: boolean;
   checkedFilterConfig?: checkedFilterProps;
+  checkedRelevant?: boolean;
   onSelect?(
     selectedKeys: React.Key[],
     info: {
@@ -206,7 +211,6 @@ export interface BrickTreeProps {
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
   const {
     selectedKeys: _selectedKeys,
-    checkedKeys: _checkedKeys,
     expandedKeys: _expandedKeys,
     configProps = {},
     dataSource = [],
@@ -215,6 +219,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     placeholder = "",
     checkAllEnabled,
     checkedFilterConfig: { field, value, operator } = {},
+    checkedRelevant,
     suffixBrick,
     suffixStopEvent,
     afterSearchBrick,
@@ -257,23 +262,28 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
   }, [_selectedKeys]);
   // istanbul ignore next
   useEffect(() => {
+    const _checkedKeys = props.checkedKeys ?? [];
     setCheckedKeys(_checkedKeys);
     setFilterCheckedKeys(difference(_checkedKeys, filterTreeKeys));
-    if (Array.isArray(_checkedKeys)) {
-      if (
-        _checkedKeys.length === 0 ||
-        intersection(_checkedKeys, getAllKeys(treeData))?.length === 0
-      ) {
-        setAllChecked(false);
-        setIndeterminate(false);
+    if (
+      _checkedKeys.length === 0 ||
+      intersection(_checkedKeys, getAllKeys(treeData))?.length === 0
+    ) {
+      setAllChecked(false);
+      setIndeterminate(false);
+    } else {
+      const checkedKeySet = new Set(_checkedKeys);
+      let allChecked;
+      if (!checkedRelevant) {
+        allChecked = getAllCheckedState(treeData, checkedKeySet);
       } else {
-        const checkedKeySet = new Set(_checkedKeys);
-        const allChecked = getAllCheckedState(treeData, checkedKeySet);
-        setAllChecked(allChecked);
-        setIndeterminate(!allChecked);
+        const allKeys = getAllKeys(treeData);
+        allChecked = allKeys.every((key) => checkedKeySet.has(key));
       }
+      setAllChecked(allChecked);
+      setIndeterminate(!allChecked);
     }
-  }, [_checkedKeys]);
+  }, [props.checkedKeys]);
   useEffect(() => {
     setExpandedKeys(_expandedKeys);
   }, [_expandedKeys]);
@@ -354,32 +364,33 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
       | React.Key[]
       | { checked: React.Key[]; halfChecked: React.Key[] }
   ) => {
+    const _checkedKeys =
+      "checked" in checkedKeys ? checkedKeys.checked : checkedKeys;
     let _filterCheckedKeys: React.Key[] = [];
     if (props.checkedFilterConfig) {
-      _filterCheckedKeys = difference(
-        checkedKeys as React.Key[],
-        filterTreeKeys
-      );
-      Array.isArray(checkedKeys) && setFilterCheckedKeys(_filterCheckedKeys);
+      _filterCheckedKeys = difference(_checkedKeys, filterTreeKeys);
+      setFilterCheckedKeys(_filterCheckedKeys);
     }
-    setCheckedKeys(checkedKeys);
+    setCheckedKeys(_checkedKeys);
 
-    if (Array.isArray(checkedKeys)) {
-      if (checkedKeys.length === 0) {
-        setAllChecked(false);
-        setIndeterminate(false);
+    if (_checkedKeys.length === 0) {
+      setAllChecked(false);
+      setIndeterminate(false);
+    } else {
+      const checkedKeySet = new Set(_checkedKeys);
+      let allChecked;
+      if (!checkedRelevant) {
+        allChecked = treeData.every((node) => checkedKeySet.has(node.key));
       } else {
-        const checkedKeySet = new Set(checkedKeys);
-        const allChecked = treeData.every((node) =>
-          checkedKeySet.has(node.key)
-        );
-
-        setAllChecked(allChecked);
-        setIndeterminate(allChecked ? false : true);
+        const allKeys = getAllKeys(treeData);
+        allChecked = allKeys.every((key) => checkedKeySet.has(key));
       }
+      setAllChecked(allChecked);
+      setIndeterminate(!allChecked);
     }
+
     props.onCheck?.(
-      props.checkedFilterConfig ? _filterCheckedKeys : checkedKeys
+      props.checkedFilterConfig ? _filterCheckedKeys : _checkedKeys
     );
   };
 
@@ -561,6 +572,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
             treeData,
             titleRender,
             checkedKeys,
+            checkStrictly: checkedRelevant,
             selectedKeys,
             defaultExpandAll,
             onSelect,

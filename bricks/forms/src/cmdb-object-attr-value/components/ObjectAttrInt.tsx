@@ -5,7 +5,7 @@ import { Form } from "@ant-design/compatible";
 import { Input, Row, InputNumber } from "antd";
 import { isNil } from "lodash";
 import i18n from "i18next";
-
+import styles from "./index.module.css";
 interface ObjectAttrIntProps {
   value: any;
   onChange: (newValue?: any) => void;
@@ -35,7 +35,7 @@ export function ObjectAttrInt(props: ObjectAttrIntProps): React.ReactElement {
 
   return (
     <>
-      <div>
+      <div className={styles.typeSelected}>
         {i18n.t(`${NS_FORMS}:${K.REGULAR}`)}
         <Row>
           <Input
