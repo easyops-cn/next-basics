@@ -180,7 +180,6 @@ export class GeneralTooltipElement extends UpdatingElement {
     }
   }
 }
-
 customElements.define(
   "presentational-bricks.general-tooltip",
   GeneralTooltipElement
