@@ -3,6 +3,11 @@
     margin-left: 16px;
   }
 }
+html[data-ui="v8-2"] .generalCheckBox {
+  :global(.ant-checkbox + span) {
+    word-break: break-all;
+  }
+}
 
 .checkboxColLayout {
   margin-bottom: -6px !important;
