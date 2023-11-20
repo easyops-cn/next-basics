@@ -42,3 +42,4 @@ import "./lazy-bricks";
 import "./general-input-number-range";
 import "./general-link";
 import "./cmdb-cascader";
+import "./commonStyle.module.css";
