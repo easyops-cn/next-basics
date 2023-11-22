@@ -81,3 +81,4 @@ import "./custom-processors/getWorkflowPreStepData";
 // !Lazy: import "./workflow-edit-data-item";
 // !Lazy: import "./workflow-condition-item";
 import "./data-providers/GetClassifiedBrickList";
+import "./data-providers/CommitBasedStoryboardAssembly";
