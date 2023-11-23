@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.263.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.262.1...@next-bricks/next-builder@1.263.0) (2023-11-23)
+
+
+### Features
+
+* 根据diff信息生成storyboard ([91e32d3](https://github.com/easyops-cn/next-basics/commit/91e32d375858cc981193cafbba2757377cd7cc57))
+* 根据diff信息生成storyboard ([1b57405](https://github.com/easyops-cn/next-basics/commit/1b57405baddd54d8a864de2707c434f84aa6721a))
+
+
+
+
+
 ## [1.262.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.262.0...@next-bricks/next-builder@1.262.1) (2023-11-09)
 
 
