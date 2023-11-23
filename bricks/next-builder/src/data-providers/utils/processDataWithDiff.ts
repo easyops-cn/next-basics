@@ -18,22 +18,18 @@ import {
 type ModelGitDiffTree = Partial<NextBuilderModels.ModelGitDiffTree>;
 
 function walkTree(
-  data: ModelGitDiffTree[] | ModelGitDiffTree,
+  data: ModelGitDiffTree[],
   parent: ModelGitDiffTree | undefined,
   callback: (
     data: ModelGitDiffTree,
     parent: ModelGitDiffTree | undefined
   ) => void
 ): void {
-  if (!data) return;
   if (Array.isArray(data)) {
     data.forEach((item) => {
       callback(item, parent);
       item.children && walkTree(item.children, item, callback);
     });
-  } else {
-    callback(data, parent);
-    data.children && walkTree(data.children, data, callback);
   }
 }
 

@@ -2602,7 +2602,29 @@ const mockFactory: Record<string, Record<string, any>> = {
     ],
     images: [],
     instanceId: "60ab961919db5",
-    mockRule: [],
+    mockRule: [
+      {
+        instanceId: "a",
+        url: "app-1/homepage/getDetail",
+        method: "GET",
+        provider: "provider-of-cmdb.get-detail",
+        isEnable: true,
+      },
+      {
+        instanceId: "b",
+        url: "app-1/homepage/getDetail/:instanceId",
+        method: "POST",
+        provider: "provider-of-cmdb.get-detail-v1",
+        isEnable: true,
+      },
+      {
+        instanceId: "c",
+        url: "app-1/homepage/getDetail/:instanceId/list",
+        method: "LIST",
+        provider: "test-abd@getMockDetail",
+        isEnable: false,
+      },
+    ],
     models: [],
     modelsDefinition: null,
     modifier: "easyops",
@@ -3880,7 +3902,18 @@ describe("CommitBasedStoryboardAssembly", () => {
             ],
             mocks: {
               mockId: "14651de6",
-              mockList: [],
+              mockList: [
+                {
+                  method: "GET",
+                  provider: "provider-of-cmdb.get-detail",
+                  uri: "app-1/homepage/getDetail",
+                },
+                {
+                  method: "POST",
+                  provider: "provider-of-cmdb.get-detail-v1",
+                  uri: "app-1/homepage/getDetail/:instanceId",
+                },
+              ],
             },
           },
           dependsAll: false,
