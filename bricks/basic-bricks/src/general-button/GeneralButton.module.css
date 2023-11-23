@@ -12,6 +12,7 @@
     &:hover {
       background: var(--color-fill-bg-base-3);
     }
+    background-color: transparent;
   }
 }
 .iconButton {
