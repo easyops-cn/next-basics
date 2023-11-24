@@ -208,7 +208,7 @@ export const suggestGroup: groupItem[] = [
 type componentGroup = Record<string, groupItem[]>;
 
 export const defaultGroup: componentGroup = {
-  v3Brick: v3BrickGroup,
+  v3Brick: brickGroup.concat(v3BrickGroup),
   brick: brickGroup,
   widget: widgetGroup,
   layout: layoutGroup,
