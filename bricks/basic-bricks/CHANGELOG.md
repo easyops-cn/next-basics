@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.249.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.8...@next-bricks/basic-bricks@1.249.9) (2023-11-24)
+
+
+### Bug Fixes
+
+* show app-bar tips in v3 container ([999b216](https://github.com/easyops-cn/next-basics/commit/999b2167a860ba3bd9d531b10941180156159cf6))
+
+
+
+
+
 ## [1.249.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.7...@next-bricks/basic-bricks@1.249.8) (2023-11-23)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
