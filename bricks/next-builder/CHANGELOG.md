@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.264.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.263.0...@next-bricks/next-builder@1.264.0) (2023-11-24)
+
+
+### Features
+
+* commit pre check ([1d0ea5d](https://github.com/easyops-cn/next-basics/commit/1d0ea5d9e8731e5d80111a370f62ea55da18a884))
+* **component-select:** support v3 category ([1dd21f5](https://github.com/easyops-cn/next-basics/commit/1dd21f50965766f205f44ec17fe42ae239fe7e89))
+
+
+
+
+
 # [1.263.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.262.1...@next-bricks/next-builder@1.263.0) (2023-11-23)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.315.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.315.0...@next-bricks/presentational-bricks@1.315.1) (2023-11-24)
+
+
+### Bug Fixes
+
+* brick tree checkedNotRelevant ([9b8c5c5](https://github.com/easyops-cn/next-basics/commit/9b8c5c5657d95bd700d4a8970a865d1028537312))
+
+
+
+
+
 # [1.315.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.314.2...@next-bricks/presentational-bricks@1.315.0) (2023-11-17)
 
 
