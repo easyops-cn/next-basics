@@ -359,7 +359,7 @@ describe("BrickTree", () => {
     );
   });
 
-  it("checkedRelevant should work", async () => {
+  it("checkedNotRelevant should work", async () => {
     const onCheck = jest.fn();
     const wrapper = shallow<BrickTreeProps>(
       <BrickTree
@@ -367,7 +367,7 @@ describe("BrickTree", () => {
         onCheck={onCheck}
         configProps={{ checkable: true }}
         checkAllEnabled={true}
-        checkedRelevant={true}
+        checkedNotRelevant={true}
       />
     );
 
