@@ -1,8 +1,11 @@
 import React from "react";
 import { NavTip } from "@next-core/brick-types";
-import { AppBarTips } from "../app-bar/AppBarTips/AppBarTips";
 import { JsonStorage } from "@next-core/brick-utils";
+import { getAuth, getRuntime, useCurrentApp } from "@next-core/brick-kit";
 import moment from "moment";
+import { AppBarTips } from "../app-bar/AppBarTips/AppBarTips";
+
+const storage = new JsonStorage(localStorage);
 
 export function AppBarWrapper({
   isFixed = true,
@@ -13,21 +16,25 @@ export function AppBarWrapper({
   const [appbarHeight, setAppbarHeight] = React.useState<string>(
     `var(--app-bar-height)`
   );
+  const currentApp = useCurrentApp();
 
-  const storage = new JsonStorage(localStorage);
-
-  const handleShowTips = ((e: CustomEvent<NavTip[]>): void => {
-    const list = e.detail ?? [];
+  const handleShowTips = React.useCallback<EventListener>((e): void => {
+    const list = (e as CustomEvent<NavTip[]>).detail ?? [];
     // 可关闭的tip，用户关闭后过一天才会重新显示
-    const res = list.filter((item) => {
-      const isTipClosing =
-        item.closable &&
-        storage.getItem(item.tipKey) &&
-        moment().unix() <= storage.getItem(item.tipKey);
-      return !isTipClosing;
-    });
-    setTipList(res);
-  }) as EventListener;
+    setTipList((previous) =>
+      previous
+        .filter((prev) => !list.some((item) => item.tipKey === prev.tipKey))
+        .concat(
+          list.filter((item) => {
+            return !(
+              item.closable &&
+              storage.getItem(item.tipKey) &&
+              moment().unix() <= storage.getItem(item.tipKey)
+            );
+          })
+        )
+    );
+  }, []);
 
   const handleCloseTips = (targetKey: string): void => {
     const list = tipList.filter((item) => item.tipKey !== targetKey);
@@ -40,11 +47,79 @@ export function AppBarWrapper({
   }, [tipList]);
 
   React.useEffect(() => {
+    const runtime = getRuntime();
+    const isV3 = runtime.getFeatureFlags()["migrate-to-brick-next-v3"];
+    if (isV3) {
+      const auth = getAuth();
+      const validDaysLeft: number = auth.license?.validDaysLeft;
+      if (validDaysLeft && validDaysLeft <= 15 && auth.isAdmin) {
+        handleShowTips(
+          new CustomEvent<NavTip[]>("app.bar.tips", {
+            detail: [
+              {
+                text: `离 License 过期还有 ${validDaysLeft} 天`,
+                tipKey: `license:${auth.org}`,
+                closable: true,
+                isCenter: true,
+                backgroundColor: "var(--color-info-bg)",
+              },
+            ],
+          })
+        );
+      }
+      return;
+    }
     window.addEventListener("app.bar.tips", handleShowTips);
     return () => {
       window.removeEventListener("app.bar.tips", handleShowTips);
     };
-  }, []);
+  }, [handleShowTips]);
+
+  React.useEffect(() => {
+    const runtime = getRuntime();
+    const isV3 = runtime.getFeatureFlags()["migrate-to-brick-next-v3"];
+    if (isV3) {
+      const auth = getAuth();
+      const handelRouteRender = (e: Event): void => {
+        const renderTime = (e as CustomEvent<{ renderTime: number }>).detail
+          .renderTime;
+        const { loadTime, loadInfoPage } = runtime.getMiscSettings();
+        if (currentApp.isBuildPush && loadTime > 0 && renderTime > loadTime) {
+          const getSecond = (time: number): number =>
+            Math.floor(time * 100) / 100;
+          handleShowTips(
+            new CustomEvent<NavTip[]>("app.bar.tips", {
+              detail: [
+                {
+                  text: `您的页面存在性能问题, 当前页面渲染时间 ${getSecond(
+                    renderTime / 1000
+                  )} 秒, 规定阈值为: ${getSecond(
+                    (loadTime as number) / 1000
+                  )} 秒, 您已超过。请您针对该页面进行性能优化!`,
+                  closable: false,
+                  isCenter: true,
+                  tipKey: `render:${auth.org}`,
+                  backgroundColor: "var(--color-warning-bg)",
+                  ...(loadInfoPage
+                    ? {
+                        info: {
+                          label: "建议解决思路",
+                          url: loadInfoPage as string,
+                        },
+                      }
+                    : {}),
+                },
+              ],
+            })
+          );
+        }
+      };
+      window.addEventListener("route.render", handelRouteRender);
+      return () => {
+        window.removeEventListener("route.render", handelRouteRender);
+      };
+    }
+  }, [handleShowTips, currentApp]);
 
   React.useEffect(() => {
     const mainElement = document.getElementById("main-mount-point");

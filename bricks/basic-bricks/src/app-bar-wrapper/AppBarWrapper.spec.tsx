@@ -1,38 +1,113 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { AppBarWrapper } from "./AppBarWrapper";
-import { mount } from "enzyme";
 import { act } from "react-dom/test-utils";
+import * as kit from "@next-core/brick-kit";
+
+jest.mock("@next-core/brick-kit");
+
+const mockGetRuntime = jest.spyOn(kit, "getRuntime");
+const mockGetAuth = jest.spyOn(kit, "getAuth");
+const getFeatureFlags = jest.fn();
+const getMiscSettings = jest.fn();
+mockGetRuntime.mockReturnValue({
+  getFeatureFlags,
+  getMiscSettings,
+} as any);
+jest.spyOn(kit, "useCurrentApp").mockReturnValue({
+  isBuildPush: true,
+} as any);
 
 describe("AppBarWrapper", () => {
   it("should work", () => {
-    const { container } = render(
+    getFeatureFlags.mockReturnValue({});
+    const { container, unmount } = render(
       <AppBarWrapper isFixed={true} displayCenter={true} />
     );
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<div class=\\"app-bar-container\\"><div class=\\"app-bar\\" style=\\"position: fixed;\\"><div class=\\"app-bar-content\\" style=\\"justify-content: space-around;\\"><div class=\\"leftContainer\\"><slot name=\\"leftContainer\\"></slot></div><div class=\\"rightContainer\\"><slot name=\\"rightContainer\\"></slot></div></div></div></div>"`
-    );
+    expect(
+      container.querySelectorAll(".app-bar > :not(.app-bar-content)").length
+    ).toBe(0);
+    unmount();
   });
 
-  it("should render tipslist", async () => {
-    const wrapper = mount(
+  it("should render tips in v2", async () => {
+    getFeatureFlags.mockReturnValue({});
+    const { container, unmount } = render(
       <AppBarWrapper isFixed={true} displayCenter={true} />
     );
-    window.dispatchEvent(
-      new CustomEvent("app.bar.tips", {
-        detail: [
-          {
-            text: "hello world",
-          },
-        ],
-      })
-    );
-    await act(async () => {
-      await (global as any).flushPromises();
+    act(() => {
+      window.dispatchEvent(
+        new CustomEvent("app.bar.tips", {
+          detail: [
+            {
+              text: "hello world",
+              tipKey: "unknown",
+            },
+          ],
+        })
+      );
     });
-    expect(wrapper.html()).toMatchInlineSnapshot(
-      `"<div class=\\"app-bar-container\\"><div class=\\"app-bar\\" style=\\"position: fixed;\\"><div style=\\"background-color: rgb(255, 255, 255);\\"><div style=\\"display: flex; justify-content: space-between; box-sizing: border-box; width: 100%; line-height: 26px; padding: 3px 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;\\"><div>hello world</div></div></div><div class=\\"app-bar-content\\" style=\\"justify-content: space-around;\\"><div class=\\"leftContainer\\"><slot name=\\"leftContainer\\"></slot></div><div class=\\"rightContainer\\"><slot name=\\"rightContainer\\"></slot></div></div></div></div>"`
+    expect(
+      container.querySelectorAll(".app-bar > :not(.app-bar-content)").length
+    ).toBe(1);
+    unmount();
+  });
+
+  it("should render no tips in v3", async () => {
+    getFeatureFlags.mockReturnValue({
+      "migrate-to-brick-next-v3": true,
+    });
+    mockGetAuth.mockReturnValue({});
+    const { container, unmount } = render(
+      <AppBarWrapper isFixed={true} displayCenter={true} />
     );
+    expect(
+      container.querySelectorAll(".app-bar > :not(.app-bar-content)").length
+    ).toBe(0);
+    unmount();
+  });
+
+  it("should render license tips in v3", async () => {
+    getFeatureFlags.mockReturnValue({
+      "migrate-to-brick-next-v3": true,
+    });
+    mockGetAuth.mockReturnValue({
+      license: {
+        validDaysLeft: 7,
+      },
+      isAdmin: true,
+    });
+    const { container, unmount } = render(
+      <AppBarWrapper isFixed={true} displayCenter={true} />
+    );
+    expect(
+      container.querySelectorAll(".app-bar > :not(.app-bar-content)").length
+    ).toBe(1);
+    unmount();
+  });
+
+  it("should render router tips in v3", async () => {
+    getFeatureFlags.mockReturnValue({
+      "migrate-to-brick-next-v3": true,
+    });
+    getMiscSettings.mockReturnValue({
+      loadTime: 3000,
+    });
+    mockGetAuth.mockReturnValue({});
+    const { container, unmount } = render(
+      <AppBarWrapper isFixed={true} displayCenter={true} />
+    );
+    act(() => {
+      window.dispatchEvent(
+        new CustomEvent("route.render", {
+          detail: { renderTime: 3567 },
+        })
+      );
+    });
+    expect(
+      container.querySelectorAll(".app-bar > :not(.app-bar-content)").length
+    ).toBe(1);
+    unmount();
   });
 });
