@@ -176,7 +176,7 @@ export interface BrickTreeProps {
   searchParent?: boolean;
   checkAllEnabled?: boolean;
   checkedFilterConfig?: checkedFilterProps;
-  checkedRelevant?: boolean;
+  checkedNotRelevant?: boolean;
   onSelect?(
     selectedKeys: React.Key[],
     info: {
@@ -219,7 +219,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     placeholder = "",
     checkAllEnabled,
     checkedFilterConfig: { field, value, operator } = {},
-    checkedRelevant,
+    checkedNotRelevant,
     suffixBrick,
     suffixStopEvent,
     afterSearchBrick,
@@ -274,7 +274,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     } else {
       const checkedKeySet = new Set(_checkedKeys);
       let allChecked;
-      if (!checkedRelevant) {
+      if (!checkedNotRelevant) {
         allChecked = getAllCheckedState(treeData, checkedKeySet);
       } else {
         const allKeys = getAllKeys(treeData);
@@ -379,7 +379,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     } else {
       const checkedKeySet = new Set(_checkedKeys);
       let allChecked;
-      if (!checkedRelevant) {
+      if (!checkedNotRelevant) {
         allChecked = treeData.every((node) => checkedKeySet.has(node.key));
       } else {
         const allKeys = getAllKeys(treeData);
@@ -572,7 +572,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
             treeData,
             titleRender,
             checkedKeys,
-            checkStrictly: checkedRelevant,
+            checkStrictly: checkedNotRelevant,
             selectedKeys,
             defaultExpandAll,
             onSelect,
