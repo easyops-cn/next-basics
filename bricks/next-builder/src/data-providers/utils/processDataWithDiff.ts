@@ -17,7 +17,7 @@ import {
 
 type ModelGitDiffTree = Partial<NextBuilderModels.ModelGitDiffTree>;
 
-function walkTree(
+export function walkTree(
   data: ModelGitDiffTree[],
   parent: ModelGitDiffTree | undefined,
   callback: (
