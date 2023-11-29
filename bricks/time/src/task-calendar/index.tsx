@@ -42,6 +42,17 @@ export class TaskCalendarElement extends UpdatingElement {
    * @kind string
    * @required false
    * @default -
+   * @description 自定义标题
+   */
+  @property({
+    attribute: false,
+  })
+  customTitle: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
    * @description 默认选中的日期
    */
   @property({
@@ -149,6 +160,17 @@ export class TaskCalendarElement extends UpdatingElement {
   mode: ModeType;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否隐藏视图模式
+   */
+  @property({
+    attribute: false,
+  })
+  hideMode: boolean;
+
+  /**
    * @detail DateDetail
    * @description 点击选择日期事件 date为选择的日期，data为该日期上的数据
    */
@@ -203,6 +225,8 @@ export class TaskCalendarElement extends UpdatingElement {
             dateCellHeight={this.dateCellHeight}
             showLunarInfo={this.showLunarInfo}
             mode={this.mode}
+            hideMode={this.hideMode}
+            customTitle={this.customTitle}
           />
         </BrickWrapper>,
         this
