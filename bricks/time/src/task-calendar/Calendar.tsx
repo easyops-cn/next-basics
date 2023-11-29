@@ -23,6 +23,8 @@ export interface CalendarProps {
   onPanelChange: (date: Moment, mode: "month" | "week") => void;
   defaultValue?: Moment;
   panelMode?: ModeType;
+  hideMode?: boolean;
+  customTitle?: string;
 }
 
 export function Calendar(props: CalendarProps): React.ReactElement {
@@ -32,6 +34,8 @@ export function Calendar(props: CalendarProps): React.ReactElement {
     onPanelChange,
     defaultValue,
     panelMode = "month",
+    hideMode = false,
+    customTitle,
   } = props;
   const [curYear, setCurYear] = useState<number>(moment().year());
   const [curMonth, setCurMonth] = useState<number>(moment().month() + 1);
@@ -119,18 +123,23 @@ export function Calendar(props: CalendarProps): React.ReactElement {
     <div className={styles.calendar}>
       <div className="ant-picker-calendar ant-picker-calendar-full">
         <div className="ant-picker-calendar-header">
-          <Radio.Group
-            onChange={handleModeChange}
-            value={mode}
-            buttonStyle="solid"
-          >
-            <Radio.Button value="week">
-              {i18next.t(`${NS_TIME}:${K.WEEK}`)}
-            </Radio.Button>
-            <Radio.Button value="month">
-              {i18next.t(`${NS_TIME}:${K.MONTH}`)}
-            </Radio.Button>
-          </Radio.Group>
+          {customTitle && (
+            <div className={styles.customHeadTitle}>{customTitle}</div>
+          )}
+          {!hideMode && (
+            <Radio.Group
+              onChange={handleModeChange}
+              value={mode}
+              buttonStyle="solid"
+            >
+              <Radio.Button value="week">
+                {i18next.t(`${NS_TIME}:${K.WEEK}`)}
+              </Radio.Button>
+              <Radio.Button value="month">
+                {i18next.t(`${NS_TIME}:${K.MONTH}`)}
+              </Radio.Button>
+            </Radio.Group>
+          )}
           <div className={styles.rightControl}>
             {mode === "week" && (
               <div

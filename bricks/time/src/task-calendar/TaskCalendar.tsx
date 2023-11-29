@@ -28,6 +28,8 @@ export interface TaskCalendarProps {
   dateCellHeight?: React.CSSProperties["height"];
   showLunarInfo?: boolean;
   mode?: ModeType;
+  hideMode?: boolean;
+  customTitle?: string;
   onDateSelect?: (detail: DateDetail) => void;
   onPickerPanelChange?: (detail: { mode: string; date: string }) => void;
 }
@@ -47,6 +49,8 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
     dateCellHeight,
     showLunarInfo,
     mode,
+    hideMode,
+    customTitle,
   } = props;
   const [selectedData, setSelectedData] = useState<{
     date: Moment;
@@ -276,6 +280,8 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
         onPanelChange={onPanelChange}
         defaultValue={pickerValue}
         panelMode={mode}
+        hideMode={hideMode}
+        customTitle={customTitle}
       />
       {extraFooterNode}
     </div>

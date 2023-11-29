@@ -62,4 +62,17 @@
       cursor: pointer;
     }
   }
+
+  .customHeadTitle {
+    display: inline-block;
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: -1px;
+    color: var(--antd-heading-color);
+    font-weight: 500;
+    font-size: 16px;
+    background: transparent;
+  }
 }
