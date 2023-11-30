@@ -123,32 +123,30 @@ export async function CommitBasedStoryboardAssembly({
     projectInfoReq,
   ]);
 
-  const routesDiffItem = diffs.find((v) => v.category === "routes");
-  const processedRoutesGraphData = processGraphDataWithDiff(
-    routeGraphResponse as pipes.GraphData,
-    routesDiffItem,
+  const routesDiffItemRoot =
+    diffs.find((v) => v.category === "routes")?.root || [];
+  const templatesDiffItemRoot =
+    diffs.find((v) => v.category === "templates")?.root || [];
+  const routesAndTemplatesDiffItem = {
+    root: [].concat(routesDiffItemRoot, templatesDiffItemRoot),
+  };
+  const processedRoutesAndTemplatesGraphData = processGraphDataWithDiff(
+    {
+      topic_vertices: [].concat(
+        routeGraphResponse.topic_vertices,
+        templateGraphResponse.topic_vertices
+      ),
+      vertices: [].concat(
+        routeGraphResponse.vertices,
+        templateGraphResponse.vertices
+      ),
+      edges: [].concat(routeGraphResponse.edges, templateGraphResponse.edges),
+    },
+    routesAndTemplatesDiffItem,
     selectedDiffSet
   );
-  const routes = graphTree(processedRoutesGraphData, {
-    sort: [
-      {
-        key: "sort",
-        order: 1,
-      },
-      {
-        key: "ctime",
-        order: 1,
-      },
-    ],
-  }) as BuilderRouteNode[];
 
-  const templatesDiffItem = diffs.find((v) => v.category === "templates");
-  const processedTemplatesGraphData = processGraphDataWithDiff(
-    templateGraphResponse as pipes.GraphData,
-    templatesDiffItem,
-    selectedDiffSet
-  );
-  const templates = graphTree(processedTemplatesGraphData, {
+  const routesAndTemplates = graphTree(processedRoutesAndTemplatesGraphData, {
     sort: [
       {
         key: "sort",
@@ -159,13 +157,20 @@ export async function CommitBasedStoryboardAssembly({
         order: 1,
       },
     ],
-  }).map((template) => ({
-    id: template.id,
-    templateId: template.templateId,
-    children: template.children,
-    proxy: template.proxy ? JSON.parse(template.proxy) : undefined,
-    state: template.state ? JSON.parse(template.state) : undefined,
-  }));
+  });
+
+  const routes = routesAndTemplates.filter(
+    (v) => v._object_id !== "STORYBOARD_TEMPLATE"
+  ) as BuilderRouteNode[];
+  const templates = routesAndTemplates
+    .filter((v) => v._object_id === "STORYBOARD_TEMPLATE")
+    .map((template) => ({
+      id: template.id,
+      templateId: template.templateId,
+      children: template.children,
+      proxy: template.proxy ? JSON.parse(template.proxy) : undefined,
+      state: template.state ? JSON.parse(template.state) : undefined,
+    }));
 
   const menusDiffItem = diffs.find((v) => v.category === "menus");
   const processedMenusGraphData = processGraphDataWithDiff(
