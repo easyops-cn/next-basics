@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.264.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.264.0...@next-bricks/next-builder@1.264.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* routes 和 templates 之间移动构件时 storyboard 计算有误 ([45d74ac](https://github.com/easyops-cn/next-basics/commit/45d74ac0ab6c9639e6e052c16d81000dcb97054b))
+
+
+
+
+
 # [1.264.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.263.0...@next-bricks/next-builder@1.264.0) (2023-11-24)
 
 
