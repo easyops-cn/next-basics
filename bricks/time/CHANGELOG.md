@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.8.0...@next-bricks/time@1.8.1) (2023-12-05)
+
+
+### Bug Fixes
+
+* 任务日历新增toolTip配置 ([20f00ea](https://github.com/easyops-cn/next-basics/commit/20f00eabffb458b2695fb3ed24501a1f49e3eeb6))
+
+
+
+
+
 # [1.8.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.7.2...@next-bricks/time@1.8.0) (2023-11-29)
 
 
