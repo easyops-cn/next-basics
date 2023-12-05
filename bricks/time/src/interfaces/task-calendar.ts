@@ -11,6 +11,7 @@ export interface TaskData {
 export interface ImportantData {
   date: string;
   issues: string[];
+  toolTip: string;
 }
 
 export interface ImportanceSettings {

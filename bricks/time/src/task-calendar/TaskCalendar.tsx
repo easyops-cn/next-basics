@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-// import { Calendar } from "antd";
+import { Tooltip } from "antd";
 import { Calendar } from "./Calendar";
 import solarLunar from "solarlunar";
 import moment, { Moment } from "moment";
@@ -81,6 +81,14 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
     }, {} as Record<ImportantData["date"], ImportantData["issues"]>);
   }, [importantList]);
 
+  const importantToolTipMap = useMemo(() => {
+    return importantList?.reduce((pre, cur) => {
+      const curMoment = moment(cur.date).format("YYYY-MM-DD");
+      pre[curMoment] = cur.toolTip;
+      return pre;
+    }, {} as Record<ImportantData["date"], ImportantData["toolTip"]>);
+  }, [importantList]);
+
   const pickerValue = useMemo(() => {
     return moment(value);
   }, [value]);
@@ -113,6 +121,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
       const curBriefData = briefDataMap?.[formatDate];
       const curTaskData = taskDataMap?.[formatDate];
       const curImportantData = importantDataMap?.[formatDate];
+      const curImportantToolTip = importantToolTipMap?.[formatDate];
       const taskColor =
         taskSettings?.colorMap?.[
           min(
@@ -127,7 +136,8 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
             curImportantData?.includes(type)
           )
         ];
-      return (
+
+      const showDate = (
         <div
           className={classNames(styles.dateContainer, {
             [styles.importantDay]: !!importanceColor,
@@ -159,6 +169,11 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
             )}
           </div>
         </div>
+      );
+      return curImportantToolTip ? (
+        <Tooltip title={curImportantToolTip}>{showDate}</Tooltip>
+      ) : (
+        showDate
       );
     },
     [
