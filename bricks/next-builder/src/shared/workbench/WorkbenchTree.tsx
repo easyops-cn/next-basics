@@ -431,6 +431,7 @@ function TreeNode({
     onNodeToggle,
     getCollapsedId,
     skipNotify,
+    NodeNameSuffix,
   } = useWorkbenchTreeContext();
   const {
     allow,
@@ -673,11 +674,7 @@ function TreeNode({
             }}
             ref={nodeLabelCallback}
           >
-            <span
-              className={classNames(styles.nodeIconWrapper, {
-                [styles.withExtraIcon]: !!node.extraIcon,
-              })}
-            >
+            <span className={styles.nodeIconWrapper}>
               {allowCollapse && (
                 <span
                   ref={collapseRefCallback}
@@ -711,7 +708,7 @@ function TreeNode({
                 )}
               </span>
             </span>
-            <span className={styles.nodeName}>
+            <span className={styles.nodeName} title={node.name}>
               {node.labelPrefix && (
                 <span style={node.labelPrefix.style}>
                   {node.labelPrefix.text}
@@ -721,6 +718,7 @@ function TreeNode({
                 ? smartDisplayForEvaluableString(node.name)
                 : node.name}
             </span>
+            {NodeNameSuffix && <NodeNameSuffix node={node} />}
           </span>
           <WorkbenchMiniActionBar
             className={styles.nodeActionsBar}

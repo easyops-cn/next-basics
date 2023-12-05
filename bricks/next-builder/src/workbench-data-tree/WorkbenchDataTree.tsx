@@ -1,4 +1,5 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { omit, pick } from "lodash";
 import {
   useBuilderData,
   useBuilderDataManager,
@@ -15,7 +16,13 @@ import {
 import { ContextConf } from "@next-core/brick-types";
 import { scanContextsInAny } from "../builder-container/DataView/scanContextsInStoryboard";
 import { deepMatch } from "../builder-container/utils/deepMatch";
-import { omit, pick } from "lodash";
+import type {
+  PreviewMessageFromPreviewer,
+  PreviewMessagePreviewerRealTimeDataInspectChange,
+  RealTimeDataAnnotation,
+} from "@next-types/preview";
+import { NodeNameSuffix } from "./NodeNameSuffix";
+import { RealTimeDataContext } from "./RealTimeDataContext";
 
 export interface WorkbenchDataTreeProps extends ContextOfWorkbenchTree {
   trees: WorkbenchNodeData[];
@@ -24,6 +31,7 @@ export interface WorkbenchDataTreeProps extends ContextOfWorkbenchTree {
   noSearch?: boolean;
   dropEmit?: (detail: dropEmitProps) => void;
   matchNodeDataFields?: string | string[];
+  onNodeNameSuffixClick?: (node: WorkbenchNodeData) => void;
 }
 
 export function WorkbenchDataTree({
@@ -36,6 +44,7 @@ export function WorkbenchDataTree({
   clickFactory,
   contextMenuFactory,
   matchNodeDataFields,
+  onNodeNameSuffixClick,
 }: WorkbenchDataTreeProps): React.ReactElement {
   const manager = useBuilderDataManager();
   const { nodes } = useBuilderData();
@@ -65,6 +74,31 @@ export function WorkbenchDataTree({
     };
   }, [manager]);
 
+  const [realTimeDataValues, setRealTimeDataValues] = useState<
+    Record<string, RealTimeDataAnnotation>
+  >({});
+
+  useEffect(() => {
+    const listener = ({
+      data,
+    }: MessageEvent<PreviewMessageFromPreviewer>): void => {
+      if (isPreviewMessagePreviewerRealTimeDataInspectChange(data)) {
+        if (data.changeType === "initialize") {
+          setRealTimeDataValues(data.detail.data);
+        } else if (data.changeType === "update") {
+          setRealTimeDataValues((prev) => ({
+            ...prev,
+            [data.detail.name]: data.detail.annotation,
+          }));
+        }
+      }
+    };
+    window.addEventListener("message", listener);
+    return () => {
+      window.removeEventListener("message", listener);
+    };
+  }, []);
+
   return (
     <WorkbenchTreeContext.Provider
       value={{
@@ -91,17 +125,30 @@ export function WorkbenchDataTree({
               ),
               lowerTrimmedQuery
             )),
+        NodeNameSuffix,
       }}
     >
-      <WorkbenchTree
-        nodes={trees}
-        placeholder={placeholder}
-        searchPlaceholder={searchPlaceholder}
-        allowDrag={true}
-        allowDragToRoot={true}
-        allowDragToInside={false}
-        dropEmit={dropEmit}
-      />
+      <RealTimeDataContext.Provider
+        value={{ realTimeDataValues, onClick: onNodeNameSuffixClick }}
+      >
+        <WorkbenchTree
+          nodes={trees}
+          placeholder={placeholder}
+          searchPlaceholder={searchPlaceholder}
+          allowDrag={true}
+          allowDragToRoot={true}
+          allowDragToInside={false}
+          dropEmit={dropEmit}
+        />
+      </RealTimeDataContext.Provider>
     </WorkbenchTreeContext.Provider>
+  );
+}
+
+function isPreviewMessagePreviewerRealTimeDataInspectChange(
+  data: PreviewMessageFromPreviewer
+): data is PreviewMessagePreviewerRealTimeDataInspectChange {
+  return (
+    data.sender === "previewer" && data.type === "real-time-data-inspect-change"
   );
 }

@@ -9,6 +9,10 @@ export interface dropOptions {
   overStatus: dragStatusEnum;
 }
 
+export interface NodeNameSuffixProps {
+  node: WorkbenchNodeData;
+}
+
 export interface ContextOfWorkbenchTree {
   hoverKey?: string | number;
   activeKey?: string | number;
@@ -30,6 +34,7 @@ export interface ContextOfWorkbenchTree {
   getCollapsedId?(node: WorkbenchNodeData): string | number;
   onBrickDrop?(e: React.DragEvent<HTMLElement>, options: dropOptions): void;
   skipNotify?: boolean;
+  NodeNameSuffix?: (props: NodeNameSuffixProps) => JSX.Element;
 }
 
 export const WorkbenchTreeContext = createContext<ContextOfWorkbenchTree>({});
