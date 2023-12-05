@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.23.5...@next-types/preview@1.24.0) (2023-12-05)
+
+
+### Features
+
+* real time data inspect ([3427bd3](https://github.com/easyops-cn/next-basics/commit/3427bd3e0222fb10b131f1ff719ab62b6b3e8784))
+
+
+
+
+
 ## [1.23.5](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.23.4...@next-types/preview@1.23.5) (2023-11-03)
 
 
