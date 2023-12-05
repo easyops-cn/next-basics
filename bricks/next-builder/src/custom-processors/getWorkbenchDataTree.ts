@@ -15,6 +15,11 @@ interface PartialProject {
   storyboardType: StoryboardType;
 }
 
+interface ExtendedContextConf extends ContextConf {
+  path?: string;
+  expose?: boolean;
+}
+
 export function getWorkbenchDataTree(
   node: BuilderRouteNode | BuilderCustomTemplateNode | BuilderSnippetNode,
   projectDetail?: PartialProject,
@@ -23,13 +28,14 @@ export function getWorkbenchDataTree(
   }
 ): WorkbenchNodeData[] {
   return (
-    (node.type === "snippet"
-      ? projectDetail?.storyboardType === "theme-template"
-        ? node.context
-        : node.snippetData
-      : node.type === "custom-template"
-      ? (pipes.json((node as { state?: string }).state) as ContextConf[])
-      : node.context
+    (
+      (node.type === "snippet"
+        ? projectDetail?.storyboardType === "theme-template"
+          ? node.context
+          : node.snippetData
+        : node.type === "custom-template"
+        ? pipes.json((node as { state?: string }).state)
+        : node.context) as ExtendedContextConf[]
     )?.map((item) => {
       const key = uniqueId("context-key-");
       let unreachable = false;
@@ -43,7 +49,7 @@ export function getWorkbenchDataTree(
       return {
         key,
         name: item.name,
-        path: (item as { path?: string }).path,
+        path: item.path,
         icon: {
           lib: "antd",
           theme: "outlined",

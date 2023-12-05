@@ -1,8 +1,6 @@
 import type {
-  BrickConf,
   BuilderBrickNode,
   ContextConf,
-  ResolveConf,
   Storyboard,
 } from "@next-core/brick-types";
 import {
@@ -18,11 +16,7 @@ import type {
 import { pipes } from "@next-core/pipes";
 import { ModelInstanceRelationRequest } from "@next-sdk/cmdb-sdk/dist/types/model/cmdb";
 import { StoryboardApi_CloneBricksRequestBody } from "@next-sdk/next-builder-sdk";
-import type {
-  FormProjectApi_CreateFormItemByFieldRequestBody,
-  FormProjectApi_CreateFormItemAndFieldRequestBody,
-  FormProjectApi_UpdateFormItemRequestBody,
-} from "@next-sdk/form-builder-service-sdk";
+import type { FormProjectApi_UpdateFormItemRequestBody } from "@next-sdk/form-builder-service-sdk";
 export interface PreviewHelperBrick {
   start(previewFromOrigin: string, options: unknown): void;
 }
@@ -106,6 +100,7 @@ export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerRouteMatchChange
   | PreviewMessagePreviewerScroll
   | PreviewMessagePreviewerContentScroll
+  | PreviewMessagePreviewerRealTimeDataInspectChange
   | PreviewMessagePreviewerCaptureOk
   | PreviewMessagePreviewerCaptureFailed
   | PreviewMessagePreviewDataValueSuccess
@@ -262,6 +257,25 @@ export interface PreviewMessagePreviewerContentScroll
     x: number;
     y: number;
   };
+}
+
+export interface PreviewMessagePreviewerRealTimeDataInspectChange
+  extends PreviewBaseMessage {
+  sender: "previewer";
+  type: "real-time-data-inspect-change";
+  changeType: string;
+  tplStateStoreId?: string;
+  detail: {
+    data?: Record<string, RealTimeDataAnnotation>;
+    name?: string;
+    annotation?: RealTimeDataAnnotation;
+  };
+}
+
+export interface RealTimeDataAnnotation {
+  type: string;
+  value?: unknown;
+  length?: number;
 }
 
 export interface PreviewMessagePreviewerCaptureOk extends PreviewBaseMessage {

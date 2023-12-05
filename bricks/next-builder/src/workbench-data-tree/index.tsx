@@ -8,7 +8,6 @@ import {
   EventEmitter,
 } from "@next-core/brick-kit";
 import { WorkbenchDataTree } from "./WorkbenchDataTree";
-import { WorkbenchTreeContext } from "../shared/workbench/WorkbenchTreeContext";
 import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
 import {
   ActionClickDetail,
@@ -90,7 +89,7 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
   };
 
   @event({ type: "node.drop" })
-  private _nodeDropEvent: EventEmitter<any>;
+  private _nodeDropEvent: EventEmitter<dropEmitProps>;
 
   private _handleNodeDrop = (detail: dropEmitProps): void => {
     this._nodeDropEvent.emit(detail);
@@ -109,6 +108,13 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
         y: e.clientY,
       });
     };
+
+  @event({ type: "nodeName.suffix.click" })
+  private _nodeNameSuffixClickEvent: EventEmitter<unknown>;
+
+  private _nodeNameSuffixClick = (node: WorkbenchNodeData): void => {
+    this._nodeNameSuffixClickEvent.emit(node.data);
+  };
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -147,6 +153,7 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
                 clickFactory={this._nodeClickFactory}
                 contextMenuFactory={this._contextMenuFactory}
                 matchNodeDataFields={this.matchNodeDataFields}
+                onNodeNameSuffixClick={this._nodeNameSuffixClick}
               />
             </WorkbenchActionsContext.Provider>
           </BuilderProvider>
