@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.265.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.265.1...@next-bricks/next-builder@1.265.2) (2023-12-06)
+
+
+### Bug Fixes
+
+* change color for changed data ([79d2889](https://github.com/easyops-cn/next-basics/commit/79d2889a61fab1dbc191b22e5893facbb0747760))
+
+
+
+
+
 ## [1.265.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.265.0...@next-bricks/next-builder@1.265.1) (2023-12-05)
 
 **Note:** Version bump only for package @next-bricks/next-builder
