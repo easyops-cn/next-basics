@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SiteMap should work 1`] = `
+<div>
+  <div
+    className="siteMap"
+  >
+    <div
+      className="siteMapTitle"
+    >
+      资源
+    </div>
+    <Popover
+      content={
+        <div
+          className="mainContainer"
+        >
+          <div
+            className="searchContainer"
+          >
+            <div
+              className="searchWrapper"
+            >
+              <ForwardRef(AutoComplete)
+                dropdownStyle={
+                  Object {
+                    "width": 300,
+                  }
+                }
+                onSearch={[Function]}
+                onSelect={[Function]}
+                optionLabelProp="value"
+                placeholder="SITE_MAP_SEARCH_PLACEHOLDER"
+                style={
+                  Object {
+                    "width": 200,
+                  }
+                }
+              >
+                <Option
+                  value="A / app"
+                >
+                  A / app
+                </Option>
+                <Option
+                  value="B / host"
+                >
+                  B / host
+                </Option>
+              </ForwardRef(AutoComplete)>
+            </div>
+          </div>
+          <div
+            className="masonry"
+          >
+            <div
+              className="column"
+              style={
+                Object {
+                  "paddingLeft": 5,
+                }
+              }
+            >
+              <div
+                className="item"
+              >
+                <div
+                  className="subCategoryContainer"
+                >
+                  <span
+                    className="diamondWrapper"
+                  />
+                  <span>
+                    A
+                  </span>
+                </div>
+                <div
+                  className="itemContainer"
+                >
+                  <a
+                    href="/next/legacy/cmdb-instance-management/APP/list"
+                    target="_self"
+                  >
+                    app
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div
+              className="column"
+              style={
+                Object {
+                  "paddingLeft": 5,
+                }
+              }
+            >
+              <div
+                className="item"
+              >
+                <div
+                  className="subCategoryContainer"
+                >
+                  <span
+                    className="diamondWrapper"
+                  />
+                  <span>
+                    B
+                  </span>
+                </div>
+                <div
+                  className="itemContainer"
+                >
+                  <a
+                    href="/next/legacy/cmdb-instance-management/HOST/list"
+                    target="_self"
+                  >
+                    host
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+      mouseEnterDelay={0.1}
+      mouseLeaveDelay={0.1}
+      overlayStyle={Object {}}
+      placement="bottomRight"
+      title={null}
+      transitionName="zoom-big"
+      trigger="click"
+    >
+      <Tooltip
+        arrowPointAtCenter={false}
+        autoAdjustOverflow={true}
+        mouseEnterDelay={0.1}
+        mouseLeaveDelay={0.1}
+        placement="top"
+        title="查看所有"
+        transitionName="zoom-big-fast"
+      >
+        <a
+          className="showIcon"
+          onClick={[Function]}
+        >
+          <GeneralIcon
+            icon={
+              Object {
+                "category": "app",
+                "icon": "all-cmdb",
+                "lib": "easyops",
+              }
+            }
+          />
+        </a>
+      </Tooltip>
+    </Popover>
+  </div>
+</div>
+`;

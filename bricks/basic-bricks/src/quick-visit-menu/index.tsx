@@ -15,6 +15,9 @@ import { QuickVisitMenu } from "./QuickVisitMenu";
  * @history
  * 1.x.0: 新增构件 `basic-bricks.quick-visit-menu`
  * @docKind brick
+ * @deprecated
+ * @memo
+ * 该构件已迁移至 `nav-legacy` 包中维护，后续版本将不再维护该构件，请使用 `nav-legacy.menu-bar` 构件
  * @noInheritDoc
  */
 export class QuickVisitMenuElement extends UpdatingElement {

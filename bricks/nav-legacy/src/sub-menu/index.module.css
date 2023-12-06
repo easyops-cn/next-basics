@@ -1,0 +1,102 @@
+.subMenuContainer {
+  background: var(--antd-app-submenu-bg);
+  border-radius: 6px;
+  padding: 20px 0;
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+    padding: 0 24px 16px 24px;
+    line-height: 26px;
+    color: var(--color-header-text);
+    i {
+      color: var(--color-secondary-text);
+      width: 24px;
+      text-align: center;
+    }
+    > i + span {
+      margin-left: 5px;
+    }
+    .headerTitle {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  > :global(.ant-menu) {
+    padding: 0 12px;
+
+    :global(.ant-menu-item-group) {
+      :global(.ant-menu-item-group-title) {
+        padding: 8px;
+        font-size: var(--sub-title-font-size);
+      }
+    }
+
+    :global(.ant-menu-sub.ant-menu-inline) {
+      background-color: var(--sub-menu-brick-group-bg);
+      border-radius: 4px;
+    }
+
+    :global(.ant-menu-item) {
+      margin: 0;
+      border-radius: 4px;
+      margin-bottom: 4px;
+      width: 100%;
+
+      &:after {
+        content: none;
+      }
+
+      &:not(:global(.ant-menu-item-selected)):hover {
+        background-color: var(--sub-menu-brick-item-hover-bg);
+      }
+
+      &:not(:global(.ant-menu-item-selected)):active {
+        background-color: var(--sub-menu-brick-item-active-bg);
+      }
+      svg {
+        color: var(--color-secondary-text);
+      }
+    }
+
+    :global(.ant-menu-item-selected) {
+      background-color: var(--app-submenu-active-bg);
+      svg {
+        color: var(--antd-link-color);
+      }
+    }
+
+    :global(.ant-menu-submenu-title) {
+      margin: 0;
+    }
+  }
+  &.isThirdLevel {
+    border-radius: 0;
+    height: 100%;
+    .header {
+      font-size: 16px;
+      display: block;
+    }
+
+    &.isCompact {
+      background: #f7f8fa;
+      border: 1px solid var(--stroke-color-default);
+      border-left: 0;
+      height: 100%;
+      > :global(.ant-menu) {
+        background: #f7f8fa;
+      }
+    }
+  }
+  .isThirdLevelHeaderTitle {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    word-wrap: break-word;
+  }
+}

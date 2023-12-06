@@ -1,0 +1,38 @@
+.logoBar {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.logoLink,
+.logoLink:hover {
+  color: #fff;
+}
+
+.ui8 {
+  height: 100%;
+  padding: 0;
+}
+
+.ui5 {
+  height: var(--app-bar-height);
+  padding: 0 22px 0 24px;
+}
+
+:global(.menu-bar-collapsed) {
+  .logoBar {
+    padding: 0 11px;
+  }
+
+  .logoLink {
+    width: 38px;
+    overflow: hidden;
+  }
+}
+
+:global(.first-rendered) .logoBar {
+  transition: padding var(--menu-bar-collapse-transition-duration)
+    var(--menu-bar-collapse-transition-timing-function);
+}
