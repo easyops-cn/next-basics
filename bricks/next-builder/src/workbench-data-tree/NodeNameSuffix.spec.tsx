@@ -3,6 +3,7 @@ import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { NodeNameSuffix } from "./NodeNameSuffix";
 import { RealTimeDataContext } from "./RealTimeDataContext";
+import { act } from "react-dom/test-utils";
 
 describe("NodeNameSuffix", () => {
   it("should render nothing if no real time value", () => {
@@ -62,6 +63,7 @@ describe("NodeNameSuffix", () => {
               value: 42,
             },
           },
+          isUpdate: true,
         }}
       >
         <NodeNameSuffix
@@ -76,6 +78,9 @@ describe("NodeNameSuffix", () => {
       </RealTimeDataContext.Provider>
     );
     expect(container.textContent).toBe("42");
+    act(() => {
+      jest.advanceTimersByTime(100);
+    });
   });
 
   it("should render undefined value", () => {

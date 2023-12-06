@@ -3,6 +3,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { hasOwnProperty } from "@next-core/brick-utils";
@@ -14,18 +15,47 @@ import styles from "./NodeNameSuffix.module.css";
 import type { NodeNameSuffixProps } from "../shared/workbench/WorkbenchTreeContext";
 
 export function NodeNameSuffix({ node }: NodeNameSuffixProps): JSX.Element {
-  const { realTimeDataValues, onClick } = useContext(RealTimeDataContext);
+  const { realTimeDataValues, isUpdate, onClick } =
+    useContext(RealTimeDataContext);
   const [annotationElement, setAnnotationElement] =
     useState<HTMLSpanElement>(null);
 
-  const { text, available, clickable } = useMemo(() => {
-    const { name } = node.data as ContextConf;
-    let annotation: RealTimeDataAnnotation;
-    const annotationType =
-      hasOwnProperty(realTimeDataValues, name) && !node.unreachable
-        ? ((annotation = realTimeDataValues[name]), annotation.type)
-        : null;
+  const [annotation, setAnnotation] = useState<RealTimeDataAnnotation>(null);
 
+  useEffect(() => {
+    const { name } = node.data as ContextConf;
+    setAnnotation(
+      hasOwnProperty(realTimeDataValues, name) && !node.unreachable
+        ? realTimeDataValues[name]
+        : null
+    );
+  }, [node, realTimeDataValues]);
+
+  const memoizedAnnotationRef = useRef<RealTimeDataAnnotation>(null);
+  const resumeTimerRef = useRef<number>();
+  // const initializedRef = useRef(false);
+  const [changed, setChanged] = useState(false);
+
+  useEffect(() => {
+    if (memoizedAnnotationRef.current !== annotation) {
+      memoizedAnnotationRef.current = annotation;
+      if (!isUpdate) {
+        return;
+      }
+      // if (!initializedRef.current) {
+      //   initializedRef.current = true;
+      //   return;
+      // }
+      setChanged(true);
+      clearTimeout(resumeTimerRef.current);
+      resumeTimerRef.current = setTimeout(() => {
+        setChanged(false);
+      }, 100) as unknown as number;
+    }
+  }, [annotation, isUpdate]);
+
+  const { text, available, clickable } = useMemo(() => {
+    const annotationType = annotation?.type;
     let text: string;
     let available = true;
     // let clickable = false;
@@ -53,7 +83,7 @@ export function NodeNameSuffix({ node }: NodeNameSuffixProps): JSX.Element {
         available = false;
     }
     return { text, available, clickable: true };
-  }, [node, realTimeDataValues]);
+  }, [annotation]);
 
   const annotationCallback = useCallback((element: HTMLSpanElement | null) => {
     setAnnotationElement(element);
@@ -77,6 +107,7 @@ export function NodeNameSuffix({ node }: NodeNameSuffixProps): JSX.Element {
     <span
       className={classNames(styles.annotation, {
         [styles.clickable]: clickable,
+        [styles.changed]: changed,
       })}
       ref={annotationCallback}
     >
