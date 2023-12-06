@@ -4,6 +4,7 @@ import type { WorkbenchNodeData } from "../shared/workbench/interfaces";
 
 export interface RealTimeDataContextValue {
   realTimeDataValues?: Record<string, RealTimeDataAnnotation>;
+  isUpdate?: boolean;
   onClick?: (node: WorkbenchNodeData) => void;
 }
 

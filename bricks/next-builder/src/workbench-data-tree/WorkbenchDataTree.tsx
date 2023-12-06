@@ -77,6 +77,7 @@ export function WorkbenchDataTree({
   const [realTimeDataValues, setRealTimeDataValues] = useState<
     Record<string, RealTimeDataAnnotation>
   >({});
+  const [isUpdate, setIsUpdate] = useState(false);
 
   useEffect(() => {
     const listener = ({
@@ -85,11 +86,13 @@ export function WorkbenchDataTree({
       if (isPreviewMessagePreviewerRealTimeDataInspectChange(data)) {
         if (data.changeType === "initialize") {
           setRealTimeDataValues(data.detail.data);
+          setIsUpdate(false);
         } else if (data.changeType === "update") {
           setRealTimeDataValues((prev) => ({
             ...prev,
             [data.detail.name]: data.detail.annotation,
           }));
+          setIsUpdate(true);
         }
       }
     };
@@ -129,7 +132,7 @@ export function WorkbenchDataTree({
       }}
     >
       <RealTimeDataContext.Provider
-        value={{ realTimeDataValues, onClick: onNodeNameSuffixClick }}
+        value={{ realTimeDataValues, isUpdate, onClick: onNodeNameSuffixClick }}
       >
         <WorkbenchTree
           nodes={trees}
