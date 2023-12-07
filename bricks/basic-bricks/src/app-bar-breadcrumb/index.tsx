@@ -10,6 +10,8 @@ import { BreadcrumbItemConf, SidebarMenu } from "@next-core/brick-types";
  * @history
  * 1.x.0: 新增构件 `basic-bricks.app-bar-breadcrumb`
  * @docKind brick
+ * @deprecated
+ * @memo 该构件已迁移至 `nav-legacy` 包中维护，后续版本将不再维护该构件，请使用 `nav-legacy.app-bar-breadcrumb` 构件
  * @noInheritDoc
  */
 export class AppbarBreadcrumbElement extends UpdatingElement {

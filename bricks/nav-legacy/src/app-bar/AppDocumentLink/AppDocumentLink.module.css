@@ -1,0 +1,27 @@
+.docLinkContainer {
+  padding: 0 16px;
+}
+
+.docLinkContainer a {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  color: var(--antd-btn-default-color);
+}
+
+.docLinkContainer.isNav {
+  padding: 0;
+  a {
+    border-radius: var(--antd-button-border-radius);
+    font-size: 16px;
+    height: 24px;
+    padding: 0 8px;
+    &:hover {
+      background: var(--color-fill-bg-base-3);
+    }
+  }
+}
+
+.docLinkContainer a:hover {
+  color: var(--antd-link-hover-color);
+}

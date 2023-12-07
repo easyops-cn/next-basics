@@ -17,7 +17,11 @@ import { MenuBar } from "./MenuBar/MenuBar";
 * @author steve
 * @slots
 * @history
+* @deprecated
 * @memo
+* 该构件已迁移至 `nav-legacy` 包中维护，后续版本将不再维护该构件，请使用 `nav-legacy.menu-bar` 构件
+*
+*
 * > Tips: 因为绝对定位的原因，当前菜单被覆盖，右侧即为效果图，如果需要返回开发者中心，请点击浏览器返回
 *```typescript
 * export interface SidebarMenu {

@@ -1,0 +1,126 @@
+.appSubMenu {
+  z-index: 100;
+  position: fixed;
+  top: var(--app-bar-height);
+  left: var(--menu-bar-width);
+  bottom: 0;
+  width: var(--sub-menu-bar-width);
+  background-color: var(--antd-app-submenu-bg);
+  color: var(--text-color-title);
+  box-shadow: var(--antd-app-submenu-shadow);
+  padding: 0 12px;
+  overflow-y: auto;
+}
+
+.appSubMenuTitle {
+  padding: 20px 10px;
+  color: var(--antd-app-submenu-title);
+  font-size: 18px;
+  word-break: break-word;
+}
+
+:global(.first-rendered) .appSubMenu {
+  transition: left var(--menu-bar-collapse-transition-duration)
+      var(--menu-bar-collapse-transition-timing-function),
+    var(--launchpad-backdrop-transition);
+}
+
+:global(.menu-bar-collapsed) .appSubMenu {
+  left: var(--menu-bar-collapsed-width);
+}
+
+:global(.launchpad-open) .appSubMenu {
+  filter: var(--launchpad-backdrop-filter);
+}
+
+.appSubMenu :global(.ant-menu) {
+  background: transparent;
+
+  :global(.ant-menu-item-group-title) {
+    color: var(--antd-app-submenu-group-title-color);
+  }
+  :global(.ant-menu-item) {
+    margin: 0;
+    border-radius: 6px;
+    transition: none;
+
+    &:not(:global(.ant-menu-item-selected)):hover {
+      > a {
+        color: var(--antd-link-color);
+      }
+    }
+  }
+
+  > :global(.ant-menu-item) > a {
+    color: var(--text-color-secondary);
+
+    > i {
+      color: var(--text-color-secondary);
+    }
+  }
+
+  :global(.ant-menu-item-selected) {
+    background-color: var(--antd-app-submenu-active-bg);
+
+    > a {
+      color: var(--antd-link-color);
+    }
+  }
+
+  :global(.ant-menu-submenu-title) {
+    color: var(--antd-text-color);
+    transition: none;
+
+    :global(.anticon) {
+      vertical-align: middle;
+      color: var(--antd-text-color-secondary);
+    }
+
+    :global(.ant-menu-submenu-arrow) {
+      color: var(--text-color-disabled);
+    }
+
+    &:active {
+      background-color: transparent;
+    }
+  }
+
+  &:global(.ant-menu-inline) :global(.ant-menu-item)::after {
+    content: none;
+  }
+
+  :global(.ant-menu-sub):global(.ant-menu-inline) > :global(.ant-menu-item) {
+    height: 36px;
+    line-height: 36px;
+    text-indent: 8px;
+  }
+
+  :global(.ant-menu-submenu) {
+    &:global(.ant-menu-submenu-selected) {
+      background: var(--menu-submenu-group-selected-bg);
+      border-radius: 6px;
+
+      > :global(.ant-menu-submenu-title) {
+        font-weight: 500;
+
+        :global(.anticon) {
+          color: var(--color-auxiliary-text);
+        }
+      }
+    }
+
+    &:global(.ant-menu-inline) > :global(.ant-menu-item) {
+      height: 36px;
+      line-height: 36px;
+      text-indent: 8px;
+    }
+
+    &:hover :global(.ant-menu-submenu-title) :global(.ant-menu-submenu-arrow) {
+      color: var(--antd-link-color);
+    }
+
+    :global(.ant-menu) {
+      background: transparent;
+    }
+  }
+}
