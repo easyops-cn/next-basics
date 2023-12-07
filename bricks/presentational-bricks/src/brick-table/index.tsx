@@ -1395,6 +1395,7 @@ export class BrickTableElement extends UpdatingElement {
   ): void => {
     const history = getHistory();
     const urlSearchParams = new URLSearchParams(history.location.search);
+
     // 分页
     if (!isEmpty(pagination)) {
       if (pagination.pageSize !== this.pageSize) {
@@ -1416,22 +1417,16 @@ export class BrickTableElement extends UpdatingElement {
         this.page = newPage;
       }
     }
-    this.filters = filters;
-    // 过滤
-    if (!isEmpty(filters)) {
-      forEach(filters, (value: any, key) => {
-        isNil(value) || value.length === 0
-          ? urlSearchParams.delete(key)
-          : urlSearchParams.set(key, value);
-      });
-      this.columnFiltersUpdate.emit(filters);
-    }
+
+    let isSort = false;
     // 排序: 切换分页和页码的时候不应该触发sort.update事件  排序触发/取消的时候，order的类型 'descend' | 'ascend' | null，没触发是false
     if (
       (sorter.order || isNil(sorter.order)) &&
       (sorter.columnKey !== this.sort ||
         this._fields[sorter.order] !== this.order)
     ) {
+      isSort = true;
+
       if (sorter.columnKey && sorter.order) {
         urlSearchParams.set("sort", sorter.columnKey as string);
         urlSearchParams.set("order", this._fields[sorter.order].toString());
@@ -1448,6 +1443,18 @@ export class BrickTableElement extends UpdatingElement {
         order: this.order,
       });
     }
+
+    this.filters = filters;
+    // 过滤
+    if (!isSort && !isEmpty(filters)) {
+      forEach(filters, (value: any, key) => {
+        isNil(value) || value.length === 0
+          ? urlSearchParams.delete(key)
+          : urlSearchParams.set(key, value);
+      });
+      this.columnFiltersUpdate.emit(filters);
+    }
+
     if (this.frontSearch) {
       if (this.shouldUpdateUrlParams) {
         history.push(`?${urlSearchParams}`, { notify: false });
