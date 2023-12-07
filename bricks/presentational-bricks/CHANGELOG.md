@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.315.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.315.1...@next-bricks/presentational-bricks@1.315.2) (2023-12-07)
+
+
+### Bug Fixes
+
+* **brick-table:** fix column.filters.update event emitted when sorting ([e8ed91d](https://github.com/easyops-cn/next-basics/commit/e8ed91d91aee560020d1499483e9a0080a6d5e38))
+
+
+
+
+
 ## [1.315.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.315.0...@next-bricks/presentational-bricks@1.315.1) (2023-11-24)
 
 
