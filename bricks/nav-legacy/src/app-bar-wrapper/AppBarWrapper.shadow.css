@@ -4,7 +4,7 @@
   left: 0;
   top: 0;
   z-index: 1000;
-  box-shadow: var(--connected-overlay-shadow);
+  box-shadow: var(--top-nav-shadow);
 }
 
 .app-bar-content {
