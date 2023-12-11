@@ -24,6 +24,7 @@ export async function StoryboardAssembly({
   useTheme,
   keepDeadConditions,
   options,
+  ignoreContract,
 }: StoryboardAssemblyParams): Promise<StoryboardAssemblyResult> {
   const { minimalBuildInfo, projectInfo } = await preStoryboardAssembly({
     projectId,
@@ -62,6 +63,7 @@ export async function StoryboardAssembly({
     options: {
       keepIds: options?.keepIds,
     },
+    ignoreContract,
   });
 
   if (!keepDeadConditions) {

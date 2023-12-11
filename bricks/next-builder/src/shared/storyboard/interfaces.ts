@@ -39,6 +39,7 @@ export interface PreStoryboardAssemblyOptions {
 export interface StoryboardAssemblyParams extends StoryboardAssemblyParamsBase {
   keepDeadConditions?: boolean;
   options?: BuildOptions;
+  ignoreContract?: boolean;
 }
 
 export type StoryboardType = "micro-app" | "theme-template";
@@ -98,6 +99,7 @@ export interface BuildInfo {
     homepage: string;
     name: string;
   };
+  ignoreContract?: boolean;
 }
 
 export type BuildInfoV2 = Omit<BuildInfo, "brickList">;

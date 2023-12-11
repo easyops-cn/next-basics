@@ -105,7 +105,7 @@ export async function buildStoryboardV2(
   ) as DependContractOfApi[];
 
   let contractList: Contract[];
-  if (!isEmpty(contracts)) {
+  if (!isEmpty(contracts) && !data.ignoreContract) {
     contractList = (
       await ContractCenterApi_batchSearchContract({
         contract: contracts.map((item) => {
