@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.265.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.265.2...@next-bricks/next-builder@1.265.3) (2023-12-11)
+
+
+### Bug Fixes
+
+* support ignore contract search ([7d95229](https://github.com/easyops-cn/next-basics/commit/7d95229c8ca3814e5bbdc1b989e2dac3606f51ee))
+
+
+
+
+
 ## [1.265.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.265.1...@next-bricks/next-builder@1.265.2) (2023-12-06)
 
 
