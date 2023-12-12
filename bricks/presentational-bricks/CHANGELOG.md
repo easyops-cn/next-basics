@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.315.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.315.2...@next-bricks/presentational-bricks@1.315.3) (2023-12-12)
+
+
+### Bug Fixes
+
+* 增加operatingAreaStyle属性控制额外样式 ([07f782d](https://github.com/easyops-cn/next-basics/commit/07f782d23963d5b77193553c03a8f2573df8b179))
+
+
+
+
+
 ## [1.315.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.315.1...@next-bricks/presentational-bricks@1.315.2) (2023-12-07)
 
 
