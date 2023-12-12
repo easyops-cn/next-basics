@@ -9,3 +9,4 @@ import "./app-document-link";
 import "./quick-visit-menu";
 import "./sub-menu";
 import "./menu-bar";
+import "./site-map";
