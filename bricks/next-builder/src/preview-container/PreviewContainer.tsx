@@ -376,23 +376,16 @@ export function LegacyPreviewContainer(
     setActiveOutlines([]);
 
     // V3 exposes `getBrickPackagesById` instead of `getBrickPackages`
-    let pkg: BrickPackage;
-    if (getRuntime().getFeatureFlags()["visual-builder-use-preview-agent"]) {
-      pkg =
-        (developHelper as any).getBrickPackagesById?.(
-          "bricks/visual-builder"
-        ) ??
-        developHelper
-          .getBrickPackages?.()
-          .find(
-            (pkg) => (pkg as { id?: string }).id === "bricks/visual-builder"
-          );
-      if (!pkg) {
-        // eslint-disable-next-line no-console
-        console.error(
-          "Cannot find preview agent package: bricks/visual-builder"
-        );
-      }
+    const agentPackageId = "bricks/visual-builder";
+    const agentBrick = "visual-builder.inject-preview-agent";
+    const pkg: BrickPackage =
+      (developHelper as any).getBrickPackagesById?.(agentPackageId) ??
+      developHelper
+        .getBrickPackages?.()
+        .find((pkg) => (pkg as { id?: string }).id === agentPackageId);
+    if (!pkg) {
+      // eslint-disable-next-line no-console
+      console.error(`Cannot find preview agent package: ${agentPackageId}`);
     }
 
     iframeRef.current.contentWindow.postMessage(
@@ -412,7 +405,7 @@ export function LegacyPreviewContainer(
             getRuntime().getCurrentApp().config
               ?.clearPreviewRequestCacheIgnoreList || [],
           agent: {
-            brick: "visual-builder.inject-preview-agent",
+            brick: agentBrick,
             pkg: pkg && {
               ...pkg,
               filePath: `${location.origin}${getRuntime().getBasePath()}${
