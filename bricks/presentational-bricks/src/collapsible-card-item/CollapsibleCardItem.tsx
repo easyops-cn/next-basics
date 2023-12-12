@@ -16,6 +16,7 @@ interface CollapsibleCardItemProps {
   hideOperate?: boolean;
   hoverable?: boolean;
   cardStyle?: CSSProperties;
+  operatingAreaStyle?: React.CSSProperties;
 }
 
 export function CollapsibleCardItem(
@@ -65,7 +66,7 @@ export function CollapsibleCardItem(
           )}
         </div>
         {!props.hideOperate && (
-          <div className="operatingArea">
+          <div className="operatingArea" style={props.operatingAreaStyle}>
             <slot id="operateSlot" name="operate" />
           </div>
         )}

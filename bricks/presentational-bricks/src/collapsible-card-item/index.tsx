@@ -170,6 +170,11 @@ export class CollapsibleCardItemElement extends UpdatingElement {
   })
   subscriptConfig: any;
 
+  @property({
+    attribute: false,
+  })
+  operatingAreaStyle: React.CSSProperties;
+
   /**
    * @detail boolean
    * @description 折叠状态改变
@@ -291,6 +296,7 @@ export class CollapsibleCardItemElement extends UpdatingElement {
             contentStyle={this.contentStyle}
             {...subscriptConfig}
             hideOperate={hideOperate}
+            operatingAreaStyle={this.operatingAreaStyle}
           />
         </BrickWrapper>,
         this._mountPoint
