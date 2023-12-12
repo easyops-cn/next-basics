@@ -1,10 +1,17 @@
-import { get, sortBy } from "lodash";
-import { INavModule, INavGroup } from "../../interface";
-import { getFlags, isIframe } from "../utils";
+import { get, sortBy, keyBy, cloneDeep } from "lodash";
+import { INavGroup, INavModule } from "../../interface";
+import { getFlags } from "../utils";
+import { isIframe } from "../utils";
+import { parseTemplate } from "@next-libs/cmdb-utils";
+import { CmdbObjectApi_ListObjectCategoryResponseBody_list_item } from "@next-sdk/cmdb-sdk";
 
 const ENABLED_FEATURES = getFlags();
 
-export const getModelGroups = (modelList: Record<string, any>[]) => {
+export const getModelGroups = (
+  modelList: Record<string, any>[],
+  isNext: boolean,
+  urlTemplates: Record<string, string>
+) => {
   let modelGroups: INavGroup[] = [];
   modelList.forEach((modelData) => {
     if (
@@ -28,7 +35,9 @@ export const getModelGroups = (modelList: Record<string, any>[]) => {
     if (subcategory === "") {
       group.states.push({
         id: modelData.objectId,
-        stateName: isIframe
+        stateName: isNext
+          ? parseTemplate(urlTemplates.modelUrlTemplate, modelData)
+          : isIframe
           ? `/ext/@console-plugin/cmdb-brick/${modelData.objectId}/list`
           : `/next/legacy/cmdb-instance-management/${modelData.objectId}/list`,
         stateParams: {
@@ -42,7 +51,9 @@ export const getModelGroups = (modelList: Record<string, any>[]) => {
       if (!group.states.some((s) => s.text === subcategory)) {
         group.states.push({
           id: "brickGroup",
-          stateName: isIframe
+          stateName: isNext
+            ? parseTemplate(urlTemplates.groupUrlTemplate, modelData)
+            : isIframe
             ? `/ext/@console-plugin/brick-group/${id}`
             : `/next/legacy/cmdb-instance-management/brick-group/${id}`,
           stateParams: {
@@ -110,7 +121,92 @@ export const getModelGroups = (modelList: Record<string, any>[]) => {
 
   return modelGroups;
 };
+export const getCategoryMap = (
+  objectCategory: CmdbObjectApi_ListObjectCategoryResponseBody_list_item[]
+) => {
+  const modifyCategoryList: any = objectCategory.map((category: any) => {
+    const subCategoryList = Object.entries(category.child).map((item) => ({
+      name: item[1],
+      title: item[1],
+      objectList: [],
+    }));
+    const subCategoryMap = keyBy(subCategoryList, "name");
+    return {
+      ...category,
+      title: category.name || "其他",
+      objectList: [],
+      subCategoryMap,
+    };
+  });
+  return keyBy(modifyCategoryList, "name");
+};
+export const getGroupsByCategoryMap = (
+  modelList,
+  categoryMap,
+  urlTemplates,
+  favouriteModels?: string[]
+) => {
+  const result: Record<string, any> = cloneDeep(categoryMap);
+  modelList.forEach((modelData) => {
+    const pieces = modelData.category.split(".");
+    const category = pieces.shift();
+    const subcategory = pieces.join(".");
+    if (!subcategory) {
+      if (result?.[category]?.objectList) {
+        result[category].objectList.push({
+          ...modelData,
+          to: parseTemplate(urlTemplates.modelUrlTemplate, modelData),
+          isFavourite: favouriteModels?.includes(modelData.objectId),
+        });
+      }
+    } else {
+      if (result?.[category]?.["subCategoryMap"]?.[subcategory]) {
+        result[category]["subCategoryMap"][subcategory].isOpen = false;
+        result[category]["subCategoryMap"][subcategory]["objectList"].push({
+          ...modelData,
+          to: parseTemplate(urlTemplates.modelUrlTemplate, modelData),
+          isFavourite: favouriteModels?.includes(modelData.objectId),
+        });
+      }
+    }
+  });
+  // return Object.values(result);
+  return Object.values(result).map((item) => ({
+    name: item.name,
+    title: item.title,
+    objectList: item.objectList,
+    subCategory: Object.values(item.subCategoryMap),
+  }));
+};
 
+export const getNewModelGroups = (
+  modelList: Record<string, any>[],
+  objectCategory: any,
+  urlTemplates: Record<string, string>,
+  favouriteModels?: string[],
+  noFilter?: boolean
+) => {
+  const categoryMap = getCategoryMap(objectCategory);
+  const filteredModelList = !noFilter
+    ? modelList.filter((modelData) => {
+        return !(
+          !modelData.name ||
+          modelData.system ||
+          modelData.virtual === "true" ||
+          !get(modelData, "view.visible", true)
+        );
+      })
+    : modelList.filter((modelData) => {
+        return !(!modelData.name || !get(modelData, "view.visible", true));
+      });
+  const groups = getGroupsByCategoryMap(
+    filteredModelList,
+    categoryMap,
+    urlTemplates,
+    favouriteModels
+  );
+  return groups;
+};
 export const NAV_RESOURCE_OVERVIEW = {
   id: "cmdb-dashboard",
   stateName: "cmdb.dashboard",
@@ -154,8 +250,12 @@ export const NAV_GROUP_OTHERS = {
   ],
 };
 
-export const getNavModuleCmdbV3 = (modelList: Record<string, any>[]) => {
-  const modelGroups = getModelGroups(modelList);
+export const getNavModuleCmdbV3 = (
+  modelList: Record<string, any>[],
+  isNext: boolean,
+  urlTemplates: Record<string, string>
+) => {
+  const modelGroups = getModelGroups(modelList, isNext, urlTemplates);
 
   const navModuleCmdbV3: INavModule = {
     text: "IT 资源管理",

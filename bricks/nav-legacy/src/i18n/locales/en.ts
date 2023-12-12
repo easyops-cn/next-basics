@@ -30,6 +30,13 @@ const locale: Locale = {
   [K.ADD_TO_QUICK_ACCESS]: "Add to quick access",
   [K.REMOVE_FROM_QUICK_ACCESS]: "Remove from quick access",
   [K.SITE_MAP_SEARCH_PLACEHOLDER]: "press enter to search",
+  [K.ALL_RESOURCES]: "All resources",
+  [K.MY_FAVORITE]: "My favorite resources",
+  [K.SEARCH_BY_NAME_OR_ID]: "Search by model name or ID",
+  [K.IT_RESOURCE_MANAGEMENT]: "Resource Management",
+  [K.NO_MODEL]: "No model",
+  [K.RESOURCES]: "Resources",
+  [K.VIEW_ALL]: "View all",
 };
 
 export default locale;

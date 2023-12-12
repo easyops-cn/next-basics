@@ -10,7 +10,7 @@ import {
   getGroupsList,
 } from "./nav/utils";
 import { orderBy, keyBy } from "lodash";
-import { GeneralIcon } from "@next-libs/basic-components";
+import { GeneralIcon, Link } from "@next-libs/basic-components";
 import { getHistory, getRuntime } from "@next-core/brick-kit";
 import { isIframe } from "./nav/utils";
 import { K, NS_NAV_LEGACY } from "../i18n/constants";
@@ -18,13 +18,16 @@ import { useTranslation } from "react-i18next";
 
 interface SiteMapProps {
   modelMap: Record<string, any>[];
+  isNext?: boolean;
+  urlTemplates?: Record<string, string>;
 }
 
 export function SiteMap(props: SiteMapProps): React.ReactElement {
+  const history = getHistory();
   const flags = getRuntime().getFeatureFlags();
   setFlags(flags);
 
-  const { modelMap } = props;
+  const { modelMap, isNext, urlTemplates } = props;
   const [visible, setVisible] = useState(true);
   const { t } = useTranslation(NS_NAV_LEGACY);
 
@@ -32,11 +35,15 @@ export function SiteMap(props: SiteMapProps): React.ReactElement {
     setVisible(true);
   };
 
-  const headerNavs: IHeaderNav[] = getNavModuleList(modelMap);
+  const headerNavs: IHeaderNav[] = getNavModuleList(
+    modelMap,
+    isNext,
+    urlTemplates
+  );
   const autoDataSource: { value: string; text: string }[] =
     getFilterNavList(headerNavs);
   const [dataSource, setDataSource] = useState(autoDataSource);
-
+  const [show, setShow] = useState(false);
   const onSearch = (value) => {
     const q = !value ? "" : value.trim().toLowerCase();
     const filterData: { value: string; text: string }[] = !q
@@ -52,6 +59,10 @@ export function SiteMap(props: SiteMapProps): React.ReactElement {
 
   const map = keyBy(dataSource, "text");
   const onSelect = (text: any) => {
+    if (isNext) {
+      history.push(map[text].value);
+      return;
+    }
     if (isIframe) {
       window.open(map[text].value, "_parent");
       return;
@@ -68,6 +79,7 @@ export function SiteMap(props: SiteMapProps): React.ReactElement {
       {item.text}
     </AutoComplete.Option>
   ));
+
   const content = (
     <div className={styles.mainContainer}>
       <div className={styles.searchContainer}>
@@ -97,7 +109,22 @@ export function SiteMap(props: SiteMapProps): React.ReactElement {
                   </div>
                   {subCategory.states.map((item, iIndex: number) => (
                     <div className={styles.itemContainer} key={iIndex}>
-                      {
+                      {isNext ? (
+                        <Link to={item.stateName}>
+                          {item.text}
+                          {item.id === "brickGroup" && (
+                            <span className={styles.brickGroupContainer}>
+                              <GeneralIcon
+                                icon={{
+                                  lib: "easyops",
+                                  category: "app",
+                                  icon: "brick-group",
+                                }}
+                              />
+                            </span>
+                          )}
+                        </Link>
+                      ) : (
                         <a
                           target={isIframe ? "_parent" : "_self"}
                           href={item.stateName}
@@ -115,7 +142,7 @@ export function SiteMap(props: SiteMapProps): React.ReactElement {
                             </span>
                           )}
                         </a>
-                      }
+                      )}
                     </div>
                   ))}
                 </div>
@@ -129,14 +156,14 @@ export function SiteMap(props: SiteMapProps): React.ReactElement {
   return (
     <div>
       <div className={styles.siteMap}>
-        <div className={styles.siteMapTitle}>资源</div>
+        <div className={styles.siteMapTitle}>{t(K.RESOURCES)}</div>
         <Popover
           placement="bottomRight"
           title={null}
           content={content}
           trigger="click"
         >
-          <Tooltip placement="top" title="查看所有">
+          <Tooltip placement="top" title={t(K.VIEW_ALL)}>
             <a className={styles.showIcon} onClick={showModal}>
               <GeneralIcon
                 icon={{
