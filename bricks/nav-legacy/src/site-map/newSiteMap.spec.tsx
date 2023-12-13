@@ -13,35 +13,29 @@ import { shallow, mount } from "enzyme";
 import { Button, Popover } from "antd";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { GeneralIcon, Link } from "@next-libs/basic-components";
-import { FetchMock, GlobalWithFetchMock } from "jest-fetch-mock";
+
 import * as kit from "@next-core/brick-kit";
 
-const customGlobal: GlobalWithFetchMock =
-  global as unknown as GlobalWithFetchMock;
-customGlobal.fetch = require("jest-fetch-mock");
-customGlobal.fetchMock = customGlobal.fetch;
+const data = {
+  data: [
+    {
+      objectId: "APP",
+      name: "app",
+      category: "A",
+    },
+    {
+      objectId: "HOST",
+      name: "host",
+      category: "B",
+    },
+  ],
+};
+
+(global as any).fetch = jest
+  .fn()
+  .mockImplementation(() => JSON.stringify({ data: data }));
+
 describe("newSiteMap", () => {
-  const fetch = global.fetch as FetchMock;
-  const data = {
-    data: [
-      {
-        objectId: "APP",
-        name: "app",
-        category: "A",
-      },
-      {
-        objectId: "HOST",
-        name: "host",
-        category: "B",
-      },
-    ],
-  };
-  fetch.mockResponseOnce(JSON.stringify({ data: data }));
-
-  afterEach((): void => {
-    fetch.resetMocks();
-  });
-
   const groupList = [
     {
       name: "平台资源",
