@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { property, BrickWrapper, UpdatingElement } from "@next-core/brick-kit";
+import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { SiteMap } from "./SiteMap";
-
+import { NewSiteMap } from "./newSiteMap";
 class SiteMapElement extends UpdatingElement {
   connectedCallback(): void {
     this.style.display = "block";
@@ -12,6 +12,18 @@ class SiteMapElement extends UpdatingElement {
   @property({ attribute: false })
   modelMap: Record<string, any>[];
 
+  @property({ attribute: false })
+  isNext = false;
+
+  @property({ attribute: false })
+  urlTemplates = {};
+  /**
+   * @default
+   * @required false
+   * @description 是否放在顶部菜单里
+   */
+  @property({ type: Boolean })
+  isInMenu: boolean;
   disconnectedCallback(): void {
     ReactDOM.unmountComponentAtNode(this);
   }
@@ -21,7 +33,18 @@ class SiteMapElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <SiteMap modelMap={this.modelMap} />
+          {this.isInMenu ? (
+            <NewSiteMap
+              modelMap={this.modelMap}
+              urlTemplates={this.urlTemplates}
+            />
+          ) : (
+            <SiteMap
+              modelMap={this.modelMap}
+              isNext={this.isNext}
+              urlTemplates={this.urlTemplates}
+            />
+          )}
         </BrickWrapper>,
         this
       );

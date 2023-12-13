@@ -3,11 +3,15 @@ import { NavModuleList } from "../interface";
 
 import { getNavModuleCmdbV3 } from "./modules-v3";
 
-import { getFlags, disableFeature } from "./utils";
+import { disableFeature, getFlags } from "./utils";
 
 const ENABLED_FEATURES = getFlags();
-export const getNavModuleList = (modelList: Record<string, any>[]) => {
-  const navModuleCmdbV3 = getNavModuleCmdbV3(modelList);
+export const getNavModuleList = (
+  modelList: Record<string, any>[],
+  isNext: boolean,
+  urlTemplates: Record<string, string>
+) => {
+  const navModuleCmdbV3 = getNavModuleCmdbV3(modelList, isNext, urlTemplates);
   const moduleList: NavModuleList = [navModuleCmdbV3];
 
   // 不显示禁用的系统模块
@@ -48,9 +52,11 @@ export const getNavModuleList = (modelList: Record<string, any>[]) => {
   // 初始化菜单的 sref 地址
   forEach(moduleList, (item) => {
     forEach(item.groups, (group) => {
-      group.module = item;
+      const { id, text } = item;
+      group.module = { id, text };
       forEach(group.states, (state) => {
-        state.group = group;
+        const { category, module } = group;
+        state.group = { category, module };
         if (!state.sref && !state.href && state.stateName) {
           state.sref = state.stateName;
           if (state.stateParams) {

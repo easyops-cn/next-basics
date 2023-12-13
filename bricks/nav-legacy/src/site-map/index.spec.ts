@@ -1,12 +1,14 @@
 import ReactDOM from "react-dom";
 import "./";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const spyOnRender = jest.spyOn(ReactDOM, "render").mockImplementation(() => {});
+const spyOnRender = jest.spyOn(ReactDOM, "render").mockImplementation(() => {
+  // to do everything
+});
 const unmountComponentAtNode = jest
   .spyOn(ReactDOM, "unmountComponentAtNode")
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  .mockImplementation((() => {}) as any);
+  .mockImplementation((() => {
+    // to do everything
+  }) as any);
 
 describe("nav-legacy.site-map", () => {
   it("should create a custom element", async () => {

@@ -29,6 +29,13 @@ const locale: Locale = {
   [K.ADD_TO_QUICK_ACCESS]: "添加至快捷访问",
   [K.REMOVE_FROM_QUICK_ACCESS]: "从快捷访问移除",
   [K.SITE_MAP_SEARCH_PLACEHOLDER]: "输入关键词或模型ID",
+  [K.SEARCH_BY_NAME_OR_ID]: "根据模型名称或ID搜索",
+  [K.IT_RESOURCE_MANAGEMENT]: "资源管理",
+  [K.NO_MODEL]: "暂无模型",
+  [K.RESOURCES]: "资源",
+  [K.VIEW_ALL]: "查看所有",
+  [K.MY_FAVORITE]: "我的收藏",
+  [K.ALL_RESOURCES]: "全部资源",
 };
 
 export default locale;

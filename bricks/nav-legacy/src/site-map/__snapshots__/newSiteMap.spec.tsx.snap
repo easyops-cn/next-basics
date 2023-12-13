@@ -1,0 +1,945 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`newSiteMap should work with ModelTree 1`] = `
+<ModelTree
+  groupList={
+    Array [
+      Object {
+        "name": "平台资源",
+        "objectList": Array [
+          Object {
+            "category": "平台资源",
+            "name": "modelA",
+            "objectId": "A",
+          },
+        ],
+        "subCategory": Array [
+          Object {
+            "name": "RS",
+            "objectList": Array [
+              Object {
+                "category": "平台资源.RS",
+                "name": "modelB",
+                "objectId": "B",
+              },
+            ],
+            "title": "RS",
+          },
+          Object {
+            "name": "数据库变更",
+            "objectList": Array [],
+            "title": "数据库变更",
+          },
+        ],
+        "title": "平台资源",
+      },
+      Object {
+        "name": "应用资源",
+        "objectList": Array [
+          Object {
+            "category": "应用资源",
+            "name": "modelC",
+            "objectId": "C",
+          },
+        ],
+        "subCategory": Array [
+          Object {
+            "name": "门户",
+            "objectList": Array [
+              Object {
+                "category": "应用资源.门户",
+                "name": "modelD",
+                "objectId": "D",
+              },
+            ],
+            "title": "门户",
+          },
+          Object {
+            "name": "服务监测",
+            "objectList": Array [],
+            "title": "服务监测",
+          },
+        ],
+        "title": "应用资源",
+      },
+    ]
+  }
+>
+  <div
+    className="masonry"
+  >
+    <div
+      className="column"
+      key="0"
+    >
+      <div
+        className="newItem"
+      >
+        <div
+          className="subCategoryContainer"
+        >
+          <GeneralIcon
+            icon={
+              Object {
+                "category": "app",
+                "icon": "workspace",
+                "lib": "easyops",
+              }
+            }
+          >
+            <AntdIcon
+              className=""
+              component={[Function]}
+              data-icon="workspace"
+            >
+              <span
+                className="anticon"
+                data-icon="workspace"
+                role="img"
+              >
+                <component
+                  aria-hidden="true"
+                  className=""
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  width="1em"
+                >
+                  <BrickIcon
+                    category="app"
+                    icon="workspace"
+                  >
+                    <span
+                      className="easyops-icon"
+                    />
+                  </BrickIcon>
+                </component>
+              </span>
+            </AntdIcon>
+          </GeneralIcon>
+          <span
+            className="categoryTitle"
+          >
+            平台资源
+          </span>
+        </div>
+        <SubCategory
+          key="0"
+          name="RS"
+          objectList={
+            Array [
+              Object {
+                "category": "平台资源.RS",
+                "name": "modelB",
+                "objectId": "B",
+              },
+            ]
+          }
+          title="RS"
+        >
+          <div
+            className="subCategoryItemContainer"
+          >
+            <Button
+              onClick={[Function]}
+              type="link"
+            >
+              <button
+                className="ant-btn ant-btn-link"
+                onClick={[Function]}
+                type="button"
+              >
+                <LoadingIcon
+                  existIcon={false}
+                  loading={false}
+                  prefixCls="ant-btn"
+                >
+                  <CSSMotion
+                    motionName="ant-btn-loading-icon-motion"
+                    onAppearActive={[Function]}
+                    onAppearStart={[Function]}
+                    onEnterActive={[Function]}
+                    onEnterStart={[Function]}
+                    onLeaveActive={[Function]}
+                    onLeaveStart={[Function]}
+                    removeOnLeave={true}
+                    visible={false}
+                  >
+                    <DomWrapper />
+                  </CSSMotion>
+                </LoadingIcon>
+                <div
+                  className="toggleWrapper"
+                  key=".0"
+                >
+                  <span
+                    className="categoryNameContainer"
+                  >
+                    RS
+                  </span>
+                  <ForwardRef(DownOutlined)>
+                    <AntdIcon
+                      icon={
+                        Object {
+                          "icon": Object {
+                            "attrs": Object {
+                              "focusable": "false",
+                              "viewBox": "64 64 896 896",
+                            },
+                            "children": Array [
+                              Object {
+                                "attrs": Object {
+                                  "d": "M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z",
+                                },
+                                "tag": "path",
+                              },
+                            ],
+                            "tag": "svg",
+                          },
+                          "name": "down",
+                          "theme": "outlined",
+                        }
+                      }
+                    >
+                      <span
+                        aria-label="down"
+                        className="anticon anticon-down"
+                        role="img"
+                      >
+                        <IconReact
+                          icon={
+                            Object {
+                              "icon": Object {
+                                "attrs": Object {
+                                  "focusable": "false",
+                                  "viewBox": "64 64 896 896",
+                                },
+                                "children": Array [
+                                  Object {
+                                    "attrs": Object {
+                                      "d": "M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z",
+                                    },
+                                    "tag": "path",
+                                  },
+                                ],
+                                "tag": "svg",
+                              },
+                              "name": "down",
+                              "theme": "outlined",
+                            }
+                          }
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="down"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            key="svg-down"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                              key="svg-down-svg-0"
+                            />
+                          </svg>
+                        </IconReact>
+                      </span>
+                    </AntdIcon>
+                  </ForwardRef(DownOutlined)>
+                </div>
+              </button>
+            </Button>
+          </div>
+        </SubCategory>
+        <div
+          style={
+            Object {
+              "height": "5px",
+            }
+          }
+        />
+        <div
+          className="objectItemContainer categoryNameContainer objectNameContainer"
+          key="0"
+        >
+          <Link>
+            <a
+              onClick={[Function]}
+              style={Object {}}
+            >
+              <RenderName
+                name="modelA"
+              >
+                <span>
+                  modelA
+                </span>
+              </RenderName>
+            </a>
+          </Link>
+          <Button
+            onClick={[Function]}
+            type="text"
+          >
+            <button
+              className="ant-btn ant-btn-text"
+              onClick={[Function]}
+              type="button"
+            >
+              <LoadingIcon
+                existIcon={false}
+                loading={false}
+                prefixCls="ant-btn"
+              >
+                <CSSMotion
+                  motionName="ant-btn-loading-icon-motion"
+                  onAppearActive={[Function]}
+                  onAppearStart={[Function]}
+                  onEnterActive={[Function]}
+                  onEnterStart={[Function]}
+                  onLeaveActive={[Function]}
+                  onLeaveStart={[Function]}
+                  removeOnLeave={true}
+                  visible={false}
+                >
+                  <DomWrapper />
+                </CSSMotion>
+              </LoadingIcon>
+              <ForwardRef(StarOutlined)
+                className="collectStar"
+                key=".0"
+              >
+                <AntdIcon
+                  className="collectStar"
+                  icon={
+                    Object {
+                      "icon": Object {
+                        "attrs": Object {
+                          "focusable": "false",
+                          "viewBox": "64 64 896 896",
+                        },
+                        "children": Array [
+                          Object {
+                            "attrs": Object {
+                              "d": "M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3zM664.8 561.6l36.1 210.3L512 672.7 323.1 772l36.1-210.3-152.8-149L417.6 382 512 190.7 606.4 382l211.2 30.7-152.8 148.9z",
+                            },
+                            "tag": "path",
+                          },
+                        ],
+                        "tag": "svg",
+                      },
+                      "name": "star",
+                      "theme": "outlined",
+                    }
+                  }
+                >
+                  <span
+                    aria-label="star"
+                    className="anticon anticon-star collectStar"
+                    role="img"
+                  >
+                    <IconReact
+                      icon={
+                        Object {
+                          "icon": Object {
+                            "attrs": Object {
+                              "focusable": "false",
+                              "viewBox": "64 64 896 896",
+                            },
+                            "children": Array [
+                              Object {
+                                "attrs": Object {
+                                  "d": "M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3zM664.8 561.6l36.1 210.3L512 672.7 323.1 772l36.1-210.3-152.8-149L417.6 382 512 190.7 606.4 382l211.2 30.7-152.8 148.9z",
+                                },
+                                "tag": "path",
+                              },
+                            ],
+                            "tag": "svg",
+                          },
+                          "name": "star",
+                          "theme": "outlined",
+                        }
+                      }
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="star"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        key="svg-star"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3zM664.8 561.6l36.1 210.3L512 672.7 323.1 772l36.1-210.3-152.8-149L417.6 382 512 190.7 606.4 382l211.2 30.7-152.8 148.9z"
+                          key="svg-star-svg-0"
+                        />
+                      </svg>
+                    </IconReact>
+                  </span>
+                </AntdIcon>
+              </ForwardRef(StarOutlined)>
+            </button>
+          </Button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="column"
+      key="1"
+    >
+      <div
+        className="newItem"
+      >
+        <div
+          className="subCategoryContainer"
+        >
+          <GeneralIcon
+            icon={
+              Object {
+                "icon": "cube",
+                "lib": "fa",
+                "prefix": "fas",
+              }
+            }
+          >
+            <AntdIcon
+              component={[Function]}
+              data-icon="cube"
+              style={
+                Object {
+                  "verticalAlign": 0,
+                }
+              }
+            >
+              <span
+                className="anticon"
+                data-icon="cube"
+                role="img"
+                style={
+                  Object {
+                    "verticalAlign": 0,
+                  }
+                }
+              >
+                <component
+                  aria-hidden="true"
+                  className=""
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  width="1em"
+                >
+                  <mockConstructor
+                    className="faIcon"
+                    icon={
+                      Array [
+                        "fas",
+                        "cube",
+                      ]
+                    }
+                  >
+                    <div>
+                      fas
+                      cube
+                    </div>
+                  </mockConstructor>
+                </component>
+              </span>
+            </AntdIcon>
+          </GeneralIcon>
+          <span
+            className="categoryTitle"
+          >
+            应用资源
+          </span>
+        </div>
+        <SubCategory
+          key="0"
+          name="门户"
+          objectList={
+            Array [
+              Object {
+                "category": "应用资源.门户",
+                "name": "modelD",
+                "objectId": "D",
+              },
+            ]
+          }
+          title="门户"
+        >
+          <div
+            className="subCategoryItemContainer"
+          >
+            <Button
+              onClick={[Function]}
+              type="link"
+            >
+              <button
+                className="ant-btn ant-btn-link"
+                onClick={[Function]}
+                type="button"
+              >
+                <LoadingIcon
+                  existIcon={false}
+                  loading={false}
+                  prefixCls="ant-btn"
+                >
+                  <CSSMotion
+                    motionName="ant-btn-loading-icon-motion"
+                    onAppearActive={[Function]}
+                    onAppearStart={[Function]}
+                    onEnterActive={[Function]}
+                    onEnterStart={[Function]}
+                    onLeaveActive={[Function]}
+                    onLeaveStart={[Function]}
+                    removeOnLeave={true}
+                    visible={false}
+                  >
+                    <DomWrapper />
+                  </CSSMotion>
+                </LoadingIcon>
+                <div
+                  className="toggleWrapper"
+                  key=".0"
+                >
+                  <span
+                    className="categoryNameContainer"
+                  >
+                    门户
+                  </span>
+                  <ForwardRef(DownOutlined)>
+                    <AntdIcon
+                      icon={
+                        Object {
+                          "icon": Object {
+                            "attrs": Object {
+                              "focusable": "false",
+                              "viewBox": "64 64 896 896",
+                            },
+                            "children": Array [
+                              Object {
+                                "attrs": Object {
+                                  "d": "M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z",
+                                },
+                                "tag": "path",
+                              },
+                            ],
+                            "tag": "svg",
+                          },
+                          "name": "down",
+                          "theme": "outlined",
+                        }
+                      }
+                    >
+                      <span
+                        aria-label="down"
+                        className="anticon anticon-down"
+                        role="img"
+                      >
+                        <IconReact
+                          icon={
+                            Object {
+                              "icon": Object {
+                                "attrs": Object {
+                                  "focusable": "false",
+                                  "viewBox": "64 64 896 896",
+                                },
+                                "children": Array [
+                                  Object {
+                                    "attrs": Object {
+                                      "d": "M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z",
+                                    },
+                                    "tag": "path",
+                                  },
+                                ],
+                                "tag": "svg",
+                              },
+                              "name": "down",
+                              "theme": "outlined",
+                            }
+                          }
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="down"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            key="svg-down"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                              key="svg-down-svg-0"
+                            />
+                          </svg>
+                        </IconReact>
+                      </span>
+                    </AntdIcon>
+                  </ForwardRef(DownOutlined)>
+                </div>
+              </button>
+            </Button>
+          </div>
+        </SubCategory>
+        <div
+          style={
+            Object {
+              "height": "5px",
+            }
+          }
+        />
+        <div
+          className="objectItemContainer categoryNameContainer objectNameContainer"
+          key="0"
+        >
+          <Link>
+            <a
+              onClick={[Function]}
+              style={Object {}}
+            >
+              <RenderName
+                name="modelC"
+              >
+                <span>
+                  modelC
+                </span>
+              </RenderName>
+            </a>
+          </Link>
+          <Button
+            onClick={[Function]}
+            type="text"
+          >
+            <button
+              className="ant-btn ant-btn-text"
+              onClick={[Function]}
+              type="button"
+            >
+              <LoadingIcon
+                existIcon={false}
+                loading={false}
+                prefixCls="ant-btn"
+              >
+                <CSSMotion
+                  motionName="ant-btn-loading-icon-motion"
+                  onAppearActive={[Function]}
+                  onAppearStart={[Function]}
+                  onEnterActive={[Function]}
+                  onEnterStart={[Function]}
+                  onLeaveActive={[Function]}
+                  onLeaveStart={[Function]}
+                  removeOnLeave={true}
+                  visible={false}
+                >
+                  <DomWrapper />
+                </CSSMotion>
+              </LoadingIcon>
+              <ForwardRef(StarOutlined)
+                className="collectStar"
+                key=".0"
+              >
+                <AntdIcon
+                  className="collectStar"
+                  icon={
+                    Object {
+                      "icon": Object {
+                        "attrs": Object {
+                          "focusable": "false",
+                          "viewBox": "64 64 896 896",
+                        },
+                        "children": Array [
+                          Object {
+                            "attrs": Object {
+                              "d": "M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3zM664.8 561.6l36.1 210.3L512 672.7 323.1 772l36.1-210.3-152.8-149L417.6 382 512 190.7 606.4 382l211.2 30.7-152.8 148.9z",
+                            },
+                            "tag": "path",
+                          },
+                        ],
+                        "tag": "svg",
+                      },
+                      "name": "star",
+                      "theme": "outlined",
+                    }
+                  }
+                >
+                  <span
+                    aria-label="star"
+                    className="anticon anticon-star collectStar"
+                    role="img"
+                  >
+                    <IconReact
+                      icon={
+                        Object {
+                          "icon": Object {
+                            "attrs": Object {
+                              "focusable": "false",
+                              "viewBox": "64 64 896 896",
+                            },
+                            "children": Array [
+                              Object {
+                                "attrs": Object {
+                                  "d": "M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3zM664.8 561.6l36.1 210.3L512 672.7 323.1 772l36.1-210.3-152.8-149L417.6 382 512 190.7 606.4 382l211.2 30.7-152.8 148.9z",
+                                },
+                                "tag": "path",
+                              },
+                            ],
+                            "tag": "svg",
+                          },
+                          "name": "star",
+                          "theme": "outlined",
+                        }
+                      }
+                    >
+                      <svg
+                        aria-hidden="true"
+                        data-icon="star"
+                        fill="currentColor"
+                        focusable="false"
+                        height="1em"
+                        key="svg-star"
+                        viewBox="64 64 896 896"
+                        width="1em"
+                      >
+                        <path
+                          d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3zM664.8 561.6l36.1 210.3L512 672.7 323.1 772l36.1-210.3-152.8-149L417.6 382 512 190.7 606.4 382l211.2 30.7-152.8 148.9z"
+                          key="svg-star-svg-0"
+                        />
+                      </svg>
+                    </IconReact>
+                  </span>
+                </AntdIcon>
+              </ForwardRef(StarOutlined)>
+            </button>
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ModelTree>
+`;
+
+exports[`newSiteMap should work with NewSiteMap 1`] = `
+<NewSiteMap>
+  <div
+    className="menuPopover"
+    id="menuPopover"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="newSiteMap"
+    >
+      <span
+        className="appName"
+      >
+        IT_RESOURCE_MANAGEMENT
+      </span>
+    </div>
+    <div
+      className="sitMapModelContainer"
+      id="sitMapModelContainer"
+    >
+      <DrawerWrapper
+        className="popoverInMenu"
+        getContainer={[Function]}
+        height="calc(60vh - 24px)"
+        maskClosable={true}
+        onClose={[Function]}
+        placement="top"
+        title={null}
+        visible={false}
+        zIndex={-1}
+      >
+        <Drawer
+          className="popoverInMenu"
+          getContainer={[Function]}
+          height="calc(60vh - 24px)"
+          maskClosable={true}
+          onClose={[Function]}
+          placement="top"
+          prefixCls="ant-drawer"
+          title={null}
+          visible={false}
+          zIndex={-1}
+        >
+          <DrawerWrapper
+            afterVisibleChange={[Function]}
+            className="popoverInMenu"
+            defaultOpen={false}
+            duration=".3s"
+            ease="cubic-bezier(0.78, 0.14, 0.15, 0.86)"
+            forceRender={false}
+            getContainer={[Function]}
+            handler={false}
+            height="calc(60vh - 24px)"
+            keyboard={true}
+            level={null}
+            maskClosable={true}
+            maskStyle={Object {}}
+            onChange={[Function]}
+            onClose={[Function]}
+            open={false}
+            placement="top"
+            prefixCls="ant-drawer"
+            showMask={true}
+            style={
+              Object {
+                "transform": undefined,
+                "zIndex": -1,
+              }
+            }
+            wrapperClassName=""
+          >
+            <PortalWrapper
+              forceRender={false}
+              getContainer={[Function]}
+              visible={false}
+              wrapperClassName=""
+            />
+          </DrawerWrapper>
+        </Drawer>
+      </DrawerWrapper>
+    </div>
+  </div>
+</NewSiteMap>
+`;
+
+exports[`newSiteMap should work with SubCategory 1`] = `
+<SubCategory
+  name="门户"
+  objectList={
+    Array [
+      Object {
+        "name": "集群",
+        "objectId": "CLUSTER",
+      },
+      Object {
+        "name": "测试",
+        "objectId": "TEST",
+      },
+    ]
+  }
+  title="门户"
+>
+  <div
+    className="subCategoryItemContainer"
+  >
+    <Button
+      onClick={[Function]}
+      type="link"
+    >
+      <button
+        className="ant-btn ant-btn-link"
+        onClick={[Function]}
+        type="button"
+      >
+        <LoadingIcon
+          existIcon={false}
+          loading={false}
+          prefixCls="ant-btn"
+        >
+          <CSSMotion
+            motionName="ant-btn-loading-icon-motion"
+            onAppearActive={[Function]}
+            onAppearStart={[Function]}
+            onEnterActive={[Function]}
+            onEnterStart={[Function]}
+            onLeaveActive={[Function]}
+            onLeaveStart={[Function]}
+            removeOnLeave={true}
+            visible={false}
+          >
+            <DomWrapper />
+          </CSSMotion>
+        </LoadingIcon>
+        <div
+          className="toggleWrapper"
+          key=".0"
+        >
+          <span
+            className="categoryNameContainer"
+          >
+            门户
+          </span>
+          <ForwardRef(DownOutlined)>
+            <AntdIcon
+              icon={
+                Object {
+                  "icon": Object {
+                    "attrs": Object {
+                      "focusable": "false",
+                      "viewBox": "64 64 896 896",
+                    },
+                    "children": Array [
+                      Object {
+                        "attrs": Object {
+                          "d": "M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z",
+                        },
+                        "tag": "path",
+                      },
+                    ],
+                    "tag": "svg",
+                  },
+                  "name": "down",
+                  "theme": "outlined",
+                }
+              }
+            >
+              <span
+                aria-label="down"
+                className="anticon anticon-down"
+                role="img"
+              >
+                <IconReact
+                  icon={
+                    Object {
+                      "icon": Object {
+                        "attrs": Object {
+                          "focusable": "false",
+                          "viewBox": "64 64 896 896",
+                        },
+                        "children": Array [
+                          Object {
+                            "attrs": Object {
+                              "d": "M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z",
+                            },
+                            "tag": "path",
+                          },
+                        ],
+                        "tag": "svg",
+                      },
+                      "name": "down",
+                      "theme": "outlined",
+                    }
+                  }
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="down"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    key="svg-down"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                      key="svg-down-svg-0"
+                    />
+                  </svg>
+                </IconReact>
+              </span>
+            </AntdIcon>
+          </ForwardRef(DownOutlined)>
+        </div>
+      </button>
+    </Button>
+  </div>
+</SubCategory>
+`;
