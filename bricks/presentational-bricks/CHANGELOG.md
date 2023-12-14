@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.316.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.315.3...@next-bricks/presentational-bricks@1.316.0) (2023-12-14)
+
+
+### Features
+
+* md-editor的upload-img支持不压缩 ([c0214cb](https://github.com/easyops-cn/next-basics/commit/c0214cb7b9299626f780fd3451333d4b55ad3efe))
+
+
+
+
+
 ## [1.315.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.315.2...@next-bricks/presentational-bricks@1.315.3) (2023-12-12)
 
 
