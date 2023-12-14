@@ -74,6 +74,18 @@ export class MarkdownEditorElement extends FormItemElement {
   @property()
   bucketName: string;
 
+  /**
+   * @kind boolean
+   * @required -
+   * @default false
+   * @description 为`true`时，上传图片不被压缩，调用oss接口传width=0和height=0，否则传width=1280和height=800
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  imgCompressDisabled: boolean;
+
   /* =========================== Group: style =========================== */
 
   /**
@@ -212,6 +224,7 @@ export class MarkdownEditorElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             supportUploadImg={this.supportUploadImg}
+            imgCompressDisabled={this.imgCompressDisabled}
             bucketName={this.bucketName}
             onUploadImage={this.handleUploadImage}
             inputMinRows={this.inputMinRows}
