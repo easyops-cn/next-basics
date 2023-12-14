@@ -20,6 +20,7 @@ interface MarkdownEditorProps extends FormItemWrapperProps {
   inputMinRows?: number;
   inputMaxRows?: number;
   markdownEditorContainerStyle?: React.CSSProperties;
+  imgCompressDisabled?: boolean;
 }
 
 export function MarkdownEditorItem(
@@ -37,6 +38,7 @@ export function MarkdownEditorItem(
     inputMaxRows,
     markdownEditorContainerStyle,
     onUploadImage,
+    imgCompressDisabled,
   } = props;
   const [value, setValue] = useState(props.value || "");
 
@@ -73,11 +75,20 @@ export function MarkdownEditorItem(
         triggerChange(newValue);
         // 上传文件
         try {
-          const response = await ObjectStoreApi_putObject(props.bucketName, {
-            file: file,
-            width: 1280,
-            height: 800,
-          });
+          const response = await ObjectStoreApi_putObject(
+            props.bucketName,
+            imgCompressDisabled
+              ? {
+                  file: file,
+                  width: 0,
+                  height: 0,
+                }
+              : {
+                  file: file,
+                  width: 1280,
+                  height: 800,
+                }
+          );
 
           const url = transformResponseToUrl(response.objectName);
           newValue = newValue.replace(
@@ -137,6 +148,7 @@ export function MarkdownEditor(props: MarkdownEditorProps): React.ReactElement {
         configProps={props.configProps}
         previewContainerStyle={props.previewContainerStyle}
         supportUploadImg={props.supportUploadImg}
+        imgCompressDisabled={props.imgCompressDisabled}
         imagePreview={props.imagePreview}
         bucketName={props.bucketName}
         inputMinRows={props.inputMinRows}
