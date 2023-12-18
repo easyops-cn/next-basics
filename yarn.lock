@@ -2855,6 +2855,11 @@
   resolved "https://registry.npmjs.org/@next-sdk/permission-sdk/-/permission-sdk-2.3.1.tgz#b431fa0efd3f9a3c010a7c366a11a901c8e3d5eb"
   integrity sha512-MECMdKVpp0nfcTBNlmH2vj8xR2pn2V8FPS+ccS4Ns2IJJPe/e2FTfk0KvBowjN8LEzeEwqgyLpCOYOCkQG0bgQ==
 
+"@next-sdk/sys-setting-sdk@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@next-sdk/sys-setting-sdk/-/sys-setting-sdk-1.1.0.tgz#f223fda8186f018a6e3ff779a172caad5c52f50c"
+  integrity sha512-z0l/XPhkCaq0gs8W5XSPu94Lg3uv8w9QTwYk+2O+lGmHZ34Pmsl4vp0Ugy5qhmOz/3DHu/xu2RvyTCZ/AxCQvg==
+
 "@next-sdk/user-service-sdk@^2.1.1", "@next-sdk/user-service-sdk@^2.1.5":
   version "2.2.2"
   resolved "https://registry.npmjs.org/@next-sdk/user-service-sdk/-/user-service-sdk-2.2.2.tgz#3024e52e7d9686b425e1482279cd6a71cc9ba376"

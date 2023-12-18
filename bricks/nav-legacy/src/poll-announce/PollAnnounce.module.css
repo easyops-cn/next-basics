@@ -1,0 +1,19 @@
+.pollAnnounce {
+  & :global(.ant-notification-notice-btn) {
+    float: left;
+    margin-top: 0;
+  }
+
+  & :global(.ant-notification-notice-description) {
+    margin-left: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  & :global(.ant-notification-notice-icon) {
+    margin-left: 0;
+  }
+}
