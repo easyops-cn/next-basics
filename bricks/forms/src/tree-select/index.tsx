@@ -8,7 +8,7 @@ import {
 } from "@next-core/brick-kit";
 import { FormItemElement } from "@next-libs/forms";
 
-import { TreeSelect } from "./TreeSelect";
+import { TreeSelect, showCheckedStrategyType } from "./TreeSelect";
 import {
   DataNode,
   DefaultValueType,
@@ -207,6 +207,13 @@ export class TreeSelectElement extends FormItemElement {
   @property({ attribute: false }) defaultExpandedKeys: string[];
 
   /**
+   * @group showCheckedStrategy
+   * @required false
+   * @description 展示节点情况。默认只显示子节点
+   */
+  @property({ attribute: false }) showCheckedStrategy: showCheckedStrategyType =
+    "child";
+  /**
    * @detail `{value: DefaultValueType, label: any, extra: any}`
    * @description 输入变化时被触发，`event.detail` 为当前值
    */
@@ -270,6 +277,7 @@ export class TreeSelectElement extends FormItemElement {
             value={this.value}
             onChange={this.onChange}
             defaultExpandedKeys={this.defaultExpandedKeys}
+            showCheckedStrategy={this.showCheckedStrategy}
           />
         </BrickWrapper>,
         this

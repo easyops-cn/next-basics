@@ -7,6 +7,14 @@ import {
   SimpleModeConfig,
 } from "rc-tree-select/lib/interface";
 
+const showCheckedStrategyMap = {
+  all: AntdTreeSelect.SHOW_ALL,
+  parent: AntdTreeSelect.SHOW_PARENT,
+  child: AntdTreeSelect.SHOW_CHILD,
+};
+
+export type showCheckedStrategyType = keyof typeof showCheckedStrategyMap;
+
 export interface TreeSelectProps extends FormItemWrapperProps {
   treeData?: DataNode[];
   treeCheckable?: boolean;
@@ -26,6 +34,7 @@ export interface TreeSelectProps extends FormItemWrapperProps {
   value?: DefaultValueType;
   defaultExpandedKeys?: string[];
   onChange?: (value: DefaultValueType, label: any, extra: any) => void;
+  showCheckedStrategy?: showCheckedStrategyType;
 }
 
 export function TreeSelect(props: TreeSelectProps): React.ReactElement {
@@ -48,6 +57,7 @@ export function TreeSelect(props: TreeSelectProps): React.ReactElement {
     value,
     defaultExpandedKeys,
     onChange,
+    showCheckedStrategy,
     ...formItemProps
   } = props;
 
@@ -72,6 +82,7 @@ export function TreeSelect(props: TreeSelectProps): React.ReactElement {
         value={value}
         treeDefaultExpandedKeys={defaultExpandedKeys}
         onChange={onChange}
+        showCheckedStrategy={showCheckedStrategyMap[showCheckedStrategy]}
       />
     </FormItemWrapper>
   );
