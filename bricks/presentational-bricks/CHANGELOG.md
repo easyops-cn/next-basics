@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.316.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.316.1...@next-bricks/presentational-bricks@1.316.2) (2023-12-21)
+
+
+### Bug Fixes
+
+* **brick-table:** fix column.filters.update event not emit when filtering without sorter ([5c4d719](https://github.com/easyops-cn/next-basics/commit/5c4d719b8e36596f5a73f20afcc54e4a689c35de))
+
+
+
+
+
 ## [1.316.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.316.0...@next-bricks/presentational-bricks@1.316.1) (2023-12-21)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
