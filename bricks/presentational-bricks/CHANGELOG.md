@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.316.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.316.2...@next-bricks/presentational-bricks@1.316.3) (2023-12-22)
+
+
+### Bug Fixes
+
+* 修复brick-tag icon尺寸过大问题 ([aaa7c41](https://github.com/easyops-cn/next-basics/commit/aaa7c417c69d8b6021d15bd535b1c389a9b96e18))
+
+
+
+
+
 ## [1.316.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.316.1...@next-bricks/presentational-bricks@1.316.2) (2023-12-21)
 
 
