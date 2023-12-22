@@ -174,20 +174,35 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
             (typeof icon === "string" ? (
               <LegacyIcon
                 type={icon}
-                style={{ marginRight: "7px", marginLeft: 0 }}
+                style={{
+                  marginRight: "7px",
+                  marginLeft: 0,
+                  verticalAlign: "middle",
+                  fontSize: "6px",
+                }}
               />
             ) : (
               typeof icon === "object" && (
                 <GeneralIcon
                   icon={icon}
-                  style={{ marginRight: "7px", marginLeft: 0 }}
+                  style={{
+                    marginRight: "7px",
+                    marginLeft: 0,
+                    verticalAlign: "middle",
+                    fontSize: "6px",
+                  }}
                 />
               )
             ))}
           {showTagCircle && (
             <GeneralIcon
               icon={circleIcon}
-              style={{ marginRight: "7px", marginLeft: 0 }}
+              style={{
+                marginRight: "7px",
+                marginLeft: 0,
+                verticalAlign: "middle",
+                fontSize: "6px",
+              }}
             />
           )}
           {label}
