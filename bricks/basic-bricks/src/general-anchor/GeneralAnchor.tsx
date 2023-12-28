@@ -19,6 +19,7 @@ interface GeneralAnchorProps {
 }
 export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
   const { configProps, type, extraBrick, handleClick, handleChange } = props;
+  const [scrollContainer, setScrollContainer] = useState(null);
   const { Link } = Anchor;
 
   const getHref = (hash: string) => {
@@ -64,17 +65,35 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
         ? props?.anchorList?.find((item) => item.href.includes(location.hash))
             ?.href
         : "";
+    // UI8.2需要修改锚点挂载dom
+    const pageView = document.querySelector("eo-page-view");
+    const pageContainer = pageView?.shadowRoot?.querySelector(
+      ".content"
+    ) as HTMLElement;
+    const scrollContainer = pageContainer ?? null;
+
+    setScrollContainer(scrollContainer);
+
     if (initHash) {
       const sharpLinkMatch = sharpMatcherRegx.exec(initHash.toString());
       const target = document.getElementById(sharpLinkMatch[1]);
 
       if (target) {
         setTimeout(() => {
-          window.scrollTo({
-            top:
-              target.offsetTop + props.initOffset ??
-              0 - (configProps?.offsetTop ?? 56),
-          });
+          // istanbul ignore next
+          if (!scrollContainer) {
+            window.scrollTo({
+              top:
+                target.offsetTop + props.initOffset ??
+                0 - (configProps?.offsetTop ?? 56),
+            });
+          } else {
+            target.scrollIntoView({
+              behavior: "auto",
+              block: "start",
+              inline: "start",
+            });
+          }
         });
         handleChange(initHash);
       }
@@ -101,6 +120,7 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
         },
       ])}
       onChange={handleChange}
+      getContainer={() => scrollContainer ?? window}
       // getCurrentAnchor={() => activeLink.current}
     >
       {type === "default" ? (
