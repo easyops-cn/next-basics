@@ -120,7 +120,7 @@ export function SubCategory(props: {
           <div className={styles.objectListContainer}>
             {objectList.map((object, i) => (
               <div className={styles.objectNameContainer} key={object.objectId}>
-                <Link href={object.to} key={i}>
+                <Link to={object.to} key={i}>
                   <RenderName
                     name={object.name}
                     highlightChar={highlightChar}
@@ -242,7 +242,7 @@ export function ModelTree(props: {
         className={`${styles.objectItemContainer} ${styles.categoryNameContainer} ${styles.objectNameContainer}`}
         key={i}
       >
-        <Link href={object.to}>
+        <Link to={object.to}>
           <RenderName name={object.name} highlightChar={highlightChar} />
         </Link>
         <Button
