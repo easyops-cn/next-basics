@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.250.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.11...@next-bricks/basic-bricks@1.250.0) (2023-12-28)
+
+
+### Features
+
+* basic-bricks.general-anchor构建锚点高亮问题 ([3bf4c2c](https://github.com/easyops-cn/next-basics/commit/3bf4c2c95ac5984b67b1b1489dff2773c3a1f0ac))
+
+
+
+
+
 ## [1.249.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.10...@next-bricks/basic-bricks@1.249.11) (2023-12-11)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
