@@ -2,6 +2,10 @@
   background-color: var(--color-fill-bg-base-4);
 }
 
+:global(.ant-table-filter-dropdown) {
+  position: relative;
+}
+
 html[data-theme="dark"] {
   .brickTableOddRow {
     background-color: #ffffff0a;
