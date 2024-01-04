@@ -63,6 +63,7 @@ export class GeneralTimerElement extends UpdatingElement {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private _intervalId: any = null;
+  private _stopped = false;
 
   private defaultEventName = "general-timer.timing-event";
   private defaultInterval = 60000;
@@ -72,6 +73,7 @@ export class GeneralTimerElement extends UpdatingElement {
    * @description 停止timer
    */
   @method() stopTimer(): void {
+    this._stopped = true;
     if (this._intervalId) {
       clearInterval(this._intervalId);
     }
@@ -83,6 +85,7 @@ export class GeneralTimerElement extends UpdatingElement {
    */
   @method() reStartTimer(): void {
     this.stopTimer();
+    this._stopped = false;
     this.startTimeout();
   }
 
@@ -118,7 +121,7 @@ export class GeneralTimerElement extends UpdatingElement {
           new CustomEvent(this.eventName || this.defaultEventName)
         );
       }
-      if (this.isInterval) {
+      if (!this._stopped && this.isInterval) {
         this.startTimeout();
       }
     }, this.interval || this.defaultInterval);
