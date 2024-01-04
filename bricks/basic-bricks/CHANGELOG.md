@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.250.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.250.0...@next-bricks/basic-bricks@1.250.1) (2024-01-04)
+
+
+### Bug Fixes
+
+* stopTimer not work ([eebe2f9](https://github.com/easyops-cn/next-basics/commit/eebe2f9d1db2158bd7a57f1ccd70418d08efc5e6))
+
+
+
+
+
 # [1.250.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.249.11...@next-bricks/basic-bricks@1.250.0) (2023-12-28)
 
 
