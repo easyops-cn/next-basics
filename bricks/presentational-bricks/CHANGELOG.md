@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.316.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.316.3...@next-bricks/presentational-bricks@1.316.4) (2024-01-04)
+
+
+### Bug Fixes
+
+* table filterDropdown overflow to screen ([493d580](https://github.com/easyops-cn/next-basics/commit/493d580fbf634ee20a2d32fb77b4065123c6d6f0))
+
+
+
+
+
 ## [1.316.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.316.2...@next-bricks/presentational-bricks@1.316.3) (2023-12-22)
 
 
