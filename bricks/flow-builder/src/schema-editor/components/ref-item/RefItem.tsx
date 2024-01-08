@@ -77,6 +77,7 @@ export function RefItem(props: RefItemProps): React.ReactElement {
         find.name,
         `${find.namespaceId}.${find.name}`
       );
+      contractContext.addUsedModelId(find.instanceId);
       setFieldList(getFlattenFields(find.fields, find?.importModelDefinition));
     }
   };

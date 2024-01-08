@@ -5,12 +5,14 @@ export class ContractContext {
   static instance: ContractContext;
   private _modelDefinitionMap = new Map<string, ModelDefinition>();
   private _importMap = new Map<string, string>();
+  private _usedModelIdSet = new Set<string>();
   public customTypeList: string[];
 
   constructor(
     definitionList: ModelDefinition[],
     importList: string[],
-    customTypeList: string[] = []
+    customTypeList: string[] = [],
+    useModelIdList: string[] = []
   ) {
     definitionList?.forEach((item) => {
       this._modelDefinitionMap.set(item.name, item);
@@ -19,6 +21,10 @@ export class ContractContext {
     importList?.forEach((namespace) => {
       const key = namespace.split(".").pop();
       this._importMap.set(key, namespace);
+    });
+
+    useModelIdList?.forEach((modelId) => {
+      this._usedModelIdSet.add(modelId);
     });
 
     this.customTypeList = customTypeList;
@@ -55,16 +61,26 @@ export class ContractContext {
     return this._importMap.get(key);
   }
 
+  addUsedModelId(modelId: string): void {
+    this._usedModelIdSet.add(modelId);
+  }
+
+  getUsedModelId(): string[] {
+    return Array.from(this._usedModelIdSet);
+  }
+
   static getInstance(
     definitionList?: ModelDefinition[],
     importList?: string[],
-    customTypeList?: string[]
+    customTypeList?: string[],
+    useModelIdList?: string[]
   ): ContractContext {
     if (!this.instance) {
       this.instance = new ContractContext(
         definitionList,
         importList,
-        customTypeList
+        customTypeList,
+        useModelIdList
       );
     }
     return this.instance;

@@ -216,11 +216,14 @@ export function processFormData(
     result.fields
   );
 
+  const useModels = ContractContext.getInstance().getUsedModelId();
+
   return {
     ...result,
     required: uniq(requiredList),
     default: defaultData,
     ...(importSet.size !== 0 ? { import: Array.from(importSet) } : {}),
+    ...(useModels.length ? { useModels } : {}),
   };
 }
 
