@@ -27,6 +27,7 @@ interface AdminButtonProps {
   dropdownBtnText?: string;
   dropdownBtnIcon?: MenuIcon | string;
   isMoreButton?: boolean;
+  useButtonDataSource?: boolean;
   moreBtnIcon?: MenuIcon | string;
   moreButtonShape?: "circle" | "rectangle" | "no" | "icon";
   moreButtonType?: ButtonType;

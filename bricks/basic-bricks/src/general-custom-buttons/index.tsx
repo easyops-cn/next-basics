@@ -99,6 +99,10 @@ export interface CustomButton {
    * 是否显示为危险样式
    */
   danger?: boolean;
+  /**
+   * 每个事件的数据源
+   */
+  dataSource?: any;
 }
 export type DropdownPlacement =
   | "bottomRight"
@@ -180,6 +184,16 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
   isMoreButton?: boolean;
 
   /**
+   * @default false
+   * @description 按钮组中 的按钮点击事件的detail返回按钮自身的dataSource，而不是整体的dataSource
+   * @group moreButton
+   */
+  @property({
+    type: Boolean,
+  })
+  useButtonDataSource?: boolean;
+
+  /**
    * @description isMoreButton 为 true 时更多按钮的图标，默认为`...`
    * @group moreButton
    */
@@ -257,7 +271,11 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
   }
 
   private handleClick(eventName: string, button: CustomButton): void {
-    this.dispatchEvent(new CustomEvent(eventName, { detail: this.dataSource }));
+    this.dispatchEvent(
+      new CustomEvent(eventName, {
+        detail: this.useButtonDataSource ? button.dataSource : this.dataSource,
+      })
+    );
 
     if (this.disableAfterClick) {
       this.customButtons = update(this.customButtons, {
@@ -305,6 +323,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
       ReactDOM.render(
         <GeneralCustomButtons
           buttons={this.customButtons}
+          useButtonDataSource={this.useButtonDataSource}
           handleClick={this.handleClick}
           dropdownBtnText={this.dropdownBtnText}
           dropdownBtnIcon={this.dropdownBtnIcon}
