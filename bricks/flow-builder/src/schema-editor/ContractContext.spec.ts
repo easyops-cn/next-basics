@@ -34,7 +34,9 @@ describe("ContractContext", () => {
     const importList = ["easyops.api.test.Cat"];
     const contractContext = ContractContext.getInstance(
       definitionList,
-      importList
+      importList,
+      ["instance_Id"],
+      ["abc"]
     );
 
     contractContext.addModelDefinition([
@@ -89,6 +91,9 @@ describe("ContractContext", () => {
     expect(contractContext.getSingleNamespace("TestModel")).toEqual(
       "easyops.api.test.TestModel"
     );
+
+    contractContext.addUsedModelId("a23b");
+    expect(contractContext.getUsedModelId()).toEqual(["abc", "a23b"]);
 
     expect(ContractContext.getInstance()).toEqual(contractContext);
 
