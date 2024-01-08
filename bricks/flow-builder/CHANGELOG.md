@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.31.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.30.4...@next-bricks/flow-builder@1.31.0) (2024-01-08)
+
+
+### Features
+
+* support useModels ([cb6d793](https://github.com/easyops-cn/next-basics/commit/cb6d79379fcc470dcd70aa62d705931cee38ad71))
+
+
+
+
+
 ## [1.30.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.30.3...@next-bricks/flow-builder@1.30.4) (2023-12-21)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
