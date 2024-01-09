@@ -71,7 +71,8 @@ export const SchemaEditorWrapper = forwardRef<
     ContractContext.getInstance(
       importModelDefinition,
       property.import,
-      customTypeList
+      customTypeList,
+      property.useModels
     )
   );
 
