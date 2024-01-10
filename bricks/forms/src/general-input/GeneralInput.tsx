@@ -5,6 +5,7 @@ import { Button, Input, message } from "antd";
 import { CopyOutlined } from "@ant-design/icons";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { Clipboard } from "@next-libs/clipboard";
+import { isNil } from "lodash";
 
 export enum widthSize {
   XS = "104px",
@@ -99,23 +100,28 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
 export function GeneralInput(props: GeneralInputProps): React.ReactElement {
   const { onChange, onBlur } = props;
   const inputRef = useRef<Input>();
+  const valueRef = useRef<string>(props.value);
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement> | string
   ): void => {
-    onChange?.(typeof e === "string" ? e : e.target.value);
+    valueRef.current = typeof e === "string" ? e : e.target.value;
+    onChange?.(valueRef.current);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
     onBlur?.(e.target.value);
   };
   useEffect(() => {
-    Promise.resolve().then(() => {
-      if (props.useBrickVisible) {
-        inputRef.current.focus();
-      } else {
-        inputRef.current.blur();
-      }
-    });
+    if (!isNil(props.useBrickVisible)) {
+      Promise.resolve().then(() => {
+        if (props.useBrickVisible) {
+          inputRef.current.focus();
+        } else {
+          inputRef.current?.blur();
+          onBlur?.(valueRef.current);
+        }
+      });
+    }
   }, [props.useBrickVisible]);
 
   return (

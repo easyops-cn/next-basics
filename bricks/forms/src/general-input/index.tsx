@@ -291,7 +291,7 @@ export class GeneralInputElement extends FormItemElement {
    * @default -
    * @description 结合popover构件，当此构件为popoverBrick的内部构件时，popover构件会透穿 visible 属性,便于聚焦当前input框
    */
-  @property({ type: Boolean })
+  @property({ attribute: false })
   useBrickVisible: boolean;
 
   /* =========================== events =========================== */

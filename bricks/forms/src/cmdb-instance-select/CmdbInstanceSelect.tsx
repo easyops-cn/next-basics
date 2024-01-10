@@ -291,7 +291,7 @@ export function CmdbInstanceSelectItem(
   );
 
   return (
-    <Spin spinning={loading}>
+    <Spin spinning={loading} style={{ display: "inline-block" }}>
       <Select
         ref={ref}
         className="formsCmdbInstSelect"
