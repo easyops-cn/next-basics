@@ -27,3 +27,7 @@
 .suffixContainer {
   margin-left: auto;
 }
+.formsCmdbInstSelectWrapper {
+  display: inline-block;
+  width: 100%;
+}
