@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.283.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.283.7...@next-bricks/forms@1.283.8) (2024-01-10)
+
+
+### Bug Fixes
+
+* forms.cmdb-instance-select 构件helpBrick的placement不生效 ([c420454](https://github.com/easyops-cn/next-basics/commit/c420454b9988c8f5d5b81ab127038933619cdc3f))
+
+
+
+
+
 ## [1.283.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.283.6...@next-bricks/forms@1.283.7) (2024-01-10)
 
 
