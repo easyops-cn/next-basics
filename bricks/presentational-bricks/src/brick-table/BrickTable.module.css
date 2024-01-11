@@ -179,3 +179,33 @@ html[data-theme="dark"] {
     }
   }
 }
+
+.xSmallSizeTable {
+  :global(.ant-table) {
+    line-height: 1;
+    :global(.ant-table-selection-col) {
+      width: 32px;
+    }
+  }
+  :global(.ant-table-thead) {
+    > tr {
+      > th {
+        padding: 0px 2px;
+      }
+      > th:first-child {
+        padding-left: 2px !important;
+      }
+    }
+  }
+
+  :global(.ant-table-tbody) {
+    > tr {
+      > td {
+        padding: 0px 2px;
+      }
+      > td:first-child {
+        padding-left: 2px !important;
+      }
+    }
+  }
+}

@@ -495,6 +495,7 @@ describe("brick-table", () => {
     element.dataSource = props.dataSource as any;
     element.columns = props.columns as any;
     element.type = "checkbox" as any;
+    element.size = "x-small";
 
     document.body.appendChild(element);
     await jest.runAllTimers();

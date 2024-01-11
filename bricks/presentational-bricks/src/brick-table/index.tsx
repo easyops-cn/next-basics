@@ -938,7 +938,7 @@ export class BrickTableElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  size: SizeType;
+  size: SizeType | "x-small";
 
   /**
    * @required false
@@ -1708,6 +1708,7 @@ export class BrickTableElement extends UpdatingElement {
             ellipsisInfo={this.ellipsisInfo}
             thTransparent={this.thTransparent}
             acceptType={this.acceptType}
+            xSmallSizeTable={this.size == "x-small"}
           />
         </BrickWrapper>,
         this

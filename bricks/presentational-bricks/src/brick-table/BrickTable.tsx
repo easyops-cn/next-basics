@@ -70,6 +70,7 @@ export interface BrickTableProps {
   thTransparent?: boolean;
   showHeader?: boolean;
   acceptType?: string;
+  xSmallSizeTable?: boolean;
 }
 
 const DraggableBodyRow = ({
@@ -582,6 +583,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
         [styles.customDropTable]: props.tableDraggable,
         [styles.tableThTransparent]: props.thTransparent,
         [styles.zebraPatternTable]: data?.length >= 2 && props.zebraPattern,
+        [styles.xSmallSizeTable]: props.xSmallSizeTable,
       })}
       dataSource={data}
       {...(props.tableDraggable
