@@ -55,7 +55,14 @@ describe("RefItem", () => {
       value: "DeployType",
       onChange: jest.fn(),
     };
-    const wrapper = mount(<RefItem {...props} />);
+
+    const wrapper = mount(<RefItem />);
+
+    expect(wrapper.find(Select).at(1).text()).toEqual(
+      "REF_FIELD_SELECT_PLACEHOLDER"
+    );
+
+    wrapper.setProps(props);
 
     wrapper.find(Select).at(0).invoke("onChange")("DeployType", null);
 

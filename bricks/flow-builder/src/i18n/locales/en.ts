@@ -18,6 +18,7 @@ const locale: Locale = {
   [K.MODEL_TYPE]: "Model Type",
   [K.REF_VALIDATE_REQUIRED_MSG]: "Please select field of Ref",
   [K.MODEL_SEARCH_PLACEHOLDER]: "Search with keyword",
+  [K.REF_FIELD_SELECT_PLACEHOLDER]: "Please select the referenced model first",
   [K.FIELDS_MAPPING_REQUIRED_MSG]: "{{name}} is required",
   [K.EDIT]: "Edit",
   [K.CANCEL]: "Cancel",
