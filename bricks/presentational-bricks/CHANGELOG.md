@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.316.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.316.4...@next-bricks/presentational-bricks@1.316.5) (2024-01-11)
+
+
+### Bug Fixes
+
+* 增加size的x-small类型控制表格的行信息紧凑度最小化 ([8236d5a](https://github.com/easyops-cn/next-basics/commit/8236d5a1ac323288701b0031500bf4766488bcd1))
+
+
+
+
+
 ## [1.316.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.316.3...@next-bricks/presentational-bricks@1.316.4) (2024-01-04)
 
 
