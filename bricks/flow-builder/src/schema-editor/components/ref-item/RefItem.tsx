@@ -39,8 +39,14 @@ export function RefItem(props: RefItemProps): React.ReactElement {
 
   useEffect(() => {
     (async () => {
-      const data = await fetchModelData(refValue.name);
-      setFieldList(getFlattenFields(data?.fields, data?.importModelDefinition));
+      if (!refValue.name) {
+        setFieldList([]);
+      } else {
+        const data = await fetchModelData(refValue.name);
+        setFieldList(
+          getFlattenFields(data?.fields, data?.importModelDefinition)
+        );
+      }
     })();
   }, [refValue.name]);
 
@@ -132,6 +138,7 @@ export function RefItem(props: RefItemProps): React.ReactElement {
         style={{ flex: 1 }}
         onChange={handleFieldChange}
         value={refValue.field}
+        placeholder={t(K.REF_FIELD_SELECT_PLACEHOLDER)}
       >
         {processFieldList(fieldList)?.map((item) => (
           <Select.Option key={item.name} value={item.name}>

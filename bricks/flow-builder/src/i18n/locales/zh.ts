@@ -16,6 +16,7 @@ const locale: Locale = {
   [K.MODEL_TYPE]: "模型",
   [K.REF_VALIDATE_REQUIRED_MSG]: "请选择引用的字段",
   [K.MODEL_SEARCH_PLACEHOLDER]: "按关键字搜索",
+  [K.REF_FIELD_SELECT_PLACEHOLDER]: "请先选择引用的模型",
   [K.FIELDS_MAPPING_REQUIRED_MSG]: "请输入{{name}}",
   [K.EDIT]: "编辑",
   [K.CANCEL]: "取消",
