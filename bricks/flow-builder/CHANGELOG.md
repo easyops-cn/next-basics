@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.31.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.1...@next-bricks/flow-builder@1.31.2) (2024-01-11)
+
+
+### Bug Fixes
+
+* fix ref not set value ([c71f741](https://github.com/easyops-cn/next-basics/commit/c71f74156d4b4c0bd5fa2e2d838fdd1ae90668b3))
+
+
+
+
+
 ## [1.31.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.0...@next-bricks/flow-builder@1.31.1) (2024-01-09)
 
 
