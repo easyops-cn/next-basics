@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.368.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.368.0...@next-bricks/developers@1.368.1) (2024-01-11)
+
+
+### Bug Fixes
+
+* fix docs of cmdb-instances.instance-list ([458348a](https://github.com/easyops-cn/next-basics/commit/458348a938ada51b18cc8b0ed0a6f4988870b25b))
+
+
+
+
+
 # [1.368.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.367.2...@next-bricks/developers@1.368.0) (2023-11-15)
 
 
