@@ -19,7 +19,6 @@ export interface ContractModel {
   namespaceId: string;
   fields: ModelFieldItem[];
   importModelDefinition?: ModelDefinition[];
-  instanceId: string;
   [key: string]: unknown;
 }
 export interface mixGroupContract {
@@ -83,7 +82,6 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
         find.name,
         `${find.namespaceId}.${find.name}`
       );
-      contractContext.addUsedModelId(find.instanceId);
     }
 
     setTypeValue(newValue);
