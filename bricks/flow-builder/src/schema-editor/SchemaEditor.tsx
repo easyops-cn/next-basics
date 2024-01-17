@@ -29,7 +29,9 @@ export interface SchemaEditorProps extends FormItemWrapperProps {
   hiddenRootNode?: boolean;
   disabledModelType?: boolean;
   enableWrapper?: boolean;
+  simpleTypeList?: string[];
   customTypeList?: string[];
+  hiddenArrayTypeCheckbox?: boolean;
   rootNodeRequired?: Record<string, boolean>;
   importModelDefinition?: ModelDefinition[];
   hiddenRootNodeRequired?: boolean;
@@ -52,7 +54,9 @@ export const SchemaEditorWrapper = forwardRef<
     hiddenRootNode,
     disabledModelType,
     enableWrapper,
+    simpleTypeList,
     customTypeList,
+    hiddenArrayTypeCheckbox,
     rootNodeRequired,
     hiddenRootNodeRequired,
     importModelDefinition,
@@ -71,8 +75,7 @@ export const SchemaEditorWrapper = forwardRef<
     ContractContext.getInstance(
       importModelDefinition,
       property.import,
-      customTypeList,
-      property.useModels
+      customTypeList
     )
   );
 
@@ -232,10 +235,13 @@ export const SchemaEditorWrapper = forwardRef<
       </div>
       <AddPropertyModal
         {...curItemData}
+        simpleTypeList={simpleTypeList}
+        customTypeList={customTypeList}
         enableWrapper={enableWrapper}
         disabledModelType={disabledModelType}
         rootNodeRequired={rootNodeRequired}
         hiddenRootNodeRequired={hiddenRootNodeRequired}
+        hiddenArrayTypeCheckbox={hiddenArrayTypeCheckbox}
         visible={visible}
         onClose={() => setVisible(false)}
         onSubmit={handleSubmit}

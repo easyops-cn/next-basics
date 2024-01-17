@@ -39,7 +39,9 @@ describe("typeItem processor", () => {
         },
       ];
 
-      const result = processFilterModes(list, "object", "normal");
+      const result = processFilterModes(list, "object", "normal", {
+        customTypeList: ["object_id", "attr_id", "email", "ip"],
+      });
 
       expect(result).toEqual([
         {
@@ -52,7 +54,9 @@ describe("typeItem processor", () => {
         },
       ]);
 
-      const result2 = processFilterModes(list, "", "normal");
+      const result2 = processFilterModes(list, "", "normal", {
+        customTypeList: ["object_id", "attr_id", "email", "ip"],
+      });
 
       expect(result2).toEqual([
         {
@@ -80,7 +84,9 @@ describe("typeItem processor", () => {
         },
       ]);
 
-      const result3 = processFilterModes(list, "", "model");
+      const result3 = processFilterModes(list, "", "model", {
+        customTypeList: ["object_id", "attr_id", "email", "ip"],
+      });
       expect(result3).toEqual([
         {
           group: "flow-builder:FROM_MODEL",

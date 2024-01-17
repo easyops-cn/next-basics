@@ -111,6 +111,22 @@ export class SchemaEditorElement extends FormItemElement {
   customTypeList: string[] = [];
 
   /**
+   * @description 自定义简单类型列表
+   */
+  @property({
+    attribute: false,
+  })
+  simpleTypeList: string[];
+
+  /**
+   * @description 隐藏支持数组选项的配置
+   */
+  @property({
+    attribute: false,
+  })
+  hiddenArrayTypeCheckbox: boolean;
+
+  /**
    * @kind ModelDefinition[]
    * @required -️
    * @default false
@@ -166,7 +182,9 @@ export class SchemaEditorElement extends FormItemElement {
             hiddenRootNode={this.hiddenRootNode}
             disabledModelType={this.disabledModelType}
             enableWrapper={this.enableWrapper}
+            simpleTypeList={this.simpleTypeList}
             customTypeList={this.customTypeList}
+            hiddenArrayTypeCheckbox={this.hiddenArrayTypeCheckbox}
             rootNodeRequired={this.rootNodeRequired}
             importModelDefinition={this.importModelDefinition}
             hiddenRootNodeRequired={this.hiddenRootNodeRequired}
