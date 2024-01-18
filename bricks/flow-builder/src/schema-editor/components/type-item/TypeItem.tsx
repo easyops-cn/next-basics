@@ -19,7 +19,6 @@ export interface ContractModel {
   namespaceId: string;
   fields: ModelFieldItem[];
   importModelDefinition?: ModelDefinition[];
-  instanceId: string;
   [key: string]: unknown;
 }
 export interface mixGroupContract {
@@ -38,12 +37,21 @@ export interface ProcessTypeValue {
 export interface TypeItemProps {
   value?: string;
   onChange?: (value: string) => void;
+  customTypeList?: string[];
+  simpleTypeList?: string[];
+  hiddenArrayTypeCheckbox?: boolean;
   type?: "normal" | "model";
   allowClear?: boolean;
 }
 
 export function TypeItem(props: TypeItemProps): React.ReactElement {
-  const { type = "normal", allowClear } = props;
+  const {
+    type = "normal",
+    allowClear,
+    simpleTypeList,
+    customTypeList,
+    hiddenArrayTypeCheckbox,
+  } = props;
   const [{ q, modelList }, setQ, setPageSize] = useContractModels({
     disabledModelType: type === "normal",
   });
@@ -57,10 +65,10 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
 
   const { t } = useTranslation(NS_FLOW_BUILDER);
 
-  const mixGroupList = useMemo(
-    () => processFilterModes(modelList, q, type),
-    [modelList, q, type]
-  );
+  const mixGroupList = processFilterModes(modelList, q, type, {
+    simpleTypeList,
+    customTypeList,
+  });
 
   const handleChange = (value: string): void => {
     const newValue = {
@@ -83,7 +91,6 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
         find.name,
         `${find.namespaceId}.${find.name}`
       );
-      contractContext.addUsedModelId(find.instanceId);
     }
 
     setTypeValue(newValue);
@@ -143,13 +150,16 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
             </Select.OptGroup>
           ))}
         </Select>
-        <Checkbox
-          checked={typeValue.isArray}
-          style={{ marginTop: -4 }}
-          onChange={(e) => handleCheckChange(e.target.checked)}
-        >
-          {t(K.ARRAY)}
-        </Checkbox>
+        {!hiddenArrayTypeCheckbox && (
+          <Checkbox
+            disabled={!typeValue.value}
+            checked={typeValue.isArray}
+            style={{ marginTop: -4 }}
+            onChange={(e) => handleCheckChange(e.target.checked)}
+          >
+            {t(K.ARRAY)}
+          </Checkbox>
+        )}
       </div>
       {type === "model" && (
         <Link target="_blank" to="/contract-center/models/create">

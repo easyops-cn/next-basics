@@ -37,7 +37,6 @@ export interface SchemaRootNodeProperty {
   description?: string;
   fields?: SchemaItemProperty[];
   import?: string[];
-  useModels?: string[];
   importModelDefinition?: ModelDefinition[];
 }
 

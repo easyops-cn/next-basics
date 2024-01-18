@@ -30,6 +30,9 @@ export interface AddPropertyModalProps {
   enableWrapper?: boolean;
   rootNodeRequired?: Record<string, boolean>;
   hiddenRootNodeRequired?: boolean;
+  simpleTypeList: string[];
+  customTypeList?: string[];
+  hiddenArrayTypeCheckbox?: boolean;
 }
 
 export function AddPropertyModal({
@@ -43,6 +46,9 @@ export function AddPropertyModal({
   enableWrapper,
   rootNodeRequired,
   hiddenRootNodeRequired,
+  simpleTypeList,
+  customTypeList,
+  hiddenArrayTypeCheckbox,
 }: AddPropertyModalProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const [form] = Form.useForm();
@@ -132,6 +138,9 @@ export function AddPropertyModal({
               messageVariables={{ label: "type" }}
             >
               <TypeItem
+                customTypeList={customTypeList}
+                simpleTypeList={simpleTypeList}
+                hiddenArrayTypeCheckbox={hiddenArrayTypeCheckbox}
                 allowClear={
                   trackId === rootTraceId && isEdit && !rootNodeRequired?.type
                 }
@@ -151,7 +160,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    [form, isEdit, rootNodeRequired, t, trackId]
+    [form, isEdit, rootNodeRequired, t, trackId, simpleTypeList, customTypeList]
   );
 
   const defaultFormItem = useMemo(

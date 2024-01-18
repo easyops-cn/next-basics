@@ -33,7 +33,11 @@ export function extractType(type = ""): string {
 export function processFilterModes(
   modelList: ContractModel[],
   q = "",
-  type: "normal" | "model"
+  type: "normal" | "model",
+  {
+    customTypeList,
+    simpleTypeList,
+  }: { customTypeList: string[]; simpleTypeList: string[] }
 ): mixGroupContract[] {
   const basicNormalGroup = {
     group: i18next.t(`${NS_FLOW_BUILDER}:${K.SIMPLE_TYPE}`),
@@ -46,16 +50,14 @@ export function processFilterModes(
   } as mixGroupContract;
 
   if (type === "normal") {
-    innerTypeList
+    (simpleTypeList ?? innerTypeList)
       .filter((type) => type.includes(q.toLowerCase()))
       .forEach((type) => {
         basicNormalGroup.items.push({ label: type, value: type });
       });
 
-    const customTypeList = ContractContext.getInstance().customTypeList;
-
     customTypeList
-      .filter((type) => type.includes(q.toLowerCase()))
+      ?.filter((type) => type.includes(q.toLowerCase()))
       .forEach((type) => {
         basicCustomTypeGroup.items.push({ label: type, value: type });
       });
