@@ -126,6 +126,16 @@ export class BrickUserElement extends UpdatingElement {
   @property({ attribute: false })
   iconMargin: number | string;
 
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 自定义toolTip替换字符串 例如："发起人：#{name}"
+   * @group basic
+   */
+  @property({ attribute: false })
+  customTooltip: string;
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -155,6 +165,7 @@ export class BrickUserElement extends UpdatingElement {
             }
             iconMargin={this.iconMargin}
             displayShowKey={this.displayShowKey}
+            customTooltip={this.customTooltip}
           />
         </BrickWrapper>,
         this

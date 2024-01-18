@@ -15,6 +15,7 @@ interface BrickUserProps {
   showNicknameOrUsername?: boolean;
   displayShowKey?: boolean;
   iconMargin?: string | number;
+  customTooltip?: string;
 }
 
 export function BrickUser(props: BrickUserProps): React.ReactElement {
@@ -74,8 +75,12 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
       : userName
     : userName;
 
+  const tooltip = props.customTooltip
+    ? props.customTooltip.replace("#{name}", name)
+    : name;
+
   return (
-    <Tooltip title={name} placement="topLeft">
+    <Tooltip title={tooltip} placement="topLeft">
       <span className={cssStyle.user}>
         {!props.hideAvatar && <span>{Avatar}</span>}
         {!props.hideUsername && (
