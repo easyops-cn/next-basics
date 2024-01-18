@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.317.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.316.5...@next-bricks/presentational-bricks@1.317.0) (2024-01-18)
+
+
+### Features
+
+* 人员查看tooltip增加自定义字符串替换 ([50e9d99](https://github.com/easyops-cn/next-basics/commit/50e9d9985d19cadc34bd6ac92d7041ee745c0479))
+
+
+
+
+
 ## [1.316.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.316.4...@next-bricks/presentational-bricks@1.316.5) (2024-01-11)
 
 
