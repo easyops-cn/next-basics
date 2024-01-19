@@ -63,7 +63,8 @@ export function GeneralButton({
   if (!buttonIcon && buttonProps?.icon) {
     buttonIcon = buttonProps.icon;
   }
-  const { placement, arrowPointAtCenter } = tooltipConfig || {};
+  const { placement, arrowPointAtCenter, overlayStyle, overlayInnerStyle } =
+    tooltipConfig || {};
   const getButtonNode = () => (
     <Button
       className={classNames(styles.iconButton, {
@@ -107,6 +108,8 @@ export function GeneralButton({
       title={disabled ? disabledTooltip : tooltip}
       placement={placement}
       arrowPointAtCenter={arrowPointAtCenter}
+      overlayInnerStyle={overlayInnerStyle}
+      overlayStyle={overlayStyle}
     >
       {buttonUrl || buttonHref ? (
         <Link
