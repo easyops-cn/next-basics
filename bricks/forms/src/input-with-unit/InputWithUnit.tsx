@@ -61,7 +61,7 @@ export function InputGroup(
 
     index = Math.max(1, index);
     let suitableUnit: any;
-    if (selectUnit && !props.useAutoCalculate) {
+    if (selectUnit) {
       suitableUnit = originUnits.find((unit) => unit.id === selectUnit);
     } else {
       suitableUnit = units[index - 1];
