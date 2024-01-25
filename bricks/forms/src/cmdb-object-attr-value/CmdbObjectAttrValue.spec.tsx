@@ -7,7 +7,15 @@ import {
 } from "./CmdbObjectAttrValue";
 import { Select, Input, Row, Col, Radio, Empty } from "antd";
 const Option = Select.Option;
+jest.mock("@next-core/brick-kit", () => {
+  const originalModule = jest.requireActual("@next-core/brick-kit");
 
+  return {
+    __esModule: true,
+    ...originalModule,
+    useFeatureFlags: jest.fn().mockImplementation(() => [true]),
+  };
+});
 describe("CmdbObjectAttrValue", () => {
   it("should work", () => {
     const props = {
