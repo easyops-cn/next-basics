@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.317.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.317.0...@next-bricks/presentational-bricks@1.317.1) (2024-01-25)
+
+
+### Bug Fixes
+
+* **table:** 前端搜索+表格构件跨页勾选，select.update事件吐出来的数据有问题 ([01b3137](https://github.com/easyops-cn/next-basics/commit/01b3137cbe5f1e9d2af0db247334acb042685f5e))
+
+
+
+
+
 # [1.317.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.316.5...@next-bricks/presentational-bricks@1.317.0) (2024-01-18)
 
 

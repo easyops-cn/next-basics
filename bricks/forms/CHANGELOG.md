@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.283.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.283.10...@next-bricks/forms@1.283.11) (2024-01-25)
+
+
+### Bug Fixes
+
+* **input-with-unit:** fix not change with useAutoCalculate ([550a4e5](https://github.com/easyops-cn/next-basics/commit/550a4e5a2b1fd820ab96022f7b7b4ad23cb381ce))
+
+
+
+
+
 ## [1.283.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.283.9...@next-bricks/forms@1.283.10) (2024-01-22)
 
 **Note:** Version bump only for package @next-bricks/forms
