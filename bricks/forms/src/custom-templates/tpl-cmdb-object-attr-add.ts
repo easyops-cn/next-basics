@@ -180,6 +180,9 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
               events: {
                 "forms.cmdb-object-attr-value.change": [
                   {
+                    action: "console.log",
+                  },
+                  {
                     if: "<% !TPL.isEdit && EVENT.detail.type === 'str' && EVENT.detail.default_type !== CTX['inner-attr-add-tpl-attr-value']?.default_type && ( EVENT.detail.default_type === 'series-number' || EVENT.detail.default_type === 'auto-increment-id') %>",
                     targetRef: "addCmdbObjectAttrForm",
                     method: "setInitValue",
@@ -252,6 +255,33 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                         },
                       ],
                     },
+                  },
+                  {
+                    if: "<% !TPL.isProtected && EVENT.detail.type === 'str' && EVENT.detail.default_type === 'function' && EVENT.detail.default === 'template()' %>",
+                    targetRef: "attrOptions",
+                    properties: {
+                      options: [
+                        {
+                          label: i18n.t(`${NS_FORMS}:${K.REQUIRED}`),
+                          value: "required",
+                        },
+                        {
+                          label: i18n.t(`${NS_FORMS}:${K.READONLY}`),
+                          value: "readonly",
+                          disabled: true,
+                        },
+                        {
+                          label: i18n.t(`${NS_FORMS}:${K.UNIQUE}`),
+                          value: "unique",
+                        },
+                      ],
+                    },
+                  },
+                  {
+                    if: "<% !TPL.isProtected && EVENT.detail.type === 'str' && EVENT.detail.default_type === 'function' && EVENT.detail.default === 'template()' %>",
+                    targetRef: "addCmdbObjectAttrForm",
+                    method: "setInitValue",
+                    args: [{ attrOptions: ["readonly"] }],
                   },
                   {
                     action: "context.replace",
