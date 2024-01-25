@@ -36,6 +36,7 @@ export enum K {
   NO_MODEL = "NO_MODEL",
   RESOURCES = "RESOURCES",
   VIEW_ALL = "VIEW_ALL",
+  SWITCH_ORG = "SWITCH_ORG",
 }
 
 export type Locale = { [key in K]: string };
