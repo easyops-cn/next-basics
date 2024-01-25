@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../../i18n/constants";
 import { Form } from "@ant-design/compatible";
 import {
+  Alert,
   Select,
   Input,
   Row,
@@ -16,6 +17,7 @@ import { RadioChangeEvent } from "antd/lib/radio";
 import { isNil, isNumber } from "lodash";
 import i18n from "i18next";
 import styles from "./index.module.css";
+
 const Option = Select.Option;
 
 interface StrValueType {
@@ -51,6 +53,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
   React.useEffect(() => {
     !isNil(props.value) && setValue(props.value);
   }, [props.value]);
+
   const handleStrChange = (newValue: Partial<StrValueType>) => {
     props.onChange && props.onChange(newValue);
   };
@@ -60,7 +63,11 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
     handleStrChange(value);
   };
 
-  const handleRegexChange = (e: { target: { value: string } }) => {
+  const handleRegexChange = (e: {
+    target: {
+      value: string;
+    };
+  }) => {
     handleValueChange({ ...value, regex: e.target.value });
   };
 
@@ -70,7 +77,11 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
 
   const handleStrDefaultTypeChange = (default_type: string) => {
     if (default_type === "function") {
-      handleValueChange({ ...value, default_type, default: "guid()" });
+      handleValueChange({
+        ...value,
+        default_type,
+        default: value.default || "guid()",
+      });
     } else if (
       value.default_type !== default_type &&
       ["series-number", "auto-increment-id"].includes(default_type)
@@ -168,13 +179,23 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
       }
     } else if (value.default_type === "function") {
       return (
-        <Select
-          value="guid()"
-          style={{ width: "100%" }}
-          disabled={props.disabled}
-        >
-          <Option value="guid()">{t(K.GLOBALLY_UNIQUE_IDENTIFIER)}</Option>
-        </Select>
+        <>
+          <Select
+            value={value.default}
+            style={{ width: "100%" }}
+            disabled={props.disabled}
+            onChange={(e) =>
+              handleValueChange({
+                ...value,
+                default: e,
+                default_type: "function",
+              })
+            }
+          >
+            <Option value="guid()">{t(K.GLOBALLY_UNIQUE_IDENTIFIER)}</Option>
+            <Option value="template()">{t(K.CUSTOM_TEMPLATE)}</Option>
+          </Select>
+        </>
       );
     } else if (value.default_type === "auto-increment-id") {
       return (
@@ -257,17 +278,19 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
   return (
     <>
       <div>
-        <div className={styles.typeSelected}>
-          {i18n.t(`${NS_FORMS}:${K.REGULAR}`)}
-          <Row>
-            <Input
-              placeholder={i18n.t(`${NS_FORMS}:${K.THIS_IS_NOT_MANDATORY}`)}
-              value={value.regex}
-              onChange={handleRegexChange}
-              disabled={props.disabled}
-            />
-          </Row>
-        </div>
+        {value.default !== "template()" && (
+          <div className={styles.typeSelected}>
+            {i18n.t(`${NS_FORMS}:${K.REGULAR}`)}
+            <Row>
+              <Input
+                placeholder={i18n.t(`${NS_FORMS}:${K.THIS_IS_NOT_MANDATORY}`)}
+                value={value.regex}
+                onChange={handleRegexChange}
+                disabled={props.disabled}
+              />
+            </Row>
+          </div>
+        )}
         <div className={styles.typeSelected}>
           {i18n.t(`${NS_FORMS}:${K.DISPLAY_AS}`)}
           <Row>
@@ -317,6 +340,38 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
               {getDefaultControl()}
             </Col>
           </Row>
+          {value.default === "template()" && (
+            <Row gutter={15}>
+              <Col span={24} style={{ marginTop: 10 }}>
+                <Input.TextArea
+                  value={value.regex}
+                  onChange={(e) =>
+                    handleValueChange({
+                      ...value,
+                      regex: e.target.value,
+                      default: "template()",
+                    })
+                  }
+                  autoSize={{ minRows: 3, maxRows: 5 }}
+                />
+              </Col>
+              <Col span={24}>
+                <Alert
+                  style={{ marginTop: 10, width: "100%" }}
+                  message={
+                    <>
+                      <div>{t(K.CUSTOM_TEMPLATE_PROMPT)}</div>
+                      <div>
+                        {t(K.CUSTOM_TEMPLATE_PROMPT2)}：
+                        {"{osSystem}-{osRelease}"}
+                      </div>
+                    </>
+                  }
+                  type="info"
+                />
+              </Col>
+            </Row>
+          )}
         </div>
       </div>
     </>

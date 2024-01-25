@@ -90,6 +90,11 @@ const locale: Locale = {
   [K.BUILT_IN_FUNCTION]: "内置函数",
   [K.SELF_INCREASE_ID]: "自增ID",
   [K.SERIAL_NUMBER]: "流水号",
+  [K.CUSTOM_TEMPLATE]: "自定义模板",
+  [K.CUSTOM_TEMPLATE_PROMPT]:
+    "可自定义属性数据的模板，可获取现有属性作为模板变量，以满足丰富的默认值场景。",
+  [K.CUSTOM_TEMPLATE_PROMPT2]:
+    "如，新增主机的“操作系统”的属性，默认值来源于现有的操作系统类型和操作系统内核发行版本属性，可配置为",
   [K.ENUMS]: "多选枚举型",
   [K.INTEGER]: "整型",
   [K.DATE]: "日期",

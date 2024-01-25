@@ -92,6 +92,11 @@ const locale: Locale = {
   [K.STRING_TYPE]: "String",
   [K.PLEASE_ENTER_THE_LENGTH_OF_THE_SERIAL_NUMBER]:
     "Please enter the length of the serial number",
+  [K.CUSTOM_TEMPLATE]: "Custom template",
+  [K.CUSTOM_TEMPLATE_PROMPT]:
+    "You can customize a template for property data, and you can obtain existing properties as template variables to meet rich default value scenarios.",
+  [K.CUSTOM_TEMPLATE_PROMPT2]:
+    "For example, the default value of the OS attribute of the new host is derived from the existing OS type and OS kernel release version attributes. The value can be set to",
   [K.DEFAULT_DIFFERENT_REGULAR]:
     "Default values are inconsistent with regular values",
   [K.FIXED_VALUE]: "Fixed value",
