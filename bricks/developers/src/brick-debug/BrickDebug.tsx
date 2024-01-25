@@ -40,11 +40,6 @@ export function BrickDebug(): React.ReactElement {
     },
   };
 
-  const enableNewBrickPreview = React.useMemo(
-    () => getRuntime().getFeatureFlags()["developers-brick-preview"],
-    []
-  );
-
   const [conf, setConf] = React.useState(defaultConf);
 
   const [columns, setColumns] = React.useState(
@@ -110,11 +105,12 @@ export function BrickDebug(): React.ReactElement {
             highlightActiveLine: true,
           }}
         />
-        {enableNewBrickPreview ? (
+        <NextBrickPreview conf={conf} containerStyle={{ padding: 0 }} />
+        {/* {enableNewBrickPreview ? (
           <NextBrickPreview conf={conf} containerStyle={{ padding: 0 }} />
         ) : (
           <BrickPreview conf={conf} />
-        )}
+        )} */}
       </div>
     </>
   );

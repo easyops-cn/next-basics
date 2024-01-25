@@ -4,6 +4,7 @@ import { Radio } from "antd";
 import { getRuntime, i18nText } from "@next-core/brick-kit";
 import { BrickBook } from "./BrickBook";
 import { BrickDemo } from "../BrickDemo/BrickDemo";
+import { NextBrickDemo } from "../../components/NextBrickDemo/NextBrickDemo";
 
 jest.mock("@next-core/brick-kit");
 jest.mock("../BrickDemo/BrickDemo");
@@ -14,6 +15,14 @@ jest.mock("@next-libs/basic-components", () => ({
     return "<a></a>";
   }),
 }));
+
+jest.mock("../../components/NextBrickDemo/NextBrickDemo", () => {
+  return {
+    NextBrickDemo() {
+      return <div>NextBrickDemo</div>;
+    },
+  };
+});
 jest.mock("../../components/v3/V3BrickDoc/V3BrickDoc", () => {
   return {
     V3BrickDoc() {
@@ -47,8 +56,8 @@ describe("BrickBook", () => {
     );
     wrapper.find(Radio.Group).invoke("onChange")({ target: { value: "json" } });
     await (global as any).flushPromises();
-    expect(wrapper.find(BrickDemo).at(0).prop("mode")).toBe("json");
-    expect(wrapper.find(BrickDemo).length).toBe(1);
+    expect(wrapper.find(NextBrickDemo).at(0).prop("mode")).toBe("json");
+    expect(wrapper.find(NextBrickDemo).length).toBe(1);
   });
 
   it("should work when render as default language", async () => {
