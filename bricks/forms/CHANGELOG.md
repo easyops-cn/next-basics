@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.284.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.284.0...@next-bricks/forms@1.284.1) (2024-01-25)
+
+
+### Bug Fixes
+
+* 【模型基本定义】属性定义支持新的默认值类型【来源于现有属性】 ([eeef19d](https://github.com/easyops-cn/next-basics/commit/eeef19d5dd5ae05695183479ab08d2362c27c4a9))
+
+
+
+
+
 # [1.284.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.283.11...@next-bricks/forms@1.284.0) (2024-01-25)
 
 
