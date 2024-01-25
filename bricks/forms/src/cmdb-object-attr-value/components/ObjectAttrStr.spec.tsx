@@ -16,7 +16,6 @@ import { render, fireEvent } from "@testing-library/react";
 import i18n from "i18next";
 import { NS_FORMS, K } from "../../i18n/constants";
 const Option = Select.Option;
-
 const defaultValue = {
   mode: "default",
   default_type: "value",
@@ -25,6 +24,10 @@ const defaultValue = {
   prefix: "",
   default: "",
 };
+
+jest.mock("@next-core/brick-kit", () => ({
+  useFeatureFlags: jest.fn().mockImplementation(() => [true]),
+}));
 
 describe("ObjectAttrStr", () => {
   it("should work", () => {

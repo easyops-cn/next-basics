@@ -17,6 +17,7 @@ import { RadioChangeEvent } from "antd/lib/radio";
 import { isNil, isNumber } from "lodash";
 import i18n from "i18next";
 import styles from "./index.module.css";
+import { useFeatureFlags } from "@next-core/brick-kit";
 
 const Option = Select.Option;
 
@@ -50,6 +51,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
   });
   const [startValue, setStartValue] = React.useState(1);
 
+  const [useCustomTemplateAttr] = useFeatureFlags("use-custom-template-attr");
   React.useEffect(() => {
     !isNil(props.value) && setValue(props.value);
   }, [props.value]);
@@ -193,7 +195,9 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
             }
           >
             <Option value="guid()">{t(K.GLOBALLY_UNIQUE_IDENTIFIER)}</Option>
-            <Option value="template()">{t(K.CUSTOM_TEMPLATE)}</Option>
+            {useCustomTemplateAttr && (
+              <Option value="template()">{t(K.CUSTOM_TEMPLATE)}</Option>
+            )}
           </Select>
         </>
       );
