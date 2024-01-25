@@ -36,6 +36,7 @@ const locale: Locale = {
   [K.VIEW_ALL]: "查看所有",
   [K.MY_FAVORITE]: "我的收藏",
   [K.ALL_RESOURCES]: "全部资源",
+  [K.SWITCH_ORG]: "切换组织",
 };
 
 export default locale;

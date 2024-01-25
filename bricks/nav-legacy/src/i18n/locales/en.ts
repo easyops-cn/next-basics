@@ -37,6 +37,7 @@ const locale: Locale = {
   [K.NO_MODEL]: "No model",
   [K.RESOURCES]: "Resources",
   [K.VIEW_ALL]: "View all",
+  [K.SWITCH_ORG]: "Switching Organizations",
 };
 
 export default locale;

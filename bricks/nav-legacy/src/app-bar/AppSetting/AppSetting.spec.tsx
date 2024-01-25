@@ -3,14 +3,20 @@ import { act } from "react-dom/test-utils";
 import { shallow, mount } from "enzyme";
 import { Dropdown, Avatar, Menu } from "antd";
 import * as brickKit from "@next-core/brick-kit";
-import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
 import { Link } from "@next-libs/basic-components";
 import { AppSetting } from "./AppSetting";
 import { UserOutlined } from "@ant-design/icons";
 import i18next from "i18next";
+import {
+  UserAdminApi_getUserInfoV2,
+  UserAdminApi_getUserOrgs,
+} from "@next-sdk/user-service-sdk";
+import { AuthApi_switchOrg } from "@next-sdk/api-gateway-sdk";
 
 jest.mock("@next-sdk/user-service-sdk");
 jest.mock("@next-sdk/air-admin-service-sdk");
+jest.mock("@next-sdk/api-gateway-sdk");
+
 jest.mock("../LaunchpadButton/LaunchpadButton");
 jest.mock("../AppBarBreadcrumb/AppBarBreadcrumb");
 jest.mock("../AppDocumentLink/AppDocumentLink");
@@ -23,18 +29,35 @@ jest.mock("i18next", () => ({
   user_icon: "avatar.png",
 });
 
+const mockAuthApi_switchOrg = AuthApi_switchOrg as jest.Mock;
+
+(UserAdminApi_getUserOrgs as jest.Mock).mockResolvedValue({
+  orgList: [
+    {
+      org: 8888,
+      name: "easyops",
+    },
+    {
+      org: 9999,
+      name: "organization",
+    },
+  ],
+});
+
 const spyOnHistoryReplace = jest.fn();
 const spyOnHistoryPush = jest.fn();
 jest.spyOn(brickKit, "getHistory").mockReturnValue({
   location: {},
   replace: spyOnHistoryReplace,
   push: spyOnHistoryPush,
+  reload: jest.fn(),
   createHref: () => "/oops",
 } as any);
 
 jest.spyOn(brickKit, "getAuth").mockReturnValue({
   username: "tester",
   userShowValue: ["easyops", "carrel"],
+  org: 8888,
 });
 
 const getFeatureFlags = jest.fn().mockReturnValue({});
@@ -178,7 +201,7 @@ describe("AppBar", () => {
     });
     const switchLanguageBtn = (
       wrapper.find(Dropdown).prop("overlay") as React.ReactElement
-    ).props.children[2].props.children[1];
+    ).props.children[3].props.children[1];
     switchLanguageBtn.props.onClick();
     await (global as any).flushPromises();
     expect(i18next.language).toEqual("zh-CN");
@@ -273,5 +296,26 @@ describe("AppBar", () => {
       apm: "light",
       events: "light",
     });
+  });
+
+  it("should switch org", async () => {
+    const wrapper = mount(<AppSetting />);
+
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
+    wrapper.update();
+
+    const dropdown = wrapper.find(Dropdown);
+    const submenu = shallow(<div>{dropdown.prop("overlay")}</div>);
+    const menu = submenu.find(Menu).at(0);
+    expect(
+      submenu.find('[data-testid="menu-item-switch-org"]').children().length
+    ).toBe(2);
+    submenu
+      .find('[data-testid="menu-item-switch-org"]')
+      .childAt(1)
+      .simulate("click");
+    expect(mockAuthApi_switchOrg).toBeCalled();
   });
 });

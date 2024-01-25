@@ -13,9 +13,15 @@ import {
   batchSetAppsLocalTheme,
 } from "@next-core/brick-kit";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
-import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
+import {
+  UserAdminApi_getUserInfoV2,
+  UserAdminApi_getUserOrgs,
+  UserAdminApi_GetUserOrgsResponseBody_orgList_item,
+} from "@next-sdk/user-service-sdk";
+import { AuthApi_switchOrg } from "@next-sdk/api-gateway-sdk";
 import { NS_NAV_LEGACY, K } from "../../i18n/constants";
 import styles from "./AppSetting.module.css";
+import classNames from "classnames";
 
 export function AppSetting(props: {
   usernameStyle: React.CSSProperties;
@@ -24,6 +30,7 @@ export function AppSetting(props: {
   const { t } = useTranslation(NS_NAV_LEGACY);
   const currentApp = useCurrentApp();
   const username = getAuth().username;
+  const curOrg = getAuth().org;
   const userShowValue = getAuth().userShowValue;
   const currentLang = i18next.language?.split("-")[0];
   const { appsTheme }: Record<string, any> = getRuntime().getMiscSettings();
@@ -32,6 +39,10 @@ export function AppSetting(props: {
   const userShowValueFlag = featureFlags["user-show-value"];
 
   const [avatarSrc, setAvatarSrc] = React.useState<string>();
+  const [userOrgs, setUserOrgs] = React.useState<
+    UserAdminApi_GetUserOrgsResponseBody_orgList_item[]
+  >([]);
+
   const [accountEntryEnabled, setAccountEntry] = React.useState<boolean>(false);
 
   const avatarProps: AvatarProps = {
@@ -68,7 +79,9 @@ export function AppSetting(props: {
       // istanbul ignore else
       if (username) {
         const userInfo = await UserAdminApi_getUserInfoV2(username);
+        const orgList = await UserAdminApi_getUserOrgs({ username });
         setAvatarSrc(userInfo.user_icon);
+        setUserOrgs(orgList.orgList);
       }
     })();
   }, [username]);
@@ -175,14 +188,24 @@ export function AppSetting(props: {
     }
     return username;
   };
+
+  const handleSwitchOrg = async (org: number) => {
+    if (org === curOrg) {
+      return;
+    }
+    await AuthApi_switchOrg({ org });
+    getHistory().reload();
+  };
+
   return (
     <div>
       {window.NO_AUTH_GUARD ? (
         getCustomizedLogOutLink()
       ) : username ? (
         <Dropdown
+          getPopupContainer={(triggerNode) => triggerNode.parentElement}
           overlay={
-            <Menu>
+            <Menu triggerSubMenuAction="click">
               {accountEntryEnabled && (
                 <Menu.Item
                   onClick={handleRedirectToMe}
@@ -215,6 +238,41 @@ export function AppSetting(props: {
                   {t(K.LOGOUT)}
                 </Menu.Item>
               )}
+              {userOrgs.length && (
+                <Menu.SubMenu
+                  className={styles.dropdownMenuItem}
+                  popupOffset={[0, 0]}
+                  expandIcon={<></>}
+                  title={
+                    <span>
+                      <GeneralIcon
+                        icon={{
+                          lib: "antd",
+                          icon: "swap",
+                          theme: "outlined",
+                        }}
+                      />
+                      <span> {t(K.SWITCH_ORG)}</span>
+                    </span>
+                  }
+                  data-testid="menu-item-switch-org"
+                >
+                  {userOrgs.map((org) => (
+                    <Menu.Item
+                      onClick={() => handleSwitchOrg(org.org)}
+                      className={classNames({
+                        [styles.dropdownSubMenuItemSelected]:
+                          curOrg === org.org,
+                      })}
+                      key={org.org}
+                      data-testid="menu-user-org"
+                    >
+                      {org.name}
+                    </Menu.Item>
+                  ))}
+                </Menu.SubMenu>
+              )}
+
               {switchLanguageEnabled && (
                 <>
                   <Menu.Divider />
