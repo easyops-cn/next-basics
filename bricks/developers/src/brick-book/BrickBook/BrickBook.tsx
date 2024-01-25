@@ -64,9 +64,7 @@ export function BrickBook({
 
   const enableNewBrickPreview = React.useMemo(() => {
     const flags = getRuntime().getFeatureFlags();
-    return (
-      flags["developers-brick-preview"] && !flags["migrate-to-brick-next-v3"]
-    );
+    return !flags["migrate-to-brick-next-v3"];
   }, []);
 
   React.useEffect(() => {

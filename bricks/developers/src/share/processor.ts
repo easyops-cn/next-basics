@@ -86,9 +86,6 @@ export const getAllStoryListV2 = (
   categories?: string | string[],
   fields?: Record<string, boolean>
 ): BrickRecord[] => {
-  const enableNewBrickPreview =
-    getRuntime().getFeatureFlags()["developers-brick-preview"];
-
   const storyList: BrickRecord[] = [];
   let books: Array<Chapter & { v3Brick?: boolean }> = [];
   fields = fields || {};
@@ -185,9 +182,7 @@ export const getAllStoryListV2 = (
           subTitle: story.author,
           description: description,
           tags: tags.map(i18nText),
-          icon: enableNewBrickPreview
-            ? processIconInPreview(story.icon)
-            : story.icon,
+          icon: processIconInPreview(story.icon),
           category: category,
           v3Brick: (story as Story & { v3Brick: boolean }).v3Brick,
         };

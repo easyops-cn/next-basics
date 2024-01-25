@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { BrickDebug } from "./BrickDebug";
-import { BrickPreview } from "../components/BrickPreview/BrickPreview";
+import { NextBrickPreview } from "../components/NextBrickPreview/NextBrickPreview";
 import RadioGroup from "antd/lib/radio/group";
 import { BrickEditor } from "../components/BrickEditor/BrickEditor";
 import * as brickKit from "@next-core/brick-kit";
@@ -31,7 +31,7 @@ jest.mock("@next-libs/storage", () => {
 describe("BrickDebug", () => {
   it("should work", () => {
     const wrapper = shallow(<BrickDebug />);
-    expect(wrapper.find(BrickPreview).prop("conf")).toEqual({
+    expect(wrapper.find(NextBrickPreview).prop("conf")).toEqual({
       brick: "mock-brick-name",
       properties: {
         name: "xx",
