@@ -38,6 +38,7 @@ const locale: Locale = {
   [K.RESOURCES]: "Resources",
   [K.VIEW_ALL]: "View all",
   [K.SWITCH_ORG]: "Switching Organizations",
+  [K.SWITCH_ORG_SUCCESS]: "Switching organizations succeeded!",
 };
 
 export default locale;

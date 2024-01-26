@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Menu, Dropdown, Avatar, Tooltip } from "antd";
+import { Button, Menu, Dropdown, Avatar, Tooltip, message } from "antd";
 import { AvatarProps } from "antd/lib/avatar";
 import {
   getAuth,
@@ -11,6 +11,7 @@ import {
   useCurrentApp,
   getCurrentTheme,
   batchSetAppsLocalTheme,
+  handleHttpError,
 } from "@next-core/brick-kit";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
 import {
@@ -193,8 +194,13 @@ export function AppSetting(props: {
     if (org === curOrg) {
       return;
     }
-    await AuthApi_switchOrg({ org });
-    getHistory().reload();
+    try {
+      await AuthApi_switchOrg({ org });
+      message.success(t(K.SWITCH_ORG_SUCCESS));
+      getHistory().reload();
+    } catch (error) {
+      handleHttpError(error);
+    }
   };
 
   return (
@@ -238,7 +244,7 @@ export function AppSetting(props: {
                   {t(K.LOGOUT)}
                 </Menu.Item>
               )}
-              {userOrgs.length && (
+              {userOrgs.length > 1 && (
                 <Menu.SubMenu
                   className={styles.dropdownMenuItem}
                   popupOffset={[0, 0]}
