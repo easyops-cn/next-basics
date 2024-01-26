@@ -25,6 +25,7 @@ import { UseBrickConf } from "@next-core/brick-types";
 export interface SchemaEditorProps extends FormItemWrapperProps {
   value: SchemaRootNodeProperty;
   readonly?: boolean;
+  projectId?: string;
   onChange?: (data: SchemaRootNodeProperty) => void;
   hiddenRootNode?: boolean;
   disabledModelType?: boolean;
@@ -51,6 +52,7 @@ export const SchemaEditorWrapper = forwardRef<
   SchemaEditorProps
 >(function LegacySchemaEditor(props, ref): React.ReactElement {
   const {
+    projectId,
     hiddenRootNode,
     disabledModelType,
     enableWrapper,
@@ -235,6 +237,7 @@ export const SchemaEditorWrapper = forwardRef<
       </div>
       <AddPropertyModal
         {...curItemData}
+        projectId={projectId}
         simpleTypeList={simpleTypeList}
         customTypeList={customTypeList}
         enableWrapper={enableWrapper}

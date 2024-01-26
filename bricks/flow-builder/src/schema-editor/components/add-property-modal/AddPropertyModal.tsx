@@ -16,6 +16,7 @@ import { RefItem } from "../../components/ref-item/RefItem";
 import { RefRequiredItem } from "../ref-required-item/RefRequiredItem";
 
 export interface AddPropertyModalProps {
+  projectId?: string;
   trackId?: string;
   visible: boolean;
   onClose: () => void;
@@ -36,6 +37,7 @@ export interface AddPropertyModalProps {
 }
 
 export function AddPropertyModal({
+  projectId,
   visible,
   onClose,
   onSubmit,
@@ -138,6 +140,7 @@ export function AddPropertyModal({
               messageVariables={{ label: "type" }}
             >
               <TypeItem
+                projectId={projectId}
                 customTypeList={customTypeList}
                 simpleTypeList={simpleTypeList}
                 hiddenArrayTypeCheckbox={hiddenArrayTypeCheckbox}
@@ -154,7 +157,10 @@ export function AddPropertyModal({
               rules={[{ validator: checkRequired }]}
               messageVariables={{ label: "ref" }}
             >
-              <RefItem onChange={() => form.resetFields(["refRequired"])} />
+              <RefItem
+                projectId={projectId}
+                onChange={() => form.resetFields(["refRequired"])}
+              />
             </Form.Item>
           )
         }
