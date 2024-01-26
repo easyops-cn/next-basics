@@ -22,11 +22,14 @@ export interface ProcessRefItemValue {
 export interface RefItemProps {
   value?: string;
   onChange?: (value: string) => void;
+  projectId?: string;
 }
 
 export function RefItem(props: RefItemProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
-  const [{ modelList }, setQ, setPageSize] = useContractModels();
+  const [{ modelList }, setQ, setPageSize] = useContractModels({
+    projectId: props.projectId,
+  });
   const [fieldList, setFieldList] = useState<ModelFieldItem[]>([]);
   const [refValue, setRefValue] = useState<ProcessRefItemValue>(
     processRefItemInitValue(props.value)

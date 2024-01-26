@@ -149,6 +149,12 @@ export class SchemaEditorElement extends FormItemElement {
     useBrick: UseBrickConf;
   };
 
+  /**
+   * @description 项目 ID
+   * @group basic
+   */
+  @property() projectId: string;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -179,6 +185,7 @@ export class SchemaEditorElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             readonly={this.readonly}
+            projectId={this.projectId}
             hiddenRootNode={this.hiddenRootNode}
             disabledModelType={this.disabledModelType}
             enableWrapper={this.enableWrapper}

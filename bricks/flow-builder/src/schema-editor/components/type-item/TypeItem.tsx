@@ -35,6 +35,7 @@ export interface ProcessTypeValue {
 }
 
 export interface TypeItemProps {
+  projectId?: string;
   value?: string;
   onChange?: (value: string) => void;
   customTypeList?: string[];
@@ -47,6 +48,7 @@ export interface TypeItemProps {
 export function TypeItem(props: TypeItemProps): React.ReactElement {
   const {
     type = "normal",
+    projectId,
     allowClear,
     simpleTypeList,
     customTypeList,
@@ -54,6 +56,7 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
   } = props;
   const [{ q, modelList }, setQ, setPageSize] = useContractModels({
     disabledModelType: type === "normal",
+    projectId,
   });
   const [typeValue, setTypeValue] = useState<ProcessTypeValue>(
     processTypeItemInitValue(props.value)

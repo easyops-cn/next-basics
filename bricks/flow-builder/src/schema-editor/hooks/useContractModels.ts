@@ -5,10 +5,12 @@ import { handleHttpError } from "@next-core/brick-kit";
 
 export interface ContractModelsParams {
   disabledModelType?: boolean;
+  projectId?: string;
 }
 
 export function useContractModels({
   disabledModelType,
+  projectId,
 }: ContractModelsParams = {}): [
   { q: string; modelList: ContractModel[] },
   (prevState: string) => void,
@@ -29,6 +31,7 @@ export function useContractModels({
                 page: 1,
                 page_size: pageSize,
                 query: {
+                  "namespace.apiProject.instanceId": projectId,
                   $or: [
                     { name: { $like: `%${q}%` } },
                     { namespaceId: { $like: `%${q}%` } },
