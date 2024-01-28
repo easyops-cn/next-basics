@@ -202,6 +202,7 @@ describe("AddPropertyModal", () => {
 
   it("should work with response root node", async () => {
     const props = {
+      projectId: "abc",
       visible: true,
       isEdit: true,
       trackId: "root",
@@ -224,7 +225,7 @@ describe("AddPropertyModal", () => {
     });
 
     expect(wrapper.find(Link).prop("to")).toEqual(
-      "/contract-center/models/create"
+      "/contract-center/project/abc/model/create"
     );
 
     wrapper.setProps({

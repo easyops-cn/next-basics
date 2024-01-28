@@ -165,7 +165,10 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
         )}
       </div>
       {type === "model" && (
-        <Link target="_blank" to="/contract-center/models/create">
+        <Link
+          target="_blank"
+          to={`/contract-center/project/${projectId}/model/create`}
+        >
           {t(K.MODEL_DEFINITION_CREATE_TIPS)}
         </Link>
       )}
