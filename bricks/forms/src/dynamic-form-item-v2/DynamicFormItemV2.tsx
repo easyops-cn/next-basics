@@ -151,8 +151,6 @@ export const LegacyDynamicFormItemV2 = forwardRef(
                       <Col
                         style={{
                           display: hideRemoveBtn ? "none" : "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
                           marginLeft: "8px",
                         }}
                       >
