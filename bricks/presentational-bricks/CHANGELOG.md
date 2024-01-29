@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.317.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.317.1...@next-bricks/presentational-bricks@1.317.2) (2024-01-29)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** when  showSelectInfo is true,click "clear" select.row.keys.update no emit. ([c61639b](https://github.com/easyops-cn/next-basics/commit/c61639b57ed1be43c467495f297507666c828de6))
+
+
+
+
+
 ## [1.317.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.317.0...@next-bricks/presentational-bricks@1.317.1) (2024-01-25)
 
 
