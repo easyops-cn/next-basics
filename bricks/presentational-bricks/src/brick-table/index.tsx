@@ -1506,6 +1506,7 @@ export class BrickTableElement extends UpdatingElement {
                 new CustomEvent(this._selectUpdateEventName, { detail: [] })
               );
             }
+            this.selectRowKeysUpdate.emit([]);
           }}
         >
           {i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.CLEAR}`)}
