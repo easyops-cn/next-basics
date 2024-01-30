@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.318.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.317.2...@next-bricks/presentational-bricks@1.318.0) (2024-01-30)
+
+
+### Features
+
+* **brick-tree:** 树构件搜索优化(只展示模糊查询到的) ([556fb76](https://github.com/easyops-cn/next-basics/commit/556fb765373022f13168bb93960a3fd8837b6d03))
+
+
+
+
+
 ## [1.317.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.317.1...@next-bricks/presentational-bricks@1.317.2) (2024-01-29)
 
 
