@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.1.1...@next-bricks/nav-legacy@1.1.2) (2024-01-30)
+
+
+### Bug Fixes
+
+* 支持多租户用户切换组织_v2 ([d9f96b4](https://github.com/easyops-cn/next-basics/commit/d9f96b41a7f1a5b1fe56bc0480c161095f6d5948))
+
+
+
+
+
 ## [1.1.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.1.0...@next-bricks/nav-legacy@1.1.1) (2024-01-26)
 
 
