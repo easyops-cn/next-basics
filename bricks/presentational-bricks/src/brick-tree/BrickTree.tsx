@@ -173,6 +173,7 @@ export interface BrickTreeProps {
   >;
   dataSource: BrickTreeNodeProps[];
   searchable?: boolean;
+  searchQ?: string;
   placeholder?: string;
   searchParent?: boolean;
   checkAllEnabled?: boolean;
@@ -217,6 +218,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     dataSource = [],
     searchable = false,
     searchParent = false,
+    searchQ = "",
     placeholder = "",
     checkAllEnabled,
     checkedFilterConfig: { field, value, operator } = {},
@@ -242,7 +244,8 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     React.Key[] | { checked: React.Key[]; halfChecked: React.Key[] }
   >();
   const [expandedKeys, setExpandedKeys] = useState<React.Key[]>();
-  const [searchValue, setSearchValue] = useState<string>("");
+  const [searchValue, setSearchValue] = useState<string>(searchQ);
+  const [inputValue, setInputValue] = useState<string>(searchQ);
   const treeContainerRef = useRef<HTMLDivElement>();
   const nodeMatchedRef = useRef<boolean>(false);
 
@@ -330,7 +333,6 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
       setTimeout(() => {
         setSearchValue(value);
       });
-
       if (value) {
         const expandedKeys: React.Key[] = [];
 
@@ -348,9 +350,13 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
       if (isFilter) {
         onSearch(value);
       }
-    }, 500),
+    }, 300),
     [defaultData, searchParent, alsoSearchByKey]
   );
+  const handleOnChange = (value: string) => {
+    onChange(value);
+    setInputValue(value);
+  };
 
   const onCheckAllChange = (e: CheckboxChangeEvent) => {
     const checked = e.target.checked;
@@ -459,7 +465,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
                     const nodeEl = el.closest(".ant-tree-treenode") || el;
                     const treeContainerEl = treeContainerRef.current;
 
-                    treeContainerEl.scrollBy(
+                    treeContainerEl?.scrollBy(
                       undefined,
                       nodeEl.getBoundingClientRect().top -
                         treeContainerEl.getBoundingClientRect().top
@@ -552,7 +558,8 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
         <div style={{ display: "flex" }}>
           <Input.Search
             placeholder={placeholder}
-            onChange={(e) => onChange(e.target.value)}
+            onChange={(e) => handleOnChange(e.target.value)}
+            value={inputValue}
             style={{ marginBottom: 8 }}
             data-testid="search-input"
           />

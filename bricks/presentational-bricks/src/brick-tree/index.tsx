@@ -126,6 +126,14 @@ export class BrickTreeElement extends UpdatingElement {
   @property({ type: Boolean }) searchable: boolean;
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 搜索字符
+   */
+  @property({ type: String }) searchQ: string;
+
+  /**
    * @kind boolean
    * @required false
    * @default false
@@ -340,6 +348,7 @@ export class BrickTreeElement extends UpdatingElement {
             expandedKeys={this.expandedKeys}
             configProps={this.configProps}
             searchable={this.searchable}
+            searchQ={this.searchQ}
             placeholder={this.placeholder}
             searchParent={this.searchParent}
             checkAllEnabled={this.checkAllEnabled}
