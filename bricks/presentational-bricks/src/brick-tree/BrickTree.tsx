@@ -25,6 +25,7 @@ import {
   difference,
   intersection,
   debounce,
+  cloneDeep,
 } from "lodash";
 import { EventDataNode } from "rc-tree/lib/interface";
 import { UseBrickConf } from "@next-core/brick-types";
@@ -241,11 +242,11 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     React.Key[] | { checked: React.Key[]; halfChecked: React.Key[] }
   >();
   const [expandedKeys, setExpandedKeys] = useState<React.Key[]>();
-  const [searchValue, setSearchValue] = useState<string>();
+  const [searchValue, setSearchValue] = useState<string>("");
   const treeContainerRef = useRef<HTMLDivElement>();
   const nodeMatchedRef = useRef<boolean>(false);
 
-  const treeData = useMemo(
+  const defaultData = useMemo(
     () => getTreeNodes(dataSource, iconUseBrick),
     [dataSource]
   );
@@ -256,6 +257,32 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
         .map((v) => v.key) || [],
     [dataSource]
   );
+  const treeData = useMemo(() => {
+    const loop = (data: DataNode[]): DataNode[] => {
+      const filterTrees: DataNode[] = [];
+      for (let i = 0; i < data.length; i++) {
+        const node = cloneDeep(data[i]);
+        let children: DataNode[] = [];
+        if (node.children) {
+          node.children = children = loop(node.children);
+        }
+        const strTitle = node.title as string;
+        const _key = node.key as string;
+        const lowerCaseSearchValue = searchValue.toLocaleLowerCase();
+        const index = strTitle
+          .toLocaleLowerCase()
+          .indexOf(lowerCaseSearchValue);
+        const kIndex = alsoSearchByKey
+          ? _key.toString()?.toLocaleLowerCase().indexOf(lowerCaseSearchValue)
+          : -1;
+        if (index != -1 || kIndex != -1 || children.length)
+          filterTrees.push(node);
+      }
+      return filterTrees;
+    };
+    const data = searchValue ? loop(defaultData) : defaultData;
+    return data;
+  }, [searchValue, defaultData]);
 
   useEffect(() => {
     setSelectedKeys(_selectedKeys);
@@ -267,7 +294,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     setFilterCheckedKeys(difference(_checkedKeys, filterTreeKeys));
     if (
       _checkedKeys.length === 0 ||
-      intersection(_checkedKeys, getAllKeys(treeData))?.length === 0
+      intersection(_checkedKeys, getAllKeys(defaultData))?.length === 0
     ) {
       setAllChecked(false);
       setIndeterminate(false);
@@ -275,9 +302,9 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
       const checkedKeySet = new Set(_checkedKeys);
       let allChecked;
       if (!checkedNotRelevant) {
-        allChecked = getAllCheckedState(treeData, checkedKeySet);
+        allChecked = getAllCheckedState(defaultData, checkedKeySet);
       } else {
-        const allKeys = getAllKeys(treeData);
+        const allKeys = getAllKeys(defaultData);
         allChecked = allKeys.every((key) => checkedKeySet.has(key));
       }
       setAllChecked(allChecked);
@@ -308,7 +335,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
         const expandedKeys: React.Key[] = [];
 
         getExpandedKeysBySearchValue(
-          treeData,
+          defaultData,
           value.toLocaleLowerCase(),
           expandedKeys,
           {
@@ -322,12 +349,12 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
         onSearch(value);
       }
     }, 500),
-    [treeData, searchParent, alsoSearchByKey]
+    [defaultData, searchParent, alsoSearchByKey]
   );
 
   const onCheckAllChange = (e: CheckboxChangeEvent) => {
     const checked = e.target.checked;
-    const checkedKeys = checked ? getAllKeys(treeData) : [];
+    const checkedKeys = checked ? getAllKeys(defaultData) : [];
     let _filterCheckedKeys: React.Key[] = [];
     if (props.checkedFilterConfig) {
       _filterCheckedKeys = difference(checkedKeys, filterTreeKeys);
@@ -380,9 +407,9 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
       const checkedKeySet = new Set(_checkedKeys);
       let allChecked;
       if (!checkedNotRelevant) {
-        allChecked = treeData.every((node) => checkedKeySet.has(node.key));
+        allChecked = defaultData.every((node) => checkedKeySet.has(node.key));
       } else {
-        const allKeys = getAllKeys(treeData);
+        const allKeys = getAllKeys(defaultData);
         allChecked = allKeys.every((key) => checkedKeySet.has(key));
       }
       setAllChecked(allChecked);
