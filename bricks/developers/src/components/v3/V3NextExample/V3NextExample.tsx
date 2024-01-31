@@ -20,12 +20,13 @@ interface V3NextExampleProps {
   code?: string;
   altCode?: string;
   gap?: boolean;
+  onBlur?: (code: string, mode: string) => void;
 }
 
 const EXAMPLE_IFRAME_MIN_HEIGHT = 88;
 
 export function V3NextExample(props: V3NextExampleProps): React.ReactElement {
-  const { code, altCode, type, gap } = props;
+  const { code, altCode, type, gap, onBlur } = props;
 
   const iframeRef = useRef<HTMLIFrameElement>();
 
@@ -144,6 +145,7 @@ export function V3NextExample(props: V3NextExampleProps): React.ReactElement {
           value={defaultCode}
           mode={language}
           onDebouncedChange={setCurrentCode}
+          onBlur={onBlur}
         />
       </div>
       <div className={styles.toolbar}>

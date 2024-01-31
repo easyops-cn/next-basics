@@ -19,3 +19,4 @@ import "./lazy-bricks";
 import "./provider-group-list";
 import "./provider-group-menu";
 import "./data-providers/GetIllustrationsCategories";
+import "./v3-next-example";
