@@ -431,4 +431,18 @@ describe("BrickTree", () => {
     );
     expect(onCheck).lastCalledWith([]);
   });
+
+  it("should support searchQ ", async () => {
+    const { getByTestId } = render(
+      <BrickTree
+        dataSource={dataSource}
+        searchable
+        isFilter
+        searchQ="模糊查询"
+      />
+    );
+
+    const inputElement = getByTestId("search-input") as HTMLInputElement;
+    expect(inputElement.value).toBe("模糊查询");
+  });
 });
