@@ -13,16 +13,22 @@ describe("V3BrickEditor", () => {
   it("should work", () => {
     const value = `brick: div`;
     const onDebouncedChange = jest.fn();
+    const onBlur = jest.fn();
     const wrapper = mount(
       <V3BrickEditor
         value={value}
         onDebouncedChange={onDebouncedChange}
         mode="yaml"
+        onBlur={onBlur}
       />
     );
     wrapper.find(AceEditor).invoke("onChange")(`brick: span`);
     jest.runAllTimers();
     expect(onDebouncedChange).lastCalledWith("brick: span", "yaml");
+
+    wrapper.find(AceEditor).invoke("onBlur")(`brick: span`);
+    expect(onBlur).lastCalledWith("brick: span", "yaml");
+
     wrapper.find(Clipboard).invoke("onCopy")(`brick: span`, true);
     wrapper.find(Clipboard).invoke("onCopy")(`brick: span`, false);
   });

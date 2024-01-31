@@ -14,10 +14,11 @@ interface V3BrickEditorProps {
   value?: string;
   mode?: string;
   onDebouncedChange?: (value: string, mode: string) => void;
+  onBlur?: (value: string, mode: string) => void;
 }
 
 export function V3BrickEditor(props: V3BrickEditorProps): React.ReactElement {
-  const { mode, onDebouncedChange } = props;
+  const { mode, onDebouncedChange, onBlur } = props;
   const aceRef = React.useRef(null);
   const [valid, setValid] = React.useState(true);
   const [value, setValue] = React.useState(props.value ?? "");
@@ -41,6 +42,10 @@ export function V3BrickEditor(props: V3BrickEditorProps): React.ReactElement {
   const handleChange = (value: string): void => {
     setValue(value);
     debouncedChange?.(value, mode);
+  };
+
+  const handleBlur = (): void => {
+    onBlur?.(value, mode);
   };
 
   const onValidate: IAceEditorProps["onValidate"] = (annotations) => {
@@ -73,6 +78,7 @@ export function V3BrickEditor(props: V3BrickEditorProps): React.ReactElement {
         }}
         onChange={handleChange}
         onValidate={onValidate}
+        onBlur={handleBlur}
       />
       <div className={cssStyle.copyIcon}>
         <Clipboard
