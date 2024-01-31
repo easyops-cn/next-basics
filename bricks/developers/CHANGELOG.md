@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.369.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.368.2...@next-bricks/developers@1.369.0) (2024-01-31)
+
+
+### Features
+
+* wrapper v3 example ([2426366](https://github.com/easyops-cn/next-basics/commit/24263668d82c2ea8d7bb5b2ee1b481d654913f35))
+
+
+
+
+
 ## [1.368.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.368.1...@next-bricks/developers@1.368.2) (2024-01-25)
 
 **Note:** Version bump only for package @next-bricks/developers
