@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.2.0...@next-bricks/nav-legacy@1.2.1) (2024-02-01)
+
+
+### Bug Fixes
+
+* 用户切回主org时，页面未刷新 ([12f8ecc](https://github.com/easyops-cn/next-basics/commit/12f8ecc2832a1040f74bc98ea2941b20d00ccb3d))
+
+
+
+
+
 # [1.2.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.1.2...@next-bricks/nav-legacy@1.2.0) (2024-02-01)
 
 
