@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.1.2...@next-bricks/nav-legacy@1.2.0) (2024-02-01)
+
+
+### Features
+
+* UserAdminApi_getUserOrgs 错误处理 ([d88335a](https://github.com/easyops-cn/next-basics/commit/d88335aa51c3c5689c265a7121a3f5ca5dfe3000))
+
+
+
+
+
 ## [1.1.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.1.1...@next-bricks/nav-legacy@1.1.2) (2024-01-30)
 
 
