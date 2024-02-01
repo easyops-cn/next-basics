@@ -83,7 +83,7 @@ export function AppSetting(props: {
         const userInfo = await UserAdminApi_getUserInfoV2(username);
         const orgList = await UserAdminApi_getUserOrgs({ username });
         setAvatarSrc(userInfo.user_icon);
-        setUserOrgs(orgList.orgList);
+        setUserOrgs(orgList?.orgList || []);
         setCurOrg(userInfo.org);
       }
     })();
