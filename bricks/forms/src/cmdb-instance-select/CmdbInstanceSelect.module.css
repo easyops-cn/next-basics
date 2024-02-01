@@ -1,4 +1,5 @@
 .avatar {
+  flex-shrink: 0;
   &.defaultIcon {
     background-color: #167be0;
     vertical-align: middle;
