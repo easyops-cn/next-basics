@@ -199,7 +199,7 @@ export function AppSetting(props: {
     try {
       await AuthApi_switchOrg({ org });
       message.success(t(K.SWITCH_ORG_SUCCESS));
-      getHistory().reload();
+      location.reload();
     } catch (error) {
       handleHttpError(error);
     }
