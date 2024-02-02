@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.285.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.284.3...@next-bricks/forms@1.285.0) (2024-02-02)
+
+
+### Features
+
+* **time-range-picker:** add allowEqual ([4c5d4ed](https://github.com/easyops-cn/next-basics/commit/4c5d4edf6c1718b6b86ecac85416dd91950a64d7))
+
+
+
+
+
 ## [1.284.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.284.2...@next-bricks/forms@1.284.3) (2024-02-01)
 
 **Note:** Version bump only for package @next-bricks/forms
