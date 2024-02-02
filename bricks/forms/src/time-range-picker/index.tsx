@@ -119,11 +119,21 @@ export class TimeRangePickerElement extends FormItemElement {
   @property({ attribute: false })
   presetRanges: presetRangeType[] = [];
 
+  /**
+   * @description 开始时间结束时间是否允许相等
+   */
+  @property({ type: Boolean })
+  allowEqual: boolean;
+
   unequal = (
     rule: any,
     value: TimeRange,
     callback: (err?: any) => void
   ): void => {
+    if (this.allowEqual) {
+      callback();
+      return;
+    }
     try {
       if (
         value.startTime &&
