@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.319.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.319.0...@next-bricks/presentational-bricks@1.319.1) (2024-02-02)
+
+
+### Bug Fixes
+
+* **table:** 兼容没有定义rowKey,导致取不到数据 ([fc174eb](https://github.com/easyops-cn/next-basics/commit/fc174eb4749ac2d19eb3e5c19a8009506727de12))
+
+
+
+
+
 # [1.319.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.318.0...@next-bricks/presentational-bricks@1.319.0) (2024-01-31)
 
 
