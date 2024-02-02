@@ -79,7 +79,9 @@ export function AppSetting(props: {
     (async () => {
       // istanbul ignore else
       if (username) {
-        const userInfo = await UserAdminApi_getUserInfoV2(username);
+        const userInfo = await UserAdminApi_getUserInfoV2(username, {
+          params: { org: curOrg },
+        });
         const orgList = await UserAdminApi_getUserOrgs({ username });
         setAvatarSrc(userInfo.user_icon);
         setUserOrgs(orgList?.orgList || []);
