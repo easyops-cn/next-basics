@@ -31,6 +31,7 @@ export function AppSetting(props: {
   const { t } = useTranslation(NS_NAV_LEGACY);
   const currentApp = useCurrentApp();
   const username = getAuth().username;
+  const curOrg = getAuth().org;
   const userShowValue = getAuth().userShowValue;
   const currentLang = i18next.language?.split("-")[0];
   const { appsTheme }: Record<string, any> = getRuntime().getMiscSettings();
@@ -42,8 +43,6 @@ export function AppSetting(props: {
   const [userOrgs, setUserOrgs] = React.useState<
     UserAdminApi_GetUserOrgsResponseBody_orgList_item[]
   >([]);
-
-  const [curOrg, setCurOrg] = React.useState(getAuth().org);
 
   const [accountEntryEnabled, setAccountEntry] = React.useState<boolean>(false);
 
@@ -84,7 +83,6 @@ export function AppSetting(props: {
         const orgList = await UserAdminApi_getUserOrgs({ username });
         setAvatarSrc(userInfo.user_icon);
         setUserOrgs(orgList?.orgList || []);
-        setCurOrg(userInfo.org);
       }
     })();
   }, [username]);
