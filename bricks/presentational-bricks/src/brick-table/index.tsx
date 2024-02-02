@@ -1196,21 +1196,29 @@ export class BrickTableElement extends UpdatingElement {
     return matchedParent;
   };
 
-  private _findSelectedRowsByRowKeys = (selectedRowKeys: string[]) => {
+  private _findSelectedRowsByRowKeys = (
+    selectedRowKeys: string[],
+    rows: any[]
+  ) => {
     const rowKey = this._getRowKey();
     const flattenedList = flatMapDeep(this._pureSource, (row) =>
       (row.children || []).concat(row)
     );
-    const selectedRows = selectedRowKeys.map((key) =>
-      flattenedList.find((rowData) => rowData[rowKey] === key)
+    const selectedRows = selectedRowKeys.map(
+      (key) =>
+        flattenedList.find((rowData) => rowData[rowKey] === key) ||
+        rows.find((rowData) => rowData[rowKey] === key)
     );
     return selectedRows;
   };
   // istanbul ignore next
-  private _handleRowSelectChange = (selectedRowKeys: string[]): void => {
+  private _handleRowSelectChange = (
+    selectedRowKeys: string[],
+    rows: any[]
+  ): void => {
     const rowKey = this._getRowKey();
     //  这里统一前端搜索的selectedRows，antd事件吐出来的会存在undefined（原选中的数据不在过滤之后的dataSource里面）
-    const selectedRows = this._findSelectedRowsByRowKeys(selectedRowKeys);
+    const selectedRows = this._findSelectedRowsByRowKeys(selectedRowKeys, rows);
     const rowKeyRowMap = keyBy(selectedRows, rowKey);
 
     if (this._selected) {
