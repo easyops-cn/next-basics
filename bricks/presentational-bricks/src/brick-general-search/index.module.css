@@ -80,7 +80,7 @@
 }
 .selectSearchBox {
   width: 100%;
-  display: inline-flex;
+  display: flex;
   background: var(--color-fill-bg-container-1);
   height: 56px;
   border-radius: 37px;
