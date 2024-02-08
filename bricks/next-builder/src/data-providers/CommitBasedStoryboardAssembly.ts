@@ -239,7 +239,7 @@ export async function CommitBasedStoryboardAssembly({
       mockId: simpleHash(`${projectId}.${new Date().getTime()}`),
       mockList: basicProjectInfoResponse.mockRule
         .filter((item: { isEnable: boolean }) => item.isEnable)
-        ?.map((item: { url: string; provider: string }) => ({
+        ?.map((item: { url: string; provider: string; method: string }) => ({
           uri: item.url,
           provider: item.provider,
           method: item.method,
