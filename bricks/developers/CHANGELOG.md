@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.369.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.369.0...@next-bricks/developers@1.369.1) (2024-02-19)
+
+
+### Bug Fixes
+
+* render doc error when switch v2 v3 brick ([0fd74ea](https://github.com/easyops-cn/next-basics/commit/0fd74ea3c43df3e104efce7d8fe494cdf659d8ab))
+
+
+
+
+
 # [1.369.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.368.2...@next-bricks/developers@1.369.0) (2024-01-31)
 
 
