@@ -71,37 +71,39 @@ export interface BrickDocumentProps
   v3Brick?: boolean;
 }
 
-export function BrickDocument({
-  storyId: brickId,
-  storyType: brickType,
-  doc,
-  renderLink = true,
-  v3Brick,
-}: BrickDocumentProps): React.ReactElement {
+export function BrickDocument(props: BrickDocumentProps): React.ReactElement {
+  const { renderLink = true } = props;
   const { t } = useTranslation(NS_DEVELOPERS);
-  const [brickDoc, setBrickDoc] = useState<StoryDoc>(null);
   const [rotate, setRotate] = useState(180);
-  const [interfaceIds, setInterfaceIds] = useState([]);
+
+  const {
+    brickId,
+    brickType,
+    v3Brick,
+    brickDoc,
+    interfaceIds,
+    presentedSharedDescList,
+  } = useMemo(() => {
+    const validDoc = props.storyId && props.storyType && props.doc;
+    return {
+      brickId: props.storyId,
+      brickType: props.storyType,
+      v3Brick: props.v3Brick,
+      brickDoc: validDoc ? props.doc : null,
+      interfaceIds: validDoc
+        ? (props.v3Brick
+            ? props.doc?.interface?.types?.map((i) => i.name)
+            : props.doc?.interface?.map((i) => i.name)) || []
+        : [],
+      presentedSharedDescList: props.v3Brick
+        ? []
+        : collectSharedTypeList(props.doc),
+    };
+  }, [props.doc, props.storyId, props.storyType, props.v3Brick]);
 
   const isV3Brick = <V2Doc, V3Doc>(event: V2Doc | V3Doc): event is V3Doc => {
     return v3Brick;
   };
-
-  const presentedSharedDescList = useMemo(
-    () => (v3Brick ? [] : collectSharedTypeList(doc)),
-    [v3Brick, doc]
-  );
-
-  useEffect(() => {
-    if (brickId && brickType && doc) {
-      setBrickDoc(doc);
-      setInterfaceIds(
-        (v3Brick
-          ? doc?.interface?.types?.map((i) => i.name)
-          : doc?.interface?.map((i) => i.name)) || []
-      );
-    }
-  }, [brickId, brickType, v3Brick, doc]);
 
   const handleCreateButtonClick = (): void => {
     if (rotate === 180) {
