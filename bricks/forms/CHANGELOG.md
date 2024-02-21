@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.285.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.285.0...@next-bricks/forms@1.285.1) (2024-02-21)
+
+
+### Bug Fixes
+
+* 下拉框选择用户后错位 ([53af3c7](https://github.com/easyops-cn/next-basics/commit/53af3c742eabc41e6635d74f79c414cb1627d137))
+
+
+
+
+
 # [1.285.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.284.3...@next-bricks/forms@1.285.0) (2024-02-02)
 
 
