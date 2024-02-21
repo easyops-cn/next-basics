@@ -337,16 +337,18 @@ export function CmdbInstanceSelectItem(
                 <Tooltip title={props.showTooltip ? optionLabel : undefined}>
                   <div className={classNames(style.optionDiv)}>
                     {op.user_icon && (
-                      <Avatar
-                        src={op.user_icon}
-                        size={24}
-                        className={classNames(style.avatar, {
-                          [style.defaultIcon]: op.user_icon === "defaultIcon",
-                        })}
-                      >
-                        {op.user_icon === "defaultIcon" &&
-                          op.label?.slice(0, 2)}
-                      </Avatar>
+                      <span>
+                        <Avatar
+                          src={op.user_icon}
+                          size={24}
+                          className={classNames(style.avatar, {
+                            [style.defaultIcon]: op.user_icon === "defaultIcon",
+                          })}
+                        >
+                          {op.user_icon === "defaultIcon" &&
+                            op.label?.slice(0, 2)}
+                        </Avatar>
+                      </span>
                     )}
                     <span
                       className={classNames(style.optionSpan)}
@@ -398,7 +400,7 @@ export function CmdbInstanceSelect(
   }, [props.useBrickVisible]);
 
   return (
-    <FormItemWrapper {...props}>
+    <FormItemWrapper {...props} className={style.formItemWrapper}>
       <RefCmdbInstanceSelectItem
         {...props}
         onChange={handleChange}

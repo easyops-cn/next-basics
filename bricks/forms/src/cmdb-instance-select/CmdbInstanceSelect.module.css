@@ -1,3 +1,6 @@
+.formItemWrapper :global(.ant-legacy-form-item-children) {
+  display: flex !important;
+}
 .avatar {
   flex-shrink: 0;
   &.defaultIcon {
