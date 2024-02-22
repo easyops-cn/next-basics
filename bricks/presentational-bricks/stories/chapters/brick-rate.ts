@@ -10,8 +10,8 @@ export const BrickRateStory: Story = {
     zh: "评分",
   },
   description: {
-    en: "A quick rating operation on something",
-    zh: "对事物进行快速的评级操作",
+    en: "allows users to rate or give feedback using a visually appealing interface. This component is designed to offer a variety of features including adjustable rating levels, customizable icons, and color-coding for each level",
+    zh: "户可通过它以直观的界面进行评分或反馈。此构件提供多种功能，包括可调整的评分等级、自定义图标以及为每个等级设置颜色编码",
   },
   icon: {
     imgSrc: brickRateSvg,

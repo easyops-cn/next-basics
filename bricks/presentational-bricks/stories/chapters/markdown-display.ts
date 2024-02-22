@@ -11,8 +11,8 @@ export const MarkdownDisplayStory: Story = {
     zh: "Markdown信息展示",
   },
   description: {
-    en: "",
-    zh: "Markdown展示",
+    en: "Markdown display, supports image preview, as well as flexible image manipulation settings",
+    zh: "Markdown展示，支持图片预览，以及灵活的图片操作设置",
   },
   icon: {
     imgSrc: markdownDisplaySvg,

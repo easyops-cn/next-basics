@@ -14,8 +14,8 @@ export const BasicIconStory: Story = {
     zh: "基础图标",
   },
   description: {
-    en: "icon show",
-    zh: "图标展示",
+    en: "basic-icon allows developers to easily integrate various icon sets into their web applications. It supports icons from our platform and custom images, providing great flexibility in design implementation. Through a series of customizable attributes such as `size`, `renderBg`, and `bg`, precise control over the appearance of icons is achieved, ensuring seamless integration with the overall interface.",
+    zh: "图标展示，使开发人员能够轻松地将各种图标集成到他们的网页应用中。它支持我们平台的图标和自定义图片的图标，在设计实现上提供了极大的灵活性。通过一系列可自定义的属性，如 `size`、`renderBg` 和 `bg`，能够精确控制图标的外观，确保它们与整体界面无缝融合。",
   },
   icon: {
     imgSrc: basicIconSvg,

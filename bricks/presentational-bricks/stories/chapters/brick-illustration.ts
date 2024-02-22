@@ -12,8 +12,8 @@ export const BrickIllustrationStory: Story = {
   },
   tags: [],
   description: {
-    en: "illustration",
-    zh: "插画展示构件内容来自`插画库`，如需更多类型请到`插画库`挑选",
+    en: "Simplified illustration display in front-end development,It defines a structure that includes properties, examples, and events, allowing developers to easily integrate and customize illustrative elements within their applications",
+    zh: "简化前端开发中的插画展示。它定义了一套包含属性、示例和事件的结构，使开发者能够轻松地将插画元素集成到应用程序中，并进行个性化定制",
   },
   icon: {
     imgSrc: brickIllustrationSvg,

@@ -10,8 +10,8 @@ export const CopyableTextStory: Story = {
     zh: "可复制文本",
   },
   description: {
-    en: "copyable text component",
-    zh: "可复制文本",
+    en: "allows users to easily copy text with a simple click interaction,customizable tooltips, and options to hide the text or change the display style",
+    zh: "通过简单的点击交互轻松复制文本,可自定义的提示文案，以及隐藏文本或更改显示样式的选项",
   },
   icon: {
     imgSrc: copyableTextSvg,

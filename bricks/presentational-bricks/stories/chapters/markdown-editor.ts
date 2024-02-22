@@ -14,8 +14,8 @@ export const MarkdownEditorStory: Story = {
     zh: "Markdown编辑",
   },
   description: {
-    en: "",
-    zh: "Markdown编辑构件",
+    en: "The Markdown editing component provides a series of features that support editing and real-time preview. The Markdown editor can also be easily integrated into forms or used as a standalone component",
+    zh: "Markdown编辑构件，提供了一系列功能，支持编辑并实时预览。也可以将 Markdown 编辑器轻松地集成到表单中，或者作为一个独立的构件使用",
   },
   icon: {
     imgSrc: markdownEditorSvg,

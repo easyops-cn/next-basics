@@ -13,8 +13,8 @@ export const BrickHumanizeTimeStory: Story = {
   type: "brick",
   author: "ice",
   text: {
-    en: "humanize time",
-    zh: "人性化时间展示",
+    en: "a versatile component designed for displaying time in a human-readable format within a front-end application. It accepts a timestamp or a string value and offers various configurations to tailor the output according to different needs",
+    zh: "以易于理解的方式显示时间信息的多功能构件。它接收时间戳或字符串值，并提供了多种配置选项，以根据不同需求定制输出",
   },
   description: {
     en: "1h ago",

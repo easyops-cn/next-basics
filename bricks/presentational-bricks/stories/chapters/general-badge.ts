@@ -10,8 +10,8 @@ export const GeneralBadgeStory: Story = {
     zh: "徽标数",
   },
   description: {
-    en: "show badge, content support text or bricks",
-    zh: "徽标数展示，内容支持文字或构件",
+    en: "a versatile display component that serves as a notification badge, capable of presenting text, icons, and even other bricks within it. This component is ideal for scenarios where you need to draw attention to dynamic updates or counts, such as new messages or notifications. It offers a variety of customizable properties including content, color, count display, and data sources",
+    zh: "可用作通知徽标，能够展示文本、图标，甚至其他构件内部内容。该组件非常适合需要在动态更新或计数时吸引用户注意的场景，如新消息或通知。它提供了一系列可自定义的属性，包括内容、颜色、计数显示和数据源",
   },
   icon: {
     imgSrc: generalBadgeSvg,

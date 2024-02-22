@@ -14,8 +14,8 @@ export const BrickTreeStory: Story = {
     imgSrc: brickTreeSvg,
   },
   description: {
-    en: "tree list",
-    zh: "常用于展示应用业务树、模型树等，可以完整展现其中层级关系，并具有展开收起选择等交互功能",
+    en: "allowing for an interactive and hierarchical display of data. It is designed to enhance user experience by providing a range of features including selection, checking, expansion, and search functionalities",
+    zh: "以树形视图的形式展现数据，支持交互式的层次结构展示。该构件通过提供选择、勾选、展开和搜索等丰富的功能",
   },
   conf: [
     {

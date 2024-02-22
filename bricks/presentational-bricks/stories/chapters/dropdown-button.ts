@@ -10,8 +10,8 @@ export const DropdownButtonStory: Story = {
     zh: "带下拉框的按钮",
   },
   description: {
-    en: "A button is on the left, and a related functional menu is on the right. ",
-    zh: "左边是按钮，右边是额外的相关功能菜单",
+    en: "It features a button with an attached dropdown menu, providing users a compact way to trigger actions or select options. This brick offers various properties to customize the appearance and behavior, making it an ideal choice for developers seeking a balance between functionality and simplicity",
+    zh: "集成了一个按钮和一个下拉菜单，为用户提供了一种紧凑的方式来触发动作或选择选项。该构件提供多种属性以定制外观和行为，对于寻求功能和简洁性平衡的开发者来说，这是一个理想的选择",
   },
   icon: {
     imgSrc: dropdownButtonSvg,

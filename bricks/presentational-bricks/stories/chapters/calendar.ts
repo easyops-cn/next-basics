@@ -11,8 +11,8 @@ export const CalendarStory: Story = {
     zh: "日历",
   },
   description: {
-    en: "The calendar container",
-    zh: "按照日历形式展示数据的容器",
+    en: "The calendar container,The brick supports various event responses such as date changes, panel changes, and date selection, and offers a rich set of property configurations, including default date, initial mode, full-screen display, and custom rendering of date cells",
+    zh: "按照日历形式展示数据的容器，该构件支持多种事件响应，如日期变化、日期面板变化及点击选择日期等，并提供了丰富的属性配置，如默认日期、初始模式、是否全屏展示以及自定义渲染日期单元格等",
   },
   icon: {
     imgSrc: calendarSvg,

@@ -10,8 +10,8 @@ export const GeneralListStory: Story = {
     zh: "列表布局",
   },
   description: {
-    en: "general list",
-    zh: "可配置具体每个item构件，常用于卡片列表",
+    en: "This container layout component provides an elegant and flexible way to present card lists of information",
+    zh: "该布局构件为容器类布局，提供了一种简洁、灵活的方式来展示信息卡片列表",
   },
   icon: {
     imgSrc: generalListSvg,

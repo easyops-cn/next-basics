@@ -13,8 +13,8 @@ export const CollapsibleCardItemStory: Story = {
     zh: "可折叠卡片项",
   },
   description: {
-    en: "collapsible card item",
-    zh: "长条形可折叠卡片，里面可以放表单／description等构件",
+    en: "This brick offers an interactive UI element that allows users to expand or collapse content areas by clicking on the card title. Its main features include customizable card titles, descriptions, icons, and styles, as well as support for hover effects and custom headers",
+    zh: "该构件提供了一种交互式的界面元素，允许用户通过点击卡片标题来展开或折叠内容区域。其主要特性包括自定义卡片标题、描述信息、图标以及样式设置，同时支持hover效果和自定义头部",
   },
   icon: {
     imgSrc: collapsibleCardItemSvg,

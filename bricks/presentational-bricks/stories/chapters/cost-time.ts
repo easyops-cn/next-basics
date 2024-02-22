@@ -10,8 +10,8 @@ export const CostTimeStory: Story = {
     zh: "文本转换-自动转换unix时间耗时",
   },
   description: {
-    en: "such as 15 seconds,one day",
-    zh: "如：15秒、1天",
+    en: "primarily used for data transformation presentation. It can represent the time cost with millisecond-level accuracy and allows for custom start and end times",
+    zh: "主要用于数据转换展示，能够以毫秒级精度表现消耗时间，并允许自定义起始与结束时间,用户可通过属性配置单位样式，以适应不同的界面设计需求",
   },
   icon: {
     imgSrc: costTimeSvg,

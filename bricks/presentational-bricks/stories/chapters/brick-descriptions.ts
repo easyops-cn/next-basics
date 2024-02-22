@@ -11,8 +11,8 @@ export const BrickDescriptionsStory: Story = {
     zh: "描述列表",
   },
   description: {
-    en: "",
-    zh: "常用于概要信息的描述，2~3列",
+    en: "Commonly used for describing summary information,offering a variety of properties that allow for the creation of descriptive lists with customizable layouts, border options, and size adjustments. It also supports the integration of other bricks, such as `brick-tag`, to enhance the display of information",
+    zh: "常用于概要信息的描述，它提供了一系列属性，用于创建具有自定义布局、边框选项和尺寸调整的描述列表。此外，它还支持与其他构件（如 `brick-tag`）的集成，以丰富信息的展示方式",
   },
   icon: {
     imgSrc: brickDescriptionsSvg,

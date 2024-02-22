@@ -10,8 +10,8 @@ export const TextCollapseStory: Story = {
     zh: "可折叠文本",
   },
   description: {
-    en: "copyable text component",
-    zh: "可折叠文本",
+    en: "displaying collapsible text content. Its primary features include the ability to set the displayed text and specify the number of lines visible when collapsed",
+    zh: "主要用于展示可折叠的文本内容。它的主要特性包括可以设定展示的文本内容以及折叠后显示的行数",
   },
   icon: {
     imgSrc: textCollapseSvg,

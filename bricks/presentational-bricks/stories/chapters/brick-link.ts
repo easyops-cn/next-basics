@@ -15,8 +15,8 @@ export const BrickLinkStory: Story = {
     zh: "链接",
   },
   description: {
-    en: "",
-    zh: "将值渲染成跳转链接，支持url模板配置",
+    en: "Link component,it supports a variety of property configurations and event handling, making the creation and customization of links extremely convenient. The link component not only provides basic text and URL settings but also supports custom label colors, underlining, icons, and disabled states, among other UI features",
+    zh: "链接，该构件支持丰富的属性配置和事件处理，使得创建和定制链接变得极其便捷。链接构件不仅提供了基础的文字和URL设置，还支持自定义标签颜色、下划线显示、图标以及禁用状态等UI特性",
   },
   icon: {
     imgSrc: brickLinkSvg,

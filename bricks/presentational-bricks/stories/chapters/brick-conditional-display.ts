@@ -11,8 +11,8 @@ export const BrickConditionalDisplayStory: Story = {
     zh: "Tag标签-条件判断展示",
   },
   description: {
-    en: "",
-    zh: "按不同条件渲染，比如告警数为0是绿色，大于1时显示黄色, 更灵活的方式请通过表达式、函数来做数据处理",
+    en: "the brick is categorized under data transformation. This component is designed to process data based on predefined rules and present text content with different styles accordingly. Its core functionality relies on MongoDB's query operators, allowing developers to define complex display rules. By configuring the data source and display rules, scenarios such as grading scores can be presented accurately",
+    zh: "此构件属于数据转换类别，主要用于根据预设的规则对数据进行处理，并以不同的样式展示相应的文本内容。允许开发者定义复杂的展示规则。通过配置数据源和展示规则，可以实现如成绩等级划分等场景的精准展示",
   },
   icon: {
     imgSrc: brickConditionalDisplaySvg,

@@ -11,8 +11,8 @@ export const BrickQuickEntriesStory: Story = {
     zh: "快捷入口",
   },
   description: {
-    en: "show multiple quick entries",
-    zh: "展示多个快捷入口",
+    en: "show multiple quick entries, which supports multi-column and multi-row layouts, suitable for creating quick entries, statistical cards, and more",
+    zh: "展示多个快捷入口，它支持多列多行的布局方式，可用于创建快捷入口、统计卡片等多种界面元素",
   },
   icon: {
     imgSrc: brickQuickEntriesSvg,

@@ -14,8 +14,8 @@ export const LogDisplayStory: Story = {
     zh: "日志内容展示",
   },
   description: {
-    en: "Show Log",
-    zh: "显示日志相关信息",
+    en: "This brick is designed specifically for displaying text-based log information and supports a variety of configuration options to adapt to different usage scenarios",
+    zh: "该构件是为展示文本日志信息而设计的，支持多种配置选项以适应不同的使用场景",
   },
   icon: {
     imgSrc: logDisplaySvg,

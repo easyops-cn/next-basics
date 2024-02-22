@@ -14,8 +14,8 @@ export const BrickTimelineStory: Story = {
     zh: "时间轴",
   },
   description: {
-    en: "show information by timeline",
-    zh: "垂直展示的时间流信息，常用于变更历史、工作动态等",
+    en: "primarily used to present data in the form of a timeline. It comes with a variety of configurable options such as data sources, custom bricks, and timeline types. The Timeline Brick supports responsive design, allowing for color mapping based on different data states to enhance the user's visual experience",
+    zh: "该构件主要用于以时间线的形式展示数据。其具备丰富的配置项，如数据源、自定义构件以及时间轴类型等。时间轴构件支持响应式布局，可以根据不同的数据状态映射显示相应颜色，增强用户视觉体验",
   },
   icon: {
     imgSrc: brickTimelineSvg,
