@@ -400,7 +400,7 @@ export function CmdbInstanceSelect(
   }, [props.useBrickVisible]);
 
   return (
-    <FormItemWrapper {...props} className={style.formItemWrapper}>
+    <FormItemWrapper {...props}>
       <RefCmdbInstanceSelectItem
         {...props}
         onChange={handleChange}
