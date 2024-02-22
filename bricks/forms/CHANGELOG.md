@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.285.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.285.1...@next-bricks/forms@1.285.2) (2024-02-22)
+
+
+### Bug Fixes
+
+* cmdb-instance-select style ([fc7bf76](https://github.com/easyops-cn/next-basics/commit/fc7bf76b2e594b2915c4d01d9b5d239a6423f35b))
+
+
+
+
+
 ## [1.285.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.285.0...@next-bricks/forms@1.285.1) (2024-02-21)
 
 
