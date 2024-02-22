@@ -147,6 +147,12 @@ html[data-theme="dark"] {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  :global(.ant-table-filter-column-title) {
+    max-width: 240px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 .tableThTransparent {
