@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.319.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.319.2...@next-bricks/presentational-bricks@1.319.3) (2024-02-22)
+
+
+### Bug Fixes
+
+* 当表头文案太长会把筛选框图标挤出去,看不到筛选图标 ([73e88d4](https://github.com/easyops-cn/next-basics/commit/73e88d4642fa86ab48cd572852b651fc31291a2a))
+
+
+
+
+
 ## [1.319.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.319.1...@next-bricks/presentational-bricks@1.319.2) (2024-02-04)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
