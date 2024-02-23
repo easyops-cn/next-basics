@@ -10,8 +10,8 @@ export const GeneralPaginationStory: Story = {
     zh: "分页",
   },
   description: {
-    en: "General pagination brick",
-    zh: "通用分页构件",
+    en: "This brick is primarily designed for implementing data pagination to allow users to navigate between different pages",
+    zh: "主要用于实现数据分页显示功能，让用户能够在不同的页面间进行导航",
   },
   icon: {
     imgSrc: generalPaginationSvg,

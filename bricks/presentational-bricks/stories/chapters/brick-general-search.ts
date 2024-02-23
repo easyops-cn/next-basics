@@ -12,8 +12,8 @@ export const BrickGeneralSearchStory: Story = {
     zh: "搜索框",
   },
   description: {
-    en: "search",
-    zh: "搜索框，满足大部分的搜索需求",
+    en: "search input, it offers various events which cater to different scenarios and user interactions,The UI can be customized with options for size, shape, input style, button style, and more",
+    zh: "搜索框，具备多种事件处理功能以适应不同的场景和用户交互需求,此外，界面样式可以通过大小、形状、输入框样式和按钮样式等进行自定义",
   },
   icon: {
     imgSrc: brickGeneralSearchSvg,

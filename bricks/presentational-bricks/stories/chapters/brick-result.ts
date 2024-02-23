@@ -16,8 +16,8 @@ export const BrickResultStory: Story = {
     zh: "结果提示",
   },
   description: {
-    en: "result page with status, title, subTitle and icon",
-    zh: "结果页面，可配置其状态，标题，次要标题和自定义图标",
+    en: "offers a suite of feedback and tooltip components,including result status display, primary and secondary titles, custom icons, and illustration configurations",
+    zh: "提供了一系列的反馈和提示的构件，包括结果状态展示、主次标题、自定义图标及插画配置等。通过灵活配置`status`属性，可以轻松实现不同状态下的视觉展示，如成功、信息、警告以及404等状态",
   },
   icon: {
     imgSrc: brickResultSvg,

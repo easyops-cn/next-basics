@@ -13,8 +13,8 @@ export const CardItemStory: Story = {
   type: "brick",
   author: "lynette",
   text: {
-    en: "Information Display Card",
-    zh: "信息展示卡片",
+    en: "Information Display Card,Rich configuration options and display effects. This component is mainly used to display card information with operational areas, such as resource monitoring, IT resource management, and other scenarios",
+    zh: "信息展示卡片，具有丰富的配置选项和展示效果。该构件主要用于展示具有操作区域的卡片信息，如资源监控、IT资源管理等场景",
   },
   description: {
     en: "General card item",

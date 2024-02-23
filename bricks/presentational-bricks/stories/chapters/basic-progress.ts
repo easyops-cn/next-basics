@@ -14,8 +14,8 @@ export const BasicProgressStory: Story = {
     zh: "进度条",
   },
   description: {
-    en: "progress show",
-    zh: "进度条展示",
+    en: "This component is primarily used for displaying progress information and supports both linear and circular presentation styles. Its main features include customizable progress values, display text, description information, and color mapping. By configuring properties, it is possible to achieve different color changes to reflect different stages of progress",
+    zh: "展示进度信息，支持线性与圆形两种展示方式。其主要特性包括：可自定义进度值、展示文本、描述信息以及颜色映射等。通过配置属性，可以实现不同的颜色变化，以反映不同的进度阶段",
   },
   icon: {
     imgSrc: basicProgressSvg,

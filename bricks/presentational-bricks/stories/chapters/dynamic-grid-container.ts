@@ -14,8 +14,8 @@ export const DynamicGridContainerStory: Story = {
     zh: "动态网格布局",
   },
   description: {
-    en: "",
-    zh: "提供动态网格布局，可自定义样式",
+    en: "a versatile grid layout container. it supports custom styles. The core feature lies in its ability to dynamically render child bricks based on the provided `data` array. Each child brick can correspond to different data items",
+    zh: "一个功能强大的grid布局容器，该构件支持自定义样式，其核心特性在于能根据传入的`data`数组动态渲染子构件`useBrick`，每个子构件可对应不同的数据项",
   },
   icon: {
     imgSrc: dynamicGridContainerSvg,

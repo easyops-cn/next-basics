@@ -11,8 +11,8 @@ export const GeneralLabelStory: Story = {
     zh: "文本信息展示-可配置前后图标与链接",
   },
   description: {
-    en: "Display label,prefix icon and suffix icon.Support for configuration click event and url.",
-    zh: "可用来展示基本文案、前后缀图标，可配置点击事件和 url 的通用 label 构件",
+    en: "suitable for use cases that require displaying static text information on the interface. The component supports a variety of attribute configurations, such as text content, prefix and suffix icons, URL links, making the presentation of information more intuitive and visually appealing",
+    zh: "支持丰富的属性配置，如文字内容、前后缀图标、链接URL等，使得信息的呈现更加直观和美观",
   },
   icon: {
     imgSrc: generalLabelSvg,

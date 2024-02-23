@@ -10,8 +10,8 @@ export const BrickCollapseCardStory: Story = {
     zh: "详情折叠",
   },
   description: {
-    en: "",
-    zh: "详情折叠，有需要再展开，避免一开始太喧宾夺主，如工具详情",
+    en: "This component is a flexible UI element designed for displaying expandable and collapsible card information. It supports custom titles and descriptions, as well as defining text and icons for expanded and collapsed states. The card component can be easily integrated into various front-end applications, offering rich interaction effects through simple property configurations",
+    zh: "详情折叠，主要用于展示可以展开和收起的卡片信息。它支持自定义标题和描述，以及定义展开和收起状态时的文本和图标。该构件可以轻松集成到各种前端应用中，通过简单的属性配置，即可实现丰富的交互效果",
   },
   icon: {
     imgSrc: brickCollapseCardSvg,

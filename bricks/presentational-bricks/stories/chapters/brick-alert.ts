@@ -16,8 +16,8 @@ export const BrickAlertStory: Story = {
     zh: "警告提示",
   },
   description: {
-    en: "alert content, configurable with color type, description and showIcon",
-    zh: "警告提示，可配置颜色类型，描述和是否显示图标",
+    en: "alert content, designed to present warnings, information, success messages, and error alerts to users in various scenarios. These components come with a rich set of configurable properties, including message content, styles, icon display, and closable buttons.Moreover, they provide slot functionalities, enabling developers to customize descriptions and action buttons, greatly enhancing the flexibility and extensibility of the alert components",
+    zh: "警告提示，主要用于在不同的场景下向用户展示警告、信息、成功和错误提示。这些构件支持丰富的属性配置，如提示内容、样式、图标显示及关闭按钮等，同时提供了插槽功能，允许开发者自定义描述内容和操作按钮，极大地增强了提示构件的灵活性和可扩展性",
   },
   icon: {
     imgSrc: brickAlertSvg,

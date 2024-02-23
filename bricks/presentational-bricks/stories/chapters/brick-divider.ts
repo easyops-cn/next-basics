@@ -21,8 +21,8 @@ export const BrickDividerStory: Story = {
     {
       snippetId: "presentational-bricks.brick-divider[normal]",
       title: {
-        zh: "Basic divider",
-        en: "基础分割线",
+        zh: "Basic divider, it is primarily used for segmentation in layouts, supporting horizontal, vertical, and a special radiation type. The Divider component allows for customization of titles, styles, and display types, enhancing the visual effects and user experience of the interface",
+        en: "基础分割线, 主要用于布局中的分割，可支持水平、垂直以及特殊的放射类型。分割线构件允许自定义标题、样式及显示类型，增强了界面的视觉效果和用户体验",
       },
       thumbnail: brickDividerNormalSvg,
       bricks: [

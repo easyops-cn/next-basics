@@ -24,8 +24,8 @@ export const BrickTableStory: Story = {
     zh: "表格",
   },
   description: {
-    en: "",
-    zh: "当需要对数据进行排序、搜索、分页、自定义操作等复杂行为时",
+    en: "It provides a visual representation of the components and their relationships,support sorting, searching, paging, custom operations, and other behaviors on data",
+    zh: "它提供了组件及其关系的可视化表示，包括创建自定义组件展示, 同时支持对数据进行排序、搜索、分页、自定义操作等行为",
   },
   icon: {
     imgSrc: brickTableSvg,

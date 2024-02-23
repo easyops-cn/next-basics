@@ -11,8 +11,8 @@ export const DatetimeSelectorStory: Story = {
     zh: "日期时间选择器",
   },
   description: {
-    en: "used to datetime filter",
-    zh: "常用于时间的过滤，支持快速选择时间区间和自定义，例如图表或表格的时间过滤",
+    en: "designed for selecting date and time ranges. It offers a range of features that cater to various scenarios, including basic and custom time range options, event handling, and URL parameter updates",
+    zh: "适用于各种日期和时间范围的选择场景。它具备丰富的特性，包括基础的默认时间范围选项和自定义时间范围选项，以及事件处理和URL参数更新等功能",
   },
   icon: {
     imgSrc: dateTimeSelectorSvg,

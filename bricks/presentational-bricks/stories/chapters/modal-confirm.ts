@@ -18,8 +18,8 @@ export const ModalConfirmStory: Story = {
     zh: "确认对话框",
   },
   description: {
-    en: "used for prompts and secondary confirmations",
-    zh: "用于提示和二次确认的场景",
+    en: " a component in the feedback and tooltip category, primarily used for implementing various modal functions, including normal confirmation boxes, information alerts, delete confirmation boxes, etc. The component supports a rich set of property configurations, such as modal title, content, type, and more. It can achieve dynamic content rendering through the combination of data sources and template language. In addition, the component provides various event handling, such as clicking the confirm and cancel buttons",
+    zh: "反馈和提示类别的构件，主要用于实现各种模态框功能，包括普通确认框、信息提醒框、删除确认框等。该构件支持丰富的属性配置，如模态框标题、内容、类型等，并可通过数据源与模板语言配合实现内容的动态渲染",
   },
   icon: {
     imgSrc: modalConfirmSvg,

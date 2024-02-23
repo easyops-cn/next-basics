@@ -14,8 +14,8 @@ export const foldBrickV2Story: Story = {
     zh: "更多信息折叠容器",
   },
   description: {
-    en: "",
-    zh: "折叠容器，只折叠单个内容，支持slot",
+    en: "a versatile foldable panel container, It supports customizing the fold display name, setting the default expansion state, and choosing from different panel types to suit various design needs",
+    zh: "折叠面板容器，该构件支持自定义折叠展示名称，设定默认展开状态，以及选择不同的面板类型以适应不同的设计需求，在交互方面，构件能够触发折叠状态变化的事件，方便开发者实现响应式功能",
   },
   icon: {
     imgSrc: foldBrickV2Svg,

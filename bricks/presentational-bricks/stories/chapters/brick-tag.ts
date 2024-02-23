@@ -18,8 +18,8 @@ export const BrickTagStory: Story = {
     },
   ],
   description: {
-    en: "tag label, support Tag and CheckableTag",
-    zh: "进行标记和分类的小标签，同时支持基本标签和可选中标签",
+    en: "supports colorful tags, selectable tags, and deletable tags, while also offering flexible configuration options and event handling mechanisms,allowing developers to customize the appearance and behavior of tags based on their needs",
+    zh: "支持多彩标签、可选择标签和可删除标签，还提供了灵活的配置项和事件处理机制，让开发者可以根据需求自定义标签的外观和行为",
   },
   icon: {
     imgSrc: brickTagSvg,

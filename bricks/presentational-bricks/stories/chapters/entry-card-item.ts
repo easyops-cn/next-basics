@@ -10,8 +10,8 @@ export const EntryCardItemStory: Story = {
     zh: "入口卡片项",
   },
   description: {
-    en: "entry card item",
-    zh: "可配置icon和title的卡片项",
+    en: "provide a user-friendly and customizable card information component for frontend development. It offers a variety of properties to fine-tune the card's appearance and behavior, including data sources, title, description, icons, colors, and URL redirection. The storyboard is particularly useful for creating clear and interactive card entries in applications",
+    zh: "它具备了丰富的属性配置，能够细致地调整卡片的展现形式和交互行为。它支持数据源绑定、标题、描述、图标、颜色以及URL跳转等功能，特别适用于在应用中创建清晰且具有交互性的卡片入口",
   },
   icon: {
     imgSrc: entryCardItemSvg,

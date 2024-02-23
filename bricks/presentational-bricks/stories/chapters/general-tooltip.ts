@@ -11,8 +11,8 @@ export const GeneralTooltipStory: Story = {
     zh: "Tooltip文字提示",
   },
   description: {
-    en: "general tooltip",
-    zh: "普通的 tooltip",
+    en: "offers developers an efficient means to implement information and tooltip displays. It supports a variety of configurations, including tip content, icons, text, and styles, making it adaptable to different application scenarios",
+    zh: "提供了一种便捷的方式来实现信息和提示的展示。该构件支持多样化的配置，包括提示内容、图标、文本以及样式等，使其能够灵活适应不同的应用场景,用户可以通过简单的属性设置，实现基本的tooltips提示",
   },
   icon: {
     imgSrc: generalTooltipSvg,

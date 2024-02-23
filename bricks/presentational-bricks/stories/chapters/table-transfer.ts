@@ -11,8 +11,8 @@ export const TableTransferStory: Story = {
     zh: "表格穿梭框",
   },
   description: {
-    en: "table in transfer(support sort by dragging)",
-    zh: "表格穿梭选择框（支持拖拽排序）",
+    en: "a versatile component designed for displaying and managing data with a dual-list selection interface, equipped with search functionality and drag-and-drop sorting capabilities. It serves as an efficient tool for users to transfer items between two columns, making it ideal for scenarios such as filter configurations or data mapping",
+    zh: "具备搜索功能和拖拽排序能力，它能够高效地帮助用户在两个列表之间转移项目，适用于如筛选配置或数据映射等多种场景",
   },
   icon: {
     imgSrc: tableTransferSvg,

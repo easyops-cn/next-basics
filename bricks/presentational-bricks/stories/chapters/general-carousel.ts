@@ -14,8 +14,8 @@ export const GeneralCarouselStory: Story = {
     zh: "通用轮播构件",
   },
   description: {
-    en: "General Carousel",
-    zh: "通用的轮播图",
+    en: "defines a series of properties, such as autoplay, dots display, and the visibility of navigation arrows, making the carousel component flexible and adaptable to various scenarios. By uniformly defining the content displayed in the carousel (useBrick), combining with rich custom styles (carouselStyle) and responsive layout settings (responsive), developers can easily achieve complex carousel effects",
+    zh: "定义了一系列属性，如是否自动播放、指示点的显示、翻页按钮的可见性等，使得轮播图构件能够灵活适应各种场景需求。通过统一定义轮播图显示的内容（useBrick），结合丰富的自定义样式（carouselStyle）和响应式布局设置（responsive），开发者可以轻松实现复杂的轮播效果",
   },
   icon: {
     imgSrc: generalCarouselSvg,

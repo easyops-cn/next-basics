@@ -11,8 +11,8 @@ export const StatisticCardStory: Story = {
     zh: "统计卡片",
   },
   description: {
-    en: "Card showing statistics, usually used on the homepage",
-    zh: "展示统计数据的卡片，一般在首页使用",
+    en: "designed for displaying statistical information in a card format. It offers a variety of customizable properties to tailor the appearance and behavior to fit a range of needs",
+    zh: "以卡片形式展示统计信息。它具有多种可自定义的属性，可以调整外观和行为以适应各种需求",
   },
   icon: {
     lib: "fa",

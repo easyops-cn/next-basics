@@ -10,8 +10,8 @@ export const BrickUserGroupStory: Story = {
     zh: "展示一组用户",
   },
   description: {
-    en: "display user avatar and user name group",
-    zh: "展示一组用户头像加用户名",
+    en: "effectively presents a collection of user avatars. Its primary function is to display a group of user identities in a user-friendly manner, with optional configurations to enhance the visual presentation",
+    zh: "展示一组用户头像,以友好的方式呈现用户身份的集合，并通过可选配置增强视觉效果",
   },
   icon: {
     imgSrc: brickUserSvg,

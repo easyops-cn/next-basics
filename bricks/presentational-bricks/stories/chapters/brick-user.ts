@@ -10,8 +10,8 @@ export const BrickUserStory: Story = {
     zh: "展示用户名",
   },
   description: {
-    en: "display user avatar and user name",
-    zh: "展示用户头像加用户名",
+    en: "providing an efficient way to present user information. It supports a variety of customizable properties to control the appearance of the user avatar, username, and other user-related elements",
+    zh: "展示用户头像信息，支持多种可定制属性，用于控制用户头像、用户名的显示以及其他相关元素的呈现",
   },
   icon: {
     imgSrc: brickUserSvg,

@@ -10,8 +10,8 @@ export const DropdownSelectStory: Story = {
     zh: "菜单切换-带下拉选择",
   },
   description: {
-    en: "To Store Related Menu Items When There Are Many Menu Items",
-    zh: "用于菜单项较多时收纳相关菜单项",
+    en: "a feature-rich dropdown selector brick. it supports both single and multiple selection operations and can be tailored to meet various business needs through the configuration of various properties",
+    zh: "功能丰富的下拉选择器构件，它支持单选与多选操作，并且可以通过配置各种属性来满足不同的业务需求",
   },
   icon: {
     imgSrc: dropdownSelectSvg,
