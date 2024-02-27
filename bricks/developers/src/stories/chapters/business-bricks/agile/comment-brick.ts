@@ -27,6 +27,10 @@ export const story: Story = {
             text: "评论",
             key: "comment",
           },
+          {
+            text: "倒序",
+            key: "comment2",
+          },
         ],
         slotType: "bricks",
       },
