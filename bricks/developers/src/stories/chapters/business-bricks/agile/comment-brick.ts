@@ -7,16 +7,16 @@ export const story: Story = {
   author: "lynette",
   text: {
     en: "comment brick",
-    zh: "评论构件"
+    zh: "评论构件",
   },
   icon: {
     lib: "fa",
     icon: "comments",
-    prefix: "fas"
+    prefix: "fas",
   },
   description: {
     en: "comment brick",
-    zh: "包括评论列表和发表评论"
+    zh: "包括评论列表和发表评论",
   },
   conf: [
     {
@@ -25,10 +25,10 @@ export const story: Story = {
         tabList: [
           {
             text: "评论",
-            key: "comment"
-          }
+            key: "comment",
+          },
         ],
-        slotType: "bricks"
+        slotType: "bricks",
       },
       slots: {
         content: {
@@ -46,8 +46,8 @@ export const story: Story = {
                     author: {
                       name: "alrenhuang",
                       user_icon:
-                        "http://p.qlogo.cn/bizmail/O1tyN98UWdKvhH2dtsicBEXOOD05XSFBKWe6XjicImtWrLzRFFZBKEqw/0"
-                    }
+                        "http://p.qlogo.cn/bizmail/O1tyN98UWdKvhH2dtsicBEXOOD05XSFBKWe6XjicImtWrLzRFFZBKEqw/0",
+                    },
                   },
                   {
                     id: "2",
@@ -56,27 +56,67 @@ export const story: Story = {
                     author: {
                       name: "leon",
                       user_icon:
-                        "http://p.qlogo.cn/bizmail/d47GDej7HBmeibwD2tQVh8szhfBP6TrZIZcamNxY6xRsm4yHf2C63mA/0"
-                    }
-                  }
-                ]
+                        "http://p.qlogo.cn/bizmail/d47GDej7HBmeibwD2tQVh8szhfBP6TrZIZcamNxY6xRsm4yHf2C63mA/0",
+                    },
+                  },
+                ],
               },
               events: {
                 "add.comment": {
-                  action: "console.log"
+                  action: "console.log",
                 },
                 "edit.comment": {
-                  action: "console.log"
+                  action: "console.log",
                 },
                 "delete.comment": {
-                  action: "console.log"
-                }
-              }
-            }
-          ]
-        }
-      }
-    }
+                  action: "console.log",
+                },
+              },
+            },
+            {
+              brick: "agile.comment-brick",
+              properties: {
+                placeholder: "请添加评论",
+                isDesc: true,
+                comments: [
+                  {
+                    id: "1",
+                    ctime: "2020-02-11 11:27:01",
+                    body: "comment 1",
+                    author: {
+                      name: "alrenhuang",
+                      user_icon:
+                        "http://p.qlogo.cn/bizmail/O1tyN98UWdKvhH2dtsicBEXOOD05XSFBKWe6XjicImtWrLzRFFZBKEqw/0",
+                    },
+                  },
+                  {
+                    id: "2",
+                    ctime: "2024-02-11 11:42:50",
+                    body: "comment 2",
+                    author: {
+                      name: "leon",
+                      user_icon:
+                        "http://p.qlogo.cn/bizmail/d47GDej7HBmeibwD2tQVh8szhfBP6TrZIZcamNxY6xRsm4yHf2C63mA/0",
+                    },
+                  },
+                ],
+              },
+              events: {
+                "add.comment": {
+                  action: "console.log",
+                },
+                "edit.comment": {
+                  action: "console.log",
+                },
+                "delete.comment": {
+                  action: "console.log",
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
   ],
-  doc: docMD
+  doc: docMD,
 };
