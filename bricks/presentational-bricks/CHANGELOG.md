@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.320.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.319.4...@next-bricks/presentational-bricks@1.320.0) (2024-02-28)
+
+
+### Features
+
+* 展开表格增加一个全部展开能力 ([dd5b046](https://github.com/easyops-cn/next-basics/commit/dd5b046d04de88d19fb55f2cc953e0faaca54b31))
+
+
+
+
+
 ## [1.319.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.319.3...@next-bricks/presentational-bricks@1.319.4) (2024-02-27)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
