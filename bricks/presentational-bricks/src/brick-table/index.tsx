@@ -1034,6 +1034,17 @@ export class BrickTableElement extends UpdatingElement {
   })
   selectedRowKeys: React.Key[] = [];
 
+  /**
+   * @required false
+   * @default false
+   * @description 是否显示展开全部
+   * @group other
+   */
+  @property({
+    type: Boolean,
+  })
+  showHeaderExpandAll: boolean;
+
   private _selected = false;
   private _selectedRow: Record<string, unknown>;
   private _selectedRows: Record<string, any>[] = [];
@@ -1728,6 +1739,7 @@ export class BrickTableElement extends UpdatingElement {
             ellipsisInfo={this.ellipsisInfo}
             thTransparent={this.thTransparent}
             acceptType={this.acceptType}
+            showHeaderExpandAll={this.showHeaderExpandAll}
             xSmallSizeTable={this.size == "x-small"}
           />
         </BrickWrapper>,

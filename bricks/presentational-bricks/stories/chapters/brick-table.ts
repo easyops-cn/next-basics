@@ -574,6 +574,7 @@ export const BrickTableStory: Story = {
           properties: {
             dataset: { testid: "tree-data-demo" },
             rowKey: "id",
+            showHeaderExpandAll: true,
             rowSelection: true,
             columns: [
               {

@@ -509,4 +509,69 @@ describe("BrickTable", () => {
       "ellipsisInfoCell"
     );
   });
+
+  it("showHeaderExpandAll should work", () => {
+    const columns: CustomColumn[] = [
+      {
+        title: "包名称",
+        dataIndex: "packageName",
+      },
+      {
+        title: "部署路径",
+        dataIndex: "installPath",
+      },
+      {
+        title: "版本",
+        dataIndex: "version",
+      },
+    ];
+    const onDrag = jest.fn();
+    const dataSource = [
+      {
+        id: "1",
+        packageName: "container",
+        installPath: "/usr/local/easyops/container",
+        version: "1.10.0",
+        __acceptType: "level-1",
+        children: [
+          {
+            id: "2",
+            packageName: "webshell",
+            installPath: "/usr/local/easyops/webshell",
+            version: "1.0.0",
+            __acceptType: "level-1",
+          },
+          {
+            id: "4",
+            packageName: "webshell",
+            installPath: "/usr/local/easyops/webshell",
+            version: "1.1.0",
+            __acceptType: "level-2",
+          },
+        ],
+      },
+      {
+        id: "3",
+        packageName: "nginx",
+        installPath: "/usr/local/easyops/nginx",
+        version: "3.6.0",
+        __acceptType: "level-1",
+      },
+    ];
+    const wrapper = mount(
+      <BrickTable
+        rowKey="id"
+        columns={columns}
+        showCard={false}
+        onChange={jest.fn}
+        tableDraggable={true}
+        onDrag={onDrag}
+        dataSource={dataSource}
+        showHeaderExpandAll={true}
+        ellipsisInfo={true}
+        defaultExpandAllRows={true}
+      />
+    );
+    expect(wrapper.find('[data-testid="expand-all-icon"]').length).toBe(1);
+  });
 });

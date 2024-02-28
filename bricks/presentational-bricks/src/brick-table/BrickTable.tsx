@@ -6,7 +6,7 @@ import { TableProps } from "antd/lib/table";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
 import { getCellStyle } from "./brickTableHelper";
-import { pickBy, isNil, toPath, isEqual } from "lodash";
+import { pickBy, isNil, toPath, isEqual, isEmpty } from "lodash";
 import classNames from "classnames";
 import styles from "./BrickTable.module.css";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
@@ -71,6 +71,7 @@ export interface BrickTableProps {
   showHeader?: boolean;
   acceptType?: string;
   xSmallSizeTable?: boolean;
+  showHeaderExpandAll?: boolean;
 }
 
 const DraggableBodyRow = ({
@@ -232,6 +233,8 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
   }, [props.dataSource, rowKey]);
 
   const [data, setData] = useState(initData);
+  const [expandedRowKeys, setExpandedRowKeys] = useState([]);
+
   const rowKeyExpandIconMapRef = useRef<Map<unknown, React.ReactNode>>(
     new Map()
   );
@@ -244,6 +247,38 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
   const itemExpandedRowBrickDataMapRef = useRef<Map<unknown, unknown>>(
     new Map()
   );
+
+  const treeToFlat = (list: any) => {
+    const childrenName = props.childrenColumnName || "children";
+    return list.reduce((ls: any, item: any) => {
+      const { children, ...res } = { ...item, children: item[childrenName] };
+      if (children && children.length) {
+        return ls.concat(
+          { ...res, isParentOfTree: true },
+          treeToFlat(children)
+        );
+      } else {
+        return ls.concat(res);
+      }
+    }, []);
+  };
+
+  useEffect(() => {
+    if (props.expandedRowKeys) {
+      setExpandedRowKeys(props.expandedRowKeys);
+    } else if (props.defaultExpandAllRows) {
+      setExpandedRowKeys(
+        treeToFlat(props.dataSource || [])
+          .filter((i) => i.isParentOfTree)
+          .map((i) => i[props.rowKey])
+      );
+    }
+  }, [
+    props.expandedRowKeys,
+    props.dataSource,
+    props.defaultExpandAllRows,
+    props.rowKey,
+  ]);
 
   useEffect(() => {
     itemExpandedRowBrickDataMapRef.current.clear();
@@ -289,6 +324,35 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
           }
 
           columnConf.title = getCustomHeader(useBrick, data);
+        }
+        if (index === 0 && !!props.showHeaderExpandAll) {
+          let iconNode: React.ReactNode = <></>;
+          let icon = props.expandIcon?.collapsedIcon || downMenuIcon;
+          const allKeys = treeToFlat(props.dataSource || [])
+            .filter((i) => i.isParentOfTree)
+            .map((i) => i[props.rowKey]);
+          if (!allKeys?.every((i) => expandedRowKeys?.includes(i))) {
+            icon = props.expandIcon?.expandedIcon || rightMenuIcon;
+          }
+          iconNode = (
+            <span
+              className={styles.expandIconSpan}
+              data-testid="expand-all-icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                setExpandedRowKeys(isEmpty(expandedRowKeys) ? allKeys : []);
+              }}
+            >
+              <GeneralIcon icon={icon} />
+            </span>
+          );
+          columnConf.title = (
+            <>
+              {iconNode}
+              {columnConf.title}
+            </>
+          );
         }
 
         if (filterDropdownBrick?.useBrick) {
@@ -422,6 +486,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
     deleteEnabled,
     onDelete,
     ellipsisInfo,
+    expandedRowKeys,
   ]);
 
   const expandedRowRender = (record: Record<string, any>, index: number) => {
@@ -516,6 +581,11 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
   };
 
   const onExpand = (expanded: boolean, record: Record<string, any>) => {
+    setExpandedRowKeys(
+      expanded
+        ? expandedRowKeys.concat(record[props.rowKey])
+        : expandedRowKeys.filter((i) => i !== record[props.rowKey])
+    );
     props.onExpand && props.onExpand(expanded, record);
   };
 
@@ -565,15 +635,19 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
     }
   };
 
-  const pickExpandProps = pickBy(
-    {
-      expandIconColumnIndex,
-      expandIconAsCell,
-      expandRowByClick: props.expandRowByClick,
-      expandedRowKeys: props.expandedRowKeys,
-      defaultExpandAllRows: props.defaultExpandAllRows,
-    },
-    (item) => !isNil(item)
+  const pickExpandProps = useMemo(
+    () =>
+      pickBy(
+        {
+          expandIconColumnIndex,
+          expandIconAsCell,
+          expandRowByClick: props.expandRowByClick,
+          expandedRowKeys: expandedRowKeys,
+          defaultExpandAllRows: props.defaultExpandAllRows,
+        },
+        (item) => !isNil(item)
+      ),
+    [expandedRowKeys]
   );
 
   let table = (
