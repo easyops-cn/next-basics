@@ -19,6 +19,7 @@ export interface ResizableBoxProps {
   boxStyle?: React.CSSProperties;
   boxStyleWhenNotResizing?: React.CSSProperties;
   resizable?: boolean;
+  variant?: "dashboard" | "default";
 }
 
 export type ResizeDirection = "left" | "right" | "top" | "bottom";
@@ -39,6 +40,7 @@ export function ResizableBox({
   boxStyle,
   boxStyleWhenNotResizing,
   resizable,
+  variant,
 }: ResizableBoxProps): React.ReactElement {
   const storage = useMemo(
     () =>
@@ -169,9 +171,13 @@ export function ResizableBox({
         <slot name="content" />
       </div>
       <div
-        className={classNames("bar", resizeDirection, {
-          hoverBar: resizable,
-        })}
+        className={classNames(
+          variant === "dashboard" ? "dashboardBar" : "bar",
+          resizeDirection,
+          {
+            hoverBar: resizable,
+          }
+        )}
         ref={refBar}
       >
         {/* Use a fullscreen mask to keep cursor status when dragging the resizer. */}

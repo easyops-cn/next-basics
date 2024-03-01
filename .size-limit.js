@@ -3,7 +3,7 @@ const { sizeLimit } = require("@next-core/build-config-factory");
 module.exports = sizeLimit({
   bricks: {
     "*": "50 KB",
-    "basic-bricks": "115 KB",
+    "basic-bricks": "120 KB",
     "calendar-bricks": "80KB",
     "presentational-bricks": "128 KB",
     "brick-visualization": "435 KB",
