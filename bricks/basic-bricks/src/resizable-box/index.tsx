@@ -38,6 +38,9 @@ export class ResizableBoxElement extends UpdatingElement {
   @property({ attribute: false })
   boxStyleWhenNotResizing: React.CSSProperties;
 
+  @property({ attribute: false })
+  variant: "dashboard" | "default" = "default";
+
   private _shadowRoot: ShadowRoot;
 
   constructor() {
@@ -72,6 +75,7 @@ export class ResizableBoxElement extends UpdatingElement {
               boxStyle={this.boxStyle}
               boxStyleWhenNotResizing={this.boxStyleWhenNotResizing}
               resizable={this.resizable}
+              variant={this.variant}
             />
           </BrickWrapper>
         </>,
