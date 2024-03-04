@@ -219,7 +219,7 @@ export function AddPropertyModal({
               label={t(K.ENUM_LABEL)}
               getValueFromEvent={(value: string[]) =>
                 numberTypeList.includes(getFieldValue("type"))
-                  ? value?.map((i) => Number(i))
+                  ? value?.map((i) => Number(i)).filter((i) => !isNaN(i))
                   : value
               }
             >
