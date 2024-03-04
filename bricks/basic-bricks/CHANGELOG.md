@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.251.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.250.5...@next-bricks/basic-bricks@1.251.0) (2024-03-04)
+
+
+### Features
+
+* **resizable:** support variant is dashboard ([8f0f9fd](https://github.com/easyops-cn/next-basics/commit/8f0f9fd2c29db2e0d3d48fb5b8a5253f5e07659c))
+
+
+
+
+
 ## [1.250.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.250.4...@next-bricks/basic-bricks@1.250.5) (2024-02-27)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks

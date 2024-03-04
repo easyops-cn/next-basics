@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.31.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.5...@next-bricks/flow-builder@1.31.6) (2024-03-04)
+
+
+### Bug Fixes
+
+* fix the error when converting enumeration values of string type to number type ([6f65220](https://github.com/easyops-cn/next-basics/commit/6f652203ac3c509b3a4f368ba392c3d7b1409a83))
+
+
+
+
+
 ## [1.31.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.4...@next-bricks/flow-builder@1.31.5) (2024-01-28)
 
 
