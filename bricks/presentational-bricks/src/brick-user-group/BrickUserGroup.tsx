@@ -74,7 +74,6 @@ export function BrickUserGroup({
   return (
     <div ref={groupRef}>
       <Avatar.Group
-        {...configProps}
         maxCount={configProps.maxCount || maxCount}
         maxStyle={
           configProps.maxStyle || {
@@ -82,6 +81,8 @@ export function BrickUserGroup({
             backgroundColor: "#fde3cf",
           }
         }
+        style={{ display: "block" }}
+        {...configProps}
       >
         {userNameOrIds.map((userNameOrId: string, index: number) => {
           return (

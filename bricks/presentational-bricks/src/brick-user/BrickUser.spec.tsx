@@ -64,7 +64,9 @@ describe("BrickUser", () => {
     await jest.advanceTimersByTime(100);
     await (global as any).flushPromises();
     wrapper.update();
-    expect(wrapper.find("span.usernameAdjust").text()).toBe("easyops(foo)");
+    expect(wrapper.find('[data-testid="username"]').text()).toBe(
+      "easyops(foo)"
+    );
   });
 
   it("useEffect should work", async () => {
