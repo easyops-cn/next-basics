@@ -137,8 +137,8 @@ export const generalButtonStory: Story = {
       ],
       snippetId: "basic-bricks.general-button[icon]",
       title: {
-        en: "Icon General Button",
-        zh: "图标按钮",
+        en: "Icon General Button(Only use in popover button)",
+        zh: "图标按钮(只用于悬浮按钮)",
       },
       thumbnail: generalButtonIconSvg,
     },
