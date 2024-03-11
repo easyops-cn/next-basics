@@ -82,13 +82,9 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
   return (
     <Tooltip title={tooltip} placement="topLeft">
       <span className={cssStyle.user}>
-        {!props.hideAvatar && <span>{Avatar}</span>}
+        {!props.hideAvatar && Avatar}
         {!props.hideUsername && (
-          <span
-            className={classNames({
-              [cssStyle.usernameAdjust]: !props.hideAvatar,
-            })}
-          >
+          <span data-testid="username">
             {props?.displayShowKey ? showKey : name}
           </span>
         )}
