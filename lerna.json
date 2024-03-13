@@ -6,6 +6,7 @@
   "useWorkspaces": true,
   "useNx": true,
   "conventionalCommits": true,
+  "concurrency": 2,
   "command": {
     "publish": {
       "npmClient": "npm",
