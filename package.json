@@ -38,11 +38,11 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@next-core/babel-runtime-helpers": "^1.0.27",
     "@next-core/brick-http": "^2.8.1",
-    "@next-core/brick-icons": "^2.33.30",
+    "@next-core/brick-icons": "^2.33.31",
     "@next-core/brick-kit": "^2.185.4",
     "@next-core/brick-types": "^2.93.0",
     "@next-core/brick-utils": "^2.51.15",
-    "@next-core/dev-dependencies": "^1.18.1",
+    "@next-core/dev-dependencies": "^1.18.2",
     "@next-core/easyops-analytics": "^0.11.1",
     "@next-core/editor-bricks-helper": "^0.50.46",
     "@next-core/fontawesome-library": "^1.1.37",
@@ -104,6 +104,6 @@
     "ua-parser-js": "0.7.19"
   },
   "easyops": {
-    "dev-dependencies": "1.18.1"
+    "dev-dependencies": "1.18.2"
   }
 }
