@@ -102,7 +102,6 @@ export const generalCustomButtonsStory: Story = {
             alignment: "end",
             customButtons: [
               {
-                buttonShape: "circle",
                 buttonType: "icon",
                 eventName: "instance.topology.update",
                 icon: {
@@ -115,7 +114,6 @@ export const generalCustomButtonsStory: Story = {
                 tooltipPlacement: "left",
               },
               {
-                buttonShape: "circle",
                 buttonType: "icon",
                 eventName: "instance.topology.update",
                 icon: {
@@ -527,7 +525,6 @@ export const generalCustomButtonsStory: Story = {
                         alignment: "end",
                         customButtons: [
                           {
-                            buttonShape: "circle",
                             buttonType: "icon",
                             eventName: "instance.topology.update",
                             icon: {
@@ -540,7 +537,6 @@ export const generalCustomButtonsStory: Story = {
                             tooltipPlacement: "left",
                           },
                           {
-                            buttonShape: "circle",
                             buttonType: "icon",
                             eventName: "instance.topology.update",
                             icon: {
@@ -553,7 +549,6 @@ export const generalCustomButtonsStory: Story = {
                             tooltipPlacement: "left",
                           },
                           {
-                            buttonShape: "circle",
                             buttonType: "icon",
                             eventName: "action.danger1",
                             icon: "close",
@@ -656,7 +651,6 @@ export const generalCustomButtonsStory: Story = {
                     text: "次按钮",
                   },
                   {
-                    buttonShape: "circle",
                     buttonType: "icon",
                     eventName: "instance.topology.update",
                     icon: {
@@ -669,7 +663,6 @@ export const generalCustomButtonsStory: Story = {
                     tooltipPlacement: "left",
                   },
                   {
-                    buttonShape: "circle",
                     buttonType: "icon",
                     eventName: "instance.topology.update",
                     icon: {
@@ -791,7 +784,6 @@ export const generalCustomButtonsStory: Story = {
                         alignment: "end",
                         customButtons: [
                           {
-                            buttonShape: "circle",
                             buttonType: "icon",
                             eventName: "instance.topology.update",
                             icon: {
@@ -804,7 +796,6 @@ export const generalCustomButtonsStory: Story = {
                             tooltipPlacement: "left",
                           },
                           {
-                            buttonShape: "circle",
                             buttonType: "icon",
                             eventName: "instance.topology.update",
                             icon: {
