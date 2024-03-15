@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.320.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.320.1...@next-bricks/presentational-bricks@1.320.2) (2024-03-15)
+
+
+### Bug Fixes
+
+* **table:** 修复表格在后台分下,数据中有undefined导致找不到数据报错的问题 ([6e58763](https://github.com/easyops-cn/next-basics/commit/6e587638fc121bd74abcfe100bde9331164f9c48))
+
+
+
+
+
 ## [1.320.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.320.0...@next-bricks/presentational-bricks@1.320.1) (2024-03-11)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
