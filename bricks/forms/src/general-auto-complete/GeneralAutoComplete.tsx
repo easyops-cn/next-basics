@@ -50,6 +50,7 @@ interface GeneralAutoCompleteProps extends FormItemWrapperProps {
   placeholder?: string;
   disabled?: boolean;
   filterByCaption?: boolean;
+  onBlur?: () => void;
 }
 
 export function GeneralAutoComplete(
@@ -110,6 +111,10 @@ export function GeneralAutoComplete(
     return walkOptions(options);
   }, [options]);
 
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
+    props?.onBlur();
+  };
+
   return (
     <FormItemWrapper {...props}>
       <AutoComplete
@@ -120,6 +125,7 @@ export function GeneralAutoComplete(
         onChange={props.onChange}
         onSearch={onSearch}
         disabled={props.disabled}
+        onBlur={handleBlur}
       />
     </FormItemWrapper>
   );

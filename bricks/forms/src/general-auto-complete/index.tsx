@@ -133,6 +133,15 @@ export class GeneralAutoCompleteElement extends FormItemElement {
     this.changeEvent.emit(value);
   };
 
+  /**
+   * @description 鼠标失去焦点时触发
+   */
+  @event({ type: "general.auto-complete.blur" })
+  blurEvent: EventEmitter<string>;
+  private _handleBlur = (): void => {
+    this.blurEvent.emit(this.value);
+  };
+
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
@@ -161,6 +170,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
             wrapperCol={this.wrapperCol}
             disabled={this.disabled}
             filterByCaption={this.filterByCaption}
+            onBlur={this._handleBlur}
           />
         </BrickWrapper>,
         this
