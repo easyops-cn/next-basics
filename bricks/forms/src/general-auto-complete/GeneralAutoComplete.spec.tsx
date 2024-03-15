@@ -5,6 +5,7 @@ import { GeneralAutoComplete } from "./GeneralAutoComplete";
 
 describe("GeneralAutoComplete", () => {
   it("should work", () => {
+    const handleBlur = jest.fn();
     const wrapper = mount(
       <GeneralAutoComplete
         options={[
@@ -26,6 +27,7 @@ describe("GeneralAutoComplete", () => {
         ]}
         value="f5"
         filterByCaption={true}
+        onBlur={handleBlur}
       />
     );
     expect(wrapper.find(AutoComplete).length).toBe(1);
@@ -60,5 +62,9 @@ describe("GeneralAutoComplete", () => {
       { label: expect.anything(), value: "1" },
       { label: expect.anything(), value: "2" },
     ]);
+    wrapper.find(AutoComplete).invoke("onBlur")({
+      target: undefined,
+    } as React.FocusEvent<HTMLInputElement>);
+    expect(handleBlur).toHaveBeenCalled();
   });
 });
