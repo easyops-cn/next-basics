@@ -323,7 +323,7 @@ export class BrickTableElement extends UpdatingElement {
 
   /**
    * @detail Record<string,any>[]
-   * @description 勾选框变化，detail 中为所选的行数据
+   * @description【谨慎使用】 勾选框变化，detail 中为所选的行数据,这个事件在后台分页的情况下，可能返回undefined
    */
   @event({ type: "select.update" }) selectUpdate: EventEmitter<
     Record<string, any>[]
@@ -1216,9 +1216,8 @@ export class BrickTableElement extends UpdatingElement {
       (row.children || []).concat(row)
     );
     const selectedRows = selectedRowKeys.map(
-      (key) =>
-        flattenedList.find((rowData) => rowData[rowKey] === key) ||
-        rows.find((rowData) => rowData[rowKey] === key)
+      (key, index) =>
+        flattenedList.find((rowData) => rowData[rowKey] === key) || rows[index]
     );
     return selectedRows;
   };
