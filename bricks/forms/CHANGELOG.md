@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.286.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.285.2...@next-bricks/forms@1.286.0) (2024-03-15)
+
+
+### Features
+
+* 构件auto-complete支持失焦事件 ([512dda3](https://github.com/easyops-cn/next-basics/commit/512dda395e51221249e6e87e626e737e53a9cca6))
+
+
+
+
+
 ## [1.285.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.285.1...@next-bricks/forms@1.285.2) (2024-02-22)
 
 
