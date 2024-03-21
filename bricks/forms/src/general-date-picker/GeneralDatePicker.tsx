@@ -21,6 +21,7 @@ interface InternalStateDatePickerProps {
   disabled?: boolean;
   onChange?: (value: Moment | null, dateString: string) => void;
   onOk?: (date: Moment) => void;
+  disabledBeforeDate?: string;
 }
 
 interface GeneralDatePickerProps
@@ -101,6 +102,7 @@ export function InternalStateDatePicker(
     disabled,
     onChange,
     onOk,
+    disabledBeforeDate,
   } = props;
   const [value, setValue] = useState(props.value);
   const [confirmDisabled, setConfirmDisabled] = useState(false);
@@ -167,6 +169,10 @@ export function InternalStateDatePicker(
 
   const handleDisabledFutureDate = (date: Moment): boolean => {
     return date && date > moment();
+  };
+
+  const handledisabledBeforeDate = (date: Moment): boolean => {
+    return date && date < moment(disabledBeforeDate);
   };
 
   const handleDisabledTime = (date: Moment) => {
@@ -364,7 +370,8 @@ export function InternalStateDatePicker(
         picker={picker}
         disabledDate={
           (disabledFutureDate && handleDisabledFutureDate) ||
-          (disabledDate && handleDisabledDate)
+          (disabledDate && handleDisabledDate) ||
+          (disabledBeforeDate && handledisabledBeforeDate)
         }
         disabledTime={disabledDate && handleDisabledTime}
         disabled={disabled}
@@ -377,7 +384,8 @@ export function InternalStateDatePicker(
 export function GeneralDatePicker(
   props: GeneralDatePickerProps
 ): React.ReactElement {
-  const { name, formElement, value, picker, ...restProps } = props;
+  const { name, formElement, value, picker, disabledBeforeDate, ...restProps } =
+    props;
   const PickerFormatMap = {
     date: "YYYY-MM-DD",
     week: "gggg-ww周",
@@ -404,6 +412,7 @@ export function GeneralDatePicker(
         onChange={handleChange}
         onOk={isDatePicker ? handleOk : undefined}
         picker={picker}
+        disabledBeforeDate={disabledBeforeDate}
       />
     </FormItemWrapper>
   );
