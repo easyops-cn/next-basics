@@ -162,6 +162,13 @@ export class GeneralDatePickerElement extends FormItemElement {
   })
   inputBoxStyle?: CSSProperties;
 
+  /**
+   * @description 不可选择指定日期的过去日期
+   * @group advanced
+   */
+  @property({ attribute: false })
+  disabledPastByDate?: string;
+
   /* =========================== events =========================== */
 
   /**
@@ -215,6 +222,7 @@ export class GeneralDatePickerElement extends FormItemElement {
             disabled={this.disabled}
             disabledFutureDate={this.disabledFutureDate}
             useFastSelectBtn={this.useFastSelectBtn}
+            disabledPastByDate={this.disabledPastByDate}
           />
         </BrickWrapper>,
         this
