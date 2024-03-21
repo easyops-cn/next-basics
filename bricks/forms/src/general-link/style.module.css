@@ -1,6 +1,5 @@
 presentational-bricks\.brick-link {
   a {
-    vertical-align: middle;
     color: var(--antd-btn-link-color);
 
     &:hover,
