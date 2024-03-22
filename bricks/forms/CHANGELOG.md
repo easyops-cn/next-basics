@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.286.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.286.1...@next-bricks/forms@1.286.2) (2024-03-22)
+
+
+### Bug Fixes
+
+* 增加disabledBeforeDate属性控制不可选择指定日期的过去日期 ([6dcc529](https://github.com/easyops-cn/next-basics/commit/6dcc5295dada7cfdfe69b2909234b4e3b593cf19))
+
+
+
+
+
 ## [1.286.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.286.0...@next-bricks/forms@1.286.1) (2024-03-21)
 
 
