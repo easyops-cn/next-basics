@@ -301,4 +301,46 @@ describe("GeneralDatePicker", () => {
       ).toBeFalsy();
     });
   });
+
+  it("should render enabled date picker when disabledBeforeDate is not defined", () => {
+    const datePicker = mount(
+      <GeneralDatePicker
+        name="datePicker"
+        picker="date"
+        disabledBeforeDate={undefined}
+      />
+    );
+    const wrapper = mount(
+      datePicker.find("PickerTrigger").prop("popupElement")
+    );
+    const disabled = wrapper.find(
+      "td.ant-picker-cell-in-view.ant-picker-cell-disabled"
+    );
+    expect(disabled).toHaveLength(0);
+  });
+  it("should render disabled date picker when selected date is before or after disabledBeforeDate", () => {
+    const datePicker = mount(
+      <GeneralDatePicker
+        name="datePicker"
+        picker="date"
+        disabledBeforeDate="2019-10-27" // 设定一个过去的日期
+      />
+    );
+    const wrapper = mount(
+      datePicker.find("PickerTrigger").prop("popupElement")
+    );
+
+    const disabled = wrapper.find(
+      'td[title="2019-10-26"].ant-picker-cell-in-view.ant-picker-cell-disabled'
+    );
+    expect(disabled).toHaveLength(1);
+    const noDisabledV1 = wrapper.find(
+      'td[title="2019-10-27"].ant-picker-cell-in-view.ant-picker-cell-disabled'
+    );
+    expect(noDisabledV1).toHaveLength(0);
+    const noDisabledV2 = wrapper.find(
+      'td[title="2019-10-28"].ant-picker-cell-in-view.ant-picker-cell-disabled'
+    );
+    expect(noDisabledV2).toHaveLength(0);
+  });
 });
