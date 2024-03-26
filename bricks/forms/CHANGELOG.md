@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.286.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.286.2...@next-bricks/forms@1.286.3) (2024-03-26)
+
+
+### Bug Fixes
+
+* 增加disabledAfterDate属性禁用指定日期未来的时间 ([78e8b10](https://github.com/easyops-cn/next-basics/commit/78e8b10614aadcd275184435cbcd89b235271f7c))
+
+
+
+
+
 ## [1.286.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.286.1...@next-bricks/forms@1.286.2) (2024-03-22)
 
 
