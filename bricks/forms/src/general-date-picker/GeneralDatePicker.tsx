@@ -22,6 +22,7 @@ interface InternalStateDatePickerProps {
   onChange?: (value: Moment | null, dateString: string) => void;
   onOk?: (date: Moment) => void;
   disabledBeforeDate?: string;
+  disabledAfterDate?: string;
 }
 
 interface GeneralDatePickerProps
@@ -103,6 +104,7 @@ export function InternalStateDatePicker(
     onChange,
     onOk,
     disabledBeforeDate,
+    disabledAfterDate,
   } = props;
   const [value, setValue] = useState(props.value);
   const [confirmDisabled, setConfirmDisabled] = useState(false);
@@ -173,6 +175,10 @@ export function InternalStateDatePicker(
 
   const handledisabledBeforeDate = (date: Moment): boolean => {
     return date && date < moment(disabledBeforeDate);
+  };
+
+  const handledisabledAfterDate = (date: Moment): boolean => {
+    return date && date.isAfter(moment(disabledAfterDate), "day");
   };
 
   const handleDisabledTime = (date: Moment) => {
@@ -371,7 +377,8 @@ export function InternalStateDatePicker(
         disabledDate={
           (disabledFutureDate && handleDisabledFutureDate) ||
           (disabledDate && handleDisabledDate) ||
-          (disabledBeforeDate && handledisabledBeforeDate)
+          (disabledBeforeDate && handledisabledBeforeDate) ||
+          (disabledAfterDate && handledisabledAfterDate)
         }
         disabledTime={disabledDate && handleDisabledTime}
         disabled={disabled}
@@ -384,8 +391,15 @@ export function InternalStateDatePicker(
 export function GeneralDatePicker(
   props: GeneralDatePickerProps
 ): React.ReactElement {
-  const { name, formElement, value, picker, disabledBeforeDate, ...restProps } =
-    props;
+  const {
+    name,
+    formElement,
+    value,
+    picker,
+    disabledBeforeDate,
+    disabledAfterDate,
+    ...restProps
+  } = props;
   const PickerFormatMap = {
     date: "YYYY-MM-DD",
     week: "gggg-ww周",
@@ -413,6 +427,7 @@ export function GeneralDatePicker(
         onOk={isDatePicker ? handleOk : undefined}
         picker={picker}
         disabledBeforeDate={disabledBeforeDate}
+        disabledAfterDate={disabledAfterDate}
       />
     </FormItemWrapper>
   );

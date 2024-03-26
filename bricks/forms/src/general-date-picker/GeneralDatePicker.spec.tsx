@@ -343,4 +343,29 @@ describe("GeneralDatePicker", () => {
     );
     expect(noDisabledV2).toHaveLength(0);
   });
+  it("should render disabled date picker when selected date is before or after disabledAfterDate", () => {
+    const datePicker = mount(
+      <GeneralDatePicker
+        name="datePicker"
+        picker="date"
+        disabledAfterDate="2019-10-27"
+      />
+    );
+    const wrapper = mount(
+      datePicker.find("PickerTrigger").prop("popupElement")
+    );
+
+    const noDisabledV1 = wrapper.find(
+      'td[title="2019-10-26"].ant-picker-cell-in-view.ant-picker-cell-disabled'
+    );
+    expect(noDisabledV1).toHaveLength(0);
+    const noDisabledV2 = wrapper.find(
+      'td[title="2019-10-27"].ant-picker-cell-in-view.ant-picker-cell-disabled'
+    );
+    expect(noDisabledV2).toHaveLength(0);
+    const disabled = wrapper.find(
+      'td[title="2019-10-28"].ant-picker-cell-in-view.ant-picker-cell-disabled'
+    );
+    expect(disabled).toHaveLength(1);
+  });
 });

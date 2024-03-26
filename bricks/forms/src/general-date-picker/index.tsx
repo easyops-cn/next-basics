@@ -169,6 +169,13 @@ export class GeneralDatePickerElement extends FormItemElement {
   @property({ attribute: false })
   disabledBeforeDate?: string;
 
+  /**
+   * @description 不可选择指定日期的未来日期
+   * @group advanced
+   */
+  @property({ attribute: false })
+  disabledAfterDate?: string;
+
   /* =========================== events =========================== */
 
   /**
@@ -223,6 +230,7 @@ export class GeneralDatePickerElement extends FormItemElement {
             disabledFutureDate={this.disabledFutureDate}
             useFastSelectBtn={this.useFastSelectBtn}
             disabledBeforeDate={this.disabledBeforeDate}
+            disabledAfterDate={this.disabledAfterDate}
           />
         </BrickWrapper>,
         this
