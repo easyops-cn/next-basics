@@ -29,6 +29,6 @@
   margin-left: auto;
 }
 .formsCmdbInstSelectWrapper {
-  display: inline-block;
+  display: inline-flex;
   width: 100%;
 }
