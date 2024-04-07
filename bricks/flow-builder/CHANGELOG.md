@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.31.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.6...@next-bricks/flow-builder@1.31.7) (2024-04-07)
+
+
+### Bug Fixes
+
+* fix serach ([6f7c542](https://github.com/easyops-cn/next-basics/commit/6f7c542877e34b5eb9c400d4f85589bf5251c4c8))
+
+
+
+
+
 ## [1.31.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.5...@next-bricks/flow-builder@1.31.6) (2024-03-04)
 
 
