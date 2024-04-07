@@ -96,6 +96,7 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
       );
     }
 
+    setQ("");
     setTypeValue(newValue);
     props.onChange(processTypeItemData(newValue));
   };
