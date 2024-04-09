@@ -155,6 +155,15 @@ export class SchemaEditorElement extends FormItemElement {
    */
   @property() projectId: string;
 
+  /**
+   * @description 隐藏字段必填项
+   * @group basic
+   */
+  @property({
+    type: Boolean,
+  })
+  hiddenFieldRequired: boolean;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -196,6 +205,7 @@ export class SchemaEditorElement extends FormItemElement {
             importModelDefinition={this.importModelDefinition}
             hiddenRootNodeRequired={this.hiddenRootNodeRequired}
             titleBrick={this.titleBrick}
+            hiddenFieldRequired={this.hiddenFieldRequired}
           />
         </BrickWrapper>,
         this
