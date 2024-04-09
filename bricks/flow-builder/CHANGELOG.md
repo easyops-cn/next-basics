@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.32.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.7...@next-bricks/flow-builder@1.32.0) (2024-04-09)
+
+
+### Features
+
+* support hidden field required ([38d1cbc](https://github.com/easyops-cn/next-basics/commit/38d1cbc3372b3a0d1828cb861d9bb8d5681c59a3))
+
+
+
+
+
 ## [1.31.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.6...@next-bricks/flow-builder@1.31.7) (2024-04-07)
 
 
