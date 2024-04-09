@@ -34,6 +34,7 @@ export interface AddPropertyModalProps {
   simpleTypeList: string[];
   customTypeList?: string[];
   hiddenArrayTypeCheckbox?: boolean;
+  hiddenFieldRequired?: boolean;
 }
 
 export function AddPropertyModal({
@@ -51,6 +52,7 @@ export function AddPropertyModal({
   simpleTypeList,
   customTypeList,
   hiddenArrayTypeCheckbox,
+  hiddenFieldRequired,
 }: AddPropertyModalProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const [form] = Form.useForm();
@@ -390,7 +392,7 @@ export function AddPropertyModal({
         {categoryFormItem}
         {typeFormItem}
 
-        {requiredFormItem}
+        {!hiddenFieldRequired && requiredFormItem}
 
         {defaultFormItem}
 

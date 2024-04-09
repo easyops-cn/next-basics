@@ -23,6 +23,7 @@ describe("processor tst", () => {
             { width: "100px", title: "b", key: "b" },
             { title: "Setting", key: "setting" },
           ],
+          false,
           false
         )
       ).toEqual([
@@ -38,12 +39,25 @@ describe("processor tst", () => {
             { width: "100px", title: "b", key: "b" },
             { title: "Setting", key: "setting" },
           ],
-          true
+          true,
+          false
         )
       ).toEqual([
         { width: "50px", title: "a", key: "a" },
         { width: "100px", title: "b", key: "b" },
       ]);
+
+      expect(
+        filterTitleList(
+          [
+            { width: "50px", title: "a", key: "a" },
+            { width: "100px", title: "b", key: "required" },
+            { title: "Setting", key: "setting" },
+          ],
+          true,
+          true
+        )
+      ).toEqual([{ width: "50px", title: "a", key: "a" }]);
     });
   });
 

@@ -19,11 +19,20 @@ import { ContractContext } from "../ContractContext";
 
 export function filterTitleList(
   titleList: EditorTitleProps[],
-  readonly: boolean
+  readonly: boolean,
+  hiddenFieldRequired: boolean
 ): EditorTitleProps[] {
-  return readonly
-    ? titleList.filter((item) => item.key !== "setting")
-    : titleList;
+  return titleList.filter((item) => {
+    if (item.key === "setting") {
+      return !readonly;
+    }
+
+    if (item.key === "required") {
+      return !hiddenFieldRequired;
+    }
+
+    return true;
+  });
 }
 
 export function getGridTemplateColumns(titleList: EditorTitleProps[]): string {

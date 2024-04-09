@@ -44,6 +44,7 @@ export interface SchemaItemProps {
   titleBrick?: {
     useBrick: UseBrickConf;
   };
+  hiddenFieldRequired?: boolean;
 }
 
 export function SchemaItem({
@@ -55,6 +56,7 @@ export function SchemaItem({
   hideDeleteBtn,
   hiddenRootNode,
   hiddenRootNodeRequired,
+  hiddenFieldRequired,
   disabledModelType,
   isModelDefinitionRow,
   parentsModel = [],
@@ -166,11 +168,13 @@ export function SchemaItem({
             <BrickAsComponent useBrick={titleBrick.useBrick} data={itemData} />
           )}
         </div>
-        <div>
-          {!(traceId === rootTraceId && hiddenRootNodeRequired) && (
-            <Checkbox checked={itemData.required} disabled />
-          )}
-        </div>
+        {!hiddenFieldRequired && (
+          <div>
+            {!(traceId === rootTraceId && hiddenRootNodeRequired) && (
+              <Checkbox checked={itemData.required} disabled />
+            )}
+          </div>
+        )}
         <div className={styles.type}>
           <Tooltip
             title={
@@ -249,7 +253,7 @@ export function SchemaItem({
           readonly={readonly}
           style={{
             gridTemplateColumns: getGridTemplateColumns(
-              filterTitleList(titleList, readonly)
+              filterTitleList(titleList, readonly, hiddenFieldRequired)
             ),
           }}
           key={index}
@@ -257,6 +261,7 @@ export function SchemaItem({
           itemData={item}
           disabledModelType={disabledModelType}
           titleBrick={titleBrick}
+          hiddenFieldRequired={hiddenFieldRequired}
         />
       ))}
       {!readonly && allowExpandFields(itemData.type) && (
