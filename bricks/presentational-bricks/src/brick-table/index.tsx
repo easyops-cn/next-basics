@@ -37,6 +37,7 @@ import {
   TableRowSelection,
   SorterResult,
   RowSelectionType,
+  ExpandableConfig,
 } from "antd/lib/table/interface";
 import {
   compareFunMap,
@@ -534,6 +535,18 @@ export class BrickTableElement extends UpdatingElement {
   rowDisabledConfig: RowDisabledProps | RowDisabledProps[];
 
   // start -- 行展开相关属性
+  /**
+   * @kind ExpandableConfig<Record<string, unknown>> | false
+   * @required false
+   * @default -
+   * @description 展开配置，详见 [expandable](https://4x.ant.design/components/table-cn/#expandable)，为 false 时禁用展开
+   * @group expand
+   */
+  @property({
+    attribute: false,
+  })
+  expandable?: ExpandableConfig<Record<string, unknown>> | false;
+
   /**
    * @kind {useBrick:UseBrickConf}
    * @required false
@@ -1719,6 +1732,7 @@ export class BrickTableElement extends UpdatingElement {
             onChange={this._handleOnChange}
             showCard={this.showCard}
             showHeader={this.showHeader}
+            expandable={this.expandable}
             expandedRowBrick={this.expandedRowBrick}
             expandIconAsCell={this.expandIconAsCell}
             expandIconColumnIndex={this.expandIconColumnIndex}

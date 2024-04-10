@@ -3,6 +3,7 @@ import Icon from "@ant-design/icons";
 import { Table, Card, ConfigProvider } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TableProps } from "antd/lib/table";
+import { ExpandableConfig } from "antd/lib/table/interface";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
 import { getCellStyle } from "./brickTableHelper";
@@ -31,10 +32,20 @@ const rightMenuIcon: MenuIcon = {
   theme: "outlined",
 };
 
-export interface BrickTableProps {
-  dataSource: Record<string, any>[];
+export interface BrickTableProps<RecordType = Record<string, unknown>>
+  extends Pick<
+    TableProps<RecordType>,
+    | "dataSource"
+    | "expandRowByClick"
+    | "defaultExpandAllRows"
+    | "onExpand"
+    | "onExpandedRowsChange"
+    | "expandedRowKeys"
+    | "scroll"
+    | "showHeader"
+  > {
   columns: CustomColumn[];
-  configProps?: TableProps<any>;
+  configProps?: TableProps<RecordType>;
   error?: any;
   deleteEnabled?: boolean;
   onDelete?: (index: number) => void;
@@ -54,24 +65,18 @@ export interface BrickTableProps {
   };
   expandIconAsCell?: boolean;
   expandIconColumnIndex?: number;
-  expandRowByClick?: boolean;
-  defaultExpandAllRows?: boolean;
-  onExpand?: (expanded: boolean, record: Record<string, any>) => void;
-  onExpandedRowsChange?: (expandedRows: React.Key[]) => void;
-  expandedRowKeys?: React.Key[];
   rowKey?: string;
   childrenColumnName?: string;
   tableDraggable?: boolean;
   onDrag?: (data: Record<string, any>[]) => void;
   zebraPattern?: boolean;
-  scroll?: TableProps<unknown>["scroll"];
   optimizedColumns?: Array<string | number>;
   ellipsisInfo?: boolean;
   thTransparent?: boolean;
-  showHeader?: boolean;
   acceptType?: string;
   xSmallSizeTable?: boolean;
   showHeaderExpandAll?: boolean;
+  expandable?: ExpandableConfig<RecordType> | false;
 }
 
 const DraggableBodyRow = ({
@@ -224,6 +229,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
     onDelete, // 用于 brick form 中，will be deprecated
     ellipsisInfo,
     showHeader,
+    expandable: _expandable,
   } = props;
 
   const initData = useMemo(() => {
@@ -589,7 +595,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
     props.onExpand && props.onExpand(expanded, record);
   };
 
-  const onExpandedRowsChange = (expandedRows: React.Key[]) => {
+  const onExpandedRowsChange = (expandedRows: readonly React.Key[]) => {
     props.onExpandedRowsChange && props.onExpandedRowsChange(expandedRows);
   };
 
@@ -649,6 +655,22 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
       ),
     [expandedRowKeys]
   );
+  const expandable =
+    _expandable !== false
+      ? {
+          ..._expandable,
+          ...(props.expandedRowBrick
+            ? {
+                expandedRowRender,
+              }
+            : {}),
+          ...pickExpandProps,
+          childrenColumnName,
+          expandIcon: getCustomExpandIcon,
+          onExpand,
+          onExpandedRowsChange,
+        }
+      : { childrenColumnName: "__noField__" };
 
   let table = (
     <Table
@@ -672,16 +694,8 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
         : {})}
       columns={customColumns}
       onChange={props.onChange}
-      {...(props.expandedRowBrick
-        ? {
-            expandedRowRender,
-          }
-        : {})}
-      {...pickExpandProps}
-      onExpand={onExpand}
-      onExpandedRowsChange={onExpandedRowsChange}
+      expandable={expandable}
       rowKey={rowKey}
-      childrenColumnName={childrenColumnName}
       rowClassName={(record, index) => {
         if (record.invalidRow) {
           return styles.invalidRow;
@@ -691,7 +705,6 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
         }
         return props.zebraPattern && index % 2 ? styles.brickTableOddRow : "";
       }}
-      expandIcon={getCustomExpandIcon}
       scroll={scroll}
       showHeader={showHeader}
       {...configProps}
