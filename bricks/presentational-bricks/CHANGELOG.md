@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.320.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.320.3...@next-bricks/presentational-bricks@1.320.4) (2024-04-10)
+
+
+### Bug Fixes
+
+* presentational-bricks.brick-divider的dashed和plain属性bug ([aa8e87b](https://github.com/easyops-cn/next-basics/commit/aa8e87b36ec99e2bdc754237b576244c268447a8))
+
+
+
+
+
 ## [1.320.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.320.2...@next-bricks/presentational-bricks@1.320.3) (2024-03-21)
 
 

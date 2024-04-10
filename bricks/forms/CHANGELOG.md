@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.286.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.286.4...@next-bricks/forms@1.286.5) (2024-04-10)
+
+
+### Bug Fixes
+
+* 新建、编辑拨测任务，拨测机、应用系统输入框样式显示有问题 ([a8176b1](https://github.com/easyops-cn/next-basics/commit/a8176b1bcd9314679c05b22ae866aba88c9b8f71))
+
+
+
+
+
 ## [1.286.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.286.3...@next-bricks/forms@1.286.4) (2024-03-28)
 
 **Note:** Version bump only for package @next-bricks/forms
