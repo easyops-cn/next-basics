@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.321.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.320.4...@next-bricks/presentational-bricks@1.321.0) (2024-04-10)
+
+
+### Features
+
+* **brick-table:** add expandable property ([dbf7996](https://github.com/easyops-cn/next-basics/commit/dbf799625f40bbbcad95ee7bd4e68fbd7dd0e818))
+
+
+
+
+
 ## [1.320.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.320.3...@next-bricks/presentational-bricks@1.320.4) (2024-04-10)
 
 
