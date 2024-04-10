@@ -437,10 +437,11 @@ describe("BrickTable", () => {
       expandedRowKeys: ["1"],
     });
     wrapper.update();
+    const expandable = wrapper.find(Table).prop("expandable");
     expect(wrapper.find("BrickAsComponent").length).toBe(1);
-    wrapper.find(Table).invoke("onExpand")(true, dataSource[1]);
+    expandable.onExpand(true, dataSource[1]);
     expect(onExpand).toHaveBeenCalled();
-    wrapper.find(Table).invoke("onExpandedRowsChange")(["2"]);
+    expandable.onExpandedRowsChange(["2"]);
     expect(onExpandedRowsChange).toHaveBeenCalled();
   });
 
