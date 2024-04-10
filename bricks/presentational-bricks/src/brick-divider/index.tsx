@@ -39,7 +39,7 @@ export class BrickDividerElement extends UpdatingElement {
    * @description 是否虚线
    * @group basic
    */
-  @property() dashed: boolean;
+  @property({ type: Boolean }) dashed: boolean;
 
   /**
    * @required false
@@ -67,7 +67,7 @@ export class BrickDividerElement extends UpdatingElement {
    * @description 文字是否显示为普通正文样式
    * @group ui
    */
-  @property()
+  @property({ type: Boolean })
   plain: boolean;
 
   /**
