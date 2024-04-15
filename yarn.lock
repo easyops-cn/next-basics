@@ -2299,10 +2299,10 @@
   dependencies:
     "@babel/runtime" "^7.20.6"
 
-"@next-core/brick-container@^2.94.15":
-  version "2.94.15"
-  resolved "https://registry.npmjs.org/@next-core/brick-container/-/brick-container-2.94.15.tgz#f9e5aa7dcddf7c0963e7985389080a24b0432ac8"
-  integrity sha512-vznyREvUP1OAHfJeesWlfsLlrTxOYZw44R3zYMEAAcHb2gjwlmmYK1VGrdfjX4FG+vCPfQFLq5z9PIZDY4LhsA==
+"@next-core/brick-container@^2.94.16":
+  version "2.94.16"
+  resolved "https://registry.npmjs.org/@next-core/brick-container/-/brick-container-2.94.16.tgz#dfb8a11570ad5d21c55c2a93166414420fc13d89"
+  integrity sha512-souRbmYlYpt+UrPihBfkeVsqkwNeCGld/VZT69Cks5g9n2hoecy5zwxh+Mxdl/qjHq9sQdZVZ768iu1sSFfaWw==
   dependencies:
     "@next-core/repo-config" "^0.2.5"
     body-parser "^1.20.1"
@@ -2444,15 +2444,15 @@
   resolved "https://registry.npmjs.org/@next-core/custom-antd-styles/-/custom-antd-styles-1.26.2.tgz#1eb2d6fcf990d1200e4aa319646019d640a59a07"
   integrity sha512-cC9N9NtHNWPV0Ko6evfShn+dza3bPvlahPRrvUv6g0Da4Z+8ss94eQSgy++Gm9qd70XM3e4g7uvzMQGNkRmPtA==
 
-"@next-core/dev-dependencies@^1.18.21":
-  version "1.18.21"
-  resolved "https://registry.npmjs.org/@next-core/dev-dependencies/-/dev-dependencies-1.18.21.tgz#88cb1f8c7dc9851befa2b167160efd9e2a2c21c4"
-  integrity sha512-ujsF9ls3tjcFKaqIhTeaZjnHcypPcaWFDJRnpA/EvlpsEMTIj6/ZaPbgUhlj6lVZcSiSerW/pcRzWXHxtuYVeA==
+"@next-core/dev-dependencies@^1.18.22":
+  version "1.18.22"
+  resolved "https://registry.npmjs.org/@next-core/dev-dependencies/-/dev-dependencies-1.18.22.tgz#bbe3e0b0320a2c2d2af1a849f008507a1bcee675"
+  integrity sha512-kV3jcG8mDd/7eN/4x2+DSa9c+qyaIecr7acRvAAB1vwL5Qej9WvcEhmm9Hg4ETQ+X01AU5wH35gA9pt0NBM1Jw==
   dependencies:
     "@babel/core" "^7.20.5"
     "@next-core/babel-preset-next" "^0.9.16"
     "@next-core/babel-preset-prismjs" "^1.0.20"
-    "@next-core/brick-container" "^2.94.15"
+    "@next-core/brick-container" "^2.94.16"
     "@next-core/brick-dll" "^2.46.19"
     "@next-core/brick-scripts" "^3.0.8"
     "@next-core/browserslist-config-next" "^0.1.4"
