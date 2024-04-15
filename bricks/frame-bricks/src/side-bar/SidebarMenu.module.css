@@ -130,6 +130,11 @@
   .simpleMenuItem {
     height: auto;
 
+    :global(.anticon),
+    .simpleMenuItemText {
+      color: var(--left-sidebar-item-normal-color);
+    }
+
     &:global(.ant-menu-item-active) {
       background: var(--v8-top-menu-item-hover);
       border-radius: var(--larger-border-radius);
