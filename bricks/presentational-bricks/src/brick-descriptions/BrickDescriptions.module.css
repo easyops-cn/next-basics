@@ -24,6 +24,9 @@ html[data-ui="v8-2"] :global(.ant-descriptions-view) {
     padding-left: 0;
   }
 }
+:global(.ant-descriptions-item-container) {
+  align-items: center;
+}
 .descriptionList {
   :global(.ant-descriptions):nth-child(n):not(:last-child) {
     margin-bottom: 24px;
