@@ -130,7 +130,9 @@
   .simpleMenuItem {
     height: auto;
 
-    :global(.anticon),
+    :global(.anticon) {
+      color: var(--left-sidebar-item-collapsed-icon-color);
+    }
     .simpleMenuItemText {
       color: var(--left-sidebar-item-normal-color);
     }
