@@ -79,3 +79,4 @@ import "./brick-user-group";
 import "./tree-transfer";
 // !Lazy: import "./qrcode-download";
 import "./banner-display-card-list";
+import "./current-time";
