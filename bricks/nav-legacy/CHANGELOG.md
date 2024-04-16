@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.2.3...@next-bricks/nav-legacy@1.2.4) (2024-04-16)
+
+
+### Bug Fixes
+
+* cmdb资源管理按钮闪烁问题 ([8018b82](https://github.com/easyops-cn/next-basics/commit/8018b822f54cc11365a6675ea10776a6658f9313))
+
+
+
+
+
 ## [1.2.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.2.2...@next-bricks/nav-legacy@1.2.3) (2024-02-02)
 
 **Note:** Version bump only for package @next-bricks/nav-legacy
