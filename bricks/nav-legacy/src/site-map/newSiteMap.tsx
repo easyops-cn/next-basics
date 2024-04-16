@@ -26,7 +26,7 @@ import {
   CmdbObjectApi_searchCollect,
   CmdbObjectApi_collect,
 } from "@next-sdk/cmdb-sdk";
-import { cloneDeep, isArray, reject, sortBy, uniq } from "lodash";
+import { cloneDeep, debounce, isArray, reject, sortBy, uniq } from "lodash";
 import { JsonStorage } from "@next-libs/storage";
 import {
   BrickAsComponent,
@@ -482,6 +482,7 @@ export function NewSiteMap(props: newSiteMapProps) {
                 onChange={onSearch}
                 defaultValue={highlightChar}
                 placeholder={t(K.SEARCH_BY_NAME_OR_ID)}
+                autoFocus={true}
               />
             </div>
             {request.loading ? (
@@ -513,7 +514,7 @@ export function NewSiteMap(props: newSiteMapProps) {
     favouriteGroupList,
   ]);
 
-  const triggerDrawerVisible = (vis: boolean) => {
+  const triggerDrawerVisible = debounce((vis: boolean) => {
     if (visible === vis) return;
     setVisible(vis);
 
@@ -533,7 +534,7 @@ export function NewSiteMap(props: newSiteMapProps) {
           },
         ]);
     }
-  };
+  }, 400);
 
   return (
     <div
