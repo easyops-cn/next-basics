@@ -239,7 +239,10 @@ export function ComponentSelect(
       .sort((a, b) => componetSortConf[a[0]] - componetSortConf[b[0]])
       .filter(
         ([k]) =>
-          !["snippet", config.libraryShowV3Brick ? "" : "v3Brick"].includes(k)
+          ![
+            "snippet",
+            ...(config.libraryShowV3Brick ? [] : ["v3Brick", "v3Provider"]),
+          ].includes(k)
       )[0];
     handleChangeTabs(k, v);
   }, [componentList]);
