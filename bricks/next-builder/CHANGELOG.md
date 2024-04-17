@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.265.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.265.7...@next-bricks/next-builder@1.265.8) (2024-04-17)
+
+
+### Bug Fixes
+
+* 没有打开 libraryShowV3Brick 的应用配置，v3 构件和provider 都不展示 ([cee4366](https://github.com/easyops-cn/next-basics/commit/cee43661fc8e3a20cef11743865f940ef874674e))
+
+
+
+
+
 ## [1.265.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.265.6...@next-bricks/next-builder@1.265.7) (2024-02-08)
 
 **Note:** Version bump only for package @next-bricks/next-builder
