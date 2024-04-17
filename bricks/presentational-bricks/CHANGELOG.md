@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.321.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.321.1...@next-bricks/presentational-bricks@1.321.2) (2024-04-17)
+
+
+### Bug Fixes
+
+* **brick-table:** fix first column indent ([c24ccfd](https://github.com/easyops-cn/next-basics/commit/c24ccfde009f3b7bdfc0bf0d4889bb261ab9237e))
+
+
+
+
+
 ## [1.321.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.321.0...@next-bricks/presentational-bricks@1.321.1) (2024-04-15)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
