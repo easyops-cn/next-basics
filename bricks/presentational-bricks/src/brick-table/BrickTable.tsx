@@ -666,7 +666,6 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
             : {}),
           ...pickExpandProps,
           childrenColumnName,
-          expandIcon: getCustomExpandIcon,
           onExpand,
           onExpandedRowsChange,
         }
@@ -705,6 +704,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
         }
         return props.zebraPattern && index % 2 ? styles.brickTableOddRow : "";
       }}
+      expandIcon={getCustomExpandIcon}
       scroll={scroll}
       showHeader={showHeader}
       {...configProps}
