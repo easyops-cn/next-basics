@@ -4,5 +4,3 @@ dependencies:
   - name: brick_next
     version: ^2.90.33 || ^3.8.38
     local_deploy: true
-  - name: user_service
-    version: ^1.13.4
