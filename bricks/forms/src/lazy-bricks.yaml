@@ -14,5 +14,6 @@ lazyBricks:
       # - cmdb-instance-select
       - cmdb-instance-select-panel
       - user-or-user-group-select
+      - cmdb-object-attr-value
   - crontab-input
   - dynamic-form-item-v2

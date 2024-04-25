@@ -18,6 +18,16 @@ import i18n from "i18next";
 import { IPRegex } from "./constants";
 jest.mock("@next-sdk/cmdb-sdk");
 
+jest.mock("@next-core/brick-kit", () => ({
+  useFeatureFlags: jest.fn().mockImplementation(() => [true]),
+}));
+
+jest.mock("@next-libs/forms", () => ({
+  FormItemWrapper: function FormItemWrapper({ children }) {
+    return <div data-testid="mock-form-item-wrapper">{children}</div>;
+  },
+}));
+
 const spyOnModalConfirm = jest.spyOn(Modal, "confirm");
 const mockLoadObject = CmdbObjectApi_getObjectAll as jest.Mock;
 
@@ -84,18 +94,18 @@ describe("ObjectAttrStruct", () => {
   });
 
   it.each([
-    ["enum", "", ""],
-    ["enums", "", ""],
-    ["str", "/a/", "/a/"],
-    ["int", "/9/", "/9/"],
-    ["arr", "/ab/", "/ab/"],
-    ["str", null, ""],
-    ["ip", "", IPRegex],
-    ["json", `{"type":"string"}`, `{"type":"string"}`],
-    ["enum", ["enum1", "enum2"], "enum1,enum2"],
+    ["enum", "", null, ""],
+    ["enums", "", null, ""],
+    ["str", "/a/", "default", "/a/"],
+    ["int", "/9/", null, "/9/"],
+    ["arr", "/ab/", null, "/ab/"],
+    ["str", null, "password", ""],
+    ["ip", "", null, IPRegex],
+    ["json", `{"type":"string"}`, null, `{"type":"string"}`],
+    ["enum", ["enum1", "enum2"], null, "enum1,enum2"],
   ])(
     "should work with props has struct_define (%s %s)",
-    (type, regex, expected) => {
+    (type, regex, mode, expected) => {
       const wrapper = mount(
         <ObjectAttrStruct
           {...{

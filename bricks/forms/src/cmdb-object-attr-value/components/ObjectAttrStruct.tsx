@@ -22,6 +22,7 @@ import {
 import styles from "./index.module.css";
 import { ColumnsType } from "antd/lib/table";
 import { IPRegex } from "./constants";
+import { useFeatureFlags } from "@next-core/brick-kit";
 
 export interface SortEnd {
   oldIndex: number;
@@ -41,6 +42,7 @@ interface StructDefine {
   type: string;
   regex?: string[];
   isNew?: boolean;
+  mode?: "default" | "password";
 }
 
 export interface StructValueType {
@@ -87,6 +89,10 @@ export function LegacyObjectAttrStructForm(
     default: "",
     struct_define: [],
   });
+
+  const [useStrPassword] = useFeatureFlags(
+    "cmdb-str-attr-support-password-mode"
+  );
 
   const [addStructMode, setAddStructMode] = React.useState("new");
   const [addStructModalVisible, setAddStructModalVisible] =
@@ -524,6 +530,22 @@ export function LegacyObjectAttrStructForm(
               </Select>
             )}
           </Form.Item>
+          {curValueType === "str" && useStrPassword && (
+            <Form.Item label={i18n.t(`${NS_FORMS}:${K.DISPLAY_AS}`)}>
+              {getFieldDecorator("mode", {
+                initialValue: currentStruct.mode ?? "default",
+              })(
+                <Radio.Group>
+                  <Radio value="default">
+                    {i18n.t(`${NS_FORMS}:${K.DEFAULT}`)}
+                  </Radio>
+                  <Radio value="password">
+                    {i18n.t(`${NS_FORMS}:${K.PASSWORD}`)}
+                  </Radio>
+                </Radio.Group>
+              )}
+            </Form.Item>
+          )}
           {(curValueType === "enum" || curValueType === "enums") && (
             <Form.Item label={i18n.t(`${NS_FORMS}:${K.ENUMERATION_VALUE}`)}>
               {getFieldDecorator("regex", {

@@ -54,6 +54,7 @@ const locale: Locale = {
   [K.THIS_IS_NOT_MANDATORY]: "可不填",
   [K.DISPLAY_AS]: "显示为:",
   [K.MULTI_LINE_STR]: "多行字符串",
+  [K.PASSWORD]: "密码",
   [K.DEFAULT]: "默认",
   [K.STRUCTURE_ITEM_ID]: "结构项ID",
   [K.STRUCTURE_ITEM_NAME]: "结构项名称",
