@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.287.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.286.5...@next-bricks/forms@1.287.0) (2024-04-25)
+
+
+### Features
+
+* cmdb attr support xml & password mode ([cdef968](https://github.com/easyops-cn/next-basics/commit/cdef968467daabb156038afa3892396870a29b93))
+
+
+
+
+
 ## [1.286.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.286.4...@next-bricks/forms@1.286.5) (2024-04-10)
 
 
