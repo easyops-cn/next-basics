@@ -18,6 +18,7 @@ import { isNil, isNumber } from "lodash";
 import i18n from "i18next";
 import styles from "./index.module.css";
 import { useFeatureFlags } from "@next-core/brick-kit";
+import { CodeEditor } from "@next-libs/code-editor-components";
 
 const Option = Select.Option;
 
@@ -52,6 +53,9 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
   const [startValue, setStartValue] = React.useState(1);
 
   const [useCustomTemplateAttr] = useFeatureFlags("use-custom-template-attr");
+  const [useStrPassword] = useFeatureFlags(
+    "cmdb-str-attr-support-password-mode"
+  );
   React.useEffect(() => {
     !isNil(props.value) && setValue(props.value);
   }, [props.value]);
@@ -155,7 +159,11 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
 
   const getDefaultControl = (): React.ReactNode => {
     if (value.default_type === "value") {
-      if (value.mode === "default" || value.mode === "url") {
+      if (
+        value.mode === "default" ||
+        value.mode === "url" ||
+        value.mode === "password"
+      ) {
         return (
           <Input
             value={value.default}
@@ -163,6 +171,22 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
               handleValueChange({ ...value, default: e.target.value });
             }}
             disabled={props.disabled}
+          />
+        );
+      } else if (value.mode === "xml") {
+        return (
+          <CodeEditor
+            theme="monokai"
+            mode={"xml"}
+            minLines={5}
+            maxLines={20}
+            showLineNumbers={true}
+            showPrintMargin={false}
+            highlightActiveLine={true}
+            value={value.default ?? ""}
+            onChange={(e) => {
+              handleValueChange({ ...value, default: e });
+            }}
           />
         );
       } else {
@@ -311,13 +335,32 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
               </Radio>
               <Radio value="url">URL</Radio>
               <Radio value="markdown">Markdown</Radio>
+              <Radio value="xml">XML</Radio>
+              {useStrPassword && (
+                <Radio value="password">
+                  {i18n.t(`${NS_FORMS}:${K.PASSWORD}`)}
+                </Radio>
+              )}
             </Radio.Group>
           </Row>
         </div>
         <div>
           {t(K.ATTRIBUTE_DEFAULT_VALUE)}
           <Row gutter={15}>
-            <Col span={value.default_type === "series-number" ? 6 : 12}>
+            <Col
+              flex={
+                value.default_type === "value" && value.mode === "xml"
+                  ? "200px"
+                  : null
+              }
+              span={
+                value.default_type === "value" && value.mode === "xml"
+                  ? null
+                  : value.default_type === "series-number"
+                  ? 6
+                  : 12
+              }
+            >
               <Select
                 value={value.default_type}
                 onChange={handleStrDefaultTypeChange}
@@ -333,7 +376,18 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
               </Select>
             </Col>
             <Col
-              span={value.default_type === "series-number" ? 18 : 12}
+              flex={
+                value.default_type === "value" && value.mode === "xml"
+                  ? "auto"
+                  : null
+              }
+              span={
+                value.default_type === "value" && value.mode === "xml"
+                  ? null
+                  : value.default_type === "series-number"
+                  ? 18
+                  : 12
+              }
               // style={{
               //   marginTop:
               //     value.mode === "multiple-lines" || value.mode === "markdown"

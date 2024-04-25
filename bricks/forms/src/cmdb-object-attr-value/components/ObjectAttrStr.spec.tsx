@@ -91,6 +91,24 @@ describe("ObjectAttrStr", () => {
       default: "test",
       mode: "multiple-lines",
     });
+
+    wrapper.find("Row").at(1).children(0).invoke("onChange")({
+      target: { value: "password" },
+    });
+    expect(props.onChange).toBeCalledWith({
+      ...defaultValue,
+      default: "test",
+      mode: "password",
+    });
+
+    wrapper.find("Row").at(1).children(0).invoke("onChange")({
+      target: { value: "xml" },
+    });
+    expect(props.onChange).toBeCalledWith({
+      ...defaultValue,
+      default: "test",
+      mode: "xml",
+    });
   });
 
   it("should change mode to markdown", () => {

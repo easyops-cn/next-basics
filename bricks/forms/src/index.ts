@@ -29,7 +29,7 @@ import "./general-structs-form-item-v2";
 import "./general-cascader";
 import "./dynamic-form-item";
 import "./general-slide";
-import "./cmdb-object-attr-value";
+// !Lazy: import "./cmdb-object-attr-value";
 // !Lazy: import "./advance-setting";
 import "./custom-templates/tpl-cmdb-object-attr-add";
 import "./tree-select";

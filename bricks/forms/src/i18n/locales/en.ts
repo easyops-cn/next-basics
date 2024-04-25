@@ -57,6 +57,7 @@ const locale: Locale = {
   [K.THIS_IS_NOT_MANDATORY]: "This is not mandatory",
   [K.DISPLAY_AS]: "Display as:",
   [K.MULTI_LINE_STR]: "Multiline string",
+  [K.PASSWORD]: "Password",
   [K.DEFAULT]: "Default",
   [K.STRUCTURE_ITEM_NAME]: "Structure item name",
   [K.STRUCTURE_ITEM_ID]: "Structure item ID",
