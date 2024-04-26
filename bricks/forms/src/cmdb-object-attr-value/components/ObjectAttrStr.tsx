@@ -257,7 +257,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
       );
     } else if (value.default_type === "series-number") {
       return (
-        <Row gutter={15}>
+        <Row gutter={8}>
           <Col span={8}>
             <InputNumber
               placeholder={i18n.t(`${NS_FORMS}:${K.NUMBER_LENGTH}`)}
@@ -346,7 +346,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
         </div>
         <div>
           {t(K.ATTRIBUTE_DEFAULT_VALUE)}
-          <Row gutter={15}>
+          <Row gutter={8}>
             <Col
               flex={
                 value.default_type === "value" && value.mode === "xml"
@@ -399,7 +399,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
             </Col>
           </Row>
           {value.default === "template()" && (
-            <Row gutter={15}>
+            <Row gutter={8}>
               <Col span={24} style={{ marginTop: 10 }}>
                 <Input.TextArea
                   value={value.regex}
