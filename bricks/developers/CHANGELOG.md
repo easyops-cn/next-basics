@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.370.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.369.3...@next-bricks/developers@1.370.0) (2024-04-28)
+
+
+### Features
+
+* replace useChildren for preview ([939b95f](https://github.com/easyops-cn/next-basics/commit/939b95f7a8de7e13bb33df76dfc238580b68c41f))
+
+
+
+
+
 ## [1.369.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.369.2...@next-bricks/developers@1.369.3) (2024-02-27)
 
 **Note:** Version bump only for package @next-bricks/developers
