@@ -9,6 +9,7 @@ import {
 import { LocationContext } from "@next-core/brick-kit/dist/types/core/exports";
 import { StoryConf, SnippetConf } from "@next-core/brick-types";
 import styles from "./BrickPreview.module.css";
+import { replaceUseChildren } from "./replaceUseChildren";
 
 export function processConf(
   conf: BrickPreviewProps["conf"]
@@ -83,7 +84,9 @@ function LegacyBrickPreview(
   useEffect(() => {
     const process = async (): Promise<void> => {
       if (migrateV3) {
-        rootRef.current?.render(cloneDeep([].concat(config)));
+        const bricks = cloneDeep([].concat(config));
+        replaceUseChildren(bricks);
+        rootRef.current?.render(bricks);
         return;
       }
       developHelper.unmountTree(bgRef.current);
