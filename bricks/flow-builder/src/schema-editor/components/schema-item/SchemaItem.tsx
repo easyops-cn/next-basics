@@ -75,7 +75,7 @@ export function SchemaItem({
   } = editorContext;
 
   useEffect(() => {
-    setExpand(!isEmpty(itemData.fields));
+    if (!isEmpty(itemData.fields)) setExpand(true);
   }, [itemData.fields]);
 
   const openEditModal = (): void => {

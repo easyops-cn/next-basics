@@ -166,7 +166,7 @@ export const SchemaEditorWrapper = forwardRef<
     traceId: string
   ): void => {
     // no need emit onChange
-    handleAdd(modelDefinition.fields, traceId, false);
+    handleAdd(modelDefinition.fields ?? [], traceId, false);
   };
 
   const hideModelDefinition = (traceId: string): void => {
