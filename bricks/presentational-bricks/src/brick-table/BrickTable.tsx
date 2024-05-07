@@ -727,7 +727,11 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
   }
 
   if (props.tableDraggable) {
-    table = <DndProvider backend={HTML5Backend}>{table}</DndProvider>;
+    table = (
+      <DndProvider backend={HTML5Backend} context={window}>
+        {table}
+      </DndProvider>
+    );
   }
 
   if (!props.showCard) {
