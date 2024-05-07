@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.321.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.321.3...@next-bricks/presentational-bricks@1.321.4) (2024-05-07)
+
+
+### Bug Fixes
+
+* **brick-table:** fix react-dnd html5 backend error ([1138323](https://github.com/easyops-cn/next-basics/commit/113832309fa71270fe440a02a45bacc401c7557c))
+
+
+
+
+
 ## [1.321.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.321.2...@next-bricks/presentational-bricks@1.321.3) (2024-04-19)
 
 
