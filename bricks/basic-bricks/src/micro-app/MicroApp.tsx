@@ -12,6 +12,8 @@ interface MicroAppProps {
   bannerStyle?: React.CSSProperties;
   noGap?: boolean;
   dashboardMode?: boolean;
+  hideLogo?: boolean;
+  hideExitBtn?: boolean;
 }
 
 export function MicroApp({
@@ -21,6 +23,8 @@ export function MicroApp({
   bannerStyle,
   noGap,
   dashboardMode,
+  hideLogo,
+  hideExitBtn,
 }: MicroAppProps): React.ReactElement {
   const { dashboard_mode_logo_url } = getRuntime().getBrandSettings();
   const isShowNewUiMode = getNewUIStatus(true);
@@ -71,14 +75,16 @@ export function MicroApp({
           </div>
           {dashboardMode && (
             <>
-              <div className="logo-in-dashboard-mode">
-                {dashboard_mode_logo_url ? (
-                  <img src={dashboard_mode_logo_url} style={{ height: 32 }} />
-                ) : (
-                  <Logo />
-                )}
-              </div>
-              <BtnExitDashboardMode />
+              {!hideLogo && (
+                <div className="logo-in-dashboard-mode">
+                  {dashboard_mode_logo_url ? (
+                    <img src={dashboard_mode_logo_url} style={{ height: 32 }} />
+                  ) : (
+                    <Logo />
+                  )}
+                </div>
+              )}
+              {!hideExitBtn && <BtnExitDashboardMode />}
             </>
           )}
         </div>

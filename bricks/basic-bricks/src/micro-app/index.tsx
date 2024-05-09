@@ -124,6 +124,30 @@ export class MicroViewElement extends UpdatingElement {
   bannerStyle?: React.CSSProperties;
 
   /**
+   * @kind boolean
+   * @required -
+   * @default false
+   * @description 隐藏logo
+   * @group ui
+   */
+  @property({
+    type: Boolean,
+  })
+  hideLogo: boolean;
+
+  /**
+   * @kind boolean
+   * @required -
+   * @default false
+   * @description 隐藏退出按钮
+   * @group ui
+   */
+  @property({
+    type: Boolean,
+  })
+  hideExitBtn: boolean;
+
+  /**
    * @private
    */
   @property({
@@ -218,6 +242,8 @@ export class MicroViewElement extends UpdatingElement {
           dashboardMode={this.dashboardMode}
           bannerPageTitle={this.bannerPageTitle}
           bannerStyle={this.bannerStyle}
+          hideLogo={this.hideLogo}
+          hideExitBtn={this.hideExitBtn}
         />,
         this._mountPoint,
         () => {
