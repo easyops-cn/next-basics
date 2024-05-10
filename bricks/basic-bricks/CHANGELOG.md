@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.251.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.251.3...@next-bricks/basic-bricks@1.251.4) (2024-05-10)
+
+
+### Bug Fixes
+
+* 增加大屏控制logo和退出按钮的设置 refs FLOW-996 ([68d2427](https://github.com/easyops-cn/next-basics/commit/68d24272d0f5019c481027d2ff5fecdfbcc5c06d))
+
+
+
+
+
 ## [1.251.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.251.2...@next-bricks/basic-bricks@1.251.3) (2024-05-06)
 
 
