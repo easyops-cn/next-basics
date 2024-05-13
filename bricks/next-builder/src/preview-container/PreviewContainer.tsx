@@ -14,6 +14,7 @@ import type {
   BrickPackage,
   BuilderBrickNode,
   BuilderSnippetNode,
+  Contract,
   SiteTheme,
   Storyboard,
   StoryboardContextItem,
@@ -35,7 +36,9 @@ import type {
   PreviewBaseMessage,
   PreviewDataOption,
   PreviewMessagePreviewContractUpdateDetail,
+  PreviewDebugData,
 } from "@next-types/preview";
+import { ContractCenterApi_batchSearchContract } from "@next-sdk/next-builder-sdk";
 
 import styles from "./PreviewContainer.module.css";
 import { buildBricks } from "../shared/storyboard/buildStoryboardV2";
@@ -87,6 +90,8 @@ export interface PreviewContainerProps {
   onExcuteProxyMethodError?(result: ExcuteProxyMethodResult): void;
   onPreviewDebug?(result: any[]): void;
   onMatchApiCache?(num: number): void;
+  onDebugValueSuccess?(value: unknown): void;
+  onDebugValueError?(alue: unknown): void;
 }
 
 export type CaptureStatus = "idle" | "capturing" | "ok" | "failed";
@@ -106,6 +111,7 @@ export interface PreviewContainerRef {
   back(): void;
   forward(): void;
   inspectDataValue(name: string, option: PreviewDataOption): void;
+  debugDataValue(debugData: PreviewDebugData, options: PreviewDataOption): void;
   manager: BuilderDataManager;
 }
 
@@ -129,6 +135,7 @@ function sendToggleInspecting(
   );
 }
 
+const cacheContractMap = new Map<string, Contract>();
 export function LegacyPreviewContainer(
   {
     previewUrl,
@@ -157,6 +164,8 @@ export function LegacyPreviewContainer(
     onInspectSingleDataValueSuccess,
     onInspectAllDataValuesSuccess,
     onInspectDataValueError,
+    onDebugValueSuccess,
+    onDebugValueError,
     onContractUpdate,
     onExcuteProxyMethodSuccess,
     onExcuteProxyMethodError,
@@ -588,6 +597,47 @@ export function LegacyPreviewContainer(
     [previewOrigin]
   );
 
+  const debugDataValue = useCallback(
+    async (debugData: PreviewDebugData, options: PreviewDataOption) => {
+      try {
+        let contractData;
+
+        if (debugData.resolve && debugData.resolve.useProvider.includes("@")) {
+          const useProvider = debugData.resolve.useProvider;
+          const cacheContract = cacheContractMap.get(useProvider);
+          if (cacheContract) {
+            contractData = cacheContract;
+          } else {
+            const arr = useProvider.split(":");
+            contractData = (
+              await ContractCenterApi_batchSearchContract({
+                contract: [
+                  {
+                    fullContractName: arr[0],
+                    version: arr[1],
+                  },
+                ],
+              })
+            ).list[0] as Contract;
+
+            cacheContractMap.set(useProvider, contractData);
+          }
+        }
+
+        iframeRef.current.contentWindow.postMessage({
+          sender: "preview-container",
+          type: "debug-data-value",
+          debugData,
+          contractData,
+          options,
+        });
+      } catch (error) {
+        onDebugValueError(error);
+      }
+    },
+    [onDebugValueError]
+  );
+
   const handleUrlChange = useCallback(
     (url: string) => {
       onUrlChange?.(url);
@@ -668,6 +718,7 @@ export function LegacyPreviewContainer(
     back,
     forward,
     inspectDataValue,
+    debugDataValue,
   }));
 
   useEffect(() => {
@@ -811,6 +862,12 @@ export function LegacyPreviewContainer(
           case "inspect-data-value-error":
             onInspectDataValueError(data.data);
             break;
+          case "debug-data-value-success":
+            onDebugValueSuccess(data.data);
+            break;
+          case "debug-data-value-error":
+            onDebugValueError(data.data);
+            break;
           case "contract-update":
             onContractUpdate(data.data);
             break;
@@ -840,6 +897,8 @@ export function LegacyPreviewContainer(
     onInspectDataValueError,
     onContractUpdate,
     routeMatch,
+    onDebugValueSuccess,
+    onDebugValueError,
   ]);
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import type {
   BuilderBrickNode,
   ContextConf,
   Storyboard,
+  UseProviderResolveConf,
 } from "@next-core/brick-types";
 import {
   BuilderRuntimeNode,
@@ -105,6 +106,8 @@ export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerCaptureFailed
   | PreviewMessagePreviewDataValueSuccess
   | PreviewMessagePreviewDataValueError
+  | PreviewMessagePreviewDebugValueSuccess
+  | PreviewMessagePreviewDebugValueError
   | PreviewMessagePreviewContractUpdate;
 
 export type PreviewMessageToPreviewer =
@@ -162,6 +165,8 @@ export type PreviewMessageToContainer =
   | PreviewMessageContainerMatchApiCache
   | PreviewMessagePreviewDataValueSuccess
   | PreviewMessagePreviewDataValueError
+  | PreviewMessagePreviewDebugValueSuccess
+  | PreviewMessagePreviewDebugValueError
   | PreviewMessagePreviewContractUpdate;
 
 export type PreviewerMessageToBuilder =
@@ -293,6 +298,18 @@ export interface PreviewMessagePreviewerCaptureFailed
 export interface PreviewMessagePreviewDataValueSuccess {
   sender: "previewer";
   type: "inspect-single-data-value-success" | "inspect-all-data-values-success";
+  data: unknown;
+}
+
+export interface PreviewMessagePreviewDebugValueSuccess {
+  sender: "previewer";
+  type: "debug-data-value-success";
+  data: unknown;
+}
+
+export interface PreviewMessagePreviewDebugValueError {
+  sender: "previewer";
+  type: "debug-data-value-error";
   data: unknown;
 }
 
@@ -782,4 +799,9 @@ export interface BackendMessageForExecuteSuccess {
 
 export interface PreviewDataOption {
   dataType: "state" | "context";
+}
+
+export interface PreviewDebugData {
+  resolve?: UseProviderResolveConf;
+  value?: unknown;
 }

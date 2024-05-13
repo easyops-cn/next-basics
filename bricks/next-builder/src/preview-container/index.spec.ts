@@ -41,6 +41,22 @@ describe("next-builder.preview-container", () => {
       "error"
     );
 
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.children.props.onDebugValueSuccess({ name: "easyops" });
+
+    expect((spyonDispatchEvent.mock.calls[3][0] as CustomEvent).detail).toEqual(
+      { name: "easyops" }
+    );
+
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.children.props.onDebugValueError("error");
+
+    expect((spyonDispatchEvent.mock.calls[4][0] as CustomEvent).detail).toEqual(
+      "error"
+    );
+
     document.body.removeChild(element);
     expect(unmountComponentAtNode).toBeCalled();
   });
