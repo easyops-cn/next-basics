@@ -18,6 +18,7 @@ import {
   PreviewSettings,
   PreviewDataOption,
   PreviewMessagePreviewContractUpdateDetail,
+  PreviewDebugData,
 } from "@next-types/preview";
 import {
   BuilderProvider,
@@ -196,6 +197,20 @@ export class PreviewContainerElement extends UpdatingElement {
     this._handleInspectDataValueErrorEvent.emit(value);
   };
 
+  @event({ type: "debug.data.value.success" })
+  private _handleDebugDataValueSuccessEvent: EventEmitter<unknown>;
+
+  private _handleDebugDataValueSuccess = (value: unknown): void => {
+    this._handleDebugDataValueSuccessEvent.emit(value);
+  };
+
+  @event({ type: "debug.data.value.error" })
+  private _handleDebugDataValueErrorEvent: EventEmitter<unknown>;
+
+  private _handleDebugDataValueError = (value: unknown): void => {
+    this._handleDebugDataValueErrorEvent.emit(value);
+  };
+
   @event({ type: "contract.update" })
   private _handleContractUpdateEvent: EventEmitter<any>;
   private _handleContractUpdate = (
@@ -258,6 +273,15 @@ export class PreviewContainerElement extends UpdatingElement {
       undefined,
       option
     );
+  }
+
+  // istanbul ignore next
+  @method()
+  debugDataValue(
+    debugData: PreviewDebugData,
+    options: PreviewDataOption
+  ): void {
+    this._previewContainerRef.current.debugDataValue(debugData, options);
   }
 
   // istanbul ignore next
@@ -332,6 +356,8 @@ export class PreviewContainerElement extends UpdatingElement {
               onExcuteProxyMethodError={this._handleExcuteProxyMethodError}
               onPreviewDebug={this._handlePreviwDebug}
               onMatchApiCache={this._handleMatchApiCache}
+              onDebugValueSuccess={this._handleDebugDataValueSuccess}
+              onDebugValueError={this._handleDebugDataValueError}
             />
           </BuilderProvider>
         </BrickWrapper>,
