@@ -624,18 +624,21 @@ export function LegacyPreviewContainer(
           }
         }
 
-        iframeRef.current.contentWindow.postMessage({
-          sender: "preview-container",
-          type: "debug-data-value",
-          debugData,
-          contractData,
-          options,
-        });
+        iframeRef.current.contentWindow.postMessage(
+          {
+            sender: "preview-container",
+            type: "debug-data-value",
+            debugData,
+            contractData,
+            options,
+          },
+          previewOrigin
+        );
       } catch (error) {
         onDebugValueError(error);
       }
     },
-    [onDebugValueError]
+    [onDebugValueError, previewOrigin]
   );
 
   const handleUrlChange = useCallback(
