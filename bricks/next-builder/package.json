@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/next-builder",
-  "version": "1.265.8",
+  "version": "1.266.0",
   "description": "Bricks for next-builder",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/next-builder",
   "license": "GPL-3.0",
@@ -50,7 +50,7 @@
     "@next-sdk/next-builder-sdk": "^2.10.0",
     "@next-sdk/object-store-sdk": "^2.1.2",
     "@next-shared/common-bricks": "0.26.0",
-    "@next-types/preview": "^1.24.0",
+    "@next-types/preview": "^1.25.0",
     "change-case": "^4.1.2",
     "classnames": "^2.3.2",
     "immutability-helper": "^3.1.1",
