@@ -35,6 +35,8 @@ export interface AddPropertyModalProps {
   customTypeList?: string[];
   hiddenArrayTypeCheckbox?: boolean;
   hiddenFieldRequired?: boolean;
+  hiddenFieldDesc?: boolean;
+  hiddenCategories?: string[];
 }
 
 export function AddPropertyModal({
@@ -53,6 +55,8 @@ export function AddPropertyModal({
   customTypeList,
   hiddenArrayTypeCheckbox,
   hiddenFieldRequired,
+  hiddenFieldDesc,
+  hiddenCategories,
 }: AddPropertyModalProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const [form] = Form.useForm();
@@ -103,19 +107,24 @@ export function AddPropertyModal({
         label={t(K.CATEGORY_LABEL)}
       >
         <Select onChange={() => form.resetFields(["type", "ref"])}>
-          <Select.Option key="normal" value="normal">
-            {t(K.SCHEMA_ITEM_NORMAL)}
-          </Select.Option>
-          <Select.Option key="model" value="model">
-            {t(K.SCHEMA_ITEM_MODEL)}
-          </Select.Option>
-          <Select.Option key="reference" value="reference">
-            {t(K.SCHEMA_ITEM_REF)}
-          </Select.Option>
+          {[
+            {
+              label: t(K.SCHEMA_ITEM_NORMAL),
+              value: "normal",
+            },
+            { label: t(K.SCHEMA_ITEM_MODEL), value: "model" },
+            { label: t(K.SCHEMA_ITEM_REF), value: "reference" },
+          ]
+            .filter((item) => !hiddenCategories?.includes(item.value))
+            .map((item) => (
+              <Select.Option key={item.value} value={item.value}>
+                {item.label}
+              </Select.Option>
+            ))}
         </Select>
       </Form.Item>
     ),
-    [disabledModelType, t, form]
+    [disabledModelType, t, form, hiddenCategories]
   );
 
   const typeFormItem = useMemo(
@@ -400,7 +409,7 @@ export function AddPropertyModal({
 
         {validatorFormItem}
         {showWrapperFormItem && wrapperFormItem}
-        {descriptionFormItem}
+        {!hiddenFieldDesc && descriptionFormItem}
       </Form>
     </Modal>
   );

@@ -40,6 +40,8 @@ export interface SchemaEditorProps extends FormItemWrapperProps {
     useBrick: UseBrickConf;
   };
   hiddenFieldRequired?: boolean;
+  hiddenFieldDesc?: boolean;
+  hiddenCategories?: string[];
 }
 
 interface ItemData {
@@ -62,6 +64,8 @@ export const SchemaEditorWrapper = forwardRef<
     hiddenArrayTypeCheckbox,
     rootNodeRequired,
     hiddenRootNodeRequired,
+    hiddenFieldDesc,
+    hiddenCategories,
     hiddenFieldRequired,
     importModelDefinition,
     titleBrick,
@@ -98,8 +102,13 @@ export const SchemaEditorWrapper = forwardRef<
   }, []);
 
   const processedTitleList = useMemo(
-    () => filterTitleList(titleList, readonly, hiddenFieldRequired),
-    [readonly, hiddenFieldRequired]
+    () =>
+      filterTitleList(titleList, {
+        readonly,
+        hiddenFieldRequired,
+        hiddenFieldDesc,
+      }),
+    [readonly, hiddenFieldRequired, hiddenFieldDesc]
   );
 
   const gridTemplateColumns = useMemo(
@@ -235,6 +244,7 @@ export const SchemaEditorWrapper = forwardRef<
             disabledModelType={disabledModelType}
             titleBrick={titleBrick}
             hiddenFieldRequired={hiddenFieldRequired}
+            hiddenFieldDesc={hiddenFieldDesc}
             parentsModel={[]}
           />
         </div>
@@ -250,6 +260,8 @@ export const SchemaEditorWrapper = forwardRef<
         hiddenRootNodeRequired={hiddenRootNodeRequired}
         hiddenArrayTypeCheckbox={hiddenArrayTypeCheckbox}
         hiddenFieldRequired={hiddenFieldRequired}
+        hiddenFieldDesc={hiddenFieldDesc}
+        hiddenCategories={hiddenCategories}
         visible={visible}
         onClose={() => setVisible(false)}
         onSubmit={handleSubmit}

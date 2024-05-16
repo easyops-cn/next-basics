@@ -19,17 +19,22 @@ import { ContractContext } from "../ContractContext";
 
 export function filterTitleList(
   titleList: EditorTitleProps[],
-  readonly: boolean,
-  hiddenFieldRequired: boolean
+  {
+    readonly,
+    hiddenFieldRequired,
+    hiddenFieldDesc,
+  }: {
+    readonly?: boolean;
+    hiddenFieldRequired?: boolean;
+    hiddenFieldDesc?: boolean;
+  }
 ): EditorTitleProps[] {
   return titleList.filter((item) => {
-    if (item.key === "setting") {
-      return !readonly;
-    }
+    if (item.key === "setting") return !readonly;
 
-    if (item.key === "required") {
-      return !hiddenFieldRequired;
-    }
+    if (item.key === "required") return !hiddenFieldRequired;
+
+    if (item.key === "description") return !hiddenFieldDesc;
 
     return true;
   });

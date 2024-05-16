@@ -23,8 +23,10 @@ describe("processor tst", () => {
             { width: "100px", title: "b", key: "b" },
             { title: "Setting", key: "setting" },
           ],
-          false,
-          false
+          {
+            readonly: false,
+            hiddenFieldRequired: false,
+          }
         )
       ).toEqual([
         { width: "50px", title: "a", key: "a" },
@@ -39,8 +41,10 @@ describe("processor tst", () => {
             { width: "100px", title: "b", key: "b" },
             { title: "Setting", key: "setting" },
           ],
-          true,
-          false
+          {
+            readonly: true,
+            hiddenFieldRequired: false,
+          }
         )
       ).toEqual([
         { width: "50px", title: "a", key: "a" },
@@ -53,9 +57,13 @@ describe("processor tst", () => {
             { width: "50px", title: "a", key: "a" },
             { width: "100px", title: "b", key: "required" },
             { title: "Setting", key: "setting" },
+            { title: "Description", key: "description" },
           ],
-          true,
-          true
+          {
+            readonly: true,
+            hiddenFieldRequired: true,
+            hiddenFieldDesc: true,
+          }
         )
       ).toEqual([{ width: "50px", title: "a", key: "a" }]);
     });
