@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.266.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.266.0...@next-bricks/next-builder@1.266.1) (2024-05-16)
+
+
+### Bug Fixes
+
+* missing preview origin ([fa13dfc](https://github.com/easyops-cn/next-basics/commit/fa13dfc6fba54dc311c1373f85c1b8e377aa825c))
+
+
+
+
+
 # [1.266.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.265.8...@next-bricks/next-builder@1.266.0) (2024-05-15)
 
 
