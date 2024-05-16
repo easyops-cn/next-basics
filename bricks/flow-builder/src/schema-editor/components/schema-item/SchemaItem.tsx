@@ -45,6 +45,7 @@ export interface SchemaItemProps {
     useBrick: UseBrickConf;
   };
   hiddenFieldRequired?: boolean;
+  hiddenFieldDesc?: boolean;
 }
 
 export function SchemaItem({
@@ -57,6 +58,7 @@ export function SchemaItem({
   hiddenRootNode,
   hiddenRootNodeRequired,
   hiddenFieldRequired,
+  hiddenFieldDesc,
   disabledModelType,
   isModelDefinitionRow,
   parentsModel = [],
@@ -211,14 +213,16 @@ export function SchemaItem({
             </Tooltip>
           )}
         </div>
-        <div
-          className={classNames(styles.textEllipsis, {
-            [styles.modelDefinitionText]: isModelDefinitionRow,
-          })}
-          title={itemData.description}
-        >
-          {itemData.description}
-        </div>
+        {!hiddenFieldDesc && (
+          <div
+            className={classNames(styles.textEllipsis, {
+              [styles.modelDefinitionText]: isModelDefinitionRow,
+            })}
+            title={itemData.description}
+          >
+            {itemData.description}
+          </div>
+        )}
         {!readonly && (
           <div hidden={isModelDefinitionRow}>
             <Button
@@ -253,7 +257,11 @@ export function SchemaItem({
           readonly={readonly}
           style={{
             gridTemplateColumns: getGridTemplateColumns(
-              filterTitleList(titleList, readonly, hiddenFieldRequired)
+              filterTitleList(titleList, {
+                readonly,
+                hiddenFieldRequired,
+                hiddenFieldDesc,
+              })
             ),
           }}
           key={index}
@@ -262,6 +270,7 @@ export function SchemaItem({
           disabledModelType={disabledModelType}
           titleBrick={titleBrick}
           hiddenFieldRequired={hiddenFieldRequired}
+          hiddenFieldDesc={hiddenFieldDesc}
         />
       ))}
       {!readonly && allowExpandFields(itemData.type) && (
