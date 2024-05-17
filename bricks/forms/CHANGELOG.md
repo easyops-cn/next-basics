@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.287.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.287.1...@next-bricks/forms@1.287.2) (2024-05-17)
+
+
+### Bug Fixes
+
+* forms.cmdb-instance-select 加载过程中会上下移动 ([22e0c79](https://github.com/easyops-cn/next-basics/commit/22e0c79157934cad1f232e163efb8b8d28adee02))
+
+
+
+
+
 ## [1.287.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.287.0...@next-bricks/forms@1.287.1) (2024-04-26)
 
 **Note:** Version bump only for package @next-bricks/forms
