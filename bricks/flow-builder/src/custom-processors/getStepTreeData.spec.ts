@@ -90,14 +90,14 @@ describe("getStepTreeData", () => {
           type: "choice",
           name: "step3",
           next: "step5",
-          pre: "step1",
+          pre: ["step1"],
         },
         {
           id: "step5",
           name: "step5",
           type: "task",
           end: true,
-          pre: "step3",
+          pre: ["step3"],
         },
       ],
       getIcon,
@@ -165,7 +165,7 @@ describe("getStepTreeData", () => {
                     id: "step3",
                     name: "step3",
                     next: "step5",
-                    pre: "step1",
+                    pre: ["step1"],
                     type: "choice",
                   },
                   icon: {
@@ -184,7 +184,7 @@ describe("getStepTreeData", () => {
                     end: true,
                     id: "step5",
                     name: "step5",
-                    pre: "step3",
+                    pre: ["step3"],
                     type: "task",
                   },
                   icon: {
@@ -243,7 +243,7 @@ describe("getStepTreeData", () => {
             id: "step3",
             name: "step3",
             next: "step5",
-            pre: "step1",
+            pre: ["step1"],
             type: "choice",
           },
           icon: {
@@ -262,7 +262,7 @@ describe("getStepTreeData", () => {
             end: true,
             id: "step5",
             name: "step5",
-            pre: "step3",
+            pre: ["step3"],
             type: "task",
           },
           icon: {

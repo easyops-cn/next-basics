@@ -26,7 +26,7 @@ export interface StepItem {
     startAt?: string;
     [key: string]: any;
   };
-  pre?: string;
+  pre?: string[];
   next?: string;
   parent?: string;
   children?: string[];
