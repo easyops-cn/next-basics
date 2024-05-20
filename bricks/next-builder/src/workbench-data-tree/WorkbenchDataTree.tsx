@@ -32,6 +32,7 @@ export interface WorkbenchDataTreeProps extends ContextOfWorkbenchTree {
   dropEmit?: (detail: dropEmitProps) => void;
   matchNodeDataFields?: string | string[];
   onNodeNameSuffixClick?: (node: WorkbenchNodeData) => void;
+  disabledNodeSuffixClick?: boolean;
 }
 
 export function WorkbenchDataTree({
@@ -41,6 +42,7 @@ export function WorkbenchDataTree({
   dropEmit,
   activeKey,
   nodeKey,
+  disabledNodeSuffixClick,
   clickFactory,
   contextMenuFactory,
   matchNodeDataFields,
@@ -132,7 +134,11 @@ export function WorkbenchDataTree({
       }}
     >
       <RealTimeDataContext.Provider
-        value={{ realTimeDataValues, isUpdate, onClick: onNodeNameSuffixClick }}
+        value={{
+          realTimeDataValues,
+          isUpdate,
+          onClick: disabledNodeSuffixClick ? null : onNodeNameSuffixClick,
+        }}
       >
         <WorkbenchTree
           nodes={trees}

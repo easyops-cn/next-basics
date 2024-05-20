@@ -74,6 +74,9 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
   @property({ type: String })
   nodeKey: string;
 
+  @property({ type: Boolean })
+  disabledNodeSuffixClick: boolean;
+
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
 
@@ -150,6 +153,7 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
                 dropEmit={this._handleNodeDrop}
                 activeKey={this.activeKey}
                 nodeKey={this.nodeKey}
+                disabledNodeSuffixClick={this.disabledNodeSuffixClick}
                 clickFactory={this._nodeClickFactory}
                 contextMenuFactory={this._contextMenuFactory}
                 matchNodeDataFields={this.matchNodeDataFields}
