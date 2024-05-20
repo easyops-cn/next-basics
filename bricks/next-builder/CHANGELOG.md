@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.267.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.266.1...@next-bricks/next-builder@1.267.0) (2024-05-20)
+
+
+### Features
+
+* node name suffix 支持只展示数据不相应点击事件 ([15604bf](https://github.com/easyops-cn/next-basics/commit/15604bffa15181b4902e18a8cab6796ee41a1c5d))
+
+
+
+
+
 ## [1.266.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.266.0...@next-bricks/next-builder@1.266.1) (2024-05-16)
 
 
