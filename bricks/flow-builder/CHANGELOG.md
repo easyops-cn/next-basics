@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.33.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.0...@next-bricks/flow-builder@1.33.1) (2024-05-20)
+
+
+### Bug Fixes
+
+* 修改单元测试 refs FLOW_BUILDER-1170 ([e6b07f4](https://github.com/easyops-cn/next-basics/commit/e6b07f42e60797211397f440b488c7f692fc7d2c))
+* 配合后端把pre改成数组 refs FLOW_BUILDER-1170 ([c36727f](https://github.com/easyops-cn/next-basics/commit/c36727f9b3eccd0bbd9118d44b7136d0eae92034))
+* 配合后端把pre改成数组(左侧输) refs FLOW_BUILDER-1170 ([9584a0e](https://github.com/easyops-cn/next-basics/commit/9584a0e8cf69a7aed9433ca3cb069af2f24323ef))
+
+
+
+
+
 # [1.33.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.32.1...@next-bricks/flow-builder@1.33.0) (2024-05-16)
 
 
