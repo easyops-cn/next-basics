@@ -3,9 +3,9 @@ import { StepItem, StepTreeNodeData } from "../interfaces";
 import { isEmpty } from "lodash";
 
 export function getUniqueKey(node: StepItem): string {
-  return `${node.parent || null}-${node.pre || null}-${node.id}-${
-    node.next || null
-  }`;
+  return `${node.parent || null}-${
+    (node.pre && node.pre?.length && node.pre[0]) || null
+  }-${node.id}-${node.next || null}`;
 }
 
 export function initStepMap(steps: StepItem[]): Map<string, StepItem> {

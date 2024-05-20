@@ -106,7 +106,7 @@ export function getStepTreeData(
   const topLevelNodes = new Set<StepItem>([startNode]);
   stepList.forEach((item) => {
     /* istanbul ignore if */
-    if (!item.pre && !item.parent) {
+    if (!item.pre?.length && !item.parent) {
       topLevelNodes.add(item);
     }
     stepMap.set(item.id, item);
