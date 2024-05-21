@@ -14,6 +14,8 @@ describe("GeneralAutoComplete", () => {
             options: [
               { label: "a1", value: "a1" },
               { label: "a2", value: "a2" },
+              // filter item
+              { label: "a2", value: "a2" },
             ],
           },
           {
