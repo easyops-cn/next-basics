@@ -35,6 +35,13 @@
   }
 }
 
+.generalCardContainerHoverable{
+  &:hover {
+    box-shadow: var(--card-item-hover-shadow);
+    background: var(--card-item-hover-bg);
+  }
+}
+
 :host-context(html[data-theme="dark"]) .ant-card {
   background: url(../images/card-bg-top-left.svg) top left no-repeat,
     url(../images/card-bg-top-right.svg) top right no-repeat,

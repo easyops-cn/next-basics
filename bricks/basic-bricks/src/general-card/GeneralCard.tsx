@@ -128,6 +128,7 @@ export function GeneralCard({
       {...configProps}
       className={classNames("generalCardContainer", {
         compactCardContainer: compactMode,
+        generalCardContainerHoverable: configProps?.hoverable,
       })}
     >
       <div
