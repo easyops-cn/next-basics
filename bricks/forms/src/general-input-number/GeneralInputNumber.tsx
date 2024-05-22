@@ -19,20 +19,8 @@ export interface GeneralInputNumberProps extends FormItemWrapperProps {
   onChange?: (value: number | string) => void;
   onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
 }
-
-export function GeneralInputNumber(
-  props: GeneralInputNumberProps
-): React.ReactElement {
-  const {
-    step,
-    max,
-    min,
-    precision,
-    readOnly,
-    disabled,
-    addonAfter,
-    ...restProps
-  } = props;
+function InputGroup(props: GeneralInputNumberProps): React.ReactElement {
+  const { step, max, min, precision, readOnly, disabled, addonAfter } = props;
   const inputNumber = (
     <InputNumber
       value={props.name && props.formElement ? undefined : (props.value as any)}
@@ -49,31 +37,55 @@ export function GeneralInputNumber(
       type="number"
     />
   );
-
+  return addonAfter?.useBrick ? (
+    <Input.Group compact style={{ display: "flex" }}>
+      {inputNumber}
+      <span
+        className="ant-input-group-addon"
+        style={{
+          display: "flex",
+          width: "auto",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <BrickAsComponent useBrick={addonAfter.useBrick}></BrickAsComponent>
+      </span>
+    </Input.Group>
+  ) : (
+    <>{inputNumber}</>
+  );
+}
+export function GeneralInputNumber(
+  props: GeneralInputNumberProps
+): React.ReactElement {
+  const {
+    step,
+    max,
+    min,
+    precision,
+    readOnly,
+    disabled,
+    addonAfter,
+    ...restProps
+  } = props;
   return (
     <FormItemWrapper {...restProps}>
-      {addonAfter?.useBrick ? (
-        <Input.Group compact style={{ display: "flex" }}>
-          {inputNumber}
-          {
-            <span
-              className="ant-input-group-addon"
-              style={{
-                display: "flex",
-                width: "auto",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <BrickAsComponent
-                useBrick={addonAfter.useBrick}
-              ></BrickAsComponent>
-            </span>
-          }
-        </Input.Group>
-      ) : (
-        inputNumber
-      )}
+      <InputGroup
+        min={min}
+        max={max}
+        placeholder={props.placeholder}
+        onChange={props.onChange}
+        onBlur={props.onBlur}
+        inputBoxStyle={props.inputBoxStyle}
+        value={props.value}
+        formElement={props.formElement}
+        precision={precision}
+        addonAfter={addonAfter}
+        disabled={disabled}
+        readOnly={readOnly}
+        step={step}
+      ></InputGroup>
     </FormItemWrapper>
   );
 }
