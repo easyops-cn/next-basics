@@ -8,7 +8,7 @@ describe("GeneralInputNumber", () => {
     const handleChange = jest.fn();
     const handleBlur = jest.fn();
 
-    const wrapper = shallow(
+    const wrapper = mount(
       <GeneralInputNumber
         name="count"
         value={10}
@@ -17,7 +17,7 @@ describe("GeneralInputNumber", () => {
         onBlur={handleBlur}
       />
     );
-    wrapper.find(InputNumber).simulate("change", 4);
+    wrapper.find(InputNumber).invoke("onChange")(4);
     await (global as any).flushPromises();
     expect(handleChange).toBeCalledWith(4);
 
