@@ -56,7 +56,15 @@ export function GeneralInputNumber(
         <Input.Group compact style={{ display: "flex" }}>
           {inputNumber}
           {
-            <span className="ant-input-group-addon">
+            <span
+              className="ant-input-group-addon"
+              style={{
+                display: "flex",
+                width: "auto",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <BrickAsComponent
                 useBrick={addonAfter.useBrick}
               ></BrickAsComponent>
