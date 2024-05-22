@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.321.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.321.4...@next-bricks/presentational-bricks@1.321.5) (2024-05-22)
+
+
+### Bug Fixes
+
+* **datetime-selector:** 修复props更新没有更新对应state状态导致构件效果不对 ([cd6fd5d](https://github.com/easyops-cn/next-basics/commit/cd6fd5d1145c4cc63d80aa8e1e85243dfd6a141b))
+
+
+
+
+
 ## [1.321.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.321.3...@next-bricks/presentational-bricks@1.321.4) (2024-05-07)
 
 
