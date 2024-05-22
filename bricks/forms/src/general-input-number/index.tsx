@@ -8,6 +8,7 @@ import {
 } from "@next-core/brick-kit";
 import { GeneralInputNumber } from "./GeneralInputNumber";
 import { FormItemElement } from "@next-libs/forms";
+import { UseBrickConf } from "@next-core/brick-types";
 
 /**
  * @id forms.general-input-number
@@ -140,6 +141,20 @@ export class GeneralInputNumberElement extends FormItemElement {
   })
   inputBoxStyle?: React.CSSProperties;
 
+  /**
+   * @kind { useBrick: UseBrickConf }
+   * @required false
+   * @default -
+   * @description 后置标签，支持在input框后面添加自定义构件 具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  addonAfter: {
+    useBrick: UseBrickConf;
+  };
+
   /* =========================== events =========================== */
 
   /**
@@ -214,6 +229,7 @@ export class GeneralInputNumberElement extends FormItemElement {
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            addonAfter={this.addonAfter}
           />
         </BrickWrapper>,
         this
