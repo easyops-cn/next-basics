@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.251.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.251.4...@next-bricks/basic-bricks@1.251.5) (2024-05-22)
+
+
+### Bug Fixes
+
+* general-card样式修改 ref CD-7913 ([824d6a5](https://github.com/easyops-cn/next-basics/commit/824d6a52b6fa5be5ce72ae553f43f9a23f7476ba))
+
+
+
+
+
 ## [1.251.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.251.3...@next-bricks/basic-bricks@1.251.4) (2024-05-10)
 
 
