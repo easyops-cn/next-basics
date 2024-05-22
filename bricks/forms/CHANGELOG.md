@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.287.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.287.3...@next-bricks/forms@1.287.4) (2024-05-22)
+
+
+### Bug Fixes
+
+* general-card样式修改 ref CD-7913 ([5dbda9a](https://github.com/easyops-cn/next-basics/commit/5dbda9a31c3789efbf613d9b0d5687b426fe347f))
+
+
+
+
+
 ## [1.287.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.287.2...@next-bricks/forms@1.287.3) (2024-05-22)
 
 
