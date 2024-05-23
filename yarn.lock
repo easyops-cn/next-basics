@@ -2705,6 +2705,13 @@
   dependencies:
     "@next-sdk/cmdb-sdk" "^2.3.1"
 
+"@next-libs/cmdb-utils@^3.5.0":
+  version "3.5.0"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-3.5.0.tgz#0c6a71ac4a3bb1bf119ae80232df1798b9e0b7c9"
+  integrity sha512-EUok09oqhWMZPm7HYYL2fclGJGT5AnMwkxDXObfX5mnlX0QUjHQUKLL3LQIEVK+SppnlRcfnZjRcWbBnEvSr4A==
+  dependencies:
+    "@next-sdk/cmdb-sdk" "^2.3.1"
+
 "@next-libs/code-display-components@^2.0.4":
   version "2.0.4"
   resolved "https://registry.npmjs.org/@next-libs/code-display-components/-/code-display-components-2.0.4.tgz#512748c761f4851cc1db3e5944eca559a4aa0287"
