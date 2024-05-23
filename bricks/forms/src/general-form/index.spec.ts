@@ -64,6 +64,11 @@ describe("forms.general-form", () => {
       structs: { b: "22" },
     });
 
+    // validate with fields
+    const fields = ["field1"];
+    element.validate(fields);
+    expect(validateFields).toBeCalledWith(fields, expect.any(Function));
+
     validateFields.mockImplementationOnce((fn) => {
       fn({ error: "oops" });
     });
