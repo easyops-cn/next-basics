@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.288.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.287.5...@next-bricks/forms@1.288.0) (2024-05-23)
+
+
+### Features
+
+* parseTemplate支持解析#showKey ([a43b508](https://github.com/easyops-cn/next-basics/commit/a43b5081aaa25a472e21bd77af20540c2a41407a))
+
+
+
+
+
 ## [1.287.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.287.4...@next-bricks/forms@1.287.5) (2024-05-22)
 
 

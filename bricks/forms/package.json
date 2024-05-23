@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/forms",
-  "version": "1.287.5",
+  "version": "1.288.0",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/forms",
   "license": "GPL-3.0",
@@ -44,6 +44,7 @@
     "@next-libs/basic-components": "^5.3.6",
     "@next-libs/clipboard": "^3.0.4",
     "@next-libs/cmdb-instances": "^7.13.9",
+    "@next-libs/cmdb-utils": "^3.5.0",
     "@next-libs/code-editor-components": "4.10.10",
     "@next-libs/crontab": "^2.0.10",
     "@next-libs/forms": "^3.5.4",
@@ -53,8 +54,7 @@
     "@next-sdk/object-store-sdk": "^2.1.1",
     "@next-sdk/permission-sdk": "^2.3.1",
     "classnames": "^2.3.2",
-    "immutability-helper": "^3.1.1",
-    "@next-libs/cmdb-utils": "^3.5.0"
+    "immutability-helper": "^3.1.1"
   },
   "sideEffects": true
 }
