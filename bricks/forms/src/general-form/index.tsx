@@ -469,8 +469,8 @@ export class GeneralFormElement
   /**
    * @description 	验证表单
    */
-  @method() validate(): void {
-    this.lowLevelValidate();
+  @method() validate(fields?: string[]): void {
+    this.lowLevelValidate(Array.isArray(fields) ? fields : undefined);
   }
   /**
    * @description 	校验用户修改过的指定表单项
@@ -536,8 +536,18 @@ export class GeneralFormElement
     Record<string, any>
   >;
 
-  lowLevelValidate(callback?: (params?: any) => void): void {
-    this.formUtils.validateFields((err, values) => {
+  lowLevelValidate(arg1?: any, arg2?: any): void {
+    let fields: string[];
+    let callback: (params?: any) => void;
+
+    if (Array.isArray(arg1)) {
+      fields = arg1;
+      callback = arg2;
+    } else {
+      callback = arg2;
+    }
+
+    const validateCallback = (err, values) => {
       // Todo(steve): shadowRoot is readonly
       /* istanbul ignore next */
       this._forceUpdate();
@@ -553,12 +563,14 @@ export class GeneralFormElement
             formatValues[node.name] = node.value;
           }
         });
-        if (callback) {
-          callback(formatValues);
-        }
+        callback?.(formatValues);
         this.successEvent.emit(formatValues);
       }
-    });
+    };
+
+    fields
+      ? this.formUtils.validateFields(fields, validateCallback)
+      : this.formUtils.validateFields(validateCallback);
   }
   formatData(data: Record<string, any>) {
     return Object.keys(data).reduce(
