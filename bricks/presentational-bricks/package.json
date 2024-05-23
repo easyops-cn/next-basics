@@ -44,7 +44,7 @@
     "@next-core/custom-antd-styles": "^1.26.2",
     "@next-libs/basic-components": "^5.3.6",
     "@next-libs/clipboard": "^3.0.4",
-    "@next-libs/cmdb-utils": "^3.4.4",
+    "@next-libs/cmdb-utils": "^3.5.0",
     "@next-libs/crontab": "^2.0.10",
     "@next-libs/datetime": "^2.0.4",
     "@next-libs/datetime-components": "^3.2.3",
