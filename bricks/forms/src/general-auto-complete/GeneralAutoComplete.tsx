@@ -89,24 +89,31 @@ export function GeneralAutoComplete(
   }, [originalOptions]);
 
   const _options = useMemo(() => {
+    const set = new Set();
     const walkOptions = (options: OptionType[]): any => {
-      return options?.map((op) => {
-        if ("options" in op) {
-          return { ...op, options: walkOptions(op.options) };
-        } else {
-          return {
-            ...op,
-            label: (
-              <div className={styles.optionContainer}>
-                <span className={styles.label}>{op.label}</span>
-                {op.caption && (
-                  <span className={styles.caption}>{op.caption}</span>
-                )}
-              </div>
-            ),
-          };
-        }
-      });
+      return options
+        ?.map((op) => {
+          if ("options" in op) {
+            return { ...op, options: walkOptions(op.options) };
+          } else {
+            if (set.has(op.value)) {
+              return false;
+            }
+            set.add(op.value);
+            return {
+              ...op,
+              label: (
+                <div className={styles.optionContainer}>
+                  <span className={styles.label}>{op.label}</span>
+                  {op.caption && (
+                    <span className={styles.caption}>{op.caption}</span>
+                  )}
+                </div>
+              ),
+            };
+          }
+        })
+        .filter(Boolean);
     };
     return walkOptions(options);
   }, [options]);
