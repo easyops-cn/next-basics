@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.289.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.289.0...@next-bricks/forms@1.289.1) (2024-05-24)
+
+
+### Bug Fixes
+
+* **auto-complete:** same value filter ([43e4fb1](https://github.com/easyops-cn/next-basics/commit/43e4fb1a626e31cc523d5376ad526c080f8599d9))
+
+
+
+
+
 # [1.289.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.288.0...@next-bricks/forms@1.289.0) (2024-05-23)
 
 
