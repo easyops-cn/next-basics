@@ -57,6 +57,27 @@ describe("next-builder.preview-container", () => {
       "error"
     );
 
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.children.props.onPreviewerDrop({
+      nodeData: { originBrick: { id: "forms.general-form" } },
+    });
+    expect((spyonDispatchEvent.mock.calls[5][0] as CustomEvent).type).toEqual(
+      "preview.drop"
+    );
+
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.children.props.onPreviewerDrop({
+      nodeData: {
+        originBrick: { id: "forms.general-form" },
+        dragType: "dataModel",
+      },
+    });
+    expect((spyonDispatchEvent.mock.calls[6][0] as CustomEvent).type).toEqual(
+      "data.model.drop"
+    );
+
     document.body.removeChild(element);
     expect(unmountComponentAtNode).toBeCalled();
   });
