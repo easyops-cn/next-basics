@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.268.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.267.1...@next-bricks/next-builder@1.268.0) (2024-05-24)
+
+
+### Features
+
+* support new drop event ([d91decf](https://github.com/easyops-cn/next-basics/commit/d91decf6daf26d75778f8179fb4b7c787eff1408))
+
+
+
+
+
 ## [1.267.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.267.0...@next-bricks/next-builder@1.267.1) (2024-05-24)
 
 **Note:** Version bump only for package @next-bricks/next-builder
