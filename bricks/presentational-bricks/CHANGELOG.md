@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.322.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.322.1...@next-bricks/presentational-bricks@1.322.2) (2024-05-24)
+
+
+### Bug Fixes
+
+* 筛选时间会多传一点ms ([ccb7b6e](https://github.com/easyops-cn/next-basics/commit/ccb7b6eb9df80b3b76400287d8f05796834a77a4))
+
+
+
+
+
 ## [1.322.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.322.0...@next-bricks/presentational-bricks@1.322.1) (2024-05-24)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
