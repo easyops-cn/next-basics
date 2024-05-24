@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@next-core/custom-antd-styles": "^1.26.2",
-    "@next-libs/basic-components": "^5.3.6",
+    "@next-libs/basic-components": "^5.4.0",
     "@next-libs/storage": "^2.0.4",
     "@next-sdk/air-admin-service-sdk": "^2.1.12",
     "@next-sdk/micro-app-standalone-sdk": "^1.1.1",
