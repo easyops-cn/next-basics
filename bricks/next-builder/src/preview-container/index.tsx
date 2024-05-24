@@ -161,8 +161,16 @@ export class PreviewContainerElement extends UpdatingElement {
   @event({ type: "preview.drop" })
   private _handlePreviewerDropEvent: EventEmitter<Record<string, any>>;
 
+  @event({ type: "data.model.drop" })
+  private _handleDataModelDropEvent: EventEmitter<Record<string, any>>;
+
   private _handlePreviewerDrop = (params: Record<string, any>): void => {
-    this._handlePreviewerDropEvent.emit(params);
+    if (params.nodeData.dragType === "dataModel") {
+      // 基于数据模型的拖拽的场景
+      this._handleDataModelDropEvent.emit(params);
+    } else {
+      this._handlePreviewerDropEvent.emit(params);
+    }
   };
 
   @event({ type: "preview.resize" })
