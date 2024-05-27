@@ -469,8 +469,24 @@ export class GeneralFormElement
   /**
    * @description 	验证表单
    */
-  @method() validate(fields?: string[]): void {
-    this.lowLevelValidate(Array.isArray(fields) ? fields : undefined);
+  @method() validate(
+    fieldsOrEvent?: string[] | Event,
+    options?: { runInMicrotask?: boolean; runInMacrotask?: boolean }
+  ): void {
+    const fields = Array.isArray(fieldsOrEvent) ? fieldsOrEvent : undefined;
+
+    if (options) {
+      options.runInMicrotask &&
+        queueMicrotask(() => {
+          this.lowLevelValidate(fields);
+        });
+      options.runInMacrotask &&
+        setTimeout(() => {
+          this.lowLevelValidate(fields);
+        });
+    } else {
+      this.lowLevelValidate(fields);
+    }
   }
   /**
    * @description 	校验用户修改过的指定表单项
