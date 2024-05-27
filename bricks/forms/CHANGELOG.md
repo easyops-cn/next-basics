@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.290.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.289.1...@next-bricks/forms@1.290.0) (2024-05-27)
+
+
+### Features
+
+* **general-form:** validate function add options argument ([bdf4d45](https://github.com/easyops-cn/next-basics/commit/bdf4d45ffeed6012d0e631a029253c66fa2f67c7))
+
+
+
+
+
 ## [1.289.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.289.0...@next-bricks/forms@1.289.1) (2024-05-24)
 
 
