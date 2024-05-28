@@ -51,10 +51,18 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
   @event({ type: "add.brick" })
   private _addBrickEvent: EventEmitter<WorkbenchBackendActionForInsertDetail>;
 
+  @event({ type: "data.model.drop" })
+  private _dataModelDropEvent: EventEmitter<Record<string, any>>;
+
   private _handleAddBrickDrop = (
     detail: WorkbenchBackendActionForInsertDetail
   ): void => {
-    this._addBrickEvent.emit(detail);
+    if (detail.nodeData.dragType === "dataModel") {
+      // 基于数据模型的拖拽的场景
+      this._dataModelDropEvent.emit(detail);
+    } else {
+      this._addBrickEvent.emit(detail);
+    }
   };
 
   @property({ type: Boolean })
