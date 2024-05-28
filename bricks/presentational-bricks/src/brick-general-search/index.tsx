@@ -216,6 +216,24 @@ export class BrickGeneralSearchElement extends UpdatingElement {
   allowClear?: boolean;
 
   /**
+   * @description 非IP搜索的情况下，是否有边框
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  bordered?: boolean = true;
+
+  /**
+   * @description 是否总是聚焦输入框
+   * @group ui
+   */
+  @property({
+    type: Boolean,
+  })
+  alwaysFoucus?: boolean;
+
+  /**
    * @kind string
    * @required false
    * @default query
@@ -264,6 +282,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
 
   private _handleBlur = (value: string): void => {
     this.blurEvent.emit(value);
+    this.alwaysFoucus && this.inputRef.focus();
   };
 
   inputRef: Input;
@@ -339,6 +358,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
             debounceTime={this.debounceTime}
             disableAutofocus={this.disableAutofocus}
             allowClear={this.allowClear}
+            bordered={this.bordered}
             ref={(ref) => {
               this.inputRef = ref;
             }}

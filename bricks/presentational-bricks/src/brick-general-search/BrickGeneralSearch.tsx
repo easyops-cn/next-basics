@@ -24,6 +24,7 @@ interface TestGeneralSearchProps {
   onSearchTypeChange?: (value: string) => void;
   searchBoxStyleType?: "defalut" | "round";
   allowClear?: boolean;
+  bordered?: boolean;
   onBlur?: (value: string) => void;
 }
 
@@ -116,6 +117,7 @@ export const BrickGeneralSearch = forwardRef<Input, TestGeneralSearchProps>(
             <Input
               ref={ref}
               allowClear={props.allowClear}
+              bordered={props.bordered}
               className={style.searchInput}
               size={sizeClassMap[props.size][props.shape].input as any}
               onPressEnter={handleOnSearch}
