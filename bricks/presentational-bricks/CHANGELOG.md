@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.322.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.322.2...@next-bricks/presentational-bricks@1.322.3) (2024-05-28)
+
+
+### Bug Fixes
+
+* 支持search-input bordered和alwaysFocus字段 ([92d42af](https://github.com/easyops-cn/next-basics/commit/92d42af79ce835a17caee579c4c7355b79e1bcdc))
+
+
+
+
+
 ## [1.322.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.322.1...@next-bricks/presentational-bricks@1.322.2) (2024-05-24)
 
 
