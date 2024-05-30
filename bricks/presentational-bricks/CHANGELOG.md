@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.322.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.322.3...@next-bricks/presentational-bricks@1.322.4) (2024-05-30)
+
+
+### Bug Fixes
+
+* 表格的过滤背景超出顶部背景 ([cc3626c](https://github.com/easyops-cn/next-basics/commit/cc3626c59b80f71f91d850cbfbf94b888db69885))
+
+
+
+
+
 ## [1.322.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.322.2...@next-bricks/presentational-bricks@1.322.3) (2024-05-28)
 
 
