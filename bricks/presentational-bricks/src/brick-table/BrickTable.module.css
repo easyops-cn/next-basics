@@ -64,6 +64,10 @@ html[data-theme="dark"] {
     /* 改变高度 */
   }
 
+  :global(.ant-table-filter-column-title) {
+    padding: 8px 26px 8px 0px;
+  }
+
   :global(.ant-table-tbody) {
     > tr.invalidRow {
       > td {
@@ -106,6 +110,12 @@ html[data-theme="dark"] {
   }
   :global(.ant-table .ant-table-selection-col) {
     width: 48px;
+  }
+
+  :global(
+      .ant-table.ant-table-small .ant-table-thead .ant-table-column-sorters
+    ) {
+    padding-left: 0;
   }
 }
 
