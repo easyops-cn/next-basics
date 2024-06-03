@@ -7,7 +7,7 @@ import {
   handleHttpError,
   useProvider,
 } from "@next-core/brick-kit";
-import { Select } from "antd";
+import { Select, Tag } from "antd";
 import {
   formatOptions,
   FormItemWrapper,
@@ -51,8 +51,12 @@ const applyArgs = (args: any[] | ((query: string) => any[]), query: string) => {
 
 type RequestStatus = "loading" | "success" | "error";
 
+export interface GeneralSelectPropsOfTags extends GeneralComplexOption {
+  color?: string;
+}
+
 export interface GeneralSelectProps extends FormItemWrapperProps {
-  options: GeneralComplexOption[];
+  options: GeneralSelectPropsOfTags[];
   optionsWrap?: boolean;
   fields?: Partial<GeneralComplexOption>;
   groupBy?: string;
@@ -94,6 +98,7 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   bordered?: boolean;
   maxTagCount?: maxTagCountType;
   defaultActiveFirstOption?: boolean;
+  optionsMode?: string;
 }
 
 // TODO(alex): 需要去掉`providers-of-cmdb.cmdb-object-api-list`，这里判断是为了开发者中心构件demo显示需要。
@@ -120,6 +125,8 @@ export function GeneralSelectLegacy(
     onOptionsChange,
     defaultActiveFirstOption = false,
     optionsWrap = false,
+    optionsMode,
+    mode,
   } = props;
   const [checkedValue, setCheckedValue] = useState(props.value);
   const [options, setOptions] = useState<GeneralComplexOption[]>(props.options);
@@ -301,16 +308,25 @@ export function GeneralSelectLegacy(
           })}
           onMouseEnter={setTooltip}
         >
-          <div className={style.textContainer}>
-            <span
-              className={classNames(style.label, {
-                [style.wrapLabel]: optionsWrap,
-              })}
-            >
+          {mode !== "tags" && mode !== "multiple" && optionsMode === "tags" ? (
+            <Tag color={op.color} style={{ borderRadius: "5px" }}>
               {op.label}
-            </span>
-            {op.caption && <span className={style.caption}>{op.caption}</span>}
-          </div>
+            </Tag>
+          ) : (
+            <div className={style.textContainer}>
+              <span
+                className={classNames(style.label, {
+                  [style.wrapLabel]: optionsWrap,
+                })}
+              >
+                {op.label}
+              </span>
+              {op.caption && (
+                <span className={style.caption}>{op.caption}</span>
+              )}
+            </div>
+          )}
+
           {suffix
             ? suffix.useBrick &&
               showSuffix(op as GeneralComplexOption) && (

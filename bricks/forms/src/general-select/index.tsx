@@ -378,6 +378,18 @@ export class GeneralSelectElement extends FormItemElement {
   groupBy: string;
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description optionsMode为 tags 时，下拉选项支持标签样式,此模式不支持select本身的mode为tags、multiple
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  optionsMode: string;
+
+  /**
    * @kind {label: string, value: string}
    * @required false
    * @default -
@@ -637,6 +649,7 @@ export class GeneralSelectElement extends FormItemElement {
             dropdownStyle={this.dropdownStyle}
             bordered={this.bordered}
             maxTagCount={this.maxTagCount}
+            optionsMode={this.optionsMode}
           />
         </BrickWrapper>,
         this
