@@ -560,7 +560,7 @@ export class GeneralFormElement
       fields = arg1;
       callback = arg2;
     } else {
-      callback = arg2;
+      callback = arg1;
     }
 
     const validateCallback = (err, values) => {
