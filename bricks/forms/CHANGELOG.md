@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.291.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.291.0...@next-bricks/forms@1.291.1) (2024-06-04)
+
+
+### Bug Fixes
+
+* **general-form:** Fix callback argument of lowLevelValidate function not being called ([e245a8c](https://github.com/easyops-cn/next-basics/commit/e245a8ce532401811cbb4a64c15adaf87c5b61c1))
+
+
+
+
+
 # [1.291.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.290.0...@next-bricks/forms@1.291.0) (2024-06-03)
 
 
