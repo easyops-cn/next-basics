@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.291.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.291.1...@next-bricks/forms@1.291.2) (2024-06-05)
+
+
+### Bug Fixes
+
+* forms.cmdb-instance-select 去掉spin，使用原生loading ([210a0d6](https://github.com/easyops-cn/next-basics/commit/210a0d696459ddd119b05ba35888c9b1aa4f9a11))
+
+
+
+
+
 ## [1.291.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.291.0...@next-bricks/forms@1.291.1) (2024-06-04)
 
 
