@@ -291,87 +291,75 @@ export function CmdbInstanceSelectItem(
   );
 
   return (
-    <div
-      className={style.formsCmdbInstSelectWrapper}
-      style={{ width: props.inputBoxStyle?.width }}
+    <Select
+      ref={ref}
+      loading={loading}
+      className="formsCmdbInstSelect"
+      allowClear={allowClear}
+      style={defaults(props.inputBoxStyle, { width: "100%" })}
+      showSearch
+      filterOption={false}
+      value={value}
+      mode={mode as ModeOption}
+      placeholder={placeholder || i18n.t(`${NS_FORMS}:${K.BACKGROUND_SEARCH}`)}
+      onChange={handleChange}
+      onSearch={debounceSearch}
+      onFocus={fetchInstanceData}
+      disabled={props.disabled}
+      dropdownStyle={{ padding: "2px", ...props.dropdownStyle }}
+      dropdownMatchSelectWidth={props.dropdownMatchSelectWidth}
+      dropdownRender={(menu) => {
+        return (
+          <div>
+            {menu}
+            {showSearchTip && total > pageSize && (
+              <div className={style.moreChoices}>
+                仅显示前{pageSize}项，更多结果请搜索
+              </div>
+            )}
+          </div>
+        );
+      }}
+      {...(props.popoverPositionType === "parent"
+        ? { getPopupContainer: (triggerNode) => triggerNode.parentElement }
+        : {})}
     >
-      <Spin spinning={loading}>
-        <Select
-          ref={ref}
-          className="formsCmdbInstSelect"
-          allowClear={allowClear}
-          style={defaults(props.inputBoxStyle, { width: "100%" })}
-          showSearch
-          filterOption={false}
-          value={value}
-          mode={mode as ModeOption}
-          placeholder={
-            placeholder || i18n.t(`${NS_FORMS}:${K.BACKGROUND_SEARCH}`)
-          }
-          onChange={handleChange}
-          onSearch={debounceSearch}
-          onFocus={fetchInstanceData}
-          disabled={props.disabled}
-          dropdownStyle={{ padding: "2px", ...props.dropdownStyle }}
-          dropdownMatchSelectWidth={props.dropdownMatchSelectWidth}
-          dropdownRender={(menu) => {
-            return (
-              <div>
-                {menu}
-                {showSearchTip && total > pageSize && (
-                  <div className={style.moreChoices}>
-                    仅显示前{pageSize}项，更多结果请搜索
+      {options.map((op, index) => {
+        const optionLabel = getLabelOptions(op);
+        return (
+          <Select.Option key={index} value={op.value} label={optionLabel}>
+            <Tooltip title={props.showTooltip ? optionLabel : undefined}>
+              <div className={classNames(style.optionDiv)}>
+                {op.user_icon && (
+                  <span>
+                    <Avatar
+                      src={op.user_icon}
+                      size={24}
+                      className={classNames(style.avatar, {
+                        [style.defaultIcon]: op.user_icon === "defaultIcon",
+                      })}
+                    >
+                      {op.user_icon === "defaultIcon" && op.label?.slice(0, 2)}
+                    </Avatar>
+                  </span>
+                )}
+                <span
+                  className={classNames(style.optionSpan)}
+                  data-testid="option-label"
+                >
+                  {optionLabel}
+                </span>
+                {suffix?.useBrick && (
+                  <div className={style.suffixContainer}>
+                    <BrickAsComponent useBrick={suffix.useBrick} data={op} />
                   </div>
                 )}
               </div>
-            );
-          }}
-          {...(props.popoverPositionType === "parent"
-            ? { getPopupContainer: (triggerNode) => triggerNode.parentElement }
-            : {})}
-        >
-          {options.map((op, index) => {
-            const optionLabel = getLabelOptions(op);
-            return (
-              <Select.Option key={index} value={op.value} label={optionLabel}>
-                <Tooltip title={props.showTooltip ? optionLabel : undefined}>
-                  <div className={classNames(style.optionDiv)}>
-                    {op.user_icon && (
-                      <span>
-                        <Avatar
-                          src={op.user_icon}
-                          size={24}
-                          className={classNames(style.avatar, {
-                            [style.defaultIcon]: op.user_icon === "defaultIcon",
-                          })}
-                        >
-                          {op.user_icon === "defaultIcon" &&
-                            op.label?.slice(0, 2)}
-                        </Avatar>
-                      </span>
-                    )}
-                    <span
-                      className={classNames(style.optionSpan)}
-                      data-testid="option-label"
-                    >
-                      {optionLabel}
-                    </span>
-                    {suffix?.useBrick && (
-                      <div className={style.suffixContainer}>
-                        <BrickAsComponent
-                          useBrick={suffix.useBrick}
-                          data={op}
-                        />
-                      </div>
-                    )}
-                  </div>
-                </Tooltip>
-              </Select.Option>
-            );
-          })}
-        </Select>
-      </Spin>
-    </div>
+            </Tooltip>
+          </Select.Option>
+        );
+      })}
+    </Select>
   );
 }
 export const RefCmdbInstanceSelectItem = React.forwardRef(
