@@ -22,6 +22,7 @@ describe("GeneralDatePicker", () => {
   it("should work", async () => {
     const handleChange = jest.fn();
     const handleOk = jest.fn();
+    const handleOpenChange = jest.fn();
 
     const wrapper = shallow(
       <GeneralDatePicker
@@ -31,6 +32,7 @@ describe("GeneralDatePicker", () => {
         value="2019-10-01"
         onChange={handleChange}
         onOk={handleOk}
+        handleOpenChange={handleOpenChange}
         format="YYYY-MM-DD"
         picker={"date"}
       />
@@ -44,6 +46,9 @@ describe("GeneralDatePicker", () => {
 
     wrapper.find(InternalStateDatePicker).invoke("onOk")(moment("2020-02-01"));
     expect(handleOk).toBeCalledWith("2020-02-01");
+
+    wrapper.find(InternalStateDatePicker).invoke("handleOpenChange")(true);
+    expect(handleOpenChange).toHaveBeenCalled();
   });
 
   it("should update value", () => {

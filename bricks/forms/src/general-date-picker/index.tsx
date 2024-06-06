@@ -197,6 +197,14 @@ export class GeneralDatePickerElement extends FormItemElement {
     this.okEvent.emit(value);
   };
 
+  /**
+   * @description 弹出日历和关闭日历的回调
+   */
+  @event({ type: "general.date.open" }) openEvent: EventEmitter<boolean>;
+  private _handleOpenChange = (open: boolean): void => {
+    this.openEvent.emit(open);
+  };
+
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
@@ -231,6 +239,7 @@ export class GeneralDatePickerElement extends FormItemElement {
             useFastSelectBtn={this.useFastSelectBtn}
             disabledBeforeDate={this.disabledBeforeDate}
             disabledAfterDate={this.disabledAfterDate}
+            handleOpenChange={this._handleOpenChange}
           />
         </BrickWrapper>,
         this
