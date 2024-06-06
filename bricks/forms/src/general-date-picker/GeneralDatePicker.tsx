@@ -23,6 +23,7 @@ interface InternalStateDatePickerProps {
   onOk?: (date: Moment) => void;
   disabledBeforeDate?: string;
   disabledAfterDate?: string;
+  handleOpenChange?: (open: boolean) => void;
 }
 
 interface GeneralDatePickerProps
@@ -358,6 +359,9 @@ export function InternalStateDatePicker(
     );
   }, [value, picker, disabledFutureDate]);
 
+  const handleOpenChange = (open: boolean): void =>
+    props?.handleOpenChange(open);
+
   return (
     <div className={style.pickerWrap}>
       <DatePicker
@@ -372,6 +376,7 @@ export function InternalStateDatePicker(
         style={inputBoxStyle}
         placeholder={placeholder}
         onOk={onOk}
+        onOpenChange={handleOpenChange}
         suffixIcon={<Icon component={() => <BrickIcon icon="calendar" />} />}
         picker={picker}
         disabledDate={
