@@ -199,6 +199,7 @@ export class GeneralDatePickerElement extends FormItemElement {
 
   /**
    * @description 弹出日历和关闭日历的回调
+   * @param open 是否打开日历
    */
   @event({ type: "general.date.open" }) openEvent: EventEmitter<boolean>;
   private _handleOpenChange = (open: boolean): void => {
