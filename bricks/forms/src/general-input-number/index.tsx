@@ -192,7 +192,7 @@ export class GeneralInputNumberElement extends FormItemElement {
   @event({ type: "general.input.press.enter" }) enterPressEvent: EventEmitter<
     Record<string, any>
   >;
-  private _handlePressEnter = (e: KeyboardEvent): void => {
+  private _handlePressEnter = (e?: KeyboardEvent): void => {
     this.enterPressEvent.emit(e);
   };
 
