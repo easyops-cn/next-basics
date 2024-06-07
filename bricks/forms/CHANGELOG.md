@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.291.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.291.3...@next-bricks/forms@1.291.4) (2024-06-07)
+
+
+### Bug Fixes
+
+* 未响应时间按照告警持续时间，告警次数过滤不生效 ([ce6462e](https://github.com/easyops-cn/next-basics/commit/ce6462ec2c568d485a067081b455c17af6e17e44))
+* 未响应时间按照告警持续时间，告警次数过滤不生效 ([a071525](https://github.com/easyops-cn/next-basics/commit/a07152559eefbd80f1291bf9968c75fbf0a85dd3))
+
+
+
+
+
 ## [1.291.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.291.1...@next-bricks/forms@1.291.3) (2024-06-06)
 
 
