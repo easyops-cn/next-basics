@@ -18,6 +18,7 @@ export interface GeneralInputNumberProps extends FormItemWrapperProps {
   };
   onChange?: (value: number | string) => void;
   onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
+  onPressEnter?: () => void;
 }
 function InputGroup(props: GeneralInputNumberProps): React.ReactElement {
   const { step, max, min, precision, readOnly, disabled, addonAfter } = props;
@@ -35,6 +36,7 @@ function InputGroup(props: GeneralInputNumberProps): React.ReactElement {
       style={props.inputBoxStyle}
       onBlur={props.onBlur}
       type="number"
+      onPressEnter={props.onPressEnter}
     />
   );
   return addonAfter?.useBrick ? (
@@ -85,6 +87,7 @@ export function GeneralInputNumber(
         disabled={disabled}
         readOnly={readOnly}
         step={step}
+        onPressEnter={props.onPressEnter}
       ></InputGroup>
     </FormItemWrapper>
   );
