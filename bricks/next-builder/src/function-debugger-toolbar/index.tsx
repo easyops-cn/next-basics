@@ -27,6 +27,9 @@ export class FunctionDebuggerToolbarElement extends UpdatingElement {
   @property({ type: Boolean })
   saveDisabled: boolean;
 
+  @property({ type: Boolean })
+  debuggable: boolean;
+
   @event({ type: "button.click" })
   private _buttonClickEmitter: EventEmitter<{ action: string }>;
 
@@ -56,6 +59,7 @@ export class FunctionDebuggerToolbarElement extends UpdatingElement {
             type={this.type}
             status={this.status}
             saveDisabled={this.saveDisabled}
+            debuggable={this.debuggable}
             onButtonClick={this._handleButtonClick}
           />
         </BrickWrapper>,

@@ -27,13 +27,20 @@ import {
   ProcessedCoverage,
   TestStats,
 } from "../shared/functions/interfaces";
-import { FunctionDebuggerFactory } from "../shared/functions/FunctionDebuggerFactory";
+import {
+  DebuggerMethod,
+  FunctionDebuggerFactory,
+} from "../shared/functions/FunctionDebuggerFactory";
 import { formatSerializableValue } from "../shared/functions/processSerializableValue";
 
 export interface DebuggerStore {
   dispatch: Dispatch<DebuggerAction>;
   initFunction: (data: Omit<DebuggerActionInitFunction, "type">) => void;
   run: () => void;
+  debuggerStart: () => void;
+  debuggerContinue: () => void;
+  debuggerStep: () => void;
+  debuggerDisconnect: () => void;
   saveDebugAsTest: () => void;
   addTest: () => void;
   deleteTest: () => void;
@@ -56,6 +63,7 @@ export interface FunctionDataToSave {
 
 export interface FunctionDebuggerStoreProps {
   runTestsAutomaticallyTimeout?: number;
+  breakpoints?: number[];
   onActiveTabChange?: (activeTab: DebuggerStateActiveTab) => void;
   onOriginalFunctionChange?: (
     originalFunction: DebuggerStateOriginalFunction
@@ -72,11 +80,13 @@ export interface FunctionDebuggerStoreProps {
   onSomethingModified?: (modified: boolean) => void;
   onTestStatsChange?: (stats: TestStats) => void;
   onCoverageChange?: (coverage: ProcessedCoverage) => void;
+  onDebuggerInfoChange?: (debuggerInfo: unknown) => void;
 }
 
 function LegacyFunctionDebuggerStore(
   {
     runTestsAutomaticallyTimeout,
+    breakpoints,
     onActiveTabChange,
     onOriginalFunctionChange,
     onFunctionModified,
@@ -91,6 +101,7 @@ function LegacyFunctionDebuggerStore(
     onSomethingModified,
     onTestStatsChange,
     onCoverageChange,
+    onDebuggerInfoChange,
   }: FunctionDebuggerStoreProps,
   ref: Ref<DebuggerStore>
 ): React.ReactElement {
@@ -177,6 +188,43 @@ function LegacyFunctionDebuggerStore(
     originalFunction,
     activeTest.testInput,
   ]);
+
+  const debuggerCallback = useCallback(
+    (method: DebuggerMethod) => {
+      const isTest = activeTab.group === "test";
+      const result = functionDebugger.debug(
+        method,
+        originalFunction.name,
+        isTest ? activeTest.testInput : debugInput,
+        breakpoints
+      );
+      onDebuggerInfoChange?.(result);
+      if (result.type === "step") {
+        return;
+      }
+      dispatch(
+        isTest
+          ? {
+              type: "testReturn",
+              output: result.output,
+              activeTestIndex: activeTab.index,
+            }
+          : {
+              type: "debugReturn",
+              output: result.output,
+            }
+      );
+    },
+    [
+      activeTab,
+      breakpoints,
+      debugInput,
+      functionDebugger,
+      originalFunction,
+      activeTest.testInput,
+      onDebuggerInfoChange,
+    ]
+  );
 
   const runAllTests = useCallback(() => {
     if (tests) {
@@ -283,6 +331,10 @@ function LegacyFunctionDebuggerStore(
       dispatch,
       initFunction,
       run,
+      debuggerStart: () => debuggerCallback("start"),
+      debuggerContinue: () => debuggerCallback("continue"),
+      debuggerStep: () => debuggerCallback("step"),
+      debuggerDisconnect: () => debuggerCallback("disconnect"),
       saveDebugAsTest,
       addTest,
       deleteTest,
@@ -295,6 +347,7 @@ function LegacyFunctionDebuggerStore(
       getFunctionDataToSave,
       initFunction,
       run,
+      debuggerCallback,
       saveDebugAsTest,
       addTest,
       deleteTest,

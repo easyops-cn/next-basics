@@ -41,6 +41,9 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
   @property({ type: Number })
   runTestsAutomaticallyTimeout: number;
 
+  @property({ attribute: false })
+  breakpoints: number[];
+
   @method()
   updateSource(source: string): void {
     this._storeRef.current.dispatch({
@@ -81,6 +84,26 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
   @method()
   run(): void {
     this._storeRef.current.run();
+  }
+
+  @method()
+  debuggerStart(): void {
+    this._storeRef.current.debuggerStart();
+  }
+
+  @method()
+  debuggerContinue(): void {
+    this._storeRef.current.debuggerContinue();
+  }
+
+  @method()
+  debuggerStep(): void {
+    this._storeRef.current.debuggerStep();
+  }
+
+  @method()
+  debuggerDisconnect(): void {
+    this._storeRef.current.debuggerDisconnect();
   }
 
   @method()
@@ -164,6 +187,9 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
   @event({ type: "coverage.change" })
   private _coverageChangeEmitter: EventEmitter<ProcessedCoverage>;
 
+  @event({ type: "debuggerInfo.change" })
+  private _debuggerInfoChangeEmitter: EventEmitter<unknown>;
+
   private _handleActiveTabChange = (
     activeTab: DebuggerStateActiveTab
   ): void => {
@@ -227,6 +253,10 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
     this._coverageChangeEmitter.emit(coverage);
   };
 
+  private _handleDebuggerInfoChange = (info: unknown): void => {
+    this._debuggerInfoChangeEmitter.emit(info);
+  };
+
   private _handleTestStatsChange = (stats: TestStats): void => {
     this._testStatsChangeEmitter.emit(stats);
   };
@@ -254,6 +284,7 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
           <FunctionDebuggerStore
             ref={this._storeRef}
             runTestsAutomaticallyTimeout={this.runTestsAutomaticallyTimeout}
+            breakpoints={this.breakpoints}
             onActiveTabChange={this._handleActiveTabChange}
             onOriginalFunctionChange={this._handleOriginalFunctionChange}
             onFunctionModified={this._handleFunctionModified}
@@ -268,6 +299,7 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
             onSomethingModified={this._handleSomethingModified}
             onTestStatsChange={this._handleTestStatsChange}
             onCoverageChange={this._handleCoverageChange}
+            onDebuggerInfoChange={this._handleDebuggerInfoChange}
           />
         </BrickWrapper>,
         this
