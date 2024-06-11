@@ -1,5 +1,6 @@
 import { StoryboardFunction } from "@next-core/brick-types";
 import { EstreeNode } from "@next-core/brick-utils";
+import { ScopeValue } from "./getDebuggerScopeValues";
 
 export interface SerializableValue {
   raw: string;
@@ -88,4 +89,17 @@ export interface FunctionTestCase {
   name?: string;
   input: string;
   output: string;
+}
+
+export type DebugResult = DebugResultStep | DebugResultDone;
+
+export interface DebugResultStep {
+  type: "step";
+  node: EstreeNode;
+  scope: ScopeValue[];
+}
+
+export interface DebugResultDone {
+  type: "done";
+  output: TestRunResult;
 }

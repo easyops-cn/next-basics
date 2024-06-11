@@ -8,14 +8,16 @@ import {
   PlayCircleOutlined,
   PlusCircleOutlined,
   QuestionOutlined,
+  BugOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
 import styles from "./FunctionDebuggerToolbar.module.css";
 
 export interface FunctionDebuggerToolbarProps {
-  type?: "input" | "output" | "test-input" | "test-output";
+  type?: "input" | "debugging-input" | "output" | "test-input" | "test-output";
   status?: "ok" | "failed" | null;
   saveDisabled?: boolean;
+  debuggable?: boolean;
   onButtonClick?: (detail: { action: string }) => void;
 }
 
@@ -23,13 +25,31 @@ export function FunctionDebuggerToolbar({
   type,
   status,
   saveDisabled,
+  debuggable,
   onButtonClick,
 }: FunctionDebuggerToolbarProps): React.ReactElement {
   const refinedType = type ?? "input";
   const isInput = refinedType === "input" || refinedType === "test-input";
+  const isDebuggingInput = refinedType === "debugging-input";
 
   const handleRunClick = useCallback(() => {
     onButtonClick?.({ action: "run" });
+  }, [onButtonClick]);
+
+  const handleDebugClick = useCallback(() => {
+    onButtonClick?.({ action: "debug" });
+  }, [onButtonClick]);
+
+  const handleDebugContinueClick = useCallback(() => {
+    onButtonClick?.({ action: "debug-continue" });
+  }, [onButtonClick]);
+
+  const handleDebugStepClick = useCallback(() => {
+    onButtonClick?.({ action: "debug-step" });
+  }, [onButtonClick]);
+
+  const handleDebugDisconnectClick = useCallback(() => {
+    onButtonClick?.({ action: "debug-disconnect" });
   }, [onButtonClick]);
 
   const handleSaveClick = useCallback(() => {
@@ -47,22 +67,22 @@ export function FunctionDebuggerToolbar({
       className={classNames(
         styles.debuggerToolbar,
         status && styles[status],
-        refinedType === "input" || refinedType === "output"
+        refinedType === "input" || refinedType === "output" || isDebuggingInput
           ? styles.debug
           : styles.test,
-        isInput ? styles.input : styles.output
+        isInput || isDebuggingInput ? styles.input : styles.output
       )}
       data-override-theme="dark"
     >
       <div className={styles.header}>
-        {refinedType === "input"
+        {refinedType === "input" || isDebuggingInput
           ? "Input"
           : refinedType === "test-input"
           ? "Test Input"
           : refinedType === "test-output"
           ? "Expect Output"
           : "Output"}
-        {isInput && (
+        {(isInput || isDebuggingInput) && (
           <span className={styles.headerSuffix}>
             &nbsp;(argument list in JSON format)
           </span>
@@ -70,6 +90,13 @@ export function FunctionDebuggerToolbar({
       </div>
       {isInput ? (
         <div className={styles.buttons}>
+          {debuggable && (
+            <Tooltip title="Debug">
+              <div className={styles.debuggerButton} onClick={handleDebugClick}>
+                <BugOutlined />
+              </div>
+            </Tooltip>
+          )}
           <Tooltip title="Run">
             <div className={styles.debuggerButton} onClick={handleRunClick}>
               <PlayCircleOutlined />
@@ -101,6 +128,33 @@ export function FunctionDebuggerToolbar({
               </div>
             </Tooltip>
           )}
+        </div>
+      ) : isDebuggingInput ? (
+        <div className={styles.buttons}>
+          <Tooltip title="Continue">
+            <div
+              className={styles.debuggerButton}
+              onClick={handleDebugContinueClick}
+            >
+              <span className="codicon codicon-debug-continue" />
+            </div>
+          </Tooltip>
+          <Tooltip title="Step">
+            <div
+              className={styles.debuggerButton}
+              onClick={handleDebugStepClick}
+            >
+              <span className="codicon codicon-debug-step-over" />
+            </div>
+          </Tooltip>
+          <Tooltip title="Disconnect">
+            <div
+              className={styles.debuggerButton}
+              onClick={handleDebugDisconnectClick}
+            >
+              <span className="codicon codicon-debug-disconnect" />
+            </div>
+          </Tooltip>
         </div>
       ) : (
         refinedType === "test-output" && (

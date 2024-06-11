@@ -53,6 +53,7 @@ export class WorkbenchSidebarElement extends UpdatingElement {
   };
 
   private _onPanesSlotChange = (event: Event): void => {
+    this._reflowPanes();
     const slot = event.target as HTMLSlotElement;
     const panes = slot.assignedNodes();
     for (const pane of panes) {
