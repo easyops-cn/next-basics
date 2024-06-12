@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.291.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.291.4...@next-bricks/forms@1.291.5) (2024-06-12)
+
+
+### Bug Fixes
+
+* 修复没有主动update的情况下,新增动态表单项select选框,二维options分配错误的问题 ([621da83](https://github.com/easyops-cn/next-basics/commit/621da83fe59e4f42ae1f8fd77d77bd4f0b3a2801))
+* 修复没有主动update的情况下,新增动态表单项select选框,二维options分配错误的问题 ([25356df](https://github.com/easyops-cn/next-basics/commit/25356df63772733b41f782c7f68177b431115a50))
+
+
+
+
+
 ## [1.291.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.291.3...@next-bricks/forms@1.291.4) (2024-06-07)
 
 
