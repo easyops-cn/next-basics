@@ -224,9 +224,10 @@ export function ColumnComponent(
         : {
             showSearch: false,
           };
-
-      if (Array.isArray(options[rowIndex])) {
-        options = options[rowIndex] as GeneralComplexOption<string | number>[];
+      // 如果options是二维数组
+      if (Array.isArray(options[rowIndex]) || Array.isArray(options[0])) {
+        options =
+          (options[rowIndex] as GeneralComplexOption<string | number>[]) ?? [];
       }
 
       return (
