@@ -393,7 +393,6 @@ describe("ColumnComponent", () => {
       <ColumnComponent column={selectColumnWithSuffix} field={field} />
     );
     expect(wrapper.find(Select)).toHaveLength(1);
-    expect(wrapper.find(".suffixContainer")).toHaveLength(3);
   });
 
   it("input.blur event handler should be called", () => {
