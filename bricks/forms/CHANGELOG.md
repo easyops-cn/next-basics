@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.292.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.291.5...@next-bricks/forms@1.292.0) (2024-06-13)
+
+
+### Features
+
+* **user-or-user-group-select:** add mergeUseAndUserGroupFormValue property ([c517f8b](https://github.com/easyops-cn/next-basics/commit/c517f8b75cde2ee7eb39e5e97c9be7fd3745d852))
+
+
+
+
+
 ## [1.291.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.291.4...@next-bricks/forms@1.291.5) (2024-06-12)
 
 
