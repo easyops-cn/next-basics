@@ -60,6 +60,7 @@ export interface UserSelectFormItemProps {
   optionsMode: "user" | "group" | "all";
   staticList?: string[];
   mergeUseAndUserGroup?: boolean;
+  mergeUseAndUserGroupFormValue?: boolean;
   query?: Record<string, any>;
   hideInvalidUser?: boolean;
   userGroupQuery?: Record<string, any>;
@@ -78,11 +79,23 @@ interface UserOrUserGroupSelectProps
 
 let objectListCache: ModelObjectItem[];
 
+const groupMixedValue = (
+  value: string[]
+): { user?: string[]; userGroup?: string[] } => {
+  return groupBy(value, (v) => (startsWith(v, ":") ? "userGroup" : "user"));
+};
+
 export function LegacyUserSelectFormItem(
   props: UserSelectFormItemProps,
   ref: React.Ref<HTMLDivElement>
 ): React.ReactElement {
-  const { filterPermissionActions, userQuery, userGroupQuery, query } = props;
+  const {
+    filterPermissionActions,
+    userQuery,
+    userGroupQuery,
+    query,
+    mergeUseAndUserGroupFormValue,
+  } = props;
   const selectRef = useRef();
   const [selectedValue, setSelectedValue] = useState([]);
   const staticValue = useRef([]);
@@ -119,31 +132,10 @@ export function LegacyUserSelectFormItem(
     <div style={{ color: "var(--bg-color-button-link)" }}>{label}</div>
   );
 
-  const isDifferent = () => {
-    const userOfValues = props.value?.selectedUser || [];
-    const userGroupOfValues = props.value?.selectedUserGroup || [];
-    const userOfSelectedValue = map(
-      filter(selectedValue, (item) => !item.key.startsWith(":")),
-      "key"
-    );
-
-    const userGroupOfSelectedValue = map(
-      filter(selectedValue, (item) => item.key.startsWith(":")),
-      "key"
-    );
-
-    return (
-      !isEqual([...userOfValues].sort(), [...userOfSelectedValue].sort()) ||
-      !isEqual(
-        [...userGroupOfValues].sort(),
-        [...userGroupOfSelectedValue].sort()
-      )
-    );
-  };
-
-  const initializeStaticList = () => {
-    return groupBy(props.staticList, (v) =>
-      startsWith(v, ":") ? "userGroup" : "user"
+  const isDifferent = (mixedValue: string[]): boolean => {
+    return !isEqual(
+      [...mixedValue].sort(),
+      selectedValue ? [...selectedValue].sort() : []
     );
   };
 
@@ -234,48 +226,50 @@ export function LegacyUserSelectFormItem(
           },
     ]);
 
-  const triggerChange = (changedValue: any) => {
+  const triggerChange = (value: string[]): void => {
     props.onChange?.(
-      isEmpty(changedValue.selectedUser) &&
-        isEmpty(changedValue.selectedUserGroup)
+      isEmpty(value)
         ? null
-        : changedValue
+        : mergeUseAndUserGroupFormValue
+        ? value
+        : {
+            selectedUser: reject(value, (v) => {
+              return startsWith(v, ":");
+            }),
+
+            selectedUserGroup: filter(value, (v) => {
+              return startsWith(v, ":");
+            }),
+          }
     );
   };
 
   useEffect(() => {
-    const initializeSelectedValue = async (): Promise<void> => {
+    const mixedValue = Array.isArray(props.value)
+      ? props.value
+      : [
+          ...(props.value?.selectedUser || []),
+          ...(props.value?.selectedUserGroup || []),
+        ];
+    const initializeSelectedValue = async (
+      mixedValue: string[]
+    ): Promise<void> => {
       let selectedUser: any[] = [];
       let selectedUserGroup: any[] = [];
-      const staticKeys = initializeStaticList();
-      const user = compact(
-        uniq([].concat(staticKeys.user).concat(props.value?.selectedUser))
-      );
-
-      const userGroup = compact(
-        uniq(
-          [].concat(staticKeys.userGroup).concat(props.value?.selectedUserGroup)
-        )
+      const mergedValue = compact(
+        uniq([].concat(props.staticList).concat(mixedValue))
       );
 
       if (
-        (staticKeys.user &&
-          some(
-            staticKeys.user,
-            (v) => !props.value?.selectedUser?.includes(v)
-          )) ||
-        (staticKeys.userGroup &&
-          some(
-            staticKeys.userGroup,
-            (v) => !props.value?.selectedUserGroup?.includes(v)
-          ))
+        props.staticList &&
+        some(props.staticList, (v) => !mixedValue.includes(v))
       ) {
-        triggerChange({
-          selectedUser: user,
-          selectedUserGroup: userGroup,
-        });
+        triggerChange(mergedValue);
       }
+
+      const { user = [], userGroup = [] } = groupMixedValue(mergedValue);
       const staticValueToSet = [];
+
       if (user.length && props.optionsMode !== "group") {
         selectedUser = (
           await InstanceApi_postSearch("USER", {
@@ -359,8 +353,8 @@ export function LegacyUserSelectFormItem(
       setSelectedValue(labelValue);
       staticValue.current = staticValueToSet;
     };
-    if (isDifferent()) {
-      initializeSelectedValue();
+    if (isDifferent(mixedValue)) {
+      initializeSelectedValue(mixedValue);
     }
   }, [props.value]);
 
@@ -434,23 +428,8 @@ export function LegacyUserSelectFormItem(
     value.unshift(...staticValue.current);
     setSelectedValue(value);
     props.onChangeV2?.(value);
-    const resultValue = {
-      selectedUser: map(
-        reject(value, (v) => {
-          return startsWith(v.key, ":");
-        }),
-        "key"
-      ),
 
-      selectedUserGroup: map(
-        filter(value, (v) => {
-          return startsWith(v.key, ":");
-        }),
-        "key"
-      ),
-    };
-
-    triggerChange(resultValue);
+    triggerChange(map(value, "key"));
     if (searchValue !== "") {
       searchUserOrUserGroupInstances("");
     }
@@ -505,23 +484,8 @@ export function LegacyUserSelectFormItem(
       : labelValue;
 
     setSelectedValue(resultSelectedValue);
-    const resultValue = {
-      selectedUser: map(
-        reject(resultSelectedValue, (v) => {
-          return startsWith(v.key, ":");
-        }),
-        "key"
-      ),
 
-      selectedUserGroup: map(
-        filter(resultSelectedValue, (v) => {
-          return startsWith(v.key, ":");
-        }),
-        "key"
-      ),
-    };
-
-    triggerChange(resultValue);
+    triggerChange(map(resultSelectedValue, "key"));
   };
 
   const handleModalSelected = async (selectedKeys: string[]) => {
@@ -764,6 +728,7 @@ export function UserOrUserGroupSelect(
         optionsMode={props.optionsMode}
         staticList={props.staticList}
         mergeUseAndUserGroup={props.mergeUseAndUserGroup}
+        mergeUseAndUserGroupFormValue={props.mergeUseAndUserGroupFormValue}
         query={props.query}
         hideInvalidUser={props.hideInvalidUser}
         userQuery={props.userQuery}

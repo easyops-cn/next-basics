@@ -40,7 +40,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @description 用户（组）选择构件中下拉框的初始值，按照我们平台的用户（组）数据，selectedUser 为"USER"模型中的 name，selectedUserGroup 为"USER_GROUP"模型中的":"+instanceId。当`mergeUseAndUserGroup`为 true 时，类型为`string[]`。
+   * @description 用户（组）选择构件中下拉框的初始值。按照我们平台的用户（组）数据，selectedUser 为 "USER" 模型中的 name，selectedUserGroup 为 "USER_GROUP" 模型中的 ":" + instanceId。值也可以为合并用户和用户组的 `string[]` 类型。
    * @group basic
    */
   @property({
@@ -162,13 +162,23 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
 
   /**
    * @default false
-   * @description 是否合并用户和用户组数据，当设置为 true 时，输入的`value`和`user.group.change`事件输出的 detail 都为`string[]`格式。
+   * @description 是否合并用户和用户组数据，当设置为 true 时，`user.group.change` 事件的 detail 都为 `string[]` 格式。
    * @group advanced
    */
   @property({
     type: Boolean,
   })
   mergeUseAndUserGroup?: boolean;
+
+  /**
+   * @default false
+   * @description 表单项值是否合并用户和用户组数据，当设置为 true 时，表单项值和 `user.group.change` 事件的 detail 都为 `string[]` 格式。
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  mergeUseAndUserGroupFormValue?: boolean;
 
   /**
    * @description 模型列表，不传该属性构件内部会发请求获取该列表，如果需要传该属性则优先使用外部传进来的数据，该数据来自"providers-of-cmdb.cmdb-object-api-get-object-ref" 如 demo 所示
@@ -230,9 +240,10 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
    */
   @event({ type: "user.group.change" }) changeEvent: EventEmitter<any>;
   private _handleChange = (value: any) => {
-    const resultValue = this.mergeUseAndUserGroup
-      ? this._mergeUseAndUserGroup(value)
-      : value;
+    const resultValue =
+      this.mergeUseAndUserGroup && !Array.isArray(value)
+        ? this._mergeUseAndUserGroup(value)
+        : value;
     this.value = resultValue;
     Promise.resolve().then(() => {
       this.changeEvent.emit(resultValue);
@@ -260,26 +271,12 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
     return [...originValue.selectedUser, ...originValue.selectedUserGroup];
   };
 
-  private _handleMergeUseAndUserGroup = (
-    originValue: string[] | UserOrUserGroupSelectValue
-  ): UserOrUserGroupSelectValue => {
-    const result = groupBy(originValue, (v) =>
-      startsWith(v, ":") ? "selectedUserGroup" : "selectedUser"
-    );
-    return result as unknown as UserOrUserGroupSelectValue;
-  };
-
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
       const mutableProps = {
         value: this.value,
       };
-      if (this.mergeUseAndUserGroup) {
-        mutableProps.value = this._handleMergeUseAndUserGroup(
-          mutableProps.value
-        );
-      }
       ReactDOM.render(
         <BrickWrapper>
           <UserOrUserGroupSelect
@@ -308,6 +305,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
             wrapperCol={this.wrapperCol}
             staticList={this.staticList}
             mergeUseAndUserGroup={this.mergeUseAndUserGroup}
+            mergeUseAndUserGroupFormValue={this.mergeUseAndUserGroupFormValue}
             filterPermissionActions={this.filterPermissionActions}
             query={this.query}
             userQuery={this.userQuery}
