@@ -49,7 +49,7 @@ const locale: Locale = {
   [K.REGULAR]: "Regular expression:",
   [K.FORMAT]: "Format:",
   [K.CLICK_TO_SELECT_DATE]: "date,click to select",
-  [K.ENUMERATION_VALUE]: "Enumeration value",
+  [K.ENUMERATION_VALUE]: "Enumeration value ",
   [K.ENUM_REGEX_JSON]: "Enumeration value/Regular expression/JSON Schema",
   [K.PLEASE_INPUT_ENUMERATED_VALUE]:
     "Enter the enumerated values, separated by carriage returns",
@@ -65,6 +65,14 @@ const locale: Locale = {
   [K.HANDEL]: "Handel",
   [K.STRUCTURE_BODY_DEFINATION]: "Structure body definition",
   [K.NEW_DEFINATION]: "New definition",
+  [K.ENUM_BODY_DEFINATION]: "Enumeration body definition",
+  [K.TREE]: "Tree",
+  [K.TREE_ENUM_TOOLTIP]:
+    "The tree selection box is suitable for displaying and filtering data at multiple levels, with the levels separated by '/' and multiple enumeration items added with line breaks. After adding an enumeration value, you can preview the effect in the Attribute default value selection box.",
+  [K.PLEASE_INPUT_TREE_ENUMERATED_VALUE]:
+    "The tree selection box is suitable for displaying and filtering data at multiple levels, with the levels separated by '/' and multiple enumeration items added with line breaks. Example: \nA1/B1/C1/D1/E1\nA1/B1/C1/D1/E2\nA1/B1/C1/D1/E3\nA1/B1/C1/D2\nA1/B1/C1/D3\nA1/B1/C1/D4/E4\nAfter adding an enumeration value, you can preview the effect in the Attribute default value selection box.",
+  [K.PLEASE_SELECT_TREE_ENUMERATED_VALUE]:
+    "Please select the Attribute default value",
   [K.IFEM]: "Introducing from existing models",
   [K.ADD_STRUCTURE_ITEM]: "Add structure item",
   [K.SELECT_MODEL]: "Select model",

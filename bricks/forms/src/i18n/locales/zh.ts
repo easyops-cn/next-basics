@@ -47,7 +47,7 @@ const locale: Locale = {
   [K.REGULAR]: "正则:",
   [K.FORMAT]: "格式:",
   [K.CLICK_TO_SELECT_DATE]: "date,点击选择",
-  [K.ENUMERATION_VALUE]: "枚举值:",
+  [K.ENUMERATION_VALUE]: "枚举值 ",
   [K.ENUM_REGEX_JSON]: "枚举值/正则/JSON Schema",
   [K.PLEASE_INPUT_ENUMERATED_VALUE]: "输入枚举值，以回车间隔",
   [K.FLOAT_LIMIT]: "小数点后最多可输入四位",
@@ -62,6 +62,13 @@ const locale: Locale = {
   [K.HANDEL]: "操作",
   [K.STRUCTURE_BODY_DEFINATION]: "结构体定义:",
   [K.NEW_DEFINATION]: "新建定义",
+  [K.TREE]: "树选择框",
+  [K.ENUM_BODY_DEFINATION]: "显示为:",
+  [K.TREE_ENUM_TOOLTIP]:
+    "树选择框适用于多层级展示与筛选的数据，层级以“/”分隔 ，换行添加多个枚举项。添加枚举值后可在【属性默认值】选择框中预览效果。",
+  [K.PLEASE_INPUT_TREE_ENUMERATED_VALUE]:
+    "树选择框适用于多层级展示与筛选的数据，层级以“/”分隔 ，换行添加多个枚举项。示例：\nA1/B1/C1/D1/E1\nA1/B1/C1/D1/E2\nA1/B1/C1/D1/E3\nA1/B1/C1/D2\nA1/B1/C1/D3\nA1/B1/C1/D4/E4\n添加枚举值后可在【属性默认值】选择框中预览效果。",
+  [K.PLEASE_SELECT_TREE_ENUMERATED_VALUE]: "请选择属性默认值",
   [K.IFEM]: "从已有模型中引入",
   [K.ADD_STRUCTURE_ITEM]: "添加结构项",
   [K.SELECT_MODEL]: "选择模型",

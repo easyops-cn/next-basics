@@ -7,6 +7,9 @@ const defaultValue = {
   regex: ["test1", "test2"],
   default: "",
 };
+jest.mock("@next-core/brick-kit", () => ({
+  useFeatureFlags: jest.fn().mockImplementation(() => [true]),
+}));
 
 describe("ObjectAttrEnum", () => {
   it("should work", () => {
