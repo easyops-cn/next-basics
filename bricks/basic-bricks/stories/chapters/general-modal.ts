@@ -472,5 +472,241 @@ export const generalModalStory: Story = {
         },
       },
     },
+    {
+      description: {
+        title: "无标题弹窗",
+      },
+      brick: "div",
+      slots: {
+        content: {
+          bricks: [
+            {
+              brick: "basic-bricks.general-button",
+              events: {
+                "general.button.click": {
+                  method: "open",
+                  target: "#noTitleModal",
+                },
+              },
+              properties: {
+                buttonName: "点击弹出模态框",
+              },
+            },
+            {
+              brick: "basic-bricks.general-modal",
+              events: {
+                "basic-bricks.general-modal.cancel": {
+                  action: "message.info",
+                  args: ["cancel modal"],
+                },
+              },
+              properties: {
+                id: "noTitleModal",
+                okText: "Save",
+                isHiddenBodyPadding: true,
+                isHiddenModalTitle: true,
+                isHiddenModalFooter: true,
+                isShowCustomHeader: true,
+                maskClosable: false,
+                width: 800,
+              },
+              slots: {
+                customLeftHeaderExtra: {
+                  type: "bricks",
+                  bricks: [
+                    {
+                      brick: "presentational-bricks.general-label",
+                      properties: {
+                        style: {
+                          color: "#ccc",
+                          cursor: "pointer",
+                        },
+                        text: "快捷切换",
+                        suffixIcon: {
+                          lib: "antd",
+                          type: "down",
+                        },
+                      },
+                    },
+                  ],
+                },
+                customRightHeaderExtra: {
+                  type: "bricks",
+                  bricks: [
+                    {
+                      brick: "div",
+                      properties: {
+                        style: {
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                        },
+                      },
+                      slots: {
+                        content: {
+                          type: "bricks",
+                          bricks: [
+                            {
+                              brick: "presentational-bricks.general-label",
+                              properties: {
+                                style: {
+                                  color: "#ccc",
+                                  cursor: "pointer",
+                                },
+                                text: "下载",
+                                prefixIcon: {
+                                  lib: "antd",
+                                  type: "download",
+                                },
+                              },
+                            },
+                            {
+                              brick: "presentational-bricks.general-label",
+                              properties: {
+                                style: {
+                                  color: "#ccc",
+                                  cursor: "pointer",
+                                },
+                                text: "查看",
+                                prefixIcon: {
+                                  lib: "antd",
+                                  type: "file-search",
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  ],
+                },
+                content: {
+                  bricks: [
+                    {
+                      brick: "presentational-bricks.brick-illustration",
+                      properties: {
+                        name: "bg13-1",
+                        category: "ira",
+                      },
+                    },
+                    {
+                      brick: "presentational-bricks.rank-table",
+                      properties: {
+                        columns: [
+                          {
+                            dataIndex: "name",
+                            key: "name",
+                            title: "Name",
+                          },
+                          {
+                            dataIndex: "age",
+                            key: "age",
+                            title: "Age",
+                          },
+                          {
+                            dataIndex: "address",
+                            headerBrick: {
+                              useBrick: {
+                                brick: "presentational-bricks.general-tooltip",
+                                properties: {
+                                  content: "这是一个 tooltips",
+                                  icon: {
+                                    icon: "info-circle",
+                                    lib: "fa",
+                                  },
+                                  text: "Address",
+                                },
+                              },
+                            },
+                            key: "address",
+                          },
+                          {
+                            dataIndex: "tags",
+                            key: "tags",
+                            title: "Tags",
+                            useBrick: {
+                              brick: "presentational-bricks.brick-tag",
+                              properties: {
+                                configProps: {
+                                  color: "var(--color-brand)",
+                                },
+                                showCard: false,
+                              },
+                              transform: {
+                                tagList: "@{cellData}",
+                              },
+                            },
+                          },
+                        ],
+                        dataSource: {
+                          list: [
+                            {
+                              address: "New York No. 1 Lake Park",
+                              age: 32,
+                              id: "1",
+                              name: "John Brown",
+                              tags: ["nice", "good"],
+                            },
+                            {
+                              address: "London No. 2 Lake Park",
+                              age: 42,
+                              id: "2",
+                              name: "Jim Green",
+                              tags: ["loser", "bad"],
+                            },
+                            {
+                              address: "Sidney No. 3 Lake Park",
+                              age: 32,
+                              id: "3",
+                              name: "Joe Black",
+                              tags: ["teacher", "lucky", "lay"],
+                            },
+                            {
+                              address: "Sidney No. 4 Lake Park",
+                              age: 34,
+                              id: "4",
+                              name: "Jim Red",
+                              tags: ["teacher", "lucky", "lay"],
+                            },
+                            {
+                              address: "Sidney No. 5 Lake Park",
+                              age: 35,
+                              id: "5",
+                              name: "Mathéo Girard",
+                              tags: ["teacher", "lucky", "lay"],
+                            },
+                            {
+                              address: "Sidney No. 6 Lake Park",
+                              age: 36,
+                              id: "6",
+                              name: "Camille Roy",
+                              tags: ["teacher", "lucky", "lay"],
+                            },
+                            {
+                              address: "Sidney No. 7 Lake Park",
+                              age: 37,
+                              id: "7",
+                              name: "Troy Owens",
+                              tags: ["teacher", "lucky", "lay"],
+                            },
+                          ],
+                        },
+                        header: {
+                          title: "Top10",
+                        },
+                        rowKey: "id",
+                        showCard: true,
+                      },
+                    },
+                  ],
+                  type: "bricks",
+                },
+              },
+            },
+          ],
+          type: "bricks",
+        },
+      },
+    },
   ],
 };

@@ -17,8 +17,34 @@
   padding: 0;
 }
 
+.customHeaderWrapper .ant-modal-body {
+  position: relative;
+
+  .headerWrapper {
+    position: absolute;
+    top: -40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    > span{
+      display: flex;
+      align-items: center;
+      ::slotted([slot="customRightHeaderExtra"]){
+        border-right: 1px solid rgba(255,255,255,0.12);
+        padding-right: 17px;
+      }
+    }
+
+  }
+}
+
 .headerWrapper .ant-modal-header {
   border-bottom: 0;
+}
+
+.titleWrapper .ant-modal-close {
+  display: none;
 }
 
 .footerWrapper .ant-modal-footer {

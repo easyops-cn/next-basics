@@ -37,6 +37,9 @@ interface GeneralModalProps {
   isHiddenBodyPadding?: boolean;
   isHiddenHeaderBorder?: boolean;
   isHiddenFooterColor?: boolean;
+  isHiddenModalTitle?: boolean;
+  isHiddenModalFooter?: boolean;
+  isShowCustomHeader?: boolean;
   onAfterClose?: () => void;
 }
 
@@ -56,6 +59,9 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
     isHiddenBodyPadding,
     isHiddenHeaderBorder,
     isHiddenFooterColor,
+    isHiddenModalTitle,
+    isHiddenModalFooter,
+    isShowCustomHeader,
     footerPosition = "right",
   } = props;
   const modalHeaderRef = useRef<HTMLDivElement>();
@@ -173,25 +179,29 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
         headerWrapper: isHiddenHeaderBorder,
         bodyWrapper: isHiddenBodyPadding,
         footerWrapper: isHiddenFooterColor,
+        titleWrapper: isHiddenModalTitle,
+        customHeaderWrapper: isShowCustomHeader,
       })}
       title={
-        modalTitle && (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: titleAlignPropertyMap[titleAlign],
-            }}
-          >
-            {iconNode}
-            {modalTitle}
-            <span className="headerExtra">
-              <slot id="headerExtra" name="headerExtra"></slot>
-            </span>
-          </div>
-        )
+        isHiddenModalTitle
+          ? ""
+          : modalTitle && (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: titleAlignPropertyMap[titleAlign],
+                }}
+              >
+                {iconNode}
+                {modalTitle}
+                <span className="headerExtra">
+                  <slot id="headerExtra" name="headerExtra"></slot>
+                </span>
+              </div>
+            )
       }
-      footer={footer || defaultFooter}
+      footer={isHiddenModalFooter ? null : footer || defaultFooter}
       width={fullscreen ? `calc(100% - ${fullscreenMargin * 2}px)` : undefined}
       bodyStyle={fullscreen ? { height: bodyHeight } : undefined}
       wrapClassName={classnames({ fullscreen })}
@@ -200,6 +210,41 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
       cancelButtonProps={{ type: "link", ...configProps?.cancelButtonProps }}
       visible={visible}
     >
+      {isShowCustomHeader ? (
+        <div className={classnames({ headerWrapper: true })}>
+          <span className="customLeftHeaderExtra">
+            <slot
+              id="customLeftHeaderExtra"
+              name="customLeftHeaderExtra"
+            ></slot>
+          </span>
+          <span>
+            <span className="customRightHeaderExtra">
+              <slot
+                id="customRightHeaderExtra"
+                name="customRightHeaderExtra"
+              ></slot>
+            </span>
+
+            <GeneralIcon
+              icon={{
+                lib: "antd",
+                icon: "close-circle",
+                theme: "filled",
+                color: "rgba(255,255,255,0.45)",
+              }}
+              style={{
+                fontSize: "24px",
+                cursor: "pointer",
+                marginLeft: "17px",
+              }}
+              size={20}
+            />
+          </span>
+        </div>
+      ) : (
+        <></>
+      )}
       <slot id="content" name="content" ref={contentSlotRef}></slot>
     </Modal>
   );
