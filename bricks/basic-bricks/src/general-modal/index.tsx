@@ -148,6 +148,36 @@ export class GeneralModalElement extends UpdatingElement {
    * @kind boolean
    * @required false
    * @default true
+   * @description 是否需要隐藏弹窗的title
+   * @group ui
+   */
+  @property({ attribute: false })
+  isHiddenModalTitle = false;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否需要隐藏弹窗的footer
+   * @group ui
+   */
+  @property({ attribute: false })
+  isHiddenModalFooter = false;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否需要显示自定义顶部header
+   * @group ui
+   */
+  @property({ attribute: false })
+  isShowCustomHeader = false;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
    * @description 是否需要隐藏底部特殊的颜色
    * @group ui
    */
@@ -327,7 +357,8 @@ export class GeneralModalElement extends UpdatingElement {
           : this.modalProps.maskClosable !== false) &&
           nodeName === "div" &&
           clickNode.className.includes("ant-modal-wrap")) ||
-        (buttonNode && buttonNode.className.includes("ant-modal-close"))
+        (buttonNode && buttonNode.className.includes("ant-modal-close")) ||
+        clickNode.closest("svg")?.getAttribute("data-icon") === "close-circle"
       ) {
         this.close();
         return;
@@ -413,6 +444,9 @@ export class GeneralModalElement extends UpdatingElement {
             isHiddenBodyPadding={this.isHiddenBodyPadding}
             isHiddenHeaderBorder={this.isHiddenHeaderBorder}
             isHiddenFooterColor={this.isHiddenFooterColor}
+            isHiddenModalTitle={this.isHiddenModalTitle}
+            isHiddenModalFooter={this.isHiddenModalFooter}
+            isShowCustomHeader={this.isShowCustomHeader}
           />
         </BrickWrapper>,
         this._mountPoint
