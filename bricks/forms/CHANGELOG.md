@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.293.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.292.0...@next-bricks/forms@1.293.0) (2024-06-14)
+
+
+### Features
+
+* 作为资源管理人员，我在模型定义多选枚举值时，可定义多层级得枚举值数据，以便于我定义不固定层级的分类信息 ([d26535a](https://github.com/easyops-cn/next-basics/commit/d26535aee5100333a24030d2c03929ce0fa7daa6))
+
+
+
+
+
 # [1.292.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.291.5...@next-bricks/forms@1.292.0) (2024-06-13)
 
 
