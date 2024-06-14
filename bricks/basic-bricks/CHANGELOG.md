@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.252.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.251.6...@next-bricks/basic-bricks@1.252.0) (2024-06-14)
+
+
+### Features
+
+* 新增无独立标题区弹窗，操作栏在弹窗顶部 ([0fb50da](https://github.com/easyops-cn/next-basics/commit/0fb50da304ce7f334f65bca8ee9ee702e39c8f61))
+
+
+
+
+
 ## [1.251.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.251.5...@next-bricks/basic-bricks@1.251.6) (2024-05-24)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
