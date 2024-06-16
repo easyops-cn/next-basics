@@ -12,6 +12,10 @@ export interface WorkbenchNodeData<T = unknown> {
     text: string;
     style?: React.CSSProperties;
   };
+  labelSuffix?: {
+    text: string;
+    style?: React.CSSProperties;
+  };
   link?:
     | {
         to: string;
@@ -28,6 +32,10 @@ export interface WorkbenchNodeData<T = unknown> {
   originKey?: string;
   parentPath?: string;
   unreachable?: boolean;
+  suffix?: {
+    text: string;
+    style?: React.CSSProperties;
+  };
 }
 
 export interface WorkbenchTreeAction {

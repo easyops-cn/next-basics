@@ -165,6 +165,7 @@ export type PreviewMessageToContainer =
   | PreviewMessageContainerMatchApiCache
   | PreviewMessagePreviewDataValueSuccess
   | PreviewMessagePreviewDataValueError
+  | PreviewMessagePreviewRuntimeData
   | PreviewMessagePreviewDebugValueSuccess
   | PreviewMessagePreviewDebugValueError
   | PreviewMessagePreviewContractUpdate;
@@ -316,6 +317,12 @@ export interface PreviewMessagePreviewDebugValueError {
 export interface PreviewMessagePreviewDataValueError {
   sender: "previewer";
   type: "inspect-data-value-error";
+  data: unknown;
+}
+
+export interface PreviewMessagePreviewRuntimeData {
+  sender: "previewer";
+  type: "inspect-runtime-data-value";
   data: unknown;
 }
 
