@@ -63,6 +63,12 @@ test("WorkbenchTree with nodes", async () => {
           {
             key: 1,
             name: "n-1",
+            labelPrefix: {
+              text: "prefix text",
+            },
+            suffix: {
+              text: "suffix text",
+            },
           },
           {
             key: 2,
@@ -108,6 +114,15 @@ test("WorkbenchTree with nodes", async () => {
   expect(firstLevelLinks[1].classList.contains("hover")).toBe(true);
   expect(firstLevelLinks[2].classList.contains("active")).toBe(false);
   expect(firstLevelLinks[2].classList.contains("hover")).toBe(false);
+
+  expect(firstLevelLinks[0].querySelector(".nodeName")).toHaveTextContent(
+    "prefix text"
+  );
+
+  expect(firstLevelLinks[0].querySelector(".suffix").textContent).toEqual(
+    "suffix text"
+  );
+
   expect(
     (firstLevelLinks[2].querySelector(".nodeLabel") as HTMLElement).style
       .paddingLeft

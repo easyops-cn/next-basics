@@ -717,7 +717,7 @@ function TreeNode({
               {isTransformName
                 ? smartDisplayForEvaluableString(node.name)
                 : node.name}
-              {node.labelSuffix?.text && (
+              {node.labelSuffix && (
                 <span
                   className={styles.labelSuffix}
                   style={node.labelSuffix.style}
@@ -744,7 +744,7 @@ function TreeNode({
               <GeneralIcon icon={node.badge} />
             </span>
           )}
-          {node.suffix?.text && (
+          {node.suffix && (
             <span
               className={styles.suffix}
               style={node.suffix.style}
