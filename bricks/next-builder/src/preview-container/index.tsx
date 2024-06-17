@@ -63,6 +63,9 @@ export class PreviewContainerElement extends UpdatingElement {
   @property()
   routePath: string;
 
+  @property()
+  routeId: string;
+
   @property({ type: Boolean })
   routeExact: boolean;
 
@@ -339,6 +342,7 @@ export class PreviewContainerElement extends UpdatingElement {
               ref={this._previewContainerRef}
               previewUrl={this.previewUrl}
               appId={this.appId}
+              routeId={this.routeId}
               templateId={this.templateId}
               formId={this.formId}
               formData={this.formData}
