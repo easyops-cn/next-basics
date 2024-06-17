@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.271.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.270.0...@next-bricks/next-builder@1.271.0) (2024-06-17)
+
+
+### Features
+
+* support inspect runtime value ([c410815](https://github.com/easyops-cn/next-basics/commit/c41081554e36bc89cff95024a9000564aea38f5b))
+* support suffix ([c44d268](https://github.com/easyops-cn/next-basics/commit/c44d268a7b6ba6b26401d225066d62c79c401dd7))
+
+
+
+
+
 # [1.270.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.269.0...@next-bricks/next-builder@1.270.0) (2024-06-11)
 
 
