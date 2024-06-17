@@ -2,8 +2,14 @@ import {
   StoryboardFunctionRegistryFactory,
   StoryboardFunctionRegistry,
 } from "@next-core/brick-kit";
-import type { EstreeNode } from "@next-core/brick-utils";
+import {
+  cook,
+  EstreeNode,
+  isObject,
+  precookFunction,
+} from "@next-core/brick-utils";
 import MockDate from "mockdate";
+import _ from "lodash";
 import {
   DebugResult,
   RawCoverage,
@@ -17,8 +23,13 @@ import {
   ScopeValue,
   YieldValue,
 } from "./getDebuggerScopeValues";
+import lodashSource from "./lodash.txt";
+import arraySource from "./array.txt";
+import objectSource from "./object.txt";
 
 export type DebuggerMethod = "start" | "continue" | "step" | "disconnect";
+
+const DebuggerArrayConstructor = class Array extends (window as any).Array {};
 
 export type FunctionDebugger = Omit<
   StoryboardFunctionRegistry,
@@ -46,7 +57,9 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
     collectCoverage: {
       createCollector,
     },
-  });
+    debuggerOverrides,
+  } as any);
+
   function run(fn: string, input: SerializableValue): TestRunResult {
     let error: string;
     let ok = false;
@@ -103,7 +116,7 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
 
       const iterator = debuggerCall(
         // Re-parse input to avoid mutating after tests run.
-        ...generalizedJsonParse<unknown[]>(input.raw)
+        ...asDebuggerArray(generalizedJsonParse<unknown[]>(input.raw))
       );
 
       debugContext = {
@@ -224,4 +237,70 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
       return coverageByFunction.get(fn);
     },
   };
+}
+
+function debuggerOverrides(ctx: {
+  precookFunction: typeof precookFunction;
+  cook: typeof cook;
+  supply: (
+    attemptToVisitGlobals: Set<string>,
+    providedGlobalVariables?: Record<string, unknown>,
+    mock?: boolean
+  ) => Record<string, unknown>;
+}): {
+  LodashWithStaticFields?: Partial<typeof _>;
+  ArrayConstructor?: typeof Array;
+  ObjectWithStaticFields?: Partial<typeof Object>;
+} {
+  const precookedLodash = ctx.precookFunction(lodashSource);
+  const debugLodash = ctx.cook(precookedLodash.function, lodashSource, {
+    externalSourceForDebug: true,
+    globalVariables: {
+      ...ctx.supply(precookedLodash.attemptToVisitGlobals),
+      global: window,
+      Function,
+      Object,
+      ArrayBuffer,
+    },
+  } as any) as () => Partial<typeof _>;
+
+  const ArrayConstructor = DebuggerArrayConstructor as any;
+  const precookedArray = ctx.precookFunction(arraySource);
+  const debugArray = ctx.cook(precookedArray.function, arraySource, {
+    externalSourceForDebug: true,
+    globalVariables: ctx.supply(precookedArray.attemptToVisitGlobals, {
+      Error,
+    }),
+    ArrayConstructor,
+  } as any) as () => object;
+  Object.assign(ArrayConstructor.prototype, debugArray());
+
+  const precookedObject = ctx.precookFunction(objectSource);
+  const debugObject = ctx.cook(precookedObject.function, objectSource, {
+    externalSourceForDebug: true,
+    globalVariables: ctx.supply(precookedObject.attemptToVisitGlobals),
+    ArrayConstructor,
+  } as any) as () => typeof Object;
+
+  return {
+    LodashWithStaticFields: debugLodash(),
+    ArrayConstructor,
+    ObjectWithStaticFields: debugObject(),
+  };
+}
+
+function asDebuggerValue(value: unknown): unknown {
+  if (Array.isArray(value)) {
+    return asDebuggerArray(value);
+  }
+  if (isObject(value)) {
+    return Object.fromEntries(
+      Object.entries(value).map(([k, v]) => [k, asDebuggerValue(v)])
+    );
+  }
+  return value;
+}
+
+function asDebuggerArray(list: unknown[]): unknown[] {
+  return new (DebuggerArrayConstructor as any)(...list.map(asDebuggerValue));
 }
