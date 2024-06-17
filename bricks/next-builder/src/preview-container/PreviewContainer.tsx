@@ -59,6 +59,7 @@ import { JsonStorage } from "@next-core/brick-utils";
 export interface PreviewContainerProps {
   previewUrl: string;
   appId?: string;
+  routeId?: string;
   templateId?: string;
   formId?: string;
   formData?: FormData;
@@ -141,6 +142,7 @@ export function LegacyPreviewContainer(
   {
     previewUrl,
     appId,
+    routeId,
     templateId,
     formId,
     formData,
@@ -405,6 +407,7 @@ export function LegacyPreviewContainer(
         type: "start-preview",
         options: {
           appId,
+          routeId,
           templateId,
           formId,
           formData,
