@@ -2867,10 +2867,10 @@
   resolved "https://registry.npmjs.org/@next-sdk/user-service-sdk/-/user-service-sdk-2.4.0.tgz#aaa3b8ab2fae2e0667cf16f0ee17ef586366446a"
   integrity sha512-9+gySn/uEgzpS16BsBtLIbu+sKLwfmp8OhVzpt2Z4FUTw14Tw+XpTaeSuzbDCrKNa9paNMWFpiSsHvNF539fCg==
 
-"@next-shared/common-bricks@0.26.0":
-  version "0.26.0"
-  resolved "https://registry.npmjs.org/@next-shared/common-bricks/-/common-bricks-0.26.0.tgz#360c0044f6110dd5f2f7a15cdf8704a43c776e29"
-  integrity sha512-kPYZkOfh9GkgHlfaS6dVJmfOWwF/LJsEmfejPjot/oVPd2SyqADDqS9UM0OXW1obRxwGJXSQMRjAhBJDYJstsw==
+"@next-shared/common-bricks@0.42.1":
+  version "0.42.1"
+  resolved "https://registry.npmjs.org/@next-shared/common-bricks/-/common-bricks-0.42.1.tgz#67f365feef24fcfe06998a468c5fbf04ec20bbe6"
+  integrity sha512-DsNUZF/xZ8aribADp9YFj/dXJUqlblsm57g9Lw4FxbutmpygsZDz/b5umIbKLyH7dhyj+DTycHqH+pbg8q6lJA==
 
 "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3":
   version "2.1.8-no-fsevents.3"
