@@ -7,7 +7,7 @@ import styles from "./index.module.css";
 import { isNil } from "lodash";
 import i18n from "i18next";
 import { RadioChangeEvent } from "antd/lib/radio";
-import { treeEnumFormat } from "../../utils";
+import { treeEnumFormat } from "@next-libs/cmdb-utils";
 import { useFeatureFlags } from "@next-core/brick-kit";
 const Option = Select.Option;
 
@@ -43,7 +43,12 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
         ? "cascade"
         : "default";
     setAddEnumsMode(enumsMode);
-    setTreeDefaultValue(enumsMode === "cascade" ? props.value?.default : []);
+    const defaultValus = Array.isArray(props.value?.default)
+      ? (props.value?.default as string[])?.filter((i) =>
+          props.value?.regex.includes(i)
+        )
+      : [];
+    setTreeDefaultValue(enumsMode === "cascade" ? defaultValus : []);
     setTreeData(
       enumsMode === "cascade" ? treeEnumFormat(props.value?.regex) : []
     );
