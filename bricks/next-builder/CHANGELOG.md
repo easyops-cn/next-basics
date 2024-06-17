@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.272.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.271.0...@next-bricks/next-builder@1.272.0) (2024-06-17)
+
+
+### Features
+
+* add routeId ([88c0771](https://github.com/easyops-cn/next-basics/commit/88c07715f4c304a1dbb0a4cd0175f9e45d0defc7))
+
+
+
+
+
 # [1.271.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.270.0...@next-bricks/next-builder@1.271.0) (2024-06-17)
 
 
