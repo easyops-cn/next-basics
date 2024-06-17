@@ -717,6 +717,15 @@ function TreeNode({
               {isTransformName
                 ? smartDisplayForEvaluableString(node.name)
                 : node.name}
+              {node.labelSuffix && (
+                <span
+                  className={styles.labelSuffix}
+                  style={node.labelSuffix.style}
+                  title={node.labelSuffix.text}
+                >
+                  {node.labelSuffix.text}
+                </span>
+              )}
             </span>
             {NodeNameSuffix && <NodeNameSuffix node={node} />}
           </span>
@@ -733,6 +742,15 @@ function TreeNode({
           {node.badge && (
             <span className={styles.badge}>
               <GeneralIcon icon={node.badge} />
+            </span>
+          )}
+          {node.suffix && (
+            <span
+              className={styles.suffix}
+              style={node.suffix.style}
+              title={node.suffix.text}
+            >
+              {node.suffix.text}
             </span>
           )}
         </Link>

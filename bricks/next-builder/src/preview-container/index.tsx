@@ -219,6 +219,13 @@ export class PreviewContainerElement extends UpdatingElement {
     this._handleDebugDataValueErrorEvent.emit(value);
   };
 
+  @event({ type: "inspect.runtime.value" })
+  private _handleInspectRuntimeValueEvent: EventEmitter<unknown>;
+
+  private _handleInspectRuntimeValue = (value: unknown): void => {
+    this._handleInspectRuntimeValueEvent.emit(value);
+  };
+
   @event({ type: "contract.update" })
   private _handleContractUpdateEvent: EventEmitter<any>;
   private _handleContractUpdate = (
@@ -366,6 +373,7 @@ export class PreviewContainerElement extends UpdatingElement {
               onMatchApiCache={this._handleMatchApiCache}
               onDebugValueSuccess={this._handleDebugDataValueSuccess}
               onDebugValueError={this._handleDebugDataValueError}
+              onRuntimeDataValue={this._handleInspectRuntimeValue}
             />
           </BuilderProvider>
         </BrickWrapper>,

@@ -91,7 +91,8 @@ export interface PreviewContainerProps {
   onPreviewDebug?(result: any[]): void;
   onMatchApiCache?(num: number): void;
   onDebugValueSuccess?(value: unknown): void;
-  onDebugValueError?(alue: unknown): void;
+  onDebugValueError?(value: unknown): void;
+  onRuntimeDataValue?(value: unknown): void;
 }
 
 export type CaptureStatus = "idle" | "capturing" | "ok" | "failed";
@@ -167,6 +168,7 @@ export function LegacyPreviewContainer(
     onDebugValueSuccess,
     onDebugValueError,
     onContractUpdate,
+    onRuntimeDataValue,
     onExcuteProxyMethodSuccess,
     onExcuteProxyMethodError,
     onPreviewDebug,
@@ -874,6 +876,9 @@ export function LegacyPreviewContainer(
           case "contract-update":
             onContractUpdate(data.data);
             break;
+          case "inspect-runtime-data-value":
+            onRuntimeDataValue(data.data);
+            break;
         }
       }
     };
@@ -902,6 +907,7 @@ export function LegacyPreviewContainer(
     routeMatch,
     onDebugValueSuccess,
     onDebugValueError,
+    onRuntimeDataValue,
   ]);
 
   useEffect(() => {

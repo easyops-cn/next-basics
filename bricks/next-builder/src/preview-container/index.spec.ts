@@ -78,6 +78,18 @@ describe("next-builder.preview-container", () => {
       "data.model.drop"
     );
 
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.children.props.onRuntimeDataValue({
+      app: {
+        id: "cmdb",
+        homepage: "/cmdb/list",
+      },
+    });
+    expect((spyonDispatchEvent.mock.calls[7][0] as CustomEvent).type).toEqual(
+      "inspect.runtime.value"
+    );
+
     document.body.removeChild(element);
     expect(unmountComponentAtNode).toBeCalled();
   });
