@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
-import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { NS_FLOW_BUILDER, K } from "../../i18n/constants";
 import { VariableContext } from "../constants";
 import styles from "./VariableDisplay.module.css";
 import { UseBrickConf } from "@next-core/brick-types";
+import { hasOwnProperty } from "@next-core/brick-utils";
 
 export function isObject(value: unknown): value is Record<string, any> {
   return typeof value === "object" && !!value;
@@ -15,6 +14,8 @@ interface VariableDisplayProps<T = any> {
   minimal?: boolean;
   expanded?: boolean;
   ellipsis?: boolean;
+  empty?: boolean;
+  uninitialized?: boolean;
   labelBrick?: {
     useBrick: UseBrickConf;
   };
@@ -23,9 +24,16 @@ interface VariableDisplayProps<T = any> {
 export function VariableDisplay(
   props: VariableDisplayProps
 ): React.ReactElement {
-  const { t } = useTranslation(NS_FLOW_BUILDER);
-  const { value } = props;
+  const { value, empty, uninitialized } = props;
 
+  if (empty) {
+    return <span className={styles.empty}>empty</span>;
+  }
+  if (uninitialized) {
+    return (
+      <span className={styles.uninitialized}>&lt;value unavailable&gt;</span>
+    );
+  }
   if (Array.isArray(value)) {
     return <ArrayDisplay {...props} />;
   }
@@ -61,10 +69,14 @@ export function ArrayDisplay({
         className={styles.variableArrayLength}
       >{` (${value.length}) `}</span>
       [
-      {value.map((item, index, array) => (
+      {new Array(value.length).fill(null).map((_item, index) => (
         <React.Fragment key={index}>
-          <VariableDisplay value={item} minimal />
-          {index < array.length - 1 && ", "}
+          <VariableDisplay
+            value={value[index]}
+            minimal
+            empty={!hasOwnProperty(value, index)}
+          />
+          {index < value.length - 1 && ", "}
         </React.Fragment>
       ))}
       ]

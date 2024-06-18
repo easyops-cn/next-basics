@@ -1,10 +1,8 @@
-import React, { useContext, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useEffect } from "react";
 import classNames from "classnames";
 import { CaretDownOutlined, CaretRightOutlined } from "@ant-design/icons";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
-import { NS_FLOW_BUILDER, K } from "../i18n/constants";
 import { VariableDisplay } from "./variable-display/VariableDisplay";
 import { isObject } from "./variable-display/VariableDisplay";
 import { VariableList } from "../variable-list/VariableList";
@@ -17,6 +15,8 @@ interface VariableItemProps {
   standalone?: boolean;
   expand?: boolean;
   ellipsis?: boolean;
+  empty?: boolean;
+  uninitialized?: boolean;
   labelBrick?: {
     useBrick: UseBrickConf;
   };
@@ -28,6 +28,8 @@ export function VariableItem({
   standalone,
   expand,
   ellipsis,
+  empty,
+  uninitialized,
   labelBrick,
 }: VariableItemProps): React.ReactElement {
   const [expanded, setExpanded] = React.useState(expand);
@@ -79,6 +81,8 @@ export function VariableItem({
           value={propValue}
           expanded={expanded}
           ellipsis={ellipsis}
+          empty={empty}
+          uninitialized={uninitialized}
           labelBrick={labelBrick}
         />
       </div>

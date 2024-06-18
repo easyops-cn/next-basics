@@ -1,12 +1,13 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { VariableDisplay } from "./VariableDisplay";
 
 describe("VariableDisplay", () => {
   it("should work for array value when not expanded", () => {
-    const { container } = render(<VariableDisplay value={[1, 2]} />);
-    expect(container.textContent).toEqual(" (2) [1, 2]");
+    // eslint-disable-next-line no-sparse-arrays
+    const { container } = render(<VariableDisplay value={[1, , 3]} />);
+    expect(container.textContent).toEqual(" (3) [1, empty, 3]");
   });
 
   it("should work for object value when not expanded", () => {
@@ -68,5 +69,13 @@ describe("VariableDisplay", () => {
     const { container } = render(<VariableDisplay value={0} />);
     expect(container.querySelector("span")).toHaveClass("variablePrimitive");
     expect(container.textContent).toBe("0");
+  });
+
+  it("should work for uninitialized value", () => {
+    // eslint-disable-next-line no-sparse-arrays
+    const { container } = render(
+      <VariableDisplay uninitialized value={undefined} />
+    );
+    expect(container.textContent).toEqual("<value unavailable>");
   });
 });

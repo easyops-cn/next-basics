@@ -18,6 +18,11 @@ export class VariableListElement extends UpdatingElement {
   value: any[] | Record<string, any>;
 
   @property({
+    attribute: false,
+  })
+  uninitializedVariables: string[];
+
+  @property({
     type: Boolean,
   })
   expand: boolean;
@@ -49,6 +54,7 @@ export class VariableListElement extends UpdatingElement {
             value={this.value}
             expand={this.expand}
             ellipsis={this.ellipsis}
+            uninitializedVariables={this.uninitializedVariables}
           />
         </BrickWrapper>,
         this
