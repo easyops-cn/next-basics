@@ -53,12 +53,17 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
     storyboardFunctions,
     registerStoryboardFunctions,
     updateStoryboardFunction,
+    clearGlobalExecutionContextStack,
+    getGlobalExecutionContextStack,
   } = StoryboardFunctionRegistryFactory({
     collectCoverage: {
       createCollector,
     },
     debuggerOverrides,
-  } as any);
+  } as any) as ReturnType<typeof StoryboardFunctionRegistryFactory> & {
+    clearGlobalExecutionContextStack?: () => void;
+    getGlobalExecutionContextStack?: () => ExecutionContext[];
+  };
 
   function run(fn: string, input: SerializableValue): TestRunResult {
     let error: string;
@@ -98,6 +103,7 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
       failed?: boolean,
       failedReason?: unknown
     ) => ScopeValue[];
+    isInCurrentFunction: () => boolean;
   };
 
   function debug(
@@ -108,6 +114,7 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
   ): DebugResult {
     if (method === "start" || !debugContext) {
       const start = performance.now();
+      clearGlobalExecutionContextStack?.();
 
       const func = storyboardFunctions[fn];
       const debuggerCall = (func as any)[Symbol.for("$DebuggerCall$")];
@@ -140,6 +147,18 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
             failed,
             failedReason
           ),
+        isInCurrentFunction: () => {
+          const stack = getGlobalExecutionContextStack?.();
+          if (!stack || stack.length < 2) {
+            return true;
+          }
+          const bottom = stack[0];
+          const top = stack[stack.length - 1];
+          return (
+            getOuterMostEnv(bottom.LexicalEnvironment) ===
+            getOuterMostEnv(top.LexicalEnvironment)
+          );
+        },
       };
     }
 
@@ -168,7 +187,8 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
     } while (
       method === "disconnect" ||
       ((breakpoints?.length ? method !== "step" : method === "continue") &&
-        !breakpoints?.includes(debugContext.node().loc?.start.line))
+        !breakpoints?.includes(debugContext.node().loc?.start.line)) ||
+      !debugContext.isInCurrentFunction()
     );
 
     if (done || failed) {
@@ -252,7 +272,9 @@ function debuggerOverrides(ctx: {
   ArrayConstructor?: typeof Array;
   ObjectWithStaticFields?: Partial<typeof Object>;
 } {
-  const precookedLodash = ctx.precookFunction(lodashSource);
+  const precookedLodash = ctx.precookFunction(lodashSource, {
+    externalSourceForDebug: true,
+  } as any);
   const debugLodash = ctx.cook(precookedLodash.function, lodashSource, {
     externalSourceForDebug: true,
     globalVariables: {
@@ -265,7 +287,9 @@ function debuggerOverrides(ctx: {
   } as any) as () => Partial<typeof _>;
 
   const ArrayConstructor = DebuggerArrayConstructor as any;
-  const precookedArray = ctx.precookFunction(arraySource);
+  const precookedArray = ctx.precookFunction(arraySource, {
+    externalSourceForDebug: true,
+  } as any);
   const debugArray = ctx.cook(precookedArray.function, arraySource, {
     externalSourceForDebug: true,
     globalVariables: ctx.supply(precookedArray.attemptToVisitGlobals, {
@@ -275,7 +299,9 @@ function debuggerOverrides(ctx: {
   } as any) as () => object;
   Object.assign(ArrayConstructor.prototype, debugArray());
 
-  const precookedObject = ctx.precookFunction(objectSource);
+  const precookedObject = ctx.precookFunction(objectSource, {
+    externalSourceForDebug: true,
+  } as any);
   const debugObject = ctx.cook(precookedObject.function, objectSource, {
     externalSourceForDebug: true,
     globalVariables: ctx.supply(precookedObject.attemptToVisitGlobals),
@@ -303,4 +329,20 @@ function asDebuggerValue(value: unknown): unknown {
 
 function asDebuggerArray(list: unknown[]): unknown[] {
   return new (DebuggerArrayConstructor as any)(...list.map(asDebuggerValue));
+}
+
+interface ExecutionContext {
+  LexicalEnvironment: EnvironmentRecord;
+}
+
+interface EnvironmentRecord {
+  OuterEnv?: EnvironmentRecord;
+}
+
+function getOuterMostEnv(env: EnvironmentRecord): EnvironmentRecord {
+  let outer = env;
+  while (outer.OuterEnv) {
+    outer = outer.OuterEnv;
+  }
+  return outer;
 }
