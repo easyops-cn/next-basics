@@ -38,9 +38,10 @@ export function VariableItem({
     setExpanded(expand);
   }, [expand]);
 
-  const handleClick = React.useCallback(() => {
-    setExpanded(!expanded);
-  }, [expanded]);
+  const handleClick = React.useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setExpanded((prev) => !prev);
+  }, []);
 
   const hasChildren = isObject(propValue);
 
