@@ -51,3 +51,12 @@ html[data-theme="dark-v2"] {
     color: hsl(252, 100%, 75%);
   }
 }
+
+.empty {
+  color: var(--text-color-disabled);
+  font-style: italic;
+}
+
+.uninitialized {
+  color: var(--palette-blue-6);
+}
