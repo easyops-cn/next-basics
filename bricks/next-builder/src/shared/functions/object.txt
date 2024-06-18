@@ -1,0 +1,33 @@
+function ObjectFactory() {
+  function entries(obj) {
+    const result = [];
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        result.push([key, obj[key]]);
+      }
+    }
+    return result;
+  }
+
+  function keys(obj) {
+    const result = [];
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        result.push(key);
+      }
+    }
+    return result;
+  }
+
+  function values(obj) {
+    const result = [];
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        result.push(obj[key]);
+      }
+    }
+    return result;
+  }
+
+  return { entries, keys, values, };
+}

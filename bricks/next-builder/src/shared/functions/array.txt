@@ -1,0 +1,123 @@
+function ArrayFactory() {
+  function map(fn) {
+    const result = [];
+    for (let i = 0; i < this.length; i++) {
+      if (this.hasOwnProperty(i))
+        result[i] = fn(this[i], i, this);
+    }
+    return result;
+  }
+
+  function forEach(fn) {
+    for (let i = 0; i < this.length; i++) {
+      if (this.hasOwnProperty(i))
+        fn(this[i], i, this);
+    }
+  }
+
+  function filter(fn) {
+    const result = [];
+    for (let i = 0; i < this.length; i++) {
+      if (this.hasOwnProperty(i) && fn(this[i], i, this))
+        result.push(this[i]);
+    }
+    return result;
+  }
+
+  function every(fn) {
+    for (let i = 0; i < this.length; i++) {
+      if (this.hasOwnProperty(i) && !fn(this[i], i, this))
+        return false;
+    }
+    return true;
+  }
+
+  function some(fn) {
+    for (let i = 0; i < this.length; i++) {
+      if (this.hasOwnProperty(i) && fn(this[i], i, this))
+        return true;
+    }
+    return false;
+  }
+
+  function find(fn) {
+    for (let i = 0; i < this.length; i++) {
+      if (fn(this[i], i, this))
+        return this[i];
+    }
+  }
+
+  function findLast(fn) {
+    for (let i = this.length - 1; i >= 0; i--) {
+      if (fn(this[i], i, this))
+        return this[i];
+    }
+  }
+
+  function findIndex(fn) {
+    for (let i = 0; i < this.length; i++) {
+      if (fn(this[i], i, this))
+        return i;
+    }
+    return -1;
+  }
+
+  function findLastIndex(fn) {
+    for (let i = this.length - 1; i >= 0; i--) {
+      if (fn(this[i], i, this))
+        return i;
+    }
+    return -1;
+  }
+
+  function flatMap(fn) {
+    const result = [];
+    for (let i = 0; i < this.length; i++) {
+      if (this.hasOwnProperty(i))
+        result[i] = fn(this[i], i, this);
+    }
+    return result.flat();
+  }
+
+  function reduce(...args) {
+    const fn = args[0];
+    let accumulator = args[1];
+    let initialized = args.length > 1;
+    for (let i = 0; i < this.length; i++) {
+      if (this.hasOwnProperty(i)) {
+        if (initialized) {
+          accumulator = fn(accumulator, this[i], i, this);
+        } else {
+          accumulator = this[i];
+          initialized = true;
+        }
+      }
+    }
+    if (!initialized) {
+      throw new Error("Reduce of empty array with no initial value");
+    }
+    return accumulator;
+  }
+
+  function reduceRight(...args) {
+    const fn = args[0];
+    let accumulator = args[1];
+    let initialized = args.length > 1;
+    for (let i = this.length - 1; i >= 0; i--) {
+      if (this.hasOwnProperty(i)) {
+        if (initialized) {
+          accumulator = fn(accumulator, this[i], i, this);
+        } else {
+          accumulator = this[i];
+          initialized = true;
+        }
+      }
+    }
+    if (!initialized) {
+      throw new Error("Reduce of empty array with no initial value");
+    }
+    return accumulator;
+  }
+
+  return { map, forEach, filter, every, some, find, findLast, findIndex, findLastIndex, flatMap, reduce, reduceRight };
+}
