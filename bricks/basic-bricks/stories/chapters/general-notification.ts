@@ -103,6 +103,93 @@ export const generalNotificationStory: Story = {
       ],
       thumbnail: generalNotificationBasicSvg,
     },
+    {
+      description: {
+        title: "带底部按钮的提醒框",
+      },
+      brick: "span",
+      slots: {
+        content: {
+          bricks: [
+            {
+              brick: "basic-bricks.general-button",
+              events: {
+                "general.button.click": {
+                  method: "open",
+                  target: "basic-bricks\\.general-notification",
+                },
+              },
+              properties: {
+                buttonName: "open notification",
+              },
+            },
+            {
+              brick: "basic-bricks.general-notification",
+              events: {
+                "general.notification.click": {
+                  action: "console.log",
+                },
+                "general.notification.close": {
+                  action: "console.log",
+                },
+              },
+              properties: {
+                btnBrick: {
+                  useBrick: [
+                    {
+                      brick: "div",
+                      properties: {
+                        style: {
+                          display: "flex",
+                          gap: "20px",
+                        },
+                      },
+                      slots: {
+                        content: {
+                          type: "bricks",
+                          bricks: [
+                            {
+                              brick: "presentational-bricks.brick-link",
+                              properties: {
+                                label: "查看详情",
+                              },
+                            },
+                            {
+                              brick: "presentational-bricks.brick-link",
+                              properties: {
+                                label: "忽略",
+                                type: "text",
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  ],
+                },
+                description:
+                  "Notification Description.Notification Description.Notification Description.Notification Description.Notification Description.",
+                duration: 3000,
+                icon: {
+                  lib: "easyops",
+                  category: "app",
+                  icon: "announcement-app",
+                  color: "orange",
+                },
+                iconStyle: {
+                  color: "orange",
+                  textAlign: "center",
+                },
+                message:
+                  "A Long Notification Title.A Long Notification Title.A Long Notification Title.",
+                placement: "topRight",
+              },
+            },
+          ],
+          type: "bricks",
+        },
+      },
+    },
   ],
   previewColumns: 1,
 };

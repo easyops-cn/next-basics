@@ -12,7 +12,8 @@ import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { notification } from "antd";
 import { NotificationPlacement } from "antd/lib/notification";
 import { NotificationApi } from "antd/es/notification";
-import type { UseBrickConf } from "@next-core/brick-types";
+import type { UseBrickConf, MenuIcon } from "@next-core/brick-types";
+import { GeneralIcon } from "@next-libs/basic-components";
 
 /**
  * @id basic-bricks.general-notification
@@ -29,6 +30,11 @@ import type { UseBrickConf } from "@next-core/brick-types";
 interface DescriptionBrickprops {
   useBrick: UseBrickConf;
 }
+
+interface BtnBrickprops {
+  useBrick: UseBrickConf;
+}
+
 export class GeneralNotificationElement extends UpdatingElement {
   /**
    * @kind string
@@ -61,6 +67,16 @@ export class GeneralNotificationElement extends UpdatingElement {
   descriptionBrick: DescriptionBrickprops;
 
   /**
+   * @kind BtnBrickprops
+   * @required false
+   * @default -
+   * @description 自定义通知提醒按钮
+   * @group basic
+   */
+  @property({ attribute: false })
+  btnBrick: BtnBrickprops;
+
+  /**
    * @kind string
    * @required false
    * @default -
@@ -71,14 +87,15 @@ export class GeneralNotificationElement extends UpdatingElement {
   key: string;
 
   /**
-   * @kind string
+   * @kind MenuIcon | string
    * @required false
    * @default -
-   * @description icon，具体查阅：[react icon](https://3x.ant.design/components/icon-cn/)
-   * @group basic
+   * @description icon
    */
-  @property()
-  icon: string;
+  @property({
+    attribute: false,
+  })
+  icon: MenuIcon | string;
 
   /**
    * @kind `topLeft` `topRight` `bottomLeft` `bottomRight`
@@ -146,7 +163,18 @@ export class GeneralNotificationElement extends UpdatingElement {
     Record<string, any>
   >;
   renderIcon = () => {
-    return this.icon && <LegacyIcon type={this.icon} style={this.iconStyle} />;
+    return (
+      this.icon && (
+        <GeneralIcon
+          icon={
+            typeof this.icon === "string"
+              ? { lib: "antd", icon: this.icon }
+              : this.icon
+          }
+          style={this.iconStyle}
+        />
+      )
+    );
   };
   renderDescription = () => {
     return this.descriptionBrick ? (
@@ -154,6 +182,10 @@ export class GeneralNotificationElement extends UpdatingElement {
     ) : (
       this.description
     );
+  };
+
+  renderBtn = () => {
+    return this.btnBrick ? <BrickAsComponent {...this.btnBrick} /> : null;
   };
   /**
    *
@@ -179,6 +211,7 @@ export class GeneralNotificationElement extends UpdatingElement {
       placement: this.placement || "topRight",
       onClose: this.handleClose,
       onClick: this.handleClick,
+      btn: this.renderBtn(),
     });
   }
 
