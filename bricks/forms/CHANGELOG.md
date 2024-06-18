@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.294.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.293.1...@next-bricks/forms@1.294.0) (2024-06-18)
+
+
+### Features
+
+* 公告提醒样式调整 ([d43d459](https://github.com/easyops-cn/next-basics/commit/d43d459a64843848afa38096aa4ea3f87692343c))
+
+
+
+
+
 ## [1.293.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.293.0...@next-bricks/forms@1.293.1) (2024-06-17)
 
 **Note:** Version bump only for package @next-bricks/forms

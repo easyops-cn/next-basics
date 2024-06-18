@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.323.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.322.5...@next-bricks/presentational-bricks@1.323.0) (2024-06-18)
+
+
+### Features
+
+* 公告提醒样式调整 ([d43d459](https://github.com/easyops-cn/next-basics/commit/d43d459a64843848afa38096aa4ea3f87692343c))
+
+
+
+
+
 ## [1.322.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.322.4...@next-bricks/presentational-bricks@1.322.5) (2024-06-17)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
