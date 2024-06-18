@@ -583,15 +583,19 @@ export const generalModalStory: Story = {
                 content: {
                   bricks: [
                     {
-                      brick: "presentational-bricks.brick-illustration",
+                      brick: "presentational-bricks.general-image",
                       properties: {
-                        name: "bg13-1",
-                        category: "ira",
+                        preview: false,
+                        imgSrc: "https://z1.wzznft.com/i/2024/06/17/h1atxi.png",
                       },
                     },
                     {
                       brick: "presentational-bricks.rank-table",
                       properties: {
+                        style: {
+                          marginBottom: "8px",
+                        },
+
                         columns: [
                           {
                             dataIndex: "name",
