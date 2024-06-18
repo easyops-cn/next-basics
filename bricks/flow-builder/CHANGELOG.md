@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.33.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.4...@next-bricks/flow-builder@1.33.5) (2024-06-18)
+
+
+### Bug Fixes
+
+* stop propagation when expand a variable ([cb038e3](https://github.com/easyops-cn/next-basics/commit/cb038e3db6485df9e2b10e90834b93cc58216816))
+
+
+
+
+
 ## [1.33.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.3...@next-bricks/flow-builder@1.33.4) (2024-06-18)
 
 
