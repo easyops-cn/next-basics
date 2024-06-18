@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.33.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.3...@next-bricks/flow-builder@1.33.4) (2024-06-18)
+
+
+### Bug Fixes
+
+* handle unavailable value and sparse array ([eac5e02](https://github.com/easyops-cn/next-basics/commit/eac5e02fc456cd2e454fb66cf57950cb41429cc9))
+
+
+
+
+
 ## [1.33.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.2...@next-bricks/flow-builder@1.33.3) (2024-05-27)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
