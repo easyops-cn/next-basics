@@ -49,20 +49,24 @@ export function getDebuggerScopeValues(
   while (currentScope) {
     const value: Record<string, unknown> = {};
     const uninitializedVariables: string[] = [];
+    let hasValue = false;
     for (const [k, v] of currentScope.bindingMap) {
       if (!currentScope.OuterEnv && k === "undefined") {
         continue;
       }
+      hasValue = true;
       value[k] = v.value;
       if (!v.initialized) {
         uninitializedVariables.push(k);
       }
     }
-    scopeValues.push({
-      label: currentScope.OuterEnv ? "Scope" : "Global",
-      value,
-      uninitializedVariables,
-    });
+    if (hasValue) {
+      scopeValues.push({
+        label: currentScope.OuterEnv ? "Scope" : "Global",
+        value,
+        uninitializedVariables,
+      });
+    }
     currentScope = currentScope.OuterEnv;
   }
 
