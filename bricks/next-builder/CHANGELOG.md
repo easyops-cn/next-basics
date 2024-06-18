@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.273.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.273.0...@next-bricks/next-builder@1.273.1) (2024-06-18)
+
+
+### Bug Fixes
+
+* fix debugging with nested FN calls ([e99d54e](https://github.com/easyops-cn/next-basics/commit/e99d54e8f0a1c18ba4f96e53f2e7eee96d316f46))
+
+
+
+
+
 # [1.273.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.272.0...@next-bricks/next-builder@1.273.0) (2024-06-18)
 
 
