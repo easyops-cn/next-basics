@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.273.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.273.1...@next-bricks/next-builder@1.273.2) (2024-06-19)
+
+
+### Bug Fixes
+
+* fix array related debugging with lodash ([a628d9f](https://github.com/easyops-cn/next-basics/commit/a628d9f75b2b8e8683c8f564e739d64eb37c417f))
+
+
+
+
+
 ## [1.273.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.273.0...@next-bricks/next-builder@1.273.1) (2024-06-18)
 
 
