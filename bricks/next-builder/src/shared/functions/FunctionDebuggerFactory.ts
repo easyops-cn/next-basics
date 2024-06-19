@@ -29,7 +29,7 @@ import objectSource from "./object.txt";
 
 export type DebuggerMethod = "start" | "continue" | "step" | "disconnect";
 
-const DebuggerArrayConstructor = class Array extends (window as any).Array {};
+class DebuggerArrayConstructor extends Array {}
 
 export type FunctionDebugger = Omit<
   StoryboardFunctionRegistry,
@@ -269,9 +269,32 @@ function debuggerOverrides(ctx: {
   ) => Record<string, unknown>;
 }): {
   LodashWithStaticFields?: Partial<typeof _>;
-  ArrayConstructor?: typeof Array;
+  ArrayConstructor?: {
+    new (): Array<unknown>;
+  };
   ObjectWithStaticFields?: Partial<typeof Object>;
 } {
+  const precookedArray = ctx.precookFunction(arraySource, {
+    externalSourceForDebug: true,
+  } as any);
+  const debugArray = ctx.cook(precookedArray.function, arraySource, {
+    externalSourceForDebug: true,
+    globalVariables: ctx.supply(precookedArray.attemptToVisitGlobals, {
+      Error,
+    }),
+    ArrayConstructor: DebuggerArrayConstructor,
+  } as any) as () => object;
+  Object.assign(DebuggerArrayConstructor.prototype, debugArray());
+
+  // Lodash uses `Array()` instead of `new Array()`
+  const ArrayFunction = function (
+    ...args: unknown[]
+  ): DebuggerArrayConstructor {
+    return new DebuggerArrayConstructor(...(args as [number]));
+  };
+  ArrayFunction.prototype = DebuggerArrayConstructor.prototype;
+  ArrayFunction.isArray = Array.isArray;
+
   const precookedLodash = ctx.precookFunction(lodashSource, {
     externalSourceForDebug: true,
   } as any);
@@ -283,21 +306,10 @@ function debuggerOverrides(ctx: {
       Function,
       Object,
       ArrayBuffer,
+      Array: ArrayFunction,
     },
+    ArrayConstructor: DebuggerArrayConstructor,
   } as any) as () => Partial<typeof _>;
-
-  const ArrayConstructor = DebuggerArrayConstructor as any;
-  const precookedArray = ctx.precookFunction(arraySource, {
-    externalSourceForDebug: true,
-  } as any);
-  const debugArray = ctx.cook(precookedArray.function, arraySource, {
-    externalSourceForDebug: true,
-    globalVariables: ctx.supply(precookedArray.attemptToVisitGlobals, {
-      Error,
-    }),
-    ArrayConstructor,
-  } as any) as () => object;
-  Object.assign(ArrayConstructor.prototype, debugArray());
 
   const precookedObject = ctx.precookFunction(objectSource, {
     externalSourceForDebug: true,
@@ -305,12 +317,12 @@ function debuggerOverrides(ctx: {
   const debugObject = ctx.cook(precookedObject.function, objectSource, {
     externalSourceForDebug: true,
     globalVariables: ctx.supply(precookedObject.attemptToVisitGlobals),
-    ArrayConstructor,
+    ArrayConstructor: DebuggerArrayConstructor,
   } as any) as () => typeof Object;
 
   return {
     LodashWithStaticFields: debugLodash(),
-    ArrayConstructor,
+    ArrayConstructor: DebuggerArrayConstructor,
     ObjectWithStaticFields: debugObject(),
   };
 }
