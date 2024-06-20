@@ -237,6 +237,7 @@ export const defaultBlankListOfBricks: string[] = [
   "presentational-bricks.brick-alert-status",
   "presentational-bricks.brick-cluster-type",
   "presentational-bricks.agent-status",
+  "presentational-bricks.brick-input",
 ];
 
 export enum SnippetType {

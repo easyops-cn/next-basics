@@ -194,11 +194,11 @@ export class BrickGeneralSearchElement extends UpdatingElement {
   buttonStyle: Record<string, any>;
 
   /**
-   * @kind "defalut"|"radio"
-   * @required "defalut"
-   * @default true
+   * @kind "defalut"|"round"
+   * @required true
+   * @default "defalut"
    * @description 按类型搜索框样式
-   * @enums "defalut"|"radio"
+   * @enums "defalut"|"round"
    * @group ui
    */
   @property({
