@@ -1,6 +1,7 @@
 dist
 dist-editors
 dist-snippets
+dist-property-editors
 node_modules
 .coverage
 .vscode
