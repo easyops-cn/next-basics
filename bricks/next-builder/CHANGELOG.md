@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.274.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.273.2...@next-bricks/next-builder@1.274.0) (2024-06-20)
+
+
+### Bug Fixes
+
+* VB下线presentational-bricks.brick-input ([2f4b876](https://github.com/easyops-cn/next-basics/commit/2f4b876270d5eb5802e3bbb95e7da765ce128acb))
+
+
+### Features
+
+* update unit test ([239c06e](https://github.com/easyops-cn/next-basics/commit/239c06e9568fa59d54a8f377f07589cc7a0d051c))
+
+
+
+
+
 ## [1.273.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.273.1...@next-bricks/next-builder@1.273.2) (2024-06-19)
 
 
