@@ -3720,6 +3720,7 @@ describe("CommitBasedStoryboardAssembly", () => {
                 menuId: "menu-aaaaaa",
                 title: "menu-aaaaaa",
                 type: "main",
+                uuid: "df106cd646084913a2967df0b0a4b471",
                 items: [
                   {
                     activeExcludes: [],
@@ -3737,6 +3738,7 @@ describe("CommitBasedStoryboardAssembly", () => {
                     text: "menu-item-a1",
                     to: "menu-item-a1",
                     type: null,
+                    uuid: "a6db956a04ef4b0dbe96727bdac16e70",
                   },
                   {
                     activeExcludes: [],
@@ -3754,6 +3756,7 @@ describe("CommitBasedStoryboardAssembly", () => {
                     text: "menu-item-a2",
                     to: "menu-item-a2",
                     type: null,
+                    uuid: "76ae1c45ac7e4483ac95ddb7997866cd",
                   },
                   {
                     activeExcludes: [],
@@ -3771,6 +3774,7 @@ describe("CommitBasedStoryboardAssembly", () => {
                     text: "menu-item-a3",
                     to: "menu-item-a3",
                     type: null,
+                    uuid: "1fa3775a2299420dabd9571980a91cb2",
                     children: [
                       {
                         activeExcludes: [],
@@ -3788,6 +3792,7 @@ describe("CommitBasedStoryboardAssembly", () => {
                         text: "menu-item-a31",
                         to: "menu-item-a31",
                         type: null,
+                        uuid: "8afbbb5269b240d38dc4bdea5f4f66f9",
                       },
                       {
                         activeExcludes: [],
@@ -3805,6 +3810,7 @@ describe("CommitBasedStoryboardAssembly", () => {
                         text: "menu-item-a32",
                         to: "menu-item-a32",
                         type: null,
+                        uuid: "aed76adc106247c79d33d43d5c0e3f28",
                       },
                     ],
                   },
@@ -3822,6 +3828,7 @@ describe("CommitBasedStoryboardAssembly", () => {
                 menuId: "menu-bbbbbb",
                 title: "menu-bbbbbb",
                 type: "main",
+                uuid: "e8e25d46b2424ad48848758c273a611b",
                 items: [
                   {
                     activeExcludes: [],
@@ -3839,6 +3846,7 @@ describe("CommitBasedStoryboardAssembly", () => {
                     text: "menu-item-b1",
                     to: "menu-item-b1",
                     type: null,
+                    uuid: "2235ffa31bc04739afa87fbafd0867b4",
                   },
                 ],
                 i18n: {},
