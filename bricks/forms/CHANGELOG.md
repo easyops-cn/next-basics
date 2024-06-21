@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.295.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.294.0...@next-bricks/forms@1.295.0) (2024-06-21)
+
+
+### Features
+
+* 属性支持附件类型 ([441b6e6](https://github.com/easyops-cn/next-basics/commit/441b6e65e6d4083b37a92c712c9046122523c5a5))
+
+
+
+
+
 # [1.294.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.293.1...@next-bricks/forms@1.294.0) (2024-06-18)
 
 
