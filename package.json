@@ -39,15 +39,15 @@
     "@next-core/babel-runtime-helpers": "^1.0.27",
     "@next-core/brick-http": "^2.8.2",
     "@next-core/brick-icons": "^2.33.42",
-    "@next-core/brick-kit": "^2.197.0",
+    "@next-core/brick-kit": "^2.197.1",
     "@next-core/brick-types": "^2.96.0",
     "@next-core/brick-utils": "^2.52.0",
-    "@next-core/dev-dependencies": "^1.18.42",
+    "@next-core/dev-dependencies": "^1.18.43",
     "@next-core/easyops-analytics": "^0.12.0",
-    "@next-core/editor-bricks-helper": "^0.50.68",
+    "@next-core/editor-bricks-helper": "^0.50.69",
     "@next-core/fontawesome-library": "^1.1.38",
     "@next-core/illustrations": "^0.11.31",
-    "@next-core/loader": "^1.6.0",
+    "@next-core/loader": "^1.6.1",
     "@next-core/pipes": "^1.0.18",
     "@next-libs/cmdb-utils": "^3.6.0",
     "@size-limit/file": "^8.1.0",
@@ -105,6 +105,6 @@
     "ua-parser-js": "0.7.19"
   },
   "easyops": {
-    "dev-dependencies": "1.18.42"
+    "dev-dependencies": "1.18.43"
   }
 }
