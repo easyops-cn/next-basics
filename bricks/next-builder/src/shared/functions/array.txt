@@ -2,7 +2,7 @@ function ArrayFactory() {
   function map(fn) {
     const result = [];
     for (let i = 0; i < this.length; i++) {
-      if (this.hasOwnProperty(i))
+      if (Object.prototype.hasOwnProperty.call(this, i))
         result[i] = fn(this[i], i, this);
     }
     return result;
@@ -10,7 +10,7 @@ function ArrayFactory() {
 
   function forEach(fn) {
     for (let i = 0; i < this.length; i++) {
-      if (this.hasOwnProperty(i))
+      if (Object.prototype.hasOwnProperty.call(this, i))
         fn(this[i], i, this);
     }
   }
@@ -18,7 +18,7 @@ function ArrayFactory() {
   function filter(fn) {
     const result = [];
     for (let i = 0; i < this.length; i++) {
-      if (this.hasOwnProperty(i) && fn(this[i], i, this))
+      if (Object.prototype.hasOwnProperty.call(this, i) && fn(this[i], i, this))
         result.push(this[i]);
     }
     return result;
@@ -26,7 +26,7 @@ function ArrayFactory() {
 
   function every(fn) {
     for (let i = 0; i < this.length; i++) {
-      if (this.hasOwnProperty(i) && !fn(this[i], i, this))
+      if (Object.prototype.hasOwnProperty.call(this, i) && !fn(this[i], i, this))
         return false;
     }
     return true;
@@ -34,7 +34,7 @@ function ArrayFactory() {
 
   function some(fn) {
     for (let i = 0; i < this.length; i++) {
-      if (this.hasOwnProperty(i) && fn(this[i], i, this))
+      if (Object.prototype.hasOwnProperty.call(this, i) && fn(this[i], i, this))
         return true;
     }
     return false;
@@ -73,7 +73,7 @@ function ArrayFactory() {
   function flatMap(fn) {
     const result = [];
     for (let i = 0; i < this.length; i++) {
-      if (this.hasOwnProperty(i))
+      if (Object.prototype.hasOwnProperty.call(this, i))
         result[i] = fn(this[i], i, this);
     }
     return result.flat();
@@ -84,7 +84,7 @@ function ArrayFactory() {
     let accumulator = args[1];
     let initialized = args.length > 1;
     for (let i = 0; i < this.length; i++) {
-      if (this.hasOwnProperty(i)) {
+      if (Object.prototype.hasOwnProperty.call(this, i)) {
         if (initialized) {
           accumulator = fn(accumulator, this[i], i, this);
         } else {
@@ -104,7 +104,7 @@ function ArrayFactory() {
     let accumulator = args[1];
     let initialized = args.length > 1;
     for (let i = this.length - 1; i >= 0; i--) {
-      if (this.hasOwnProperty(i)) {
+      if (Object.prototype.hasOwnProperty.call(this, i)) {
         if (initialized) {
           accumulator = fn(accumulator, this[i], i, this);
         } else {
