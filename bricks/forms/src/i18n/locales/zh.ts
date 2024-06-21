@@ -146,6 +146,7 @@ const locale: Locale = {
   [K.USE_LINK_TO_UPLOAD_PLACEHOLDER]:
     "请输入图片的链接，多个链接之间用换行分隔",
   [K.UPLOAD_IMG_NUMBER_LIMIT]: "最多只能上传 {{maxNumber}} 张图片",
+  [K.ATTACHMENT]: "附件",
 };
 
 export default locale;

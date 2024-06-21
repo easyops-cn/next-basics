@@ -36,6 +36,10 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
         ref: "attrOptions",
         refProperty: "options",
       },
+      attrOptionsNotRender: {
+        ref: "attrOptions",
+        refProperty: "notRender",
+      },
       protected: {
         ref: "attrValue",
         refProperty: "isProtected",
@@ -282,6 +286,18 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                     targetRef: "addCmdbObjectAttrForm",
                     method: "setInitValue",
                     args: [{ attrOptions: ["readonly"] }],
+                  },
+                  {
+                    if: "<% !TPL.isProtected && EVENT.detail.type === 'attachment'  %>",
+                    targetRef: "attrOptions",
+                    method: "setNotRender",
+                    args: [true],
+                  },
+                  {
+                    if: "<% !TPL.isProtected && EVENT.detail.type !== 'attachment'  %>",
+                    targetRef: "attrOptions",
+                    method: "setNotRender",
+                    args: [false],
                   },
                   {
                     action: "context.replace",

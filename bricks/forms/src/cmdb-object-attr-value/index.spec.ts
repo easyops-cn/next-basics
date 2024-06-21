@@ -1,6 +1,21 @@
 import ReactDOM from "react-dom";
 import "./";
 
+jest.mock("@next-core/brick-kit", () => {
+  const originalModule = jest.requireActual("@next-core/brick-kit");
+
+  return {
+    __esModule: true,
+    ...originalModule,
+    useFeatureFlags: jest.fn().mockImplementation(() => [true]),
+    getRuntime: jest.fn().mockImplementation(() => ({
+      getFeatureFlags: () => ({
+        "cmdb-use-attr-attachment": false,
+      }),
+    })),
+  };
+});
+
 const spyOnRender = jest
   .spyOn(ReactDOM, "render")
   .mockImplementation(() => null);

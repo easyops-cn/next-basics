@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import { Select, Input, Row, Col, Radio, Empty } from "antd";
-import { defaults, isEmpty } from "lodash";
+import { defaults, isEmpty, compact } from "lodash";
+import { getRuntime } from "@next-core/brick-kit";
 import i18n from "i18next";
 import {
   ObjectAttrStr,
@@ -35,11 +36,14 @@ export const ValueTypeMap = {
   bool: "布尔型",
   float: "浮点型",
   json: "JSON",
+  attachment: "附件",
 } as const;
 
 export const defaultValue = {
   default: "",
 };
+
+const FLAGS = getRuntime().getFeatureFlags();
 
 export const defaultValueMap = new Map([
   [
@@ -92,6 +96,13 @@ export const defaultValueMap = new Map([
   ["bool", defaultValue],
   ["float", defaultValue],
   ["json", defaultValue],
+  [
+    "attachment",
+    {
+      default: "",
+      struct_define: [],
+    },
+  ],
 ]);
 
 export type ValueType = keyof typeof ValueTypeMap;
@@ -100,7 +111,7 @@ export interface ValueOptions {
   key: string;
   text: string;
 }
-export const valueTypeList = [
+export const valueTypeList = compact([
   {
     key: "str",
     text: i18n.t(`${NS_FORMS}:${K.STRING_TYPE}`),
@@ -153,7 +164,11 @@ export const valueTypeList = [
     key: "json",
     text: "JSON",
   },
-];
+  FLAGS["cmdb-use-attr-attachment"] && {
+    key: "attachment",
+    text: i18n.t(`${NS_FORMS}:${K.ATTACHMENT}`),
+  },
+]);
 
 export interface CmdbObjectAttrValueProps extends FormItemWrapperProps {
   value?: any;
