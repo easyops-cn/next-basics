@@ -14,6 +14,11 @@ jest.mock("@next-core/brick-kit", () => {
     __esModule: true,
     ...originalModule,
     useFeatureFlags: jest.fn().mockImplementation(() => [true]),
+    getRuntime: jest.fn().mockImplementation(() => ({
+      getFeatureFlags: () => ({
+        "cmdb-use-attr-attachment": false,
+      }),
+    })),
   };
 });
 describe("CmdbObjectAttrValue", () => {

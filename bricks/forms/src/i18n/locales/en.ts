@@ -161,6 +161,7 @@ const locale: Locale = {
     "Please enter a link to the picture. Multiple links are separated by a new line",
   [K.UPLOAD_IMG_NUMBER_LIMIT]:
     "Only {{maxNumber}} image can be uploaded at most",
+  [K.ATTACHMENT]: "Attachment",
 };
 
 export default locale;

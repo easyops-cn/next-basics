@@ -20,6 +20,11 @@ jest.mock("@next-sdk/cmdb-sdk");
 
 jest.mock("@next-core/brick-kit", () => ({
   useFeatureFlags: jest.fn().mockImplementation(() => [true]),
+  getRuntime: jest.fn().mockImplementation(() => ({
+    getFeatureFlags: () => ({
+      "cmdb-use-attr-attachment": false,
+    }),
+  })),
 }));
 
 jest.mock("@next-libs/forms", () => ({
