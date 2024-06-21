@@ -2678,35 +2678,14 @@
   resolved "https://registry.npmjs.org/@next-libs/clipboard/-/clipboard-3.0.4.tgz#51ebe3b2f2e45c5940bf343e2a19f767a683b030"
   integrity sha512-pCxzyaSBnbFLUBif4n/Sa1TkUGandGhzycRs04NY73+wbqrYquM29egum7Ji0EdmakI+5MRgLXZZQsm+HlXvSQ==
 
-"@next-libs/cmdb-instances@^7.18.1":
-  version "7.18.1"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-7.18.1.tgz#159bdaad87152bb4f6a8e7a5947c8fbbdf210506"
-  integrity sha512-U8tIrIRgHTCEOA6L3VWnrtWM5gJQ/gCOzj7PuPkX6sem0ySq2tEwhZ+AxHxA932OyQfSsfKdszQLi9sn/Uzhbg==
+"@next-libs/cmdb-instances@^7.19.2":
+  version "7.19.2"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-7.19.2.tgz#fb37b0265e496dedd66da41183d03b97d4369b69"
+  integrity sha512-vNWkF30g1gD45QDCV1tL5j6v5U1IUlb7TZ/x0eEpbMvBRvd9E3uDwnM1f8brLpushkMtSucPKiqpB6Lifow+BA==
   dependencies:
     "@next-core/brick-types" "^2.16.0"
     "@next-libs/basic-components" "^5.4.0"
-    "@next-libs/cmdb-utils" "^3.5.0"
-    "@next-libs/code-display-components" "^2.1.0"
-    "@next-libs/code-editor-components" "^4.10.12"
-    "@next-libs/forms" "^3.5.5"
-    "@next-libs/storage" "^2.0.4"
-    "@next-sdk/cmdb-sdk" "^3.1.0"
-    "@next-sdk/permission-sdk" "^2.1.1"
-    "@types/file-saver" "^2.0.3"
-    classnames "^2.3.2"
-    dompurify "^2.4.1"
-    file-saver "^2.0.5"
-    immutability-helper "^3.1.1"
-    marked "^2.1.3"
-
-"@next-libs/cmdb-instances@^7.19.1":
-  version "7.19.1"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-7.19.1.tgz#1e610929580485f2328aa4c5589be6ac33dd5053"
-  integrity sha512-icvUhxf9siRp8sUfhGk8RKmakHV5p5irU+uhgAJr3vEFHbAoKmFMOFgKpsBD5m4b6MJTFdqsHkNNJxE99KOeOA==
-  dependencies:
-    "@next-core/brick-types" "^2.16.0"
-    "@next-libs/basic-components" "^5.4.0"
-    "@next-libs/cmdb-utils" "^3.6.1"
+    "@next-libs/cmdb-utils" "^3.6.2"
     "@next-libs/code-display-components" "^2.1.0"
     "@next-libs/code-editor-components" "^4.11.0"
     "@next-libs/forms" "^3.5.5"
@@ -2720,17 +2699,17 @@
     immutability-helper "^3.1.1"
     marked "^2.1.3"
 
-"@next-libs/cmdb-utils@^3.5.0", "@next-libs/cmdb-utils@^3.6.0":
-  version "3.6.0"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-3.6.0.tgz#61656f4d9d3ee0a6f22f9378053f3e028b4a6f76"
-  integrity sha512-py0zwDmUbjBCFugK2vOVrOJAUoPfF/qAUnfyg96qe8SmO5yfFTg7g8+hi8BIehZ6w5uBF4G3CR4f4/HCcbuefg==
-  dependencies:
-    "@next-sdk/cmdb-sdk" "^2.3.1"
-
 "@next-libs/cmdb-utils@^3.6.1":
   version "3.6.1"
   resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-3.6.1.tgz#3de402108efb72a0919a7282a68f7107a19d3488"
   integrity sha512-1LLaO0lsE1hpIfLaRTNv3rbjrv6JyVG1sMzNH1brymU1w9gpdNLnzWR0tTZunBgHZdcoUSSmiroQKkbTFUjVbQ==
+  dependencies:
+    "@next-sdk/cmdb-sdk" "^2.3.1"
+
+"@next-libs/cmdb-utils@^3.6.2":
+  version "3.6.2"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-3.6.2.tgz#b1b48c7eefd8ae16f744080b007facf4b959a3b3"
+  integrity sha512-jJW9gdlJnFiZnXOlJvS2fQfv+ySKnOyz81TizWbQHkcliW9KBKVA4QQJO0U5fjcfVUqdSaO9nyrn15mrvrwWqw==
   dependencies:
     "@next-sdk/cmdb-sdk" "^2.3.1"
 
