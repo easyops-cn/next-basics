@@ -347,7 +347,9 @@ export function CmdbObjectAttrValueItem(
     <div ref={ref}>
       <Select
         style={defaults(inputBoxStyle, { width: "100%" })}
-        className={valueType ? styles.typeSelected : ""}
+        className={
+          valueType !== "attachment" && value ? styles.typeSelected : ""
+        }
         placeholder={placeholder || t(K.PLEASE_SELECT_VALUE_TYPE)}
         value={valueType}
         onChange={handleValueTypeChange}
