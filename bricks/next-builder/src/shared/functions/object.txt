@@ -2,7 +2,7 @@ function ObjectFactory() {
   function entries(obj) {
     const result = [];
     for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
         result.push([key, obj[key]]);
       }
     }
@@ -12,7 +12,7 @@ function ObjectFactory() {
   function keys(obj) {
     const result = [];
     for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
         result.push(key);
       }
     }
@@ -22,7 +22,7 @@ function ObjectFactory() {
   function values(obj) {
     const result = [];
     for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
         result.push(obj[key]);
       }
     }

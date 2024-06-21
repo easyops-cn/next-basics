@@ -281,6 +281,7 @@ function debuggerOverrides(ctx: {
     externalSourceForDebug: true,
     globalVariables: ctx.supply(precookedArray.attemptToVisitGlobals, {
       Error,
+      Object,
     }),
     ArrayConstructor: DebuggerArrayConstructor,
   } as any) as () => object;
@@ -300,14 +301,13 @@ function debuggerOverrides(ctx: {
   } as any);
   const debugLodash = ctx.cook(precookedLodash.function, lodashSource, {
     externalSourceForDebug: true,
-    globalVariables: {
-      ...ctx.supply(precookedLodash.attemptToVisitGlobals),
+    globalVariables: ctx.supply(precookedLodash.attemptToVisitGlobals, {
       global: window,
       Function,
       Object,
       ArrayBuffer,
       Array: ArrayFunction,
-    },
+    }),
     ArrayConstructor: DebuggerArrayConstructor,
   } as any) as () => Partial<typeof _>;
 
@@ -316,7 +316,9 @@ function debuggerOverrides(ctx: {
   } as any);
   const debugObject = ctx.cook(precookedObject.function, objectSource, {
     externalSourceForDebug: true,
-    globalVariables: ctx.supply(precookedObject.attemptToVisitGlobals),
+    globalVariables: ctx.supply(precookedObject.attemptToVisitGlobals, {
+      Object,
+    }),
     ArrayConstructor: DebuggerArrayConstructor,
   } as any) as () => typeof Object;
 
