@@ -23,6 +23,7 @@ export interface ContextOfWorkbenchTree {
   collapsible?: boolean;
   collapsedNodes?: (string | number)[];
   nodeKey?: string;
+  showLine?: boolean;
   clickFactory?(node: WorkbenchNodeData): () => void;
   mouseEnterFactory?(node: WorkbenchNodeData): () => void;
   mouseLeaveFactory?(node: WorkbenchNodeData): () => void;

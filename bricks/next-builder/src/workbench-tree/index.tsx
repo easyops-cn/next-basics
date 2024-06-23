@@ -89,6 +89,9 @@ export class WorkbenchTreeElement extends UpdatingElement {
   @property({ type: Boolean })
   skipNotify: boolean;
 
+  @property({ type: Boolean })
+  showLine: boolean;
+
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
 
@@ -178,6 +181,7 @@ export class WorkbenchTreeElement extends UpdatingElement {
                 isTransformName: this.isTransformName,
                 fixedActionsFor: this.fixedActionsFor,
                 nodeKey: this.nodeKey,
+                showLine: this.showLine,
                 collapsible: this.collapsible,
                 collapsedNodes: this.collapsedNodes,
                 getCollapsedId: defaultGetCollapsedId,

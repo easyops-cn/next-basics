@@ -33,6 +33,9 @@ export interface WorkbenchDataTreeProps extends ContextOfWorkbenchTree {
   matchNodeDataFields?: string | string[];
   onNodeNameSuffixClick?: (node: WorkbenchNodeData) => void;
   disabledNodeSuffixClick?: boolean;
+  allowDrag?: boolean;
+  allowDragToRoot?: boolean;
+  allowDragToInside?: boolean;
 }
 
 export function WorkbenchDataTree({
@@ -47,6 +50,10 @@ export function WorkbenchDataTree({
   contextMenuFactory,
   matchNodeDataFields,
   onNodeNameSuffixClick,
+  showLine,
+  allowDrag,
+  allowDragToInside,
+  allowDragToRoot,
 }: WorkbenchDataTreeProps): React.ReactElement {
   const manager = useBuilderDataManager();
   const { nodes } = useBuilderData();
@@ -112,6 +119,7 @@ export function WorkbenchDataTree({
         mouseLeaveFactory,
         activeKey,
         nodeKey,
+        showLine,
         clickFactory,
         contextMenuFactory,
         collapsible: true,
@@ -144,9 +152,9 @@ export function WorkbenchDataTree({
           nodes={trees}
           placeholder={placeholder}
           searchPlaceholder={searchPlaceholder}
-          allowDrag={true}
-          allowDragToRoot={true}
-          allowDragToInside={false}
+          allowDrag={allowDrag !== false}
+          allowDragToRoot={allowDragToRoot !== false}
+          allowDragToInside={allowDragToInside}
           dropEmit={dropEmit}
         />
       </RealTimeDataContext.Provider>
