@@ -57,10 +57,7 @@ export const generalButtonsSchema = {
               label: "文字",
               value: "text",
             },
-          ].map((item) => ({
-            label: item.label,
-            value: item.value,
-          })),
+          ],
         },
       },
     },
@@ -114,17 +111,31 @@ export const generalButtonsSchema = {
           placeholder: "请选择按钮类型",
           allowClear: true,
           options: [
-            "primary",
-            "default",
-            "dashed",
-            "ghost",
-            "link",
-            "text",
-            "icon",
-          ].map((item) => ({
-            label: item,
-            value: item,
-          })),
+            {
+              label: "主要",
+              value: "primary",
+            },
+            {
+              label: "默认",
+              value: "default",
+            },
+            {
+              label: "虚线",
+              value: "dashed",
+            },
+            {
+              label: "重影",
+              value: "ghost",
+            },
+            {
+              label: "链接",
+              value: "link",
+            },
+            {
+              label: "文字",
+              value: "text",
+            },
+          ],
         },
       },
     },

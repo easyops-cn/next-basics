@@ -69,10 +69,7 @@ export const generalCheckboxSchema = {
               label: "右对齐",
               value: "right",
             },
-          ].map((item) => ({
-            label: item.label,
-            value: item.value,
-          })),
+          ],
         },
       },
     },
@@ -80,10 +77,11 @@ export const generalCheckboxSchema = {
       name: "labelColor",
       title: "标签颜色",
       type: "string",
+      component: "ColorPicker",
     },
     {
       name: "labelBold",
-      title: "标签颜色",
+      title: "标签加粗",
       type: "boolean",
     },
     {
@@ -138,10 +136,7 @@ export const generalCheckboxSchema = {
           options: [
             { label: "默认", value: "default" },
             { label: "图标", value: "icon" },
-          ].map((item) => ({
-            label: item.label,
-            value: item.value,
-          })),
+          ],
         },
       },
     },

@@ -74,10 +74,7 @@ export const generalTextareaSchema = {
               label: "右对齐",
               value: "right",
             },
-          ].map((item) => ({
-            label: item.label,
-            value: item.value,
-          })),
+          ],
         },
       },
     },
@@ -85,10 +82,11 @@ export const generalTextareaSchema = {
       name: "labelColor",
       title: "标签颜色",
       type: "string",
+      component: "ColorPicker",
     },
     {
       name: "labelBold",
-      title: "标签颜色",
+      title: "标签加粗",
       type: "boolean",
     },
     {
