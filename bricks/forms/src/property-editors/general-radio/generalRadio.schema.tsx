@@ -53,6 +53,7 @@ export const generalRadioSchema = {
       type: "boolean",
     },
     {
+      name: "labelAlign",
       type: "string",
       title: "标签对齐方式",
       component: {
@@ -91,7 +92,7 @@ export const generalRadioSchema = {
     },
     {
       name: "labelCol",
-      title: "标签布局	",
+      title: "标签布局",
       component: {
         name: "CodeEditor",
       },
@@ -155,10 +156,7 @@ export const generalRadioSchema = {
           options: [
             { label: "默认", value: "default" },
             { label: "卡片", value: "dashboard" },
-          ].map((item) => ({
-            label: item.label,
-            value: item.value,
-          })),
+          ],
         },
       },
     },

@@ -54,6 +54,7 @@ export const generalInputNumberSchema = {
       type: "boolean",
     },
     {
+      name: "labelAlign",
       type: "string",
       title: "标签对齐方式",
       component: {
@@ -92,7 +93,7 @@ export const generalInputNumberSchema = {
     },
     {
       name: "labelCol",
-      title: "标签布局	",
+      title: "标签布局",
       component: {
         name: "CodeEditor",
       },

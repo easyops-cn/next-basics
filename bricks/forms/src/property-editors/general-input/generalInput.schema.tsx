@@ -54,6 +54,7 @@ export const generalInputSchema = {
       type: "boolean",
     },
     {
+      name: "labelAlign",
       type: "string",
       title: "标签对齐方式",
       component: {
@@ -92,7 +93,7 @@ export const generalInputSchema = {
     },
     {
       name: "labelCol",
-      title: "标签布局	",
+      title: "标签布局",
       component: {
         name: "CodeEditor",
       },
@@ -128,10 +129,7 @@ export const generalInputSchema = {
           options: [
             { label: "文本", value: "text" },
             { label: "密码", value: "password" },
-          ].map((item) => ({
-            label: item.label,
-            value: item.value,
-          })),
+          ],
         },
       },
     },
