@@ -25,6 +25,6 @@ function GeneralSwitchComponentFactory(React: typeof _React) {
 
 // forms.general-switch
 getRuntime().customEditors.define(
-  "forms.general-radio",
+  "forms.general-switch",
   GeneralSwitchComponentFactory
 );
