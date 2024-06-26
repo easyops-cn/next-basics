@@ -1,5 +1,5 @@
 import type _React from "react";
-import { customEditors } from "@next-core/runtime";
+import { getRuntime } from "@next-core/brick-kit";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import type { EditorComponentProps } from "@next-bricks/visual-builder/property-editor";
@@ -27,4 +27,7 @@ function GeneralInputComponentFactory(React: typeof _React) {
 }
 
 // forms.general-checkbox
-customEditors.define("forms.general-checkbox", GeneralInputComponentFactory);
+(getRuntime() as any).customEditors.define(
+  "forms.general-checkbox",
+  GeneralInputComponentFactory
+);
