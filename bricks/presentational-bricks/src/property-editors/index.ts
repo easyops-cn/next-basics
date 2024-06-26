@@ -1,1 +1,2 @@
-import "./general-text";
+import "./brick-general-search";
+import "./brick-tag";
