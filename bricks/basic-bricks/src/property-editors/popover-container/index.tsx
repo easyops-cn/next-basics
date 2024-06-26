@@ -1,14 +1,9 @@
 import type _React from "react";
-import { customEditors } from "@next-core/runtime";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import type { EditorComponentProps } from "@next-bricks/visual-builder/property-editor";
+import { getRuntime } from "@next-core/brick-kit";
 import { popoverContainerSchema } from "./popoverContainer.schema";
 
 function PopoverContainerComponentFactory(React: typeof _React) {
-  return function PopoverContainerComponent(
-    props: EditorComponentProps
-  ): React.ReactElement {
+  return function PopoverContainerComponent(props: any): React.ReactElement {
     const {
       SchemaFieldComponent,
       formilySchemaFormatter,
@@ -26,7 +21,7 @@ function PopoverContainerComponentFactory(React: typeof _React) {
   };
 }
 
-customEditors.define(
+(getRuntime() as any).customEditors.define(
   "basic-bricks.popover-container",
   PopoverContainerComponentFactory
 );

@@ -1,14 +1,9 @@
 import type _React from "react";
-import { customEditors } from "@next-core/runtime";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import type { EditorComponentProps } from "@next-bricks/visual-builder/property-editor";
+import { getRuntime } from "@next-core/brick-kit";
 import { generalDrawerSchema } from "./generalDrawer.schema";
 
 function GeneralDrawerComponentFactory(React: typeof _React) {
-  return function GeneralDrawerComponent(
-    props: EditorComponentProps
-  ): React.ReactElement {
+  return function GeneralDrawerComponent(props: any): React.ReactElement {
     const {
       SchemaFieldComponent,
       formilySchemaFormatter,
@@ -30,7 +25,7 @@ function GeneralDrawerComponentFactory(React: typeof _React) {
   };
 }
 
-customEditors.define(
+(getRuntime() as any).customEditors.define(
   "basic-bricks.general-drawer",
   GeneralDrawerComponentFactory
 );

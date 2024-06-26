@@ -1,14 +1,9 @@
 import type _React from "react";
-import { customEditors } from "@next-core/runtime";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import type { EditorComponentProps } from "@next-bricks/visual-builder/property-editor";
+import { getRuntime } from "@next-core/brick-kit";
 import { generalTextSchema } from "./generalText.schema";
 
 function GeneralTextComponentFactory(React: typeof _React) {
-  return function GeneralTextComponent(
-    props: EditorComponentProps
-  ): React.ReactElement {
+  return function GeneralTextComponent(props: any): React.ReactElement {
     const {
       SchemaFieldComponent,
       formilySchemaFormatter,
@@ -23,4 +18,7 @@ function GeneralTextComponentFactory(React: typeof _React) {
   };
 }
 
-customEditors.define("basic-bricks.general-text", GeneralTextComponentFactory);
+(getRuntime() as any).customEditors.define(
+  "basic-bricks.general-text",
+  GeneralTextComponentFactory
+);
