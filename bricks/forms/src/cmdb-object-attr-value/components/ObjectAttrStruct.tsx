@@ -520,7 +520,10 @@ export function LegacyObjectAttrStructForm(
               >
                 {valueTypeList
                   .filter(
-                    (type) => type.key !== "struct" && type.key !== "structs"
+                    (type) =>
+                      type.key !== "struct" &&
+                      type.key !== "structs" &&
+                      type.key !== "attachment"
                   )
                   .map((item) => (
                     <Option key={item.key} value={item.key}>
