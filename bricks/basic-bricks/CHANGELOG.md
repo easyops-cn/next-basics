@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.254.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.254.1...@next-bricks/basic-bricks@1.254.2) (2024-06-26)
+
+
+### Bug Fixes
+
+* fix color picker ([085b23b](https://github.com/easyops-cn/next-basics/commit/085b23bbea451319cba10ecffd2cfdcc0a24e6ea))
+
+
+
+
+
 ## [1.254.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.254.0...@next-bricks/basic-bricks@1.254.1) (2024-06-26)
 
 
