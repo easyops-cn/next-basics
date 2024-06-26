@@ -63,6 +63,8 @@ export interface TreeListProps {
   nodes: WorkbenchNodeData[];
   level: number;
   onNodeActive: (node: HTMLElement) => void;
+  isFirst?: boolean[];
+  isLast?: boolean[];
 }
 
 const SearchingContext = createContext(false);
@@ -361,7 +363,13 @@ export function WorkbenchTree({
   );
 }
 
-function TreeList({ nodes, level, onNodeActive }: TreeListProps): ReactElement {
+function TreeList({
+  nodes,
+  level,
+  onNodeActive,
+  isFirst,
+  isLast,
+}: TreeListProps): ReactElement {
   const lastIndex = nodes.length - 1;
   return (
     <ul className={styles.tree}>
@@ -372,8 +380,8 @@ function TreeList({ nodes, level, onNodeActive }: TreeListProps): ReactElement {
             key={node.key}
             node={node}
             level={level}
-            isFirst={index === 0}
-            isLast={index === lastIndex}
+            isFirst={[...(isFirst ?? []), index === 0]}
+            isLast={[...(isLast ?? []), index === lastIndex]}
             onNodeActive={onNodeActive}
           />
         ))}
@@ -399,8 +407,8 @@ function PlaceholderDOM({
 export interface TreeNodeProps {
   node: WorkbenchNodeData;
   level: number;
-  isFirst?: boolean;
-  isLast?: boolean;
+  isFirst?: boolean[];
+  isLast?: boolean[];
   skipNotify?: boolean;
   onNodeActive?: (node: HTMLElement) => void;
 }
@@ -424,6 +432,7 @@ function TreeNode({
     collapsible,
     collapsedNodes,
     nodeKey,
+    showLine,
     clickFactory,
     mouseEnterFactory,
     mouseLeaveFactory,
@@ -446,6 +455,8 @@ function TreeNode({
     useWorkbenchActionsContext();
 
   const nodePaddingLeft = level * treeLevelPadding + basePaddingLeft - 2;
+  const isFirstOfCurrentLayer = isFirst[isFirst.length - 1];
+  const isLastOfCurrentLayer = isLast[isLast.length - 1];
   const searching = useContext(SearchingContext);
   const [cacheDragStatus, setCacheDragStatus] = useState(null);
   const [collapseClicked, setCollapseClicked] = useState(false);
@@ -669,11 +680,30 @@ function TreeNode({
               [styles.unreachable]: node.unreachable,
             })}
             style={{
-              paddingLeft: nodePaddingLeft,
+              paddingLeft: !showLine ? nodePaddingLeft : 0,
               color: node.labelColor,
             }}
             ref={nodeLabelCallback}
           >
+            {showLine && (
+              <>
+                {[...Array(level - 1)].map((_, i) => {
+                  return (
+                    <span
+                      key={i}
+                      className={classNames(
+                        isLast[i] ? styles.indentUnit : styles.indentUnitLine
+                      )}
+                    />
+                  );
+                })}
+                <span
+                  className={classNames(styles.switcherLeafLine, {
+                    [styles.isLast]: isLastOfCurrentLayer,
+                  })}
+                ></span>
+              </>
+            )}
             <span className={styles.nodeIconWrapper}>
               {allowCollapse && (
                 <span
@@ -732,8 +762,8 @@ function TreeNode({
           <WorkbenchMiniActionBar
             className={styles.nodeActionsBar}
             data={node.data}
-            isFirst={isFirst}
-            isLast={isLast}
+            isFirst={isFirstOfCurrentLayer}
+            isLast={isLastOfCurrentLayer}
             actions={actions}
             useNativeEvent
             onActionClick={onActionClick}
@@ -759,6 +789,8 @@ function TreeNode({
             nodes={node.children}
             level={level + 1}
             onNodeActive={onNodeActive}
+            isFirst={isFirst}
+            isLast={isLast}
           />
         )}
       </li>

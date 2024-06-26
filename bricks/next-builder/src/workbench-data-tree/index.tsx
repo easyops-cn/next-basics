@@ -75,6 +75,9 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
   nodeKey: string;
 
   @property({ type: Boolean })
+  showLine: boolean;
+
+  @property({ type: Boolean })
   disabledNodeSuffixClick: boolean;
 
   @event({ type: "action.click" })
@@ -147,6 +150,9 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
             >
               <WorkbenchDataTree
                 trees={this.nodes}
+                allowDrag={this.allowDrag}
+                allowDragToRoot={this.allowDragToRoot}
+                allowDragToInside={this.allowDragToInside}
                 placeholder={this.placeholder}
                 searchPlaceholder={this.searchPlaceholder}
                 noSearch={this.noSearch}
@@ -158,6 +164,7 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
                 contextMenuFactory={this._contextMenuFactory}
                 matchNodeDataFields={this.matchNodeDataFields}
                 onNodeNameSuffixClick={this._nodeNameSuffixClick}
+                showLine={this.showLine}
               />
             </WorkbenchActionsContext.Provider>
           </BuilderProvider>
