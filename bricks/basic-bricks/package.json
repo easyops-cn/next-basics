@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@next-core/custom-antd-styles": "^1.27.1",
+    "@next-core/runtime": "^1.49.9",
     "@next-libs/basic-components": "^5.4.0",
     "@next-libs/storage": "^2.0.4",
     "@next-sdk/air-admin-service-sdk": "^2.1.12",
@@ -51,9 +52,6 @@
     "classnames": "^2.3.2",
     "hotkeys-js": "^3.10.1",
     "immutability-helper": "^3.1.1"
-  },
-  "dependencies": {
-    "@next-core/runtime": "^1.49.9"
   },
   "sideEffects": true
 }
