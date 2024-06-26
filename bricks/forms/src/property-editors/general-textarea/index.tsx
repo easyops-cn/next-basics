@@ -28,6 +28,6 @@ function GeneralTextareaComponentFactory(React: typeof _React) {
 
 // forms.general-textarea
 getRuntime().customEditors.define(
-  "forms.general-text-area",
+  "forms.general-textarea",
   GeneralTextareaComponentFactory
 );
