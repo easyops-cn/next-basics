@@ -24,7 +24,7 @@ function GeneralRadioComponentFactory(React: typeof _React) {
 }
 
 // forms.general-radio
-(getRuntime() as any).customEditors.define(
+getRuntime().customEditors.define(
   "forms.general-radio",
   GeneralRadioComponentFactory
 );

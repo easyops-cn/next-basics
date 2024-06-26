@@ -27,7 +27,7 @@ function GeneralInputComponentFactory(React: typeof _React) {
 }
 
 // forms.general-checkbox
-(getRuntime() as any).customEditors.define(
+getRuntime().customEditors.define(
   "forms.general-checkbox",
   GeneralInputComponentFactory
 );

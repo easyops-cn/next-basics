@@ -27,7 +27,7 @@ function GeneralTextareaComponentFactory(React: typeof _React) {
 }
 
 // forms.general-textarea
-(getRuntime() as any).customEditors.define(
+getRuntime().customEditors.define(
   "forms.general-textarea",
   GeneralTextareaComponentFactory
 );

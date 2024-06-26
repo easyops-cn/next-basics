@@ -27,7 +27,7 @@ function GeneralButtonsComponentFactory(React: typeof _React) {
 }
 
 // forms.general-buttons
-(getRuntime() as any).customEditors.define(
+getRuntime().customEditors.define(
   "forms.general-buttons",
   GeneralButtonsComponentFactory
 );
