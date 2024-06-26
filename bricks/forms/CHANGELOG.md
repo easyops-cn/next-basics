@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.296.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.295.3...@next-bricks/forms@1.296.0) (2024-06-26)
+
+
+### Bug Fixes
+
+* 修改review相关优化 refs BRICK-339 ([a536aac](https://github.com/easyops-cn/next-basics/commit/a536aacf51681232dc2c6f13bf5ac0eefe0a6679))
+* 去掉@next-core/runtime 调整其引入格式 refs BRICK-339 ([2e09518](https://github.com/easyops-cn/next-basics/commit/2e095183ea36162b8f6a8b0249652130f02bc028))
+* 去掉@next-core/test-next依赖 refs  BRICK-339 ([37bf0e4](https://github.com/easyops-cn/next-basics/commit/37bf0e4e91ebe2aaea4cca92b95e7b83c634bb4c))
+* 增加package.json构建逻辑 refs BRICK-339 ([a1b7a98](https://github.com/easyops-cn/next-basics/commit/a1b7a98b086b432fac50e9030d74ad147c2731aa))
+* 调整scheme内容 refs BRICK-339 ([87c7efe](https://github.com/easyops-cn/next-basics/commit/87c7efe1fb6e534cf837f2d5c345dd83b80c2faa))
+* 调整文件引入格式 refs BRICK-339 ([1ba5a65](https://github.com/easyops-cn/next-basics/commit/1ba5a65adcfb8f8e80d0a18f0c9dcc57d54f3540))
+
+
+### Features
+
+* support formEditor refs BRICK-339 ([e946af7](https://github.com/easyops-cn/next-basics/commit/e946af7de8c673453de90568bcb9c8a0907df7a4))
+
+
+
+
+
 ## [1.295.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.295.2...@next-bricks/forms@1.295.3) (2024-06-21)
 
 **Note:** Version bump only for package @next-bricks/forms
