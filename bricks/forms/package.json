@@ -41,6 +41,8 @@
   },
   "devDependencies": {
     "@next-core/custom-antd-styles": "^1.27.1",
+    "@next-core/runtime": "^1.49.9",
+    "@next-core/test-next": "^1.1.4",
     "@next-libs/basic-components": "^5.4.0",
     "@next-libs/clipboard": "^3.0.4",
     "@next-libs/cmdb-instances": "^7.19.2",
