@@ -26,8 +26,8 @@ function GeneralInputNumberComponentFactory(React: typeof _React) {
   };
 }
 
-// forms.general-input
+// forms.eneral-input-number
 getRuntime().customEditors.define(
-  "forms.general-input",
+  "forms.general-input-number",
   GeneralInputNumberComponentFactory
 );
