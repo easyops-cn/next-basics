@@ -47,11 +47,7 @@ export const generalTextSchema = {
       name: "color",
       title: "字体颜色",
       type: "string",
-      component: {
-        props: {
-          placeholder: "black",
-        },
-      },
+      component: "ColorPicker",
     },
     {
       name: "lineHeight",
