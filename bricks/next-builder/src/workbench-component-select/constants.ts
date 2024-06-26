@@ -238,6 +238,21 @@ export const defaultBlankListOfBricks: string[] = [
   "presentational-bricks.brick-cluster-type",
   "presentational-bricks.agent-status",
   "presentational-bricks.brick-input",
+  "presentational-bricks.brick-conditional-display",
+  "presentational-bricks.brick-display-structs",
+  "presentational-bricks.dynamic-content",
+  "basic-bricks.multiple-columns-card",
+  "presentational-bricks.general-list",
+  "presentational-bricks.dynamic-grid-container",
+  "basic-bricks.sub-menu",
+  "basic-bricks.menu-bar",
+  "presentational-bricks.template-breadcrumb",
+  "basic-bricks.transform-agent",
+  "basic-bricks.redirect-to",
+  "basic-bricks.script-brick",
+  "basic-bricks.export-json-file",
+  "presentational-bricks.brick-utils",
+  "utils.general-clipboard",
 ];
 
 export enum SnippetType {
