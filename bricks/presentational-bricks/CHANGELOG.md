@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.323.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.323.3...@next-bricks/presentational-bricks@1.323.4) (2024-06-26)
+
+
+### Bug Fixes
+
+* migrate V3 bricks schema ([f76f8b0](https://github.com/easyops-cn/next-basics/commit/f76f8b041cc386f02227776e870885d9b5164958))
+* migrate V3 bricks schema ([a094521](https://github.com/easyops-cn/next-basics/commit/a094521901d15d7e89fa318d58090c6bedda67c5))
+* 修改package.json文件 ([a74e08a](https://github.com/easyops-cn/next-basics/commit/a74e08a0bb12e7e32eb59c45702d6c6dfa709b1a))
+* 导出schema ([7af2079](https://github.com/easyops-cn/next-basics/commit/7af2079cec8bb0b650a31f2fcb000b19238ab8e7))
+
+
+
+
+
 ## [1.323.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.323.2...@next-bricks/presentational-bricks@1.323.3) (2024-06-21)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
