@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.296.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.296.4...@next-bricks/forms@1.296.5) (2024-06-27)
+
+
+### Bug Fixes
+
+* 模型新增属性，选择数组类型，输入的值无下拉选项 ([5023b88](https://github.com/easyops-cn/next-basics/commit/5023b885ac9ef1a28f8a62586f56255ba0902093))
+
+
+
+
+
 ## [1.296.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.296.3...@next-bricks/forms@1.296.4) (2024-06-26)
 
 
