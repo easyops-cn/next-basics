@@ -14,7 +14,15 @@ function GeneralTextareaComponentFactory(React: typeof _React) {
       formilySchemaFormatter,
       advancedMode,
       scope,
+      form,
     } = props;
+
+    React.useEffect(() => {
+      form.setInitialValues({
+        required: false,
+        pattern: "",
+      });
+    }, [form]);
 
     return React.createElement(SchemaFieldComponent, {
       schema: formilySchemaFormatter(

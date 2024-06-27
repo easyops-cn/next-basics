@@ -49,33 +49,160 @@ export const generalTextareaSchema = {
     },
     {
       name: "notRender",
-      title: "隐藏",
+      title: "隐藏表单项",
+      type: "boolean",
+      component: {
+        name: "Switch",
+      },
+      decorator: {
+        name: "FormItem",
+        props: {
+          layout: "horizontal",
+          tooltip: "当前值为true时, 表单不会再显示当前项, 同时不会校验当前项",
+        },
+      },
+    },
+
+    {
+      name: "categoryTitle_textarea",
+      type: "void",
+      decorator: {
+        name: "CategoryTitle",
+        props: {
+          text: "文本框",
+        },
+      },
+    },
+    {
+      name: "autoSize",
+      title: "自适应内容高度",
       type: "boolean",
     },
     {
+      name: "placeholder",
+      title: "占位文本",
+      type: "string",
+    },
+    {
       name: "trim",
-      title: "隐藏",
-      type: "去除前后的空白符",
+      title: "去除前后的空白符",
+      type: "boolean",
+      component: {
+        name: "Switch",
+        props: {
+          defaultValue: true,
+        },
+      },
+    },
+    {
+      name: "categoryTitle_validator",
+      type: "void",
+      decorator: {
+        name: "CategoryTitle",
+        props: {
+          text: "校验",
+        },
+      },
+    },
+    {
+      name: "required",
+      title: "必填",
+      type: "boolean",
+      component: {
+        props: {
+          size: "small",
+        },
+      },
+      "x-reactions": [
+        {
+          target: "requiredValidatorText",
+          fulfill: {
+            state: {
+              visible: "{{$self.value}}",
+            },
+          },
+        },
+      ],
+    },
+    {
+      name: "requiredValidatorText",
+      title: "必填提示文字",
+      type: "string",
+    },
+    {
+      name: "pattern",
+      title: "正则校验规则",
+      type: "string",
+      "x-reactions": [
+        {
+          target: "patternValidatorText",
+          fulfill: {
+            state: {
+              visible: "{{$self.value}}",
+            },
+          },
+        },
+      ],
+    },
+    {
+      name: "patternValidatorText",
+      title: "正则提示文字",
+      type: "string",
+    },
+    {
+      name: "max",
+      title: "最大长度",
+      type: "number",
+      component: {
+        name: "NumberPicker",
+      },
+      decorator: "FormItem",
+    },
+    {
+      name: "min",
+      title: "最小长度",
+      type: "number",
+      component: {
+        name: "NumberPicker",
+      },
+      decorator: "FormItem",
+    },
+    {
+      name: "categoryTitle_itemStyle",
+      type: "void",
+      decorator: {
+        name: "CategoryTitle",
+        props: {
+          text: "表单项样式",
+        },
+      },
     },
     {
       name: "labelAlign",
-      type: "string",
       title: "标签对齐方式",
-      component: {
-        name: "Select",
+      type: "string",
+      decorator: {
+        name: "FormItem",
         props: {
-          placeholder: "请选择",
-          allowClear: true,
-          options: [
-            {
-              label: "左对齐",
-              value: "left",
-            },
-            {
-              label: "右对齐",
-              value: "right",
-            },
-          ],
+          layout: "horizontal",
+        },
+      },
+      enum: [
+        {
+          label: "左对齐",
+          value: "left",
+        },
+        {
+          label: "右对齐",
+          value: "right",
+        },
+      ],
+      component: {
+        name: "Radio.Group",
+        props: {
+          size: "small",
+          optionType: "button",
+          defaultValue: "left",
         },
       },
     },
@@ -98,6 +225,7 @@ export const generalTextareaSchema = {
     {
       name: "labelCol",
       title: "标签布局",
+      type: "string",
       component: {
         name: "CodeEditor",
       },
@@ -106,30 +234,11 @@ export const generalTextareaSchema = {
     {
       name: "labelBrick",
       title: "标签构件",
+      type: "string",
       component: {
         name: "CodeEditor",
       },
       decorator: "FormItemWithoutAdvanced",
-    },
-    {
-      name: "categoryTitle_input",
-      type: "void",
-      decorator: {
-        name: "CategoryTitle",
-        props: {
-          text: "文本框",
-        },
-      },
-    },
-    {
-      name: "autoSize",
-      title: "自适应内容高度",
-      type: "boolean",
-    },
-    {
-      name: "placeholder",
-      title: "占位文本",
-      type: "string",
     },
     {
       name: "inputBoxStyle",
@@ -152,63 +261,6 @@ export const generalTextareaSchema = {
     {
       name: "helpBrick",
       title: "帮助构件",
-      type: "string",
-      component: {
-        name: "CodeEditor",
-      },
-      decorator: "FormItemWithoutAdvanced",
-    },
-
-    {
-      name: "categoryTitle_validator",
-      type: "void",
-      decorator: {
-        name: "CategoryTitle",
-        props: {
-          text: "校验",
-        },
-      },
-    },
-    {
-      name: "required",
-      title: "必填",
-      type: "boolean",
-    },
-    {
-      name: "max",
-      title: "最大长度",
-      type: "number",
-      component: {
-        name: "NumberPicker",
-      },
-      decorator: "FormItem",
-    },
-    {
-      name: "min",
-      title: "最小长度",
-      type: "number",
-      component: {
-        name: "NumberPicker",
-      },
-      decorator: "FormItem",
-    },
-    {
-      name: "pattern",
-      title: "正则校验规则",
-      type: "string",
-    },
-    {
-      name: "message",
-      title: "校验文本",
-      type: "string",
-      component: {
-        name: "CodeEditor",
-      },
-      decorator: "FormItemWithoutAdvanced",
-    },
-    {
-      name: "validator",
-      title: "表单校验方法",
       type: "string",
       component: {
         name: "CodeEditor",
