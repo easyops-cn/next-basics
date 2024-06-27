@@ -119,8 +119,7 @@ export function LegacyObjectAttrStructForm(
       return cmdbObjectList
         .filter((object) => object.objectId === selectedObjectId)[0]
         ?.attrList.filter(
-          (attr) =>
-            !["struct", "structs", "attachment"].includes(attr.value.type)
+          (attr) => !["struct", "structs"].includes(attr.value.type)
         );
     } else {
       return [];
@@ -379,8 +378,7 @@ export function LegacyObjectAttrStructForm(
       cmdbObjectList
         .filter((object) => object.objectId === e)[0]
         ?.attrList.filter(
-          (attr) =>
-            !["struct", "structs", "attachment"].includes(attr.value.type)
+          (attr) => !["struct", "structs"].includes(attr.value.type)
         )
         .map((attr, index) => attr.id)
     );
