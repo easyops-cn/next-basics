@@ -40,70 +40,22 @@ export const generalSwitchSchema = {
     },
     {
       name: "notRender",
-      title: "隐藏",
+      title: "隐藏表单项",
       type: "boolean",
-    },
-    {
-      name: "trim",
-      title: "去除前后的空白符",
-      type: "boolean",
-    },
-    {
-      name: "labelAlign",
-      type: "string",
-      title: "标签对齐方式",
       component: {
-        name: "Select",
+        name: "Switch",
+      },
+      decorator: {
+        name: "FormItem",
         props: {
-          placeholder: "请选择",
-          allowClear: true,
-          options: [
-            {
-              label: "左对齐",
-              value: "left",
-            },
-            {
-              label: "右对齐",
-              value: "right",
-            },
-          ],
+          layout: "horizontal",
+          tooltip: "当前值为true时, 表单不会再显示当前项, 同时不会校验当前项",
         },
       },
     },
+
     {
-      name: "labelColor",
-      title: "标签颜色",
-      type: "string",
-      component: "ColorPicker",
-    },
-    {
-      name: "labelBold",
-      title: "标签加粗",
-      type: "boolean",
-    },
-    {
-      name: "labelTooltip",
-      title: "标签提示",
-      type: "string",
-    },
-    {
-      name: "labelCol",
-      title: "标签布局",
-      component: {
-        name: "CodeEditor",
-      },
-      decorator: "FormItemWithoutAdvanced",
-    },
-    {
-      name: "labelBrick",
-      title: "标签构件",
-      component: {
-        name: "CodeEditor",
-      },
-      decorator: "FormItemWithoutAdvanced",
-    },
-    {
-      name: "categoryTitle_input",
+      name: "categoryTitle_switch",
       type: "void",
       decorator: {
         name: "CategoryTitle",
@@ -124,7 +76,7 @@ export const generalSwitchSchema = {
       },
       enum: [
         {
-          label: "标准",
+          label: "普通",
           value: "default",
         },
         {
@@ -137,6 +89,7 @@ export const generalSwitchSchema = {
         props: {
           size: "small",
           optionType: "button",
+          defaultValue: "default",
         },
       },
     },
@@ -163,25 +116,6 @@ export const generalSwitchSchema = {
       component: "IconSelect",
     },
     {
-      name: "wrapperCol",
-      title: "控件布局",
-      type: "string",
-      component: {
-        name: "CodeEditor",
-      },
-      decorator: "FormItemWithoutAdvanced",
-    },
-    {
-      name: "helpBrick",
-      title: "帮助构件",
-      type: "string",
-      component: {
-        name: "CodeEditor",
-      },
-      decorator: "FormItemWithoutAdvanced",
-    },
-
-    {
       name: "categoryTitle_validator",
       type: "void",
       decorator: {
@@ -195,10 +129,112 @@ export const generalSwitchSchema = {
       name: "required",
       title: "必填",
       type: "boolean",
+      component: {
+        props: {
+          size: "small",
+        },
+      },
+      "x-reactions": [
+        {
+          target: "requiredValidatorText",
+          fulfill: {
+            state: {
+              visible: "{{$self.value}}",
+            },
+          },
+        },
+      ],
     },
     {
-      name: "message",
-      title: "校验文本",
+      name: "requiredValidatorText",
+      title: "必填提示文字",
+      type: "string",
+    },
+    {
+      name: "categoryTitle_itemStyle",
+      type: "void",
+      decorator: {
+        name: "CategoryTitle",
+        props: {
+          text: "表单项样式",
+        },
+      },
+    },
+    {
+      name: "labelAlign",
+      title: "标签对齐方式",
+      type: "string",
+      decorator: {
+        name: "FormItem",
+        props: {
+          layout: "horizontal",
+        },
+      },
+      enum: [
+        {
+          label: "左对齐",
+          value: "left",
+        },
+        {
+          label: "右对齐",
+          value: "right",
+        },
+      ],
+      component: {
+        name: "Radio.Group",
+        props: {
+          size: "small",
+          optionType: "button",
+          defaultValue: "left",
+        },
+      },
+    },
+    {
+      name: "labelColor",
+      title: "标签颜色",
+      type: "string",
+      component: "ColorPicker",
+    },
+    {
+      name: "labelBold",
+      title: "标签加粗",
+      type: "boolean",
+    },
+    {
+      name: "labelTooltip",
+      title: "标签提示",
+      type: "string",
+    },
+    {
+      name: "labelCol",
+      title: "标签布局",
+      type: "string",
+      component: {
+        name: "CodeEditor",
+      },
+      decorator: "FormItemWithoutAdvanced",
+    },
+    {
+      name: "labelBrick",
+      title: "标签构件",
+      type: "string",
+      component: {
+        name: "CodeEditor",
+      },
+      decorator: "FormItemWithoutAdvanced",
+    },
+    {
+      name: "wrapperCol",
+      title: "控件布局",
+      type: "string",
+      component: {
+        name: "CodeEditor",
+      },
+      decorator: "FormItemWithoutAdvanced",
+    },
+    {
+      name: "helpBrick",
+      title: "帮助构件",
       type: "string",
       component: {
         name: "CodeEditor",

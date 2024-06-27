@@ -14,7 +14,14 @@ function GeneralInputNumberComponentFactory(React: typeof _React) {
       formilySchemaFormatter,
       advancedMode,
       scope,
+      form,
     } = props;
+
+    React.useEffect(() => {
+      form.setInitialValues({
+        required: false,
+      });
+    }, [form]);
 
     return React.createElement(SchemaFieldComponent, {
       schema: formilySchemaFormatter(
@@ -26,7 +33,7 @@ function GeneralInputNumberComponentFactory(React: typeof _React) {
   };
 }
 
-// forms.eneral-input-number
+// forms.general-input-number
 getRuntime().customEditors.define(
   "forms.general-input-number",
   GeneralInputNumberComponentFactory

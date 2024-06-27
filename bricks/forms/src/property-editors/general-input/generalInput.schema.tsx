@@ -45,67 +45,18 @@ export const generalInputSchema = {
     },
     {
       name: "notRender",
-      title: "隐藏",
+      title: "隐藏表单项",
       type: "boolean",
-    },
-    {
-      name: "trim",
-      title: "去除前后的空白符",
-      type: "boolean",
-    },
-    {
-      name: "labelAlign",
-      type: "string",
-      title: "标签对齐方式",
       component: {
-        name: "Select",
+        name: "Switch",
+      },
+      decorator: {
+        name: "FormItem",
         props: {
-          placeholder: "请选择",
-          allowClear: true,
-          options: [
-            {
-              label: "左对齐",
-              value: "left",
-            },
-            {
-              label: "右对齐",
-              value: "right",
-            },
-          ],
+          layout: "horizontal",
+          tooltip: "当前值为true时, 表单不会再显示当前项, 同时不会校验当前项",
         },
       },
-    },
-    {
-      name: "labelColor",
-      title: "标签颜色",
-      type: "string",
-      component: "ColorPicker",
-    },
-    {
-      name: "labelBold",
-      title: "标签加粗",
-      type: "boolean",
-    },
-    {
-      name: "labelTooltip",
-      title: "标签提示",
-      type: "string",
-    },
-    {
-      name: "labelCol",
-      title: "标签布局",
-      component: {
-        name: "CodeEditor",
-      },
-      decorator: "FormItemWithoutAdvanced",
-    },
-    {
-      name: "labelBrick",
-      title: "标签构件",
-      component: {
-        name: "CodeEditor",
-      },
-      decorator: "FormItemWithoutAdvanced",
     },
     {
       name: "categoryTitle_input",
@@ -126,6 +77,7 @@ export const generalInputSchema = {
         props: {
           placeholder: "请选择文本框类型",
           allowClear: true,
+          defaultValue: "text",
           options: [
             { label: "文本", value: "text" },
             { label: "密码", value: "password" },
@@ -144,7 +96,7 @@ export const generalInputSchema = {
       type: "boolean",
     },
     {
-      name: "clearable",
+      name: "copyButton",
       title: "显示复制按钮",
       type: "boolean",
     },
@@ -185,6 +137,7 @@ export const generalInputSchema = {
         props: {
           size: "small",
           optionType: "button",
+          defaultValue: "M",
         },
       },
     },
@@ -197,6 +150,132 @@ export const generalInputSchema = {
       name: "addonAfter",
       title: "后置标签",
       type: "string",
+    },
+    {
+      name: "categoryTitle_validator",
+      type: "void",
+      decorator: {
+        name: "CategoryTitle",
+        props: {
+          text: "校验",
+        },
+      },
+    },
+    {
+      name: "required",
+      title: "必填",
+      type: "boolean",
+      component: {
+        props: {
+          size: "small",
+        },
+      },
+      "x-reactions": [
+        {
+          target: "requiredValidatorText",
+          fulfill: {
+            state: {
+              visible: "{{$self.value}}",
+            },
+          },
+        },
+      ],
+    },
+    {
+      name: "requiredValidatorText",
+      title: "必填提示文字",
+      type: "string",
+    },
+    {
+      name: "pattern",
+      title: "正则校验规则",
+      type: "string",
+      "x-reactions": [
+        {
+          target: "patternValidatorText",
+          fulfill: {
+            state: {
+              visible: "{{$self.value}}",
+            },
+          },
+        },
+      ],
+    },
+    {
+      name: "patternValidatorText",
+      title: "正则提示文字",
+      type: "string",
+    },
+    {
+      name: "categoryTitle_itemStyle",
+      type: "void",
+      decorator: {
+        name: "CategoryTitle",
+        props: {
+          text: "表单项样式",
+        },
+      },
+    },
+    {
+      name: "labelAlign",
+      title: "标签对齐方式",
+      type: "string",
+      decorator: {
+        name: "FormItem",
+        props: {
+          layout: "horizontal",
+        },
+      },
+      enum: [
+        {
+          label: "左对齐",
+          value: "left",
+        },
+        {
+          label: "右对齐",
+          value: "right",
+        },
+      ],
+      component: {
+        name: "Radio.Group",
+        props: {
+          size: "small",
+          optionType: "button",
+          defaultValue: "left",
+        },
+      },
+    },
+    {
+      name: "labelColor",
+      title: "标签颜色",
+      type: "string",
+      component: "ColorPicker",
+    },
+    {
+      name: "labelBold",
+      title: "标签加粗",
+      type: "boolean",
+    },
+    {
+      name: "labelTooltip",
+      title: "标签提示",
+      type: "string",
+    },
+    {
+      name: "labelCol",
+      title: "标签布局",
+      component: {
+        name: "CodeEditor",
+      },
+      decorator: "FormItemWithoutAdvanced",
+    },
+    {
+      name: "labelBrick",
+      title: "标签构件",
+      component: {
+        name: "CodeEditor",
+      },
+      decorator: "FormItemWithoutAdvanced",
     },
     {
       name: "inputBoxStyle",
@@ -219,44 +298,6 @@ export const generalInputSchema = {
     {
       name: "helpBrick",
       title: "帮助构件",
-      type: "string",
-      component: {
-        name: "CodeEditor",
-      },
-      decorator: "FormItemWithoutAdvanced",
-    },
-    {
-      name: "categoryTitle_validator",
-      type: "void",
-      decorator: {
-        name: "CategoryTitle",
-        props: {
-          text: "校验",
-        },
-      },
-    },
-    {
-      name: "required",
-      title: "必填",
-      type: "boolean",
-    },
-    {
-      name: "pattern",
-      title: "正则校验规则",
-      type: "string",
-    },
-    {
-      name: "message",
-      title: "校验文本",
-      type: "string",
-      component: {
-        name: "CodeEditor",
-      },
-      decorator: "FormItemWithoutAdvanced",
-    },
-    {
-      name: "validator",
-      title: "表单校验方法",
       type: "string",
       component: {
         name: "CodeEditor",

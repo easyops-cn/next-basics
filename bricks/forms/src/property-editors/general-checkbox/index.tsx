@@ -14,7 +14,15 @@ function GeneralInputComponentFactory(React: typeof _React) {
       formilySchemaFormatter,
       advancedMode,
       scope,
+      form,
     } = props;
+
+    React.useEffect(() => {
+      form.setInitialValues({
+        required: false,
+        isGroup: false,
+      });
+    }, [form]);
 
     return React.createElement(SchemaFieldComponent, {
       schema: formilySchemaFormatter(

@@ -32,10 +32,6 @@ export const generalRadioSchema = {
       name: "value",
       title: "值",
       type: "string",
-      component: {
-        name: "CodeEditor",
-      },
-      decorator: "FormItemWithoutAdvanced",
     },
     {
       name: "disabled",
@@ -44,70 +40,21 @@ export const generalRadioSchema = {
     },
     {
       name: "notRender",
-      title: "隐藏",
+      title: "隐藏表单项",
       type: "boolean",
-    },
-    {
-      name: "trim",
-      title: "去除前后的空白符",
-      type: "boolean",
-    },
-    {
-      name: "labelAlign",
-      type: "string",
-      title: "标签对齐方式",
       component: {
-        name: "Select",
+        name: "Switch",
+      },
+      decorator: {
+        name: "FormItem",
         props: {
-          placeholder: "请选择",
-          allowClear: true,
-          options: [
-            {
-              label: "左对齐",
-              value: "left",
-            },
-            {
-              label: "右对齐",
-              value: "right",
-            },
-          ],
+          layout: "horizontal",
+          tooltip: "当前值为true时, 表单不会再显示当前项, 同时不会校验当前项",
         },
       },
     },
     {
-      name: "labelColor",
-      title: "标签颜色",
-      type: "string",
-      component: "ColorPicker",
-    },
-    {
-      name: "labelBold",
-      title: "标签加粗",
-      type: "boolean",
-    },
-    {
-      name: "labelTooltip",
-      title: "标签提示",
-      type: "string",
-    },
-    {
-      name: "labelCol",
-      title: "标签布局",
-      component: {
-        name: "CodeEditor",
-      },
-      decorator: "FormItemWithoutAdvanced",
-    },
-    {
-      name: "labelBrick",
-      title: "标签构件",
-      component: {
-        name: "CodeEditor",
-      },
-      decorator: "FormItemWithoutAdvanced",
-    },
-    {
-      name: "categoryTitle_input",
+      name: "categoryTitle_radio",
       type: "void",
       decorator: {
         name: "CategoryTitle",
@@ -119,6 +66,7 @@ export const generalRadioSchema = {
     {
       name: "options",
       title: "选项列表",
+      type: "string",
       component: {
         name: "CodeEditor",
       },
@@ -140,22 +88,6 @@ export const generalRadioSchema = {
             { label: "圆形图标", value: "icon-circle" },
             { label: "方形图标", value: "icon-square" },
             { label: "自定义", value: "custom" },
-          ],
-        },
-      },
-    },
-    {
-      name: "ui",
-      title: "类型",
-      type: "string",
-      component: {
-        name: "Select",
-        props: {
-          placeholder: "请选择ui样式",
-          allowClear: true,
-          options: [
-            { label: "默认", value: "default" },
-            { label: "卡片", value: "dashboard" },
           ],
         },
       },
@@ -190,12 +122,138 @@ export const generalRadioSchema = {
         props: {
           size: "small",
           optionType: "button",
+          defaultValue: "medium",
         },
       },
     },
     {
+      name: "ui",
+      title: "UI样式",
+      type: "string",
+      component: {
+        name: "Select",
+        props: {
+          placeholder: "请选择ui样式",
+          allowClear: true,
+          options: [
+            { label: "默认", value: "default" },
+            { label: "卡片", value: "dashboard" },
+          ],
+        },
+      },
+    },
+
+    {
+      name: "categoryTitle_validator",
+      type: "void",
+      decorator: {
+        name: "CategoryTitle",
+        props: {
+          text: "校验",
+        },
+      },
+    },
+    {
+      name: "required",
+      title: "必填",
+      type: "boolean",
+      component: {
+        props: {
+          size: "small",
+        },
+      },
+      "x-reactions": [
+        {
+          target: "requiredValidatorText",
+          fulfill: {
+            state: {
+              visible: "{{$self.value}}",
+            },
+          },
+        },
+      ],
+    },
+    {
+      name: "requiredValidatorText",
+      title: "必填提示文字",
+      type: "string",
+    },
+    {
+      name: "categoryTitle_itemStyle",
+      type: "void",
+      decorator: {
+        name: "CategoryTitle",
+        props: {
+          text: "表单项样式",
+        },
+      },
+    },
+    {
+      name: "labelAlign",
+      title: "标签对齐方式",
+      type: "string",
+      decorator: {
+        name: "FormItem",
+        props: {
+          layout: "horizontal",
+        },
+      },
+      enum: [
+        {
+          label: "左对齐",
+          value: "left",
+        },
+        {
+          label: "右对齐",
+          value: "right",
+        },
+      ],
+      component: {
+        name: "Radio.Group",
+        props: {
+          size: "small",
+          optionType: "button",
+          defaultValue: "left",
+        },
+      },
+    },
+    {
+      name: "labelColor",
+      title: "标签颜色",
+      type: "string",
+      component: "ColorPicker",
+    },
+    {
+      name: "labelBold",
+      title: "标签加粗",
+      type: "boolean",
+    },
+    {
+      name: "labelTooltip",
+      title: "标签提示",
+      type: "string",
+    },
+    {
+      name: "labelCol",
+      title: "标签布局",
+      type: "string",
+      component: {
+        name: "CodeEditor",
+      },
+      decorator: "FormItemWithoutAdvanced",
+    },
+    {
+      name: "labelBrick",
+      title: "标签构件",
+      type: "string",
+      component: {
+        name: "CodeEditor",
+      },
+      decorator: "FormItemWithoutAdvanced",
+    },
+    {
       name: "useBrick",
-      title: "自定义radio的内容",
+      title: "自定义选项内容",
       type: "string",
       component: {
         name: "CodeEditor",
@@ -204,7 +262,7 @@ export const generalRadioSchema = {
     },
     {
       name: "customStyle",
-      title: "自定义radio的外层样式",
+      title: "外层样式",
       type: "string",
       component: {
         name: "CodeEditor",
@@ -232,30 +290,6 @@ export const generalRadioSchema = {
     {
       name: "helpBrick",
       title: "帮助构件",
-      type: "string",
-      component: {
-        name: "CodeEditor",
-      },
-      decorator: "FormItemWithoutAdvanced",
-    },
-    {
-      name: "categoryTitle_validator",
-      type: "void",
-      decorator: {
-        name: "CategoryTitle",
-        props: {
-          text: "校验",
-        },
-      },
-    },
-    {
-      name: "required",
-      title: "必填",
-      type: "boolean",
-    },
-    {
-      name: "message",
-      title: "校验文本",
       type: "string",
       component: {
         name: "CodeEditor",
