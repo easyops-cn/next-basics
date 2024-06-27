@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.296.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.296.5...@next-bricks/forms@1.296.6) (2024-06-27)
+
+
+### Bug Fixes
+
+* 调整附件属性的方案 ([41d2173](https://github.com/easyops-cn/next-basics/commit/41d217337bad057beb1e63b1c0dc1c1fc9b87b55))
+
+
+
+
+
 ## [1.296.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.296.4...@next-bricks/forms@1.296.5) (2024-06-27)
 
 
