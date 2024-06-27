@@ -74,7 +74,6 @@ export function ObjectAttrArr(props: ObjectAttrArrProps): React.ReactElement {
             placeholder={i18n.t(`${NS_FORMS}:${K.ARRAY_LIMIT}`)}
             onChange={(e) => handleValueChange({ ...value, default: e })}
             tokenSeparators={[",", " "]}
-            dropdownRender={() => <></>}
             disabled={props.disabled}
           />
         </Row>
