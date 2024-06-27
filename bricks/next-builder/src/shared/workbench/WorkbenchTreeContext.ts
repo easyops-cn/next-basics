@@ -24,6 +24,7 @@ export interface ContextOfWorkbenchTree {
   collapsedNodes?: (string | number)[];
   nodeKey?: string;
   showLine?: boolean;
+  showChildrenIfMatchParent?: boolean;
   clickFactory?(node: WorkbenchNodeData): () => void;
   mouseEnterFactory?(node: WorkbenchNodeData): () => void;
   mouseLeaveFactory?(node: WorkbenchNodeData): () => void;
