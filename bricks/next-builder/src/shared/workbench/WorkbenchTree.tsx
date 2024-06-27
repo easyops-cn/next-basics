@@ -65,6 +65,7 @@ export interface TreeListProps {
   onNodeActive: (node: HTMLElement) => void;
   isFirst?: boolean[];
   isLast?: boolean[];
+  parents?: WorkbenchNodeData[];
 }
 
 const SearchingContext = createContext(false);
@@ -369,6 +370,7 @@ function TreeList({
   onNodeActive,
   isFirst,
   isLast,
+  parents,
 }: TreeListProps): ReactElement {
   const lastIndex = nodes.length - 1;
   return (
@@ -382,6 +384,7 @@ function TreeList({
             level={level}
             isFirst={[...(isFirst ?? []), index === 0]}
             isLast={[...(isLast ?? []), index === lastIndex]}
+            parents={[...(parents ?? []), node]}
             onNodeActive={onNodeActive}
           />
         ))}
@@ -411,6 +414,7 @@ export interface TreeNodeProps {
   isLast?: boolean[];
   skipNotify?: boolean;
   onNodeActive?: (node: HTMLElement) => void;
+  parents?: WorkbenchNodeData[];
 }
 
 function TreeNode({
@@ -418,6 +422,7 @@ function TreeNode({
   level,
   isFirst,
   isLast,
+  parents,
   onNodeActive,
 }: TreeNodeProps): ReactElement {
   const isLeaf = !node.children?.length;
@@ -433,6 +438,7 @@ function TreeNode({
     collapsedNodes,
     nodeKey,
     showLine,
+    showChildrenIfMatchParent,
     clickFactory,
     mouseEnterFactory,
     mouseLeaveFactory,
@@ -614,7 +620,10 @@ function TreeNode({
   // Disallow collapse leaf nodes, or any nodes when searching.
   const allowCollapse = collapsible && !isLeaf && !searching;
 
-  if (searching && showMatchedNodeOnly && !node.matched) {
+  const matchParent =
+    showChildrenIfMatchParent && parents.some((item) => item.matchedSelf);
+
+  if (searching && showMatchedNodeOnly && !node.matched && !matchParent) {
     return null;
   }
 
@@ -791,6 +800,7 @@ function TreeNode({
             onNodeActive={onNodeActive}
             isFirst={isFirst}
             isLast={isLast}
+            parents={parents}
           />
         )}
       </li>

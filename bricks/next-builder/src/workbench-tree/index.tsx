@@ -92,6 +92,9 @@ export class WorkbenchTreeElement extends UpdatingElement {
   @property({ type: Boolean })
   showLine: boolean;
 
+  @property({ type: Boolean })
+  showChildrenIfMatchParent: boolean;
+
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
 
@@ -182,6 +185,7 @@ export class WorkbenchTreeElement extends UpdatingElement {
                 fixedActionsFor: this.fixedActionsFor,
                 nodeKey: this.nodeKey,
                 showLine: this.showLine,
+                showChildrenIfMatchParent: this.showChildrenIfMatchParent,
                 collapsible: this.collapsible,
                 collapsedNodes: this.collapsedNodes,
                 getCollapsedId: defaultGetCollapsedId,

@@ -36,6 +36,7 @@ export interface WorkbenchDataTreeProps extends ContextOfWorkbenchTree {
   allowDrag?: boolean;
   allowDragToRoot?: boolean;
   allowDragToInside?: boolean;
+  showChildrenIfMatchParent?: boolean;
 }
 
 export function WorkbenchDataTree({
@@ -51,6 +52,7 @@ export function WorkbenchDataTree({
   matchNodeDataFields,
   onNodeNameSuffixClick,
   showLine,
+  showChildrenIfMatchParent,
   allowDrag,
   allowDragToInside,
   allowDragToRoot,
@@ -120,6 +122,7 @@ export function WorkbenchDataTree({
         activeKey,
         nodeKey,
         showLine,
+        showChildrenIfMatchParent,
         clickFactory,
         contextMenuFactory,
         collapsible: true,

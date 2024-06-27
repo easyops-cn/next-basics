@@ -56,6 +56,9 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
   @property({ attribute: false })
   matchNodeDataFields: string | string[];
 
+  @property({ type: Boolean })
+  showChildrenIfMatchParent: boolean;
+
   @property({ attribute: false })
   fixedActionsFor: Record<string, unknown> | Record<string, unknown>[];
 
@@ -165,6 +168,7 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
                 matchNodeDataFields={this.matchNodeDataFields}
                 onNodeNameSuffixClick={this._nodeNameSuffixClick}
                 showLine={this.showLine}
+                showChildrenIfMatchParent={this.showChildrenIfMatchParent}
               />
             </WorkbenchActionsContext.Provider>
           </BuilderProvider>
