@@ -182,10 +182,7 @@ export const generalModalSchema = {
             { label: "Ghost", value: "ghost" },
             { label: "Dashed", value: "dashed" },
             { label: "Danger", value: "danger" },
-          ].map((item) => ({
-            label: item.label,
-            value: item.value,
-          })),
+          ],
         },
       },
     },
