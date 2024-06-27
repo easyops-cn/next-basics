@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.254.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.254.2...@next-bricks/basic-bricks@1.254.3) (2024-06-27)
+
+
+### Bug Fixes
+
+* add divider and modal schema ([e877d25](https://github.com/easyops-cn/next-basics/commit/e877d256f2543f7c7e295dfc2c214b2c202de383))
+* add divider and modal schema ([d54324c](https://github.com/easyops-cn/next-basics/commit/d54324cd461b7a11e9ee7dcbc73f81c17ea782d4))
+
+
+
+
+
 ## [1.254.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.254.1...@next-bricks/basic-bricks@1.254.2) (2024-06-26)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.323.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.323.4...@next-bricks/presentational-bricks@1.323.5) (2024-06-27)
+
+
+### Bug Fixes
+
+* add divider and modal schema ([d54324c](https://github.com/easyops-cn/next-basics/commit/d54324cd461b7a11e9ee7dcbc73f81c17ea782d4))
+
+
+
+
+
 ## [1.323.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.323.3...@next-bricks/presentational-bricks@1.323.4) (2024-06-26)
 
 
