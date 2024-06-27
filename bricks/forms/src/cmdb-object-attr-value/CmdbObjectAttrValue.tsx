@@ -101,6 +101,7 @@ export const defaultValueMap = new Map([
     {
       default: "",
       struct_define: [],
+      mode: "attachment",
     },
   ],
 ]);
