@@ -32,6 +32,7 @@ export const generalButtonsSchema = {
         props: {
           placeholder: "请选择按钮类型",
           allowClear: true,
+          defaultValue: "primary",
           options: [
             {
               label: "主要",
@@ -95,6 +96,24 @@ export const generalButtonsSchema = {
       name: "showCancelButton",
       title: "显示",
       type: "boolean",
+      "x-reactions": [
+        {
+          target: "cancelText",
+          fulfill: {
+            state: {
+              visible: "{{$self.value}}",
+            },
+          },
+        },
+        {
+          target: "cancelType",
+          fulfill: {
+            state: {
+              visible: "{{$self.value}}",
+            },
+          },
+        },
+      ],
     },
     {
       name: "cancelText",
@@ -110,6 +129,7 @@ export const generalButtonsSchema = {
         props: {
           placeholder: "请选择按钮类型",
           allowClear: true,
+          defaultValue: "link",
           options: [
             {
               label: "主要",

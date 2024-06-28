@@ -14,7 +14,14 @@ function GeneralButtonsComponentFactory(React: typeof _React) {
       formilySchemaFormatter,
       advancedMode,
       scope,
+      form,
     } = props;
+
+    React.useEffect(() => {
+      form.setInitialValues({
+        showCancelButton: false,
+      });
+    }, [form]);
 
     return React.createElement(SchemaFieldComponent, {
       schema: formilySchemaFormatter(
