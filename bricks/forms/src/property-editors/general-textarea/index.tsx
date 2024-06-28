@@ -15,6 +15,7 @@ function GeneralTextareaComponentFactory(React: typeof _React) {
       advancedMode,
       scope,
       form,
+      effects,
     } = props;
 
     React.useEffect(() => {
@@ -23,6 +24,23 @@ function GeneralTextareaComponentFactory(React: typeof _React) {
         pattern: "",
       });
     }, [form]);
+
+    React.useEffect(() => {
+      const { onSubmit } = effects;
+      form.addEffects("formEffect", () => {
+        onSubmit((value) => {
+          if (value.minRows || value.maxRows) {
+            const { minRows, maxRows, ...newValue } = value;
+            return { ...newValue, autoSize: { minRows, maxRows } };
+          }
+          if (!value.minRows && !value.maxRows) {
+            const { autoSize, ...newValue } = value;
+            return { ...newValue, autoSize };
+          }
+          return { ...value };
+        });
+      });
+    }, []);
 
     return React.createElement(SchemaFieldComponent, {
       schema: formilySchemaFormatter(

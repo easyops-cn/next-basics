@@ -53,7 +53,8 @@ export const generalCheckboxSchema = {
         name: "FormItem",
         props: {
           layout: "horizontal",
-          tooltip: "当前值为true时, 表单不会再显示当前项, 同时不会校验当前项",
+          tooltip:
+            "区别于通用的“隐藏”属性，隐藏表单项时，表单不仅不显示当前项，同时也不会校验当前项；通用隐藏仅仅是不显示，但仍会校验当前项。通常，您应选择此属性来隐藏表单项。",
         },
       },
     },

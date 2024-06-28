@@ -43,7 +43,7 @@ export const generalTextareaSchema = {
       type: "boolean",
     },
     {
-      name: "readonly",
+      name: "readOnly",
       title: "只读",
       type: "boolean",
     },
@@ -58,7 +58,8 @@ export const generalTextareaSchema = {
         name: "FormItem",
         props: {
           layout: "horizontal",
-          tooltip: "当前值为true时, 表单不会再显示当前项, 同时不会校验当前项",
+          tooltip:
+            "区别于通用的“隐藏”属性，隐藏表单项时，表单不仅不显示当前项，同时也不会校验当前项；通用隐藏仅仅是不显示，但仍会校验当前项。通常，您应选择此属性来隐藏表单项。",
         },
       },
     },
@@ -77,6 +78,24 @@ export const generalTextareaSchema = {
       name: "autoSize",
       title: "自适应内容高度",
       type: "boolean",
+    },
+    {
+      name: "minRows",
+      title: "最小行数",
+      type: "number",
+      component: {
+        name: "NumberPicker",
+      },
+      decorator: "FormItem",
+    },
+    {
+      name: "maxRows",
+      title: "最大行数",
+      type: "number",
+      component: {
+        name: "NumberPicker",
+      },
+      decorator: "FormItem",
     },
     {
       name: "placeholder",
