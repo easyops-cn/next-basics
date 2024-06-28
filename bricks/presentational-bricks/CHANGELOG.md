@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.323.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.323.5...@next-bricks/presentational-bricks@1.323.6) (2024-06-28)
+
+
+### Bug Fixes
+
+* add cardItem schema ([bf845df](https://github.com/easyops-cn/next-basics/commit/bf845df3d6f5cf38fa8b884276c8426a1975c187))
+
+
+
+
+
 ## [1.323.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.323.4...@next-bricks/presentational-bricks@1.323.5) (2024-06-27)
 
 
