@@ -78,6 +78,24 @@ export const generalTextareaSchema = {
       name: "autoSize",
       title: "自适应内容高度",
       type: "boolean",
+      "x-reactions": [
+        {
+          target: "minRows",
+          fulfill: {
+            state: {
+              visible: "{{!$self.value}}",
+            },
+          },
+        },
+        {
+          target: "maxRows",
+          fulfill: {
+            state: {
+              visible: "{{!$self.value}}",
+            },
+          },
+        },
+      ],
     },
     {
       name: "minRows",
