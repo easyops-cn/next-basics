@@ -684,6 +684,25 @@ function TreeNode({
               }
             : { ...pick(node.link, ["to", "href"]) })}
         >
+          {showLine && (
+            <>
+              {[...Array(level - 1)].map((_, i) => {
+                return (
+                  <span
+                    key={i}
+                    className={classNames(
+                      isLast[i] ? styles.indentUnit : styles.indentUnitLine
+                    )}
+                  />
+                );
+              })}
+              <span
+                className={classNames(styles.switcherLeafLine, {
+                  [styles.isLast]: isLastOfCurrentLayer,
+                })}
+              ></span>
+            </>
+          )}
           <span
             className={classNames(styles.nodeLabel, {
               [styles.unreachable]: node.unreachable,
@@ -694,25 +713,6 @@ function TreeNode({
             }}
             ref={nodeLabelCallback}
           >
-            {showLine && (
-              <>
-                {[...Array(level - 1)].map((_, i) => {
-                  return (
-                    <span
-                      key={i}
-                      className={classNames(
-                        isLast[i] ? styles.indentUnit : styles.indentUnitLine
-                      )}
-                    />
-                  );
-                })}
-                <span
-                  className={classNames(styles.switcherLeafLine, {
-                    [styles.isLast]: isLastOfCurrentLayer,
-                  })}
-                ></span>
-              </>
-            )}
             <span className={styles.nodeIconWrapper}>
               {allowCollapse && (
                 <span
