@@ -28,6 +28,8 @@ function GeneralTextareaComponentFactory(React: typeof _React) {
     React.useEffect(() => {
       const { onSubmit } = effects;
       form.addEffects("formEffect", () => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         onSubmit((value) => {
           if (value.minRows || value.maxRows) {
             const { minRows, maxRows, ...newValue } = value;
