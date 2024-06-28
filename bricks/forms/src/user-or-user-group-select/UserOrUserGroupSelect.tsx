@@ -99,9 +99,9 @@ export function LegacyUserSelectFormItem(
   const selectRef = useRef();
   const [selectedValue, setSelectedValue] = useState([]);
   const staticValue = useRef([]);
-  const userShowKey: string[] = getInstanceNameKeys(props.objectMap["USER"]);
+  const userShowKey: string[] = getInstanceNameKeys(props.objectMap?.["USER"]);
   const userGroupShowKey: string[] = getInstanceNameKeys(
-    props.objectMap["USER_GROUP"]
+    props.objectMap?.["USER_GROUP"]
   );
 
   const { t } = useTranslation(NS_FORMS);
@@ -574,7 +574,7 @@ export function LegacyUserSelectFormItem(
         showSearch
         className={styles.customSelect}
         ref={selectRef}
-        allowClear={true}
+        allowClear
         mode={props.isMultiple ? "multiple" : null}
         labelInValue
         placeholder={props.placeholder}
@@ -651,25 +651,27 @@ export function LegacyUserSelectFormItem(
           ></Button>
         )}
       </div>
-      <InstanceListModal
-        objectMap={props.objectMap}
-        objectId={modalObjectId}
-        visible={modalVisible}
-        title={title}
-        onSelected={handleModalSelected}
-        onCancel={closeModal}
-        rowSelectionType={props.isMultiple ? "checkbox" : "radio"}
-        showSizeChanger={true}
-        {...(modalObjectId === "USER" && props.hideInvalidUser
-          ? {
-              presetConfigs: {
-                query: {
-                  state: "valid",
+      {props.objectMap && (
+        <InstanceListModal
+          objectMap={props.objectMap}
+          objectId={modalObjectId}
+          visible={modalVisible}
+          title={title}
+          onSelected={handleModalSelected}
+          onCancel={closeModal}
+          rowSelectionType={props.isMultiple ? "checkbox" : "radio"}
+          showSizeChanger
+          {...(modalObjectId === "USER" && props.hideInvalidUser
+            ? {
+                presetConfigs: {
+                  query: {
+                    state: "valid",
+                  },
                 },
-              },
-            }
-          : {})}
-      />
+              }
+            : {})}
+        />
+      )}
     </div>
   );
 }
@@ -709,10 +711,6 @@ export function UserOrUserGroupSelect(
       })();
     }
   }, [props.objectList, props.notRender]);
-
-  if (!objectList) {
-    return null;
-  }
 
   return (
     <FormItemWrapper {...props}>
