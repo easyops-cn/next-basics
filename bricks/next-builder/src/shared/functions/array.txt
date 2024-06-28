@@ -1,121 +1,237 @@
 function ArrayFactory() {
-  function map(fn) {
-    const result = [];
-    for (let i = 0; i < this.length; i++) {
-      if (Object.prototype.hasOwnProperty.call(this, i))
-        result[i] = fn(this[i], i, this);
+  // https://tc39.es/ecma262/multipage/abstract-operations.html#sec-tolength
+  function ToLength(length) {
+    const len = ToIntegerOrInfinity(length);
+    if (len <= 0) {
+      return 0;
     }
-    return result;
+    return Math.min(len, 2 ** 53 - 1);
+  }
+
+  // https://tc39.es/ecma262/multipage/abstract-operations.html#sec-tointegerorinfinity
+  function ToIntegerOrInfinity(length) {
+    const number = Number(length);
+    if (isNaN(number)) {
+      return 0;
+    }
+    if (!isFinite(number)) {
+      return number;
+    }
+    if (number < 0) {
+      return Math.ceil(number);
+    }
+    return Math.floor(number);
+  }
+
+  function EnsureFunction(fn) {
+    if (typeof fn !== "function") {
+      throw new TypeError(`${typeof fn} is not a function`);
+    }
+  }
+
+  function HasProperty(object, prop) {
+    return Object.prototype.hasOwnProperty.call(object, prop);
+  }
+
+  // https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.map
+  function map(fn) {
+    const len = ToLength(this.length);
+    EnsureFunction(fn);
+    const A = new Array(len);
+    let k = 0;
+    while (k < len) {
+      if (HasProperty(this, k)) {
+        // TODO(steve): can't use `this` in callback
+        A[k] = fn(this[k], k, this);
+      }
+      k++;
+    }
+    return A;
   }
 
   function forEach(fn) {
-    for (let i = 0; i < this.length; i++) {
-      if (Object.prototype.hasOwnProperty.call(this, i))
-        fn(this[i], i, this);
+    const len = ToLength(this.length);
+    EnsureFunction(fn);
+    let k = 0;
+    while (k < len) {
+      if (HasProperty(this, k)) {
+        fn(this[k], k, this);
+      }
+      k++;
     }
   }
 
   function filter(fn) {
-    const result = [];
-    for (let i = 0; i < this.length; i++) {
-      if (Object.prototype.hasOwnProperty.call(this, i) && fn(this[i], i, this))
-        result.push(this[i]);
+    const len = ToLength(this.length);
+    EnsureFunction(fn);
+    const A = new Array(0);
+    let k = 0;
+    let to = 0;
+    while (k < len) {
+      if (HasProperty(this, k)) {
+        const kValue = this[k];
+        if (fn(kValue, k, this)) {
+          A[to] = kValue;
+          to++;
+        }
+      }
+      k++;
     }
-    return result;
+    return A;
   }
 
   function every(fn) {
-    for (let i = 0; i < this.length; i++) {
-      if (Object.prototype.hasOwnProperty.call(this, i) && !fn(this[i], i, this))
-        return false;
+    const len = ToLength(this.length);
+    EnsureFunction(fn);
+    let k = 0;
+    while (k < len) {
+      if (HasProperty(this, k)) {
+        if (!fn(this[k], k, this)) {
+          return false;
+        }
+      }
+      k++;
     }
     return true;
   }
 
   function some(fn) {
-    for (let i = 0; i < this.length; i++) {
-      if (Object.prototype.hasOwnProperty.call(this, i) && fn(this[i], i, this))
-        return true;
+    const len = ToLength(this.length);
+    EnsureFunction(fn);
+    let k = 0;
+    while (k < len) {
+      if (HasProperty(this, k)) {
+        if (fn(this[k], k, this)) {
+          return true;
+        }
+      }
+      k++;
     }
     return false;
   }
 
   function find(fn) {
-    for (let i = 0; i < this.length; i++) {
-      if (fn(this[i], i, this))
-        return this[i];
+    const len = ToLength(this.length);
+    EnsureFunction(fn);
+    for (let k = 0; k < len; k++) {
+      const kValue = this[k];
+      if (fn(kValue, k, this)) {
+        return kValue;
+      }
     }
   }
 
   function findLast(fn) {
-    for (let i = this.length - 1; i >= 0; i--) {
-      if (fn(this[i], i, this))
-        return this[i];
+    const len = ToLength(this.length);
+    EnsureFunction(fn);
+    for (let k = len - 1; k >= 0; k--) {
+      const kValue = this[k];
+      if (fn(kValue, k, this)) {
+        return kValue;
+      }
     }
   }
 
   function findIndex(fn) {
-    for (let i = 0; i < this.length; i++) {
-      if (fn(this[i], i, this))
-        return i;
+    const len = ToLength(this.length);
+    EnsureFunction(fn);
+    for (let k = 0; k < len; k++) {
+      if (fn(this[k], k, this)) {
+        return k;
+      }
     }
     return -1;
   }
 
   function findLastIndex(fn) {
-    for (let i = this.length - 1; i >= 0; i--) {
-      if (fn(this[i], i, this))
-        return i;
+    const len = ToLength(this.length);
+    EnsureFunction(fn);
+    for (let k = len - 1; k >= 0; k--) {
+      if (fn(this[k], k, this)) {
+        return k;
+      }
     }
     return -1;
   }
 
   function flatMap(fn) {
+    const sourceLen = ToLength(this.length);
+    EnsureFunction(fn);
     const result = [];
-    for (let i = 0; i < this.length; i++) {
-      if (Object.prototype.hasOwnProperty.call(this, i))
-        result[i] = fn(this[i], i, this);
+    for (let k = 0; k < sourceLen; k++) {
+      if (HasProperty(this, k))
+        result[k] = fn(this[k], k, this);
     }
     return result.flat();
   }
 
   function reduce(...args) {
+    const len = ToLength(this.length);
     const fn = args[0];
-    let accumulator = args[1];
-    let initialized = args.length > 1;
-    for (let i = 0; i < this.length; i++) {
-      if (Object.prototype.hasOwnProperty.call(this, i)) {
-        if (initialized) {
-          accumulator = fn(accumulator, this[i], i, this);
-        } else {
-          accumulator = this[i];
-          initialized = true;
+    EnsureFunction(fn);
+
+    if (len === 0 && args.length === 1) {
+      throw new TypeError("Reduce of empty array with no initial value");
+    }
+
+    let k = 0;
+    let accumulator;
+
+    if (args.length >= 2) {
+      accumulator = args[1];
+    } else {
+      let kPresent = false;
+      while (!kPresent && k < len) {
+        kPresent = HasProperty(this, k);
+        if (kPresent) {
+          accumulator = this[k];
         }
+        k++;
       }
     }
-    if (!initialized) {
-      throw new Error("Reduce of empty array with no initial value");
+
+    while (k < len) {
+      if (HasProperty(this, k)) {
+        accumulator = fn(accumulator, this[k], k, this);
+      }
+      k++;
     }
+
     return accumulator;
   }
 
   function reduceRight(...args) {
+    const len = ToLength(this.length);
     const fn = args[0];
-    let accumulator = args[1];
-    let initialized = args.length > 1;
-    for (let i = this.length - 1; i >= 0; i--) {
-      if (Object.prototype.hasOwnProperty.call(this, i)) {
-        if (initialized) {
-          accumulator = fn(accumulator, this[i], i, this);
-        } else {
-          accumulator = this[i];
-          initialized = true;
+    EnsureFunction(fn);
+
+    if (len === 0 && args.length === 1) {
+      throw new TypeError("Reduce of empty array with no initial value");
+    }
+
+    let k = len - 1;
+    let accumulator;
+
+    if (args.length >= 2) {
+      accumulator = args[1];
+    } else {
+      let kPresent = false;
+      while (!kPresent && k >= 0) {
+        kPresent = HasProperty(this, k);
+        if (kPresent) {
+          accumulator = this[k];
         }
+        k--;
       }
     }
-    if (!initialized) {
-      throw new Error("Reduce of empty array with no initial value");
+
+    while (k >= 0) {
+      if (HasProperty(this, k)) {
+        accumulator = fn(accumulator, this[k], k, this);
+      }
+      k--;
     }
+
     return accumulator;
   }
 

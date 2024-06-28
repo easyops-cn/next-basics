@@ -280,8 +280,14 @@ function debuggerOverrides(ctx: {
   const debugArray = ctx.cook(precookedArray.function, arraySource, {
     externalSourceForDebug: true,
     globalVariables: ctx.supply(precookedArray.attemptToVisitGlobals, {
-      Error,
+      TypeError,
       Object,
+      Array: DebuggerArrayConstructor,
+      Number,
+      isNaN,
+      isFinite,
+      Math,
+      console,
     }),
     ArrayConstructor: DebuggerArrayConstructor,
   } as any) as () => object;
