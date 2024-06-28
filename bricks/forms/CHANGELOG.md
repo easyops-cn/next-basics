@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.296.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.296.8...@next-bricks/forms@1.296.9) (2024-06-28)
+
+
+### Bug Fixes
+
+* 修复form表单editor遗留项问题 ([b363516](https://github.com/easyops-cn/next-basics/commit/b3635163c133526e5734c537115f6bb01ff1e9a6))
+
+
+
+
+
 ## [1.296.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.296.7...@next-bricks/forms@1.296.8) (2024-06-28)
 
 
