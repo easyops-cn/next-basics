@@ -1,10 +1,11 @@
 import { getRuntime } from "@next-core/brick-kit";
-import { computeConstantCondition } from "@next-core/brick-utils";
+import { computeConstantCondition, isEvaluable } from "@next-core/brick-utils";
 import {
   BuilderCustomTemplateNode,
   BuilderRouteNode,
   ContextConf,
   BuilderSnippetNode,
+  MenuIcon,
 } from "@next-core/brick-types";
 import { pipes } from "@next-core/pipes";
 import { uniqueId } from "lodash";
@@ -18,6 +19,24 @@ interface PartialProject {
 interface ExtendedContextConf extends ContextConf {
   path?: string;
   expose?: boolean;
+}
+
+function isNonExpression(value: unknown): boolean {
+  switch (typeof value) {
+    case "string":
+      return !isEvaluable(value) && !value.includes("${");
+    case "boolean":
+    case "number":
+      return true;
+    case "object":
+      return value === null
+        ? true
+        : (Array.isArray(value) ? value : Object.entries(value).flat()).every(
+            (item) => isNonExpression(item)
+          );
+    default:
+      return false;
+  }
 }
 
 export function getWorkbenchDataTree(
@@ -46,16 +65,36 @@ export function getWorkbenchDataTree(
           unreachable = true;
         }
       }
+
+      let icon: MenuIcon;
+      if (item.resolve) {
+        icon = {
+          lib: "antd",
+          icon: "link",
+          theme: "outlined",
+          color: "orange",
+        };
+      } else {
+        icon = isNonExpression(item.value)
+          ? {
+              lib: "fa",
+              prefix: "fas",
+              icon: "dollar-sign",
+              color: "blue",
+            }
+          : {
+              lib: "antd",
+              icon: "code",
+              theme: "outlined",
+              color: "cyan",
+            };
+      }
+
       return {
         key,
         name: item.name,
         path: item.path,
-        icon: {
-          lib: "antd",
-          theme: "outlined",
-          icon: item.resolve ? "link" : "code",
-          color: item.resolve ? "orange" : "cyan",
-        },
+        icon,
         labelPrefix:
           node.type === "custom-template" &&
           options?.distinguishExposedStates &&
