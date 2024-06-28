@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.276.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.276.1...@next-bricks/next-builder@1.276.2) (2024-06-28)
+
+
+### Bug Fixes
+
+* put line outside ([375aa9a](https://github.com/easyops-cn/next-basics/commit/375aa9a0222641eb5385d3eb40f83937bc3dce89))
+
+
+
+
+
 ## [1.276.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.276.0...@next-bricks/next-builder@1.276.1) (2024-06-28)
 
 
