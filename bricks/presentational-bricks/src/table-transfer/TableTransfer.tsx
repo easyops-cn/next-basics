@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 import type { ColumnsType, TableRowSelection } from "antd/es/table/interface";
@@ -13,7 +13,10 @@ import { MenuOutlined } from "@ant-design/icons";
 import { Transfer, Table, Modal } from "antd";
 import difference from "lodash/difference";
 import styles from "./index.module.css";
-import { cloneDeep, isNumber, get, uniq } from "lodash";
+import { cloneDeep, isNumber, get, uniq, toPath } from "lodash";
+import { CustomColumn } from "../brick-table";
+import { UseBrickConf } from "@next-core/brick-types";
+import { getCustomComp, getCustomHeader } from "./TableTransferHelper";
 
 interface TableTransferProps {
   dataSource: any[];
@@ -31,6 +34,13 @@ interface TableTransferProps {
   searchPlaceholder?: string;
   onSearch?: (direction: "left" | "right", value: string) => void;
 }
+type ItemBrickDataMap = Map<unknown, BrickData>;
+type BrickData = {
+  cellData: unknown;
+  rowData: Record<string, unknown>;
+  columnIndex: number;
+};
+
 export function arrayMoveImmutable(array, fromIndex, toIndex) {
   const newArray = [...array];
   const startIndex = fromIndex < 0 ? newArray.length + fromIndex : fromIndex;
@@ -131,6 +141,13 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
   const [rightColumns, setRightColumns] = useState([]);
   const [targetKeys, setTargetKeys] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState([]);
+  const columnTitleBrickDataMapRef = useRef<
+    Map<CustomColumn, { title: unknown }>
+  >(new Map());
+  const useBrickItemBrickDataMapRef = useRef<
+    Map<UseBrickConf, ItemBrickDataMap>
+  >(new Map());
+
   useEffect(() => {
     const modifiedDataSource = filterDisabledDataSource(
       originDataSource,
@@ -147,7 +164,12 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
       ));
       setRightColumns([
         ...originColumns,
-        { title: sortTitle, dataIndex: "sort", render: () => <DragHandle /> },
+        {
+          title: sortTitle,
+          dataIndex: "sort",
+          width: 50,
+          render: () => <DragHandle />,
+        },
       ]);
     } else {
       setRightColumns(originColumns);
@@ -219,6 +241,100 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
         disabled: listDisabled,
       }) => {
         const columns = direction === "left" ? originColumns : rightColumns;
+        let customColumns;
+
+        if (columns) {
+          columnTitleBrickDataMapRef.current.clear();
+          useBrickItemBrickDataMapRef.current.clear();
+          customColumns = columns.map((column, index) => {
+            const {
+              useBrick,
+              component,
+              valueSuffix,
+              cellStatus,
+              titleUseBrick,
+              headerBrick,
+              colSpanKey,
+              rowSpanKey,
+              ...columnConf
+            } = column;
+
+            if (headerBrick?.useBrick || titleUseBrick) {
+              if (titleUseBrick) {
+                // eslint-disable-next-line no-console
+                console.warn(
+                  "`titleUseBrick` of `<presentational-bricks.rank-table>` is deprecated, use `headerBrick` instead."
+                );
+              }
+
+              const useBrick = headerBrick?.useBrick || titleUseBrick;
+              let data = columnTitleBrickDataMapRef.current.get(column);
+
+              if (!data) {
+                data = {
+                  title: columnConf.title,
+                };
+                columnTitleBrickDataMapRef.current.set(column, data);
+              }
+
+              columnConf.title = getCustomHeader(useBrick, data);
+            }
+
+            if (useBrick || component) {
+              let itemBrickDataMap: ItemBrickDataMap;
+
+              if (useBrick) {
+                itemBrickDataMap =
+                  useBrickItemBrickDataMapRef.current.get(useBrick);
+
+                if (!itemBrickDataMap) {
+                  itemBrickDataMap = new Map();
+                  useBrickItemBrickDataMapRef.current.set(
+                    useBrick,
+                    itemBrickDataMap
+                  );
+                }
+              }
+
+              columnConf.render = getCustomComp(
+                useBrick,
+                component,
+                itemBrickDataMap
+              );
+            } else if (valueSuffix) {
+              // eslint-disable-next-line react/display-name
+              columnConf.render = (value: any, record: any, index: any) => (
+                <>{value + valueSuffix}</>
+              );
+            }
+
+            if (typeof columnConf.dataIndex === "string") {
+              columnConf.dataIndex = toPath(columnConf.dataIndex);
+            }
+            if (columnConf.verticalAlign === "top") {
+              columnConf.className
+                ? (columnConf.className += " alignTop")
+                : (columnConf.className = "alignTop");
+            }
+            if (columnConf.verticalAlign === "bottom") {
+              columnConf.className
+                ? (columnConf.className += " alignBottom")
+                : (columnConf.className = "alignBottom");
+            }
+
+            if (!columnConf.render) {
+              // eslint-disable-next-line react/display-name
+              columnConf.render = (text: string) => (
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <span style={{ flex: 1 }}>{text}</span>
+                </div>
+              );
+            }
+
+            return columnConf;
+          });
+        }
+
         const rowSelection: TableRowSelection<TransferItem> = {
           getCheckboxProps: (item) => ({
             disabled: listDisabled || item.disabled,
@@ -294,7 +410,7 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
           <Table
             rowSelection={rowSelection}
             dataSource={filteredItems}
-            columns={columns}
+            columns={customColumns}
             size="small"
             onRow={({ key, disabled: itemDisabled }) => ({
               onClick: () => {
