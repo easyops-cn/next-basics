@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.296.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.296.9...@next-bricks/forms@1.296.10) (2024-07-01)
+
+
+### Bug Fixes
+
+* **user-or-user-group-select:** Fix value cannot be initialized ([f1a0033](https://github.com/easyops-cn/next-basics/commit/f1a003361b72bd7c1bbc6297dcc5f4bdfbdc6ae7))
+
+
+
+
+
 ## [1.296.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.296.8...@next-bricks/forms@1.296.9) (2024-06-28)
 
 
