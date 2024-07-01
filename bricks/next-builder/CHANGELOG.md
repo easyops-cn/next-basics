@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.276.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.276.3...@next-bricks/next-builder@1.276.4) (2024-07-01)
+
+
+### Bug Fixes
+
+* handle debugger input with single number argument ([2c7698a](https://github.com/easyops-cn/next-basics/commit/2c7698a61f68bc715c784f71bfa11830efaf780e))
+
+
+
+
+
 ## [1.276.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.276.2...@next-bricks/next-builder@1.276.3) (2024-07-01)
 
 
