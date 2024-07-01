@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.276.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.276.2...@next-bricks/next-builder@1.276.3) (2024-07-01)
+
+
+### Bug Fixes
+
+* fix array implementation ([4fddfb9](https://github.com/easyops-cn/next-basics/commit/4fddfb904a9e422398feb0d867cc664fed97800e))
+
+
+
+
+
 ## [1.276.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.276.1...@next-bricks/next-builder@1.276.2) (2024-06-28)
 
 
