@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.324.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.323.6...@next-bricks/presentational-bricks@1.324.0) (2024-07-01)
+
+
+### Features
+
+* 穿梭框表格支持useBrick展示自定义节点 ([28da60f](https://github.com/easyops-cn/next-basics/commit/28da60f7017f175420507ab02dc2116faecdb74b))
+
+
+
+
+
 ## [1.323.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.323.5...@next-bricks/presentational-bricks@1.323.6) (2024-06-28)
 
 
