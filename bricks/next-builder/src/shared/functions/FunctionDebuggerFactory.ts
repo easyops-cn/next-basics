@@ -348,6 +348,13 @@ function asDebuggerValue(value: unknown): unknown {
 }
 
 function asDebuggerArray(list: unknown[]): unknown[] {
+  // `new Array(n)` means an array with `n` empty slots.
+  // `new Array(a, b, ...)` means an array with `a`, `b`, ...
+  if (list.length === 1) {
+    const result = new DebuggerArrayConstructor(1);
+    result[0] = asDebuggerValue(list[0]);
+    return result;
+  }
   return new (DebuggerArrayConstructor as any)(...list.map(asDebuggerValue));
 }
 
