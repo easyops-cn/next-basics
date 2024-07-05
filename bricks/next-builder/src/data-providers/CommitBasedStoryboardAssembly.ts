@@ -176,7 +176,8 @@ export async function CommitBasedStoryboardAssembly({
   const processedMenusGraphData = processGraphDataWithDiff(
     menuGraphResponse as pipes.GraphData,
     menusDiffItem,
-    selectedDiffSet
+    selectedDiffSet,
+    { graphType: "menu" }
   );
   const menus = graphTree(processedMenusGraphData);
 

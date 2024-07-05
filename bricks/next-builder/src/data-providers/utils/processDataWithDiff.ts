@@ -52,7 +52,8 @@ function getPreviousNodeData(node: ModelGitDiffTree): pipes.GraphVertex {
 export function processGraphDataWithDiff(
   graphData: pipes.GraphData,
   diffItem: GitApi_CodeDiffResponseBody_diffs_item,
-  selectedDiffSet: Set<string>
+  selectedDiffSet: Set<string>,
+  options?: { graphType: string }
 ): pipes.GraphData {
   // diffTree use uuid instead of instanceId
   const verticesMap = keyBy(
@@ -66,7 +67,7 @@ export function processGraphDataWithDiff(
       in: verticesMap[e.in].uuid,
     };
   });
-
+  const { graphType } = options ?? {};
   const removedTopicVertices: string[] = [];
   const addedTopicVertices: pipes.GraphVertex[] = [];
   const modifiedTopicVertices: pipes.GraphVertex[] = [];
@@ -76,6 +77,18 @@ export function processGraphDataWithDiff(
   const removedEdges: pipes.GraphEdge[] = [];
   const addedEdges: pipes.GraphEdge[] = [];
   const modifiedEdges: [pipes.GraphEdge, pipes.GraphEdge][] = [];
+
+  const calcEdgesName = (condition: {
+    key: string;
+    value: unknown;
+  }): string => {
+    return graphType === "menu" &&
+      !!graphData.topic_vertices.find(
+        (item) => item[condition.key as string] === condition.value
+      )
+      ? "items"
+      : "children";
+  };
 
   walkTree(diffItem?.root, null, (node, parent) => {
     if (node.actions.length && !selectedDiffSet.has(node.id)) {
@@ -119,7 +132,7 @@ export function processGraphDataWithDiff(
             removedEdges.push({
               out: parent.id,
               in: node.id,
-              out_name: "children",
+              out_name: calcEdgesName({ key: "uuid", value: parent.id }),
             });
           }
           break;
@@ -146,7 +159,7 @@ export function processGraphDataWithDiff(
             addedEdges.push({
               out: parent.id,
               in: node.id,
-              out_name: "children",
+              out_name: calcEdgesName({ key: "uuid", value: parent.id }),
             });
           }
           break;
@@ -161,12 +174,18 @@ export function processGraphDataWithDiff(
               {
                 out: moveAction.curRootInstanceId,
                 in: node.id,
-                out_name: "children",
+                out_name: calcEdgesName({
+                  key: "instanceId",
+                  value: moveAction.curRootInstanceId,
+                }),
               },
               {
                 out: moveAction.originRootInstanceId,
                 in: node.id,
-                out_name: "children",
+                out_name: calcEdgesName({
+                  key: "instanceId",
+                  value: moveAction.originRootInstanceId,
+                }),
               },
             ]);
             if (actionType === "moveAndModify") {
@@ -182,12 +201,18 @@ export function processGraphDataWithDiff(
               {
                 out: moveAction.curRootInstanceId,
                 in: node.id,
-                out_name: "children",
+                out_name: calcEdgesName({
+                  key: "instanceId",
+                  value: moveAction.curRootInstanceId,
+                }),
               },
               {
                 out: moveAction.originRootInstanceId,
                 in: node.id,
-                out_name: "children",
+                out_name: calcEdgesName({
+                  key: "instanceId",
+                  value: moveAction.originRootInstanceId,
+                }),
               },
             ]);
             removedTopicVertices.push(node.id);
@@ -202,12 +227,18 @@ export function processGraphDataWithDiff(
               {
                 out: moveAction.curRootInstanceId,
                 in: node.id,
-                out_name: "children",
+                out_name: calcEdgesName({
+                  key: "instanceId",
+                  value: moveAction.curRootInstanceId,
+                }),
               },
               {
                 out: moveAction.originRootInstanceId,
                 in: node.id,
-                out_name: "children",
+                out_name: calcEdgesName({
+                  key: "instanceId",
+                  value: moveAction.originRootInstanceId,
+                }),
               },
             ]);
             removedVertices.push(node.id);
