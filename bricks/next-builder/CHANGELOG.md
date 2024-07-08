@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.276.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.276.4...@next-bricks/next-builder@1.276.5) (2024-07-08)
+
+
+### Bug Fixes
+
+* 修复部分提交的时候，menus 组装问题 ([7e2aa26](https://github.com/easyops-cn/next-basics/commit/7e2aa2671fef30570886b66a3072cc7bb7b0ebce))
+
+
+
+
+
 ## [1.276.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.276.3...@next-bricks/next-builder@1.276.4) (2024-07-01)
 
 
