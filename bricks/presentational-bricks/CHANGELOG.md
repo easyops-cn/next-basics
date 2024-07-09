@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.325.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.324.0...@next-bricks/presentational-bricks@1.325.0) (2024-07-09)
+
+
+### Bug Fixes
+
+* **brick-user:** prevent avatar shrinkage ([e1fb89b](https://github.com/easyops-cn/next-basics/commit/e1fb89b2a6cdfec91c5b425f55b8fdfa591f116f))
+
+
+### Features
+
+* **info-display-card-list:** CardDetail add width property ([8d2b67b](https://github.com/easyops-cn/next-basics/commit/8d2b67b6d770952accfedbbe5d64b440be9ac453))
+
+
+
+
+
 # [1.324.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.323.6...@next-bricks/presentational-bricks@1.324.0) (2024-07-01)
 
 
