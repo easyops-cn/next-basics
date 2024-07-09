@@ -8,6 +8,7 @@ import { UseBrickConf } from "@next-core/brick-types";
 export interface CardDetail {
   title: string;
   desc: string;
+  width?: string | number;
   useBrick?: boolean;
   detailBrickConf?: { useBrick: UseBrickConf };
 }

@@ -44,7 +44,11 @@ export function InfoDisplayCardList({
     item: CardDetail,
     index: number
   ): React.ReactNode => (
-    <div className={styles.infoCardDetailWrapper} key={index}>
+    <div
+      className={styles.infoCardDetailWrapper}
+      style={{ width: item.width, flexShrink: 0 }}
+      key={index}
+    >
       <h5>{item.title}</h5>
       {(isEmptyDetailOfDescBrickConf || !item.useBrick) && item.desc && (
         <Tooltip title={item.desc}>
@@ -136,13 +140,17 @@ export function InfoDisplayCardList({
         </div>
         <div className={styles.infoCardRightSection}>
           <div
-            style={
-              item.detail?.length >= 4
+            style={{
+              ...(item.detail?.length >= 4
                 ? {
                     gridTemplateColumns: `repeat(${item.detail.length}, minmax(0, 1fr))`,
                   }
-                : { display: "flex", justifyContent: "flex-end" }
-            }
+                : {
+                    display: "flex",
+                    flexWrap: "wrap",
+                  }),
+              gap: "var(--toolbar-button-gap)",
+            }}
           >
             {item.detail?.map(getCardItemDetail)}
           </div>
@@ -151,7 +159,6 @@ export function InfoDisplayCardList({
               onClick={(e) => {
                 e.stopPropagation();
               }}
-              style={{ padding: "15px 5px" }}
             >
               <BrickAsComponent
                 useBrick={optionConf.useBrick}
@@ -160,7 +167,7 @@ export function InfoDisplayCardList({
             </div>
           )}
           {!isEmpty(item.operateItemBrick?.useBrick) && (
-            <div style={{ padding: "15px 5px" }}>
+            <div>
               <BrickAsComponent
                 useBrick={item.operateItemBrick?.useBrick}
                 data={item}

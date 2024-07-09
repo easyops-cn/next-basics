@@ -3,3 +3,8 @@
   gap: 8px;
   align-items: center;
 }
+
+.username {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
