@@ -27,7 +27,7 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
     Avatar,
     user: userInfo,
     updateConfig,
-  } = useAvatar(props.userNameOrId);
+  } = useAvatar(props.userNameOrId, { style: { flexShrink: 0 } });
 
   React.useEffect(() => {
     if (userInfo) {
@@ -59,6 +59,7 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
       shape,
       size,
       style: {
+        flexShrink: 0,
         backgroundColor: avatarSrc ? undefined : "rgb(0, 113, 235)",
         margin: iconMargin,
       },
@@ -81,14 +82,14 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
 
   return (
     <Tooltip title={tooltip} placement="topLeft">
-      <span className={cssStyle.user}>
+      <div className={cssStyle.user}>
         {!props.hideAvatar && Avatar}
         {!props.hideUsername && (
-          <span data-testid="username">
+          <span className={cssStyle.username} data-testid="username">
             {props?.displayShowKey ? showKey : name}
           </span>
         )}
-      </span>
+      </div>
     </Tooltip>
   );
 }
