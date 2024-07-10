@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.255.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.254.3...@next-bricks/basic-bricks@1.255.0) (2024-07-10)
+
+
+### Features
+
+* add link and icon editor ([36ef6d2](https://github.com/easyops-cn/next-basics/commit/36ef6d26baa5e141f769f124116876ddb4b82b89))
+
+
+
+
+
 ## [1.254.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.254.2...@next-bricks/basic-bricks@1.254.3) (2024-06-27)
 
 
