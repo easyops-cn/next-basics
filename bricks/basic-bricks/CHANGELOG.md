@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.256.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.255.0...@next-bricks/basic-bricks@1.256.0) (2024-07-11)
+
+
+### Features
+
+* add general-custom-buttons editor ([07aaf73](https://github.com/easyops-cn/next-basics/commit/07aaf735ada3e44f47bad5c8c607bc2509266df9))
+
+
+
+
+
 # [1.255.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.254.3...@next-bricks/basic-bricks@1.255.0) (2024-07-10)
 
 
