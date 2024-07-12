@@ -1,12 +1,14 @@
 import ReactDOM from "react-dom";
 import "./";
 
-const spyOnRender = jest.spyOn(ReactDOM, "render").mockImplementation(() => {});
+const spyOnRender = jest
+  .spyOn(ReactDOM, "render")
+  .mockImplementation(() => void 0);
 const unmountComponentAtNode = jest
   .spyOn(ReactDOM, "unmountComponentAtNode")
-  .mockImplementation((() => {}) as any);
+  .mockImplementation((() => void 0) as any);
 
-  jest.spyOn(console, "warn").mockImplementation(() => void 0);
+jest.spyOn(console, "warn").mockImplementation(() => void 0);
 
 describe("presentational-bricks.brick-humanize-time", () => {
   it("should create a custom element", async () => {
@@ -17,8 +19,8 @@ describe("presentational-bricks.brick-humanize-time", () => {
       dataSource: {},
       fields: { value: "" },
       isCostTime: false,
-      isMicrosecond: true,
-      formatter: "accurate"
+      isMillisecond: true,
+      formatter: "accurate",
     });
     // Always waiting for async `(dis)connectedCallback`
     await jest.runAllTimers();

@@ -33,7 +33,7 @@ describe("BrickHumanizeTime", () => {
     const wrapper = shallow(
       <BrickHumanizeTime
         value={1563509000}
-        isMicrosecond={true}
+        isMillisecond={true}
         isCostTime={true}
       />
     );

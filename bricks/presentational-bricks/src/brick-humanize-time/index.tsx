@@ -99,7 +99,7 @@ export class BrickHumanizeTimeElement extends UpdatingElement {
           <BrickHumanizeTime
             value={value}
             formatter={this.formatter}
-            isMicrosecond={this.isMicrosecond}
+            isMillisecond={this.isMillisecond ?? this.isMicrosecond}
             isCostTime={this.isCostTime}
             link={link}
             inputFormat={this.inputFormat}
@@ -145,10 +145,17 @@ export class BrickHumanizeTimeElement extends UpdatingElement {
   formatter: HumanizeTimeFormat;
 
   /**
-   * @required false
-   * @default false
    * @description value 值的单位是否为毫秒
    * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  isMillisecond: boolean;
+
+  /**
+   * @description value 值的单位是否为毫秒（此处属性 id 写错，实际表达意义为 isMillisecond）
+   * @deprecated 请使用 `isMillisecond`
    */
   @property({
     type: Boolean,

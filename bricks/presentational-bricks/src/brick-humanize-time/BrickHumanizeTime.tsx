@@ -10,7 +10,7 @@ import { isNil } from "lodash";
 
 interface BrickHumanizeTimeProps {
   value: number | string;
-  isMicrosecond?: boolean;
+  isMillisecond?: boolean;
   formatter?: HumanizeTimeFormat;
   isCostTime?: boolean;
   inputFormat?: string;
@@ -26,7 +26,7 @@ export function BrickHumanizeTime(
 ): React.ReactElement {
   const {
     value,
-    isMicrosecond,
+    isMillisecond,
     inputFormat,
     outputFormat,
     isCostTime,
@@ -40,7 +40,7 @@ export function BrickHumanizeTime(
 
   let ts;
   if (typeof value === "number") {
-    ts = isMicrosecond ? value : Number(value) * 1000;
+    ts = isMillisecond ? value : Number(value) * 1000;
   } else {
     const time = moment(value, inputFormat);
     ts = time.unix() * 1000;
