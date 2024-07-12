@@ -71,7 +71,7 @@ export const BrickHumanizeTimeStory: Story = {
           brick: "presentational-bricks.brick-humanize-time",
           properties: {
             value: 1571017058000,
-            isMicrosecond: true,
+            isMillisecond: true,
             formatter: "relative",
           },
         },
