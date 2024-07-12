@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.326.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.326.0...@next-bricks/presentational-bricks@1.326.1) (2024-07-12)
+
+
+### Bug Fixes
+
+* use millisecond instead of microsecond ([db66432](https://github.com/easyops-cn/next-basics/commit/db66432c4543edd45a41863165db1d5fbc9014d6))
+
+
+
+
+
 # [1.326.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.325.0...@next-bricks/presentational-bricks@1.326.0) (2024-07-10)
 
 
