@@ -9,7 +9,6 @@ function EasyViewComponentFactory(React: typeof _React) {
       formilySchemaFormatter,
       advancedMode,
       scope,
-      form,
     } = props;
 
     return React.createElement(SchemaFieldComponent, {
