@@ -47,13 +47,14 @@ export const listContainerSchema = {
       name: "itemKey",
       title: "数据项Key",
       type: "string",
-      component: {
-        name: "CodeEditor",
-      },
       decorator: {
-        name: "FormItemWithoutAdvanced",
         props: {
           tooltip: "不设置则默认使用index",
+        },
+      },
+      component: {
+        props: {
+          placeholder: "index",
         },
       },
     },
@@ -64,6 +65,7 @@ export const listContainerSchema = {
       decorator: {
         props: {
           tooltip: "容器本身默认是grid布局",
+          layout: "horizontal",
         },
       },
       "x-reactions": [
@@ -96,7 +98,8 @@ export const listContainerSchema = {
     {
       name: "extraContainerStyle",
       title: "容器额外样式",
-      type: "CodeEditor",
+      type: "string",
+      decorator: "FormItemWithoutAdvanced",
       component: {
         name: "CodeEditor",
       },
@@ -114,8 +117,12 @@ export const listContainerSchema = {
     {
       name: "containerStyle",
       title: "自定义容器的样式",
-      type: "CodeEditor",
+      type: "string",
+      component: {
+        name: "CodeEditor",
+      },
       decorator: {
+        name: "FormItemWithoutAdvanced",
         props: {
           tooltip: "会覆盖容器默认的样式配置",
         },
