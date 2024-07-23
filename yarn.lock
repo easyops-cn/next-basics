@@ -2782,10 +2782,10 @@
   dependencies:
     "@next-libs/storage" "^2.0.4"
 
-"@next-libs/visual-builder@^1.13.3":
-  version "1.13.3"
-  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.13.3.tgz#e718b45f87380858c15ca38a981114a99606ef0a"
-  integrity sha512-lWWTJIvNxmk0sy/TlrY9co+WJRTMR87ZUqfEKvURW0dhNAZsDMxNQwbr8d3KNJYSgEHYWWibvSamNqlUv9qu8Q==
+"@next-libs/visual-builder@^1.13.4":
+  version "1.13.4"
+  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.13.4.tgz#f06df2d3125b378ffe1c7915d16dfb2c221aac11"
+  integrity sha512-ZxVcCPMhUtxJ8Oa7Pm/rTMdLfXvoM61x/aMbVunyXV1yuHSjkiRvbW4QEjSEEoJAyEJ/+BZO7iYMr9fSjitH0A==
   dependencies:
     "@next-libs/basic-components" "^5.5.0"
     "@next-libs/code-editor-components" "^4.12.1"
