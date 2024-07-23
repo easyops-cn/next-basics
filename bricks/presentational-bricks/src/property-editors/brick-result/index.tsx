@@ -1,6 +1,11 @@
 import type _React from "react";
 import { getRuntime } from "@next-core/brick-kit";
-import { brickResultSchema } from "./brickResult.schema";
+import {
+  brickResultSchema,
+  IllustrationsStatusOptions,
+  BrickResultStatusOptions,
+  EmptyResultStatusOptions,
+} from "./brickResult.schema";
 
 function BrickResultComponentFactory(React: typeof _React) {
   return function BrickResultComponent(props: any): React.ReactElement {
@@ -22,7 +27,12 @@ function BrickResultComponentFactory(React: typeof _React) {
 
     return React.createElement(SchemaFieldComponent, {
       schema: formilySchemaFormatter(brickResultSchema as any, advancedMode!),
-      scope,
+      scope: {
+        ...scope,
+        IllustrationsStatusOptions,
+        BrickResultStatusOptions,
+        EmptyResultStatusOptions,
+      },
     });
   };
 }

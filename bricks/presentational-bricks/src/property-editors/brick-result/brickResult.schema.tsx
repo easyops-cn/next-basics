@@ -1,11 +1,11 @@
-const illustrationsStatusOptions = [
+export const IllustrationsStatusOptions = [
   {
     label: "自定义插画",
     value: "illustrations",
   },
 ];
 
-const BrickResultStatusOptions = [
+export const BrickResultStatusOptions = [
   {
     label: "403",
     value: "403",
@@ -36,7 +36,7 @@ const BrickResultStatusOptions = [
   },
 ];
 
-const EmptyResultStatusOptions = [
+export const EmptyResultStatusOptions = [
   {
     label: "浏览器版本过低",
     value: "browser-too-old",
@@ -101,7 +101,7 @@ export const brickResultSchema = {
         name: "Select",
         props: {
           options: [
-            ...illustrationsStatusOptions,
+            ...IllustrationsStatusOptions,
             ...BrickResultStatusOptions,
             ...EmptyResultStatusOptions,
           ],
@@ -113,7 +113,7 @@ export const brickResultSchema = {
           fulfill: {
             state: {
               visible:
-                "{{BrickResultStatusOptions.find(item => item.value === $self.value)}}",
+                "{{BrickResultStatusOptions.some(item => item.value === $self.value)}}",
             },
           },
         },
@@ -122,7 +122,7 @@ export const brickResultSchema = {
           fulfill: {
             state: {
               visible:
-                "{{illustrationsStatusOptions.find(item => item.value === $self.value)}}",
+                "{{IllustrationsStatusOptions.some(item => item.value === $self.value)}}",
             },
           },
         },
@@ -131,7 +131,7 @@ export const brickResultSchema = {
           fulfill: {
             state: {
               visible:
-                "{{EmptyResultStatusOptions.find(item => item.value === $self.value)}}",
+                "{{EmptyResultStatusOptions.some(item => item.value === $self.value)}}",
             },
           },
         },
@@ -151,6 +151,7 @@ export const brickResultSchema = {
         name: "FormItem",
         props: {
           tooltip: "使用新版本的图标替换插画库default分类图标",
+          layout: "horizontal",
         },
       },
     },
