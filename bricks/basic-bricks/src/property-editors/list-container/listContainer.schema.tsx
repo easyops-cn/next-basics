@@ -20,10 +20,31 @@ export const listContainerSchema = {
     },
     {
       name: "data",
-      title: "数据列表",
+      title: "选择数据",
       type: "string",
-      component: "CodeEditor",
-      decorator: "FormItemWithoutAdvanced",
+      required: true,
+      component: {
+        name: "Select",
+        props: {
+          placeholder: "请选择数据",
+          allowClear: true,
+        },
+      },
+    },
+    {
+      name: "itemKey",
+      title: "数据项Key",
+      type: "string",
+      decorator: {
+        props: {
+          tooltip: "不设置则默认使用index",
+        },
+      },
+      component: {
+        props: {
+          placeholder: "index",
+        },
+      },
     },
     {
       name: "useBrick",
@@ -40,21 +61,6 @@ export const listContainerSchema = {
         name: "FormItemWithoutAdvanced",
         props: {
           tooltip: "具体查阅文档UseBrickConf",
-        },
-      },
-    },
-    {
-      name: "itemKey",
-      title: "数据项Key",
-      type: "string",
-      decorator: {
-        props: {
-          tooltip: "不设置则默认使用index",
-        },
-      },
-      component: {
-        props: {
-          placeholder: "index",
         },
       },
     },

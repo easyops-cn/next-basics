@@ -35,13 +35,37 @@ function ListContainerComponentFactory(React: typeof _React) {
       form,
       effects,
     } = props;
+    const isInitRef = React.useRef<boolean>(false);
+    const dataListRef = React.useRef<any>();
 
     React.useEffect(() => {
-      const { onAdvancedChange, onSubmit } = effects;
+      const {
+        onAdvancedChange,
+        onSubmit,
+        onFormInitialValuesChange,
+        onFieldValueChange,
+      } = effects;
 
       // 表单初始化
       form.setInitialValues({
         isGridLayout: true,
+      });
+
+      // 当data变化时
+      form.addEffects("dataChange", () => {
+        onFormInitialValuesChange(() => {
+          isInitRef.current = true;
+
+          setTimeout(() => {
+            isInitRef.current = false;
+          });
+        }),
+          onFieldValueChange("data", () => {
+            if (!isInitRef.current) {
+              // 清除关联值
+              form.deleteValuesIn("itemKey");
+            }
+          });
       });
 
       // 监听模式切换
@@ -60,6 +84,21 @@ function ListContainerComponentFactory(React: typeof _React) {
         });
       });
     }, [form, scope]);
+
+    React.useEffect(() => {
+      // 初始化data
+      const { dataList = [] } = scope;
+      dataListRef.current = dataList?.map((item: any) => ({
+        ...item,
+        label: item?.name,
+        value: item?.value,
+      }));
+      form.query("data").take((field: any) => {
+        field.setComponentProps({
+          options: dataListRef.current,
+        });
+      });
+    }, [scope]);
 
     return React.createElement(SchemaFieldComponent, {
       schema: formilySchemaFormatter(listContainerSchema as any, advancedMode!),
