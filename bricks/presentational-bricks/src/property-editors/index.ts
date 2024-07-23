@@ -4,3 +4,4 @@ import "./brick-divider";
 import "./card-item";
 import "./brick-link";
 import "./basic-icon";
+import "./brick-result";

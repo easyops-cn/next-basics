@@ -28,6 +28,7 @@
     "prestart": "node scripts/pre-build.js",
     "start": "cross-env NODE_ENV='development' webpack --config webpack.config.js --watch",
     "start:editors": "cross-env NODE_ENV='development' webpack --config webpack.editors.js --watch",
+    "start:property-editors": "cross-env NODE_ENV='development' webpack --config webpack.property-editors.js --watch",
     "start:snippets": "cross-env NODE_ENV='development' rollup --config rollup.snippets.js --watch",
     "start:all": "concurrently -k -n main,editors,snippets \"npm run start\" \"npm run start:editors\" \"npm run start:snippets\"",
     "prebuild": "node scripts/pre-build.js",
