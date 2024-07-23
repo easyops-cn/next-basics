@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.256.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.256.1...@next-bricks/basic-bricks@1.256.2) (2024-07-23)
+
+
+### Bug Fixes
+
+* v2 easy-view schema ([4f951a4](https://github.com/easyops-cn/next-basics/commit/4f951a4ddb69b88b5720befc0d3e3b455c354718))
+* v2 layout schema ([894bae2](https://github.com/easyops-cn/next-basics/commit/894bae271a6b8b8cf2c0ca8b65ffd6509c2068ea))
+* v2 list-container schema ([b2e3ad9](https://github.com/easyops-cn/next-basics/commit/b2e3ad9397115899fc52d99a051b3e6d00de3f81))
+* v2 list-container schema ([d034551](https://github.com/easyops-cn/next-basics/commit/d034551c2a0a8ebcc57884f4b7db1eb10c19a107))
+* v3 flex bug ([b0f3044](https://github.com/easyops-cn/next-basics/commit/b0f3044a01af653887bd4f38bc591f99a1f4d15d))
+* v3 list-container bug ([0fae6ad](https://github.com/easyops-cn/next-basics/commit/0fae6adf4829a6df17c2b861205859cf456702e7))
+
+
+
+
+
 ## [1.256.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.256.0...@next-bricks/basic-bricks@1.256.1) (2024-07-16)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
