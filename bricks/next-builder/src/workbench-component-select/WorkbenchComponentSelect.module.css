@@ -197,7 +197,7 @@
     height: 32px;
     line-height: 32px;
     padding: 0 12px;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--color-fill-bg-base-2);
     border-radius: 6px;
     cursor: pointer;
     overflow: hidden;
@@ -205,7 +205,8 @@
     white-space: nowrap;
   }
   .tabBtnSelected {
-    background: #3f75dd;
+    background: var(--color-brand);
+    color: #fff;
   }
 }
 
@@ -251,5 +252,13 @@
   .providerId {
     color: var(--antd-text-color-secondary);
     font-size: 14px;
+  }
+}
+
+html[data-theme="dark-v2"] {
+  .tabBtnWrapper {
+    .tabBtnSelected {
+      color: rgba(255, 255, 255, 0.85);
+    }
   }
 }
