@@ -37,7 +37,7 @@
   outline-width: 1px;
   outline-style: solid;
   outline-offset: -1px;
-  outline-color: #007fd4;
+  outline-color: var(--color-brand);
 }
 
 :host(:not(:first-child)) .pane-header {

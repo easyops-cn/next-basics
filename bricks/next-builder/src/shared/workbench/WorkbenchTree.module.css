@@ -1,10 +1,12 @@
 .searchBox,
 [data-override-theme="light"] .searchBox {
   --search-box-background: #fff;
+  --search-box-border: #d9d9d9;
 }
 html[data-theme="dark-v2"] .searchBox,
 [data-override-theme="dark-v2"] .searchBox {
   --search-box-background: #181818;
+  --search-box-border: rgba(255, 255, 255, 0.2);
 }
 .tree,
 [data-override-theme="light"] .tree {
@@ -13,6 +15,7 @@ html[data-theme="dark-v2"] .searchBox,
   --node-color-focus: #595959;
   --node-background-active: #e0eeff;
   --node-background-focus: #e0eeff;
+  --node-background-hover: #f5f5f5;
   --node-icon-background-hover: #fff;
 }
 html[data-theme="dark-v2"] .tree,
@@ -22,6 +25,7 @@ html[data-theme="dark-v2"] .tree,
   --node-color-focus: #fff;
   --node-background-active: rgba(255, 255, 255, 0.08);
   --node-background-focus: #1a7aff;
+  --node-background-hover: rgba(255, 255, 255, 0.12);
   --node-icon-background-hover: rgba(90, 93, 94, 0.31);
 }
 
@@ -33,7 +37,7 @@ html[data-theme="dark-v2"] .tree,
   z-index: 1;
   :global(.ant-input-affix-wrapper) {
     background-color: var(--search-box-background);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--search-box-border);
     :global(input.ant-input) {
       background-color: var(--search-box-background);
     }
@@ -61,7 +65,7 @@ html[data-theme="dark-v2"] .tree,
 
 .nodeLabelRow:hover,
 .nodeLabelRow.hover {
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: var(--node-background-hover);
 }
 
 .nodeLabelRow:focus {
