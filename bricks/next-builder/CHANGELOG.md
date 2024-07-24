@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.277.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.277.1...@next-bricks/next-builder@1.277.2) (2024-07-24)
+
+
+### Bug Fixes
+
+* fix api proxy ([ac08dd7](https://github.com/easyops-cn/next-basics/commit/ac08dd7073c02d03804dbec1d38f67aca944b715))
+
+
+
+
+
 ## [1.277.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.277.0...@next-bricks/next-builder@1.277.1) (2024-07-24)
 
 **Note:** Version bump only for package @next-bricks/next-builder
