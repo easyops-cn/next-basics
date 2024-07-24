@@ -37,7 +37,7 @@ function splitContract(value = ""): ProcessedContractField {
   };
 }
 
-function isContractApi(name: string): boolean {
+export function isContractApi(name: string): boolean {
   return /.*@.*:\d+\.\d+\.\d+/.test(name);
 }
 
