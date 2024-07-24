@@ -38,9 +38,9 @@ export const eoLinkSchema = {
       },
     },
     {
-      name: "disabled",
-      title: "禁用",
       type: "boolean",
+      title: "隐藏外链标识",
+      name: "hideExternalIcon",
     },
     {
       name: "type",
@@ -90,13 +90,19 @@ export const eoLinkSchema = {
               value: "_blank",
             },
           ],
+          defaultValue: "_self",
         },
       },
     },
     {
       name: "tooltip",
-      title: "按钮提示",
+      title: "文字提示",
       type: "string",
+    },
+    {
+      name: "disabled",
+      title: "禁用",
+      type: "boolean",
     },
     {
       name: "categoryTitle_style",
@@ -108,15 +114,22 @@ export const eoLinkSchema = {
       },
     },
     {
-      type: "boolean",
-      title: "隐藏跳转图标",
-      name: "hideExternalIcon",
+      name: "icon",
+      title: "图标",
+      type: "string",
+      component: "IconSelect",
+      decorator: {
+        name: "FormItem",
+        props: {
+          layout: "horizontal",
+        },
+      },
       "x-reactions": [
         {
           target: "iconAlign",
           fulfill: {
             state: {
-              visible: "{{!$self.value}}",
+              display: '{{$self.value === undefined ? "none" : "visible"}}',
             },
           },
         },
@@ -133,9 +146,15 @@ export const eoLinkSchema = {
         },
       },
       component: {
-        name: "TextAlignRadio",
+        name: "Radio.Group",
         props: {
-          hideCenter: true,
+          size: "small",
+          options: [
+            { label: "文本左侧", value: "left" },
+            { label: "文本右侧", value: "right" },
+          ],
+          optionType: "button",
+          defaultValue: "left",
         },
       },
     },
@@ -148,13 +167,13 @@ export const eoLinkSchema = {
       name: "labelColor",
       type: "string",
       title: "文本颜色",
-      compponent: "ColorPicker",
-    },
-    {
-      name: "icon",
-      title: "图标",
-      type: "string",
-      component: "IconSelect",
+      decorator: {
+        name: "FormItem",
+        props: {
+          layout: "horizontal",
+        },
+      },
+      component: "ColorPicker",
     },
   ],
 };
