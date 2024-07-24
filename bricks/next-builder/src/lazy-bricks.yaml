@@ -3,6 +3,8 @@ lazyBricks:
   - event-config-form
   - search-tree
   - storyboard-lint-result
+  - api-request-form-item
+  - api-proxy-request
   - group: workflow
     bricks:
       - workflow-create-data-item
