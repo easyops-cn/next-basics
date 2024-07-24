@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.277.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.276.8...@next-bricks/next-builder@1.277.0) (2024-07-24)
+
+
+### Features
+
+* support api-request-form-item ([703985c](https://github.com/easyops-cn/next-basics/commit/703985c1773bf325551e04fca32ed2f4abbcdad1))
+
+
+
+
+
 ## [1.276.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.276.7...@next-bricks/next-builder@1.276.8) (2024-07-23)
 
 **Note:** Version bump only for package @next-bricks/next-builder
