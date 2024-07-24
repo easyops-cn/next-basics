@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Tabs } from "antd";
 import {
   ContractAutoComplete,
@@ -20,7 +20,7 @@ interface ApiRequestFormItemProps {
 export function ApiRequestFormItem(
   props: ApiRequestFormItemProps
 ): React.ReactElement {
-  const [tab, setTab] = useState<"flowApi" | "http">(props.value?.type);
+  const [tab, setTab] = useState<"flowApi" | "http">();
   const apiDataCacheRef = useRef<any>(
     props.value?.type === "flowApi" ? props.value : { useProvider: "" }
   );
@@ -36,18 +36,20 @@ export function ApiRequestFormItem(
           useProvider: tab === "http" ? "basic.http-proxy-request" : value,
           args:
             tab === "http"
-              ? {
-                  ...props.value?.params?.args,
-                  ...value,
-                  ...(value.headers
-                    ? {
-                        headers: {
-                          ...(props.value?.params?.args?.headers ?? {}),
-                          ...value.headers,
-                        },
-                      }
-                    : {}),
-                }
+              ? [
+                  {
+                    ...props.value?.params?.args[0],
+                    ...value,
+                    ...(value.headers
+                      ? {
+                          headers: {
+                            ...(props.value?.params?.args?.headers ?? {}),
+                            ...value.headers,
+                          },
+                        }
+                      : {}),
+                  },
+                ]
               : null,
         },
       };
@@ -93,6 +95,10 @@ export function ApiRequestFormItem(
     [props]
   );
 
+  useEffect(() => {
+    if (props.value?.type) setTab(props.value?.type);
+  }, [props.value?.type]);
+
   return (
     <Tabs size="small" activeKey={tab} onChange={handleTabChange}>
       <Tabs.TabPane tab="API集市" key="flowApi">
@@ -107,7 +113,9 @@ export function ApiRequestFormItem(
       </Tabs.TabPane>
       <Tabs.TabPane tab="手动填写" key="http">
         <APIProxyRequest
-          value={httpDataCacheRef.current?.params}
+          value={
+            props.value?.type === "http" ? props.value?.params?.args?.[0] : {}
+          }
           onChange={handleHttpChange}
         />
       </Tabs.TabPane>
@@ -128,15 +136,10 @@ export function checkContractRule(
   ) {
     callback(i18next.t(`${NS_NEXT_BUILDER}:${K.CONTRACT_VALIDATE_MESSAGE}`));
   } else if (value?.type === "http") {
-    if (!value?.params?.args.url) {
+    if (!value?.params?.args?.[0].url) {
       callback(i18next.t(`${NS_NEXT_BUILDER}:${K.HTTP_VALIDATE_MESSAGE}`));
-    } else if (typeof value?.params?.args?.body === "string") {
-      try {
-        JSON.parse(value.params.args.body);
-        callback();
-      } catch {
-        callback(i18next.t(`${NS_NEXT_BUILDER}:${K.DATA_ERROR}`));
-      }
+    } else if (value?.params?.args?.[0]?.body === false) {
+      callback(i18next.t(`${NS_NEXT_BUILDER}:${K.DATA_ERROR}`));
     } else {
       callback();
     }
