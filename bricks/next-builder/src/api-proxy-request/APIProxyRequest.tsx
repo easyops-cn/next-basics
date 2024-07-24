@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./index.module.css";
 import { Input, Select } from "antd";
 import {
@@ -20,19 +20,16 @@ function getUrlParams(url: string): Record<string, any> {
 }
 
 interface APIProxyRequestProps {
-  value: {
-    useProvider: string;
-    args: Record<string, any>;
-  };
+  value: Record<string, any>;
   onChange: (v: any) => void;
 }
 
 export function APIProxyRequest(
   props: APIProxyRequestProps
 ): React.ReactElement {
-  const [url, setUrl] = useState<string>(props.value?.args?.url);
+  const [url, setUrl] = useState<string>(props.value?.url);
   const [params, setParams] = useState<Record<string, any>>(
-    props.value?.args?.queryParameters
+    props.value?.queryParameters
   );
   const requestBodyRef = useRef<CustomActionRef>();
 
@@ -113,7 +110,7 @@ export function APIProxyRequest(
       <div className={styles.methodWrapper}>
         <Select
           defaultValue="GET"
-          value={props.value?.args?.method}
+          value={props.value?.method}
           className={styles.methodSelect}
           options={["GET", "POST", "PUT", "DELETE"].map((item) => ({
             label: item,
@@ -129,14 +126,15 @@ export function APIProxyRequest(
       </div>
       <CustomActionComponent
         params={params}
-        value={props.value?.args?.queryParameters}
+        value={props.value?.queryParameters}
         label="查询参数"
         onChange={handleParamsChange}
       />
       <CustomActionComponent
         label="请求头"
         ref={requestBodyRef}
-        value={props.value?.args?.headers}
+        params={props.value.headers}
+        value={props.value?.headers}
         onChange={(v) =>
           handleChange({
             headers: Object.fromEntries(
@@ -147,8 +145,8 @@ export function APIProxyRequest(
       />
       <RequestBodyComponent
         label="请求体"
-        headers={props.value?.args?.headers}
-        value={props.value?.args?.body}
+        headers={props.value?.headers}
+        value={props.value?.body}
         onChange={handleChange}
         onTypeChange={handleTypeChange}
       />

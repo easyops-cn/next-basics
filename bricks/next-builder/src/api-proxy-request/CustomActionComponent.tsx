@@ -87,8 +87,8 @@ export function LeacyCustomActionComponent(
     onChange(filterItem(cacheListRef.current));
   };
 
-  useEffect(() => {
-    const list = Object.entries(params ?? {}).map(([k, v]) => ({
+  const setValue = useCallback((value: Record<string, string>): void => {
+    const list = Object.entries(value ?? {}).map(([k, v]) => ({
       key: k,
       value: v,
       [ITEM_KEY]: Math.random(),
@@ -102,28 +102,15 @@ export function LeacyCustomActionComponent(
           },
         ];
     setList(cacheListRef.current);
-  }, [params]);
+  }, []);
 
   useEffect(() => {
-    if (value) {
-      cacheListRef.current = Object.entries(value).map(([k, v]) => ({
-        key: k,
-        value: v,
-        [ITEM_KEY]: Math.random(),
-      }));
-      cacheListRef.current = list.length
-        ? list
-        : [
-            {
-              [ITEM_KEY]: Math.random(),
-            },
-          ];
-      setList(cacheListRef.current);
-    }
-  }, []);
+    setValue(params);
+  }, [params]);
 
   useImperativeHandle(ref, () => ({
     addItem: (item?: Omit<CustomActionItem, "$key">) => handleAddItem(item),
+    setValue,
   }));
 
   return (

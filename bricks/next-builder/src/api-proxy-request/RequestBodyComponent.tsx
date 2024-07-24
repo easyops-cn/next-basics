@@ -30,8 +30,14 @@ export function RequestBodyComponent(
 
   const handleCodeEditorChange = (value: string): void => {
     setJSON(value);
+    let newValue: any;
+    try {
+      newValue = value === "" ? {} : JSON.parse(value);
+    } catch {
+      newValue = false;
+    }
     props.onChange({
-      body: value,
+      body: newValue,
     });
   };
 
@@ -56,6 +62,16 @@ export function RequestBodyComponent(
           : contentType === "multipart/form-data"
           ? "Form Data"
           : "None"
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (props.value && mode === "JSON") {
+      setJSON(
+        typeof props.value === "string"
+          ? props.value
+          : JSON.stringify(props.value)
       );
     }
   }, []);
@@ -86,6 +102,7 @@ export function RequestBodyComponent(
         {mode === "Form Data" ? (
           <CustomActionComponent
             ref={customActionRef}
+            params={typeof props.value === "string" ? {} : props.value}
             value={typeof props.value === "string" ? {} : props.value}
             onChange={handleActionChange}
           />
