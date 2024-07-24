@@ -145,6 +145,9 @@ const locale: Locale = {
   [K.CONTRACT_OPTIONS_TIPS_SUFFIX]:
     "items are displayed, please search for more results",
   [K.CONTRACT_VALIDATE_MESSAGE]: "Please fill in the correct contract name ",
+  [K.HTTP_VALIDATE_MESSAGE]: "Please enter the correct URL",
+  [K.EMPTY_VALIDATE_MESSAGE]: "Please enter",
+  [K.DATA_ERROR]: "Data error",
   [K.ADD_FIELD]: "Add field",
   [K.CURRENT_FIELD]: "Current field",
   [K.SET_TO_NEW_VALUE]: "Set as",
