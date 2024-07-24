@@ -9,7 +9,7 @@ import { ApiRequestValue } from "./index";
 import { isNil } from "lodash";
 import i18next from "i18next";
 import { K, NS_NEXT_BUILDER } from "../i18n/constants";
-import { APIProxyRequest } from "../shared/components/api-proxy-request/APIProxyRequest";
+import { APIProxyRequest } from "../api-proxy-request/APIProxyRequest";
 
 interface ApiRequestFormItemProps {
   value: ApiRequestValue;

@@ -10,7 +10,7 @@ import { RequestBodyComponent } from "./RequestBodyComponent";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { isNil } from "lodash";
 import i18next from "i18next";
-import { K, NS_NEXT_BUILDER } from "../../../i18n/constants";
+import { K, NS_NEXT_BUILDER } from "../i18n/constants";
 
 function getUrlParams(url: string): Record<string, any> {
   const urlStr = url.split("?")[1];
