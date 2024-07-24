@@ -5,3 +5,4 @@ import "./card-item";
 import "./brick-link";
 import "./basic-icon";
 import "./brick-result";
+import "./brick-table";
