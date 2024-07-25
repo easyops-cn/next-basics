@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.326.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.326.4...@next-bricks/presentational-bricks@1.326.5) (2024-07-25)
+
+
+### Bug Fixes
+
+* add v2 table schema ([237dafd](https://github.com/easyops-cn/next-basics/commit/237dafde56ac94ca8fdb34df8af663c2f9666dba))
+* add v2 table schema ([cc14085](https://github.com/easyops-cn/next-basics/commit/cc14085976b6ab6b5678f7cf8012bdc342b3a077))
+
+
+
+
+
 ## [1.326.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.326.3...@next-bricks/presentational-bricks@1.326.4) (2024-07-25)
 
 
