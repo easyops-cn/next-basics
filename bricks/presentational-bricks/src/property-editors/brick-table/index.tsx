@@ -1,11 +1,7 @@
 import type _React from "react";
 import { getRuntime } from "@next-core/brick-kit";
 import { brickTableSchema } from "./brickTable.schema";
-import { get, isNil, omit } from "lodash";
-
-const computeNilObject = (value: any, key: string) => {
-  return isNil(value) ? {} : { [key]: value };
-};
+import { get, omit } from "lodash";
 
 const transformNormal2Advanced = (rawValue: any) => {
   const res = {
@@ -58,31 +54,18 @@ function BrickTableComponentFactory(React: typeof _React) {
       } = effects;
 
       form.setInitialValues({
-        rowKey: "index",
         isPagination: true,
-        storeCheckedByUrl: false,
-        showSelectInfo: false,
+        rowSelection: false,
         defaultSelectAll: false,
-        selectAllChildren: false,
-        autoSelectParentWhenAllChildrenSelected: false,
         sortable: true,
+        expandable: true,
+        size: "large",
         defaultExpandAllRows: false,
-        expandRowByClick: false,
         expandIconAsCell: true,
-        childrenColumnName: "children",
-        showHeaderExpandAll: false,
-        stripEmptyExpandableChildren: false,
         frontSearch: false,
-        exactSearch: false,
-        qField: "q",
         tableDraggable: false,
-        acceptType: "DraggableBodyRow",
-        zebraPattern: false,
-        ellipsisInfo: false,
-        showCard: true,
         showHeader: true,
         shouldUpdateUrlParams: true,
-        shouldRenderWhenUrlParamsUpdate: true,
       });
 
       // 当data变化时

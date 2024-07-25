@@ -86,6 +86,7 @@ export const brickTableSchema = {
       component: {
         props: {
           defaultValue: true,
+          size: "small",
         },
       },
       "x-reactions": [
@@ -141,6 +142,7 @@ export const brickTableSchema = {
       component: {
         props: {
           defaultValue: false,
+          size: "small",
         },
       },
       decorator: {
@@ -338,6 +340,7 @@ export const brickTableSchema = {
       component: {
         props: {
           defaultValue: true,
+          size: "small",
         },
       },
       decorator: {
@@ -558,6 +561,7 @@ export const brickTableSchema = {
       component: {
         props: {
           defaultValue: true,
+          size: "small",
         },
       },
       decorator: {
@@ -590,7 +594,7 @@ export const brickTableSchema = {
     },
     {
       name: "childrenColumnName",
-      title: "指定树形结构的列名",
+      title: "树形结构的列名",
       type: "string",
       component: {
         props: {
@@ -764,7 +768,7 @@ export const brickTableSchema = {
     },
     {
       name: "tableDraggable",
-      title: "表格行可拖拽",
+      title: "支持表格行拖拽",
       type: "boolean",
       component: {
         props: {
@@ -868,6 +872,7 @@ export const brickTableSchema = {
       component: {
         props: {
           defaultValue: true,
+          size: "small",
         },
       },
     },
@@ -878,6 +883,7 @@ export const brickTableSchema = {
       component: {
         props: {
           defaultValue: true,
+          size: "small",
         },
       },
       "x-reactions": [
@@ -944,6 +950,7 @@ export const brickTableSchema = {
       component: {
         props: {
           defaultValue: true,
+          size: "small",
         },
       },
       "x-reactions": [
@@ -964,6 +971,7 @@ export const brickTableSchema = {
       component: {
         props: {
           defaultValue: true,
+          size: "small",
         },
       },
     },
