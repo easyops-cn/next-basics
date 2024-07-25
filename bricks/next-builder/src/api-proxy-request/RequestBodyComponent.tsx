@@ -102,8 +102,7 @@ export function RequestBodyComponent(
         {mode === "Form Data" ? (
           <CustomActionComponent
             ref={customActionRef}
-            params={typeof props.value === "string" ? {} : props.value}
-            value={typeof props.value === "string" ? {} : props.value}
+            value={props.value}
             onChange={handleActionChange}
           />
         ) : mode === "JSON" ? (

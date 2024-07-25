@@ -136,7 +136,7 @@ export function checkContractRule(
   ) {
     callback(i18next.t(`${NS_NEXT_BUILDER}:${K.CONTRACT_VALIDATE_MESSAGE}`));
   } else if (value?.type === "http") {
-    if (!value?.params?.args?.[0].url) {
+    if (!value?.params?.args?.[0]?.url) {
       callback(i18next.t(`${NS_NEXT_BUILDER}:${K.HTTP_VALIDATE_MESSAGE}`));
     } else if (value?.params?.args?.[0]?.body === false) {
       callback(i18next.t(`${NS_NEXT_BUILDER}:${K.DATA_ERROR}`));
