@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.326.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.326.3...@next-bricks/presentational-bricks@1.326.4) (2024-07-25)
+
+
+### Bug Fixes
+
+* 优化link构件的表单编辑器 ([9479610](https://github.com/easyops-cn/next-basics/commit/9479610d718f7cc6c054b1cc6684d8ea76abb902))
+
+
+
+
+
 ## [1.326.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.326.2...@next-bricks/presentational-bricks@1.326.3) (2024-07-23)
 
 
