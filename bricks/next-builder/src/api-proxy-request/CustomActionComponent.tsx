@@ -8,14 +8,13 @@ import React, {
 } from "react";
 import styles from "./index.module.css";
 import { PlusCircleOutlined, CloseOutlined } from "@ant-design/icons";
-import { omit } from "lodash";
+import { omit, isEqual } from "lodash";
 
 const ITEM_KEY = "$key";
 
 interface CustomActionComponentProps {
   label?: string;
   value: Record<string, string>;
-  params?: Record<string, any>;
   onChange: (v: Omit<CustomActionItem, "$key">[]) => void;
 }
 
@@ -29,8 +28,14 @@ export interface CustomActionRef {
   addItem: (item?: Omit<CustomActionItem, "$key">) => void;
 }
 
+export const transformListToValue = (
+  list: Record<string, string>[]
+): Record<string, string> => {
+  return Object.fromEntries((list ?? []).map((item) => [item.key, item.value]));
+};
+
 export function LeacyCustomActionComponent(
-  { label, value, params, onChange }: CustomActionComponentProps,
+  { label, value, onChange }: CustomActionComponentProps,
   ref: React.Ref<CustomActionRef>
 ): React.ReactElement {
   const [list, setList] = useState<CustomActionItem[]>([]);
@@ -105,12 +110,13 @@ export function LeacyCustomActionComponent(
   }, []);
 
   useEffect(() => {
-    setValue(params);
-  }, [params]);
+    if (!isEqual(transformListToValue(cacheListRef.current as any), value)) {
+      setValue(value);
+    }
+  }, [value, setValue]);
 
   useImperativeHandle(ref, () => ({
     addItem: (item?: Omit<CustomActionItem, "$key">) => handleAddItem(item),
-    setValue,
   }));
 
   return (

@@ -1,10 +1,17 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import styles from "./index.module.css";
 import { Input, Select } from "antd";
 import {
   CustomActionComponent,
   CustomActionItem,
   CustomActionRef,
+  transformListToValue,
 } from "./CustomActionComponent";
 import { RequestBodyComponent } from "./RequestBodyComponent";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
@@ -105,12 +112,20 @@ export function APIProxyRequest(
     });
   };
 
+  const defaultValue = useMemo(() => props.value ?? {}, [props.value]);
+
+  useEffect(() => {
+    if (defaultValue.queryParameters) {
+      setParams(defaultValue.queryParameters);
+    }
+  }, [defaultValue]);
+
   return (
     <div>
       <div className={styles.methodWrapper}>
         <Select
           defaultValue="GET"
-          value={props.value?.method}
+          value={defaultValue.method}
           className={styles.methodSelect}
           options={["GET", "POST", "PUT", "DELETE"].map((item) => ({
             label: item,
@@ -122,31 +137,27 @@ export function APIProxyRequest(
             })
           }
         />
-        <Input value={url} onChange={handleUrlChange} />
+        <Input value={defaultValue.url} onChange={handleUrlChange} />
       </div>
       <CustomActionComponent
-        params={params}
-        value={props.value?.queryParameters}
+        value={params}
         label="查询参数"
         onChange={handleParamsChange}
       />
       <CustomActionComponent
         label="请求头"
         ref={requestBodyRef}
-        params={props.value.headers}
-        value={props.value?.headers}
+        value={defaultValue.headers}
         onChange={(v) =>
           handleChange({
-            headers: Object.fromEntries(
-              v.map((item) => [item.key, item.value])
-            ),
+            headers: transformListToValue(v),
           })
         }
       />
       <RequestBodyComponent
         label="请求体"
-        headers={props.value?.headers}
-        value={props.value?.body}
+        headers={defaultValue.headers}
+        value={defaultValue.body}
         onChange={handleChange}
         onTypeChange={handleTypeChange}
       />
