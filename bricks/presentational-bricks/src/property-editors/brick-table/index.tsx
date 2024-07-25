@@ -131,7 +131,7 @@ function BrickTableComponentFactory(React: typeof _React) {
           options: dataListRef.current,
         });
       });
-    }, [scope]);
+    }, [scope, form]);
 
     return React.createElement(SchemaFieldComponent, {
       schema: formilySchemaFormatter(brickTableSchema as any, advancedMode!),
