@@ -106,6 +106,7 @@ export const brickValueMappingSchema = {
         name: "FormItem",
         props: {
           tooltip: "按照平台规范，通常表示状态的标签需显示圆点",
+          layout: "horizontal",
         },
       },
     },

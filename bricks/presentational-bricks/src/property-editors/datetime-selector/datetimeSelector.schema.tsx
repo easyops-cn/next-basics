@@ -47,12 +47,14 @@ export const datetimeSelectorSchema = {
       component: {
         props: {
           defaultValue: true,
+          size: "small",
         },
       },
       decorator: {
         name: "FormItem",
         props: {
           tooltip: "默认显示常用的几种时间范围，如有需要可自定义",
+          layout: "horizontal",
         },
       },
     },
