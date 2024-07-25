@@ -6,3 +6,6 @@ import "./brick-link";
 import "./basic-icon";
 import "./brick-result";
 import "./brick-table";
+import "./datetime-selector";
+import "./modal-confirm";
+import "./brick-value-mapping";
