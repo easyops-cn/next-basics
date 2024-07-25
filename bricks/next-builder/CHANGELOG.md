@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.277.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.277.2...@next-bricks/next-builder@1.277.3) (2024-07-25)
+
+
+### Bug Fixes
+
+* fix apiProxyFormItem ([df1eaf5](https://github.com/easyops-cn/next-basics/commit/df1eaf59d854a9db597553d750965e50995f0310))
+
+
+
+
+
 ## [1.277.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.277.1...@next-bricks/next-builder@1.277.2) (2024-07-24)
 
 
