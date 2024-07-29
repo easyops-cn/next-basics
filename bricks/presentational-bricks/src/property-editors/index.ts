@@ -9,3 +9,4 @@ import "./brick-table";
 import "./datetime-selector";
 import "./modal-confirm";
 import "./brick-value-mapping";
+import "./general-tooltip";
