@@ -10,3 +10,4 @@ import "./datetime-selector";
 import "./modal-confirm";
 import "./brick-value-mapping";
 import "./general-tooltip";
+import "./brick-descriptions";
