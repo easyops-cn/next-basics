@@ -5,3 +5,4 @@ import "./general-input-number/index";
 import "./general-radio/index";
 import "./general-switch/index";
 import "./general-textarea/index";
+import "./general-form-item-v2/index";
