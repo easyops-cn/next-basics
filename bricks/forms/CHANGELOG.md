@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.296.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.296.11...@next-bricks/forms@1.296.12) (2024-07-29)
+
+
+### Bug Fixes
+
+* add schema ([ee688f1](https://github.com/easyops-cn/next-basics/commit/ee688f1c6837fcdce4e261203abe6383b76f60b7))
+
+
+
+
+
 ## [1.296.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.296.10...@next-bricks/forms@1.296.11) (2024-07-16)
 
 **Note:** Version bump only for package @next-bricks/forms

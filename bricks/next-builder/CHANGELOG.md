@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.277.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.277.3...@next-bricks/next-builder@1.277.4) (2024-07-29)
+
+
+### Bug Fixes
+
+* 下线forms.general-form-item ([ebf21f5](https://github.com/easyops-cn/next-basics/commit/ebf21f5ef2ce390d77b1abc3bc84f6c37c2d7b12))
+
+
+
+
+
 ## [1.277.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.277.2...@next-bricks/next-builder@1.277.3) (2024-07-25)
 
 
