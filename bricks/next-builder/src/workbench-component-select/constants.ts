@@ -253,6 +253,7 @@ export const defaultBlankListOfBricks: string[] = [
   "basic-bricks.export-json-file",
   "presentational-bricks.brick-utils",
   "utils.general-clipboard",
+  "forms.general-form-item",
 ];
 
 export enum SnippetType {
