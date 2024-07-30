@@ -36,6 +36,6 @@ function GeneralLabelComponentFactory(React: typeof _React) {
 }
 
 (getRuntime() as any).customEditors.define(
-  "presentational-bricks.brick-divider",
+  "presentational-bricks.general-label",
   GeneralLabelComponentFactory
 );
