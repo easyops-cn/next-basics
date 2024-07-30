@@ -12,9 +12,9 @@ import { K, NS_NEXT_BUILDER } from "../i18n/constants";
 import { APIProxyRequest } from "../api-proxy-request/APIProxyRequest";
 
 interface ApiRequestFormItemProps {
-  value: ApiRequestValue;
-  typeChange: (type: string) => void;
-  onChange: (value: ApiRequestValue) => void;
+  value?: ApiRequestValue;
+  typeChange?: (type: string) => void;
+  onChange?: (value: ApiRequestValue) => void;
 }
 
 export function ApiRequestFormItem(
@@ -38,7 +38,7 @@ export function ApiRequestFormItem(
             tab === "http"
               ? [
                   {
-                    ...props.value?.params?.args[0],
+                    ...props.value?.params?.args?.[0],
                     ...value,
                     ...(value.headers
                       ? {
@@ -53,7 +53,7 @@ export function ApiRequestFormItem(
               : null,
         },
       };
-      props.onChange(newValue);
+      props.onChange?.(newValue);
 
       return newValue;
     },
@@ -80,7 +80,7 @@ export function ApiRequestFormItem(
     (_tab: string): void => {
       const tab = _tab as "flowApi" | "http";
       setTab(tab);
-      props?.typeChange(tab);
+      props?.typeChange?.(tab);
 
       props.onChange({
         type: tab,

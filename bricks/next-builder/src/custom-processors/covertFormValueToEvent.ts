@@ -51,12 +51,16 @@ export function covertFormValueToEvent(
       }),
     } as BuiltinBrickEventHandler;
   } else if (formValue.handlerType === HandlerType.UseProvider) {
+    const args =
+      typeof formValue.flow === "string" ? {} : formValue.flow?.params?.args;
     const useProvider =
       formValue.providerType === "provider"
         ? formValue.provider
         : formValue.providerType === "workflow"
         ? formValue.workflow
-        : formValue.flow;
+        : typeof formValue.flow === "string"
+        ? formValue.flow
+        : formValue.flow?.params?.useProvider;
 
     const loadFields = safeLoadFields({
       if: formValue.if,
@@ -75,6 +79,7 @@ export function covertFormValueToEvent(
         ? {}
         : { method: formValue.useProviderMethod }),
       ...loadFields,
+      ...(args ? { args } : {}),
     } as UseProviderEventHandler;
   } else if (formValue.handlerType === HandlerType.Conditional) {
     const loadFields = safeLoadFields({

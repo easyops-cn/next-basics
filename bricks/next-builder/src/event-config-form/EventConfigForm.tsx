@@ -5,6 +5,7 @@ import React, {
   useMemo,
   useImperativeHandle,
   useCallback,
+  useState,
 } from "react";
 import { useTranslation } from "react-i18next";
 import { useCurrentTheme, getRuntime } from "@next-core/brick-kit";
@@ -44,7 +45,7 @@ import {
 } from "../shared/visual-events/interfaces";
 import { isNil, debounce } from "lodash";
 import { getActionOptions } from "../shared/visual-events/getActionOptions";
-import { ContractAutoComplete } from "../shared/components/contract-auto-complete/ContractAutoComplete";
+import { ApiRequestFormItem } from "../api-request-form-item/ApiRequestFormItem";
 
 export interface EventConfigFormProps {
   labelCol?: ColProps;
@@ -86,11 +87,18 @@ export function LegacyEventConfigForm(
     onClickHighlightToken,
   } = props;
   const [form] = Form.useForm();
+  const [flowType, setFlowType] = useState<string>("flowApi");
+
+  const setFiledsValue = (value: any): void => {
+    // console.log(value);
+    setFlowType(value.flow?.type ?? "flowApi");
+    form.setFieldsValue(value);
+  };
 
   useImperativeHandle(
     ref,
     () => ({
-      setFieldsValue: form.setFieldsValue,
+      setFieldsValue: setFiledsValue,
       resetFields: form.resetFields,
       validateFields: form.validateFields,
     }),
@@ -523,7 +531,10 @@ export function LegacyEventConfigForm(
                   ...{ width: "calc(100% - 44px)" },
                 }}
               >
-                <ContractAutoComplete />
+                {/* <ContractAutoComplete /> */}
+                <ApiRequestFormItem
+                  typeChange={(v: string) => setFlowType(v)}
+                />
               </Form.Item>
               {copyFlowApi}
               {contractTooltip}
@@ -790,7 +801,8 @@ export function LegacyEventConfigForm(
           ) ||
             (getFieldValue("handlerType") === HandlerType.CustomBrick &&
               getFieldValue("brickEventType") ===
-                CustomBrickEventType.ExecuteMethod)) && (
+                CustomBrickEventType.ExecuteMethod)) &&
+          flowType === "flowApi" && (
             <Form.Item name="args" label={t(K.ARGS_LABEL)}>
               {getCodeEditorItem({
                 schemaRef:
@@ -801,7 +813,7 @@ export function LegacyEventConfigForm(
         }
       </Form.Item>
     ),
-    [t, getCodeEditorItem]
+    [t, getCodeEditorItem, flowType]
   );
 
   const propertiesItem = useMemo(
