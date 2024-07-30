@@ -81,11 +81,48 @@ describe("covertToEventFormValue", () => {
       { useProvider: "mynamespace@getDetail:1.0.0", args: ["abc"] },
       undefined,
       {
-        flow: "mynamespace@getDetail:1.0.0",
+        flow: {
+          type: "flowApi",
+          params: {
+            useProvider: "mynamespace@getDetail:1.0.0",
+            args: ["abc"],
+          },
+        },
         handlerType: "useProvider",
         pollEnabled: undefined,
         providerType: "flow",
         args: "- abc\n",
+        useProviderMethod: "resolve",
+      },
+    ],
+    [
+      {
+        useProvider: "basic.http-proxy-request",
+        args: [
+          {
+            method: "GET",
+            url: "www.abc.com",
+          },
+        ],
+      },
+      undefined,
+      {
+        flow: {
+          type: "http",
+          params: {
+            useProvider: "basic.http-proxy-request",
+            args: [
+              {
+                method: "GET",
+                url: "www.abc.com",
+              },
+            ],
+          },
+        },
+        handlerType: "useProvider",
+        pollEnabled: undefined,
+        providerType: "flow",
+        args: `- method: GET\n  url: www.abc.com\n`,
         useProviderMethod: "resolve",
       },
     ],

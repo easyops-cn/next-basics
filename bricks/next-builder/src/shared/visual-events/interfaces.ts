@@ -1,4 +1,5 @@
 import { BrickEventHandler } from "@next-core/brick-types";
+import { APIProxyRequestValue } from "../../api-proxy-request/index";
 
 export enum HandlerType {
   BuiltinAction = "builtinAction",
@@ -67,7 +68,10 @@ export interface EventFormField {
   brickEventType?: CustomBrickEventType;
   providerType?: "provider" | "flow" | "workflow";
   provider?: string;
-  flow?: string;
+  flow?: {
+    params: APIProxyRequestValue;
+    type: string;
+  };
   workflow?: string;
   pollEnabled?: boolean;
   poll?: string;

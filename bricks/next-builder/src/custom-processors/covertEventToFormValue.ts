@@ -10,6 +10,7 @@ import {
 import { safeDumpFields } from "../builder-container/DataView/utils";
 import {
   getHandlerType,
+  isApiProxyProvider,
   isFlowAPiProvider,
 } from "../shared/visual-events/processEventHandler";
 import {
@@ -76,7 +77,8 @@ export function covertEventToFormValue(
       (handler as UseProviderEventHandler).useProvider
     )
       ? "workflow"
-      : isFlowAPiProvider((handler as UseProviderEventHandler).useProvider)
+      : isFlowAPiProvider((handler as UseProviderEventHandler).useProvider) ||
+        isApiProxyProvider((handler as UseProviderEventHandler).useProvider)
       ? "flow"
       : "provider";
 
@@ -91,7 +93,19 @@ export function covertEventToFormValue(
       ...(providerType === "workflow"
         ? { workflow: provider }
         : providerType === "flow"
-        ? { flow: provider }
+        ? {
+            flow: {
+              type: isFlowAPiProvider(
+                (handler as UseProviderEventHandler).useProvider
+              )
+                ? "flowApi"
+                : "http",
+              params: {
+                useProvider: provider,
+                args: (handler as UseProviderEventHandler).args,
+              },
+            },
+          }
         : { provider }),
       ...safeDumpFields(
         omitBy(

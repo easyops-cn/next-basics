@@ -37,6 +37,10 @@ export function isFlowAPiProvider(provider: string): boolean {
   return provider?.includes("@");
 }
 
+export function isApiProxyProvider(provider: string): boolean {
+  return provider === "basic.http-proxy-request";
+}
+
 export function isConditionalEventHandler(
   handler: BrickEventHandler
 ): handler is ConditionalEventHandler {

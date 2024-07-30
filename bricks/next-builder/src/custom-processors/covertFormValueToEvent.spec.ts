@@ -113,10 +113,15 @@ describe("covertFormValueToEvent", () => {
     [
       {
         handlerType: HandlerType.UseProvider,
-        flow: "namespace@getDetail:1.0.0",
+        flow: {
+          type: "flowApi",
+          params: {
+            useProvider: "namespace@getDetail:1.0.0",
+            args: ["abc"],
+          },
+        },
         useProviderMethod: "resolve",
         providerType: "flow",
-        args: "- abc\n",
         poll: 'expectPollEnd: <% (result) => result.status === "done" %>\n',
         pollEnabled: true,
       },
@@ -127,6 +132,34 @@ describe("covertFormValueToEvent", () => {
           expectPollEnd: '<% (result) => result.status === "done" %>',
         },
         useProvider: "namespace@getDetail:1.0.0",
+      },
+    ],
+    [
+      {
+        handlerType: HandlerType.UseProvider,
+        flow: {
+          type: "http",
+          params: {
+            useProvider: "basic.http-proxy-request",
+            args: [
+              {
+                method: "GET",
+                url: "www.abc.com",
+              },
+            ],
+          },
+        },
+        useProviderMethod: "resolve",
+        providerType: "flow",
+      },
+      {
+        args: [
+          {
+            method: "GET",
+            url: "www.abc.com",
+          },
+        ],
+        useProvider: "basic.http-proxy-request",
       },
     ],
     [
