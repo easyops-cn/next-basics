@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.278.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.277.4...@next-bricks/next-builder@1.278.0) (2024-07-30)
+
+
+### Features
+
+* EventConfigForm add apiProxy ([25cbe8b](https://github.com/easyops-cn/next-basics/commit/25cbe8b48fcc2e7f5d8b1bd326c0d45175b99373))
+
+
+
+
+
 ## [1.277.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.277.3...@next-bricks/next-builder@1.277.4) (2024-07-29)
 
 
