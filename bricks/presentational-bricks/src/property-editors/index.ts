@@ -12,3 +12,4 @@ import "./brick-value-mapping";
 import "./general-tooltip";
 import "./brick-descriptions";
 import "./general-label";
+import "./brick-alert";

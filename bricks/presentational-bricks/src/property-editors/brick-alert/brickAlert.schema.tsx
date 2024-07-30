@@ -217,7 +217,7 @@ export const brickAlertSchema = {
     },
     {
       name: "stripLocalStorageUrlSuffix",
-      title: "关闭url命名空间",
+      title: "不使用url命名空间",
       type: "boolean",
     },
     {
@@ -243,7 +243,7 @@ export const brickAlertSchema = {
     },
     {
       name: "noBorderRadio",
-      title: "关闭圆角",
+      title: "不使用圆角",
       type: "boolean",
     },
   ],
