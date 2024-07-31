@@ -354,8 +354,8 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     [defaultData, searchParent, alsoSearchByKey]
   );
   const handleOnChange = (value: string) => {
-    onChange(value);
-    setInputValue(value);
+    onChange(value.trim());
+    setInputValue(value.trim());
   };
 
   const onCheckAllChange = (e: CheckboxChangeEvent) => {
