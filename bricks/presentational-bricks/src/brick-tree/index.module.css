@@ -4,6 +4,18 @@
   background: var(--color-fill-bg-container-1);
   border-radius: var(--larger-border-radius);
 
+  :global(.ant-tree) {
+    :global(.ant-tree-treenode) {
+      width: 100%;
+    }
+    :global(.ant-tree-node-content-wrapper) {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      word-break: break-all;
+    }
+  }
+
   &.withSuffix {
     .suffixBrickWrapper {
       display: flex;
@@ -34,6 +46,7 @@
       min-width: 0;
     }
   }
+
   :global(.ant-tree-directory) {
     :global(.ant-tree-treenode-selected) {
       &:hover::before,
