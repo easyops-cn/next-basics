@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.326.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.326.8...@next-bricks/presentational-bricks@1.326.9) (2024-07-31)
+
+
+### Bug Fixes
+
+*  业务树搜索框，建议忽略关键字左右两侧的空格 ([920d331](https://github.com/easyops-cn/next-basics/commit/920d331d918b8b61bc50cd311cd5ec6d63bf5f08))
+
+
+
+
+
 ## [1.326.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.326.7...@next-bricks/presentational-bricks@1.326.8) (2024-07-30)
 
 
