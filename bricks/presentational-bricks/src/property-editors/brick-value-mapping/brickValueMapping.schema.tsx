@@ -30,7 +30,13 @@ export const brickValueMappingSchema = {
       name: "mapping",
       title: "映射规则",
       type: "string",
-      component: "CodeEditor",
+      component: {
+        name: "CodeEditor",
+        props: {
+          placeholder:
+            "success:\n  color: green\n  text:正常\narning:\n  color: orange\n  text:异常",
+        },
+      },
       decorator: {
         name: "FormItemWithoutAdvanced",
       },

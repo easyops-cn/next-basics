@@ -77,7 +77,13 @@ export const datetimeSelectorSchema = {
       name: "customTimeRange",
       title: "可选时间范围",
       type: "string",
-      component: "CodeEditor",
+      component: {
+        name: "CodeEditor",
+        props: {
+          placeholder:
+            "- range: now-1h\n  text:近一个小时\n- range: now-1d\n  text:近24小时",
+        },
+      },
       decorator: {
         name: "FormItemWithoutAdvanced",
       },
