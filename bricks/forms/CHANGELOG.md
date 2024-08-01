@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.297.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.296.12...@next-bricks/forms@1.297.0) (2024-08-01)
+
+
+### Features
+
+* add custom editors ([feddbb3](https://github.com/easyops-cn/next-basics/commit/feddbb34f61dca1f3ed69ba784f94b3a6c3bfc17))
+
+
+
+
+
 ## [1.296.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.296.11...@next-bricks/forms@1.296.12) (2024-07-29)
 
 
