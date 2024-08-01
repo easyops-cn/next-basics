@@ -29,6 +29,7 @@
     "start": "cross-env NODE_ENV='development' webpack --config webpack.config.js --watch",
     "start:editors": "cross-env NODE_ENV='development' webpack --config webpack.editors.js --watch",
     "start:both": "concurrently -k -n main,editors \"npm run start\" \"npm run start:editors\"",
+    "start:property-editors": "cross-env NODE_ENV='development' webpack --config webpack.property-editors.js --watch",
     "prebuild": "node scripts/pre-build.js",
     "build": "cross-env NODE_ENV='production' npm run build:webpack && npm run build:stories && npm run build:webpack:property-editors",
     "build:webpack": "npm run build:webpack:main && npm run build:webpack:editors",

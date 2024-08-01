@@ -6,3 +6,5 @@ import "./general-radio/index";
 import "./general-switch/index";
 import "./general-textarea/index";
 import "./general-form-item-v2/index";
+import "./general-date-picker/index";
+import "./cmdb-instance-select/index";
