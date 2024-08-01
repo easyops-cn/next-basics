@@ -36,7 +36,13 @@ export const brickTableSchema = {
       title: "表格列配置",
       type: "string",
       required: true,
-      component: "CodeEditor",
+      component: {
+        name: "CodeEditor",
+        props: {
+          placeholder:
+            "- dataIndex: name\n  title: 名称\n  key: name\n- dataIndex: age\n  title: 年龄\n  key: age",
+        },
+      },
       decorator: {
         name: "FormItemWithoutAdvanced",
         props: {
@@ -61,7 +67,12 @@ export const brickTableSchema = {
       name: "hiddenColumns",
       title: "隐藏表格列",
       type: "string",
-      component: "CodeEditor",
+      component: {
+        name: "CodeEditor",
+        props: {
+          placeholder: "- name\n- age",
+        },
+      },
       decorator: {
         name: "FormItemWithoutAdvanced",
         props: {
@@ -916,7 +927,12 @@ export const brickTableSchema = {
       name: "scrollConfigs",
       title: "表格滚动配置",
       type: "string",
-      component: "CodeEditor",
+      component: {
+        name: "CodeEditor",
+        props: {
+          placeholder: "x: true",
+        },
+      },
       decorator: {
         name: "FormItemWithoutAdvanced",
       },

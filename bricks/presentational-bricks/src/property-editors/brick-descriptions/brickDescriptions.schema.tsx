@@ -58,14 +58,26 @@ export const brickDescriptionsSchema = {
       name: "descriptionList",
       title: "描述列表",
       type: "string",
-      component: "CodeEditor",
+      component: {
+        name: "CodeEditor",
+        props: {
+          placeholder:
+            "- descriptionTitle: 基本信息\n  itemList:\n    - label: 名称\n      text: name\n    - label: 环境类型\n      text: 无\n- descriptionTitle: 集群规格\n  itemList:\n    - label: 集群来源\n      text: 导入\n    - label: 节点数量\n      text: 3\n",
+        },
+      },
       decorator: "FormItemWithoutAdvanced",
     },
     {
       name: "itemList",
       title: "描述列表",
       type: "string",
-      component: "CodeEditor",
+      component: {
+        name: "CodeEditor",
+        props: {
+          placeholder:
+            "- label: 名称\n  text: name\n- label: 环境类型\n  text: 无",
+        },
+      },
       decorator: "FormItemWithoutAdvanced",
     },
     {
