@@ -404,7 +404,7 @@
   &:hover {
     .appName {
       z-index: 1000;
-      background: var(--color-fill-bg-base-1);
+      background: var(--top-menu-item-hover-bg);
     }
   }
 }
@@ -451,7 +451,7 @@
   border-radius: 4px;
 
   &:hover {
-    background: var(--color-fill-bg-base-1);
+    background: var(--top-menu-item-hover-bg);
   }
 }
 
