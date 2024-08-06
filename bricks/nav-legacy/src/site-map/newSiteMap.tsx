@@ -37,6 +37,7 @@ import {
 interface newSiteMapProps {
   urlTemplates?: Record<string, string>;
   favouriteObjectList?: string[];
+  titleStyle?: React.CSSProperties;
 }
 export function matchSearchValue(model: Record<string, any>, value: string) {
   return (
@@ -544,7 +545,9 @@ export function NewSiteMap(props: newSiteMapProps) {
       onMouseLeave={() => triggerDrawerVisible(false)}
     >
       <div className={styles.newSiteMap}>
-        <span className={styles.appName}>{t(K.IT_RESOURCE_MANAGEMENT)}</span>
+        <span className={styles.appName} style={{ ...props.titleStyle }}>
+          {t(K.IT_RESOURCE_MANAGEMENT)}
+        </span>
       </div>
       <div id={"sitMapModelContainer"} className={styles.sitMapModelContainer}>
         <Drawer

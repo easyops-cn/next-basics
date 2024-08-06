@@ -17,6 +17,9 @@ class SiteMapElement extends UpdatingElement {
 
   @property({ attribute: false })
   urlTemplates = {};
+
+  @property({ attribute: false })
+  titleStyle: React.CSSProperties = {};
   /**
    * @default
    * @required false
@@ -37,6 +40,7 @@ class SiteMapElement extends UpdatingElement {
             <NewSiteMap
               modelMap={this.modelMap}
               urlTemplates={this.urlTemplates}
+              titleStyle={this.titleStyle}
             />
           ) : (
             <SiteMap
