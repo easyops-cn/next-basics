@@ -15,6 +15,7 @@ import {
   BuildAndPushState,
   BuildAndPushParams,
   MessageConf,
+  StoryboardType,
 } from "./WorkbenchCacheAction";
 import {
   BuilderProvider,
@@ -41,7 +42,7 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
   projectId: string;
 
   @property({ type: String })
-  storyboardType: "micro-app" | "theme-template";
+  storyboardType: StoryboardType;
 
   @property({ attribute: false })
   rootNode: BuilderRuntimeNode;
