@@ -389,8 +389,8 @@ export function LegacyPreviewContainer(
     setActiveOutlines([]);
 
     // V3 exposes `getBrickPackagesById` instead of `getBrickPackages`
-    const agentPackageId = "bricks/visual-builder";
-    const agentBrick = "visual-builder.inject-preview-agent";
+    const agentPackageId = "bricks/inject";
+    const agentBrick = "inject.visual-builder-preview-agent";
     const pkg: BrickPackage =
       (developHelper as any).getBrickPackagesById?.(agentPackageId) ??
       developHelper
