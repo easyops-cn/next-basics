@@ -189,6 +189,8 @@ function LegacyWorkbenchCacheAction(
         }
       }
     });
+
+    // form-builder 不需要自动添加依赖信息
     if (storyboardType !== "form") {
       backendInstance.setUsedBrickPackage([...brickList.values()]);
     }
