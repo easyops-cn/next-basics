@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.278.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.1...@next-bricks/next-builder@1.278.2) (2024-08-06)
+
+
+### Bug Fixes
+
+* Compatible with form-builder ([ba3db36](https://github.com/easyops-cn/next-basics/commit/ba3db36ab4054713fb2f5cc2bf6f1124809239f1))
+
+
+
+
+
 ## [1.278.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.0...@next-bricks/next-builder@1.278.1) (2024-08-05)
 
 **Note:** Version bump only for package @next-bricks/next-builder

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.26.1](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.26.0...@next-types/preview@1.26.1) (2024-08-06)
+
+
+### Bug Fixes
+
+* Compatible with form-builder ([ba3db36](https://github.com/easyops-cn/next-basics/commit/ba3db36ab4054713fb2f5cc2bf6f1124809239f1))
+
+
+
+
+
 # [1.26.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.25.0...@next-types/preview@1.26.0) (2024-06-17)
 
 

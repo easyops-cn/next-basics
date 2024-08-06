@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.3.1...@next-bricks/nav-legacy@1.3.2) (2024-08-06)
+
+
+### Bug Fixes
+
+* **site-map:** 支持自定义菜单字体颜色 ([2b375c8](https://github.com/easyops-cn/next-basics/commit/2b375c8f66e1234de52b29c2821b1cae2f00b7bd))
+
+
+
+
+
 ## [1.3.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.3.0...@next-bricks/nav-legacy@1.3.1) (2024-08-06)
 
 
