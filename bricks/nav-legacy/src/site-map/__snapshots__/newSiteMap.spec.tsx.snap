@@ -736,6 +736,7 @@ exports[`newSiteMap should work with NewSiteMap 1`] = `
     >
       <span
         className="appName"
+        style={Object {}}
       >
         IT_RESOURCE_MANAGEMENT
       </span>
