@@ -63,11 +63,15 @@ export const renderLinkCom = (
 
 export const renderSpanCom = (
   item: SidebarMenuGroups,
-  className?: string
+  className?: string,
+  mainMenuTitleStyle?: React.CSSProperties
 ): React.ReactElement => {
   return (
     <>
-      <span className={classNames(style.menuText, className)}>
+      <span
+        className={classNames(style.menuText, className)}
+        style={mainMenuTitleStyle}
+      >
         {item.title}
       </span>
     </>

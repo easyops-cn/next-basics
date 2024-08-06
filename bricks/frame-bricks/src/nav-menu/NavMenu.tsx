@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, CSSProperties } from "react";
 import { Menu, Popover } from "antd";
 import { UnregisterCallback, Location } from "history";
 import { getHistory } from "@next-core/brick-kit";
@@ -24,6 +24,7 @@ interface SidebarMenuProps {
   isCustom?: boolean;
   selectedKeys?: string[];
   showTooltip?: boolean;
+  mainMenuTitleStyle: CSSProperties | undefined;
 }
 
 export function NavMenu(props: SidebarMenuProps): React.ReactElement {
@@ -67,7 +68,10 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
     );
   };
 
-  const renderGroupMenu = (item: SidebarMenuGroups): React.ReactNode => {
+  const renderGroupMenu = (
+    item: SidebarMenuGroups,
+    mainMenuTitleStyle?: CSSProperties
+  ): React.ReactNode => {
     if (item.items?.length > 0) {
       return (
         <Menu.ItemGroup
@@ -76,7 +80,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
           title={
             item.useBrick
               ? renderBrickCom(item)
-              : renderSpanCom(item, style.groupText)
+              : renderSpanCom(item, style.groupText, mainMenuTitleStyle)
           }
         >
           {item.items?.map((innerItem) => renderMenuItem(innerItem))}
@@ -85,7 +89,10 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
     }
   };
 
-  const renderSubMenu = (item: SidebarMenuGroups): React.ReactNode => {
+  const renderSubMenu = (
+    item: SidebarMenuGroups,
+    mainMenuTitleStyle?: CSSProperties
+  ): React.ReactNode => {
     if (item.items?.length > 0) {
       return (
         <Menu.SubMenu
@@ -96,7 +103,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
           title={
             item.useBrick
               ? renderBrickCom(item)
-              : renderSpanCom(item, style.subMenuTitleText)
+              : renderSpanCom(item, style.subMenuTitleText, mainMenuTitleStyle)
           }
         >
           {item.items.map((innerItem) => renderMenuItem(innerItem))}
@@ -148,14 +155,15 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
 
   const renderMenuItem = (
     item: SidebarMenuItem,
-    groupAsSubMenu?: boolean
+    groupAsSubMenu?: boolean,
+    mainMenuTitleStyle?: CSSProperties
   ): React.ReactNode => {
     return isDivider(item)
       ? renderDivider()
       : isSubMenu(item, groupAsSubMenu)
-      ? renderSubMenu(item)
+      ? renderSubMenu(item, mainMenuTitleStyle)
       : isGroup(item)
-      ? renderGroupMenu(item)
+      ? renderGroupMenu(item, mainMenuTitleStyle)
       : renderSimpleMenuItem(item);
   };
 
@@ -170,7 +178,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
         item.childLayout === "category" &&
         item.items?.length
           ? renderThreeLevelMenu(item)
-          : renderMenuItem(item, true)
+          : renderMenuItem(item, true, props.mainMenuTitleStyle)
       )}
     </Menu>
   );

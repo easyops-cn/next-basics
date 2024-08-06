@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { NavMenu } from "./NavMenu";
@@ -44,6 +44,16 @@ export class NavMenuElement extends UpdatingElement {
   })
   showTooltip: boolean;
 
+  /**
+   * @required false
+   * @default -
+   * @description 配置主菜单文字样式
+   */
+  @property({
+    attribute: false,
+  })
+  mainMenuTitleStyle: CSSProperties | undefined = { color: "white" };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -65,6 +75,7 @@ export class NavMenuElement extends UpdatingElement {
           <NavMenu
             menuItems={this.menu?.menuItems ?? []}
             showTooltip={this.showTooltip}
+            mainMenuTitleStyle={this.mainMenuTitleStyle}
           />
         </BrickWrapper>,
         this
