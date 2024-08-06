@@ -93,10 +93,12 @@ type UpdateStoryboard =
     };
 
 export type BuildAndPushState = "building" | "success" | "fail";
+
+export type StoryboardType = "micro-app" | "theme-template" | "form";
 export interface WorkbenchCacheActionProps {
   appId: string;
   projectId: string;
-  storyboardType: "micro-app" | "theme-template";
+  storyboardType: StoryboardType;
   objectId: string;
   rootNode: BuilderRuntimeNode;
   onlyShowActionCount?: boolean;
@@ -187,7 +189,9 @@ function LegacyWorkbenchCacheAction(
         }
       }
     });
-    backendInstance.setUsedBrickPackage([...brickList.values()]);
+    if (storyboardType !== "form") {
+      backendInstance.setUsedBrickPackage([...brickList.values()]);
+    }
   };
 
   const setNewStoryboard = useCallback(
