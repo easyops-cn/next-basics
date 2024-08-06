@@ -26,6 +26,11 @@ export class AppBarDocumentLinkElement extends UpdatingElement {
   })
   isInNavbar: boolean;
 
+  @property({
+    attribute: false,
+  })
+  showHover = true;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -47,6 +52,7 @@ export class AppBarDocumentLinkElement extends UpdatingElement {
           <AppDocumentLink
             iconStyle={this.iconStyle}
             isInNavbar={this.isInNavbar}
+            showHover={this.showHover}
           />
         </BrickWrapper>,
         this

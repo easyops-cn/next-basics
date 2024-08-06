@@ -11,6 +11,7 @@ import styles from "./AppDocumentLink.module.css";
 interface AppDocumentLinkProps {
   documentId?: string;
   iconStyle?: React.CSSProperties;
+  buttonStyle?: React.CSSProperties;
   isInNavbar?: boolean;
 }
 
@@ -18,6 +19,7 @@ export function AppDocumentLink({
   documentId,
   iconStyle,
   isInNavbar,
+  buttonStyle,
 }: AppDocumentLinkProps): React.ReactElement {
   const { t } = useTranslation(NS_BASIC_BRICKS);
   const { currentApp } = useRecentApps();
@@ -48,6 +50,7 @@ export function AppDocumentLink({
       buttonIcon="question-circle"
       tooltip={t(K.HELP)}
       buttonUrl={docLink}
+      buttonStyle={buttonStyle}
     />
   ) : (
     <div className={styles.docLinkContainer}>

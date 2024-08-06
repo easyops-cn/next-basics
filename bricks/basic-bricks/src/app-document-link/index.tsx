@@ -19,6 +19,11 @@ export class AppBarDocumentLinkElement extends UpdatingElement {
     attribute: false,
   })
   iconStyle: React.CSSProperties;
+
+  @property({
+    attribute: false,
+  })
+  buttonStyle: React.CSSProperties;
   /**
    * @default false
    * @required false
@@ -50,6 +55,7 @@ export class AppBarDocumentLinkElement extends UpdatingElement {
           <AppDocumentLink
             iconStyle={this.iconStyle}
             isInNavbar={this.isInNavbar}
+            buttonStyle={this.buttonStyle}
           />
         </BrickWrapper>,
         this

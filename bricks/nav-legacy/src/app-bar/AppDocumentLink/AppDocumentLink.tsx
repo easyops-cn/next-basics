@@ -12,12 +12,14 @@ interface AppDocumentLinkProps {
   documentId?: string;
   iconStyle?: React.CSSProperties;
   isInNavbar?: boolean;
+  showHover?: boolean;
 }
 
 export function AppDocumentLink({
   documentId,
   iconStyle,
   isInNavbar,
+  showHover,
 }: AppDocumentLinkProps): React.ReactElement {
   const { t } = useTranslation(NS_NAV_LEGACY);
   const { currentApp } = useRecentApps();
@@ -46,6 +48,7 @@ export function AppDocumentLink({
     <div
       className={classNames(styles.docLinkContainer, {
         [styles.isNav]: isInNavbar,
+        [styles.notShowHover]: !showHover,
       })}
     >
       <Tooltip title={t(K.HELP)} placement="bottom">

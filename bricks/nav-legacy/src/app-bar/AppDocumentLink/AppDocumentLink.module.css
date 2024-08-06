@@ -22,6 +22,11 @@
   }
 }
 
+.docLinkContainer.notShowHover {
+  a:hover {
+    background: none !important;
+  }
+}
 .docLinkContainer a:hover {
   color: var(--antd-link-hover-color);
 }
