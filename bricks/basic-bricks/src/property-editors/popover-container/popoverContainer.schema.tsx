@@ -88,14 +88,6 @@ export const popoverContainerSchema = {
           },
         },
         {
-          target: "showIcon",
-          fulfill: {
-            state: {
-              visible: "{{$self.value}}",
-            },
-          },
-        },
-        {
           target: "trigger",
           fulfill: {
             state: {
