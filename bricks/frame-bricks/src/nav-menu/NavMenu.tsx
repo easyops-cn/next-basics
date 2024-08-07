@@ -55,7 +55,8 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
   }, []);
 
   const renderSimpleMenuItem = (
-    item: SidebarMenuSimpleItems
+    item: SidebarMenuSimpleItems,
+    mainMenuTitleStyle?: CSSProperties
   ): React.ReactNode => {
     return (
       <Menu.Item
@@ -63,7 +64,9 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
         title={showTooltip ? item.text : ""}
         className={style.simpleMenuItem}
       >
-        {item.useBrick ? renderBrickCom(item) : renderLinkCom(item)}
+        {item.useBrick
+          ? renderBrickCom(item)
+          : renderLinkCom(item, null, mainMenuTitleStyle)}
       </Menu.Item>
     );
   };
@@ -164,7 +167,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
       ? renderSubMenu(item, mainMenuTitleStyle)
       : isGroup(item)
       ? renderGroupMenu(item, mainMenuTitleStyle)
-      : renderSimpleMenuItem(item);
+      : renderSimpleMenuItem(item, mainMenuTitleStyle);
   };
 
   return (
