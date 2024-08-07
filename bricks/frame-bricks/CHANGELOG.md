@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.9...@next-bricks/frame-bricks@1.18.10) (2024-08-07)
+
+
+### Bug Fixes
+
+* **nav:** 支持自定义菜单字体颜色 ([944085f](https://github.com/easyops-cn/next-basics/commit/944085f9a7d3e46ab37d42352bb3b9f2cf54dfe2))
+
+
+
+
+
 ## [1.18.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.8...@next-bricks/frame-bricks@1.18.9) (2024-08-06)
 
 
