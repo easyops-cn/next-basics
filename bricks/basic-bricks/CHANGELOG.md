@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.257.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.257.0...@next-bricks/basic-bricks@1.257.1) (2024-08-07)
+
+
+### Bug Fixes
+
+* fix popover schema bug ([b181978](https://github.com/easyops-cn/next-basics/commit/b181978375c80faffab945a1cd70978d26ed1e2c))
+
+
+
+
+
 # [1.257.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.256.2...@next-bricks/basic-bricks@1.257.0) (2024-08-06)
 
 
