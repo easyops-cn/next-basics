@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.278.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.2...@next-bricks/next-builder@1.278.3) (2024-08-13)
+
+
+### Bug Fixes
+
+* use preview agent from inject ([c31100c](https://github.com/easyops-cn/next-basics/commit/c31100cd6b210c2dfca4b0c9f83502c956d844f5))
+
+
+
+
+
 ## [1.278.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.1...@next-bricks/next-builder@1.278.2) (2024-08-06)
 
 
