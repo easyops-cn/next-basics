@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.327.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.326.10...@next-bricks/presentational-bricks@1.327.0) (2024-08-13)
+
+
+### Features
+
+* **brick-collapse-card:** Title with icon and descriptions add compact layout ([b266971](https://github.com/easyops-cn/next-basics/commit/b2669716a59e055be7379e981cceaf17c8c04c71))
+
+
+
+
+
 ## [1.326.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.326.9...@next-bricks/presentational-bricks@1.326.10) (2024-08-01)
 
 
