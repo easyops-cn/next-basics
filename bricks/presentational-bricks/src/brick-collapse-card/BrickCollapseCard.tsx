@@ -19,7 +19,7 @@ interface BrickCollapseCardProps {
   hasHeaderSlot?: boolean;
   titleIcon?: MenuIcon | string;
   descriptionList?: descriptionsItemProps[];
-  titleWithIconAndDesc?: boolean;
+  titleWithIconAndDesc?: boolean | "compact";
   verticalCenter?: boolean;
 }
 
@@ -76,10 +76,12 @@ const getHeaderWithIconAndDescNode = (
     <>
       <div className="headerIcon">{getIconNode(props.titleIcon, "")}</div>
       <div className="headerContent">
-        <div className="cardTitle">{props.title}</div>
-        <div className="descriptionList">
-          {props.descriptionList && getDescriptionNode(props.descriptionList)}
-        </div>
+        {props.title && <div className="cardTitle">{props.title}</div>}
+        {props.descriptionList && (
+          <div className="descriptionList">
+            {getDescriptionNode(props.descriptionList)}
+          </div>
+        )}
       </div>
     </>
   );
@@ -88,7 +90,11 @@ const getHeaderWithIconAndDescNode = (
 const getHeaderNode = (props: BrickCollapseCardProps): React.ReactElement => {
   if (props.hasHeaderSlot) return <slot id="headerSlot" name="header" />;
   return (
-    <div className="collapseTitle">
+    <div
+      className={classNames("collapseTitle", {
+        compact: props.titleWithIconAndDesc === "compact",
+      })}
+    >
       {props.titleWithIconAndDesc
         ? getHeaderWithIconAndDescNode(props)
         : props.title}
