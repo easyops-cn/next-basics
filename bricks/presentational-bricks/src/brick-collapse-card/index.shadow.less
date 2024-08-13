@@ -23,6 +23,11 @@
       padding: 20px;
       cursor: inherit;
 
+      &,
+      .collapseTitle {
+        gap: var(--toolbar-button-gap);
+      }
+
       &::before,
       &::after {
         content: none;
@@ -38,7 +43,7 @@
         font-size: 16px;
 
         .headerIcon {
-          margin-right: 24px;
+          margin-right: 16px;
           font-size: 60px;
           line-height: 0;
           color: var(--color-brand);
@@ -59,16 +64,15 @@
           }
 
           .descriptionList {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
             line-height: 20px;
             margin-top: 14px;
             font-weight: 400;
             font-size: 14px;
 
             .descriptionItem {
-              &:not(:last-child) {
-                margin-right: 20px;
-              }
-
               .descriptionItemLabel {
                 color: var(--color-secondary-text);
                 margin-right: 10px;
@@ -76,6 +80,33 @@
 
               .descriptionItemText {
                 color: var(--color-header-text);
+              }
+            }
+          }
+        }
+
+        &.compact {
+          justify-content: normal;
+
+          .headerIcon {
+            margin-right: 0;
+            font-size: 32px;
+          }
+
+          .headerContent {
+            flex-direction: row;
+            justify-content: normal;
+            align-items: center;
+            gap: var(--toolbar-button-gap);
+
+            .descriptionList {
+              gap: var(--toolbar-button-gap);
+              margin-top: 0;
+
+              .descriptionItem {
+                .descriptionItemLabel {
+                  margin-right: 6px;
+                }
               }
             }
           }

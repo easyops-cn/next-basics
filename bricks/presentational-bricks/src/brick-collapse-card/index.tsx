@@ -104,15 +104,15 @@ export class BrickCollapseCardElement extends UpdatingElement {
   };
 
   /**
-   * @kind boolean
+   * @kind boolean | "compact"
    * @required false
    * @default false
    * @description 是否可以设置标题图标和描述信息
    */
   @property({
-    type: Boolean,
+    attribute: false,
   })
-  titleWithIconAndDesc: boolean;
+  titleWithIconAndDesc: boolean | "compact";
 
   /**
    * @kind boolean
