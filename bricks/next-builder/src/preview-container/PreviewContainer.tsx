@@ -388,17 +388,31 @@ export function LegacyPreviewContainer(
     setHoverOutlines([]);
     setActiveOutlines([]);
 
-    // V3 exposes `getBrickPackagesById` instead of `getBrickPackages`
-    const agentPackageId = "bricks/visual-builder";
-    const agentBrick = "visual-builder.inject-preview-agent";
-    const pkg: BrickPackage =
-      (developHelper as any).getBrickPackagesById?.(agentPackageId) ??
-      developHelper
-        .getBrickPackages?.()
-        .find((pkg) => (pkg as { id?: string }).id === agentPackageId);
+    const agentCandidates = [
+      ["bricks/inject", "inject.visual-builder-preview-agent"],
+      ["bricks/visual-builder", "visual-builder.inject-preview-agent"],
+    ] as const;
+    let pkg: BrickPackage | undefined;
+    let agentBrick: string | undefined;
+    for (const [agentPackageId, brick] of agentCandidates) {
+      // V3 exposes `getBrickPackagesById` instead of `getBrickPackages`
+      pkg =
+        (developHelper as any).getBrickPackagesById?.(agentPackageId) ??
+        developHelper
+          .getBrickPackages?.()
+          .find((pkg) => (pkg as { id?: string }).id === agentPackageId);
+      if (pkg) {
+        agentBrick = brick;
+        break;
+      }
+    }
     if (!pkg) {
       // eslint-disable-next-line no-console
-      console.error(`Cannot find preview agent package: ${agentPackageId}`);
+      console.error(
+        `Cannot find preview agent package: ${agentCandidates
+          .map(([item]) => item)
+          .join(" or ")}`
+      );
     }
 
     iframeRef.current.contentWindow.postMessage(
@@ -434,6 +448,7 @@ export function LegacyPreviewContainer(
   }, [
     snippetGraphData,
     appId,
+    routeId,
     templateId,
     formId,
     formData,
