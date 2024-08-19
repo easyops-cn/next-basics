@@ -9,16 +9,25 @@ import {
   Contract,
   StoryboardMeta,
   CustomTemplate,
+  StoryboardFunction,
 } from "@next-core/brick-types";
 import {
   isObject,
   normalizeBuilderNode,
   normalizeMenu,
   isRouteNode,
+  visitStoryboardFunctions,
+  EstreeLiteral,
 } from "@next-core/brick-utils";
 import { safeLoad, JSON_SCHEMA } from "js-yaml";
 import { get, isEmpty } from "lodash";
-import { BuildInfoV2, StoryboardToBuild, TemplateNode } from "./interfaces";
+import {
+  BuildInfoV2,
+  FunctionNode,
+  ProcessedStoryboardFunction,
+  StoryboardToBuild,
+  TemplateNode,
+} from "./interfaces";
 import { ContractCenterApi_batchSearchContract } from "@next-sdk/next-builder-sdk";
 import {
   ScanBricksAndTemplates,
@@ -29,6 +38,10 @@ import { bundleMenu } from "./bundleMenu";
 
 export const symbolForNodeId = Symbol.for("nodeId");
 export const symbolForNodeInstanceId = Symbol.for("nodeInstanceId");
+
+const FN = "FN";
+const PERMISSIONS = "PERMISSIONS";
+const check = "check";
 
 interface BuildContext {
   keepIds?: boolean;
@@ -68,11 +81,7 @@ export async function buildStoryboardV2(
     } as Record<string, Record<string, string>>
   );
 
-  const functions = data.functions?.map((fn) => ({
-    name: fn.name,
-    source: fn.source,
-    typescript: fn.typescript,
-  }));
+  const functions = buildFunctions(data.functions);
 
   const meta: StoryboardToBuild["meta"] = {
     customTemplates,
@@ -165,6 +174,56 @@ function buildRoute(node: BuilderRouteNode, ctx: BuildContext = {}): RouteConf {
       routeConf.bricks = buildBricks(node.children as BuilderBrickNode[], ctx);
   }
   return routeConf;
+}
+
+function buildFunctions(
+  functions: FunctionNode[] | undefined
+): ProcessedStoryboardFunction[] | undefined {
+  return functions?.map((fnNode) => {
+    const fn: ProcessedStoryboardFunction = {
+      name: fnNode.name,
+      source: fnNode.source,
+      typescript: fnNode.typescript,
+    };
+
+    // 在构建时就计算好函数需要在运行时扫描的信息，包括依赖的其他函数、是否调用了 `PERMISSIONS.check`。
+    const deps = new Set<string>();
+    let perm = false;
+    if (fn.source.includes(FN) || fn.source.includes(PERMISSIONS)) {
+      visitStoryboardFunctions([fn], (node, parent) => {
+        if (node.name === FN) {
+          const memberParent = parent[parent.length - 1];
+          if (
+            memberParent?.node.type === "MemberExpression" &&
+            memberParent.key === "object" &&
+            !memberParent.node.computed &&
+            memberParent.node.property.type === "Identifier"
+          ) {
+            deps.add(memberParent.node.property.name);
+          }
+        } else if (!perm && node.name === PERMISSIONS) {
+          const memberParent = parent[parent.length - 1];
+          const callParent = parent[parent.length - 2];
+          if (
+            callParent?.node.type === "CallExpression" &&
+            callParent?.key === "callee" &&
+            memberParent?.node.type === "MemberExpression" &&
+            memberParent.key === "object" &&
+            !memberParent.node.computed &&
+            memberParent.node.property.type === "Identifier" &&
+            memberParent.node.property.name === check
+          ) {
+            perm = true;
+          }
+        }
+      });
+    }
+
+    fn.deps = [...deps];
+    fn.perm = perm;
+
+    return fn;
+  });
 }
 
 /**
