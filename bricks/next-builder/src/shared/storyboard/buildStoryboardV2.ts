@@ -219,6 +219,9 @@ function buildFunctions(
       });
     }
 
+    // Remove self
+    deps.delete(fn.name);
+
     fn.deps = [...deps];
     fn.perm = perm;
 
