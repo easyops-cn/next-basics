@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.278.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.5...@next-bricks/next-builder@1.278.6) (2024-08-19)
+
+
+### Bug Fixes
+
+* remove dataDefinition in context ([e603f11](https://github.com/easyops-cn/next-basics/commit/e603f119cd97c11a7f4aae5e696426e18341247a))
+
+
+
+
+
 ## [1.278.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.4...@next-bricks/next-builder@1.278.5) (2024-08-19)
 
 
