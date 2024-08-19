@@ -230,12 +230,13 @@ describe("buildStoryboardV2", () => {
               FN.a();
               FN.b();
               FN.a();
+              FN.useFn();
               FN;
             }`,
           },
           {
             name: "usePerm",
-            source: `function useFn() {
+            source: `function usePerm() {
               PERMISSIONS.check();
               PERMISSIONS;
             }`,
@@ -439,6 +440,7 @@ describe("buildStoryboardV2", () => {
               FN.a();
               FN.b();
               FN.a();
+              FN.useFn();
               FN;
             }`,
               deps: ["a", "b"],
@@ -446,7 +448,7 @@ describe("buildStoryboardV2", () => {
             },
             {
               name: "usePerm",
-              source: `function useFn() {
+              source: `function usePerm() {
               PERMISSIONS.check();
               PERMISSIONS;
             }`,
