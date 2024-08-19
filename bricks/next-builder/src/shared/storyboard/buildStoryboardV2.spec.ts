@@ -1,6 +1,6 @@
 import { clone } from "lodash";
 import { ContractCenterApi_batchSearchContract } from "@next-sdk/next-builder-sdk";
-import { Contract } from "@next-core/brick-types";
+import { ContextConf, Contract } from "@next-core/brick-types";
 import {
   buildStoryboardV2,
   symbolForNodeId,
@@ -140,7 +140,8 @@ describe("buildStoryboardV2", () => {
               {
                 name: "myState",
                 value: "any data",
-              },
+                dataDefinition: [],
+              } as ContextConf,
             ],
             children: [
               {
@@ -1005,7 +1006,7 @@ describe("buildStoryboardV2", () => {
                   args: ["APP"],
                 },
                 dataDefinition: [],
-              } as any,
+              } as ContextConf,
             ],
             // Fields should be removed.
             _ts: 123,
