@@ -148,7 +148,7 @@ export function builderCustomTemplates(
   return templates?.map((template) => ({
     name: template.templateId,
     proxy: template.proxy,
-    state: template.state,
+    state: buildContextOrState(template.state),
     bricks: buildBricks(template.children, ctx) as BrickConfInTemplate[],
     ...(ctx?.keepIds
       ? {
@@ -168,7 +168,7 @@ export function buildRoutes(
 function buildRoute(node: BuilderRouteNode, ctx: BuildContext = {}): RouteConf {
   const routeConf = normalize(node, ctx.keepIds) as unknown as RouteConf;
 
-  routeConf.context = buildRouteContext(node.context);
+  routeConf.context = buildContextOrState(node.context);
 
   switch (routeConf.type) {
     case "routes":
@@ -180,7 +180,7 @@ function buildRoute(node: BuilderRouteNode, ctx: BuildContext = {}): RouteConf {
   return routeConf;
 }
 
-function buildRouteContext(
+function buildContextOrState(
   context: (ContextConf & { dataDefinition?: unknown })[] | undefined
 ): ContextConf[] | undefined {
   return context?.map(({ dataDefinition, ...rest }) => rest);
