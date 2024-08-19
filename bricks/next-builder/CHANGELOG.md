@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.278.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.4...@next-bricks/next-builder@1.278.5) (2024-08-19)
+
+
+### Bug Fixes
+
+* **function:** do not mark self as a dep ([5c32e98](https://github.com/easyops-cn/next-basics/commit/5c32e989b1374f912c6dda4220b19eec7d75ba97))
+
+
+
+
+
 ## [1.278.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.3...@next-bricks/next-builder@1.278.4) (2024-08-19)
 
 
