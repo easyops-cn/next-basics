@@ -1004,7 +1004,8 @@ describe("buildStoryboardV2", () => {
                   useProvider: "easyops.api.cmdb.instance@PostSearch:1.1.0",
                   args: ["APP"],
                 },
-              },
+                dataDefinition: [],
+              } as any,
             ],
             // Fields should be removed.
             _ts: 123,
