@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.278.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.3...@next-bricks/next-builder@1.278.4) (2024-08-19)
+
+
+### Bug Fixes
+
+* collect function deps and perm at build time ([57b15ba](https://github.com/easyops-cn/next-basics/commit/57b15bab3408f97931f043247bee1bff97f53133))
+
+
+
+
+
 ## [1.278.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.2...@next-bricks/next-builder@1.278.3) (2024-08-13)
 
 
