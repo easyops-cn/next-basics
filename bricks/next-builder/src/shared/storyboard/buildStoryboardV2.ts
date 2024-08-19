@@ -10,6 +10,7 @@ import {
   StoryboardMeta,
   CustomTemplate,
   StoryboardFunction,
+  ContextConf,
 } from "@next-core/brick-types";
 import {
   isObject,
@@ -166,6 +167,9 @@ export function buildRoutes(
 
 function buildRoute(node: BuilderRouteNode, ctx: BuildContext = {}): RouteConf {
   const routeConf = normalize(node, ctx.keepIds) as unknown as RouteConf;
+
+  routeConf.context = buildRouteContext(node.context);
+
   switch (routeConf.type) {
     case "routes":
       routeConf.routes = buildRoutes(node.children as BuilderRouteNode[], ctx);
@@ -174,6 +178,12 @@ function buildRoute(node: BuilderRouteNode, ctx: BuildContext = {}): RouteConf {
       routeConf.bricks = buildBricks(node.children as BuilderBrickNode[], ctx);
   }
   return routeConf;
+}
+
+function buildRouteContext(
+  context: (ContextConf & { dataDefinition?: unknown })[] | undefined
+): ContextConf[] | undefined {
+  return context?.map(({ dataDefinition, ...rest }) => rest);
 }
 
 function buildFunctions(
