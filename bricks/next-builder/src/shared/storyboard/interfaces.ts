@@ -138,13 +138,23 @@ export interface StoryboardToBuild {
     i18n?: MetaI18n;
     workflows?: WorkflowField[];
     userGroups?: UserGroup[];
-    functions?: Pick<FunctionNode, "name" | "source" | "typescript">[];
+    functions?: ProcessedStoryboardFunction[];
     mocks?: Mocks;
     contracts?: Contract[];
   };
 
   dependsAll?: boolean;
 }
+
+export type ProcessedStoryboardFunction = Pick<
+  FunctionNode,
+  "name" | "source" | "typescript"
+> & {
+  /** 依赖的其他函数 */
+  deps?: string[];
+  /** 是否调用了 `PERMISSIONS.check` */
+  perm?: boolean;
+};
 
 export interface I18nNode {
   name: string;

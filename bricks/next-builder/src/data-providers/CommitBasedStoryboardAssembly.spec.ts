@@ -3885,12 +3885,16 @@ describe("CommitBasedStoryboardAssembly", () => {
                 name: "aaaa",
                 source: "function aaaa() {\n  \n}\n",
                 typescript: false,
+                deps: [],
+                perm: false,
               },
               {
                 name: "bbbb",
                 source:
                   "function bbbb(params: Params): Result {\n  \n}\n\ninterface Params {}\n\ninterface Result {}\n",
                 typescript: true,
+                deps: [],
+                perm: false,
               },
             ],
             workflows: [

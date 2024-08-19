@@ -224,6 +224,22 @@ describe("buildStoryboardV2", () => {
             description: "Say exclamation",
             typescript: true,
           },
+          {
+            name: "useFn",
+            source: `function useFn() {
+              FN.a();
+              FN.b();
+              FN.a();
+              FN;
+            }`,
+          },
+          {
+            name: "usePerm",
+            source: `function useFn() {
+              PERMISSIONS.check();
+              PERMISSIONS;
+            }`,
+          },
         ],
         workflows: [
           {
@@ -407,11 +423,35 @@ describe("buildStoryboardV2", () => {
             {
               name: "sayHello",
               source: "function sayHello() {}",
+              deps: [],
+              perm: false,
             },
             {
               name: "sayExclamation",
               source: "function sayExclamation() {}",
               typescript: true,
+              deps: [],
+              perm: false,
+            },
+            {
+              name: "useFn",
+              source: `function useFn() {
+              FN.a();
+              FN.b();
+              FN.a();
+              FN;
+            }`,
+              deps: ["a", "b"],
+              perm: false,
+            },
+            {
+              name: "usePerm",
+              source: `function useFn() {
+              PERMISSIONS.check();
+              PERMISSIONS;
+            }`,
+              deps: [],
+              perm: true,
             },
           ],
         },
@@ -1005,11 +1045,15 @@ describe("buildStoryboardV2", () => {
               name: "sayHello",
               source: "function sayHello() {}",
               typescript: undefined,
+              deps: [],
+              perm: false,
             },
             {
               name: "sayExclamation",
               source: "function sayExclamation() {}",
               typescript: true,
+              deps: [],
+              perm: false,
             },
           ],
           i18n: {
