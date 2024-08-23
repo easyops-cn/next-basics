@@ -10,6 +10,8 @@ import {
   CustomTemplateState,
   Contract,
   Mocks,
+  ContractRequest,
+  ContractResponse,
 } from "@next-core/brick-types";
 import { InstanceApi_GetDetailResponseBody } from "@next-sdk/cmdb-sdk";
 import { MenuNode } from "@next-core/brick-utils";
@@ -140,7 +142,7 @@ export interface StoryboardToBuild {
     userGroups?: UserGroup[];
     functions?: ProcessedStoryboardFunction[];
     mocks?: Mocks;
-    contracts?: Contract[];
+    contracts?: MinimalContract[];
   };
 
   dependsAll?: boolean;
@@ -170,3 +172,23 @@ export interface ImageNode {
 export interface FunctionNode extends StoryboardFunction {
   tests?: unknown[];
 }
+
+export type MinimalContract = Omit<Contract, "request" | "response"> & {
+  request?: MinimalContractRequest;
+  response?: MinimalContractResponse;
+};
+export type MinimalContractRequest = Pick<ContractRequest, "type"> & {
+  fields?: MinimalContractField[];
+};
+export type MinimalContractField =
+  | {
+      type: string;
+      fields?: MinimalContractField[];
+    }
+  | {
+      ref: string;
+    };
+export type MinimalContractResponse = Pick<
+  ContractResponse,
+  "type" | "wrapper"
+>;

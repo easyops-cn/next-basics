@@ -18,6 +18,24 @@ import { Contract } from "@next-core/brick-types";
       contract: "easyops.api.cmdb.instance.PostSearch",
       type: "contract",
       version: "1.1.0",
+      request: {
+        type: "object",
+        fields: [
+          {
+            type: "file",
+            name: "thing",
+          },
+          {
+            type: "string",
+            name: "label",
+          },
+        ],
+      },
+      response: {
+        type: "object",
+        wrapper: false,
+        fields: [],
+      },
     },
   ],
 });
@@ -672,7 +690,19 @@ describe("StoryboardAssembly", () => {
                 contract: "easyops.api.cmdb.instance.PostSearch",
                 type: "contract",
                 version: "1.1.0",
-              } as Partial<Contract> as Contract,
+                request: {
+                  type: "object",
+                  fields: [
+                    {
+                      type: "file",
+                    },
+                  ],
+                },
+                response: {
+                  type: "object",
+                  wrapper: false,
+                },
+              } as unknown as Contract,
             ],
             userGroups: [{ description: "研发", name: "开发小组" }],
           },
@@ -958,6 +988,18 @@ describe("StoryboardAssembly", () => {
                 contract: "easyops.api.cmdb.instance.PostSearch",
                 type: "contract",
                 version: "1.1.0",
+                request: {
+                  type: "object",
+                  fields: [
+                    {
+                      type: "file",
+                    },
+                  ],
+                },
+                response: {
+                  type: "object",
+                  wrapper: false,
+                },
               },
             ],
             userGroups: [{ description: "研发", name: "开发小组" }],
@@ -1181,7 +1223,19 @@ describe("StoryboardAssembly", () => {
                 contract: "easyops.api.cmdb.instance.PostSearch",
                 type: "contract",
                 version: "1.1.0",
-              } as Partial<Contract> as Contract,
+                request: {
+                  type: "object",
+                  fields: [
+                    {
+                      type: "file",
+                    },
+                  ],
+                },
+                response: {
+                  type: "object",
+                  wrapper: false,
+                },
+              } as unknown as Contract,
             ],
           },
         },

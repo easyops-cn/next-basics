@@ -3,6 +3,7 @@ import { collectBricksByCustomTemplates } from "@next-core/brick-utils";
 import {
   BrickConfInTemplate,
   BuilderCustomTemplateNode,
+  Contract,
   CustomTemplate,
   CustomTemplateState,
   SnippetDefinition,
@@ -30,7 +31,10 @@ import {
   InstanceApi_getDetail,
 } from "@next-sdk/cmdb-sdk";
 import { paramCase } from "change-case";
-import { buildBricks } from "../shared/storyboard/buildStoryboardV2";
+import {
+  buildBricks,
+  buildContracts,
+} from "../shared/storyboard/buildStoryboardV2";
 import { getBrickPackageIndexJs } from "./utils/getBrickPackageIndexJs";
 import { getBrickPackageIndexJsV3 } from "./utils/getBrickPackageIndexJsV3";
 import { getBrickPackageBootstrapJs } from "./utils/getBrickPackageBootstrapJs";
@@ -448,11 +452,13 @@ export async function BuildProjectOfTemplates({
 
   let contracts: ContractCenterApi_BatchSearchContractResponseBody_list_item[];
   if (contractParams.length > 0) {
-    contracts = (
-      await ContractCenterApi_batchSearchContract({
-        contract: contractParams,
-      })
-    ).list;
+    contracts = buildContracts(
+      (
+        await ContractCenterApi_batchSearchContract({
+          contract: contractParams,
+        })
+      ).list as Contract[]
+    );
   }
 
   const processedTemplates = templates.map((tpl) => ({
