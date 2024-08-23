@@ -3,7 +3,6 @@ import {
   InstanceApi_getDetail,
 } from "@next-sdk/cmdb-sdk";
 import { ContractCenterApi_batchSearchContract } from "@next-sdk/next-builder-sdk";
-import type { FeatureFlags } from "@next-core/brick-types";
 import {
   BuildInfoForProjectOfTemplates,
   BuildProjectOfTemplates,
@@ -382,6 +381,22 @@ const consoleError = jest
       name: "postsearch",
       namespaceId: "cmdb.instance",
       version: "1.0.0",
+      endpoint: {
+        uri: "api/cmdb/instance/search",
+        method: "GET",
+      },
+      request: {
+        type: "object",
+        fields: [
+          { name: "query", type: "string" },
+          { name: "number", type: "string" },
+        ],
+      },
+      response: {
+        type: "object",
+        wrapper: true,
+        fields: [],
+      },
     },
   ],
 });
@@ -409,11 +424,11 @@ describe("BuildProjectOfTemplates", () => {
     "app-1.template-v",
     "app-1.template-w"
   ],
-  "filePath": "bricks/app-1/dist/index.4a11c8e8.js"
+  "filePath": "bricks/app-1/dist/index.12032f60.js"
 }`,
           },
           {
-            path: "dist/index.4a11c8e8.js",
+            path: "dist/index.12032f60.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
@@ -540,7 +555,23 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
     {
       "name": "postsearch",
       "namespaceId": "cmdb.instance",
-      "version": "1.0.0"
+      "version": "1.0.0",
+      "endpoint": {
+        "uri": "api/cmdb/instance/search",
+        "method": "GET"
+      },
+      "request": {
+        "type": "object",
+        "fields": [
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "response": {
+        "type": "object",
+        "wrapper": true
+      }
     }
   ]
 }),
@@ -989,11 +1020,11 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
     "app-2.template-v",
     "app-2.template-w"
   ],
-  "filePath": "bricks/app-2/dist/index.17cef4c4.js"
+  "filePath": "bricks/app-2/dist/index.aeb35983.js"
 }`,
           },
           {
-            path: "dist/index.17cef4c4.js",
+            path: "dist/index.aeb35983.js",
             content: expect.stringContaining(
               'registerCustomTemplate("app-2.template-t",'
             ),
@@ -1312,9 +1343,11 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
     expect(receivedRest).toEqual(expectRest);
     expect(receivedFiles.length).toEqual(expectFiles.length);
     receivedFiles.forEach(({ path, content }) => {
-      const { path: expectPath, content: expectContent } = expectFiles.find(
-        (exp) => exp.path === path
-      );
+      const found = expectFiles.find((exp) => exp.path === path);
+      if (!found) {
+        throw new Error(`File not found: "${path}"`);
+      }
+      const { path: expectPath, content: expectContent } = found;
       expect(path).toEqual(expectPath);
       if (typeof expectContent !== "string" && path.endsWith(".json")) {
         // require("fs-extra").outputFileSync(require("path").resolve(".vscode/tests", `${params.appId}.json`), content);
@@ -1352,11 +1385,11 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
     "app-2.template-v",
     "app-2.template-w"
   ],
-  "filePath": "bricks/app-2/dist/index.697e37e7.js"
+  "filePath": "bricks/app-2/dist/index.1a5be1a7.js"
 }`,
           },
           {
-            path: "dist/index.697e37e7.js",
+            path: "dist/index.1a5be1a7.js",
             content: [
               '"./template-t":',
               '"./template-u":',
@@ -1365,7 +1398,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
             ] as any,
           },
           {
-            path: "dist/chunks/bootstrap.11ad5619.js",
+            path: "dist/chunks/bootstrap.12abe0d9.js",
             content: [
               'customTemplates.define("app-2.template-t",',
               'customTemplates.define("app-2.template-u",',
@@ -1408,9 +1441,11 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
       expect(receivedRest).toEqual(expectRest);
       expect(receivedFiles.length).toEqual(expectFiles.length);
       receivedFiles.forEach(({ path, content }) => {
-        const { path: expectPath, content: expectContent } = expectFiles.find(
-          (exp) => exp.path === path
-        );
+        const found = expectFiles.find((exp) => exp.path === path);
+        if (!found) {
+          throw new Error(`File not found: "${path}"`);
+        }
+        const { path: expectPath, content: expectContent } = found;
         expect(path).toEqual(expectPath);
         if (Array.isArray(expectContent)) {
           for (const exp of expectContent) {
@@ -1447,7 +1482,8 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
     ["/x/y/abc.png", "abc.png"],
     ["abc.jpeg", "abc.jpeg"],
     ["abc", "abc"],
-    [undefined, undefined],
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    [undefined!, undefined],
   ])("getBaseName should work", (data, result) => {
     const suffix = getBaseName(data);
     expect(suffix).toEqual(result);

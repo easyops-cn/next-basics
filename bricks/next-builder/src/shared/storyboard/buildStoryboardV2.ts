@@ -9,8 +9,8 @@ import {
   Contract,
   StoryboardMeta,
   CustomTemplate,
-  StoryboardFunction,
   ContextConf,
+  ContractFieldItem,
 } from "@next-core/brick-types";
 import {
   isObject,
@@ -18,13 +18,15 @@ import {
   normalizeMenu,
   isRouteNode,
   visitStoryboardFunctions,
-  EstreeLiteral,
 } from "@next-core/brick-utils";
 import { safeLoad, JSON_SCHEMA } from "js-yaml";
-import { get, isEmpty } from "lodash";
+import { get, isEmpty, pick } from "lodash";
 import {
   BuildInfoV2,
   FunctionNode,
+  MinimalContract,
+  MinimalContractField,
+  MinimalContractRequest,
   ProcessedStoryboardFunction,
   StoryboardToBuild,
   TemplateNode,
@@ -135,10 +137,71 @@ export async function buildStoryboardV2(
     routes,
     meta: {
       ...meta,
-      contracts: contractList,
+      contracts: buildContracts(contractList),
     },
     dependsAll: data.dependsAll,
   };
+}
+
+/**
+ * Remove unnecessary fields from contract to stored in storyboard.
+ */
+export function buildContracts(
+  contract: Contract[] | undefined
+): MinimalContract[] | undefined {
+  return contract?.map(({ request, response, ...item }) => {
+    const isSimpleRequest = ["get", "delete", "head"].includes(
+      item.endpoint?.method?.toLowerCase()
+    );
+    return {
+      ...item,
+      request: {
+        type: request?.type,
+        fields: isSimpleRequest
+          ? (request.fields
+              ?.map((field) => pick(field, ["ref", "type"]))
+              // For simple requests, keep just one more field than ones in the uri params.
+              // It is used for detecting whether there is query params.
+              .slice(
+                0,
+                (item.endpoint.uri?.match(/:([^/]+)/g)?.length ?? 0) + 1
+              ) as MinimalContractField[])
+          : hasFileType(request)
+          ? [
+              {
+                // One field with type file is enough for detecting file upload.
+                type: "file",
+              },
+            ]
+          : undefined,
+      },
+      response: {
+        type: response?.type,
+        wrapper: response?.wrapper,
+      },
+    };
+  });
+}
+
+function hasFileType(request: MinimalContractRequest | undefined): boolean {
+  if (request?.type !== "object") {
+    return false;
+  }
+
+  const processFields = (
+    fields: MinimalContractField[] | undefined
+  ): boolean => {
+    return (
+      !isEmpty(fields) &&
+      fields.some(
+        (field) =>
+          ["file", "file[]"].includes((field as ContractFieldItem).type) ||
+          processFields((field as ContractFieldItem).fields)
+      )
+    );
+  };
+
+  return processFields(request.fields);
 }
 
 export function builderCustomTemplates(

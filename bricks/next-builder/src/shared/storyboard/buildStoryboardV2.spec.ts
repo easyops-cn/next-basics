@@ -17,6 +17,15 @@ import * as dataProvider from "../../data-providers/ScanBricksAndTemplates";
       name: "PostSearch",
       version: "1.1.0",
       serviceName: "logic.cmdb.service",
+      request: {
+        type: "object",
+        fields: [],
+      },
+      response: {
+        type: "object",
+        wrapper: true,
+        fields: [],
+      },
     },
   ],
 });
@@ -1041,6 +1050,13 @@ describe("buildStoryboardV2", () => {
               name: "PostSearch",
               version: "1.1.0",
               serviceName: "logic.cmdb.service",
+              request: {
+                type: "object",
+              },
+              response: {
+                type: "object",
+                wrapper: true,
+              },
             } as Partial<Contract> as Contract,
           ],
           customTemplates: [],
