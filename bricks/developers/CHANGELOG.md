@@ -3,219 +3,123 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.370.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.370.1...@next-bricks/developers@1.370.2) (2024-07-16)
+## [1.370.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.370.2...@next-bricks/developers@1.370.3) (2024-08-26)
 
 **Note:** Version bump only for package @next-bricks/developers
 
+## [1.370.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.370.1...@next-bricks/developers@1.370.2) (2024-07-16)
 
-
-
+**Note:** Version bump only for package @next-bricks/developers
 
 ## [1.370.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.370.0...@next-bricks/developers@1.370.1) (2024-05-24)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 # [1.370.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.369.3...@next-bricks/developers@1.370.0) (2024-04-28)
-
 
 ### Features
 
-* replace useChildren for preview ([939b95f](https://github.com/easyops-cn/next-basics/commit/939b95f7a8de7e13bb33df76dfc238580b68c41f))
-
-
-
-
+- replace useChildren for preview ([939b95f](https://github.com/easyops-cn/next-basics/commit/939b95f7a8de7e13bb33df76dfc238580b68c41f))
 
 ## [1.369.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.369.2...@next-bricks/developers@1.369.3) (2024-02-27)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.369.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.369.1...@next-bricks/developers@1.369.2) (2024-02-27)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.369.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.369.0...@next-bricks/developers@1.369.1) (2024-02-19)
-
 
 ### Bug Fixes
 
-* render doc error when switch v2 v3 brick ([0fd74ea](https://github.com/easyops-cn/next-basics/commit/0fd74ea3c43df3e104efce7d8fe494cdf659d8ab))
-
-
-
-
+- render doc error when switch v2 v3 brick ([0fd74ea](https://github.com/easyops-cn/next-basics/commit/0fd74ea3c43df3e104efce7d8fe494cdf659d8ab))
 
 # [1.369.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.368.2...@next-bricks/developers@1.369.0) (2024-01-31)
 
-
 ### Features
 
-* wrapper v3 example ([2426366](https://github.com/easyops-cn/next-basics/commit/24263668d82c2ea8d7bb5b2ee1b481d654913f35))
-
-
-
-
+- wrapper v3 example ([2426366](https://github.com/easyops-cn/next-basics/commit/24263668d82c2ea8d7bb5b2ee1b481d654913f35))
 
 ## [1.368.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.368.1...@next-bricks/developers@1.368.2) (2024-01-25)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.368.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.368.0...@next-bricks/developers@1.368.1) (2024-01-11)
-
 
 ### Bug Fixes
 
-* fix docs of cmdb-instances.instance-list ([458348a](https://github.com/easyops-cn/next-basics/commit/458348a938ada51b18cc8b0ed0a6f4988870b25b))
-
-
-
-
+- fix docs of cmdb-instances.instance-list ([458348a](https://github.com/easyops-cn/next-basics/commit/458348a938ada51b18cc8b0ed0a6f4988870b25b))
 
 # [1.368.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.367.2...@next-bricks/developers@1.368.0) (2023-11-15)
 
-
 ### Features
 
-* **brick-book:**  add v3 tag ([771ad2b](https://github.com/easyops-cn/next-basics/commit/771ad2b99a6d52a90b581e36533fc03375b14ef7))
-
-
-
-
+- **brick-book:** add v3 tag ([771ad2b](https://github.com/easyops-cn/next-basics/commit/771ad2b99a6d52a90b581e36533fc03375b14ef7))
 
 ## [1.367.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.367.1...@next-bricks/developers@1.367.2) (2023-11-14)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.367.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.367.0...@next-bricks/developers@1.367.1) (2023-11-01)
-
 
 ### Bug Fixes
 
-* handle non-element nodes ([fb1a198](https://github.com/easyops-cn/next-basics/commit/fb1a198902a32431e185e53da38c3253c628952c))
-
-
-
-
+- handle non-element nodes ([fb1a198](https://github.com/easyops-cn/next-basics/commit/fb1a198902a32431e185e53da38c3253c628952c))
 
 # [1.367.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.366.1...@next-bricks/developers@1.367.0) (2023-09-08)
 
-
 ### Features
 
-* 文档展示 v3 provider ([aead6e8](https://github.com/easyops-cn/next-basics/commit/aead6e805c48f2ba1a8cfe0021d3f4f4488e8276))
-
-
-
-
+- 文档展示 v3 provider ([aead6e8](https://github.com/easyops-cn/next-basics/commit/aead6e805c48f2ba1a8cfe0021d3f4f4488e8276))
 
 ## [1.366.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.366.0...@next-bricks/developers@1.366.1) (2023-09-08)
 
-
 ### Bug Fixes
 
-* modify v3 preview url ([f7af732](https://github.com/easyops-cn/next-basics/commit/f7af73226a3095169690f56c9b66eda48ed7f5c2))
-
-
-
-
+- modify v3 preview url ([f7af732](https://github.com/easyops-cn/next-basics/commit/f7af73226a3095169690f56c9b66eda48ed7f5c2))
 
 # [1.366.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.12...@next-bricks/developers@1.366.0) (2023-09-07)
 
-
 ### Features
 
-* 文档展示 v3 构件 example ([8808ea5](https://github.com/easyops-cn/next-basics/commit/8808ea5b9220a989bc9cd5b5a76b8de8ecd6abbc))
-* 文档展示 v3 构件 interface ([917128b](https://github.com/easyops-cn/next-basics/commit/917128b056fa5f38782bd95bfb552e2bdb2b7f2c))
-* 文档展示 v3 构件 interface ([7a3a028](https://github.com/easyops-cn/next-basics/commit/7a3a0288fec14ac4cdadd5f075c6e536e7f0dfaa))
-
-
-
-
+- 文档展示 v3 构件 example ([8808ea5](https://github.com/easyops-cn/next-basics/commit/8808ea5b9220a989bc9cd5b5a76b8de8ecd6abbc))
+- 文档展示 v3 构件 interface ([917128b](https://github.com/easyops-cn/next-basics/commit/917128b056fa5f38782bd95bfb552e2bdb2b7f2c))
+- 文档展示 v3 构件 interface ([7a3a028](https://github.com/easyops-cn/next-basics/commit/7a3a0288fec14ac4cdadd5f075c6e536e7f0dfaa))
 
 ## [1.365.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.11...@next-bricks/developers@1.365.12) (2023-08-29)
 
-
 ### Bug Fixes
 
-* brick document properties/events/methods 兼容 v3 brick ([d5608f6](https://github.com/easyops-cn/next-basics/commit/d5608f670b1f512feff8366650d1eb30a12cb72c))
-
-
-
-
+- brick document properties/events/methods 兼容 v3 brick ([d5608f6](https://github.com/easyops-cn/next-basics/commit/d5608f670b1f512feff8366650d1eb30a12cb72c))
 
 ## [1.365.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.10...@next-bricks/developers@1.365.11) (2023-08-15)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## 1.365.10 (2023-07-31)
 
 **Note:** Version bump only for package @next-bricks/developers
-
-
-
-
 
 ## [1.365.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.8...@next-bricks/developers@1.365.9) (2023-07-19)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.365.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.7...@next-bricks/developers@1.365.8) (2023-05-24)
-
 
 ### Bug Fixes
 
-* Fix the situation where the value is null ([b02e11a](https://github.com/easyops-cn/next-basics/commit/b02e11af8e4dbfe51c8e256446fdeffd0f706e2c))
-
-
-
-
+- Fix the situation where the value is null ([b02e11a](https://github.com/easyops-cn/next-basics/commit/b02e11af8e4dbfe51c8e256446fdeffd0f706e2c))
 
 ## [1.365.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.6...@next-bricks/developers@1.365.7) (2023-05-12)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.365.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.5...@next-bricks/developers@1.365.6) (2023-05-11)
-
 
 ### Bug Fixes
 
-* optimize automatic height adjustment ([871ea29](https://github.com/easyops-cn/next-basics/commit/871ea2937d54fa2ed540d86a2cb37b33d9867c8b))
-
-
-
-
+- optimize automatic height adjustment ([871ea29](https://github.com/easyops-cn/next-basics/commit/871ea2937d54fa2ed540d86a2cb37b33d9867c8b))
 
 ## [1.365.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.365.4...@next-bricks/developers@1.365.5) (2023-05-09)
 

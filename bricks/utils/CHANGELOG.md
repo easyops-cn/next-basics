@@ -3,13 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.4.2 (2023-07-31)
+## [1.4.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/utils@1.4.2...@next-bricks/utils@1.4.3) (2024-08-26)
 
 **Note:** Version bump only for package @next-bricks/utils
 
+## 1.4.2 (2023-07-31)
 
-
-
+**Note:** Version bump only for package @next-bricks/utils
 
 ## [1.4.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/utils@1.4.0...@next-bricks/utils@1.4.1) (2023-05-09)
 

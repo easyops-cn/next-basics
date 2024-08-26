@@ -3,328 +3,184 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.18.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.9...@next-bricks/frame-bricks@1.18.10) (2024-08-07)
+## [1.18.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.10...@next-bricks/frame-bricks@1.18.11) (2024-08-26)
 
+**Note:** Version bump only for package @next-bricks/frame-bricks
+
+## [1.18.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.9...@next-bricks/frame-bricks@1.18.10) (2024-08-07)
 
 ### Bug Fixes
 
-* **nav:** 支持自定义菜单字体颜色 ([944085f](https://github.com/easyops-cn/next-basics/commit/944085f9a7d3e46ab37d42352bb3b9f2cf54dfe2))
-
-
-
-
+- **nav:** 支持自定义菜单字体颜色 ([944085f](https://github.com/easyops-cn/next-basics/commit/944085f9a7d3e46ab37d42352bb3b9f2cf54dfe2))
 
 ## [1.18.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.8...@next-bricks/frame-bricks@1.18.9) (2024-08-06)
 
-
 ### Bug Fixes
 
-* **nav:** 支持自定义菜单字体颜色 ([6be37a2](https://github.com/easyops-cn/next-basics/commit/6be37a2c3f6c52a02d2de2be5cb02787c7e4a072))
-
-
-
-
+- **nav:** 支持自定义菜单字体颜色 ([6be37a2](https://github.com/easyops-cn/next-basics/commit/6be37a2c3f6c52a02d2de2be5cb02787c7e4a072))
 
 ## [1.18.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.7...@next-bricks/frame-bricks@1.18.8) (2024-07-16)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
 
-
-
-
-
 ## [1.18.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.6...@next-bricks/frame-bricks@1.18.7) (2024-05-24)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
 
-
-
-
-
 ## [1.18.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.5...@next-bricks/frame-bricks@1.18.6) (2024-04-16)
-
 
 ### Bug Fixes
 
-* 二级菜单图标颜色调整 ([8fd2f57](https://github.com/easyops-cn/next-basics/commit/8fd2f57bd2e6edb183bfd109d22e80f694a0d4db))
-
-
-
-
+- 二级菜单图标颜色调整 ([8fd2f57](https://github.com/easyops-cn/next-basics/commit/8fd2f57bd2e6edb183bfd109d22e80f694a0d4db))
 
 ## [1.18.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.4...@next-bricks/frame-bricks@1.18.5) (2024-04-15)
 
-
 ### Bug Fixes
 
-* 二级菜单颜色调整 ([41f5a94](https://github.com/easyops-cn/next-basics/commit/41f5a948f22efb1100f5684cfe2c6e494e316736))
-
-
-
-
+- 二级菜单颜色调整 ([41f5a94](https://github.com/easyops-cn/next-basics/commit/41f5a948f22efb1100f5684cfe2c6e494e316736))
 
 ## [1.18.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.3...@next-bricks/frame-bricks@1.18.4) (2023-10-11)
 
-
 ### Bug Fixes
 
-* modify style ([d0ecb35](https://github.com/easyops-cn/next-basics/commit/d0ecb35b309da8c9921e7d8ca9c688b3a02744dc))
-
-
-
-
+- modify style ([d0ecb35](https://github.com/easyops-cn/next-basics/commit/d0ecb35b309da8c9921e7d8ca9c688b3a02744dc))
 
 ## [1.18.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.2...@next-bricks/frame-bricks@1.18.3) (2023-10-09)
 
-
 ### Bug Fixes
 
-* fix style ([fcfb693](https://github.com/easyops-cn/next-basics/commit/fcfb693a664517d8a03c5b1a5224331d7cb5a6db))
-* refactor cursor style ([1f56461](https://github.com/easyops-cn/next-basics/commit/1f56461feff14d840dc9e40556494a1c159f85c0))
-* 修复拖拽闪动问题 ([e400793](https://github.com/easyops-cn/next-basics/commit/e400793453bf17a8acb81e2bfb70351929992ae9))
-
-
-
-
+- fix style ([fcfb693](https://github.com/easyops-cn/next-basics/commit/fcfb693a664517d8a03c5b1a5224331d7cb5a6db))
+- refactor cursor style ([1f56461](https://github.com/easyops-cn/next-basics/commit/1f56461feff14d840dc9e40556494a1c159f85c0))
+- 修复拖拽闪动问题 ([e400793](https://github.com/easyops-cn/next-basics/commit/e400793453bf17a8acb81e2bfb70351929992ae9))
 
 ## [1.18.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.1...@next-bricks/frame-bricks@1.18.2) (2023-10-07)
 
-
 ### Bug Fixes
 
-* 公网拨测机的二级菜单图标显示不正确 ([#87](https://github.com/easyops-cn/next-basics/issues/87)) ([a094134](https://github.com/easyops-cn/next-basics/commit/a094134078fca202b3c2992308f6ca0a7ddb9d24))
-
-
-
-
+- 公网拨测机的二级菜单图标显示不正确 ([#87](https://github.com/easyops-cn/next-basics/issues/87)) ([a094134](https://github.com/easyops-cn/next-basics/commit/a094134078fca202b3c2992308f6ca0a7ddb9d24))
 
 ## [1.18.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.0...@next-bricks/frame-bricks@1.18.1) (2023-08-15)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
 
-
-
-
-
 # 1.18.0 (2023-07-31)
-
 
 ### Features
 
-* 二级菜单折叠后，产品名称默认展示项目图标 ([89133d1](https://github.com/easyops-cn/next-basics/commit/89133d19bcd17fa43175debc0bae897a77a7b6d7))
-
-
-
-
+- 二级菜单折叠后，产品名称默认展示项目图标 ([89133d1](https://github.com/easyops-cn/next-basics/commit/89133d19bcd17fa43175debc0bae897a77a7b6d7))
 
 ## [1.17.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.17.0...@next-bricks/frame-bricks@1.17.1) (2023-07-20)
 
-
 ### Bug Fixes
 
-* 样式修复 ([e49a7ba](https://github.com/easyops-cn/next-basics/commit/e49a7ba0da24f7344814afad5b43ea8eb916a366))
-
-
-
-
+- 样式修复 ([e49a7ba](https://github.com/easyops-cn/next-basics/commit/e49a7ba0da24f7344814afad5b43ea8eb916a366))
 
 # [1.17.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.16.1...@next-bricks/frame-bricks@1.17.0) (2023-07-19)
 
-
 ### Features
 
-* 开发nw顶部与侧边栏菜单 ([0fbbed6](https://github.com/easyops-cn/next-basics/commit/0fbbed64be668129f5cfe9745d9ebf29aad7332c))
-
-
-
-
+- 开发 nw 顶部与侧边栏菜单 ([0fbbed6](https://github.com/easyops-cn/next-basics/commit/0fbbed64be668129f5cfe9745d9ebf29aad7332c))
 
 ## [1.16.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.16.0...@next-bricks/frame-bricks@1.16.1) (2023-07-11)
 
-
 ### Bug Fixes
 
-* **frame-bricks:** 修复菜单栏高度 ([9f0e8e0](https://github.com/easyops-cn/next-basics/commit/9f0e8e017aea5f3e81acc530ef1843b61dc78ac1))
-
-
-
-
+- **frame-bricks:** 修复菜单栏高度 ([9f0e8e0](https://github.com/easyops-cn/next-basics/commit/9f0e8e017aea5f3e81acc530ef1843b61dc78ac1))
 
 # [1.16.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.15.1...@next-bricks/frame-bricks@1.16.0) (2023-07-07)
 
-
 ### Features
 
-* **frame-bricks:** 二级菜单项上下内间距固定，高度支持子元素撑开 ([33a6b4b](https://github.com/easyops-cn/next-basics/commit/33a6b4b2e48a8b43d268a0f4944b4acaf677d722))
-
-
-
-
+- **frame-bricks:** 二级菜单项上下内间距固定，高度支持子元素撑开 ([33a6b4b](https://github.com/easyops-cn/next-basics/commit/33a6b4b2e48a8b43d268a0f4944b4acaf677d722))
 
 ## [1.15.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.15.0...@next-bricks/frame-bricks@1.15.1) (2023-07-06)
 
-
 ### Bug Fixes
 
-* 菜单交互优化 ([7c5467a](https://github.com/easyops-cn/next-basics/commit/7c5467aadcc789b7ecbd35b63ac3a93b95c491a2))
-
-
-
-
+- 菜单交互优化 ([7c5467a](https://github.com/easyops-cn/next-basics/commit/7c5467aadcc789b7ecbd35b63ac3a93b95c491a2))
 
 # [1.15.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.8...@next-bricks/frame-bricks@1.15.0) (2023-06-27)
 
-
 ### Features
 
-* 三级菜单背景颜色调整 ([38f91ab](https://github.com/easyops-cn/next-basics/commit/38f91ab21e3e60c50506b509c31204b51272b894))
-
-
-
-
+- 三级菜单背景颜色调整 ([38f91ab](https://github.com/easyops-cn/next-basics/commit/38f91ab21e3e60c50506b509c31204b51272b894))
 
 ## [1.14.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.7...@next-bricks/frame-bricks@1.14.8) (2023-06-26)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
 
-
-
-
-
 ## [1.14.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.6...@next-bricks/frame-bricks@1.14.7) (2023-06-13)
-
 
 ### Bug Fixes
 
-* 三级菜单样式调整 ([e014c29](https://github.com/easyops-cn/next-basics/commit/e014c290573784e4cccc470dc0f4483e67bc7d14))
-
-
-
-
+- 三级菜单样式调整 ([e014c29](https://github.com/easyops-cn/next-basics/commit/e014c290573784e4cccc470dc0f4483e67bc7d14))
 
 ## [1.14.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.5...@next-bricks/frame-bricks@1.14.6) (2023-06-13)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
 
-
-
-
-
 ## [1.14.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.4...@next-bricks/frame-bricks@1.14.5) (2023-06-09)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
 
-
-
-
-
 ## [1.14.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.3...@next-bricks/frame-bricks@1.14.4) (2023-06-08)
-
 
 ### Bug Fixes
 
-* 二级菜单交互动效优化 ([2185ee3](https://github.com/easyops-cn/next-basics/commit/2185ee37c019673742ffda13610c8eb6b0148673))
-
-
-
-
+- 二级菜单交互动效优化 ([2185ee3](https://github.com/easyops-cn/next-basics/commit/2185ee37c019673742ffda13610c8eb6b0148673))
 
 ## [1.14.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.2...@next-bricks/frame-bricks@1.14.3) (2023-06-08)
 
-
 ### Bug Fixes
 
-* 三级菜单默认显示第一个分组 ([bb9444d](https://github.com/easyops-cn/next-basics/commit/bb9444d3a902a8f88238f52a21f75000694f4a20))
-
-
-
-
+- 三级菜单默认显示第一个分组 ([bb9444d](https://github.com/easyops-cn/next-basics/commit/bb9444d3a902a8f88238f52a21f75000694f4a20))
 
 ## [1.14.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.1...@next-bricks/frame-bricks@1.14.2) (2023-05-30)
 
-
 ### Bug Fixes
 
-* 三级菜单交互改为mouseEnter ([a3454a2](https://github.com/easyops-cn/next-basics/commit/a3454a21e9b1c4a1d383773f70c3ce46f7152e8a))
-
-
-
-
+- 三级菜单交互改为 mouseEnter ([a3454a2](https://github.com/easyops-cn/next-basics/commit/a3454a21e9b1c4a1d383773f70c3ce46f7152e8a))
 
 ## [1.14.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.14.0...@next-bricks/frame-bricks@1.14.1) (2023-05-30)
 
-
 ### Bug Fixes
 
-* 三级菜单样式修改 ([c5726e5](https://github.com/easyops-cn/next-basics/commit/c5726e5a863953cb7a667c55cc255eac131783d8))
-
-
-
-
+- 三级菜单样式修改 ([c5726e5](https://github.com/easyops-cn/next-basics/commit/c5726e5a863953cb7a667c55cc255eac131783d8))
 
 # [1.14.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.13.4...@next-bricks/frame-bricks@1.14.0) (2023-05-25)
 
-
 ### Features
 
-* 新三级菜单样式 ([05f842e](https://github.com/easyops-cn/next-basics/commit/05f842ef6445d80f8ef812c5c90e977832d6a589))
-
-
-
-
+- 新三级菜单样式 ([05f842e](https://github.com/easyops-cn/next-basics/commit/05f842ef6445d80f8ef812c5c90e977832d6a589))
 
 ## [1.13.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.13.3...@next-bricks/frame-bricks@1.13.4) (2023-05-12)
 
-
 ### Bug Fixes
 
-* **sidebar:** 修改二级菜单拖拽样式 ([8b32dce](https://github.com/easyops-cn/next-basics/commit/8b32dce29acb2701d55bff08c4eaf8bde48d80df))
-
-
-
-
+- **sidebar:** 修改二级菜单拖拽样式 ([8b32dce](https://github.com/easyops-cn/next-basics/commit/8b32dce29acb2701d55bff08c4eaf8bde48d80df))
 
 ## [1.13.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.13.2...@next-bricks/frame-bricks@1.13.3) (2023-05-12)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
 
-
-
-
-
 ## [1.13.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.13.1...@next-bricks/frame-bricks@1.13.2) (2023-05-12)
-
 
 ### Bug Fixes
 
-* fix sidebar ([0e02416](https://github.com/easyops-cn/next-basics/commit/0e02416fbc4555589bfccb4a7f352679852c2484))
-* **sidebar:** 二级菜单拖拽修复以及brick-tag样式修改 ([a1f9cde](https://github.com/easyops-cn/next-basics/commit/a1f9cdee0591925968d2ed68d9ed00a6881900b4))
-
-
-
-
+- fix sidebar ([0e02416](https://github.com/easyops-cn/next-basics/commit/0e02416fbc4555589bfccb4a7f352679852c2484))
+- **sidebar:** 二级菜单拖拽修复以及 brick-tag 样式修改 ([a1f9cde](https://github.com/easyops-cn/next-basics/commit/a1f9cdee0591925968d2ed68d9ed00a6881900b4))
 
 ## [1.13.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.13.0...@next-bricks/frame-bricks@1.13.1) (2023-05-11)
 
-
 ### Bug Fixes
 
-* 修改二级菜单拖拽侧边栏bug ([dea982c](https://github.com/easyops-cn/next-basics/commit/dea982caad9f26920ce509e68d31563f7a4a66d6))
-
-
-
-
+- 修改二级菜单拖拽侧边栏 bug ([dea982c](https://github.com/easyops-cn/next-basics/commit/dea982caad9f26920ce509e68d31563f7a4a66d6))
 
 # [1.13.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.12.5...@next-bricks/frame-bricks@1.13.0) (2023-05-11)
 
-
 ### Features
 
-* 二级菜单支持实例名称两行显示，菜单区域可以拖动跟随显示全部 ([#2205](https://github.com/easyops-cn/next-basics/issues/2205)) ([f49cf47](https://github.com/easyops-cn/next-basics/commit/f49cf47258148d2c76dbb34e4d33db65a2994802))
-
-
-
-
+- 二级菜单支持实例名称两行显示，菜单区域可以拖动跟随显示全部 ([#2205](https://github.com/easyops-cn/next-basics/issues/2205)) ([f49cf47](https://github.com/easyops-cn/next-basics/commit/f49cf47258148d2c76dbb34e4d33db65a2994802))
 
 ## [1.12.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.12.4...@next-bricks/frame-bricks@1.12.5) (2023-05-09)
 

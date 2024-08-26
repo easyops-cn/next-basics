@@ -3,109 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.24.17](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.16...@next-bricks/brick-visualization@1.24.17) (2024-07-23)
+## [1.24.18](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.17...@next-bricks/brick-visualization@1.24.18) (2024-08-26)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
 
+## [1.24.17](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.16...@next-bricks/brick-visualization@1.24.17) (2024-07-23)
 
-
-
+**Note:** Version bump only for package @next-bricks/brick-visualization
 
 ## [1.24.16](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.15...@next-bricks/brick-visualization@1.24.16) (2024-07-16)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
 
-
-
-
-
 ## [1.24.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.14...@next-bricks/brick-visualization@1.24.15) (2024-05-27)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
-
-
-
-
 
 ## [1.24.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.13...@next-bricks/brick-visualization@1.24.14) (2024-05-24)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
 
-
-
-
-
 ## [1.24.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.12...@next-bricks/brick-visualization@1.24.13) (2023-12-21)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
-
-
-
-
 
 ## [1.24.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.11...@next-bricks/brick-visualization@1.24.12) (2023-10-10)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
 
-
-
-
-
 ## [1.24.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.10...@next-bricks/brick-visualization@1.24.11) (2023-08-21)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
-
-
-
-
 
 ## [1.24.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.9...@next-bricks/brick-visualization@1.24.10) (2023-08-15)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
 
-
-
-
-
 ## 1.24.9 (2023-07-31)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
-
-
-
-
 
 ## [1.24.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.7...@next-bricks/brick-visualization@1.24.8) (2023-07-19)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
 
-
-
-
-
 ## [1.24.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.6...@next-bricks/brick-visualization@1.24.7) (2023-05-29)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
-
-
-
-
 
 ## [1.24.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.5...@next-bricks/brick-visualization@1.24.6) (2023-05-17)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
 
-
-
-
-
 ## [1.24.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.4...@next-bricks/brick-visualization@1.24.5) (2023-05-12)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
-
-
-
-
 
 ## [1.24.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.24.3...@next-bricks/brick-visualization@1.24.4) (2023-05-09)
 

@@ -3,347 +3,193 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.33.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.6...@next-bricks/flow-builder@1.33.7) (2024-07-23)
+## [1.33.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.7...@next-bricks/flow-builder@1.33.8) (2024-08-26)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
 
+## [1.33.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.6...@next-bricks/flow-builder@1.33.7) (2024-07-23)
 
-
-
+**Note:** Version bump only for package @next-bricks/flow-builder
 
 ## [1.33.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.5...@next-bricks/flow-builder@1.33.6) (2024-07-16)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
 
-
-
-
-
 ## [1.33.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.4...@next-bricks/flow-builder@1.33.5) (2024-06-18)
-
 
 ### Bug Fixes
 
-* stop propagation when expand a variable ([cb038e3](https://github.com/easyops-cn/next-basics/commit/cb038e3db6485df9e2b10e90834b93cc58216816))
-
-
-
-
+- stop propagation when expand a variable ([cb038e3](https://github.com/easyops-cn/next-basics/commit/cb038e3db6485df9e2b10e90834b93cc58216816))
 
 ## [1.33.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.3...@next-bricks/flow-builder@1.33.4) (2024-06-18)
 
-
 ### Bug Fixes
 
-* handle unavailable value and sparse array ([eac5e02](https://github.com/easyops-cn/next-basics/commit/eac5e02fc456cd2e454fb66cf57950cb41429cc9))
-
-
-
-
+- handle unavailable value and sparse array ([eac5e02](https://github.com/easyops-cn/next-basics/commit/eac5e02fc456cd2e454fb66cf57950cb41429cc9))
 
 ## [1.33.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.2...@next-bricks/flow-builder@1.33.3) (2024-05-27)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
 
-
-
-
-
 ## [1.33.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.1...@next-bricks/flow-builder@1.33.2) (2024-05-24)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
 
-
-
-
-
 ## [1.33.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.0...@next-bricks/flow-builder@1.33.1) (2024-05-20)
-
 
 ### Bug Fixes
 
-* 修改单元测试 refs FLOW_BUILDER-1170 ([e6b07f4](https://github.com/easyops-cn/next-basics/commit/e6b07f42e60797211397f440b488c7f692fc7d2c))
-* 配合后端把pre改成数组 refs FLOW_BUILDER-1170 ([c36727f](https://github.com/easyops-cn/next-basics/commit/c36727f9b3eccd0bbd9118d44b7136d0eae92034))
-* 配合后端把pre改成数组(左侧输) refs FLOW_BUILDER-1170 ([9584a0e](https://github.com/easyops-cn/next-basics/commit/9584a0e8cf69a7aed9433ca3cb069af2f24323ef))
-
-
-
-
+- 修改单元测试 refs FLOW_BUILDER-1170 ([e6b07f4](https://github.com/easyops-cn/next-basics/commit/e6b07f42e60797211397f440b488c7f692fc7d2c))
+- 配合后端把 pre 改成数组 refs FLOW_BUILDER-1170 ([c36727f](https://github.com/easyops-cn/next-basics/commit/c36727f9b3eccd0bbd9118d44b7136d0eae92034))
+- 配合后端把 pre 改成数组(左侧输) refs FLOW_BUILDER-1170 ([9584a0e](https://github.com/easyops-cn/next-basics/commit/9584a0e8cf69a7aed9433ca3cb069af2f24323ef))
 
 # [1.33.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.32.1...@next-bricks/flow-builder@1.33.0) (2024-05-16)
 
-
 ### Features
 
-* support hidden field ([00b4d92](https://github.com/easyops-cn/next-basics/commit/00b4d92b1d4fc2ca86d08432e378a6fc72aa8342))
-
-
-
-
+- support hidden field ([00b4d92](https://github.com/easyops-cn/next-basics/commit/00b4d92b1d4fc2ca86d08432e378a6fc72aa8342))
 
 ## [1.32.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.32.0...@next-bricks/flow-builder@1.32.1) (2024-04-30)
 
-
 ### Bug Fixes
 
-* fix empty field ([1bccb70](https://github.com/easyops-cn/next-basics/commit/1bccb7063d5f0eb9cf8041e6dcfa62a2cb90354f))
-
-
-
-
+- fix empty field ([1bccb70](https://github.com/easyops-cn/next-basics/commit/1bccb7063d5f0eb9cf8041e6dcfa62a2cb90354f))
 
 # [1.32.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.7...@next-bricks/flow-builder@1.32.0) (2024-04-09)
 
-
 ### Features
 
-* support hidden field required ([38d1cbc](https://github.com/easyops-cn/next-basics/commit/38d1cbc3372b3a0d1828cb861d9bb8d5681c59a3))
-
-
-
-
+- support hidden field required ([38d1cbc](https://github.com/easyops-cn/next-basics/commit/38d1cbc3372b3a0d1828cb861d9bb8d5681c59a3))
 
 ## [1.31.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.6...@next-bricks/flow-builder@1.31.7) (2024-04-07)
 
-
 ### Bug Fixes
 
-* fix serach ([6f7c542](https://github.com/easyops-cn/next-basics/commit/6f7c542877e34b5eb9c400d4f85589bf5251c4c8))
-
-
-
-
+- fix serach ([6f7c542](https://github.com/easyops-cn/next-basics/commit/6f7c542877e34b5eb9c400d4f85589bf5251c4c8))
 
 ## [1.31.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.5...@next-bricks/flow-builder@1.31.6) (2024-03-04)
 
-
 ### Bug Fixes
 
-* fix the error when converting enumeration values of string type to number type ([6f65220](https://github.com/easyops-cn/next-basics/commit/6f652203ac3c509b3a4f368ba392c3d7b1409a83))
-
-
-
-
+- fix the error when converting enumeration values of string type to number type ([6f65220](https://github.com/easyops-cn/next-basics/commit/6f652203ac3c509b3a4f368ba392c3d7b1409a83))
 
 ## [1.31.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.4...@next-bricks/flow-builder@1.31.5) (2024-01-28)
 
-
 ### Bug Fixes
 
-* fix url ([0a7d6cf](https://github.com/easyops-cn/next-basics/commit/0a7d6cf1813f83c0c4225e1e21e03678ec36703d))
-
-
-
-
+- fix url ([0a7d6cf](https://github.com/easyops-cn/next-basics/commit/0a7d6cf1813f83c0c4225e1e21e03678ec36703d))
 
 ## [1.31.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.3...@next-bricks/flow-builder@1.31.4) (2024-01-26)
 
-
 ### Bug Fixes
 
-* 通过 projectId 获取项目数据 ([b5b2513](https://github.com/easyops-cn/next-basics/commit/b5b2513a3e75f97d1db9c5ff3104e557c7167af6))
-
-
-
-
+- 通过 projectId 获取项目数据 ([b5b2513](https://github.com/easyops-cn/next-basics/commit/b5b2513a3e75f97d1db9c5ff3104e557c7167af6))
 
 ## [1.31.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.2...@next-bricks/flow-builder@1.31.3) (2024-01-18)
 
-
 ### Bug Fixes
 
-* open more property configuration ([8a7595c](https://github.com/easyops-cn/next-basics/commit/8a7595c45551f0340159ce490b1066f050c75638))
-
+- open more property configuration ([8a7595c](https://github.com/easyops-cn/next-basics/commit/8a7595c45551f0340159ce490b1066f050c75638))
 
 ### Reverts
 
-* Revert "feat(): support useModels" ([5c1bdc0](https://github.com/easyops-cn/next-basics/commit/5c1bdc09004dc6ab3e34af2ae953c6dd28a06a94))
-
-
-
-
+- Revert "feat(): support useModels" ([5c1bdc0](https://github.com/easyops-cn/next-basics/commit/5c1bdc09004dc6ab3e34af2ae953c6dd28a06a94))
 
 ## [1.31.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.1...@next-bricks/flow-builder@1.31.2) (2024-01-11)
 
-
 ### Bug Fixes
 
-* fix ref not set value ([c71f741](https://github.com/easyops-cn/next-basics/commit/c71f74156d4b4c0bd5fa2e2d838fdd1ae90668b3))
-
-
-
-
+- fix ref not set value ([c71f741](https://github.com/easyops-cn/next-basics/commit/c71f74156d4b4c0bd5fa2e2d838fdd1ae90668b3))
 
 ## [1.31.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.31.0...@next-bricks/flow-builder@1.31.1) (2024-01-09)
 
-
 ### Bug Fixes
 
-* useModels ([0b93fa1](https://github.com/easyops-cn/next-basics/commit/0b93fa1b726ae7064e8892b281fb1e3b2fbff7e5))
-
-
-
-
+- useModels ([0b93fa1](https://github.com/easyops-cn/next-basics/commit/0b93fa1b726ae7064e8892b281fb1e3b2fbff7e5))
 
 # [1.31.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.30.4...@next-bricks/flow-builder@1.31.0) (2024-01-08)
 
-
 ### Features
 
-* support useModels ([cb6d793](https://github.com/easyops-cn/next-basics/commit/cb6d79379fcc470dcd70aa62d705931cee38ad71))
-
-
-
-
+- support useModels ([cb6d793](https://github.com/easyops-cn/next-basics/commit/cb6d79379fcc470dcd70aa62d705931cee38ad71))
 
 ## [1.30.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.30.3...@next-bricks/flow-builder@1.30.4) (2023-12-21)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
 
-
-
-
-
 ## [1.30.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.30.2...@next-bricks/flow-builder@1.30.3) (2023-11-09)
-
 
 ### Bug Fixes
 
-* fix click collapse button do not work ([856c4e8](https://github.com/easyops-cn/next-basics/commit/856c4e88a42881fd4efdc12aec80588ca4ad85b3))
-
-
-
-
+- fix click collapse button do not work ([856c4e8](https://github.com/easyops-cn/next-basics/commit/856c4e88a42881fd4efdc12aec80588ca4ad85b3))
 
 ## [1.30.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.30.1...@next-bricks/flow-builder@1.30.2) (2023-11-02)
 
-
 ### Bug Fixes
 
-* 增加request和reponse refs FLOW_BUILDER-995 ([1e52d0e](https://github.com/easyops-cn/next-basics/commit/1e52d0ef84e937afa79631e9d88078d8f8eed2a6))
-
-
-
-
+- 增加 request 和 reponse refs FLOW_BUILDER-995 ([1e52d0e](https://github.com/easyops-cn/next-basics/commit/1e52d0ef84e937afa79631e9d88078d8f8eed2a6))
 
 ## [1.30.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.30.0...@next-bricks/flow-builder@1.30.1) (2023-10-10)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
 
-
-
-
-
 # [1.30.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.17...@next-bricks/flow-builder@1.30.0) (2023-09-27)
-
 
 ### Features
 
-* step tree support collapse ([cf70798](https://github.com/easyops-cn/next-basics/commit/cf70798e00bc55bc06958741a71cbbf33f0c2db7))
-
-
-
-
+- step tree support collapse ([cf70798](https://github.com/easyops-cn/next-basics/commit/cf70798e00bc55bc06958741a71cbbf33f0c2db7))
 
 ## [1.29.17](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.16...@next-bricks/flow-builder@1.29.17) (2023-09-20)
 
-
 ### Bug Fixes
 
-* fix flow graph line ([7969a16](https://github.com/easyops-cn/next-basics/commit/7969a16e71c12516ddba850bb3a817263ed267bd))
-
-
-
-
+- fix flow graph line ([7969a16](https://github.com/easyops-cn/next-basics/commit/7969a16e71c12516ddba850bb3a817263ed267bd))
 
 ## [1.29.16](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.15...@next-bricks/flow-builder@1.29.16) (2023-09-14)
 
-
 ### Bug Fixes
 
-* emit node data when dispatch event `node.leave` ([ae22b5d](https://github.com/easyops-cn/next-basics/commit/ae22b5da490ec93a57a2a20ad25607f00d7a3dfb))
-
-
-
-
+- emit node data when dispatch event `node.leave` ([ae22b5d](https://github.com/easyops-cn/next-basics/commit/ae22b5da490ec93a57a2a20ad25607f00d7a3dfb))
 
 ## [1.29.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.14...@next-bricks/flow-builder@1.29.15) (2023-08-29)
 
-
 ### Bug Fixes
 
-* fix style ([de3bba7](https://github.com/easyops-cn/next-basics/commit/de3bba78cb2ead807267a9db0513945e1ad6444c))
-
-
-
-
+- fix style ([de3bba7](https://github.com/easyops-cn/next-basics/commit/de3bba78cb2ead807267a9db0513945e1ad6444c))
 
 ## [1.29.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.13...@next-bricks/flow-builder@1.29.14) (2023-08-21)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
 
-
-
-
-
 ## [1.29.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.12...@next-bricks/flow-builder@1.29.13) (2023-08-15)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
-
-
-
-
 
 ## 1.29.12 (2023-07-31)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
 
-
-
-
-
 ## [1.29.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.10...@next-bricks/flow-builder@1.29.11) (2023-07-19)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
 
-
-
-
-
 ## [1.29.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.9...@next-bricks/flow-builder@1.29.10) (2023-07-03)
-
 
 ### Bug Fixes
 
-* support labelBrick ([1d9b961](https://github.com/easyops-cn/next-basics/commit/1d9b96110faa46a32f409067694c210a9c470c94))
-
-
-
-
+- support labelBrick ([1d9b961](https://github.com/easyops-cn/next-basics/commit/1d9b96110faa46a32f409067694c210a9c470c94))
 
 ## [1.29.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.8...@next-bricks/flow-builder@1.29.9) (2023-05-29)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
 
-
-
-
-
 ## [1.29.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.7...@next-bricks/flow-builder@1.29.8) (2023-05-17)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
 
-
-
-
-
 ## [1.29.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.6...@next-bricks/flow-builder@1.29.7) (2023-05-12)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
-
-
-
-
 
 ## [1.29.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.29.5...@next-bricks/flow-builder@1.29.6) (2023-05-09)
 

@@ -3,35 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.8.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.8.0...@next-bricks/time@1.8.1) (2023-12-05)
+## [1.8.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.8.1...@next-bricks/time@1.8.2) (2024-08-26)
 
+**Note:** Version bump only for package @next-bricks/time
+
+## [1.8.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.8.0...@next-bricks/time@1.8.1) (2023-12-05)
 
 ### Bug Fixes
 
-* 任务日历新增toolTip配置 ([20f00ea](https://github.com/easyops-cn/next-basics/commit/20f00eabffb458b2695fb3ed24501a1f49e3eeb6))
-
-
-
-
+- 任务日历新增 toolTip 配置 ([20f00ea](https://github.com/easyops-cn/next-basics/commit/20f00eabffb458b2695fb3ed24501a1f49e3eeb6))
 
 # [1.8.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.7.2...@next-bricks/time@1.8.0) (2023-11-29)
 
-
 ### Features
 
-* taskCalendar add hideMode customTitle options ([11e70fc](https://github.com/easyops-cn/next-basics/commit/11e70fc2ec2d70a6d6ee78c36c98d5cced6232d6))
-
-
-
-
+- taskCalendar add hideMode customTitle options ([11e70fc](https://github.com/easyops-cn/next-basics/commit/11e70fc2ec2d70a6d6ee78c36c98d5cced6232d6))
 
 ## 1.7.2 (2023-07-31)
 
 **Note:** Version bump only for package @next-bricks/time
-
-
-
-
 
 ## [1.7.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.7.0...@next-bricks/time@1.7.1) (2023-05-09)
 

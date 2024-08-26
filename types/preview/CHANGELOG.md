@@ -3,128 +3,77 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.26.1](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.26.0...@next-types/preview@1.26.1) (2024-08-06)
+## [1.26.2](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.26.1...@next-types/preview@1.26.2) (2024-08-26)
 
+**Note:** Version bump only for package @next-types/preview
+
+## [1.26.1](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.26.0...@next-types/preview@1.26.1) (2024-08-06)
 
 ### Bug Fixes
 
-* Compatible with form-builder ([ba3db36](https://github.com/easyops-cn/next-basics/commit/ba3db36ab4054713fb2f5cc2bf6f1124809239f1))
-
-
-
-
+- Compatible with form-builder ([ba3db36](https://github.com/easyops-cn/next-basics/commit/ba3db36ab4054713fb2f5cc2bf6f1124809239f1))
 
 # [1.26.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.25.0...@next-types/preview@1.26.0) (2024-06-17)
 
-
 ### Features
 
-* support suffix ([c44d268](https://github.com/easyops-cn/next-basics/commit/c44d268a7b6ba6b26401d225066d62c79c401dd7))
-
-
-
-
+- support suffix ([c44d268](https://github.com/easyops-cn/next-basics/commit/c44d268a7b6ba6b26401d225066d62c79c401dd7))
 
 # [1.25.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.24.0...@next-types/preview@1.25.0) (2024-05-15)
 
-
 ### Features
 
-* support debug data value ([3578a75](https://github.com/easyops-cn/next-basics/commit/3578a75cdac85937f54e242b6d57711444b2d82e))
-
-
-
-
+- support debug data value ([3578a75](https://github.com/easyops-cn/next-basics/commit/3578a75cdac85937f54e242b6d57711444b2d82e))
 
 # [1.24.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.23.5...@next-types/preview@1.24.0) (2023-12-05)
 
-
 ### Features
 
-* real time data inspect ([3427bd3](https://github.com/easyops-cn/next-basics/commit/3427bd3e0222fb10b131f1ff719ab62b6b3e8784))
-
-
-
-
+- real time data inspect ([3427bd3](https://github.com/easyops-cn/next-basics/commit/3427bd3e0222fb10b131f1ff719ab62b6b3e8784))
 
 ## [1.23.5](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.23.4...@next-types/preview@1.23.5) (2023-11-03)
 
-
 ### Bug Fixes
 
-* **preview:** handle content scroll ([d831bb5](https://github.com/easyops-cn/next-basics/commit/d831bb526d44a54003470dfbc0c58e6a05a8b1d3))
-
-
-
-
+- **preview:** handle content scroll ([d831bb5](https://github.com/easyops-cn/next-basics/commit/d831bb526d44a54003470dfbc0c58e6a05a8b1d3))
 
 ## [1.23.4](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.23.3...@next-types/preview@1.23.4) (2023-09-27)
 
-
 ### Bug Fixes
 
-* VB cmdb操作更换业务接口记录变更历史 ([e2b52e7](https://github.com/easyops-cn/next-basics/commit/e2b52e702ce923c8029db23611da0cbef02f31d2))
-
-
-
-
+- VB cmdb 操作更换业务接口记录变更历史 ([e2b52e7](https://github.com/easyops-cn/next-basics/commit/e2b52e702ce923c8029db23611da0cbef02f31d2))
 
 ## [1.23.3](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.23.2...@next-types/preview@1.23.3) (2023-08-18)
 
-
 ### Bug Fixes
 
-* build storyboard error ([20e0d35](https://github.com/easyops-cn/next-basics/commit/20e0d3546e56de619928dd8797b70dd6f07c93a7))
-
-
-
-
+- build storyboard error ([20e0d35](https://github.com/easyops-cn/next-basics/commit/20e0d3546e56de619928dd8797b70dd6f07c93a7))
 
 ## 1.23.2 (2023-07-31)
 
 **Note:** Version bump only for package @next-types/preview
 
-
-
-
-
 ## [1.23.1](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.23.0...@next-types/preview@1.23.1) (2023-07-25)
-
 
 ### Bug Fixes
 
-* 修复直接使用契约时，还需要手动 build & push 问题 ([a0b2678](https://github.com/easyops-cn/next-basics/commit/a0b2678e25a5035a24435d191447ea06d21b40da))
-
-
-
-
+- 修复直接使用契约时，还需要手动 build & push 问题 ([a0b2678](https://github.com/easyops-cn/next-basics/commit/a0b2678e25a5035a24435d191447ea06d21b40da))
 
 # [1.23.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.22.0...@next-types/preview@1.23.0) (2023-06-06)
 
-
 ### Features
 
-* support dynamic snippet ([751a1b4](https://github.com/easyops-cn/next-basics/commit/751a1b41704be1e6f856e5986a70b9adc3d76a7b))
-
-
-
-
+- support dynamic snippet ([751a1b4](https://github.com/easyops-cn/next-basics/commit/751a1b41704be1e6f856e5986a70b9adc3d76a7b))
 
 # [1.22.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.21.2...@next-types/preview@1.22.0) (2023-05-17)
 
-
 ### Bug Fixes
 
-* refactor preivew ([34d1eeb](https://github.com/easyops-cn/next-basics/commit/34d1eebb0d269943062865784bec0ea94118d330))
-
+- refactor preivew ([34d1eeb](https://github.com/easyops-cn/next-basics/commit/34d1eebb0d269943062865784bec0ea94118d330))
 
 ### Features
 
-* support preview context/state value ([8e14eb4](https://github.com/easyops-cn/next-basics/commit/8e14eb4e0576ff5b7aa24454a542c788b742e2fd))
-
-
-
-
+- support preview context/state value ([8e14eb4](https://github.com/easyops-cn/next-basics/commit/8e14eb4e0576ff5b7aa24454a542c788b742e2fd))
 
 ## [1.21.2](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.21.1...@next-types/preview@1.21.2) (2023-05-09)
 

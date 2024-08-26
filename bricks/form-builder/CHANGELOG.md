@@ -3,24 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/form-builder@0.3.4...@next-bricks/form-builder@0.3.5) (2024-08-26)
+
+**Note:** Version bump only for package @next-bricks/form-builder
+
 ## 0.3.4 (2023-07-31)
 
 **Note:** Version bump only for package @next-bricks/form-builder
 
-
-
-
-
 ## [0.3.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/form-builder@0.3.2...@next-bricks/form-builder@0.3.3) (2023-06-14)
-
 
 ### Bug Fixes
 
-* fb cmdb级联配置模型不支持模型名称搜索 ([5edbceb](https://github.com/easyops-cn/next-basics/commit/5edbceb95aeae6d5ef3153d1083bdc2b1f080f91))
-
-
-
-
+- fb cmdb 级联配置模型不支持模型名称搜索 ([5edbceb](https://github.com/easyops-cn/next-basics/commit/5edbceb95aeae6d5ef3153d1083bdc2b1f080f91))
 
 ## [0.3.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/form-builder@0.3.1...@next-bricks/form-builder@0.3.2) (2023-05-09)
 

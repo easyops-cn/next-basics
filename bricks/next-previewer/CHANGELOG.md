@@ -3,139 +3,81 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.15.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.15.8...@next-bricks/next-previewer@1.15.9) (2024-08-06)
+## [1.15.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.15.9...@next-bricks/next-previewer@1.15.10) (2024-08-26)
 
 **Note:** Version bump only for package @next-bricks/next-previewer
 
+## [1.15.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.15.8...@next-bricks/next-previewer@1.15.9) (2024-08-06)
 
-
-
+**Note:** Version bump only for package @next-bricks/next-previewer
 
 ## [1.15.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.15.7...@next-bricks/next-previewer@1.15.8) (2024-06-17)
 
 **Note:** Version bump only for package @next-bricks/next-previewer
 
-
-
-
-
 ## [1.15.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.15.6...@next-bricks/next-previewer@1.15.7) (2024-05-15)
 
 **Note:** Version bump only for package @next-bricks/next-previewer
-
-
-
-
 
 ## [1.15.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.15.5...@next-bricks/next-previewer@1.15.6) (2023-12-05)
 
 **Note:** Version bump only for package @next-bricks/next-previewer
 
-
-
-
-
 ## [1.15.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.15.4...@next-bricks/next-previewer@1.15.5) (2023-11-03)
 
 **Note:** Version bump only for package @next-bricks/next-previewer
-
-
-
-
 
 ## [1.15.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.15.3...@next-bricks/next-previewer@1.15.4) (2023-09-27)
 
 **Note:** Version bump only for package @next-bricks/next-previewer
 
-
-
-
-
 ## [1.15.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.15.2...@next-bricks/next-previewer@1.15.3) (2023-08-18)
 
 **Note:** Version bump only for package @next-bricks/next-previewer
-
-
-
-
 
 ## 1.15.2 (2023-07-31)
 
 **Note:** Version bump only for package @next-bricks/next-previewer
 
-
-
-
-
 ## [1.15.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.15.0...@next-bricks/next-previewer@1.15.1) (2023-07-26)
 
 **Note:** Version bump only for package @next-bricks/next-previewer
 
-
-
-
-
 # [1.15.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.14.1...@next-bricks/next-previewer@1.15.0) (2023-07-25)
-
 
 ### Bug Fixes
 
-* 修复直接使用契约时，还需要手动 build & push 问题 ([a0b2678](https://github.com/easyops-cn/next-basics/commit/a0b2678e25a5035a24435d191447ea06d21b40da))
-
+- 修复直接使用契约时，还需要手动 build & push 问题 ([a0b2678](https://github.com/easyops-cn/next-basics/commit/a0b2678e25a5035a24435d191447ea06d21b40da))
 
 ### Features
 
-* support show message ([f8d63e2](https://github.com/easyops-cn/next-basics/commit/f8d63e26c19b9720aaa353227c979a1cb17a9009))
-
-
-
-
+- support show message ([f8d63e2](https://github.com/easyops-cn/next-basics/commit/f8d63e26c19b9720aaa353227c979a1cb17a9009))
 
 ## [1.14.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.14.0...@next-bricks/next-previewer@1.14.1) (2023-06-11)
 
-
 ### Bug Fixes
 
-* dynamic snippet optimization ([d88a9b1](https://github.com/easyops-cn/next-basics/commit/d88a9b162d69aabd23ecbecf950b10d3a6c529b6))
-
-
-
-
+- dynamic snippet optimization ([d88a9b1](https://github.com/easyops-cn/next-basics/commit/d88a9b162d69aabd23ecbecf950b10d3a6c529b6))
 
 # [1.14.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.13.1...@next-bricks/next-previewer@1.14.0) (2023-06-08)
 
-
 ### Features
 
-* support dynamic snippet preview ([3ba7dda](https://github.com/easyops-cn/next-basics/commit/3ba7ddad8f18e69ca777ae0730ec7d4f3ae15936))
-
-
-
-
+- support dynamic snippet preview ([3ba7dda](https://github.com/easyops-cn/next-basics/commit/3ba7ddad8f18e69ca777ae0730ec7d4f3ae15936))
 
 ## [1.13.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.13.0...@next-bricks/next-previewer@1.13.1) (2023-06-06)
 
 **Note:** Version bump only for package @next-bricks/next-previewer
 
-
-
-
-
 # [1.13.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.12.6...@next-bricks/next-previewer@1.13.0) (2023-05-17)
-
 
 ### Bug Fixes
 
-* refactor preivew ([34d1eeb](https://github.com/easyops-cn/next-basics/commit/34d1eebb0d269943062865784bec0ea94118d330))
-
+- refactor preivew ([34d1eeb](https://github.com/easyops-cn/next-basics/commit/34d1eebb0d269943062865784bec0ea94118d330))
 
 ### Features
 
-* support preview context/state value ([8e14eb4](https://github.com/easyops-cn/next-basics/commit/8e14eb4e0576ff5b7aa24454a542c788b742e2fd))
-
-
-
-
+- support preview context/state value ([8e14eb4](https://github.com/easyops-cn/next-basics/commit/8e14eb4e0576ff5b7aa24454a542c788b742e2fd))
 
 ## [1.12.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.12.5...@next-bricks/next-previewer@1.12.6) (2023-05-09)
 

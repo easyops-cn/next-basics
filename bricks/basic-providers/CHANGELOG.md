@@ -3,13 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.4.5 (2023-07-31)
+## [1.4.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-providers@1.4.5...@next-bricks/basic-providers@1.4.6) (2024-08-26)
 
 **Note:** Version bump only for package @next-bricks/basic-providers
 
+## 1.4.5 (2023-07-31)
 
-
-
+**Note:** Version bump only for package @next-bricks/basic-providers
 
 ## [1.4.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-providers@1.4.3...@next-bricks/basic-providers@1.4.4) (2023-05-09)
 
