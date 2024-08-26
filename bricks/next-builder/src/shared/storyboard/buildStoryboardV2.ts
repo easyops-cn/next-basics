@@ -150,7 +150,7 @@ export function buildContracts(
   contract: Contract[] | undefined
 ): MinimalContract[] | undefined {
   return contract?.map(({ request, response, ...item }) => {
-    const isSimpleRequest = ["get", "delete", "head"].includes(
+    const isSimpleRequest = ["list", "get", "delete", "head"].includes(
       item.endpoint?.method?.toLowerCase()
     );
     return {
