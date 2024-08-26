@@ -2444,10 +2444,10 @@
   resolved "https://registry.npmjs.org/@next-core/custom-antd-styles/-/custom-antd-styles-1.27.1.tgz#5cf7721999a042e6d7d403e4f1677013f3c01a61"
   integrity sha512-Jx6mTRAZ+K0KTRendJ2tXt8Cbjsop7UXNO9Rklh/w+Xma4rNpO8zR16fqq80PuuzQIRhRwQ/7+6g3sbXWjmSOQ==
 
-"@next-core/dev-dependencies@^1.18.60":
-  version "1.18.60"
-  resolved "https://registry.npmjs.org/@next-core/dev-dependencies/-/dev-dependencies-1.18.60.tgz#6f7cae24ef642bad0b7d820c58439a390acc2695"
-  integrity sha512-x6P7wouPW/wUHOROljZo/yO5GIeanPUpE7q/ePMlEElQ5xAiOTEbCvB3M/gHht6zqupDydIN9E9VSGB8/5H6Lg==
+"@next-core/dev-dependencies@^1.19.0":
+  version "1.19.0"
+  resolved "https://registry.npmjs.org/@next-core/dev-dependencies/-/dev-dependencies-1.19.0.tgz#78cb8c7e03d3dc9a192f3c7994a562e807b11bed"
+  integrity sha512-5iWtBkADJz5vNQzNz+1I3NfD/NOCnQGE/DHlgdyDOT/sDy2w0xafgVSMWYBye5UIW4iBporRQ1knBeQnVnO9aw==
   dependencies:
     "@babel/core" "^7.20.5"
     "@next-core/babel-preset-next" "^0.9.16"
