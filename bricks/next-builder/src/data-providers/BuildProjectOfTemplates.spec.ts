@@ -383,7 +383,7 @@ const consoleError = jest
       version: "1.0.0",
       endpoint: {
         uri: "api/cmdb/instance/search",
-        method: "GET",
+        method: "LIST",
       },
       request: {
         type: "object",
@@ -424,11 +424,11 @@ describe("BuildProjectOfTemplates", () => {
     "app-1.template-v",
     "app-1.template-w"
   ],
-  "filePath": "bricks/app-1/dist/index.12032f60.js"
+  "filePath": "bricks/app-1/dist/index.846fbe31.js"
 }`,
           },
           {
-            path: "dist/index.12032f60.js",
+            path: "dist/index.846fbe31.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
@@ -558,7 +558,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
       "version": "1.0.0",
       "endpoint": {
         "uri": "api/cmdb/instance/search",
-        "method": "GET"
+        "method": "LIST"
       },
       "request": {
         "type": "object",
@@ -1020,11 +1020,11 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
     "app-2.template-v",
     "app-2.template-w"
   ],
-  "filePath": "bricks/app-2/dist/index.aeb35983.js"
+  "filePath": "bricks/app-2/dist/index.a9fb7682.js"
 }`,
           },
           {
-            path: "dist/index.aeb35983.js",
+            path: "dist/index.a9fb7682.js",
             content: expect.stringContaining(
               'registerCustomTemplate("app-2.template-t",'
             ),
@@ -1385,11 +1385,11 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
     "app-2.template-v",
     "app-2.template-w"
   ],
-  "filePath": "bricks/app-2/dist/index.1a5be1a7.js"
+  "filePath": "bricks/app-2/dist/index.14050a1d.js"
 }`,
           },
           {
-            path: "dist/index.1a5be1a7.js",
+            path: "dist/index.14050a1d.js",
             content: [
               '"./template-t":',
               '"./template-u":',
@@ -1398,7 +1398,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
             ] as any,
           },
           {
-            path: "dist/chunks/bootstrap.12abe0d9.js",
+            path: "dist/chunks/bootstrap.1c8244b2.js",
             content: [
               'customTemplates.define("app-2.template-t",',
               'customTemplates.define("app-2.template-u",',
