@@ -9,7 +9,6 @@
 }
 
 .searchInputContainer {
-  display: inline-block;
   position: relative;
   > .searchInput {
     padding-left: 12px;
@@ -20,7 +19,7 @@
   > .searchBtn {
     position: absolute;
     right: 0;
-    top: 0;
+    bottom: -8px;
     &:not(:global(.ant-btn-circle)) {
       border-radius: 0 6px 6px 0;
     }
