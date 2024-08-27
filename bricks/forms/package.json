@@ -45,7 +45,7 @@
     "@next-core/custom-antd-styles": "^1.27.1",
     "@next-libs/basic-components": "^5.5.0",
     "@next-libs/clipboard": "^3.0.4",
-    "@next-libs/cmdb-instances": "^7.21.4",
+    "@next-libs/cmdb-instances": "^7.21.8",
     "@next-libs/cmdb-utils": "^3.7.3",
     "@next-libs/code-editor-components": "4.12.1",
     "@next-libs/crontab": "^2.0.10",
