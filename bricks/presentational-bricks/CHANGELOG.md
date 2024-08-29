@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.328.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.328.0...@next-bricks/presentational-bricks@1.328.1) (2024-08-29)
+
+
+### Bug Fixes
+
+* **brick-table:** hiddenColumns uses column key first instead of dataIndex ([de114e5](https://github.com/easyops-cn/next-basics/commit/de114e55ae4a7ea260fc03507c066ab9d4a175c0))
+
+
+
+
+
 # [1.328.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.327.3...@next-bricks/presentational-bricks@1.328.0) (2024-08-29)
 
 
