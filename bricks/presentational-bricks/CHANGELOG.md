@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.328.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.327.3...@next-bricks/presentational-bricks@1.328.0) (2024-08-29)
+
+
+### Features
+
+* **brick-table:** add columnKeyBrickMap property ([8a7deff](https://github.com/easyops-cn/next-basics/commit/8a7deffb28ef818d68df8d4b02ef5280f7a59477))
+
+
+
+
+
 ## [1.327.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.327.2...@next-bricks/presentational-bricks@1.327.3) (2024-08-26)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
