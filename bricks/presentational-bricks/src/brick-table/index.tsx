@@ -1703,7 +1703,7 @@ export class BrickTableElement extends UpdatingElement {
     if (this._columns && this.hiddenColumns) {
       columns = this._columns.filter((column) => {
         return !this.hiddenColumns.includes(
-          (column.dataIndex as string) ?? column.key
+          column.key ?? (column.dataIndex as string)
         );
       });
     }
