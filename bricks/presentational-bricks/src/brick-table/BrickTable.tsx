@@ -77,6 +77,7 @@ export interface BrickTableProps<RecordType = Record<string, unknown>>
   xSmallSizeTable?: boolean;
   showHeaderExpandAll?: boolean;
   expandable?: ExpandableConfig<RecordType> | false;
+  columnKeyBrickMap?: Record<string, { useBrick: UseBrickConf }>;
 }
 
 const DraggableBodyRow = ({
@@ -230,6 +231,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
     ellipsisInfo,
     showHeader,
     expandable: _expandable,
+    columnKeyBrickMap,
   } = props;
 
   const initData = useMemo(() => {
@@ -298,7 +300,6 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
       useBrickItemBrickDataMapRef.current.clear();
       const customColumns = columns.map((column, index) => {
         const {
-          useBrick,
           component,
           valueSuffix,
           cellStatus,
@@ -311,6 +312,11 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
           customFilterIcon,
           ...columnConf
         } = column;
+        const useBrick =
+          column.useBrick ||
+          columnKeyBrickMap?.[column.key || (column.dataIndex as string)]
+            ?.useBrick;
+
         if (headerBrick?.useBrick || titleUseBrick) {
           if (titleUseBrick) {
             // eslint-disable-next-line no-console

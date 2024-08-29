@@ -1058,6 +1058,17 @@ export class BrickTableElement extends UpdatingElement {
   })
   showHeaderExpandAll: boolean;
 
+  /**
+   * @required false
+   * @default -
+   * @description 列的 key 与对应构件配置的 map。一般在 columns 属性需要动态生成，且希望自定义列的构件（columns.useBrick）时使用。
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  columnKeyBrickMap: Record<string, { useBrick: UseBrickConf }>;
+
   private _selected = false;
   private _selectedRow: Record<string, unknown>;
   private _selectedRows: Record<string, any>[] = [];
@@ -1754,6 +1765,7 @@ export class BrickTableElement extends UpdatingElement {
             acceptType={this.acceptType}
             showHeaderExpandAll={this.showHeaderExpandAll}
             xSmallSizeTable={this.size == "x-small"}
+            columnKeyBrickMap={this.columnKeyBrickMap}
           />
         </BrickWrapper>,
         this
