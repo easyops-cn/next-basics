@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.298.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.297.3...@next-bricks/forms@1.298.0) (2024-09-11)
+
+
+### Features
+
+* **tree-select:** add defaultExpandAll property ([9e6662a](https://github.com/easyops-cn/next-basics/commit/9e6662ab371c0aecdfbfdbef1ad56c51dde273ce))
+
+
+
+
+
 ## [1.297.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.297.2...@next-bricks/forms@1.297.3) (2024-08-27)
 
 **Note:** Version bump only for package @next-bricks/forms
