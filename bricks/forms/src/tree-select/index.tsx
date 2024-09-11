@@ -202,6 +202,13 @@ export class TreeSelectElement extends FormItemElement {
   /**
    * @group basicFormItem
    * @required false
+   * @description 默认展开所有树节点
+   */
+  @property({ type: Boolean }) defaultExpandAll: boolean;
+
+  /**
+   * @group basicFormItem
+   * @required false
    * @description 默认展开项
    */
   @property({ attribute: false }) defaultExpandedKeys: string[];
@@ -276,6 +283,7 @@ export class TreeSelectElement extends FormItemElement {
             treeNodeLabelProp={this.treeNodeLabelProp}
             value={this.value}
             onChange={this.onChange}
+            defaultExpandAll={this.defaultExpandAll}
             defaultExpandedKeys={this.defaultExpandedKeys}
             showCheckedStrategy={this.showCheckedStrategy}
           />
