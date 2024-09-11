@@ -3,6 +3,7 @@ import { shallow } from "enzyme";
 import { TreeSelect as AntdTreeSelect } from "antd";
 import { TreeNode, TreeNodeValue } from "antd/lib/tree-select/interface";
 import { FormItemWrapper } from "@next-libs/forms";
+import { omit } from "lodash";
 
 import { TreeSelect } from "./TreeSelect";
 
@@ -28,6 +29,7 @@ const treeSelectProps = {
   treeNodeFilterProp: "name",
   treeNodeLabelProp: "name",
   value: [] as TreeNodeValue,
+  defaultExpandAll: true,
   onChange: jest.fn(),
 };
 
@@ -40,7 +42,8 @@ describe("TreeSelect", () => {
       expect.objectContaining(formItemProps)
     );
     const antdTreeSelectProps = {
-      ...treeSelectProps,
+      ...omit(treeSelectProps, ["defaultExpandAll"]),
+      treeDefaultExpandAll: treeSelectProps.defaultExpandAll,
       style: treeSelectProps.inputBoxStyle,
     };
     delete antdTreeSelectProps.inputBoxStyle;
