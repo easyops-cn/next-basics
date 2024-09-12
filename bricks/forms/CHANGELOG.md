@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.298.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.298.0...@next-bricks/forms@1.298.1) (2024-09-12)
+
+
+### Bug Fixes
+
+* 支持失焦事件 ([be398ca](https://github.com/easyops-cn/next-basics/commit/be398ca5a1150d5d9fc0d754e9f3656c736645a7))
+
+
+
+
+
 # [1.298.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.297.3...@next-bricks/forms@1.298.0) (2024-09-11)
 
 
