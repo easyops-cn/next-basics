@@ -391,6 +391,7 @@ export function GeneralSelectLegacy(
       notFoundContent={notFoundContent}
       loading={requestStatus === "loading"}
       bordered={props.bordered}
+      onBlur={props.onBlur}
       onFocus={() => {
         props.onFocus?.();
         handleSearchQuery("", "search");
