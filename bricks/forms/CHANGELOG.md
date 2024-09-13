@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.299.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.298.1...@next-bricks/forms@1.299.0) (2024-09-13)
+
+
+### Features
+
+* **slide:** 滑动输入条支持inputBoxStyle样式 ([e812d0a](https://github.com/easyops-cn/next-basics/commit/e812d0a2794b9a1a8ec02c2fe1eade9f1a5ba742))
+
+
+
+
+
 ## [1.298.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.298.0...@next-bricks/forms@1.298.1) (2024-09-12)
 
 
