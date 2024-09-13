@@ -224,6 +224,20 @@ export class GeneralSlideElement extends FormItemElement {
   })
   tipFormatter: (value?: number) => string;
 
+  /* =========================== Group: style =========================== */
+
+  /**
+   * @kind object
+   * @required false
+   * @default
+   * @description 输入框样式
+   * @group style
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle: React.CSSProperties;
+
   /* =========================== Group: advanced =========================== */
 
   /**
@@ -311,6 +325,7 @@ export class GeneralSlideElement extends FormItemElement {
             tooltipVisible={this.tooltipVisible}
             tipFormatter={this.tipFormatter}
             uiType={this.uiType}
+            inputBoxStyle={this.inputBoxStyle}
           />
         </BrickWrapper>,
         this

@@ -22,6 +22,7 @@ export interface GeneralSlideProps extends FormItemWrapperProps {
   size?: string;
   tooltipVisible?: boolean;
   uiType?: UiType;
+  inputBoxStyle?: React.CSSProperties;
   tipFormatter?: (value?: number) => React.ReactNode;
 }
 
@@ -40,6 +41,7 @@ export function GeneralSlide(props: GeneralSlideProps): React.ReactElement {
     size,
     uiType,
     tooltipVisible,
+    inputBoxStyle,
     tipFormatter,
   } = props;
 
@@ -64,6 +66,7 @@ export function GeneralSlide(props: GeneralSlideProps): React.ReactElement {
           onAfterChange={props.onAfterChange}
           tipFormatter={tipFormatter}
           tooltipVisible={tooltipVisible}
+          style={inputBoxStyle}
         />
       </FormItemWrapper>
     </div>
