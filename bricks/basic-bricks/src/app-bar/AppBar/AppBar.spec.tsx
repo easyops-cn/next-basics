@@ -35,6 +35,8 @@ jest.spyOn(brickKit, "getAuth").mockReturnValue({
   username: "tester",
 });
 
+jest.spyOn(brickKit, "useCurrentMode").mockReturnValue("default");
+
 const getFeatureFlags = jest.fn().mockReturnValue({});
 const getMicroApps = jest
   .fn()
