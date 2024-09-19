@@ -19,6 +19,25 @@ html[data-theme="dark"] {
       }
     }
   }
+  .zebraPatternTable {
+    :global(.ant-table-tbody) {
+      .brickTableOddRow,
+      :global(.ant-table-row-selected) {
+        td {
+          background: #ffffff0a;
+        }
+      }
+    }
+  }
+  :global(.ant-table-tbody) {
+    tr:hover:not(:global(.ant-table-expanded-row)):not(
+        :global(.ant-table-row-selected)
+      ):not(:global(.ant-table-empty) :global(.ant-table-placeholder)) {
+      td {
+        background: #ffffff0a;
+      }
+    }
+  }
 }
 
 .customDropTable {
