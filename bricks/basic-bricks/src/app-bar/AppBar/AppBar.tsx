@@ -1,7 +1,7 @@
 import React from "react";
 import { Divider } from "antd";
 import { BreadcrumbItemConf, NavTip } from "@next-core/brick-types";
-import { getAuth, getRuntime } from "@next-core/brick-kit";
+import { getAuth, getRuntime, useCurrentMode } from "@next-core/brick-kit";
 import { CustomerApi_getExpiration } from "@next-sdk/air-admin-service-sdk";
 import { LaunchpadButton } from "../LaunchpadButton/LaunchpadButton";
 import { AppBarBreadcrumb } from "../AppBarBreadcrumb/AppBarBreadcrumb";
@@ -27,6 +27,7 @@ export function AppBar({
   noCurrentApp,
 }: AppBarProps): React.ReactElement {
   const [tipList, setTipList] = React.useState<NavTip[]>([]);
+  const mode = useCurrentMode();
   const storage = new JsonStorage(localStorage);
 
   const hideLaunchpadButton = React.useMemo(
@@ -84,7 +85,7 @@ export function AppBar({
     const iframeMainElement = document.getElementById(
       "legacy-iframe-mount-point"
     );
-    if (tipList.length) {
+    if (tipList.length && mode !== "dashboard") {
       marginTop = `calc(var(--app-bar-height) + ${tipList.length * 32}px)`;
     }
     mainElement && (mainElement.style.marginTop = marginTop);
@@ -100,20 +101,21 @@ export function AppBar({
 
   return (
     <div className={styles.appBar} id="app-bar">
-      {tipList.map((item: NavTip) => {
-        return (
-          <AppBarTips
-            key={item.tipKey}
-            tipKey={item.tipKey}
-            text={item.text}
-            info={item.info}
-            isCenter={item.isCenter}
-            backgroundColor={item.backgroundColor}
-            closable={item.closable}
-            onClose={handleCloseTips}
-          />
-        );
-      })}
+      {mode !== "dashboard" &&
+        tipList.map((item: NavTip) => {
+          return (
+            <AppBarTips
+              key={item.tipKey}
+              tipKey={item.tipKey}
+              text={item.text}
+              info={item.info}
+              isCenter={item.isCenter}
+              backgroundColor={item.backgroundColor}
+              closable={item.closable}
+              onClose={handleCloseTips}
+            />
+          );
+        })}
       <div className={styles.appBarContent}>
         <div className={styles.titleContainer}>
           {!hideLaunchpadButton && (
