@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.328.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.328.1...@next-bricks/presentational-bricks@1.328.2) (2024-09-19)
+
+
+### Bug Fixes
+
+* 修复暗色模式下hover效果白色 ([c09da04](https://github.com/easyops-cn/next-basics/commit/c09da04e9222a0040397b4d06401f89f43b17496))
+
+
+
+
+
 ## [1.328.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.328.0...@next-bricks/presentational-bricks@1.328.1) (2024-08-29)
 
 
