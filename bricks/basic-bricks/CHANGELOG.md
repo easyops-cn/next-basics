@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.257.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.257.2...@next-bricks/basic-bricks@1.257.3) (2024-09-19)
+
+
+### Bug Fixes
+
+* 旧版暗色模式下隐藏到期提示 ([231b8e1](https://github.com/easyops-cn/next-basics/commit/231b8e1011d6b66641922e36a47484dfd72fb7a9))
+
+
+
+
+
 ## [1.257.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.257.1...@next-bricks/basic-bricks@1.257.2) (2024-08-26)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
