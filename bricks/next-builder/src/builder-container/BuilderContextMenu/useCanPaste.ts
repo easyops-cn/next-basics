@@ -36,9 +36,10 @@ export function useCanPaste(): CanPaste {
       }
       if (
         (sourceNode || clipboard.nodeType) &&
-        (isRouteNode(sourceNode || ({ type: clipboard.nodeType } as any))
-          ? targetNode.type !== "routes"
-          : targetNode.type === "routes" || targetNode.type === "redirect")
+        (targetNode.type === "redirect" ||
+          (isRouteNode(sourceNode || ({ type: clipboard.nodeType } as any))
+            ? targetNode.type === "bricks"
+            : targetNode.type === "routes"))
       ) {
         return false;
       }
