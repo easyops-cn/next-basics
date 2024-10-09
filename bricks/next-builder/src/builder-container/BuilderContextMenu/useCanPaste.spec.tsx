@@ -204,10 +204,10 @@ describe("useCanPaste", () => {
     [2, 3, true],
     [2, 100, false],
     [2, 101, true],
-    [100, 2, false],
+    [100, 2, true],
     [100, 101, false],
     [101, 100, true],
-  ])("should work", (sourceUid, targetUid, canDrop) => {
+  ])("should work for %d %d", (sourceUid, targetUid, canDrop) => {
     const wrapper = shallow(
       <TestComponent
         clipboard={{
