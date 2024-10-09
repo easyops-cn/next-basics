@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.278.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.12...@next-bricks/next-builder@1.278.13) (2024-10-09)
+
+
+### Bug Fixes
+
+* allow paste a route into a brick ([42a0168](https://github.com/easyops-cn/next-basics/commit/42a01684e14c1be8486ea033d44743c73b001175))
+
+
+
+
+
 ## [1.278.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.11...@next-bricks/next-builder@1.278.12) (2024-08-27)
 
 **Note:** Version bump only for package @next-bricks/next-builder
