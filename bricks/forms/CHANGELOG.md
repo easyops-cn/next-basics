@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.300.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.299.0...@next-bricks/forms@1.300.0) (2024-10-15)
+
+
+### Features
+
+* support paste image into textarea and upload to OSS ([a07c48c](https://github.com/easyops-cn/next-basics/commit/a07c48c006ae954d8ab3edfde70ea98f2e8edaf6))
+
+
+
+
+
 # [1.299.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.298.1...@next-bricks/forms@1.299.0) (2024-09-13)
 
 
