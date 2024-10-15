@@ -128,6 +128,12 @@ export class GeneralTextAreaElement extends FormItemElement {
   })
   inputBoxStyle?: React.CSSProperties;
 
+  /**
+   * @description 设置粘贴图片上传到 OSS 的 bucketName（不设置时不支持上传图片）
+   * @group advanced
+   */
+  @property() pasteImageBucketName?: string;
+
   /* =========================== events =========================== */
 
   /**
@@ -200,6 +206,7 @@ export class GeneralTextAreaElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             inputBoxStyle={this.inputBoxStyle}
+            pasteImageBucketName={this.pasteImageBucketName}
           />
         </BrickWrapper>,
         this
