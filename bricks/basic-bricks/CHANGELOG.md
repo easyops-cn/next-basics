@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.258.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.257.3...@next-bricks/basic-bricks@1.258.0) (2024-10-16)
+
+
+### Features
+
+* support modal stack ([d8624b4](https://github.com/easyops-cn/next-basics/commit/d8624b41ef9a6901d2143e98305a44635f6965c8))
+
+
+
+
+
 ## [1.257.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.257.2...@next-bricks/basic-bricks@1.257.3) (2024-09-19)
 
 
