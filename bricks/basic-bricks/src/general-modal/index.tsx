@@ -9,6 +9,7 @@ import {
   method,
   event,
   EventEmitter,
+  instantiateModalStack,
 } from "@next-core/brick-kit";
 import { GeneralModal, positionType } from "./GeneralModal";
 import style from "./index.shadow.less";
@@ -314,6 +315,16 @@ export class GeneralModalElement extends UpdatingElement {
     modalTitle: string;
   };
 
+  /**
+   * @description 是否可堆叠，开启后每次打开抽屉会将新的抽屉置于上层（zIndex ++）。注意：仅初始设置有效。
+   *
+   * @default true
+   */
+  @property({ attribute: false })
+  stackable = true;
+
+  private _stack = instantiateModalStack?.();
+
   private _mountPoint: HTMLElement;
   private isVisible = false;
   private modalProps: ModalProps = {};
@@ -395,7 +406,9 @@ export class GeneralModalElement extends UpdatingElement {
     document.body.style.overflow = "";
     document.body.style.touchAction = "";
     ReactDOM.unmountComponentAtNode(this);
+    this._stack?.pull();
   }
+
   private initData(mutableProps: { modalTitle: string }): void {
     const pickFields = pick(this.fields, ["modalTitle"]);
     forEach(pickFields, (fieldKey, field: string) => {
@@ -447,6 +460,8 @@ export class GeneralModalElement extends UpdatingElement {
             isHiddenModalTitle={this.isHiddenModalTitle}
             isHiddenModalFooter={this.isHiddenModalFooter}
             isShowCustomHeader={this.isShowCustomHeader}
+            stack={this._stack}
+            stackable={this.stackable}
           />
         </BrickWrapper>,
         this._mountPoint

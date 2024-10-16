@@ -6,6 +6,7 @@ import {
   event,
   method,
   EventEmitter,
+  instantiateModalStack,
 } from "@next-core/brick-kit";
 import { GeneralModal } from "./GeneralModal";
 import { FormItemElement } from "@next-libs/forms";
@@ -210,6 +211,16 @@ export class GeneralModalElement extends FormItemElement {
     modalTitle: string;
   };
 
+  /**
+   * @description 是否可堆叠，开启后每次打开抽屉会将新的抽屉置于上层（zIndex ++）。注意：仅初始设置有效。
+   *
+   * @default true
+   */
+  @property({ attribute: false })
+  stackable = true;
+
+  private _stack = instantiateModalStack?.();
+
   private _mountPoint: HTMLElement;
 
   private _childFormElement: ChildeFormElement;
@@ -295,6 +306,7 @@ export class GeneralModalElement extends FormItemElement {
     document.body.style.touchAction = "";
     ReactDOM.unmountComponentAtNode(this._mountPoint);
     this.removeEventListener("click", this.listenToClick);
+    this._stack?.pull();
   }
 
   protected _render(): void {
@@ -333,6 +345,8 @@ export class GeneralModalElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             titleIcon={this.titleIcon}
+            stack={this._stack}
+            stackable={this.stackable}
           />
         </BrickWrapper>,
         this._mountPoint,

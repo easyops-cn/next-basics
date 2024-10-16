@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Drawer, Spin } from "antd";
-import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { DrawerProps } from "antd/lib/drawer";
+import type { ModalStack } from "@next-core/brick-kit";
 import { ICustomSwitchConfig } from "./index";
 interface GeneralDrawerProps {
   visible: boolean;
@@ -22,10 +22,12 @@ interface GeneralDrawerProps {
   useBigOuterSwitch?: boolean;
   customSwitchConfig?: ICustomSwitchConfig;
   scrollToTopWhenOpen?: boolean;
+  stack: ModalStack;
+  stackable?: boolean;
 }
 
 export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
-  const { scrollToTopWhenOpen } = props;
+  const { scrollToTopWhenOpen, stack, stackable } = props;
 
   const contentRef = useRef<HTMLDivElement>();
 
@@ -36,11 +38,26 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
     }
   };
 
-  useEffect(() => {
-    scrollToTopWhenOpen &&
-      props.visible &&
-      findDrawerBody(contentRef.current)?.scrollTo(0, 0);
-  }, [props.visible]);
+  const [zIndex, setZIndex] = useState<number>(undefined);
+  useEffect(
+    () => {
+      scrollToTopWhenOpen &&
+        props.visible &&
+        findDrawerBody(contentRef.current)?.scrollTo(0, 0);
+
+      if (stack && stackable !== false) {
+        if (props.visible) {
+          setZIndex(stack.push());
+        } else {
+          stack.pull();
+          setZIndex(undefined);
+        }
+      }
+    },
+    // Only re-run the effect if visible changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [props.visible]
+  );
 
   const title = (
     <div className="header">
@@ -117,6 +134,7 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
         headerStyle={props.headerStyle}
         forceRender={!!props.hasOuterSwitch}
         className={classNameList.join(" ")}
+        zIndex={zIndex}
       >
         {props.hasOuterSwitch && (
           <div
