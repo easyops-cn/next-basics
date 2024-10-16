@@ -6,6 +6,7 @@ import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
 import { NS_BASIC_BRICKS, K } from "../i18n/constants";
 import { useTranslation } from "react-i18next";
+import type { ModalStack } from "@next-core/brick-kit";
 
 const fullscreenMargin = 20;
 const titleAlignPropertyMap: Record<string, string> = {
@@ -40,6 +41,8 @@ interface GeneralModalProps {
   isHiddenModalTitle?: boolean;
   isHiddenModalFooter?: boolean;
   isShowCustomHeader?: boolean;
+  stack: ModalStack;
+  stackable?: boolean;
   onAfterClose?: () => void;
 }
 
@@ -63,6 +66,8 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
     isHiddenModalFooter,
     isShowCustomHeader,
     footerPosition = "right",
+    stack,
+    stackable,
   } = props;
   const modalHeaderRef = useRef<HTMLDivElement>();
   const modalFooterRef = useRef<HTMLDivElement>();
@@ -172,6 +177,23 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
     }
   }
 
+  const [zIndex, setZIndex] = useState<number>(undefined);
+  useEffect(
+    () => {
+      if (stack && stackable !== false) {
+        if (visible) {
+          setZIndex(stack.push());
+        } else {
+          stack.pull();
+          setZIndex(undefined);
+        }
+      }
+    },
+    // Only re-run the effect if visible changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [visible]
+  );
+
   return (
     <Modal
       className={classnames({
@@ -205,6 +227,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
       width={fullscreen ? `calc(100% - ${fullscreenMargin * 2}px)` : undefined}
       bodyStyle={fullscreen ? { height: bodyHeight } : undefined}
       wrapClassName={classnames({ fullscreen })}
+      zIndex={zIndex}
       {...configProps}
       afterClose={onAfterClose}
       cancelButtonProps={{ type: "link", ...configProps?.cancelButtonProps }}

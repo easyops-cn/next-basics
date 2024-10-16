@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal } from "antd";
 import { ButtonType } from "antd/lib/button";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
@@ -6,6 +6,7 @@ import i18n from "i18next";
 import { NS_FORMS, K } from "../i18n/constants";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
+import type { ModalStack } from "@next-core/brick-kit";
 
 declare type SrcIcon = {
   imgSrc?: string;
@@ -23,9 +24,12 @@ interface GeneralModalProps extends FormItemWrapperProps {
   btnText?: string;
   okDisabled?: boolean;
   titleIcon?: MenuIcon | SrcIcon;
+  stack: ModalStack;
+  stackable?: boolean;
 }
 
 export function GeneralModal(props: GeneralModalProps): React.ReactElement {
+  const { stack, stackable } = props;
   const footer = (
     <>
       <Button className="cancelBtn" type="text">
@@ -67,6 +71,23 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
     }
   }
 
+  const [zIndex, setZIndex] = useState<number>(undefined);
+  useEffect(
+    () => {
+      if (stack && stackable !== false) {
+        if (props.visible) {
+          setZIndex(stack.push());
+        } else {
+          stack.pull();
+          setZIndex(undefined);
+        }
+      }
+    },
+    // Only re-run the effect if visible changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [props.visible]
+  );
+
   return (
     <FormItemWrapper {...props}>
       <>
@@ -94,6 +115,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
           getContainer={props.container}
           footer={footer}
           destroyOnClose={true}
+          zIndex={zIndex}
         >
           <slot id="content" name="content"></slot>
         </Modal>

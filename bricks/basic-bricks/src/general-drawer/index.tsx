@@ -8,6 +8,7 @@ import {
   method,
   event,
   EventEmitter,
+  instantiateModalStack,
 } from "@next-core/brick-kit";
 import { GeneralDrawer } from "./GeneralDrawer";
 import style from "./index.shadow.less";
@@ -189,6 +190,16 @@ export class GeneralDrawerElement extends UpdatingElement {
   @property({ attribute: false })
   scrollToTopWhenOpen = true;
 
+  /**
+   * @description 是否可堆叠，开启后每次打开抽屉会将新的抽屉置于上层（zIndex ++）。注意：仅初始设置有效。
+   *
+   * @default true
+   */
+  @property({ attribute: false })
+  stackable = true;
+
+  private _stack = instantiateModalStack?.();
+
   constructor() {
     super();
 
@@ -276,6 +287,7 @@ export class GeneralDrawerElement extends UpdatingElement {
     document.body.style.overflow = "";
     document.body.style.touchAction = "";
     ReactDOM.unmountComponentAtNode(this);
+    this._stack?.pull();
   }
 
   protected _render(): void {
@@ -301,6 +313,8 @@ export class GeneralDrawerElement extends UpdatingElement {
             useBigOuterSwitch={this.useBigOuterSwitch}
             customSwitchConfig={this.customSwitchConfig}
             scrollToTopWhenOpen={this.scrollToTopWhenOpen}
+            stack={this._stack}
+            stackable={this.stackable}
           />
         </BrickWrapper>,
         this._mountPoint
