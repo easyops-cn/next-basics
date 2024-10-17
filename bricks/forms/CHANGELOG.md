@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.301.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.301.0...@next-bricks/forms@1.301.1) (2024-10-17)
+
+
+### Bug Fixes
+
+* set stackable defaults to false ([8739f39](https://github.com/easyops-cn/next-basics/commit/8739f3932aab76da63dd245eeefde5c3ecec154e))
+
+
+
+
+
 # [1.301.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.300.0...@next-bricks/forms@1.301.0) (2024-10-16)
 
 
