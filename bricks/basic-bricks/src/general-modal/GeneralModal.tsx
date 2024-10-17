@@ -180,7 +180,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
   const [zIndex, setZIndex] = useState<number>(undefined);
   useEffect(
     () => {
-      if (stack && stackable !== false) {
+      if (stack && stackable) {
         if (visible) {
           setZIndex(stack.push());
         } else {

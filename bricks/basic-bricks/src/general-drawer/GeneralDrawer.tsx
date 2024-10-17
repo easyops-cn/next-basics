@@ -45,7 +45,7 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
         props.visible &&
         findDrawerBody(contentRef.current)?.scrollTo(0, 0);
 
-      if (stack && stackable !== false) {
+      if (stack && stackable) {
         if (props.visible) {
           setZIndex(stack.push());
         } else {

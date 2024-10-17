@@ -213,11 +213,9 @@ export class GeneralModalElement extends FormItemElement {
 
   /**
    * @description 是否可堆叠，开启后每次打开抽屉会将新的抽屉置于上层（zIndex ++）。注意：仅初始设置有效。
-   *
-   * @default true
    */
-  @property({ attribute: false })
-  stackable = true;
+  @property({ type: Boolean })
+  stackable: boolean;
 
   private _stack = instantiateModalStack?.();
 
