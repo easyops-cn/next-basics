@@ -40,6 +40,15 @@ html[data-theme="dark"] {
   }
 }
 
+[data-mode="dashboard"] .brickTable {
+  :global(.ant-table) {
+    background-color: transparent;
+  }
+  :global(.ant-table .ant-table-thead > tr > th) {
+    background-color: rgba(11, 40, 82, 0.76863);
+  }
+}
+
 .customDropTable {
   :global(.ant-table-tbody) {
     tr.dropOverDownward {
