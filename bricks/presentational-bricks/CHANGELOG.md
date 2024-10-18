@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.328.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.328.2...@next-bricks/presentational-bricks@1.328.3) (2024-10-18)
+
+
+### Bug Fixes
+
+* dashboard style ([3dc7a14](https://github.com/easyops-cn/next-basics/commit/3dc7a1457750fe1f8f55227b8888e0ae7008c00b))
+
+
+
+
+
 ## [1.328.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.328.1...@next-bricks/presentational-bricks@1.328.2) (2024-09-19)
 
 
