@@ -367,7 +367,10 @@ export class GeneralModalElement extends UpdatingElement {
           nodeName === "div" &&
           clickNode.className.includes("ant-modal-wrap")) ||
         (buttonNode && buttonNode.className.includes("ant-modal-close")) ||
-        clickNode.closest("svg")?.getAttribute("data-icon") === "close-circle"
+        // 如果cascader在modal，点击关闭按钮会误关闭弹窗，这里过滤掉cascader.
+        (clickNode.closest("svg")?.getAttribute("data-icon") ===
+          "close-circle" &&
+          !clickNode.closest(".ant-cascader-picker-clear"))
       ) {
         this.close();
         return;
