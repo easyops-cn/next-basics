@@ -207,9 +207,6 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         moment().unix() <= storage.getItem(item.tipKey);
       return !isTipClosing;
     });
-    const top = `calc(var(--app-bar-height) + ${list.length * 32}px)`;
-
-    wrapperDOM.style.top = top;
     setTipList(list);
   }) as EventListener;
 
@@ -220,12 +217,6 @@ export function SideBar(props: SideBarProps): React.ReactElement {
     };
   }, []);
 
-  const sidebarHeight = useMemo(() => {
-    return `calc(100vh - var(--app-bar-height) + 1px - ${
-      tipList.length * 32
-    }px)`;
-  }, [tipList]);
-
   return (
     <div
       className={classNames(styles.sideBarContainer, {
@@ -234,7 +225,11 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         [styles.dragging]: !!dragging,
       })}
       style={{
-        height: sidebarHeight,
+        height: `calc(100vh - var(--app-bar-height-with-tips, ${
+          tipList.length
+            ? `calc(var(--app-bar-height) + ${tipList.length * 32}px)`
+            : "var(--app-bar-height)"
+        }))`,
         width:
           expandedState === ExpandedState.Collapsed
             ? "var(--side-bar-collapsed-width)"

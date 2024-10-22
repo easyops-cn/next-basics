@@ -18,6 +18,11 @@ export function AppBarWrapper({
   );
   const currentApp = useCurrentApp();
 
+  const isV3 = React.useMemo(() => {
+    const runtime = getRuntime();
+    return runtime.getFeatureFlags()["migrate-to-brick-next-v3"];
+  }, []);
+
   const handleShowTips = React.useCallback<EventListener>((e): void => {
     const list = (e as CustomEvent<NavTip[]>).detail ?? [];
     // 可关闭的tip，用户关闭后过一天才会重新显示
@@ -43,12 +48,17 @@ export function AppBarWrapper({
   };
 
   React.useEffect(() => {
-    setAppbarHeight(`calc(var(--app-bar-height) + ${tipList.length * 32}px)`);
+    const newHeight = tipList.length
+      ? `calc(var(--app-bar-height) + ${tipList.length * 32}px)`
+      : "var(--app-bar-height)";
+    setAppbarHeight(newHeight);
+    document.documentElement.style.setProperty(
+      "--app-bar-height-with-tips",
+      newHeight
+    );
   }, [tipList]);
 
   React.useEffect(() => {
-    const runtime = getRuntime();
-    const isV3 = runtime.getFeatureFlags()["migrate-to-brick-next-v3"];
     if (isV3) {
       const auth = getAuth();
       const validDaysLeft: number = auth.license?.validDaysLeft;
@@ -73,17 +83,15 @@ export function AppBarWrapper({
     return () => {
       window.removeEventListener("app.bar.tips", handleShowTips);
     };
-  }, [handleShowTips]);
+  }, [isV3, handleShowTips]);
 
   React.useEffect(() => {
-    const runtime = getRuntime();
-    const isV3 = runtime.getFeatureFlags()["migrate-to-brick-next-v3"];
     if (isV3) {
       const auth = getAuth();
       const handelRouteRender = (e: Event): void => {
         const renderTime = (e as CustomEvent<{ renderTime: number }>).detail
           .renderTime;
-        const { loadTime, loadInfoPage } = runtime.getMiscSettings();
+        const { loadTime, loadInfoPage } = getRuntime().getMiscSettings();
         if (currentApp.isBuildPush && loadTime > 0 && renderTime > loadTime) {
           const getSecond = (time: number): number =>
             Math.floor(time * 100) / 100;
@@ -119,7 +127,7 @@ export function AppBarWrapper({
         window.removeEventListener("route.render", handelRouteRender);
       };
     }
-  }, [handleShowTips, currentApp]);
+  }, [isV3, handleShowTips, currentApp]);
 
   React.useEffect(() => {
     const mainElement = document.getElementById("main-mount-point");

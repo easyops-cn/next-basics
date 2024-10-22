@@ -43,7 +43,14 @@ export function AppBarWrapper({
   };
 
   React.useEffect(() => {
-    setAppbarHeight(`calc(var(--app-bar-height) + ${tipList.length * 32}px)`);
+    const newHeight = tipList.length
+      ? `calc(var(--app-bar-height) + ${tipList.length * 32}px)`
+      : "var(--app-bar-height)";
+    setAppbarHeight(newHeight);
+    document.documentElement.style.setProperty(
+      "--app-bar-height-with-tips",
+      newHeight
+    );
   }, [tipList]);
 
   React.useEffect(() => {
