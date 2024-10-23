@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.278.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.14...@next-bricks/next-builder@1.278.15) (2024-10-23)
+
+
+### Bug Fixes
+
+* distinguish slot brick ([0b8f00b](https://github.com/easyops-cn/next-basics/commit/0b8f00bb9dd459092bda4837677df412aaeade60))
+
+
+
+
+
 ## [1.278.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.13...@next-bricks/next-builder@1.278.14) (2024-10-16)
 
 **Note:** Version bump only for package @next-bricks/next-builder
