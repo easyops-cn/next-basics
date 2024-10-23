@@ -245,8 +245,13 @@ export function WorkbenchBrickTree({
               color = "var(--palette-red-6)";
               break;
             case "brick":
-              icon = "build";
-              color = "var(--palette-green-6)";
+              if (node.brick === "slot") {
+                icon = "usb";
+                color = "var(--palette-orange-6)";
+              } else {
+                icon = "build";
+                color = "var(--palette-green-6)";
+              }
               break;
           }
         }
