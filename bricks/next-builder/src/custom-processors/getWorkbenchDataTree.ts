@@ -70,7 +70,7 @@ export function getWorkbenchDataTree(
       if (item.resolve) {
         icon = {
           lib: "antd",
-          icon: "link",
+          icon: "database",
           theme: "outlined",
           color: "orange",
         };
