@@ -361,8 +361,7 @@ export function LegacyPreviewContainer(
           const parentNodes = getAllParentNodes(parentEdges);
           onPreviewerDrop({
             nodeData: transformNodeData,
-            mountPoint:
-              dragStatus === "inside" ? "content" : hoverEdge.mountPoint,
+            mountPoint: dragStatus === "inside" ? "" : hoverEdge.mountPoint,
             dragStatus,
             parentNodes: parentNodes.map((node) =>
               omit(node, ["parent", "children"])

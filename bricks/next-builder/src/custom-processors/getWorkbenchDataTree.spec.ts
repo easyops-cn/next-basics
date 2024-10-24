@@ -67,7 +67,7 @@ test("getWorkbenchDataTree for route", () => {
         },
         "icon": Object {
           "color": "orange",
-          "icon": "link",
+          "icon": "database",
           "lib": "antd",
           "theme": "outlined",
         },
@@ -86,7 +86,7 @@ test("getWorkbenchDataTree for route", () => {
         },
         "icon": Object {
           "color": "orange",
-          "icon": "link",
+          "icon": "database",
           "lib": "antd",
           "theme": "outlined",
         },

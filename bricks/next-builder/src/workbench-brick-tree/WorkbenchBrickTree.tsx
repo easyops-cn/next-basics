@@ -9,7 +9,6 @@ import {
   useHoverNodeUid,
 } from "@next-core/editor-bricks-helper";
 import {
-  isBrickNode,
   isCustomTemplateNode,
   isRouteNode,
   isSnippetNode,
@@ -323,7 +322,7 @@ export function WorkbenchBrickTree({
           overStatus === "inside"
             ? overNode.$$uid === rootNode.$$uid
               ? "bricks"
-              : "content"
+              : ""
             : edges.find((item) => item.child === overUid).mountPoint;
         onAddBrickDrop({
           nodeData: nodeData,
