@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.278.16](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.15...@next-bricks/next-builder@1.278.16) (2024-10-24)
+
+
+### Bug Fixes
+
+* set default mount point to empty, refine data icon ([1f375c5](https://github.com/easyops-cn/next-basics/commit/1f375c58267c84ed5efe11a7cdf61045d30577d6))
+
+
+
+
+
 ## [1.278.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.14...@next-bricks/next-builder@1.278.15) (2024-10-23)
 
 
