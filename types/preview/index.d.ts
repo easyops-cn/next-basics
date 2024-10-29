@@ -17,7 +17,10 @@ import type {
 import { pipes } from "@next-core/pipes";
 import { ModelInstanceRelationRequest } from "@next-sdk/cmdb-sdk/dist/types/model/cmdb";
 import { StoryboardApi_CloneBricksRequestBody } from "@next-sdk/next-builder-sdk";
-import type { FormProjectApi_UpdateFormItemRequestBody } from "@next-sdk/form-builder-service-sdk";
+import type {
+  FormProjectApi_UpdateFormItemRequestBody,
+  FormProjectApi_UpdateFormTemplateRequestBody,
+} from "@next-sdk/form-builder-service-sdk";
 export interface PreviewHelperBrick {
   start(previewFromOrigin: string, options: unknown): void;
 }
@@ -694,6 +697,12 @@ export type updateFormItemArgs = [
 ];
 export type deleteFormItemArgs = [string, HttpOptions];
 
+export type updateFormTemplateArgs = [
+  string,
+  FormProjectApi_UpdateFormTemplateRequestBody,
+  HttpOptions
+];
+
 export interface WorkbenchBackendActionForInsertFormItem
   extends WorkbencdBackendCacheActionCommon {
   action: "insert.formItem";
@@ -711,6 +720,12 @@ export interface WorkbenchBackendActionForUpdateFormItem
   extends WorkbencdBackendCacheActionCommon {
   action: "update.formItem";
   args: updateFormItemArgs;
+}
+
+export interface WorkbenchBackendActionForUpdateFormTemplate
+  extends WorkbencdBackendCacheActionCommon {
+  action: "update.formTemplate";
+  args: updateFormTemplateArgs;
 }
 
 export interface WorkbenchBackendActionForUpdateVisualForm
