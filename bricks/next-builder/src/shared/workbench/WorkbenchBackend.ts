@@ -17,6 +17,7 @@ import {
   FormProjectApi_updateFormItem,
   FormProjectApi_deleteFormItem,
   FormProjectApi_createFormItem,
+  FormProjectApi_updateFormTemplate,
 } from "@next-sdk/form-builder-service-sdk";
 import { StoryboardAssembly } from "../storyboard/StoryboardAssembly";
 import type {
@@ -38,6 +39,7 @@ import type {
   WorkbenchBackendActionForInsertFormItem,
   WorkbenchBackendActionForDeleteFormItem,
   WorkbenchBackendActionForUpdateFormItem,
+  WorkbenchBackendActionForUpdateFormTemplate,
   WorkbenchBackendActionForUpdateVisualForm,
   WorkbenchBackendActionForBatchOp,
   WorkbenchBackendActionForBatchOpDetail,
@@ -68,6 +70,7 @@ export type QueueItem =
   | WorkbenchBackendActionForInsertFormItem
   | WorkbenchBackendActionForDeleteFormItem
   | WorkbenchBackendActionForUpdateFormItem
+  | WorkbenchBackendActionForUpdateFormTemplate
   | WorkbenchBackendActionForUpdateVisualForm
   | WorkbenchBackendActionForBatchOp;
 
@@ -566,6 +569,36 @@ export default class WorkbenchBackend {
     }
   }
 
+  private async updateFormTemplate(
+    task: WorkbenchBackendActionForUpdateFormTemplate
+  ): Promise<boolean> {
+    try {
+      const instance =
+        this.mockInstanceIdCache.get(task.args[0]) ||
+        this.draftInstanceIdCache?.find(
+          (item) => item.oldInstanceId === task.args[0]
+        )?.newItem?.instanceId ||
+        task.args[0];
+      const res = await FormProjectApi_updateFormTemplate(
+        instance,
+        task.args[1]
+      );
+      if (res.itemMapList?.length > 0)
+        this.draftInstanceIdCache = res.itemMapList;
+      this.publish("message", {
+        action: "execute-success",
+        data: {
+          res: res,
+          op: "update",
+        },
+      });
+      return true;
+    } catch (e) {
+      this.handleError(e, "更新表单模板失败");
+      return false;
+    }
+  }
+
   private async deleteFormItem(
     task: WorkbenchBackendActionForDeleteFormItem
   ): Promise<boolean> {
@@ -626,7 +659,8 @@ export default class WorkbenchBackend {
         const { action, data } = task;
         // eslint-disable-next-line no-console
         console.log("batchDealRequest", action, data);
-        this.autoBuild = !action.includes("formItem");
+        this.autoBuild =
+          !action.includes("formItem") && !action.includes("formTemplate");
         let isSuccess: boolean;
         try {
           switch (action) {
@@ -663,6 +697,9 @@ export default class WorkbenchBackend {
               break;
             case "update.formItem":
               this.updateFormItem(task);
+              break;
+            case "update.formTemplate":
+              this.updateFormTemplate(task);
               break;
             case "copy.brick":
               isSuccess = await this.copyBrick(data);

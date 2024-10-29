@@ -46,7 +46,7 @@
     "@next-libs/visual-builder": "^1.13.4",
     "@next-sdk/api-gateway-sdk": "^2.0.17",
     "@next-sdk/cmdb-sdk": "^3.0.2",
-    "@next-sdk/form-builder-service-sdk": "^1.2.2",
+    "@next-sdk/form-builder-service-sdk": "^2.0.0",
     "@next-sdk/next-builder-sdk": "^2.10.0",
     "@next-sdk/object-store-sdk": "^2.1.2",
     "@next-shared/common-bricks": "0.49.0",

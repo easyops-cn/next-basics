@@ -575,6 +575,20 @@ describe("WorkbenchBackend should work", () => {
         "",
       ],
     });
+
+    backendInstance.push({
+      action: "update.formTemplate",
+      state: "pending",
+      args: [
+        "123",
+        {
+          id: "123",
+          projectInstanceId: "123",
+          formName: "123",
+        },
+        "",
+      ],
+    });
     await (global as any).flushPromises();
 
     expect(mockUpdateFormItem).toHaveBeenCalledWith("123", {
