@@ -594,7 +594,7 @@ export default class WorkbenchBackend {
       });
       return true;
     } catch (e) {
-      this.handleError(e, "更新表单项失败");
+      this.handleError(e, "更新表单模板失败");
       return false;
     }
   }
