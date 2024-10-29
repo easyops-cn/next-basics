@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.278.17](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.16...@next-bricks/next-builder@1.278.17) (2024-10-29)
+
+
+### Bug Fixes
+
+* workbenchbackend 增加动作 update form template ([eb332bf](https://github.com/easyops-cn/next-basics/commit/eb332bff7f4dd36d67e93ba369f7f75e3c888b0f))
+
+
+
+
+
 ## [1.278.16](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.15...@next-bricks/next-builder@1.278.16) (2024-10-24)
 
 

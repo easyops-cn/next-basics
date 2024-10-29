@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.26.3](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.26.2...@next-types/preview@1.26.3) (2024-10-29)
+
+
+### Bug Fixes
+
+* workbenchbackend 增加动作 update form template ([eb332bf](https://github.com/easyops-cn/next-basics/commit/eb332bff7f4dd36d67e93ba369f7f75e3c888b0f))
+
+
+
+
+
 ## [1.26.2](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.26.1...@next-types/preview@1.26.2) (2024-08-26)
 
 **Note:** Version bump only for package @next-types/preview
