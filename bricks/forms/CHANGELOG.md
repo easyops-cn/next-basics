@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.302.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.301.1...@next-bricks/forms@1.302.0) (2024-11-05)
+
+
+### Features
+
+* **forms.cmdb-instance-select:** 支持proxy外部数据源 ([44b551c](https://github.com/easyops-cn/next-basics/commit/44b551cf368deb97bd60e764408eb53a5756aa84))
+
+
+
+
+
 ## [1.301.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.301.0...@next-bricks/forms@1.301.1) (2024-10-17)
 
 
