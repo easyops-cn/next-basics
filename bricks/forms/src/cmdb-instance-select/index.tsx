@@ -386,6 +386,26 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   blurAfterValueChanged: boolean;
 
   /**
+   * @default false
+   * @required
+   * @description 使用外部数据源
+   */
+  @property({
+    type: Boolean,
+  })
+  useExternalCmdbApi: boolean;
+
+  /**
+   * @default false
+   * @required
+   * @description 外部数据源id
+   */
+  @property({
+    attribute: false,
+  })
+  externalSourceId = "";
+
+  /**
    * @kind Record<string, number | string>[]
    * @required false
    * @default -
@@ -490,6 +510,8 @@ export class CmdbInstanceSelectElement extends FormItemElement {
             sort={this.sort}
             suffix={this.suffix}
             useBrickVisible={this.useBrickVisible}
+            useExternalCmdbApi={this.useExternalCmdbApi}
+            externalSourceId={this.externalSourceId}
           />
         </BrickWrapper>,
         this
