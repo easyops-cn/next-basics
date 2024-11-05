@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { Select, Spin, Avatar, Tooltip } from "antd";
 import i18n from "i18next";
 import { NS_FORMS, K } from "../i18n/constants";
@@ -13,7 +13,11 @@ import {
   isNil,
   trim,
 } from "lodash";
-import { BrickAsComponent, handleHttpError } from "@next-core/brick-kit";
+import {
+  BrickAsComponent,
+  handleHttpError,
+  useProvider,
+} from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
 import { ModeOption } from "antd/lib/select";
 import { InstanceApi_postSearchV3 } from "@next-sdk/cmdb-sdk";
@@ -56,6 +60,8 @@ export interface CmdbInstanceSelectProps extends FormItemWrapperProps {
     useBrick: UseBrickConf;
   };
   useBrickVisible?: boolean;
+  useExternalCmdbApi?: boolean;
+  externalSourceId?: string;
 }
 
 export interface ComplexOption<T = string | number> {
@@ -95,6 +101,8 @@ export function CmdbInstanceSelectItem(
     ignoreMissingFieldError,
     blurAfterValueChanged,
     suffix,
+    useExternalCmdbApi,
+    externalSourceId,
   } = props;
   const userQuery = formatUserQuery(props.instanceQuery);
   //istanbul ignore else
@@ -110,6 +118,20 @@ export function CmdbInstanceSelectItem(
   );
   const [total, setTotal] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
+
+  // 用于外部调用的接口, 当useExternalCmdbApi为true，才调用这些接口
+  const externalPostSearchV3 = useProvider(
+    "easyops.api.cmdb.topo_center@ProxyPostSearchV3:1.0.1",
+    { cache: false }
+  );
+
+  // useExternalCmdbApi为true，外部接口参数
+  const externalRequestParams = useMemo(() => {
+    return {
+      objectId: props.objectId,
+      sourceId: props.externalSourceId,
+    };
+  }, [props.objectId, externalSourceId]);
   const computeFields = () => {
     const result = [
       fields.value,
@@ -171,7 +193,7 @@ export function CmdbInstanceSelectItem(
         const fieldsQuery = Array.isArray(fields.label)
           ? fields.label.map((label) => ({ [label]: { $like: `%${q}%` } }))
           : [{ [fields.label]: { $like: `%${q}%` } }];
-        const data = await InstanceApi_postSearchV3(props.objectId, {
+        const paramQuery = {
           query: {
             $and: [
               {
@@ -192,7 +214,15 @@ export function CmdbInstanceSelectItem(
           page_size: pageSizeQuery || pageSize,
           ignore_missing_field_error: ignoreMissingFieldError,
           sort: props.sort,
-        });
+        };
+        const data = useExternalCmdbApi
+          ? await externalPostSearchV3.query([
+              {
+                ...paramQuery,
+                ...externalRequestParams,
+              },
+            ])
+          : await InstanceApi_postSearchV3(props.objectId, paramQuery);
 
         list = data.list;
         setTotal(data.total);
