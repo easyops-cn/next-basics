@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.302.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.302.0...@next-bricks/forms@1.302.1) (2024-11-06)
+
+
+### Bug Fixes
+
+* upload-files-v2构件限制了上传文件类型时，前端需要二次校验 SHLSTYYWPT-693 ([4637553](https://github.com/easyops-cn/next-basics/commit/46375532205c1f9ba9f84e033d0a0586a5645d3e))
+
+
+
+
+
 # [1.302.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.301.1...@next-bricks/forms@1.302.0) (2024-11-05)
 
 
