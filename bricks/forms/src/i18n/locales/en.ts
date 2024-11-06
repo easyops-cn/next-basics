@@ -162,6 +162,7 @@ const locale: Locale = {
   [K.UPLOAD_IMG_NUMBER_LIMIT]:
     "Only {{maxNumber}} image can be uploaded at most",
   [K.ATTACHMENT]: "Attachment",
+  [K.NO_SUPPORT_FILE_TYPE]: "The current file type is not supported",
 };
 
 export default locale;
