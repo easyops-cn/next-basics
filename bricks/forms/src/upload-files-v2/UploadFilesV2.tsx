@@ -113,6 +113,22 @@ export function RealUploadFile(
         reject(new Error(i18n.t(`${NS_FORMS}:${K.VOLUME_TOO_BIG}`)));
       });
     }
+    if (props.accept) {
+      const acceptedTypes = props.accept.split(",").map((type) => type.trim());
+      const fileName = file.name.toLowerCase();
+      const fileType = file.type;
+      const isValidType = acceptedTypes.some((type) => {
+        if (type.startsWith(".")) {
+          return fileName.endsWith(type);
+        }
+        return fileType === type;
+      });
+      if (!isValidType) {
+        return new Promise((_resolve, reject) => {
+          reject(new Error(i18n.t(`${NS_FORMS}:${K.NO_SUPPORT_FILE_TYPE}`)));
+        });
+      }
+    }
     if (props.autoUpload) {
       // 进行自动上传
       return new Promise((resolve) => resolve(file));
