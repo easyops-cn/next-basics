@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.3.4...@next-bricks/nav-legacy@1.4.0) (2024-11-20)
+
+
+### Features
+
+* IT资源管理的资源管理特殊菜单过滤无效的分类 ([0cbab45](https://github.com/easyops-cn/next-basics/commit/0cbab4539991c32e7d5ead4e00d9af33fba3d899))
+
+
+
+
+
 ## [1.3.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.3.3...@next-bricks/nav-legacy@1.3.4) (2024-10-22)
 
 **Note:** Version bump only for package @next-bricks/nav-legacy
