@@ -273,68 +273,74 @@ export function ModelTree(props: {
   };
   return groupList?.length ? (
     <div className={styles.masonry}>
-      {groupList?.map((category, i) => {
-        const displaySubCategory =
-          category.subCategory?.filter(
-            (subCategory) => subCategory.objectList.length
-          ) ?? [];
-        return (
-          <div className={styles.column} key={i}>
-            <div className={styles.newItem}>
-              <div className={styles.subCategoryContainer}>
-                {category.title === "应用资源" ? (
-                  <GeneralIcon
-                    icon={{ lib: "fa", icon: "cube", prefix: "fas" }}
-                  />
-                ) : category.title === "基础设施" ? (
-                  <GeneralIcon
-                    icon={{ lib: "fa", icon: "cubes", prefix: "fas" }}
-                  />
-                ) : category.title === "平台资源" ? (
-                  <GeneralIcon
-                    icon={{
-                      lib: "easyops",
-                      icon: "workspace",
-                      category: "app",
-                    }}
-                  />
-                ) : category.title === "组织信息" ? (
-                  <GeneralIcon
-                    icon={{
-                      lib: "easyops",
-                      icon: "production",
-                      category: "deploy",
-                    }}
-                  />
+      {groupList
+        ?.filter(
+          (v) =>
+            v.objectList.length > 0 ||
+            v.subCategory.filter((c) => c.objectList.length > 0).length > 0
+        )
+        ?.map((category, i) => {
+          const displaySubCategory =
+            category.subCategory?.filter(
+              (subCategory) => subCategory.objectList.length
+            ) ?? [];
+          return (
+            <div className={styles.column} key={i}>
+              <div className={styles.newItem}>
+                <div className={styles.subCategoryContainer}>
+                  {category.title === "应用资源" ? (
+                    <GeneralIcon
+                      icon={{ lib: "fa", icon: "cube", prefix: "fas" }}
+                    />
+                  ) : category.title === "基础设施" ? (
+                    <GeneralIcon
+                      icon={{ lib: "fa", icon: "cubes", prefix: "fas" }}
+                    />
+                  ) : category.title === "平台资源" ? (
+                    <GeneralIcon
+                      icon={{
+                        lib: "easyops",
+                        icon: "workspace",
+                        category: "app",
+                      }}
+                    />
+                  ) : category.title === "组织信息" ? (
+                    <GeneralIcon
+                      icon={{
+                        lib: "easyops",
+                        icon: "production",
+                        category: "deploy",
+                      }}
+                    />
+                  ) : (
+                    <TagOutlined
+                      className={styles.categoryIcon}
+                      style={{ marginRight: "4px" }}
+                    />
+                  )}
+                  <span className={styles.categoryTitle}>{category.title}</span>
+                </div>
+                {displaySubCategory?.map((subCategory, i) => {
+                  const props = {
+                    ...subCategory,
+                    highlightChar,
+                    updateCollect,
+                    favouriteObjectList,
+                  };
+                  return <SubCategory {...props} key={i} />;
+                })}
+                {displaySubCategory?.length && category.objectList.length ? (
+                  <div style={{ height: "5px" }}></div>
                 ) : (
-                  <TagOutlined
-                    className={styles.categoryIcon}
-                    style={{ marginRight: "4px" }}
-                  />
+                  <></>
                 )}
-                <span className={styles.categoryTitle}>{category.title}</span>
+                {category.objectList.map((object, i) => {
+                  return renderObjectList(object, i);
+                })}
               </div>
-              {displaySubCategory?.map((subCategory, i) => {
-                const props = {
-                  ...subCategory,
-                  highlightChar,
-                  updateCollect,
-                  favouriteObjectList,
-                };
-                return <SubCategory {...props} key={i} />;
-              })}
-              {displaySubCategory?.length && category.objectList.length ? (
-                <div style={{ height: "5px" }}></div>
-              ) : (
-                <></>
-              )}
-              {category.objectList.map((object, i) => {
-                return renderObjectList(object, i);
-              })}
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </div>
   ) : (
     <BrickAsComponent
