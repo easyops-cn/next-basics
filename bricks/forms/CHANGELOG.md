@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.302.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.302.1...@next-bricks/forms@1.302.2) (2024-11-25)
+
+
+### Bug Fixes
+
+* SHLSTYYWPT-638 修复定制化构件CUSTOMIZE-FLOW.AUTOMATION-CI-FORM-ITEM在general-form构件中使用的问题 SHLSTYYWPT-638 ([52f71bf](https://github.com/easyops-cn/next-basics/commit/52f71bf6cfd60cdc729d780069f5f5ede78e6598))
+
+
+
+
+
 ## [1.302.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.302.0...@next-bricks/forms@1.302.1) (2024-11-06)
 
 
