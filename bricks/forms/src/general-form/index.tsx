@@ -352,7 +352,10 @@ export class GeneralFormElement
       // Manually trigger to render validation messages.
       (element as any)._render?.();
 
-      if (element.nodeName !== "FORMS.GENERAL-FORM-ITEM") {
+      if (
+        element.nodeName !== "FORMS.GENERAL-FORM-ITEM" &&
+        element.nodeName !== "CUSTOMIZE-FLOW.AUTOMATION-CI-FORM-ITEM"
+      ) {
         return;
       }
     }
