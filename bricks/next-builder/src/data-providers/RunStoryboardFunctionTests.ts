@@ -50,13 +50,13 @@ function getFunctionDebugger(): FunctionDebugger {
   return functionDebugger;
 }
 
-export async function RunStoryboardFunctionTests({
+export function RunStoryboardFunctionTests({
   functions,
   keepProcessedCoverage,
-}: RunStoryboardFunctionTestsParams): Promise<RunStoryboardFunctionTestsResult> {
+}: RunStoryboardFunctionTestsParams): RunStoryboardFunctionTestsResult {
   const { registerStoryboardFunctions, run, getCoverage } =
     getFunctionDebugger();
-  await registerStoryboardFunctions(functions);
+  registerStoryboardFunctions(functions);
   let total = 0;
   let passed = 0;
   const coverageByFunction: Record<string, CoverageReport> = {};

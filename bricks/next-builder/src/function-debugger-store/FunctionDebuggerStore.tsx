@@ -357,37 +357,18 @@ function LegacyFunctionDebuggerStore(
     ]
   );
 
-  const [functionsRegistered, setFunctionRegistered] = useState(false);
   useEffect(() => {
     if (functions) {
-      let ignore = false;
-      setFunctionRegistered(false);
-      (async () => {
-        await functionDebugger.registerStoryboardFunctions(
-          functions,
-          () => ignore
-        );
-        if (!ignore) {
-          setFunctionRegistered(true);
-        }
-      })();
-      return () => {
-        ignore = true;
-      };
+      functionDebugger.registerStoryboardFunctions(functions);
     }
   }, [functionDebugger, functions]);
 
   useEffect(() => {
     if (modifiedFunction?.modified) {
-      let ignore = false;
       functionDebugger.updateStoryboardFunction(
         originalFunction.name,
-        modifiedFunction,
-        () => ignore
+        modifiedFunction
       );
-      return () => {
-        ignore = true;
-      };
     }
   }, [functionDebugger, originalFunction, modifiedFunction]);
 
@@ -397,7 +378,7 @@ function LegacyFunctionDebuggerStore(
         // Each time `initFunction` is dispatched, which changes
         // `originalFunction`, run all tests automatically.
         // (give a second of break)
-        if (runTestsAutomaticallyTimeout > 0 && functionsRegistered) {
+        if (runTestsAutomaticallyTimeout > 0) {
           autoTestsTimeoutRef.current = setTimeout(() => {
             runAllTests();
           }, runTestsAutomaticallyTimeout) as unknown as number;
@@ -405,7 +386,7 @@ function LegacyFunctionDebuggerStore(
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [originalFunction, functionsRegistered]
+    [originalFunction]
   );
 
   const functionModified = !!modifiedFunction?.modified;
