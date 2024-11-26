@@ -20,6 +20,7 @@ interface UploadFilesV2Props extends FormItemWrapperProps {
   onChange?: any;
   onError?: (file: any) => void;
   onRemove?: (file: any) => void;
+  onDownload?: (file: any) => void;
   value?: UploadFileValueItem[];
   autoUpload?: boolean;
   url: string;
@@ -37,6 +38,7 @@ interface UploadFilesV2Props extends FormItemWrapperProps {
   uploadButtonName?: string;
   hideDragBtnWhenAchieveMax?: boolean;
   uploadButtonProps?: UploadButtonProps;
+  showDownloadIcon?: boolean;
 }
 
 export interface UploadFileValueItem {
@@ -275,6 +277,9 @@ export function RealUploadFile(
   const handleRemove = (e: any) => {
     props.onRemove?.(e);
   };
+  const handleDownload = (e: any) => {
+    props.onDownload?.(e);
+  };
 
   const uploadProps = {
     className: classNames({
@@ -296,6 +301,7 @@ export function RealUploadFile(
     beforeUpload: handleBeforeUpload,
     onChange: handleChange,
     onRemove: handleRemove,
+    onDownload: handleDownload,
     supportServerRender: true,
     progress: {
       strokeColor: "var(--color-success)",
@@ -304,6 +310,17 @@ export function RealUploadFile(
       showInfo: false,
     },
     showUploadList: {
+      showDownloadIcon: props.showDownloadIcon,
+      // eslint-disable-next-line react/display-name
+      downloadIcon: (file: UploadFile): ReactNode => (
+        <GeneralIcon
+          icon={{
+            lib: "antd",
+            theme: "outlined",
+            icon: "download",
+          }}
+        />
+      ),
       // eslint-disable-next-line react/display-name
       removeIcon: (file: UploadFile): ReactNode =>
         file.status === "error" ? (
@@ -362,6 +379,7 @@ export function UploadFilesV2(props: UploadFilesV2Props): React.ReactElement {
         onChange={props.onChange}
         onRemove={props.onRemove}
         onError={props.onError}
+        onDownload={props.onDownload}
         url={props.url}
         method={props.method}
         uploadName={props.uploadName}
