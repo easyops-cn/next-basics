@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.302.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.302.2...@next-bricks/forms@1.302.3) (2024-11-26)
+
+
+### Bug Fixes
+
+* 支持展示下载文件图标 ([0f3feda](https://github.com/easyops-cn/next-basics/commit/0f3feda25466643e49ad37a266a1d2d0ef1f1a9c))
+
+
+
+
+
 ## [1.302.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.302.1...@next-bricks/forms@1.302.2) (2024-11-25)
 
 
