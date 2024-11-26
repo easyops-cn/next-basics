@@ -58,7 +58,12 @@ async function transform(
   fn: FunctionToBeTransformed,
   attemptToVisitGlobals: Set<string>
 ): Promise<TransformedFunction> {
-  const babel = await import("@babel/standalone");
+  // `require("crypto").createHash("sha1").update(packageName).digest("hex").substr(0, 4)`
+  // returns "2a2a" when `packageName` is "next-builder".
+  const babel = await import(
+    /* webpackChunkName: "chunks/babel-standalone.2a2a" */
+    "@babel/standalone"
+  );
   const result = babel.transform(fn.source, {
     ast: true,
     filename: `${fn.name}.${fn.typescript ? "ts" : "js"}`,
