@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.279.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.18...@next-bricks/next-builder@1.279.0) (2024-11-26)
+
+
+### Bug Fixes
+
+* specify chunk name ([024a619](https://github.com/easyops-cn/next-basics/commit/024a6191d4a41a2cd33f764981689290a4f89dd6))
+
+
+### Features
+
+* support native mode for storyboard functions ([300e0c7](https://github.com/easyops-cn/next-basics/commit/300e0c7e6a6d677f6858f3d27f49d88fa1bb71a5))
+
+
+
+
+
 ## [1.278.18](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.17...@next-bricks/next-builder@1.278.18) (2024-11-18)
 
 **Note:** Version bump only for package @next-bricks/next-builder
