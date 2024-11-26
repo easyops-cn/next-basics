@@ -96,6 +96,16 @@ export class UploadFilesV2Element extends FormItemElement {
   /**
    * @group basicFormItem
    * @required false
+   * @default false
+   * @description 是否支持展示下载图标,仅在showDownloadIcon为true时有效
+   *
+   */
+  @property({ attribute: false })
+  showDownloadIcon = false;
+
+  /**
+   * @group basicFormItem
+   * @required false
    * @description 接受上传的文件类型，多个之间用,连接
    */
   @property({ attribute: false })
@@ -241,6 +251,14 @@ export class UploadFilesV2Element extends FormItemElement {
   private _handleRemove = (value: any): void => {
     this.removeEvent.emit(value);
   };
+  /**
+   * @detail `file`
+   * @description 	下载文件发出的事件
+   */
+  @event({ type: "upload.files.download" }) downloadEvent: EventEmitter<any>;
+  private _handleDownload = (value: any): void => {
+    this.downloadEvent.emit(value);
+  };
 
   protected _render(): void {
     // istanbul ignore else
@@ -272,6 +290,8 @@ export class UploadFilesV2Element extends FormItemElement {
             onChange={this._handleChange}
             onRemove={this._handleRemove}
             onError={this._handleError}
+            onDownload={this._handleDownload}
+            showDownloadIcon={this.showDownloadIcon}
             message={this.message}
             validator={this.validator}
             notRender={this.notRender}
