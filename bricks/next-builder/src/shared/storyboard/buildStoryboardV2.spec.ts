@@ -251,6 +251,13 @@ describe("buildStoryboardV2", () => {
               PERMISSIONS;
             }`,
           },
+          {
+            name: "nativeMode",
+            source: `function nativeMode() {
+              "native mode";
+              return a ?? 1;
+            }`,
+          },
         ],
         workflows: [
           {
@@ -464,6 +471,24 @@ describe("buildStoryboardV2", () => {
             }`,
               deps: [],
               perm: true,
+            },
+            {
+              name: "nativeMode",
+              source: `function nativeMode() {
+              "native mode";
+              return a ?? 1;
+            }`,
+              deps: [],
+              perm: false,
+              transformed: {
+                globals: ["a"],
+                source: `function nativeMode() {
+  "native mode";
+
+  var _a;
+  return (_a = a) !== null && _a !== void 0 ? _a : 1;
+}`,
+              },
             },
           ],
         },

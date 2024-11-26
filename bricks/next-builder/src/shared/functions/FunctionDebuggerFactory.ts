@@ -1,6 +1,6 @@
 import {
   StoryboardFunctionRegistryFactory,
-  StoryboardFunctionRegistry,
+  StoryboardFunctionPatch,
 } from "@next-core/brick-kit";
 import {
   cook,
@@ -8,6 +8,7 @@ import {
   isObject,
   precookFunction,
 } from "@next-core/brick-utils";
+import type { StoryboardFunction } from "@next-core/brick-types";
 import MockDate from "mockdate";
 import _ from "lodash";
 import {
@@ -26,15 +27,22 @@ import {
 import lodashSource from "./lodash.txt";
 import arraySource from "./array.txt";
 import objectSource from "./object.txt";
+import { TransformedFunction, transformFunction } from "./transformFunction";
 
 export type DebuggerMethod = "start" | "continue" | "step" | "disconnect";
 
 class DebuggerArrayConstructor extends Array {}
 
-export type FunctionDebugger = Omit<
-  StoryboardFunctionRegistry,
-  "storyboardFunctions"
-> & {
+export interface FunctionDebugger {
+  registerStoryboardFunctions(
+    functions: StoryboardFunction[],
+    ignored?: () => boolean
+  ): Promise<void>;
+  updateStoryboardFunction(
+    fn: string,
+    data: StoryboardFunctionPatch,
+    ignored: () => boolean
+  ): Promise<void>;
   run(fn: string, input: SerializableValue): TestRunResult;
   debug(
     method: DebuggerMethod,
@@ -44,7 +52,7 @@ export type FunctionDebugger = Omit<
   ): DebugResult | undefined;
   getCoverage(fn: string): RawCoverage;
   resetCoverage(fn: string): void;
-};
+}
 
 export function FunctionDebuggerFactory(): FunctionDebugger {
   const { createCollector, resetCoverageByFunction, coverageByFunction } =
@@ -230,13 +238,36 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
   }
 
   return {
-    registerStoryboardFunctions(functions) {
+    async registerStoryboardFunctions(functions, ignored) {
       coverageByFunction.clear();
-      return registerStoryboardFunctions(functions);
+      const functionsWithTransformed = await Promise.all(
+        functions.map(async (fn) => {
+          const transformed = await transformFunction(fn);
+          (fn as { transformed?: TransformedFunction }).transformed =
+            transformed;
+          return fn;
+        })
+      );
+      if (ignored?.()) {
+        return;
+      }
+      return registerStoryboardFunctions(functionsWithTransformed);
     },
-    updateStoryboardFunction(fn, data) {
+    async updateStoryboardFunction(fn, data, ignored) {
       coverageByFunction.delete(fn);
-      return updateStoryboardFunction(fn, data);
+      const transformed = await transformFunction({
+        name: fn,
+        source: data.source,
+        typescript: data.typescript,
+      });
+      if (ignored()) {
+        return;
+      }
+      const patch = {
+        ...data,
+        transformed,
+      };
+      return updateStoryboardFunction(fn, patch);
     },
     run,
     debug,

@@ -35,6 +35,7 @@
   },
   "sideEffects": true,
   "devDependencies": {
+    "@babel/standalone": "^7.26.2",
     "@next-core/storyboard-function-types": "^0.2.18",
     "@next-libs/basic-components": "^5.5.0",
     "@next-libs/cmdb-instances": "^7.21.8",

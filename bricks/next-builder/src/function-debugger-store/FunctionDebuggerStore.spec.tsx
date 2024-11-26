@@ -4,7 +4,7 @@ import { act } from "react-dom/test-utils";
 import { DebuggerStore, FunctionDebuggerStore } from "./FunctionDebuggerStore";
 
 describe("FunctionDebuggerStore", () => {
-  it("should work", () => {
+  it("should work", async () => {
     const storeRef = createRef<DebuggerStore>();
     const handlers = {
       onActiveTabChange: jest.fn(),
@@ -135,6 +135,9 @@ describe("FunctionDebuggerStore", () => {
     }
 
     {
+      await act(async () => {
+        await (global as any).flushPromises();
+      });
       act(() => {
         jest.advanceTimersByTime(1000);
       });
@@ -438,6 +441,9 @@ describe("FunctionDebuggerStore", () => {
 
     // "run"
     {
+      await act(async () => {
+        await (global as any).flushPromises();
+      });
       jest.clearAllMocks();
       act(() => {
         storeRef.current.run();
@@ -1024,6 +1030,9 @@ describe("FunctionDebuggerStore", () => {
       }
     }
 
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
     act(() => {
       jest.advanceTimersByTime(1000);
     });
@@ -1083,6 +1092,9 @@ describe("FunctionDebuggerStore", () => {
       expectRestHandlersNotBeCalled(restHandlers, "initFunction 3rd");
     }
 
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
     act(() => {
       jest.advanceTimersByTime(1000);
     });
@@ -1216,6 +1228,9 @@ describe("FunctionDebuggerStore", () => {
       ]);
     }
 
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
     act(() => {
       jest.advanceTimersByTime(1000);
     });
@@ -1334,7 +1349,7 @@ describe("FunctionDebuggerStore", () => {
     wrapper.unmount();
   });
 
-  it("should collect failed coverage", () => {
+  it("should collect failed coverage", async () => {
     const storeRef = createRef<DebuggerStore>();
     const onCoverageChange = jest.fn();
     const wrapper = mount(
@@ -1365,6 +1380,9 @@ describe("FunctionDebuggerStore", () => {
         initialFunction: null,
       });
     });
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
     act(() => {
       storeRef.current.runAllTests();
     });
@@ -1376,7 +1394,7 @@ describe("FunctionDebuggerStore", () => {
     wrapper.unmount();
   });
 
-  it("should collect coverage", () => {
+  it("should collect coverage", async () => {
     const storeRef = createRef<DebuggerStore>();
     const onCoverageChange = jest.fn();
     const wrapper = mount(
@@ -1468,6 +1486,9 @@ describe("FunctionDebuggerStore", () => {
         ],
         initialFunction: null,
       });
+    });
+    await act(async () => {
+      await (global as any).flushPromises();
     });
     act(() => {
       storeRef.current.runAllTests();

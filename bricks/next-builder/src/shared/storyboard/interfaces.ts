@@ -15,6 +15,7 @@ import {
 } from "@next-core/brick-types";
 import { InstanceApi_GetDetailResponseBody } from "@next-sdk/cmdb-sdk";
 import { MenuNode } from "@next-core/brick-utils";
+import { TransformedFunction } from "../functions/transformFunction";
 
 export interface StoryboardAssemblyParamsBase {
   // The instanceId of a project.
@@ -156,6 +157,7 @@ export type ProcessedStoryboardFunction = Pick<
   deps?: string[];
   /** 是否调用了 `PERMISSIONS.check` */
   perm?: boolean;
+  transformed?: TransformedFunction;
 };
 
 export interface I18nNode {

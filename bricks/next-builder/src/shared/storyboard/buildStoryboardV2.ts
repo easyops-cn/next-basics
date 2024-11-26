@@ -38,6 +38,7 @@ import {
   DependContractOfApi,
 } from "../../data-providers/ScanBricksAndTemplates";
 import { bundleMenu } from "./bundleMenu";
+import { transformFunction } from "../functions/transformFunction";
 
 export const symbolForNodeId = Symbol.for("nodeId");
 export const symbolForNodeInstanceId = Symbol.for("nodeInstanceId");
@@ -84,7 +85,7 @@ export async function buildStoryboardV2(
     } as Record<string, Record<string, string>>
   );
 
-  const functions = buildFunctions(data.functions);
+  const functions = await buildFunctions(data.functions);
 
   const meta: StoryboardToBuild["meta"] = {
     customTemplates,
@@ -249,57 +250,68 @@ function buildContextOrState(
   return context?.map(({ dataDefinition, ...rest }) => rest);
 }
 
-function buildFunctions(
+async function buildFunctions(
   functions: FunctionNode[] | undefined
-): ProcessedStoryboardFunction[] | undefined {
-  return functions?.map((fnNode) => {
-    const fn: ProcessedStoryboardFunction = {
-      name: fnNode.name,
-      source: fnNode.source,
-      typescript: fnNode.typescript,
-    };
+): Promise<ProcessedStoryboardFunction[] | undefined> {
+  if (functions == null) {
+    return;
+  }
 
-    // 在构建时就计算好函数需要在运行时扫描的信息，包括依赖的其他函数、是否调用了 `PERMISSIONS.check`。
-    const deps = new Set<string>();
-    let perm = false;
-    if (fn.source.includes(FN) || fn.source.includes(PERMISSIONS)) {
-      visitStoryboardFunctions([fn], (node, parent) => {
-        if (node.name === FN) {
-          const memberParent = parent[parent.length - 1];
-          if (
-            memberParent?.node.type === "MemberExpression" &&
-            memberParent.key === "object" &&
-            !memberParent.node.computed &&
-            memberParent.node.property.type === "Identifier"
-          ) {
-            deps.add(memberParent.node.property.name);
+  return Promise.all(
+    functions.map(async (fnNode) => {
+      const fn: ProcessedStoryboardFunction = {
+        name: fnNode.name,
+        source: fnNode.source,
+        typescript: fnNode.typescript,
+      };
+
+      // 在构建时就计算好函数需要在运行时扫描的信息，包括依赖的其他函数、是否调用了 `PERMISSIONS.check`。
+      const deps = new Set<string>();
+      let perm = false;
+      if (fn.source.includes(FN) || fn.source.includes(PERMISSIONS)) {
+        visitStoryboardFunctions([fn], (node, parent) => {
+          if (node.name === FN) {
+            const memberParent = parent[parent.length - 1];
+            if (
+              memberParent?.node.type === "MemberExpression" &&
+              memberParent.key === "object" &&
+              !memberParent.node.computed &&
+              memberParent.node.property.type === "Identifier"
+            ) {
+              deps.add(memberParent.node.property.name);
+            }
+          } else if (!perm && node.name === PERMISSIONS) {
+            const memberParent = parent[parent.length - 1];
+            const callParent = parent[parent.length - 2];
+            if (
+              callParent?.node.type === "CallExpression" &&
+              callParent?.key === "callee" &&
+              memberParent?.node.type === "MemberExpression" &&
+              memberParent.key === "object" &&
+              !memberParent.node.computed &&
+              memberParent.node.property.type === "Identifier" &&
+              memberParent.node.property.name === check
+            ) {
+              perm = true;
+            }
           }
-        } else if (!perm && node.name === PERMISSIONS) {
-          const memberParent = parent[parent.length - 1];
-          const callParent = parent[parent.length - 2];
-          if (
-            callParent?.node.type === "CallExpression" &&
-            callParent?.key === "callee" &&
-            memberParent?.node.type === "MemberExpression" &&
-            memberParent.key === "object" &&
-            !memberParent.node.computed &&
-            memberParent.node.property.type === "Identifier" &&
-            memberParent.node.property.name === check
-          ) {
-            perm = true;
-          }
-        }
-      });
-    }
+        });
+      }
 
-    // Remove self
-    deps.delete(fn.name);
+      const transformed = await transformFunction(fn);
+      if (transformed) {
+        fn.transformed = transformed;
+      }
 
-    fn.deps = [...deps];
-    fn.perm = perm;
+      // Remove self
+      deps.delete(fn.name);
 
-    return fn;
-  });
+      fn.deps = [...deps];
+      fn.perm = perm;
+
+      return fn;
+    })
+  );
 }
 
 /**

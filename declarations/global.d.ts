@@ -56,6 +56,21 @@ declare module "*.worker.ts" {
   export default WebpackWorker;
 }
 
+declare module "@babel/standalone" {
+  export const transform: (
+    code: string,
+    options?: {
+      ast?: boolean;
+      filename?: string;
+      inputSourceMap?: boolean;
+      sourceType?: string;
+      presets?: (string | [string, any])[];
+      plugins?: (string | [string, any])[];
+    }
+  ) => { code: string; ast: any };
+  export const availablePlugins: Record<string, string>;
+}
+
 interface Window {
   /** The app needs no auth guard.  */
   NO_AUTH_GUARD?: boolean;
