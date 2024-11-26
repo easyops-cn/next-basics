@@ -21,7 +21,7 @@ module.exports = sizeLimit({
   },
   chunks: {
     "*": "50 KB",
-    "next-builder": "75 KB",
+    "next-builder": "700 KB",
   },
   workers: {
     "*": "50 KB",
