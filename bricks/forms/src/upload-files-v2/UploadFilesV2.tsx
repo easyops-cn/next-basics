@@ -380,6 +380,7 @@ export function UploadFilesV2(props: UploadFilesV2Props): React.ReactElement {
         onRemove={props.onRemove}
         onError={props.onError}
         onDownload={props.onDownload}
+        showDownloadIcon={props.showDownloadIcon}
         url={props.url}
         method={props.method}
         uploadName={props.uploadName}
