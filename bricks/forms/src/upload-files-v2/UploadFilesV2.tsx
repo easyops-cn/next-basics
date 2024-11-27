@@ -319,6 +319,9 @@ export function RealUploadFile(
             theme: "outlined",
             icon: "download",
           }}
+          style={{
+            display: "inline-block",
+          }}
         />
       ),
       // eslint-disable-next-line react/display-name
