@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.302.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.302.4...@next-bricks/forms@1.302.5) (2024-11-27)
+
+
+### Bug Fixes
+
+* 支持展示下载文件图标 refs: SZT_ITSM-912 ([a57ec81](https://github.com/easyops-cn/next-basics/commit/a57ec815cb48de77e24b1821a7fc784e2541f5cc))
+
+
+
+
+
 ## [1.302.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.302.3...@next-bricks/forms@1.302.4) (2024-11-26)
 
 
