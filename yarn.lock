@@ -2273,10 +2273,10 @@
     npmlog "^6.0.2"
     write-file-atomic "^4.0.1"
 
-"@next-core/babel-preset-next@^0.9.16":
-  version "0.9.16"
-  resolved "https://registry.npmjs.org/@next-core/babel-preset-next/-/babel-preset-next-0.9.16.tgz#e91e789075bba647fa35dd13e54ebb35175c2e91"
-  integrity sha512-J46lreD0sfDUFhjQLjX6fh6f91V33k7gu7Y20INaCQ1CljntBunhuFey3R7oy9AUVfnS38nIUiwp6NThVdLazw==
+"@next-core/babel-preset-next@^0.9.17":
+  version "0.9.17"
+  resolved "https://registry.npmjs.org/@next-core/babel-preset-next/-/babel-preset-next-0.9.17.tgz#6548d51c0ec90ac591c64e825589f43ceec2bf68"
+  integrity sha512-P0JitjM0vOiC7vWDEYbzoyntDqfWWLL2nAML3iZjF7Sbls/Y+0eELQxGc8jA8ptuJtM93Q5fIRzIqhbmcwwVaA==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.18.6"
     "@babel/plugin-proposal-decorators" "^7.20.5"
@@ -2304,10 +2304,10 @@
   dependencies:
     "@babel/runtime" "^7.20.6"
 
-"@next-core/brick-container@^2.96.32":
-  version "2.96.32"
-  resolved "https://registry.npmjs.org/@next-core/brick-container/-/brick-container-2.96.32.tgz#7ada443028b6b27964cb2d7a4047609bdd7d1b82"
-  integrity sha512-XDVFl/j1sY/48lCodu972+4utIi184fqC6zK7Bg8vPRLDy2HGTNeI5cfvbG3cR9lZP11Q89zrgtvBhVCaYRs1w==
+"@next-core/brick-container@^2.96.33":
+  version "2.96.33"
+  resolved "https://registry.npmjs.org/@next-core/brick-container/-/brick-container-2.96.33.tgz#31694480b51cf62e71c241762837fcc2a41217a5"
+  integrity sha512-qjF3gfqxa6eujQn0h/0YelwHJ9ufQbYy3uiRkoCpz1lbIBK9Zn0O2Bt5j4WnfpDRxdp+XuqGX612rSREsv0lkA==
   dependencies:
     "@next-core/repo-config" "^0.2.5"
     body-parser "^1.20.1"
@@ -2449,15 +2449,15 @@
   resolved "https://registry.npmjs.org/@next-core/custom-antd-styles/-/custom-antd-styles-1.27.1.tgz#5cf7721999a042e6d7d403e4f1677013f3c01a61"
   integrity sha512-Jx6mTRAZ+K0KTRendJ2tXt8Cbjsop7UXNO9Rklh/w+Xma4rNpO8zR16fqq80PuuzQIRhRwQ/7+6g3sbXWjmSOQ==
 
-"@next-core/dev-dependencies@^1.19.8":
-  version "1.19.8"
-  resolved "https://registry.npmjs.org/@next-core/dev-dependencies/-/dev-dependencies-1.19.8.tgz#72ec08bb0284bc38df8e6c22ef8b311f5c8fcaf5"
-  integrity sha512-1fY50rKffubcaEBKP4r5OCdWBDtZ/Qk6NuVvBYGe3rJ5YVDSzifj/VSd8rIsX64ojn47npVbg6bhCmxXI/IvJg==
+"@next-core/dev-dependencies@^1.19.9":
+  version "1.19.9"
+  resolved "https://registry.npmjs.org/@next-core/dev-dependencies/-/dev-dependencies-1.19.9.tgz#944bbda6ddfd027134996e8b40e2dfa91080b28f"
+  integrity sha512-XV7lNy3LRZXGQSKDRy9bnvXKFn5+nz65QqdKTTDWrTiAvCCPL/57IJhp2Me8meMEo7WILFUvBTFzLC9twc0Xyw==
   dependencies:
     "@babel/core" "^7.20.5"
-    "@next-core/babel-preset-next" "^0.9.16"
+    "@next-core/babel-preset-next" "^0.9.17"
     "@next-core/babel-preset-prismjs" "^1.0.20"
-    "@next-core/brick-container" "^2.96.32"
+    "@next-core/brick-container" "^2.96.33"
     "@next-core/brick-dll" "^2.48.0"
     "@next-core/brick-scripts" "^3.0.8"
     "@next-core/browserslist-config-next" "^0.1.4"
