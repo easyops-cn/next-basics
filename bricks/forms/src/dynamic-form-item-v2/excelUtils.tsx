@@ -5,30 +5,28 @@ export const exportToExcel = async (
   columns: Column[],
   fileName: string
 ): Promise<void> => {
-  const XLSX = (
-    await import(
-      /* webpackChunkName: "chunks/xlsx.015f" */
-      "xlsx"
-    )
-  ).default;
+  const { utils: XLSXUtils, writeFile: XLSXWriteFile } = await import(
+    /* webpackChunkName: "chunks/xlsx.015f" */
+    "xlsx"
+  );
 
   const headers = columns.map((col) => ({
     key: col.name,
     header: col.label || col.name,
   }));
 
-  const worksheet = XLSX.utils.json_to_sheet([{}], {
+  const worksheet = XLSXUtils.json_to_sheet([{}], {
     header: headers.map((h) => h.key),
   });
 
   // Add header row with labels
-  XLSX.utils.sheet_add_aoa(worksheet, [headers.map((h) => h.header)], {
+  XLSXUtils.sheet_add_aoa(worksheet, [headers.map((h) => h.header)], {
     origin: "A1",
   });
 
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Template");
-  XLSX.writeFile(workbook, `${fileName}.xlsx`);
+  const workbook = XLSXUtils.book_new();
+  XLSXUtils.book_append_sheet(workbook, worksheet, "Template");
+  XLSXWriteFile(workbook, `${fileName}.xlsx`);
 };
 
 export const importFromExcel = async (
@@ -36,12 +34,14 @@ export const importFromExcel = async (
   columns: Column[]
 ): Promise<Record<string, any>[]> => {
   // sha1 hash of "dynamic-form-item-v2" starts with "015f"
-  const XLSX = (
-    await import(
-      /* webpackChunkName: "chunks/xlsx.015f" */
-      "xlsx"
-    )
-  ).default;
+  const {
+    utils: XLSXUtils,
+    read: XLSXRead,
+    writeFile: XLSXWriteFile,
+  } = await import(
+    /* webpackChunkName: "chunks/xlsx.015f" */
+    "xlsx"
+  );
 
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -53,7 +53,7 @@ export const importFromExcel = async (
       }
 
       const data = new Uint8Array(e.target.result as ArrayBuffer);
-      const workbook = XLSX.read(data, { type: "array" });
+      const workbook = XLSXRead(data, { type: "array" });
 
       if (!workbook.SheetNames.length) {
         reject(new Error("No sheets found in workbook"));
@@ -61,7 +61,7 @@ export const importFromExcel = async (
       }
 
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData = XLSX.utils.sheet_to_json(worksheet, {
+      const jsonData = XLSXUtils.sheet_to_json(worksheet, {
         raw: false,
         defval: null, // 设置空单元格的默认值
       });

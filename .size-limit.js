@@ -22,6 +22,8 @@ module.exports = sizeLimit({
   chunks: {
     "*": "50 KB",
     "next-builder": "700 KB",
+    "dynamic-form-item-v2": "150 KB",
+    "brick-visualization": "150 KB",
   },
   workers: {
     "*": "50 KB",
