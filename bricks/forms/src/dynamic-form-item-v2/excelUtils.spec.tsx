@@ -5,62 +5,63 @@ import {
   validateAndTransformValue,
 } from "./excelUtils";
 import { Column } from "../interfaces";
-import * as XLSX from "xlsx";
+import { utils, read, writeFile } from "xlsx";
 
-// Mock XLSX module
+// Add mock setup at the top level, before any describe blocks
 jest.mock("xlsx", () => ({
   utils: {
     json_to_sheet: jest.fn(),
+    sheet_add_aoa: jest.fn(),
     book_new: jest.fn(),
     book_append_sheet: jest.fn(),
     sheet_to_json: jest.fn(),
-    sheet_add_aoa: jest.fn(),
   },
   read: jest.fn(),
   writeFile: jest.fn(),
 }));
 
 describe("excelUtils", () => {
+  // Remove jest.mock() calls from beforeEach blocks
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   describe("exportToExcel", () => {
     const mockColumns: Column[] = [
       { name: "name", label: "姓名", type: "input", props: {} },
       { name: "age", type: "inputNumber", props: {} },
     ];
 
-    beforeEach(() => {
-      jest.clearAllMocks();
-    });
+    it("should create worksheet with correct headers", async () => {
+      await exportToExcel(mockColumns, "test");
 
-    it("should create worksheet with correct headers", () => {
-      exportToExcel(mockColumns, "test");
-
-      expect(XLSX.utils.json_to_sheet).toHaveBeenCalledWith([{}], {
+      expect(utils.json_to_sheet).toHaveBeenCalledWith([{}], {
         header: ["name", "age"],
       });
 
-      expect(XLSX.utils.sheet_add_aoa).toHaveBeenCalledWith(
+      expect(utils.sheet_add_aoa).toHaveBeenCalledWith(
         undefined,
         [["姓名", "age"]],
         { origin: "A1" }
       );
     });
 
-    it("should create and save workbook", () => {
+    it("should create and save workbook", async () => {
       const mockWorksheet = {};
       const mockWorkbook = {};
 
-      (XLSX.utils.json_to_sheet as jest.Mock).mockReturnValue(mockWorksheet);
-      (XLSX.utils.book_new as jest.Mock).mockReturnValue(mockWorkbook);
+      (utils.json_to_sheet as jest.Mock).mockReturnValue(mockWorksheet);
+      (utils.book_new as jest.Mock).mockReturnValue(mockWorkbook);
 
-      exportToExcel(mockColumns, "test");
+      await exportToExcel(mockColumns, "test");
 
-      expect(XLSX.utils.book_new).toHaveBeenCalled();
-      expect(XLSX.utils.book_append_sheet).toHaveBeenCalledWith(
+      expect(utils.book_new).toHaveBeenCalled();
+      expect(utils.book_append_sheet).toHaveBeenCalledWith(
         mockWorkbook,
         mockWorksheet,
         "Template"
       );
-      expect(XLSX.writeFile).toHaveBeenCalledWith(mockWorkbook, "test.xlsx");
+      expect(writeFile).toHaveBeenCalledWith(mockWorkbook, "test.xlsx");
     });
   });
 
@@ -69,10 +70,6 @@ describe("excelUtils", () => {
       { name: "name", label: "姓名", type: "input", props: {} },
       { name: "age", type: "inputNumber", props: {} },
     ];
-
-    beforeEach(() => {
-      jest.clearAllMocks();
-    });
 
     it("should successfully import excel file", async () => {
       const mockData = [{ 姓名: "John", age: "25" }];
@@ -85,11 +82,11 @@ describe("excelUtils", () => {
 
       (global as any).FileReader = jest.fn(() => mockFileReader);
 
-      (XLSX.read as jest.Mock).mockReturnValue({
+      (read as jest.Mock).mockReturnValue({
         SheetNames: ["Sheet1"],
         Sheets: { Sheet1: {} },
       });
-      (XLSX.utils.sheet_to_json as jest.Mock).mockReturnValue(mockData);
+      (utils.sheet_to_json as jest.Mock).mockReturnValue(mockData);
 
       const file = new File([""], "test.xlsx", {
         type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -124,7 +121,7 @@ describe("excelUtils", () => {
 
       (global as any).FileReader = jest.fn(() => mockFileReader);
 
-      (XLSX.read as jest.Mock).mockReturnValue({
+      (read as jest.Mock).mockReturnValue({
         SheetNames: [],
       });
 

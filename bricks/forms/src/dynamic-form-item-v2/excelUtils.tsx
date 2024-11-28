@@ -34,11 +34,7 @@ export const importFromExcel = async (
   columns: Column[]
 ): Promise<Record<string, any>[]> => {
   // sha1 hash of "dynamic-form-item-v2" starts with "015f"
-  const {
-    utils: XLSXUtils,
-    read: XLSXRead,
-    writeFile: XLSXWriteFile,
-  } = await import(
+  const { utils: XLSXUtils, read: XLSXRead } = await import(
     /* webpackChunkName: "chunks/xlsx.015f" */
     "xlsx"
   );
