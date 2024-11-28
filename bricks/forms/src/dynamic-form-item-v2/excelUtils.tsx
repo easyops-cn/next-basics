@@ -1,8 +1,11 @@
-import * as XLSX from "xlsx";
 import { isNil } from "lodash";
+import XLSX from "xlsx";
 import { Column } from "../interfaces";
 
-export const exportToExcel = (columns: Column[], fileName: string): void => {
+export const exportToExcel = async (
+  columns: Column[],
+  fileName: string
+): Promise<void> => {
   const headers = columns.map((col) => ({
     key: col.name,
     header: col.label || col.name,
@@ -31,14 +34,16 @@ export const importFromExcel = async (
 
     reader.onload = (e) => {
       if (!e.target?.result) {
-        throw new Error("Failed to read file");
+        reject(new Error("Failed to read file"));
+        return;
       }
 
       const data = new Uint8Array(e.target.result as ArrayBuffer);
       const workbook = XLSX.read(data, { type: "array" });
 
       if (!workbook.SheetNames.length) {
-        throw new Error("No sheets found in workbook");
+        reject(new Error("No sheets found in workbook"));
+        return;
       }
 
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];

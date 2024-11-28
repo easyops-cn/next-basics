@@ -21,7 +21,7 @@ import { ColumnComponent } from "./ColumnComponent";
 import style from "./DynamicFormItemV2.module.css";
 import { getRealValue } from "./util";
 import classNames from "classnames";
-import { isBoolean, isNil } from "lodash";
+import { isBoolean } from "lodash";
 import { exportToExcel, importFromExcel } from "./excelUtils";
 
 const FORM_LIST_NAME = "dynamicForm";
@@ -129,6 +129,18 @@ export const LegacyDynamicFormItemV2 = forwardRef(
 
     const handleImport = async (file: File) => {
       try {
+        const allowedTypes = [
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xlsx
+          "application/vnd.ms-excel", // .xls
+          "text/csv", // .csv
+        ];
+
+        if (!allowedTypes.includes(file.type)) {
+          throw new Error(
+            t(`${NS_FORMS}:${K.INVALID_FILE_TYPE_DYNAMIC_FORM_ITEM}`)
+          );
+        }
+
         const importedData = await importFromExcel(file, columns);
 
         if (!importedData) {
@@ -146,9 +158,7 @@ export const LegacyDynamicFormItemV2 = forwardRef(
         // eslint-disable-next-line no-console
         console.error("Import failed: ", error);
         message.error(
-          error instanceof Error
-            ? error.message
-            : t(`${NS_FORMS}:${K.IMPORT_FAILED}`)
+          `${t(`${NS_FORMS}:${K.IMPORT_FAILED}`)}, ${error.message}`
         );
       }
     };

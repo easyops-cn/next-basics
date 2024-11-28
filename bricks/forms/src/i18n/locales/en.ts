@@ -171,6 +171,7 @@ const locale: Locale = {
   [K.IMPORT_DATA_EMPTY]: "Import data is empty",
   [K.IMPORT_DATA_FORMAT_ERROR]: "Import data format error",
   [K.IMPORT_FAILED]: "Import failed",
+  [K.INVALID_FILE_TYPE_DYNAMIC_FORM_ITEM]: "File type is not .xlsx .xls .csv",
 };
 
 export default locale;
