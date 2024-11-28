@@ -6,9 +6,14 @@ import React, {
   useMemo,
   useRef,
 } from "react";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  MinusCircleOutlined,
+  PlusOutlined,
+  DownloadOutlined,
+  UploadOutlined,
+} from "@ant-design/icons";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
-import { Button, Col, Form, FormInstance, Row } from "antd";
+import { Button, Col, Form, FormInstance, Row, message } from "antd";
 import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";
 import { Column } from "../interfaces";
@@ -16,7 +21,8 @@ import { ColumnComponent } from "./ColumnComponent";
 import style from "./DynamicFormItemV2.module.css";
 import { getRealValue } from "./util";
 import classNames from "classnames";
-import { isBoolean } from "lodash";
+import { isBoolean, isNil } from "lodash";
+import { exportToExcel, importFromExcel } from "./excelUtils";
 
 const FORM_LIST_NAME = "dynamicForm";
 
@@ -40,6 +46,8 @@ interface LegacyDynamicFormItemV2Props extends FormItemWrapperProps {
   hideAddButton?: boolean | ((value: Record<string, any>[]) => boolean);
   disabledAddButton?: boolean | ((value: Record<string, any>[]) => boolean);
   dynamicFormStyle?: React.CSSProperties;
+  onImport?: (value: Record<string, any>[]) => void;
+  showImportExport?: boolean;
 }
 
 interface LegacyDynamicFormItemV2Ref {
@@ -58,6 +66,7 @@ export const LegacyDynamicFormItemV2 = forwardRef(
   ): React.ReactElement => {
     const {
       value,
+      label,
       columns = [],
       onChange,
       onAdd,
@@ -68,6 +77,8 @@ export const LegacyDynamicFormItemV2 = forwardRef(
       hideAddButton,
       disabledAddButton,
       dynamicFormStyle,
+      onImport,
+      showImportExport,
     } = props;
     const { t } = useTranslation(NS_FORMS);
     const [form] = Form.useForm();
@@ -108,8 +119,68 @@ export const LegacyDynamicFormItemV2 = forwardRef(
         ),
       [columns]
     );
+
+    const handleExportTemplate = () => {
+      exportToExcel(
+        columns,
+        `${label || ""}_${t(`${NS_FORMS}:${K.TEMPLATE}`)}`
+      );
+    };
+
+    const handleImport = async (file: File) => {
+      try {
+        const importedData = await importFromExcel(file, columns);
+
+        if (!importedData) {
+          throw new Error(t(`${NS_FORMS}:${K.IMPORT_DATA_EMPTY}`));
+        }
+
+        if (!Array.isArray(importedData)) {
+          throw new Error(t(`${NS_FORMS}:${K.IMPORT_DATA_FORMAT_ERROR}`));
+        }
+
+        form.setFieldsValue({ [FORM_LIST_NAME]: importedData });
+        onChange?.(importedData);
+        onImport?.(importedData);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error("Import failed: ", error);
+        message.error(
+          error instanceof Error
+            ? error.message
+            : t(`${NS_FORMS}:${K.IMPORT_FAILED}`)
+        );
+      }
+    };
+
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
     return (
       <div className={style.dynamicForm} style={{ ...dynamicFormStyle }}>
+        {showImportExport && (
+          <div className={style.importExportButtons}>
+            <a onClick={handleExportTemplate}>
+              <DownloadOutlined /> {t(`${NS_FORMS}:${K.DOWNLOAD_TEMPLATE}`)}
+            </a>
+            <a onClick={() => fileInputRef.current?.click()}>
+              <UploadOutlined /> {t(`${NS_FORMS}:${K.IMPORT_DATA}`)}
+            </a>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".xlsx,.xls,.csv"
+              data-testid="excel-file-input"
+              style={{ display: "none" }}
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  handleImport(file);
+                }
+                e.target.value = "";
+              }}
+            />
+          </div>
+        )}
         <Form
           form={form}
           layout={"vertical"}
@@ -235,6 +306,9 @@ export function DynamicFormItemV2(
     disabledAddButton,
     upperRef,
     dynamicFormStyle,
+    onImport,
+    showImportExport,
+    label,
   } = props;
   const [columns, setColumns] = React.useState<Column[]>([]);
   const DynamicFormItemV2Ref = useRef<LegacyDynamicFormItemV2Ref>();
@@ -275,6 +349,7 @@ export function DynamicFormItemV2(
     >
       <LegacyDynamicFormItemV2
         ref={DynamicFormItemV2Ref}
+        label={label}
         columns={columns}
         onChange={onChange}
         onAdd={onAdd}
@@ -285,6 +360,8 @@ export function DynamicFormItemV2(
         hideAddButton={hideAddButton}
         disabledAddButton={disabledAddButton}
         dynamicFormStyle={dynamicFormStyle}
+        onImport={onImport}
+        showImportExport={showImportExport}
       />
     </FormItemWrapper>
   );
