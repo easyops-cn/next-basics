@@ -47,13 +47,4 @@
     gap: 16px;
     margin: -16px 0 8px 0;
   }
-
-  /* .importExportButtons a {
-    margin-right: 16px;
-    color: var(--text-color-link);
-  }
-
-  .importExportButtons a:hover {
-    color: var(--text-color-link-hover);
-  } */
 }
