@@ -1,13 +1,16 @@
 import { isNil } from "lodash";
-import * as XLSX from "xlsx";
 import { Column } from "../interfaces";
 
 export const exportToExcel = async (
   columns: Column[],
   fileName: string
 ): Promise<void> => {
-  /* webpackChunkName: "chunks/xlsx.015f" */
-  const XLSX = await import("xlsx");
+  const XLSX = (
+    await import(
+      /* webpackChunkName: "chunks/xlsx.015f" */
+      "xlsx"
+    )
+  ).default;
 
   const headers = columns.map((col) => ({
     key: col.name,
@@ -32,8 +35,13 @@ export const importFromExcel = async (
   file: File,
   columns: Column[]
 ): Promise<Record<string, any>[]> => {
-  /* webpackChunkName: "chunks/xlsx.015f" */
-  const XLSX = await import("xlsx");
+  // sha1 hash of "dynamic-form-item-v2" starts with "015f"
+  const XLSX = (
+    await import(
+      /* webpackChunkName: "chunks/xlsx.015f" */
+      "xlsx"
+    )
+  ).default;
 
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
