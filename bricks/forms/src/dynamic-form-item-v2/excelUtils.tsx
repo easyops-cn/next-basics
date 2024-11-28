@@ -1,5 +1,5 @@
 import { isNil } from "lodash";
-import XLSX from "xlsx";
+import * as XLSX from "xlsx";
 import { Column } from "../interfaces";
 
 export const exportToExcel = async (
