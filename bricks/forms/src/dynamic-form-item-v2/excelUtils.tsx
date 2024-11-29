@@ -57,13 +57,15 @@ export const importFromExcel = async (
       }
 
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData = XLSXUtils.sheet_to_json(worksheet, {
-        raw: false,
-        defval: null, // 设置空单元格的默认值
-      });
+      const jsonData: Record<string, string>[] = XLSXUtils.sheet_to_json(
+        worksheet,
+        {
+          raw: false, // 返回格式化的字符串
+        }
+      );
 
       // 增强数据验证和转换逻辑
-      const transformedData = jsonData.map((row: any, index: number) => {
+      const transformedData = jsonData.map((row: Record<string, string>) => {
         const transformedRow: Record<string, any> = {};
 
         columns.forEach((col) => {
@@ -85,66 +87,75 @@ export const importFromExcel = async (
   });
 };
 
-export function validateAndTransformValue(value: any, column: Column): any {
+export function validateAndTransformValue(
+  value: string | undefined,
+  column: Column
+): any {
+  // 如果值为空，则返回空值
+  const trimValue = value?.trim();
+  if (trimValue === undefined || trimValue === "") {
+    return undefined;
+  }
+
+  // 根据类型，处理不同的值
   switch (column.type) {
     case "cascader":
-      if (typeof value === "string") {
-        try {
-          const parsedValue = JSON.parse(value);
-          return Array.isArray(parsedValue) ? parsedValue : [];
-        } catch {
-          return [];
+      try {
+        const parsedValue = JSON.parse(trimValue);
+        if (Array.isArray(parsedValue)) {
+          return parsedValue;
         }
-      } else if (Array.isArray(value)) {
-        return value;
+      } catch {
+        // eslint-disable-next-line no-empty
       }
-      return [];
+      // 尝试按 / 分割
+      return trimValue.split("/").map((v) => v.trim());
 
     case "inputNumber":
-      return Number(value) || 0;
+      // 兼容非数字(NaN)
+      return Number(trimValue) || 0;
 
     case "select":
       if (column.props?.mode === "multiple") {
-        if (Array.isArray(value)) {
-          return value;
-        } else if (typeof value === "string") {
-          try {
-            const parsedValue = JSON.parse(value);
-            if (Array.isArray(parsedValue)) {
-              return parsedValue;
-            }
-          } catch {
-            // eslint-disable-next-line no-empty
+        try {
+          const parsedValue = JSON.parse(trimValue);
+          if (Array.isArray(parsedValue)) {
+            return parsedValue;
           }
-          return value ? value.split(",").map((v) => v.trim()) : [];
+        } catch {
+          // eslint-disable-next-line no-empty
         }
-        return isNil(value) ? [] : [value];
+        // 如果换行符数量小于等于1，则按逗号分割
+        const trySplitLines = trimValue.split("\n").map((v) => v.trim());
+        if (trySplitLines.length <= 1) {
+          return trimValue.split(",").map((v) => v.trim());
+        }
+        return trySplitLines;
+      } else {
+        return trimValue;
       }
-      return value;
 
-    case "checkbox":
-      if (typeof value === "string") {
-        const trimmedValue = value.trim().toLowerCase();
-        // 明确的 false 值
-        if (
-          trimmedValue === "false" ||
-          trimmedValue === "0" ||
-          trimmedValue === "no" ||
-          trimmedValue === "n" ||
-          trimmedValue === ""
-        ) {
-          return false;
-        }
-        // 其他所有情况都是 true
-        return true;
+    case "checkbox": {
+      const trimmedValue = trimValue.toLowerCase();
+      // 明确的 false 值
+      if (
+        trimmedValue === "false" ||
+        trimmedValue === "0" ||
+        trimmedValue === "no" ||
+        trimmedValue === "n" ||
+        trimmedValue === "否"
+      ) {
+        return false;
       }
-      return Boolean(value);
+      // 其他所有情况都是 true
+      return true;
+    }
 
     case "textArea":
     case "input":
     case "inputPassword":
     case "autoComplete":
     default:
-      return value;
+      return trimValue;
   }
 }
