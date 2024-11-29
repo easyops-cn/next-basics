@@ -3,145 +3,87 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.302.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.302.4...@next-bricks/forms@1.302.5) (2024-11-27)
+# [1.303.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.302.5...@next-bricks/forms@1.303.0) (2024-11-29)
 
+### Features
+
+- dynamic form item 支持 excel 导入数据 ([1085bf3](https://github.com/easyops-cn/next-basics/commit/1085bf37c652cad66f4e7687344965ce74fa9b7b))
+
+## [1.302.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.302.4...@next-bricks/forms@1.302.5) (2024-11-27)
 
 ### Bug Fixes
 
-* 支持展示下载文件图标 refs: SZT_ITSM-912 ([a57ec81](https://github.com/easyops-cn/next-basics/commit/a57ec815cb48de77e24b1821a7fc784e2541f5cc))
-
-
-
-
+- 支持展示下载文件图标 refs: SZT_ITSM-912 ([a57ec81](https://github.com/easyops-cn/next-basics/commit/a57ec815cb48de77e24b1821a7fc784e2541f5cc))
 
 ## [1.302.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.302.3...@next-bricks/forms@1.302.4) (2024-11-26)
 
-
 ### Bug Fixes
 
-* 支持展示下载文件图标 refs: SZT_ITSM-912 ([3c43eba](https://github.com/easyops-cn/next-basics/commit/3c43ebaf6986023c74bc0a364326817cf818d1c6))
-
-
-
-
+- 支持展示下载文件图标 refs: SZT_ITSM-912 ([3c43eba](https://github.com/easyops-cn/next-basics/commit/3c43ebaf6986023c74bc0a364326817cf818d1c6))
 
 ## [1.302.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.302.2...@next-bricks/forms@1.302.3) (2024-11-26)
 
-
 ### Bug Fixes
 
-* 支持展示下载文件图标 ([0f3feda](https://github.com/easyops-cn/next-basics/commit/0f3feda25466643e49ad37a266a1d2d0ef1f1a9c))
-
-
-
-
+- 支持展示下载文件图标 ([0f3feda](https://github.com/easyops-cn/next-basics/commit/0f3feda25466643e49ad37a266a1d2d0ef1f1a9c))
 
 ## [1.302.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.302.1...@next-bricks/forms@1.302.2) (2024-11-25)
 
-
 ### Bug Fixes
 
-* SHLSTYYWPT-638 修复定制化构件CUSTOMIZE-FLOW.AUTOMATION-CI-FORM-ITEM在general-form构件中使用的问题 SHLSTYYWPT-638 ([52f71bf](https://github.com/easyops-cn/next-basics/commit/52f71bf6cfd60cdc729d780069f5f5ede78e6598))
-
-
-
-
+- SHLSTYYWPT-638 修复定制化构件 CUSTOMIZE-FLOW.AUTOMATION-CI-FORM-ITEM 在 general-form 构件中使用的问题 SHLSTYYWPT-638 ([52f71bf](https://github.com/easyops-cn/next-basics/commit/52f71bf6cfd60cdc729d780069f5f5ede78e6598))
 
 ## [1.302.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.302.0...@next-bricks/forms@1.302.1) (2024-11-06)
 
-
 ### Bug Fixes
 
-* upload-files-v2构件限制了上传文件类型时，前端需要二次校验 SHLSTYYWPT-693 ([4637553](https://github.com/easyops-cn/next-basics/commit/46375532205c1f9ba9f84e033d0a0586a5645d3e))
-
-
-
-
+- upload-files-v2 构件限制了上传文件类型时，前端需要二次校验 SHLSTYYWPT-693 ([4637553](https://github.com/easyops-cn/next-basics/commit/46375532205c1f9ba9f84e033d0a0586a5645d3e))
 
 # [1.302.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.301.1...@next-bricks/forms@1.302.0) (2024-11-05)
 
-
 ### Features
 
-* **forms.cmdb-instance-select:** 支持proxy外部数据源 ([44b551c](https://github.com/easyops-cn/next-basics/commit/44b551cf368deb97bd60e764408eb53a5756aa84))
-
-
-
-
+- **forms.cmdb-instance-select:** 支持 proxy 外部数据源 ([44b551c](https://github.com/easyops-cn/next-basics/commit/44b551cf368deb97bd60e764408eb53a5756aa84))
 
 ## [1.301.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.301.0...@next-bricks/forms@1.301.1) (2024-10-17)
 
-
 ### Bug Fixes
 
-* set stackable defaults to false ([8739f39](https://github.com/easyops-cn/next-basics/commit/8739f3932aab76da63dd245eeefde5c3ecec154e))
-
-
-
-
+- set stackable defaults to false ([8739f39](https://github.com/easyops-cn/next-basics/commit/8739f3932aab76da63dd245eeefde5c3ecec154e))
 
 # [1.301.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.300.0...@next-bricks/forms@1.301.0) (2024-10-16)
 
-
 ### Features
 
-* support modal stack ([d8624b4](https://github.com/easyops-cn/next-basics/commit/d8624b41ef9a6901d2143e98305a44635f6965c8))
-
-
-
-
+- support modal stack ([d8624b4](https://github.com/easyops-cn/next-basics/commit/d8624b41ef9a6901d2143e98305a44635f6965c8))
 
 # [1.300.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.299.0...@next-bricks/forms@1.300.0) (2024-10-15)
 
-
 ### Features
 
-* support paste image into textarea and upload to OSS ([a07c48c](https://github.com/easyops-cn/next-basics/commit/a07c48c006ae954d8ab3edfde70ea98f2e8edaf6))
-
-
-
-
+- support paste image into textarea and upload to OSS ([a07c48c](https://github.com/easyops-cn/next-basics/commit/a07c48c006ae954d8ab3edfde70ea98f2e8edaf6))
 
 # [1.299.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.298.1...@next-bricks/forms@1.299.0) (2024-09-13)
 
-
 ### Features
 
-* **slide:** 滑动输入条支持inputBoxStyle样式 ([e812d0a](https://github.com/easyops-cn/next-basics/commit/e812d0a2794b9a1a8ec02c2fe1eade9f1a5ba742))
-
-
-
-
+- **slide:** 滑动输入条支持 inputBoxStyle 样式 ([e812d0a](https://github.com/easyops-cn/next-basics/commit/e812d0a2794b9a1a8ec02c2fe1eade9f1a5ba742))
 
 ## [1.298.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.298.0...@next-bricks/forms@1.298.1) (2024-09-12)
 
-
 ### Bug Fixes
 
-* 支持失焦事件 ([be398ca](https://github.com/easyops-cn/next-basics/commit/be398ca5a1150d5d9fc0d754e9f3656c736645a7))
-
-
-
-
+- 支持失焦事件 ([be398ca](https://github.com/easyops-cn/next-basics/commit/be398ca5a1150d5d9fc0d754e9f3656c736645a7))
 
 # [1.298.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.297.3...@next-bricks/forms@1.298.0) (2024-09-11)
 
-
 ### Features
 
-* **tree-select:** add defaultExpandAll property ([9e6662a](https://github.com/easyops-cn/next-basics/commit/9e6662ab371c0aecdfbfdbef1ad56c51dde273ce))
-
-
-
-
+- **tree-select:** add defaultExpandAll property ([9e6662a](https://github.com/easyops-cn/next-basics/commit/9e6662ab371c0aecdfbfdbef1ad56c51dde273ce))
 
 ## [1.297.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.297.2...@next-bricks/forms@1.297.3) (2024-08-27)
 
 **Note:** Version bump only for package @next-bricks/forms
-
-
-
-
 
 ## [1.297.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.297.1...@next-bricks/forms@1.297.2) (2024-08-26)
 
