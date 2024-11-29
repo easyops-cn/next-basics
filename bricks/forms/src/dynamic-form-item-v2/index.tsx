@@ -206,6 +206,22 @@ export class DynamicFormItemV2Element extends FormItemElement {
     );
   }
 
+  /**
+   * @description 是否显示导入导出按钮
+   * @group ui
+   * @default false
+   */
+  @property({ type: Boolean })
+  showImportExport?: boolean;
+
+  /**
+   * @description 导入数据时触发
+   */
+  @event({ type: "import" }) importEvent: EventEmitter<Record<string, any>[]>;
+  private _handleImport = (detail: Record<string, any>[]): void => {
+    this.importEvent.emit(detail);
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -251,6 +267,8 @@ export class DynamicFormItemV2Element extends FormItemElement {
             disabledAddButton={this.disabledAddButton}
             upperRef={this.upperRef}
             dynamicFormStyle={this.dynamicFormStyle}
+            showImportExport={this.showImportExport}
+            onImport={this._handleImport}
           />
         </BrickWrapper>,
         this

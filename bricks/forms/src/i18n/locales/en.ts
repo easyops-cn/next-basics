@@ -163,6 +163,15 @@ const locale: Locale = {
     "Only {{maxNumber}} image can be uploaded at most",
   [K.ATTACHMENT]: "Attachment",
   [K.NO_SUPPORT_FILE_TYPE]: "The current file type is not supported",
+  [K.TEMPLATE]: "Template",
+  [K.EXPORT_TEMPLATE]: "Export Template",
+  [K.IMPORT]: "Import",
+  [K.DOWNLOAD_TEMPLATE]: "Template",
+  [K.IMPORT_DATA]: "Import",
+  [K.IMPORT_DATA_EMPTY]: "Import data is empty",
+  [K.IMPORT_DATA_FORMAT_ERROR]: "Import data format error",
+  [K.IMPORT_FAILED]: "Import failed",
+  [K.INVALID_FILE_TYPE_DYNAMIC_FORM_ITEM]: "File type is not .xlsx .xls .csv",
 };
 
 export default locale;

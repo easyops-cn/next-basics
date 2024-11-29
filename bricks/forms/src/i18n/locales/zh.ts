@@ -148,6 +148,15 @@ const locale: Locale = {
   [K.UPLOAD_IMG_NUMBER_LIMIT]: "最多只能上传 {{maxNumber}} 张图片",
   [K.ATTACHMENT]: "附件",
   [K.NO_SUPPORT_FILE_TYPE]: "当前文件类型不支持",
+  [K.TEMPLATE]: "模板",
+  [K.EXPORT_TEMPLATE]: "导出模板",
+  [K.IMPORT]: "从模板导入",
+  [K.DOWNLOAD_TEMPLATE]: "模板",
+  [K.IMPORT_DATA]: "导入",
+  [K.IMPORT_DATA_EMPTY]: "导入数据为空",
+  [K.IMPORT_DATA_FORMAT_ERROR]: "导入数据格式错误",
+  [K.IMPORT_FAILED]: "导入失败",
+  [K.INVALID_FILE_TYPE_DYNAMIC_FORM_ITEM]: "文件类型非 .xlsx .xls .csv",
 };
 
 export default locale;

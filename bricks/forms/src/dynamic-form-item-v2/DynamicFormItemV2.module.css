@@ -41,4 +41,10 @@
       color: var(--text-color-disabled);
     }
   }
+
+  .importExportButtons {
+    display: flex;
+    gap: 16px;
+    margin: -16px 0 8px 0;
+  }
 }

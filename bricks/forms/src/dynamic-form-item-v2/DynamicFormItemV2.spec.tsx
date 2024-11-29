@@ -3,6 +3,7 @@ import { shallow, mount } from "enzyme";
 import { DynamicFormItemV2 } from "./DynamicFormItemV2";
 import { Column } from "../interfaces";
 import { cloneDeep } from "lodash";
+import * as excelUtilsModule from "./excelUtils";
 
 const columns = [
   {
@@ -88,5 +89,56 @@ describe("DynamicFormItemV2", () => {
     expect(wrapper.find(".addRowBtn.displayNone")).not.toHaveLength(0);
     expect(wrapper.find(".addRowBtn[disabled=true]")).not.toHaveLength(0);
     expect(wrapper.find(".removeRowBtn[disabled=true]")).not.toHaveLength(0);
+  });
+
+  it("import export button should work", () => {
+    const onChange = jest.fn();
+    const onAdd = jest.fn();
+    const onRemove = jest.fn();
+    const wrapper = mount(
+      <DynamicFormItemV2
+        columns={columns}
+        onChange={onChange}
+        onAdd={onAdd}
+        onRemove={onRemove}
+        showImportExport={true}
+        label="动态表单项"
+      />
+    );
+    expect(wrapper.find(".importExportButtons")).toHaveLength(1);
+    expect(wrapper.find(".importExportButtons a")).toHaveLength(2);
+
+    const exportBtn = wrapper.find(".importExportButtons a").at(0);
+    const importBtn = wrapper.find(".importExportButtons a").at(1);
+    // Test export functionality
+    const exportToExcelMock = jest
+      .spyOn(excelUtilsModule, "exportToExcel")
+      .mockImplementation(() => {
+        return;
+      });
+    exportBtn.simulate("click");
+    expect(exportToExcelMock).toHaveBeenCalledWith(
+      columns,
+      "动态表单项_forms:TEMPLATE"
+    );
+
+    // Test import functionality
+    const file = new File(["test content"], "test.xlsx", {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    const importFromExcelMock = jest
+      .spyOn(excelUtilsModule, "importFromExcel")
+      .mockResolvedValue([{ name: "test", age: 25, isActive: true }]);
+
+    importBtn.simulate("click");
+    const fileInput = wrapper.find('input[type="file"]');
+    fileInput.simulate("change", { target: { files: [file] } });
+
+    expect(importFromExcelMock).toHaveBeenCalledWith(file, columns);
+
+    wrapper.setProps({
+      showImportExport: false,
+    });
+    expect(wrapper.find(".importExportButtons")).toHaveLength(0);
   });
 });
