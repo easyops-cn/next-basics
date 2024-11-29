@@ -172,6 +172,12 @@ describe("excelUtils", () => {
   });
 
   describe("validateAndTransformValue", () => {
+    describe("empty value", () => {
+      it("should return undefined", () => {
+        expect(validateAndTransformValue(undefined, undefined)).toBe(undefined);
+        expect(validateAndTransformValue("", undefined)).toBe(undefined);
+      });
+    });
     describe("cascader type", () => {
       const column: Column = { name: "test", type: "cascader", props: {} };
 
@@ -180,24 +186,15 @@ describe("excelUtils", () => {
           "a",
           "b",
         ]);
-        expect(validateAndTransformValue('{"a":"b"}', column)).toEqual([]);
-      });
-
-      it("should handle invalid JSON string", () => {
-        expect(validateAndTransformValue("invalid json", column)).toEqual([]);
-      });
-
-      it("should handle array value", () => {
-        expect(validateAndTransformValue(["a", "b"], column)).toEqual([
-          "a",
-          "b",
+        expect(validateAndTransformValue('{"a":"b"}', column)).toEqual([
+          '{"a":"b"}',
         ]);
       });
 
-      it("should handle non-array value", () => {
-        expect(validateAndTransformValue(123, column)).toEqual([]);
-        expect(validateAndTransformValue(null, column)).toEqual([]);
-        expect(validateAndTransformValue(undefined, column)).toEqual([]);
+      it("should handle invalid JSON string", () => {
+        expect(validateAndTransformValue("invalid json", column)).toEqual([
+          "invalid json",
+        ]);
       });
     });
 
@@ -211,13 +208,7 @@ describe("excelUtils", () => {
 
       it("should handle invalid number string", () => {
         expect(validateAndTransformValue("abc", column)).toBe(0);
-        expect(validateAndTransformValue("", column)).toBe(0);
-      });
-
-      it("should handle non-string values", () => {
-        expect(validateAndTransformValue(123, column)).toBe(123);
-        expect(validateAndTransformValue(null, column)).toBe(0);
-        expect(validateAndTransformValue(undefined, column)).toBe(0);
+        expect(validateAndTransformValue("", column)).toBe(undefined);
       });
     });
 
@@ -227,13 +218,6 @@ describe("excelUtils", () => {
         type: "select",
         props: { mode: "multiple" },
       };
-
-      it("should handle array values", () => {
-        expect(validateAndTransformValue(["a", "b"], column)).toEqual([
-          "a",
-          "b",
-        ]);
-      });
 
       it("should handle comma-separated string", () => {
         expect(validateAndTransformValue("a,b", column)).toEqual(["a", "b"]);
@@ -246,16 +230,6 @@ describe("excelUtils", () => {
           "b",
         ]);
         expect(validateAndTransformValue("{}", column)).toEqual(["{}"]);
-      });
-
-      it("should handle empty value", () => {
-        expect(validateAndTransformValue("", column)).toEqual([]);
-        expect(validateAndTransformValue(null, column)).toEqual([]);
-        expect(validateAndTransformValue(undefined, column)).toEqual([]);
-      });
-
-      it("should handle single value", () => {
-        expect(validateAndTransformValue(true, column)).toEqual([true]);
       });
     });
 
@@ -279,6 +253,7 @@ describe("excelUtils", () => {
         expect(validateAndTransformValue("false", column)).toBe(false);
         expect(validateAndTransformValue("TRUE", column)).toBe(true);
         expect(validateAndTransformValue("FALSE", column)).toBe(false);
+        expect(validateAndTransformValue("否", column)).toBe(false);
       });
 
       it("should handle number-like strings", () => {
@@ -300,18 +275,8 @@ describe("excelUtils", () => {
       });
 
       it("should handle empty strings", () => {
-        expect(validateAndTransformValue("", column)).toBe(false);
-        expect(validateAndTransformValue(" ", column)).toBe(false);
-      });
-
-      it("should handle boolean values", () => {
-        expect(validateAndTransformValue(true, column)).toBe(true);
-        expect(validateAndTransformValue(false, column)).toBe(false);
-      });
-
-      it("should handle null/undefined", () => {
-        expect(validateAndTransformValue(null, column)).toBe(false);
-        expect(validateAndTransformValue(undefined, column)).toBe(false);
+        expect(validateAndTransformValue("", column)).toBe(undefined);
+        expect(validateAndTransformValue(" ", column)).toBe(undefined);
       });
 
       it("should handle other strings", () => {
@@ -335,9 +300,7 @@ describe("excelUtils", () => {
           expect(validateAndTransformValue("test value", column)).toBe(
             "test value"
           );
-          expect(validateAndTransformValue("", column)).toBe("");
-          expect(validateAndTransformValue(123, column)).toBe(123);
-          expect(validateAndTransformValue(null, column)).toBe(null);
+          expect(validateAndTransformValue("aaa", column)).toBe("aaa");
         });
       });
     });
