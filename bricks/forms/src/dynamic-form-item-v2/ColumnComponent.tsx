@@ -3,7 +3,7 @@ import { FormListFieldData } from "antd/lib/form/FormList";
 import { Column, SelectProps } from "../interfaces";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
 import { Cascader, Form, Input, InputNumber, Select, Checkbox } from "antd";
-import _, { groupBy, isEqual, isNil, partial } from "lodash";
+import { groupBy, isEqual, isNil } from "lodash";
 import { getRealValue } from "./util";
 import { GeneralComplexOption } from "@next-libs/forms";
 import style from "./ColumnComponent.module.css";
@@ -83,22 +83,24 @@ export function ColumnComponent(
         if (typeof rule.validator === "function") {
           return {
             message: rule.message,
-            validator: partial(rule.validator, _, _, _, {
-              formValue,
-              rowValue,
-              rowIndex,
-            }),
+            // `_.partial` is not compatible with brick next v3
+            validator: (r: any, value: any, cb: any) =>
+              rule.validator(r, value, cb, {
+                formValue,
+                rowValue,
+                rowIndex,
+              }),
           };
         }
         if (rule.unique) {
           return {
-            validator: (rule: any, value: any, cb: any) => {
+            validator: (r: any, value: any, cb: any) => {
               if (!isNil(value) && value !== "") {
                 const valueList = formValue?.map((row) => row[name]);
                 const matchList = valueList?.filter(
                   (v, i) => isEqual(v, value) && i !== rowIndex
                 );
-                matchList?.length && cb(rule.message);
+                matchList?.length && cb(r.message);
               }
               cb();
             },
