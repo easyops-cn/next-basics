@@ -242,23 +242,8 @@ export function RealUploadFile(
 
   async function downloadFile(url: string, fileName: string) {
     const response = await fetch(url);
-    const reader = response.body.getReader();
-    const stream = new ReadableStream({
-      async start(controller) {
-        let readResult;
-        do {
-          readResult = await reader.read();
-          if (!readResult.done) {
-            controller.enqueue(readResult.value);
-          }
-        } while (!readResult.done);
-        controller.close();
-      },
-    });
-
-    const blobUrl = window.URL.createObjectURL(
-      await new Response(stream).blob()
-    );
+    const blob = await response.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = blobUrl;
     link.download = fileName;
@@ -282,7 +267,7 @@ export function RealUploadFile(
     if (props.autoDownload && props.autoDownloadUrlTemplate) {
       const downloadUrl = parseTemplate(props.autoDownloadUrlTemplate, copyE);
       try {
-        downloadFile(downloadUrl, copyE.name);
+        await downloadFile(downloadUrl, copyE.name);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error("Download failed:", error);
