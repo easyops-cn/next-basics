@@ -7,6 +7,8 @@ import { NS_FORMS, K } from "../i18n/constants";
 import * as brickKit from "@next-core/brick-kit";
 import { GeneralIcon } from "@next-libs/basic-components";
 import i18n from "i18next";
+import { ReadableStream } from "stream/web";
+
 jest.mock("@next-core/brick-http");
 
 HTMLCanvasElement.prototype.getContext = jest.fn();
@@ -501,4 +503,157 @@ describe("UploadFilesV2", () => {
     });
     spyOnUseCurrentTheme.mockRestore();
   });
+
+  it("should auto download", () => {
+    // Mock fetch
+    global.URL.createObjectURL = jest.fn().mockReturnValue("blob:mock-url");
+    global.URL.revokeObjectURL = jest.fn();
+
+    // Add ReadableStream to global
+    if (!global.ReadableStream) {
+      global.ReadableStream = ReadableStream as any;
+    }
+    if (!global.Response) {
+      global.Response = class Response {
+        constructor(body?: any, init?: any) {
+          this.body = body;
+        }
+        body: any;
+        blob() {
+          return Promise.resolve(new Blob(["test"]));
+        }
+      } as any;
+    }
+    const mockData = new Uint8Array([1, 2, 3]);
+
+    const mockResponse = {
+      body: new ReadableStream({
+        start(controller) {
+          controller.enqueue(mockData);
+          controller.close();
+        },
+      }),
+    };
+
+    global.fetch = jest.fn().mockResolvedValue(mockResponse);
+
+    const onDownload = jest.fn();
+    const wrapper = mount(
+      <UploadFilesV2
+        url="/api/upload"
+        showDownloadIcon={true}
+        autoDownload={true}
+        autoDownloadUrlTemplate="http://example.com/#{response.objectName}"
+        onDownload={onDownload}
+        value={[
+          {
+            uid: "123",
+            name: "test.txt",
+            status: "done",
+            response: {
+              objectName: "test.txt",
+            },
+          },
+        ]}
+      />
+    );
+
+    wrapper.find(Upload).invoke("onDownload")({
+      uid: "123",
+      name: "test.txt",
+      status: "done",
+      size: 1024,
+      type: "text/plain",
+    });
+
+    expect(onDownload).toHaveBeenCalled();
+    expect(global.fetch).toHaveBeenCalledWith("http://example.com/test.txt");
+  });
 });
+
+// describe("downloadFile", () => {
+//   beforeEach(() => {
+//     // Mock URL API
+//     (window.URL.createObjectURL as jest.Mock) = jest.fn(() => "blob:mock-url");
+//     (window.URL.revokeObjectURL as jest.Mock) = jest.fn();
+
+//     // Mock document.createElement
+//     const mockLink = {
+//       href: "",
+//       download: "",
+//       style: { display: "" },
+//       click: jest.fn(),
+//     };
+//     document.createElement = jest.fn(() => mockLink as any);
+//   });
+
+//   afterEach(() => {
+//     jest.clearAllMocks();
+//   });
+
+//   it("should download file successfully", async () => {
+//     // Mock successful fetch response
+//     const mockResponse = new Response(new Blob(["test content"]));
+//     global.fetch = jest.fn().mockResolvedValue(mockResponse);
+
+//     const onDownload = jest.fn();
+//     const wrapper = mount(
+//       <UploadFilesV2
+//         url="/api/upload"
+//         autoDownload={true}
+//         autoDownloadUrlTemplate="http://example.com/{name}"
+//         onDownload={onDownload}
+//       />
+//     );
+
+//     const file = {
+//       uid: "test-uid",
+//       name: "test.txt",
+//       status: "done",
+//     };
+
+//     await act(async () => {
+//       const uploadProps = wrapper.find(Upload).props();
+//       await uploadProps.onDownload(file);
+//     });
+
+//     expect(global.fetch).toHaveBeenCalledWith("http://example.com/test.txt");
+//     expect(document.createElement).toHaveBeenCalledWith("a");
+//     expect(window.URL.createObjectURL).toHaveBeenCalled();
+//     expect(window.URL.revokeObjectURL).toHaveBeenCalled();
+//     expect(onDownload).toHaveBeenCalled();
+//   });
+
+//   it("should handle download error", async () => {
+//     // Mock failed fetch
+//     const mockError = new Error("Download failed");
+//     global.fetch = jest.fn().mockRejectedValue(mockError);
+//     console.error = jest.fn();
+
+//     const onDownload = jest.fn();
+//     const wrapper = mount(
+//       <UploadFilesV2
+//         url="/api/upload"
+//         autoDownload={true}
+//         autoDownloadUrlTemplate="http://example.com/{name}"
+//         onDownload={onDownload}
+//       />
+//     );
+
+//     const file = {
+//       uid: "test-uid",
+//       name: "test.txt",
+//       status: "done",
+//     };
+
+//     await act(async () => {
+//       const uploadProps = wrapper.find(Upload).props();
+//       await uploadProps.onDownload(file);
+//     });
+
+//     expect(global.fetch).toHaveBeenCalledWith("http://example.com/test.txt");
+//     expect(console.error).toHaveBeenCalledWith("Download failed:", mockError);
+//     expect(window.URL.revokeObjectURL).not.toHaveBeenCalled();
+//     expect(onDownload).toHaveBeenCalled();
+//   });
+// });
