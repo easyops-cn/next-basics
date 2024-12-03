@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.303.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.303.2...@next-bricks/forms@1.303.3) (2024-12-03)
+
+
+### Bug Fixes
+
+* 支持自动下载,以用于 form-builderOC ([22c2e3c](https://github.com/easyops-cn/next-basics/commit/22c2e3cde2424ddb55c60a7a1e977f051bc23fee))
+
+
+
+
+
 ## [1.303.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.303.1...@next-bricks/forms@1.303.2) (2024-12-02)
 
 **Note:** Version bump only for package @next-bricks/forms
