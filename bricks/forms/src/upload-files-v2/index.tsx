@@ -106,6 +106,20 @@ export class UploadFilesV2Element extends FormItemElement {
   /**
    * @group basicFormItem
    * @required false
+   * @description 是否支持自动下载
+   */
+  @property({ type: Boolean }) autoDownload: boolean;
+
+  /**
+   * @group basicFormItem
+   * @required false
+   * @description 自动下载的url模板
+   */
+  @property() autoDownloadUrlTemplate: string;
+
+  /**
+   * @group basicFormItem
+   * @required false
    * @description 接受上传的文件类型，多个之间用,连接
    */
   @property({ attribute: false })
@@ -292,6 +306,8 @@ export class UploadFilesV2Element extends FormItemElement {
             onError={this._handleError}
             onDownload={this._handleDownload}
             showDownloadIcon={this.showDownloadIcon}
+            autoDownload={this.autoDownload}
+            autoDownloadUrlTemplate={this.autoDownloadUrlTemplate}
             message={this.message}
             validator={this.validator}
             notRender={this.notRender}

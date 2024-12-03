@@ -74,10 +74,13 @@
           :global(.anticon) {
             color: var(--text-color-disabled);
             font-size: 14px;
+          }
 
-            &:hover {
-              color: var(--theme-red-color);
-            }
+          :global(.anticon:hover) {
+            color: var(--bg-color-button-danger-hover);
+          }
+          :global(.anticon-download:hover) {
+            color: var(--antd-link-hover-color);
           }
         }
       }

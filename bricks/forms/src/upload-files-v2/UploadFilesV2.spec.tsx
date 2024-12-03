@@ -7,6 +7,7 @@ import { NS_FORMS, K } from "../i18n/constants";
 import * as brickKit from "@next-core/brick-kit";
 import { GeneralIcon } from "@next-libs/basic-components";
 import i18n from "i18next";
+
 jest.mock("@next-core/brick-http");
 
 HTMLCanvasElement.prototype.getContext = jest.fn();
@@ -500,5 +501,103 @@ describe("UploadFilesV2", () => {
       lib: "easyops",
     });
     spyOnUseCurrentTheme.mockRestore();
+  });
+
+  it("should auto download", () => {
+    // Mock fetch and URL methods
+    global.URL.createObjectURL = jest.fn().mockReturnValue("blob:mock-url");
+    global.URL.revokeObjectURL = jest.fn();
+
+    const mockBlob = new Blob(["test"], { type: "text/plain" });
+    const mockResponse = {
+      blob: jest.fn().mockResolvedValue(mockBlob),
+    };
+
+    global.fetch = jest.fn().mockResolvedValue(mockResponse);
+
+    const onDownload = jest.fn();
+    const wrapper = mount(
+      <UploadFilesV2
+        url="/api/upload"
+        showDownloadIcon={true}
+        autoDownload={true}
+        autoDownloadUrlTemplate="http://example.com/#{response.objectName}"
+        onDownload={onDownload}
+        value={[
+          {
+            uid: "123",
+            name: "test.txt",
+            status: "done",
+            response: {
+              objectName: "test.txt",
+            },
+          },
+        ]}
+      />
+    );
+
+    wrapper.find(Upload).invoke("onDownload")({
+      uid: "123",
+      name: "test.txt",
+      status: "done",
+      size: 1024,
+      type: "text/plain",
+    });
+    wrapper.update();
+    expect(global.fetch).toHaveBeenCalledWith("http://example.com/test.txt");
+
+    jest.restoreAllMocks();
+  });
+
+  it("should auto download error", () => {
+    // Mock fetch and URL methods
+    global.URL.createObjectURL = jest.fn().mockReturnValue("blob:mock-url");
+    global.URL.revokeObjectURL = jest.fn();
+
+    const mockBlob = new Blob(["test"], { type: "text/plain" });
+    const mockResponse = {
+      blob: jest.fn().mockResolvedValue(mockBlob),
+    };
+
+    global.fetch = jest.fn().mockResolvedValue(mockResponse);
+
+    const onDownload = jest.fn();
+    const wrapper = mount(
+      <UploadFilesV2
+        url="/api/upload"
+        showDownloadIcon={true}
+        autoDownload={true}
+        autoDownloadUrlTemplate="http://example.com/#{response.objectName}"
+        onDownload={onDownload}
+        value={[
+          {
+            uid: "123",
+            name: "test.txt",
+            status: "done",
+            response: {
+              objectName: "test.txt",
+            },
+          },
+        ]}
+      />
+    );
+
+    global.fetch = jest.fn().mockRejectedValue(new Error("test"));
+    const errorSpy = jest.spyOn(console, "error").mockImplementation();
+
+    wrapper.find(Upload).invoke("onDownload")({
+      uid: "123",
+      name: "test.txt",
+      status: "done",
+      size: 1024,
+      type: "text/plain",
+    });
+    wrapper.update();
+    jest.runAllTimers();
+    expect(global.fetch).toHaveBeenCalledWith("http://example.com/test.txt");
+    expect(errorSpy).toHaveBeenCalled();
+
+    errorSpy.mockRestore();
+    jest.restoreAllMocks();
   });
 });

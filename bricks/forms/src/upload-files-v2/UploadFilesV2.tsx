@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from "react";
-import { uniqueId, map, findIndex, some, isEqual } from "lodash";
+import { uniqueId, map, findIndex, some, isEqual, cloneDeep } from "lodash";
 import { useCurrentTheme } from "@next-core/brick-kit";
 import update from "immutability-helper";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
@@ -14,6 +14,7 @@ import { NS_FORMS, K } from "../i18n/constants";
 import { UploadFile, RcFile } from "antd/lib/upload/interface";
 import { FileUtils } from "../utils";
 import { UploadButtonProps } from "../interfaces";
+import { parseTemplate } from "@next-libs/cmdb-utils";
 import i18n from "i18next";
 
 interface UploadFilesV2Props extends FormItemWrapperProps {
@@ -39,6 +40,8 @@ interface UploadFilesV2Props extends FormItemWrapperProps {
   hideDragBtnWhenAchieveMax?: boolean;
   uploadButtonProps?: UploadButtonProps;
   showDownloadIcon?: boolean;
+  autoDownload?: boolean;
+  autoDownloadUrlTemplate?: string;
 }
 
 export interface UploadFileValueItem {
@@ -47,6 +50,7 @@ export interface UploadFileValueItem {
   response?: any;
   file?: any;
   uid?: string;
+  status?: string;
 }
 
 interface FileItem {
@@ -153,6 +157,7 @@ export function RealUploadFile(
             response: newFile.response,
             name: newFile.name,
             uid: newFile.uid,
+            status: newFile.status,
           },
         ]);
       } else {
@@ -163,6 +168,7 @@ export function RealUploadFile(
             response: newFile.response,
             name: newFile.name,
             uid: newFile.uid,
+            status: newFile.status,
           },
         ]);
       }
@@ -175,6 +181,7 @@ export function RealUploadFile(
               file: newFile,
               name: newFile.name,
               uid: newFile.uid,
+              status: newFile.status,
             },
           ]);
         }
@@ -187,6 +194,7 @@ export function RealUploadFile(
               file: newFile,
               name: newFile.name,
               uid: newFile.uid,
+              status: newFile.status,
             },
           ]);
         }
@@ -230,6 +238,42 @@ export function RealUploadFile(
         handleFilesChange(_file, _fileList, true);
       }
     }
+  };
+
+  async function downloadFile(url: string, fileName: string) {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = blobUrl;
+    link.download = fileName;
+    link.style.display = "none";
+    link.click();
+
+    // 清理
+    window.URL.revokeObjectURL(blobUrl);
+  }
+
+  const handleDownload = async (e: any) => {
+    // value 和 fileList 里的 response 不一样，value 中的 response 剥掉了外面一层，只保留 response.data
+    // 参见 handleChange 方法中的 _file.response = _file.response.data; (L237)
+    const copyE = cloneDeep(e);
+    const fileInValue = value?.find((file) => file.uid === copyE.uid);
+    if (fileInValue) {
+      copyE.response = fileInValue.response;
+    }
+
+    // 自动下载
+    if (props.autoDownload && props.autoDownloadUrlTemplate) {
+      const downloadUrl = parseTemplate(props.autoDownloadUrlTemplate, copyE);
+      try {
+        await downloadFile(downloadUrl, copyE.name);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error("Download failed:", error);
+      }
+    }
+    props.onDownload?.(copyE);
   };
 
   const uploadNode = () => {
@@ -276,9 +320,6 @@ export function RealUploadFile(
 
   const handleRemove = (e: any) => {
     props.onRemove?.(e);
-  };
-  const handleDownload = (e: any) => {
-    props.onDownload?.(e);
   };
 
   const uploadProps = {
@@ -384,6 +425,8 @@ export function UploadFilesV2(props: UploadFilesV2Props): React.ReactElement {
         onError={props.onError}
         onDownload={props.onDownload}
         showDownloadIcon={props.showDownloadIcon}
+        autoDownload={props.autoDownload}
+        autoDownloadUrlTemplate={props.autoDownloadUrlTemplate}
         url={props.url}
         method={props.method}
         uploadName={props.uploadName}
