@@ -270,6 +270,8 @@ export function RealUploadFile(
   }
 
   const handleDownload = async (e: any) => {
+    // value 和 fileList 里的 response 不一样，value 中的 response 剥掉了外面一层，只保留 response.data
+    // 参见 handleChange 方法中的 _file.response = _file.response.data; (L237)
     const copyE = cloneDeep(e);
     const fileInValue = value?.find((file) => file.uid === copyE.uid);
     if (fileInValue) {
