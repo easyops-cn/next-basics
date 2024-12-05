@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.303.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.303.3...@next-bricks/forms@1.303.4) (2024-12-05)
+
+
+### Bug Fixes
+
+* **select:** ignore stale search response ([d40f98f](https://github.com/easyops-cn/next-basics/commit/d40f98f9e93102b18eb2e486db9e3aa4be736dd1))
+
+
+
+
+
 ## [1.303.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.303.2...@next-bricks/forms@1.303.3) (2024-12-03)
 
 
