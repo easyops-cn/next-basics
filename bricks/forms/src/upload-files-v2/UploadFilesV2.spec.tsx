@@ -607,7 +607,7 @@ describe("UploadFilesV2", () => {
     const wrapper = mount(
       <UploadFilesV2
         url={url}
-        fileNamePattern={/^[^/#()&%+@]+$/}
+        fileNamePattern={"^[^/#()&%+@]+$"}
         onChange={onChange}
         onCustomError={onCustomError}
       />

@@ -100,7 +100,7 @@ export class UploadFilesV2Element extends FormItemElement {
    * @description 文件名称校验格式（正则表达式）
    */
   @property({ attribute: false })
-  fileNamePattern: RegExp;
+  fileNamePattern: string;
 
   /**
    * @group basicFormItem
@@ -274,7 +274,7 @@ export class UploadFilesV2Element extends FormItemElement {
   customErrorEvent: EventEmitter<any>;
   private _handleCustomError = (type: any, value: any): void => {
     Promise.resolve().then(() => {
-      this.customErrorEvent.emit({ ...value, errorType: type });
+      this.customErrorEvent.emit({ message: value, errorType: type });
     });
   };
 
