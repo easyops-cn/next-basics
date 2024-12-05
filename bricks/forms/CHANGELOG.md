@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.303.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.303.5...@next-bricks/forms@1.303.6) (2024-12-05)
+
+
+### Bug Fixes
+
+* 修复支持文件名校验的问题 ([f31b0b2](https://github.com/easyops-cn/next-basics/commit/f31b0b23a020a49cd2a5f18820944bc5cbbf9030))
+
+
+
+
+
 ## [1.303.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.303.4...@next-bricks/forms@1.303.5) (2024-12-05)
 
 
