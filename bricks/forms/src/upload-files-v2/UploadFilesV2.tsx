@@ -44,7 +44,7 @@ interface UploadFilesV2Props extends FormItemWrapperProps {
   autoDownload?: boolean;
   autoDownloadUrlTemplate?: string;
   // 文件名称校验格式（正则表达式）
-  fileNamePattern?: RegExp;
+  fileNamePattern?: string;
 }
 
 export interface UploadFileValueItem {
@@ -144,19 +144,21 @@ export function RealUploadFile(
       }
     }
     // 正则校验文件名
-    if (
-      props.fileNamePattern &&
-      !props.fileNamePattern?.test(file?.name ?? "")
-    ) {
-      props.onCustomError?.(
-        "name",
-        i18n.t(`${NS_FORMS}:${K.FILE_NAME_VALIDATE_MESSAGE_LOG}`)
+    if (props.fileNamePattern) {
+      const isValidFileName = new RegExp(props.fileNamePattern as string)?.test(
+        file?.name ?? ""
       );
-      return new Promise((_resolve, reject) => {
-        reject(
-          new Error(i18n.t(`${NS_FORMS}:${K.FILE_NAME_VALIDATE_MESSAGE_LOG}`))
+      if (!isValidFileName) {
+        props.onCustomError?.(
+          "name",
+          i18n.t(`${NS_FORMS}:${K.FILE_NAME_VALIDATE_MESSAGE_LOG}`)
         );
-      });
+        return new Promise((_resolve, reject) => {
+          reject(
+            new Error(i18n.t(`${NS_FORMS}:${K.FILE_NAME_VALIDATE_MESSAGE_LOG}`))
+          );
+        });
+      }
     }
     if (props.autoUpload) {
       // 进行自动上传
