@@ -22,6 +22,7 @@ interface UploadFilesV2Props extends FormItemWrapperProps {
   onError?: (file: any) => void;
   onRemove?: (file: any) => void;
   onDownload?: (file: any) => void;
+  onCustomError?: (type: string, file: any) => void;
   value?: UploadFileValueItem[];
   autoUpload?: boolean;
   url: string;
@@ -42,6 +43,8 @@ interface UploadFilesV2Props extends FormItemWrapperProps {
   showDownloadIcon?: boolean;
   autoDownload?: boolean;
   autoDownloadUrlTemplate?: string;
+  // 文件名称校验格式（正则表达式）
+  fileNamePattern?: RegExp;
 }
 
 export interface UploadFileValueItem {
@@ -114,6 +117,7 @@ export function RealUploadFile(
     if (FileUtils.sizeCompare(file, props.limitSize ?? 100)) {
       // 如果上传文件大小大于限定大小
       props.onError?.(i18n.t(`${NS_FORMS}:${K.VOLUME_TOO_BIG}`));
+      props.onCustomError?.("size", i18n.t(`${NS_FORMS}:${K.VOLUME_TOO_BIG}`));
       return new Promise((_resolve, reject) => {
         // 返回reject阻止文件添加
         reject(new Error(i18n.t(`${NS_FORMS}:${K.VOLUME_TOO_BIG}`)));
@@ -130,10 +134,29 @@ export function RealUploadFile(
         return fileType === type;
       });
       if (!isValidType) {
+        props.onCustomError?.(
+          "accept",
+          i18n.t(`${NS_FORMS}:${K.NO_SUPPORT_FILE_TYPE}`)
+        );
         return new Promise((_resolve, reject) => {
           reject(new Error(i18n.t(`${NS_FORMS}:${K.NO_SUPPORT_FILE_TYPE}`)));
         });
       }
+    }
+    // 正则校验文件名
+    if (
+      props.fileNamePattern &&
+      !props.fileNamePattern?.test(file?.name ?? "")
+    ) {
+      props.onCustomError?.(
+        "name",
+        i18n.t(`${NS_FORMS}:${K.FILE_NAME_VALIDATE_MESSAGE_LOG}`)
+      );
+      return new Promise((_resolve, reject) => {
+        reject(
+          new Error(i18n.t(`${NS_FORMS}:${K.FILE_NAME_VALIDATE_MESSAGE_LOG}`))
+        );
+      });
     }
     if (props.autoUpload) {
       // 进行自动上传
@@ -423,6 +446,7 @@ export function UploadFilesV2(props: UploadFilesV2Props): React.ReactElement {
         onChange={props.onChange}
         onRemove={props.onRemove}
         onError={props.onError}
+        onCustomError={props.onCustomError}
         onDownload={props.onDownload}
         showDownloadIcon={props.showDownloadIcon}
         autoDownload={props.autoDownload}
@@ -430,6 +454,7 @@ export function UploadFilesV2(props: UploadFilesV2Props): React.ReactElement {
         url={props.url}
         method={props.method}
         uploadName={props.uploadName}
+        fileNamePattern={props.fileNamePattern}
         accept={props.accept}
         data={props.data}
         maxNumber={props.maxNumber}

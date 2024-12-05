@@ -157,6 +157,7 @@ const locale: Locale = {
   [K.IMPORT_DATA_FORMAT_ERROR]: "导入数据格式错误",
   [K.IMPORT_FAILED]: "导入失败",
   [K.INVALID_FILE_TYPE_DYNAMIC_FORM_ITEM]: "文件类型非 .xlsx .xls .csv",
+  [K.FILE_NAME_VALIDATE_MESSAGE_LOG]: "上传文件名称格式校验失败",
 };
 
 export default locale;
