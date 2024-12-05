@@ -97,6 +97,15 @@ export class UploadFilesV2Element extends FormItemElement {
    * @group basicFormItem
    * @required false
    * @default false
+   * @description 文件名称校验格式（正则表达式）
+   */
+  @property({ attribute: false })
+  fileNamePattern: RegExp;
+
+  /**
+   * @group basicFormItem
+   * @required false
+   * @default false
    * @description 是否支持展示下载图标,仅在showDownloadIcon为true时有效
    *
    */
@@ -258,6 +267,18 @@ export class UploadFilesV2Element extends FormItemElement {
   };
 
   /**
+   * @detail `{errorType:string,url?:string,response?:object,file?:object,uid:string,name:string}`
+   * @description 上传文件失败发出的事件，仅在autoUpload为true时有效
+   */
+  @event({ type: "upload.files.custom.error" })
+  customErrorEvent: EventEmitter<any>;
+  private _handleCustomError = (type: any, value: any): void => {
+    Promise.resolve().then(() => {
+      this.customErrorEvent.emit({ ...value, errorType: type });
+    });
+  };
+
+  /**
    * @detail `file`
    * @description 	删除文件发出的事件
    */
@@ -290,6 +311,7 @@ export class UploadFilesV2Element extends FormItemElement {
             url={this.url}
             method={this.method}
             uploadName={this.uploadName}
+            fileNamePattern={this.fileNamePattern}
             accept={this.accept}
             data={this.data}
             disabled={this.disabled}
@@ -304,6 +326,7 @@ export class UploadFilesV2Element extends FormItemElement {
             onChange={this._handleChange}
             onRemove={this._handleRemove}
             onError={this._handleError}
+            onCustomError={this._handleCustomError}
             onDownload={this._handleDownload}
             showDownloadIcon={this.showDownloadIcon}
             autoDownload={this.autoDownload}

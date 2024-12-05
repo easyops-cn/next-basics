@@ -600,4 +600,33 @@ describe("UploadFilesV2", () => {
     errorSpy.mockRestore();
     jest.restoreAllMocks();
   });
+
+  it("should fileName validate", async () => {
+    const onCustomError = jest.fn();
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <UploadFilesV2
+        url={url}
+        fileNamePattern={/^[^/#()&%+@]+$/}
+        onChange={onChange}
+        onCustomError={onCustomError}
+      />
+    );
+    const notAllowResult = wrapper.find(Upload).invoke("beforeUpload")(
+      {
+        uid: "-img1",
+        size: 1024,
+        type: "image/png",
+        name: "image@111.png",
+        status: "uploading",
+      },
+      []
+    );
+    wrapper.update();
+    await expect(notAllowResult).rejects.toStrictEqual(
+      new Error(i18n.t(`${NS_FORMS}:${K.FILE_NAME_VALIDATE_MESSAGE_LOG}`))
+    );
+    expect(wrapper.find(".ant-upload-list-item").length).toBe(0);
+    expect(onCustomError).toHaveBeenCalled();
+  });
 });
