@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { UseBackendConf, UseBrickConf } from "@next-core/brick-types";
 import {
   BrickAsComponent,
@@ -205,45 +211,50 @@ export function GeneralSelectLegacy(
     );
   }, [props.onDebounceSearch, props.debounceSearchDelay]);
 
-  const handleSearchQuery = useMemo(
-    () =>
-      (value = "", type: "valueChange" | "search") => {
-        if (isSearchable(props.useBackend)) {
-          const {
-            provider,
-            args,
-            onValueChangeArgs,
-            transform = (data) => data,
-          } = props.useBackend;
-          (async () => {
-            try {
-              setRequestStatus("loading");
-              const actualArgs = applyArgs(
-                type === "search" ? args : onValueChangeArgs,
-                value
-              );
-              const result = await request.query(provider, actualArgs);
-              if (isNil(result)) return;
-              const transformedData = transform(result);
-              const actualData = formatOptions(
-                transformedData as unknown as GeneralOption[],
-                props.fields as any
-              );
-              setRequestStatus("success");
-              setOptions(actualData);
-            } catch (e) {
-              setRequestStatus("error");
-              handleHttpError(e);
-            }
-          })();
-        } else {
-          props?.useBackend?.provider &&
-            // eslint-disable-next-line no-console
-            console.error(
-              `Please use "contract api" instead of "${props?.useBackend?.provider}".`
+  const requestIdRef = useRef(0);
+
+  const handleSearchQuery = useCallback(
+    (value = "", type: "valueChange" | "search") => {
+      if (isSearchable(props.useBackend)) {
+        const {
+          provider,
+          args,
+          onValueChangeArgs,
+          transform = (data) => data,
+        } = props.useBackend;
+        (async () => {
+          const currentId = ++requestIdRef.current;
+          try {
+            setRequestStatus("loading");
+            const actualArgs = applyArgs(
+              type === "search" ? args : onValueChangeArgs,
+              value
             );
-        }
-      },
+            const result = await request.query(provider, actualArgs);
+            // ignore stale response
+            if (isNil(result) || currentId !== requestIdRef.current) return;
+            const transformedData = transform(result);
+            const actualData = formatOptions(
+              transformedData as unknown as GeneralOption[],
+              props.fields as any
+            );
+            setRequestStatus("success");
+            setOptions(actualData);
+          } catch (e) {
+            // ignore stale response
+            if (currentId !== requestIdRef.current) return;
+            setRequestStatus("error");
+            handleHttpError(e);
+          }
+        })();
+      } else {
+        props?.useBackend?.provider &&
+          // eslint-disable-next-line no-console
+          console.error(
+            `Please use "contract api" instead of "${props?.useBackend?.provider}".`
+          );
+      }
+    },
     [props.useBackend, props.fields, props.value]
   );
 
