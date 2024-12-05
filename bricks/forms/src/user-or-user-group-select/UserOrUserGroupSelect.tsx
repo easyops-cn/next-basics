@@ -91,11 +91,12 @@ export function LegacyUserSelectFormItem(
 ): React.ReactElement {
   const {
     filterPermissionActions,
+    query,
     userQuery,
     userGroupQuery,
-    query,
     mergeUseAndUserGroupFormValue,
   } = props;
+
   const selectRef = useRef();
   const [selectedValue, setSelectedValue] = useState([]);
   const staticValue = useRef([]);
@@ -103,7 +104,6 @@ export function LegacyUserSelectFormItem(
   const userGroupShowKey: string[] = getInstanceNameKeys(
     props.objectMap?.["USER_GROUP"]
   );
-
   const { t } = useTranslation(NS_FORMS);
 
   const getLabel = (
@@ -269,7 +269,6 @@ export function LegacyUserSelectFormItem(
 
       const { user = [], userGroup = [] } = groupMixedValue(mergedValue);
       const staticValueToSet = [];
-
       if (user.length && props.optionsMode !== "group") {
         selectedUser = (
           await InstanceApi_postSearch("USER", {
@@ -563,7 +562,6 @@ export function LegacyUserSelectFormItem(
     const iconWidth = props.hideSelectByCMDB ? 0 : -32;
     return btnWidth + lineWidth + iconWidth;
   };
-
   return (
     <div
       ref={ref}
@@ -661,12 +659,18 @@ export function LegacyUserSelectFormItem(
           onCancel={closeModal}
           rowSelectionType={props.isMultiple ? "checkbox" : "radio"}
           showSizeChanger
-          {...(modalObjectId === "USER" && props.hideInvalidUser
+          {...(userQuery || userGroupQuery
             ? {
                 presetConfigs: {
-                  query: {
-                    state: "valid",
-                  },
+                  query:
+                    modalObjectId === "USER"
+                      ? {
+                          ...userQuery,
+                          ...(props.hideInvalidUser ? { state: "valid" } : {}),
+                        }
+                      : {
+                          ...userGroupQuery,
+                        },
                 },
               }
             : {})}
