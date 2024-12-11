@@ -153,15 +153,19 @@ export class DynamicFormItemV2Element extends FormItemElement {
   updateOptions(args: {
     rowIndex: number | number[] | "all";
     name: string;
-    options: SelectProps["options"];
+    options:
+      | GeneralComplexOption<string | number>[]
+      | GeneralComplexOption<string | number>[][];
   }): void {
     const { rowIndex, name, options } = args;
     const { columns, setColumns } = this.upperRef.current;
     const cloneOptions =
-      (
+      ((
         lodash.cloneDeep(columns).find((item) => item.name === name)
           ?.props as SelectProps
-      )?.options || [];
+      )?.options as
+        | GeneralComplexOption<string | number>[]
+        | GeneralComplexOption<string | number>[][]) || [];
     if (
       Array.isArray(rowIndex) &&
       (options as GeneralComplexOption<string | number>[]).every(
