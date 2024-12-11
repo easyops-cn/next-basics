@@ -156,8 +156,8 @@ export function validateAndTransformValue(
         const parsedValue = JSON.parse(trimValue);
         if (
           isObject(parsedValue) &&
-          Object.hasOwn(parsedValue, "startTime") &&
-          Object.hasOwn(parsedValue, "endTime")
+          "startTime" in parsedValue &&
+          "endTime" in parsedValue
         ) {
           return parsedValue;
         }
