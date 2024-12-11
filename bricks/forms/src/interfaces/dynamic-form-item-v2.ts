@@ -9,8 +9,8 @@ import { Rule, RuleObject } from "antd/lib/form";
 import { StoreValue } from "antd/lib/form/interface";
 import { OptionType } from ".";
 import { CheckboxProps } from "antd";
-import { TimeRangePickerProps } from "../time-range-picker/TimeRangePicker";
 import { TextAreaProps } from "antd/lib/input";
+import { TimeRangePickerItemProps } from "../dynamic-form-item-v2/TimeRangePicker";
 
 export enum ComponentType {
   INPUT = "input",
@@ -270,7 +270,7 @@ export interface TextAreaColumn {
 
 export interface DateRangePickerColumn {
   type: "timeRangePicker";
-  props: TimeRangePickerProps;
+  props: TimeRangePickerItemProps;
 }
 
 export interface BasicColumn {

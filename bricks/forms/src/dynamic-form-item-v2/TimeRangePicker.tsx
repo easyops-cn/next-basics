@@ -12,14 +12,14 @@ export interface TimeRange {
   endTime: string;
 }
 
-interface TimeRangePickerProps {
+export interface TimeRangePickerItemProps {
   rangeType?: RangeType;
   value?: TimeRange;
   onChange?: (value: TimeRange) => void;
 }
 
 export function TimeRangePickerItem(
-  props: TimeRangePickerProps
+  props: TimeRangePickerItemProps
 ): React.ReactElement {
   const { value, rangeType, onChange } = props;
 
