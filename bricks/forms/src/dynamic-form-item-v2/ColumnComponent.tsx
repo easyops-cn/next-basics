@@ -2,20 +2,31 @@ import React, { useEffect, useMemo, useState } from "react";
 import { FormListFieldData } from "antd/lib/form/FormList";
 import { Column, SelectProps } from "../interfaces";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
-import { Cascader, Form, Input, InputNumber, Select, Checkbox } from "antd";
+import {
+  Cascader,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  Checkbox,
+  DatePicker,
+} from "antd";
 import { groupBy, isEqual, isNil } from "lodash";
-import { getRealValue } from "./util";
+import { getRealValue, getRealValueOptions } from "./util";
 import { GeneralComplexOption } from "@next-libs/forms";
 import style from "./ColumnComponent.module.css";
 import { UseBrickConf } from "@next-core/brick-types";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { AutoCompleteItem } from "./autoCompleteItem";
+import { TimeRangePickerItem } from "./TimeRangePicker";
+
 interface ColumnComponentProps {
   column: Column;
   field: FormListFieldData;
   rowIndex?: number;
   formValue?: Record<string, any>[];
   hasLabel?: boolean;
+  showLabelInAllRows?: boolean;
   handleInputBlur: (rowIndex: number, name: string, value: string) => void;
 }
 
@@ -60,16 +71,24 @@ const getOptsGroups = (
 export function ColumnComponent(
   props: ColumnComponentProps
 ): React.ReactElement {
-  const { column, field, rowIndex, hasLabel, formValue, handleInputBlur } =
-    props;
+  const {
+    column,
+    field,
+    rowIndex,
+    hasLabel,
+    showLabelInAllRows,
+    formValue,
+    handleInputBlur,
+  } = props;
   const { label, name } = column;
   const { name: fieldName, ...restField } = field;
 
   const rowValue = formValue?.[rowIndex];
   const [isReadOnly, setIsReadOnly] = useState(true);
   const labelNode = useMemo(
-    () => hasLabel && rowIndex === 0 && <div>{label}</div>,
-    [label, rowIndex, hasLabel]
+    () =>
+      hasLabel && (showLabelInAllRows || rowIndex === 0) && <div>{label}</div>,
+    [label, rowIndex, hasLabel, showLabelInAllRows]
   );
 
   const disabled = useMemo(
@@ -110,6 +129,12 @@ export function ColumnComponent(
         return rule;
       }),
     [column.rules, formValue, name, rowIndex, rowValue]
+  );
+
+  let options = useMemo(
+    () =>
+      getRealValueOptions(column.props?.options, [rowValue, rowIndex]) || [],
+    [column.props?.options, rowValue, rowIndex]
   );
 
   useEffect(() => {
@@ -213,7 +238,6 @@ export function ColumnComponent(
         suffix,
         suffixStyle,
       } = column.props || {};
-      let { options = [] } = column.props || {};
       const searchProps = showSearch
         ? {
             showSearch: true,
@@ -379,6 +403,19 @@ export function ColumnComponent(
           valuePropName="checked"
         >
           <Checkbox {...column.props}>{column.props?.text}</Checkbox>
+        </Form.Item>
+      );
+    }
+
+    case "timeRangePicker": {
+      return (
+        <Form.Item
+          {...restField}
+          label={labelNode}
+          name={[fieldName, name]}
+          rules={rules}
+        >
+          <TimeRangePickerItem {...column.props} />
         </Form.Item>
       );
     }

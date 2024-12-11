@@ -31,7 +31,7 @@ type PickerType = "date" | "week" | "month" | "quarter" | "year";
 type OtherPickerType = "dateTime" | "hmTime" | "time";
 export type RangeType = PickerType & OtherPickerType;
 
-interface TimeRangePickerProps extends FormItemWrapperProps {
+export interface TimeRangePickerProps extends FormItemWrapperProps {
   value?: TimeRange;
   format: string;
   rangeType?: RangeType;

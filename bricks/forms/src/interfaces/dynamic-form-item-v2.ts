@@ -9,6 +9,7 @@ import { Rule, RuleObject } from "antd/lib/form";
 import { StoreValue } from "antd/lib/form/interface";
 import { OptionType } from ".";
 import { CheckboxProps } from "antd";
+import { TimeRangePickerProps } from "../time-range-picker/TimeRangePicker";
 import { TextAreaProps } from "antd/lib/input";
 
 export enum ComponentType {
@@ -82,7 +83,13 @@ export interface SelectProps extends BasicProps {
    */
   options:
     | GeneralComplexOption<string | number>[]
-    | GeneralComplexOption<string | number>[][];
+    | GeneralComplexOption<string | number>[][]
+    | ((
+        row: Record<string, any>,
+        index: number
+      ) =>
+        | GeneralComplexOption<string | number>[]
+        | GeneralComplexOption<string | number>[][]);
   /**
    * 支持搜索
    */
@@ -211,6 +218,18 @@ export interface AutoCompleteProps extends BasicProps {
   isAppendMode?: boolean;
 }
 
+// export interface DateRangePickerProps extends BasicProps {
+//   /**
+//    * 日期格式
+//    */
+//   format?: string;
+
+//   /**
+//    * 日期范围
+//    */
+//   showTime?: TimePickerProps;
+// }
+
 export interface InputColumn {
   // type: ComponentType.INPUT;
   type: "input";
@@ -261,6 +280,11 @@ export interface TextAreaColumn {
   props: TextAreaProps;
 }
 
+export interface DateRangePickerColumn {
+  type: "timeRangePicker";
+  props: TimeRangePickerProps;
+}
+
 export interface BasicColumn {
   /**
    * 表单项字段说明
@@ -294,6 +318,10 @@ export interface BasicColumn {
    * 表单项默认值
    */
   defaultValue?: any;
+  /**
+   * gridColumns 设置后，每个表单项所占的列数
+   */
+  span?: number;
 }
 
 export type Column = BasicColumn &
@@ -307,4 +335,5 @@ export type Column = BasicColumn &
     | AutoCompleteColumn
     | CheckboxColumn
     | TextAreaColumn
+    | DateRangePickerColumn
   );

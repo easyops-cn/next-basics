@@ -304,5 +304,43 @@ describe("excelUtils", () => {
         });
       });
     });
+
+    describe("timeRangePicker type", () => {
+      const column: Column = {
+        name: "test",
+        type: "timeRangePicker",
+        props: {},
+      };
+
+      it("should handle time range picker", () => {
+        expect(
+          validateAndTransformValue(
+            "2024-01-01 00:00:00~2024-01-01 23:59:59",
+            column
+          )
+        ).toEqual({
+          startTime: "2024-01-01 00:00:00",
+          endTime: "2024-01-01 23:59:59",
+        });
+        expect(
+          validateAndTransformValue(
+            "2024-01-01 00:00:00,2024-01-01 23:59:59",
+            column
+          )
+        ).toEqual({
+          startTime: "2024-01-01 00:00:00",
+          endTime: "2024-01-01 23:59:59",
+        });
+        expect(
+          validateAndTransformValue(
+            '{"startTime":"2024-01-01 00:00:00","endTime":"2024-01-01 23:59:59"}',
+            column
+          )
+        ).toEqual({
+          startTime: "2024-01-01 00:00:00",
+          endTime: "2024-01-01 23:59:59",
+        });
+      });
+    });
   });
 });

@@ -33,6 +33,11 @@
       margin-top: 30px;
     }
 
+    &.inGridLayout {
+      margin-top: 0;
+      align-self: center;
+    }
+
     &:hover {
       color: var(--color-auxiliary-text);
     }
@@ -46,5 +51,9 @@
     display: flex;
     gap: 16px;
     margin: -16px 0 8px 0;
+  }
+
+  .divider {
+    margin: 24px 0 8px 0;
   }
 }
