@@ -218,18 +218,6 @@ export interface AutoCompleteProps extends BasicProps {
   isAppendMode?: boolean;
 }
 
-// export interface DateRangePickerProps extends BasicProps {
-//   /**
-//    * 日期格式
-//    */
-//   format?: string;
-
-//   /**
-//    * 日期范围
-//    */
-//   showTime?: TimePickerProps;
-// }
-
 export interface InputColumn {
   // type: ComponentType.INPUT;
   type: "input";
