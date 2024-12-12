@@ -15,13 +15,18 @@ export interface TimeRange {
 export interface TimeRangePickerItemProps {
   rangeType?: RangeType;
   value?: TimeRange;
+  disabled?: boolean;
+  allowClear?: boolean;
+  placeholder?: [string, string];
+  width?: string;
   onChange?: (value: TimeRange) => void;
 }
 
 export function TimeRangePickerItem(
   props: TimeRangePickerItemProps
 ): React.ReactElement {
-  const { value, rangeType, onChange } = props;
+  const { value, rangeType, onChange, disabled, allowClear, placeholder } =
+    props;
 
   let format = "";
   switch (rangeType) {
@@ -53,6 +58,10 @@ export function TimeRangePickerItem(
 
   return (
     <DatePicker.RangePicker
+      style={{ width: props.width ?? "100%" }}
+      disabled={disabled}
+      allowClear={allowClear}
+      placeholder={placeholder}
       separator={"~"}
       format={format}
       showTime={rangeType === "dateTime"}
