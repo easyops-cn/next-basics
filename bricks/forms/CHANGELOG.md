@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.304.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.303.7...@next-bricks/forms@1.304.0) (2024-12-12)
+
+
+### Features
+
+* dynamic-form-item-v2 能力优化 ([1ea772c](https://github.com/easyops-cn/next-basics/commit/1ea772ca4ce1aa7a68aac834e023b13dc10ac8bf))
+
+
+
+
+
 ## [1.303.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.303.6...@next-bricks/forms@1.303.7) (2024-12-09)
 
 **Note:** Version bump only for package @next-bricks/forms
