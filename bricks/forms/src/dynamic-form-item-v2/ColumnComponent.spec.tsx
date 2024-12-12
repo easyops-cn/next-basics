@@ -8,6 +8,7 @@ import {
   InputNumber,
   Select,
   Checkbox,
+  DatePicker,
 } from "antd";
 import { ColumnComponent } from "./ColumnComponent";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
@@ -98,6 +99,20 @@ const selectColumnWithTwoDimensionalOptions = {
   },
 } as Column;
 
+const selectColumnWithOptionsFunction = {
+  name: "select",
+  label: "select",
+  // type: ComponentType.SELECT,
+  type: "select",
+  props: {
+    options: () => [
+      [{ label: "a", value: "a" }],
+      [{ label: "b", value: "b" }],
+      [{ label: "c", value: "c" }],
+    ],
+  },
+} as Column;
+
 const selectColumnWithSuffix = {
   name: "select",
   label: "select",
@@ -149,6 +164,15 @@ const textAreaColumn = {
   type: "textArea",
   props: {
     autoSize: true,
+  },
+} as Column;
+
+const timeRangePickerColumn = {
+  name: "timeRangePicker",
+  label: "timeRangePicker",
+  type: "timeRangePicker",
+  props: {
+    rangeType: "dateTime",
   },
 } as Column;
 
@@ -348,6 +372,19 @@ describe("ColumnComponent", () => {
     });
   });
 
+  it("select with options functionshould work", () => {
+    const wrapper = shallow(
+      <ColumnComponent
+        column={selectColumnWithOptionsFunction}
+        field={field}
+        rowIndex={0}
+      />
+    );
+    expect(wrapper.find(Select)).toHaveLength(1);
+    expect(wrapper.find(Select.Option)).toHaveLength(1);
+    expect(wrapper.find(Select.OptGroup)).toHaveLength(0);
+  });
+
   it("select with two dimensional options should work", () => {
     const wrapper = shallow(
       <ColumnComponent
@@ -450,5 +487,18 @@ describe("ColumnComponent", () => {
     );
 
     expect(wrapper.find(Input.TextArea)).toHaveLength(1);
+  });
+
+  it("timeRangePicker should work", () => {
+    const handleInputBlur = jest.fn();
+    const wrapper = mount(
+      <ColumnComponent
+        column={timeRangePickerColumn}
+        field={field}
+        handleInputBlur={handleInputBlur}
+      />
+    );
+
+    expect(wrapper.find(DatePicker.RangePicker)).toHaveLength(1);
   });
 });

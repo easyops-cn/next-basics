@@ -13,7 +13,7 @@ import {
   UploadOutlined,
 } from "@ant-design/icons";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
-import { Button, Col, Form, FormInstance, Row, message } from "antd";
+import { Button, Col, Divider, Form, FormInstance, Row, message } from "antd";
 import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";
 import { Column } from "../interfaces";
@@ -48,6 +48,7 @@ interface LegacyDynamicFormItemV2Props extends FormItemWrapperProps {
   dynamicFormStyle?: React.CSSProperties;
   onImport?: (value: Record<string, any>[]) => void;
   showImportExport?: boolean;
+  gridColumns?: number;
 }
 
 interface LegacyDynamicFormItemV2Ref {
@@ -79,6 +80,7 @@ export const LegacyDynamicFormItemV2 = forwardRef(
       dynamicFormStyle,
       onImport,
       showImportExport,
+      gridColumns,
     } = props;
     const { t } = useTranslation(NS_FORMS);
     const [form] = Form.useForm();
@@ -110,6 +112,8 @@ export const LegacyDynamicFormItemV2 = forwardRef(
       () => columns.some((column) => column.label),
       [columns]
     );
+
+    const showLabelInAllRows = useMemo(() => !!gridColumns, [gridColumns]);
 
     const defaultValues = useMemo(
       () =>
@@ -207,19 +211,28 @@ export const LegacyDynamicFormItemV2 = forwardRef(
                     rowValue,
                     name,
                   ]);
+                  const isGridLayout = !!gridColumns;
                   return (
                     <Row key={key} className={style.row}>
                       <Row gutter={[12, 8]} style={{ flex: 1 }}>
                         {columns?.map((column) => (
                           <Col
                             key={column.name}
+                            span={
+                              isGridLayout
+                                ? (24 / gridColumns) * (column.span || 1)
+                                : undefined
+                            }
                             style={{
-                              flex: column.flex ?? "1",
-                              width: "fit-content",
+                              flex: !isGridLayout
+                                ? column.flex ?? "1"
+                                : undefined,
+                              width: !isGridLayout ? "fit-content" : undefined,
                             }}
                           >
                             <ColumnComponent
                               hasLabel={hasLabel}
+                              showLabelInAllRows={showLabelInAllRows}
                               rowIndex={name}
                               column={column}
                               formValue={value}
@@ -239,7 +252,8 @@ export const LegacyDynamicFormItemV2 = forwardRef(
                           type="link"
                           className={classNames(style.removeRowBtn, [
                             {
-                              [style.inLabelRow]: showLabel,
+                              [style.inLabelRow]: !isGridLayout && showLabel,
+                              [style.inGridLayout]: isGridLayout,
                             },
                           ])}
                           disabled={getRealValue(disabledRemoveButton, [
@@ -257,6 +271,9 @@ export const LegacyDynamicFormItemV2 = forwardRef(
                           <MinusCircleOutlined />
                         </Button>
                       </Col>
+                      {isGridLayout && key !== fields.length - 1 && (
+                        <Divider className={classNames(style.divider)} />
+                      )}
                     </Row>
                   );
                 })}
@@ -319,6 +336,7 @@ export function DynamicFormItemV2(
     onImport,
     showImportExport,
     label,
+    gridColumns,
   } = props;
   const [columns, setColumns] = React.useState<Column[]>([]);
   const DynamicFormItemV2Ref = useRef<LegacyDynamicFormItemV2Ref>();
@@ -372,6 +390,7 @@ export function DynamicFormItemV2(
         dynamicFormStyle={dynamicFormStyle}
         onImport={onImport}
         showImportExport={showImportExport}
+        gridColumns={gridColumns}
       />
     </FormItemWrapper>
   );

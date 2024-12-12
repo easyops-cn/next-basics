@@ -1,4 +1,4 @@
-import { isNil } from "lodash";
+import { isObject } from "lodash";
 import { Column } from "../interfaces";
 
 export const exportToExcel = async (
@@ -149,6 +149,28 @@ export function validateAndTransformValue(
       }
       // 其他所有情况都是 true
       return true;
+    }
+
+    case "timeRangePicker": {
+      try {
+        const parsedValue = JSON.parse(trimValue);
+        if (
+          isObject(parsedValue) &&
+          "startTime" in parsedValue &&
+          "endTime" in parsedValue
+        ) {
+          return parsedValue;
+        }
+      } catch {
+        // eslint-disable-next-line no-empty
+      }
+      // 尝试按 ~ 分割
+      let trySplit = trimValue.split("~").map((v) => v.trim());
+      if (trySplit.length <= 1) {
+        trySplit = trimValue.split(",").map((v) => v.trim());
+      }
+      const [startTime, endTime] = trySplit;
+      return { startTime, endTime };
     }
 
     case "textArea":

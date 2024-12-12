@@ -141,4 +141,38 @@ describe("DynamicFormItemV2", () => {
     });
     expect(wrapper.find(".importExportButtons")).toHaveLength(0);
   });
+
+  it("should work with grid layout", () => {
+    const onChange = jest.fn();
+    const onAdd = jest.fn();
+    const onRemove = jest.fn();
+    const wrapper = mount(
+      <DynamicFormItemV2
+        columns={columns}
+        onChange={onChange}
+        onAdd={onAdd}
+        onRemove={onRemove}
+        gridColumns={2}
+      />
+    );
+
+    expect(wrapper.find("Row.row")).toHaveLength(0);
+
+    wrapper.find(".addRowBtn").at(0).simulate("click");
+    expect(wrapper.find("Row.row")).toHaveLength(1);
+    expect(wrapper.find("Row.row .inLabelRow")).toHaveLength(0);
+    expect(wrapper.find("Row.row .inGridLayout")).toHaveLength(columns.length);
+    expect(wrapper.find("Row.row").find("ColumnComponent")).toHaveLength(2);
+    expect(onChange).lastCalledWith([{}]);
+    expect(onAdd).lastCalledWith({ detail: {}, index: 0 });
+
+    wrapper.find(".addRowBtn").at(0).simulate("click");
+    expect(wrapper.find("Row.row")).toHaveLength(2);
+    expect(wrapper.find("Row.row .inGridLayout")).toHaveLength(
+      columns.length * 2
+    );
+    expect(wrapper.find("Divider")).toHaveLength(1);
+    expect(onChange).lastCalledWith([{}, {}]);
+    expect(onAdd).lastCalledWith({ detail: {}, index: 1 });
+  });
 });
