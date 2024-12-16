@@ -10,6 +10,7 @@ import {
   Select,
   Checkbox,
   DatePicker,
+  TooltipProps,
 } from "antd";
 import { groupBy, isEqual, isNil } from "lodash";
 import { getRealValue, getRealValueOptions } from "./util";
@@ -66,6 +67,17 @@ const getOptsGroups = (
       )}
     </Select.OptGroup>
   ));
+};
+
+const getTooltip = (tooltip: string): TooltipProps => {
+  if (!tooltip) {
+    return undefined;
+  }
+  return {
+    title: tooltip
+      ?.split("\n")
+      .map((line, index) => <div key={index}>{line}</div>),
+  };
 };
 
 export function ColumnComponent(
@@ -154,6 +166,7 @@ export function ColumnComponent(
           label={labelNode}
           name={[fieldName, name]}
           rules={rules}
+          tooltip={getTooltip(column.tooltip)}
         >
           <Input.TextArea {...column.props} />
         </Form.Item>
@@ -168,6 +181,7 @@ export function ColumnComponent(
           label={labelNode}
           name={[fieldName, name]}
           rules={rules}
+          tooltip={getTooltip(column.tooltip)}
         >
           <Input
             style={{ width: "100%" }}
@@ -192,6 +206,7 @@ export function ColumnComponent(
           label={labelNode}
           name={[fieldName, name]}
           rules={rules}
+          tooltip={getTooltip(column.tooltip)}
         >
           <InputNumber
             style={{ width: "100%" }}
@@ -214,6 +229,7 @@ export function ColumnComponent(
           label={labelNode}
           name={[fieldName, name]}
           rules={rules}
+          tooltip={getTooltip(column.tooltip)}
         >
           <Input.Password
             style={{ width: "100%" }}
@@ -262,6 +278,7 @@ export function ColumnComponent(
           label={labelNode}
           name={[fieldName, name]}
           rules={rules}
+          tooltip={getTooltip(column.tooltip)}
         >
           <Select
             className={suffix && style.suffixBrickSelect}
@@ -312,6 +329,7 @@ export function ColumnComponent(
           label={labelNode}
           name={[fieldName, name]}
           rules={rules}
+          tooltip={getTooltip(column.tooltip)}
         >
           <Cascader
             style={{ width: "100%" }}
@@ -351,6 +369,7 @@ export function ColumnComponent(
           label={labelNode}
           name={[fieldName, name]}
           rules={rules}
+          tooltip={getTooltip(column.tooltip)}
         >
           <CodeEditorItem
             placeholder={placeholder}
@@ -381,6 +400,7 @@ export function ColumnComponent(
           label={labelNode}
           name={[fieldName, name]}
           rules={rules}
+          tooltip={getTooltip(column.tooltip)}
         >
           <AutoCompleteItem
             options={options}
@@ -401,6 +421,7 @@ export function ColumnComponent(
           name={[fieldName, name]}
           rules={rules}
           valuePropName="checked"
+          tooltip={getTooltip(column.tooltip)}
         >
           <Checkbox {...column.props}>{column.props?.text}</Checkbox>
         </Form.Item>
@@ -414,6 +435,7 @@ export function ColumnComponent(
           label={labelNode}
           name={[fieldName, name]}
           rules={rules}
+          tooltip={getTooltip(column.tooltip)}
         >
           <TimeRangePickerItem {...column.props} />
         </Form.Item>
