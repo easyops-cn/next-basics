@@ -290,6 +290,44 @@ describe("ColumnComponent", () => {
     expect(wrapper.find(Form.Item).prop("label")).toBeFalsy();
   });
 
+  it("tooltip should work", () => {
+    const wrapper = shallow(
+      <ColumnComponent
+        column={{
+          ...inputColumn,
+          tooltip: "l1\nl2",
+        }}
+        field={field}
+        rowIndex={0}
+      />
+    );
+    const tooltip = wrapper.find(Form.Item).prop("tooltip");
+
+    // 验证 tooltip 是否为对象
+    expect(typeof tooltip).toBe("object");
+
+    // 验证 tooltip 是否有 title 属性
+    expect(tooltip).toHaveProperty("title");
+
+    // 验证 title 是否为数组
+    expect(Array.isArray(tooltip.title)).toBe(true);
+
+    // 验证数组长度
+    expect(tooltip.title).toHaveLength(2);
+
+    // 验证每个元素的类型和内容
+    const titles = tooltip.title;
+    expect(titles[0].type).toBe("div");
+    expect(titles[0].props.children).toBe("l1");
+    expect(titles[1].type).toBe("div");
+    expect(titles[1].props.children).toBe("l2");
+
+    wrapper.setProps({
+      column: inputColumn,
+    });
+    expect(wrapper.find(Form.Item).prop("tooltip")).toBeUndefined();
+  });
+
   it("disabled should work", () => {
     const wrapper = shallow(
       <ColumnComponent

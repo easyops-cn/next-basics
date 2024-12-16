@@ -310,6 +310,10 @@ export interface BasicColumn {
    * gridColumns 设置后，每个表单项所占的列数
    */
   span?: number;
+  /**
+   * 表单项提示信息
+   */
+  tooltip?: string;
 }
 
 export type Column = BasicColumn &
