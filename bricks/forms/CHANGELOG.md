@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.304.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.304.3...@next-bricks/forms@1.304.4) (2024-12-20)
+
+
+### Bug Fixes
+
+* **upload-files-v2:** refine file size limit error message ([d278db2](https://github.com/easyops-cn/next-basics/commit/d278db2df5c5023c2144c0377af0e1a0b0a8fa8c))
+
+
+
+
+
 ## [1.304.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.304.2...@next-bricks/forms@1.304.3) (2024-12-17)
 
 **Note:** Version bump only for package @next-bricks/forms
