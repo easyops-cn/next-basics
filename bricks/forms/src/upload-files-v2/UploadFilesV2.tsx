@@ -15,7 +15,6 @@ import { UploadFile, RcFile } from "antd/lib/upload/interface";
 import { FileUtils } from "../utils";
 import { UploadButtonProps } from "../interfaces";
 import { parseTemplate } from "@next-libs/cmdb-utils";
-import i18n from "i18next";
 
 interface UploadFilesV2Props extends FormItemWrapperProps {
   onChange?: any;
@@ -114,13 +113,19 @@ export function RealUploadFile(
   };
 
   const handleBeforeUpload = (file: RcFile): Promise<RcFile> | boolean => {
-    if (FileUtils.sizeCompare(file, props.limitSize ?? 100)) {
+    const limitSize = props.limitSize ?? 100;
+
+    if (FileUtils.sizeCompare(file, limitSize)) {
       // 如果上传文件大小大于限定大小
-      props.onError?.(i18n.t(`${NS_FORMS}:${K.VOLUME_TOO_BIG}`));
-      props.onCustomError?.("size", i18n.t(`${NS_FORMS}:${K.VOLUME_TOO_BIG}`));
+      const message = t(K.VOLUME_TOO_BIG, {
+        size: limitSize,
+        unit: "MB",
+      });
+      props.onError?.(message);
+      props.onCustomError?.("size", message);
       return new Promise((_resolve, reject) => {
         // 返回reject阻止文件添加
-        reject(new Error(i18n.t(`${NS_FORMS}:${K.VOLUME_TOO_BIG}`)));
+        reject(new Error(message));
       });
     }
     if (props.accept) {
@@ -134,12 +139,9 @@ export function RealUploadFile(
         return fileType === type;
       });
       if (!isValidType) {
-        props.onCustomError?.(
-          "accept",
-          i18n.t(`${NS_FORMS}:${K.NO_SUPPORT_FILE_TYPE}`)
-        );
+        props.onCustomError?.("accept", t(K.NO_SUPPORT_FILE_TYPE));
         return new Promise((_resolve, reject) => {
-          reject(new Error(i18n.t(`${NS_FORMS}:${K.NO_SUPPORT_FILE_TYPE}`)));
+          reject(new Error(t(K.NO_SUPPORT_FILE_TYPE)));
         });
       }
     }
@@ -149,14 +151,9 @@ export function RealUploadFile(
         file?.name ?? ""
       );
       if (!isValidFileName) {
-        props.onCustomError?.(
-          "name",
-          i18n.t(`${NS_FORMS}:${K.FILE_NAME_VALIDATE_MESSAGE_LOG}`)
-        );
+        props.onCustomError?.("name", t(K.FILE_NAME_VALIDATE_MESSAGE_LOG));
         return new Promise((_resolve, reject) => {
-          reject(
-            new Error(i18n.t(`${NS_FORMS}:${K.FILE_NAME_VALIDATE_MESSAGE_LOG}`))
-          );
+          reject(new Error(t(K.FILE_NAME_VALIDATE_MESSAGE_LOG)));
         });
       }
     }
@@ -312,8 +309,7 @@ export function RealUploadFile(
             <GeneralIcon icon={buttonIcon} />
           </p>
           <p className="ant-upload-text">
-            {props.draggableUploadText ??
-              i18n.t(`${NS_FORMS}:${K.CLICK_AND_DRAP_FIEL}`)}
+            {props.draggableUploadText ?? t(K.CLICK_AND_DRAP_FIEL)}
           </p>
           <p className="ant-upload-hint">
             {props.draggableUploadHint ?? t(K.DRAGGABLE_UPLOAD_HINT)}

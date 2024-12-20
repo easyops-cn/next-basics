@@ -350,7 +350,7 @@ describe("UploadFilesV2", () => {
         ]
       );
       await expect(notAllowResult).rejects.toStrictEqual(
-        new Error(i18n.t(`${NS_FORMS}:${K.VOLUME_TOO_BIG}`))
+        new Error(K.VOLUME_TOO_BIG)
       );
 
       wrapper.setProps({
@@ -624,7 +624,7 @@ describe("UploadFilesV2", () => {
     );
     wrapper.update();
     await expect(notAllowResult).rejects.toStrictEqual(
-      new Error(i18n.t(`${NS_FORMS}:${K.FILE_NAME_VALIDATE_MESSAGE_LOG}`))
+      new Error(K.FILE_NAME_VALIDATE_MESSAGE_LOG)
     );
     expect(wrapper.find(".ant-upload-list-item").length).toBe(0);
     expect(onCustomError).toHaveBeenCalled();

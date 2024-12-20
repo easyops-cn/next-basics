@@ -138,8 +138,7 @@ const locale: Locale = {
   [K.DAY]: "Day",
   [K.MINUTE]: "Minute",
   [K.CLICK_AND_DRAP_FIEL]: "Click or drag the file to this area",
-  [K.VOLUME_TOO_BIG]:
-    "The volume of the uploaded file exceeds the limit. Procedure",
+  [K.VOLUME_TOO_BIG]: "Upload file size larger than {{size}}{{unit}}",
   [K.ADD]: "Add",
   [K.MONTH]: "month",
   [K.CORRECT_CRONT_MSG]: "Please enter the correct time format",
