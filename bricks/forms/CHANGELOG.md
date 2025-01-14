@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.304.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.304.5...@next-bricks/forms@1.304.6) (2025-01-14)
+
+
+### Bug Fixes
+
+* 服务链路接口所属服务搜索框清空后无法选择其他数据 ([fbacae9](https://github.com/easyops-cn/next-basics/commit/fbacae93f92691e1b7652d5067a6f32d11563cff))
+
+
+
+
+
 ## [1.304.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.304.4...@next-bricks/forms@1.304.5) (2024-12-26)
 
 **Note:** Version bump only for package @next-bricks/forms
