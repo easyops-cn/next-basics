@@ -137,6 +137,7 @@ export function GeneralSelectLegacy(
   const [checkedValue, setCheckedValue] = useState(props.value);
   const [options, setOptions] = useState<GeneralComplexOption[]>(props.options);
   const [requestStatus, setRequestStatus] = useState<RequestStatus>();
+  const [clearEdValue, setClearEdValue] = useState<boolean>(false);
   const shouldTriggerOnValueChangeArgs = useRef(true);
   const curOptionData = useRef<GeneralComplexOption | GeneralComplexOption[]>();
   const request = useProvider({ cache: false });
@@ -202,6 +203,7 @@ export function GeneralSelectLegacy(
         : options.find((item) => item.value === newValue);
     props.onChangeV2?.(newValueV2);
     setCheckedValue(newValue);
+    setClearEdValue(isNil(newValue));
   };
 
   const handleDebounceSearch = React.useMemo(() => {
@@ -259,14 +261,24 @@ export function GeneralSelectLegacy(
   );
 
   useEffect(() => {
-    props?.useBackend?.onValueChangeArgs &&
-      shouldTriggerOnValueChangeArgs.current &&
-      !(Array.isArray(props.value)
-        ? props.value.length === 0
-        : isNil(props.value)) &&
-      handleSearchQuery(props.value, "valueChange");
-    shouldTriggerOnValueChangeArgs.current = true;
-  }, [props.value, props.fields, props.useBackend]);
+    /**
+     * 确保清空之后能重新获取数据
+     */
+    if (clearEdValue) {
+      setTimeout(() => {
+        handleSearchQuery(props.value, "valueChange");
+        setClearEdValue(false);
+      }, 300);
+    } else {
+      props?.useBackend?.onValueChangeArgs &&
+        shouldTriggerOnValueChangeArgs.current &&
+        !(Array.isArray(props.value)
+          ? props.value.length === 0
+          : isNil(props.value)) &&
+        handleSearchQuery(props.value, "valueChange");
+      shouldTriggerOnValueChangeArgs.current = true;
+    }
+  }, [props.value, props.fields, props.useBackend, clearEdValue]);
 
   const handleDebounceBackendSearch = useMemo(() => {
     return debounce(handleSearchQuery, props.debounceSearchDelay || 300);
