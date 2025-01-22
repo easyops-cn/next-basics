@@ -34,23 +34,33 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
   const [addEnumsMode, setAddEnumsMode] = React.useState("default");
   const [treeData, setTreeData] = useState([]);
   const [treeRegexString, setTreeRegexString] = useState("");
-  const [treeDefaultValue, setTreeDefaultValue] = useState([]);
+  const [treeDefaultValue, setTreeDefaultValue] = useState(
+    props.isMulti ? [] : ""
+  );
   const { TextArea } = Input;
 
   React.useEffect(() => {
     const enumsMode =
-      useTreeEnum && props.isMulti && props.value?.mode === "cascade"
-        ? "cascade"
-        : "default";
+      useTreeEnum && props.value?.mode === "cascade" ? "cascade" : "default";
     setAddEnumsMode(enumsMode);
     const defaultValus = Array.isArray(props.value?.default)
       ? (props.value?.default as string[])?.filter((i) =>
           props.value?.regex.includes(i)
         )
       : [];
-    setTreeDefaultValue(enumsMode === "cascade" ? defaultValus : []);
+    const treeDefaultValue = props.isMulti
+      ? enumsMode === "cascade"
+        ? defaultValus
+        : []
+      : enumsMode === "cascade"
+      ? props.value?.default
+      : "";
+
+    setTreeDefaultValue(treeDefaultValue);
     setTreeData(
-      enumsMode === "cascade" ? treeEnumFormat(props.value?.regex) : []
+      enumsMode === "cascade"
+        ? treeEnumFormat(props.value?.regex, props.isMulti)
+        : []
     );
     setTreeRegexString(
       enumsMode === "cascade" ? props.value?.regex?.join("\n") : ""
@@ -70,7 +80,7 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
     let value;
     if (type === "regex") {
       setTreeRegexString(e.target.value);
-      const regexData = treeEnumFormat(e.target.value);
+      const regexData = treeEnumFormat(e.target.value, props.isMulti);
       setTreeData(regexData);
       setTreeDefaultValue([]);
       value = {
@@ -106,7 +116,7 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
 
   return (
     <>
-      {props.isMulti && useTreeEnum && (
+      {useTreeEnum && (
         <>
           {i18n.t(`${NS_FORMS}:${K.ENUM_BODY_DEFINATION}`)}
           <Row className={styles.typeSelected}>
@@ -187,7 +197,7 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
                 allowClear
                 treeData={treeData}
                 disabled={props.disabled}
-                treeCheckable
+                treeCheckable={props.isMulti}
                 placeholder={i18n.t(
                   `${NS_FORMS}:${K.PLEASE_SELECT_TREE_ENUMERATED_VALUE}`
                 )}

@@ -271,6 +271,7 @@ export function CmdbObjectAttrValueItem(
           <ObjectAttrEnum
             value={value}
             onChange={onValueChange}
+            isMulti={false}
             disabled={attrDisabled}
           />
         );

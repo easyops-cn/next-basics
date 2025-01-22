@@ -2705,10 +2705,39 @@
     js-base64 "^3.7.7"
     marked "^2.1.3"
 
+"@next-libs/cmdb-instances@^7.24.3":
+  version "7.24.3"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-7.24.3.tgz#b3c7171489638aeb2d411dd8aabddf38ef5aea6a"
+  integrity sha512-HQJTmZiPm9G/ppaOPUsaFJUtFqaPjsJ1pu2u247KEZyXIfLBmh3hM61aRXzAA/F3m0d5FZ2e8wOgl8Dit9II+g==
+  dependencies:
+    "@next-core/brick-types" "^2.97.0"
+    "@next-libs/basic-components" "^5.5.1"
+    "@next-libs/cmdb-utils" "^3.7.4"
+    "@next-libs/code-display-components" "^2.1.0"
+    "@next-libs/code-editor-components" "^4.12.4"
+    "@next-libs/forms" "^3.6.1"
+    "@next-libs/storage" "^2.0.4"
+    "@next-sdk/cmdb-sdk" "^3.1.0"
+    "@next-sdk/permission-sdk" "^2.1.1"
+    "@types/file-saver" "^2.0.3"
+    classnames "^2.3.2"
+    dompurify "^2.4.1"
+    file-saver "^2.0.5"
+    immutability-helper "^3.1.1"
+    js-base64 "^3.7.7"
+    marked "^2.1.3"
+
 "@next-libs/cmdb-utils@^3.7.3":
   version "3.7.3"
   resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-3.7.3.tgz#14421147a96c310792939f66707a2cafe2733739"
   integrity sha512-gnGmvgoeSD8M8LIcFBmvMFXNp1gmUeWKYIgYKpyTWfTCp6y6Vmf8/eBqsj5xBFoYbS9MeE1m1dVxA4Wz6THwIw==
+  dependencies:
+    "@next-sdk/cmdb-sdk" "^2.3.1"
+
+"@next-libs/cmdb-utils@^3.7.4":
+  version "3.7.4"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-3.7.4.tgz#43a5a5c1c967f325196b355218578cb92dc07040"
+  integrity sha512-pxtLrkiL3InLrLLDUdPswsS/zvQtmalKy2/IG2gQ0PQ7V2z4ubPRmv7HG58E/nJ3fDGUozRuvG21Euv+EVl1Nw==
   dependencies:
     "@next-sdk/cmdb-sdk" "^2.3.1"
 
