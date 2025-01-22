@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.304.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.304.6...@next-bricks/forms@1.304.7) (2025-01-22)
+
+
+### Bug Fixes
+
+* 模型属性中，单选枚举型支持显示为树状结构 refs: CMDB_MODEL-345 ([1fd4c7c](https://github.com/easyops-cn/next-basics/commit/1fd4c7c53b973ccfb244a96500bbb991628f5f63))
+
+
+
+
+
 ## [1.304.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.304.5...@next-bricks/forms@1.304.6) (2025-01-14)
 
 
