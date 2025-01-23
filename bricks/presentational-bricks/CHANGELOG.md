@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.328.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.328.6...@next-bricks/presentational-bricks@1.328.7) (2025-01-23)
+
+
+### Bug Fixes
+
+* fix table selection column padding ([6d9a005](https://github.com/easyops-cn/next-basics/commit/6d9a00593d0cc9a6ac3c680a6af0879b28b557b9))
+
+
+
+
+
 ## [1.328.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.328.5...@next-bricks/presentational-bricks@1.328.6) (2025-01-23)
 
 
