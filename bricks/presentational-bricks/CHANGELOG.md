@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.329.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.328.7...@next-bricks/presentational-bricks@1.329.0) (2025-01-23)
+
+
+### Features
+
+* **brick-tree:** add beforeTreeBrick property ([962731f](https://github.com/easyops-cn/next-basics/commit/962731f717a9d0c8ea11f5e1ebecd701da0da2f3))
+
+
+
+
+
 ## [1.328.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.328.6...@next-bricks/presentational-bricks@1.328.7) (2025-01-23)
 
 
