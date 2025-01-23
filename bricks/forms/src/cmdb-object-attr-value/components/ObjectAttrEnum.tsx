@@ -195,6 +195,7 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
                 style={{ width: "100%" }}
                 value={treeDefaultValue}
                 allowClear
+                showSearch
                 treeData={treeData}
                 disabled={props.disabled}
                 treeCheckable={props.isMulti}
