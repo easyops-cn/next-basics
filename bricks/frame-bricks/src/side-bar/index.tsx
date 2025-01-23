@@ -52,6 +52,16 @@ export class SideBarElement extends UpdatingElement {
   hiddenFixedIcon: boolean;
 
   /**
+   * @default false
+   * @description 是否跟导航栏搭配使用，之前默认搭配导航栏使用，当隐藏上方导航栏，单独显示左侧
+   * 菜单栏时，由于该菜单的位置偏移量为固定值，需要重新计算位置和样式
+   */
+  @property({
+    type: Boolean,
+  })
+  noAppNavBar: boolean;
+
+  /**
    * @detail
    * @description
    */
@@ -81,7 +91,9 @@ export class SideBarElement extends UpdatingElement {
         "width var(--side-bar-collapse-transition-duration) var(--side-bar-collapse-transition-timing-function)";
       this.style.position = "fixed";
       this.style.left = "0px";
-      this.style.top = "var(--app-bar-height-with-tips, var(--app-bar-height))";
+      this.style.top = this.noAppNavBar
+        ? "0px"
+        : "var(--app-bar-height-with-tips, var(--app-bar-height))";
       this.style.zIndex = "999";
     }
     this._render();
@@ -103,6 +115,7 @@ export class SideBarElement extends UpdatingElement {
             hiddenFixedIcon={this.hiddenFixedIcon}
             onSideBarFixed={this.handleSideBarFixed}
             onSideBarResize={this.handleSideBarResize}
+            noAppNavBar={this.noAppNavBar}
           />
         </BrickWrapper>,
         this

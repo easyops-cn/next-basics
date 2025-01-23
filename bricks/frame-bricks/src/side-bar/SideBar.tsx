@@ -28,6 +28,7 @@ interface SideBarProps {
   hiddenFixedIcon?: boolean;
   onSideBarFixed?: (isFiexed: boolean) => void;
   onSideBarResize?: (value: string) => void;
+  noAppNavBar?: boolean;
 }
 
 export enum ExpandedState {
@@ -52,6 +53,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
     onSideBarResize,
     hiddenFixedIcon,
     wrapperDOM,
+    noAppNavBar,
   } = props;
   const contentContainerRef = useRef<HTMLDivElement>();
   const storage = React.useMemo(() => new JsonStorage(localStorage), []);
@@ -225,11 +227,13 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         [styles.dragging]: !!dragging,
       })}
       style={{
-        height: `calc(100vh - var(--app-bar-height-with-tips, ${
-          tipList.length
-            ? `calc(var(--app-bar-height) + ${tipList.length * 32}px)`
-            : "var(--app-bar-height)"
-        }))`,
+        height: noAppNavBar
+          ? "100vh"
+          : `calc(100vh - var(--app-bar-height-with-tips, ${
+              tipList.length
+                ? `calc(var(--app-bar-height) + ${tipList.length * 32}px)`
+                : "var(--app-bar-height)"
+            }))`,
         width:
           expandedState === ExpandedState.Collapsed
             ? "var(--side-bar-collapsed-width)"

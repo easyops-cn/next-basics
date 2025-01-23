@@ -152,4 +152,25 @@ describe("SideBar", () => {
     expect(getSideBarWidth()).toBe(310);
     expect(wrapper.find(".sideBarContainer").hasClass("dragging")).toBe(false);
   });
+
+  it("should work without nav bar", () => {
+    const wrapper = mount(
+      <SideBar
+        noAppNavBar={true}
+        menu={{
+          title: "",
+          menuItems: [
+            {
+              text: "page-1",
+              type: "default",
+              to: "/page-1",
+            },
+          ],
+        }}
+      />
+    );
+
+    const container = wrapper.find(".sideBarContainer");
+    expect(container.prop("style").height).toEqual("100vh");
+  });
 });
