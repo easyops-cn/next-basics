@@ -199,6 +199,7 @@ export interface BrickTreeProps {
   suffixBrick?: { useBrick: UseBrickConf };
   suffixStopEvent?: boolean;
   afterSearchBrick?: { useBrick: UseBrickConf };
+  beforeTreeBrick?: { useBrick: UseBrickConf };
   showSpecificationTitleStyle?: boolean;
   defaultExpandAll?: boolean;
   deselectable?: boolean;
@@ -226,6 +227,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     suffixBrick,
     suffixStopEvent,
     afterSearchBrick,
+    beforeTreeBrick,
     showSpecificationTitleStyle,
     defaultExpandAll,
     deselectable,
@@ -246,7 +248,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
   const [expandedKeys, setExpandedKeys] = useState<React.Key[]>();
   const [searchValue, setSearchValue] = useState<string>(searchQ);
   const [inputValue, setInputValue] = useState<string>(searchQ);
-  const treeContainerRef = useRef<HTMLDivElement>();
+  const treeWrapperRef = useRef<HTMLDivElement>();
   const nodeMatchedRef = useRef<boolean>(false);
 
   const defaultData = useMemo(
@@ -463,12 +465,12 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
                 return (el: HTMLElement) => {
                   if (el) {
                     const nodeEl = el.closest(".ant-tree-treenode") || el;
-                    const treeContainerEl = treeContainerRef.current;
+                    const treeWrapperEl = treeWrapperRef.current;
 
-                    treeContainerEl?.scrollBy(
+                    treeWrapperEl?.scrollBy(
                       undefined,
                       nodeEl.getBoundingClientRect().top -
-                        treeContainerEl.getBoundingClientRect().top
+                        treeWrapperEl.getBoundingClientRect().top
                     );
                   }
                 };
@@ -499,12 +501,12 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
                 return (el: HTMLElement) => {
                   if (el) {
                     const nodeEl = el.closest(".ant-tree-treenode") || el;
-                    const treeContainerEl = treeContainerRef.current;
+                    const treeWrapperEl = treeWrapperRef.current;
 
-                    treeContainerEl.scrollBy(
+                    treeWrapperEl.scrollBy(
                       undefined,
                       nodeEl.getBoundingClientRect().top -
-                        treeContainerEl.getBoundingClientRect().top
+                        treeWrapperEl.getBoundingClientRect().top
                     );
                   }
                 };
@@ -553,25 +555,27 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     isDirectory ? <DirectoryTree {...props} /> : <Tree {...props} />;
 
   return (
-    <>
+    <div className={styles.treeContainer}>
       {searchable && (
         <div style={{ display: "flex" }}>
           <Input.Search
             placeholder={placeholder}
             onChange={(e) => handleOnChange(e.target.value)}
             value={inputValue}
-            style={{ marginBottom: 8 }}
             data-testid="search-input"
           />
           {!isEmpty(afterSearchBrick?.useBrick) && (
             <BrickAsComponent
-              useBrick={afterSearchBrick?.useBrick}
+              useBrick={afterSearchBrick.useBrick}
             ></BrickAsComponent>
           )}
         </div>
       )}
+      {beforeTreeBrick?.useBrick && (
+        <BrickAsComponent useBrick={beforeTreeBrick.useBrick} />
+      )}
       {configProps.checkable && checkAllEnabled && (
-        <div style={{ marginBottom: 6, display: "flex", alignItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "center" }}>
           <Checkbox
             checked={allChecked}
             indeterminate={indeterminate}
@@ -597,7 +601,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
           [styles.titleSpace]: showSpecificationTitleStyle,
           [styles.hideBackground]: hideBackground,
         })}
-        ref={treeContainerRef}
+        ref={treeWrapperRef}
       >
         {treeData?.length ? (
           getTreeElement({
@@ -617,6 +621,6 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
         )}
       </div>
-    </>
+    </div>
   );
 }
