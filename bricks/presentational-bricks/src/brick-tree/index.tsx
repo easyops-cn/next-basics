@@ -254,6 +254,17 @@ export class BrickTreeElement extends UpdatingElement {
   afterSearchBrick: { useBrick: UseBrickConf };
 
   /**
+   * @kind { useBrick: [UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf) }
+   * @required false
+   * @default -
+   * @description 树上方的构件
+   */
+  @property({
+    attribute: false,
+  })
+  beforeTreeBrick: { useBrick: UseBrickConf };
+
+  /**
    * @kind boolean
    * @required false
    * @default `false`
@@ -361,6 +372,7 @@ export class BrickTreeElement extends UpdatingElement {
             suffixBrick={this.suffixBrick}
             suffixStopEvent={this.suffixStopEvent}
             afterSearchBrick={this.afterSearchBrick}
+            beforeTreeBrick={this.beforeTreeBrick}
             showSpecificationTitleStyle={this.showSpecificationTitleStyle}
             defaultExpandAll={this.defaultExpandAll}
             deselectable={this.deselectable}
