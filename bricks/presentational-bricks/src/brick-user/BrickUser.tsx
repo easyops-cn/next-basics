@@ -78,6 +78,8 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
 
   const tooltip = props.customTooltip
     ? props.customTooltip.replace("#{name}", name)
+    : props?.displayShowKey
+    ? showKey
     : name;
 
   return (
