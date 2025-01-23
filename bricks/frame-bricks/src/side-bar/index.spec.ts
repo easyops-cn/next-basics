@@ -17,4 +17,16 @@ describe("frame-bricks.side-bar", () => {
     document.body.removeChild(element);
     expect(unmountComponentAtNode).toBeCalled();
   });
+
+  it("should create a custom element without nav bar", () => {
+    const element = document.createElement("frame-bricks.side-bar") as any;
+    element.noAppNavBar = true;
+    document.body.appendChild(element);
+    expect(spyOnRender).toBeCalled();
+
+    const style = getComputedStyle(element);
+    expect(style.top).toEqual("0px");
+    document.body.removeChild(element);
+    expect(unmountComponentAtNode).toBeCalled();
+  });
 });
