@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.328.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.328.5...@next-bricks/presentational-bricks@1.328.6) (2025-01-23)
+
+
+### Bug Fixes
+
+* 故障工单列表和详情hover展示数据不对 ([5ca2c7f](https://github.com/easyops-cn/next-basics/commit/5ca2c7f47726507fc0c38588060733d2a32a7e9c))
+
+
+
+
+
 ## [1.328.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.328.4...@next-bricks/presentational-bricks@1.328.5) (2024-12-26)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
