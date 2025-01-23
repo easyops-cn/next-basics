@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.13...@next-bricks/frame-bricks@1.18.14) (2025-01-23)
+
+
+### Bug Fixes
+
+* refine sidebar layout ([89a4ec3](https://github.com/easyops-cn/next-basics/commit/89a4ec381182a464937d08c5eebe1ed940d7dacd))
+
+
+
+
+
 ## [1.18.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.18.12...@next-bricks/frame-bricks@1.18.13) (2024-12-26)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
