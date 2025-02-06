@@ -34,7 +34,7 @@ import {
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import { getInstanceNameKeys } from "@next-libs/cmdb-utils";
 import { InstanceListModal } from "@next-libs/cmdb-instances";
-import { getAuth, handleHttpError } from "@next-core/brick-kit";
+import { getAuth, handleHttpError, useProvider } from "@next-core/brick-kit";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { useTranslation } from "react-i18next";
 import {
@@ -67,6 +67,7 @@ export interface UserSelectFormItemProps {
   userQuery?: Record<string, any>;
   isMultiple?: boolean;
   filterPermissionActions?: string[];
+  externalSourceId?: string;
 }
 
 type ModelObjectItem = Partial<CmdbModels.ModelCmdbObject>;
@@ -96,6 +97,10 @@ export function LegacyUserSelectFormItem(
     userGroupQuery,
     mergeUseAndUserGroupFormValue,
   } = props;
+  const externalPostSearchV3 = useProvider(
+    "easyops.api.cmdb.topo_center@ProxyPostSearchV3:1.0.1",
+    { cache: false }
+  );
 
   const selectRef = useRef();
   const [selectedValue, setSelectedValue] = useState([]);
@@ -270,49 +275,76 @@ export function LegacyUserSelectFormItem(
       const { user = [], userGroup = [] } = groupMixedValue(mergedValue);
       const staticValueToSet = [];
       if (user.length && props.optionsMode !== "group") {
-        selectedUser = (
-          await InstanceApi_postSearch("USER", {
-            query: {
-              name: {
-                $in: user,
+        const instancesParams = {
+          query: {
+            name: {
+              $in: user,
+            },
+          },
+          page: 1,
+          page_size: user.length,
+          ignore_missing_field_error: true,
+          fields: {
+            ...zipObject(
+              userShowKey,
+              map(userShowKey, (v) => true)
+            ),
+            name: true,
+          },
+        };
+        /* istanbul ignore next */
+        if (props.externalSourceId) {
+          selectedUser = (
+            await externalPostSearchV3.query([
+              {
+                ...instancesParams,
+                objectId: "USER",
+                sourceId: props.externalSourceId,
+                fields: [...userShowKey, "name"],
               },
-            },
-
-            page: 1,
-            page_size: user.length,
-            fields: {
-              ...zipObject(
-                userShowKey,
-                map(userShowKey, (v) => true)
-              ),
-
-              name: true,
-            },
-          })
-        ).list;
+            ])
+          ).list;
+        } else {
+          selectedUser = (await InstanceApi_postSearch("USER", instancesParams))
+            .list;
+        }
       }
       if (userGroup.length && props.optionsMode !== "user") {
-        selectedUserGroup = (
-          await InstanceApi_postSearch("USER_GROUP", {
-            query: {
-              instanceId: {
-                // 默认带为":"+instanceId，这里查询的时候去掉前面的冒号
-                $in: map(userGroup, (v) => v.slice(1)),
+        const instancesParams = {
+          query: {
+            instanceId: {
+              // 默认带为":"+instanceId，这里查询的时候去掉前面的冒号
+              $in: map(userGroup, (v) => v.slice(1)),
+            },
+          },
+          page: 1,
+          page_size: userGroup.length,
+          ignore_missing_field_error: true,
+          fields: {
+            ...zipObject(
+              userGroupShowKey,
+              map(userGroupShowKey, (v) => true)
+            ),
+            name: true,
+          },
+        };
+        /* istanbul ignore next */
+        if (props.externalSourceId) {
+          selectedUserGroup = (
+            await externalPostSearchV3.query([
+              {
+                ...instancesParams,
+                objectId: "USER_GROUP",
+                sourceId: props.externalSourceId,
+                fields: [...userGroupShowKey, "name"],
               },
-            },
-
-            page: 1,
-            page_size: userGroup.length,
-            fields: {
-              ...zipObject(
-                userGroupShowKey,
-                map(userGroupShowKey, (v) => true)
-              ),
-
-              name: true,
-            },
-          })
-        ).list;
+            ])
+          ).list;
+        } else {
+          selectedUserGroup = (
+            await InstanceApi_postSearch("USER_GROUP", instancesParams)
+          ).list;
+        }
       }
       let labelValue = [
         ...map(selectedUser, (v) => {
@@ -355,7 +387,7 @@ export function LegacyUserSelectFormItem(
     if (isDifferent(mixedValue)) {
       initializeSelectedValue(mixedValue);
     }
-  }, [props.value]);
+  }, [props.value, props.externalSourceId]);
 
   const fetchInstanceList = async (
     objectId: "USER" | "USER_GROUP",
@@ -372,23 +404,37 @@ export function LegacyUserSelectFormItem(
           }
         : {}),
     };
-    return (
-      await InstanceApi_postSearch(objectId, {
-        page: 1,
-        page_size: 20,
-        fields: {
-          ...zipObject(
-            showKey,
-            map(showKey, (v) => true)
-          ),
+    const params = {
+      page: 1,
+      page_size: 20,
+      fields: {
+        ...zipObject(
+          showKey,
+          map(showKey, (v) => true)
+        ),
 
-          name: true,
-        },
-        query: {
-          $and: [...getQueries(objectId), showKeyQuery],
-        },
-      })
-    ).list;
+        name: true,
+      },
+      ignore_missing_field_error: true,
+      query: {
+        $and: [...getQueries(objectId), showKeyQuery],
+      },
+    };
+    /* istanbul ignore next */
+    if (props.externalSourceId) {
+      return (
+        await externalPostSearchV3.query([
+          {
+            ...params,
+            objectId,
+            sourceId: props.externalSourceId,
+            fields: [...showKey, "name"],
+          },
+        ])
+      ).list;
+    } else {
+      return (await InstanceApi_postSearch(objectId, params)).list;
+    }
   };
 
   const searchUser = async (value: string) => {
@@ -489,13 +535,29 @@ export function LegacyUserSelectFormItem(
 
   const handleModalSelected = async (selectedKeys: string[]) => {
     if (selectedKeys?.length) {
-      const instances = (
-        await InstanceApi_postSearch(modalObjectId, {
-          query: { instanceId: { $in: selectedKeys } },
-          fields: { "*": true },
-          page_size: selectedKeys.length,
-        })
-      ).list;
+      const params = {
+        query: { instanceId: { $in: selectedKeys } },
+        fields: { "*": true },
+        page: 1,
+        page_size: selectedKeys.length,
+        ignore_missing_field_error: true,
+      };
+      let instances = [];
+      /* istanbul ignore next */
+      if (props.externalSourceId) {
+        instances = (
+          await externalPostSearchV3.query([
+            {
+              ...params,
+              fields: ["*"],
+              objectId: modalObjectId,
+              sourceId: props.externalSourceId,
+            },
+          ])
+        ).list;
+      } else {
+        instances = (await InstanceApi_postSearch(modalObjectId, params)).list;
+      }
       handleInstancesSelected(instances, modalObjectId);
     }
     setModalVisible(false);
@@ -527,26 +589,41 @@ export function LegacyUserSelectFormItem(
       // 如果已选择项中包含我，则不重新发起请求
       return;
     }
-    const myUser = (
-      await InstanceApi_postSearch("USER", {
-        query: {
-          name: {
-            $eq: myUserName,
+    const params = {
+      query: {
+        name: {
+          $eq: myUserName,
+        },
+      },
+
+      page: 1,
+      page_size: 1,
+      ignore_missing_field_error: true,
+      fields: {
+        ...zipObject(
+          userShowKey,
+          map(userShowKey, (v) => true)
+        ),
+        name: true,
+      },
+    };
+    let myUser = [];
+    /* istanbul ignore next */
+    if (props.externalSourceId) {
+      myUser = (
+        await externalPostSearchV3.query([
+          {
+            ...params,
+            objectId: "USER",
+            sourceId: props.externalSourceId,
+            fields: [...userShowKey, "name"],
           },
-        },
+        ])
+      ).list;
+    } else {
+      myUser = (await InstanceApi_postSearch("USER", params)).list;
+    }
 
-        page: 1,
-        page_size: 1,
-        fields: {
-          ...zipObject(
-            userShowKey,
-            map(userShowKey, (v) => true)
-          ),
-
-          name: true,
-        },
-      })
-    ).list;
     handleInstancesSelected(myUser, "USER");
   };
 
@@ -562,6 +639,7 @@ export function LegacyUserSelectFormItem(
     const iconWidth = props.hideSelectByCMDB ? 0 : -32;
     return btnWidth + lineWidth + iconWidth;
   };
+
   return (
     <div
       ref={ref}
@@ -655,6 +733,8 @@ export function LegacyUserSelectFormItem(
           objectId={modalObjectId}
           visible={modalVisible}
           title={title}
+          useExternalCmdbApi={!!props.externalSourceId}
+          externalSourceId={props.externalSourceId}
           onSelected={handleModalSelected}
           onCancel={closeModal}
           rowSelectionType={props.isMultiple ? "checkbox" : "radio"}
@@ -688,7 +768,10 @@ export function UserOrUserGroupSelect(
   const [objectList, setObjectList] = useState<ModelObjectItem[]>(
     props.objectList
   );
-
+  const externalGetObjectRef = useProvider(
+    "easyops.api.cmdb.topo_center@ProxyGetObjectRef:1.0.0",
+    { cache: false }
+  );
   useEffect(() => {
     if (!props.notRender) {
       (async () => {
@@ -697,11 +780,23 @@ export function UserOrUserGroupSelect(
             setObjectList(objectListCache);
           } else {
             try {
-              const list = (
-                await CmdbObjectApi_getObjectRef({
-                  ref_object: "USER,USER_GROUP",
-                })
-              ).data;
+              let list = [];
+              const ref_object = "USER,USER_GROUP";
+              /* istanbul ignore next */
+              if (props.externalSourceId) {
+                list = await externalGetObjectRef.query([
+                  {
+                    ref_object,
+                    sourceId: props.externalSourceId,
+                  },
+                ]);
+              } else {
+                list = (
+                  await CmdbObjectApi_getObjectRef({
+                    ref_object,
+                  })
+                ).data;
+              }
               setObjectList(list);
               objectListCache = list;
             } catch (e) {
@@ -714,7 +809,7 @@ export function UserOrUserGroupSelect(
         }
       })();
     }
-  }, [props.objectList, props.notRender]);
+  }, [props.objectList, props.notRender, props.externalSourceId]);
 
   return (
     <FormItemWrapper {...props}>
@@ -737,6 +832,7 @@ export function UserOrUserGroupSelect(
         userGroupQuery={props.userGroupQuery}
         isMultiple={props.isMultiple}
         filterPermissionActions={props.filterPermissionActions}
+        externalSourceId={props.externalSourceId}
       />
     </FormItemWrapper>
   );
