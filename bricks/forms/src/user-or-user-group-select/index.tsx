@@ -232,6 +232,15 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   })
   isMultiple?: boolean = true;
 
+  /**
+   * @kind string
+   * @required false
+   * @default
+   * @description 数据源id
+   */
+  @property({ type: String })
+  externalSourceId: string;
+
   /* =========================== events =========================== */
 
   /**
@@ -312,6 +321,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
             userGroupQuery={this.userGroupQuery}
             hideInvalidUser={this.hideInvalidUser}
             isMultiple={this.isMultiple}
+            externalSourceId={this.externalSourceId}
           />
         </BrickWrapper>,
         this
