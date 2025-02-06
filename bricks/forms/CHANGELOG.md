@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.305.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.304.8...@next-bricks/forms@1.305.0) (2025-02-06)
+
+
+### Features
+
+* 用户、用户组组件支持数据源 ([3063938](https://github.com/easyops-cn/next-basics/commit/30639389b8b4d3f97158b798425c282e55117f91))
+
+
+
+
+
 ## [1.304.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.304.7...@next-bricks/forms@1.304.8) (2025-01-23)
 
 
