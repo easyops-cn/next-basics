@@ -26,6 +26,10 @@
   .circleShapeButton {
     border-radius: 16px;
   }
+  :global(.ant-dropdown-open) {
+    color: var(--color-brand) !important;
+    background: var(--antd-btn-special-icon-type-hover-bg) !important;
+  }
 }
 
 .dropdownBtnIconContainer {
@@ -84,10 +88,7 @@
     }
   }
 }
-.dropdown {
-  color: var(--color-brand) !important;
-  background: var(--antd-btn-special-icon-type-hover-bg) !important;
-}
+
 .moreIconButton {
   background: var(--antd-btn-special-icon-type-bg);
   color: var(--antd-btn-special-icon-type-color);
