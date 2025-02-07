@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.258.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.4...@next-bricks/basic-bricks@1.258.5) (2025-02-07)
+
+
+### Bug Fixes
+
+* 小尺寸按钮在点击后不应该保持高亮样式 ([56d5e81](https://github.com/easyops-cn/next-basics/commit/56d5e813831bc8e18db012c1f8d3242902760634))
+
+
+
+
+
 ## [1.258.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.3...@next-bricks/basic-bricks@1.258.4) (2024-12-26)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
