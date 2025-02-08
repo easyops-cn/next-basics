@@ -183,6 +183,9 @@ export class PreviewContainerElement extends UpdatingElement {
     this._handlePreviewResizeEvent.emit(resize);
   };
 
+  /**
+   * @deprecated Use `inspectDataValueCallback()` instead.
+   */
   @event({ type: "inspect.single.data.value.success" })
   private _handleInspectSingleDataValueSuccessEvent: EventEmitter<unknown>;
 
@@ -190,6 +193,9 @@ export class PreviewContainerElement extends UpdatingElement {
     this._handleInspectSingleDataValueSuccessEvent.emit(value);
   };
 
+  /**
+   * @deprecated Use `inspectAllDataValueCallback()` instead.
+   */
   @event({ type: "inspect.all.data.values.success" })
   private _handleInspectAllDataValuesSuccessEvent: EventEmitter<
     Map<string, StoryboardContextItem>
@@ -201,6 +207,9 @@ export class PreviewContainerElement extends UpdatingElement {
     this._handleInspectAllDataValuesSuccessEvent.emit(value);
   };
 
+  /**
+   * @deprecated Use `inspectDataValueCallback()` or `inspectAllDataValueCallback()` instead.
+   */
   @event({ type: "inspect.data.value.error" })
   private _handleInspectDataValueErrorEvent: EventEmitter<unknown>;
 
@@ -279,15 +288,42 @@ export class PreviewContainerElement extends UpdatingElement {
   }
 
   // istanbul ignore next
+  /**
+   * @deprecated Use `inspectDataValueCallback()` instead.
+   */
   @method()
   inspectDataValue(name: string, option: PreviewDataOption): any {
     return this._previewContainerRef.current.inspectDataValue(name, option);
   }
 
   // istanbul ignore next
+  /**
+   * @deprecated Use `inspectAllDataValueCallback()` instead.
+   */
   @method()
   inspectAllDataValue(option: PreviewDataOption): any {
     return this._previewContainerRef.current.inspectDataValue(
+      undefined,
+      option
+    );
+  }
+
+  // istanbul ignore next
+  @method()
+  inspectDataValueCallback(
+    name: string,
+    option: PreviewDataOption
+  ): Promise<unknown> {
+    return this._previewContainerRef.current.inspectDataValueCallback(
+      name,
+      option
+    );
+  }
+
+  // istanbul ignore next
+  @method()
+  inspectAllDataValueCallback(option: PreviewDataOption): Promise<unknown> {
+    return this._previewContainerRef.current.inspectDataValueCallback(
       undefined,
       option
     );

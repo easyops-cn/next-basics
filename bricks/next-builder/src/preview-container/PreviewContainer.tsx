@@ -48,7 +48,7 @@ import {
   BuilderRuntimeNode,
   useBuilderDataManager,
 } from "@next-core/editor-bricks-helper";
-import { omit } from "lodash";
+import { omit, uniqueId } from "lodash";
 import {
   batchSetAppsLocalTheme,
   developHelper,
@@ -113,6 +113,10 @@ export interface PreviewContainerRef {
   back(): void;
   forward(): void;
   inspectDataValue(name: string, option: PreviewDataOption): void;
+  inspectDataValueCallback(
+    name: string,
+    option: PreviewDataOption
+  ): Promise<unknown>;
   debugDataValue(debugData: PreviewDebugData, options: PreviewDataOption): void;
   manager: BuilderDataManager;
 }
@@ -616,6 +620,58 @@ export function LegacyPreviewContainer(
     [previewOrigin]
   );
 
+  const inspectDataValueCallback = useCallback(
+    (name: string, option: PreviewDataOption) =>
+      new Promise((resolve, reject) => {
+        const _id = uniqueId();
+        const listener = ({
+          data,
+          origin,
+        }: MessageEvent<
+          PreviewMessageToContainer & { _id?: string }
+        >): void => {
+          if (
+            data &&
+            data.sender === "previewer" &&
+            origin === previewOrigin &&
+            data._id === _id
+          ) {
+            window.removeEventListener("message", listener);
+            switch (data.type) {
+              case "inspect-single-data-value-success":
+              case "inspect-all-data-values-success":
+                resolve((data.data as { value: unknown }).value);
+                break;
+              case "inspect-data-value-error":
+                reject(data.data);
+                break;
+              default:
+                reject({
+                  message: `unexpected message type, expected one of [inspect-single-data-value-success, inspect-all-data-values-success, inspect-data-value-error], received: "${data.type}"`,
+                });
+                break;
+            }
+          }
+        };
+        window.addEventListener("message", listener);
+        iframeRef.current.contentWindow.postMessage(
+          {
+            sender: "preview-container",
+            type: "inspect-data-value",
+            name,
+            option,
+            _id, // adding _id to the payload to keep track of the request
+          } as PreviewBaseMessage,
+          previewOrigin
+        );
+        setTimeout(() => {
+          window.removeEventListener("message", listener);
+          reject({ message: "timeout" });
+        }, 3000);
+      }),
+    [previewOrigin]
+  );
+
   const debugDataValue = useCallback(
     async (debugData: PreviewDebugData, options: PreviewDataOption) => {
       try {
@@ -740,6 +796,7 @@ export function LegacyPreviewContainer(
     back,
     forward,
     inspectDataValue,
+    inspectDataValueCallback,
     debugDataValue,
   }));
 
