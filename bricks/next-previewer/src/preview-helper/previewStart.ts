@@ -160,7 +160,11 @@ export function previewStart(
     getHistory().reload();
   };
 
-  const handlePreviewData = (name: string, option: PreviewDataOption): void => {
+  const handlePreviewData = (
+    name: string,
+    option: PreviewDataOption,
+    _id?: string
+  ): void => {
     try {
       const { dataType } = option;
       let tplContextId;
@@ -174,6 +178,7 @@ export function previewStart(
         if (!tplContextId) {
           sendMessage<PreviewMessagePreviewDataValueError>({
             type: "inspect-data-value-error",
+            _id,
             data: {
               error: {
                 message:
@@ -208,6 +213,7 @@ export function previewStart(
 
       sendMessage<PreviewMessagePreviewDataValueSuccess>({
         type,
+        _id,
         data: {
           name,
           value,
@@ -218,6 +224,7 @@ export function previewStart(
     } catch (error) {
       sendMessage<PreviewMessagePreviewDataValueError>({
         type: "inspect-data-value-error",
+        _id,
         data: {
           message: error.message,
         },
@@ -354,7 +361,7 @@ export function previewStart(
             );
             break;
           case "inspect-data-value":
-            handlePreviewData(data.name, data.option);
+            handlePreviewData(data.name, data.option, data._id);
             break;
           case "update-preview-url": {
             // Remove origin first.

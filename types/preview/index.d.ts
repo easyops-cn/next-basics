@@ -33,6 +33,7 @@ export interface PreviewBaseMessage {
   sender: "builder" | "preview-container" | "previewer";
   type: string;
   forwardedFor?: "builder" | "previewer";
+  _id?: string;
 }
 
 export interface PreviewMessageBuilderHoverOnIframe
@@ -303,24 +304,28 @@ export interface PreviewMessagePreviewDataValueSuccess {
   sender: "previewer";
   type: "inspect-single-data-value-success" | "inspect-all-data-values-success";
   data: unknown;
+  _id?: string;
 }
 
 export interface PreviewMessagePreviewDebugValueSuccess {
   sender: "previewer";
   type: "debug-data-value-success";
   data: unknown;
+  _id?: string;
 }
 
 export interface PreviewMessagePreviewDebugValueError {
   sender: "previewer";
   type: "debug-data-value-error";
   data: unknown;
+  _id?: string;
 }
 
 export interface PreviewMessagePreviewDataValueError {
   sender: "previewer";
   type: "inspect-data-value-error";
   data: unknown;
+  _id?: string;
 }
 
 export interface PreviewMessagePreviewRuntimeData {
