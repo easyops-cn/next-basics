@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.15.11...@next-bricks/next-previewer@1.15.12) (2025-02-08)
+
+
+### Bug Fixes
+
+* support inspect callback ([6322925](https://github.com/easyops-cn/next-basics/commit/6322925e9f1d56dd8e9c39b1b85b3b565051b84e))
+
+
+
+
+
 ## [1.15.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.15.10...@next-bricks/next-previewer@1.15.11) (2024-10-29)
 
 **Note:** Version bump only for package @next-bricks/next-previewer
