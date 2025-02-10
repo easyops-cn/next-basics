@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.305.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.0...@next-bricks/forms@1.305.1) (2025-02-10)
+
+
+### Bug Fixes
+
+* **general-form-item:** fix control wrapper style with vertical form ([147f8a7](https://github.com/easyops-cn/next-basics/commit/147f8a7aef8af4477f617f8ef6abac8220921ad7))
+
+
+
+
+
 # [1.305.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.304.8...@next-bricks/forms@1.305.0) (2025-02-06)
 
 
