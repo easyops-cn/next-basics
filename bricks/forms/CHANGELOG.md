@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.305.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.1...@next-bricks/forms@1.305.2) (2025-02-18)
+
+
+### Bug Fixes
+
+* dynamic form item 支持模版示例的导出 ([673c746](https://github.com/easyops-cn/next-basics/commit/673c746466982a85271c015b8222190ec0857de3))
+
+
+
+
+
 ## [1.305.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.0...@next-bricks/forms@1.305.1) (2025-02-10)
 
 
