@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.330.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.329.0...@next-bricks/presentational-bricks@1.330.0) (2025-02-18)
+
+
+### Features
+
+* **markdown-editor:** support textareaStyle ([fcfe229](https://github.com/easyops-cn/next-basics/commit/fcfe2296672396be85da83ffff5cab1dc599a635))
+
+
+
+
+
 # [1.329.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.328.7...@next-bricks/presentational-bricks@1.329.0) (2025-01-23)
 
 
