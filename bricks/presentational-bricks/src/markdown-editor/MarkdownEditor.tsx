@@ -21,6 +21,7 @@ interface MarkdownEditorProps extends FormItemWrapperProps {
   inputMaxRows?: number;
   markdownEditorContainerStyle?: React.CSSProperties;
   imgCompressDisabled?: boolean;
+  textareaStyle?: React.CSSProperties;
 }
 
 export function MarkdownEditorItem(
@@ -39,6 +40,7 @@ export function MarkdownEditorItem(
     markdownEditorContainerStyle,
     onUploadImage,
     imgCompressDisabled,
+    textareaStyle,
   } = props;
   const [value, setValue] = useState(props.value || "");
 
@@ -117,6 +119,8 @@ export function MarkdownEditorItem(
           ref={ref}
           onChange={handleChange}
           value={value}
+          className="x-text-area"
+          style={textareaStyle}
           {...(supportUploadImg && bucketName ? { onPaste: filesPasted } : {})}
           {...configProps}
           {...(inputMinRows || inputMaxRows
@@ -154,6 +158,7 @@ export function MarkdownEditor(props: MarkdownEditorProps): React.ReactElement {
         inputMinRows={props.inputMinRows}
         inputMaxRows={props.inputMaxRows}
         markdownEditorContainerStyle={props.markdownEditorContainerStyle}
+        textareaStyle={props.textareaStyle}
       />
     </FormItemWrapper>
   );
