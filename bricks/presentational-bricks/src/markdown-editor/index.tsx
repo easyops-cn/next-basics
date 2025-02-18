@@ -112,6 +112,18 @@ export class MarkdownEditorElement extends FormItemElement {
   })
   markdownEditorContainerStyle: React.CSSProperties;
 
+  /**
+   * @kind Record<string,any>
+   * @required false
+   * @default -
+   * @description Textarea 的样式
+   * @group style
+   */
+  @property({
+    attribute: false,
+  })
+  textareaStyle: React.CSSProperties;
+
   /* =========================== Group: other =========================== */
 
   /**
@@ -230,6 +242,7 @@ export class MarkdownEditorElement extends FormItemElement {
             inputMinRows={this.inputMinRows}
             inputMaxRows={this.inputMaxRows}
             markdownEditorContainerStyle={this.markdownEditorContainerStyle}
+            textareaStyle={this.textareaStyle}
           />
         </BrickWrapper>,
         this
