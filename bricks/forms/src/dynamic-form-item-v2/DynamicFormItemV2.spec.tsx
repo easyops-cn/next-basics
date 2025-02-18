@@ -103,6 +103,10 @@ describe("DynamicFormItemV2", () => {
         onRemove={onRemove}
         showImportExport={true}
         label="动态表单项"
+        exportExamples={[
+          { input: "a", select: "a" },
+          { input: "b", select: "b" },
+        ]}
       />
     );
     expect(wrapper.find(".importExportButtons")).toHaveLength(1);
@@ -119,7 +123,11 @@ describe("DynamicFormItemV2", () => {
     exportBtn.simulate("click");
     expect(exportToExcelMock).toHaveBeenCalledWith(
       columns,
-      "动态表单项_forms:TEMPLATE"
+      "动态表单项_forms:TEMPLATE",
+      [
+        { input: "a", select: "a" },
+        { input: "b", select: "b" },
+      ]
     );
 
     // Test import functionality

@@ -3,7 +3,8 @@ import { Column } from "../interfaces";
 
 export const exportToExcel = async (
   columns: Column[],
-  fileName: string
+  fileName: string,
+  exportExamples?: Record<string, string>[]
 ): Promise<void> => {
   const { utils: XLSXUtils, writeFile: XLSXWriteFile } = await import(
     /* webpackChunkName: "chunks/xlsx.015f" */
@@ -15,13 +16,9 @@ export const exportToExcel = async (
     header: col.label || col.name,
   }));
 
-  const worksheet = XLSXUtils.json_to_sheet([{}], {
-    header: headers.map((h) => h.key),
-  });
-
-  // Add header row with labels
-  XLSXUtils.sheet_add_aoa(worksheet, [headers.map((h) => h.header)], {
-    origin: "A1",
+  const data = exportExamples || [];
+  const worksheet = XLSXUtils.json_to_sheet(data, {
+    header: headers.map((h) => h.header),
   });
 
   const workbook = XLSXUtils.book_new();

@@ -48,6 +48,7 @@ interface LegacyDynamicFormItemV2Props extends FormItemWrapperProps {
   dynamicFormStyle?: React.CSSProperties;
   onImport?: (value: Record<string, any>[]) => void;
   showImportExport?: boolean;
+  exportExamples?: Record<string, string>[];
   gridColumns?: number;
 }
 
@@ -81,6 +82,7 @@ export const LegacyDynamicFormItemV2 = forwardRef(
       onImport,
       showImportExport,
       gridColumns,
+      exportExamples,
     } = props;
     const { t } = useTranslation(NS_FORMS);
     const [form] = Form.useForm();
@@ -127,7 +129,8 @@ export const LegacyDynamicFormItemV2 = forwardRef(
     const handleExportTemplate = () => {
       exportToExcel(
         columns,
-        `${label || ""}_${t(`${NS_FORMS}:${K.TEMPLATE}`)}`
+        `${label || ""}_${t(`${NS_FORMS}:${K.TEMPLATE}`)}`,
+        exportExamples
       );
     };
 
@@ -337,6 +340,7 @@ export function DynamicFormItemV2(
     showImportExport,
     label,
     gridColumns,
+    exportExamples,
   } = props;
   const [columns, setColumns] = React.useState<Column[]>([]);
   const DynamicFormItemV2Ref = useRef<LegacyDynamicFormItemV2Ref>();
@@ -391,6 +395,7 @@ export function DynamicFormItemV2(
         onImport={onImport}
         showImportExport={showImportExport}
         gridColumns={gridColumns}
+        exportExamples={exportExamples}
       />
     </FormItemWrapper>
   );
