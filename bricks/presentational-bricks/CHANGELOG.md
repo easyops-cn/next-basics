@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.331.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.330.0...@next-bricks/presentational-bricks@1.331.0) (2025-02-18)
+
+
+### Bug Fixes
+
+* **brick-tree:** fix not scrollable ([4832352](https://github.com/easyops-cn/next-basics/commit/4832352ed043593c5431daa22c16ab8daa59d7f1))
+
+
+### Features
+
+* **brick-descriptions:** add itemIdBrickMap property ([8d366bb](https://github.com/easyops-cn/next-basics/commit/8d366bb8ea389b2d8506e2a16ee6efa4f68fd7a4))
+
+
+
+
+
 # [1.330.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.329.0...@next-bricks/presentational-bricks@1.330.0) (2025-02-18)
 
 
