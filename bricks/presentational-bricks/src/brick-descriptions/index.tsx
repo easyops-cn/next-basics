@@ -110,6 +110,17 @@ export class BrickDescriptionsElement extends UpdatingElement {
   itemList: BrickDescriptionsItemProps[];
 
   /**
+   * @required false
+   * @default -
+   * @description 列表项的 id 与对应构件配置的 map。一般在 itemList 属性需要动态生成，且希望自定义列的构件（itemList.useBrick）时使用。
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  itemIdBrickMap: Record<string, { useBrick: UseBrickConf }>;
+
+  /**
    * @kind boolean
    * @required false
    * @default true
@@ -250,6 +261,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
               <BrickDescriptions
                 key={index}
                 itemList={description.itemList}
+                itemIdBrickMap={this.itemIdBrickMap}
                 descriptionTitle={description.descriptionTitle}
                 configProps={description.configProps || this.configProps}
                 column={description.column || this.column}
@@ -264,6 +276,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
         ) : (
           <BrickDescriptions
             itemList={mutableProps.itemList}
+            itemIdBrickMap={this.itemIdBrickMap}
             configProps={this.configProps}
             dataSource={this.dataSource}
             descriptionTitle={this.descriptionTitle}

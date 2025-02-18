@@ -11,6 +11,7 @@ import styles from "./BrickDescriptions.module.css";
 export interface BrickDescriptionsProps {
   configProps?: DescriptionsProps;
   itemList: BrickDescriptionsItemProps[];
+  itemIdBrickMap?: Record<string, { useBrick: UseBrickConf }>;
   dataSource?: any;
   descriptionTitle?: string;
   column?: number;
@@ -35,6 +36,7 @@ export function BrickDescriptions(
     dataSource,
     configProps,
     itemList,
+    itemIdBrickMap,
     hideGroups,
     extraBrick,
   } = props;
@@ -101,15 +103,17 @@ export function BrickDescriptions(
       {itemList
         ?.filter((item) => !hideGroupsSet.has(item.group))
         .map((item, idx) => {
-          const { text, component, useBrick, ...itemProps } = item;
+          const { id, text, component, ...itemProps } = item;
+          const useBrick = item.useBrick || itemIdBrickMap?.[id]?.useBrick;
+
           return (
             <Descriptions.Item
-              key={item.id || idx}
+              key={id || idx}
               {...itemProps}
               className={styles.descriptionItem}
             >
               {useBrick
-                ? renderBrick(item)
+                ? renderBrick({ ...item, useBrick })
                 : component
                 ? renderLegacyComponent(item)
                 : isPlainObject(text)
