@@ -219,6 +219,14 @@ export class DynamicFormItemV2Element extends FormItemElement {
   showImportExport?: boolean;
 
   /**
+   * @description 导出数据示例
+   * @group ui
+   * @default false
+   */
+  @property({ attribute: false })
+  exportExamples?: Record<string, string>[];
+
+  /**
    * @description 表单项的列数，设置后，表单项会以 grid 布局显示
    * @group ui
    */
@@ -281,6 +289,7 @@ export class DynamicFormItemV2Element extends FormItemElement {
             showImportExport={this.showImportExport}
             onImport={this._handleImport}
             gridColumns={this.gridColumns}
+            exportExamples={this.exportExamples}
           />
         </BrickWrapper>,
         this

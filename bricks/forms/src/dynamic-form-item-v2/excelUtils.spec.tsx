@@ -11,7 +11,6 @@ import { utils, read, writeFile } from "xlsx";
 jest.mock("xlsx", () => ({
   utils: {
     json_to_sheet: jest.fn(),
-    sheet_add_aoa: jest.fn(),
     book_new: jest.fn(),
     book_append_sheet: jest.fn(),
     sheet_to_json: jest.fn(),
@@ -33,17 +32,22 @@ describe("excelUtils", () => {
     ];
 
     it("should create worksheet with correct headers", async () => {
-      await exportToExcel(mockColumns, "test");
+      await exportToExcel(mockColumns, "test", [{ 姓名: "张三", age: "20" }]);
 
-      expect(utils.json_to_sheet).toHaveBeenCalledWith([{}], {
-        header: ["name", "age"],
-      });
-
-      expect(utils.sheet_add_aoa).toHaveBeenCalledWith(
-        undefined,
-        [["姓名", "age"]],
-        { origin: "A1" }
+      expect(utils.json_to_sheet).toHaveBeenCalledWith(
+        [{ 姓名: "张三", age: "20" }],
+        {
+          header: ["姓名", "age"],
+        }
       );
+    });
+
+    it("should create worksheet with correct headers but no example", async () => {
+      await exportToExcel(mockColumns, "test", undefined);
+
+      expect(utils.json_to_sheet).toHaveBeenCalledWith([], {
+        header: ["姓名", "age"],
+      });
     });
 
     it("should create and save workbook", async () => {
