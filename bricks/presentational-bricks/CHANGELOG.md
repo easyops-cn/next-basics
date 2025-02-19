@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.331.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.331.0...@next-bricks/presentational-bricks@1.331.1) (2025-02-19)
+
+
+### Bug Fixes
+
+* **modal-confirm:** escape html characters in content template values ([a2e6c79](https://github.com/easyops-cn/next-basics/commit/a2e6c79eb2a3da1db196c8eb88dfdca8f3886fc3))
+
+
+
+
+
 # [1.331.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.330.0...@next-bricks/presentational-bricks@1.331.0) (2025-02-18)
 
 
