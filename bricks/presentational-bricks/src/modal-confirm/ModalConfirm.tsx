@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Modal, Input } from "antd";
 import { ButtonType, ButtonProps } from "antd/lib/button";
 import { Parser } from "html-to-react";
-import { defaults, merge } from "lodash";
+import { defaults, escape, mapValues, merge } from "lodash";
 import DOMPurify from "dompurify";
 import { parseTemplate } from "@next-libs/cmdb-utils";
 import { UseBrickConf } from "@next-core/brick-types";
@@ -37,7 +37,14 @@ const parseHTMLTemplate = (template: string, context: Record<string, any>) => {
   const parser = new Parser();
 
   return template
-    ? parser.parse(DOMPurify.sanitize(parseTemplate(template, context)))
+    ? parser.parse(
+        DOMPurify.sanitize(
+          parseTemplate(
+            template,
+            mapValues(context, (value) => escape(value))
+          )
+        )
+      )
     : template;
 };
 
