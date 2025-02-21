@@ -621,8 +621,8 @@ export function LegacyPreviewContainer(
   );
 
   const inspectDataValueCallback = useCallback(
-    (name: string, option: PreviewDataOption) =>
-      new Promise((resolve, reject) => {
+    (name: string, option: PreviewDataOption) => {
+      const promise = new Promise((resolve, reject) => {
         const _id = uniqueId();
         const listener = ({
           data,
@@ -668,7 +668,19 @@ export function LegacyPreviewContainer(
           window.removeEventListener("message", listener);
           reject({ message: "timeout" });
         }, 3000);
-      }),
+      });
+
+      window.dispatchEvent(new Event("request.start"));
+      promise
+        .catch(() => {
+          // Do nothing
+        })
+        .finally(() => {
+          window.dispatchEvent(new Event("request.end"));
+        });
+
+      return promise;
+    },
     [previewOrigin]
   );
 
