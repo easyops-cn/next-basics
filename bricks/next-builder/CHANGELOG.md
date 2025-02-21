@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.279.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.4...@next-bricks/next-builder@1.279.5) (2025-02-21)
+
+
+### Bug Fixes
+
+* dispatch request start/end for inspect callback ([facd4cc](https://github.com/easyops-cn/next-basics/commit/facd4cc3930f9a01b0d0449fa62d78100da701e4))
+
+
+
+
+
 ## [1.279.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.3...@next-bricks/next-builder@1.279.4) (2025-02-08)
 
 
