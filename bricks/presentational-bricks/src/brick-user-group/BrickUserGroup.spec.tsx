@@ -45,4 +45,46 @@ describe("BrickUserGroup", () => {
     wrapper.update();
     expect(wrapper.find("Tooltip").get(0).props["title"]).toBe("a(showA)");
   });
+
+  it("should render text", async () => {
+    const wrapper = mount(
+      <BrickUserGroup userNameOrIds={["a", "b"]} type="text" />
+    );
+    await jest.advanceTimersByTime(100);
+    await (global as any).flushPromises();
+    wrapper.update();
+    expect(wrapper.find("[data-testid='user-text']").length).toBe(2);
+    expect(
+      wrapper.find("[data-testid='user-text-separator']").at(0).text()
+    ).toBe(";");
+    expect(wrapper.find("[data-testid='user-text']").at(0).text()).toBe("a");
+    expect(wrapper.find("[data-testid='user-text-separator']").length).toBe(1);
+  });
+  it("should render text with showKey", async () => {
+    const wrapper = mount(
+      <BrickUserGroup userNameOrIds={["a", "b"]} type="text" displayShowKey />
+    );
+    await jest.advanceTimersByTime(100);
+    await (global as any).flushPromises();
+    wrapper.update();
+    expect(wrapper.find("[data-testid='user-text']").length).toBe(2);
+    expect(
+      wrapper.find("[data-testid='user-text-separator']").at(0).text()
+    ).toBe(";");
+    expect(wrapper.find("[data-testid='user-text']").at(0).text()).toBe(
+      "a(showA)"
+    );
+    expect(wrapper.find("[data-testid='user-text-separator']").length).toBe(1);
+  });
+  it("should render text with separator", async () => {
+    const wrapper = mount(
+      <BrickUserGroup userNameOrIds={["a", "b"]} type="text" separator="," />
+    );
+    await jest.advanceTimersByTime(100);
+    await (global as any).flushPromises();
+    wrapper.update();
+    expect(
+      wrapper.find("[data-testid='user-text-separator']").at(0).text()
+    ).toBe(",");
+  });
 });
