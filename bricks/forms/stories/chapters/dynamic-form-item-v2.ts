@@ -150,8 +150,8 @@ export const DynamicFormItemV2Story: Story = {
     },
     {
       description: {
-        title: "基本用法",
-        message: "混合多种表单类型",
+        title: "类型和布局",
+        message: "混合多种表单类型，并设置表单项的布局",
       },
       brick: "forms.general-form",
       events: {
@@ -202,6 +202,7 @@ export const DynamicFormItemV2Story: Story = {
                 label: "动态表单项v2",
                 name: "dynamic",
                 required: true,
+                gridColumns: 12,
                 columns: [
                   {
                     props: {
@@ -216,6 +217,7 @@ export const DynamicFormItemV2Story: Story = {
                     ],
                     name: "input",
                     type: "input",
+                    span: 4,
                   },
                   {
                     props: {
@@ -225,6 +227,7 @@ export const DynamicFormItemV2Story: Story = {
                     },
                     name: "inputNumber",
                     type: "inputNumber",
+                    span: 8,
                   },
                   {
                     props: {
@@ -232,6 +235,7 @@ export const DynamicFormItemV2Story: Story = {
                     },
                     name: "inputPassword",
                     type: "inputPassword",
+                    span: 6,
                   },
                   {
                     props: {
@@ -254,10 +258,12 @@ export const DynamicFormItemV2Story: Story = {
                     },
                     name: "select",
                     type: "select",
+                    span: 6,
                   },
                   {
                     name: "cascader",
                     type: "cascader",
+                    span: 12,
                     props: {
                       allowClear: false,
                       expandTrigger: "hover",
