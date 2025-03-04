@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
-import { BrickUserGroup } from "./BrickUserGroup";
+import { BrickUserGroup, UserGroupType } from "./BrickUserGroup";
 import { GroupProps } from "antd/lib/avatar";
 
 /**
@@ -13,6 +13,26 @@ import { GroupProps } from "antd/lib/avatar";
  * @noInheritDoc
  */
 export class BrickUserGroupElement extends UpdatingElement {
+  /**
+   * @kind "string"
+   * @required false
+   * @default "group"
+   * @description 用户组类型, 代表头像模式还是文本模式
+   * @group basic
+   */
+  @property({ attribute: false })
+  type: UserGroupType = "avatar";
+
+  /**
+   * @kind string
+   * @required false
+   * @default ";"
+   * @description 用户组分隔符，默认是分号；仅在 type 为 text 时有效
+   * @group basic
+   */
+  @property({ attribute: false })
+  separator = ";";
+
   /**
    * @kind string[]
    * @required true
@@ -64,6 +84,8 @@ export class BrickUserGroupElement extends UpdatingElement {
             userNameOrIds={this.userNameOrIds}
             configProps={this.configProps}
             displayShowKey={this.displayShowKey}
+            type={this.type}
+            separator={this.separator}
           />
         </BrickWrapper>,
         this
