@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.332.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.331.1...@next-bricks/presentational-bricks@1.332.0) (2025-03-04)
+
+
+### Features
+
+* 支持文本模式下展示用户 ([5407c94](https://github.com/easyops-cn/next-basics/commit/5407c94215857fa4ca166c295fd01f8f93ac1f5e))
+
+
+
+
+
 ## [1.331.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.331.0...@next-bricks/presentational-bricks@1.331.1) (2025-02-19)
 
 
