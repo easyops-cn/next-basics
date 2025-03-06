@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.305.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.3...@next-bricks/forms@1.305.4) (2025-03-06)
+
+
+### Bug Fixes
+
+* cmdb instance select panel 增加objectId判断 ([35153db](https://github.com/easyops-cn/next-basics/commit/35153db0cb2960b117d18adccafc3dd943f76a1d))
+
+
+
+
+
 ## [1.305.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.2...@next-bricks/forms@1.305.3) (2025-03-04)
 
 **Note:** Version bump only for package @next-bricks/forms
