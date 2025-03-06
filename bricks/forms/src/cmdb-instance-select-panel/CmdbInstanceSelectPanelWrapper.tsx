@@ -39,24 +39,26 @@ export function CmdbInstanceSelectPanelWrapper(
 
   return (
     <FormItemWrapper {...props}>
-      <RefCmdbInstancesSelectPanel
-        objectMap={props.objectMap}
-        objectId={props.objectId}
-        value={
-          props.name && props.formElement ? undefined : props.instanceIdList
-        }
-        instanceQuery={props.instanceQuery}
-        addTitle={props.addButtonText}
-        onChange={triggerOnChanges}
-        fields={props.fields}
-        addInstancesModalPageSize={props.addInstancesModalPageSize}
-        showSizeChanger={props.showSizeChanger}
-        pageSizeOptions={props.pageSizeOptions}
-        bindEvent={props.bindEvent}
-        showBindButton={props.showBindButton}
-        bindButtonDisabled={props.bindButtonDisabled}
-        bindButtonText={props.bindButtonText}
-      />
+      {props.objectId && props.objectMap && (
+        <RefCmdbInstancesSelectPanel
+          objectMap={props.objectMap}
+          objectId={props.objectId}
+          value={
+            props.name && props.formElement ? undefined : props.instanceIdList
+          }
+          instanceQuery={props.instanceQuery}
+          addTitle={props.addButtonText}
+          onChange={triggerOnChanges}
+          fields={props.fields}
+          addInstancesModalPageSize={props.addInstancesModalPageSize}
+          showSizeChanger={props.showSizeChanger}
+          pageSizeOptions={props.pageSizeOptions}
+          bindEvent={props.bindEvent}
+          showBindButton={props.showBindButton}
+          bindButtonDisabled={props.bindButtonDisabled}
+          bindButtonText={props.bindButtonText}
+        />
+      )}
     </FormItemWrapper>
   );
 }
