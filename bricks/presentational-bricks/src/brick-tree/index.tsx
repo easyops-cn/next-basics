@@ -309,6 +309,15 @@ export class BrickTreeElement extends UpdatingElement {
   @property({ attribute: false })
   hideBackground?: boolean;
 
+  /**
+   * @kind
+   * @default -
+   * @description 仅高亮搜索结果而不过滤其他节点
+   * @group basic
+   */
+  @property({ attribute: false })
+  onlyHighlightBySearch?: boolean = false;
+
   connectedCallback(): void {
     this.style.display = "flex";
     this.style.flexDirection = "column";
@@ -382,6 +391,7 @@ export class BrickTreeElement extends UpdatingElement {
             isDirectory={this.isDirectory}
             hideSelectedNum={this.hideSelectedNum}
             hideBackground={this.hideBackground}
+            onlyHighlightBySearch={this.onlyHighlightBySearch}
           />
         </BrickWrapper>,
         this
