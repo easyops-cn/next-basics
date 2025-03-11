@@ -209,6 +209,7 @@ export interface BrickTreeProps {
   isDirectory?: boolean;
   hideSelectedNum?: boolean;
   hideBackground?: boolean;
+  onlyHighlightBySearch?: boolean;
 }
 
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
@@ -237,6 +238,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     iconUseBrick,
     isDirectory,
     hideBackground,
+    onlyHighlightBySearch,
   } = props;
   const [allChecked, setAllChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -285,9 +287,10 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
       }
       return filterTrees;
     };
-    const data = searchValue ? loop(defaultData) : defaultData;
+    const data =
+      searchValue && !onlyHighlightBySearch ? loop(defaultData) : defaultData;
     return data;
-  }, [searchValue, defaultData]);
+  }, [searchValue, defaultData, onlyHighlightBySearch]);
 
   useEffect(() => {
     setSelectedKeys(_selectedKeys);
