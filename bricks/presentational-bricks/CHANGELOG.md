@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.332.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.332.0...@next-bricks/presentational-bricks@1.332.1) (2025-03-11)
+
+
+### Bug Fixes
+
+*  兼容搜索筛选时只高亮匹配数据而不做隐藏过滤 ([cc8ddf6](https://github.com/easyops-cn/next-basics/commit/cc8ddf6d90be4f3d8b0bb10fbff5577281ca7812))
+
+
+
+
+
 # [1.332.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.331.1...@next-bricks/presentational-bricks@1.332.0) (2025-03-04)
 
 
