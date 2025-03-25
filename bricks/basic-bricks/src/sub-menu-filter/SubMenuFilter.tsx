@@ -21,6 +21,7 @@ export interface SubMenuFilterSimpleItem {
   type?: "item";
   icon: MenuIcon;
   to?: LocationDescriptor;
+  style?: React.CSSProperties;
 }
 
 export interface SubMenuFilterGroup {
@@ -135,7 +136,7 @@ export function SubMenuFilter({
   ): React.ReactNode => {
     return (
       <Menu.Item key={String(item.key)} title={item.title}>
-        <div className={style.itemContainerInner}>
+        <div className={style.itemContainerInner} style={item.style}>
           {item.to ? (
             <Link to={item.to} className={style.blockLink}>
               <div className={style.menuItemMainPart}>
