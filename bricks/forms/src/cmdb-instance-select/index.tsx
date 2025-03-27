@@ -6,13 +6,14 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import {
-  CmdbInstanceSelect,
-  CmdbInstanceSelectProps,
-  ComplexOption,
-} from "./CmdbInstanceSelect";
 import { FormItemElement } from "@next-libs/forms";
 import { UseBrickConf } from "@next-core/brick-types";
+import { ComplexOption } from "@next-libs/cmdb-instances";
+
+import {
+  CmdbInstanceSelectFormItem,
+  CmdbInstanceSelectFormItemProps,
+} from "./CmdbInstanceSelectFormItem";
 
 /**
  * @id forms.cmdb-instance-select
@@ -178,7 +179,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @group ui
    */
   @property()
-  popoverPositionType: CmdbInstanceSelectProps["popoverPositionType"];
+  popoverPositionType: CmdbInstanceSelectFormItemProps["popoverPositionType"];
 
   /**
    * @default false
@@ -235,7 +236,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   @property({
     attribute: false,
   })
-  instanceQuery: CmdbInstanceSelectProps["instanceQuery"];
+  instanceQuery: CmdbInstanceSelectFormItemProps["instanceQuery"];
 
   /**
    * @kind `{label: string[]|string, value?: string]}`
@@ -247,7 +248,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   @property({
     attribute: false,
   })
-  fields: CmdbInstanceSelectProps["fields"];
+  fields: CmdbInstanceSelectFormItemProps["fields"];
 
   /**
    * @kind string
@@ -465,7 +466,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <CmdbInstanceSelect
+          <CmdbInstanceSelectFormItem
             value={this.value}
             formElement={this.getFormElement()}
             name={this.name}

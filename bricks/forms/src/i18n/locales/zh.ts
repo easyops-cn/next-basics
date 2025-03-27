@@ -8,7 +8,6 @@ const locale: Locale = {
   [K.START_TIME_END_TIME_CANNOT_EQUAL]: "开始时间和结束时间不能相等",
   [K.START_TIME_REQUIRED]: "开始时间必填",
   [K.END_TIME_REQUIRED]: "结束时间必填",
-  [K.BACKGROUND_SEARCH]: "输入关键字搜索",
   [K.DRAGGABLE_UPLOAD_TEXT]: "单击或拖拽图像到此区域上传",
   [K.DRAGGABLE_UPLOAD_HINT]: "支持扩展名：.jpg .jpeg .png .gif ...",
   [K.SELECT_ICON]: "选择图标",
