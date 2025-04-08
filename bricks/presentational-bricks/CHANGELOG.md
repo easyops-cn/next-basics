@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.333.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.332.2...@next-bricks/presentational-bricks@1.333.0) (2025-04-08)
+
+
+### Features
+
+* **dropdown-select:** Add labelBrick property ([c6f5f7a](https://github.com/easyops-cn/next-basics/commit/c6f5f7a030979a74155f0c542fc56fc140171ee1))
+
+
+
+
+
 ## [1.332.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.332.1...@next-bricks/presentational-bricks@1.332.2) (2025-03-25)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
