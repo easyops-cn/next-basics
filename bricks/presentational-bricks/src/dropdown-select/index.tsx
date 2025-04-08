@@ -229,6 +229,18 @@ export class DropdownSelectElement extends UpdatingElement {
   })
   dropdownTriggerStyle: React.CSSProperties;
 
+  /**
+   * @required false
+   * @description label 的构件配置
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  labelBrick?: {
+    useBrick: UseBrickConf;
+  };
+
   connectedCallback(): void {
     this.style.display = "inline-block";
     this._render();
@@ -279,6 +291,7 @@ export class DropdownSelectElement extends UpdatingElement {
             selectBoxStyle={this.selectBoxStyle}
             hideLabel={this.hideLabel}
             dropdownTriggerStyle={this.dropdownTriggerStyle}
+            labelBrick={this.labelBrick}
           />
         </BrickWrapper>,
         this

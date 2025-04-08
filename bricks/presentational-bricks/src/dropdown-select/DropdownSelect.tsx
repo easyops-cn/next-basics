@@ -35,6 +35,9 @@ interface DropdownSelectProps {
   selectBoxStyle?: React.CSSProperties;
   dropdownTriggerStyle?: React.CSSProperties;
   hideLabel?: boolean;
+  labelBrick?: {
+    useBrick: UseBrickConf;
+  };
 }
 
 export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
@@ -50,6 +53,7 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
     selectTipText,
     selectBoxStyle,
     hideLabel,
+    labelBrick,
   } = props;
   if (!dataSource) {
     dataSource = [];
@@ -80,8 +84,24 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
     setVisible(false);
   };
 
+  const renderOptionLabel = (option: Option) => {
+    if (labelBrick?.useBrick) {
+      return <BrickAsComponent useBrick={labelBrick.useBrick} data={option} />;
+    } else {
+      return option.label;
+    }
+  };
+
   const label = useMemo(() => {
     if (selectedItem) {
+      if (labelBrick?.useBrick) {
+        return (
+          <BrickAsComponent
+            useBrick={labelBrick.useBrick}
+            data={selectedItem}
+          />
+        );
+      }
       if (options) {
         return selectedItem.label;
       } else {
@@ -94,7 +114,7 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
         return parseTemplate(_label, { item: selectedItem });
       }
     } else {
-      return "";
+      return null;
     }
   }, [selectedItem, props.label, optionTitle]);
   const menu = useMemo(
@@ -123,7 +143,7 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
                     style={{ marginRight: "7px" }}
                     icon={option.icon}
                   />
-                  {option.label}
+                  {renderOptionLabel(option)}
                 </h4>
                 {option.content && (
                   <p className={styles.optionContent}>{option.content}</p>
@@ -202,7 +222,9 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
         {options
           ? options.map((option) => (
               <Menu.Item key={option.value}>
-                <h4 className={styles.optionTitle}>{option.label}</h4>
+                <h4 className={styles.optionTitle}>
+                  {renderOptionLabel(option)}
+                </h4>
                 {option.content && (
                   <p className={styles.optionContent}>{option.content}</p>
                 )}
