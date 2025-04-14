@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.305.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.6...@next-bricks/forms@1.305.7) (2025-04-14)
+
+
+### Bug Fixes
+
+* 售中工单_结构体里面位置调整，会把原来的结构体属性的位置顶替掉_麒麟v10sp2_x86 ([70e5918](https://github.com/easyops-cn/next-basics/commit/70e591806503afe8f60ef9a44e80bbb97466acc4))
+
+
+
+
+
 ## [1.305.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.5...@next-bricks/forms@1.305.6) (2025-03-27)
 
 **Note:** Version bump only for package @next-bricks/forms
