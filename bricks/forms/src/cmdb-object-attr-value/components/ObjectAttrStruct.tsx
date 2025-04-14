@@ -71,6 +71,30 @@ const objectAttrColumns = [
       valueTypeList.filter((type) => type.key === text)[0].text,
   },
 ];
+function arrayMoveMutable(
+  array: StructDefine[],
+  fromIndex: number,
+  toIndex: number
+) {
+  const startIndex = fromIndex < 0 ? array.length + fromIndex : fromIndex;
+
+  if (startIndex >= 0 && startIndex < array.length) {
+    const endIndex = toIndex < 0 ? array.length + toIndex : toIndex;
+
+    const [item] = array.splice(fromIndex, 1);
+    array.splice(endIndex, 0, item);
+  }
+}
+
+function arrayMoveImmutable(
+  array: StructDefine[],
+  fromIndex: number,
+  toIndex: number
+) {
+  const newArray = [...array];
+  arrayMoveMutable(newArray, fromIndex, toIndex);
+  return newArray;
+}
 
 // eslint-disable-next-line no-useless-escape
 const regexType = ["str", "int", "arr", "json", "ip", "enum", "enums"];
@@ -197,13 +221,14 @@ export function LegacyObjectAttrStructForm(
   const onSortEnd = ({ oldIndex, newIndex }: SortEnd) => {
     const dataSource = value?.struct_define;
     if (oldIndex !== newIndex) {
-      const tempData = [].concat(dataSource);
-      const temp = tempData[oldIndex];
-      tempData[oldIndex] = tempData[newIndex];
-      tempData[newIndex] = temp;
+      const newData = arrayMoveImmutable(
+        dataSource.slice(),
+        oldIndex,
+        newIndex
+      ).filter((el: StructDefine) => !!el);
       handleValueChange({
         ...value,
-        struct_define: tempData.filter((el) => !!el),
+        struct_define: newData,
       });
     }
   };
@@ -383,7 +408,6 @@ export function LegacyObjectAttrStructForm(
         .map((attr, index) => attr.id)
     );
   };
-
   return (
     <div>
       {i18n.t(`${NS_FORMS}:${K.STRUCTURE_BODY_DEFINATION}`)}
