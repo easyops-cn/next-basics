@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.333.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.333.0...@next-bricks/presentational-bricks@1.333.1) (2025-04-27)
+
+
+### Bug Fixes
+
+* card-item的subTitle支持title属性 ref AGENT-1224 ([0a95cbc](https://github.com/easyops-cn/next-basics/commit/0a95cbc8bed6fedd6e7e9c3755b498f3b1a72f4b))
+
+
+
+
+
 # [1.333.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.332.2...@next-bricks/presentational-bricks@1.333.0) (2025-04-08)
 
 
