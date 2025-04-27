@@ -108,7 +108,11 @@ export function CardItem(props: CardItemProps): React.ReactElement {
     </div>
   );
   // 副标题
-  const subtitle = <div className="cardSubtitle">{props.cardSubtitle}</div>;
+  const subtitle = (
+    <div className="cardSubtitle" title={props.cardSubtitle}>
+      {props.cardSubtitle}
+    </div>
+  );
   const cardIconAsBackground = (
     <span className="iconContainer">
       <div
