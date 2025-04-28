@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.305.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.7...@next-bricks/forms@1.305.8) (2025-04-28)
+
+
+### Bug Fixes
+
+* uploadFielsV2的onChange事件数据暴露size,type属性 ref CMDB_INSTANCE-2756 ([a4116ca](https://github.com/easyops-cn/next-basics/commit/a4116ca2e81d1d21213a8b5b28d1265871eab58d))
+
+
+
+
+
 ## [1.305.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.6...@next-bricks/forms@1.305.7) (2025-04-14)
 
 
