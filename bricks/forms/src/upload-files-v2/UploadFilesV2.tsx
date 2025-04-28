@@ -53,6 +53,8 @@ export interface UploadFileValueItem {
   file?: any;
   uid?: string;
   status?: string;
+  size?: number;
+  type?: string;
 }
 
 interface FileItem {
@@ -177,6 +179,8 @@ export function RealUploadFile(
         handleValueChange([
           {
             response: newFile.response,
+            size: newFile.size,
+            type: newFile.type,
             name: newFile.name,
             uid: newFile.uid,
             status: newFile.status,
@@ -187,6 +191,8 @@ export function RealUploadFile(
         handleValueChange([
           ...value,
           {
+            size: newFile.size,
+            type: newFile.type,
             response: newFile.response,
             name: newFile.name,
             uid: newFile.uid,
@@ -200,6 +206,8 @@ export function RealUploadFile(
         if (!props.autoUpload) {
           handleValueChange([
             {
+              size: newFile.size,
+              type: newFile.type,
               file: newFile,
               name: newFile.name,
               uid: newFile.uid,
@@ -213,6 +221,8 @@ export function RealUploadFile(
           handleValueChange([
             ...value,
             {
+              size: newFile.size,
+              type: newFile.type,
               file: newFile,
               name: newFile.name,
               uid: newFile.uid,
