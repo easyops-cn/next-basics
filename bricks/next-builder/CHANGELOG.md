@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.279.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.6...@next-bricks/next-builder@1.279.7) (2025-05-15)
+
+
+### Bug Fixes
+
+* add builtin actions ([895ccba](https://github.com/easyops-cn/next-basics/commit/895ccba43af5cf6861a68611e13ea50daf167a5e))
+* add svg as an image extension ([89f3d2e](https://github.com/easyops-cn/next-basics/commit/89f3d2e96252bb9971fbc7fb878de9375bac1d5c))
+
+
+
+
+
 ## [1.279.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.5...@next-bricks/next-builder@1.279.6) (2025-03-25)
 
 **Note:** Version bump only for package @next-bricks/next-builder
