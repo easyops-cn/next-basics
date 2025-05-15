@@ -93,7 +93,10 @@ export interface LintDetailMeta {
   };
 }
 
-type BuiltinAction = BuiltinBrickEventHandler["action"];
+type BuiltinAction =
+  | BuiltinBrickEventHandler["action"]
+  | "window.postMessage"
+  | "parent.postMessage";
 
 export interface NodeRaw {
   target?: string;
@@ -160,7 +163,9 @@ export function doLintStoryboard(
     "location.reload",
     "location.assign",
     "window.open",
+    "window.close",
     "event.preventDefault",
+    "event.stopPropagation",
     "console.log",
     "console.error",
     "console.warn",
@@ -208,6 +213,9 @@ export function doLintStoryboard(
 
     // Update form state
     "formstate.update",
+
+    "window.postMessage",
+    "parent.postMessage",
   ] as UnionToTuple<BuiltinAction>);
   const tagNameAsTargetRegExp = /^[-\w]+(\\\.[-\w]+)*$/;
   const providerBrickRegExp = /^providers-of-/;
