@@ -140,6 +140,7 @@ export const LegacyDynamicFormItemV2 = forwardRef(
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xlsx
           "application/vnd.ms-excel", // .xls
           "text/csv", // .csv
+          "application/wps-office.xlsx"  // wps.xlsx
         ];
 
         if (!allowedTypes.includes(file.type)) {
