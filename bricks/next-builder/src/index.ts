@@ -85,3 +85,4 @@ import "./data-providers/CommitBasedStoryboardAssembly";
 import "./data-providers/ProjectCommitPreCheck";
 // !Lazy: import "./api-request-form-item";
 // !Lazy: import "./api-proxy-request";
+import "./data-providers/GetSuiteGraphBasePartCommit";
