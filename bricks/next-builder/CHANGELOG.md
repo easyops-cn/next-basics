@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.279.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.7...@next-bricks/next-builder@1.279.8) (2025-05-26)
+
+
+### Bug Fixes
+
+* GetSuiteGraphBasePartCommit provider ([6dacf89](https://github.com/easyops-cn/next-basics/commit/6dacf8925c6fc7820e930faa1e9287a374335fd0))
+
+
+
+
+
 ## [1.279.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.6...@next-bricks/next-builder@1.279.7) (2025-05-15)
 
 
