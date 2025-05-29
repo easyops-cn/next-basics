@@ -250,11 +250,12 @@ export function SubMenuFilter({
     return data.filter(Boolean);
   };
   const handleSearch = (value: string) => {
-    onSearch && onSearch(value);
-    if (value) {
+    const _value = value?.trim();
+    onSearch && onSearch(_value);
+    if (_value) {
       const keys: string[] = [];
       const m = cloneDeep(rowMenuItem);
-      const result = searchMenu(m, value, keys);
+      const result = searchMenu(m, _value, keys);
       setMenuItems(result);
       setOpenKeys(keys);
     } else {
