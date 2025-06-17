@@ -8,6 +8,7 @@
 .treeWrapper {
   overflow: auto;
   flex-grow: 1;
+  padding-right: 10px;
   background: var(--color-fill-bg-container-1);
   border-radius: var(--larger-border-radius);
 
