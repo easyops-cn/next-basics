@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.333.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.333.2...@next-bricks/presentational-bricks@1.333.3) (2025-06-17)
+
+
+### Bug Fixes
+
+* 滚动条把数字挡住了，建议调整一下。 ([7bb5e10](https://github.com/easyops-cn/next-basics/commit/7bb5e106a03f60ec3821423dfce4f6b94cf73f11))
+
+
+
+
+
 ## [1.333.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.333.1...@next-bricks/presentational-bricks@1.333.2) (2025-05-30)
 
 
