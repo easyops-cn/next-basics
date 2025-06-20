@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.305.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.9...@next-bricks/forms@1.305.10) (2025-06-20)
+
+
+### Bug Fixes
+
+* dynamic-form-item-v2列支持设置hidden属性 ref CMDB_VIEW-466 ([3459079](https://github.com/easyops-cn/next-basics/commit/3459079f60a313481f1a342335b7da45c5362fed))
+
+
+
+
+
 ## [1.305.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.8...@next-bricks/forms@1.305.9) (2025-05-22)
 
 **Note:** Version bump only for package @next-bricks/forms
