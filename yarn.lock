@@ -2683,16 +2683,16 @@
   resolved "https://registry.npmjs.org/@next-libs/clipboard/-/clipboard-3.0.4.tgz#51ebe3b2f2e45c5940bf343e2a19f767a683b030"
   integrity sha512-pCxzyaSBnbFLUBif4n/Sa1TkUGandGhzycRs04NY73+wbqrYquM29egum7Ji0EdmakI+5MRgLXZZQsm+HlXvSQ==
 
-"@next-libs/cmdb-instances@^7.24.10", "@next-libs/cmdb-instances@^7.26.1":
-  version "7.26.1"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-7.26.1.tgz#af6679db66677e19b2ac2635937f74cca44342e6"
-  integrity sha512-8GRKGrC/PWuf4v8hEzhP7/6JSrej6Fun1noOc8wLKk2QURT/lSLGTDzJjb79faGMp/uwHLiYIntJiGWOUDh3iw==
+"@next-libs/cmdb-instances@^7.29.5":
+  version "7.29.5"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-7.29.5.tgz#bfa67dc6bbe4b142a1d8f64c2451e18fee34f257"
+  integrity sha512-kGSMV2MMPHpxW8emMV7I+zdmhUvXkDFG1cir4o7oz01HW3hXkJ4QAdceVsvdhjXVb/ivZnJz6VFLb5bba7e89w==
   dependencies:
     "@next-core/brick-types" "^2.97.0"
     "@next-libs/basic-components" "^5.5.2"
-    "@next-libs/cmdb-utils" "^3.7.4"
+    "@next-libs/cmdb-utils" "^3.7.5"
     "@next-libs/code-display-components" "^2.1.0"
-    "@next-libs/code-editor-components" "^4.12.5"
+    "@next-libs/code-editor-components" "^4.12.6"
     "@next-libs/forms" "^3.6.2"
     "@next-libs/storage" "^2.0.4"
     "@next-sdk/cmdb-sdk" "^3.1.0"
@@ -2705,10 +2705,10 @@
     js-base64 "^3.7.7"
     marked "^2.1.3"
 
-"@next-libs/cmdb-utils@^3.7.4":
-  version "3.7.4"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-3.7.4.tgz#43a5a5c1c967f325196b355218578cb92dc07040"
-  integrity sha512-pxtLrkiL3InLrLLDUdPswsS/zvQtmalKy2/IG2gQ0PQ7V2z4ubPRmv7HG58E/nJ3fDGUozRuvG21Euv+EVl1Nw==
+"@next-libs/cmdb-utils@^3.7.5":
+  version "3.7.5"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-3.7.5.tgz#29cd0becb815921964427daf1a279b18cddedca9"
+  integrity sha512-euxao0HBsiZ4CrLDpqXkyaZU8GZ0pGyb/Ryw8GyAmhcSoeuvLS6vtgR3GGBknY1VXMbEvcZjR6REeq4W5NU9sQ==
   dependencies:
     "@next-sdk/cmdb-sdk" "^2.3.1"
 
@@ -2723,10 +2723,10 @@
     prismjs "^1.29.0"
     resize-observer-polyfill "^1.5.1"
 
-"@next-libs/code-editor-components@4.12.5", "@next-libs/code-editor-components@^4.12.5":
-  version "4.12.5"
-  resolved "https://registry.npmjs.org/@next-libs/code-editor-components/-/code-editor-components-4.12.5.tgz#d9e6df72eb7be0ff84daa83b1e53938a69616c93"
-  integrity sha512-0hutbKn3BWbn82O8kZH5jijs4m6jtA8rpuD8rHewXf3d73Tvz1DrmUL+qGoIajj3pZKLZMMd0COXyJgWw4cD8A==
+"@next-libs/code-editor-components@4.12.6", "@next-libs/code-editor-components@^4.12.6":
+  version "4.12.6"
+  resolved "https://registry.npmjs.org/@next-libs/code-editor-components/-/code-editor-components-4.12.6.tgz#e29d2c1cf182fa926f4efea6a1a5a6e699d2b992"
+  integrity sha512-S7cHUChR1JCYSSXqRvn/HJDL8khdLJyuNc4PHi1XBhqUeUzI8Rzj1B89Tk4yoyZEIxNHO7fzEFkSG7YLUMu/0g==
   dependencies:
     "@next-libs/basic-components" "^5.5.2"
     "@next-libs/clipboard" "^3.0.4"
@@ -2787,13 +2787,13 @@
   dependencies:
     "@next-libs/storage" "^2.0.4"
 
-"@next-libs/visual-builder@^1.13.8":
-  version "1.13.8"
-  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.13.8.tgz#22f3cbe885d31dca08b4b604896010407e00391c"
-  integrity sha512-CQF4UGvpfc1P0IN8AUAJSicc035uEgnBmMRQ6+oTao8bavs0QGo6xNARzw6X/IBCt0xv69Va8yGeV+nIqP9NVw==
+"@next-libs/visual-builder@^1.13.9":
+  version "1.13.9"
+  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.13.9.tgz#1830dffbca4e92a2774ee0f75b99281734cc7339"
+  integrity sha512-UzvvCN6kvJiGIgzn84Qf3xC48VSurOPv8ruYrKCY5qbnDXknLooYih/46UMuo2BdnByGy8QMxZIYlmcy/nmvYg==
   dependencies:
     "@next-libs/basic-components" "^5.5.2"
-    "@next-libs/code-editor-components" "^4.12.5"
+    "@next-libs/code-editor-components" "^4.12.6"
     "@next-libs/forms" "^3.6.2"
     "@types/react-color" "^3.0.6"
     react-color "^2.19.3"
