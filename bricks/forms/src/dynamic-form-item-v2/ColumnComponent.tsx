@@ -275,8 +275,12 @@ export function ColumnComponent(
         : {
             showSearch: false,
           };
-      // 如果options是二维数组
-      if (Array.isArray(options[rowIndex]) || Array.isArray(options[0])) {
+      // 如果options是二维数组 只要其中一个是二维数组 就需要重新赋值options
+      if (
+        Array.isArray(options[rowIndex]) ||
+        Array.isArray(options[0]) ||
+        options.some((option) => Array.isArray(option))
+      ) {
         options =
           (options[rowIndex] as GeneralComplexOption<string | number>[]) ?? [];
       }
