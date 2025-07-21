@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.333.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.333.3...@next-bricks/presentational-bricks@1.333.4) (2025-07-21)
+
+
+### Bug Fixes
+
+* AOPS-920 【应急演练】产品中，与用户相关的显示改为user模型showkey显示 ref AOPS-920 ([3757db8](https://github.com/easyops-cn/next-basics/commit/3757db860c1ec4127e55434cd99bc00e19414421))
+
+
+
+
+
 ## [1.333.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.333.2...@next-bricks/presentational-bricks@1.333.3) (2025-06-17)
 
 
