@@ -1,8 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
+import {
+  BrickWrapper,
+  EventEmitter,
+  UpdatingElement,
+  event,
+  method,
+  property,
+} from "@next-core/brick-kit";
 import { MarkdownDisplay } from "./MarkdownDisplay";
 import { get } from "lodash";
+import { CheckboxInfo } from "./MarkdownDisplay";
 
 /**
  * @id presentational-bricks.markdown-display
@@ -74,6 +82,19 @@ export class MarkdownDisplayElement extends UpdatingElement {
   @property({ type: String })
   linkTarget: string;
 
+  // ⚠️ For qa use only, not for production
+  @property({ attribute: false })
+  __unstable_property_collectCheckboxInfo = false;
+
+  @event({
+    type: "checkbox.change",
+  })
+  checkboxChange: EventEmitter<CheckboxInfo[]>;
+
+  handleCheckboxChange = (checkboxInfos: CheckboxInfo[]): void => {
+    this.checkboxChange.emit(checkboxInfos);
+  };
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -104,6 +125,8 @@ export class MarkdownDisplayElement extends UpdatingElement {
             hideImgPreviewMask={this.hideImgPreviewMask}
             imagePreviewOperationInBottom={this.imagePreviewOperationInBottom}
             linkTarget={this.linkTarget}
+            collectCheckboxInfo={this.__unstable_property_collectCheckboxInfo}
+            onCheckboxChange={this.handleCheckboxChange}
           />
         </BrickWrapper>,
         this
