@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.334.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.333.4...@next-bricks/presentational-bricks@1.334.0) (2025-07-30)
+
+
+### Features
+
+* markdown支持checkbox事件 ([5e7d696](https://github.com/easyops-cn/next-basics/commit/5e7d696d5461f7483f86ded34080c8072d86e93c))
+
+
+
+
+
 ## [1.333.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.333.3...@next-bricks/presentational-bricks@1.333.4) (2025-07-21)
 
 
