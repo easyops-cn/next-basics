@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.4.2...@next-bricks/nav-legacy@1.4.3) (2025-07-31)
+
+
+### Bug Fixes
+
+* 文档空间名称搜索不了，还有这个名称太长会被挡到 ([d2bde86](https://github.com/easyops-cn/next-basics/commit/d2bde86f1129073e8414729110a4133a74a63e5c))
+
+
+
+
+
 ## [1.4.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.4.1...@next-bricks/nav-legacy@1.4.2) (2025-03-25)
 
 **Note:** Version bump only for package @next-bricks/nav-legacy
