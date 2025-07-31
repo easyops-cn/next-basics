@@ -33,7 +33,7 @@ const locale: Locale = {
   [K.ALL_RESOURCES]: "All resources",
   [K.MY_FAVORITE]: "My favorite resources",
   [K.SEARCH_BY_NAME_OR_ID]: "Search by model name or ID",
-  [K.IT_RESOURCE_MANAGEMENT]: "Resource Management",
+  [K.IT_RESOURCE_MANAGEMENT]: "Resource Mgmt",
   [K.NO_MODEL]: "No model",
   [K.RESOURCES]: "Resources",
   [K.VIEW_ALL]: "View all",
