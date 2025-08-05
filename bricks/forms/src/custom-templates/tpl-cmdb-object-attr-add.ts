@@ -314,9 +314,9 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                   testid: "cmdb-object-attr-add-tag-input",
                 },
                 name: "tag",
-                label: i18n.t(`${NS_FORMS}:${K.ATTRIBUTE_CATEGROY}`),
+                label: i18n.t(`${NS_FORMS}:${K.ATTRIBUTE_CATEGORY}`),
                 placeholder: i18n.t(
-                  `${NS_FORMS}:${K.PLEASE_INPUT_ATTRIBUTE_CATEGROY}`
+                  `${NS_FORMS}:${K.PLEASE_INPUT_ATTRIBUTE_CATEGORY}`
                 ),
                 inputBoxStyle: {
                   width: "100%",
