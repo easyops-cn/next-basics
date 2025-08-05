@@ -274,13 +274,13 @@ export function LegacyObjectAttrStructForm(
     },
 
     {
-      title: i18n.t(`${NS_FORMS}:${K.HANDEL}`),
+      title: i18n.t(`${NS_FORMS}:${K.OPERATION}`),
       key: "action",
       render: (text: string, record: any) => getOptionBtns(record),
     },
 
     {
-      title: "排序",
+      title: i18n.t(`${NS_FORMS}:${K.SORT}`),
       dataIndex: "sort",
       width: 70,
       className: styles["drag-visible"],
@@ -327,13 +327,13 @@ export function LegacyObjectAttrStructForm(
     },
 
     {
-      title: i18n.t(`${NS_FORMS}:${K.HANDEL}`),
+      title: i18n.t(`${NS_FORMS}:${K.OPERATION}`),
       key: "action",
       render: (text: any, record: any) => getOptionBtns(record),
     },
 
     {
-      title: "排序",
+      title: i18n.t(`${NS_FORMS}:${K.SORT}`),
       dataIndex: "sort",
       width: 70,
       className: styles["drag-visible"],
