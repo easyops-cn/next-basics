@@ -49,7 +49,7 @@
     "@next-libs/cmdb-utils": "^3.7.4",
     "@next-libs/crontab": "^2.0.10",
     "@next-libs/datetime": "^2.0.4",
-    "@next-libs/datetime-components": "^3.2.4",
+    "@next-libs/datetime-components": "^3.2.5",
     "@next-libs/forms": "^3.6.2",
     "@next-libs/hooks": "^2.2.6",
     "@next-sdk/cmdb-sdk": "^2.1.1",
