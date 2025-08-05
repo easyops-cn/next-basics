@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.305.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.11...@next-bricks/forms@1.305.12) (2025-08-05)
+
+
+### Bug Fixes
+
+* 添加属性表单国际化优化 ([6dfb1db](https://github.com/easyops-cn/next-basics/commit/6dfb1dbd422bbc98592c9cf568bd8d6dfe5c15f8))
+
+
+
+
+
 ## [1.305.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.10...@next-bricks/forms@1.305.11) (2025-07-17)
 
 
