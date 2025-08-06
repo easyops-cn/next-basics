@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.334.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.334.1...@next-bricks/presentational-bricks@1.334.2) (2025-08-06)
+
+
+### Bug Fixes
+
+* presentational-bricks 国际化 优化 ([0a9e3a8](https://github.com/easyops-cn/next-basics/commit/0a9e3a840bf76a4a92ef5125624e67f75d219ec3))
+
+
+
+
+
 ## [1.334.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.334.0...@next-bricks/presentational-bricks@1.334.1) (2025-08-05)
 
 
