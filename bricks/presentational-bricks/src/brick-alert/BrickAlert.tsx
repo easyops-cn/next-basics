@@ -1,5 +1,6 @@
 import React, { CSSProperties, useCallback } from "react";
 import classnames from "classnames";
+import { useTranslation } from "react-i18next";
 import { useCurrentTheme } from "@next-core/brick-kit";
 import Icon, {
   CheckCircleFilled,
@@ -22,6 +23,7 @@ import { ReactComponent as BigInfoCircleOutlinedDark } from "../images/info-circ
 import { ReactComponent as BigErrorCircleOutlinedDark } from "../images/error-circle-dark.svg";
 import { ReactComponent as BigSuccessCircleOutlinedDark } from "../images/success-circle-dark.svg";
 import { ReactComponent as BigWarningCircleOutlinedDark } from "../images/warning-circle-dark.svg";
+import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 
 interface BrickAlertProps {
   message: string;
@@ -42,6 +44,8 @@ interface BrickAlertProps {
 }
 
 export function BrickAlert(props: BrickAlertProps): React.ReactElement {
+  const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
+
   const [show, setShow] = React.useState<boolean>(false);
   const theme = useCurrentTheme();
   const onClose = () => {
@@ -107,7 +111,8 @@ export function BrickAlert(props: BrickAlertProps): React.ReactElement {
   const text =
     props.closeOnce && props.closable ? (
       <span style={{ color: "var(--text-color-link)" }}>
-        不再提示 <CloseOutlined style={{ color: "var(--text-color-link)" }} />
+        {t(K.NO_ALERT)}
+        <CloseOutlined style={{ color: "var(--text-color-link)" }} />
       </span>
     ) : (
       ""
