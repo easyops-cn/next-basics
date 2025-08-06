@@ -34,6 +34,7 @@ const locale: Locale = {
   [K.IP_SEARCH]: "IP搜索 ",
   [K.SORT]: "排序",
   [K.PREVIEW]: "预览",
+  [K.NO_ALERT]: "不再提示",
 };
 
 export default locale;

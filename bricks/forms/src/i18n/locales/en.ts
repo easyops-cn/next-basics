@@ -19,7 +19,7 @@ const locale: Locale = {
   [K.USERS]: "Users",
   [K.USER_GROUPS]: "User groups",
   [K.SWITCH]: "Switch to {{type}}",
-  [K.FILTER_FROM_CMDB]: "Filter {{type}} from CMDB",
+  [K.FILTER_FROM_CMDB]: "Filter {{type}} From CMDB",
   [K.USERS_RESULT_LABEL]:
     "Users (only display the top 20 items, please search for more results)",
   [K.USER_GROUPS_RESULT_LABEL]:
