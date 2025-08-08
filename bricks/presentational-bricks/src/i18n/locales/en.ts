@@ -13,7 +13,7 @@ const locale: Locale = {
   [K.ALERT_SHIELDED]: "Alert Shielded",
   [K.PRESENTATIONAL_BRICKS]: "Presentational Bricks",
   [K.PAGINATION_TOTAL_TEXT]: "Total",
-  [K.PAGINATION_TOTAL_UNIT]: "Items",
+  [K.PAGINATION_TOTAL_UNIT]: "items",
   [K.UNKNOWN_ERROR]: "unknown error",
   [K.NO_DATA]: "No Data",
   [K.COLLECTION_INSTANCE_SYNCHRONIZE]: "Synchronize",
