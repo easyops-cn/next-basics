@@ -2759,7 +2759,7 @@
     prismjs "^1.29.0"
     resize-observer-polyfill "^1.5.1"
 
-"@next-libs/code-editor-components@4.12.5", "@next-libs/code-editor-components@^4.12.5":
+"@next-libs/code-editor-components@^4.12.5":
   version "4.12.5"
   resolved "https://registry.npmjs.org/@next-libs/code-editor-components/-/code-editor-components-4.12.5.tgz#d9e6df72eb7be0ff84daa83b1e53938a69616c93"
   integrity sha512-0hutbKn3BWbn82O8kZH5jijs4m6jtA8rpuD8rHewXf3d73Tvz1DrmUL+qGoIajj3pZKLZMMd0COXyJgWw4cD8A==
