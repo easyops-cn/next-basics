@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.280.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.8...@next-bricks/next-builder@1.280.0) (2025-08-08)
+
+
+### Features
+
+* VB小优化 ([85320d1](https://github.com/easyops-cn/next-basics/commit/85320d1ab1daed920b75ad0ad738de400f2b03d4))
+
+
+
+
+
 ## [1.279.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.7...@next-bricks/next-builder@1.279.8) (2025-05-26)
 
 
