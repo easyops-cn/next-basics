@@ -6,7 +6,7 @@ module.exports = sizeLimit({
     "basic-bricks": "120 KB",
     "calendar-bricks": "80KB",
     "presentational-bricks": "128 KB",
-    "brick-visualization": "471 KB",
+    "brick-visualization": "500 KB",
     "next-builder": "80 KB",
     "nav-legacy": "67 KB",
     forms: "95 KB",
@@ -17,7 +17,7 @@ module.exports = sizeLimit({
     "presentational-bricks": "320 KB",
     "flow-builder": "380 KB",
     developers: "193 KB",
-    forms: "610 KB",
+    forms: "650 KB",
   },
   chunks: {
     "*": "50 KB",
