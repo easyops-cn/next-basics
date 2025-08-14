@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.305.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.14...@next-bricks/forms@1.305.15) (2025-08-14)
+
+
+### Bug Fixes
+
+* i18n fix ([44365ed](https://github.com/easyops-cn/next-basics/commit/44365ed0261086d119dff18e0271448186dc948e))
+
+
+
+
+
 ## [1.305.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.13...@next-bricks/forms@1.305.14) (2025-08-11)
 
 **Note:** Version bump only for package @next-bricks/forms

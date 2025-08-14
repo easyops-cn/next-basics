@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.4.4...@next-bricks/nav-legacy@1.4.5) (2025-08-14)
+
+
+### Bug Fixes
+
+* i18n fix ([1cba6fe](https://github.com/easyops-cn/next-basics/commit/1cba6fee84b7a5a3d1a92fa7d86cec0cd8388501))
+
+
+
+
+
 ## [1.4.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.4.3...@next-bricks/nav-legacy@1.4.4) (2025-08-07)
 
 **Note:** Version bump only for package @next-bricks/nav-legacy
