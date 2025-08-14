@@ -8,6 +8,8 @@ import { Button, Table, Modal } from "antd";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { isFunction, isEmpty } from "lodash";
 import update from "immutability-helper";
+import { useTranslation } from "react-i18next";
+import { K, NS_FORMS } from "../i18n/constants";
 
 export interface GeneralStructsRef {
   onAdd?: (value: Record<string, unknown>) => void;
@@ -53,6 +55,7 @@ export const GeneralStructs = forwardRef<
   GeneralStructsRef,
   GeneralStructsFormItemProps
 >(function GeneralStructsFormItemInstance(props, ref): React.ReactElement {
+  const { t } = useTranslation(NS_FORMS);
   const {
     modalVisible,
     confirmVisible,
@@ -75,9 +78,9 @@ export const GeneralStructs = forwardRef<
   } = props;
   const footer = (
     <>
-      <Button className="cancelBtn">{cancelText || "取消"}</Button>
+      <Button className="cancelBtn">{cancelText || t(K.CANCEL)}</Button>
       <Button className="okBtn" type="primary">
-        {okText || "确定"}
+        {okText || t(K.CONFIRM_TEXT)}
       </Button>
     </>
   );
@@ -96,7 +99,7 @@ export const GeneralStructs = forwardRef<
     };
   });
   const operationCol = {
-    title: "操作",
+    title: t(K.OPERATION),
     key: "operation",
     width: "100px",
     dataIndex: "operation",
@@ -133,8 +136,8 @@ export const GeneralStructs = forwardRef<
     },
   };
   columns.push(operationCol);
-  const createTitle = createModalTitle || "新建结构体";
-  const editTitle = editModalTitle || "编辑结构体";
+  const createTitle = createModalTitle || t(K.NEW_STRUCTURE);
+  const editTitle = editModalTitle || t(K.EDIT_STRUCTURE);
   // istanbul ignore next
   useImperativeHandle(
     ref,
@@ -158,7 +161,7 @@ export const GeneralStructs = forwardRef<
   return (
     <div>
       <Button type="link" className={"openBtn"} disabled={addBtnDisabled}>
-        {btnText || "添加"}
+        {btnText || t(K.ADD)}
       </Button>
       <Modal
         visible={modalVisible}
@@ -175,7 +178,7 @@ export const GeneralStructs = forwardRef<
         className="ant-modal-confirm ant-modal-confirm-confirm"
         width={416}
         visible={confirmVisible}
-        title="删除确认"
+        title={t(K.DELETE_CONFIRMATION)}
         footer={null}
         getContainer={container}
       >
@@ -183,13 +186,13 @@ export const GeneralStructs = forwardRef<
           <div className="ant-modal-confirm-body">
             <QuestionCircleOutlined />
             <span className="ant-modal-confirm-title">
-              {deleteText || "确定要删除该数据吗？"}
+              {deleteText || t(K.DELETE_CONFIRM_MESSAGE)}
             </span>
           </div>
           <div className="ant-modal-confirm-btns">
-            <Button className="confirmCancelBtn">取消</Button>
+            <Button className="confirmCancelBtn">{t(K.CANCEL)}</Button>
             <Button danger className="confirmOkBtn">
-              确定
+              {t(K.CONFIRM_TEXT)}
             </Button>
           </div>
         </div>

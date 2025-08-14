@@ -27,6 +27,7 @@ const locale: Locale = {
   [K.NO_DATA]: "No Data",
   [K.ATTRIBUTE_DEFAULT_VALUE]: "Attribute Default Value:",
   [K.CONFIRM]: "Confirm",
+  [K.CONFIRM_TEXT]: "Confirm",
   [K.CANCEL]: "Cancel",
   [K.GLOBALLY_UNIQUE_IDENTIFIER]: "Globally unique identifier",
   [K.ATTRIBUTE_NAME]: "Attribute Name",
@@ -173,6 +174,10 @@ const locale: Locale = {
   [K.INVALID_FILE_TYPE_DYNAMIC_FORM_ITEM]: "File type is not .xlsx .xls .csv",
   [K.FILE_NAME_VALIDATE_MESSAGE_LOG]:
     "Failed to validate the upload file name format",
+  [K.DELETE_CONFIRMATION]: "Delete Confirmation",
+  [K.DELETE_CONFIRM_MESSAGE]: "Are you sure you want to delete this data?",
+  [K.NEW_STRUCTURE]: "Create Structure",
+  [K.EDIT_STRUCTURE]: "Edit Structure",
 };
 
 export default locale;
