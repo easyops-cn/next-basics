@@ -35,6 +35,7 @@ const locale: Locale = {
   [K.SORT]: "排序",
   [K.PREVIEW]: "预览",
   [K.NO_ALERT]: "不再提示",
+  [K.EDIT]: "编辑",
 };
 
 export default locale;

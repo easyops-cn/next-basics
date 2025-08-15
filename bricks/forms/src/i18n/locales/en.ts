@@ -178,6 +178,13 @@ const locale: Locale = {
   [K.DELETE_CONFIRM_MESSAGE]: "Are you sure you want to delete this data?",
   [K.NEW_STRUCTURE]: "Create Structure",
   [K.EDIT_STRUCTURE]: "Edit Structure",
+  [K.UPLOAD_IMAGE_TEXT]: "Upload Image",
+  [K.UPLOAD_FILE_FAILED]: "Uploading files failed",
+  [K.UPLOADING_FILE]:
+    "The attachment is still uploading. Please try again later.",
+  [K.UPLOAD_FAILED]: "Upload failed",
+  [K.UPLOAD_IMAGE_ONLY]: "Only image files can be uploaded.",
+  [K.UPLOAD_IMAGE_LIMIT]: "The uploaded file size exceeds the specified limit.",
 };
 
 export default locale;

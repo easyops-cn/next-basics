@@ -35,6 +35,7 @@ export enum K {
   SORT = "SORT",
   PREVIEW = "PREVIEW",
   NO_ALERT = "NO_ALERT",
+  EDIT = "EDIT",
 }
 
 export type Locale = { [key in K]: string };
