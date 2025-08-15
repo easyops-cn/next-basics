@@ -7,6 +7,8 @@ import { MarkdownDisplay } from "../markdown-display/MarkdownDisplay";
 import { ObjectStoreApi_putObject } from "@next-sdk/object-store-sdk";
 import { forEach } from "lodash";
 import { ImageInfo } from "./index";
+import { K, NS_PRESENTATIONAL_BRICKS } from "../i18n/constants";
+import i18next from "i18next";
 
 interface MarkdownEditorProps extends FormItemWrapperProps {
   value: string;
@@ -114,7 +116,10 @@ export function MarkdownEditorItem(
       className={style.markdownEditorContainer}
       style={markdownEditorContainerStyle}
     >
-      <Tabs.TabPane tab="编辑" key="1">
+      <Tabs.TabPane
+        tab={i18next.t(`${NS_PRESENTATIONAL_BRICKS}:${K.EDIT}`)}
+        key="1"
+      >
         <Input.TextArea
           ref={ref}
           onChange={handleChange}
@@ -128,7 +133,10 @@ export function MarkdownEditorItem(
             : {})}
         />
       </Tabs.TabPane>
-      <Tabs.TabPane tab="预览" key="2">
+      <Tabs.TabPane
+        tab={i18next.t(`${NS_PRESENTATIONAL_BRICKS}:${K.PREVIEW}`)}
+        key="2"
+      >
         <div
           className={style.markdownPreviewContainer}
           style={previewContainerStyle}

@@ -35,6 +35,7 @@ const locale: Locale = {
   [K.SORT]: "Sort",
   [K.PREVIEW]: "Preview",
   [K.NO_ALERT]: "Don't show again",
+  [K.EDIT]: "Edit",
 };
 
 export default locale;

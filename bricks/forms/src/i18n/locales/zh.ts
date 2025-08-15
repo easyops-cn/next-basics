@@ -163,6 +163,12 @@ const locale: Locale = {
   [K.DELETE_CONFIRM_MESSAGE]: "确定要删除该数据吗？",
   [K.NEW_STRUCTURE]: "新建结构体",
   [K.EDIT_STRUCTURE]: "编辑结构体",
+  [K.UPLOAD_IMAGE_TEXT]: "上传图片",
+  [K.UPLOAD_FILE_FAILED]: "上传文件失败",
+  [K.UPLOADING_FILE]: "还有附件正在上传，请稍候再试。",
+  [K.UPLOAD_FAILED]: "上传失败",
+  [K.UPLOAD_IMAGE_ONLY]: "仅支持上传图片文件",
+  [K.UPLOAD_IMAGE_LIMIT]: "上传文件体积大于限定体积",
 };
 
 export default locale;
