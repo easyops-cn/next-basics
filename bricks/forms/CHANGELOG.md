@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.305.17](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.16...@next-bricks/forms@1.305.17) (2025-08-19)
+
+
+### Bug Fixes
+
+* 统一`确认`文本国际化翻译 ([387c21b](https://github.com/easyops-cn/next-basics/commit/387c21b4aa242052940f053e478af62a72d20e9d))
+
+
+
+
+
 ## [1.305.16](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.15...@next-bricks/forms@1.305.16) (2025-08-15)
 
 
