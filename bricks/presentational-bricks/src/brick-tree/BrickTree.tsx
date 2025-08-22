@@ -194,6 +194,17 @@ export interface BrickTreeProps {
       | React.Key[]
       | { checked: React.Key[]; halfChecked: React.Key[] }
   ): void;
+  onCheckV2?(
+    checkedKeys:
+      | React.Key[]
+      | { checked: React.Key[]; halfChecked: React.Key[] },
+    info: {
+      event: "check";
+      checked: boolean;
+      checkedNodes: DataNode[];
+      nativeEvent: MouseEvent;
+    }
+  ): void;
   onExpand?(expandedKeys: React.Key[]): void;
   onSearch?(value: string): void;
   suffixBrick?: { useBrick: UseBrickConf };
@@ -400,7 +411,13 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
   const onCheck = (
     checkedKeys:
       | React.Key[]
-      | { checked: React.Key[]; halfChecked: React.Key[] }
+      | { checked: React.Key[]; halfChecked: React.Key[] },
+    info: {
+      event: "check";
+      checked: boolean;
+      checkedNodes: DataNode[];
+      nativeEvent: MouseEvent;
+    }
   ) => {
     const _checkedKeys =
       "checked" in checkedKeys ? checkedKeys.checked : checkedKeys;
@@ -429,6 +446,11 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
 
     props.onCheck?.(
       props.checkedFilterConfig ? _filterCheckedKeys : _checkedKeys
+    );
+
+    props.onCheckV2?.(
+      props.checkedFilterConfig ? _filterCheckedKeys : _checkedKeys,
+      info
     );
   };
 
