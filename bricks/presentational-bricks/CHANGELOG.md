@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.335.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.334.7...@next-bricks/presentational-bricks@1.335.0) (2025-08-22)
+
+
+### Features
+
+* **brick-tree:** 支持`checkV2` 事件 ([c1baa3a](https://github.com/easyops-cn/next-basics/commit/c1baa3ab31649463483a16e12f437b6d68ac8370))
+
+
+
+
+
 ## [1.334.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.334.6...@next-bricks/presentational-bricks@1.334.7) (2025-08-15)
 
 
