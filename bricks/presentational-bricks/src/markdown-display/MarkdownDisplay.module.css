@@ -349,6 +349,7 @@
 
   table tr td code {
     white-space: normal;
+    word-break: break-all;
   }
 
   table tr th :first-child,
