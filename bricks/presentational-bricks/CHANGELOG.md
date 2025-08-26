@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.335.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.335.0...@next-bricks/presentational-bricks@1.335.1) (2025-08-26)
+
+
+### Bug Fixes
+
+* **markdown-display:** fix code in table display error ([fe6109c](https://github.com/easyops-cn/next-basics/commit/fe6109c1a3c6150ea064599e855ebd8f27805031))
+
+
+
+
+
 # [1.335.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.334.7...@next-bricks/presentational-bricks@1.335.0) (2025-08-22)
 
 
