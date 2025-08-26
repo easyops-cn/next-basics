@@ -347,6 +347,10 @@
     word-break: break-word;
   }
 
+  table tr td code {
+    white-space: normal;
+  }
+
   table tr th :first-child,
   table tr td :first-child {
     margin-top: 0;
