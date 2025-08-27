@@ -56,7 +56,8 @@ export function IllustrationWrapper(
 
   const app = useCurrentApp();
   const theme = useCurrentTheme();
-  const [isFeatureFlag] = useFeatureFlags("support-new-illustrations");
+  // const [isFeatureFlag] = useFeatureFlags("support-new-illustrations");
+  const isFeatureFlag = true;
   const miscSettings = getRuntime().getMiscSettings();
   const isSupportedApp =
     ((miscSettings["supportedNewIllustrationApps"] || []) as any).includes(
