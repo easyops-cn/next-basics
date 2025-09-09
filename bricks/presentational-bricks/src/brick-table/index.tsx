@@ -11,7 +11,7 @@ import {
 import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 import i18n from "i18next";
 import paginationStyle from "../general-pagination/index.module.css";
-import { BrickTable } from "./BrickTable";
+import { BrickTable, TableDragInfo } from "./BrickTable";
 import {
   get,
   map,
@@ -370,6 +370,7 @@ export class BrickTableElement extends UpdatingElement {
    */
   @event({ type: "row.drag" }) rowDrag: EventEmitter<{
     data: Record<string, any>[];
+    info: TableDragInfo;
   }>;
 
   /**
@@ -1681,9 +1682,13 @@ export class BrickTableElement extends UpdatingElement {
 
   // 拖拽排序后触发的事件
   // istanbul ignore next
-  private _handleOnDrag = (data: Record<string, any>[]): void => {
+  private _handleOnDrag = (
+    data: Record<string, any>[],
+    info: TableDragInfo
+  ): void => {
     this.rowDrag.emit({
       data,
+      info,
     });
   };
 
