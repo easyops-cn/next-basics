@@ -161,7 +161,7 @@ html[data-theme="dark"] {
 .expandIconCellHidden {
   :global(.ant-table-row-expand-icon-cell),
   :global(.ant-table-expand-icon-col) {
-    width: 1px;
+    width: 0px;
     min-width: auto;
 
     > * {
