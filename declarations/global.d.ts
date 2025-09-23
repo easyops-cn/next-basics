@@ -92,3 +92,8 @@ interface Window {
   /** Markup for standalone micro-apps. */
   STANDALONE_MICRO_APPS?: boolean;
 }
+
+declare module "prismjs/components/*" {
+  const content: any;
+  export default content;
+}
