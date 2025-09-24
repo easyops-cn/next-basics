@@ -5,7 +5,7 @@ import "prismjs/themes/prism-tomorrow.css";
 import { Button, message } from "antd";
 import { CopyOutlined, CheckOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
-import { K } from "../i18n/constants";
+import { K, NS_PRESENTATIONAL_BRICKS } from "../i18n/constants";
 import style from "./SyntaxHighlighter.module.css";
 import { copyToClipboard } from "@next-libs/clipboard";
 
@@ -52,7 +52,7 @@ export const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = ({
   enableCopy = true,
   onCopy,
 }) => {
-  const { t } = useTranslation(K.PRESENTATIONAL_BRICKS);
+  const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
   const [copied, setCopied] = useState(false);
   const codeRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
