@@ -36,6 +36,9 @@ const locale: Locale = {
   [K.PREVIEW]: "Preview",
   [K.NO_ALERT]: "Don't show again",
   [K.EDIT]: "Edit",
+  [K.COPY_CODE]: "Copy Code",
+  [K.CODE_COPIED]: "Code copied to clipboard",
+  [K.CODE_COPY_FAILED]: "Copy failed, please copy manually",
 };
 
 export default locale;

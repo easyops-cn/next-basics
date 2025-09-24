@@ -9,13 +9,24 @@
   h4,
   h5,
   h6 {
-    margin: 20px 0 0px;
-    padding: 0 0 12px;
+    /* margin: 20px 0 0px;
+    padding: 0 0 12px; */
     font-weight: bold;
     -webkit-font-smoothing: antialiased;
     cursor: text;
     position: relative;
     color: #262626;
+    margin: 0 !important;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    padding: 20px 0 12px 0;
+  }
+  h5,
+  h6 {
+    padding: 12px 0 12px 0;
   }
 
   mark {
@@ -389,17 +400,29 @@
     border: none;
     background: transparent;
     color: var(--antd-text-color);
+    min-width: 100%;
+    float: left;
   }
 
   pre {
-    background-color: rgba(26, 122, 255, 0.06);
-    border: 1px solid rgba(26, 122, 255, 0.08);
+    background-color: rgb(246, 248, 250) !important;
     font-size: 13px;
     line-height: 19px;
     overflow: auto;
-    padding: 16px 12px;
-    border-radius: 3px;
+    padding: 1rem;
+    border-radius: 0.4rem;
     margin: 20px 0 20px;
+    box-shadow: 0 1px 2px 0 #0000001a;
+  }
+
+  /* 代码块包装器样式 */
+  :global(.code-block-wrapper) {
+    position: relative;
+    margin: 20px 0;
+
+    &:hover {
+      /* 当鼠标悬停时显示复制按钮 */
+    }
   }
 
   pre code,
@@ -458,8 +481,14 @@ html[data-theme="dark-v2"] {
     }
 
     pre {
-      background-color: rgba(63, 117, 221, 0.06);
-      border: 1px solid rgba(63, 117, 221, 0.08);
+      background-color: rgb(33, 33, 33) !important;
+      box-shadow: 0 1px 2px 0 #0000001a !important;
+    }
+
+    /* 暗色主题下的代码块包装器样式 */
+    :global(.code-block-wrapper) {
+      position: relative;
+      margin: 20px 0;
     }
 
     code {

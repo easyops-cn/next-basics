@@ -8,6 +8,7 @@ import { Image } from "antd";
 import { uniqueId } from "lodash";
 import style from "./MarkdownDisplay.module.css";
 import { GeneralPreviewImage } from "../general-preview-image/GeneralPreviewImage";
+import { SyntaxHighlighter } from "./SyntaxHighlighter";
 import classNames from "classnames";
 
 export interface CheckboxInfo {
@@ -23,6 +24,7 @@ interface MarkdownDisplayProps {
   linkTarget?: string;
   collectCheckboxInfo?: boolean;
   onCheckboxChange?: (checkboxInfos: CheckboxInfo[]) => void;
+  enableCodeCopy?: boolean;
 }
 
 export function MarkdownDisplay({
@@ -33,6 +35,7 @@ export function MarkdownDisplay({
   collectCheckboxInfo = false,
   onCheckboxChange,
   linkTarget,
+  enableCodeCopy = true,
 }: MarkdownDisplayProps): React.ReactElement {
   const history = getHistory();
   const baseUrl = location.origin + history.createHref(history.location);
@@ -83,6 +86,37 @@ export function MarkdownDisplay({
   }, [collectCheckboxInfo, value, onCheckboxChange]);
 
   const renderer = {
+    code(code: string, language: string) {
+      const codeId = uniqueId("code-block-");
+      // 使用 setTimeout 确保 DOM 已经渲染
+      setTimeout(() => {
+        const codeElement = document.getElementById(codeId);
+
+        if (codeElement) {
+          const wrapper = document.createElement("div");
+          wrapper.id = `syntax-highlighter-${codeId}`;
+          wrapper.style.position = "relative";
+
+          // 将代码块包装在 wrapper 中
+          codeElement.parentNode?.insertBefore(wrapper, codeElement);
+          wrapper.appendChild(codeElement);
+
+          // 渲染语法高亮器（默认启用复制和语法高亮）
+          ReactDOM.render(
+            <SyntaxHighlighter
+              code={code}
+              language={language || "none"}
+              enableCopy={enableCodeCopy}
+            />,
+            wrapper
+          );
+        }
+      });
+
+      return `<pre id="${codeId}"><code class="language-${
+        language || ""
+      }">${escape(code)}</code></pre>`;
+    },
     link(href: string, title: string, text: string) {
       href = cleanUrl(this.options.sanitize, this.options.baseUrl, href);
       if (href === null) {

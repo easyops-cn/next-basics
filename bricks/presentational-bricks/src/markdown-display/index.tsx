@@ -82,6 +82,15 @@ export class MarkdownDisplayElement extends UpdatingElement {
   @property({ type: String })
   linkTarget: string;
 
+  /**
+   * @kind boolean
+   * @default true
+   * @description 是否启用代码块复制功能（语法高亮默认启用）
+   * @group basic
+   */
+  @property({ attribute: false })
+  enableCodeCopy = true;
+
   // ⚠️ For qa use only, not for production
   @property({ attribute: false })
   __unstable_property_collectCheckboxInfo = false;
@@ -127,6 +136,7 @@ export class MarkdownDisplayElement extends UpdatingElement {
             linkTarget={this.linkTarget}
             collectCheckboxInfo={this.__unstable_property_collectCheckboxInfo}
             onCheckboxChange={this.handleCheckboxChange}
+            enableCodeCopy={this.enableCodeCopy}
           />
         </BrickWrapper>,
         this
