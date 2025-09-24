@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.336.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.335.4...@next-bricks/presentational-bricks@1.336.0) (2025-09-24)
+
+
+### Features
+
+* Markdown构件展示优化 ([2918da4](https://github.com/easyops-cn/next-basics/commit/2918da4c221b244d72740525755e02b950f988e4))
+
+
+
+
+
 ## [1.335.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.335.3...@next-bricks/presentational-bricks@1.335.4) (2025-09-15)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
