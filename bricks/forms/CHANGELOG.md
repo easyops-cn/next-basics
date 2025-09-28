@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.306.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.19...@next-bricks/forms@1.306.0) (2025-09-28)
+
+
+### Features
+
+* 支持转换forms.crontab-input的值 ([3e0b1fc](https://github.com/easyops-cn/next-basics/commit/3e0b1fcd7b94e46c94714874abdfb38e37c37e74))
+
+
+
+
+
 ## [1.305.19](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.18...@next-bricks/forms@1.305.19) (2025-09-12)
 
 **Note:** Version bump only for package @next-bricks/forms
