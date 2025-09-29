@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.306.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.306.0...@next-bricks/forms@1.306.1) (2025-09-29)
+
+
+### Bug Fixes
+
+* forms.get-crontab-input-format-provider不加载问题 ([3295bde](https://github.com/easyops-cn/next-basics/commit/3295bdeeb3ebfac3947ad9a345e0585f35bcc0e2))
+
+
+
+
+
 # [1.306.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.19...@next-bricks/forms@1.306.0) (2025-09-28)
 
 
