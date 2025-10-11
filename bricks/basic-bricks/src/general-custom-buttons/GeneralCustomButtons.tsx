@@ -118,9 +118,10 @@ export class GeneralCustomButtons extends React.Component<
               [style.iconButton]: buttonType === "icon",
             })}
             icon={
-              icon &&
-              typeof icon === "string" && (
+              icon && typeof icon === "string" ? (
                 <LegacyIcon type={icon} data-icon={icon} />
+              ) : (
+                icon && typeof icon === "object" && <GeneralIcon icon={icon} />
               )
             }
             onClick={() => {
@@ -137,7 +138,6 @@ export class GeneralCustomButtons extends React.Component<
             data-testid={testId}
             {...restProps}
           >
-            {icon && typeof icon === "object" && <GeneralIcon icon={icon} />}
             {text}
           </Button>
         );
@@ -259,9 +259,18 @@ export class GeneralCustomButtons extends React.Component<
               type={moreButtonType}
               style={{ ...moreButtonStyle }}
               icon={
-                moreBtnIcon &&
-                typeof moreBtnIcon === "string" && (
+                moreBtnIcon && typeof moreBtnIcon === "string" ? (
                   <LegacyIcon type={moreBtnIcon} />
+                ) : moreBtnIcon && typeof moreBtnIcon === "object" ? (
+                  <GeneralIcon icon={moreBtnIcon} />
+                ) : (
+                  <GeneralIcon
+                    icon={{
+                      lib: "easyops",
+                      category: "default",
+                      icon: "more",
+                    }}
+                  />
                 )
               }
               className={classNames(
@@ -280,20 +289,7 @@ export class GeneralCustomButtons extends React.Component<
                 }
               )}
               data-testid="dropdown-trigger"
-            >
-              {moreBtnIcon && typeof moreBtnIcon === "object" && (
-                <GeneralIcon icon={moreBtnIcon} />
-              )}
-              {!moreBtnIcon && (
-                <GeneralIcon
-                  icon={{
-                    lib: "easyops",
-                    category: "default",
-                    icon: "more",
-                  }}
-                />
-              )}
-            </Button>
+            ></Button>
           ) : dropdownBtnType === "link" ? (
             <Button
               type="link"
@@ -308,16 +304,14 @@ export class GeneralCustomButtons extends React.Component<
               icon={
                 dropdownBtnIcon && typeof dropdownBtnIcon === "string" ? (
                   <LegacyIcon type={dropdownBtnIcon} />
-                ) : dropdownBtnIcon &&
-                  typeof dropdownBtnIcon === "object" ? null : (
+                ) : dropdownBtnIcon && typeof dropdownBtnIcon === "object" ? (
+                  <GeneralIcon icon={dropdownBtnIcon} />
+                ) : (
                   <SettingOutlined />
                 )
               }
               data-testid="dropdown-trigger"
             >
-              {dropdownBtnIcon && typeof dropdownBtnIcon === "object" && (
-                <GeneralIcon icon={dropdownBtnIcon} />
-              )}
               {dropdownBtnText || "管理"} <DownOutlined />
             </Button>
           )}
