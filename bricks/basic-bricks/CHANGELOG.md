@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.258.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.7...@next-bricks/basic-bricks@1.258.8) (2025-10-13)
+
+
+### Bug Fixes
+
+* 修复当按钮图标显示不是正方形展示 ([a76eeca](https://github.com/easyops-cn/next-basics/commit/a76eecac12f2002bebaf514a9dba53773e994bc1))
+
+
+
+
+
 ## [1.258.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.6...@next-bricks/basic-bricks@1.258.7) (2025-05-29)
 
 
