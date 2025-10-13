@@ -167,8 +167,8 @@ describe("topology view admin buttons", () => {
         }}
       />
     );
-    const saveButtonIcon = wrapper2.find("GeneralIcon").at(0);
-    expect(saveButtonIcon.prop("icon")).toEqual(
+    const saveButton2 = wrapper2.find(Button).at(0);
+    expect(saveButton2.prop("icon").props.icon).toEqual(
       expect.objectContaining({
         lib: "fa",
         icon: "plus",
@@ -209,8 +209,8 @@ describe("topology view admin buttons", () => {
         moreBtnIcon={{ lib: "fa", icon: "plus", prefix: "fas" }}
       />
     );
-    const moreButtonIcon = wrapper2.find("GeneralIcon").at(0);
-    expect(moreButtonIcon.prop("icon")).toEqual(
+    const moreButton2 = wrapper2.find(Button).at(0);
+    expect(moreButton2.prop("icon").props.icon).toEqual(
       expect.objectContaining({
         lib: "fa",
         icon: "plus",
