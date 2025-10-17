@@ -32,7 +32,7 @@ const locale: Locale = {
   [K.SITE_MAP_SEARCH_PLACEHOLDER]: "press enter to search",
   [K.ALL_RESOURCES]: "All resources",
   [K.MY_FAVORITE]: "My favorite resources",
-  [K.SEARCH_BY_NAME_OR_ID]: "Search By Model Name Or ID",
+  [K.SEARCH_BY_NAME_OR_ID]: "Search by model name or ID",
   [K.IT_RESOURCE_MANAGEMENT]: "Resource Mgmt",
   [K.NO_MODEL]: "No model",
   [K.RESOURCES]: "Resources",
