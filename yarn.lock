@@ -2759,10 +2759,10 @@
   dependencies:
     "@next-libs/basic-components" "^5.5.3"
 
-"@next-libs/forms@^3.6.4":
-  version "3.6.4"
-  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.6.4.tgz#79eac738ca4b0d35cc67368db4252f24f5b277ec"
-  integrity sha512-UiGrKeOXAJtAlMq+nlS6oA1LhNJ1/rfAfE3SvRwFSPkgJLaVECciJXeJNpp1IAsoQoj2bwTz67Gc0gGf+VQoxA==
+"@next-libs/forms@^3.6.5":
+  version "3.6.5"
+  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.6.5.tgz#3ba1e09487b7dfd81ec3aeabba030823ef939049"
+  integrity sha512-mhYvNTHN2cDfIFI4kD2ErirRk2qjK/LWYL5GWpYZuV6y5a0ihytFP7xvc75U2csdqf1kUlsV9VvQyf80p7wBLA==
   dependencies:
     "@next-libs/basic-components" "^5.5.3"
 
