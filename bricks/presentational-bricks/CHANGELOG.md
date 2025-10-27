@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.336.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.336.1...@next-bricks/presentational-bricks@1.336.2) (2025-10-27)
+
+
+### Bug Fixes
+
+* card-item fix ([eb355aa](https://github.com/easyops-cn/next-basics/commit/eb355aa89141ca42c6b9805d9093839f19b8f961))
+
+
+
+
+
 ## [1.336.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.336.0...@next-bricks/presentational-bricks@1.336.1) (2025-09-24)
 
 
