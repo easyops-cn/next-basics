@@ -28,6 +28,7 @@ export enum K {
   ENTER_KEY_WORDS = "ENTER_KEY_WORDS",
   ADD_TO_QUICK_ACCESS = "ADD_TO_QUICK_ACCESS",
   REMOVE_FROM_QUICK_ACCESS = "REMOVE_FROM_QUICK_ACCESS",
+  MANAGE = "MANAGE",
 }
 
 export type Locale = { [key in K]: string };
