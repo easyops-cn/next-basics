@@ -172,6 +172,7 @@ const locale: Locale = {
   [K.INVALID_FILE_TYPE_DYNAMIC_FORM_ITEM]: "File type is not .xlsx .xls .csv",
   [K.FILE_NAME_VALIDATE_MESSAGE_LOG]:
     "Failed to validate the upload file name format",
+  [K.EXPORT_DATA]: "Export Data",
 };
 
 export default locale;

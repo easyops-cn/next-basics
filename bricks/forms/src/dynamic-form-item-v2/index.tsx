@@ -227,6 +227,14 @@ export class DynamicFormItemV2Element extends FormItemElement {
   exportExamples?: Record<string, string>[];
 
   /**
+   * @description 导入数据过滤项
+   * @group ui
+   * @default false
+   */
+  @property({ attribute: false })
+  importFilter?: string[];
+
+  /**
    * @description 表单项的列数，设置后，表单项会以 grid 布局显示
    * @group ui
    */
@@ -290,6 +298,7 @@ export class DynamicFormItemV2Element extends FormItemElement {
             onImport={this._handleImport}
             gridColumns={this.gridColumns}
             exportExamples={this.exportExamples}
+            importFilter={this.importFilter}
           />
         </BrickWrapper>,
         this
