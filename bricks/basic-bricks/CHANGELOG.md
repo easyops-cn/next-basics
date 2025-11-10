@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.258.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.8...@next-bricks/basic-bricks@1.258.9) (2025-11-08)
+
+**Note:** Version bump only for package @next-bricks/basic-bricks
+
+
+
+
+
+## [1.258.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.7...@next-bricks/basic-bricks@1.258.8) (2025-10-13)
+
+
+### Bug Fixes
+
+* 修复当按钮图标显示不是正方形展示 ([a76eeca](https://github.com/easyops-cn/next-basics/commit/a76eecac12f2002bebaf514a9dba53773e994bc1))
+
+
+
+
+
+## [1.258.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.6...@next-bricks/basic-bricks@1.258.7) (2025-05-29)
+
+
+### Bug Fixes
+
+* 资源视角的搜索框，建议把字符前后的空格去掉，会影响搜索结果。 ([3a19547](https://github.com/easyops-cn/next-basics/commit/3a1954779d410188b5ab629c0c0c7087011b3c54))
+
+
+
+
+
 ## [1.258.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.5...@next-bricks/basic-bricks@1.258.6) (2025-03-25)
 
 

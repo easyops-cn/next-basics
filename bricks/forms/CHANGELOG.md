@@ -3,6 +3,164 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.306.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.306.3...@next-bricks/forms@1.306.4) (2025-10-20)
+
+**Note:** Version bump only for package @next-bricks/forms
+
+
+
+
+
+## [1.306.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.306.2...@next-bricks/forms@1.306.3) (2025-10-17)
+
+**Note:** Version bump only for package @next-bricks/forms
+
+
+
+
+
+## [1.306.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.306.1...@next-bricks/forms@1.306.2) (2025-10-15)
+
+**Note:** Version bump only for package @next-bricks/forms
+
+
+
+
+
+## [1.306.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.306.0...@next-bricks/forms@1.306.1) (2025-09-29)
+
+
+### Bug Fixes
+
+* forms.get-crontab-input-format-provider不加载问题 ([3295bde](https://github.com/easyops-cn/next-basics/commit/3295bdeeb3ebfac3947ad9a345e0585f35bcc0e2))
+
+
+
+
+
+# [1.306.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.19...@next-bricks/forms@1.306.0) (2025-09-28)
+
+
+### Features
+
+* 支持转换forms.crontab-input的值 ([3e0b1fc](https://github.com/easyops-cn/next-basics/commit/3e0b1fcd7b94e46c94714874abdfb38e37c37e74))
+
+
+
+
+
+## [1.305.19](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.18...@next-bricks/forms@1.305.19) (2025-09-12)
+
+**Note:** Version bump only for package @next-bricks/forms
+
+
+
+
+
+## [1.305.18](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.17...@next-bricks/forms@1.305.18) (2025-08-21)
+
+
+### Bug Fixes
+
+* fix typo ([4f8469d](https://github.com/easyops-cn/next-basics/commit/4f8469d4796e9900f853e73511411358274cad4f))
+
+
+
+
+
+## [1.305.17](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.16...@next-bricks/forms@1.305.17) (2025-08-19)
+
+
+### Bug Fixes
+
+* 统一`确认`文本国际化翻译 ([387c21b](https://github.com/easyops-cn/next-basics/commit/387c21b4aa242052940f053e478af62a72d20e9d))
+
+
+
+
+
+## [1.305.16](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.15...@next-bricks/forms@1.305.16) (2025-08-15)
+
+
+### Bug Fixes
+
+* add i18n ([98e2345](https://github.com/easyops-cn/next-basics/commit/98e2345af927d44e5b11898fe49c2e5e0f400edb))
+
+
+
+
+
+## [1.305.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.14...@next-bricks/forms@1.305.15) (2025-08-14)
+
+
+### Bug Fixes
+
+* i18n fix ([44365ed](https://github.com/easyops-cn/next-basics/commit/44365ed0261086d119dff18e0271448186dc948e))
+
+
+
+
+
+## [1.305.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.13...@next-bricks/forms@1.305.14) (2025-08-11)
+
+**Note:** Version bump only for package @next-bricks/forms
+
+
+
+
+
+## [1.305.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.12...@next-bricks/forms@1.305.13) (2025-08-06)
+
+
+### Bug Fixes
+
+* i18n fix ([8619d5a](https://github.com/easyops-cn/next-basics/commit/8619d5ae6d89a3efa8da1d4d0f97cad46b0ac59e))
+
+
+
+
+
+## [1.305.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.11...@next-bricks/forms@1.305.12) (2025-08-05)
+
+
+### Bug Fixes
+
+* 添加属性表单国际化优化 ([6dfb1db](https://github.com/easyops-cn/next-basics/commit/6dfb1dbd422bbc98592c9cf568bd8d6dfe5c15f8))
+
+
+
+
+
+## [1.305.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.10...@next-bricks/forms@1.305.11) (2025-07-17)
+
+
+### Bug Fixes
+
+* form-builder 动态表单报错 ([1c3cf38](https://github.com/easyops-cn/next-basics/commit/1c3cf38713ed1065cc72cee143cd9f483f47b812))
+
+
+
+
+
+## [1.305.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.9...@next-bricks/forms@1.305.10) (2025-06-20)
+
+
+### Bug Fixes
+
+* dynamic-form-item-v2列支持设置hidden属性 ref CMDB_VIEW-466 ([3459079](https://github.com/easyops-cn/next-basics/commit/3459079f60a313481f1a342335b7da45c5362fed))
+
+
+
+
+
+## [1.305.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.8...@next-bricks/forms@1.305.9) (2025-05-22)
+
+**Note:** Version bump only for package @next-bricks/forms
+
+
+
+
+
 ## [1.305.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.305.7...@next-bricks/forms@1.305.8) (2025-04-28)
 
 

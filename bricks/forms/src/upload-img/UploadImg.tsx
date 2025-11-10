@@ -318,7 +318,7 @@ export function RealUploadImg(
       if (index !== -1) {
         setImageList(update(imageList, { $splice: [[index, 1]] }));
       }
-      message.error("上传文件失败");
+      message.error(t(K.UPLOAD_FILE_FAILED));
     } else {
       if (file?.type.startsWith("image/")) {
         handleFilesChange(file, [...fileList], false);
@@ -367,7 +367,7 @@ export function RealUploadImg(
           )}
 
           <div className="ant-upload-text" style={{ marginTop: "-8px" }}>
-            上传图片
+            {t(K.UPLOAD_IMAGE_TEXT)}
           </div>
         </div>
       );
@@ -402,7 +402,7 @@ export function RealUploadImg(
           return;
         }
         if (disabled) {
-          message.error("还有附件正在上传，请稍候再试。");
+          message.error(t(K.UPLOADING_FILE));
           return;
         }
         const fileInfo: any = {
@@ -447,7 +447,7 @@ export function RealUploadImg(
           props.multiple && currentDoneFileList.push(fileInfo);
           setDisabled(false);
         } catch (err) {
-          message.error("上传失败");
+          message.error(t(K.UPLOAD_FAILED));
           setImageList(oldList);
           setDisabled(false);
         }
@@ -474,7 +474,7 @@ export function RealUploadImg(
     const currentDoneFileList: ImageItem[] = [];
     forEach(uploadLinks, async (item) => {
       if (disabled) {
-        message.error("还有附件正在上传，请稍候再试。");
+        message.error(t(K.UPLOADING_FILE));
         return;
       }
       const oldList = cloneDeep(imageList);
@@ -515,7 +515,7 @@ export function RealUploadImg(
         props.multiple && currentDoneFileList.push(fileInfo);
         setDisabled(false);
       } catch (err) {
-        message.error("上传失败");
+        message.error(t(K.UPLOAD_FAILED));
         setImageList(oldList);
         setDisabled(false);
       }
@@ -534,12 +534,12 @@ export function RealUploadImg(
   const handleBeforeUpload = (file: RcFile): Promise<RcFile> => {
     return new Promise((resolve, reject) => {
       if (!file.type?.startsWith("image/")) {
-        message.error("仅支持上传图片文件");
-        reject(new Error("仅支持上传图片文件"));
+        message.error(t(K.UPLOAD_IMAGE_ONLY));
+        reject(new Error(t(K.UPLOAD_IMAGE_ONLY)));
       }
       if (FileUtils.sizeCompare(file, props.limitSize ?? 10)) {
-        message.error(`上传文件体积大于限定体积`);
-        reject(new Error("上传文件体积大于限定体积"));
+        message.error(t(K.UPLOAD_IMAGE_LIMIT));
+        reject(new Error(t(K.UPLOAD_IMAGE_LIMIT)));
       }
       getImageDetail(file)
         .then((detail) => {

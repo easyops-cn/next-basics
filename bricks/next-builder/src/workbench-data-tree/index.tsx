@@ -6,6 +6,7 @@ import {
   property,
   event,
   EventEmitter,
+  method,
 } from "@next-core/brick-kit";
 import { WorkbenchDataTree } from "./WorkbenchDataTree";
 import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
@@ -121,8 +122,21 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
   @event({ type: "nodeName.suffix.click" })
   private _nodeNameSuffixClickEvent: EventEmitter<unknown>;
 
+  private _activeNode: HTMLElement;
+
+  @method()
+  scrollActiveNodeIntoView(): void {
+    this._activeNode?.scrollIntoView({
+      block: "center",
+      behavior: "smooth",
+      inline: "center",
+    });
+  }
   private _nodeNameSuffixClick = (node: WorkbenchNodeData): void => {
     this._nodeNameSuffixClickEvent.emit(node.data);
+  };
+  private _handleNodeActive = (node: HTMLElement): void => {
+    this._activeNode = node;
   };
 
   connectedCallback(): void {
@@ -162,6 +176,7 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
                 dropEmit={this._handleNodeDrop}
                 activeKey={this.activeKey}
                 nodeKey={this.nodeKey}
+                onNodeActive={this._handleNodeActive}
                 disabledNodeSuffixClick={this.disabledNodeSuffixClick}
                 clickFactory={this._nodeClickFactory}
                 contextMenuFactory={this._contextMenuFactory}

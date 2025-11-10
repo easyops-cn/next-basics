@@ -14,6 +14,7 @@ import "./general-textarea";
 // !Lazy: import "./cmdb-instance-select-panel";
 // !Lazy: import "./user-or-user-group-select";
 // !Lazy: import "./crontab-input";
+import "./crontab-input/provider/CrontabFormat";
 import "./general-switch";
 import "./time-range-picker";
 import "./general-auto-complete";
