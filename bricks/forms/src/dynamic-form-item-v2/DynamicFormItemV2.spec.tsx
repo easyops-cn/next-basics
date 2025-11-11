@@ -142,7 +142,7 @@ describe("DynamicFormItemV2", () => {
     const fileInput = wrapper.find('input[type="file"]');
     fileInput.simulate("change", { target: { files: [file] } });
 
-    expect(importFromExcelMock).toHaveBeenCalledWith(file, columns);
+    expect(importFromExcelMock).toHaveBeenCalledWith(file, columns, undefined);
 
     // 测试导出数据功能
     const handleExportDataMock = jest
