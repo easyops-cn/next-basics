@@ -110,7 +110,7 @@ describe("DynamicFormItemV2", () => {
       />
     );
     expect(wrapper.find(".importExportButtons")).toHaveLength(1);
-    expect(wrapper.find(".importExportButtons a")).toHaveLength(2);
+    expect(wrapper.find(".importExportButtons a")).toHaveLength(3);
 
     // Test export functionality
     const exportToExcelMock = jest
