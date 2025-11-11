@@ -8,7 +8,13 @@ import { Image } from "antd";
 import { uniqueId } from "lodash";
 import style from "./MarkdownDisplay.module.css";
 import { GeneralPreviewImage } from "../general-preview-image/GeneralPreviewImage";
+import { SyntaxHighlighter } from "./SyntaxHighlighter";
 import classNames from "classnames";
+
+export interface CheckboxInfo {
+  id: string;
+  checked: boolean;
+}
 
 interface MarkdownDisplayProps {
   value: string;
@@ -16,6 +22,9 @@ interface MarkdownDisplayProps {
   hideImgPreviewMask?: boolean;
   imagePreviewOperationInBottom?: boolean;
   linkTarget?: string;
+  collectCheckboxInfo?: boolean;
+  onCheckboxChange?: (checkboxInfos: CheckboxInfo[]) => void;
+  enableCodeCopy?: boolean;
 }
 
 export function MarkdownDisplay({
@@ -23,12 +32,91 @@ export function MarkdownDisplay({
   imagePreview = true,
   hideImgPreviewMask = true,
   imagePreviewOperationInBottom = false,
+  collectCheckboxInfo = false,
+  onCheckboxChange,
   linkTarget,
+  enableCodeCopy = true,
 }: MarkdownDisplayProps): React.ReactElement {
   const history = getHistory();
   const baseUrl = location.origin + history.createHref(history.location);
   const previewImgUrls = useRef<string[]>([]);
+  const markdownContainerRef = useRef<HTMLDivElement>(null);
+
+  // 收集所有checkbox状态的函数
+  const collectAllCheckboxStates = () => {
+    if (!collectCheckboxInfo || !markdownContainerRef.current) return;
+
+    const checkboxes =
+      markdownContainerRef.current.querySelectorAll<HTMLInputElement>(
+        'input[type="checkbox"][class*="task-checkbox"][data-id]'
+      );
+
+    const checkboxInfos: CheckboxInfo[] = Array.from(checkboxes).map(
+      (checkbox) => ({
+        id: checkbox.dataset.id || "",
+        checked: checkbox.checked,
+      })
+    );
+
+    onCheckboxChange?.(checkboxInfos);
+  };
+
+  // 添加checkbox事件监听
+  useEffect(() => {
+    if (!collectCheckboxInfo || !markdownContainerRef.current) return;
+
+    const container = markdownContainerRef.current;
+
+    const handleCheckboxChange = (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      if (
+        target.type === "checkbox" &&
+        target.classList.contains("task-checkbox") &&
+        target.dataset.id
+      ) {
+        collectAllCheckboxStates();
+      }
+    };
+
+    container.addEventListener("change", handleCheckboxChange);
+
+    return () => {
+      container.removeEventListener("change", handleCheckboxChange);
+    };
+  }, [collectCheckboxInfo, value, onCheckboxChange]);
+
   const renderer = {
+    code(code: string, language: string) {
+      const codeId = uniqueId("code-block-");
+      // 使用 setTimeout 确保 DOM 已经渲染
+      setTimeout(() => {
+        const codeElement = document.getElementById(codeId);
+
+        if (codeElement) {
+          const wrapper = document.createElement("div");
+          wrapper.id = `syntax-highlighter-${codeId}`;
+          wrapper.style.position = "relative";
+
+          // 将代码块包装在 wrapper 中
+          codeElement.parentNode?.insertBefore(wrapper, codeElement);
+          wrapper.appendChild(codeElement);
+
+          // 渲染语法高亮器（默认启用复制和语法高亮）
+          ReactDOM.render(
+            <SyntaxHighlighter
+              code={code}
+              language={language || "none"}
+              enableCopy={enableCodeCopy}
+            />,
+            wrapper
+          );
+        }
+      });
+
+      return `<pre id="${codeId}"><code class="language-${
+        language || ""
+      }">${escape(code)}</code></pre>`;
+    },
     link(href: string, title: string, text: string) {
       href = cleanUrl(this.options.sanitize, this.options.baseUrl, href);
       if (href === null) {
@@ -135,6 +223,7 @@ export function MarkdownDisplay({
         className={classNames(style.customMarkdown, {
           [style.hideImgPreviewMask]: hideImgPreviewMask,
         })}
+        ref={markdownContainerRef}
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(
             marked(value || "", {
@@ -154,6 +243,7 @@ export function MarkdownDisplay({
       className={classNames(style.customMarkdown, {
         [style.hideImgPreviewMask]: hideImgPreviewMask,
       })}
+      ref={markdownContainerRef}
       dangerouslySetInnerHTML={{
         __html: DOMPurify.sanitize(
           marked(value || "", {

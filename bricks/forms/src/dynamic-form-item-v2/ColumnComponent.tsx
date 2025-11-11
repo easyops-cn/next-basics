@@ -108,6 +108,11 @@ export function ColumnComponent(
     [column.props?.disabled, rowValue, rowIndex]
   );
 
+  const hidden = useMemo(
+    () => getRealValue(column.props?.hidden, [rowValue, rowIndex]),
+    [column.props?.hidden, rowValue, rowIndex]
+  );
+
   const rules = useMemo(
     () =>
       column.rules?.map((rule) => {
@@ -167,6 +172,7 @@ export function ColumnComponent(
           name={[fieldName, name]}
           rules={rules}
           tooltip={getTooltip(column.tooltip)}
+          hidden={hidden}
         >
           <Input.TextArea {...column.props} />
         </Form.Item>
@@ -182,6 +188,7 @@ export function ColumnComponent(
           name={[fieldName, name]}
           rules={rules}
           tooltip={getTooltip(column.tooltip)}
+          hidden={hidden}
         >
           <Input
             style={{ width: "100%" }}
@@ -207,6 +214,7 @@ export function ColumnComponent(
           name={[fieldName, name]}
           rules={rules}
           tooltip={getTooltip(column.tooltip)}
+          hidden={hidden}
         >
           <InputNumber
             style={{ width: "100%" }}
@@ -230,6 +238,7 @@ export function ColumnComponent(
           name={[fieldName, name]}
           rules={rules}
           tooltip={getTooltip(column.tooltip)}
+          hidden={hidden}
         >
           <Input.Password
             style={{ width: "100%" }}
@@ -266,8 +275,12 @@ export function ColumnComponent(
         : {
             showSearch: false,
           };
-      // 如果options是二维数组
-      if (Array.isArray(options[rowIndex]) || Array.isArray(options[0])) {
+      // 如果options是二维数组 只要其中一个是二维数组 就需要重新赋值options
+      if (
+        Array.isArray(options[rowIndex]) ||
+        Array.isArray(options[0]) ||
+        options.some((option) => Array.isArray(option))
+      ) {
         options =
           (options[rowIndex] as GeneralComplexOption<string | number>[]) ?? [];
       }
@@ -279,6 +292,7 @@ export function ColumnComponent(
           name={[fieldName, name]}
           rules={rules}
           tooltip={getTooltip(column.tooltip)}
+          hidden={hidden}
         >
           <Select
             className={suffix && style.suffixBrickSelect}
@@ -330,6 +344,7 @@ export function ColumnComponent(
           name={[fieldName, name]}
           rules={rules}
           tooltip={getTooltip(column.tooltip)}
+          hidden={hidden}
         >
           <Cascader
             style={{ width: "100%" }}
@@ -370,6 +385,7 @@ export function ColumnComponent(
           name={[fieldName, name]}
           rules={rules}
           tooltip={getTooltip(column.tooltip)}
+          hidden={hidden}
         >
           <CodeEditorItem
             placeholder={placeholder}
@@ -401,6 +417,7 @@ export function ColumnComponent(
           name={[fieldName, name]}
           rules={rules}
           tooltip={getTooltip(column.tooltip)}
+          hidden={hidden}
         >
           <AutoCompleteItem
             options={options}
@@ -422,6 +439,7 @@ export function ColumnComponent(
           rules={rules}
           valuePropName="checked"
           tooltip={getTooltip(column.tooltip)}
+          hidden={hidden}
         >
           <Checkbox {...column.props}>{column.props?.text}</Checkbox>
         </Form.Item>
@@ -436,6 +454,7 @@ export function ColumnComponent(
           name={[fieldName, name]}
           rules={rules}
           tooltip={getTooltip(column.tooltip)}
+          hidden={hidden}
         >
           <TimeRangePickerItem {...column.props} />
         </Form.Item>

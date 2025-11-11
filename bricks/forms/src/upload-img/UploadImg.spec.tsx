@@ -103,7 +103,7 @@ describe("UploadImg", () => {
       [...fileList]
     );
     await expect(notImageResult).rejects.toStrictEqual(
-      new Error("仅支持上传图片文件")
+      new Error("UPLOAD_IMAGE_ONLY")
     );
 
     wrapper.setProps({
@@ -119,7 +119,7 @@ describe("UploadImg", () => {
       [...fileList]
     );
     await expect(overLimitResult).rejects.toStrictEqual(
-      new Error("上传文件体积大于限定体积")
+      new Error("UPLOAD_IMAGE_LIMIT")
     );
 
     let allowResult;
@@ -212,7 +212,7 @@ describe("UploadImg", () => {
         ],
       },
     });
-    expect(message.error).not.toBeCalledWith("还有附件正在上传，请稍候再试。");
+    expect(message.error).not.toBeCalledWith("UPLOADING_FILE");
     wrapper.find(Input.TextArea).invoke("onPaste")({
       clipboardData: {
         items: [
@@ -224,7 +224,7 @@ describe("UploadImg", () => {
         ],
       },
     });
-    expect(message.error).toBeCalledWith("还有附件正在上传，请稍候再试。");
+    expect(message.error).toBeCalledWith("UPLOADING_FILE");
     await act(async () => {
       wrapper.find(Upload).invoke("onPreview")({
         size: 1024,

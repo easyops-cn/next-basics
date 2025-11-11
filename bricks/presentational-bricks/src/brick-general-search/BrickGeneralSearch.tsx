@@ -148,7 +148,7 @@ export const BrickGeneralSearch = forwardRef<Input, TestGeneralSearchProps>(
             <Select
               bordered={false}
               className={style.selectType}
-              style={{ width: "120px" }}
+              style={{ width: "150px" }}
               defaultValue={props.searchType}
               onChange={props.onSearchTypeChange}
             >

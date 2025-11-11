@@ -3,6 +3,206 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.336.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.336.1...@next-bricks/presentational-bricks@1.336.2) (2025-10-27)
+
+
+### Bug Fixes
+
+* card-item fix ([eb355aa](https://github.com/easyops-cn/next-basics/commit/eb355aa89141ca42c6b9805d9093839f19b8f961))
+
+
+
+
+
+## [1.336.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.336.0...@next-bricks/presentational-bricks@1.336.1) (2025-09-24)
+
+
+### Bug Fixes
+
+* Markdown构件展示优化 ([23ed3ac](https://github.com/easyops-cn/next-basics/commit/23ed3ac32d354de3519eee070ee485e2f16ca4cc))
+
+
+
+
+
+# [1.336.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.335.4...@next-bricks/presentational-bricks@1.336.0) (2025-09-24)
+
+
+### Features
+
+* Markdown构件展示优化 ([2918da4](https://github.com/easyops-cn/next-basics/commit/2918da4c221b244d72740525755e02b950f988e4))
+
+
+
+
+
+## [1.335.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.335.3...@next-bricks/presentational-bricks@1.335.4) (2025-09-15)
+
+**Note:** Version bump only for package @next-bricks/presentational-bricks
+
+
+
+
+
+## [1.335.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.335.2...@next-bricks/presentational-bricks@1.335.3) (2025-09-09)
+
+**Note:** Version bump only for package @next-bricks/presentational-bricks
+
+
+
+
+
+## [1.335.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.335.1...@next-bricks/presentational-bricks@1.335.2) (2025-08-26)
+
+
+### Bug Fixes
+
+* **markdown-display:** fix code in table display error ([260bf5f](https://github.com/easyops-cn/next-basics/commit/260bf5f1379b6c1cc7b500e149a0f9dd374ac83f))
+
+
+
+
+
+## [1.335.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.335.0...@next-bricks/presentational-bricks@1.335.1) (2025-08-26)
+
+
+### Bug Fixes
+
+* **markdown-display:** fix code in table display error ([fe6109c](https://github.com/easyops-cn/next-basics/commit/fe6109c1a3c6150ea064599e855ebd8f27805031))
+
+
+
+
+
+# [1.335.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.334.7...@next-bricks/presentational-bricks@1.335.0) (2025-08-22)
+
+
+### Features
+
+* **brick-tree:** 支持`checkV2` 事件 ([c1baa3a](https://github.com/easyops-cn/next-basics/commit/c1baa3ab31649463483a16e12f437b6d68ac8370))
+
+
+
+
+
+## [1.334.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.334.6...@next-bricks/presentational-bricks@1.334.7) (2025-08-15)
+
+
+### Bug Fixes
+
+* add i18n ([98e2345](https://github.com/easyops-cn/next-basics/commit/98e2345af927d44e5b11898fe49c2e5e0f400edb))
+
+
+
+
+
+## [1.334.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.334.5...@next-bricks/presentational-bricks@1.334.6) (2025-08-14)
+
+
+### Bug Fixes
+
+* i18n fix ([44365ed](https://github.com/easyops-cn/next-basics/commit/44365ed0261086d119dff18e0271448186dc948e))
+
+
+
+
+
+## [1.334.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.334.4...@next-bricks/presentational-bricks@1.334.5) (2025-08-11)
+
+**Note:** Version bump only for package @next-bricks/presentational-bricks
+
+
+
+
+
+## [1.334.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.334.3...@next-bricks/presentational-bricks@1.334.4) (2025-08-08)
+
+
+### Bug Fixes
+
+* i18n fix ([b3fee78](https://github.com/easyops-cn/next-basics/commit/b3fee7804ea7cca250886d98011315492c0d1079))
+
+
+
+
+
+## [1.334.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.334.2...@next-bricks/presentational-bricks@1.334.3) (2025-08-06)
+
+
+### Bug Fixes
+
+* i18n fix ([8619d5a](https://github.com/easyops-cn/next-basics/commit/8619d5ae6d89a3efa8da1d4d0f97cad46b0ac59e))
+
+
+
+
+
+## [1.334.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.334.1...@next-bricks/presentational-bricks@1.334.2) (2025-08-06)
+
+
+### Bug Fixes
+
+* presentational-bricks 国际化 优化 ([0a9e3a8](https://github.com/easyops-cn/next-basics/commit/0a9e3a840bf76a4a92ef5125624e67f75d219ec3))
+
+
+
+
+
+## [1.334.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.334.0...@next-bricks/presentational-bricks@1.334.1) (2025-08-05)
+
+
+### Bug Fixes
+
+* datetime-range  国际化 优化 ([5e21366](https://github.com/easyops-cn/next-basics/commit/5e21366944c44da4bf99a9bb470d25dd758484ec))
+
+
+
+
+
+# [1.334.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.333.4...@next-bricks/presentational-bricks@1.334.0) (2025-07-30)
+
+
+### Features
+
+* markdown支持checkbox事件 ([5e7d696](https://github.com/easyops-cn/next-basics/commit/5e7d696d5461f7483f86ded34080c8072d86e93c))
+
+
+
+
+
+## [1.333.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.333.3...@next-bricks/presentational-bricks@1.333.4) (2025-07-21)
+
+
+### Bug Fixes
+
+* AOPS-920 【应急演练】产品中，与用户相关的显示改为user模型showkey显示 ref AOPS-920 ([3757db8](https://github.com/easyops-cn/next-basics/commit/3757db860c1ec4127e55434cd99bc00e19414421))
+
+
+
+
+
+## [1.333.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.333.2...@next-bricks/presentational-bricks@1.333.3) (2025-06-17)
+
+
+### Bug Fixes
+
+* 滚动条把数字挡住了，建议调整一下。 ([7bb5e10](https://github.com/easyops-cn/next-basics/commit/7bb5e106a03f60ec3821423dfce4f6b94cf73f11))
+
+
+
+
+
+## [1.333.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.333.1...@next-bricks/presentational-bricks@1.333.2) (2025-05-30)
+
+
+### Bug Fixes
+
+* 文档空间名称搜索不了，还有这个名称太长会被挡到 ([5be81c9](https://github.com/easyops-cn/next-basics/commit/5be81c9dcfe505298410e8de51e81ca4b400dccb))
+
+
+
+
+
 ## [1.333.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.333.0...@next-bricks/presentational-bricks@1.333.1) (2025-04-27)
 
 

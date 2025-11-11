@@ -31,7 +31,11 @@ const rightMenuIcon: MenuIcon = {
   icon: "right",
   theme: "outlined",
 };
-
+export interface TableDragInfo {
+  order: "asc" | "desc";
+  dragData: Record<string, any>;
+  anchorData: Record<string, any>;
+}
 export interface BrickTableProps<RecordType = Record<string, unknown>>
   extends Pick<
     TableProps<RecordType>,
@@ -68,7 +72,7 @@ export interface BrickTableProps<RecordType = Record<string, unknown>>
   rowKey?: string;
   childrenColumnName?: string;
   tableDraggable?: boolean;
-  onDrag?: (data: Record<string, any>[]) => void;
+  onDrag?: (data: Record<string, any>[], info: TableDragInfo) => void;
   zebraPattern?: boolean;
   optimizedColumns?: Array<string | number>;
   ellipsisInfo?: boolean;
@@ -579,6 +583,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
     hoverIndex: number,
     dragRowKey: string
   ) => {
+    const order = dragIndex > hoverIndex ? "asc" : "desc";
     /* istanbul ignore next */
     const newData = getNewDateAfterMoving({
       oldData: data,
@@ -589,7 +594,12 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
       childrenColumnName,
     });
     setData(newData);
-    props.onDrag && props.onDrag(newData);
+    props.onDrag &&
+      props.onDrag(newData, {
+        order,
+        dragData: data.find((d, index) => index === dragIndex),
+        anchorData: data.find((d, index) => index === hoverIndex),
+      });
   };
 
   const onExpand = (expanded: boolean, record: Record<string, any>) => {

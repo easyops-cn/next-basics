@@ -34,6 +34,11 @@ export enum K {
   IP_SEARCH = "IP_SEARCH",
   SORT = "SORT",
   PREVIEW = "PREVIEW",
+  NO_ALERT = "NO_ALERT",
+  EDIT = "EDIT",
+  COPY_CODE = "COPY_CODE",
+  CODE_COPIED = "CODE_COPIED",
+  CODE_COPY_FAILED = "CODE_COPY_FAILED",
 }
 
 export type Locale = { [key in K]: string };

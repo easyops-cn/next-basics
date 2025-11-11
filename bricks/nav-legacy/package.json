@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/nav-legacy",
-  "version": "1.4.2",
+  "version": "1.4.6",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/nav-legacy",
   "license": "GPL-3.0",
@@ -26,7 +26,7 @@
   },
   "sideEffects": true,
   "devDependencies": {
-    "@next-libs/basic-components": "^5.5.2",
+    "@next-libs/basic-components": "^5.5.3",
     "@next-libs/storage": "^2.0.4",
     "@next-sdk/air-admin-service-sdk": "^2.1.12",
     "@next-sdk/api-gateway-sdk": "2.10.0",
