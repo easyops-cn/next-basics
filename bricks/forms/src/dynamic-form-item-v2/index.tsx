@@ -196,17 +196,18 @@ export class DynamicFormItemV2Element extends FormItemElement {
       }
     }
     setColumns(
-      columns.map((item) =>
-        item.name === name
-          ? {
-              ...item,
-              props: {
-                ...item.props,
-                options: rowIndex === "all" ? options : cloneOptions,
-              },
-            }
-          : item
-      ) as Column[]
+      (prevColumns) =>
+        prevColumns.map((item) =>
+          item.name === name
+            ? {
+                ...item,
+                props: {
+                  ...item.props,
+                  options: rowIndex === "all" ? options : cloneOptions,
+                },
+              }
+            : item
+        ) as Column[]
     );
   }
 
