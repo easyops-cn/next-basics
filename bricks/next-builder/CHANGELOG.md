@@ -3,158 +3,100 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.279.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.6...@next-bricks/next-builder@1.279.7) (2025-05-15)
+# [1.280.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.8...@next-bricks/next-builder@1.280.0) (2025-08-08)
 
+### Features
+
+- VB 小优化 ([85320d1](https://github.com/easyops-cn/next-basics/commit/85320d1ab1daed920b75ad0ad738de400f2b03d4))
+
+## [1.279.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.7...@next-bricks/next-builder@1.279.8) (2025-05-26)
 
 ### Bug Fixes
 
-* add builtin actions ([895ccba](https://github.com/easyops-cn/next-basics/commit/895ccba43af5cf6861a68611e13ea50daf167a5e))
-* add svg as an image extension ([89f3d2e](https://github.com/easyops-cn/next-basics/commit/89f3d2e96252bb9971fbc7fb878de9375bac1d5c))
+- GetSuiteGraphBasePartCommit provider ([6dacf89](https://github.com/easyops-cn/next-basics/commit/6dacf8925c6fc7820e930faa1e9287a374335fd0))
 
+## [1.279.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.6...@next-bricks/next-builder@1.279.7) (2025-05-15)
 
+### Bug Fixes
 
-
+- add builtin actions ([895ccba](https://github.com/easyops-cn/next-basics/commit/895ccba43af5cf6861a68611e13ea50daf167a5e))
+- add svg as an image extension ([89f3d2e](https://github.com/easyops-cn/next-basics/commit/89f3d2e96252bb9971fbc7fb878de9375bac1d5c))
 
 ## [1.279.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.5...@next-bricks/next-builder@1.279.6) (2025-03-25)
 
 **Note:** Version bump only for package @next-bricks/next-builder
 
-
-
-
-
 ## [1.279.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.4...@next-bricks/next-builder@1.279.5) (2025-02-21)
-
 
 ### Bug Fixes
 
-* dispatch request start/end for inspect callback ([facd4cc](https://github.com/easyops-cn/next-basics/commit/facd4cc3930f9a01b0d0449fa62d78100da701e4))
-
-
-
-
+- dispatch request start/end for inspect callback ([facd4cc](https://github.com/easyops-cn/next-basics/commit/facd4cc3930f9a01b0d0449fa62d78100da701e4))
 
 ## [1.279.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.3...@next-bricks/next-builder@1.279.4) (2025-02-08)
 
-
 ### Bug Fixes
 
-* support inspect callback ([6322925](https://github.com/easyops-cn/next-basics/commit/6322925e9f1d56dd8e9c39b1b85b3b565051b84e))
-
-
-
-
+- support inspect callback ([6322925](https://github.com/easyops-cn/next-basics/commit/6322925e9f1d56dd8e9c39b1b85b3b565051b84e))
 
 ## [1.279.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.2...@next-bricks/next-builder@1.279.3) (2024-12-26)
 
 **Note:** Version bump only for package @next-bricks/next-builder
 
-
-
-
-
 ## [1.279.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.1...@next-bricks/next-builder@1.279.2) (2024-12-17)
 
 **Note:** Version bump only for package @next-bricks/next-builder
 
-
-
-
-
 ## [1.279.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.279.0...@next-bricks/next-builder@1.279.1) (2024-11-26)
-
 
 ### Bug Fixes
 
-* do not transform native function for debugger ([7266045](https://github.com/easyops-cn/next-basics/commit/72660456fe70066ed52ba4e78383d448fe0c3a0b))
-
-
-
-
+- do not transform native function for debugger ([7266045](https://github.com/easyops-cn/next-basics/commit/72660456fe70066ed52ba4e78383d448fe0c3a0b))
 
 # [1.279.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.18...@next-bricks/next-builder@1.279.0) (2024-11-26)
 
-
 ### Bug Fixes
 
-* specify chunk name ([024a619](https://github.com/easyops-cn/next-basics/commit/024a6191d4a41a2cd33f764981689290a4f89dd6))
-
+- specify chunk name ([024a619](https://github.com/easyops-cn/next-basics/commit/024a6191d4a41a2cd33f764981689290a4f89dd6))
 
 ### Features
 
-* support native mode for storyboard functions ([300e0c7](https://github.com/easyops-cn/next-basics/commit/300e0c7e6a6d677f6858f3d27f49d88fa1bb71a5))
-
-
-
-
+- support native mode for storyboard functions ([300e0c7](https://github.com/easyops-cn/next-basics/commit/300e0c7e6a6d677f6858f3d27f49d88fa1bb71a5))
 
 ## [1.278.18](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.17...@next-bricks/next-builder@1.278.18) (2024-11-18)
 
 **Note:** Version bump only for package @next-bricks/next-builder
 
-
-
-
-
 ## [1.278.17](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.16...@next-bricks/next-builder@1.278.17) (2024-10-29)
-
 
 ### Bug Fixes
 
-* workbenchbackend 增加动作 update form template ([eb332bf](https://github.com/easyops-cn/next-basics/commit/eb332bff7f4dd36d67e93ba369f7f75e3c888b0f))
-
-
-
-
+- workbenchbackend 增加动作 update form template ([eb332bf](https://github.com/easyops-cn/next-basics/commit/eb332bff7f4dd36d67e93ba369f7f75e3c888b0f))
 
 ## [1.278.16](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.15...@next-bricks/next-builder@1.278.16) (2024-10-24)
 
-
 ### Bug Fixes
 
-* set default mount point to empty, refine data icon ([1f375c5](https://github.com/easyops-cn/next-basics/commit/1f375c58267c84ed5efe11a7cdf61045d30577d6))
-
-
-
-
+- set default mount point to empty, refine data icon ([1f375c5](https://github.com/easyops-cn/next-basics/commit/1f375c58267c84ed5efe11a7cdf61045d30577d6))
 
 ## [1.278.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.14...@next-bricks/next-builder@1.278.15) (2024-10-23)
 
-
 ### Bug Fixes
 
-* distinguish slot brick ([0b8f00b](https://github.com/easyops-cn/next-basics/commit/0b8f00bb9dd459092bda4837677df412aaeade60))
-
-
-
-
+- distinguish slot brick ([0b8f00b](https://github.com/easyops-cn/next-basics/commit/0b8f00bb9dd459092bda4837677df412aaeade60))
 
 ## [1.278.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.13...@next-bricks/next-builder@1.278.14) (2024-10-16)
 
 **Note:** Version bump only for package @next-bricks/next-builder
 
-
-
-
-
 ## [1.278.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.12...@next-bricks/next-builder@1.278.13) (2024-10-09)
-
 
 ### Bug Fixes
 
-* allow paste a route into a brick ([42a0168](https://github.com/easyops-cn/next-basics/commit/42a01684e14c1be8486ea033d44743c73b001175))
-
-
-
-
+- allow paste a route into a brick ([42a0168](https://github.com/easyops-cn/next-basics/commit/42a01684e14c1be8486ea033d44743c73b001175))
 
 ## [1.278.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.11...@next-bricks/next-builder@1.278.12) (2024-08-27)
 
 **Note:** Version bump only for package @next-bricks/next-builder
-
-
-
-
 
 ## [1.278.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.278.10...@next-bricks/next-builder@1.278.11) (2024-08-26)
 

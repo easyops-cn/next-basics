@@ -29,6 +29,7 @@ const locale: Locale = {
   [K.ENTER_KEY_WORDS]: "Enter keywords to search",
   [K.ADD_TO_QUICK_ACCESS]: "Add to quick access",
   [K.REMOVE_FROM_QUICK_ACCESS]: "Remove from quick access",
+  [K.MANAGE]: "Manage",
 };
 
 export default locale;

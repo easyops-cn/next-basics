@@ -28,6 +28,7 @@ const locale: Locale = {
   [K.ENTER_KEY_WORDS]: "输入关键词搜索",
   [K.ADD_TO_QUICK_ACCESS]: "添加至快捷访问",
   [K.REMOVE_FROM_QUICK_ACCESS]: "从快捷访问移除",
+  [K.MANAGE]: "管理",
 };
 
 export default locale;

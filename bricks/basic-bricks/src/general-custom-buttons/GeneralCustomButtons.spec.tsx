@@ -2,8 +2,9 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import { GeneralCustomButtons } from "./GeneralCustomButtons";
 import { CustomButton } from ".";
-import { Menu, Dropdown, Button } from "antd";
+import { Menu, Dropdown, Button, MenuProps } from "antd";
 import { SettingOutlined } from "@ant-design/icons";
+import { K } from "../i18n/constants";
 
 describe("topology view admin buttons", () => {
   it("should work", () => {
@@ -83,7 +84,9 @@ describe("topology view admin buttons", () => {
     );
     const saveButton = wrapper.find(Button).at(0);
     expect(saveButton.prop("icon")).toEqual(<SettingOutlined />);
-    (wrapper.instance() as any).handleMenuClick({
+    (
+      wrapper.find(Dropdown).prop("overlay") as React.ReactElement<MenuProps>
+    ).props.onClick({
       key: "save",
       item: { props: { ["data-button"]: buttons[0] } },
     });
@@ -167,8 +170,8 @@ describe("topology view admin buttons", () => {
         }}
       />
     );
-    const saveButtonIcon = wrapper2.find("GeneralIcon").at(0);
-    expect(saveButtonIcon.prop("icon")).toEqual(
+    const saveButton2 = wrapper2.find(Button).at(0);
+    expect(saveButton2.prop("icon").props.icon).toEqual(
       expect.objectContaining({
         lib: "fa",
         icon: "plus",
@@ -209,8 +212,8 @@ describe("topology view admin buttons", () => {
         moreBtnIcon={{ lib: "fa", icon: "plus", prefix: "fas" }}
       />
     );
-    const moreButtonIcon = wrapper2.find("GeneralIcon").at(0);
-    expect(moreButtonIcon.prop("icon")).toEqual(
+    const moreButton2 = wrapper2.find(Button).at(0);
+    expect(moreButton2.prop("icon").props.icon).toEqual(
       expect.objectContaining({
         lib: "fa",
         icon: "plus",
@@ -240,7 +243,7 @@ describe("topology view admin buttons", () => {
     const moreButton = wrapper.find(Button).at(0);
     expect(moreButton.prop("type")).toEqual("link");
     expect(moreButton.hasClass("dropdownBtnContainer")).toBeTruthy();
-    expect(moreButton.text()).toEqual("管理");
+    expect(moreButton.text()).toEqual(K.MANAGE);
     wrapper.find(Dropdown).invoke("onVisibleChange")(true);
     expect(mockOnDropdownVisibleChange).toHaveBeenCalledWith(true);
   });

@@ -3,87 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.258.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.5...@next-bricks/basic-bricks@1.258.6) (2025-03-25)
+## [1.258.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.8...@next-bricks/basic-bricks@1.258.9) (2025-11-08)
 
+**Note:** Version bump only for package @next-bricks/basic-bricks
+
+## [1.258.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.7...@next-bricks/basic-bricks@1.258.8) (2025-10-13)
 
 ### Bug Fixes
 
-* support item style ([623861a](https://github.com/easyops-cn/next-basics/commit/623861a3c9a3f8af371d65e5eb8d1c7d0d148d47))
+- 修复当按钮图标显示不是正方形展示 ([a76eeca](https://github.com/easyops-cn/next-basics/commit/a76eecac12f2002bebaf514a9dba53773e994bc1))
 
+## [1.258.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.6...@next-bricks/basic-bricks@1.258.7) (2025-05-29)
 
+### Bug Fixes
 
+- 资源视角的搜索框，建议把字符前后的空格去掉，会影响搜索结果。 ([3a19547](https://github.com/easyops-cn/next-basics/commit/3a1954779d410188b5ab629c0c0c7087011b3c54))
 
+## [1.258.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.5...@next-bricks/basic-bricks@1.258.6) (2025-03-25)
+
+### Bug Fixes
+
+- support item style ([623861a](https://github.com/easyops-cn/next-basics/commit/623861a3c9a3f8af371d65e5eb8d1c7d0d148d47))
 
 ## [1.258.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.4...@next-bricks/basic-bricks@1.258.5) (2025-02-07)
 
-
 ### Bug Fixes
 
-* 小尺寸按钮在点击后不应该保持高亮样式 ([56d5e81](https://github.com/easyops-cn/next-basics/commit/56d5e813831bc8e18db012c1f8d3242902760634))
-
-
-
-
+- 小尺寸按钮在点击后不应该保持高亮样式 ([56d5e81](https://github.com/easyops-cn/next-basics/commit/56d5e813831bc8e18db012c1f8d3242902760634))
 
 ## [1.258.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.3...@next-bricks/basic-bricks@1.258.4) (2024-12-26)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
 
-
-
-
-
 ## [1.258.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.2...@next-bricks/basic-bricks@1.258.3) (2024-10-22)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
 
-
-
-
-
 ## [1.258.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.1...@next-bricks/basic-bricks@1.258.2) (2024-10-21)
-
 
 ### Bug Fixes
 
-* 级联选择如果在弹窗内，点击x会关掉整个弹窗 ([5519681](https://github.com/easyops-cn/next-basics/commit/55196811ef88370c0c5b205417db6b8c727f0a8b))
-
-
-
-
+- 级联选择如果在弹窗内，点击 x 会关掉整个弹窗 ([5519681](https://github.com/easyops-cn/next-basics/commit/55196811ef88370c0c5b205417db6b8c727f0a8b))
 
 ## [1.258.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.0...@next-bricks/basic-bricks@1.258.1) (2024-10-17)
 
-
 ### Bug Fixes
 
-* set stackable defaults to false ([8739f39](https://github.com/easyops-cn/next-basics/commit/8739f3932aab76da63dd245eeefde5c3ecec154e))
-
-
-
-
+- set stackable defaults to false ([8739f39](https://github.com/easyops-cn/next-basics/commit/8739f3932aab76da63dd245eeefde5c3ecec154e))
 
 # [1.258.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.257.3...@next-bricks/basic-bricks@1.258.0) (2024-10-16)
 
-
 ### Features
 
-* support modal stack ([d8624b4](https://github.com/easyops-cn/next-basics/commit/d8624b41ef9a6901d2143e98305a44635f6965c8))
-
-
-
-
+- support modal stack ([d8624b4](https://github.com/easyops-cn/next-basics/commit/d8624b41ef9a6901d2143e98305a44635f6965c8))
 
 ## [1.257.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.257.2...@next-bricks/basic-bricks@1.257.3) (2024-09-19)
 
-
 ### Bug Fixes
 
-* 旧版暗色模式下隐藏到期提示 ([231b8e1](https://github.com/easyops-cn/next-basics/commit/231b8e1011d6b66641922e36a47484dfd72fb7a9))
-
-
-
-
+- 旧版暗色模式下隐藏到期提示 ([231b8e1](https://github.com/easyops-cn/next-basics/commit/231b8e1011d6b66641922e36a47484dfd72fb7a9))
 
 ## [1.257.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.257.1...@next-bricks/basic-bricks@1.257.2) (2024-08-26)
 

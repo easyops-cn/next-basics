@@ -34,6 +34,11 @@ const locale: Locale = {
   [K.IP_SEARCH]: "IP搜索 ",
   [K.SORT]: "排序",
   [K.PREVIEW]: "预览",
+  [K.NO_ALERT]: "不再提示",
+  [K.EDIT]: "编辑",
+  [K.COPY_CODE]: "复制代码",
+  [K.CODE_COPIED]: "代码已复制到剪贴板",
+  [K.CODE_COPY_FAILED]: "复制失败，请手动复制",
 };
 
 export default locale;

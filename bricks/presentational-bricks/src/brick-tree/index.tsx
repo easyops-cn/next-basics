@@ -71,6 +71,20 @@ export class BrickTreeElement extends UpdatingElement {
   >;
 
   /**
+   * @detail {checkedKeys: string[]| {checked: string[]; halfChecked: string[]}; info: {event: string; checked: boolean; checkedNodes: DataNode[]; nativeEvent: MouseEvent;}}
+   * @description 勾选事件
+   */
+  @event({ type: "tree.checkV2", cancelable: true }) treeCheckV2: EventEmitter<{
+    checkedKeys: string[] | { checked: string[]; halfChecked: string[] };
+    info: {
+      event: "check";
+      checked: boolean;
+      checkedNodes: DataNode[];
+      nativeEvent: MouseEvent;
+    };
+  }>;
+
+  /**
    * @detail string[]| {checked: string[]; halfChecked: string[]}
    * @description 搜索事件
    */
@@ -348,6 +362,18 @@ export class BrickTreeElement extends UpdatingElement {
     this.treeCheck.emit(checkedKeys);
   };
 
+  private _handleCheckV2 = (
+    checkedKeys: string[] | { checked: string[]; halfChecked: string[] },
+    info: {
+      event: "check";
+      checked: boolean;
+      checkedNodes: DataNode[];
+      nativeEvent: MouseEvent;
+    }
+  ) => {
+    this.treeCheckV2.emit({ checkedKeys, info });
+  };
+
   private _handleSearch = (value: string) => {
     this.treeSearch.emit(value);
   };
@@ -375,6 +401,7 @@ export class BrickTreeElement extends UpdatingElement {
             onSelect={this._handleSelect}
             onExpand={this._handleExpand}
             onCheck={this._handleCheck}
+            onCheckV2={this._handleCheckV2}
             onSearch={this._handleSearch}
             checkedFilterConfig={this.checkedFilterConfig}
             checkedNotRelevant={this.checkedNotRelevant}
