@@ -196,17 +196,18 @@ export class DynamicFormItemV2Element extends FormItemElement {
       }
     }
     setColumns(
-      columns.map((item) =>
-        item.name === name
-          ? {
-              ...item,
-              props: {
-                ...item.props,
-                options: rowIndex === "all" ? options : cloneOptions,
-              },
-            }
-          : item
-      ) as Column[]
+      (prevColumns) =>
+        prevColumns.map((item) =>
+          item.name === name
+            ? {
+                ...item,
+                props: {
+                  ...item.props,
+                  options: rowIndex === "all" ? options : cloneOptions,
+                },
+              }
+            : item
+        ) as Column[]
     );
   }
 
@@ -225,6 +226,14 @@ export class DynamicFormItemV2Element extends FormItemElement {
    */
   @property({ attribute: false })
   exportExamples?: Record<string, string>[];
+
+  /**
+   * @description 导入数据过滤项
+   * @group ui
+   * @default false
+   */
+  @property({ attribute: false })
+  importFilter?: string[];
 
   /**
    * @description 表单项的列数，设置后，表单项会以 grid 布局显示
@@ -290,6 +299,7 @@ export class DynamicFormItemV2Element extends FormItemElement {
             onImport={this._handleImport}
             gridColumns={this.gridColumns}
             exportExamples={this.exportExamples}
+            importFilter={this.importFilter}
           />
         </BrickWrapper>,
         this

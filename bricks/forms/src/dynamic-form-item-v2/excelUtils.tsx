@@ -26,9 +26,43 @@ export const exportToExcel = async (
   XLSXWriteFile(workbook, `${fileName}.xlsx`);
 };
 
+// 新增导出表单数据的函数
+export const exportFormData = async (
+  columns: Column[],
+  formData: Record<string, any>[],
+  fileName: string
+): Promise<void> => {
+  const { utils: XLSXUtils, writeFile: XLSXWriteFile } = await import(
+    /* webpackChunkName: "chunks/xlsx.015f" */
+    "xlsx"
+  );
+
+  // 处理表头
+  const headers = columns.map((col) => ({
+    key: col.name,
+    header: col.label || col.name,
+  }));
+
+  // 处理数据，确保数据格式正确
+  const exportData = formData.map((row) => {
+    const exportRow: Record<string, any> = {};
+    headers.forEach((header) => {
+      exportRow[header.header] = row[header.key];
+    });
+    return exportRow;
+  });
+
+  // 创建工作表和工作簿
+  const worksheet = XLSXUtils.json_to_sheet(exportData);
+  const workbook = XLSXUtils.book_new();
+  XLSXUtils.book_append_sheet(workbook, worksheet, "Data");
+  XLSXWriteFile(workbook, `${fileName}.xlsx`);
+};
+
 export const importFromExcel = async (
   file: File,
-  columns: Column[]
+  columns: Column[],
+  importFilter?: string[]
 ): Promise<Record<string, any>[]> => {
   // sha1 hash of "dynamic-form-item-v2" starts with "015f"
   const { utils: XLSXUtils, read: XLSXRead } = await import(
@@ -62,7 +96,7 @@ export const importFromExcel = async (
       );
 
       // 增强数据验证和转换逻辑
-      const transformedData = jsonData.map((row: Record<string, string>) => {
+      let transformedData = jsonData.map((row: Record<string, string>) => {
         const transformedRow: Record<string, any> = {};
 
         columns.forEach((col) => {
@@ -74,6 +108,32 @@ export const importFromExcel = async (
 
         return transformedRow;
       });
+
+      // 如果提供了ImportFilter，则根据指定字段进行去重
+      if (importFilter && importFilter.length > 0) {
+        const uniqueData: Record<string, any>[] = [];
+        const seen = new Set<string>();
+
+        transformedData.forEach((row) => {
+          // 构建用于判断重复的键
+          const filterKey = importFilter
+            .map((field) => {
+              const value = row[field];
+              return value === undefined || value === null
+                ? "__NULL__"
+                : String(value);
+            })
+            .join("|");
+
+          // 如果未见过这个键，则添加到结果中
+          if (!seen.has(filterKey)) {
+            seen.add(filterKey);
+            uniqueData.push(row);
+          }
+        });
+
+        transformedData = uniqueData;
+      }
 
       resolve(transformedData);
     };

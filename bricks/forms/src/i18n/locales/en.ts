@@ -174,6 +174,7 @@ const locale: Locale = {
   [K.INVALID_FILE_TYPE_DYNAMIC_FORM_ITEM]: "File type is not .xlsx .xls .csv",
   [K.FILE_NAME_VALIDATE_MESSAGE_LOG]:
     "Failed to validate the upload file name format",
+  [K.EXPORT_DATA]: "Export Data",
   [K.DELETE_CONFIRMATION]: "Delete Confirmation",
   [K.DELETE_CONFIRM_MESSAGE]: "Are you sure you want to delete this data?",
   [K.NEW_STRUCTURE]: "Create Structure",

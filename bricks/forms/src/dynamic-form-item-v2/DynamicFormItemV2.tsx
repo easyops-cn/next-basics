@@ -11,6 +11,7 @@ import {
   PlusOutlined,
   DownloadOutlined,
   UploadOutlined,
+  ExportOutlined,
 } from "@ant-design/icons";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { Button, Col, Divider, Form, FormInstance, Row, message } from "antd";
@@ -22,7 +23,7 @@ import style from "./DynamicFormItemV2.module.css";
 import { getRealValue } from "./util";
 import classNames from "classnames";
 import { isBoolean } from "lodash";
-import { exportToExcel, importFromExcel } from "./excelUtils";
+import { exportToExcel, importFromExcel, exportFormData } from "./excelUtils";
 
 const FORM_LIST_NAME = "dynamicForm";
 
@@ -49,6 +50,7 @@ interface LegacyDynamicFormItemV2Props extends FormItemWrapperProps {
   onImport?: (value: Record<string, any>[]) => void;
   showImportExport?: boolean;
   exportExamples?: Record<string, string>[];
+  importFilter?: string[];
   gridColumns?: number;
 }
 
@@ -83,6 +85,7 @@ export const LegacyDynamicFormItemV2 = forwardRef(
       showImportExport,
       gridColumns,
       exportExamples,
+      importFilter,
     } = props;
     const { t } = useTranslation(NS_FORMS);
     const [form] = Form.useForm();
@@ -134,13 +137,22 @@ export const LegacyDynamicFormItemV2 = forwardRef(
       );
     };
 
+    // 新增导出数据处理函数
+    const handleExportData = () => {
+      exportFormData(
+        columns,
+        value || [],
+        `${label || ""}_${t(`${NS_FORMS}:${K.EXPORT_DATA}`)}`
+      );
+    };
+
     const handleImport = async (file: File) => {
       try {
         const allowedTypes = [
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xlsx
           "application/vnd.ms-excel", // .xls
           "text/csv", // .csv
-          "application/wps-office.xlsx"  // wps.xlsx
+          "application/wps-office.xlsx", // wps.xlsx
         ];
 
         if (!allowedTypes.includes(file.type)) {
@@ -149,7 +161,7 @@ export const LegacyDynamicFormItemV2 = forwardRef(
           );
         }
 
-        const importedData = await importFromExcel(file, columns);
+        const importedData = await importFromExcel(file, columns, importFilter);
 
         if (!importedData) {
           throw new Error(t(`${NS_FORMS}:${K.IMPORT_DATA_EMPTY}`));
@@ -182,6 +194,9 @@ export const LegacyDynamicFormItemV2 = forwardRef(
             </a>
             <a onClick={() => fileInputRef.current?.click()}>
               <UploadOutlined /> {t(`${NS_FORMS}:${K.IMPORT_DATA}`)}
+            </a>
+            <a onClick={handleExportData}>
+              <ExportOutlined /> {t(`${NS_FORMS}:${K.EXPORT_DATA}`)}
             </a>
             <input
               ref={fileInputRef}
@@ -342,6 +357,7 @@ export function DynamicFormItemV2(
     label,
     gridColumns,
     exportExamples,
+    importFilter,
   } = props;
   const [columns, setColumns] = React.useState<Column[]>([]);
   const DynamicFormItemV2Ref = useRef<LegacyDynamicFormItemV2Ref>();
@@ -397,6 +413,7 @@ export function DynamicFormItemV2(
         showImportExport={showImportExport}
         gridColumns={gridColumns}
         exportExamples={exportExamples}
+        importFilter={importFilter}
       />
     </FormItemWrapper>
   );

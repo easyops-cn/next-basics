@@ -159,6 +159,7 @@ const locale: Locale = {
   [K.IMPORT_FAILED]: "导入失败",
   [K.INVALID_FILE_TYPE_DYNAMIC_FORM_ITEM]: "文件类型非 .xlsx .xls .csv",
   [K.FILE_NAME_VALIDATE_MESSAGE_LOG]: "上传文件名称格式校验失败",
+  [K.EXPORT_DATA]: "导出",
   [K.DELETE_CONFIRMATION]: "删除确认",
   [K.DELETE_CONFIRM_MESSAGE]: "确定要删除该数据吗？",
   [K.NEW_STRUCTURE]: "新建结构体",

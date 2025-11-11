@@ -110,17 +110,16 @@ describe("DynamicFormItemV2", () => {
       />
     );
     expect(wrapper.find(".importExportButtons")).toHaveLength(1);
-    expect(wrapper.find(".importExportButtons a")).toHaveLength(2);
+    expect(wrapper.find(".importExportButtons a")).toHaveLength(3);
 
-    const exportBtn = wrapper.find(".importExportButtons a").at(0);
-    const importBtn = wrapper.find(".importExportButtons a").at(1);
     // Test export functionality
     const exportToExcelMock = jest
       .spyOn(excelUtilsModule, "exportToExcel")
       .mockImplementation(() => {
         return;
       });
-    exportBtn.simulate("click");
+    const exportTemplateBtn = wrapper.find(".importExportButtons a").at(0);
+    exportTemplateBtn.simulate("click");
     expect(exportToExcelMock).toHaveBeenCalledWith(
       columns,
       "动态表单项_forms:TEMPLATE",
@@ -138,11 +137,27 @@ describe("DynamicFormItemV2", () => {
       .spyOn(excelUtilsModule, "importFromExcel")
       .mockResolvedValue([{ name: "test", age: 25, isActive: true }]);
 
+    const importBtn = wrapper.find(".importExportButtons a").at(1);
     importBtn.simulate("click");
     const fileInput = wrapper.find('input[type="file"]');
     fileInput.simulate("change", { target: { files: [file] } });
 
-    expect(importFromExcelMock).toHaveBeenCalledWith(file, columns);
+    expect(importFromExcelMock).toHaveBeenCalledWith(file, columns, undefined);
+
+    // 测试导出数据功能
+    const handleExportDataMock = jest
+      .spyOn(excelUtilsModule, "exportFormData")
+      .mockImplementation(() => {
+        return;
+      });
+
+    const exportDataBtn = wrapper.find(".importExportButtons a").at(2);
+    exportDataBtn.simulate("click");
+    expect(handleExportDataMock).toHaveBeenCalledWith(
+      columns,
+      [],
+      "动态表单项_forms:EXPORT_DATA"
+    );
 
     wrapper.setProps({
       showImportExport: false,
