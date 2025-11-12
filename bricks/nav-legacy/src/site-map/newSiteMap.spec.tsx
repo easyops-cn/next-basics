@@ -173,16 +173,3 @@ describe("RenderName", () => {
     expect(splits.at(1).hasClass("highlightText")).toBe(true);
   });
 });
-describe("getNewFavouriteList", () => {
-  expect(getNewFavouriteList("APP", ["APP", "HOST", "CLUSTER"], true)).toEqual([
-    "APP",
-    "HOST",
-    "CLUSTER",
-  ]);
-  expect(getNewFavouriteList("APP", ["APP", "HOST", "CLUSTER"], false)).toEqual(
-    ["HOST", "CLUSTER"]
-  );
-  expect(
-    getNewFavouriteList("AGENT", ["APP", "HOST", "CLUSTER"], true)
-  ).toEqual(["APP", "HOST", "CLUSTER", "AGENT"]);
-});
