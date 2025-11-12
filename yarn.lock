@@ -2793,14 +2793,7 @@
   resolved "https://registry.npmjs.org/@next-libs/datetime/-/datetime-2.0.4.tgz#bdfc0ff323b585c1c9e55f68dda15ab8fbf4ab33"
   integrity sha512-kWzim/bvvLxQLBNDHEjeLKrZ6jEGMxv+y9TtKsyprRTXBDAHbmrA+yUnp6lhIcQZwokzm7k2ujXE7I9nPC/DJw==
 
-"@next-libs/forms@^3.6.2", "@next-libs/forms@^3.6.3":
-  version "3.6.3"
-  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.6.3.tgz#d55bba9bcc8ab023ca5678fef914868fa3df82ac"
-  integrity sha512-HpURPbCe3ZnlwAoq10ijwMgUtInfxUPq/0OJOlak51OWNFgzxgq4snyTsWlNyPOj1lsNoAqvRY2eTVqLJrzYyQ==
-  dependencies:
-    "@next-libs/basic-components" "^5.5.3"
-
-"@next-libs/forms@^3.6.5":
+"@next-libs/forms@^3.6.2", "@next-libs/forms@^3.6.3", "@next-libs/forms@^3.6.5":
   version "3.6.5"
   resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.6.5.tgz#3ba1e09487b7dfd81ec3aeabba030823ef939049"
   integrity sha512-mhYvNTHN2cDfIFI4kD2ErirRk2qjK/LWYL5GWpYZuV6y5a0ihytFP7xvc75U2csdqf1kUlsV9VvQyf80p7wBLA==
@@ -2926,10 +2919,10 @@
   resolved "https://registry.npmjs.org/@next-sdk/user-service-sdk/-/user-service-sdk-2.4.0.tgz#aaa3b8ab2fae2e0667cf16f0ee17ef586366446a"
   integrity sha512-9+gySn/uEgzpS16BsBtLIbu+sKLwfmp8OhVzpt2Z4FUTw14Tw+XpTaeSuzbDCrKNa9paNMWFpiSsHvNF539fCg==
 
-"@next-shared/common-bricks@0.53.0":
-  version "0.53.0"
-  resolved "https://registry.npmjs.org/@next-shared/common-bricks/-/common-bricks-0.53.0.tgz#7db4a7c5a3e269371f78b576ac6e9222b0123fec"
-  integrity sha512-ErM82K2aGP0Vku9GnOCeCrcbTzmlI7RUwPN6BRjAFNV1Eg1dq5UCh0Ad0fAM9MdI3rEiTs6jytcrkV20RNDJxA==
+"@next-shared/common-bricks@0.57.1":
+  version "0.57.1"
+  resolved "https://registry.npmjs.org/@next-shared/common-bricks/-/common-bricks-0.57.1.tgz#b1b42620a7f76ffbf534a2c6500ce6b5e092dda1"
+  integrity sha512-MnpJHeTfA/Dvx8JkqfcqNDHFZsgyx5TYBLT8ix3WxoNXXmBS0CRGciCwlTivb5pLFosIFtMc4vL4KdWudWKSQw==
 
 "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3":
   version "2.1.8-no-fsevents.3"
