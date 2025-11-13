@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.4.7...@next-bricks/nav-legacy@1.4.8) (2025-11-13)
+
+
+### Bug Fixes
+
+* 售后工单_点资源管理，搜索标签的时候，还没有输入完，弹窗就收回了_centos7.9_x86 ([9c48ddd](https://github.com/easyops-cn/next-basics/commit/9c48ddd4f9ce6f845aa30bc2dced8c954ea16489))
+
+
+
+
+
 ## [1.4.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.4.6...@next-bricks/nav-legacy@1.4.7) (2025-11-13)
 
 **Note:** Version bump only for package @next-bricks/nav-legacy
