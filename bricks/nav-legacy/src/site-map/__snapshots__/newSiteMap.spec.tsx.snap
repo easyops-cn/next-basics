@@ -728,8 +728,6 @@ exports[`newSiteMap should work with NewSiteMap 1`] = `
   <div
     className="menuPopover"
     id="menuPopover"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
   >
     <div
       className="newSiteMap"

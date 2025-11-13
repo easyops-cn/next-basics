@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  useCallback,
+} from "react";
 import styles from "./SiteMap.module.css";
 import {
   Button,
@@ -520,36 +526,58 @@ export function NewSiteMap(props: newSiteMapProps) {
     favouriteObjectList,
     favouriteGroupList,
   ]);
+  const containerRef = useRef(null);
 
-  const triggerDrawerVisible = debounce((vis: boolean) => {
-    if (visible === vis) return;
-    setVisible(vis);
+  const triggerDrawerVisible = useMemo(
+    () =>
+      debounce((vis: boolean) => {
+        setVisible((prevVisible) => {
+          if (prevVisible === vis) {
+            return prevVisible;
+          }
+          if (vis === true) {
+            !objectCategory &&
+              categoryRequest.query([
+                {
+                  isValidatePermission: true,
+                  visible: isShowAll ? "all" : "visible",
+                },
+              ]);
+            !request.data.length &&
+              request.query([
+                {
+                  isValidatePermission: true,
+                  visible: isShowAll ? "all" : "visible",
+                },
+              ]);
+          }
+          return vis;
+        });
+      }, 400),
+    [objectCategory, request, categoryRequest, isShowAll] // ✅ 移除 visible，因为使用函数式更新
+  );
 
-    if (vis === true) {
-      !objectCategory &&
-        categoryRequest.query([
-          {
-            isValidatePermission: true,
-            visible: isShowAll ? "all" : "visible",
-          },
-        ]);
-      !request.data.length &&
-        request.query([
-          {
-            isValidatePermission: true,
-            visible: isShowAll ? "all" : "visible",
-          },
-        ]);
-    }
-  }, 400);
+  // ✅ 使用 useCallback 避免每次渲染都创建新函数
+  const handleMouseOver = useCallback(
+    (e: MouseEvent) => {
+      const path = e.composedPath();
+      const isVisible =
+        containerRef.current && path.includes(containerRef.current);
+      triggerDrawerVisible(Boolean(isVisible));
+    },
+    [triggerDrawerVisible]
+  ); // ✅ 添加依赖
+
+  useEffect(() => {
+    document.addEventListener("mousemove", handleMouseOver);
+    return () => {
+      document.removeEventListener("mousemove", handleMouseOver);
+      triggerDrawerVisible.cancel();
+    };
+  }, [handleMouseOver, triggerDrawerVisible]); // ✅ 添加 handleMouseOver 作为依赖
 
   return (
-    <div
-      id="menuPopover"
-      className={styles.menuPopover}
-      onMouseEnter={() => triggerDrawerVisible(true)}
-      onMouseLeave={() => triggerDrawerVisible(false)}
-    >
+    <div id="menuPopover" className={styles.menuPopover} ref={containerRef}>
       <div className={styles.newSiteMap}>
         <span className={styles.appName} style={{ ...props.titleStyle }}>
           {t(K.IT_RESOURCE_MANAGEMENT)}
