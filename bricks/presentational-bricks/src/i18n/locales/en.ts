@@ -39,6 +39,11 @@ const locale: Locale = {
   [K.COPY_CODE]: "Copy Code",
   [K.CODE_COPIED]: "Code copied to clipboard",
   [K.CODE_COPY_FAILED]: "Copy failed, please copy manually",
+  [K.CLUSTER_TYPE_NONE]: "None",
+  [K.CLUSTER_TYPE_DEVELOPMENT]: "Development",
+  [K.CLUSTER_TYPE_TEST]: "Test",
+  [K.CLUSTER_TYPE_PRODUCTION]: "Production",
+  [K.CLUSTER_TYPE_PRE_RELEASE]: "Pre-production",
 };
 
 export default locale;

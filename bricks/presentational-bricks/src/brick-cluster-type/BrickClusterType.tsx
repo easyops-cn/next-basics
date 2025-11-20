@@ -1,32 +1,47 @@
 import React from "react";
+import i18next from "i18next";
 
 import {
   BrickValueMapping,
   Color,
-  MappingValue
+  MappingValue,
 } from "../brick-value-mapping/BrickValueMapping";
+import { NS_PRESENTATIONAL_BRICKS } from "../i18n/constants";
+import { K } from "../i18n/constants";
 
 const mapping: { [key: string]: MappingValue } = {
   "-1": {
-    text: "无",
-    color: Color.gray
+    text: i18next.t(`${NS_PRESENTATIONAL_BRICKS}:${K.CLUSTER_TYPE_NONE}`, "无"),
+    color: Color.gray,
   },
   "0": {
-    text: "开发",
-    color: Color.purple
+    text: i18next.t(
+      `${NS_PRESENTATIONAL_BRICKS}:${K.CLUSTER_TYPE_DEVELOPMENT}`,
+      "开发"
+    ),
+    color: Color.purple,
   },
   "1": {
-    text: "测试",
-    color: Color.green
+    text: i18next.t(
+      `${NS_PRESENTATIONAL_BRICKS}:${K.CLUSTER_TYPE_TEST}`,
+      "测试"
+    ),
+    color: Color.green,
   },
   "2": {
-    text: "生产",
-    color: Color.blue
+    text: i18next.t(
+      `${NS_PRESENTATIONAL_BRICKS}:${K.CLUSTER_TYPE_PRODUCTION}`,
+      "生产"
+    ),
+    color: Color.blue,
   },
   "3": {
-    text: "预发布",
-    color: Color.cyan
-  }
+    text: i18next.t(
+      `${NS_PRESENTATIONAL_BRICKS}:${K.CLUSTER_TYPE_PRE_RELEASE}`,
+      "预发布"
+    ),
+    color: Color.cyan,
+  },
 };
 
 interface BrickClusterTypeProps {
