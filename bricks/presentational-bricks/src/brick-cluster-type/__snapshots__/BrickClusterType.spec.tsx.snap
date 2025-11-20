@@ -6,23 +6,23 @@ exports[`BrickClusterType should work 1`] = `
     Object {
       "-1": Object {
         "color": "gray",
-        "text": "无",
+        "text": "presentational-bricks:CLUSTER_TYPE_NONE",
       },
       "0": Object {
         "color": "purple",
-        "text": "开发",
+        "text": "presentational-bricks:CLUSTER_TYPE_DEVELOPMENT",
       },
       "1": Object {
         "color": "green",
-        "text": "测试",
+        "text": "presentational-bricks:CLUSTER_TYPE_TEST",
       },
       "2": Object {
         "color": "blue",
-        "text": "生产",
+        "text": "presentational-bricks:CLUSTER_TYPE_PRODUCTION",
       },
       "3": Object {
         "color": "cyan",
-        "text": "预发布",
+        "text": "presentational-bricks:CLUSTER_TYPE_PRE_RELEASE",
       },
     }
   }

@@ -39,6 +39,11 @@ const locale: Locale = {
   [K.COPY_CODE]: "复制代码",
   [K.CODE_COPIED]: "代码已复制到剪贴板",
   [K.CODE_COPY_FAILED]: "复制失败，请手动复制",
+  [K.CLUSTER_TYPE_NONE]: "无",
+  [K.CLUSTER_TYPE_DEVELOPMENT]: "开发",
+  [K.CLUSTER_TYPE_TEST]: "测试",
+  [K.CLUSTER_TYPE_PRODUCTION]: "生产",
+  [K.CLUSTER_TYPE_PRE_RELEASE]: "预发布",
 };
 
 export default locale;
