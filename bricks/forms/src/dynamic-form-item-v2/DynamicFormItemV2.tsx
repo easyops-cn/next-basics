@@ -56,6 +56,8 @@ interface LegacyDynamicFormItemV2Props extends FormItemWrapperProps {
 
 interface LegacyDynamicFormItemV2Ref {
   validateFields: FormInstance["validateFields"];
+  columns: Column[];
+  setColumns: React.Dispatch<React.SetStateAction<Column[]>>;
 }
 
 type DynamicFormValue = {
@@ -71,7 +73,6 @@ export const LegacyDynamicFormItemV2 = forwardRef(
     const {
       value,
       label,
-      columns = [],
       onChange,
       onAdd,
       onRemove,
@@ -89,9 +90,15 @@ export const LegacyDynamicFormItemV2 = forwardRef(
     } = props;
     const { t } = useTranslation(NS_FORMS);
     const [form] = Form.useForm();
+    const [columns, setColumns] = React.useState<Column[]>([]);
+    useEffect(() => {
+      setColumns(props.columns);
+    }, [props.columns]);
 
     useImperativeHandle(ref, () => ({
       validateFields: form.validateFields,
+      columns: columns,
+      setColumns: setColumns,
     }));
 
     useEffect(() => {
@@ -359,17 +366,16 @@ export function DynamicFormItemV2(
     exportExamples,
     importFilter,
   } = props;
-  const [columns, setColumns] = React.useState<Column[]>([]);
   const DynamicFormItemV2Ref = useRef<LegacyDynamicFormItemV2Ref>();
 
   useImperativeHandle(upperRef, () => ({
-    columns: columns,
-    setColumns: setColumns,
+    get columns(): Column[] {
+      return DynamicFormItemV2Ref.current?.columns || [];
+    },
+    setColumns: (updater: React.SetStateAction<Column[]>) => {
+      DynamicFormItemV2Ref.current?.setColumns?.(updater);
+    },
   }));
-
-  useEffect(() => {
-    setColumns(props.columns);
-  }, [props.columns]);
 
   const validators = [
     {
@@ -399,7 +405,7 @@ export function DynamicFormItemV2(
       <LegacyDynamicFormItemV2
         ref={DynamicFormItemV2Ref}
         label={label}
-        columns={columns}
+        columns={props.columns}
         onChange={onChange}
         onAdd={onAdd}
         onRemove={onRemove}
