@@ -363,6 +363,7 @@ export function LegacyObjectAttrStructForm(
       if (err) {
         return;
       }
+      data.name = data.name?.trim();
       const new_struct_define = [...value.struct_define];
       if (isEmpty(currentStruct)) {
         new_struct_define.push({ ...data, isNew: true });
