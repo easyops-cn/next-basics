@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.306.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.306.7...@next-bricks/forms@1.306.8) (2025-11-25)
+
+
+### Bug Fixes
+
+* close CMDB_INSTANCE-3548 ([43e48ef](https://github.com/easyops-cn/next-basics/commit/43e48ef423b93f12d544b951a120e118ddfde92b))
+
+
+
+
+
 ## [1.306.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.306.6...@next-bricks/forms@1.306.7) (2025-11-24)
 
 
