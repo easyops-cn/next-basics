@@ -124,7 +124,11 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
   let footer = undefined;
   const defaultFooter = (
     <div style={{ textAlign: `${footerPosition}` }}>
-      <Button type="text" className="cancelBtn">
+      <Button
+        type="text"
+        className="cancelBtn"
+        {...configProps?.cancelButtonProps}
+      >
         {configProps?.cancelText || t(K.CANCEL)}
       </Button>
       <Button
@@ -132,6 +136,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
         loading={confirmLoading}
         className="okBtn"
         type={configProps?.okType || "primary"}
+        {...configProps?.okButtonProps}
       >
         {configProps?.okText || t(K.OK)}
       </Button>
