@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.336.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.336.4...@next-bricks/presentational-bricks@1.336.5) (2025-11-28)
+
+
+### Bug Fixes
+
+* tree 支持节点虚拟滚动 ([b320ebd](https://github.com/easyops-cn/next-basics/commit/b320ebd1dfb31f8149f4450941700d8bdd9bea2b))
+
+
+
+
+
 ## [1.336.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.336.3...@next-bricks/presentational-bricks@1.336.4) (2025-11-20)
 
 
