@@ -58,6 +58,46 @@ function isMenuIcon(icon: TreeIcon): icon is MenuIcon {
   return (icon as MenuIcon).lib !== undefined;
 }
 
+/**
+ * 自动计算容器高度的 Hook
+ * 用于虚拟滚动时自动获取容器高度
+ */
+function useAutoHeight(
+  options: {
+    enabled: boolean;
+    targetRef: React.RefObject<HTMLDivElement>;
+  },
+  dependencies?: any[]
+): number | undefined {
+  const { enabled, targetRef } = options;
+  const [autoHeight, setAutoHeight] = useState<number>();
+
+  useEffect(() => {
+    if (enabled && targetRef.current) {
+      const updateHeight = () => {
+        const element = targetRef.current;
+        if (element) {
+          const calculatedHeight = element.clientHeight;
+          setAutoHeight(calculatedHeight > 0 ? calculatedHeight : 500);
+        }
+      };
+
+      // 初始计算
+      updateHeight();
+
+      // 监听容器大小变化
+      const resizeObserver = new ResizeObserver(updateHeight);
+      resizeObserver.observe(targetRef.current);
+
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, dependencies);
+
+  return autoHeight;
+}
+
 function getTreeNodes(
   list: BrickTreeNodeProps[],
   iconUseBrick: { useBrick: UseBrickConf }
@@ -221,6 +261,10 @@ export interface BrickTreeProps {
   hideSelectedNum?: boolean;
   hideBackground?: boolean;
   onlyHighlightBySearch?: boolean;
+  /** 是否开启虚拟滚动 */
+  virtual?: boolean;
+  /** 虚拟滚动时的高度，不传则自动获取父容器高度 */
+  height?: number;
 }
 
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
@@ -250,6 +294,8 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     isDirectory,
     hideBackground,
     onlyHighlightBySearch,
+    virtual,
+    height,
   } = props;
   const [allChecked, setAllChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -336,6 +382,15 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
   useEffect(() => {
     nodeMatchedRef.current = false;
   }, [searchValue]);
+
+  // 监听 tree 容器高度变化（当 virtual 为 true 且没有传入 height 时自动计算）
+  const autoHeight = useAutoHeight(
+    {
+      enabled: virtual && !height,
+      targetRef: treeWrapperRef,
+    },
+    [virtual, height]
+  );
 
   let searchValueLength: number;
 
@@ -579,6 +634,12 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
   const getTreeElement = (props: any): React.ReactNode =>
     isDirectory ? <DirectoryTree {...props} /> : <Tree {...props} />;
 
+  // 计算实际使用的高度：如果传入了 height 使用传入值，否则使用自动计算的高度
+  const actualHeight = useMemo(() => {
+    if (!virtual) return undefined;
+    return height ?? autoHeight;
+  }, [virtual, height, autoHeight]);
+
   return (
     <div className={styles.treeContainer}>
       {searchable && (
@@ -632,6 +693,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
           getTreeElement({
             ...configProps,
             ...(expandedKeys ? { expandedKeys: expandedKeys } : {}),
+            height: configProps.height ?? actualHeight,
             treeData,
             titleRender,
             checkedKeys,
