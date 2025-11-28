@@ -333,22 +333,13 @@ export class BrickTreeElement extends UpdatingElement {
   onlyHighlightBySearch?: boolean = false;
 
   /**
-   * @kind boolean
-   * @default false
-   * @description 是否开启虚拟滚动
-   * @group advanced
-   */
-  @property({ type: Boolean })
-  virtualScroll?: boolean;
-
-  /**
-   * @kind number
+   * @kind number | "auto"
    * @default -
-   * @description 虚拟滚动时的高度（像素）
+   * @description 虚拟滚动时的高度 当为 "auto" 时自动计算容器高度
    * @group advanced
    */
-  @property({ type: Number })
-  height?: number;
+  @property({ attribute: false })
+  virtualScrollHeight?: number | "auto";
 
   connectedCallback(): void {
     this.style.display = "flex";
@@ -437,8 +428,7 @@ export class BrickTreeElement extends UpdatingElement {
             hideSelectedNum={this.hideSelectedNum}
             hideBackground={this.hideBackground}
             onlyHighlightBySearch={this.onlyHighlightBySearch}
-            virtual={this.virtualScroll}
-            height={this.height}
+            height={this.virtualScrollHeight}
           />
         </BrickWrapper>,
         this
