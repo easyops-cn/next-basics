@@ -31,6 +31,7 @@ export interface ModalConfirmProps {
   confirmLoading?: boolean;
   expect?: string;
   contentBrick?: { useBrick: UseBrickConf };
+  extraContentSuffixBrick?: { useBrick: UseBrickConf };
 }
 
 const parseHTMLTemplate = (template: string, context: Record<string, any>) => {
@@ -67,6 +68,7 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
     isDelete,
     type,
     width,
+    extraContentSuffixBrick,
   } = props;
   const title = useMemo(() => {
     return _title ? parseTemplate(_title, dataSource) : _title;
@@ -140,6 +142,12 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
         {extraContent && <p style={{ marginTop: "1em" }}>{extraContent}</p>}
       </div>
       {expect && expectContent}
+      {extraContentSuffixBrick?.useBrick && (
+        <BrickAsComponent
+          useBrick={extraContentSuffixBrick?.useBrick}
+          data={dataSource}
+        />
+      )}
     </div>
   );
 

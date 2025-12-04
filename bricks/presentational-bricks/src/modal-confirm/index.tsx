@@ -85,6 +85,11 @@ export class ModalConfirmElement extends UpdatingElement {
   })
   contentBrick: { useBrick: UseBrickConf };
 
+  @property({
+    attribute: false,
+  })
+  extraContentSuffixBrick: { useBrick: UseBrickConf };
+
   // -------------------------------- ui --------------------------------
 
   /**
@@ -381,6 +386,7 @@ export class ModalConfirmElement extends UpdatingElement {
             confirmLoading={this.confirmLoading}
             expect={this.expect}
             width={this.width}
+            extraContentSuffixBrick={this.extraContentSuffixBrick}
           />
         </BrickWrapper>,
         this
