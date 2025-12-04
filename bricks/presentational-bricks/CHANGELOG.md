@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.336.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.336.6...@next-bricks/presentational-bricks@1.336.7) (2025-12-04)
+
+
+### Bug Fixes
+
+* close model-confirm增加extraContentSuffixBrick参数 Closes CMDB_INSTANCE-3474 ([74c35c6](https://github.com/easyops-cn/next-basics/commit/74c35c6846524d6413ef2cea3090f075959d78ae))
+
+
+
+
+
 ## [1.336.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.336.5...@next-bricks/presentational-bricks@1.336.6) (2025-11-28)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
