@@ -393,6 +393,7 @@ export class GeneralModalElement extends UpdatingElement {
             buttonNode.className.includes("ant-btn-primary"))
         ) {
           this.generalModalConfirm.emit(this.dataSource);
+          this.modalConfirm.emit(this.dataSource);
           if (this.closeWhenOk) {
             this.close();
           }
@@ -401,6 +402,7 @@ export class GeneralModalElement extends UpdatingElement {
           !isInFooterContainer
         ) {
           this.generalModalCancel.emit();
+          this.modalCancel.emit();
           if (this.closeWhenCancel) {
             this.close();
           }
@@ -523,16 +525,31 @@ export class GeneralModalElement extends UpdatingElement {
 
   /**
    * @detail `Record<string, any>`
+   * @deprecated 请使用`modal.cancel`代替
    * @description 当点击 modal 自带的取消按钮时发出该事件，detail来源为当前的dataSource属性值
    */
   @event({ type: "basic-bricks.general-modal.cancel" })
-  generalModalCancel: EventEmitter;
+  generalModalCancel: EventEmitter<Record<string, any>>;
+
   /**
    * @detail `Record<string, any>`
+   * @description 当点击 modal 自带的取消按钮时发出该事件，detail来源为当前的dataSource属性值
+   */
+  @event({ type: "modal.cancel" })
+  modalCancel: EventEmitter;
+  /**
+   * @detail `Record<string, any>`
+   * @deprecated 请使用`modal.confirm`代替
    * @description 当点击 modal 自带的确认按钮时发出该事件，detail来源为当前的dataSource属性值
    */
   @event({ type: "basic-bricks.general-modal.confirm" })
   generalModalConfirm: EventEmitter;
+  /**
+   * @detail `Record<string, any>`
+   * @description 当点击 modal 自带的确认按钮时发出该事件，detail来源为当前的dataSource属性值
+   */
+  @event({ type: "modal.confirm" })
+  modalConfirm: EventEmitter;
 }
 
 customElements.define("basic-bricks.general-modal", GeneralModalElement);
