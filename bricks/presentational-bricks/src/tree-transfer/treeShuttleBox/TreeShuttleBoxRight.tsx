@@ -7,6 +7,8 @@ import { createNewTreeData, getRootKeys, searchTree } from "./tool";
 
 import { DataNode } from "rc-tree-select/lib/interface";
 import { treeDataType } from "./interfaceType";
+import { K, NS_PRESENTATIONAL_BRICKS } from "../../i18n/constants";
+import i18next from "i18next";
 export interface TreeShuttleBoxRightPropsType {
   showSearch?: boolean;
   titles?: string[];
@@ -108,8 +110,11 @@ const TreeShuttleBoxRight: FC<TreeShuttleBoxRightPropsType> = ({
             () =>
               shownumItem ? (
                 <p className={shareStyle.selectCount}>
-                  {getRootKeys(checkListRight, allRootKeySet).length}/
-                  {selectedRootKeys.length}项
+                  {i18next.t(`${NS_PRESENTATIONAL_BRICKS}:${K.COUNT_ITEMS}`, {
+                    count: `${
+                      getRootKeys(checkListRight, allRootKeySet).length
+                    }/${selectedRootKeys.length}` as any,
+                  })}
                 </p>
               ) : null,
             [selectedRootKeys, checkListRight, allRootKeySet]
@@ -121,7 +126,9 @@ const TreeShuttleBoxRight: FC<TreeShuttleBoxRightPropsType> = ({
         {showSearch && (
           <Search
             data-testid="rightSearch"
-            placeholder="请输入搜索内容"
+            placeholder={i18next.t(
+              `${NS_PRESENTATIONAL_BRICKS}:${K.PLEASE_ENTER_THE_SEARCH_CONTENT}`
+            )}
             value={searchText}
             onSearch={handleSearchTree}
             onChange={handleSearchChange}

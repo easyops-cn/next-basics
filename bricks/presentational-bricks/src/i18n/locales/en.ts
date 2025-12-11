@@ -44,6 +44,8 @@ const locale: Locale = {
   [K.CLUSTER_TYPE_TEST]: "Test",
   [K.CLUSTER_TYPE_PRODUCTION]: "Production",
   [K.CLUSTER_TYPE_PRE_RELEASE]: "Pre-production",
+  [K.PLEASE_ENTER_THE_SEARCH_CONTENT]: "Please enter the search content",
+  [K.COUNT_ITEMS]: "{{count}} items",
 };
 
 export default locale;
