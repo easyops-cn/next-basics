@@ -9,6 +9,8 @@ import { useTreeContext } from "./useTreeContext";
 import { cloneDeep } from "lodash";
 import { DataNode } from "rc-tree-select/lib/interface";
 import { treeDataType } from "./interfaceType";
+import i18next from "i18next";
+import { K, NS_PRESENTATIONAL_BRICKS } from "../../i18n/constants";
 
 export interface shuttleLeftProps {
   handleChange?: (value: string[]) => void;
@@ -117,8 +119,11 @@ const TreeShuttleBoxLeft: FC<shuttleLeftProps> = ({
             () =>
               shownumItem ? (
                 <p className={shareStyle.selectCount}>
-                  {getRootKeys(checkListLeft, allRootKeySet).length}/
-                  {[...allRootKeySet].length}项
+                  {i18next.t(`${NS_PRESENTATIONAL_BRICKS}:${K.COUNT_ITEMS}`, {
+                    count: `${
+                      getRootKeys(checkListLeft, allRootKeySet).length
+                    }/${[...allRootKeySet].length}` as any,
+                  })}
                 </p>
               ) : null,
             [checkListLeft, allRootKeySet]
@@ -130,7 +135,9 @@ const TreeShuttleBoxLeft: FC<shuttleLeftProps> = ({
         {showSearch && (
           <Search
             data-testid="leftSearch"
-            placeholder="请输入搜索内容"
+            placeholder={i18next.t(
+              `${NS_PRESENTATIONAL_BRICKS}:${K.PLEASE_ENTER_THE_SEARCH_CONTENT}`
+            )}
             value={searchText}
             onSearch={handleSearchTree}
             onChange={handleSearchChange}

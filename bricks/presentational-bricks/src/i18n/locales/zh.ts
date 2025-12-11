@@ -44,6 +44,8 @@ const locale: Locale = {
   [K.CLUSTER_TYPE_TEST]: "测试",
   [K.CLUSTER_TYPE_PRODUCTION]: "生产",
   [K.CLUSTER_TYPE_PRE_RELEASE]: "预发布",
+  [K.PLEASE_ENTER_THE_SEARCH_CONTENT]: "请输入搜索内容",
+  [K.COUNT_ITEMS]: "{{count}} 项",
 };
 
 export default locale;
