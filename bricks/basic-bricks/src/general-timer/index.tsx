@@ -6,6 +6,8 @@ import {
   BrickWrapper,
   UpdatingElement,
   method,
+  event,
+  EventEmitter,
 } from "@next-core/brick-kit";
 /**
  * @id basic-bricks.general-timer
@@ -89,6 +91,9 @@ export class GeneralTimerElement extends UpdatingElement {
     this.startTimeout();
   }
 
+  @event({ type: "time.change" })
+  timeChangeEvent: EventEmitter;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -116,10 +121,12 @@ export class GeneralTimerElement extends UpdatingElement {
             detail: this.dataSource,
           })
         );
+        this.timeChangeEvent.emit(this.dataSource);
       } else {
         this.dispatchEvent(
           new CustomEvent(this.eventName || this.defaultEventName)
         );
+        this.timeChangeEvent.emit(undefined);
       }
       if (!this._stopped && this.isInterval) {
         this.startTimeout();
