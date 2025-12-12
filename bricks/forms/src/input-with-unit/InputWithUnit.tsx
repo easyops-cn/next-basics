@@ -31,6 +31,7 @@ export function InputGroup(
       units = units.filter((u) => props.availableUnits.includes(u.id));
     }
   }
+
   const baseUnit = originUnits.find((unit) => unit.id === props.unit);
   if (!baseUnit && originUnits.length > 0) {
     throw new Error(
@@ -97,7 +98,9 @@ export function InputGroup(
     }
     setSelectUnit(value);
   };
-
+  React.useEffect(() => {
+    setSelectUnit(props.unit);
+  }, [props.unit]);
   React.useEffect(() => {
     if (!isNil(props.value)) {
       if (isNumber(props.value)) {
