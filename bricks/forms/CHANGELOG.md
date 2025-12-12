@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.306.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.306.8...@next-bricks/forms@1.306.9) (2025-12-12)
+
+
+### Bug Fixes
+
+* **input-with-unit:** 修复切换notRender，小时单位文案看不全 Refs DATA_QUALITY-404 ([6195934](https://github.com/easyops-cn/next-basics/commit/6195934a2df7b1a95c9b63cb9c02d89f0a66844c))
+
+
+
+
+
 ## [1.306.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.306.7...@next-bricks/forms@1.306.8) (2025-11-25)
 
 
