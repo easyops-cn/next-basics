@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.258.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.12...@next-bricks/basic-bricks@1.258.13) (2025-12-12)
+
+
+### Bug Fixes
+
+* **timmer:** stanrand event name ([d1c8b76](https://github.com/easyops-cn/next-basics/commit/d1c8b76c8ea21c1be4fa7c8ce220f07a19ec0408))
+
+
+
+
+
 ## [1.258.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.11...@next-bricks/basic-bricks@1.258.12) (2025-12-05)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
