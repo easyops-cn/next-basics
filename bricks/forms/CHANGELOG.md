@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.307.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.307.0...@next-bricks/forms@1.307.1) (2025-12-18)
+
+
+### Bug Fixes
+
+* 【7.12en】资源故障分析，执行ping命令，placeholder为英文，应该是中文 ([7e1e695](https://github.com/easyops-cn/next-basics/commit/7e1e695ef6a1a9c5642e0017c2131f31ebd3eeb0))
+
+
+
+
+
 # [1.307.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.306.9...@next-bricks/forms@1.307.0) (2025-12-18)
 
 
