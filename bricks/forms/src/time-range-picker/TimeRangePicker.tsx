@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { uniqueId, isEmpty, difference } from "lodash";
 import { useTranslation } from "react-i18next";
 import Icon from "@ant-design/icons";
@@ -39,6 +39,7 @@ interface TimeRangePickerProps extends FormItemWrapperProps {
   emitChangeOnInit?: boolean;
   selectNearDays?: number;
   presetRanges?: presetRangeType[];
+  rangePlaceholder?: string | [string, string];
 }
 
 type RealTimeRangePickerProps = Omit<
@@ -158,11 +159,23 @@ export function RealTimeRangePicker(
     }
   }, [props.value]);
 
+  const placeholders = useMemo((): [string, string] | undefined => {
+    const placeholder = props.rangePlaceholder;
+    if (!placeholder) {
+      return undefined;
+    }
+    if (Array.isArray(placeholder)) {
+      return placeholder as [string, string];
+    }
+    return [placeholder, placeholder];
+  }, [props.rangePlaceholder]);
+
   const timeRange = (
     <Input.Group compact className={styles.timeRange}>
       <TimePicker
         {...{ id: uniqueId("start-time-") }}
         onChange={onStartTimeChange}
+        placeholder={placeholders?.[0]}
         value={!isEmpty(props.value?.startTime) ? startTime : undefined}
         format={props.format}
       />
@@ -170,6 +183,7 @@ export function RealTimeRangePicker(
       <TimePicker
         {...{ id: uniqueId("end-time-") }}
         onChange={onEndTimeChange}
+        placeholder={placeholders?.[1]}
         value={!isEmpty(props.value?.endTime) ? endTime : undefined}
         format={props.format}
       />
@@ -235,9 +249,10 @@ export function RealTimeRangePicker(
       value={
         !isEmpty(props.value?.startTime) || !isEmpty(props.value?.endTime)
           ? [startTime, endTime]
-          : []
+          : ([] as any)
       }
       ranges={presetRange as any}
+      placeholder={placeholders}
       format={props.format}
       onChange={rangeChange}
       onOpenChange={onOpenChange}
@@ -267,6 +282,7 @@ export function TimeRangePicker(
         emitChangeOnInit={props.emitChangeOnInit}
         selectNearDays={props.selectNearDays}
         presetRanges={props.presetRanges}
+        rangePlaceholder={props.rangePlaceholder}
       />
     </FormItemWrapper>
   );

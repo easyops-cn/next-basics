@@ -125,6 +125,14 @@ export class TimeRangePickerElement extends FormItemElement {
   @property({ type: Boolean })
   allowEqual: boolean;
 
+  /**
+   * @group basicFormItem
+   * @required false
+   * @description 占位说明，支持字符串或数组形式。字符串时两个输入框显示相同提示；数组时分别为开始和结束时间设置不同提示
+   */
+  @property({ attribute: false })
+  rangePlaceholder: string | [string, string];
+
   unequal = (
     rule: any,
     value: TimeRange,
@@ -259,6 +267,7 @@ export class TimeRangePickerElement extends FormItemElement {
             emitChangeOnInit={this.emitChangeOnInit}
             selectNearDays={this.selectNearDays}
             presetRanges={this.presetRanges}
+            rangePlaceholder={this.rangePlaceholder}
           />
         </BrickWrapper>,
         this
