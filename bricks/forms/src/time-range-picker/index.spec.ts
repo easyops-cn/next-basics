@@ -112,4 +112,38 @@ describe("forms.time-range-picker", () => {
       endTime: "08:30",
     });
   });
+
+  it("should work with string placeholder", async () => {
+    const element = document.createElement("forms.time-range-picker") as any;
+    element.rangePlaceholder = "请选择时间";
+    await jest.runAllTimers();
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    expect(spyOnRender).toBeCalled();
+    const renderArgs =
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1];
+    // eslint-disable-next-line
+    // @ts-ignore
+    const props = renderArgs[0].props.children.props;
+    expect(props.rangePlaceholder).toBe("请选择时间");
+    document.body.removeChild(element);
+    await jest.runAllTimers();
+  });
+
+  it("should work with array placeholder", async () => {
+    const element = document.createElement("forms.time-range-picker") as any;
+    element.rangePlaceholder = ["开始时间", "结束时间"];
+    await jest.runAllTimers();
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    expect(spyOnRender).toBeCalled();
+    const renderArgs =
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1];
+    // eslint-disable-next-line
+    // @ts-ignore
+    const props = renderArgs[0].props.children.props;
+    expect(props.rangePlaceholder).toEqual(["开始时间", "结束时间"]);
+    document.body.removeChild(element);
+    await jest.runAllTimers();
+  });
 });
