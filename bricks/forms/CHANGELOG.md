@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.307.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.306.9...@next-bricks/forms@1.307.0) (2025-12-18)
+
+
+### Features
+
+* 构件支持 placeholder 自定义传入 ([4809efa](https://github.com/easyops-cn/next-basics/commit/4809efaa638290c06e6d29e5ddf9edfcc164411e))
+
+
+
+
+
 ## [1.306.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.306.8...@next-bricks/forms@1.306.9) (2025-12-12)
 
 
