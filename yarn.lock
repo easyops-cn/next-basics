@@ -2705,10 +2705,10 @@
     js-base64 "^3.7.7"
     marked "^2.1.3"
 
-"@next-libs/cmdb-instances@^7.30.15":
-  version "7.30.15"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-7.30.15.tgz#b113b084f1b26d6e2d9a46fa7a357aca07300326"
-  integrity sha512-strx8FBQNqtok5AySPlgyu2nTHKusWvsP77X9VKUulUVCe3oL6sgBrVo9CoQblLIOvHT4Zphmcv6QsN3vIz3cg==
+"@next-libs/cmdb-instances@^7.30.16":
+  version "7.30.16"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-7.30.16.tgz#ea0d7be61ede6256b0208f8fb2635b81a0f99ca1"
+  integrity sha512-4aSywyPqeEU2nR1EPYcrZ++b96GuHKyHD9Ed5F/tin9GilE+lFwQrMlIGxqUtdtL1Zx/qELQNX+d+D1JLSGKug==
   dependencies:
     "@next-core/brick-types" "^2.97.0"
     "@next-libs/basic-components" "^5.5.3"
