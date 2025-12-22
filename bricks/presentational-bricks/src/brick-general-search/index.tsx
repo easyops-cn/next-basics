@@ -245,6 +245,14 @@ export class BrickGeneralSearchElement extends UpdatingElement {
   })
   field = "query";
 
+  @property({
+    attribute: false,
+  })
+  customSearchTypeOptions?: {
+    label: string;
+    value: string;
+  }[];
+
   /**
    * @detail Record<string,any>
    * @description 更新的数据，包括 defaultArgs 和输入框的组合，注意在事件中 q 的 field 为 query。点击搜索时触发
@@ -367,6 +375,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
             onSearchTypeChange={this._handleSearchTypeChange}
             searchBoxStyleType={this.searchBoxStyleType}
             onBlur={this._handleBlur}
+            customSearchTypeOptions={this.customSearchTypeOptions}
           />
         </BrickWrapper>,
         this

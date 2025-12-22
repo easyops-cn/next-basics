@@ -26,6 +26,10 @@ interface TestGeneralSearchProps {
   allowClear?: boolean;
   bordered?: boolean;
   onBlur?: (value: string) => void;
+  customSearchTypeOptions?: {
+    label: string;
+    value: string;
+  }[];
 }
 
 const sizeClassMap = {
@@ -158,6 +162,11 @@ export const BrickGeneralSearch = forwardRef<Input, TestGeneralSearchProps>(
               <Select.Option value="ip">
                 {i18next.t(`${NS_PRESENTATIONAL_BRICKS}:${K.IP_SEARCH}`)}
               </Select.Option>
+              {(props.customSearchTypeOptions || []).map((item) => (
+                <Select.Option key={item.value} value={item.value}>
+                  {item.label}
+                </Select.Option>
+              ))}
             </Select>
             <span className={style.selectSearchInputContainer}>
               <Input
