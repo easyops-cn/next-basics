@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.307.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.307.1...@next-bricks/forms@1.307.2) (2025-12-23)
+
+
+### Bug Fixes
+
+* 【7.12en】新建分组规则，新建分组压缩，分组间隔单位应该是“分”，而不是“s” ([b00064d](https://github.com/easyops-cn/next-basics/commit/b00064de04319aba3758936ec521db884d7be69f))
+
+
+
+
+
 ## [1.307.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.307.0...@next-bricks/forms@1.307.1) (2025-12-18)
 
 
