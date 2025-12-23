@@ -43,6 +43,7 @@ export function InputGroup(
   const [inputNumber, setInputNumber] = useState<number>();
   const [selectUnit, setSelectUnit] = useState<string>();
   const [min, setMin] = useState<number>(Number.MIN_SAFE_INTEGER);
+  const [isUserSelected, setIsUserSelected] = useState<boolean>(false);
 
   const transformUnit = (n: number, currentUnit: string): number => {
     const select = units.find((unit) => unit.id === currentUnit);
@@ -62,7 +63,8 @@ export function InputGroup(
 
     index = Math.max(1, index);
     let suitableUnit: any;
-    if (selectUnit) {
+    // 只有用户手动选择了单位时才保持用户的选择，否则自动计算最合适的单位
+    if (selectUnit && isUserSelected) {
       suitableUnit = originUnits.find((unit) => unit.id === selectUnit);
     } else {
       suitableUnit = units[index - 1];
@@ -97,9 +99,11 @@ export function InputGroup(
       props.onChange?.(n);
     }
     setSelectUnit(value);
+    setIsUserSelected(true); // 标记为用户手动选择
   };
   React.useEffect(() => {
     setSelectUnit(props.unit);
+    setIsUserSelected(false); // props.unit 变化时重置用户选择标记
   }, [props.unit]);
   React.useEffect(() => {
     if (!isNil(props.value)) {
