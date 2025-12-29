@@ -243,6 +243,14 @@ export class DynamicFormItemV2Element extends FormItemElement {
   gridColumns?: number;
 
   /**
+   * @description 是否启用水平滚动布局
+   * @group ui
+   * @default false
+   */
+  @property({ type: Boolean })
+  horizontalScroll?: boolean;
+
+  /**
    * @description 导入数据时触发
    */
   @event({ type: "import" }) importEvent: EventEmitter<Record<string, any>[]>;
@@ -300,6 +308,7 @@ export class DynamicFormItemV2Element extends FormItemElement {
             gridColumns={this.gridColumns}
             exportExamples={this.exportExamples}
             importFilter={this.importFilter}
+            horizontalScroll={this.horizontalScroll}
           />
         </BrickWrapper>,
         this

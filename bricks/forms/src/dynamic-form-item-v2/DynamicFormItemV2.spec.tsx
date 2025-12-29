@@ -85,6 +85,7 @@ describe("DynamicFormItemV2", () => {
       disabledAddButton: true,
       hideRemoveButton: true,
       disabledRemoveButton: true,
+      horizontalScroll: false,
     });
     expect(wrapper.find(".addRowBtn.displayNone")).not.toHaveLength(0);
     expect(wrapper.find(".addRowBtn[disabled=true]")).not.toHaveLength(0);

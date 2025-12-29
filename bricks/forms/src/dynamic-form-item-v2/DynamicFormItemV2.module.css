@@ -55,5 +55,51 @@
 
   .divider {
     margin: 24px 0 8px 0;
+    border-top: 1px solid #bfbfbf;
   }
+}
+
+/* 水平滚动布局样式 */
+.dynamicForm.horizontal-scroll {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.dynamicForm.horizontal-scroll > :global(.ant-form) {
+  width: max-content;
+  min-width: 100%;
+  white-space: nowrap;
+}
+
+.dynamicForm.horizontal-scroll .row {
+  display: flex !important;
+  flex-direction: row !important;
+  width: max-content !important;
+  min-width: 100%;
+  white-space: nowrap;
+}
+
+.dynamicForm.horizontal-scroll .row > :global(.ant-col) {
+  flex: none !important;
+  white-space: nowrap;
+}
+
+.dynamicForm.horizontal-scroll .row :global(.ant-form-item) {
+  white-space: nowrap;
+  margin-right: 16px;
+}
+
+.dynamicForm.horizontal-scroll .row > :global(.ant-col:last-child) {
+  display: flex !important;
+  align-items: flex-start !important;
+}
+
+.dynamicForm.horizontal-scroll .divider {
+  display: inline-block !important;
+  vertical-align: top;
+  height: auto;
+  min-height: 100%;
+  border-top: 1px solid #bfbfbf;
+  border-left: none;
+  margin: 24px 0 8px 0;
 }

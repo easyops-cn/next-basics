@@ -52,6 +52,7 @@ interface LegacyDynamicFormItemV2Props extends FormItemWrapperProps {
   exportExamples?: Record<string, string>[];
   importFilter?: string[];
   gridColumns?: number;
+  horizontalScroll?: boolean;
 }
 
 interface LegacyDynamicFormItemV2Ref {
@@ -87,6 +88,7 @@ export const LegacyDynamicFormItemV2 = forwardRef(
       gridColumns,
       exportExamples,
       importFilter,
+      horizontalScroll,
     } = props;
     const { t } = useTranslation(NS_FORMS);
     const [form] = Form.useForm();
@@ -192,8 +194,13 @@ export const LegacyDynamicFormItemV2 = forwardRef(
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
+    const containerClassName = classNames({
+      [style.dynamicForm]: true,
+      [style["horizontal-scroll"]]: horizontalScroll,
+    });
+
     return (
-      <div className={style.dynamicForm} style={{ ...dynamicFormStyle }}>
+      <div className={containerClassName} style={{ ...dynamicFormStyle }}>
         {showImportExport && (
           <div className={style.importExportButtons}>
             <a onClick={handleExportTemplate}>
@@ -241,32 +248,36 @@ export const LegacyDynamicFormItemV2 = forwardRef(
                   return (
                     <Row key={key} className={style.row}>
                       <Row gutter={[12, 8]} style={{ flex: 1 }}>
-                        {columns?.map((column) => (
-                          <Col
-                            key={column.name}
-                            span={
-                              isGridLayout
-                                ? (24 / gridColumns) * (column.span || 1)
-                                : undefined
-                            }
-                            style={{
-                              flex: !isGridLayout
-                                ? column.flex ?? "1"
-                                : undefined,
-                              width: !isGridLayout ? "fit-content" : undefined,
-                            }}
-                          >
-                            <ColumnComponent
-                              hasLabel={hasLabel}
-                              showLabelInAllRows={showLabelInAllRows}
-                              rowIndex={name}
-                              column={column}
-                              formValue={value}
-                              field={{ key, name, ...restField }}
-                              handleInputBlur={handleInputBlur}
-                            />
-                          </Col>
-                        ))}
+                        {columns?.map((column) =>
+                          column.props?.hidden !== true ? (
+                            <Col
+                              key={column.name}
+                              span={
+                                isGridLayout
+                                  ? (24 / gridColumns) * (column.span || 1)
+                                  : undefined
+                              }
+                              style={{
+                                flex: !isGridLayout
+                                  ? column.flex ?? "1"
+                                  : undefined,
+                                width: !isGridLayout
+                                  ? "fit-content"
+                                  : undefined,
+                              }}
+                            >
+                              <ColumnComponent
+                                hasLabel={hasLabel}
+                                showLabelInAllRows={showLabelInAllRows}
+                                rowIndex={name}
+                                column={column}
+                                formValue={value}
+                                field={{ key, name, ...restField }}
+                                handleInputBlur={handleInputBlur}
+                              />
+                            </Col>
+                          ) : null
+                        )}
                       </Row>
                       <Col
                         style={{
@@ -365,6 +376,7 @@ export function DynamicFormItemV2(
     gridColumns,
     exportExamples,
     importFilter,
+    horizontalScroll,
   } = props;
   const DynamicFormItemV2Ref = useRef<LegacyDynamicFormItemV2Ref>();
 
@@ -420,6 +432,7 @@ export function DynamicFormItemV2(
         gridColumns={gridColumns}
         exportExamples={exportExamples}
         importFilter={importFilter}
+        horizontalScroll={horizontalScroll}
       />
     </FormItemWrapper>
   );
