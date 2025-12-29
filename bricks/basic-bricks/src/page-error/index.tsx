@@ -3,7 +3,12 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { PageError } from "./PageError";
 
-class PageErrorElement extends UpdatingElement {
+export interface PageErrorElementProps {
+  error?: string;
+  code?: number;
+}
+
+class PageErrorElement extends UpdatingElement implements PageErrorElementProps {
   @property()
   error: string;
 

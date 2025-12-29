@@ -14,6 +14,36 @@ import { MenuIcon } from "@next-core/brick-types";
 import { EventDataNode } from "rc-tree/lib/interface";
 import { UseBrickConf } from "@next-core/brick-types";
 
+
+export interface BrickTreeElementProps {
+  dataSource?: BrickTreeNodeProps[];
+  selectedKeys?: string[];
+  checkedKeys?: string[];
+  expandedKeys?: string[];
+  searchable?: boolean;
+  searchQ?: string;
+  isFilter?: boolean;
+  isDirectory?: boolean;
+  alsoSearchByKey?: boolean;
+  showSpecificationTitleStyle?: boolean;
+  placeholder?: string;
+  configProps?: TreeProps;
+  searchParent?: boolean;
+  checkAllEnabled?: boolean;
+  checkedFilterConfig?: checkedFilterProps;
+  checkedNotRelevant?: boolean;
+  suffixBrick?: { useBrick: UseBrickConf };
+  suffixStopEvent?: boolean;
+  afterSearchBrick?: { useBrick: UseBrickConf };
+  beforeTreeBrick?: { useBrick: UseBrickConf };
+  defaultExpandAll?: boolean;
+  iconUseBrick?: BrickTreeProps["iconUseBrick"];
+  hideSelectedNum?: boolean;
+  hideBackground?: boolean;
+  onlyHighlightBySearch?: boolean;
+  virtualScrollHeight?: number | "auto";
+}
+
 export type TreeIcon =
   | MenuIcon
   | React.ComponentType<React.SVGAttributes<SVGElement>>;
@@ -37,7 +67,7 @@ export type BrickTreeNodeProps = Omit<AntTreeNodeProps, "children"> & {
  * @memo
  * @noInheritDoc
  */
-export class BrickTreeElement extends UpdatingElement {
+export class BrickTreeElement extends UpdatingElement implements BrickTreeElementProps {
   /**
    * @detail string[]
    * @description 选择事件
@@ -363,6 +393,19 @@ export class BrickTreeElement extends UpdatingElement {
   ) => {
     this.treeSelect.emit(selectedKeys);
     this.treeSelectV2.emit({ selectedKeys, info });
+
+        // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("tree.select", {
+        detail: { selectedKeys, info },
+      })
+    );
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("tree.select.v2", {
+        detail: { selectedKeys, info },
+      })
+    );
   };
 
   private _handleCheck = (
@@ -381,6 +424,13 @@ export class BrickTreeElement extends UpdatingElement {
     }
   ) => {
     this.treeCheckV2.emit({ checkedKeys, info });
+
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("tree.check.v2", {
+        detail: { checkedKeys, info },
+      })
+    );
   };
 
   private _handleSearch = (value: string) => {

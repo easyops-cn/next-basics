@@ -3,6 +3,10 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement } from "@next-core/brick-kit";
 import { LaunchpadButton } from "../app-bar/LaunchpadButton/LaunchpadButton";
 
+export interface LaunchpadButtonElementProps {
+  // No props
+}
+
 /**
  * @id nav-legacy.launchpad-button
  * @author SailorF
@@ -11,7 +15,7 @@ import { LaunchpadButton } from "../app-bar/LaunchpadButton/LaunchpadButton";
  * @docKind brick
  * @noInheritDoc
  */
-export class LaunchpadButtonElement extends UpdatingElement {
+export class LaunchpadButtonElement extends UpdatingElement implements LaunchpadButtonElementProps {
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else

@@ -2,6 +2,7 @@ import React from "react";
 import {
   Type,
   ReferenceType,
+  // @ts-ignore - StringLiteralType may not be exported
   StringLiteralType,
   ArrayType,
   UnionType,
@@ -40,6 +41,7 @@ export function GeneralType(props: GeneralTypeProps): React.ReactElement {
     case "typeParameter":
       return <span>{(props.type as ReferenceType).name}</span>;
     case "stringLiteral":
+      // @ts-ignore
       return <span>&quot;{(props.type as StringLiteralType).value}&quot;</span>;
     case "reference":
       return (

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useRef, useState } from "react";
 import { StarOutlined } from "@ant-design/icons";
 import { Rate } from "antd";

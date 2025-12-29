@@ -19,6 +19,24 @@ import {
 import { StepTree } from "./StepTree";
 import { WorkbenchTreeContext } from "./constants";
 
+export interface StepTreeElementProps {
+  actions: StepTreeAction[];
+  placeholder: string;
+  actionsHidden: boolean;
+  matchNodeDataFields: string | string[];
+  searchPlaceholder: string;
+  nodes: StepTreeNodeData[];
+  noSearch: boolean;
+  activeKey: string;
+  multipleSelectMode: boolean;
+  selectedSteps: StepCheckedItem[];
+  activeBarActions: StepTreeAction[];
+  activeBarUseBrick: { useBrick: UseBrickConf };
+  activeBarStyle: React.CSSProperties;
+  collapsible: boolean;
+  collapsedNodes: string[];
+}
+
 /**
  * @id flow-builder.step-tree
  * @author jojiang
@@ -28,7 +46,7 @@ import { WorkbenchTreeContext } from "./constants";
  * @noInheritDoc
  */
 
-export class StepTreeElement extends UpdatingElement {
+export class StepTreeElement extends UpdatingElement implements StepTreeElementProps {
   @property({ attribute: false })
   actions: StepTreeAction[];
 

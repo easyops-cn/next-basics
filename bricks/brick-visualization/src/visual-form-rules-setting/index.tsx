@@ -3,6 +3,15 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, property } from "@next-core/brick-kit";
 import { VisualFormRulesSetting } from "./VisualFormRulesSetting";
 import { FormItemElement } from "@next-libs/forms";
+
+export interface VisualFormRulesSettingElementProps {
+  value?: Record<string, any>[];
+  formChildren?: Record<string, any>[];
+  name?: string;
+  label?: string;
+  labelTooltip?: string;
+}
+
 /**
  * @id brick-visualization.visual-form-rules-setting
  * @author kehua
@@ -11,7 +20,7 @@ import { FormItemElement } from "@next-libs/forms";
  * @docKind brick
  * @noInheritDoc
  */
-export class VisualFormRulesSettingElement extends FormItemElement {
+export class VisualFormRulesSettingElement extends FormItemElement implements VisualFormRulesSettingElementProps {
   /**
    * @kind Record<string, any>[]
    * @default

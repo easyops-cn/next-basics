@@ -4,6 +4,15 @@ import { isNil, get } from "lodash";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BrickAlertStatus } from "./BrickAlertStatus";
 
+
+export interface BrickAlertStatusElementProps {
+  status?: number;
+  recoverType?: string;
+  isRecover?: boolean;
+  dataSource?: any;
+  fields?: { status: string; recoverType: string; isRecover: string };
+}
+
 /**
  * @id presentational-bricks.brick-alert-status
  * @name presentational-bricks.brick-alert-status
@@ -16,7 +25,7 @@ import { BrickAlertStatus } from "./BrickAlertStatus";
  * @memo
  * @noInheritDoc
  */
-export class BrickAlertStatusElement extends UpdatingElement {
+export class BrickAlertStatusElement extends UpdatingElement implements BrickAlertStatusElementProps {
   /**
    * @kind enum[0, 1, 2, 3]
    * @required false

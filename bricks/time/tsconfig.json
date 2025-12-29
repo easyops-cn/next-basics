@@ -1,4 +1,10 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["./src", "../../declarations"]
+  "include": ["./src", "../../declarations"],
+  "exclude": ["**/*.spec.ts", "**/*.spec.tsx"],
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist-types",
+    "emitDeclarationOnly": true
+  }
 }

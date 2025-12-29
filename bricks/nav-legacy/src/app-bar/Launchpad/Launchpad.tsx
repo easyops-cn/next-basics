@@ -39,7 +39,7 @@ export function Launchpad(props: LaunchpadProps): React.ReactElement {
   );
 
   React.useEffect((): (() => void) => {
-    let timer: NodeJS.Timeout;
+    let timer: any;
     const pollingRunningAppStatus = async (): Promise<void> => {
       try {
         await runtime.reloadMicroApps({

@@ -7,6 +7,19 @@ import style from "./index.shadow.less";
 import { CardProps } from "antd/lib/card";
 import { isEmpty } from "lodash";
 
+export interface GeneralCardElementProps {
+  operationButtons?: OperationButton[];
+  configProps?: CardProps;
+  cardContentWrapperStyle?: React.CSSProperties;
+  cardTitle?: string;
+  fillVertical?: boolean;
+  verticalCenter?: boolean;
+  compactMode?: boolean;
+  hasExtraSlot?: boolean;
+  hasFooter?: boolean;
+  isFixedFooter?: boolean;
+}
+
 /**
  * @id basic-bricks.general-card
  * @name basic-bricks.general-card
@@ -22,7 +35,7 @@ import { isEmpty } from "lodash";
  * 1.42.0:新增属性 `fillVertical`
  * @noInheritDoc
  */
-export class GeneralCardElement extends UpdatingElement {
+export class GeneralCardElement extends UpdatingElement implements GeneralCardElementProps {
   /**
    * @kind string
    * @required false

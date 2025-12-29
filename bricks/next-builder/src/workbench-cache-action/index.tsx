@@ -26,6 +26,45 @@ import { WorkbenchBackendCacheAction } from "@next-types/preview";
 import { pipes } from "@next-core/pipes";
 import { Storyboard } from "@next-core/brick-types";
 
+export interface WorkbenchCacheActionProps {
+  appId?: string;
+  projectId?: string;
+  storyboardType?: StoryboardType;
+  rootNode?: BuilderRuntimeNode;
+  objectId?: string;
+  onlyShowActionCount?: boolean;
+  onCacheAction?: (event: CustomEvent) => void;
+  onStoryboardUpdate?: (event: CustomEvent) => void;
+  onRootNodeUpdate?: (event: CustomEvent) => void;
+  onGraphdataUpdate?: (event: CustomEvent) => void;
+  onExecuteSuccess?: (event: CustomEvent) => void;
+  onSnippetSuccess?: (event: CustomEvent) => void;
+  onBuildAndPush?: (event: CustomEvent) => void;
+}
+
+export interface WorkbenchCacheActionElementProps {
+  appId?: string;
+  projectId?: string;
+  storyboardType?: StoryboardType;
+  rootNode?: BuilderRuntimeNode;
+  objectId?: string;
+  onlyShowActionCount?: boolean;
+  onCacheAction?: (event: CustomEvent<any>) => void;
+  onStoryboardUpdate?: (event: CustomEvent<StoryboardUpdateParams>) => void;
+  onRootNodeUpdate?: (event: CustomEvent<{
+    node: BuilderRuntimeNode;
+  }>) => void;
+  onGraphdataUpdate?: (event: CustomEvent<{
+    graphData: pipes.GraphData;
+  }>) => void;
+  onExecuteSuccess?: (event: CustomEvent<{
+    res: unknown;
+    op: string;
+  }>) => void;
+  onSnippetSuccess?: (event: CustomEvent<EventDetailOfSnippetApplyStored>) => void;
+  onBuildAndPush?: (event: CustomEvent<BuildAndPushParams>) => void;
+}
+
 /**
  * @id next-builder.workbench-cache-action
  * @author SheRunFeng
@@ -34,7 +73,7 @@ import { Storyboard } from "@next-core/brick-types";
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchCacheActionElement extends UpdatingElement {
+export class WorkbenchCacheActionElement extends UpdatingElement implements WorkbenchCacheActionProps {
   @property({ type: String })
   appId: string;
 

@@ -4,6 +4,11 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { MonitorModels } from "@next-sdk/monitor-sdk";
 import { BrickAlertValue } from "./BrickAlertValue";
 
+
+export interface BrickAlertValueElementProps {
+  dataSource?: MonitorModels.ModelAlertEvent;
+}
+
 /**
  * @id presentational-bricks.brick-alert-value
  * @name presentational-bricks.brick-alert-value
@@ -15,7 +20,7 @@ import { BrickAlertValue } from "./BrickAlertValue";
  * @memo
  * @noInheritDoc
  */
-export class BrickAlertValueElement extends UpdatingElement {
+export class BrickAlertValueElement extends UpdatingElement implements BrickAlertValueElementProps {
   /**
    * @kind monitor-sdk/MonitorModels.ModelAlertEvent
    * @required true

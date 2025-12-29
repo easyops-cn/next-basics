@@ -9,7 +9,14 @@ import {
 } from "@next-core/brick-kit";
 import { V3NextExample } from "../components/v3/V3NextExample/V3NextExample";
 
-export class V3NextExampleElement extends UpdatingElement {
+export interface V3NextExampleElementProps {
+  type: string;
+  code: string;
+  altCode: string;
+  gap?: boolean;
+}
+
+export class V3NextExampleElement extends UpdatingElement implements V3NextExampleElementProps {
   @property()
   type: string;
 

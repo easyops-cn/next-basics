@@ -18,6 +18,18 @@ import {
   yaml,
 } from "@next-libs/visual-builder";
 
+export interface VisualPropertyFormElementProps {
+  projectId?: string;
+  propertyTypeList?: VisualPropertyFormProps["propertyTypeList"];
+  labelIcon?: VisualPropertyFormProps["labelIcon"];
+  brickProperties?: VisualPropertyFormProps["brickProperties"];
+  brickInfo?: VisualPropertyFormProps["brickInfo"];
+  emptyConfig?: VisualPropertyFormProps["emptyConfig"];
+  hiddenPropsCategory?: boolean;
+  sharedPropertyList?: PropertyType[];
+  childMountPointList?: string[];
+}
+
 /**
  * @id brick-visualization.visual-property-form
  * @author jiangzhefeng
@@ -27,7 +39,7 @@ import {
  * @docKind brick
  * @noInheritDoc
  */
-export class VisualPropertyFormElement extends UpdatingElement {
+export class VisualPropertyFormElement extends UpdatingElement implements VisualPropertyFormElementProps {
   private _formUtils = React.createRef<visualFormUtils>();
 
   /**

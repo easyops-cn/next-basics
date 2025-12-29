@@ -5,6 +5,18 @@ import { ResizableBox, type ResizeDirection } from "./ResizableBox";
 
 import styles from "./ResizableBox.shadow.css";
 
+export interface ResizableBoxElementProps {
+  boxStyle?: React.CSSProperties;
+  boxStyleWhenNotResizing?: React.CSSProperties;
+  variant?: "dashboard" | "default";
+  resizeDirection?: ResizeDirection;
+  storageKey?: string;
+  defaultSize?: number;
+  minSize?: number;
+  minSpace?: number;
+  resizable?: boolean;
+}
+
 /**
  * @id basic-bricks.resizable-box
  * @author steve
@@ -13,7 +25,7 @@ import styles from "./ResizableBox.shadow.css";
  * @docKind brick
  * @noInheritDoc
  */
-export class ResizableBoxElement extends UpdatingElement {
+export class ResizableBoxElement extends UpdatingElement implements ResizableBoxElementProps {
   @property()
   resizeDirection: ResizeDirection;
 

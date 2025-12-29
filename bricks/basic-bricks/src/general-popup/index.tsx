@@ -9,6 +9,18 @@ import {
 import styles from "./style.shadow.css";
 import { GeneralPopup, OpenDirection } from "./GeneralPopup";
 
+export interface GeneralPopupElementProps {
+  popupId?: string;
+  popupWidth?: React.CSSProperties["width"];
+  popupHeight?: React.CSSProperties["height"];
+  popupTitle?: string;
+  openDirection?: OpenDirection;
+  isVisible?: boolean;
+  dragHeaderStyle?: Record<string, any>;
+  dragWrapperStyle?: Record<string, any>;
+  resize?: boolean;
+}
+
 /**
  * @id basic-bricks.general-popup
  * @author SheRunFeng
@@ -17,7 +29,7 @@ import { GeneralPopup, OpenDirection } from "./GeneralPopup";
  * @docKind brick
  * @noInheritDoc
  */
-export class GeneralPopupElement extends UpdatingElement {
+export class GeneralPopupElement extends UpdatingElement implements GeneralPopupElementProps {
   /**
    * @default -
    * @required false

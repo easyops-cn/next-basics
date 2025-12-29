@@ -32,7 +32,20 @@ import { FileUtils } from "../utils";
 * | hint     | string | -        | -       | 提示文本    |
 * @noInheritDoc
 */
-export class UploadFilesElement extends UpdatingElement {
+export interface UploadFilesElementProps {
+  url?: string;
+  method?: string;
+  name?: string;
+  data?: { [key: string]: string };
+  multiple?: boolean;
+  autoUpload?: boolean;
+  limitSize?: number;
+  text?: UploadFilesTextProps;
+  accept?: string;
+}
+
+
+export class UploadFilesElement extends UpdatingElement  implements UploadFilesElementProps {
   /**
    * @kind string
    * @required true

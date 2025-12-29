@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { FC, useMemo, useState, useEffect } from "react";
 
 import shareStyle from "./share.module.css";

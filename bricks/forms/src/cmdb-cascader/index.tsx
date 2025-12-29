@@ -30,7 +30,20 @@ export interface FieldCMDBCascaderProps {
  * @docKind brick
  * @noInheritDoc
  */
-export class CmdbCascaderElement extends FormItemElement {
+export interface CmdbCascaderElementProps {
+  name?: string;
+  label?: string;
+  value?: valueCMDBCascaderProp[];
+  objectIdPath?: FieldCMDBCascaderProps["objectIdPath"] | string[];
+  required?: boolean;
+  message?: Record<string, string>;
+  placeholder?: string;
+  disabled?: boolean;
+  inputBoxStyle?: React.CSSProperties;
+}
+
+
+export class CmdbCascaderElement extends FormItemElement  implements CmdbCascaderElementProps {
   /**
    * @kind string
    * @required true
@@ -148,6 +161,7 @@ export class CmdbCascaderElement extends FormItemElement {
    */
   @event({ type: "forms.cmdb-cascader.options.change" })
   optionsChange: EventEmitter;
+  // @ts-ignore
   handleOptionsChange = (options: CascaderOptionType[], name: string): void => {
     this.optionsChange.emit({ options, name });
   };
@@ -186,6 +200,7 @@ export class CmdbCascaderElement extends FormItemElement {
             validator={this.validator}
             notRender={this.notRender}
             onChange={this.handleChange}
+            // @ts-ignore
             onChangeV2={this.handleChangeV2}
             optionsChange={this.handleOptionsChange}
             helpBrick={this.helpBrick}

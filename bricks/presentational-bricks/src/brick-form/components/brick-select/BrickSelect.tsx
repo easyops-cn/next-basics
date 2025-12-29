@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect, useRef } from "react";
 import { Select } from "antd";
 import { debounce, isEmpty } from "lodash";

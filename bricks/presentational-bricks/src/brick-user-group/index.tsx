@@ -4,6 +4,14 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BrickUserGroup, UserGroupType } from "./BrickUserGroup";
 import { GroupProps } from "antd/lib/avatar";
 
+
+export interface BrickUserGroupElementProps {
+  type?: UserGroupType ;
+  userNameOrIds?: string[];
+  displayShowKey?: boolean;
+  configProps?: GroupProps;
+}
+
 /**
  * @id presentational-bricks.brick-user-group
  * @author dophjing
@@ -12,7 +20,7 @@ import { GroupProps } from "antd/lib/avatar";
  * @docKind brick
  * @noInheritDoc
  */
-export class BrickUserGroupElement extends UpdatingElement {
+export class BrickUserGroupElement extends UpdatingElement implements BrickUserGroupElementProps {
   /**
    * @kind "string"
    * @required false

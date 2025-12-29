@@ -58,7 +58,32 @@ import {
  * }
  * ```
  */
-export class TreeSelectElement extends FormItemElement {
+export interface TreeSelectElementProps {
+  name?: string;
+  label?: string;
+  treeData?: DataNode[];
+  value?: DefaultValueType;
+  disabled?: boolean;
+  showSearch?: boolean;
+  placeholder?: string;
+  searchPlaceholder?: string;
+  treeNodeFilterProp?: string;
+  inputBoxStyle?: React.CSSProperties;
+  allowClear?: boolean;
+  treeCheckable?: boolean;
+  treeCheckStrictly?: boolean;
+  multiple?: boolean;
+  dropdownStyle?: React.CSSProperties;
+  treeDataSimpleMode?: | boolean
+    | SimpleModeConfig;
+  treeNodeLabelProp?: string;
+  defaultExpandAll?: boolean;
+  defaultExpandedKeys?: string[];
+  showCheckedStrategy?: showCheckedStrategyType;
+}
+
+
+export class TreeSelectElement extends FormItemElement  implements TreeSelectElementProps {
   /**
    * @group basicFormItem
    * @required true
@@ -243,7 +268,15 @@ export class TreeSelectElement extends FormItemElement {
   onChange = (value: DefaultValueType, label: any, extra: any): void => {
     this.value = value;
     this._render();
-    this.changeEvent.emit({ value, label, extra });
+    const detail = { value, label, extra };
+    this.changeEvent.emit(detail);
+
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("tree.select.change", {
+        detail,
+      })
+    );
   };
 
   protected _render(): void {

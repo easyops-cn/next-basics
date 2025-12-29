@@ -25,6 +25,46 @@ import {
 } from "./reducers/interfaces";
 import { ProcessedCoverage, TestStats } from "../shared/functions/interfaces";
 
+export interface FunctionDebuggerStoreProps {
+  runTestsAutomaticallyTimeout?: number;
+  breakpoints?: number[];
+  onActivetabChange?: (event: CustomEvent) => void;
+  onOriginalfunctionChange?: (event: CustomEvent) => void;
+  onFunctionModified?: (event: CustomEvent) => void;
+  onDebuginputChange?: (event: CustomEvent) => void;
+  onDebugoutputChange?: (event: CustomEvent) => void;
+  onTestsChange?: (event: CustomEvent) => void;
+  onTestinputChange?: (event: CustomEvent) => void;
+  onTestexpectChange?: (event: CustomEvent) => void;
+  onTestreceivedChange?: (event: CustomEvent) => void;
+  onTestmatchedChange?: (event: CustomEvent) => void;
+  onTestupdatableChange?: (event: CustomEvent) => void;
+  onSomethingModified?: (event: CustomEvent) => void;
+  onTeststatsChange?: (event: CustomEvent) => void;
+  onCoverageChange?: (event: CustomEvent) => void;
+  onDebuggerinfoChange?: (event: CustomEvent) => void;
+}
+
+export interface FunctionDebuggerStoreElementProps {
+  runTestsAutomaticallyTimeout?: number;
+  breakpoints?: number[];
+  onActivetabChange?: (event: CustomEvent<DebuggerStateActiveTab>) => void;
+  onOriginalfunctionChange?: (event: CustomEvent<DebuggerStateOriginalFunction>) => void;
+  onFunctionModified?: (event: CustomEvent<boolean>) => void;
+  onDebuginputChange?: (event: CustomEvent<DebuggerStateDebugInput>) => void;
+  onDebugoutputChange?: (event: CustomEvent<DebuggerStateDebugOutput>) => void;
+  onTestsChange?: (event: CustomEvent<DebuggerStateTestCase[]>) => void;
+  onTestinputChange?: (event: CustomEvent<DebuggerStateTestInput>) => void;
+  onTestexpectChange?: (event: CustomEvent<DebuggerStateTestExpect>) => void;
+  onTestreceivedChange?: (event: CustomEvent<DebuggerStateDebugOutput>) => void;
+  onTestmatchedChange?: (event: CustomEvent<boolean | null>) => void;
+  onTestupdatableChange?: (event: CustomEvent<boolean>) => void;
+  onSomethingModified?: (event: CustomEvent<boolean>) => void;
+  onTeststatsChange?: (event: CustomEvent<TestStats>) => void;
+  onCoverageChange?: (event: CustomEvent<ProcessedCoverage>) => void;
+  onDebuggerinfoChange?: (event: CustomEvent<unknown>) => void;
+}
+
 /**
  * @id next-builder.function-debugger-store
  * @author Steve
@@ -33,7 +73,7 @@ import { ProcessedCoverage, TestStats } from "../shared/functions/interfaces";
  * @docKind brick
  * @noInheritDoc
  */
-export class FunctionDebuggerStoreElement extends UpdatingElement {
+export class FunctionDebuggerStoreElement extends UpdatingElement implements FunctionDebuggerStoreProps {
   /**
    * @kind number
    * @description Run tests automatically in milliseconds.

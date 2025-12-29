@@ -4,6 +4,16 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { WorkbenchActionList } from "./WorkbenchActionList";
 import { SidebarSubMenu } from "@next-core/brick-types";
 
+export interface WorkbenchActionListProps {
+  appId?: string;
+  menu?: SidebarSubMenu;
+}
+
+export interface WorkbenchActionListElementProps {
+  appId?: string;
+  menu?: SidebarSubMenu;
+}
+
 /**
  * @id next-builder.workbench-action-list
  * @author SheRunFeng
@@ -12,7 +22,7 @@ import { SidebarSubMenu } from "@next-core/brick-types";
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchActionListElement extends UpdatingElement {
+export class WorkbenchActionListElement extends UpdatingElement implements WorkbenchActionListProps {
   @property({ type: String })
   appId: string;
 

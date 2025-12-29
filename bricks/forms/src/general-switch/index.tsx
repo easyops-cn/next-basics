@@ -24,7 +24,13 @@ import { MenuIcon } from "@next-core/brick-types";
  *  pattern
  * @memo
  */
-export class GeneralSwitchElement extends FormItemElement {
+export interface GeneralSwitchElementProps {
+  name?: string;
+  label?: string;
+}
+
+
+export class GeneralSwitchElement extends FormItemElement  implements GeneralSwitchElementProps {
   /* =========================== Group: basic =========================== */
 
   /**

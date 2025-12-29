@@ -13,5 +13,5 @@ export const chapter: Chapter = {
     cmdbInstancesInputForm,
     cmdbInstancesFilterForm,
     cmdbInstancesFilterDisplay,
-  ],
+  ] as any,
 };

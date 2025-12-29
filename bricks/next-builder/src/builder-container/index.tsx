@@ -70,6 +70,101 @@ interface FulfilledSnippetNodeDetail extends SnippetNodeDetail {
   nodeData: WithAppId<SnippetNodeInstance>;
 }
 
+export interface BuilderContainerProps {
+  appId?: string;
+  dataSource?: BuilderRouteOrBrickNode[];
+  brickList?: BrickOptionItem[];
+  editorList?: SharedEditorConf[];
+  providerList?: string[];
+  storyList?: Story[];
+  routeList?: BuilderRouteNode[];
+  templateList?: BuilderCustomTemplateNode[];
+  snippetList?: BuilderSnippetNode[];
+  templateSources?: BuilderCustomTemplateNode[];
+  processing?: boolean;
+  fullscreen?: boolean;
+  toolboxTab?: ToolboxTab;
+  hiddenWrapper?: boolean;
+  eventStreamNodeId?: string;
+  migrateClipboard?: boolean;
+  clipboardData?: BuilderClipboard;
+  clipboardType?: BuilderClipboardType;
+  clipboardSource?: string;
+  clipboardNodeType?: string;
+  canvasIndex?: number;
+  storyboardQuery?: string;
+  highlightTokens?: HighlightTokenSettings[];
+  showDataView?: boolean;
+  containerForContextModal?: string;
+  builderContainerStyle?: React.CSSProperties;
+  onNodeAdd?: (event: CustomEvent) => void;
+  onSnippetApply?: (event: CustomEvent) => void;
+  onNodeReorder?: (event: CustomEvent) => void;
+  onNodeMove?: (event: CustomEvent) => void;
+  onNodeClick?: (event: CustomEvent) => void;
+  onBrickClick?: (event: CustomEvent) => void;
+  onRouteClick?: (event: CustomEvent) => void;
+  onNodeDeleteAsk?: (event: CustomEvent) => void;
+  onNodeDeleteConfirmed?: (event: CustomEvent) => void;
+  onContextUpdate?: (event: CustomEvent) => void;
+  onRouteSelect?: (event: CustomEvent) => void;
+  onTemplateSelect?: (event: CustomEvent) => void;
+  onSnippetSelect?: (event: CustomEvent) => void;
+  onCurrentRouteClick?: (event: CustomEvent) => void;
+  onCurrentTemplateClick?: (event: CustomEvent) => void;
+  onCurrentSnippetClick?: (event: CustomEvent) => void;
+  onProjectBuildandpush?: (event: CustomEvent) => void;
+  onProjectPreview?: (event: CustomEvent) => void;
+  onFullscreenToggle?: (event: CustomEvent) => void;
+  onWorkbenchClose?: (event: CustomEvent) => void;
+  onToolboxTabSwitch?: (event: CustomEvent) => void;
+  onWrapperHiddenSwitch?: (event: CustomEvent) => void;
+  onEventstreamNodeSelect?: (event: CustomEvent) => void;
+  onEventNodeClick?: (event: CustomEvent) => void;
+  onNodeConverttotemplate?: (event: CustomEvent) => void;
+  onClipboardChange?: (event: CustomEvent) => void;
+  onNodeCopy?: (event: CustomEvent) => void;
+  onNodeCut?: (event: CustomEvent) => void;
+  onNodeCopyPaste?: (event: CustomEvent) => void;
+  onNodeCutPaste?: (event: CustomEvent) => void;
+  onClipboardClear?: (event: CustomEvent) => void;
+  onNodeAppendbrickAsk?: (event: CustomEvent) => void;
+  onNodeAppendrouteAsk?: (event: CustomEvent) => void;
+  onCanvasIndexSwitch?: (event: CustomEvent) => void;
+  onStoryboardQueryUpdate?: (event: CustomEvent) => void;
+  onHighlighttokenClick?: (event: CustomEvent) => void;
+}
+
+export interface BuilderContainerElementProps {
+  appId?: string;
+  dataSource?: BuilderRouteOrBrickNode[];
+  brickList?: BrickOptionItem[];
+  editorList?: SharedEditorConf[];
+  providerList?: string[];
+  storyList?: Story[];
+  routeList?: BuilderRouteNode[];
+  templateList?: BuilderCustomTemplateNode[];
+  snippetList?: BuilderSnippetNode[];
+  templateSources?: BuilderCustomTemplateNode[];
+  processing?: boolean;
+  fullscreen?: boolean;
+  toolboxTab?: ToolboxTab;
+  hiddenWrapper?: boolean;
+  eventStreamNodeId?: string;
+  migrateClipboard?: boolean;
+  clipboardData?: BuilderClipboard;
+  clipboardType?: BuilderClipboardType;
+  clipboardSource?: string;
+  clipboardNodeType?: string;
+  canvasIndex?: number;
+  storyboardQuery?: string;
+  highlightTokens?: HighlightTokenSettings[];
+  showDataView?: boolean;
+  containerForContextModal?: string;
+  builderContainerStyle?: React.CSSProperties;
+  onWrapperHiddenSwitch?: (event: CustomEvent<boolean>) => void;
+}
+
 /**
  * @id next-builder.builder-container
  * @author stevewang
@@ -78,7 +173,7 @@ interface FulfilledSnippetNodeDetail extends SnippetNodeDetail {
  * @docKind brick
  * @noInheritDoc
  */
-export class BuilderContainerElement extends UpdatingElement {
+export class BuilderContainerElement extends UpdatingElement implements BuilderContainerProps {
   @property()
   appId: string;
 

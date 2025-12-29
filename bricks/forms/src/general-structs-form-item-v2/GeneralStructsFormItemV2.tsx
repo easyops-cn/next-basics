@@ -207,7 +207,7 @@ export function GeneralStructsFormItemV2Instance(
 
   const handleOk = (): void => {
     (modalContentElementRef.current as GeneralFormElement)?.lowLevelValidate?.(
-      (values) => {
+      (values: any) => {
         onChange?.(
           currentItem
             ? update(value, { [value.indexOf(currentItem)]: { $set: values } })

@@ -3,7 +3,11 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BricksOfProviders, ServiceData } from "./BricksOfProviders";
 
-class BricksOfProvidersElement extends UpdatingElement {
+export interface BricksOfProvidersElementProps {
+  dataSource: ServiceData;
+}
+
+class BricksOfProvidersElement extends UpdatingElement implements BricksOfProvidersElementProps {
   @property({
     attribute: false
   })

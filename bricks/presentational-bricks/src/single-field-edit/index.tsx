@@ -14,6 +14,22 @@ import { AutoSizeType } from "rc-textarea/lib/ResizableTextArea";
 
 import { SingleFieldEdit } from "./SingleFieldEdit";
 
+
+export interface SingleFieldEditElementProps {
+  visible?: boolean;
+  title?: string;
+  modalTitle?: string;
+  label?: string;
+  type?: ControlType;
+  placeholder?: string;
+  initialValue?: any;
+  options?: Record<string, any>[];
+  labelKey?: string;
+  valueKey?: string;
+  rules?: ValidationRule[];
+  autoSize?: boolean | AutoSizeType;
+}
+
 export enum ControlType {
   Text = "text",
   Textarea = "textarea",
@@ -35,7 +51,7 @@ export enum ControlType {
  * @memo
  * @noInheritDoc
  */
-export class SingleFieldEditElement extends UpdatingElement {
+export class SingleFieldEditElement extends UpdatingElement implements SingleFieldEditElementProps {
   /**
    * @detail any
    * @description 点击确定按钮的事件，detail 为当前值

@@ -9,6 +9,14 @@ import {
 } from "@next-core/brick-kit";
 import { QuickVisitMenu } from "./QuickVisitMenu";
 
+export interface QuickVisitMenuElementProps {
+  menu?: Record<string, any>;
+  buttonName?: string;
+  favouriteMenus?: { text: string; to?: string; href?: string; }[];
+  searchPlaceholder?: string;
+  maxFavouriteCount?: number;
+}
+
 /**
  * @id basic-bricks.quick-visit-menu
  * @author annzhang
@@ -20,7 +28,7 @@ import { QuickVisitMenu } from "./QuickVisitMenu";
  * 该构件已迁移至 `nav-legacy` 包中维护，后续版本将不再维护该构件，请使用 `nav-legacy.menu-bar` 构件
  * @noInheritDoc
  */
-export class QuickVisitMenuElement extends UpdatingElement {
+export class QuickVisitMenuElement extends UpdatingElement implements QuickVisitMenuElementProps {
   /**
    * @default
    * @required true
@@ -63,7 +71,7 @@ export class QuickVisitMenuElement extends UpdatingElement {
     Record<string, any>
   >;
 
-  private _handleMenuDrag = (item) => {
+  private _handleMenuDrag = (item:any) => {
     this.menuDragEvent.emit(item);
   };
   /**
@@ -74,7 +82,7 @@ export class QuickVisitMenuElement extends UpdatingElement {
     Record<string, any>
   >;
 
-  private _handleMenuRemove = (item) => {
+  private _handleMenuRemove = (item:any) => {
     this.menuRemoveEvent.emit(item);
   };
   /**
@@ -82,7 +90,7 @@ export class QuickVisitMenuElement extends UpdatingElement {
    * @description 添加到快捷访问时发出的事件
    */
   @event({ type: "menu.add" }) menuAddEvent: EventEmitter<Record<string, any>>;
-  private _handleMenuAdd = (item) => {
+  private _handleMenuAdd = (item:any) => {
     this.menuAddEvent.emit(item);
   };
   /**
@@ -93,7 +101,7 @@ export class QuickVisitMenuElement extends UpdatingElement {
     Record<string, any>
   >;
 
-  private _handleMenuClick = (item) => {
+  private _handleMenuClick = (item:any) => {
     this.menuClickEvent.emit(item);
   };
   /**

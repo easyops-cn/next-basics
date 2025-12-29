@@ -9,6 +9,18 @@ import {
 } from "@next-core/brick-kit";
 import { GeneralSlider, GeneralSliderProps } from "./GeneralSlider";
 
+
+export interface GeneralSliderElementProps {
+  onlyShowMode?: boolean;
+  size?: string;
+  value?: GeneralSliderProps["value"];
+  disabled?: boolean;
+  dots?: boolean;
+  marks?: GeneralSliderProps["marks"];
+  range?: boolean;
+  step?: GeneralSliderProps["step"];
+}
+
 /**
  * @id presentational-bricks.general-slider
  * @name presentational-bricks.general-slider
@@ -21,7 +33,7 @@ import { GeneralSlider, GeneralSliderProps } from "./GeneralSlider";
  * @memo
  * @noInheritDoc
  */
-export class GeneralSliderElement extends UpdatingElement {
+export class GeneralSliderElement extends UpdatingElement implements GeneralSliderElementProps {
   /**
    * @kind boolean
    * @required -️

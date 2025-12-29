@@ -4,6 +4,11 @@ import { UpdatingElement, property } from "@next-core/brick-kit";
 import hotkeys from "hotkeys-js";
 import { isEmpty, map, find } from "lodash";
 
+export interface GeneralHotkeysElementProps {
+  hotkeysConfig?: HotkeysConfig[];
+  disabled?: boolean;
+}
+
 interface HotkeysConfig {
   key: string;
   eventName: string;
@@ -35,7 +40,7 @@ interface HotkeysConfig {
 *  - `↩︎` return/Enter space
 * @noInheritDoc
 */
-export class GeneralHotkeysElement extends UpdatingElement {
+export class GeneralHotkeysElement extends UpdatingElement implements GeneralHotkeysElementProps {
   /**
    * @kind {key: string,eventName: string}[]
    * @required false

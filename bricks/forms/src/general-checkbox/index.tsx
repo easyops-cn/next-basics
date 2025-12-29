@@ -54,7 +54,25 @@ export interface LabeledValue {
 
 * > Tips: 多选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
 */
-export class GeneralCheckboxElement extends FormItemElement {
+export interface GeneralCheckboxElementProps {
+  name?: string;
+  value?: CheckboxValueType[];
+  options?: (CheckboxOptionType | IconCheckboxItem)[];
+  placeholder?: string;
+  label?: string;
+  required?: boolean;
+  message?: Record<string, string>;
+  type?: CheckboxType;
+  isCustom?: boolean;
+  colSpan?: number;
+  disabled?: boolean;
+  isGroup?: boolean;
+  optionGroups?: OptionGroup[];
+  text?: string;
+}
+
+
+export class GeneralCheckboxElement extends FormItemElement  implements GeneralCheckboxElementProps {
   /* =========================== Group: basic =========================== */
 
   /**
@@ -311,6 +329,7 @@ export class GeneralCheckboxElement extends FormItemElement {
             message={this.message}
             validator={this.validator}
             notRender={this.notRender}
+            // @ts-ignore
             onChange={this._handleChange}
             onChangeV2={this._handleChangeV2}
             optionsChange={this._handleOptionsChange}

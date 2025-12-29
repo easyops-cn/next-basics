@@ -75,13 +75,13 @@ export function Calendar(props: CalendarProps): React.ReactElement {
     onSelect?.(newDate);
   };
 
-  const handleModeChange = (e) => {
+  const handleModeChange = (e: any) => {
     setMode(e.target.value);
     const newDate = getDate(curYear, curMonth, curDay);
     onPanelChange?.(newDate, e.target.value);
   };
 
-  const handleArrowClick = (type) => {
+  const handleArrowClick = (type: any) => {
     let newDate;
     if (type === "pre") {
       newDate = getDate(curYear, curMonth, curDay).subtract(1, "w");
@@ -206,7 +206,7 @@ export function Calendar(props: CalendarProps): React.ReactElement {
                 </thead>
                 <tbody>
                   {calendarData.map((row, index) => {
-                    const curRow = row.map((item) => renderDateNode(item));
+                    const curRow = row.map((item: any) => renderDateNode(item));
                     return <tr key={index}>{curRow}</tr>;
                   })}
                 </tbody>

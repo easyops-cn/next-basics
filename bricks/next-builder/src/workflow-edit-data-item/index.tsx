@@ -5,7 +5,19 @@ import { WorkflowEditDataItem } from "./WorkflowEditDataItem";
 import { FormItemElement } from "@next-libs/forms";
 import { TypeFieldItem, WorkflowDataItem } from "../interface";
 
-export class WorkflowEditDataItemElement extends FormItemElement {
+export interface WorkflowEditDataItemProps {
+  value?: any;
+  fieldList?: TypeFieldItem[];
+  dataList?: WorkflowDataItem[];
+}
+
+export interface WorkflowEditDataItemElementProps {
+  value?: any;
+  fieldList?: TypeFieldItem[];
+  dataList?: WorkflowDataItem[];
+}
+
+export class WorkflowEditDataItemElement extends FormItemElement implements WorkflowEditDataItemProps {
   @property({
     attribute: false,
   })

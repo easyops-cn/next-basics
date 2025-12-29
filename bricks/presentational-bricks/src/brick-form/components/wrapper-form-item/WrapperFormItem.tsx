@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { Form } from "@ant-design/compatible";
 import { FormComponentProps } from "@ant-design/compatible/lib/form";

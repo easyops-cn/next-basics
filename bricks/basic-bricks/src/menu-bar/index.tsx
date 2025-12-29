@@ -8,6 +8,12 @@ import {
 } from "@next-core/brick-types";
 import { MenuBar } from "./MenuBar/MenuBar";
 
+export interface MenuBarElementProps extends Partial<MenuBarBrick> {
+  menu?: SidebarMenu;
+  subMenu?: SidebarSubMenu;
+  collapsed?: boolean;
+}
+
 /**
 * @id basic-bricks.menu-bar
 * @name basic-bricks.menu-bar
@@ -69,7 +75,7 @@ import { MenuBar } from "./MenuBar/MenuBar";
 *
 * @noInheritDoc
 */
-export class MenuBarElement extends UpdatingElement implements MenuBarBrick {
+export class MenuBarElement extends UpdatingElement implements MenuBarElementProps   {
   /**
    * @kind SidebarMenu
    * @required true

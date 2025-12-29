@@ -35,17 +35,17 @@ interface MenuContainerProps {
 export function filterMenuTitle(title: string, key: string) {
   return title.toLowerCase().includes(key.trim().toLocaleLowerCase());
 }
-export function flagFavourite(favouriteMenus: Record<string, unknown>[], menu) {
+export function flagFavourite(favouriteMenus: Record<string, unknown>[], menu: any) {
   return favouriteMenus.length
     ? !!favouriteMenus.find((item) => menuIsSame(item, menu))
     : false;
 }
-export function flattenMenus(menu, favouriteMenus = []) {
-  const allMenus = [];
+export function flattenMenus(menu: any, favouriteMenus: any[] = []) {
+  const allMenus: any[] = [];
   const { menuItems } = menu;
-  menuItems.forEach((menuItem) => {
+  menuItems.forEach((menuItem: any) => {
     const { items: secondItems = [] } = menuItem;
-    secondItems.forEach((secondItem) => {
+    secondItems.forEach((secondItem: any) => {
       if (!secondItem.items?.length) {
         allMenus.push({
           ...secondItem,
@@ -55,7 +55,7 @@ export function flattenMenus(menu, favouriteMenus = []) {
       } else {
         const { items: thirdItems } = secondItem;
         allMenus.push(
-          ...thirdItems.map((thirdItem) => {
+          ...thirdItems.map((thirdItem: any) => {
             return {
               ...thirdItem,
               groupTitle: secondItem.title,
@@ -69,20 +69,20 @@ export function flattenMenus(menu, favouriteMenus = []) {
   });
   return allMenus;
 }
-export function menuIsSame(menu1, menu2) {
+export function menuIsSame(menu1: any, menu2: any) {
   return (
     menu1.text === menu2.text &&
     (menu1.to === menu2.to || menu1.href === menu2.href)
   );
 }
-export function removeItemFromList(list, item) {
-  return reject(list, (menu) => menuIsSame(menu, item));
+export function removeItemFromList(list: any, item: any) {
+  return reject(list, (menu: any) => menuIsSame(menu, item));
 }
-export function searchMenu(menus, key: string) {
+export function searchMenu(menus: any, key: string) {
   if (key.trim() === "") {
     return [];
   }
-  const result = menus.filter((menu) => {
+  const result = menus.filter((menu: any) => {
     return (
       filterMenuTitle(menu.text, key) ||
       (menu.categoryTitle && filterMenuTitle(menu.categoryTitle, key)) ||
@@ -110,28 +110,28 @@ export function MenuContainer({
   useEffect(() => {
     setFavouriteCount(favouriteMenus?.length ?? 0);
   }, [favouriteMenus]);
-  const onSearch = (event) => {
+  const onSearch = (event: any) => {
     setSearchKey(event.target.value);
     setIsSearching(!!event.target.value);
     const searchResult = searchMenu(allMenus, event.target.value);
     setFilterMenus(searchResult);
   };
-  const handleCollect = (item) => {
+  const handleCollect = (item: any) => {
     const newFavouriteList = [...favouriteMenus, item];
     handleMenuAdd(newFavouriteList);
   };
   const handleCollectMenuFailed = () => {
     handleCollectFailed();
   };
-  const removeSingleMenu = (item) => {
+  const removeSingleMenu = (item: any) => {
     const newFavouriteList = removeItemFromList(favouriteMenus, item);
     handleMenuRemove(newFavouriteList);
   };
-  const removeFavouriteItem = (newFavouriteList) => {
+  const removeFavouriteItem = (newFavouriteList: any) => {
     handleMenuRemove(newFavouriteList);
   };
   const reorderFavouriteItem = (
-    newFavouriteList,
+    newFavouriteList: any,
     oldIndex: number,
     newIndex: number
   ) => {
@@ -235,7 +235,7 @@ export function QuickVisitMenu(props: QuickVisitMenuProps): React.ReactElement {
   useEffect(() => {
     setAllMenus(flattenMenus(menu, favouriteMenus));
   }, [favouriteMenus, menu]);
-  let timer;
+  let timer:any;
   const [drawerVisible, setDrawerVisible] = useState(false);
   function triggerDrawerVisible(visible: boolean) {
     if (!visible && drawerVisible) {
@@ -250,7 +250,7 @@ export function QuickVisitMenu(props: QuickVisitMenuProps): React.ReactElement {
     }
   }
 
-  const removeMenuItem = (favouriteList) => {
+  const removeMenuItem = (favouriteList:  any) => {
     handleMenuRemove(favouriteList);
   };
 

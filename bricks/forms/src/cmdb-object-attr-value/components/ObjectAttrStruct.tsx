@@ -619,6 +619,7 @@ export function LegacyObjectAttrStructForm(
                 style={{ wordBreak: "break-all" }}
                 disabled={true}
                 autoSize={{ minRows: 4 }}
+                // @ts-ignore
                 resize={false}
               />
             </Form.Item>

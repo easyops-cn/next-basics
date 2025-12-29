@@ -14,6 +14,15 @@ import { ButtonType, ButtonShape, ButtonSize } from "antd/lib/button";
 import { TooltipPlacement } from "antd/lib/tooltip";
 import { GeneralCustomButtons } from "./GeneralCustomButtons";
 
+export interface GeneralCustomButtonsElementProps {
+  customButtons: CustomButton[];
+  dataSource?: any;
+  moreBtnIcon?: MenuIcon | string;
+  dropdownBtnType?: "default" | "link";
+  dropdownBtnIcon?: MenuIcon | string;
+  moreButtonStyle: React.CSSProperties;
+}
+
 export interface CustomButton {
   /**
    * 是否收纳成下拉框
@@ -142,7 +151,7 @@ export type DropdownPlacement =
  * @memo
  * @noInheritDoc
  */
-export class GeneralCustomButtonsElement extends UpdatingElement {
+export class GeneralCustomButtonsElement extends UpdatingElement implements GeneralCustomButtonsElementProps {
   /**
    * @kind CustomButton[]
    * @description 自定义按钮组

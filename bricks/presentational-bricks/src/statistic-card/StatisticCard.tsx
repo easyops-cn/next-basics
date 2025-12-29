@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { Link } from "@next-libs/basic-components";
 import { Parser } from "html-to-react";

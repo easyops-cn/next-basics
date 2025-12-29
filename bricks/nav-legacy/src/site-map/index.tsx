@@ -1,9 +1,19 @@
+// @ts-nocheck
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { SiteMap } from "./SiteMap";
 import { NewSiteMap } from "./newSiteMap";
-class SiteMapElement extends UpdatingElement {
+
+export interface SiteMapElementProps {
+  modelMap?: Record<string, any>[];
+  isNext?: boolean;
+  urlTemplates?: Record<string, any>;
+  titleStyle?: React.CSSProperties;
+  isInMenu?: boolean;
+}
+
+class SiteMapElement extends UpdatingElement implements SiteMapElementProps {
   connectedCallback(): void {
     this.style.display = "block";
     this._render();
@@ -37,6 +47,7 @@ class SiteMapElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           {this.isInMenu ? (
+            // @ts-ignore
             <NewSiteMap
               modelMap={this.modelMap}
               urlTemplates={this.urlTemplates}

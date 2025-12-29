@@ -33,7 +33,36 @@ import {
  * ### 注意
  * 该构件是下拉框对 cmdb 列表的一个简单封装，只适用于于简单的数据选择和搜索，如果涉及到复杂的数据选择，可能需要有高级的过滤（比如主机数据，需要按 IP，按主机名，按状态等过滤），则建议用：[CMDB 实例输入表单项 ](developers/brick-book/brick/cmdb-instances.cmdb-instances-input-form)
  */
-export class CmdbInstanceSelectElement extends FormItemElement {
+export interface CmdbInstanceSelectElementProps {
+  name?: string;
+  value?: string;
+  placeholder?: string;
+  objectId?: string;
+  label?: string;
+  required?: boolean;
+  message?: Record<string, string>;
+  disabled?: boolean;
+  allowClear?: boolean;
+  mode?: string;
+  popoverPositionType?: CmdbInstanceSelectFormItemProps["popoverPositionType"];
+  inputBoxStyle?: React.CSSProperties;
+  instanceQuery?: CmdbInstanceSelectFormItemProps["instanceQuery"];
+  fields?: CmdbInstanceSelectFormItemProps["fields"];
+  labelTemplate?: string;
+  extraSearchKey?: string[];
+  extraFields?: string[];
+  suffix?: {
+    useBrick: UseBrickConf;
+  };
+  dropdownStyle?: React.CSSProperties;
+  blurAfterValueChanged?: boolean;
+  useExternalCmdbApi?: boolean;
+  sort?: Record<string, number | string>[];
+  useBrickVisible?: boolean;
+}
+
+
+export class CmdbInstanceSelectElement extends FormItemElement  implements CmdbInstanceSelectElementProps {
   /* =========================== Group: basic =========================== */
 
   /**

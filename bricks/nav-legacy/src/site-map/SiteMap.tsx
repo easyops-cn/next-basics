@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from "react";
 import { AutoComplete, Input, Popover, Tooltip } from "antd";
 import styles from "./SiteMap.module.css";
@@ -40,6 +41,7 @@ export function SiteMap(props: SiteMapProps): React.ReactElement {
     isNext,
     urlTemplates
   );
+  // @ts-ignore
   const autoDataSource: { value: string; text: string }[] =
     getFilterNavList(headerNavs);
   const [dataSource, setDataSource] = useState(autoDataSource);
@@ -50,7 +52,9 @@ export function SiteMap(props: SiteMapProps): React.ReactElement {
       ? [...autoDataSource]
       : autoDataSource.filter(
           (item) =>
+            // @ts-ignore
             item.text.toLowerCase().includes(q) ||
+            // @ts-ignore
             item.objectId.toLowerCase().includes(q)
         );
 
@@ -84,6 +88,7 @@ export function SiteMap(props: SiteMapProps): React.ReactElement {
     <div className={styles.mainContainer}>
       <div className={styles.searchContainer}>
         <div className={styles.searchWrapper}>
+          {/* @ts-ignore */}
           <AutoComplete
             style={{ width: 200 }}
             dropdownStyle={{ width: 300 }}

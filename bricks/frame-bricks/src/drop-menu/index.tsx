@@ -3,6 +3,15 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { DropMenu } from "./DropMenu";
 
+export interface DropMenuElementProps {
+  menuData: any[];
+  categoryStyle: React.CSSProperties;
+  subCategoryStyle: React.CSSProperties;
+  instanceMenuStyle: React.CSSProperties;
+  menuTitle: string;
+  placeholder: string;
+}
+
 /**
  * @id frame-bricks.drop-menu
  * @author julielai
@@ -11,7 +20,7 @@ import { DropMenu } from "./DropMenu";
  * @docKind brick
  * @noInheritDoc
  */
-export class DropMenuElement extends UpdatingElement {
+export class DropMenuElement extends UpdatingElement implements DropMenuElementProps {
   /**
    * @required true
    * @description 菜单数据源

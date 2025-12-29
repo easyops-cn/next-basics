@@ -4,6 +4,19 @@ import { UseBrickConf } from "@next-core/brick-types";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { GeneralTooltip, GeneralTooltipProps } from "./GeneralTooltip";
 
+
+export interface GeneralTooltipElementProps {
+  content?: GeneralTooltipProps["content"];
+  icon?: GeneralTooltipProps["icon"];
+  text?: string;
+  iconContainerStyle?: React.CSSProperties;
+  type?: GeneralTooltipProps["type"] ;
+  header?: string;
+  tooltipConfig?: TooltipConfig;
+  displayBrick?: DisplayBrick;
+  textEllipsis?: boolean;
+}
+
 export interface DisplayBrick {
   useBrick: UseBrickConf;
   data?: any;
@@ -50,7 +63,7 @@ export interface TooltipConfig {
  * @memo
  * @noInheritDoc
  */
-export class GeneralTooltipElement extends UpdatingElement {
+export class GeneralTooltipElement extends UpdatingElement implements GeneralTooltipElementProps {
   /**
    * @kind string | string[]
    * @required true

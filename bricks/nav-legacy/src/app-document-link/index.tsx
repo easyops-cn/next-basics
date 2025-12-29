@@ -3,6 +3,12 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { AppDocumentLink } from "./AppDocumentLink";
 
+export interface AppBarDocumentLinkElementProps {
+  iconStyle?: React.CSSProperties;
+  isInNavbar?: boolean;
+  showHover?: boolean;
+}
+
 /**
  * @id nav-legacy.app-bar-document-link
  * @author SheRunFeng
@@ -11,7 +17,7 @@ import { AppDocumentLink } from "./AppDocumentLink";
  * @docKind brick
  * @noInheritDoc
  */
-export class AppBarDocumentLinkElement extends UpdatingElement {
+export class AppBarDocumentLinkElement extends UpdatingElement implements AppBarDocumentLinkElementProps {
   @property({
     attribute: false,
   })

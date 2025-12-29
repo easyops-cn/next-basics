@@ -17,6 +17,16 @@ export interface ApiRequestValue {
   };
 }
 
+export interface ApiRequestFormItemProps {
+  value?: ApiRequestValue;
+  onApiChange?: (event: CustomEvent) => void;
+  onTypeChange?: (event: CustomEvent) => void;
+}
+
+export interface ApiRequestFormItemElementProps {
+  value?: ApiRequestValue;
+}
+
 /**
  * @id next-builder.api-request-form-item
  * @author SheRunFeng
@@ -25,7 +35,7 @@ export interface ApiRequestValue {
  * @docKind brick
  * @noInheritDoc
  */
-export class ApiRequestFormItemElement extends FormItemElement {
+export class ApiRequestFormItemElement extends FormItemElement implements ApiRequestFormItemProps {
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else

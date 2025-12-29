@@ -7,6 +7,18 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BrickEvent, ReadSelectionChangeDetail } from "@next-core/brick-types";
 import { BrickForm, LegacyBrickFormProps, FieldDefinition } from "./BrickForm";
 
+
+export interface BrickFormElementProps {
+  contractName?: string;
+  fields?: LegacyBrickFormProps["fields"] ;
+  cancelText?: string;
+  confirmText?: string;
+  tailFormBtnLayout?: LegacyBrickFormProps["tailFormBtnLayout"];
+  layout?: FormLayout;
+  labelCol?: LegacyBrickFormProps["labelCol"];
+  wrapperCol?: LegacyBrickFormProps["wrapperCol"];
+}
+
 interface BrickFormElement extends LegacyBrickFormProps {}
 
 interface BrickFormRefProps {
@@ -14,7 +26,7 @@ interface BrickFormRefProps {
   [key: string]: any;
 }
 
-class BrickFormElement extends UpdatingElement {
+class BrickFormElement extends UpdatingElement implements BrickFormElementProps {
   @property()
   contractName: string;
 

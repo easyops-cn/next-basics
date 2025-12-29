@@ -9,6 +9,23 @@ import {
 import { ConditionalFormatAdapter } from "./ConditionalFormat";
 import { FormItemElement } from "@next-libs/forms";
 
+export interface ConditionalFormatElementProps {
+  name: string;
+  label: string;
+  value: any;
+  required: boolean;
+  message: Record<string, string>;
+  disabled: boolean;
+  originOptions: {
+    label: string;
+    value: string;
+  }[];
+  operationOptions: {
+    label: string;
+    value: string;
+  }[];
+}
+
 /**
  * @id form-builder.conditional-format
  * @author frankshi
@@ -17,7 +34,7 @@ import { FormItemElement } from "@next-libs/forms";
  * @docKind brick
  * @noInheritDoc
  */
-export class ConditionalFormatElement extends FormItemElement {
+export class ConditionalFormatElement extends FormItemElement implements ConditionalFormatElementProps {
   /**
    * @kind string
    * @required true

@@ -6,6 +6,27 @@ import { StatisticCard, IconType } from "./StatisticCard";
 import { parseTemplate } from "@next-libs/cmdb-utils";
 import { pick, forEach, set, get } from "lodash";
 
+
+export interface StatisticCardElementProps {
+  cardTitle?: string;
+  value?: string | number;
+  icon?: MenuIcon | string;
+  url?: string;
+  tip?: string;
+  disabled?: boolean;
+  dataSource?: Record<string, any>;
+  fields?: {
+    icon?: string;
+    disabled?: string;
+    tip?: string;
+    url?: string;
+    cardTitle?: string;
+    value?: string;
+  }
+  urlTemplate?: string;
+  iconType?: string;
+}
+
 /**
  * @id presentational-bricks.statistic-card
  * @name presentational-bricks.statistic-card
@@ -17,7 +38,7 @@ import { pick, forEach, set, get } from "lodash";
  * @memo
  * @noInheritDoc
  */
-export class StatisticCardElement extends UpdatingElement {
+export class StatisticCardElement extends UpdatingElement implements StatisticCardElementProps {
   /**
    * @kind string
    * @required false

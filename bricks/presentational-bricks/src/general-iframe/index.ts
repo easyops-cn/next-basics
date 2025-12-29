@@ -24,7 +24,13 @@ const defaultStyle = {
  * @memo
  * @noInheritDoc
  */
-export class GeneralIframeElement extends UpdatingElement {
+export interface GeneralIframeElementProps {
+  src?: string;
+  enableMessageSubscribe?: boolean;
+  messageOrigin?: string;
+}
+
+export class GeneralIframeElement extends UpdatingElement implements GeneralIframeElementProps {
   /**
    * @detail any
    * @description iframe 加载完成时触发

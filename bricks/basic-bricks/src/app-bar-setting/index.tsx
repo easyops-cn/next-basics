@@ -3,6 +3,11 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { AppBarSetting } from "./AppBarSetting";
 
+export interface AppBarSettingElementProps {
+  usernameStyle: React.CSSProperties;
+  dropdownIconStyle: React.CSSProperties;
+}
+
 /**
  * @id basic-bricks.app-bar-setting
  * @author SheRunFeng
@@ -14,7 +19,7 @@ import { AppBarSetting } from "./AppBarSetting";
  *  该构件已迁移至 `nav-legacy` 包中维护，后续版本将不再维护该构件，请使用 `nav-legacy.app-bar-setting` 构件
  * @noInheritDoc
  */
-export class AppBarSettingElement extends UpdatingElement {
+export class AppBarSettingElement extends UpdatingElement implements AppBarSettingElementProps {
   @property({
     attribute: false,
   })

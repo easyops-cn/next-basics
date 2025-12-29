@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";

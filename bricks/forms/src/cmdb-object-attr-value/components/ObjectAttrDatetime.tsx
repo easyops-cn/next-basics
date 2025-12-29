@@ -29,6 +29,7 @@ export function ObjectAttrDatetime(
   }, [props.value]);
 
   const handleValueChange = (value: Partial<DateTimeType>) => {
+    // @ts-ignore
     setValue(value);
     props.onChange && props.onChange(value);
   };

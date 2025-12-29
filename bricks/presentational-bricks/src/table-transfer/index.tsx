@@ -9,6 +9,21 @@ import {
 } from "@next-core/brick-kit";
 import { TableTransfer } from "./TableTransfer";
 import type { ColumnsType } from "antd/es/table/interface";
+
+export interface TableTransferElementProps {
+  dataSource?: any[];
+  columns?: ColumnsType<Record<string, any>>;
+  targetKeys?: string[];
+  selectedKeys?: string[];
+  disabled?: boolean;
+  dragSortable?: boolean;
+  sortTitle?: string;
+  maxSelected?: number;
+  listStyle?: React.CSSProperties;
+  titles?: string[];
+  searchPlaceholder?: string;
+}
+
 /**
  * @id presentational-bricks.table-transfer
  * @author annzhang
@@ -18,7 +33,7 @@ import type { ColumnsType } from "antd/es/table/interface";
  * @noInheritDoc
  */
 
-export class TableTransferElement extends UpdatingElement {
+export class TableTransferElement extends UpdatingElement implements TableTransferElementProps {
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else

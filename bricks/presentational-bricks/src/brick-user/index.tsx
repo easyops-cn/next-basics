@@ -3,6 +3,22 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BrickUser } from "./BrickUser";
 
+
+export interface BrickUserElementProps {
+  username?: string;
+  userNameOrId?: string;
+  iconUrl?: string;
+  hideAvatar?: boolean;
+  hideUsername?: boolean;
+  size?: "large" | "small" | "default" ;
+  shape?: "circle" | "square";
+  showNickname?: boolean;
+  showNicknameOrUsername?: boolean;
+  displayShowKey?: boolean;
+  iconMargin?: number | string;
+  customTooltip?: string;
+}
+
 /**
  * @id presentational-bricks.brick-user
  * @name presentational-bricks.brick-user
@@ -17,7 +33,7 @@ import { BrickUser } from "./BrickUser";
  * @memo
  * @noInheritDoc
  */
-export class BrickUserElement extends UpdatingElement {
+export class BrickUserElement extends UpdatingElement implements BrickUserElementProps {
   /**
    * @kind string
    * @required true

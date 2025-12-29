@@ -25,7 +25,30 @@ import { FormItemElement } from "@next-libs/forms";
  *| -------------- | ------ | ---------------------- |
  *| getFormElement | -      | 获得输入框所属表单元素 |
  */
-export class GeneralInputElement extends FormItemElement {
+export interface GeneralInputElementProps {
+  name?: string;
+  value?: string;
+  placeholder?: string;
+  label?: string;
+  required?: boolean;
+  message?: Record<string, string>;
+  min?: number;
+  max?: number;
+  minLength?: number;
+  maxLength?: number;
+  disabled?: boolean;
+  readOnly?: boolean;
+  type?: string;
+  size?: widthSize;
+  addonBefore?: string;
+  addonAfter?: string;
+  copyButton?: boolean;
+  inputBoxStyle?: React.CSSProperties;
+  useBrickVisible?: boolean;
+}
+
+
+export class GeneralInputElement extends FormItemElement  implements GeneralInputElementProps {
   /* =========================== Group: basic =========================== */
 
   /**
@@ -390,6 +413,7 @@ export class GeneralInputElement extends FormItemElement {
             inputBoxStyle={this.inputBoxStyle}
             copyButton={this.copyButton}
             onChange={this._handleChange}
+            // @ts-ignore
             onKeyDown={this._handleKeyDown}
             onKeyUp={this._handleKeyUp}
             onFocus={this._handleFocus}

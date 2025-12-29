@@ -4,7 +4,10 @@ import { BrickWrapper } from "@next-core/brick-kit";
 import { BrickCodeDisplay } from "./BrickCodeDisplay";
 import { get } from "lodash";
 
-class BrickCodeDisplayElement extends HTMLElement {
+
+export interface BrickCodeDisplayElementProps {}
+
+class BrickCodeDisplayElement extends HTMLElement implements BrickCodeDisplayElementProps {
   private _language: string;
   private _showLineNumber = true;
   private _value: string;

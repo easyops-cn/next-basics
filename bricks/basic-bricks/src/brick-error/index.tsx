@@ -3,6 +3,13 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { BrickError } from "./BrickError";
 
+export interface BrickErrorElementProps {
+  errorType?: string;
+  errorMessage?: string;
+  brickName?: string;
+  isLegacyTemplate?: boolean;
+}
+
 /**
  * @id basic-bricks.brick-error
  * @description 用于当构件发生允许单独 crash 的错误时显示的替代构件
@@ -12,7 +19,7 @@ import { BrickError } from "./BrickError";
  * @docKind brick
  * @noInheritDoc
  */
-export class BrickErrorElement extends UpdatingElement {
+export class BrickErrorElement extends UpdatingElement implements BrickErrorElementProps {
   /**
    * @description 错误类型
    */

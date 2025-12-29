@@ -3,6 +3,10 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement } from "@next-core/brick-kit";
 import { AppBarLogo } from "./AppBarLogo";
 
+export interface AppBarLogoElementProps {
+  // No props
+}
+
 /**
  * @id nav-legacy.app-bar-logo
  * @author SheRunFeng
@@ -11,7 +15,7 @@ import { AppBarLogo } from "./AppBarLogo";
  * @docKind brick
  * @noInheritDoc
  */
-export class AppBarLogoElement extends UpdatingElement {
+export class AppBarLogoElement extends UpdatingElement implements AppBarLogoElementProps {
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else

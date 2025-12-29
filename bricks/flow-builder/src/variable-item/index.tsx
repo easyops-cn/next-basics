@@ -4,6 +4,17 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { VariableItem } from "./VariableItem";
 import { UseBrickConf } from "@next-core/brick-types";
 
+export interface VariableItemElementProps {
+  propName: string;
+  labelBrick: {
+    useBrick: UseBrickConf;
+  };
+  propValue: any;
+  standalone: boolean;
+  expand: boolean;
+  ellipsis: boolean;
+}
+
 /**
  * @id flow-builder.variable-item
  * @author jojiang
@@ -12,7 +23,7 @@ import { UseBrickConf } from "@next-core/brick-types";
  * @docKind brick
  * @noInheritDoc
  */
-export class VariableItemElement extends UpdatingElement {
+export class VariableItemElement extends UpdatingElement implements VariableItemElementProps {
   @property() propName: string;
 
   @property({

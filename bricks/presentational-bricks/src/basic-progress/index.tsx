@@ -3,6 +3,18 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BasicProgress, Color } from "./BasicProgress";
 
+
+export interface BasicProgressElementProps {
+  value?: number;
+  type?: "line" | "circle" | "dashboard";
+  text?: string;
+  description?: string;
+  textColor?: string;
+  colorMap?: ColorObj[];
+  fontSize?: string;
+  configProps?: Record<string, any>;
+}
+
 export interface ColorObj {
   /**
    * 进度范围最大值，值（value）小于等于最大值则为该颜色
@@ -52,7 +64,7 @@ export interface ColorObj {
  * ```
  * @noInheritDoc
  */
-export class BasicProgressElement extends UpdatingElement {
+export class BasicProgressElement extends UpdatingElement implements BasicProgressElementProps {
   /**
    * @kind number
    * @required true

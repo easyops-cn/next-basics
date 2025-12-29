@@ -35,7 +35,34 @@ import {
  *| disabledEditBtnRowValues    | `string[]`  | -        | -       | 禁用编辑操作的行唯一值 |
  *| disabledDeleteBtnRowValues  | `string[]`  | -        | -       | 禁用删除操作的行唯一值 |
  */
-export class GeneralStructsFormItemV2Element extends FormItemElement {
+export interface GeneralStructsFormItemV2ElementProps {
+  name?: string;
+  label?: string;
+  btnText?: string;
+  value?: any;
+  structDefaultValues?: any;
+  fieldsMap?: any;
+  maskClosable?: boolean;
+  createModalTitle?: string;
+  editModalTitle?: string;
+  modalWidth?: string | number;
+  okText?: string;
+  cancelText?: string;
+  deleteText?: string;
+  isVisible?: boolean;
+  addBtnDisabled?: boolean;
+  structItemShowRenderFN?: (
+    text: any,
+    rowData: Record<string, any>,
+    dataIndex: any,
+    columnKey: any
+  ) => any;
+  structInnerTableColumnsOrder?: string[];
+  rowOperationConfig?: RowOperationConfig;
+}
+
+
+export class GeneralStructsFormItemV2Element extends FormItemElement  implements GeneralStructsFormItemV2ElementProps {
   /**
    * @group basicFormItem
    * @required true

@@ -13,6 +13,29 @@ import {
   historyProps,
 } from "./WorkbenchQuickEntry";
 
+export interface WorkbenchQuickEntryProps {
+  entryTitle?: string;
+  entryList?: Array<listItem>;
+  history?: historyProps;
+  showMoreButton?: boolean;
+  moreButtonText?: string;
+  showThumbnails?: boolean;
+  thumbnailWidth?: number;
+  thumbnailHeight?: number;
+  onMoreButtonClick?: (event: CustomEvent) => void;
+}
+
+export interface WorkbenchQuickEntryElementProps {
+  entryTitle?: string;
+  entryList?: Array<listItem>;
+  history?: historyProps;
+  showMoreButton?: boolean;
+  moreButtonText?: string;
+  showThumbnails?: boolean;
+  thumbnailWidth?: number;
+  thumbnailHeight?: number;
+}
+
 /**
  * @id next-builder.workbench-quick-entry
  * @author SheRunFeng
@@ -21,7 +44,7 @@ import {
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchQuickEntryElement extends UpdatingElement {
+export class WorkbenchQuickEntryElement extends UpdatingElement implements WorkbenchQuickEntryProps {
   @property({ type: String })
   entryTitle: string;
 

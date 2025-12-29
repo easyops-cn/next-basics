@@ -94,7 +94,7 @@ export function BusinessRule(props: BusinessRuleProps): React.ReactElement {
     return actions.map((item) => {
       return (
         <div key={item.target}>
-          <span>{actionTypeMap[item.actionType]}：</span>
+          <span>{(actionTypeMap as any)[item.actionType]}：</span>
           <span className={styles.highlight}>{item.target}</span>
         </div>
       );
@@ -117,17 +117,17 @@ export function BusinessRule(props: BusinessRuleProps): React.ReactElement {
                     return (
                       <>
                         <span className={styles.highlight} key={v.origin}>
-                          {v.origin} {operationMap[v.operation]} {v.value}
+                          {v.origin} {(operationMap as any)[v.operation]} {v.value}
                         </span>
                         {item.conditions.length - 1 !== i && (
-                          <span>{opMap[v.op]}</span>
+                          <span>{(opMap as any)[v.op]}</span>
                         )}
                       </>
                     );
                   })}
                   )
                 </span>
-                {groups.length - 1 !== index && <span>{opMap[op]}</span>}
+                {groups.length - 1 !== index && <span>{(opMap as any)[op]}</span>}
               </>
             );
           })}

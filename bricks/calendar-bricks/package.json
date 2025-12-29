@@ -29,12 +29,13 @@
     "build:webpack": "webpack --config webpack.config.js",
     "build:stories": "if [ -d stories ];then  rollup --config rollup.stories.js; else echo \" no stories \"; fi",
     "build:snippets": "if [ -d snippets ]; then rollup --config rollup.snippets.js; else echo 'no snippets'; fi",
-    "postbuild": "ENABLE_GENERATE_DOC=true node scripts/post-build.js",
+    "postbuild": "npm run build:types && ENABLE_GENERATE_DOC=true node scripts/post-build.js",
     "test": "cross-env NODE_ENV='test' jest",
     "test:ci": "cross-env NODE_ENV='test' CI=true jest",
     "prepack:tar": "node scripts/generate-version-file.js && npm run build",
     "pack:tar": "npm pack",
-    "postpack:tar": "node scripts/rename-tar-package.js"
+    "postpack:tar": "node scripts/rename-tar-package.js",
+    "build:types": "tsc --project tsconfig.types.json"
   },
   "devDependencies": {
     "@fullcalendar/daygrid": "^5.11.3",

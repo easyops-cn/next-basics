@@ -14,7 +14,7 @@ export const columns = [
       showSearch: true,
       optionFilterProp: "children",
       dropdownMatchSelectWidth: false,
-      filterOption: (input, option) =>
+      filterOption: (input: any, option: any) =>
         (option.props.children as string)
           .toLowerCase()
           .indexOf(input.toLowerCase()) >= 0,
@@ -34,7 +34,7 @@ export const columns = [
       showSearch: true,
       dropdownMatchSelectWidth: false,
       optionFilterProp: "children",
-      filterOption: (input, option) =>
+      filterOption: (input: any, option: any) =>
         (option.props.children as string)
           .toLowerCase()
           .indexOf(input.toLowerCase()) >= 0,
@@ -60,7 +60,7 @@ export const columns = [
       allowClear: true,
       dropdownMatchSelectWidth: false,
       optionFilterProp: "children",
-      filterOption: (input, option) =>
+      filterOption: (input: any, option: any) =>
         (option.props.children as string)
           .toLowerCase()
           .indexOf(input.toLowerCase()) >= 0,
@@ -79,7 +79,15 @@ export const columns = [
  * 1.x.0:新增构件 `forms.dynamic-user-select-item`
  * @memo
  */
-export class DynamicUserSelectItemElement extends FormItemElement {
+export interface DynamicUserSelectItemElementProps {
+  value?: any;
+  disabledAddButton?: boolean;
+  disabledDeleteButton?: boolean;
+  srcObjectId?: string;
+}
+
+
+export class DynamicUserSelectItemElement extends FormItemElement  implements DynamicUserSelectItemElementProps {
   private manualEditedValue: any[];
 
   @property({

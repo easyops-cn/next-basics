@@ -3,6 +3,17 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { GeneralText } from "./GeneralText";
 
+export interface GeneralTextElementProps {
+  text?: string;
+  fontSize?: CSSProperties["fontSize"];
+  fontWeight?: CSSProperties["fontWeight"];
+  color?: CSSProperties["color"];
+  lineHeight?: CSSProperties["lineHeight"];
+  textAlign?: CSSProperties["textAlign"];
+  display?: CSSProperties["display"];
+  customStyle?: CSSProperties;
+}
+
 /**
  * @id basic-bricks.general-text
  * @author SailorShe
@@ -11,7 +22,7 @@ import { GeneralText } from "./GeneralText";
  * @docKind brick
  * @noInheritDoc
  */
-export class GeneralTextElement extends UpdatingElement {
+export class GeneralTextElement extends UpdatingElement implements GeneralTextElementProps {
   /**
    * @default ''
    * @required false

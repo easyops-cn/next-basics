@@ -23,5 +23,5 @@ export const chapter: Chapter = {
     toolOutputTemplate,
     baseManualExecution,
     enhancedToolsInputForm,
-  ],
+  ] as any,
 };

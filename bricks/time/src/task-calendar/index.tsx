@@ -18,6 +18,22 @@ import {
 import { TaskCalendar } from "./TaskCalendar";
 import { ModeType } from "./utils";
 
+export interface TaskCalendarElementProps {
+  value?: string;
+  customTitle?: string;
+  defaultSelectedDate?: string;
+  briefList?: BriefData[];
+  taskList?: TaskData[];
+  importantList?: ImportantData[];
+  taskSettings?: TaskSettings;
+  importanceSettings?: ImportanceSettings;
+  dateCellHeight?: React.CSSProperties["height"];
+  footerStyle?: React.CSSProperties;
+  showLunarInfo?: boolean;
+  mode?: ModeType;
+  hideMode?: boolean;
+}
+
 /**
  * @id time.task-calendar
  * @author nlicroshan
@@ -26,7 +42,7 @@ import { ModeType } from "./utils";
  * @docKind brick
  * @noInheritDoc
  */
-export class TaskCalendarElement extends UpdatingElement {
+export class TaskCalendarElement extends UpdatingElement implements TaskCalendarElementProps {
   /**
    * @kind string
    * @required false

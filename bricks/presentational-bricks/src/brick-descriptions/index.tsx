@@ -9,6 +9,21 @@ import { DescriptionsProps } from "antd/lib/descriptions";
 import { DescriptionsItemProps } from "antd/lib/descriptions/Item";
 import styles from "./BrickDescriptions.module.css";
 
+
+export interface BrickDescriptionsElementProps {
+  descriptionTitle?: string;
+  descriptionList?: DescriptionListProps[];
+  itemList?: BrickDescriptionsItemProps[];
+  itemIdBrickMap?: Record<string, { useBrick: UseBrickConf }>;
+  column?: number;
+  layout?: LayoutType;
+  bordered?: boolean;
+  size?: SizeType;
+  configProps?: DescriptionsProps;
+  hideGroups?: string[] | string;
+  dataSource?: Record<string, any>;
+}
+
 export interface BrickDescriptionsItemProps
   extends Partial<DescriptionsItemProps> {
   /**
@@ -74,7 +89,7 @@ export type SizeType = "default" | "middle" | "small";
  * | transformFrom | string         | -        | -       | 属性数据转换来自数据源的哪个字段，不填则为整个数据 |
  * @noInheritDoc
  */
-export class BrickDescriptionsElement extends UpdatingElement {
+export class BrickDescriptionsElement extends UpdatingElement implements BrickDescriptionsElementProps {
   /**
    * @kind string
    * @required false

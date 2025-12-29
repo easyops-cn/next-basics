@@ -8,6 +8,13 @@ import {
 } from "@next-core/brick-kit";
 import { GeneralTransform } from "@next-core/brick-types";
 
+export interface ScriptBrickElementProps {
+  data?: any;
+  transform?: GeneralTransform;
+  multiple?: boolean;
+  target?: string;
+}
+
 /**
  * @id basic-bricks.script-brick
  * @name basic-bricks.script-brick
@@ -27,7 +34,7 @@ import { GeneralTransform } from "@next-core/brick-types";
 > 3. 执行`sendNotify`，则会根据`data`发送`data.true`或`data.false`事件，从而执行不同的绑定行为
  * @noInheritDoc
  */
-export class ScriptBrickElement extends UpdatingElement {
+export class ScriptBrickElement extends UpdatingElement implements ScriptBrickElementProps {
   /**
    * @kind any
    * @required false

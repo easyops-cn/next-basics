@@ -11,6 +11,36 @@ import { UseBrickConf } from "@next-core/brick-types";
 import { DropdownSelect } from "./DropdownSelect";
 import { Option } from "../interfaces";
 
+
+export interface DropdownSelectElementProps {
+  options?: Option[];
+  dataSource?: any[];
+  value?: any[];
+  label?: string;
+  disabled?: boolean;
+  heightFix?: boolean;
+  buttonIcon?: any;
+  dropdownButtonType?: "default" | "shape";
+  labelFontSize?: string;
+  placeholder?: string;
+  optionTitle?: string;
+  optionContent?: string;
+  valuePath?: string;
+  multipleSelect?: boolean;
+  selectedKeys?: string[] ;
+  selectTipText?: string;
+  selectBoxStyle?: React.CSSProperties;
+  defaultSelectedKeys?: string[] ;
+  minSelectedItemLength?: number;
+  multipleLabel?: string;
+  tipBrick?: { useBrick: UseBrickConf };
+  hideLabel?: boolean;
+  dropdownTriggerStyle?: React.CSSProperties;
+  labelBrick?: {
+    useBrick: UseBrickConf;
+  }
+}
+
 /**
  * @id presentational-bricks.dropdown-select
  * @name presentational-bricks.dropdown-select
@@ -23,7 +53,7 @@ import { Option } from "../interfaces";
  * @memo
  * @noInheritDoc
  */
-export class DropdownSelectElement extends UpdatingElement {
+export class DropdownSelectElement extends UpdatingElement implements DropdownSelectElementProps {
   /**
    * @detail {value: any; item: any}
    * @description 选项改变事件

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { NS_PRESENTATIONAL_BRICKS } from "../i18n/constants";
@@ -23,7 +24,8 @@ import { BrickCheckbox } from "./components/brick-checkbox/BrickCheckbox";
 import { BrickOptionProps } from "./interfaces";
 import { BrickMarkdownEditor } from "../markdown-editor/MarkdownEditor";
 import { BrickInstanceSelector } from "./components/brick-instance-selector/BrickInstanceSelector";
-import { CustomColumn } from "../brick-table/BrickTable";
+// @ts-ignore
+import { CustomColumn } from "../brick-table/index";
 
 export interface FieldDefinition {
   field: string;

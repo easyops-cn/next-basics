@@ -13,6 +13,14 @@ import {
 import { GeneralDrawer } from "./GeneralDrawer";
 import style from "./index.shadow.less";
 import { DrawerProps } from "antd/lib/drawer";
+export interface GeneralDrawerElementProps {
+  width?: number | string;
+  bodyStyle?: Record<string, any>;
+  drawerStyle?: Record<string, any>;
+  headerStyle?: Record<string, any>;
+  configProps?: DrawerProps;
+}
+
 export interface OpenCloseOption {
   noEvent?: boolean;
 }
@@ -49,7 +57,7 @@ export interface ICustomSwitchConfig {
 * | noEvent  | `boolean` | -        | -       | 不触发事件  |
  * @noInheritDoc
  */
-export class GeneralDrawerElement extends UpdatingElement {
+export class GeneralDrawerElement extends UpdatingElement implements GeneralDrawerElementProps {
   private _mountPoint: HTMLElement;
   private isVisible = false;
 

@@ -3,6 +3,11 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BrickAlertNumber } from "./BrickAlertNumber";
 
+
+export interface BrickAlertNumberElementProps {
+  value?: number;
+}
+
 /**
  * @id presentational-bricks.brick-alert-number
  * @name presentational-bricks.brick-alert-number
@@ -14,7 +19,7 @@ import { BrickAlertNumber } from "./BrickAlertNumber";
  * @memo
  * @noInheritDoc
  */
-export class BrickAlertNumberElement extends UpdatingElement {
+export class BrickAlertNumberElement extends UpdatingElement implements BrickAlertNumberElementProps {
   /**
    * @kind number
    * @required true

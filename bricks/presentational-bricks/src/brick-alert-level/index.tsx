@@ -4,6 +4,13 @@ import { isNil, get } from "lodash";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BrickAlertLevel } from "./BrickAlertLevel";
 
+
+export interface BrickAlertLevelElementProps {
+  value?: AlertLevel;
+  dataSource?: Record<string, any>;
+  fields?: { value: string };
+}
+
 export type AlertLevel = 0 | 1 | 2 | "info" | "warning" | "critical";
 
 /**
@@ -17,7 +24,7 @@ export type AlertLevel = 0 | 1 | 2 | "info" | "warning" | "critical";
  * @memo
  * @noInheritDoc
  */
-export class BrickAlertLevelElement extends UpdatingElement {
+export class BrickAlertLevelElement extends UpdatingElement implements BrickAlertLevelElementProps {
   /**
    * @kind AlertLevel
    * @required false

@@ -3,7 +3,11 @@ import ReactDOM from "react-dom";
 import { BrickWrapper } from "@next-core/brick-kit";
 import { BrickDebug } from "./BrickDebug";
 
-class BrickDebugElement extends HTMLElement {
+export interface BrickDebugElementProps {
+  // 此构件没有属性
+}
+
+class BrickDebugElement extends HTMLElement implements BrickDebugElementProps {
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {

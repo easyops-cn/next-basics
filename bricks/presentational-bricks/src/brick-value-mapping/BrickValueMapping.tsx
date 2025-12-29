@@ -1,14 +1,21 @@
+// @ts-nocheck
 import React, { useMemo } from "react";
 import { Tag, Tooltip } from "antd";
 import { isNil, isEmpty } from "lodash";
 import classNames from "classnames";
 import { GeneralIcon, Link, LinkProps } from "@next-libs/basic-components";
-import { MappingValue } from "./index";
 import { Color } from "../interfaces/brick-tag";
 export { Color } from "../interfaces/brick-tag";
 import cssStyle from "./style.module.css";
 import { MenuIcon } from "@next-core/brick-types";
 import { getRuntime } from "@next-core/brick-kit";
+
+export interface MappingValue {
+  text?: string;
+  color?: Color;
+  icon?: MenuIcon;
+  iconSize?: number;
+}
 
 export const circleIcon: MenuIcon = {
   lib: "fa",

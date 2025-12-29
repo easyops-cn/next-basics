@@ -80,6 +80,7 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
   const input = (
     <Input
       value={value}
+      // @ts-ignore
       style={inputBoxStyle ?? { width: widthSize[size] }}
       ref={ref}
       allowClear={allowClear}
@@ -125,6 +126,7 @@ export function GeneralInput(props: GeneralInputProps): React.ReactElement {
   }, [props.useBrickVisible]);
 
   return (
+    // @ts-ignore
     <FormItemWrapper {...props}>
       <InputGroup
         {...props}

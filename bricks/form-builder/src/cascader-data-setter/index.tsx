@@ -18,6 +18,15 @@ export interface FieldCascaderProps {
   }[];
 }
 
+export interface CascaderDataSetterElementProps {
+  name: string;
+  label: string;
+  value: FieldCascaderProps["options"];
+  required: boolean;
+  message: Record<string, string>;
+  disabled: boolean;
+}
+
 /**
  * @id form-builder.cascader-data-setter
  * @author frankshi
@@ -26,7 +35,7 @@ export interface FieldCascaderProps {
  * @docKind brick
  * @noInheritDoc
  */
-export class CascaderDataSetterElement extends FormItemElement {
+export class CascaderDataSetterElement extends FormItemElement implements CascaderDataSetterElementProps {
   /**
    * @kind string
    * @required true

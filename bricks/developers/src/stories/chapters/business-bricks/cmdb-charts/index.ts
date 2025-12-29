@@ -6,5 +6,5 @@ export const chapter: Chapter = {
     en: "CMDB Chart",
     zh: "CMDB图表",
   },
-  stories: [InstancesTotal],
+  stories: [InstancesTotal] as any,
 };

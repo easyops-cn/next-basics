@@ -11,6 +11,11 @@ import {
 import { FieldsMappingEditor, EditorRef } from "./FieldsMappingEditor";
 import { FieldItem } from "./interfaces";
 
+export interface FieldsMappingEditorElementProps {
+  dataSource: FieldItem[];
+  loadding: boolean;
+}
+
 /**
  * @id flow-builder.fields-mapping-editor
  * @author jojiang
@@ -19,7 +24,7 @@ import { FieldItem } from "./interfaces";
  * @docKind brick
  * @noInheritDoc
  */
-export class FieldsMappingEditorElement extends UpdatingElement {
+export class FieldsMappingEditorElement extends UpdatingElement implements FieldsMappingEditorElementProps {
   private _editorRefs = React.createRef<EditorRef>();
   /**
    * @kind FieldItem[]

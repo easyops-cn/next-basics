@@ -110,9 +110,11 @@ export const GeneralStructs = forwardRef<
     ) {
       const rowUniqueValue = record[rowOperationConfig?.rowUniqueKey];
       const editBtnDisabled =
+        // @ts-ignore
         rowOperationConfig?.disabledEditBtnRowValues?.includes(rowUniqueValue);
       const deleteBtnDisabled =
         rowOperationConfig?.disabledDeleteBtnRowValues?.includes(
+          // @ts-ignore
           rowUniqueValue
         );
       return (

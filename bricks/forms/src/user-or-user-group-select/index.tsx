@@ -28,7 +28,17 @@ import { UserOrUserGroupSelectValue } from "../interfaces";
  *  pattern
  * @memo
  */
-export class UserOrUserGroupSelectElement extends FormItemElement {
+export interface UserOrUserGroupSelectElementProps {
+  name?: string;
+  placeholder?: string;
+  label?: string;
+  required?: boolean;
+  disabled?: boolean;
+  externalSourceId?: string;
+}
+
+
+export class UserOrUserGroupSelectElement extends FormItemElement  implements UserOrUserGroupSelectElementProps {
   /* =========================== Group: basic =========================== */
 
   /**

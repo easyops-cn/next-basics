@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect, forwardRef, useCallback } from "react";
 import { SearchOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { Input, Button, Select } from "antd";

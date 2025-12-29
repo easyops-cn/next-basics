@@ -135,6 +135,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
         disabled={okDisabled ?? configProps?.okButtonProps?.disabled}
         loading={confirmLoading}
         className="okBtn"
+        // @ts-ignore
         type={configProps?.okType || "primary"}
         {...configProps?.okButtonProps}
       >

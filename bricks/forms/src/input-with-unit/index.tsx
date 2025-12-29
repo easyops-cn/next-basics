@@ -31,7 +31,22 @@ import { UnitType } from "./libs/constants";
  * const byteRateUnits = ["bps", "Bps", "KBps", "MBps", "GBps"];
  * ```
  */
-export class InputWithUnitElement extends FormItemElement {
+export interface InputWithUnitElementProps {
+  name?: string;
+  value?: number;
+  placeholder?: string;
+  unitType?: UnitType;
+  unit?: string;
+  label?: string;
+  required?: boolean;
+  inputNumberMin?: number;
+  precision?: number;
+  availableUnits?: string[];
+  inputBoxStyle?: React.CSSProperties;
+}
+
+
+export class InputWithUnitElement extends FormItemElement  implements InputWithUnitElementProps {
   /* =========================== Group: basic =========================== */
 
   /**

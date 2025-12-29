@@ -44,6 +44,7 @@ export function DesktopCustom({
         })}
         href={url}
         target="_blank"
+        // @ts-ignore
         onClick={handleItemClick}
       >
         <img className={styles.appIcon} src={defaultAppIcon} />

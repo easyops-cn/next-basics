@@ -27,7 +27,18 @@ import { UploadImgValue } from "../interfaces";
  *  pattern
  * @memo
  */
-export class UploadImgElement extends FormItemElement {
+export interface UploadImgElementProps {
+  name?: string;
+  label?: string;
+  bucketName?: string;
+  placeholder?: string;
+  required?: boolean;
+  draggable?: boolean;
+  accept?: string;
+}
+
+
+export class UploadImgElement extends FormItemElement  implements UploadImgElementProps {
   // 对象存储桶名字，业务编排的时候创建，一般一个业务需求对应一个存储桶名称，相当于 namespace
   /**
    * @required true

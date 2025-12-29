@@ -3,7 +3,10 @@ import ReactDOM from "react-dom";
 import { BrickDeleteConfirm } from "./BrickDeleteConfirm";
 import { BrickWrapper } from "@next-core/brick-kit";
 
-class BrickDeleteConfirmElement extends HTMLElement {
+
+export interface BrickDeleteConfirmElementProps {}
+
+class BrickDeleteConfirmElement extends HTMLElement implements BrickDeleteConfirmElementProps {
   private _deleteName = "";
   private _fields: {
     name?: string;

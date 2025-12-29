@@ -3,6 +3,13 @@ import ReactDOM from "react-dom";
 import { BrickWrapper } from "@next-core/brick-kit";
 import { DeleteConfirmModal } from "./DeleteConfirmModal";
 
+export interface DeleteConfirmModalElementProps {
+  isVisible?: boolean;
+  name?: string;
+  title?: string;
+  message?: string;
+}
+
 /**
  * @id basic-bricks.delete-confirm-modal
  * @name basic-bricks.delete-confirm-modal
@@ -14,7 +21,7 @@ import { DeleteConfirmModal } from "./DeleteConfirmModal";
  * @memo
  * @noInheritDoc
  */
-export class DeleteConfirmModalElement extends HTMLElement {
+export class DeleteConfirmModalElement extends HTMLElement  {
   private isVisible = false;
   private _data = { name: "" };
   private _eventName = "";

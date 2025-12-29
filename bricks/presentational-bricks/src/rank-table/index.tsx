@@ -13,6 +13,18 @@ import { cloneDeep, get, isNil, map } from "lodash";
 import { UseBrickConf } from "@next-core/brick-types";
 import { SorterResult, SortOrder } from "antd/lib/table/interface";
 
+
+export interface RankTableElementProps {
+  header?: Header;
+  configProps?: any;
+  rowKey?: string;
+  scrollConfigs?: TableProps<unknown>["scroll"];
+  hiddenColumns?: Array<string | number>;
+  size?: "default" | "small";
+  sort?: string;
+  order?: SortOrder;
+}
+
 export interface CustomColumn extends ColumnProps<Record<string, any>> {
   /**
    * 支持为某列自定义展示构件
@@ -93,7 +105,7 @@ export interface Header {
  * | transform     | string\|object | -        | -       | 属性数据转换                                       |
  * | transformFrom | string         | -        | -       | 属性数据转换来自数据源的哪个字段，不填则为整个数据 |
  */
-export class RankTableElement extends UpdatingElement {
+export class RankTableElement extends UpdatingElement implements RankTableElementProps {
   private _dataSource: Record<string, any>[];
   private _columns: CustomColumn[];
 

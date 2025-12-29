@@ -9,6 +9,15 @@ import {
 } from "@next-core/brick-kit";
 import { CopyableText } from "./CopyableText";
 
+
+export interface CopyableTextElementProps {
+  text?: string;
+  tooltips?: string;
+  hiddenText?: boolean;
+  type?: "custom" | "input" | "text" ;
+  dataSource?: Record<string, any>;
+}
+
 /**
  * @id presentational-bricks.copyable-text
  * @name presentational-bricks.copyable-text
@@ -21,7 +30,7 @@ import { CopyableText } from "./CopyableText";
  * @memo
  * @noInheritDoc
  */
-export class CopyableTextElement extends UpdatingElement {
+export class CopyableTextElement extends UpdatingElement implements CopyableTextElementProps {
   /**
    * @kind string
    * @required true

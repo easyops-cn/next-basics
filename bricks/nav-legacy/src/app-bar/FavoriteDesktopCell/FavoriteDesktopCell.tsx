@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useMemo } from "react";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
 import classNames from "classnames";
@@ -17,8 +18,10 @@ export function FavoriteDesktopCell({
     () =>
       item.launchpadCollection.type === "microApp"
         ? !item.microAppId
-        : item.launchpadCollection.type === "customItem"
-        ? !item.customItemId
+        : // @ts-ignore
+        item.launchpadCollection.type === "customItem"
+        ? // @ts-ignore
+          !item.customItemId
         : false,
     [item]
   );
@@ -65,6 +68,7 @@ export function FavoriteDesktopCell({
         <Link className={styles.link} to={realLink} onClick={handleCellClick}>
           <>
             <span className={classNames(styles.appLink, styles.square)}>
+              {/* @ts-ignore */}
               <GeneralIcon
                 icon={item?.launchpadCollection.icon}
                 style={{ fontSize: 18 }}

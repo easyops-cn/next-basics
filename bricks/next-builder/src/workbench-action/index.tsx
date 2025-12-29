@@ -4,6 +4,20 @@ import type { MenuIcon } from "@next-core/brick-types";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { WorkbenchAction } from "./WorkbenchAction";
 
+export interface WorkbenchActionItemProps {
+  icon?: MenuIcon;
+  to?: string;
+  active?: boolean;
+  tooltip?: string;
+}
+
+export interface WorkbenchActionItemElementProps {
+  icon?: MenuIcon;
+  to?: string;
+  active?: boolean;
+  tooltip?: string;
+}
+
 /**
  * @id next-builder.workbench-action
  * @author steve
@@ -12,7 +26,7 @@ import { WorkbenchAction } from "./WorkbenchAction";
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchActionItemElement extends UpdatingElement {
+export class WorkbenchActionItemElement extends UpdatingElement implements WorkbenchActionItemProps {
   @property({ attribute: false })
   icon: MenuIcon;
 

@@ -10,6 +10,22 @@ import {
 import { Card } from "antd";
 import { UseBrickConf } from "@next-core/brick-types";
 import { AdvanceListContainer } from "./AdvanceListContainer";
+export interface AdvanceListContainerElementProps {
+  data: AdvanceListContainerProps["data"];
+  titleBrick: AdvanceListContainerProps["titleBrick"];
+  suffixBrick: AdvanceListContainerProps["suffixBrick"];
+  showCard: boolean;
+  defaultActiveIndex: number;
+}
+
+export interface AdvancedListContainerElementProps {
+  data: AdvanceListContainerProps["data"];
+  titleBrick: AdvanceListContainerProps["titleBrick"];
+  suffixBrick: AdvanceListContainerProps["suffixBrick"];
+  showCard: boolean;
+  defaultActiveIndex: number;
+}
+
 export interface itemData {
   list: Record<string, any>[];
   page_size?: number | string;
@@ -60,7 +76,7 @@ export interface AdvanceListContainerProps {
  * ```
  * @noInheritDoc
  */
-export class AdvancedListContainerElement extends UpdatingElement {
+export class AdvancedListContainerElement extends UpdatingElement implements AdvancedListContainerElementProps {
   /**
    * @kind ItemData
    * @required true
@@ -185,7 +201,7 @@ customElements.define(
 );
 // `basic-bricks.advance-list-container` is deprecated cause its misunderstanding name.
 // Use `basic-bricks.advanced-list-container` instead.
-class AdvanceListContainerElement extends AdvancedListContainerElement {}
+class AdvanceListContainerElement extends AdvancedListContainerElement implements AdvanceListContainerElementProps {}
 customElements.define(
   "basic-bricks.advance-list-container",
   AdvanceListContainerElement

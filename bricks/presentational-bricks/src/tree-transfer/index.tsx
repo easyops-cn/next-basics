@@ -10,6 +10,17 @@ import {
 import { TreeTransfer } from "./TreeTransfer";
 import { DataNode } from "rc-tree-select/lib/interface";
 
+
+export interface TreeTransferElementProps {
+  dataSource?: any[];
+  selectedKeys?: string[] ;
+  listStyle?: React.CSSProperties;
+  showSearch?: boolean;
+  titles?: string[];
+  shownumItem?: boolean;
+  replaceFields?: { key: string, title: string};
+}
+
 /**
  * @id presentational-bricks.tree-transfer
  * @author weili
@@ -18,7 +29,7 @@ import { DataNode } from "rc-tree-select/lib/interface";
  * @docKind brick
  * @noInheritDoc
  */
-export class TreeTransferElement extends UpdatingElement {
+export class TreeTransferElement extends UpdatingElement implements TreeTransferElementProps {
   /**
    * @kind any[]
    * @required true

@@ -386,7 +386,7 @@ export function RealUploadImg(
       : null;
   };
 
-  const filesPasted = (e): void => {
+  const filesPasted = (e: any): void => {
     const items = e.clipboardData.items;
     const currentFileList: ImageItem[] = [];
     const currentDoneFileList: ImageItem[] = [];
@@ -592,7 +592,9 @@ export function RealUploadImg(
     });
     if (React.isValidElement(node)) {
       // children是function额外处理
+      // @ts-ignore
       if (node?.props?.children instanceof Function)
+        // @ts-ignore
         return React.cloneElement(node, null, node.props.children);
       return React.cloneElement(node, null, nodeChildren);
     }
@@ -760,8 +762,10 @@ export function RealUploadImg(
         </div>
       )}
       {props.uploadDraggable ? (
+        // @ts-ignore
         <Upload.Dragger {...uploadProps}>{uploadNode()}</Upload.Dragger>
       ) : (
+        // @ts-ignore
         <Upload {...uploadProps} {...typeProps}>
           {uploadNode()}
         </Upload>

@@ -9,6 +9,15 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
+
+export interface GeneralTimerElementProps {
+  eventName?: string;
+  interval?: number;
+  isInterval?: boolean;
+  dataSource?: any;
+}
+
+
 /**
  * @id basic-bricks.general-timer
  * @name basic-bricks.general-timer
@@ -21,7 +30,7 @@ import {
  * @memo
  * @noInheritDoc
  */
-export class GeneralTimerElement extends UpdatingElement {
+export class GeneralTimerElement extends UpdatingElement implements GeneralTimerElementProps {
   /**
    * @kind string
    * @required false

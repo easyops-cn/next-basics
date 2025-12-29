@@ -29,6 +29,7 @@ export function PageTitle({
       )}
       <span
         className="page-title-content"
+        // @ts-ignore
         style={{
           display: "block",
           overflow: "hidden",

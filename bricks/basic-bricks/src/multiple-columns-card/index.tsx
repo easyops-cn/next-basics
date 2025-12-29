@@ -4,6 +4,11 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { MultipleColumnsCard } from "./MultipleColumnsCard";
 import style from "./index.shadow.less";
 
+export interface MultipleColumnsCardElementProps {
+  gridColumns?: string;
+  cardBorder?: boolean;
+}
+
 /**
  * @id basic-bricks.multiple-columns-card
  * @name basic-bricks.multiple-columns-card
@@ -16,7 +21,7 @@ import style from "./index.shadow.less";
  * Tips: 多列布局默认每一列都会有 padding，如果其中某一列不需要则在相应的用户构件 storyboard 内配置 columns-card-no-padding 的类名属性即可，如示例二所示
  * @noInheritDoc
  */
-export class MultipleColumnsCardElement extends UpdatingElement {
+export class MultipleColumnsCardElement extends UpdatingElement implements MultipleColumnsCardElementProps {
   /**
    * @kind `Array<string | number>`
    * @required false

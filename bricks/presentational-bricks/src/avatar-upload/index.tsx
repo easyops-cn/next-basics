@@ -9,6 +9,11 @@ import {
 } from "@next-core/brick-kit";
 import { AvatarUpload } from "./AvatarUpload";
 
+
+export interface AvatarUploadElementProps {
+  imgSrc?: string;
+}
+
 /**
  * @id presentational-bricks.avatar-upload
  * @author momomo
@@ -17,7 +22,7 @@ import { AvatarUpload } from "./AvatarUpload";
  * @docKind brick
  * @noInheritDoc
  */
-export class AvatarUploadElement extends UpdatingElement {
+export class AvatarUploadElement extends UpdatingElement implements AvatarUploadElementProps {
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else

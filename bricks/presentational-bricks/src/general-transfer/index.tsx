@@ -13,6 +13,22 @@ import {
 import { GeneralTransfer } from "./GeneralTransfer";
 import { BrickWrapperConfig } from "../interfaces";
 
+
+export interface GeneralTransferElementProps {
+  dataSource?: any[];
+  listStyle?: React.CSSProperties;
+  selectedKeys?: string[];
+  disabled?: boolean;
+  maxSelected?: number;
+  showSearch?: boolean;
+  wrapperConfig?: BrickWrapperConfig;
+  dataDescriptor?: { [k in keyof TransferItem]: string };
+  targetKeys?: string[];
+  titles?: string[];
+  operations?: string[];
+  locale?: Partial<TransferLocale>;
+}
+
 /**
  * @id presentational-bricks.general-transfer
  * @name presentational-bricks.general-transfer
@@ -34,7 +50,7 @@ import { BrickWrapperConfig } from "../interfaces";
  * ```
  * @noInheritDoc
  */
-export class GeneralTransferElement extends UpdatingElement {
+export class GeneralTransferElement extends UpdatingElement implements GeneralTransferElementProps {
   /**
    * @kind any[]
    * @required true

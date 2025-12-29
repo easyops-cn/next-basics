@@ -3,6 +3,12 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { GeneralHeading } from "./GeneralHeading";
 
+export interface GeneralHeadingElementProps {
+  text?: string;
+  type?: headType;
+  customStyle?: CSSProperties;
+}
+
 type headType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 /**
  * @id basic-bricks.general-heading
@@ -12,7 +18,7 @@ type headType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
  * @docKind brick
  * @noInheritDoc
  */
-export class GeneralHeadingElement extends UpdatingElement {
+export class GeneralHeadingElement extends UpdatingElement implements GeneralHeadingElementProps {
   /**
    * @default ''
    * @required true

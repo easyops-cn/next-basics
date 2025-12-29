@@ -273,6 +273,7 @@ export function LegacyUserSelectFormItem(
       }
 
       const { user = [], userGroup = [] } = groupMixedValue(mergedValue);
+      // @ts-ignore
       const staticValueToSet = [];
       if (user.length && props.optionsMode !== "group") {
         const instancesParams = {
@@ -378,10 +379,12 @@ export function LegacyUserSelectFormItem(
       ];
 
       labelValue = [
+        // @ts-ignore
         ...staticValueToSet,
         ...filter(labelValue, (v) => !props.staticList?.includes(v.key)),
       ];
       setSelectedValue(labelValue);
+      // @ts-ignore
       staticValue.current = staticValueToSet;
     };
     if (isDifferent(mixedValue)) {
@@ -445,14 +448,14 @@ export function LegacyUserSelectFormItem(
   const searchUserGroup = async (value: string) => {
     const result = await fetchInstanceList("USER_GROUP", value);
     setUserGroupList(
-      result.map((v) => {
+      result.map((v: any) => {
         v.instanceId = ":" + v.instanceId;
         return v;
       })
     );
   };
 
-  const searchUserOrUserGroupInstances = async (value) => {
+  const searchUserOrUserGroupInstances = async (value: any) => {
     setSearchValue(value);
     setFetching(true);
     await Promise.all([
@@ -463,7 +466,7 @@ export function LegacyUserSelectFormItem(
     setFetching(false);
   };
 
-  const handleSelectChange = (originValue) => {
+  const handleSelectChange = (originValue: any) => {
     const value = filter(
       props.isMultiple ? originValue : originValue ? [originValue] : [],
       (item) => {

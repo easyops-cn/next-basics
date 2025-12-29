@@ -5,7 +5,11 @@ import { DocBook } from "./DocBook";
 
 const ATTR_DOC_ID = "doc-id";
 
-class DocBookElement extends HTMLElement {
+export interface DocBookElementProps {
+  docId: string;
+}
+
+class DocBookElement extends HTMLElement implements DocBookElementProps {
   static get observedAttributes(): string[] {
     return [ATTR_DOC_ID];
   }
