@@ -10,26 +10,26 @@ declare global {
       "form-builder--business-rule": DetailedHTMLProps<
         HTMLAttributes<BusinessRuleElement>,
         BusinessRuleElement
-      > & BusinessRuleElementProps & {
+      > & Partial<BusinessRuleElementProps> & {
         onFormBuilderBusinessRuleEdit?: (event: CustomEvent<any>) => void;
         onFormBuilderBusinessRuleDelete?: (event: CustomEvent<any>) => void;
       };
       "form-builder--cascader-data-setter": DetailedHTMLProps<
         HTMLAttributes<CascaderDataSetterElement>,
         CascaderDataSetterElement
-      > & CascaderDataSetterElementProps & {
+      > & Partial<CascaderDataSetterElementProps> & {
         onFormsCascaderDataChange?: (event: CustomEvent<any>) => void;
       };
       "form-builder--cmdb-cascader-path-setter": DetailedHTMLProps<
         HTMLAttributes<CmdbCascaderPathSetterElement>,
         CmdbCascaderPathSetterElement
-      > & CmdbCascaderPathSetterElementProps & {
+      > & Partial<CmdbCascaderPathSetterElementProps> & {
         onFormsCmdbCascaderPathChange?: (event: CustomEvent<any>) => void;
       };
       "form-builder--conditional-format": DetailedHTMLProps<
         HTMLAttributes<ConditionalFormatElement>,
         ConditionalFormatElement
-      > & ConditionalFormatElementProps & {
+      > & Partial<ConditionalFormatElementProps> & {
         onFormsConditionalChange?: (event: CustomEvent<any>) => void;
       };
     }

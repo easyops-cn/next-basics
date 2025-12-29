@@ -1,5 +1,6 @@
 import React from "react";
 import { List, Avatar } from "antd";
+// @ts-ignore
 import { ListProps, ListItemProps, ListItemMetaProps } from "antd/lib/List";
 import { ItemBrick } from "./index";
 import classNames from "classnames";

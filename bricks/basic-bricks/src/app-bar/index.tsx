@@ -5,9 +5,9 @@ import { BreadcrumbItemConf } from "@next-core/brick-types";
 import { AppBar } from "./AppBar/AppBar";
 
 export interface AppBarElementProps {
-  pageTitle: string;
-  documentId: string;
-  noCurrentApp: boolean;
+  pageTitle?: string;
+  documentId?: string;
+  noCurrentApp?: boolean;
 }
 
 /**

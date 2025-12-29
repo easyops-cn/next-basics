@@ -17,7 +17,7 @@ declare global {
         HTMLAttributes<HTMLElement>,
         HTMLElement
       > &
-        ProviderGroupListElementProps & {
+      Partial<ProviderGroupListElementProps> & {
           onGroupClick?: (
             event: CustomEvent<{ namespace: string; group: any }>
           ) => void;
@@ -27,7 +27,7 @@ declare global {
         HTMLAttributes<HTMLElement>,
         HTMLElement
       > &
-        ProviderGroupMenuElementProps & {
+      Partial<ProviderGroupMenuElementProps> & {
           onMenuFold?: (event: CustomEvent<boolean>) => void;
         };
 
@@ -35,37 +35,37 @@ declare global {
         HTMLAttributes<HTMLElement>,
         HTMLElement
       > &
-        BrickBookElementProps;
+      Partial<BrickBookElementProps>;
 
       "developers--bricks-of-providers": DetailedHTMLProps<
         HTMLAttributes<HTMLElement>,
         HTMLElement
       > &
-        BricksOfProvidersElementProps;
+      Partial< BricksOfProvidersElementProps>;
 
       "developers--brick-debug": DetailedHTMLProps<
         HTMLAttributes<HTMLElement>,
         HTMLElement
       > &
-        BrickDebugElementProps;
+      Partial<BrickDebugElementProps>;
 
       "developers--brick-colors": DetailedHTMLProps<
         HTMLAttributes<HTMLElement>,
         HTMLElement
       > &
-        BrickColorsElementProps;
+      Partial<BrickColorsElementProps>;
 
       "developers--doc-book": DetailedHTMLProps<
         HTMLAttributes<HTMLElement>,
         HTMLElement
       > &
-        DocBookElementProps;
+      Partial<DocBookElementProps>;
 
       "developers--v3-next-example": DetailedHTMLProps<
         HTMLAttributes<HTMLElement>,
         HTMLElement
       > &
-        V3NextExampleElementProps & {
+      Partial<V3NextExampleElementProps> & {
           onOnBlur?: (
             event: CustomEvent<{ code: string; mode: string }>
           ) => void;
@@ -75,13 +75,13 @@ declare global {
         HTMLAttributes<HTMLElement>,
         HTMLElement
       > &
-        IllustrationCardElementProps;
+      Partial<IllustrationCardElementProps>;
 
       "developers--provider-doc": DetailedHTMLProps<
         HTMLAttributes<HTMLElement>,
         HTMLElement
       > &
-        ProviderDocElementProps & {
+      Partial<ProviderDocElementProps> & {
           onDebuggerExpandChange?: (event: CustomEvent<boolean>) => void;
         };
     }

@@ -8,11 +8,11 @@ declare global {
       "brick-visualization--visual-form-rules-setting": DetailedHTMLProps<
         HTMLAttributes<VisualFormRulesSettingElement>,
         VisualFormRulesSettingElement
-      > & VisualFormRulesSettingElementProps;
+      > & Partial<VisualFormRulesSettingElementProps>;
       "brick-visualization--visual-property-form": DetailedHTMLProps<
         HTMLAttributes<VisualPropertyFormElement>,
         VisualPropertyFormElement
-      > & VisualPropertyFormElementProps & {
+      > & Partial<VisualPropertyFormElementProps> & {
         onMenuSettingClick?: (event: CustomEvent<void>) => void;
         onValidateSuccess?: (event: CustomEvent<Record<string, any>>) => void;
         onValidateError?: (event: CustomEvent<Record<string, any>>) => void;

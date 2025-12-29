@@ -5,9 +5,9 @@ import { AppbarBreadcrumb } from "./AppbarBreadcrumb";
 import { BreadcrumbItemConf, SidebarMenu } from "@next-core/brick-types";
 
 export interface AppbarBreadcrumbElementProps {
-  breadcrumb: BreadcrumbItemConf[];
-  noCurrentApp: boolean;
-  menu: Partial<SidebarMenu>;
+  breadcrumb?: BreadcrumbItemConf[];
+  noCurrentApp?: boolean;
+  menu?: Partial<SidebarMenu>;
 }
 
 /**

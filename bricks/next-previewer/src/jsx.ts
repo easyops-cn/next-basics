@@ -7,7 +7,7 @@ declare global {
       "next-previewer--preview-helper": DetailedHTMLProps<
         HTMLAttributes<PreviewHelperElement>,
         PreviewHelperElement
-      > & PreviewHelperElementProps;
+      > & Partial<PreviewHelperElementProps>;
     }
   }
 }

@@ -7,7 +7,7 @@ declare global {
       "calendar-bricks--agenda-calendar": DetailedHTMLProps<
         HTMLAttributes<AgendaCalendarElement>,
         AgendaCalendarElement
-      > & AgendaCalendarElementProps & {
+      > & Partial<AgendaCalendarElementProps> & {
         onCalendarOnDateSelect?: (event: CustomEvent<{ date: string; data: any }>) => void;
         onCalendarOnAgendaSelect?: (event: CustomEvent<{ data: any }>) => void;
         onCalendarOnQuickSwitchDate?: (event: CustomEvent<{

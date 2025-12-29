@@ -11,19 +11,19 @@ import { Card } from "antd";
 import { UseBrickConf } from "@next-core/brick-types";
 import { AdvanceListContainer } from "./AdvanceListContainer";
 export interface AdvanceListContainerElementProps {
-  data: AdvanceListContainerProps["data"];
-  titleBrick: AdvanceListContainerProps["titleBrick"];
-  suffixBrick: AdvanceListContainerProps["suffixBrick"];
-  showCard: boolean;
-  defaultActiveIndex: number;
+  data?: AdvanceListContainerProps["data"];
+  titleBrick?: AdvanceListContainerProps["titleBrick"];
+  suffixBrick?: AdvanceListContainerProps["suffixBrick"];
+  showCard?: boolean;
+  defaultActiveIndex?: number;
 }
 
 export interface AdvancedListContainerElementProps {
-  data: AdvanceListContainerProps["data"];
-  titleBrick: AdvanceListContainerProps["titleBrick"];
-  suffixBrick: AdvanceListContainerProps["suffixBrick"];
-  showCard: boolean;
-  defaultActiveIndex: number;
+  data?: AdvanceListContainerProps["data"];
+  titleBrick?: AdvanceListContainerProps["titleBrick"];
+  suffixBrick?: AdvanceListContainerProps["suffixBrick"];
+  showCard?: boolean;
+  defaultActiveIndex?: number;
 }
 
 export interface itemData {

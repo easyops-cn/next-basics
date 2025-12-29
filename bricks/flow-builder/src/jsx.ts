@@ -13,7 +13,7 @@ declare global {
         HTMLAttributes<FieldsMappingEditorElement>,
         FieldsMappingEditorElement
       > &
-        FieldsMappingEditorElementProps & {
+      Partial<FieldsMappingEditorElementProps> & {
           onValuesChange?: (event: CustomEvent<any>) => void;
           onRowEdit?: (event: CustomEvent<any>) => void;
         };
@@ -21,7 +21,7 @@ declare global {
         HTMLAttributes<MultipleFilesFormElement>,
         MultipleFilesFormElement
       > &
-        MultipleFilesFormElementProps & {
+      Partial< MultipleFilesFormElementProps> & {
           onValidateSuccess?: (event: CustomEvent<Record<string, any>>) => void;
           onValidateError?: (event: CustomEvent<Record<string, any>>) => void;
         };
@@ -29,12 +29,12 @@ declare global {
         HTMLAttributes<SchemaEditorElement>,
         SchemaEditorElement
       > &
-        SchemaEditorElementProps;
+      Partial<SchemaEditorElementProps>;
       "flow-builder--step-tree": DetailedHTMLProps<
         HTMLAttributes<StepTreeElement>,
         StepTreeElement
       > &
-        StepTreeElementProps & {
+      Partial<StepTreeElementProps> & {
           onActionClick?: (event: CustomEvent<any>) => void;
           onNodeClick?: (event: CustomEvent<any>) => void;
           onNodeEnter?: (event: CustomEvent<any>) => void;
@@ -47,12 +47,12 @@ declare global {
         HTMLAttributes<VariableItemElement>,
         VariableItemElement
       > &
-        VariableItemElementProps;
+      Partial<VariableItemElementProps>;
       "flow-builder--variable-list": DetailedHTMLProps<
         HTMLAttributes<VariableListElement>,
         VariableListElement
       > &
-        VariableListElementProps;
+      Partial<VariableListElementProps>;
     }
   }
 }

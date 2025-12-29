@@ -8,13 +8,13 @@ declare global {
       "utils--broadcast-channel": DetailedHTMLProps<
         HTMLAttributes<BroadcastChannelElement>,
         BroadcastChannelElement
-      > & BroadcastChannelElementProps & {
+      > & Partial<BroadcastChannelElementProps> & {
         onChannelMessage?: (event: CustomEvent<unknown>) => void;
       };
       "utils--general-clipboard": DetailedHTMLProps<
         HTMLAttributes<GeneralClipboardElement>,
         GeneralClipboardElement
-      > & GeneralClipboardElementProps & {
+      > & Partial<GeneralClipboardElementProps> & {
         onClipboardChange?: (event: CustomEvent<{ clipboard: unknown }>) => void;
       };
     }

@@ -7,7 +7,7 @@ declare global {
       "time--task-calendar": DetailedHTMLProps<
         HTMLAttributes<TaskCalendarElement>,
         TaskCalendarElement
-      > & TaskCalendarElementProps & {
+      > & Partial<TaskCalendarElementProps> & {
         onCalendarOnSelect?: (event: CustomEvent<any>) => void;
         onCalendarOnPanelChange?: (event: CustomEvent<any>) => void;
       };

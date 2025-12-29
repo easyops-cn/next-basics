@@ -9,15 +9,15 @@ declare global {
       "frame-bricks--drop-menu": DetailedHTMLProps<
         HTMLAttributes<DropMenuElement>,
         DropMenuElement
-      > & DropMenuElementProps;
+      > & Partial<DropMenuElementProps>;
       "frame-bricks--nav-menu": DetailedHTMLProps<
         HTMLAttributes<NavMenuElement>,
         NavMenuElement
-      > & NavMenuElementProps;
+      > & Partial<NavMenuElementProps>;
       "frame-bricks--side-bar": DetailedHTMLProps<
         HTMLAttributes<SideBarElement>,
         SideBarElement
-      > & SideBarElementProps & {
+      > & Partial<SideBarElementProps> & {
         onSideBarFixed?: (event: CustomEvent<boolean>) => void;
         onSideBarResize?: (event: CustomEvent<string>) => void;
       };

@@ -87,75 +87,75 @@ import { TreeTransferElementProps } from "./tree-transfer";
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      "presentational-bricks--agent-status": DetailedHTMLProps<HTMLAttributes<AgentStatusElementProps>, any> & AgentStatusElementProps;
-      "presentational-bricks--avatar-upload": DetailedHTMLProps<HTMLAttributes<AvatarUploadElementProps>, any> & AvatarUploadElementProps & {
+      "presentational-bricks--agent-status": DetailedHTMLProps<HTMLAttributes<AgentStatusElementProps>, any> & Partial<AgentStatusElementProps>;
+      "presentational-bricks--avatar-upload": DetailedHTMLProps<HTMLAttributes<AvatarUploadElementProps>, any> & Partial<AvatarUploadElementProps> & {
         onAvatarUploadSuccess?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--banner-display-card-list": DetailedHTMLProps<HTMLAttributes<BannerDisplayCardListElementProps>, any> & BannerDisplayCardListElementProps;
-      "presentational-bricks--basic-icon": DetailedHTMLProps<HTMLAttributes<BasicIconElementProps>, any> & BasicIconElementProps & {
+      "presentational-bricks--banner-display-card-list": DetailedHTMLProps<HTMLAttributes<BannerDisplayCardListElementProps>, any> & Partial<BannerDisplayCardListElementProps>;
+      "presentational-bricks--basic-icon": DetailedHTMLProps<HTMLAttributes<BasicIconElementProps>, any> & Partial<BasicIconElementProps> & {
         onIconClick?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--basic-progress": DetailedHTMLProps<HTMLAttributes<BasicProgressElementProps>, any> & BasicProgressElementProps;
-      "presentational-bricks--brick-alert": DetailedHTMLProps<HTMLAttributes<BrickAlertElementProps>, any> & BrickAlertElementProps;
-      "presentational-bricks--brick-alert-level": DetailedHTMLProps<HTMLAttributes<BrickAlertLevelElementProps>, any> & BrickAlertLevelElementProps;
-      "presentational-bricks--brick-alert-number": DetailedHTMLProps<HTMLAttributes<BrickAlertNumberElementProps>, any> & BrickAlertNumberElementProps;
-      "presentational-bricks--brick-alert-status": DetailedHTMLProps<HTMLAttributes<BrickAlertStatusElementProps>, any> & BrickAlertStatusElementProps;
-      "presentational-bricks--brick-alert-value": DetailedHTMLProps<HTMLAttributes<BrickAlertValueElementProps>, any> & BrickAlertValueElementProps;
-      "presentational-bricks--brick-button": DetailedHTMLProps<HTMLAttributes<BrickButtonElementProps>, any> & BrickButtonElementProps & {
+      "presentational-bricks--basic-progress": DetailedHTMLProps<HTMLAttributes<BasicProgressElementProps>, any> & Partial<BasicProgressElementProps>;
+      "presentational-bricks--brick-alert": DetailedHTMLProps<HTMLAttributes<BrickAlertElementProps>, any> & Partial<BrickAlertElementProps>;
+      "presentational-bricks--brick-alert-level": DetailedHTMLProps<HTMLAttributes<BrickAlertLevelElementProps>, any> & Partial<BrickAlertLevelElementProps>;
+      "presentational-bricks--brick-alert-number": DetailedHTMLProps<HTMLAttributes<BrickAlertNumberElementProps>, any> & Partial<BrickAlertNumberElementProps>;
+      "presentational-bricks--brick-alert-status": DetailedHTMLProps<HTMLAttributes<BrickAlertStatusElementProps>, any> & Partial<BrickAlertStatusElementProps>;
+      "presentational-bricks--brick-alert-value": DetailedHTMLProps<HTMLAttributes<BrickAlertValueElementProps>, any> & Partial<BrickAlertValueElementProps>;
+      "presentational-bricks--brick-button": DetailedHTMLProps<HTMLAttributes<BrickButtonElementProps>, any> & Partial<BrickButtonElementProps> & {
         onButtonClick?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--calendar": DetailedHTMLProps<HTMLAttributes<BrickCalendarElementProps>, any> & BrickCalendarElementProps & {
+      "presentational-bricks--calendar": DetailedHTMLProps<HTMLAttributes<BrickCalendarElementProps>, any> & Partial<BrickCalendarElementProps> & {
         onPresentationalCalendarOnSelect?: (event: CustomEvent<any>) => void;
         onPresentationalCalendarOnSelectV2?: (event: CustomEvent<any>) => void;
         onPresentationalCalendarOnChange?: (event: CustomEvent<any>) => void;
         onPresentationalCalendarOnChangeV2?: (event: CustomEvent<any>) => void;
         onPresentationalCalendarOnPanelChange?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--brick-cluster-type": DetailedHTMLProps<HTMLAttributes<BrickClusterTypeElementProps>, any> & BrickClusterTypeElementProps;
-      "presentational-bricks--brick-code-display": DetailedHTMLProps<HTMLAttributes<BrickCodeDisplayElementProps>, any> & BrickCodeDisplayElementProps;
-      "presentational-bricks--brick-collapse-card": DetailedHTMLProps<HTMLAttributes<BrickCollapseCardElementProps>, any> & BrickCollapseCardElementProps & {
+      "presentational-bricks--brick-cluster-type": DetailedHTMLProps<HTMLAttributes<BrickClusterTypeElementProps>, any> & Partial<BrickClusterTypeElementProps>;
+      "presentational-bricks--brick-code-display": DetailedHTMLProps<HTMLAttributes<BrickCodeDisplayElementProps>, any> & Partial<BrickCodeDisplayElementProps>;
+      "presentational-bricks--brick-collapse-card": DetailedHTMLProps<HTMLAttributes<BrickCollapseCardElementProps>, any> & Partial<BrickCollapseCardElementProps> & {
         onResize?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--brick-collection-instance-execution": DetailedHTMLProps<HTMLAttributes<BrickCollectionInstanceExecutionElementProps>, any> & BrickCollectionInstanceExecutionElementProps & {
+      "presentational-bricks--brick-collection-instance-execution": DetailedHTMLProps<HTMLAttributes<BrickCollectionInstanceExecutionElementProps>, any> & Partial<BrickCollectionInstanceExecutionElementProps> & {
         onCollectionInstanceExecutionClick?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--brick-conditional-display": DetailedHTMLProps<HTMLAttributes<BrickConditionalDisplayElementProps>, any> & BrickConditionalDisplayElementProps;
-      "presentational-bricks--brick-delete-confirm": DetailedHTMLProps<HTMLAttributes<BrickDeleteConfirmElementProps>, any> & BrickDeleteConfirmElementProps & {
+      "presentational-bricks--brick-conditional-display": DetailedHTMLProps<HTMLAttributes<BrickConditionalDisplayElementProps>, any> & Partial<BrickConditionalDisplayElementProps>;
+      "presentational-bricks--brick-delete-confirm": DetailedHTMLProps<HTMLAttributes<BrickDeleteConfirmElementProps>, any> & Partial<BrickDeleteConfirmElementProps> & {
         onConfirmDelete?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--brick-descriptions": DetailedHTMLProps<HTMLAttributes<BrickDescriptionsElementProps>, any> & BrickDescriptionsElementProps;
-      "presentational-bricks--brick-display-structs": DetailedHTMLProps<HTMLAttributes<BrickDisplayStructsElementProps>, any> & BrickDisplayStructsElementProps;
-      "presentational-bricks--brick-divider": DetailedHTMLProps<HTMLAttributes<BrickDividerElementProps>, any> & BrickDividerElementProps;
-      "presentational-bricks--brick-form": DetailedHTMLProps<HTMLAttributes<BrickFormElementProps>, any> & BrickFormElementProps & {
+      "presentational-bricks--brick-descriptions": DetailedHTMLProps<HTMLAttributes<BrickDescriptionsElementProps>, any> & Partial<BrickDescriptionsElementProps>;
+      "presentational-bricks--brick-display-structs": DetailedHTMLProps<HTMLAttributes<BrickDisplayStructsElementProps>, any> & Partial<BrickDisplayStructsElementProps>;
+      "presentational-bricks--brick-divider": DetailedHTMLProps<HTMLAttributes<BrickDividerElementProps>, any> & Partial<BrickDividerElementProps>;
+      "presentational-bricks--brick-form": DetailedHTMLProps<HTMLAttributes<BrickFormElementProps>, any> & Partial<BrickFormElementProps> & {
         onBrickFormSubmit?: (event: CustomEvent<any>) => void;
         onBrickFormCancel?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--brick-general-search": DetailedHTMLProps<HTMLAttributes<BrickGeneralSearchElementProps>, any> & BrickGeneralSearchElementProps & {
+      "presentational-bricks--brick-general-search": DetailedHTMLProps<HTMLAttributes<BrickGeneralSearchElementProps>, any> & Partial<BrickGeneralSearchElementProps> & {
         onFilterUpdate?: (event: CustomEvent<Record<string, any>>) => void;
         onQueryChange?: (event: CustomEvent<string>) => void;
         onQueryChangeV2?: (event: CustomEvent<{ q: string }>) => void;
         onSearchTypeChange?: (event: CustomEvent<string>) => void;
         onInputBlur?: (event: CustomEvent<string>) => void;
       };
-      "presentational-bricks--brick-humanize-time": DetailedHTMLProps<HTMLAttributes<BrickHumanizeTimeElementProps>, any> & BrickHumanizeTimeElementProps;
-      "presentational-bricks--brick-illustration": DetailedHTMLProps<HTMLAttributes<BrickIllustrationElementProps>, any> & BrickIllustrationElementProps;
-      "presentational-bricks--brick-input": DetailedHTMLProps<HTMLAttributes<BrickInputElementProps>, any> & BrickInputElementProps & {
+      "presentational-bricks--brick-humanize-time": DetailedHTMLProps<HTMLAttributes<BrickHumanizeTimeElementProps>, any> & Partial<BrickHumanizeTimeElementProps>;
+      "presentational-bricks--brick-illustration": DetailedHTMLProps<HTMLAttributes<BrickIllustrationElementProps>, any> & Partial<BrickIllustrationElementProps>;
+      "presentational-bricks--brick-input": DetailedHTMLProps<HTMLAttributes<BrickInputElementProps>, any> & Partial<BrickInputElementProps> & {
         onInputEmit?: (event: CustomEvent<Record<string, any>>) => void;
         onInputChange?: (event: CustomEvent<Record<string, any>>) => void;
       };
-      "presentational-bricks--brick-link": DetailedHTMLProps<HTMLAttributes<BrickLinkElementProps>, any> & BrickLinkElementProps & {
+      "presentational-bricks--brick-link": DetailedHTMLProps<HTMLAttributes<BrickLinkElementProps>, any> & Partial<BrickLinkElementProps> & {
         onLinkClick?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--brick-list": DetailedHTMLProps<HTMLAttributes<BrickListElementProps>, any> & BrickListElementProps;
-      "presentational-bricks--brick-placeholder": DetailedHTMLProps<HTMLAttributes<BrickPlaceholderElementProps>, any> & BrickPlaceholderElementProps;
-      "presentational-bricks--brick-quick-entries": DetailedHTMLProps<HTMLAttributes<BrickQuickEntriesElementProps>, any> & BrickQuickEntriesElementProps & {
+      "presentational-bricks--brick-list": DetailedHTMLProps<HTMLAttributes<BrickListElementProps>, any> & Partial<BrickListElementProps>;
+      "presentational-bricks--brick-placeholder": DetailedHTMLProps<HTMLAttributes<BrickPlaceholderElementProps>, any> & Partial<BrickPlaceholderElementProps>;
+      "presentational-bricks--brick-quick-entries": DetailedHTMLProps<HTMLAttributes<BrickQuickEntriesElementProps>, any> & Partial<BrickQuickEntriesElementProps> & {
         onTitleIconClick?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--brick-rate": DetailedHTMLProps<HTMLAttributes<BrickRateElementProps>, any> & BrickRateElementProps & {
+      "presentational-bricks--brick-rate": DetailedHTMLProps<HTMLAttributes<BrickRateElementProps>, any> & Partial<BrickRateElementProps> & {
         onRateChange?: (event: CustomEvent<Record<number, any>>) => void;
       };
-      "presentational-bricks--brick-result": DetailedHTMLProps<HTMLAttributes<BrickResultElementProps>, any> & BrickResultElementProps;
-      "presentational-bricks--brick-table": DetailedHTMLProps<HTMLAttributes<BrickTableElementProps>, any> & BrickTableElementProps & {
+      "presentational-bricks--brick-result": DetailedHTMLProps<HTMLAttributes<BrickResultElementProps>, any> & Partial<BrickResultElementProps>;
+      "presentational-bricks--brick-table": DetailedHTMLProps<HTMLAttributes<BrickTableElementProps>, any> & Partial<BrickTableElementProps> & {
         onPageUpdate?: (event: CustomEvent<Record<string, number>>) => void;
         onFilterUpdate?: (event: CustomEvent<Record<string, number>>) => void;
         onSelectUpdate?: (event: CustomEvent<Record<string, any>[]>) => void;
@@ -166,16 +166,16 @@ declare global {
         onRowDrag?: (event: CustomEvent<{ data: Record<string, any>[]; info: any; }>) => void;
         onColumnFiltersUpdate?: (event: CustomEvent<Record<string, string[]>>) => void;
       };
-      "presentational-bricks--brick-tag": DetailedHTMLProps<HTMLAttributes<BrickTagElementProps>, any> & BrickTagElementProps & {
+      "presentational-bricks--brick-tag": DetailedHTMLProps<HTMLAttributes<BrickTagElementProps>, any> & Partial<BrickTagElementProps> & {
         onCheckedUpdate?: (event: CustomEvent<string[]>) => void;
         onCheckedUpdateV2?: (event: CustomEvent<{ label: string; key: string }[]>) => void;
         onTagClose?: (event: CustomEvent<{ current: Record<string, any>; tagList: Record<string, any>[]; }>) => void;
         onTagClick?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--brick-timeline": DetailedHTMLProps<HTMLAttributes<BrickTimelineElementProps>, any> & BrickTimelineElementProps & {
+      "presentational-bricks--brick-timeline": DetailedHTMLProps<HTMLAttributes<BrickTimelineElementProps>, any> & Partial<BrickTimelineElementProps> & {
         onItemClick?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--brick-tree": DetailedHTMLProps<HTMLAttributes<BrickTreeElementProps>, any> & BrickTreeElementProps & {
+      "presentational-bricks--brick-tree": DetailedHTMLProps<HTMLAttributes<BrickTreeElementProps>, any> & Partial<BrickTreeElementProps> & {
         onTreeSelect?: (event: CustomEvent<string[]>) => void;
         onTreeSelectV2?: (event: CustomEvent<any>) => void;
         onTreeCheck?: (event: CustomEvent<any>) => void;
@@ -183,110 +183,110 @@ declare global {
         onTreeSearch?: (event: CustomEvent<string>) => void;
         onTreeExpand?: (event: CustomEvent<React.Key[]>) => void;
       };
-      "presentational-bricks--brick-user": DetailedHTMLProps<HTMLAttributes<BrickUserElementProps>, any> & BrickUserElementProps;
-      "presentational-bricks--brick-user-group": DetailedHTMLProps<HTMLAttributes<BrickUserGroupElementProps>, any> & BrickUserGroupElementProps;
-      "presentational-bricks--brick-utils": DetailedHTMLProps<HTMLAttributes<BrickUtilsElementProps>, any> & BrickUtilsElementProps;
-      "presentational-bricks--brick-value-mapping": DetailedHTMLProps<HTMLAttributes<BrickValueMappingElementProps>, any> & BrickValueMappingElementProps & {
+      "presentational-bricks--brick-user": DetailedHTMLProps<HTMLAttributes<BrickUserElementProps>, any> & Partial<BrickUserElementProps>;
+      "presentational-bricks--brick-user-group": DetailedHTMLProps<HTMLAttributes<BrickUserGroupElementProps>, any> & Partial<BrickUserGroupElementProps>;
+      "presentational-bricks--brick-utils": DetailedHTMLProps<HTMLAttributes<BrickUtilsElementProps>, any> & Partial<BrickUtilsElementProps>;
+      "presentational-bricks--brick-value-mapping": DetailedHTMLProps<HTMLAttributes<BrickValueMappingElementProps>, any> & Partial<BrickValueMappingElementProps> & {
         onBrickValueMappingClick?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--button-wrapper": DetailedHTMLProps<HTMLAttributes<ButtonWrapperElementProps>, any> & ButtonWrapperElementProps;
-      "presentational-bricks--card-item": DetailedHTMLProps<HTMLAttributes<CardItemElementProps>, any> & CardItemElementProps & {
+      "presentational-bricks--button-wrapper": DetailedHTMLProps<HTMLAttributes<ButtonWrapperElementProps>, any> & Partial<ButtonWrapperElementProps>;
+      "presentational-bricks--card-item": DetailedHTMLProps<HTMLAttributes<CardItemElementProps>, any> & Partial<CardItemElementProps> & {
         onPresentationalBricksCardItemClick?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--code-editor": DetailedHTMLProps<HTMLAttributes<CodeEditorElementProps>, any> & CodeEditorElementProps & {
+      "presentational-bricks--code-editor": DetailedHTMLProps<HTMLAttributes<CodeEditorElementProps>, any> & Partial<CodeEditorElementProps> & {
         onCodeChange?: (event: CustomEvent<string>) => void;
         onCodeErrorChange?: (event: CustomEvent<boolean>) => void;
         onEditorBlur?: (event: CustomEvent<string>) => void;
       };
-      "presentational-bricks--collapse-info-list": DetailedHTMLProps<HTMLAttributes<CollapseInfoListElementProps>, any> & CollapseInfoListElementProps & {
+      "presentational-bricks--collapse-info-list": DetailedHTMLProps<HTMLAttributes<CollapseInfoListElementProps>, any> & Partial<CollapseInfoListElementProps> & {
         onCollapseInfoListChange?: (event: CustomEvent<string[]>) => void;
       };
-      "presentational-bricks--collapsible-card-item": DetailedHTMLProps<HTMLAttributes<CollapsibleCardItemElementProps>, any> & CollapsibleCardItemElementProps & {
+      "presentational-bricks--collapsible-card-item": DetailedHTMLProps<HTMLAttributes<CollapsibleCardItemElementProps>, any> & Partial<CollapsibleCardItemElementProps> & {
         onCollapseChange?: (event: CustomEvent<boolean>) => void;
       };
-      "presentational-bricks--copyable-text": DetailedHTMLProps<HTMLAttributes<CopyableTextElementProps>, any> & CopyableTextElementProps & {
+      "presentational-bricks--copyable-text": DetailedHTMLProps<HTMLAttributes<CopyableTextElementProps>, any> & Partial<CopyableTextElementProps> & {
         onTextClick?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--cost-time": DetailedHTMLProps<HTMLAttributes<CostTimeElementProps>, any> & CostTimeElementProps;
-      "presentational-bricks--crontab-display": DetailedHTMLProps<HTMLAttributes<CrontabDisplayElementProps>, any> & CrontabDisplayElementProps;
-      "presentational-bricks--datetime-selector": DetailedHTMLProps<HTMLAttributes<DatetimeSelectorElementProps>, any> & DatetimeSelectorElementProps & {
+      "presentational-bricks--cost-time": DetailedHTMLProps<HTMLAttributes<CostTimeElementProps>, any> & Partial<CostTimeElementProps>;
+      "presentational-bricks--crontab-display": DetailedHTMLProps<HTMLAttributes<CrontabDisplayElementProps>, any> & Partial<CrontabDisplayElementProps>;
+      "presentational-bricks--datetime-selector": DetailedHTMLProps<HTMLAttributes<DatetimeSelectorElementProps>, any> & Partial<DatetimeSelectorElementProps> & {
         onDatetimeSelected?: (event: CustomEvent<any>) => void;
         onDatetimeSelectedV2?: (event: CustomEvent<any>) => void;
         onDatetimeSelectedV3?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--digital-number": DetailedHTMLProps<HTMLAttributes<DigitalNumberElementProps>, any> & DigitalNumberElementProps;
-      "presentational-bricks--dropdown-button": DetailedHTMLProps<HTMLAttributes<DropdownButtonElementProps>, any> & DropdownButtonElementProps & {
+      "presentational-bricks--digital-number": DetailedHTMLProps<HTMLAttributes<DigitalNumberElementProps>, any> & Partial<DigitalNumberElementProps>;
+      "presentational-bricks--dropdown-button": DetailedHTMLProps<HTMLAttributes<DropdownButtonElementProps>, any> & Partial<DropdownButtonElementProps> & {
         onSelectChange?: (event: CustomEvent<any>) => void;
         onLeftButtonClick?: (event: CustomEvent<{ item: any }>) => void;
       };
-      "presentational-bricks--dropdown-select": DetailedHTMLProps<HTMLAttributes<DropdownSelectElementProps>, any> & DropdownSelectElementProps & {
+      "presentational-bricks--dropdown-select": DetailedHTMLProps<HTMLAttributes<DropdownSelectElementProps>, any> & Partial<DropdownSelectElementProps> & {
         onSelectChange?: (event: CustomEvent<any>) => void;
         onMultipleSelectChange?: (event: CustomEvent<{ value: any }>) => void;
       };
-      "presentational-bricks--dynamic-content": DetailedHTMLProps<HTMLAttributes<DynamicContentElementProps>, any> & DynamicContentElementProps;
-      "presentational-bricks--dynamic-grid-container": DetailedHTMLProps<HTMLAttributes<DynamicGridContainerElementProps>, any> & DynamicGridContainerElementProps & {
+      "presentational-bricks--dynamic-content": DetailedHTMLProps<HTMLAttributes<DynamicContentElementProps>, any> & Partial<DynamicContentElementProps>;
+      "presentational-bricks--dynamic-grid-container": DetailedHTMLProps<HTMLAttributes<DynamicGridContainerElementProps>, any> & Partial<DynamicGridContainerElementProps> & {
         onDynamicGridContainerRendered?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--entry-card-item": DetailedHTMLProps<HTMLAttributes<EntryCardItemElementProps>, any> & EntryCardItemElementProps;
-      "presentational-bricks--general-badge": DetailedHTMLProps<HTMLAttributes<GeneralBadgeElementProps>, any> & GeneralBadgeElementProps;
-      "presentational-bricks--general-carousel": DetailedHTMLProps<HTMLAttributes<GeneralCarouselElementProps>, any> & GeneralCarouselElementProps & {
+      "presentational-bricks--entry-card-item": DetailedHTMLProps<HTMLAttributes<EntryCardItemElementProps>, any> & Partial<EntryCardItemElementProps>;
+      "presentational-bricks--general-badge": DetailedHTMLProps<HTMLAttributes<GeneralBadgeElementProps>, any> & Partial<GeneralBadgeElementProps>;
+      "presentational-bricks--general-carousel": DetailedHTMLProps<HTMLAttributes<GeneralCarouselElementProps>, any> & Partial<GeneralCarouselElementProps> & {
         onGeneralCarouselClick?: (event: CustomEvent<number>) => void;
       };
-      "presentational-bricks--general-iframe": DetailedHTMLProps<HTMLAttributes<GeneralIframeElementProps>, any> & GeneralIframeElementProps & {
+      "presentational-bricks--general-iframe": DetailedHTMLProps<HTMLAttributes<GeneralIframeElementProps>, any> & Partial<GeneralIframeElementProps> & {
         onGeneralIframeLoaded?: (event: CustomEvent<any>) => void;
         onIframeMessage?: (event: CustomEvent<unknown>) => void;
       };
-      "presentational-bricks--general-image": DetailedHTMLProps<HTMLAttributes<GeneralImageElementProps>, any> & GeneralImageElementProps & {
+      "presentational-bricks--general-image": DetailedHTMLProps<HTMLAttributes<GeneralImageElementProps>, any> & Partial<GeneralImageElementProps> & {
         onGeneralImageVisibleChange?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--general-label": DetailedHTMLProps<HTMLAttributes<GeneralLabelElementProps>, any> & GeneralLabelElementProps & {
+      "presentational-bricks--general-label": DetailedHTMLProps<HTMLAttributes<GeneralLabelElementProps>, any> & Partial<GeneralLabelElementProps> & {
         onLabelClick?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--general-list": DetailedHTMLProps<HTMLAttributes<GeneralListElementProps>, any> & GeneralListElementProps;
-      "presentational-bricks--general-pagination": DetailedHTMLProps<HTMLAttributes<GeneralPaginationElementProps>, any> & GeneralPaginationElementProps & {
+      "presentational-bricks--general-list": DetailedHTMLProps<HTMLAttributes<GeneralListElementProps>, any> & Partial<GeneralListElementProps>;
+      "presentational-bricks--general-pagination": DetailedHTMLProps<HTMLAttributes<GeneralPaginationElementProps>, any> & Partial<GeneralPaginationElementProps> & {
         onPageUpdate?: (event: CustomEvent<{ page: number }>) => void;
         onFilterUpdate?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--general-preview-image": DetailedHTMLProps<HTMLAttributes<GeneralPreviewImageElementProps>, any> & GeneralPreviewImageElementProps;
-      "presentational-bricks--general-slider": DetailedHTMLProps<HTMLAttributes<GeneralSliderElementProps>, any> & GeneralSliderElementProps & {
+      "presentational-bricks--general-preview-image": DetailedHTMLProps<HTMLAttributes<GeneralPreviewImageElementProps>, any> & Partial<GeneralPreviewImageElementProps>;
+      "presentational-bricks--general-slider": DetailedHTMLProps<HTMLAttributes<GeneralSliderElementProps>, any> & Partial<GeneralSliderElementProps> & {
         onSliderChange?: (event: CustomEvent<number | [number, number]>) => void;
         onSliderAfterChange?: (event: CustomEvent<number | [number, number]>) => void;
       };
-      "presentational-bricks--general-tooltip": DetailedHTMLProps<HTMLAttributes<GeneralTooltipElementProps>, any> & GeneralTooltipElementProps;
-      "presentational-bricks--general-transfer": DetailedHTMLProps<HTMLAttributes<GeneralTransferElementProps>, any> & GeneralTransferElementProps & {
+      "presentational-bricks--general-tooltip": DetailedHTMLProps<HTMLAttributes<GeneralTooltipElementProps>, any> & Partial<GeneralTooltipElementProps>;
+      "presentational-bricks--general-transfer": DetailedHTMLProps<HTMLAttributes<GeneralTransferElementProps>, any> & Partial<GeneralTransferElementProps> & {
         onGeneralTransferChange?: (event: CustomEvent<string[]>) => void;
       };
-      "presentational-bricks--general-video": DetailedHTMLProps<HTMLAttributes<GeneralVideoElementProps>, any> & GeneralVideoElementProps;
-      "presentational-bricks--info-display-card-list": DetailedHTMLProps<HTMLAttributes<InfoDisplayCardListElementProps>, any> & InfoDisplayCardListElementProps;
-      "presentational-bricks--log-display": DetailedHTMLProps<HTMLAttributes<LogDisplayElementProps>, any> & LogDisplayElementProps;
-      "presentational-bricks--markdown-display": DetailedHTMLProps<HTMLAttributes<MarkdownDisplayElementProps>, any> & MarkdownDisplayElementProps & {
+      "presentational-bricks--general-video": DetailedHTMLProps<HTMLAttributes<GeneralVideoElementProps>, any> & Partial<GeneralVideoElementProps>;
+      "presentational-bricks--info-display-card-list": DetailedHTMLProps<HTMLAttributes<InfoDisplayCardListElementProps>, any> & Partial<InfoDisplayCardListElementProps>;
+      "presentational-bricks--log-display": DetailedHTMLProps<HTMLAttributes<LogDisplayElementProps>, any> & Partial<LogDisplayElementProps>;
+      "presentational-bricks--markdown-display": DetailedHTMLProps<HTMLAttributes<MarkdownDisplayElementProps>, any> & Partial<MarkdownDisplayElementProps> & {
         onCheckboxChange?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--markdown-editor": DetailedHTMLProps<HTMLAttributes<MarkdownEditorElementProps>, any> & MarkdownEditorElementProps & {
+      "presentational-bricks--markdown-editor": DetailedHTMLProps<HTMLAttributes<MarkdownEditorElementProps>, any> & Partial<MarkdownEditorElementProps> & {
         onMarkdownValueChange?: (event: CustomEvent<string>) => void;
         onImageUpload?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--modal-confirm": DetailedHTMLProps<HTMLAttributes<ModalConfirmElementProps>, any> & ModalConfirmElementProps & {
+      "presentational-bricks--modal-confirm": DetailedHTMLProps<HTMLAttributes<ModalConfirmElementProps>, any> & Partial<ModalConfirmElementProps> & {
         onConfirmOk?: (event: CustomEvent<any>) => void;
         onConfirmCancel?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--qrcode-download": DetailedHTMLProps<HTMLAttributes<QrcodeDownloadElementProps>, any> & QrcodeDownloadElementProps;
-      "presentational-bricks--rank-table": DetailedHTMLProps<HTMLAttributes<RankTableElementProps>, any> & RankTableElementProps & {
+      "presentational-bricks--qrcode-download": DetailedHTMLProps<HTMLAttributes<QrcodeDownloadElementProps>, any> & Partial<QrcodeDownloadElementProps>;
+      "presentational-bricks--rank-table": DetailedHTMLProps<HTMLAttributes<RankTableElementProps>, any> & Partial<RankTableElementProps> & {
         onSortUpdate?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--single-field-edit": DetailedHTMLProps<HTMLAttributes<SingleFieldEditElementProps>, any> & SingleFieldEditElementProps & {
+      "presentational-bricks--single-field-edit": DetailedHTMLProps<HTMLAttributes<SingleFieldEditElementProps>, any> & Partial<SingleFieldEditElementProps> & {
         onSingleFieldEditOk?: (event: CustomEvent<any>) => void;
         onSingleFieldEditCancel?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--statistic-card": DetailedHTMLProps<HTMLAttributes<StatisticCardElementProps>, any> & StatisticCardElementProps;
-      "presentational-bricks--table-transfer": DetailedHTMLProps<HTMLAttributes<TableTransferElementProps>, any> & TableTransferElementProps & {
+      "presentational-bricks--statistic-card": DetailedHTMLProps<HTMLAttributes<StatisticCardElementProps>, any> & Partial<StatisticCardElementProps>;
+      "presentational-bricks--table-transfer": DetailedHTMLProps<HTMLAttributes<TableTransferElementProps>, any> & Partial<TableTransferElementProps> & {
         onTableTransferChange?: (event: CustomEvent<string[]>) => void;
         onSortChange?: (event: CustomEvent<string[]>) => void;
         onSearchChange?: (event: CustomEvent<any>) => void;
       };
-      "presentational-bricks--template-breadcrumb": DetailedHTMLProps<HTMLAttributes<TemplateBreadcrumbElementProps>, any> & TemplateBreadcrumbElementProps;
-      "presentational-bricks--text-collapse": DetailedHTMLProps<HTMLAttributes<TextCollapseElementProps>, any> & TextCollapseElementProps;
-      "presentational-bricks--tree-transfer": DetailedHTMLProps<HTMLAttributes<TreeTransferElementProps>, any> & TreeTransferElementProps & {
+      "presentational-bricks--template-breadcrumb": DetailedHTMLProps<HTMLAttributes<TemplateBreadcrumbElementProps>, any> & Partial<TemplateBreadcrumbElementProps>;
+      "presentational-bricks--text-collapse": DetailedHTMLProps<HTMLAttributes<TextCollapseElementProps>, any> & Partial<TextCollapseElementProps>;
+      "presentational-bricks--tree-transfer": DetailedHTMLProps<HTMLAttributes<TreeTransferElementProps>, any> & Partial<TreeTransferElementProps> & {
         onGeneralTransferChange?: (event: CustomEvent<any>) => void;
       };
     }

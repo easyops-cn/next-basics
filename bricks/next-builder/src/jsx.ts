@@ -44,20 +44,20 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       "next-builder--api-proxy-request": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & ApiProxyRequestElementProps,
+        HTMLAttributes<HTMLElement> & Partial<ApiProxyRequestElementProps>,
         HTMLElement
       > & {
         onApiChange?: (event: CustomEvent<any>) => void;
       };
       "next-builder--api-request-form-item": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & ApiRequestFormItemElementProps,
+        HTMLAttributes<HTMLElement> & Partial<ApiRequestFormItemElementProps>,
         HTMLElement
       > & {
         onApiChange?: (event: CustomEvent<any>) => void;
         onTypeChange?: (event: CustomEvent<string>) => void;
       };
       "next-builder--builder-container": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & BuilderContainerElementProps,
+        HTMLAttributes<HTMLElement> & Partial<BuilderContainerElementProps>,
         HTMLElement
       > & {
         onNodeAdd?: (event: CustomEvent<any>) => void;
@@ -98,13 +98,13 @@ declare global {
         onHighlightTokenClick?: (event: CustomEvent<{ type: string; value: string; }>) => void;
       };
       "next-builder--contract-auto-complete": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & ContractAutoCompleteElementProps,
+        HTMLAttributes<HTMLElement> & Partial<ContractAutoCompleteElementProps>,
         HTMLElement
       > & {
         onContractChange?: (event: CustomEvent<string>) => void;
       };
       "next-builder--event-config-form": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & EventConfigFormElementProps,
+        HTMLAttributes<HTMLElement> & Partial<EventConfigFormElementProps>,
         HTMLElement
       > & {
         onValidateSuccess?: (event: CustomEvent<Record<string, unknown>>) => void;
@@ -113,7 +113,7 @@ declare global {
         onHighlightTokenClick?: (event: CustomEvent<{ type: string; value: string; }>) => void;
       };
       "next-builder--events-editor": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & EventsEditorElementProps,
+        HTMLAttributes<HTMLElement> & Partial<EventsEditorElementProps>,
         HTMLElement
       > & {
         onEventCreate?: (event: CustomEvent<{ key: string; name: string; }>) => void;
@@ -121,7 +121,7 @@ declare global {
         onEventChange?: (event: CustomEvent<any>) => void;
       };
       "next-builder--function-debugger-sidebar": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & FunctionsSidebarElementProps,
+        HTMLAttributes<HTMLElement> & Partial<FunctionsSidebarElementProps>,
         HTMLElement
       > & {
         onTabSwitch?: (event: CustomEvent<string>) => void;
@@ -129,11 +129,11 @@ declare global {
         onTestsAdd?: (event: CustomEvent<any>) => void;
       };
       "next-builder--function-debugger-statusbar": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & FunctionDebuggerStatusbarElementProps,
+        HTMLAttributes<HTMLElement> & Partial<FunctionDebuggerStatusbarElementProps>,
         HTMLElement
       >;
       "next-builder--function-debugger-store": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & FunctionDebuggerStoreElementProps,
+        HTMLAttributes<HTMLElement> & Partial<FunctionDebuggerStoreElementProps>,
         HTMLElement
       > & {
         onActiveTabChange?: (event: CustomEvent<any>) => void;
@@ -153,20 +153,20 @@ declare global {
         onDebuggerInfoChange?: (event: CustomEvent<unknown>) => void;
       };
       "next-builder--function-debugger-toolbar": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & FunctionDebuggerToolbarElementProps,
+        HTMLAttributes<HTMLElement> & Partial<FunctionDebuggerToolbarElementProps>,
         HTMLElement
       > & {
         onButtonClick?: (event: CustomEvent<{ action: string }>) => void;
       };
       "next-builder--function-debugger-toolbar-v2": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & FunctionDebuggerToolbarV2ElementProps,
+        HTMLAttributes<HTMLElement> & Partial<FunctionDebuggerToolbarV2ElementProps>,
         HTMLElement
       > & {
         onButtonClick?: (event: CustomEvent<{ action: string }>) => void;
         onWantErrorCheck?: (event: CustomEvent<boolean>) => void;
       };
       "next-builder--preview-container": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & PreviewContainerElementProps,
+        HTMLAttributes<HTMLElement> & Partial<PreviewContainerElementProps>,
         HTMLElement
       > & {
         onPreviewStart?: (event: CustomEvent<any>) => void;
@@ -191,7 +191,7 @@ declare global {
         onContractUpdate?: (event: CustomEvent<any>) => void;
       };
       "next-builder--search-tree": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & SearchTreeElementProps,
+        HTMLAttributes<HTMLElement> & Partial<SearchTreeElementProps>,
         HTMLElement
       > & {
         onNodeClick?: (event: CustomEvent<any>) => void;
@@ -199,25 +199,25 @@ declare global {
         onNodeBlur?: (event: CustomEvent<any>) => void;
       };
       "next-builder--storyboard-lint-result": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & StoryboardLintResultElementProps,
+        HTMLAttributes<HTMLElement> & Partial<StoryboardLintResultElementProps>,
         HTMLElement
       >;
       "next-builder--workbench-action": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchActionItemElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchActionItemElementProps>,
         HTMLElement
       >;
       "next-builder--workbench-action-list": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchActionListElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchActionListElementProps>,
         HTMLElement
       >;
       "next-builder--workbench-brick-context-menu": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchBrickContextMenuElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchBrickContextMenuElementProps>,
         HTMLElement
       > & {
         onActionClick?: (event: CustomEvent<any>) => void;
       };
       "next-builder--workbench-brick-tree": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchStoryboardTreeElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchStoryboardTreeElementProps>,
         HTMLElement
       > & {
         onActionClick?: (event: CustomEvent<any>) => void;
@@ -226,7 +226,7 @@ declare global {
         onNodeToggle?: (event: CustomEvent<{ nodeId: string; collapsed: boolean; }>) => void;
       };
       "next-builder--workbench-cache-action": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchCacheActionElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchCacheActionElementProps>,
         HTMLElement
       > & {
         onCacheAction?: (event: CustomEvent<any>) => void;
@@ -238,7 +238,7 @@ declare global {
         onBuildAndPush?: (event: CustomEvent<any>) => void;
       };
       "next-builder--workbench-component-select": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchComponentSelectElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchComponentSelectElementProps>,
         HTMLElement
       > & {
         onActionClick?: (event: CustomEvent<{ type: string; data: any }>) => void;
@@ -247,13 +247,13 @@ declare global {
         onInstructionsClick?: (event: CustomEvent<{ type: string }>) => void;
       };
       "next-builder--workbench-context-menu": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchContextMenuElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchContextMenuElementProps>,
         HTMLElement
       > & {
         onActionClick?: (event: CustomEvent<any>) => void;
       };
       "next-builder--workbench-data-tree": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchDataTreeElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchDataTreeElementProps>,
         HTMLElement
       > & {
         onActionClick?: (event: CustomEvent<any>) => void;
@@ -263,30 +263,30 @@ declare global {
         onNodeNameSuffixClick?: (event: CustomEvent<unknown>) => void;
       };
       "next-builder--workbench-mini-action-bar": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchMiniActionBarElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchMiniActionBarElementProps>,
         HTMLElement
       > & {
         onActionClick?: (event: CustomEvent<any>) => void;
       };
       "next-builder--workbench-pane": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchPaneElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchPaneElementProps>,
         HTMLElement
       > & {
         onActiveChange?: (event: CustomEvent<boolean>) => void;
         onActiveFirstActivated?: (event: CustomEvent<any>) => void;
       };
       "next-builder--workbench-quick-entry": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchQuickEntryElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchQuickEntryElementProps>,
         HTMLElement
       > & {
         onMoreButtonClick?: (event: CustomEvent<any>) => void;
       };
       "next-builder--workbench-sidebar": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchSidebarElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchSidebarElementProps>,
         HTMLElement
       >;
       "next-builder--workbench-store": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchStoreElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchStoreElementProps>,
         HTMLElement
       > & {
         onNodeClick?: (event: CustomEvent<any>) => void;
@@ -298,14 +298,14 @@ declare global {
         onNodesCount?: (event: CustomEvent<number>) => void;
       };
       "next-builder--workbench-tabs": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchTabsElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchTabsElementProps>,
         HTMLElement
       > & {
         onTabClose?: (event: CustomEvent<any>) => void;
         onTabClick?: (event: CustomEvent<any>) => void;
       };
       "next-builder--workbench-tree": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkbenchTreeElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkbenchTreeElementProps>,
         HTMLElement
       > & {
         onActionClick?: (event: CustomEvent<any>) => void;
@@ -315,19 +315,19 @@ declare global {
         onNodeToggle?: (event: CustomEvent<{ nodeId: string; collapsed: boolean; }>) => void;
       };
       "next-builder--workflow-condition-item": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkflowConditionItemElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkflowConditionItemElementProps>,
         HTMLElement
       >;
       "next-builder--workflow-create-data-item": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkflowCreateDataItemElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkflowCreateDataItemElementProps>,
         HTMLElement
       >;
       "next-builder--workflow-edit-data-item": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkflowEditDataItemElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkflowEditDataItemElementProps>,
         HTMLElement
       >;
       "next-builder--workflow-node": DetailedHTMLProps<
-        HTMLAttributes<HTMLElement> & WorkflowNodeElementProps,
+        HTMLAttributes<HTMLElement> & Partial<WorkflowNodeElementProps>,
         HTMLElement
       > & {
         onNodeClick?: (event: CustomEvent<any>) => void;

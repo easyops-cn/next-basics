@@ -4,8 +4,8 @@ import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { AppBarSetting } from "./AppBarSetting";
 
 export interface AppBarSettingElementProps {
-  usernameStyle: React.CSSProperties;
-  dropdownIconStyle: React.CSSProperties;
+  usernameStyle?: React.CSSProperties;
+  dropdownIconStyle?: React.CSSProperties;
 }
 
 /**
