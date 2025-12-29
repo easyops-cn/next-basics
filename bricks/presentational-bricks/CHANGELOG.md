@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.336.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.336.9...@next-bricks/presentational-bricks@1.336.10) (2025-12-29)
+
+
+### Bug Fixes
+
+* fix  after search height not inherited ([5ec63e4](https://github.com/easyops-cn/next-basics/commit/5ec63e4bf9a9bf12072c39d3223069d2758adb97))
+
+
+
+
+
 ## [1.336.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.336.8...@next-bricks/presentational-bricks@1.336.9) (2025-12-22)
 
 
