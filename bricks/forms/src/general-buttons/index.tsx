@@ -43,7 +43,18 @@ const BUTTON_TYPES = [
  *  trim
  * @memo
  */
-export class GeneralButtonsElement extends FormItemElement {
+export interface GeneralButtonsElementProps {
+  submitText?: string;
+  showCancelButton?: boolean;
+  cancelText?: string;
+  disableAfterClick?: boolean;
+  loading?: boolean;
+  submitDisabled?: boolean;
+  submitTooltip?: string;
+}
+
+
+export class GeneralButtonsElement extends FormItemElement  implements GeneralButtonsElementProps {
   /**
    * @kind string
    * @required false

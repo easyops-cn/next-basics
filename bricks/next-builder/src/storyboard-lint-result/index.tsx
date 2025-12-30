@@ -4,6 +4,18 @@ import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { StoryboardLintResult } from "./StoryboardLintResult";
 import { StoryboardError } from "../data-providers/chunks/doLintStoryboard";
 
+export interface StoryboardLintResultProps {
+  projectId?: string;
+  appId?: string;
+  errors?: StoryboardError[];
+}
+
+export interface StoryboardLintResultElementProps {
+  projectId?: string;
+  appId?: string;
+  errors?: StoryboardError[];
+}
+
 /**
  * @id next-builder.storyboard-lint-result
  * @author steve
@@ -12,7 +24,7 @@ import { StoryboardError } from "../data-providers/chunks/doLintStoryboard";
  * @docKind brick
  * @noInheritDoc
  */
-export class StoryboardLintResultElement extends UpdatingElement {
+export class StoryboardLintResultElement extends UpdatingElement implements StoryboardLintResultProps {
   @property()
   projectId: string;
 

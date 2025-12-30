@@ -22,7 +22,28 @@ import { MenuIcon } from "@next-core/brick-types";
  * placeholder
  * pattern
  */
-export class GeneralLinkElement extends FormItemElement {
+export interface GeneralLinkElementProps {
+  name?: string;
+  label?: string;
+  value?: string;
+  text?: string;
+  textColor?: string;
+  url?: string;
+  href?: string;
+  target?: string;
+  hideExternalIcon?: boolean;
+  tooltip?: string;
+  disabled?: boolean;
+  dataSource?: Record<string, any>;
+  underLine?: boolean;
+  icon?: MenuIcon;
+  notToJumpWhenEmpty?: boolean;
+  type?: "link" | "text";
+  iconAlign?: "left" | "right";
+}
+
+
+export class GeneralLinkElement extends FormItemElement  implements GeneralLinkElementProps {
   /**
    * @group basicFormItem
    * @required true

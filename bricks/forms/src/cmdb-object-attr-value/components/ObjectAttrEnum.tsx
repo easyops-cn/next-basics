@@ -32,9 +32,9 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
   });
   const [useTreeEnum] = useFeatureFlags("cmdb-use-tree-enum-attr");
   const [addEnumsMode, setAddEnumsMode] = React.useState("default");
-  const [treeData, setTreeData] = useState([]);
+  const [treeData, setTreeData] = useState<any>([]);
   const [treeRegexString, setTreeRegexString] = useState("");
-  const [treeDefaultValue, setTreeDefaultValue] = useState(
+  const [treeDefaultValue, setTreeDefaultValue] = useState<any>(
     props.isMulti ? [] : ""
   );
   const { TextArea } = Input;
@@ -74,7 +74,7 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
   };
 
   const handleTreeValueChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>,
+    e: any,
     type: string
   ) => {
     let value;
@@ -85,6 +85,7 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
       setTreeDefaultValue([]);
       value = {
         ...props.value,
+        // @ts-ignore
         regex: (e.target.value || "")?.split("\n"),
         default: [],
       };
@@ -99,9 +100,11 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
   const getDefaultEnumValue = () => {
     if (props.isMulti) {
       return Array.isArray(value?.default)
+        // @ts-ignore
         ? (value.default as string[])?.filter((i) => value.regex.includes(i))
         : undefined;
     } else {
+      // @ts-ignore
       return value.regex?.includes(value?.default) ? value?.default : "";
     }
   };
@@ -152,6 +155,7 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
               <Select
                 style={{ width: "100%" }}
                 value={getDefaultEnumValue()}
+                // @ts-ignore
                 mode={props.isMulti ? "multiple" : ""}
                 allowClear
                 disabled={props.disabled}

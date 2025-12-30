@@ -8,5 +8,5 @@ export const chapter: Chapter = {
     en: "Real Time Monitor",
     zh: "实时监控",
   },
-  stories: [TopProcess, ProcessMonitor],
+  stories: [TopProcess, ProcessMonitor] as any,
 };

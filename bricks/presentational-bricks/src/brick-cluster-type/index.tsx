@@ -4,6 +4,14 @@ import { get, isNil } from "lodash";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BrickClusterType } from "./BrickClusterType";
 
+
+export interface BrickClusterTypeElementProps {
+  objectId?: string;
+  value?: ClusterType;
+  dataSource?: Record<string, any>;
+  fields?: { value: string };
+}
+
 export type ClusterType = "-1" | "0" | "1" | "2" | "3";
 
 /**
@@ -17,7 +25,7 @@ export type ClusterType = "-1" | "0" | "1" | "2" | "3";
  * @memo
  * @noInheritDoc
  */
-export class BrickClusterTypeElement extends UpdatingElement {
+export class BrickClusterTypeElement extends UpdatingElement implements BrickClusterTypeElementProps {
   /**
    * @kind string
    * @required false

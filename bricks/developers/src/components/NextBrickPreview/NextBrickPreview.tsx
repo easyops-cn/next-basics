@@ -87,7 +87,7 @@ export function LegacyNextBrickPreview(
   }));
 
   const handleResizerMouseDown = useCallback(
-    (event: MouseEvent) => {
+    (event: MouseEvent | any) => {
       // Prevent text selecting.
       event.preventDefault();
       setResizerStatus({

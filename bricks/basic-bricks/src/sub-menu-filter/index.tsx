@@ -10,6 +10,22 @@ import {
 import { SubMenuFilter, SubMenuFilterItem } from "./SubMenuFilter";
 import { UseBrickConf } from "@next-core/brick-types";
 
+// 重新导出类型供 jsx.ts 使用
+export type { SubMenuFilterItem };
+
+export interface SubMenuFilterElementProps {
+  menuItems?: SubMenuFilterItem[];
+  suffixBrick?: { useBrick: UseBrickConf };
+  defaultSelectedKeys?: string[];
+  defaultOpenKeys?: string[];
+  selectable?: boolean;
+  multiple?: boolean;
+  inlineIndent?: number;
+  transparentBackground?: boolean;
+  accordion?: boolean;
+  suffixBrickTriggerByHover?: boolean;
+}
+
 /**
  * @id basic-bricks.sub-menu-filter
  * @name basic-bricks.sub-menu-filter
@@ -76,7 +92,7 @@ import { UseBrickConf } from "@next-core/brick-types";
 
  * @noInheritDoc
  */
-export class SubMenuFilterElement extends UpdatingElement {
+export class SubMenuFilterElement extends UpdatingElement implements SubMenuFilterElementProps {
   /**
    * @required -
    * @default -

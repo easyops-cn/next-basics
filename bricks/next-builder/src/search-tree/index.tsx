@@ -11,6 +11,26 @@ import { SearchTree } from "./SearchTree";
 import { StoryboardAssemblyResult } from "../shared/storyboard/interfaces";
 import { UseBrickConf } from "@next-core/brick-types";
 
+export interface SearchTreeProps {
+  homepage?: string;
+  appId?: string;
+  projectId?: string;
+  dataSource?: StoryboardAssemblyResult;
+  onNodeClick?: (event: CustomEvent) => void;
+  onNodeFocus?: (event: CustomEvent) => void;
+  onNodeBlur?: (event: CustomEvent) => void;
+}
+
+export interface SearchTreeElementProps {
+  homepage?: string;
+  appId?: string;
+  projectId?: string;
+  dataSource?: StoryboardAssemblyResult;
+  searchContent?: {
+    useBrick: UseBrickConf;
+  }
+}
+
 /**
  * @id next-builder.search-tree
  * @author SailorF
@@ -19,7 +39,7 @@ import { UseBrickConf } from "@next-core/brick-types";
  * @docKind brick
  * @noInheritDoc
  */
-export class SearchTreeElement extends UpdatingElement {
+export class SearchTreeElement extends UpdatingElement implements SearchTreeElementProps {
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else

@@ -154,7 +154,14 @@ export interface FormItemColumnsProps extends BaseColumnsProps {
 *| allowClear  | `boolean`                               | -        | true   | 是否支持清除                 |
 *| expandTrigger  | `click \| hover`                               | -        | 'click'   | 次级菜单的展开方式                 |
 */
-export class DynamicFormItemElement extends FormItemElement {
+export interface DynamicFormItemElementProps {
+  name?: string;
+  label?: string;
+  columns?: FormItemColumnsProps[];
+}
+
+
+export class DynamicFormItemElement extends FormItemElement  implements DynamicFormItemElementProps {
   private manualEditedValue: any[];
 
   /**

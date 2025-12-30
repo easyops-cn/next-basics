@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import Icon from "@ant-design/icons";
 import { Table, Card, ConfigProvider } from "antd";

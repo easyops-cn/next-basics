@@ -5,6 +5,10 @@ import {
   UpdatingElement,
 } from "@next-core/brick-kit";
 
+export interface EventAgentElementProps {
+  [key: string]: any;
+}
+
 /**
  * @id basic-bricks.event-agent
  * @author steve
@@ -13,7 +17,7 @@ import {
  * @docKind brick
  * @noInheritDoc
  */
-export class EventAgentElement extends UpdatingElement {
+export class EventAgentElement extends UpdatingElement implements EventAgentElementProps {
   /**
    * @detail `unknown`
    * @description 事件被触发。

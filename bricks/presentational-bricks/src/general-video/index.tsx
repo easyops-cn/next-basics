@@ -3,6 +3,14 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { GeneralVideo } from "./GeneralVideo";
 
+
+export interface GeneralVideoElementProps {
+  source?: string;
+  preview?: boolean;
+  videoTitle?: string;
+  height?: number;
+}
+
 /**
  * @id presentational-bricks.general-video
  * @name presentational-bricks.general-video
@@ -14,7 +22,7 @@ import { GeneralVideo } from "./GeneralVideo";
  * @memo
  * @noInheritDoc
  */
-export class GeneralVideoElement extends UpdatingElement {
+export class GeneralVideoElement extends UpdatingElement implements GeneralVideoElementProps {
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {

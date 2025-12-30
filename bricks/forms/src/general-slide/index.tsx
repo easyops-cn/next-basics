@@ -25,7 +25,26 @@ import { UiType } from "../interfaces";
  *  pattern
  * @memo
  */
-export class GeneralSlideElement extends FormItemElement {
+export interface GeneralSlideElementProps {
+  name?: string;
+  value?: GeneralSlideProps["value"];
+  label?: string;
+  required?: boolean;
+  disabled?: boolean;
+  onlyShowMode?: boolean;
+  size?: string;
+  uiType?: UiType;
+  dots?: boolean;
+  marks?: GeneralSlideProps["marks"];
+  range?: boolean;
+  tooltipVisible?: boolean;
+  tipFormatter?: (value?: number) => string;
+  inputBoxStyle?: React.CSSProperties;
+  step?: GeneralSlideProps["step"];
+}
+
+
+export class GeneralSlideElement extends FormItemElement  implements GeneralSlideElementProps {
   /* =========================== Group: basic =========================== */
 
   /**

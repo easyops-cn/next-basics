@@ -13,6 +13,28 @@ import { ButtonProps, ButtonType } from "antd/lib/button";
 import { pick } from "lodash";
 import { UseBrickConf } from "@next-core/brick-types";
 
+
+export interface ModalConfirmElementProps {
+  modalTitle?: string;
+  content?: string;
+  type?: ModalConfirmProps["type"] ;
+  dataSource?: Record<string, any>;
+  contentBrick?: { useBrick: UseBrickConf };
+  extraContentSuffixBrick?: { useBrick: UseBrickConf };
+  expect?: string;
+  isDelete?: boolean;
+  okText?: string;
+  okType?: ButtonType;
+  okButtonProps?: ButtonProps;
+  confirmLoading?: boolean;
+  cancelText?: string;
+  cancelButtonProps?: ButtonProps;
+  extraContent?: string;
+  visible?: boolean;
+  width?: string | number;
+  title?: string;
+}
+
 /**
  * @id presentational-bricks.modal-confirm
  * @name presentational-bricks.modal-confirm
@@ -32,7 +54,7 @@ import { UseBrickConf } from "@next-core/brick-types";
  * @memo
  * @noInheritDoc
  */
-export class ModalConfirmElement extends UpdatingElement {
+export class ModalConfirmElement extends UpdatingElement implements ModalConfirmElementProps {
   // -------------------------------- basic --------------------------------
 
   /**

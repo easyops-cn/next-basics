@@ -12,6 +12,19 @@ import { MarkdownDisplay } from "./MarkdownDisplay";
 import { get } from "lodash";
 import { CheckboxInfo } from "./MarkdownDisplay";
 
+
+export interface MarkdownDisplayElementProps {
+  value?: string;
+  dataSource?: Record<string, any>;
+  fields?: {
+    value?: string;
+  }
+  imagePreview?: boolean;
+  hideImgPreviewMask?: boolean;
+  imagePreviewOperationInBottom?: boolean;
+  linkTarget?: string;
+}
+
 /**
  * @id presentational-bricks.markdown-display
  * @name presentational-bricks.markdown-display
@@ -24,7 +37,7 @@ import { CheckboxInfo } from "./MarkdownDisplay";
  * @memo
  * @noInheritDoc
  */
-export class MarkdownDisplayElement extends UpdatingElement {
+export class MarkdownDisplayElement extends UpdatingElement implements MarkdownDisplayElementProps {
   /**
    * @required false
    * @description markdown 展示内容

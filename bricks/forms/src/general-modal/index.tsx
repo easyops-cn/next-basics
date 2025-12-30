@@ -57,7 +57,27 @@ export interface ChildeFormElement extends HTMLElement {
 *| -------- | --------- | -------- | ------- | ----------- |
 *| noEvent  | `boolean` | -        | -       | 不触发事件  |
 */
-export class GeneralModalElement extends FormItemElement {
+export interface GeneralModalElementProps {
+  modalTitle?: string;
+  modalWidth?: string | number;
+  dataSource?: Record<string, any>;
+  okText?: string;
+  okDisabled?: boolean;
+  cancelText?: string;
+  btnText?: string;
+  disableAfterClick?: boolean;
+  notResetWhenClose?: boolean;
+  okType?: ButtonType;
+  maskClosable?: boolean;
+  isVisible?: boolean;
+  fields?: {
+    modalTitle: string;
+  };
+  stackable?: boolean;
+}
+
+
+export class GeneralModalElement extends FormItemElement  implements GeneralModalElementProps {
   /**
    * @kind string
    * @required false

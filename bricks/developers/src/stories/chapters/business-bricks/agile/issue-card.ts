@@ -78,6 +78,7 @@ export const story: Story = {
     {
       bricks: [
         {
+          // @ts-ignore - description is a custom field
           description: {
             title: "topRightBrick",
             message: "自定义右上角的内容",

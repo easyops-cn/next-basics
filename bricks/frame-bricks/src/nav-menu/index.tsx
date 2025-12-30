@@ -4,6 +4,13 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { NavMenu } from "./NavMenu";
 import { SidebarSubMenu } from "@next-core/brick-types";
 
+export interface NavMenuElementProps {
+  menu: SidebarSubMenu;
+  selectedKeys: string[];
+  showTooltip: boolean;
+  mainMenuTitleStyle: CSSProperties | undefined;
+}
+
 /**
  * @id frame-bricks.nav-bar
  * @author nlicroshan
@@ -12,7 +19,7 @@ import { SidebarSubMenu } from "@next-core/brick-types";
  * @docKind brick
  * @noInheritDoc
  */
-export class NavMenuElement extends UpdatingElement {
+export class NavMenuElement extends UpdatingElement implements NavMenuElementProps {
   /**
    * @kind SidebarSubMenu
    * @required false

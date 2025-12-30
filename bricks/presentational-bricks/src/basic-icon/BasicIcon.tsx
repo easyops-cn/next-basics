@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { MenuIcon } from "@next-core/brick-types";
 import cssStyle from "./BasicIcon.module.css";

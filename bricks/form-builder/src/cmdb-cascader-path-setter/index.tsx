@@ -14,6 +14,17 @@ export interface ObjectPathItem {
   showKey: string[];
 }
 
+export interface CmdbCascaderPathSetterElementProps {
+  name?: string;
+  label?: string;
+  value?: ObjectPathItem[] | string[];
+  required?: boolean;
+  message?: Record<string, string>;
+  placeholder?: string;
+  disabled?: boolean;
+  inputBoxStyle?: React.CSSProperties;
+}
+
 /**
  * @id form-builder.cmdb-cascader-path-setter
  * @author frankshi
@@ -22,7 +33,7 @@ export interface ObjectPathItem {
  * @docKind brick
  * @noInheritDoc
  */
-export class CmdbCascaderPathSetterElement extends FormItemElement {
+export class CmdbCascaderPathSetterElement extends FormItemElement implements CmdbCascaderPathSetterElementProps {
   /**
    * @kind string
    * @required true

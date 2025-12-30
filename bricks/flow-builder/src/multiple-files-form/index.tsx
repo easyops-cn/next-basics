@@ -17,6 +17,10 @@ import {
   ProcessedUploadFormData,
 } from "./MultipleFilesForm";
 
+export interface MultipleFilesFormElementProps {
+  fieldList: FileField[];
+}
+
 /**
  * @id flow-builder.multiple-files-form
  * @author jojiang
@@ -25,7 +29,7 @@ import {
  * @docKind brick
  * @noInheritDoc
  */
-export class MultipleFilesFormElement extends UpdatingElement {
+export class MultipleFilesFormElement extends UpdatingElement implements MultipleFilesFormElementProps {
   private _form = createRef<FormInstance>();
   @property({
     attribute: false,

@@ -41,6 +41,28 @@ interface FulfilledSnippetNodeDetail extends SnippetNodeDetail {
   nodeData: WithAppId<SnippetNodeInstance>;
 }
 
+export interface WorkbenchStoreProps {
+  appId?: string;
+  dataSource?: BuilderRouteOrBrickNode[];
+  templateSources?: BuilderCustomTemplateNode[];
+  activeInstanceId?: string;
+  onNodeClick?: (event: CustomEvent) => void;
+  onNodeAdd?: (event: CustomEvent) => void;
+  onSnippetApply?: (event: CustomEvent) => void;
+  onNodeReorder?: (event: CustomEvent) => void;
+  onNodeMove?: (event: CustomEvent) => void;
+  onNodeDelete?: (event: CustomEvent) => void;
+  onNodesCount?: (event: CustomEvent) => void;
+}
+
+export interface WorkbenchStoreElementProps {
+  appId?: string;
+  dataSource?: BuilderRouteOrBrickNode[];
+  templateSources?: BuilderCustomTemplateNode[];
+  activeInstanceId?: string;
+  onNodeClick?: (event: CustomEvent<BuilderRuntimeNode>) => void;
+}
+
 /**
  * @id next-builder.workbench-store
  * @author steve
@@ -49,7 +71,7 @@ interface FulfilledSnippetNodeDetail extends SnippetNodeDetail {
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchStoreElement extends UpdatingElement {
+export class WorkbenchStoreElement extends UpdatingElement implements WorkbenchStoreProps {
   /**
    * @default
    * @required

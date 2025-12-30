@@ -10,6 +10,13 @@ import {
 import { DynamicGridContainer } from "./DynamicGridContainer";
 import { UseBrickConf } from "@next-core/brick-types";
 
+
+export interface DynamicGridContainerElementProps {
+  useBrick?: UseBrickConf;
+  data?: any[];
+  containerStyle?: React.CSSProperties;
+}
+
 /**
  * @id presentational-bricks.dynamic-grid-container
  * @author astrid
@@ -18,7 +25,7 @@ import { UseBrickConf } from "@next-core/brick-types";
  * @docKind brick
  * @noInheritDoc
  */
-export class DynamicGridContainerElement extends UpdatingElement {
+export class DynamicGridContainerElement extends UpdatingElement implements DynamicGridContainerElementProps {
   /**
    * @kind [UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)
    * @required false

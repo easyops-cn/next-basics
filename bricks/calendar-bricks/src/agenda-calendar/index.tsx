@@ -17,6 +17,27 @@ import {
 } from "./AgendaCalendar";
 import { viewTypeEnum } from "./component/agendaCalendarContext";
 
+export interface AgendaCalendarElementProps {
+  hideSwitchMonth?: boolean;
+  hideTitle?: boolean;
+  displayDate?: string;
+  agendaColor?: string;
+  agendaData?: agendaDataType[];
+  customHolidays?: customHolidayType[];
+  firstDay?: number;
+  agendaCollapsed?: boolean;
+  showEventCount?: boolean;
+  agendaRandomColor?: boolean;
+  afterTitleBrick?: {
+    useBrick: UseBrickConf;
+    data: unknown;
+  };
+  afterQuickSwitchBrick?: {
+    useBrick: UseBrickConf;
+    data: unknown;
+  };
+}
+
 /**
  * @id calendar-bricks.agenda-calendar
  * @author zhendonghuang
@@ -48,7 +69,7 @@ import { viewTypeEnum } from "./component/agendaCalendarContext";
  * }
  *```
  */
-export class AgendaCalendarElement extends UpdatingElement {
+export class AgendaCalendarElement extends UpdatingElement implements AgendaCalendarElementProps {
   /**
    * @kind boolean
    * @default  false
@@ -212,6 +233,13 @@ export class AgendaCalendarElement extends UpdatingElement {
   // istanbul ignore next
   private _handleDateSelect = (date: string, data: any) => {
     this.onDateSelect.emit({ date, data });
+    
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("calendar.on.date.select", {
+        detail: { date, data },
+      })
+    );
   };
 
   // istanbul ignore next
@@ -221,11 +249,25 @@ export class AgendaCalendarElement extends UpdatingElement {
     data: any
   ) => {
     this.onQuickSwitchDate.emit({ viewType, type, data });
+    
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("calendar.on.quick.switch.date", {
+        detail: { viewType, type, data },
+      })
+    );
   };
 
   // istanbul ignore next
   private _handleAgendaSelect = (data: any) => {
     this.onAgendaSelect.emit({ data });
+    
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("calendar.on.agenda.select", {
+        detail: { data },
+      })
+    );
   };
 
   private _calendarRef = createRef<any>();

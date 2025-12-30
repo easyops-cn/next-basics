@@ -10,6 +10,16 @@ import {
 import { BrickTimeline, BrickTimelineProps, ItemProps } from "./BrickTimeline";
 import { UseBrickConf } from "@next-core/brick-types";
 
+
+export interface BrickTimelineElementProps {
+  itemList?: BrickTimelineProps["itemList"];
+  useBrick?: UseBrickConf;
+  statusMap?: BrickTimelineProps["statusMap"];
+  type?: BrickTimelineProps["type"] ;
+  timeType?: BrickTimelineProps["timeType"] ;
+  mode?: BrickTimelineProps["mode"];
+}
+
 export type StatusColor = "green" | "red" | "gray" | "blue";
 
 export interface TimelineItem {
@@ -60,7 +70,7 @@ export interface TimelineItem {
  * ```
  * @noInheritDoc
  */
-export class BrickTimelineElement extends UpdatingElement {
+export class BrickTimelineElement extends UpdatingElement implements BrickTimelineElementProps {
   /**
    * @kind TimelineItem[]|Record<string, any>[]
    * @required true

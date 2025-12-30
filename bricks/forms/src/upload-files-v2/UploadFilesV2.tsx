@@ -434,8 +434,10 @@ export function RealUploadFile(
   return (
     <div ref={ref} className={styles.uploadContainer}>
       {props.uploadDraggable ? (
+        // @ts-ignore
         <Upload.Dragger {...uploadProps}>{uploadNode()}</Upload.Dragger>
       ) : (
+        // @ts-ignore
         <Upload {...uploadProps}>{uploadNode()}</Upload>
       )}
     </div>

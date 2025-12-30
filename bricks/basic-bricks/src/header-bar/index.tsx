@@ -9,6 +9,11 @@ import {
 } from "@next-core/brick-kit";
 import { HeaderBar } from "./HeaderBar";
 import style from "./index.headerBar.less";
+export interface HeaderBarElementProps {
+  logoUrl?: string;
+  headerBackgroundColor?: string;
+}
+
 /**
  * @id basic-bricks.header-bar
  * @author zekunpan
@@ -20,7 +25,7 @@ import style from "./index.headerBar.less";
  * toolbar: 右侧工具栏插槽
  * @noInheritDoc
  */
-export class HeaderBarElement extends UpdatingElement {
+export class HeaderBarElement extends UpdatingElement implements HeaderBarElementProps {
   private _mountPoint: HTMLElement;
   private _shadowRoot: ShadowRoot;
 

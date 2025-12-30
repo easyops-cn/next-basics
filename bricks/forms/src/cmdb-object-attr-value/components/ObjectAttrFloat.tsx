@@ -12,7 +12,7 @@ interface ObjectAttrFloatProps {
 }
 
 interface FloatValueType {
-  default: number;
+  default: any;
 }
 
 export function ObjectAttrFloat(

@@ -16,6 +16,19 @@ import { DatetimeSelector, ResolutionProps } from "./DatetimeSelector";
 import { transformToTimestamp, formatTimeRange } from "./processor";
 import { ButtonSize } from "antd/lib/button";
 
+
+export interface DatetimeSelectorElementProps {
+  from?: string;
+  to?: string;
+  customTimeRange?: RangeText[];
+  placement?: TooltipPlacement;
+  resolution?: ResolutionProps ;
+  size?: ButtonSize;
+  selectNearDays?: number;
+  format?: string;
+  rangeDays?: number;
+}
+
 export type TooltipPlacement =
   | "top"
   | "left"
@@ -63,7 +76,7 @@ export type TooltipPlacement =
  *
  * @noInheritDoc
  */
-export class DatetimeSelectorElement extends UpdatingElement {
+export class DatetimeSelectorElement extends UpdatingElement implements DatetimeSelectorElementProps {
   /**
    * @detail { type: "dateRange"; value: "now/d" } | { type: "specifiedDate"; value: { from: number; to: number }}
    * @description [已废弃]选择时间

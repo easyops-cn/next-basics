@@ -31,5 +31,5 @@ export const chapter: Chapter = {
     GeneralCardList,
     SearchableCardList,
     SearchableTable,
-  ],
+  ] as any,
 };

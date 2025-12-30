@@ -3,6 +3,11 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { PageTitle } from "./PageTitle";
 
+export interface PageTitleElementProps {
+  pageTitle?: string;
+  dashboardMode?: boolean;
+}
+
 /**
  * @id basic-bricks.page-title
  * @name basic-bricks.page-title
@@ -14,7 +19,7 @@ import { PageTitle } from "./PageTitle";
  * @memo
  * @noInheritDoc
  */
-export class PageTitleElement extends UpdatingElement {
+export class PageTitleElement extends UpdatingElement implements PageTitleElementProps {
   /**
    * @required true
    * @default -

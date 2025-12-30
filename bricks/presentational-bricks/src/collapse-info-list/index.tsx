@@ -11,6 +11,13 @@ import { CollapseInfoList } from "./CollapseInfoList";
 import { UseBrickConf } from "@next-core/brick-types";
 import { InfoDetail } from "./CollapseInfoList";
 
+
+export interface CollapseInfoListElementProps {
+  dataSource?: InfoDetail[];
+  titleBrick?: { useBrick: UseBrickConf };
+  extraBrick?: { useBrick: UseBrickConf };
+}
+
 /**
  * @id presentational-bricks.collapse-info-list
  * @author dophjing
@@ -19,7 +26,7 @@ import { InfoDetail } from "./CollapseInfoList";
  * @docKind brick
  * @noInheritDoc
  */
-export class CollapseInfoListElement extends UpdatingElement {
+export class CollapseInfoListElement extends UpdatingElement implements CollapseInfoListElementProps {
   /**
    * @required true
    * @description 折叠项dataSource

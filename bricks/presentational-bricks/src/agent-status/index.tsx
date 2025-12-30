@@ -4,6 +4,13 @@ import { get } from "lodash";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { AgentStatus } from "./AgentStatus";
 
+
+export interface AgentStatusElementProps {
+  dataSource?: any;
+  fields?: { value: string };
+  value?: AgentStatusType;
+}
+
 export enum AgentStatusType {
   NORMAL = "正常",
   ABNORMAL = "异常",
@@ -28,7 +35,7 @@ export enum AgentStatusType {
  * @memo
  * @noInheritDoc
  */
-export class AgentStatusElement extends UpdatingElement {
+export class AgentStatusElement extends UpdatingElement implements AgentStatusElementProps {
   /**
    * @kind any
    * @required -️

@@ -40,8 +40,10 @@ const getOptions = (
     <Select.Option key={op.value} value={op.value} label={op.label}>
       <div className={style.option}>
         <span className={style.label}>{op.label}</span>
+        {/* @ts-ignore */}
         {suffix && suffix.useBrick && (
           <div className={style.suffixContainer} style={suffixStyle}>
+            {/* @ts-ignore */}
             <BrickAsComponent useBrick={suffix.useBrick} data={op} />
           </div>
         )}
@@ -104,12 +106,16 @@ export function ColumnComponent(
   );
 
   const disabled = useMemo(
+    // @ts-ignore
     () => getRealValue(column.props?.disabled, [rowValue, rowIndex]),
+    // @ts-ignore
     [column.props?.disabled, rowValue, rowIndex]
   );
 
   const hidden = useMemo(
+    // @ts-ignore
     () => getRealValue(column.props?.hidden, [rowValue, rowIndex]),
+    // @ts-ignore
     [column.props?.hidden, rowValue, rowIndex]
   );
 
@@ -150,7 +156,9 @@ export function ColumnComponent(
 
   let options = useMemo(
     () =>
+      // @ts-ignore
       getRealValueOptions(column.props?.options, [rowValue, rowIndex]) || [],
+    // @ts-ignore
     [column.props?.options, rowValue, rowIndex]
   );
 

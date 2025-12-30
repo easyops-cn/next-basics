@@ -12,6 +12,11 @@ import {
   EventEmitter,
 } from "@next-core/brick-kit";
 
+export interface ExportJsonFileElementProps {
+  fileName?: string;
+  data?: any;
+}
+
 /**
  * @id basic-bricks.export-json-file
  * @name basic-bricks.export-json-file
@@ -24,7 +29,7 @@ import {
  * @memo
  * @noInheritDoc
  */
-export class ExportJsonFileElement extends UpdatingElement {
+export class ExportJsonFileElement extends UpdatingElement implements ExportJsonFileElementProps {
   /**
    * @kind string
    * @required false

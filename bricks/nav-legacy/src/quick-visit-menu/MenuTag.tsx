@@ -60,6 +60,7 @@ export function MenuTag(props: MenuTagProps): React.ReactElement {
     <div className={styles.tag}>
       <div className={styles.textContainer} onClick={handleOnTextClick}>
         <Tooltip
+          // @ts-ignore
           trigger={text?.length > 20 ? "hover" : []}
           title={text}
           mouseLeaveDelay={2}

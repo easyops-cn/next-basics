@@ -101,10 +101,12 @@ export function BrickEditor({
     }
     changed.current = false;
     const conf = parse(confString);
+    // @ts-ignore
     if (conf) onConfChange(conf);
   };
 
   React.useEffect(() => {
+    // @ts-ignore
     const content = serialize(defaultConf);
     setConfString(content);
   }, [defaultConf, mode]);

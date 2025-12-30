@@ -66,7 +66,8 @@ export function GeneralPopup({
     [popupId]
   );
 
-  const handleShowTips = ((e: CustomEvent<NavTip[]>): void => {
+  // @ts-ignore
+  const handleShowTips = ((e: CustomEvent<any[]>): void => {
     const list = (e.detail ?? []).filter((item) => {
       const isTipClosing =
         item.closable &&

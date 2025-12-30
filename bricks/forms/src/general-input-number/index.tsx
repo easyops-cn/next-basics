@@ -23,7 +23,20 @@ import { UseBrickConf } from "@next-core/brick-types";
  * @memo
  * > Tips: 对于 event.detail 为 `Keyboard Event` 时， 由于 react 对于合成事件的处理，打印出来的整个 `Keyboard Event` 相关属性都为 null, 但可通过单独查看某个属性来得到值（如示例所示），相关详情信息可[查看 react 合成事件](https://zh-hans.reactjs.org/docs/events.html#event-pooling)。
  */
-export class GeneralInputNumberElement extends FormItemElement {
+export interface GeneralInputNumberElementProps {
+  name?: string;
+  value?: number | string;
+  placeholder?: string;
+  label?: string;
+  required?: boolean;
+  message?: Record<string, string>;
+  addonAfter?: {
+    useBrick: UseBrickConf;
+  };
+}
+
+
+export class GeneralInputNumberElement extends FormItemElement  implements GeneralInputNumberElementProps {
   /* =========================== Group: basic =========================== */
 
   /**

@@ -6,6 +6,17 @@ import { MenuIcon, UseBrickConf } from "@next-core/brick-types";
 import classNames from "classnames";
 import styles from "./GeneralBadge.module.css";
 
+
+export interface GeneralBadgeElementProps {
+  content?: string | { useBrick: UseBrickConf};
+  contentIcon?: MenuIcon;
+  dataSource?: any;
+  dot?: boolean;
+  offset?: [number, number];
+  showZero?: boolean;
+  disablePointerEvents?: boolean;
+}
+
 /**
  * @id presentational-bricks.general-badge
  * @author Jimmy
@@ -14,7 +25,7 @@ import styles from "./GeneralBadge.module.css";
  * @docKind brick
  * @noInheritDoc
  */
-export class GeneralBadgeElement extends UpdatingElement {
+export class GeneralBadgeElement extends UpdatingElement implements GeneralBadgeElementProps {
   /**
    * @kind string | { useBrick: UseBrickConf, dataSource?: any }
    * @required false

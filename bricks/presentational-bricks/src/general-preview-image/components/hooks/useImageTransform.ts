@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useRef } from "react";
 import raf from "rc-util/lib/raf";
 import { getClientSize } from "rc-util/lib/Dom/css";

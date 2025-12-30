@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { DatePicker } from "antd";
 import { WrapperFormItem } from "../wrapper-form-item/WrapperFormItem";

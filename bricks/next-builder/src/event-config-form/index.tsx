@@ -12,7 +12,44 @@ import { ColProps } from "antd/lib/col";
 import { FormInstance } from "antd/lib/form";
 import { HighlightTokenSettings } from "@next-libs/code-editor-components";
 import { LifeCycle, Workflow } from "../shared/visual-events/interfaces";
-import { EventConfigForm, EventConfigFormProps } from "./EventConfigForm";
+import { EventConfigForm, EventConfigFormProps as EventConfigFormComponentProps } from "./EventConfigForm";
+
+export interface EventConfigFormProps {
+  labelCol?: ColProps;
+  wrapperCol?: ColProps;
+  providerList?: string[];
+  workflowList?: Workflow[];
+  type?: "event" | "lifeCycle";
+  lifeCycle?: LifeCycle;
+  useInCustomTemplate?: boolean;
+  docUrl?: string;
+  mockTipsUrl?: string;
+  highlightTokens?: HighlightTokenSettings[];
+  pathList?: string[];
+  segueList?: EventConfigFormProps["segueList"];
+  onValidateSuccess?: (event: CustomEvent) => void;
+  onValidateError?: (event: CustomEvent) => void;
+  onValuesChange?: (event: CustomEvent) => void;
+  onHighlighttokenClick?: (event: CustomEvent) => void;
+}
+
+export interface EventConfigFormElementProps {
+  labelCol?: ColProps;
+  wrapperCol?: ColProps;
+  providerList?: string[];
+  workflowList?: Workflow[];
+  type?: "event" | "lifeCycle";
+  lifeCycle?: LifeCycle;
+  useInCustomTemplate?: boolean;
+  docUrl?: string;
+  mockTipsUrl?: string;
+  highlightTokens?: HighlightTokenSettings[];
+  pathList?: string[];
+  segueList?: EventConfigFormProps["segueList"];
+  onValidateSuccess?: (event: CustomEvent<Record<string, unknown>>) => void;
+  onValidateError?: (event: CustomEvent<Record<string, unknown>>) => void;
+  onValuesChange?: (event: CustomEvent<Record<string, unknown>>) => void;
+}
 
 /**
  * @id next-builder.event-config-form
@@ -22,7 +59,7 @@ import { EventConfigForm, EventConfigFormProps } from "./EventConfigForm";
  * @docKind brick
  * @noInheritDoc
  */
-export class EventConfigFormElement extends UpdatingElement {
+export class EventConfigFormElement extends UpdatingElement implements EventConfigFormProps {
   private _formUtils = React.createRef<Partial<FormInstance>>();
 
   connectedCallback(): void {

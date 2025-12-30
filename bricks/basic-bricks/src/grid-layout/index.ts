@@ -1,5 +1,18 @@
 import { UpdatingElement, property } from "@next-core/brick-kit";
 import styles from "./gridLayout.module.css";
+
+export interface GridLayoutElementProps {
+  columns?: number;
+  columnSpan?: number;
+  rows?: number;
+  rowSpan?: number;
+  templateColumns?: string;
+  responsive?: ResponsiveSettings;
+  gap?: string;
+  showGridBorder?: boolean;
+  gridBorderColor?: string;
+}
+
 // ** Set a :host display style (e.g. block, inline-block, flex)
 //    unless you prefer the default of inline. **
 // ** Add a :host display style that respects the hidden attribute. **
@@ -76,7 +89,7 @@ const mediaQueryMap: Record<MediaSize, string> = {
 
 *在 `> 1600px` 的屏幕上时将显示为三列，`<= 1600px && > 1280px` 时显示两列，更小的屏幕显示为一列。
  */
-export class GridLayoutElement extends UpdatingElement {
+export class GridLayoutElement extends UpdatingElement implements GridLayoutElementProps {
   private _mountPoint: HTMLElement;
   private _sizeMatch: Partial<Record<MediaSize, boolean>> = {};
   // eslint-disable-next-line @typescript-eslint/ban-types

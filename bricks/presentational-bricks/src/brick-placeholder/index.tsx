@@ -5,6 +5,15 @@ import { BrickPlaceholder } from "./BrickPlaceholder";
 
 import { Card } from "antd";
 
+
+export interface BrickPlaceholderElementProps {
+  showCard?: boolean;
+  bordered?: boolean;
+  gridRow?: string;
+  gridColumn?: string;
+  text?: string;
+}
+
 /**
  * @id presentational-bricks.brick-placeholder
  * @name presentational-bricks.brick-placeholder
@@ -16,7 +25,7 @@ import { Card } from "antd";
  * @memo
  * @noInheritDoc
  */
-export class BrickPlaceholderElement extends UpdatingElement {
+export class BrickPlaceholderElement extends UpdatingElement implements BrickPlaceholderElementProps {
   /**
    * @kind boolean
    * @required false

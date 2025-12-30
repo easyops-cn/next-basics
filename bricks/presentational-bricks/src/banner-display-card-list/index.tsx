@@ -3,6 +3,11 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BannerDisplayCardList, CardItem } from "./BannerDisplayCardList";
 
+
+export interface BannerDisplayCardListElementProps {
+  cardList?: CardItem[];
+}
+
 /**
  * @id presentational-bricks.banner-display-card-list
  * @author dophjing
@@ -11,7 +16,7 @@ import { BannerDisplayCardList, CardItem } from "./BannerDisplayCardList";
  * @docKind brick
  * @noInheritDoc
  */
-export class BannerDisplayCardListElement extends UpdatingElement {
+export class BannerDisplayCardListElement extends UpdatingElement implements BannerDisplayCardListElementProps {
   /**
    * @kind CardItem[]
    * @required true

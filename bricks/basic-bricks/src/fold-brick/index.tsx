@@ -4,6 +4,13 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { FoldBrick } from "./FoldBrick";
 import { UseBrickConf } from "@next-core/brick-types";
 
+export interface FoldBrickElementProps {
+  useBrick?: UseBrickConf;
+  foldName?: string;
+  foldStyle?: Record<string, string>;
+  defaultShow?: boolean;
+}
+
 /**
  * @id basic-bricks.fold-brick
  * @name basic-bricks.fold-brick
@@ -15,7 +22,7 @@ import { UseBrickConf } from "@next-core/brick-types";
  * @memo
  * @noInheritDoc
  */
-export class FoldBrickElement extends UpdatingElement {
+export class FoldBrickElement extends UpdatingElement implements FoldBrickElementProps {
   @property({
     attribute: false,
   })

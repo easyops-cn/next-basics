@@ -5,6 +5,11 @@ import { BrickWrapper, property } from "@next-core/brick-kit";
 import { IndexCard } from "./IndexCard";
 import styles from "./IndexCard.shadow.css";
 
+export interface IndexCardElementProps {
+  contentGridGap?: number;
+  title?: string;
+}
+
 /**
  * @id basic-bricks.index-card
  * @name basic-bricks.index-card
@@ -16,7 +21,7 @@ import styles from "./IndexCard.shadow.css";
  * @memo
  * @noInheritDoc
  */
-export class IndexCardElement extends HTMLElement {
+export class IndexCardElement extends HTMLElement implements IndexCardElementProps {
   private _mountPoint: HTMLElement;
   private _contentGridGap = 24;
   private _title: string;

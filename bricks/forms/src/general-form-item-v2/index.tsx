@@ -23,7 +23,12 @@ import { ControlBrickConfig } from "../interfaces";
  *  placeholder
  * @memo
  */
-export class GeneralFormItemV2Element extends FormItemElement {
+export interface GeneralFormItemV2ElementProps {
+  value?: unknown;
+}
+
+
+export class GeneralFormItemV2Element extends FormItemElement  implements GeneralFormItemV2ElementProps {
   /**
    * @required false
    * @description 表单项的值

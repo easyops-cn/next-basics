@@ -8,7 +8,23 @@ import {
 import { FormItemElement } from "@next-libs/forms";
 import { TypeFieldItem, WorkflowDataItem } from "../interface";
 
-export class WorkflowConditionItemElement extends FormItemElement {
+export interface WorkflowConditionItemProps {
+  fieldList?: TypeFieldItem[];
+  dataList?: WorkflowDataItem[];
+  logicTypeList?: ComparatorOption[];
+  comparatorMap?: Record<string, ComparatorOption[]>;
+  value?: any;
+}
+
+export interface WorkflowConditionItemElementProps {
+  fieldList?: TypeFieldItem[];
+  dataList?: WorkflowDataItem[];
+  logicTypeList?: ComparatorOption[];
+  comparatorMap?: Record<string, ComparatorOption[]>;
+  value?: any;
+}
+
+export class WorkflowConditionItemElement extends FormItemElement implements WorkflowConditionItemProps {
   @property({
     attribute: false,
   })

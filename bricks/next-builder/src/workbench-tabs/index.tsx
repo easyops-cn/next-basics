@@ -9,6 +9,24 @@ import {
 } from "@next-core/brick-kit";
 import { type WorkbenchTabConf, WorkbenchTabs } from "./WorkbenchTabs";
 
+export interface WorkbenchTabsProps {
+  tabs?: WorkbenchTabConf[];
+  activeTabKey?: string | number;
+  historyBlocked?: boolean;
+  closeDisabled?: boolean;
+  onTabClose?: (event: CustomEvent) => void;
+  onTabClick?: (event: CustomEvent) => void;
+}
+
+export interface WorkbenchTabsElementProps {
+  tabs?: WorkbenchTabConf[];
+  activeTabKey?: string | number;
+  historyBlocked?: boolean;
+  closeDisabled?: boolean;
+  onTabClose?: (event: CustomEvent<WorkbenchTabConf>) => void;
+  onTabClick?: (event: CustomEvent<WorkbenchTabConf>) => void;
+}
+
 /**
  * @id next-builder.workbench-tabs
  * @author steve
@@ -17,7 +35,7 @@ import { type WorkbenchTabConf, WorkbenchTabs } from "./WorkbenchTabs";
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchTabsElement extends UpdatingElement {
+export class WorkbenchTabsElement extends UpdatingElement implements WorkbenchTabsProps {
   @property({ attribute: false })
   tabs: WorkbenchTabConf[];
 

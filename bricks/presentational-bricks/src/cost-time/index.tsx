@@ -4,6 +4,20 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { CostTime } from "./CostTime";
 import { get } from "lodash";
 
+
+export interface CostTimeElementProps {
+  cost?: number;
+  startTime?: string | number;
+  endTime?: string | number;
+  unitStyle?: React.CSSProperties;
+  dataSource?: any;
+  fields?: {
+    cost?: string;
+    startTime?: string;
+    endTime?: string;
+  }
+}
+
 /**
  * @id presentational-bricks.cost-time
  * @name presentational-bricks.cost-time
@@ -15,7 +29,7 @@ import { get } from "lodash";
  * @memo
  * @noInheritDoc
  */
-export class CostTimeElement extends UpdatingElement {
+export class CostTimeElement extends UpdatingElement implements CostTimeElementProps {
   connectedCallback(): void {
     this._render();
   }

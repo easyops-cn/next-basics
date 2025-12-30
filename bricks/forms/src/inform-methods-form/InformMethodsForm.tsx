@@ -6,12 +6,11 @@ import { Checkbox } from "antd";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import { CustomSenderApi_listSupportInform } from "@next-sdk/msgsender-sdk";
 
-import { InformMethod } from "../interfaces";
 
 export interface InformMethodsFormItemProps {
   value?: string[];
   children?: React.ReactNode;
-  informMethodList?: InformMethod[];
+  informMethodList?: [];
   onChange?: (value: any) => void;
 }
 
@@ -21,20 +20,20 @@ export const InformMethodsFormItem = forwardRef<
 >((props, ref) => {
   const { value, onChange } = props;
 
-  const [informMethodList, setInformMethodList] = useState<InformMethod[]>([]);
+  const [informMethodList, setInformMethodList] = useState<[]>([]);
 
   useEffect(() => {
     const fetchInformMethodList = async (): Promise<void> => {
       const informMethodList = await CustomSenderApi_listSupportInform();
-      setInformMethodList(informMethodList.data);
+      setInformMethodList((informMethodList as any).data);
     };
     fetchInformMethodList();
   }, []);
 
   const renderGroup = (): React.ReactElement => {
     const options = informMethodList.map((informMethods) => ({
-      label: informMethods.description,
-      value: informMethods.inform_type,
+      label: (informMethods as any).description,
+      value: (informMethods as any).inform_type,
     }));
 
     return (

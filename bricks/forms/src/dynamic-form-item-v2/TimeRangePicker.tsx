@@ -25,6 +25,7 @@ export interface TimeRangePickerItemProps {
 export function TimeRangePickerItem(
   props: TimeRangePickerItemProps
 ): React.ReactElement {
+  // @ts-ignore
   const {
     value,
     rangeType,
@@ -63,6 +64,13 @@ export function TimeRangePickerItem(
       break;
   }
 
+  const dateValue = (!isEmpty(value?.startTime) || !isEmpty(value?.endTime))
+    ? [
+        value?.startTime ? moment(value?.startTime, format) : null,
+        value?.endTime ? moment(value?.endTime, format) : null,
+      ]
+    : [];
+
   return (
     <DatePicker.RangePicker
       style={{ width: width ?? "100%" }}
@@ -79,14 +87,8 @@ export function TimeRangePickerItem(
           ? "time"
           : rangeType
       }
-      value={
-        !isEmpty(value?.startTime) || !isEmpty(value?.endTime)
-          ? [
-              value?.startTime ? moment(value?.startTime, format) : null,
-              value?.endTime ? moment(value?.endTime, format) : null,
-            ]
-          : []
-      }
+      // @ts-ignore
+      value={dateValue}
       onChange={(value) => {
         if (!value) {
           onChange?.(undefined);

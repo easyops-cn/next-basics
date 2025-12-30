@@ -12,6 +12,26 @@ import { UseBrickConf, MenuIcon } from "@next-core/brick-types";
 import { TooltipPlacement, TooltipAlignConfig } from "antd/lib/tooltip";
 import { ActionType, AlignType } from "rc-trigger/lib/interface";
 
+export interface PopoverContainerElementProps {
+  data?: any;
+  displayBrick?: { useBrick: UseBrickConf; data?: any; };
+  popoverTitleBrick?: { useBrick: UseBrickConf; };
+  align?: AlignType;
+  popoverBrick: { useBrick: UseBrickConf; data?: any; };
+  popoverIcon?: MenuIcon;
+  placement?: TooltipPlacement;
+  trigger?: ActionType | ActionType[];
+  popoverContentStyle?: Record<string, any>;
+  showIcon?: "always" | "never" | "hover";
+  zIndex?: number;
+  highlighted?: boolean;
+  related?: boolean;
+  faded?: boolean;
+  transferGraphAttrs?: boolean;
+  transferVisible?: boolean;
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
+}
+
 /**
  * @id basic-bricks.popover-container
  * @name basic-bricks.popover-container
@@ -41,7 +61,7 @@ import { ActionType, AlignType } from "rc-trigger/lib/interface";
 * | transformFrom | string         | -        | -       | 属性数据转换来自数据源的哪个字段，不填则为整个数据 |
  * @noInheritDoc
  */
-export class PopoverContainerElement extends UpdatingElement {
+export class PopoverContainerElement extends UpdatingElement implements PopoverContainerElementProps {
   // 整体数据，可以配置整体数据，也可以单独配置数据
   /**
    * @kind any

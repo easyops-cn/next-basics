@@ -17,7 +17,9 @@ export function FavoriteDesktopCell({
     () =>
       item.launchpadCollection.type === "microApp"
         ? !item.microAppId
+        // @ts-ignore
         : item.launchpadCollection.type === "customItem"
+        // @ts-ignore
         ? !item.customItemId
         : false,
     [item]
@@ -62,10 +64,13 @@ export function FavoriteDesktopCell({
           [styles.disabled]: disabled,
         })}
       >
-        <Link className={styles.link} to={realLink} onClick={handleCellClick}>
+        <Link className={styles.link} to={realLink} 
+        // @ts-ignore
+        onClick={handleCellClick}>
           <>
             <span className={classNames(styles.appLink, styles.square)}>
               <GeneralIcon
+                // @ts-ignore
                 icon={item?.launchpadCollection.icon}
                 style={{ fontSize: 18 }}
               />

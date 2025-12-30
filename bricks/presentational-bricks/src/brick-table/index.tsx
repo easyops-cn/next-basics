@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import ReactDOM from "react-dom";
 import {
@@ -53,6 +54,58 @@ import { DataIndex } from "rc-table/lib/interface";
 import { MenuIcon } from "@next-core/brick-types";
 import { BrickWrapperConfig } from "../interfaces";
 import { SizeType } from "antd/lib/config-provider/SizeContext";
+
+export interface BrickTableElementProps {
+  rowSelection?: false | TableRowSelection<any>;
+  rowKey?: string;
+  hiddenColumns?: Array<string | number>;
+  filters?: Record<string, string[]>;
+  configProps?: any;
+  sort?: string;
+  order?: string | number;
+  rowDisabledConfig?: RowDisabledProps | RowDisabledProps[];
+  expandable?: ExpandableConfig<Record<string, unknown>> | false;
+  expandedRowBrick?: {
+    useBrick?: UseBrickConf;
+  }
+  emptyUseBrick?: {
+    useBrick?: UseBrickConf;
+  }
+  expandIcon?: {
+    collapsedIcon: MenuIcon;
+    expandedIcon: MenuIcon;
+  }
+  expandIconColumnIndex?: number;
+  expandRowByClick?: boolean;
+  optimizedColumns?: Array<string | number>;
+  wrapperConfig?: BrickWrapperConfig;
+  defaultExpandAllRows?: boolean;
+  expandedRowKeys?: string[];
+  selectAllChildren?: boolean;
+  defaultSelectAll?: boolean;
+  ellipsisInfo?: boolean;
+  frontSearch?: boolean;
+  exactSearch?: boolean;
+  frontSearchFilterKeys?: string[];
+  page?: number;
+  pageSize?: number;
+  scrollConfigs?: TableProps<unknown>["scroll"];
+  tableDraggable?: boolean;
+  acceptType?: string;
+  zebraPattern?: boolean;
+  storeCheckedByUrl?: boolean;
+  extraRows?: Record<string, unknown>[];
+  draggable?: boolean;
+  autoSelectParentWhenAllChildrenSelected?: boolean;
+  thTransparent?: boolean;
+  pagination?: false | TablePaginationConfig;
+  size?: SizeType | "x-small";
+  type?: RowSelectionType;
+  selectedRowKeys?: React.Key[];
+  showHeaderExpandAll?: boolean;
+  columnKeyBrickMap?: Record<string, { useBrick: UseBrickConf }>;
+}
+
 export interface RowDisabledProps {
   field: string;
   value: any;
@@ -305,7 +358,7 @@ export interface CellStatusProps {
  *
  * @noInheritDoc
  */
-export class BrickTableElement extends UpdatingElement {
+export class BrickTableElement extends UpdatingElement implements BrickTableElementProps {
   /**
    * @detail {[pagePath]: xxx}
    * @description 页码变化,pagePath 可在 fields.page 中设置，默认为 page

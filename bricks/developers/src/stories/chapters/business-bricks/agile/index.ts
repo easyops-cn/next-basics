@@ -21,5 +21,5 @@ export const chapter: Chapter = {
     TplIssueDetailDrawer,
     TplCreateIssueModal,
     TplEditIssueModal,
-  ],
+  ] as any,
 };

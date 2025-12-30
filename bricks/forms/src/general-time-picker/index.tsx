@@ -29,7 +29,18 @@ import { TimePickerProps } from "antd/lib/time-picker";
  *| -------------- | ------ | ---------------------- |
  *| getFormElement | -      | 获得输入框所属表单元素 |
  */
-export class GeneralTimePickerElement extends FormItemElement {
+export interface GeneralTimePickerElementProps {
+  name?: string;
+  value?: string;
+  placeholder?: string;
+  label?: string;
+  required?: boolean;
+  message?: Record<string, string>;
+  configProps?: Partial<TimePickerProps>;
+}
+
+
+export class GeneralTimePickerElement extends FormItemElement  implements GeneralTimePickerElementProps {
   /* =========================== Group: basic =========================== */
 
   /**

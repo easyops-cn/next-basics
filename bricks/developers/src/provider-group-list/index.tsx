@@ -22,7 +22,12 @@ import {
  * @noInheritDoc
  */
 
-export class ProviderGroupListElement extends UpdatingElement {
+export interface ProviderGroupListElementProps {
+  dataSource: NamespaceItem[];
+  containerStyle: React.CSSProperties;
+}
+
+export class ProviderGroupListElement extends UpdatingElement implements ProviderGroupListElementProps {
   /**
    * @kind GroupItem
    * @required true

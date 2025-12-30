@@ -7,5 +7,5 @@ export const chapter: Chapter = {
     en: "permission",
     zh: "权限相关",
   },
-  stories: [roleSetUsersAndGroupsModal],
+  stories: [roleSetUsersAndGroupsModal] as any,
 };

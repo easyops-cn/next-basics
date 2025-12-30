@@ -1,5 +1,6 @@
 import React from "react";
 import { List, Avatar } from "antd";
+// @ts-ignore
 import { ListProps, ListItemProps, ListItemMetaProps } from "antd/lib/List";
 import { ItemBrick } from "./index";
 import classNames from "classnames";
@@ -35,7 +36,7 @@ export function BrickList(props: BrickListProps): React.ReactElement {
       className={classNames({
         [styles.cardList]: isCardList
       })}
-      renderItem={item => {
+      renderItem={(item: ItemProps) => {
         const { meta, content, ...originItemProps } = item;
         return (
           <>
@@ -55,11 +56,11 @@ export function BrickList(props: BrickListProps): React.ReactElement {
               <List.Item {...originItemProps} style={props.itemStyle}>
                 {meta && (
                   <List.Item.Meta
-                    {...(item.meta.src && {
-                      avatar: <Avatar src={item.meta.src} />
+                    {...(meta.src && {
+                      avatar: <Avatar src={meta.src} />
                     })}
-                    title={item.meta.title}
-                    description={item.meta.description}
+                    title={meta.title}
+                    description={meta.description}
                   />
                 )}
                 <div>{content}</div>

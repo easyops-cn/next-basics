@@ -15,6 +15,64 @@ import { parseTemplate } from "@next-libs/cmdb-utils";
 import style from "./index.shadow.less";
 import { CardProps } from "antd/lib/card";
 
+
+export interface CardItemElementProps {
+  cardLayoutType?: CardLayoutType;
+  fields?: {
+    cardTitle?: string;
+    cardSubtitle?: string;
+    newDescription?: string;
+    topInformation?: string;
+    descriptionList?: string;
+    icon?: string;
+    iconColor?: string;
+    iconStyle?: string;
+    iconSize?: string;
+    iconOffsetX?: string;
+    iconOffsetY?: string;
+    iconOpacity?: string;
+    disabled?: string;
+  }
+  dataSource?: Record<string, any>;
+  urlTemplate?: string;
+  cardTitle?: string;
+  cardSubtitle?: string;
+  newDescription?: string;
+  topInformation?: string;
+  descriptionList?: string[] | string | DescriptionItem[];
+  descMaxLine?: number;
+  hideDescCircle?: boolean;
+  url?: string;
+  href?: string;
+  target?: string;
+  icon?: MenuIcon;
+  iconStyle?: Record<string, any>;
+  iconColor?: Color ;
+  iconSize?: string | number;
+  iconOffsetX?: string | number;
+  iconOffsetY?: string | number;
+  iconOpacity?: number;
+  tagConfig?: {
+    text: string;
+    field?: string;
+    value?: any;
+    isNotEqual?: boolean; //增加下逻辑
+    hideOperate?: boolean;
+    color?: Color;
+    triangle?: boolean;
+  }
+  configProps?: CardProps;
+  showOperationAreaWhenHovering?: boolean;
+  alwaysShowDescription?: boolean;
+  descriptionDataType?: "list" | "section";
+  disabled?: boolean;
+  reverseBgColor?: boolean;
+  imgSrc?: string;
+  showImg?: boolean;
+  imgSize?: number;
+  shape?: "circle" | "square" | "round-square";
+}
+
 export type Color =
   | "green"
   | "red"
@@ -63,7 +121,7 @@ export interface DescriptionItem {
  * @memo
  * @noInheritDoc
  */
-export class CardItemElement extends UpdatingElement {
+export class CardItemElement extends UpdatingElement implements CardItemElementProps {
   /**
    * @required false
    * @default "icon-as-background"

@@ -3,6 +3,14 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { LogDisplay } from "./LogDisplay";
 
+
+export interface LogDisplayElementProps {
+  value?: string;
+  loadingIcon?: boolean;
+  hasBackspace?: boolean;
+  containerStyle?: React.CSSProperties;
+}
+
 /**
  * @id presentational-bricks.log-display
  * @name presentational-bricks.log-display
@@ -16,7 +24,7 @@ import { LogDisplay } from "./LogDisplay";
  * @memo
  * @noInheritDoc
  */
-export class LogDisplayElement extends UpdatingElement {
+export class LogDisplayElement extends UpdatingElement implements LogDisplayElementProps {
   /**
    * @kind string
    * @required true

@@ -3,7 +3,11 @@ import ReactDOM from "react-dom";
 import { BrickWrapper } from "@next-core/brick-kit";
 import { LoadingBar } from "./LoadingBar";
 
-class LoadingBarElement extends HTMLElement {
+export interface LoadingBarElementProps {
+  // 该构件无属性
+}
+
+class LoadingBarElement extends HTMLElement implements LoadingBarElementProps {
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {

@@ -38,7 +38,35 @@ import { clone, pullAt } from "lodash";
  *| disabledEditBtnRowValues    | `string[]`  | -        | -       | 禁用编辑操作的行唯一值 |
  *| disabledDeleteBtnRowValues  | `string[]`  | -        | -       | 禁用删除操作的行唯一值 |
  */
-export class GeneralStructsFormItemElement extends FormItemElement {
+export interface GeneralStructsFormItemElementProps {
+  name?: string;
+  label?: string;
+  btnText?: string;
+  value?: any;
+  structDefaultValues?: any;
+  fieldsMap?: any;
+  maskClosable?: boolean;
+  createModalTitle?: string;
+  editModalTitle?: string;
+  modalWidth?: string | number;
+  okText?: string;
+  cancelText?: string;
+  deleteText?: string;
+  isVisible?: boolean;
+  confirmVisible?: boolean;
+  addBtnDisabled?: boolean;
+  structItemShowRenderFN?: (
+    text: any,
+    rowData: Record<string, any>,
+    dataIndex: any,
+    columnKey: any
+  ) => any;
+  structInnerTableColumnsOrder?: string[];
+  rowOperationConfig?: RowOperationConfig;
+}
+
+
+export class GeneralStructsFormItemElement extends FormItemElement  implements GeneralStructsFormItemElementProps {
   private _mountPoint: HTMLElement;
   private _childComponent: any;
   private _ref = React.createRef<GeneralStructsRef>();
@@ -290,7 +318,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
     this._render();
   }
 
-  private _listenToClick = async (e) => {
+  private _listenToClick = async (e: any) => {
     const paths = e.composedPath() as HTMLElement[];
     const clickNode = paths[0];
     const nodeName = clickNode.nodeName.toLowerCase();

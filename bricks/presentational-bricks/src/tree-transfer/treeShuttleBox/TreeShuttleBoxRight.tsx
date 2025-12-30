@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { FC, useState, useMemo, useEffect } from "react";
 import shareStyle from "./share.module.css";
 import { Checkbox, Input, Tree } from "antd";

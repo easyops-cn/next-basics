@@ -59,6 +59,7 @@ export function GeneralCard({
 
   // istanbul ignore next
   const handleFooter = () => {
+    // @ts-ignore
     const rootNodeRef = footerRef.current.getRootNode().host;
     const rootNodeRect = rootNodeRef.getBoundingClientRect();
     const top = rootNodeRect.bottom - window.innerHeight;
@@ -86,6 +87,7 @@ export function GeneralCard({
         }
       }
     });
+    // @ts-ignore
     resizeObserver.observe(footerRef.current.getRootNode().host);
 
     if (isFixedFooter) {

@@ -1,0 +1,1628 @@
+{
+    "packages": [
+        {
+            "name": "basic-bricks",
+            "architecture": "V2",
+            "bricks": [
+                {
+                    "tagName": "basic-bricks.advanced-list-container",
+                    "className": "AdvancedListContainerElement",
+                    "propsInterface": "AdvancedListContainerElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/advance-list-container/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.advance-list-container",
+                    "className": "AdvanceListContainerElement",
+                    "propsInterface": "AdvanceListContainerElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/advance-list-container/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.app-bar",
+                    "className": "AppBarElement",
+                    "propsInterface": "AppBarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/app-bar/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.app-bar-breadcrumb",
+                    "className": "AppbarBreadcrumbElement",
+                    "propsInterface": "AppbarBreadcrumbElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/app-bar-breadcrumb/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.app-bar-logo",
+                    "className": "AppBarLogoElement",
+                    "propsInterface": "AppBarLogoElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/app-bar-logo/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.app-bar-setting",
+                    "className": "AppBarSettingElement",
+                    "propsInterface": "AppBarSettingElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/app-bar-setting/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.app-bar-wrapper",
+                    "className": "AppBarWrapperElement",
+                    "propsInterface": "AppBarWrapperElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/app-bar-wrapper/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.app-document-link",
+                    "className": "AppBarDocumentLinkElement",
+                    "propsInterface": "AppBarDocumentLinkElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/app-document-link/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.brick-error",
+                    "className": "BrickErrorElement",
+                    "propsInterface": "BrickErrorElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/brick-error/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.delete-confirm-modal",
+                    "className": "DeleteConfirmModalElement",
+                    "propsInterface": "DeleteConfirmModalElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/delete-confirm-modal/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.easy-view",
+                    "className": "EasyViewElement",
+                    "propsInterface": "EasyViewElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/easy-view/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.event-agent",
+                    "className": "EventAgentElement",
+                    "propsInterface": "EventAgentElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/event-agent/index.ts"
+                },
+                {
+                    "tagName": "basic-bricks.export-json-file",
+                    "className": "ExportJsonFileElement",
+                    "propsInterface": "ExportJsonFileElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/export-json-file/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.flex-layout",
+                    "className": "FlexLayoutElement",
+                    "propsInterface": "FlexLayoutElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/flex-layout/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.fold-brick",
+                    "className": "FoldBrickElement",
+                    "propsInterface": "FoldBrickElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/fold-brick/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.fold-brick-v2",
+                    "className": "FoldBrickV2Element",
+                    "propsInterface": "FoldBrickV2ElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/fold-brick-v2/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.general-anchor",
+                    "className": "GeneralAnchorElement",
+                    "propsInterface": "GeneralAnchorElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/general-anchor/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.general-button",
+                    "className": "GeneralButtonElement",
+                    "propsInterface": "GeneralButtonElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/general-button/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.general-card",
+                    "className": "GeneralCardElement",
+                    "propsInterface": "GeneralCardElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/general-card/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.general-custom-buttons",
+                    "className": "GeneralCustomButtonsElement",
+                    "propsInterface": "GeneralCustomButtonsElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/general-custom-buttons/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.general-drawer",
+                    "className": "GeneralDrawerElement",
+                    "propsInterface": "GeneralDrawerElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/general-drawer/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.general-heading",
+                    "className": "GeneralHeadingElement",
+                    "propsInterface": "GeneralHeadingElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/general-heading/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.general-hotkeys",
+                    "className": "GeneralHotkeysElement",
+                    "propsInterface": "GeneralHotkeysElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/general-hotkeys/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.general-modal",
+                    "className": "GeneralModalElement",
+                    "propsInterface": "GeneralModalElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/general-modal/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.general-notification",
+                    "className": "GeneralNotificationElement",
+                    "propsInterface": "GeneralNotificationElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/general-notification/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.general-popup",
+                    "className": "GeneralPopupElement",
+                    "propsInterface": "GeneralPopupElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/general-popup/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.general-text",
+                    "className": "GeneralTextElement",
+                    "propsInterface": "GeneralTextElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/general-text/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.general-timer",
+                    "className": "GeneralTimerElement",
+                    "propsInterface": "GeneralTimerElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/general-timer/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.general-title",
+                    "className": "GeneralTitleElement",
+                    "propsInterface": "GeneralTitleElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/general-title/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.grid-layout",
+                    "className": "GridLayoutElement",
+                    "propsInterface": "GridLayoutElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/grid-layout/index.ts"
+                },
+                {
+                    "tagName": "basic-bricks.header-bar",
+                    "className": "HeaderBarElement",
+                    "propsInterface": "HeaderBarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/header-bar/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.home-redirect",
+                    "className": "HomeRedirectElement",
+                    "propsInterface": "HomeRedirectElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/home-redirect/index.ts"
+                },
+                {
+                    "tagName": "basic-bricks.index-card",
+                    "className": "IndexCardElement",
+                    "propsInterface": "IndexCardElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/index-card/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.launchpad-button",
+                    "className": "LaunchpadButtonElement",
+                    "propsInterface": "LaunchpadButtonElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/launchpad-button/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.list-container",
+                    "className": "ListContainerElement",
+                    "propsInterface": "ListContainerElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/list-container/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.loading-bar",
+                    "className": "LoadingBarElement",
+                    "propsInterface": "LoadingBarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/loading-bar/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.magic-brick",
+                    "className": "MagicBrickElement",
+                    "propsInterface": "MagicBrickElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/magic-brick/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.menu-bar",
+                    "className": "MenuBarElement",
+                    "propsInterface": "MenuBarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/menu-bar/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.micro-view",
+                    "className": "MicroViewElement",
+                    "propsInterface": "MicroViewElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/micro-app/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.micro-app",
+                    "className": "MicroAppElement",
+                    "propsInterface": "MicroAppElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/micro-app/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.multiple-columns-card",
+                    "className": "MultipleColumnsCardElement",
+                    "propsInterface": "MultipleColumnsCardElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/multiple-columns-card/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.page-error",
+                    "className": "PageErrorElement",
+                    "propsInterface": "PageErrorElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/page-error/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.page-not-found",
+                    "className": "PageNotFoundElement",
+                    "propsInterface": "PageNotFoundElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/page-not-found/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.page-title",
+                    "className": "PageTitleElement",
+                    "propsInterface": "PageTitleElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/page-title/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.popover-container",
+                    "className": "PopoverContainerElement",
+                    "propsInterface": "PopoverContainerElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/popover-container/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.print-button",
+                    "className": "PrintButtonElement",
+                    "propsInterface": "PrintButtonElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/print-button/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.quick-visit-menu",
+                    "className": "QuickVisitMenuElement",
+                    "propsInterface": "QuickVisitMenuElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/quick-visit-menu/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.redirect-to",
+                    "className": "RedirectToElement",
+                    "propsInterface": "RedirectToElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/redirect-to/index.ts"
+                },
+                {
+                    "tagName": "basic-bricks.resizable-box",
+                    "className": "ResizableBoxElement",
+                    "propsInterface": "ResizableBoxElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/resizable-box/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.script-brick",
+                    "className": "ScriptBrickElement",
+                    "propsInterface": "ScriptBrickElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/script-brick/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.sub-menu",
+                    "className": "SubMenuElement",
+                    "propsInterface": "SubMenuElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/sub-menu/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.sub-menu-filter",
+                    "className": "SubMenuFilterElement",
+                    "propsInterface": "SubMenuFilterElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/sub-menu-filter/index.tsx"
+                },
+                {
+                    "tagName": "basic-bricks.transform-agent",
+                    "className": "TransformAgentElement",
+                    "propsInterface": "TransformAgentElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/transform-agent/index.ts"
+                },
+                {
+                    "tagName": "basic-bricks.virtual-list-container",
+                    "className": "VirtualListContainerElement",
+                    "propsInterface": "VirtualListContainerElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/basic-bricks/src/virtual-list-container/index.tsx"
+                }
+            ],
+            "hasJsxTs": false
+        },
+        {
+            "name": "basic-providers",
+            "architecture": "V2",
+            "bricks": [],
+            "hasJsxTs": false
+        },
+        {
+            "name": "brick-visualization",
+            "architecture": "V2",
+            "bricks": [
+                {
+                    "tagName": "brick-visualization.visual-form-rules-setting",
+                    "className": "VisualFormRulesSettingElement",
+                    "propsInterface": "VisualFormRulesSettingElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/brick-visualization/src/visual-form-rules-setting/index.tsx"
+                },
+                {
+                    "tagName": "brick-visualization.visual-property-form",
+                    "className": "VisualPropertyFormElement",
+                    "propsInterface": "VisualPropertyFormElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/brick-visualization/src/visual-property-form/index.tsx"
+                }
+            ],
+            "hasJsxTs": false
+        },
+        {
+            "name": "calendar-bricks",
+            "architecture": "V2",
+            "bricks": [
+                {
+                    "tagName": "calendar-bricks.agenda-calendar",
+                    "className": "AgendaCalendarElement",
+                    "propsInterface": "AgendaCalendarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/calendar-bricks/src/agenda-calendar/index.tsx"
+                }
+            ],
+            "hasJsxTs": false
+        },
+        {
+            "name": "developers",
+            "architecture": "V2",
+            "bricks": [
+                {
+                    "tagName": "developers.brick-book",
+                    "className": "BrickBookElement",
+                    "propsInterface": "BrickBookElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/developers/src/brick-book/index.tsx"
+                },
+                {
+                    "tagName": "developers.brick-colors",
+                    "className": "BrickColorsElement",
+                    "propsInterface": "BrickColorsElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/developers/src/brick-colors/index.tsx"
+                },
+                {
+                    "tagName": "developers.brick-debug",
+                    "className": "BrickDebugElement",
+                    "propsInterface": "BrickDebugElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/developers/src/brick-debug/index.tsx"
+                },
+                {
+                    "tagName": "developers.bricks-of-providers",
+                    "className": "BricksOfProvidersElement",
+                    "propsInterface": "BricksOfProvidersElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/developers/src/bricks-of-providers/index.tsx"
+                },
+                {
+                    "tagName": "developers.doc-book",
+                    "className": "DocBookElement",
+                    "propsInterface": "DocBookElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/developers/src/doc-book/index.tsx"
+                },
+                {
+                    "tagName": "developers.illustration-card-list",
+                    "className": "IllustrationCardElement",
+                    "propsInterface": "IllustrationCardElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/developers/src/illustration-card/index.tsx"
+                },
+                {
+                    "tagName": "developers.provider-doc",
+                    "className": "ProviderDocElement",
+                    "propsInterface": "ProviderDocElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/developers/src/provider-doc/index.tsx"
+                },
+                {
+                    "tagName": "developers.provider-group-list",
+                    "className": "ProviderGroupListElement",
+                    "propsInterface": "ProviderGroupListElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/developers/src/provider-group-list/index.tsx"
+                },
+                {
+                    "tagName": "developers.provider-group-menu",
+                    "className": "ProviderGroupMenuElement",
+                    "propsInterface": "ProviderGroupMenuElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/developers/src/provider-group-menu/index.tsx"
+                },
+                {
+                    "tagName": "developers.v3-next-example",
+                    "className": "V3NextExampleElement",
+                    "propsInterface": "V3NextExampleElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/developers/src/v3-next-example/index.tsx"
+                }
+            ],
+            "hasJsxTs": false
+        },
+        {
+            "name": "flow-builder",
+            "architecture": "V2",
+            "bricks": [
+                {
+                    "tagName": "flow-builder.fields-mapping-editor",
+                    "className": "FieldsMappingEditorElement",
+                    "propsInterface": "FieldsMappingEditorElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/flow-builder/src/fields-mapping-editor/index.tsx"
+                },
+                {
+                    "tagName": "flow-builder.multiple-files-form",
+                    "className": "MultipleFilesFormElement",
+                    "propsInterface": "MultipleFilesFormElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/flow-builder/src/multiple-files-form/index.tsx"
+                },
+                {
+                    "tagName": "flow-builder.schema-editor",
+                    "className": "SchemaEditorElement",
+                    "propsInterface": "SchemaEditorElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/flow-builder/src/schema-editor/index.tsx"
+                },
+                {
+                    "tagName": "flow-builder.step-tree",
+                    "className": "StepTreeElement",
+                    "propsInterface": "StepTreeElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/flow-builder/src/step-tree/index.tsx"
+                },
+                {
+                    "tagName": "flow-builder.variable-item",
+                    "className": "VariableItemElement",
+                    "propsInterface": "VariableItemElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/flow-builder/src/variable-item/index.tsx"
+                },
+                {
+                    "tagName": "flow-builder.variable-list",
+                    "className": "VariableListElement",
+                    "propsInterface": "VariableListElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/flow-builder/src/variable-list/index.tsx"
+                }
+            ],
+            "hasJsxTs": false
+        },
+        {
+            "name": "form-builder",
+            "architecture": "V2",
+            "bricks": [
+                {
+                    "tagName": "form-builder.business-rule",
+                    "className": "BusinessRuleElement",
+                    "propsInterface": "BusinessRuleElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/form-builder/src/business-rule/index.tsx"
+                },
+                {
+                    "tagName": "form-builder.cascader-data-setter",
+                    "className": "CascaderDataSetterElement",
+                    "propsInterface": "CascaderDataSetterElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/form-builder/src/cascader-data-setter/index.tsx"
+                },
+                {
+                    "tagName": "form-builder.cmdb-cascader-path-setter",
+                    "className": "CmdbCascaderPathSetterElement",
+                    "propsInterface": "CmdbCascaderPathSetterElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/form-builder/src/cmdb-cascader-path-setter/index.tsx"
+                },
+                {
+                    "tagName": "form-builder.conditional-format",
+                    "className": "ConditionalFormatElement",
+                    "propsInterface": "ConditionalFormatElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/form-builder/src/conditional-format/index.tsx"
+                }
+            ],
+            "hasJsxTs": false
+        },
+        {
+            "name": "forms",
+            "architecture": "V2",
+            "bricks": [
+                {
+                    "tagName": "forms.advance-setting",
+                    "className": "AdvanceSettingElement",
+                    "propsInterface": "AdvanceSettingElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/advance-setting/index.tsx"
+                },
+                {
+                    "tagName": "forms.cmdb-cascader",
+                    "className": "CmdbCascaderElement",
+                    "propsInterface": "CmdbCascaderElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/cmdb-cascader/index.tsx"
+                },
+                {
+                    "tagName": "forms.cmdb-instance-select",
+                    "className": "CmdbInstanceSelectElement",
+                    "propsInterface": "CmdbInstanceSelectElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/cmdb-instance-select/index.tsx"
+                },
+                {
+                    "tagName": "forms.cmdb-instance-select-panel",
+                    "className": "CmdbInstanceSelectPanelElement",
+                    "propsInterface": "CmdbInstanceSelectPanelElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/cmdb-instance-select-panel/index.tsx"
+                },
+                {
+                    "tagName": "forms.cmdb-object-attr-value",
+                    "className": "CmdbObjectAttrValueElement",
+                    "propsInterface": "CmdbObjectAttrValueElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/cmdb-object-attr-value/index.tsx"
+                },
+                {
+                    "tagName": "forms.crontab-input",
+                    "className": "CrontabInputElement",
+                    "propsInterface": "CrontabInputElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/crontab-input/index.tsx"
+                },
+                {
+                    "tagName": "forms.dynamic-form-input-item",
+                    "className": "DynamicFormInputItemElement",
+                    "propsInterface": "DynamicFormInputItemElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/dynamic-form-input-item/index.tsx"
+                },
+                {
+                    "tagName": "forms.dynamic-form-item",
+                    "className": "DynamicFormItemElement",
+                    "propsInterface": "DynamicFormItemElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/dynamic-form-item/index.tsx"
+                },
+                {
+                    "tagName": "forms.dynamic-form-item-v2",
+                    "className": "DynamicFormItemV2Element",
+                    "propsInterface": "DynamicFormItemV2ElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/dynamic-form-item-v2/index.tsx"
+                },
+                {
+                    "tagName": "forms.dynamic-user-select-item",
+                    "className": "DynamicUserSelectItemElement",
+                    "propsInterface": "DynamicUserSelectItemElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/dynamic-user-select-item/index.tsx"
+                },
+                {
+                    "tagName": "forms.form-modal",
+                    "className": "FormModalElement",
+                    "propsInterface": "FormModalElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/form-modal/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-auto-complete",
+                    "className": "GeneralAutoCompleteElement",
+                    "propsInterface": "GeneralAutoCompleteElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-auto-complete/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-buttons",
+                    "className": "GeneralButtonsElement",
+                    "propsInterface": "GeneralButtonsElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-buttons/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-cascader",
+                    "className": "GeneralCascaderElement",
+                    "propsInterface": "GeneralCascaderElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-cascader/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-checkbox",
+                    "className": "GeneralCheckboxElement",
+                    "propsInterface": "GeneralCheckboxElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-checkbox/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-date-picker",
+                    "className": "GeneralDatePickerElement",
+                    "propsInterface": "GeneralDatePickerElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-date-picker/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-form",
+                    "className": "GeneralFormElement",
+                    "propsInterface": "GeneralFormElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-form/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-form-item",
+                    "className": "GeneralFormItemElement",
+                    "propsInterface": "GeneralFormItemElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-form-item/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-form-item-v2",
+                    "className": "GeneralFormItemV2Element",
+                    "propsInterface": "GeneralFormItemV2ElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-form-item-v2/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-input",
+                    "className": "GeneralInputElement",
+                    "propsInterface": "GeneralInputElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-input/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-input-number",
+                    "className": "GeneralInputNumberElement",
+                    "propsInterface": "GeneralInputNumberElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-input-number/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-input-number-range",
+                    "className": "GeneralInputNumberRangeElement",
+                    "propsInterface": "GeneralInputNumberRangeElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-input-number-range/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-link",
+                    "className": "GeneralLinkElement",
+                    "propsInterface": "GeneralLinkElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-link/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-modal",
+                    "className": "GeneralModalElement",
+                    "propsInterface": "GeneralModalElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-modal/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-radio",
+                    "className": "GeneralRadioElement",
+                    "propsInterface": "GeneralRadioElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-radio/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-select",
+                    "className": "GeneralSelectElement",
+                    "propsInterface": "GeneralSelectElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-select/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-slide",
+                    "className": "GeneralSlideElement",
+                    "propsInterface": "GeneralSlideElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-slide/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-structs-form-item",
+                    "className": "GeneralStructsFormItemElement",
+                    "propsInterface": "GeneralStructsFormItemElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-structs-form-item/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-structs-form-item-v2",
+                    "className": "GeneralStructsFormItemV2Element",
+                    "propsInterface": "GeneralStructsFormItemV2ElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-structs-form-item-v2/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-switch",
+                    "className": "GeneralSwitchElement",
+                    "propsInterface": "GeneralSwitchElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-switch/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-text-area",
+                    "className": "GeneralTextAreaElement",
+                    "propsInterface": "GeneralTextAreaElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-textarea/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-textarea",
+                    "className": "GeneralTextAreaAlias",
+                    "propsInterface": "GeneralTextAreaAliasProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-textarea/index.tsx"
+                },
+                {
+                    "tagName": "forms.general-time-picker",
+                    "className": "GeneralTimePickerElement",
+                    "propsInterface": "GeneralTimePickerElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/general-time-picker/index.tsx"
+                },
+                {
+                    "tagName": "forms.icon-select",
+                    "className": "IconSelectElement",
+                    "propsInterface": "IconSelectElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/icon-select/index.tsx"
+                },
+                {
+                    "tagName": "forms.inform-methods-form",
+                    "className": "InformMethodsFormElement",
+                    "propsInterface": "InformMethodsFormElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/inform-methods-form/index.tsx"
+                },
+                {
+                    "tagName": "forms.input-with-unit",
+                    "className": "InputWithUnitElement",
+                    "propsInterface": "InputWithUnitElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/input-with-unit/index.tsx"
+                },
+                {
+                    "tagName": "forms.time-range-picker",
+                    "className": "TimeRangePickerElement",
+                    "propsInterface": "TimeRangePickerElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/time-range-picker/index.tsx"
+                },
+                {
+                    "tagName": "forms.tree-select",
+                    "className": "TreeSelectElement",
+                    "propsInterface": "TreeSelectElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/tree-select/index.tsx"
+                },
+                {
+                    "tagName": "forms.upload-files",
+                    "className": "UploadFilesElement",
+                    "propsInterface": "UploadFilesElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/upload-files/index.tsx"
+                },
+                {
+                    "tagName": "forms.upload-files-v2",
+                    "className": "UploadFilesV2Element",
+                    "propsInterface": "UploadFilesV2ElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/upload-files-v2/index.tsx"
+                },
+                {
+                    "tagName": "forms.upload-img",
+                    "className": "UploadImgElement",
+                    "propsInterface": "UploadImgElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/upload-img/index.tsx"
+                },
+                {
+                    "tagName": "forms.user-or-user-group-select",
+                    "className": "UserOrUserGroupSelectElement",
+                    "propsInterface": "UserOrUserGroupSelectElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/forms/src/user-or-user-group-select/index.tsx"
+                }
+            ],
+            "hasJsxTs": false
+        },
+        {
+            "name": "frame-bricks",
+            "architecture": "V2",
+            "bricks": [
+                {
+                    "tagName": "frame-bricks.drop-menu",
+                    "className": "DropMenuElement",
+                    "propsInterface": "DropMenuElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/frame-bricks/src/drop-menu/index.tsx"
+                },
+                {
+                    "tagName": "frame-bricks.nav-menu",
+                    "className": "NavMenuElement",
+                    "propsInterface": "NavMenuElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/frame-bricks/src/nav-menu/index.tsx"
+                },
+                {
+                    "tagName": "frame-bricks.side-bar",
+                    "className": "SideBarElement",
+                    "propsInterface": "SideBarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/frame-bricks/src/side-bar/index.tsx"
+                }
+            ],
+            "hasJsxTs": false
+        },
+        {
+            "name": "general-auth",
+            "architecture": "UNKNOWN",
+            "bricks": [],
+            "hasJsxTs": false
+        },
+        {
+            "name": "nav-legacy",
+            "architecture": "V2",
+            "bricks": [
+                {
+                    "tagName": "nav-legacy.app-bar",
+                    "className": "AppBarElement",
+                    "propsInterface": "AppBarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/nav-legacy/src/app-bar/index.tsx"
+                },
+                {
+                    "tagName": "nav-legacy.app-bar-breadcrumb",
+                    "className": "AppbarBreadcrumbElement",
+                    "propsInterface": "AppbarBreadcrumbElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/nav-legacy/src/app-bar-breadcrumb/index.tsx"
+                },
+                {
+                    "tagName": "nav-legacy.app-bar-logo",
+                    "className": "AppBarLogoElement",
+                    "propsInterface": "AppBarLogoElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/nav-legacy/src/app-bar-logo/index.tsx"
+                },
+                {
+                    "tagName": "nav-legacy.app-bar-setting",
+                    "className": "AppBarSettingElement",
+                    "propsInterface": "AppBarSettingElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/nav-legacy/src/app-bar-setting/index.tsx"
+                },
+                {
+                    "tagName": "nav-legacy.app-bar-wrapper",
+                    "className": "AppBarWrapperElement",
+                    "propsInterface": "AppBarWrapperElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/nav-legacy/src/app-bar-wrapper/index.tsx"
+                },
+                {
+                    "tagName": "nav-legacy.app-document-link",
+                    "className": "AppBarDocumentLinkElement",
+                    "propsInterface": "AppBarDocumentLinkElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/nav-legacy/src/app-document-link/index.tsx"
+                },
+                {
+                    "tagName": "nav-legacy.launchpad-button",
+                    "className": "LaunchpadButtonElement",
+                    "propsInterface": "LaunchpadButtonElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/nav-legacy/src/launchpad-button/index.tsx"
+                },
+                {
+                    "tagName": "nav-legacy.menu-bar",
+                    "className": "MenuBarElement",
+                    "propsInterface": "MenuBarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/nav-legacy/src/menu-bar/index.tsx"
+                },
+                {
+                    "tagName": "nav-legacy.poll-announce",
+                    "className": "PollAnnounceElement",
+                    "propsInterface": "PollAnnounceElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/nav-legacy/src/poll-announce/index.tsx"
+                },
+                {
+                    "tagName": "nav-legacy.quick-visit-menu",
+                    "className": "QuickVisitMenuElement",
+                    "propsInterface": "QuickVisitMenuElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/nav-legacy/src/quick-visit-menu/index.tsx"
+                },
+                {
+                    "tagName": "nav-legacy.site-map",
+                    "className": "SiteMapElement",
+                    "propsInterface": "SiteMapElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/nav-legacy/src/site-map/index.tsx"
+                },
+                {
+                    "tagName": "nav-legacy.sub-menu",
+                    "className": "SubMenuElement",
+                    "propsInterface": "SubMenuElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/nav-legacy/src/sub-menu/index.tsx"
+                }
+            ],
+            "hasJsxTs": false
+        },
+        {
+            "name": "next-builder",
+            "architecture": "V2",
+            "bricks": [
+                {
+                    "tagName": "next-builder.api-proxy-request",
+                    "className": "ContractAutoCompleteElement",
+                    "propsInterface": "ContractAutoCompleteElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/api-proxy-request/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.api-request-form-item",
+                    "className": "ApiRequestFormItemElement",
+                    "propsInterface": "ApiRequestFormItemElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/api-request-form-item/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.builder-container",
+                    "className": "BuilderContainerElement",
+                    "propsInterface": "BuilderContainerElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/builder-container/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.event-config-form",
+                    "className": "EventConfigFormElement",
+                    "propsInterface": "EventConfigFormElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/event-config-form/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.events-editor",
+                    "className": "EventsEditorElement",
+                    "propsInterface": "EventsEditorElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/events-editor/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.function-debugger-sidebar",
+                    "className": "FunctionsSidebarElement",
+                    "propsInterface": "FunctionsSidebarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/function-debugger-sidebar/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.function-debugger-statusbar",
+                    "className": "FunctionDebuggerStatusbarElement",
+                    "propsInterface": "FunctionDebuggerStatusbarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/function-debugger-statusbar/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.function-debugger-store",
+                    "className": "FunctionDebuggerStoreElement",
+                    "propsInterface": "FunctionDebuggerStoreElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/function-debugger-store/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.function-debugger-toolbar",
+                    "className": "FunctionDebuggerToolbarElement",
+                    "propsInterface": "FunctionDebuggerToolbarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/function-debugger-toolbar/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.function-debugger-toolbar-v2",
+                    "className": "FunctionDebuggerToolbarV2Element",
+                    "propsInterface": "FunctionDebuggerToolbarV2ElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/function-debugger-toolbar-v2/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.preview-container",
+                    "className": "PreviewContainerElement",
+                    "propsInterface": "PreviewContainerElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/preview-container/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.search-tree",
+                    "className": "SearchTreeElement",
+                    "propsInterface": "SearchTreeElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/search-tree/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.contract-auto-complete",
+                    "className": "ContractAutoCompleteElement",
+                    "propsInterface": "ContractAutoCompleteElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/shared/components/contract-auto-complete/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.storyboard-lint-result",
+                    "className": "StoryboardLintResultElement",
+                    "propsInterface": "StoryboardLintResultElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/storyboard-lint-result/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-action",
+                    "className": "WorkbenchActionItemElement",
+                    "propsInterface": "WorkbenchActionItemElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-action/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-action-list",
+                    "className": "WorkbenchActionListElement",
+                    "propsInterface": "WorkbenchActionListElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-action-list/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-brick-context-menu",
+                    "className": "WorkbenchBrickContextMenuElement",
+                    "propsInterface": "WorkbenchBrickContextMenuElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-brick-context-menu/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-brick-tree",
+                    "className": "WorkbenchStoryboardTreeElement",
+                    "propsInterface": "WorkbenchStoryboardTreeElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-brick-tree/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-cache-action",
+                    "className": "WorkbenchCacheActionElement",
+                    "propsInterface": "WorkbenchCacheActionElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-cache-action/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-component-select",
+                    "className": "WorkbenchComponentSelectElement",
+                    "propsInterface": "WorkbenchComponentSelectElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-component-select/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-context-menu",
+                    "className": "WorkbenchContextMenuElement",
+                    "propsInterface": "WorkbenchContextMenuElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-context-menu/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-data-tree",
+                    "className": "WorkbenchDataTreeElement",
+                    "propsInterface": "WorkbenchDataTreeElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-data-tree/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-mini-action-bar",
+                    "className": "WorkbenchMiniActionBarElement",
+                    "propsInterface": "WorkbenchMiniActionBarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-mini-action-bar/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-pane",
+                    "className": "WorkbenchPaneElement",
+                    "propsInterface": "WorkbenchPaneElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-pane/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-quick-entry",
+                    "className": "WorkbenchQuickEntryElement",
+                    "propsInterface": "WorkbenchQuickEntryElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-quick-entry/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-sidebar",
+                    "className": "WorkbenchSidebarElement",
+                    "propsInterface": "WorkbenchSidebarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-sidebar/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-store",
+                    "className": "WorkbenchStoreElement",
+                    "propsInterface": "WorkbenchStoreElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-store/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-tabs",
+                    "className": "WorkbenchTabsElement",
+                    "propsInterface": "WorkbenchTabsElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-tabs/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workbench-tree",
+                    "className": "WorkbenchTreeElement",
+                    "propsInterface": "WorkbenchTreeElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workbench-tree/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workflow-condition-item",
+                    "className": "WorkflowConditionItemElement",
+                    "propsInterface": "WorkflowConditionItemElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workflow-condition-item/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workflow-create-data-item",
+                    "className": "WorkflowCreateDataItemElement",
+                    "propsInterface": "WorkflowCreateDataItemElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workflow-create-data-item/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workflow-edit-data-item",
+                    "className": "WorkflowEditDataItemElement",
+                    "propsInterface": "WorkflowEditDataItemElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workflow-edit-data-item/index.tsx"
+                },
+                {
+                    "tagName": "next-builder.workflow-node",
+                    "className": "WorkflowNodeElement",
+                    "propsInterface": "WorkflowNodeElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-builder/src/workflow-node/index.tsx"
+                }
+            ],
+            "hasJsxTs": false
+        },
+        {
+            "name": "next-previewer",
+            "architecture": "V2",
+            "bricks": [
+                {
+                    "tagName": "next-previewer.preview-helper",
+                    "className": "PreviewHelperElement",
+                    "propsInterface": "PreviewHelperElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/next-previewer/src/preview-helper/index.ts"
+                }
+            ],
+            "hasJsxTs": false
+        },
+        {
+            "name": "presentational-bricks",
+            "architecture": "V2",
+            "bricks": [
+                {
+                    "tagName": "presentational-bricks.agent-status",
+                    "className": "AgentStatusElement",
+                    "propsInterface": "AgentStatusElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/agent-status/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.avatar-upload",
+                    "className": "AvatarUploadElement",
+                    "propsInterface": "AvatarUploadElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/avatar-upload/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.banner-display-card-list",
+                    "className": "BannerDisplayCardListElement",
+                    "propsInterface": "BannerDisplayCardListElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/banner-display-card-list/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.basic-icon",
+                    "className": "BasicIconElement",
+                    "propsInterface": "BasicIconElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/basic-icon/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.basic-progress",
+                    "className": "BasicProgressElement",
+                    "propsInterface": "BasicProgressElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/basic-progress/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-alert",
+                    "className": "BrickAlertElement",
+                    "propsInterface": "BrickAlertElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-alert/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-alert-level",
+                    "className": "BrickAlertLevelElement",
+                    "propsInterface": "BrickAlertLevelElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-alert-level/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-alert-number",
+                    "className": "BrickAlertNumberElement",
+                    "propsInterface": "BrickAlertNumberElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-alert-number/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-alert-status",
+                    "className": "BrickAlertStatusElement",
+                    "propsInterface": "BrickAlertStatusElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-alert-status/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-alert-value",
+                    "className": "BrickAlertValueElement",
+                    "propsInterface": "BrickAlertValueElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-alert-value/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-button",
+                    "className": "BrickButtonElement",
+                    "propsInterface": "BrickButtonElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-button/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.calendar",
+                    "className": "BrickCalendarElement",
+                    "propsInterface": "BrickCalendarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-calendar/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-cluster-type",
+                    "className": "BrickClusterTypeElement",
+                    "propsInterface": "BrickClusterTypeElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-cluster-type/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-code-display",
+                    "className": "BrickCodeDisplayElement",
+                    "propsInterface": "BrickCodeDisplayElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-code-display/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-collapse-card",
+                    "className": "BrickCollapseCardElement",
+                    "propsInterface": "BrickCollapseCardElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-collapse-card/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-collection-instance-execution",
+                    "className": "BrickCollectionInstanceExecutionElement",
+                    "propsInterface": "BrickCollectionInstanceExecutionElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-collection-instance-execution/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-conditional-display",
+                    "className": "BrickConditionalDisplayElement",
+                    "propsInterface": "BrickConditionalDisplayElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-conditional-display/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-delete-confirm",
+                    "className": "BrickDeleteConfirmElement",
+                    "propsInterface": "BrickDeleteConfirmElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-delete-confirm/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-descriptions",
+                    "className": "BrickDescriptionsElement",
+                    "propsInterface": "BrickDescriptionsElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-descriptions/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-display-structs",
+                    "className": "BrickDisplayStructsElement",
+                    "propsInterface": "BrickDisplayStructsElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-display-structs/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-divider",
+                    "className": "BrickDividerElement",
+                    "propsInterface": "BrickDividerElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-divider/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-form",
+                    "className": "BrickFormElement",
+                    "propsInterface": "BrickFormElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-form/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-general-search",
+                    "className": "BrickGeneralSearchElement",
+                    "propsInterface": "BrickGeneralSearchElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-general-search/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-humanize-time",
+                    "className": "BrickHumanizeTimeElement",
+                    "propsInterface": "BrickHumanizeTimeElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-humanize-time/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-illustration",
+                    "className": "BrickIllustrationElement",
+                    "propsInterface": "BrickIllustrationElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-illustration/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-input",
+                    "className": "BrickInputElement",
+                    "propsInterface": "BrickInputElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-input/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-link",
+                    "className": "BrickLinkElement",
+                    "propsInterface": "BrickLinkElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-link/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-list",
+                    "className": "BrickListElement",
+                    "propsInterface": "BrickListElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-list/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-placeholder",
+                    "className": "BrickPlaceholderElement",
+                    "propsInterface": "BrickPlaceholderElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-placeholder/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-quick-entries",
+                    "className": "BrickQuickEntriesElement",
+                    "propsInterface": "BrickQuickEntriesElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-quick-entries/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-rate",
+                    "className": "BrickRateElement",
+                    "propsInterface": "BrickRateElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-rate/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-result",
+                    "className": "BrickResultElement",
+                    "propsInterface": "BrickResultElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-result/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-table",
+                    "className": "BrickTableElement",
+                    "propsInterface": "BrickTableElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-table/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-tag",
+                    "className": "BrickTagElement",
+                    "propsInterface": "BrickTagElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-tag/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-timeline",
+                    "className": "BrickTimelineElement",
+                    "propsInterface": "BrickTimelineElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-timeline/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-tree",
+                    "className": "BrickTreeElement",
+                    "propsInterface": "BrickTreeElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-tree/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-user",
+                    "className": "BrickUserElement",
+                    "propsInterface": "BrickUserElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-user/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-user-group",
+                    "className": "BrickUserGroupElement",
+                    "propsInterface": "BrickUserGroupElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-user-group/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-utils",
+                    "className": "BrickUtilsElement",
+                    "propsInterface": "BrickUtilsElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-utils/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.brick-value-mapping",
+                    "className": "BrickValueMappingElement",
+                    "propsInterface": "BrickValueMappingElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/brick-value-mapping/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.button-wrapper",
+                    "className": "ButtonWrapperElement",
+                    "propsInterface": "ButtonWrapperElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/button-wrapper/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.card-item",
+                    "className": "CardItemElement",
+                    "propsInterface": "CardItemElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/card-item/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.code-editor",
+                    "className": "CodeEditorElement",
+                    "propsInterface": "CodeEditorElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/code-editor/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.collapse-info-list",
+                    "className": "CollapseInfoListElement",
+                    "propsInterface": "CollapseInfoListElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/collapse-info-list/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.collapsible-card-item",
+                    "className": "CollapsibleCardItemElement",
+                    "propsInterface": "CollapsibleCardItemElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/collapsible-card-item/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.copyable-text",
+                    "className": "CopyableTextElement",
+                    "propsInterface": "CopyableTextElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/copyable-text/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.cost-time",
+                    "className": "CostTimeElement",
+                    "propsInterface": "CostTimeElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/cost-time/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.crontab-display",
+                    "className": "CrontabDisplayElement",
+                    "propsInterface": "CrontabDisplayElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/crontab-display/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.datetime-selector",
+                    "className": "DatetimeSelectorElement",
+                    "propsInterface": "DatetimeSelectorElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/datetime-selector/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.digital-number",
+                    "className": "DigitalNumberElement",
+                    "propsInterface": "DigitalNumberElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/digital-number/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.dropdown-button",
+                    "className": "DropdownButtonElement",
+                    "propsInterface": "DropdownButtonElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/dropdown-button/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.dropdown-select",
+                    "className": "DropdownSelectElement",
+                    "propsInterface": "DropdownSelectElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/dropdown-select/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.dynamic-content",
+                    "className": "DynamicContentElement",
+                    "propsInterface": "DynamicContentElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/dynamic-content/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.dynamic-grid-container",
+                    "className": "DynamicGridContainerElement",
+                    "propsInterface": "DynamicGridContainerElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/dynamic-grid-container/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.entry-card-item",
+                    "className": "EntryCardItemElement",
+                    "propsInterface": "EntryCardItemElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/entry-card-item/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.general-badge",
+                    "className": "GeneralBadgeElement",
+                    "propsInterface": "GeneralBadgeElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/general-badge/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.general-carousel",
+                    "className": "GeneralCarouselElement",
+                    "propsInterface": "GeneralCarouselElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/general-carousel/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.general-iframe",
+                    "className": "GeneralIframeElement",
+                    "propsInterface": "GeneralIframeElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/general-iframe/index.ts"
+                },
+                {
+                    "tagName": "presentational-bricks.general-image",
+                    "className": "GeneralImageElement",
+                    "propsInterface": "GeneralImageElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/general-image/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.general-label",
+                    "className": "GeneralLabelElement",
+                    "propsInterface": "GeneralLabelElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/general-label/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.general-list",
+                    "className": "GeneralListElement",
+                    "propsInterface": "GeneralListElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/general-list/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.general-pagination",
+                    "className": "GeneralPaginationElement",
+                    "propsInterface": "GeneralPaginationElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/general-pagination/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.general-preview-image",
+                    "className": "GeneralPreviewImageElement",
+                    "propsInterface": "GeneralPreviewImageElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/general-preview-image/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.general-slider",
+                    "className": "GeneralSliderElement",
+                    "propsInterface": "GeneralSliderElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/general-slider/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.general-tooltip",
+                    "className": "GeneralTooltipElement",
+                    "propsInterface": "GeneralTooltipElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/general-tooltip/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.general-transfer",
+                    "className": "GeneralTransferElement",
+                    "propsInterface": "GeneralTransferElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/general-transfer/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.general-video",
+                    "className": "GeneralVideoElement",
+                    "propsInterface": "GeneralVideoElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/general-video/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.info-display-card-list",
+                    "className": "InfoDisplayCardListElement",
+                    "propsInterface": "InfoDisplayCardListElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/info-display-card-list/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.log-display",
+                    "className": "LogDisplayElement",
+                    "propsInterface": "LogDisplayElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/log-display/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.markdown-display",
+                    "className": "MarkdownDisplayElement",
+                    "propsInterface": "MarkdownDisplayElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/markdown-display/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.markdown-editor",
+                    "className": "MarkdownEditorElement",
+                    "propsInterface": "MarkdownEditorElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/markdown-editor/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.modal-confirm",
+                    "className": "ModalConfirmElement",
+                    "propsInterface": "ModalConfirmElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/modal-confirm/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.qrcode-download",
+                    "className": "QrcodeDownloadElement",
+                    "propsInterface": "QrcodeDownloadElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/qrcode-download/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.rank-table",
+                    "className": "RankTableElement",
+                    "propsInterface": "RankTableElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/rank-table/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.single-field-edit",
+                    "className": "SingleFieldEditElement",
+                    "propsInterface": "SingleFieldEditElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/single-field-edit/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.statistic-card",
+                    "className": "StatisticCardElement",
+                    "propsInterface": "StatisticCardElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/statistic-card/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.table-transfer",
+                    "className": "TableTransferElement",
+                    "propsInterface": "TableTransferElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/table-transfer/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.template-breadcrumb",
+                    "className": "TemplateBreadcrumbElement",
+                    "propsInterface": "TemplateBreadcrumbElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/template-breadcrumb/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.text-collapse",
+                    "className": "TextCollapseElement",
+                    "propsInterface": "TextCollapseElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/text-collapse/index.tsx"
+                },
+                {
+                    "tagName": "presentational-bricks.tree-transfer",
+                    "className": "TreeTransferElement",
+                    "propsInterface": "TreeTransferElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/presentational-bricks/src/tree-transfer/index.tsx"
+                }
+            ],
+            "hasJsxTs": false
+        },
+        {
+            "name": "shared-editors",
+            "architecture": "V2",
+            "bricks": [],
+            "hasJsxTs": false
+        },
+        {
+            "name": "time",
+            "architecture": "V2",
+            "bricks": [
+                {
+                    "tagName": "time.task-calendar",
+                    "className": "TaskCalendarElement",
+                    "propsInterface": "TaskCalendarElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/time/src/task-calendar/index.tsx"
+                }
+            ],
+            "hasJsxTs": false
+        },
+        {
+            "name": "utils",
+            "architecture": "V2",
+            "bricks": [
+                {
+                    "tagName": "utils.broadcast-channel",
+                    "className": "BroadcastChannelElement",
+                    "propsInterface": "BroadcastChannelElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/utils/src/broadcast-channel/index.tsx"
+                },
+                {
+                    "tagName": "utils.general-clipboard",
+                    "className": "GeneralClipboardElement",
+                    "propsInterface": "GeneralClipboardElementProps",
+                    "filePath": "/Users/alex/Workspace/easyops/next-basics-github/bricks/utils/src/general-clipboard/index.tsx"
+                }
+            ],
+            "hasJsxTs": false
+        }
+    ],
+    "totalPackages": 17,
+    "totalBricks": 251
+}

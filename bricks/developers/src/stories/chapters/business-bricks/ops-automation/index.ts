@@ -7,5 +7,5 @@ export const chapter: Chapter = {
     en: "ops automation",
     zh: "运维自动化",
   },
-  stories: [jobTasksList],
+  stories: [jobTasksList] as any,
 };

@@ -9,7 +9,12 @@ import {
 } from "@next-core/brick-kit";
 import { PollAnnounce } from "./PollAnnounce";
 
-export class PollAnnounceElement extends UpdatingElement {
+export interface PollAnnounceElementProps {
+  pollDisabled?: boolean;
+  realTimeMessage?: any;
+}
+
+export class PollAnnounceElement extends UpdatingElement implements PollAnnounceElementProps {
   @property({ type: Boolean })
   pollDisabled: boolean;
 

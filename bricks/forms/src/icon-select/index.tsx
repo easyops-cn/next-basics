@@ -29,7 +29,18 @@ export type Size = number | "large" | "small" | "default";
  *  pattern
  * @memo
  */
-export class IconSelectElement extends FormItemElement {
+export interface IconSelectElementProps {
+  name?: string;
+  label?: string;
+  value?: MenuIcon;
+  disabled?: boolean;
+  required?: boolean;
+  message?: Record<string, string>;
+  visible?: boolean;
+}
+
+
+export class IconSelectElement extends FormItemElement  implements IconSelectElementProps {
   /**
    * @group basicFormItem
    * @required true

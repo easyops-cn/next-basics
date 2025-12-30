@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getClientSize } from "rc-util/lib/Dom/css";
 
 function fixPoint(

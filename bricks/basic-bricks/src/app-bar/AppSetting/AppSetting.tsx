@@ -16,10 +16,12 @@ import { Link, GeneralIcon } from "@next-libs/basic-components";
 import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
 import { NS_BASIC_BRICKS, K } from "../../i18n/constants";
 import styles from "./AppSetting.module.css";
+// @ts-ignore
+import { AnyCnameRecord } from "dns";
 
 export function AppSetting(props: {
-  usernameStyle: React.CSSProperties;
-  dropdownIconStyle: React.CSSProperties;
+  usernameStyle?: React.CSSProperties;
+  dropdownIconStyle?: React.CSSProperties;
 }): React.ReactElement {
   const { t } = useTranslation(NS_BASIC_BRICKS);
   const currentApp = useCurrentApp();
@@ -54,7 +56,7 @@ export function AppSetting(props: {
       getRuntime().getFeatureFlags()["next-hide-my-account"];
     const isEnable =
       !hideMyAccountEnabled &&
-      (window.STANDALONE_MICRO_APPS ||
+      ((window as any).STANDALONE_MICRO_APPS ||
         getRuntime()
           .getMicroApps()
           .some((item) => {
@@ -177,7 +179,7 @@ export function AppSetting(props: {
   };
   return (
     <div>
-      {window.NO_AUTH_GUARD ? (
+      {(window as any).NO_AUTH_GUARD ? (
         getCustomizedLogOutLink()
       ) : username ? (
         <Dropdown

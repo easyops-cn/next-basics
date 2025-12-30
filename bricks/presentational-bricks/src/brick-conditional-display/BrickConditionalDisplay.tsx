@@ -1,11 +1,20 @@
 import React from "react";
 import { merge } from "lodash";
 
-import { DataType, isConditionSatisfied } from "@next-libs/cmdb-utils";
-import { RuleProps } from "./index";
+import { DataType, isConditionSatisfied, ConditionType } from "@next-libs/cmdb-utils";
 import cssStyle from "./style.module.css";
 
 export type DisplayType = "label" | "default";
+
+export interface RuleProps {
+  condition: ConditionType;
+  style?: {
+    color?: string;
+    backgroundColor?: string;
+    borderColor?: string;
+  };
+  label?: string;
+}
 
 export interface BrickConditionalDisplayProps {
   data: DataType;

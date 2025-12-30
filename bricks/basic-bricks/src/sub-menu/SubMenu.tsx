@@ -23,7 +23,7 @@ export function SubMenu({
 
   const [isShowTooltip, setIsShowTooltip] = React.useState(false);
   React.useEffect(() => {
-    const thirdLevelHeaderTitleRef = thirdLevelHeaderTitle?.current;
+    const thirdLevelHeaderTitleRef = thirdLevelHeaderTitle?.current as any;
     if (
       isThirdLevel &&
       thirdLevelHeaderTitleRef?.scrollHeight >

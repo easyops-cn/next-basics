@@ -7,6 +7,13 @@ import {
 import { isObject } from "@next-core/brick-utils";
 import { GeneralTransform } from "@next-core/brick-types";
 
+export interface TransformAgentElementProps {
+  source?: Record<string, string>;
+  target?: string;
+  transform?: GeneralTransform;
+  multiple?: boolean;
+}
+
 /**
  * @id basic-bricks.transform-agent
  * @name basic-bricks.transform-agent
@@ -18,7 +25,7 @@ import { GeneralTransform } from "@next-core/brick-types";
  * 1.21.0:新增构件 `basic-bricks.transform-agent`
  * @memo
  */
-export class TransformAgentElement extends UpdatingElement {
+export class TransformAgentElement extends UpdatingElement implements TransformAgentElementProps {
   /**
    * @kind object
    * @required true

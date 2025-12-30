@@ -41,7 +41,24 @@ export type RadioType =
  * @memo
  * > Tips: 单选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
  */
-export class GeneralRadioElement extends FormItemElement {
+export interface GeneralRadioElementProps {
+  name?: string;
+  value?: any;
+  options?: GeneralOption[];
+  label?: string;
+  required?: boolean;
+  message?: Record<string, string>;
+  disabled?: boolean;
+  type?: RadioType;
+  size?: "large" | "middle" | "small";
+  uiType?: UiType;
+  useBrick?: UseBrickConf;
+  customStyle?: React.CSSProperties;
+  buttonStyle?: RadioGroupButtonStyle;
+}
+
+
+export class GeneralRadioElement extends FormItemElement  implements GeneralRadioElementProps {
   /* =========================== Group: basic =========================== */
 
   /**

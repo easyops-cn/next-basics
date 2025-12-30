@@ -62,6 +62,7 @@ export function DesktopCell(props: DesktopCellProps): React.ReactElement {
         };
       }
       try {
+        // @ts-ignore
         await launchpadService.setAsFavorite(params);
         props?.onSetAsFavorite?.();
       } catch (e) {

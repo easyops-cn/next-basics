@@ -4,6 +4,15 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
 import { ListContainer } from "./ListContainer";
 
+export interface ListContainerElementProps {
+  data?: any[];
+  useBrick?: UseBrickConf;
+  extraContainerStyle?: React.CSSProperties;
+  itemKey?: string;
+  gap?: string | number;
+  containerStyle?: React.CSSProperties;
+}
+
 /**
  * @id basic-bricks.list-container
  * @name basic-bricks.list-container
@@ -17,7 +26,7 @@ import { ListContainer } from "./ListContainer";
  * @memo
  * @noInheritDoc
  */
-export class ListContainerElement extends UpdatingElement {
+export class ListContainerElement extends UpdatingElement implements ListContainerElementProps {
   /**
    * @kind `any[]`
    * @required true

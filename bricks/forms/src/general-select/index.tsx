@@ -38,7 +38,42 @@ export type maxTagCountType = "responsive" | number;
  * 1.200.0:新增属性 `emptyProps`
  * @memo
  */
-export class GeneralSelectElement extends FormItemElement {
+export interface GeneralSelectElementProps {
+  name?: string;
+  value?: any;
+  options?: GeneralOption[];
+  placeholder?: string;
+  label?: string;
+  required?: boolean;
+  message?: Record<string, string>;
+  validateTrigger?: string;
+  disabled?: boolean;
+  readOnly?: boolean;
+  size?: "small" | "middle" | "large";
+  optionsWrap?: boolean;
+  suffix?: {
+    useBrick: UseBrickConf;
+  };
+  suffixStyle?: React.CSSProperties;
+  mode?: string;
+  tokenSeparators?: string[];
+  maxTagCount?: maxTagCountType;
+  inputBoxStyle?: React.CSSProperties;
+  dropdownStyle?: React.CSSProperties;
+  groupBy?: string;
+  optionsMode?: string;
+  fields?: Partial<GeneralComplexOption>;
+  popoverPositionType?: GeneralSelectProps["popoverPositionType"];
+  filterByLabelAndValue?: boolean;
+  filterByCaption?: boolean;
+  defaultActiveFirstOption?: boolean;
+  useBackend?: UseBackendConf;
+  suffixBrick?: UseBrickConf;
+  suffixBrickStyle?: React.CSSProperties;
+}
+
+
+export class GeneralSelectElement extends FormItemElement  implements GeneralSelectElementProps {
   /* =========================== Group: basic =========================== */
 
   /**
@@ -582,6 +617,13 @@ export class GeneralSelectElement extends FormItemElement {
   };
   private _handleDebounceSearch = (value: string): void => {
     this._debounceSearchEvent.emit(value);
+
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("general.select.debounce.search", {
+        detail: value,
+      })
+    );
   };
 
   protected _render(): void {

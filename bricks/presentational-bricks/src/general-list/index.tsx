@@ -5,6 +5,14 @@ import { GeneralList } from "./GeneralList";
 import { Card } from "antd";
 import styles from "./GeneralList.shadow.less";
 
+
+export interface GeneralListElementProps {
+  isCardList?: boolean;
+  showCard?: boolean;
+  cardWidth?: string;
+  cardMinWidth?: string;
+}
+
 /**
  * @id presentational-bricks.general-list
  * @name presentational-bricks.general-list
@@ -21,7 +29,7 @@ import styles from "./GeneralList.shadow.less";
  * 通用列表，可以配置每个 item 构件。通常不会单独使用，而是搭配 dynamic template 使用，具体参考"general-list.general-card-list"中，具体事例看同[general-card-list](developers/brick-book/template/general-list.general-card-list)。
  * @noInheritDoc
  */
-export class GeneralListElement extends UpdatingElement {
+export class GeneralListElement extends UpdatingElement implements GeneralListElementProps {
   /**
    * @kind boolean
    * @required false

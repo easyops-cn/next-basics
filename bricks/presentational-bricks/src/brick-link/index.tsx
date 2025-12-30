@@ -12,6 +12,29 @@ import { parseTemplate } from "@next-libs/cmdb-utils";
 import { BrickLink } from "./BrickLink";
 import { MenuIcon } from "@next-core/brick-types";
 
+
+export interface BrickLinkElementProps {
+  label?: string;
+  url?: string;
+  href?: string;
+  target?: string;
+  tooltip?: string;
+  tooltipProps?: Record<string, any>;
+  dataSource?: Record<string, any>;
+  labelColor?: string;
+  underLine?: boolean;
+  icon?: MenuIcon;
+  disabled?: boolean;
+  hideExternalIcon?: boolean;
+  notToJumpWhenEmpty?: boolean;
+  type?: "link" | "text" ;
+  iconAlign?: "left" | "right" ;
+  native?: boolean;
+  labelField?: string;
+  detail?: any;
+  urlTemplate?: string;
+}
+
 /**
  * @id presentational-bricks.brick-link
  * @name presentational-bricks.brick-link
@@ -32,7 +55,7 @@ import { MenuIcon } from "@next-core/brick-types";
  * @memo
  * @noInheritDoc
  */
-export class BrickLinkElement extends UpdatingElement {
+export class BrickLinkElement extends UpdatingElement implements BrickLinkElementProps {
   /**
    * @kind string
    * @required false

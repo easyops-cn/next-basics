@@ -26,6 +26,65 @@ function defaultGetCollapsedId(node: WorkbenchNodeData): string | number {
   return node.key;
 }
 
+export interface WorkbenchTreeProps {
+  nodes?: WorkbenchNodeData[];
+  actions?: WorkbenchTreeAction[];
+  actionsHidden?: boolean;
+  placeholder?: string;
+  isTransformName?: boolean;
+  searchPlaceholder?: string;
+  noSearch?: boolean;
+  activeKey?: string | number;
+  showMatchedNodeOnly?: boolean;
+  matchNodeDataFields?: string | string[];
+  fixedActionsFor?: Record<string, unknown> | Record<string, unknown>[];
+  collapsible?: boolean;
+  collapsedNodes?: string[];
+  allowDrag?: boolean;
+  allowDragToRoot?: boolean;
+  allowDragToInside?: boolean;
+  nodeKey?: string;
+  skipNotify?: boolean;
+  showLine?: boolean;
+  showChildrenIfMatchParent?: boolean;
+  onActionClick?: (event: CustomEvent) => void;
+  onNodeClick?: (event: CustomEvent) => void;
+  onNodeDrop?: (event: CustomEvent) => void;
+  onContextMenu?: (event: CustomEvent) => void;
+  onNodeToggle?: (event: CustomEvent) => void;
+}
+
+export interface WorkbenchTreeElementProps {
+  nodes?: WorkbenchNodeData[];
+  actions?: WorkbenchTreeAction[];
+  actionsHidden?: boolean;
+  placeholder?: string;
+  isTransformName?: boolean;
+  searchPlaceholder?: string;
+  noSearch?: boolean;
+  activeKey?: string | number;
+  showMatchedNodeOnly?: boolean;
+  matchNodeDataFields?: string | string[];
+  fixedActionsFor?: Record<string, unknown> | Record<string, unknown>[];
+  collapsible?: boolean;
+  collapsedNodes?: string[];
+  allowDrag?: boolean;
+  allowDragToRoot?: boolean;
+  allowDragToInside?: boolean;
+  nodeKey?: string;
+  skipNotify?: boolean;
+  showLine?: boolean;
+  showChildrenIfMatchParent?: boolean;
+  onActionClick?: (event: CustomEvent<ActionClickDetail>) => void;
+  onNodeClick?: (event: CustomEvent<unknown>) => void;
+  onNodeDrop?: (event: CustomEvent<any>) => void;
+  onContextMenu?: (event: CustomEvent<unknown>) => void;
+  onNodeToggle?: (event: CustomEvent<{
+    nodeId: string;
+    collapsed: boolean;
+  }>) => void;
+}
+
 /**
  * @id next-builder.workbench-tree
  * @author steve
@@ -34,7 +93,7 @@ function defaultGetCollapsedId(node: WorkbenchNodeData): string | number {
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchTreeElement extends UpdatingElement {
+export class WorkbenchTreeElement extends UpdatingElement implements WorkbenchTreeProps {
   @property({ attribute: false })
   nodes: WorkbenchNodeData[];
 

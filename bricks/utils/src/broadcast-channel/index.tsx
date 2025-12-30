@@ -10,6 +10,10 @@ import {
 } from "@next-core/brick-kit";
 import { BroadcastChannelComponent } from "./BroadcastChannel";
 
+export interface BroadcastChannelElementProps {
+  channelName: string;
+}
+
 /**
  * @id utils.broadcast-channel
  * @author Steve
@@ -18,7 +22,7 @@ import { BroadcastChannelComponent } from "./BroadcastChannel";
  * @docKind brick
  * @noInheritDoc
  */
-export class BroadcastChannelElement extends UpdatingElement {
+export class BroadcastChannelElement extends UpdatingElement implements BroadcastChannelElementProps {
   /**
    * @description 广播频道名称，详见 [BroadcastChannel](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API)。
    * @required true

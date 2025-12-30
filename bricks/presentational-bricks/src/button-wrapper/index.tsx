@@ -3,7 +3,13 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { ButtonWrapper } from "./ButtonWrapper";
 
-class ButtonWrapperElement extends UpdatingElement {
+
+export interface ButtonWrapperElementProps {
+  description?: string;
+  brick?: string;
+}
+
+class ButtonWrapperElement extends UpdatingElement implements ButtonWrapperElementProps {
   @property()
   description: string;
   @property()

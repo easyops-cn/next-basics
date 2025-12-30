@@ -10,7 +10,7 @@ import { GeneralIcon, Link } from "@next-libs/basic-components";
 import { Menu, Input } from "antd";
 import { uniq, cloneDeep } from "lodash";
 import style from "./index.module.css";
-import { SelectParam } from "antd/lib/menu";
+import { MenuItemProps as SelectParam } from "antd/lib/menu";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import classNames from "classnames";
 import { LocationDescriptor } from "history";
@@ -173,7 +173,7 @@ export function SubMenuFilter({
   };
   const renderMenuTitle = (item: SubMenuFilterGroup) => (
     <div className={style.menuItemMainPart}>
-      {renderIcon(item)}
+      {renderIcon(item as any)}
       {item.title}
     </div>
   );
@@ -208,7 +208,7 @@ export function SubMenuFilter({
             return (menu = null);
           }
           selectedKeys.push(menu.key);
-          return (m.items = result);
+          return ((m as any).items = result);
         }
       } else {
         if (menu.title.toLowerCase().includes(query.toLowerCase())) {
@@ -230,8 +230,8 @@ export function SubMenuFilter({
         return;
       }
 
-      if (menu.items) {
-        const result = getMenuItemByKey(menu.items, key);
+      if ((menu as SubMenuFilterGroup).items) {
+        const result = getMenuItemByKey((menu as SubMenuFilterGroup).items, key);
         if (result) {
           data = result;
         }
@@ -278,7 +278,7 @@ export function SubMenuFilter({
     }
   };
 
-  const handleSelect = ({ key }: SelectParam) => {
+  const handleSelect = ({ key }: any) => {
     const newSelectedKeys = multiple
       ? [...new Set([...selectedKeys, key])]
       : [key];
@@ -287,7 +287,7 @@ export function SubMenuFilter({
     onSelect && onSelect(getSelectedMenuItemByKeys(newSelectedKeys));
   };
 
-  const handleDeselect = ({ key }: SelectParam) => {
+  const handleDeselect = ({ key }: any) => {
     const newSelectedKeys = [...selectedKeys.filter((k) => k !== key)];
     setSelectedKeys(newSelectedKeys);
     onSelect && onSelect(getSelectedMenuItemByKeys(newSelectedKeys));
@@ -310,6 +310,7 @@ export function SubMenuFilter({
           style={{ width: "100%" }}
         />
       )}
+      {/* @ts-ignore */}
       <Menu
         multiple={multiple}
         mode="inline"
@@ -323,7 +324,7 @@ export function SubMenuFilter({
         onClick={handleClick}
         onSelect={handleSelect}
         onDeselect={handleDeselect}
-        onOpenChange={handleOpenChange}
+        onOpenChange={(keys) => handleOpenChange(keys as string[])}
         inlineIndent={inlineIndent}
       >
         {menuItems && menuItems.map((item) => renderMenuItem(item))}

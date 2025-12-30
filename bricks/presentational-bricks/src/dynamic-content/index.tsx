@@ -4,6 +4,12 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { parseTemplate } from "@next-libs/cmdb-utils";
 import { isNil } from "lodash";
 
+
+export interface DynamicContentElementProps {
+  dataSource?: Record<string, any>;
+  dynamicContent?: string;
+}
+
 /**
  * @id presentational-bricks.dynamic-content
  * @name presentational-bricks.dynamic-content
@@ -15,7 +21,7 @@ import { isNil } from "lodash";
  * @memo
  * @noInheritDoc
  */
-export class DynamicContentElement extends UpdatingElement {
+export class DynamicContentElement extends UpdatingElement implements DynamicContentElementProps {
   /**
    * @kind Record<string, any>
    * @required true

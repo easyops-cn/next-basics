@@ -10,6 +10,21 @@ import {
 } from "@next-core/brick-kit";
 import { GeneralImage, GeneralImageProps } from "./GeneralImage";
 
+
+export interface GeneralImageElementProps {
+  imgSrc?: string;
+  imgHeight?: string | number;
+  imgStyle?: React.CSSProperties;
+  imgWidth?: string | number;
+  dataSource?: GeneralImageProps["dataSource"];
+  placeholder?: string;
+  imgAlt?: string;
+  fallback?: string;
+  extra?: GeneralImageProps["extra"];
+  extraContainerStyle?: React.CSSProperties;
+  visible?: boolean;
+}
+
 /**
  * @id presentational-bricks.general-image
  * @author Lynette
@@ -18,7 +33,7 @@ import { GeneralImage, GeneralImageProps } from "./GeneralImage";
  * @docKind brick
  * @noInheritDoc
  */
-export class GeneralImageElement extends UpdatingElement {
+export class GeneralImageElement extends UpdatingElement implements GeneralImageElementProps {
   /**
    * @default -
    * @required

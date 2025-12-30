@@ -23,7 +23,16 @@ import { CrontabInput, CrontabType } from "./CrontabInput";
  *  pattern
  * @memo
  */
-export class CrontabInputElement extends FormItemElement {
+export interface CrontabInputElementProps {
+  name?: string;
+  value?: string;
+  label?: string;
+  required?: boolean;
+  disabledSet?: CrontabType[];
+}
+
+
+export class CrontabInputElement extends FormItemElement  implements CrontabInputElementProps {
   /* =========================== Group: basic =========================== */
 
   /**

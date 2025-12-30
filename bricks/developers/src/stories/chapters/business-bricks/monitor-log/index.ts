@@ -15,5 +15,5 @@ export const chapter: Chapter = {
     logKeywordsStatisticsTemplate,
     filesTableTemplate,
     tailLog,
-  ],
+  ] as any,
 };

@@ -3,6 +3,15 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { PrintButton } from "./PrintButton";
 
+export interface PrintButtonElementProps {
+  prefixTitle?: string;
+  right?: string;
+  bottom?: string;
+  color?: string;
+  border?: string;
+  backgroundColor?: string;
+}
+
 /**
  * @id basic-bricks.print-button
  * @name basic-bricks.print-button
@@ -14,7 +23,7 @@ import { PrintButton } from "./PrintButton";
  * @memo
  * @noInheritDoc
  */
-export class PrintButtonElement extends UpdatingElement {
+export class PrintButtonElement extends UpdatingElement implements PrintButtonElementProps {
   top: string;
 
   /**

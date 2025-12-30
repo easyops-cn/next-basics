@@ -26,7 +26,12 @@ import lodash from "lodash";
  *  pattern
  * @docKind brick
  */
-export class DynamicFormItemV2Element extends FormItemElement {
+export interface DynamicFormItemV2ElementProps {
+  columns?: Column[];
+}
+
+
+export class DynamicFormItemV2Element extends FormItemElement  implements DynamicFormItemV2ElementProps {
   /**
    * @description 动态表单项的初始值
    * @group basicFormItem
@@ -248,6 +253,13 @@ export class DynamicFormItemV2Element extends FormItemElement {
   @event({ type: "import" }) importEvent: EventEmitter<Record<string, any>[]>;
   private _handleImport = (detail: Record<string, any>[]): void => {
     this.importEvent.emit(detail);
+
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("dynamic.form.item.v2.import", {
+        detail,
+      })
+    );
   };
 
   connectedCallback(): void {

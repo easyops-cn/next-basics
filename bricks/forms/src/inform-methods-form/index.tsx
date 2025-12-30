@@ -19,7 +19,14 @@ import { InformMethodsForm } from "./InformMethodsForm";
  *  pattern
  * @memo
  */
-export class InformMethodsFormElement extends FormItemElement {
+export interface InformMethodsFormElementProps {
+  name?: string;
+  label?: string;
+  required?: boolean;
+}
+
+
+export class InformMethodsFormElement extends FormItemElement  implements InformMethodsFormElementProps {
   /* =========================== Group: basic =========================== */
 
   /**

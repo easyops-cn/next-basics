@@ -6,7 +6,19 @@ import { UpdatingElement, property } from "@next-core/brick-kit";
 import { BrickBook } from "./BrickBook/BrickBook";
 import { Story, StoryDoc } from "@next-core/brick-types";
 
-export class BrickBookElement extends UpdatingElement {
+export interface BrickBookElementProps {
+  storyId: string;
+  notToSetPageTitle: boolean;
+  storyType: "brick" | "template";
+  showCard: boolean;
+  titleLinkEnabled: boolean;
+  titleLinkTarget: string;
+  renderDocLink: boolean;
+  brickDoc: StoryDoc | null;
+  stories: Story[];
+}
+
+export class BrickBookElement extends UpdatingElement implements BrickBookElementProps {
   @property()
   storyId: string;
 

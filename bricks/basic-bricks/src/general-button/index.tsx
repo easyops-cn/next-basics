@@ -11,6 +11,28 @@ import { isEmpty } from "lodash";
 import { GeneralButton } from "./GeneralButton";
 import { ButtonProps } from "antd/lib/button";
 
+export interface GeneralButtonElementProps {
+  buttonName?: string;
+  buttonIcon?: any;
+  buttonType?: ButtonType;
+  tooltip?: string;
+  disabled?: boolean;
+  disabledTooltip?: string;
+  tooltipConfig?: TooltipConfig;
+  buttonUrl?: string;
+  buttonHref?: string;
+  target?: string;
+  dataSource?: Record<string, any>;
+  buttonProps?: ButtonProps & { icon?: string };
+  loading?: boolean;
+  buttonDanger?: boolean;
+  buttonShape?: "circle" | "round";
+  buttonSize?: "xs" | "small" | "large";
+  fadedText?: boolean;
+  buttonStyle?: React.CSSProperties;
+  detail?: Record<string, any>;
+}
+
 declare const ButtonTypes: [
   "default",
   "primary",
@@ -71,7 +93,7 @@ export interface TooltipConfig {
  *
  * @noInheritDoc
  */
-export class GeneralButtonElement extends UpdatingElement {
+export class GeneralButtonElement extends UpdatingElement implements GeneralButtonElementProps {
   /**
    * @kind string
    * @required false

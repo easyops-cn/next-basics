@@ -4,6 +4,14 @@ import { get } from "lodash";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BrickDisplayStructs } from "./BrickDisplayStructs";
 
+
+export interface BrickDisplayStructsElementProps {
+  dataSource?: Record<string, any>;
+  fields?: { value: string };
+  value?: any;
+  displayType?: "stringify" | FieldToDisplay;
+}
+
 export interface FieldToDisplay {
   field?: string;
   separator: string;
@@ -20,7 +28,7 @@ export interface FieldToDisplay {
  * @memo
  * @noInheritDoc
  */
-export class BrickDisplayStructsElement extends UpdatingElement {
+export class BrickDisplayStructsElement extends UpdatingElement implements BrickDisplayStructsElementProps {
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {

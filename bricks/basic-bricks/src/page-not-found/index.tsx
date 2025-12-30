@@ -3,7 +3,11 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { PageNotFound } from "./PageNotFound";
 
-export class PageNotFoundElement extends UpdatingElement {
+export interface PageNotFoundElementProps {
+  url?: string;
+}
+
+export class PageNotFoundElement extends UpdatingElement implements PageNotFoundElementProps {
   @property()
   url: string;
 

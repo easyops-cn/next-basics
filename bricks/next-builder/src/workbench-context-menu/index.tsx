@@ -13,6 +13,20 @@ import { ContextMenuItem, WorkbenchContextMenu } from "./WorkbenchContextMenu";
 import { ActionClickDetail } from "../shared/workbench/interfaces";
 import type { BuilderClipboard } from "../builder-container/interfaces";
 
+export interface WorkbenchContextMenuProps {
+  menu?: ContextMenuItem[];
+  clipboard?: BuilderClipboard;
+  contextMenuStatus?: BuilderContextMenuStatus;
+  onActionClick?: (event: CustomEvent) => void;
+}
+
+export interface WorkbenchContextMenuElementProps {
+  menu?: ContextMenuItem[];
+  clipboard?: BuilderClipboard;
+  contextMenuStatus?: BuilderContextMenuStatus;
+  onActionClick?: (event: CustomEvent<ActionClickDetail>) => void;
+}
+
 /**
  * @id next-builder.workbench-context-menu
  * @author steve
@@ -21,7 +35,7 @@ import type { BuilderClipboard } from "../builder-container/interfaces";
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchContextMenuElement extends UpdatingElement {
+export class WorkbenchContextMenuElement extends UpdatingElement implements WorkbenchContextMenuProps {
   @property({ attribute: false })
   menu: ContextMenuItem[];
 

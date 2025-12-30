@@ -10,6 +10,21 @@ import {
 import { GeneralCarousel, GeneralCarouselProps } from "./GeneralCarousel";
 import { BrickEventsMap } from "@next-core/brick-types";
 
+
+export interface GeneralCarouselElementProps {
+  useBrick?: GeneralCarouselProps["useBrick"];
+  autoplay?: boolean;
+  dataSource?: GeneralCarouselProps["dataSource"];
+  pauseOnDotsHover?: boolean;
+  adaptiveHeight?: boolean;
+  responsive?: any[];
+  noDataDesc?: string;
+  dotsTheme?: GeneralCarouselProps["dotsTheme"] ;
+  dotPosition?: "top" | "bottom" | "left" | "right" ;
+  components?: GeneralCarouselProps["components"];
+  useLazyLoad?: boolean;
+}
+
 export interface CustomCompProps {
   brick: string | any;
   properties?: any;
@@ -35,7 +50,7 @@ export interface CustomCompProps {
  * ```
  * @noInheritDoc
  */
-export class GeneralCarouselElement extends UpdatingElement {
+export class GeneralCarouselElement extends UpdatingElement implements GeneralCarouselElementProps {
   /**
    * @detail number
    * @description 传出当前所点击的轮播序列号

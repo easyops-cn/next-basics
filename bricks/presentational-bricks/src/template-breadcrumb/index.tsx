@@ -2,6 +2,9 @@ import { getRuntime, property } from "@next-core/brick-kit";
 import { BreadcrumbItemConf } from "@next-core/brick-types";
 import { parseTemplate } from "@next-libs/cmdb-utils";
 
+
+export interface TemplateBreadcrumbElementProps {}
+
 /**
  * @id presentational-bricks.template-breadcrumb
  * @name presentational-bricks.template-breadcrumb
@@ -54,7 +57,7 @@ import { parseTemplate } from "@next-libs/cmdb-utils";
  * 综上，此构件让面包屑的配置支持`#{variableName}`格式的模板标记，使用`dataSource`上的`variableName`的实际值，并支持`a.b`的多层嵌套。
  * @noInheritDoc
  */
-export class TemplateBreadcrumbElement extends HTMLElement {
+export class TemplateBreadcrumbElement extends HTMLElement implements TemplateBreadcrumbElementProps {
   private _originalBreadcrumbs: BreadcrumbItemConf[];
   private _dataSource: Record<string, any>;
 

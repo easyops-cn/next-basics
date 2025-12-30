@@ -121,6 +121,7 @@ export function InputGroup(
         <InputNumber
           placeholder={props.placeholder}
           value={inputNumber}
+          // @ts-ignore
           onChange={handleChange}
           min={min}
           style={props.inputBoxStyle}

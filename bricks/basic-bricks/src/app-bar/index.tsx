@@ -4,13 +4,19 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BreadcrumbItemConf } from "@next-core/brick-types";
 import { AppBar } from "./AppBar/AppBar";
 
+export interface AppBarElementProps {
+  pageTitle?: string;
+  documentId?: string;
+  noCurrentApp?: boolean;
+}
+
 /**
  * @id basic-bricks.basic-bricks.app-bar
  * @deprecated
  * @memo 该构件已迁移至 `nav-legacy` 包中维护，后续版本将不再维护该构件，请使用 `nav-legacy.app-bar` 构件
  */
 
-class AppBarElement extends UpdatingElement {
+class AppBarElement extends UpdatingElement implements AppBarElementProps {
   @property()
   pageTitle: string;
 

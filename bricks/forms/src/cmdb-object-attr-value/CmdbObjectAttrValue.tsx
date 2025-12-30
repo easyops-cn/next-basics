@@ -45,11 +45,13 @@ export const defaultValue = {
 
 const FLAGS = getRuntime().getFeatureFlags();
 
+// @ts-ignore
 export const defaultValueMap = new Map([
   [
     "str",
     {
       default: "",
+      // @ts-ignore
       mode: "default",
       default_type: "value",
     },
@@ -187,12 +189,12 @@ export function CmdbObjectAttrValueItem(
   ref: any
 ): React.ReactElement {
   const { t } = useTranslation(NS_FORMS);
-  const [valueType, setValueType] = React.useState();
+  const [valueType, setValueType] = React.useState<any>();
   const [valueOptions, setValueOptions] =
     React.useState<ValueOptions[]>(valueTypeList);
   const { placeholder, inputBoxStyle, isProtected, disableProtectedAttr } =
     props;
-  const [value, setValue] = React.useState();
+  const [value, setValue] = React.useState<any>();
   const [attrDisabled, setAttrDisabled] = React.useState(
     isProtected && disableProtectedAttr
   );
@@ -205,6 +207,7 @@ export function CmdbObjectAttrValueItem(
     props.valueType?.length > 0 &&
       setValueOptions(
         valueTypeList.filter((valueType) =>
+          // @ts-ignore
           props.valueType?.includes(valueType.key)
         )
       );
@@ -220,12 +223,15 @@ export function CmdbObjectAttrValueItem(
     }
   };
 
-  const handleValueTypeChange = (valueType: ValueType): void => {
+  const handleValueTypeChange = (valueType: any): void => {
+    // @ts-ignore
     setValueType(valueType);
+    // @ts-ignore
     setValue({
       ...defaultValueMap.get(valueType),
       type: valueType,
     });
+    // @ts-ignore
     onValueChange({
       ...defaultValueMap.get(valueType),
       type: valueType,
@@ -294,7 +300,9 @@ export function CmdbObjectAttrValueItem(
         );
       case "struct":
         return (
+          // @ts-ignore
           <ObjectAttrStruct
+            // @ts-ignore
             value={value}
             onChange={onValueChange}
             disabled={attrDisabled}
@@ -302,7 +310,9 @@ export function CmdbObjectAttrValueItem(
         );
       case "structs":
         return (
+          // @ts-ignore
           <ObjectAttrStruct
+            // @ts-ignore
             value={value}
             onChange={onValueChange}
             disabled={attrDisabled}

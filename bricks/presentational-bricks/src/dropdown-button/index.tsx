@@ -10,6 +10,18 @@ import {
 import { DropdownButton } from "./DropdownButton";
 import { MenuIcon } from "@next-core/brick-types";
 import { Option } from "../interfaces";
+
+export interface DropdownButtonElementProps {
+  options?: Option[];
+  leftButtonIcon?: MenuIcon | string;
+  rightButtonIcon?: MenuIcon | string;
+  buttonName?: string;
+  disabled?: boolean;
+  textPlacement?: "right" | "left";
+  tooltip?: string;
+  value?: any[];
+}
+
 /**
  * @id presentational-bricks.dropdown-button
  * @author astrid
@@ -18,7 +30,7 @@ import { Option } from "../interfaces";
  * @docKind brick
  * @noInheritDoc
  */
-export class DropdownButtonElement extends UpdatingElement {
+export class DropdownButtonElement extends UpdatingElement implements DropdownButtonElementProps {
   /**
    * @kind Option[]
    * @required false

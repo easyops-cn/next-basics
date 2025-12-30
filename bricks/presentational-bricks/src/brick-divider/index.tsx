@@ -3,6 +3,17 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BrickDivider } from "./BrickDivider";
 
+
+export interface BrickDividerElementProps {
+  dividerTitle?: string;
+  type?: "horizontal" | "vertical" | "radiation";
+  dashed?: boolean;
+  dividerStyle?: React.CSSProperties;
+  orientation?: "center" | "left" | "right";
+  plain?: boolean;
+  proportion?: number[];
+}
+
 /**
  * @id presentational-bricks.brick-divider
  * @name presentational-bricks.brick-divider
@@ -16,7 +27,7 @@ import { BrickDivider } from "./BrickDivider";
  * @memo
  * @noInheritDoc
  */
-export class BrickDividerElement extends UpdatingElement {
+export class BrickDividerElement extends UpdatingElement implements BrickDividerElementProps {
   /**
    * @required false
    * @description 标题

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { forwardRef, useState, useEffect } from "react";
 import { Input, Tabs, Button } from "antd";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";

@@ -12,6 +12,24 @@ import { AlertConf, WorkbenchPane } from "./WorkbenchPane";
 import styles from "./WorkbenchPane.shadow.css";
 import sharedStyles from "../shared/scrollbar.shadow.css";
 
+export interface WorkbenchPaneProps {
+  titleLabel?: string;
+  active?: boolean;
+  badge?: number;
+  alerts?: AlertConf[];
+  onActiveChange?: (event: CustomEvent) => void;
+  onActiveFirstactivated?: (event: CustomEvent) => void;
+}
+
+export interface WorkbenchPaneElementProps {
+  titleLabel?: string;
+  active?: boolean;
+  badge?: number;
+  alerts?: AlertConf[];
+  onActiveChange?: (event: CustomEvent<boolean>) => void;
+  onActiveFirstactivated?: (event: CustomEvent<any>) => void;
+}
+
 /**
  * @id next-builder.workbench-pane
  * @author steve
@@ -20,7 +38,7 @@ import sharedStyles from "../shared/scrollbar.shadow.css";
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchPaneElement extends UpdatingElement {
+export class WorkbenchPaneElement extends UpdatingElement implements WorkbenchPaneProps {
   @property()
   titleLabel: string;
 

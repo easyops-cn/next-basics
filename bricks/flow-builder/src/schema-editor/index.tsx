@@ -6,6 +6,27 @@ import { SchemaEditor } from "./SchemaEditor";
 import { SchemaRootNodeProperty, ModelDefinition } from "./interfaces";
 import { UseBrickConf } from "@next-core/brick-types";
 
+export interface SchemaEditorElementProps {
+  value: SchemaRootNodeProperty;
+  readonly: boolean;
+  hiddenRootNode: boolean;
+  rootNodeRequired: Record<string, boolean>;
+  hiddenRootNodeRequired?: boolean;
+  disabledModelType: boolean;
+  enableWrapper: boolean;
+  customTypeList: string[];
+  simpleTypeList: string[];
+  hiddenArrayTypeCheckbox: boolean;
+  importModelDefinition: ModelDefinition[];
+  titleBrick: {
+    useBrick: UseBrickConf;
+  };
+  projectId: string;
+  hiddenFieldRequired: boolean;
+  hiddenFieldDesc: boolean;
+  hiddenCategories: string[];
+}
+
 /**
  * @id shared-editors.schema-editor
  * @author jojiang
@@ -14,7 +35,7 @@ import { UseBrickConf } from "@next-core/brick-types";
  * @docKind brick
  * @noInheritDoc
  */
-export class SchemaEditorElement extends FormItemElement {
+export class SchemaEditorElement extends FormItemElement implements SchemaEditorElementProps {
   /**
    * @kind any[]
    * @required -️

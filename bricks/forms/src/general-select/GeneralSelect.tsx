@@ -183,6 +183,7 @@ export function GeneralSelectLegacy(
        * 2、value相同，但optionData更新了也会触发一次
        */
       if (
+        // @ts-ignore
         checkedValue !== preOptionData?.value ||
         (!isNil(checkedValue) &&
           !isNil(newOptionData) &&
@@ -250,9 +251,11 @@ export function GeneralSelectLegacy(
           }
         })();
       } else {
+        // @ts-ignore
         props?.useBackend?.provider &&
           // eslint-disable-next-line no-console
           console.error(
+            // @ts-ignore
             `Please use "contract api" instead of "${props?.useBackend?.provider}".`
           );
       }

@@ -9,6 +9,17 @@ import {
 } from "@next-core/brick-kit";
 import { BrickRate } from "./BrickRate";
 
+
+export interface BrickRateElementProps {
+  value?: number;
+  allowHalf?: boolean;
+  colors?: any[];
+  type?: string;
+  rateStyle?: Record<string, any>;
+  rateIcon?: any;
+  tooltips?: string[];
+}
+
 /**
  * @id presentational-bricks.brick-rate
  * @author astrid
@@ -20,7 +31,7 @@ import { BrickRate } from "./BrickRate";
  * @docKind brick
  * @noInheritDoc
  */
-export class BrickRateElement extends UpdatingElement {
+export class BrickRateElement extends UpdatingElement implements BrickRateElementProps {
   /**
    * @kind number
    * @required false

@@ -10,6 +10,12 @@ import {
 } from "@next-core/brick-kit";
 import { BrickInput } from "./BrickInput";
 
+
+export interface BrickInputElementProps {
+  placeholder?: string;
+  trigger?: "change" | "enter";
+}
+
 /**
  * @id presentational-bricks.brick-input
  * @name presentational-bricks.brick-input
@@ -23,7 +29,7 @@ import { BrickInput } from "./BrickInput";
  * @memo
  * @noInheritDoc
  */
-export class BrickInputElement extends UpdatingElement {
+export class BrickInputElement extends UpdatingElement implements BrickInputElementProps {
   /**
    * @detail Record<string,any>
    * @description 事件内容为{q: value}，其中 value 为输入的字符

@@ -25,7 +25,16 @@ import style from "./style.shadow.less";
  *  pattern
  * @memo
  */
-export class AdvanceSettingElement extends FormItemElement {
+export interface AdvanceSettingElementProps {
+  foldName?: string;
+  show?: boolean;
+  dividerOrientation?: "left" | "right";
+  dividerDashed?: boolean;
+  foldStyle?: Record<string, string>;
+}
+
+
+export class AdvanceSettingElement extends FormItemElement  implements AdvanceSettingElementProps {
   private _mountPoint: HTMLElement;
   private _shadowRoot: ShadowRoot;
 

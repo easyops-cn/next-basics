@@ -28,6 +28,7 @@ export function ObjectAttrDate(props: ObjectAttrDateProps): React.ReactElement {
   }, [props.value]);
 
   const handleValueChange = (value: Partial<DateValueType>) => {
+    // @ts-ignore
     setValue(value);
     props.onChange && props.onChange(value);
   };

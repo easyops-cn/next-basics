@@ -26,19 +26,19 @@ export function matchSearchValue(model: Record<string, any>, value: string) {
   return model.name.toLowerCase().includes(value.toLowerCase());
 }
 
-export function filterBySearch(groupList, value: string): any[] {
+export function filterBySearch(groupList: any, value: string): any[] {
   if (!value) {
     // setDisplay(false);
     return groupList;
   }
   const filteredGroups: any = [];
-  const filterCategory = (objectList) => {
-    return objectList?.filter((object) => matchSearchValue(object, value));
+  const filterCategory = (objectList: any) => {
+    return objectList?.filter((object: any) => matchSearchValue(object, value));
   };
-  groupList.forEach((category) => {
+  groupList.forEach((category: any) => {
     const filteredObjectList = filterCategory(category.children);
     const filteredSubCategoryObjectList: any = [];
-    category.subCategory?.forEach((subCategory) => {
+    category.subCategory?.forEach((subCategory: any) => {
       const filteredObjectListInSubCategory = filterCategory(
         subCategory.children
       );
@@ -62,7 +62,7 @@ export function filterBySearch(groupList, value: string): any[] {
   return filteredGroups;
 }
 
-export function SubCategory(subCategory) {
+export function SubCategory(subCategory: any) {
   const [open, setOpen] = useState(true);
   const handleToggle = () => {
     setOpen(!open);
@@ -83,7 +83,7 @@ export function SubCategory(subCategory) {
       </Button>
       {open && (
         <div className={styles.objectListContainer}>
-          {subCategory?.children?.map((object, i) => (
+          {subCategory?.children?.map((object: any, i: any) => (
             <Link
               href={object.to}
               key={i}
@@ -120,7 +120,7 @@ export function DropMenu(props: DropMenuProps): React.ReactElement {
         <div className={styles.masonry}>
           {filteredGroupList?.map((category, i) => {
             const displaySubCategory = category.subCategory?.filter(
-              (subCategory) => subCategory.children.length
+              (subCategory: any) => subCategory.children.length
             );
             return (
               <div className={styles.column} key={i}>
@@ -137,7 +137,7 @@ export function DropMenu(props: DropMenuProps): React.ReactElement {
                       {category.title}
                     </span>
                   </div>
-                  {displaySubCategory?.map((subCategory, i) => {
+                  {displaySubCategory?.map((subCategory: any, i: any) => {
                     const newSubCategory = {
                       ...subCategory,
                       subCategoryFontSize: props.subCategoryStyle,
@@ -150,7 +150,7 @@ export function DropMenu(props: DropMenuProps): React.ReactElement {
                   ) : (
                     <></>
                   )}
-                  {category?.children?.map((object, i) => {
+                  {category?.children?.map((object: any, i: any) => {
                     return (
                       <div
                         className={`${styles.objectItemContainer} ${styles.categoryNameContainer}`}

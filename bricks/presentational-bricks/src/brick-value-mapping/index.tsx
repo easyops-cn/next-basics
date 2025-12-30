@@ -10,20 +10,27 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import { BrickValueMapping } from "./BrickValueMapping";
+import { BrickValueMapping, MappingValue } from "./BrickValueMapping";
 import { MenuIcon } from "@next-core/brick-types";
 
-export interface MappingValue {
-  /** 展示文本 */
-  text?: string;
-  /** 标签颜色 */
-  color?: Color;
-  /**
-   * [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
-   */
-  icon?: MenuIcon;
-  /** 图标大小 */
-  iconSize?: number;
+// Re-export for backward compatibility
+export type { MappingValue };
+
+export interface BrickValueMappingElementProps {
+  value?: string | number;
+  fields?: {
+    value: string;
+  }
+  mapping?: Record<
+    string | number,
+    MappingValue
+  >;
+  showTagCircle?: boolean;
+  dataSource?: Record<string, any>;
+  triggerClickEvent?: boolean;
+  isTextEllipsis?: boolean;
+  link?: LinkProps;
+  data?: any;
 }
 
 /**
@@ -77,7 +84,7 @@ export interface MappingValue {
  * ```
  * @noInheritDoc
  */
-export class BrickValueMappingElement extends UpdatingElement {
+export class BrickValueMappingElement extends UpdatingElement implements BrickValueMappingElementProps {
   /**
    * @description 点击事件
    */

@@ -3,6 +3,13 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { VariableList } from "./VariableList";
 
+export interface VariableListElementProps {
+  value: any[] | Record<string, any>;
+  uninitializedVariables: string[];
+  expand: boolean;
+  ellipsis: boolean;
+}
+
 /**
  * @id flow-builder.variable-list
  * @author jojiang
@@ -11,7 +18,7 @@ import { VariableList } from "./VariableList";
  * @docKind brick
  * @noInheritDoc
  */
-export class VariableListElement extends UpdatingElement {
+export class VariableListElement extends UpdatingElement implements VariableListElementProps {
   @property({
     attribute: false,
   })

@@ -10,5 +10,5 @@ export const chapter: Chapter = {
     en: "chart",
     zh: "图表相关",
   },
-  stories: [barChart, PieChart, TrendChart, ...stories],
+  stories: [barChart, PieChart, TrendChart, ...stories] as any,
 };

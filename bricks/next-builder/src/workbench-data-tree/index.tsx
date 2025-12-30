@@ -18,6 +18,60 @@ import {
 import { dropEmitProps } from "../shared/workbench/WorkbenchTree";
 import { BuilderProvider } from "@next-core/editor-bricks-helper";
 
+export interface WorkbenchDataTreeProps {
+  nodes?: WorkbenchNodeData[];
+  actions?: WorkbenchTreeAction[];
+  actionsHidden?: boolean;
+  placeholder?: string;
+  isTransformName?: boolean;
+  searchPlaceholder?: string;
+  noSearch?: boolean;
+  activeKey?: string | number;
+  showMatchedNodeOnly?: boolean;
+  matchNodeDataFields?: string | string[];
+  showChildrenIfMatchParent?: boolean;
+  fixedActionsFor?: Record<string, unknown> | Record<string, unknown>[];
+  collapsible?: boolean;
+  allowDrag?: boolean;
+  allowDragToRoot?: boolean;
+  allowDragToInside?: boolean;
+  nodeKey?: string;
+  showLine?: boolean;
+  disabledNodeSuffixClick?: boolean;
+  onActionClick?: (event: CustomEvent) => void;
+  onNodeClick?: (event: CustomEvent) => void;
+  onNodeDrop?: (event: CustomEvent) => void;
+  onContextMenu?: (event: CustomEvent) => void;
+  onNodenameSuffixClick?: (event: CustomEvent) => void;
+}
+
+export interface WorkbenchDataTreeElementProps {
+  nodes?: WorkbenchNodeData[];
+  actions?: WorkbenchTreeAction[];
+  actionsHidden?: boolean;
+  placeholder?: string;
+  isTransformName?: boolean;
+  searchPlaceholder?: string;
+  noSearch?: boolean;
+  activeKey?: string | number;
+  showMatchedNodeOnly?: boolean;
+  matchNodeDataFields?: string | string[];
+  showChildrenIfMatchParent?: boolean;
+  fixedActionsFor?: Record<string, unknown> | Record<string, unknown>[];
+  collapsible?: boolean;
+  allowDrag?: boolean;
+  allowDragToRoot?: boolean;
+  allowDragToInside?: boolean;
+  nodeKey?: string;
+  showLine?: boolean;
+  disabledNodeSuffixClick?: boolean;
+  onActionClick?: (event: CustomEvent<ActionClickDetail>) => void;
+  onNodeClick?: (event: CustomEvent<unknown>) => void;
+  onNodeDrop?: (event: CustomEvent<dropEmitProps>) => void;
+  onContextMenu?: (event: CustomEvent<unknown>) => void;
+  onNodenameSuffixClick?: (event: CustomEvent<unknown>) => void;
+}
+
 /**
  * @id next-builder.workbench-data-tree
  * @author SheRunFeng
@@ -26,7 +80,7 @@ import { BuilderProvider } from "@next-core/editor-bricks-helper";
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchDataTreeElement extends UpdatingElement {
+export class WorkbenchDataTreeElement extends UpdatingElement implements WorkbenchDataTreeProps {
   @property({ attribute: false })
   nodes: WorkbenchNodeData[];
 

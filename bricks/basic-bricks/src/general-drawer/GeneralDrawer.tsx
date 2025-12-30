@@ -97,10 +97,11 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
 
   // istanbul ignore next
   const getOuterSwitchNode = () => {
-    if (!props.useBigOuterSwitch) {
+      if (!props.useBigOuterSwitch) {
       const outerIcon = props.visible
         ? { lib: "antd", icon: "right", theme: "outlined" }
         : { lib: "antd", icon: "left", theme: "outlined" };
+      // @ts-ignore
       return <GeneralIcon icon={outerIcon} />;
     } else {
       if (!props.customSwitchConfig) return;

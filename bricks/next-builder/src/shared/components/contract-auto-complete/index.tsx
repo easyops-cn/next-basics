@@ -10,6 +10,15 @@ import { UseBrickConf } from "@next-core/brick-types";
 import { ContractAutoCompleteLegacyWrapper } from "./ContractAutoComplete";
 import { FormItemElement } from "@next-libs/forms";
 
+export interface ContractAutoCompleteElementProps {
+  value?: string;
+  inputBoxStyle?: React.CSSProperties;
+  suffix?: {
+    useBrick: UseBrickConf;
+  }
+  onContractChange?: (event: CustomEvent<string>) => void;
+}
+
 /**
  * @id next-builder.contract-auto-complete
  * @author jojiang
@@ -18,7 +27,7 @@ import { FormItemElement } from "@next-libs/forms";
  * @docKind brick
  * @noInheritDoc
  */
-export class ContractAutoCompleteElement extends FormItemElement {
+export class ContractAutoCompleteElement extends FormItemElement implements ContractAutoCompleteElementProps {
   @property()
   value: string;
 

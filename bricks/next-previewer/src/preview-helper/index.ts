@@ -6,6 +6,10 @@ import type {
 } from "@next-types/preview";
 import { previewStart } from "./previewStart";
 
+export interface PreviewHelperElementProps {
+  // 该构件没有属性,仅提供方法
+}
+
 /**
  * @id next-previewer.preview-helper
  * @author steve
@@ -16,7 +20,7 @@ import { previewStart } from "./previewStart";
  */
 export class PreviewHelperElement
   extends UpdatingElement
-  implements PreviewHelperBrick
+  implements PreviewHelperBrick, PreviewHelperElementProps
 {
   protected _render(): void {
     // Do nothing.

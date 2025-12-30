@@ -2,6 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { property, UpdatingElement } from "@next-core/brick-kit";
 
+export interface FlexLayoutElementProps {
+  flexDirection?: string;
+  justifyContent?: string;
+  alignItems?: string;
+  alignContent?: string;
+  flexWrap?: string;
+  gap?: string;
+}
+
 /**
  * @id basic-bricks.flex-layout
  * @author kehua
@@ -11,7 +20,7 @@ import { property, UpdatingElement } from "@next-core/brick-kit";
  * @noInheritDoc
  */
 
-export class FlexLayoutElement extends UpdatingElement {
+export class FlexLayoutElement extends UpdatingElement implements FlexLayoutElementProps {
   /**
    * @description 定义[flex-direction]:设置主轴方向
    * @group basic

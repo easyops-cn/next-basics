@@ -10,6 +10,18 @@ import {
 import { BasicIcon, ImgIcon } from "./BasicIcon";
 import { MenuIcon } from "@next-core/brick-types";
 
+
+export interface BasicIconElementProps {
+  icon?: MenuIcon | ImgIcon;
+  size?: string;
+  renderBg?: boolean;
+  showWhenHover?: boolean;
+  bg?: string;
+  bgSize?: string;
+  bgBorderRadius?: string;
+  dataSource?: unknown;
+}
+
 /**
  * @id presentational-bricks.basic-icon
  * @name presentational-bricks.basic-icon
@@ -20,7 +32,7 @@ import { MenuIcon } from "@next-core/brick-types";
  * @description 基础icon构件
  * @noInheritDoc
  */
-export class BasicIconElement extends UpdatingElement {
+export class BasicIconElement extends UpdatingElement implements BasicIconElementProps {
   /**
    * @kind MenuIcon ｜ ImgIcon
    * @required true

@@ -12,7 +12,38 @@ import { WorkflowNode, StatusStyle, WorkFlowNodeRef } from "./WorkflowNode";
 import { MenuIcon, UseBrickConf } from "@next-core/brick-types";
 import { ContentItemActions } from "@next-libs/basic-components";
 
-export class WorkflowNodeElement extends UpdatingElement {
+export interface WorkflowNodeProps {
+  header?: string;
+  headerBgColor?: string;
+  icon?: MenuIcon;
+  containerStyle?: React.CSSProperties;
+  iconStyle?: React.CSSProperties;
+  descStyle?: React.CSSProperties;
+  dataSource?: Record<string, any>;
+  contentItemActions?: ContentItemActions;
+  statusStyle?: StatusStyle;
+  onNodeClick?: (event: CustomEvent) => void;
+}
+
+export interface WorkflowNodeElementProps {
+  header?: string;
+  headerBgColor?: string;
+  icon?: MenuIcon;
+  descUseBrick?: {
+    useBrick: UseBrickConf;
+  }
+  containerStyle?: React.CSSProperties;
+  iconStyle?: React.CSSProperties;
+  descStyle?: React.CSSProperties;
+  dataSource?: Record<string, any>;
+  contentItemActions?: ContentItemActions;
+  statusStyle?: StatusStyle;
+  suffixBrick?: {
+    useBrick: UseBrickConf;
+  }
+}
+
+export class WorkflowNodeElement extends UpdatingElement implements WorkflowNodeElementProps {
   private _nodeRef = React.createRef<WorkFlowNodeRef>();
 
   @property()

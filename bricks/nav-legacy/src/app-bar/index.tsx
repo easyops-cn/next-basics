@@ -4,7 +4,14 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BreadcrumbItemConf } from "@next-core/brick-types";
 import { AppBar } from "./AppBar/AppBar";
 
-class AppBarElement extends UpdatingElement {
+export interface AppBarElementProps {
+  pageTitle?: string;
+  documentId?: string;
+  noCurrentApp?: boolean;
+  breadcrumb?: BreadcrumbItemConf[];
+}
+
+class AppBarElement extends UpdatingElement implements AppBarElementProps {
   @property()
   pageTitle: string;
 

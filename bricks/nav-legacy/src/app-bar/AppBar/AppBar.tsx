@@ -133,6 +133,7 @@ export function AppBar({
         </div>
         <div className={styles.actionsContainer}>
           <AppDocumentLink documentId={documentId} />
+          {/* @ts-ignore */}
           <AppSetting />
         </div>
       </div>

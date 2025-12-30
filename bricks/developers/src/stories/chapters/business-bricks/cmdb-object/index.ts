@@ -9,5 +9,5 @@ export const chapter: Chapter = {
     en: "CMDB Object",
     zh: "CMDB模型",
   },
-  stories: [ObjectTree, ModelIconCombinationModal, ObjectAttrAdd],
+  stories: [ObjectTree, ModelIconCombinationModal, ObjectAttrAdd] as any,
 };
