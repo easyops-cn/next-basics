@@ -269,14 +269,16 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
     this.value = value;
     this._render();
     const detail = { value, label, extra };
-    this.changeEvent.emit(detail);
-
     // 新增规范化事件（向后兼容）
     this.dispatchEvent(
       new CustomEvent("tree.select.change", {
         detail,
       })
     );
+        
+    this.changeEvent.emit(detail);
+
+
   };
 
   protected _render(): void {
