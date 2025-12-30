@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.34.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.11...@next-bricks/flow-builder@1.34.0) (2025-12-30)
+
+
+### Features
+
+* 为构件包添加 JSX 类型生成系统并修复类型错误 ([3c59a62](https://github.com/easyops-cn/next-basics/commit/3c59a62c0c43ee40aa8f50830a9872d12369e1c8))
+
+
+
+
+
 ## [1.33.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.33.10...@next-bricks/flow-builder@1.33.11) (2025-03-25)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
