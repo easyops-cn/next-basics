@@ -55,5 +55,6 @@
 
   .divider {
     margin: 24px 0 8px 0;
+    border-top: 2px solid #b5b3b3;
   }
 }

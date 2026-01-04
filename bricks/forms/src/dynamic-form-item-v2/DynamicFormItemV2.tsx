@@ -241,32 +241,44 @@ export const LegacyDynamicFormItemV2 = forwardRef(
                   return (
                     <Row key={key} className={style.row}>
                       <Row gutter={[12, 8]} style={{ flex: 1 }}>
-                        {columns?.map((column) => (
-                          <Col
-                            key={column.name}
-                            span={
-                              isGridLayout
-                                ? (24 / gridColumns) * (column.span || 1)
-                                : undefined
-                            }
-                            style={{
-                              flex: !isGridLayout
-                                ? column.flex ?? "1"
-                                : undefined,
-                              width: !isGridLayout ? "fit-content" : undefined,
-                            }}
-                          >
-                            <ColumnComponent
-                              hasLabel={hasLabel}
-                              showLabelInAllRows={showLabelInAllRows}
-                              rowIndex={name}
-                              column={column}
-                              formValue={value}
-                              field={{ key, name, ...restField }}
-                              handleInputBlur={handleInputBlur}
-                            />
-                          </Col>
-                        ))}
+                        {columns?.map((column) => {
+                          const props = column.props as
+                            | Record<string, any>
+                            | undefined;
+                          const hidden = getRealValue(props?.hidden, [
+                            rowValue,
+                            name,
+                          ]);
+                          return (
+                            <Col
+                              key={column.name}
+                              span={
+                                isGridLayout
+                                  ? (24 / gridColumns) * (column.span || 1)
+                                  : undefined
+                              }
+                              style={{
+                                display: hidden ? "none" : undefined,
+                                flex: !isGridLayout
+                                  ? column.flex ?? "1"
+                                  : undefined,
+                                width: !isGridLayout
+                                  ? "fit-content"
+                                  : undefined,
+                              }}
+                            >
+                              <ColumnComponent
+                                hasLabel={hasLabel}
+                                showLabelInAllRows={showLabelInAllRows}
+                                rowIndex={name}
+                                column={column}
+                                formValue={value}
+                                field={{ key, name, ...restField }}
+                                handleInputBlur={handleInputBlur}
+                              />
+                            </Col>
+                          );
+                        })}
                       </Row>
                       <Col
                         style={{

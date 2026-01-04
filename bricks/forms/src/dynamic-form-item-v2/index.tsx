@@ -30,8 +30,10 @@ export interface DynamicFormItemV2ElementProps {
   columns?: Column[];
 }
 
-
-export class DynamicFormItemV2Element extends FormItemElement  implements DynamicFormItemV2ElementProps {
+export class DynamicFormItemV2Element
+  extends FormItemElement
+  implements DynamicFormItemV2ElementProps
+{
   /**
    * @description 动态表单项的初始值
    * @group basicFormItem
