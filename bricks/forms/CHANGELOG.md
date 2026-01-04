@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.0...@next-bricks/forms@1.308.1) (2026-01-04)
+
+
+### Bug Fixes
+
+* 动态表单项v2分割线加深，元素隐藏处理 ([78a46cd](https://github.com/easyops-cn/next-basics/commit/78a46cdacc93c4a7707d24abe664486825a672f4))
+* 动态表单项v2构件支持水平滚动 ([dbd851e](https://github.com/easyops-cn/next-basics/commit/dbd851e27078266464fbc1c4e817304e4b463d50))
+* 动态表单项v2补充 ([4803306](https://github.com/easyops-cn/next-basics/commit/4803306fe1c96f6a186023db11028c9ea0d40a90))
+
+
+
+
+
 # [1.308.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.307.2...@next-bricks/forms@1.308.0) (2025-12-30)
 
 
