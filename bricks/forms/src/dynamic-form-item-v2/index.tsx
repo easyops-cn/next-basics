@@ -30,8 +30,10 @@ export interface DynamicFormItemV2ElementProps {
   columns?: Column[];
 }
 
-
-export class DynamicFormItemV2Element extends FormItemElement  implements DynamicFormItemV2ElementProps {
+export class DynamicFormItemV2Element
+  extends FormItemElement
+  implements DynamicFormItemV2ElementProps
+{
   /**
    * @description 动态表单项的初始值
    * @group basicFormItem
@@ -248,14 +250,6 @@ export class DynamicFormItemV2Element extends FormItemElement  implements Dynami
   gridColumns?: number;
 
   /**
-   * @description 是否启用水平滚动布局
-   * @group ui
-   * @default false
-   */
-  @property({ type: Boolean })
-  horizontalScroll?: boolean;
-
-  /**
    * @description 导入数据时触发
    */
   @event({ type: "import" }) importEvent: EventEmitter<Record<string, any>[]>;
@@ -320,7 +314,6 @@ export class DynamicFormItemV2Element extends FormItemElement  implements Dynami
             gridColumns={this.gridColumns}
             exportExamples={this.exportExamples}
             importFilter={this.importFilter}
-            horizontalScroll={this.horizontalScroll}
           />
         </BrickWrapper>,
         this
