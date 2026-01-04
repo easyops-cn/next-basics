@@ -3,7 +3,11 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BrickColors, BrickColorsProps } from "./BrickColors";
 
-class BrickColorsElement extends UpdatingElement {
+export interface BrickColorsElementProps {
+  list: BrickColorsProps["list"];
+}
+
+class BrickColorsElement extends UpdatingElement implements BrickColorsElementProps {
   @property({
     attribute: false
   })

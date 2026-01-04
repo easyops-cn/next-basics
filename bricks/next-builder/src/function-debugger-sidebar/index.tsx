@@ -10,6 +10,26 @@ import {
 import { FunctionDebuggerSidebar } from "./FunctionDebuggerSidebar";
 import { DebuggerStateTestCase } from "../function-debugger-store/reducers/interfaces";
 
+export interface FunctionsSidebarProps {
+  functionName?: string;
+  functionModified?: boolean;
+  activeTab?: string;
+  tests?: DebuggerStateTestCase[];
+  onTabSwitch?: (event: CustomEvent) => void;
+  onTestsRun?: (event: CustomEvent) => void;
+  onTestsAdd?: (event: CustomEvent) => void;
+}
+
+export interface FunctionsSidebarElementProps {
+  functionName?: string;
+  functionModified?: boolean;
+  activeTab?: string;
+  tests?: DebuggerStateTestCase[];
+  onTabSwitch?: (event: CustomEvent<string>) => void;
+  onTestsRun?: (event: CustomEvent<any>) => void;
+  onTestsAdd?: (event: CustomEvent<any>) => void;
+}
+
 /**
  * @id next-builder.function-debugger-sidebar
  * @author steve
@@ -18,7 +38,7 @@ import { DebuggerStateTestCase } from "../function-debugger-store/reducers/inter
  * @docKind brick
  * @noInheritDoc
  */
-export class FunctionsSidebarElement extends UpdatingElement {
+export class FunctionsSidebarElement extends UpdatingElement implements FunctionsSidebarProps {
   @property()
   functionName: string;
 

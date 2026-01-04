@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button, Modal } from "antd";
 
 import { WrapperFormItem } from "../wrapper-form-item/WrapperFormItem";
-import { BrickTable, CustomColumn } from "../../../brick-table/BrickTable";
+import { BrickTable } from "../../../brick-table/BrickTable";
+// @ts-ignore
+import { CustomColumn } from "../../../brick-table/index";
 
 export interface BrickInstanceSelectProps {
   optionList: Record<string, any>[];

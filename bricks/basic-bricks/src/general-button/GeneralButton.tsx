@@ -20,7 +20,7 @@ declare const ButtonTypes: [
 declare type ButtonType = typeof ButtonTypes[number];
 
 interface LegacyGeneralButtonProps {
-  buttonName: string;
+  buttonName?: string;
   buttonType?: ButtonType;
   buttonDanger?: boolean;
   buttonIcon?: string;
@@ -29,7 +29,7 @@ interface LegacyGeneralButtonProps {
   buttonProps?: ButtonProps & { icon?: string };
   buttonUrl?: string;
   buttonHref?: string;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
   loading?: boolean;
   disabledTooltip?: string;
@@ -85,6 +85,7 @@ export function GeneralButton({
       shape={buttonType !== "nav" ? buttonShape : null}
       size={buttonSize !== "xs" && buttonType !== "nav" ? buttonSize : null}
       onClick={onClick}
+      // @ts-ignore
       type={buttonType}
       danger={buttonDanger}
       {...buttonProps}

@@ -92,8 +92,10 @@ export function BrickDocument(props: BrickDocumentProps): React.ReactElement {
       brickDoc: validDoc ? props.doc : null,
       interfaceIds: validDoc
         ? (props.v3Brick
-            ? props.doc?.interface?.types?.map((i) => i.name)
-            : props.doc?.interface?.map((i) => i.name)) || []
+            // @ts-ignore
+            ? props.doc?.interface?.types?.map((i: any) => i.name)
+            // @ts-ignore
+            : props.doc?.interface?.map((i: any) => i.name)) || []
         : [],
       presentedSharedDescList: props.v3Brick
         ? []
@@ -312,6 +314,7 @@ export function BrickDocument(props: BrickDocumentProps): React.ReactElement {
     return (
       <ReactMarkdown
         source={source}
+        // @ts-ignore
         plugins={[gfm]}
         escapeHtml={true}
         skipHtml={true}
@@ -352,6 +355,7 @@ export function BrickDocument(props: BrickDocumentProps): React.ReactElement {
           {enums.description && (
             <ReactMarkdown
               source={enums.description}
+              // @ts-ignore
               plugins={[gfm]}
               linkTarget="_blank"
             />
@@ -444,6 +448,7 @@ export function BrickDocument(props: BrickDocumentProps): React.ReactElement {
         {description && (
           <ReactMarkdown
             source={description}
+            // @ts-ignore
             plugins={[gfm]}
             linkTarget="_blank"
           />
@@ -469,6 +474,7 @@ export function BrickDocument(props: BrickDocumentProps): React.ReactElement {
           {type.description && (
             <ReactMarkdown
               source={type.description}
+              // @ts-ignore
               plugins={[gfm]}
               linkTarget="_blank"
             />
@@ -668,7 +674,8 @@ export function BrickDocument(props: BrickDocumentProps): React.ReactElement {
         <div className={style.brickDocContainer}>
           {renderHistory(brickDoc.history)}
           {v3Brick && brickType === "provider" ? (
-            <V3ProviderInterface data={brickDoc.interface} />
+            // @ts-ignore
+            <V3ProviderInterface data={brickDoc.interface as any} />
           ) : (
             <>
               {renderProperties(brickDoc.properties)}
@@ -678,9 +685,11 @@ export function BrickDocument(props: BrickDocumentProps): React.ReactElement {
             </>
           )}
           {v3Brick ? (
-            <V3BrickDocTypes types={brickDoc.interface?.types} />
+            // @ts-ignore
+            <V3BrickDocTypes types={(brickDoc.interface as any)?.types} />
           ) : (
-            renderInterfaceMix(brickDoc.interface)
+            // @ts-ignore
+            renderInterfaceMix(brickDoc.interface as any)
           )}
           {renderSharedContent(presentedSharedDescList)}
           {renderMemo(brickDoc.memo)}

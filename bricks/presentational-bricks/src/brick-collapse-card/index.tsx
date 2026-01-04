@@ -7,6 +7,23 @@ import { get, find } from "lodash";
 import style from "./index.shadow.less";
 import { MenuIcon } from "@next-core/brick-types";
 
+
+export interface BrickCollapseCardElementProps {
+  cardTitle?: string;
+  descriptionList?: descriptionsItemProps[];
+  titleIcon?: MenuIcon | string;
+  titleWithIconAndDesc?: boolean | "compact";
+  isActive?: boolean;
+  hasHeaderSlot?: boolean;
+  containerStyle?: any;
+  headerStyle?: any;
+  contentStyle?: any;
+  verticalCenter?: boolean;
+  title?: string;
+  fields?: { dataSource?: string; title: string };
+  dataSource?: Record<string, any>;
+}
+
 /**
  * @id presentational-bricks.brick-collapse-card
  * @name presentational-bricks.brick-collapse-card
@@ -20,7 +37,7 @@ import { MenuIcon } from "@next-core/brick-types";
  * @memo
  * @noInheritDoc
  */
-export class BrickCollapseCardElement extends UpdatingElement {
+export class BrickCollapseCardElement extends UpdatingElement implements BrickCollapseCardElementProps {
   private _mountPoint: HTMLElement;
   private _shadowRoot: ShadowRoot;
 

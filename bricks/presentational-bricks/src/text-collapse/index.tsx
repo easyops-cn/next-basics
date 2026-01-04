@@ -3,6 +3,12 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { TextCollapse } from "./TextCollapse";
 
+
+export interface TextCollapseElementProps {
+  text?: string;
+  line?: number;
+}
+
 /**
  * @id presentational-bricks.text-collapse
  * @author julielai
@@ -12,7 +18,7 @@ import { TextCollapse } from "./TextCollapse";
  * @docKind brick
  * @noInheritDoc
  */
-export class TextCollapseElement extends UpdatingElement {
+export class TextCollapseElement extends UpdatingElement implements TextCollapseElementProps {
   /**
    * @kind string
    * @required false

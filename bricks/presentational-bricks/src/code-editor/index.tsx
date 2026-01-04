@@ -10,6 +10,19 @@ import {
 import { CodeEditor } from "./CodeEditor";
 import { get } from "lodash";
 
+
+export interface CodeEditorElementProps {
+  value?: string;
+  fields?: {
+    value?: string;
+    mode?: string;
+  };
+  dataSource?: Record<string, any>;
+  setOptions?: Record<string, any>;
+  editorStyle?: Record<string, any>;
+  required?: boolean;
+}
+
 /**
  * @id presentational-bricks.code-editor
  * @name presentational-bricks.code-editor
@@ -30,7 +43,7 @@ import { get } from "lodash";
  * - yaml
  * @noInheritDoc
  */
-export class CodeEditorElement extends UpdatingElement {
+export class CodeEditorElement extends UpdatingElement implements CodeEditorElementProps {
   /**
    * @detail string
    * @description 值变化的时候发出的事件，detail 为值

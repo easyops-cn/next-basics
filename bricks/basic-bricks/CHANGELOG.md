@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.259.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.13...@next-bricks/basic-bricks@1.259.0) (2025-12-30)
+
+
+### Features
+
+* 为构件包添加 JSX 类型生成系统并修复类型错误 ([3c59a62](https://github.com/easyops-cn/next-basics/commit/3c59a62c0c43ee40aa8f50830a9872d12369e1c8))
+
+
+
+
+
 ## [1.258.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.258.12...@next-bricks/basic-bricks@1.258.13) (2025-12-12)
 
 

@@ -50,7 +50,8 @@ export function BrickBook({
   notToSetPageTitle,
   renderDocLink,
 }: BrickBookProps): React.ReactElement {
-  const story = findStoryById(storyId, storyType, stories);
+  // @ts-ignore
+  const story = findStoryById(storyId, storyType as any, stories);
   const v3Brick = story?.v3Brick;
   const actions = story ? story.actions : null;
   const confList: (BrickConf | SnippetConf)[] = v3Brick
@@ -135,7 +136,8 @@ export function BrickBook({
           )}
         </div>
         {v3Brick ? (
-          <V3BrickDoc doc={story.conf?.doc} />
+          // @ts-ignore
+          <V3BrickDoc doc={(story.conf as any)?.doc} />
         ) : (
           <div
             className={cssStyle.brickPreview}

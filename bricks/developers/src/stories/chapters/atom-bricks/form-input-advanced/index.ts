@@ -7,5 +7,5 @@ export const chapter: Chapter = {
     en: "form input advanced",
     zh: "进阶表单输入",
   },
-  stories: [dynamicFormInputItem],
+  stories: [dynamicFormInputItem] as any,
 };

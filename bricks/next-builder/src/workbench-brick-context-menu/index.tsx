@@ -13,6 +13,18 @@ import { BuilderClipboard } from "../builder-container/interfaces";
 import { ActionClickDetail } from "../shared/workbench/interfaces";
 import { BuilderProvider } from "@next-core/editor-bricks-helper";
 
+export interface WorkbenchBrickContextMenuProps {
+  menu?: ContextMenuItem[];
+  clipboard?: BuilderClipboard;
+  onActionClick?: (event: CustomEvent) => void;
+}
+
+export interface WorkbenchBrickContextMenuElementProps {
+  menu?: ContextMenuItem[];
+  clipboard?: BuilderClipboard;
+  onActionClick?: (event: CustomEvent<ActionClickDetail>) => void;
+}
+
 /**
  * @id next-builder.workbench-brick-context-menu
  * @author SheRunFeng
@@ -21,7 +33,7 @@ import { BuilderProvider } from "@next-core/editor-bricks-helper";
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchBrickContextMenuElement extends UpdatingElement {
+export class WorkbenchBrickContextMenuElement extends UpdatingElement implements WorkbenchBrickContextMenuProps {
   @property({ attribute: false })
   menu: ContextMenuItem[];
 

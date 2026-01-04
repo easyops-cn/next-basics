@@ -9,6 +9,25 @@ import {
 import { JsonStorage } from "@next-libs/storage";
 import { BrickAlert } from "./BrickAlert";
 
+
+export interface BrickAlertElementProps {
+  message?: string;
+  messageStyle?: CSSProperties;
+  description?: string;
+  type?: AlertType;
+  showIcon?: boolean;
+  closable?: boolean;
+  enableDescSlot?: boolean;
+  enableMessageSlot?: boolean;
+  enableActionSlot?: boolean;
+  localStorageKey?: string;
+  stripLocalStorageUrlSuffix?: boolean;
+  foldDesc?: boolean;
+  foldDescLabel?: string;
+  noBorderRadio?: boolean;
+  iconSize?: "big" | "small" | "default";
+}
+
 const storage = new JsonStorage(localStorage);
 const LOCAL_STORAGE_PREFIX = "brick-alert";
 
@@ -30,7 +49,7 @@ export type AlertType = "success" | "error" | "info" | "warning";
  * @memo
  * @noInheritDoc
  */
-export class BrickAlertElement extends UpdatingElement {
+export class BrickAlertElement extends UpdatingElement implements BrickAlertElementProps {
   /**
    * @kind string
    * @required true

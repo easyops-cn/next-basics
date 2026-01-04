@@ -5,7 +5,10 @@ import { BrickWrapper } from "@next-core/brick-kit";
 
 import { BrickCollectionInstanceExecution } from "./BrickCollectionInstanceExecution";
 
-class BrickCollectionInstanceExecutionElement extends HTMLElement {
+
+export interface BrickCollectionInstanceExecutionElementProps {}
+
+class BrickCollectionInstanceExecutionElement extends HTMLElement implements BrickCollectionInstanceExecutionElementProps {
   private _ids: string[] = [];
 
   connectedCallback(): void {

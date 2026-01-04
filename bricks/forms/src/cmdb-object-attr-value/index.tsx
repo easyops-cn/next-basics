@@ -40,7 +40,20 @@ import { IPRegex } from "./components/constants";
   * | "float";
 
 */
-export class CmdbObjectAttrValueElement extends FormItemElement {
+export interface CmdbObjectAttrValueElementProps {
+  name?: string;
+  label?: string;
+  value?: string[];
+  valueType?: ValueType[];
+  required?: boolean;
+  disabled?: boolean;
+  isProtected?: boolean;
+  disableProtectedAttr?: boolean;
+  inputBoxStyle?: React.CSSProperties;
+}
+
+
+export class CmdbObjectAttrValueElement extends FormItemElement  implements CmdbObjectAttrValueElementProps {
   /**
    * @kind string
    * @required true
@@ -175,7 +188,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
         }
       }
       if (this.hasValueWithRegex(value) && value.type === "arr") {
-        value.default.forEach((arrValue) => {
+        value.default.forEach((arrValue: any) => {
           if (!new RegExp(value.regex, "ig").test(arrValue)) {
             throw new Error(rule.message);
           }

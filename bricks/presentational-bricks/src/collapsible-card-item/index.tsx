@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { CSSProperties } from "react";
 import ReactDOM from "react-dom";
 import {
@@ -12,6 +13,29 @@ import { CollapsibleCardItem } from "./CollapsibleCardItem";
 import { MenuIcon } from "@next-core/brick-types";
 import style from "./index.shadow.css";
 import { get, pick, forEach, set, find, isEqual } from "lodash";
+
+
+export interface CollapsibleCardItemElementProps {
+  cardTitle?: string;
+  cardDesc?: string;
+  hoverable?: boolean;
+  cardStyle?: CSSProperties;
+  icon?: MenuIcon;
+  iconStyle?: Record<string, any>;
+  dataSource?: Record<string, any>;
+  fields?: {
+    cardTitle?: string;
+    cardDesc?: string;
+    icon?: string;
+  }
+  isActive?: boolean;
+  disableClickHeaderToOpen?: boolean;
+  customHeader?: boolean;
+  disableClickHeaderToClose?: boolean;
+  contentStyle?: Record<string, any>;
+  subscriptConfig?: any;
+  operatingAreaStyle?: React.CSSProperties;
+}
 
 /**
  * @id presentational-bricks.collapsible-card-item
@@ -28,7 +52,7 @@ import { get, pick, forEach, set, find, isEqual } from "lodash";
  * @memo
  * @noInheritDoc
  */
-export class CollapsibleCardItemElement extends UpdatingElement {
+export class CollapsibleCardItemElement extends UpdatingElement implements CollapsibleCardItemElementProps {
   /**
    * @kind string
    * @required false

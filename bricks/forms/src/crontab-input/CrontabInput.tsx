@@ -28,7 +28,7 @@ export interface CrontabInputItemProps {
 
 function CrontabInputItem(
   props: CrontabInputItemProps,
-  ref: React.RefObject<HTMLDivElement>
+  ref: any
 ): React.ReactElement {
   const [{ minute, hour, date, month, dow }, setChange] = useCrontab(
     props.value
@@ -50,6 +50,7 @@ function CrontabInputItem(
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const value = e.target.value;
     const type = e.target.name;
+    // @ts-ignore
     setChange(type, value);
     triggerChange(type, value);
   };
@@ -119,10 +120,10 @@ function CrontabInputItem(
   );
 }
 
-export const CrontabInputWrapper = forwardRef(CrontabInputItem);
+export const CrontabInputWrapper = forwardRef<HTMLDivElement, CrontabInputItemProps>(CrontabInputItem);
 
 export function CrontabInput(props: CrontabInputProps): React.ReactElement {
-  const [, setForceUpdate] = useState();
+  const [, setForceUpdate] = useState<any>();
 
   const validatorFn = (
     rule: any,
@@ -149,6 +150,7 @@ export function CrontabInput(props: CrontabInputProps): React.ReactElement {
       {...props}
       validator={
         props.validator
+          // @ts-ignore
           ? builtInValidator.concat(props.validator)
           : builtInValidator
       }

@@ -33,7 +33,30 @@ declare type SrcIcon = {
  * @memo
  * @noInheritDoc
  */
-export class FormModalElement extends UpdatingElement {
+export interface FormModalElementProps {
+  modalTitle?: string;
+  items?: { useBrick: UseSingleBrickConf[] };
+  form?: {
+    useBrick: Omit<UseSingleBrickConf, "brick">;
+  };
+  dataSource?: any;
+  width?: string | number;
+  confirmLoading?: boolean;
+  centered?: boolean;
+  okText?: string;
+  okType?: ButtonType;
+  cancelText?: string;
+  maskClosable?: boolean;
+  forceRender?: boolean;
+  okButtonProps?: ButtonProps;
+  cancelButtonProps?: ButtonProps;
+  destroyOnClose?: boolean;
+  itemBricks?: UseSingleBrickConf[];
+  formBrick?: Omit<UseSingleBrickConf, "brick">;
+}
+
+
+export class FormModalElement extends UpdatingElement  implements FormModalElementProps {
   /**
    * @kind string
    * @required false
@@ -234,6 +257,13 @@ export class FormModalElement extends UpdatingElement {
     this._visible = true;
     this._render();
     this.openEvent.emit();
+
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("form.modal.open", {
+        detail: {},
+      })
+    );
   }
   /**
    * @description 模态框关闭
@@ -246,6 +276,13 @@ export class FormModalElement extends UpdatingElement {
     this._visible = false;
     this._render();
     this.closeEvent.emit();
+
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("form.modal.close", {
+        detail: {},
+      })
+    );
   }
   /**
    * @description 模态框确定，默认自动关闭模态框，可以通过 `action: 'preventDefault'` 阻止
@@ -253,6 +290,14 @@ export class FormModalElement extends UpdatingElement {
   @event({ type: "formModal.ok", cancelable: true }) okEvent: EventEmitter;
   private _handleOk = (): void => {
     const defaultAction = this.okEvent.emit();
+
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("form.modal.ok", {
+        cancelable: true,
+      })
+    );
+
     if (defaultAction) {
       this.close();
     }
@@ -264,6 +309,14 @@ export class FormModalElement extends UpdatingElement {
   cancelEvent: EventEmitter;
   private _handleCancel = (): void => {
     const defaultAction = this.cancelEvent.emit();
+
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("form.modal.cancel", {
+        cancelable: true,
+      })
+    );
+
     if (defaultAction) {
       this.close();
     }

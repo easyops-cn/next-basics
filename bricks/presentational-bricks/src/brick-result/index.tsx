@@ -10,6 +10,16 @@ import {
   IllustrationsConfig,
 } from "../interfaces/brick-result";
 import { IconSize } from "./components/IllustrationWrapper";
+
+export interface BrickResultElementProps {
+  status?: BrickResultStatus | EmptyResultStatus | IllustrationsStatus;
+  customTitle?: string;
+  subTitle?: string;
+  icon?: string;
+  illustrationsConfig?: IllustrationsConfig;
+  emptyResultSize?: IconSize;
+}
+
 /**
  * @id presentational-bricks.brick-result
  * @name presentational-bricks.brick-result
@@ -24,7 +34,7 @@ import { IconSize } from "./components/IllustrationWrapper";
  * @noInheritDoc
  */
 
-export class BrickResultElement extends UpdatingElement {
+export class BrickResultElement extends UpdatingElement implements BrickResultElementProps {
   private _mountPoint: HTMLElement;
 
   /**

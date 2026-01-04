@@ -17,6 +17,35 @@ import type {
 import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
 import { WorkbenchBackendActionForInsertDetail } from "@next-types/preview";
 
+export interface WorkbenchStoryboardTreeProps {
+  actions?: WorkbenchTreeAction[];
+  placeholder?: string;
+  searchPlaceholder?: string;
+  activeInstanceId?: string;
+  collapsedNodes?: string[];
+  isDrag?: boolean;
+  onActionClick?: (event: CustomEvent) => void;
+  onAddBrick?: (event: CustomEvent) => void;
+  onDataModelDrop?: (event: CustomEvent) => void;
+  onNodeToggle?: (event: CustomEvent) => void;
+}
+
+export interface WorkbenchStoryboardTreeElementProps {
+  actions?: WorkbenchTreeAction[];
+  placeholder?: string;
+  searchPlaceholder?: string;
+  activeInstanceId?: string;
+  collapsedNodes?: string[];
+  isDrag?: boolean;
+  onActionClick?: (event: CustomEvent<ActionClickDetail>) => void;
+  onAddBrick?: (event: CustomEvent<WorkbenchBackendActionForInsertDetail>) => void;
+  onDataModelDrop?: (event: CustomEvent<Record<string, any>>) => void;
+  onNodeToggle?: (event: CustomEvent<{
+    nodeId: string;
+    collapsed: boolean;
+  }>) => void;
+}
+
 /**
  * @id next-builder.workbench-brick-tree
  * @author steve
@@ -25,7 +54,7 @@ import { WorkbenchBackendActionForInsertDetail } from "@next-types/preview";
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchStoryboardTreeElement extends UpdatingElement {
+export class WorkbenchStoryboardTreeElement extends UpdatingElement implements WorkbenchStoryboardTreeProps {
   @property({ attribute: false })
   actions: WorkbenchTreeAction[];
 

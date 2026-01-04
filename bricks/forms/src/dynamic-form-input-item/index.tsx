@@ -40,7 +40,15 @@ import {
 *| type        | `text` \| `checkbox`\| `number`... | -        | -       | 该列表单项的类型，详情可查看 [<input> types](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input#%3Cinput%3E_types) |
 *| disabled    | `boolean`                         | -        | -       | 该列表单项是否禁止                                                                                                                |
 */
-export class DynamicFormInputItemElement extends FormItemElement {
+export interface DynamicFormInputItemElementProps {
+  name?: string;
+  label?: string;
+  value?: CommonItemProps["value"];
+  columns?: CommonItemProps["columns"];
+}
+
+
+export class DynamicFormInputItemElement extends FormItemElement  implements DynamicFormInputItemElementProps {
   /**
    * @kind string
    * @required true

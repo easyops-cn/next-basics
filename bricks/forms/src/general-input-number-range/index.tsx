@@ -22,7 +22,17 @@ import { ValidationRule } from "@ant-design/compatible/lib/form";
  * @docKind brick
  * @noInheritDoc
  */
-export class GeneralInputNumberRangeElement extends FormItemElement {
+export interface GeneralInputNumberRangeElementProps {
+  name?: string;
+  placeholder?: string;
+  label?: string;
+  value?: { min?: string | number; max?: string | number };
+  required?: boolean;
+  message?: Record<string, string>;
+}
+
+
+export class GeneralInputNumberRangeElement extends FormItemElement  implements GeneralInputNumberRangeElementProps {
   /**
    * @required true
    * @description 数字区间输入框字段名

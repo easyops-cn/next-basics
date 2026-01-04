@@ -10,6 +10,14 @@ interface WorkbenchSidebarChildElement extends HTMLElement {
   activeFlex?: string;
 }
 
+export interface WorkbenchSidebarProps {
+  titleLabel?: string;
+}
+
+export interface WorkbenchSidebarElementProps {
+  titleLabel?: string;
+}
+
 /**
  * @id next-builder.workbench-sidebar
  * @author steve
@@ -18,7 +26,7 @@ interface WorkbenchSidebarChildElement extends HTMLElement {
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchSidebarElement extends UpdatingElement {
+export class WorkbenchSidebarElement extends UpdatingElement implements WorkbenchSidebarProps {
   @property()
   titleLabel: string;
 

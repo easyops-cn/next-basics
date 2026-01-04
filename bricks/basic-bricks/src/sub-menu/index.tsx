@@ -4,6 +4,12 @@ import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { SubMenu } from "./SubMenu";
 import { SidebarMenu, UseBrickConf } from "@next-core/brick-types";
 
+export interface SubMenuElementProps {
+  dataSource?: SidebarMenu;
+  topOperationConf?: { useBrick: UseBrickConf };
+  isThirdLevel?: boolean;
+}
+
 /**
  * @id basic-bricks.sub-menu
  * @name basic-bricks.sub-menu
@@ -17,7 +23,7 @@ import { SidebarMenu, UseBrickConf } from "@next-core/brick-types";
  * > Tips: 通用子菜单构件，相关配置项同 Storyboard.routes.menu.sidebarMenu，暂时不支持 icon
  * @noInheritDoc
  */
-export class SubMenuElement extends UpdatingElement {
+export class SubMenuElement extends UpdatingElement implements SubMenuElementProps {
   /**
    * @kind [SidebarMenu](http://developers.162.d.easyops.local/micro-app/storyboard-routes-menu-sidebarmenu.html)
    * @required true

@@ -37,9 +37,23 @@ export const LAYOUT_ENUMS = ["horizontal", "vertical", "inline"];
  * @memo
  * @noInheritDoc
  */
+export interface GeneralFormElementProps {
+  values?: Record<string, any>;
+  staticValues?: Record<string, any>;
+  name?: string;
+  layout?: FormLayout;
+  labelAlign?: string;
+  labelCol?: ColProps;
+  wrapperCol?: ColProps;
+  valueTypes?: Record<string, string>;
+  noColon?: boolean;
+  maxWidthLimited?: boolean;
+  alignment?: FormAlignment;
+  formStyle?: React.CSSProperties;
+}
+
 export class GeneralFormElement
-  extends UpdatingElement
-  implements AbstractGeneralFormElement
+  extends UpdatingElement implements  GeneralFormElementProps
 {
   readonly isFormElement = true;
 
@@ -566,7 +580,7 @@ export class GeneralFormElement
       callback = arg1;
     }
 
-    const validateCallback = (err, values) => {
+    const validateCallback = (err: any, values: any) => {
       // Todo(steve): shadowRoot is readonly
       /* istanbul ignore next */
       this._forceUpdate();

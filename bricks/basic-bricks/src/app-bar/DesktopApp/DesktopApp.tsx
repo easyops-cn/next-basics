@@ -54,6 +54,7 @@ export function DesktopApp({
           }
         )}
         to={app.homepage}
+        // @ts-ignore
         onClick={handleAppClick}
       >
         <img

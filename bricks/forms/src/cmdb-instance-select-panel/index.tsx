@@ -27,7 +27,25 @@ import { FormItemElement } from "@next-libs/forms";
  *  pattern
  * @memo
  */
-export class CmdbInstanceSelectPanelElement extends FormItemElement {
+export interface CmdbInstanceSelectPanelElementProps {
+  name?: string;
+  value?: string[];
+  objectId?: string;
+  objectList?: Partial<CmdbModels.ModelCmdbObject>[];
+  label?: string;
+  addButtonText?: string;
+  fields?: string[];
+  showSizeChanger?: boolean;
+  addInstancesModalPageSize?: number;
+  pageSizeOptions?: string[];
+  instanceQuery?: any;
+  showBindButton?: boolean;
+  bindButtonDisabled?: boolean;
+  bindButtonText?: string;
+}
+
+
+export class CmdbInstanceSelectPanelElement extends FormItemElement  implements CmdbInstanceSelectPanelElementProps {
   /* =========================== Group: basic =========================== */
 
   /**

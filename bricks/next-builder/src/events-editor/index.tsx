@@ -20,6 +20,37 @@ import {
 } from "@next-core/brick-kit";
 import { EventsEditor, EditorRef } from "./EventsEditor";
 
+export interface EventsEditorProps {
+  customTitle?: string;
+  titleIcon?: MenuIcon;
+  updatedViewKey?: string;
+  eventDocInfo?: EventsDoc[] | V3EventsDoc[];
+  eventList?: EventConfig[];
+  loading?: boolean;
+}
+
+export interface EventsEditorElementProps {
+  customTitle?: string;
+  titleIcon?: MenuIcon;
+  updatedViewKey?: string;
+  eventDocInfo?: EventsDoc[] | V3EventsDoc[];
+  eventList?: EventConfig[];
+  suffixTitle?: {
+    useBrick: UseBrickConf;
+  }
+  loading?: boolean;
+  onEventCreate?: (event: CustomEvent<{
+    key: string;
+    name: string;
+  }>) => void;
+  onEventEdit?: (event: CustomEvent<{
+    key: string;
+    name: string;
+    handler: BrickEventHandler;
+  }>) => void;
+  onEventChange?: (event: CustomEvent<any>) => void;
+}
+
 /**
  * @id next-builder.events-editor
  * @author jojiang
@@ -28,7 +59,7 @@ import { EventsEditor, EditorRef } from "./EventsEditor";
  * @docKind brick
  * @noInheritDoc
  */
-export class EventsEditorElement extends UpdatingElement {
+export class EventsEditorElement extends UpdatingElement implements EventsEditorElementProps {
   private _editorRef = React.createRef<EditorRef>();
   /**
    * @kind string

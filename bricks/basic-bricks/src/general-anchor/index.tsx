@@ -10,6 +10,14 @@ import {
 import { GeneralAnchor } from "./GeneralAnchor";
 import { AnchorLinkProps, AnchorProps } from "antd";
 import { UseBrickConf } from "@next-core/brick-types";
+export interface GeneralAnchorElementProps {
+  anchorList?: AnchorListType[];
+  configProps?: AnchorProps;
+  type?: "default" | "radio";
+  extraBrick?: { useBrick: UseBrickConf };
+  initOffset?: number;
+}
+
 export interface AnchorListType extends AnchorLinkProps {
   /* 其他参数请参考 https://ant.design/components/anchor-cn/#Link-Props */
   title: string;
@@ -26,7 +34,7 @@ export interface AnchorListType extends AnchorLinkProps {
  * @docKind brick
  * @noInheritDoc
  */
-export class GeneralAnchorElement extends UpdatingElement {
+export class GeneralAnchorElement extends UpdatingElement implements GeneralAnchorElementProps {
   /**
    * @kind `AnchorListType[]`
    * @required true

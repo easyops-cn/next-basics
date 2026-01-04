@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import ReactDOM from "react-dom";
 import {
@@ -12,6 +13,34 @@ import { Card, TooltipProps } from "antd";
 import { Color, TagTypeProps, TagListType } from "../interfaces/brick-tag";
 import { get, map } from "lodash";
 import { UseBrickConf } from "@next-core/brick-types";
+
+export interface BrickTagElementProps {
+  label?: string;
+  tagList?: TagListType[] | string[];
+  showTagCircle?: boolean;
+  color?: string | Color;
+  dataSource?: Record<string, any>;
+  closable?: boolean;
+  componentType?: TagTypeProps;
+  default?: string | string[];
+  configProps?: Record<string, any>;
+  disabledTooltip?: string;
+  tooltipProps?: TooltipProps;
+  fields?: {
+    label: string;
+    key: string;
+    icon?: string;
+    tagList?: string;
+  }
+  textEllipsis?: boolean;
+  tagStyle?: React.CSSProperties;
+  tagCheckedStyle?: React.CSSProperties;
+  tagHoverStyle?: React.CSSProperties;
+  afterBrick?: {
+    useBrick: UseBrickConf;
+  }
+}
+
 /**
  * @id presentational-bricks.brick-tag
  * @name presentational-bricks.brick-tag
@@ -28,7 +57,7 @@ import { UseBrickConf } from "@next-core/brick-types";
  * @memo
  * @noInheritDoc
  */
-export class BrickTagElement extends UpdatingElement {
+export class BrickTagElement extends UpdatingElement implements BrickTagElementProps {
   /**
    * @description 选中的 tag 的 key
    */

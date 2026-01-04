@@ -91,6 +91,7 @@ export function GeneralLink(props: GeneralLinkProps): React.ReactElement {
       link = <a {...commonProps}>{linkContent}</a>;
     } else {
       link = (
+        // @ts-ignore
         <Link to={url} href={href} {...linkProps} {...commonProps}>
           {linkContent}
         </Link>

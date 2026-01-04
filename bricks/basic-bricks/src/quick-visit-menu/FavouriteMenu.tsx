@@ -10,7 +10,7 @@ import {
 } from "react-sortable-hoc";
 import { K, NS_BASIC_BRICKS } from "../i18n/constants";
 import { useTranslation } from "react-i18next";
-export function arrayMoveImmutable(array, fromIndex, toIndex) {
+export function arrayMoveImmutable(array: any, fromIndex: any, toIndex: any) {
   if (fromIndex === toIndex) {
     return array;
   }
@@ -30,31 +30,31 @@ export function FavouriteMenu({
   handleMenuRemove,
   handleMenuDrag,
   handleMenuClick,
-}): React.ReactElement {
+}: any): React.ReactElement {
   const [list, setList] = useState([]);
   const { t } = useTranslation(NS_BASIC_BRICKS);
   useEffect(() => {
     setList(menus);
   }, [menus]);
 
-  const removeItem = (menu) => {
+  const removeItem = (menu: any) => {
     const newList = removeItemFromList(list, menu);
     setList(newList);
     handleMenuRemove(newList);
   };
-  const onSortEnd = ({ oldIndex, newIndex }) => {
+  const onSortEnd = ({ oldIndex, newIndex }: any) => {
     const newList = arrayMoveImmutable(list, oldIndex, newIndex);
     setList(newList);
     handleMenuDrag(newList, oldIndex, newIndex);
   };
-  const SortableWrapper = SortableContainer(({ children }) => {
+  const SortableWrapper = SortableContainer(({ children }: any) => {
     return <div className={styles.container}>{children}</div>;
   });
   const DragHandle = SortableHandle(() => (
     <span className={styles.dragHandler}>:::</span>
   ));
 
-  const SortableItem = SortableElement(({ menu, removeItem, clickItem }) => (
+  const SortableItem = SortableElement(({ menu, removeItem, clickItem }: any) => (
     <div className={styles.favouriteTag}>
       <div className={styles.textContainer} onClick={() => clickItem(menu)}>
         <Tooltip

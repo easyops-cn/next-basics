@@ -14,7 +14,7 @@ interface ObjectAttrIntProps {
 
 interface IntValueType {
   regex: string;
-  default: number;
+  default: any;
 }
 
 export function ObjectAttrInt(props: ObjectAttrIntProps): React.ReactElement {

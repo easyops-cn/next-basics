@@ -10,6 +10,24 @@ import { FormItemElement } from "@next-libs/forms";
 import { MarkdownEditor } from "./MarkdownEditor";
 import { get } from "lodash";
 
+
+export interface MarkdownEditorElementProps {
+  value?: string;
+  supportUploadImg?: boolean;
+  imagePreview?: boolean;
+  bucketName?: string;
+  imgCompressDisabled?: boolean;
+  previewContainerStyle?: React.CSSProperties;
+  markdownEditorContainerStyle?: React.CSSProperties;
+  textareaStyle?: React.CSSProperties;
+  dataSource?: Record<string, any>;
+  fields?: {
+    value?: string;
+  }
+  inputMinRows?: number;
+  inputMaxRows?: number;
+}
+
 export interface ImageInfo {
   name: string;
   url: string;
@@ -28,7 +46,7 @@ export interface ImageInfo {
  * 1.90.0: 新增属性 `previewContainerStyle`
  * @memo
  */
-export class MarkdownEditorElement extends FormItemElement {
+export class MarkdownEditorElement extends FormItemElement implements MarkdownEditorElementProps {
   /* =========================== Group: basic =========================== */
 
   /**

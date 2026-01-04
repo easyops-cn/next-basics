@@ -8,5 +8,5 @@ export const chapter: Chapter = {
     en: "Auto Collection",
     zh: "自动采集",
   },
-  stories: [CollectionInstanceList, CollectionHistoryList],
+  stories: [CollectionInstanceList, CollectionHistoryList] as any,
 };

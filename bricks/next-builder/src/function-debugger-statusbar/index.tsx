@@ -4,6 +4,16 @@ import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { FunctionDebuggerStatusbar } from "./FunctionDebuggerStatusbar";
 import { ProcessedCoverage, TestStats } from "../shared/functions/interfaces";
 
+export interface FunctionDebuggerStatusbarProps {
+  coverage?: ProcessedCoverage;
+  testStats?: TestStats;
+}
+
+export interface FunctionDebuggerStatusbarElementProps {
+  coverage?: ProcessedCoverage;
+  testStats?: TestStats;
+}
+
 /**
  * @id next-builder.function-debugger-statusbar
  * @author Steve
@@ -12,7 +22,7 @@ import { ProcessedCoverage, TestStats } from "../shared/functions/interfaces";
  * @docKind brick
  * @noInheritDoc
  */
-export class FunctionDebuggerStatusbarElement extends UpdatingElement {
+export class FunctionDebuggerStatusbarElement extends UpdatingElement implements FunctionDebuggerStatusbarProps {
   @property({ attribute: false })
   coverage: ProcessedCoverage;
 

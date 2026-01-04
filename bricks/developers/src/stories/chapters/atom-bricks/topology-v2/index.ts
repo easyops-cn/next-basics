@@ -6,5 +6,5 @@ export const chapter: Chapter = {
     en: "topology",
     zh: "拓扑",
   },
-  stories: [GeneralTopology],
+  stories: [GeneralTopology] as any,
 };

@@ -4,6 +4,12 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { AppbarBreadcrumb } from "./AppbarBreadcrumb";
 import { BreadcrumbItemConf, SidebarMenu } from "@next-core/brick-types";
 
+export interface AppbarBreadcrumbElementProps {
+  breadcrumb?: BreadcrumbItemConf[];
+  noCurrentApp?: boolean;
+  menu?: Partial<SidebarMenu>;
+}
+
 /**
  * @id basic-bricks.app-bar-breadcrumb
  * @author SailorF
@@ -14,7 +20,7 @@ import { BreadcrumbItemConf, SidebarMenu } from "@next-core/brick-types";
  * @memo 该构件已迁移至 `nav-legacy` 包中维护，后续版本将不再维护该构件，请使用 `nav-legacy.app-bar-breadcrumb` 构件
  * @noInheritDoc
  */
-export class AppbarBreadcrumbElement extends UpdatingElement {
+export class AppbarBreadcrumbElement extends UpdatingElement implements AppbarBreadcrumbElementProps {
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else

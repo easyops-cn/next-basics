@@ -4,6 +4,13 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { isNil, get } from "lodash";
 import { CrontabDisplay } from "./CrontabDisplay";
 
+
+export interface CrontabDisplayElementProps {
+  value?: string;
+  dataSource?: Record<string, any>;
+  fields?: { value: string };
+}
+
 /**
  * @id presentational-bricks.crontab-display
  * @name presentational-bricks.crontab-display
@@ -15,7 +22,7 @@ import { CrontabDisplay } from "./CrontabDisplay";
  * @memo
  * @noInheritDoc
  */
-export class CrontabDisplayElement extends UpdatingElement {
+export class CrontabDisplayElement extends UpdatingElement implements CrontabDisplayElementProps {
   /**
    * @kind string
    * @required true

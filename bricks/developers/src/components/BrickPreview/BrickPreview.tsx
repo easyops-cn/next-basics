@@ -84,6 +84,7 @@ function LegacyBrickPreview(
   useEffect(() => {
     const process = async (): Promise<void> => {
       if (migrateV3) {
+        // @ts-ignore
         const bricks = cloneDeep([].concat(config));
         replaceUseChildren(bricks);
         rootRef.current?.render(bricks);
@@ -109,9 +110,12 @@ function LegacyBrickPreview(
         failed: false,
       };
       try {
-        const mutableConf = cloneDeep(config);
+        const mutableConf = cloneDeep(config) as any;
+        // @ts-ignore
         await developHelper.asyncProcessBrick(mutableConf);
+        // @ts-ignore
         await developHelper.loadDynamicBricksInBrickConf(mutableConf);
+        // @ts-ignore
         await fakeLocationContext.mountBrick(
           mutableConf,
           null,

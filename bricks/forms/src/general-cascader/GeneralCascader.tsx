@@ -165,6 +165,7 @@ export function LegacyGeneralCascader(
         placeholder={placeholder}
         popupPlacement={popupPlacement}
         showSearch={showSearch && { limit, filter }}
+        // @ts-ignore
         size={size}
         style={props.style}
         suffixIcon={suffixIcon && <LegacyIcon type={suffixIcon} />}

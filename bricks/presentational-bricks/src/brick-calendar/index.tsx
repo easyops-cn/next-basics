@@ -14,6 +14,14 @@ import { CalendarMode } from "antd/lib/calendar/generateCalendar";
 import { UseBrickConf } from "@next-core/brick-types";
 import { groupBy } from "lodash";
 
+
+export interface BrickCalendarElementProps {
+  value?: moment.Moment ;
+  mode?: CalendarMode ;
+  dateCell?: { useBrick: UseBrickConf };
+  monthCell?: { useBrick: UseBrickConf };
+}
+
 /** panelEvent */
 export interface PanelEvent {
   /** 日期 */
@@ -42,7 +50,7 @@ export interface PanelEvent {
  * | transformFrom | string         | -        | -       | 属性数据转换来自数据源的哪个字段，不填则为整个数据 |
  * @noInheritDoc
  */
-export class BrickCalendarElement extends UpdatingElement {
+export class BrickCalendarElement extends UpdatingElement implements BrickCalendarElementProps {
   /**
    * @category property
    * @kind [moment](https://momentjs.com)
@@ -165,7 +173,21 @@ export class BrickCalendarElement extends UpdatingElement {
     const curData = this.getDataByMode(date, this.mode);
     this.value = date;
     this.onSelect.emit(date);
+    
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("presentational.calendar.on.select", {
+        detail: date,
+      })
+    );
     this.onSelectV2.emit({ date, data: curData });
+    
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("presentational.calendar.on.select.v2", {
+        detail: { date, data: curData },
+      })
+    );
   };
 
   /**
@@ -185,7 +207,21 @@ export class BrickCalendarElement extends UpdatingElement {
     const curData = this.getDataByMode(date, this.mode);
     this.value = date;
     this.onChange.emit(date);
+    
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("presentational.calendar.on.change", {
+        detail: date,
+      })
+    );
     this.onChangeV2.emit({ date, data: curData });
+    
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("presentational.calendar.on.change.v2", {
+        detail: { date, data: curData },
+      })
+    );
   };
 
   /**
@@ -197,6 +233,13 @@ export class BrickCalendarElement extends UpdatingElement {
   handlePanelChange = (date: moment.Moment, mode: CalendarMode) => {
     this.mode = mode;
     this.onPanelChange.emit({ date: date, mode: mode } as PanelEvent);
+    
+    // 新增规范化事件（向后兼容）
+    this.dispatchEvent(
+      new CustomEvent("presentational.calendar.on.panel.change", {
+        detail: { date: date, mode: mode } as PanelEvent,
+      })
+    );
   };
 
   getCustomComp = (cell: { useBrick: UseBrickConf }, mode: CalendarMode) => {

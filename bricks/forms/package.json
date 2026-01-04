@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/forms",
-  "version": "1.307.2",
+  "version": "1.308.0",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/forms",
   "license": "GPL-3.0",
@@ -37,9 +37,10 @@
     "build:webpack:editors": "webpack --config webpack.editors.js",
     "build:webpack:property-editors": "webpack --config webpack.property-editors.js",
     "build:stories": "if [ -d stories ];then  rollup --config rollup.stories.js; else echo \" no stories \"; fi",
-    "postbuild": "ENABLE_GENERATE_DOC=true node scripts/post-build.js",
+    "postbuild": "npm run build:types && ENABLE_GENERATE_DOC=true node scripts/post-build.js",
     "test": "cross-env NODE_ENV='test' jest",
-    "test:ci": "cross-env NODE_ENV='test' CI=true jest"
+    "test:ci": "cross-env NODE_ENV='test' CI=true jest",
+    "build:types": "tsc --project tsconfig.types.json"
   },
   "devDependencies": {
     "@next-core/custom-antd-styles": "^1.27.1",

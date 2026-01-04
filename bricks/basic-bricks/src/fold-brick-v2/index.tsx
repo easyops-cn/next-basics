@@ -12,6 +12,16 @@ import style from "./style.shadow.less";
 import { uniqueId } from "lodash";
 import { MenuIcon } from "@next-core/brick-types";
 
+export interface FoldBrickV2ElementProps {
+  foldName?: string;
+  defaultShow?: boolean;
+  type: "normal" | "primary";
+  foldStyle?: Record<string, string>;
+  dividerOrientation?: "left" | "right" | "center";
+  foldIcon?: MenuIcon;
+  foldIconStyle?: any;
+}
+
 /**
  * @id basic-bricks.fold-brick-v2
  * @name basic-bricks.fold-brick-v2
@@ -34,7 +44,7 @@ import { MenuIcon } from "@next-core/brick-types";
  * @memo
  * @noInheritDoc
  */
-export class FoldBrickV2Element extends UpdatingElement {
+export class FoldBrickV2Element extends UpdatingElement implements FoldBrickV2ElementProps {
   private _id = uniqueId("foldBrickButton");
   private _mountPoint: HTMLElement;
   private _shadowRoot: ShadowRoot;

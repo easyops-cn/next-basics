@@ -12,6 +12,14 @@ import { PaginationProps } from "antd/lib/pagination";
 import { get } from "lodash";
 import { getHistory } from "@next-core/brick-kit";
 
+
+export interface GeneralPaginationElementProps {
+  total?: number;
+  onlyShowTotal?: boolean;
+  dataSource?: Record<string, any>;
+  configProps?: PaginationProps;
+}
+
 /**
  * @id presentational-bricks.general-pagination
  * @name presentational-bricks.general-pagination
@@ -23,7 +31,7 @@ import { getHistory } from "@next-core/brick-kit";
  * @memo
  * @noInheritDoc
  */
-export class GeneralPaginationElement extends UpdatingElement {
+export class GeneralPaginationElement extends UpdatingElement implements GeneralPaginationElementProps {
   /**
    * @detail {page: number}
    * @description 页码变化

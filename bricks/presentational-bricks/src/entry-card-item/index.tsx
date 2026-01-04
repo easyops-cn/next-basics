@@ -6,6 +6,26 @@ import { MenuIcon } from "@next-core/brick-types";
 import { get, pick, forEach, set } from "lodash";
 import { parseTemplate } from "@next-libs/cmdb-utils";
 
+
+export interface EntryCardItemElementProps {
+  dataSource?: Record<string, any>;
+  cardTitle?: string;
+  description?: string;
+  fields?: {
+    cardTitle?: string;
+    icon?: string;
+    iconColor?: string;    
+  }
+  icon?: MenuIcon;
+  iconColor?: Color;
+  iconSize?: Size;
+  target?: string;
+  url?: string;
+  urlTemplate?: string;
+  cardStyle?: React.CSSProperties;
+  tip?: string;
+}
+
 /**
  * @id presentational-bricks.entry-card-item
  * @name presentational-bricks.entry-card-item
@@ -17,7 +37,7 @@ import { parseTemplate } from "@next-libs/cmdb-utils";
  * @memo
  * @noInheritDoc
  */
-export class EntryCardItemElement extends UpdatingElement {
+export class EntryCardItemElement extends UpdatingElement implements EntryCardItemElementProps {
   /**
    * @kind Record<string, any>
    * @required true

@@ -31,6 +31,16 @@ export interface FormItemColumnsProps extends BaseColumnsProps {
   selectProps: SelectProps;
 }
 
+export interface RowFormItemProps {
+  row: any;
+  form: any;
+  prefixId: string;
+  srcObjectId: string;
+  columns: FormItemColumnsProps[];
+  batchChange: (values: Record<string, any>) => void;
+  onChange: (value: any, name: string) => void;
+}
+
 const relationSearch = ["USER", "USER_GROUP"];
 
 export function RowFormItem(props: RowFormItemProps): React.ReactElement {
@@ -67,6 +77,7 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
   const handleDstObjectIdChange = async (
     value: string,
     column: FormItemColumnsProps
+  // @ts-ignore
   ): void => {
     // 清空关联选择,因为重刷之后form会赋值
     props.batchChange({
@@ -274,10 +285,11 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
   );
 }
 
-export function DynamicUserSelectItem(props): React.ReactElement {
+export function DynamicUserSelectItem(props: any): React.ReactElement {
   return (
     <FormItemWrapper {...omit(props, "name")}>
       <DynamicCommonItem {...props}>
+        {/* @ts-ignore */}
         <RowFormItem srcObjectId={props.srcObjectId} />
       </DynamicCommonItem>
     </FormItemWrapper>

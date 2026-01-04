@@ -51,6 +51,7 @@ export function PageError(props: PageErrorProps): React.ReactElement {
           mode="guide"
           category="exception"
           name={httpCodeItem.name}
+          // @ts-ignore
           header={{ title: t(K[httpCodeItem.title]), description: props.error }}
         ></BrickIllustration>
       ) : (

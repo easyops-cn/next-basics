@@ -181,6 +181,7 @@ export function PopoverContainer(
         trigger={trigger}
         overlayClassName={props.showPopoverBg ? "" : styles.customOverlay}
         onVisibleChange={onVisibleChange}
+        // @ts-ignore
         zIndex={props.zIndex ?? 1030}
         align={props.align}
         getPopupContainer={props.getPopupContainer}

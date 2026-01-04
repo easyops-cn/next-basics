@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/utils",
-  "version": "1.4.3",
+  "version": "1.5.0",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/utils",
   "license": "GPL-3.0",
@@ -27,7 +27,7 @@
     "start:editors": "cross-env NODE_ENV='development' webpack --config webpack.editors.js --watch",
     "start:both": "concurrently -k -n main,editors \"npm run start\" \"npm run start:editors\"",
     "prebuild": "node scripts/pre-build.js",
-    "build": "npm run build:webpack && npm run build:stories && npm run build:snippets",
+    "build": "npm run build:webpack && npm run build:stories && npm run build:snippets  && npm run build:types",
     "build:webpack": "npm run build:webpack:main && npm run build:webpack:editors",
     "build:webpack:main": "webpack --config webpack.config.js",
     "build:webpack:editors": "webpack --config webpack.editors.js",
@@ -38,7 +38,8 @@
     "test:ci": "cross-env NODE_ENV='test' CI=true jest",
     "prepack:tar": "node scripts/generate-version-file.js && npm run build",
     "pack:tar": "npm pack",
-    "postpack:tar": "node scripts/rename-tar-package.js"
+    "postpack:tar": "node scripts/rename-tar-package.js",
+    "build:types": "tsc --project tsconfig.types.json"
   },
   "sideEffects": true,
   "devDependencies": {

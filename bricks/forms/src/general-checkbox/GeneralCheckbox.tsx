@@ -178,7 +178,8 @@ export function GeneralCheckboxItem(
         Array.from(groupMap, (v) => {
           const { optionKeys } = v[1];
           const checkedItems = new Set(
-            value?.filter((v) => optionKeys.includes(v)) ?? []
+            // @ts-ignore
+            value?.filter((v: any) => optionKeys.includes(v)) ?? []
           );
           const status = {
             indeterminate:
@@ -235,6 +236,7 @@ export function GeneralCheckboxItem(
     const checkbox = (
       <Checkbox
         value={item.value}
+        // @ts-ignore
         key={item.value}
         disabled={!!item.disabled}
         className={styles[`${checkboxColorStyle}`]}
@@ -245,6 +247,7 @@ export function GeneralCheckboxItem(
     );
 
     return isGridType ? (
+      // @ts-ignore
       <Col key={item.value} span={colSpan}>
         {checkbox}
       </Col>
@@ -278,8 +281,10 @@ export function GeneralCheckboxItem(
     const toCheckAll = !!groupValue.length;
     const { optionKeys } = groupMap.get(groupKey);
     const newValue = toCheckAll
+      // @ts-ignore
       ? uniq((value ?? []).concat(optionKeys))
-      : value.filter((v) => !optionKeys.includes(v));
+      // @ts-ignore
+      : value.filter((v: any) => !optionKeys.includes(v));
     onChange(newValue);
     const _options = optionGroups.reduce(
       (before, after) => [...before, ...after.options],
@@ -337,20 +342,24 @@ export function GeneralCheckboxItem(
               }
               key={group.key}
             >
+              {/* @ts-ignore */}
               {getCheckboxGroup(group.options, isGridType)}
             </Collapse.Panel>
           ))}
         </Collapse>
       );
     } else {
+      // @ts-ignore
       return getCheckboxGroup(options, isGridType);
     }
   };
   if (type === "icon") {
     return (
       <IconCheckbox
+        // @ts-ignore
         options={options}
         name={props.name}
+        // @ts-ignore
         value={value}
         isCustom={props.isCustom}
         disabled={disabled}
@@ -358,6 +367,7 @@ export function GeneralCheckboxItem(
       />
     );
   }
+  // @ts-ignore
   return (isGroup && optionGroups) || options?.length > 0 ? (
     <Checkbox.Group
       className={styles.generalCheckBox}

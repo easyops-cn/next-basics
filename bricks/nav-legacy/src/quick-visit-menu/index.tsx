@@ -9,6 +9,18 @@ import {
 } from "@next-core/brick-kit";
 import { QuickVisitMenu } from "./QuickVisitMenu";
 
+export interface QuickVisitMenuElementProps {
+  menu?: Record<string, any>;
+  buttonName?: string;
+  favouriteMenus?: {
+    text: string;
+    to?: string;
+    href?: string;
+  }[];
+  searchPlaceholder?: string;
+  maxFavouriteCount?: number;
+}
+
 /**
  * @id nav-legacy.quick-visit-menu
  * @author annzhang
@@ -17,7 +29,7 @@ import { QuickVisitMenu } from "./QuickVisitMenu";
  * @docKind brick
  * @noInheritDoc
  */
-export class QuickVisitMenuElement extends UpdatingElement {
+export class QuickVisitMenuElement extends UpdatingElement implements QuickVisitMenuElementProps {
   /**
    * @default
    * @required true

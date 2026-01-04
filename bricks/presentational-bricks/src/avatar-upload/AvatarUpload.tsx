@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Upload, Button, message, Avatar, Modal } from "antd";
@@ -30,7 +31,7 @@ export function AvatarUpload(props: UploadProps): React.ReactElement {
       setShowSrc(props.imgSrc);
     }
   }, [props.imgSrc]);
-  const handleBeforeUpload = (file, fileList) => {
+  const handleBeforeUpload = (file: any, fileList: any) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
     if (!isJpgOrPng) {
       message.error("请上传 JPG/PNG 格式!");

@@ -21,7 +21,20 @@ import { OptionType } from "../interfaces";
  * 1.36.0:新增构件 `forms.general-auto-complete`
  * @memo
  */
-export class GeneralAutoCompleteElement extends FormItemElement {
+export interface GeneralAutoCompleteElementProps {
+  name?: string;
+  value?: string;
+  options?: string[] | OptionType[];
+  filterByCaption?: boolean;
+  placeholder?: string;
+  label?: string;
+  required?: boolean;
+  message?: Record<string, string>;
+  disabled?: boolean;
+}
+
+
+export class GeneralAutoCompleteElement extends FormItemElement  implements GeneralAutoCompleteElementProps {
   /* =========================== Group: basic =========================== */
 
   /**
@@ -163,6 +176,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
             notRender={this.notRender}
             options={this.options}
             value={this.value}
+            // @ts-ignore
             onChange={this._handleChange}
             helpBrick={this.helpBrick}
             labelBrick={this.labelBrick}

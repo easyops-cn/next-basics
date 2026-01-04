@@ -1,5 +1,12 @@
 import { getHistory, UpdatingElement, property } from "@next-core/brick-kit";
 import { createLocation, locationsAreEqual } from "history";
+
+export interface RedirectToElementProps {
+  href?: string;
+  href2?: string;
+  useHref2?: boolean;
+}
+
 /**
  * @id basic-bricks.redirect-to
  * @name basic-bricks.redirect-to
@@ -43,7 +50,7 @@ import { createLocation, locationsAreEqual } from "history";
  * >Tips: 新增 href2 用来解决如下场景：如果有数据则跳转到列表页面，如果没数据则跳转到提示新建页面
  * @noInheritDoc
  */
-export class RedirectToElement extends UpdatingElement {
+export class RedirectToElement extends UpdatingElement implements RedirectToElementProps {
   /**
    * @kind string
    * @required true

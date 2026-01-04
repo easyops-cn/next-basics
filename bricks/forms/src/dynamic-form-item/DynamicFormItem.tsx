@@ -223,6 +223,7 @@ export function DynamicFormItem(props: CommonItemProps) {
   return (
     <FormItemWrapper {...omit(props, "name")}>
       <DynamicCommonItem {...props}>
+        {/* @ts-ignore */}
         <RowFormItem />
       </DynamicCommonItem>
     </FormItemWrapper>

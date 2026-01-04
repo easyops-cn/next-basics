@@ -5,6 +5,23 @@ import { GeneralTitle } from "./GeneralTitle";
 import { UseBrickConf } from "@next-core/brick-types";
 import { forEach, get, pick, set } from "lodash";
 
+export interface GeneralTitleElementProps {
+  mainTitle?: string;
+  description?: string;
+  subTitle?: string;
+  url?: string;
+  target?: string;
+  descPrefixBrick?: { useBrick: UseBrickConf };
+  titleSuffixBrick?: { useBrick: UseBrickConf };
+  descSuffixBrick?: { useBrick: UseBrickConf };
+  dataSource?: Record<string, any>;
+  fields?: {
+    mainTitle?: string;
+    description?: string;
+    subTitle?: string;
+  };
+}
+
 /**
  * @id basic-bricks.general-title
  * @author astrid
@@ -14,7 +31,7 @@ import { forEach, get, pick, set } from "lodash";
  * @docKind brick
  * @noInheritDoc
  */
-export class GeneralTitleElement extends UpdatingElement {
+export class GeneralTitleElement extends UpdatingElement implements GeneralTitleElementProps {
   /**
    * @kind `string`
    * @required true

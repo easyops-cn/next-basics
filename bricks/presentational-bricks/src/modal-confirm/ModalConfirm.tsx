@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useMemo, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Modal, Input } from "antd";

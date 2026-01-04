@@ -4,7 +4,10 @@ import { BrickWrapper } from "@next-core/brick-kit";
 import { BrickButton } from "./BrickButton";
 import { ButtonProps } from "antd/lib/button";
 
-class BrickButtonElement extends HTMLElement {
+
+export interface BrickButtonElementProps {}
+
+class BrickButtonElement extends HTMLElement implements BrickButtonElementProps {
   private _text: string;
   private _configProps: ButtonProps & { icon?: string };
 

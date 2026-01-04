@@ -13,6 +13,11 @@ import { Modal, message } from "antd";
 import QRCode from "qrcode";
 import type { QRCodeToDataURLOptions } from "qrcode";
 
+
+export interface QrcodeDownloadElementProps {
+  domain?: string;
+}
+
 export type QrCodeItem = {
   /** 二维码名称 */
   name: string;
@@ -28,7 +33,7 @@ export type QrCodeItem = {
  * @docKind brick
  * @noInheritDoc
  */
-export class QrcodeDownloadElement extends UpdatingElement {
+export class QrcodeDownloadElement extends UpdatingElement implements QrcodeDownloadElementProps {
   /**
    * @default  60
    * @required false

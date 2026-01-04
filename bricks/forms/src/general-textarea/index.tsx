@@ -22,7 +22,16 @@ import { AutoSizeType } from "rc-textarea/lib/ResizableTextArea";
  * 1.91.0:新增 `disabled` 属性，构件正名为 `forms.general-textarea`
  * @memo
  */
-export class GeneralTextAreaElement extends FormItemElement {
+export interface GeneralTextAreaElementProps {
+  name?: string;
+  placeholder?: string;
+  label?: string;
+  required?: boolean;
+  message?: Record<string, string>;
+}
+
+
+export class GeneralTextAreaElement extends FormItemElement  implements GeneralTextAreaElementProps {
   /* =========================== Group: basic =========================== */
 
   /**

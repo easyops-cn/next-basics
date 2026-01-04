@@ -17,7 +17,13 @@ import { ProviderGroupMenu } from "./ProviderGroupMenu";
  * @docKind brick
  * @noInheritDoc
  */
-export class ProviderGroupMenuElement extends UpdatingElement {
+
+export interface ProviderGroupMenuElementProps {
+  itemList: string[];
+  containerStyle: React.CSSProperties;
+}
+
+export class ProviderGroupMenuElement extends UpdatingElement implements ProviderGroupMenuElementProps {
   /**
    * @kind string[]
    * @required true

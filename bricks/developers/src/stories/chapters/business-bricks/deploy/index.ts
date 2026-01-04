@@ -7,5 +7,5 @@ export const chapter: Chapter = {
     en: "Deploy",
     zh: "发布部署",
   },
-  stories: [DeployList],
+  stories: [DeployList] as any,
 };

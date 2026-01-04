@@ -10,6 +10,10 @@ import {
 } from "@next-core/brick-kit";
 import { GeneralClipboard } from "./GeneralClipboard";
 
+export interface GeneralClipboardElementProps {
+  storageKey?: string;
+}
+
 /**
  * @id utils.general-clipboard
  * @author Steve
@@ -18,7 +22,7 @@ import { GeneralClipboard } from "./GeneralClipboard";
  * @docKind brick
  * @noInheritDoc
  */
-export class GeneralClipboardElement extends UpdatingElement {
+export class GeneralClipboardElement extends UpdatingElement implements GeneralClipboardElementProps {
   /**
    * @description 设置使用本地存储记录剪贴板数据的 key。未设置时将不启用本地存储。
    */

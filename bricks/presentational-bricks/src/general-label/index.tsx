@@ -11,6 +11,17 @@ import {
 import { GeneralLabel } from "./GeneralLabel";
 import { MenuIcon } from "@next-core/brick-types";
 
+
+export interface GeneralLabelElementProps {
+  text?: string;
+  prefixIcon?: MenuIcon;
+  suffixIcon?: MenuIcon;
+  url?: string;
+  href?: string;
+  dataSource?: any;
+  data?: any;
+}
+
 /**
  * @id presentational-bricks.general-label
  * @name presentational-bricks.general-label
@@ -24,7 +35,7 @@ import { MenuIcon } from "@next-core/brick-types";
  * @memo
  * @noInheritDoc
  */
-export class GeneralLabelElement extends UpdatingElement {
+export class GeneralLabelElement extends UpdatingElement implements GeneralLabelElementProps {
   /**
    * @required false
    * @description 文字内容

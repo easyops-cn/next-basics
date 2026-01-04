@@ -15,6 +15,18 @@ import { NotificationApi } from "antd/es/notification";
 import type { UseBrickConf, MenuIcon } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
 
+export interface GeneralNotificationElementProps {
+  message?: string;
+  description?: string;
+  descriptionBrick?: DescriptionBrickprops;
+  btnBrick?: BtnBrickprops;
+  icon?: MenuIcon | string;
+  iconStyle?: CSSProperties;
+  placement?: NotificationPlacement;
+  duration?: number;
+  key?: string;
+}
+
 /**
  * @id basic-bricks.general-notification
  * @name basic-bricks.general-notification
@@ -35,7 +47,7 @@ interface BtnBrickprops {
   useBrick: UseBrickConf;
 }
 
-export class GeneralNotificationElement extends UpdatingElement {
+export class GeneralNotificationElement extends UpdatingElement implements GeneralNotificationElementProps {
   /**
    * @kind string
    * @required true

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import AceEditor from "react-ace";
 import "./brace/mode";

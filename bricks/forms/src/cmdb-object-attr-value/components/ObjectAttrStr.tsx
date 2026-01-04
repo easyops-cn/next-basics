@@ -118,7 +118,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
     handleValueChange({ ...value, start_value: startValue });
     setPopoverVisible(false);
   };
-  const handleNumberChange = (e: number) => {
+  const handleNumberChange = (e: any) => {
     setStartValue(isNumber(e) && e >= 1 ? e : 1);
   };
 
@@ -242,6 +242,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
           {!props.disabled && (
             <Col span={4}>
               <Popover
+                // @ts-ignore
                 content={getPopoverContent({ prefix: value.prefix })}
                 trigger="click"
                 visible={popoverVisible}
@@ -262,7 +263,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
             <InputNumber
               placeholder={i18n.t(`${NS_FORMS}:${K.NUMBER_LENGTH}`)}
               value={value.series_number_length}
-              onChange={(e) => {
+              onChange={(e: any) => {
                 handleValueChange({ ...value, series_number_length: e });
               }}
               style={{ width: "100%" }}
@@ -285,6 +286,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
           {!props.disabled && (
             <Col span={4}>
               <Popover
+                // @ts-ignore
                 content={getPopoverContent({
                   prefix: value.prefix,
                 })}

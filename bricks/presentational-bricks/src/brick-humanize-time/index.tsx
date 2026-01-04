@@ -6,6 +6,20 @@ import { HumanizeTimeFormat } from "@next-libs/datetime";
 import { parseTemplate } from "@next-libs/cmdb-utils";
 import { BrickHumanizeTime } from "./BrickHumanizeTime";
 
+
+export interface BrickHumanizeTimeElementProps {
+  value?: number | string;
+  inputFormat?: string;
+  outputFormat?: string;
+  isCostTime?: boolean;
+  dataSource?: Record<string, any>;
+  fields?: { value: string };
+  formatter?: HumanizeTimeFormat;
+  isMillisecond?: boolean;
+  isMicrosecond?: boolean;
+  link?: LinkInfo;
+}
+
 export interface LinkInfo {
   detailUrlTemplate: string;
   target?: string;
@@ -23,7 +37,7 @@ export interface LinkInfo {
  * @memo
  * @noInheritDoc
  */
-export class BrickHumanizeTimeElement extends UpdatingElement {
+export class BrickHumanizeTimeElement extends UpdatingElement implements BrickHumanizeTimeElementProps {
   /**
    * @required false
    * @description 时间截，或字符串，当为字符串时，应提供时间格式 `inputFormat`

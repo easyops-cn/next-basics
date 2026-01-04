@@ -4,6 +4,17 @@ import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { BrickIllustration } from "./BrickIllustration";
 import { IconSize } from "../brick-result/components/IllustrationWrapper";
 
+
+export interface BrickIllustrationElementProps {
+  name?: string;
+  size?: IconSize;
+  category?: string;
+  header?: IllustrationHeader;
+  footer?: IllustrationFooter;
+  mode?: IllustrationMode;
+  imageStyle?: CSSProperties;
+}
+
 export interface IllustrationHeader {
   title?: string;
   description?: string;
@@ -28,7 +39,7 @@ export type IllustrationMode = "feedback" | "guide";
  * @docKind brick
  * @noInheritDoc
  */
-export class BrickIllustrationElement extends UpdatingElement {
+export class BrickIllustrationElement extends UpdatingElement implements BrickIllustrationElementProps {
   /**
    * @required true
    * @description 插画名称

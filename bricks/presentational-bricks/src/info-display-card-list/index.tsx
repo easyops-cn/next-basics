@@ -5,6 +5,21 @@ import { InfoDisplayCardList } from "./InfoDisplayCardList";
 import { MenuIcon } from "@next-core/brick-types";
 import { UseBrickConf } from "@next-core/brick-types";
 
+
+export interface InfoDisplayCardListElementProps {
+  dataSource?: CardItem[];
+  urlTemplate?: string;
+  url?: string;
+  target?: string;
+  optionConf?: { useBrick: UseBrickConf };
+  titleBrickConf?: { useBrick: UseBrickConf };
+  iconBrickConf?: { useBrick: UseBrickConf };
+  detailOfDescBrickConf?: { useBrick: UseBrickConf };
+  titleFontSize?: number | string;
+  detailDescFontSize?: number | string;
+  listStyle?: React.CSSProperties;
+}
+
 export interface CardDetail {
   title: string;
   desc: string;
@@ -29,7 +44,7 @@ export interface CardItem {
  * @docKind brick
  * @noInheritDoc
  */
-export class InfoDisplayCardListElement extends UpdatingElement {
+export class InfoDisplayCardListElement extends UpdatingElement implements InfoDisplayCardListElementProps {
   /**
    * @kind CardItem[]
    * @required true

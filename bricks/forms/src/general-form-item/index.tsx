@@ -29,7 +29,12 @@ import styles from "./index.shadow.less";
  *  placeholder
  * @memo
  */
-export class GeneralFormItemElement extends FormItemElement {
+export interface GeneralFormItemElementProps {
+  value?: unknown;
+}
+
+
+export class GeneralFormItemElement extends FormItemElement  implements GeneralFormItemElementProps {
   /**
    * @required false
    * @description 表单项的值

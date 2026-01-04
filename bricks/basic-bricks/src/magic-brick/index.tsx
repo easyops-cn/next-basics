@@ -3,6 +3,11 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { MagicBrick } from "./MagicBrick";
 
+export interface MagicBrickElementProps {
+  showType?: string;
+  data?: any;
+}
+
 /**
  * @id basic-bricks.magic-brick
  * @name basic-bricks.magic-brick
@@ -15,7 +20,7 @@ import { MagicBrick } from "./MagicBrick";
  * @memo
  * @noInheritDoc
  */
-export class MagicBrickElement extends UpdatingElement {
+export class MagicBrickElement extends UpdatingElement implements MagicBrickElementProps {
   /**
    * @kind string
    * @required true

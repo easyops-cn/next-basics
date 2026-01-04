@@ -10,6 +10,26 @@ import {
 
 import styles from "./MicroApp.shadow.css";
 
+
+export interface MicroViewElementProps {
+  pageTitle?: string;
+  bannerPageTitle?: string;
+  overflowXAuto?: boolean;
+  noGap?: boolean;
+  dashboardMode?: boolean;
+  pageTitleScale?: number;
+  hideToolbar?: boolean;
+  hideLogo?: boolean;
+  hideExitBtn?: boolean;
+  hasToolbar?: boolean;
+  hasTitleBar?: boolean;
+  hasSubMenu?: boolean;
+  hasBanner?: boolean;
+  hasBannerTitleBar?: boolean;
+  hasBannerToolbar?: boolean;
+  bannerStyle?: React.CSSProperties;
+}
+
 // ** Best Practices **
 // https://developers.google.com/web/fundamentals/web-components/best-practices
 
@@ -37,7 +57,7 @@ import styles from "./MicroApp.shadow.css";
  * @memo
  * @noInheritDoc
  */
-export class MicroViewElement extends UpdatingElement {
+export class MicroViewElement extends UpdatingElement implements MicroViewElementProps {
   /**
    * @kind string
    * @required -
@@ -359,5 +379,5 @@ export class MicroViewElement extends UpdatingElement {
 // `basic-bricks.micro-app` is deprecated cause its misunderstanding name.
 // Use `basic-bricks.micro-view` instead.
 customElements.define("basic-bricks.micro-view", MicroViewElement);
-class MicroAppElement extends MicroViewElement {}
+class MicroAppElement extends MicroViewElement implements MicroViewElementProps {}
 customElements.define("basic-bricks.micro-app", MicroAppElement);

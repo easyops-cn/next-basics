@@ -39,7 +39,26 @@ type sizeType = "large" | "default" | "small";
  *```
  */
 
-export class GeneralCascaderElement extends FormItemElement {
+export interface GeneralCascaderElementProps {
+  name?: string;
+  label?: string;
+  options?: GeneralCascaderProps["options"];
+  value?: GeneralCascaderProps["value"];
+  placeholder?: string;
+  required?: boolean;
+  message?: Record<string, string>;
+  disabled?: boolean;
+  suffixIcon?: string;
+  notFoundContent?: string;
+  popupPlacement?: popupPlacementType;
+  size?: sizeType;
+  cascaderStyle?: React.CSSProperties;
+}
+
+
+
+
+export class GeneralCascaderElement extends FormItemElement  implements GeneralCascaderElementProps {
   private _cascaderRef = React.createRef<any>();
   /**
    * @group basicFormItem
@@ -279,8 +298,16 @@ export class GeneralCascaderElement extends FormItemElement {
     selectedData: selectedDataType,
     visible: boolean
   ): void => {
+    const detail = { selectedData, visible };
     Promise.resolve().then(() => {
-      this.dropdownVisibleChange.emit({ selectedData, visible });
+      this.dropdownVisibleChange.emit(detail);
+
+      // 新增规范化事件（向后兼容）
+      this.dispatchEvent(
+        new CustomEvent("cascader.dropdown.visible.change", {
+          detail,
+        })
+      );
     });
   };
 

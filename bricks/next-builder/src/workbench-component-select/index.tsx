@@ -15,6 +15,28 @@ import {
 import { BrickOptionItem } from "../builder-container/interfaces";
 import { Story } from "@next-core/brick-types";
 
+export interface WorkbenchComponentSelectProps {
+  brickList?: BrickOptionItem[];
+  storyList?: Story[];
+  isShowSuggest?: boolean;
+  currentBrick?: string;
+  onActionClick?: (event: CustomEvent) => void;
+  onOnDrag?: (event: CustomEvent) => void;
+  onFeedbackClick?: (event: CustomEvent) => void;
+  onInstructionsClick?: (event: CustomEvent) => void;
+}
+
+export interface WorkbenchComponentSelectElementProps {
+  brickList?: BrickOptionItem[];
+  storyList?: Story[];
+  isShowSuggest?: boolean;
+  currentBrick?: string;
+  onActionClick?: (event: CustomEvent<{ type: string; data: any }>) => void;
+  onOnDrag?: (event: CustomEvent<{ isDrag: boolean }>) => void;
+  onFeedbackClick?: (event: CustomEvent<{ type: string }>) => void;
+  onInstructionsClick?: (event: CustomEvent<{ type: string }>) => void;
+}
+
 /**
  * @id next-builder.workbench-component-select
  * @author SheRunFeng
@@ -23,7 +45,7 @@ import { Story } from "@next-core/brick-types";
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchComponentSelectElement extends UpdatingElement {
+export class WorkbenchComponentSelectElement extends UpdatingElement implements WorkbenchComponentSelectProps {
   private _selectRef = createRef<ComponentSelectRef>();
 
   @property({

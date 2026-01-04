@@ -4,6 +4,12 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { AppBarWrapper } from "./AppBarWrapper";
 import styles from "./AppBarWrapper.shadow.css";
 
+export interface AppBarWrapperElementProps {
+  isFixed?: boolean;
+  displayCenter?: boolean;
+  extraAppBarContentStyle?: React.CSSProperties;
+}
+
 /**
  * @id nav-legacy.app-bar-wrapper
  * @author SheRunFeng
@@ -12,7 +18,7 @@ import styles from "./AppBarWrapper.shadow.css";
  * @docKind brick
  * @noInheritDoc
  */
-export class AppBarWrapperElement extends UpdatingElement {
+export class AppBarWrapperElement extends UpdatingElement implements AppBarWrapperElementProps {
   private _shadowRoot: ShadowRoot;
 
   @property({

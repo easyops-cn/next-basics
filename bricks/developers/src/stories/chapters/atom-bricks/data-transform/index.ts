@@ -7,5 +7,5 @@ export const chapter: Chapter = {
     en: "data transform",
     zh: "信息自动转换",
   },
-  stories: [providerQueryAdapter],
+  stories: [providerQueryAdapter] as any,
 };

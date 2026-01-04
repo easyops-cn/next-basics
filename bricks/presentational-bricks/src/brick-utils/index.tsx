@@ -10,6 +10,11 @@ import { copyToClipboard } from "@next-libs/clipboard";
 import i18next from "i18next";
 import { K, NS_PRESENTATIONAL_BRICKS } from "../i18n/constants";
 
+
+export interface BrickUtilsElementProps {
+  messages?: { success: string; error: string }
+}
+
 /**
  * @id presentational-bricks.brick-utils
  * @name presentational-bricks.brick-utils
@@ -22,7 +27,7 @@ import { K, NS_PRESENTATIONAL_BRICKS } from "../i18n/constants";
  * @memo
  * @noInheritDoc
  */
-export class BrickUtilsElement extends UpdatingElement {
+export class BrickUtilsElement extends UpdatingElement implements BrickUtilsElementProps {
   handleHttpError(event: CustomEvent): void {
     // eslint-disable-next-line no-console
     console.warn(

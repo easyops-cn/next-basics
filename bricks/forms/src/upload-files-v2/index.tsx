@@ -22,7 +22,33 @@ import { UploadButtonProps } from "../interfaces";
  *  placeholder
  *  pattern
  */
-export class UploadFilesV2Element extends FormItemElement {
+export interface UploadFilesV2ElementProps {
+  name?: string;
+  label?: string;
+  required?: boolean;
+  disabled?: boolean;
+  autoUpload?: boolean;
+  url?: string;
+  method?: string;
+  uploadName?: string;
+  fileNamePattern?: string;
+  autoDownload?: boolean;
+  autoDownloadUrlTemplate?: string;
+  accept?: string;
+  data?: { [key: string]: string };
+  value?: UploadFileValueItem[];
+  maxNumber?: number;
+  limitSize?: number;
+  uploadDraggable?: boolean;
+  hideUploadButton?: boolean;
+  draggableUploadText?: string;
+  draggableUploadHint?: string;
+  uploadButtonName?: string;
+  uploadButtonProps?: UploadButtonProps;
+}
+
+
+export class UploadFilesV2Element extends FormItemElement  implements UploadFilesV2ElementProps {
   /**
    * @group basicFormItem
    * @required true

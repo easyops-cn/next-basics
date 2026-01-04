@@ -11,7 +11,12 @@ import { IllustrationCard, IllustrationCardList } from "./IllustrationCard";
  * @docKind brick
  * @noInheritDoc
  */
-export class IllustrationCardElement extends UpdatingElement {
+
+export interface IllustrationCardElementProps {
+  dataSource: { name: string; category: string; color: string }[];
+}
+
+export class IllustrationCardElement extends UpdatingElement implements IllustrationCardElementProps {
   @property({ attribute: false })
   dataSource: { name: string; category: string; color: string }[];
 

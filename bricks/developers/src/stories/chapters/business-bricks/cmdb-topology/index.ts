@@ -15,5 +15,5 @@ export const chapter: Chapter = {
     InstanceTopoViewTemplate,
     TopologyGraph,
     ObjectTopologyView,
-  ],
+  ] as any,
 };

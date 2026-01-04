@@ -52,7 +52,7 @@ export function BrickDebug(): React.ReactElement {
     return null;
   }
 
-  const handleConfChange = (conf: BrickConf): void => {
+  const handleConfChange = (conf: BrickConf | any): void => {
     setConf(conf);
     jsonLocalStorage.setItem(
       LOCAL_STORAGE_KEY_FOR_DEBUG_BRICK,
@@ -105,7 +105,8 @@ export function BrickDebug(): React.ReactElement {
             highlightActiveLine: true,
           }}
         />
-        <NextBrickPreview conf={conf} containerStyle={{ padding: 0 }} />
+        {/* @ts-ignore */}
+        <NextBrickPreview conf={conf} containerStyle={{ padding: 0 }} storyId="" />
         {/* {enableNewBrickPreview ? (
           <NextBrickPreview conf={conf} containerStyle={{ padding: 0 }} />
         ) : (

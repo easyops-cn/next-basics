@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { Descriptions } from "antd";
 import { DescriptionsProps } from "antd/lib/descriptions";

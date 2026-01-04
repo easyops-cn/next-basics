@@ -17,6 +17,36 @@ import { get, pick, forEach, set } from "lodash";
 import { MenuIcon } from "@next-core/brick-types";
 import { ButtonType } from "antd/lib/button";
 
+export interface GeneralModalElementProps {
+  modalTitle?: string;
+  titleIcon?: MenuIcon;
+  titleAlign?: string;
+  dataSource?: Record<string, any>;
+  width?: string | number;
+  configProps?: ModalProps;
+  fields?: {
+    modalTitle: string;
+  };
+  enableFooterSlot?: boolean;
+  footerPosition?: positionType;
+  isHiddenBodyPadding?: boolean;
+  isHiddenHeaderBorder?: boolean;
+  isHiddenModalTitle?: boolean;
+  isHiddenModalFooter?: boolean;
+  isShowCustomHeader?: boolean;
+  stackable?: boolean;
+  okText?: string;
+  okType?: ButtonType;
+  okDisabled?: boolean;
+  confirmLoading?: boolean;
+  cancelText?: string;
+  hideCancelButton?: boolean;
+  closeWhenOk?: boolean;
+  closeWhenCancel?: boolean;
+  maskClosable?: boolean;
+  fullscreen?: boolean;
+}
+
 export interface OpenCloseOption {
   noEvent?: boolean;
 }
@@ -49,7 +79,7 @@ export interface OpenCloseOption {
 * | noEvent  | `boolean` | -        | -       | 不触发事件  |
  * @noInheritDoc
  */
-export class GeneralModalElement extends UpdatingElement {
+export class GeneralModalElement extends UpdatingElement implements GeneralModalElementProps {
   // ----------------------- basic ----------------------------
 
   /**

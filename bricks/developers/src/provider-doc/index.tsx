@@ -10,7 +10,14 @@ import {
 import { ProviderDoc } from "./ProviderDoc";
 import { ProcessedProviderDoc } from "../provider-provider-doc/interfaces";
 
-class ProviderDocElement extends UpdatingElement {
+export interface ProviderDocElementProps {
+  dataSource: ProcessedProviderDoc;
+  showCard: boolean;
+  debuggerPanelExpand: boolean;
+  docKey: string;
+}
+
+class ProviderDocElement extends UpdatingElement implements ProviderDocElementProps {
   /**
    * @kind ProcessedProviderDoc
    * @required true

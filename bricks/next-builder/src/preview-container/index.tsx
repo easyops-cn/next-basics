@@ -31,6 +31,82 @@ import {
   type PreviewContainerRef,
 } from "./PreviewContainer";
 
+export interface PreviewContainerProps {
+  previewUrl?: string;
+  appId?: string;
+  templateId?: string;
+  formId?: string;
+  formData?: FormData;
+  snippetGraphData?: BuilderSnippetNode[];
+  routePath?: string;
+  routeId?: string;
+  routeExact?: boolean;
+  previewSettings?: PreviewSettings;
+  inspecting?: boolean;
+  viewportWidth?: number;
+  viewportHeight?: number;
+  screenshotMaxWidth?: number;
+  screenshotMaxHeight?: number;
+  onPreviewStart?: (event: CustomEvent) => void;
+  onExcuteProxyMethodSuccess?: (event: CustomEvent) => void;
+  onExcuteProxyMethodError?: (event: CustomEvent) => void;
+  onPreviewDebug?: (event: CustomEvent) => void;
+  onMatchApiCache?: (event: CustomEvent) => void;
+  onUrlChange?: (event: CustomEvent) => void;
+  onScaleChange?: (event: CustomEvent) => void;
+  onRouteMatch?: (event: CustomEvent) => void;
+  onCapturestatusChange?: (event: CustomEvent) => void;
+  onScreenshotCapture?: (event: CustomEvent) => void;
+  onPreviewDrop?: (event: CustomEvent) => void;
+  onDataModelDrop?: (event: CustomEvent) => void;
+  onPreviewResize?: (event: CustomEvent) => void;
+  onInspectSingleDataValueSuccess?: (event: CustomEvent) => void;
+  onInspectAllDataValuesSuccess?: (event: CustomEvent) => void;
+  onInspectDataValueError?: (event: CustomEvent) => void;
+  onDebugDataValueSuccess?: (event: CustomEvent) => void;
+  onDebugDataValueError?: (event: CustomEvent) => void;
+  onInspectRuntimeValue?: (event: CustomEvent) => void;
+  onContractUpdate?: (event: CustomEvent) => void;
+}
+
+export interface PreviewContainerElementProps {
+  previewUrl?: string;
+  appId?: string;
+  templateId?: string;
+  formId?: string;
+  formData?: FormData;
+  snippetGraphData?: BuilderSnippetNode[];
+  routePath?: string;
+  routeId?: string;
+  routeExact?: boolean;
+  previewSettings?: PreviewSettings;
+  inspecting?: boolean;
+  viewportWidth?: number;
+  viewportHeight?: number;
+  screenshotMaxWidth?: number;
+  screenshotMaxHeight?: number;
+  onPreviewStart?: (event: CustomEvent<any>) => void;
+  onExcuteProxyMethodSuccess?: (event: CustomEvent<ExcuteProxyMethodResult>) => void;
+  onExcuteProxyMethodError?: (event: CustomEvent<ExcuteProxyMethodResult>) => void;
+  onPreviewDebug?: (event: CustomEvent<any[]>) => void;
+  onMatchApiCache?: (event: CustomEvent<number>) => void;
+  onUrlChange?: (event: CustomEvent<string>) => void;
+  onScaleChange?: (event: CustomEvent<number>) => void;
+  onRouteMatch?: (event: CustomEvent<boolean>) => void;
+  onCapturestatusChange?: (event: CustomEvent<CaptureStatus>) => void;
+  onScreenshotCapture?: (event: CustomEvent<Blob>) => void;
+  onPreviewDrop?: (event: CustomEvent<Record<string, any>>) => void;
+  onDataModelDrop?: (event: CustomEvent<Record<string, any>>) => void;
+  onPreviewResize?: (event: CustomEvent<PreviewerResize>) => void;
+  onInspectSingleDataValueSuccess?: (event: CustomEvent<unknown>) => void;
+  onInspectAllDataValuesSuccess?: (event: CustomEvent<Map<string, StoryboardContextItem>>) => void;
+  onInspectDataValueError?: (event: CustomEvent<unknown>) => void;
+  onDebugDataValueSuccess?: (event: CustomEvent<unknown>) => void;
+  onDebugDataValueError?: (event: CustomEvent<unknown>) => void;
+  onInspectRuntimeValue?: (event: CustomEvent<unknown>) => void;
+  onContractUpdate?: (event: CustomEvent<any>) => void;
+}
+
 /**
  * @id next-builder.preview-container
  * @author bot
@@ -39,7 +115,7 @@ import {
  * @docKind brick
  * @noInheritDoc
  */
-export class PreviewContainerElement extends UpdatingElement {
+export class PreviewContainerElement extends UpdatingElement implements PreviewContainerProps {
   @property()
   previewUrl: string;
 

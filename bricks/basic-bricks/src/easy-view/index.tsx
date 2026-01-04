@@ -5,6 +5,15 @@ import { EasyView } from "./EasyView";
 
 import styles from "./EasyView.shadow.css";
 
+export interface EasyViewElementProps {
+  gridAreas?: Record<string, (string | number)[]>;
+  gridTemplateAreas?: string[][];
+  gridTemplateColumns?: string | string[];
+  gridTemplateRows?: string | string[];
+  containerStyle?: React.CSSProperties;
+  styleByAreas?: Record<string, React.CSSProperties>;
+}
+
 /**
  * @id basic-bricks.easy-view
  * @author steve
@@ -14,7 +23,7 @@ import styles from "./EasyView.shadow.css";
  * @docKind brick
  * @noInheritDoc
  */
-export class EasyViewElement extends UpdatingElement {
+export class EasyViewElement extends UpdatingElement implements EasyViewElementProps {
   /**
    * @description 以键值对形式定义多个 [grid-area](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area)
    * @group basic

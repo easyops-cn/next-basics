@@ -9,6 +9,24 @@ import {
 } from "@next-core/brick-kit";
 import { FunctionDebuggerToolbarV2 } from "./FunctionDebuggerToolbarV2";
 
+export interface FunctionDebuggerToolbarV2Props {
+  type?: "input" | "output" | "test-input" | "test-output";
+  status?: "ok" | "failed" | null;
+  saveDisabled?: boolean;
+  wantErrCheckStatus?: boolean;
+  onButtonClick?: (event: CustomEvent) => void;
+  onWantErrorCheck?: (event: CustomEvent) => void;
+}
+
+export interface FunctionDebuggerToolbarV2ElementProps {
+  type?: "input" | "output" | "test-input" | "test-output";
+  status?: "ok" | "failed" | null;
+  saveDisabled?: boolean;
+  wantErrCheckStatus?: boolean;
+  onButtonClick?: (event: CustomEvent<{ action: string }>) => void;
+  onWantErrorCheck?: (event: CustomEvent<boolean>) => void;
+}
+
 /**
  * @id next-builder.function-debugger-toolbar-v2
  * @author Kehua
@@ -17,7 +35,7 @@ import { FunctionDebuggerToolbarV2 } from "./FunctionDebuggerToolbarV2";
  * @docKind brick
  * @noInheritDoc
  */
-export class FunctionDebuggerToolbarV2Element extends UpdatingElement {
+export class FunctionDebuggerToolbarV2Element extends UpdatingElement implements FunctionDebuggerToolbarV2Props {
   @property()
   type: "input" | "output" | "test-input" | "test-output";
 

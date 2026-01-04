@@ -1,24 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { isObject, get } from "lodash";
-import { ConditionType } from "@next-libs/cmdb-utils";
 
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 
 import {
   BrickConditionalDisplay,
   DisplayType,
+  RuleProps,
 } from "./BrickConditionalDisplay";
 
-export interface RuleProps {
-  condition: ConditionType;
-  style?: {
-    color?: string;
-    backgroundColor?: string;
-    borderColor?: string;
-  };
-  label?: string;
+// Re-export for backward compatibility
+export type { RuleProps, DisplayType };
+
+export interface BrickConditionalDisplayElementProps {
+  rules?: RuleProps[] ;
+  fields?: { value: string };
+  dataSource?: DataType;
+  type?: DisplayType;
 }
+
 export type DataType = string | number | Record<string, any>;
 
 export enum ConditionOperator {
@@ -35,12 +36,12 @@ export enum LogicalOperator {
   or = "$or",
 }
 
-// export type ConditionType =
-//   | boolean
-//   | number
-//   | string
-//   | Record<string | ConditionOperator, any>
-//   | LogicalCondition;
+export type ConditionType =
+  | boolean
+  | number
+  | string
+  | Record<string | ConditionOperator, any>
+  | LogicalCondition;
 
 export interface LogicalCondition
   extends Record<string | LogicalOperator, ConditionType[]> {}
@@ -83,7 +84,7 @@ export interface LogicalCondition
  *
  * @noInheritDoc
  */
-export class BrickConditionalDisplayElement extends UpdatingElement {
+export class BrickConditionalDisplayElement extends UpdatingElement implements BrickConditionalDisplayElementProps {
   /**
    * @required false
    * @description 展示规则, 具体请查看[Mongodb条件操作符](https://www.mongodb.com/docs/manual/reference/operator/query/)

@@ -14,6 +14,11 @@ export interface APIProxyRequestValue {
   args: Record<string, any>;
 }
 
+export interface ApiProxyRequestElementProps {
+  value?: APIProxyRequestValue;
+  onApiChange?: (event: CustomEvent<APIProxyRequestValue>) => void;
+}
+
 /**
  * @id next-builder.api-proxy-request
  * @author sailorshe
@@ -22,7 +27,7 @@ export interface APIProxyRequestValue {
  * @docKind brick
  * @noInheritDoc
  */
-export class ContractAutoCompleteElement extends FormItemElement {
+export class ApiProxyRequestElement extends FormItemElement implements ApiProxyRequestElementProps {
   @property({
     attribute: false,
   })
@@ -80,5 +85,5 @@ export class ContractAutoCompleteElement extends FormItemElement {
 
 customElements.define(
   "next-builder.api-proxy-request",
-  ContractAutoCompleteElement
+  ApiProxyRequestElement
 );

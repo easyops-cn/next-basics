@@ -13,6 +13,16 @@ import type {
   WorkbenchTreeAction,
 } from "../shared/workbench/interfaces";
 
+export interface WorkbenchMiniActionBarProps {
+  actions?: WorkbenchTreeAction[];
+  onActionClick?: (event: CustomEvent) => void;
+}
+
+export interface WorkbenchMiniActionBarElementProps {
+  actions?: WorkbenchTreeAction[];
+  onActionClick?: (event: CustomEvent<ActionClickDetail>) => void;
+}
+
 /**
  * @id next-builder.workbench-mini-action-bar
  * @author steve
@@ -21,7 +31,7 @@ import type {
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchMiniActionBarElement extends UpdatingElement {
+export class WorkbenchMiniActionBarElement extends UpdatingElement implements WorkbenchMiniActionBarProps {
   @property({ attribute: false })
   actions: WorkbenchTreeAction[];
 

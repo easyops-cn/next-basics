@@ -9,6 +9,10 @@ import {
 } from "@next-core/brick-kit";
 import { BusinessRule, DataSource } from "./BusinessRule";
 
+export interface BusinessRuleElementProps {
+  dataSource: DataSource[];
+}
+
 /**
  * @id form-builder.business-rule
  * @author frankshi
@@ -17,7 +21,7 @@ import { BusinessRule, DataSource } from "./BusinessRule";
  * @docKind brick
  * @noInheritDoc
  */
-export class BusinessRuleElement extends UpdatingElement {
+export class BusinessRuleElement extends UpdatingElement implements BusinessRuleElementProps {
   @property({ attribute: false })
   dataSource: DataSource[];
 

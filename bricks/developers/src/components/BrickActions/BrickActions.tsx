@@ -67,6 +67,7 @@ export function BrickActions({
         {actions.map((action, index) => (
           <Button
             key={String(index)}
+            // @ts-ignore
             type={action.type || "primary"}
             onClick={() => handleActionClick(action, index)}
           >
@@ -83,6 +84,7 @@ export function BrickActions({
         <Input.TextArea
           value={value}
           onChange={handlePromptChange}
+          // @ts-ignore
           autosize={{ minRows: 3 }}
         />
       </Modal>

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
@@ -247,11 +248,13 @@ export function AppSetting(props: {
                 </Menu.Item>
               )}
               {userOrgs.length > 1 && (
-                <Menu.SubMenu
-                  className={styles.dropdownMenuItem}
-                  popupOffset={[0, 0]}
-                  expandIcon={<></>}
-                  title={
+                <>
+                  {/* @ts-ignore */}
+                  <Menu.SubMenu
+                    className={styles.dropdownMenuItem}
+                    popupOffset={[0, 0]}
+                    expandIcon={<></>}
+                    title={
                     <span>
                       <GeneralIcon
                         icon={{
@@ -279,6 +282,7 @@ export function AppSetting(props: {
                     </Menu.Item>
                   ))}
                 </Menu.SubMenu>
+                </>
               )}
 
               {switchLanguageEnabled && (

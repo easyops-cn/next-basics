@@ -9,6 +9,14 @@ import {
 } from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
 import { VirtualListContainer2 } from "./VirtualListContainer";
+export interface VirtualListContainerElementProps {
+  data?: VirtualListContainerProps["data"];
+  titleBrick?: VirtualListContainerProps["titleBrick"];
+  suffixBrick?: VirtualListContainerProps["suffixBrick"];
+  total?: number;
+  oHeight?: string;
+}
+
 export interface itemData {
   list: Record<string, any>[];
   page_size?: number | string;
@@ -23,7 +31,7 @@ export interface VirtualListContainerProps {
   total?: number;
 }
 
-export class VirtualListContainerElement extends UpdatingElement {
+export class VirtualListContainerElement extends UpdatingElement implements VirtualListContainerElementProps {
   /**
    * @kind ItemData
    * @required true

@@ -32,6 +32,7 @@ export function GeneralTimePicker(
         value={
           props.name && props.formElement
             ? undefined
+            // @ts-ignore
             : props.value && moment(props.value, format)
         }
         onChange={handleChange}

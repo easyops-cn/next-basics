@@ -121,6 +121,7 @@ export function GeneralCustomButtons(
             handleClick(eventName, button);
           }}
           style={{ color: disabled ? "" : color }}
+          // @ts-ignore
           type={AvailableButtonTypeSet.has(buttonType) ? buttonType : undefined}
           shape={buttonShape}
           size={buttonSize}
@@ -247,6 +248,7 @@ export function GeneralCustomButtons(
       >
         {isMoreButton ? (
           <Button
+            // @ts-ignore
             type={moreButtonType}
             style={{ ...moreButtonStyle }}
             icon={

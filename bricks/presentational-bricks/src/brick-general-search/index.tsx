@@ -12,6 +12,29 @@ import {
 import { forEach } from "lodash";
 import { Input } from "antd";
 
+
+export interface BrickGeneralSearchElementProps {
+  placeholder?: string;
+  defaultArgs?: { field: string; value: any }[];
+  shouldTrimQuery?: boolean;
+  qField?: string;
+  disableAutofocus?: boolean;
+  searchType?: "all" | "ip" ;
+  searchTypeEnabled?: boolean;
+  size?: Size ;
+  shape?: Shape ;
+  inputStyle?: Record<string, any>;
+  buttonStyle?: Record<string, any>;
+  searchBoxStyleType?: "defalut" | "round" ;
+  allowClear?: boolean;
+  bordered?: boolean ;
+  alwaysFoucus?: boolean;
+  customSearchTypeOptions?: {
+    label: string;
+    value: string;
+  }[];
+}
+
 export type Size = "small" | "default" | "large" | "extraLarge";
 export type Shape = "round" | "default";
 
@@ -29,7 +52,7 @@ export type Shape = "round" | "default";
  * @memo
  * @noInheritDoc
  */
-export class BrickGeneralSearchElement extends UpdatingElement {
+export class BrickGeneralSearchElement extends UpdatingElement implements BrickGeneralSearchElementProps {
   /**
    * @kind string
    * @required false

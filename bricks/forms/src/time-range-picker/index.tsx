@@ -51,7 +51,20 @@ import { NS_FORMS, K } from "../i18n/constants";
 *}
 *```
 */
-export class TimeRangePickerElement extends FormItemElement {
+export interface TimeRangePickerElementProps {
+  name?: string;
+  label?: string;
+  value?: TimeRange;
+  required?: boolean;
+  rangeType?: RangeType;
+  selectNearDays?: number;
+  presetRanges?: presetRangeType[];
+  allowEqual?: boolean;
+  rangePlaceholder?: string | [string, string];
+}
+
+
+export class TimeRangePickerElement extends FormItemElement  implements TimeRangePickerElementProps {
   private _defaultFormat = "HH:mm:ss";
 
   /**

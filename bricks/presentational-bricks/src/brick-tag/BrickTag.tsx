@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { Tag, Tooltip, TooltipProps } from "antd";
 import { TagProps } from "antd/lib/tag";

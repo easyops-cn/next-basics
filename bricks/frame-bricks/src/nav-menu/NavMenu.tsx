@@ -119,7 +119,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
     return (
       <Menu.Item key={item.key} className={style.threeLevelMenuItem}>
         <Popover
-          zIndex={1060}
+          {...({ zIndex: 1060 } as any)}
           align={{ offset: [0, -3] }}
           overlayInnerStyle={{ overflow: "hidden" }}
           overlayClassName={style.threeLevelMenuPopover}

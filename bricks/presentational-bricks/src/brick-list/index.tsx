@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper } from "@next-core/brick-kit";
@@ -6,12 +7,15 @@ import { ListProps } from "antd/lib/list";
 import { get, forEach, set } from "lodash";
 import { Card } from "antd";
 
+
+export interface BrickListElementProps {}
+
 export interface ItemBrick {
   brick: string | any;
   properties?: Record<string, any>;
 }
 
-class BrickListElement extends HTMLElement {
+class BrickListElement extends HTMLElement implements BrickListElementProps {
   private _showCard = true;
   private _itemList: ItemProps[];
   private _configProps: ListProps<any>;

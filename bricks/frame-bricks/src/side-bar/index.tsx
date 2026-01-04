@@ -10,6 +10,13 @@ import {
 import { ExpandedState, SideBar } from "./SideBar";
 import { SidebarSubMenu } from "@next-core/brick-types";
 
+export interface SideBarElementProps {
+  menu: SidebarSubMenu;
+  expandedState: ExpandedState;
+  hiddenFixedIcon: boolean;
+  noAppNavBar: boolean;
+}
+
 /**
  * @id frame-bricks.side-bar
  * @author nlicroshan
@@ -18,7 +25,7 @@ import { SidebarSubMenu } from "@next-core/brick-types";
  * @docKind brick
  * @noInheritDoc
  */
-export class SideBarElement extends UpdatingElement {
+export class SideBarElement extends UpdatingElement implements SideBarElementProps {
   /**
    * @kind SidebarSubMenu
    * @required false

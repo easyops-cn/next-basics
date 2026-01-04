@@ -3,6 +3,21 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { DigitalNumber, DigitalNumberType } from "./DigitalNumber";
 
+
+export interface DigitalNumberElementProps {
+  decimals?: number;
+  decimal?: string;
+  cellStyle?: CSSProperties;
+  textStyle?: CSSProperties;
+  easeSpeed?: number;
+  maxLen?: number;
+  value?: number;
+  type?: DigitalNumberType;
+  height?: number;
+  width?: number;
+  thousands?: boolean;
+}
+
 /**
  * @id presentational-bricks.digital-number
  * @author abert
@@ -11,7 +26,7 @@ import { DigitalNumber, DigitalNumberType } from "./DigitalNumber";
  * @docKind brick
  * @noInheritDoc
  */
-export class DigitalNumberElement extends UpdatingElement {
+export class DigitalNumberElement extends UpdatingElement implements DigitalNumberElementProps {
   /**
    * @default
    * @required false

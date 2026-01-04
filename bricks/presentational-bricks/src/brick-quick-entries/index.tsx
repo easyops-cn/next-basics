@@ -11,6 +11,17 @@ import {
 import { MenuIcon, UseBrickConf } from "@next-core/brick-types";
 import { BrickQuickEntries } from "./BrickQuickEntries";
 
+
+export interface BrickQuickEntriesElementProps {
+  links?: LinkProps[] ;
+  useBrick?: UseBrickConf;
+  data?: any[];
+  titleList?: TitleConfig[];
+  containerStyle?: React.CSSProperties;
+  mode?: "multiCardGeneral" | "multiCardNoLine" | "default" ;
+  useBricks?: UseBrickConf;
+}
+
 export interface LinkProps {
   icon: MenuIcon;
   target: string;
@@ -61,7 +72,7 @@ export interface TitleConfig {
  *
  * @noInheritDoc
  */
-export class BrickQuickEntriesElement extends UpdatingElement {
+export class BrickQuickEntriesElement extends UpdatingElement implements BrickQuickEntriesElementProps {
   /**
    * @kind number
    * @required false

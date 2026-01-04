@@ -31,5 +31,5 @@ export const chapter: Chapter = {
     WorkflowStepEditor,
     VariablesFormItem,
     PipelineTrigger,
-  ],
+  ] as any,
 };

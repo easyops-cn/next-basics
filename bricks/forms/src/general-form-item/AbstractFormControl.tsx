@@ -21,6 +21,7 @@ export const AbstractFormControl = forwardRef<
 
   useEffect(() => {
     if (controlValue !== valueRef.current) {
+      // @ts-ignore
       valueRef.current = controlValue;
 
       onChange?.(controlValue);
@@ -29,6 +30,7 @@ export const AbstractFormControl = forwardRef<
 
   useEffect(() => {
     if (value !== valueRef.current) {
+      // @ts-ignore
       valueRef.current = value;
 
       onControlValueChange?.(value);

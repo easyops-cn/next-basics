@@ -3,6 +3,19 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { GeneralPreviewImage } from "./GeneralPreviewImage";
 
+
+export interface GeneralPreviewImageElementProps {
+  height?: string | number;
+  width?: string | number;
+  src?: string;
+  srcList?: string[];
+  alt?: string;
+  fallback?: string;
+  canPreview?: boolean;
+  customOperationPosition?: boolean;
+  previewCurrentIndex?: number;
+}
+
 /**
  * @id presentational-bricks.general-preview-image
  * @author Albert Jie
@@ -11,7 +24,7 @@ import { GeneralPreviewImage } from "./GeneralPreviewImage";
  * @docKind brick
  * @noInheritDoc
  */
-export class GeneralPreviewImageElement extends UpdatingElement {
+export class GeneralPreviewImageElement extends UpdatingElement implements GeneralPreviewImageElementProps {
   /**
    * @default -
    * @required

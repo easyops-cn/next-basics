@@ -51,6 +51,7 @@ export interface CommonItemProps extends FormItemWrapperProps {
   emitChangeOnInit?: boolean;
   oneRowRequired?: boolean;
   rowDisabledhandler?: (value: RowProps, index: number) => boolean;
+  srcObjectId?: any;
 }
 
 export const inputSpan = 21;
@@ -62,13 +63,13 @@ export function CommonItem(
 ): React.ReactElement {
   const { getFieldValue, setFieldsValue, validateFields } =
     props.formElement.formUtils;
-  const [, forceUpdate] = useState();
+  const [, forceUpdate] = useState<any>();
   const defaultRow = props.columns.reduce((obj: any, column) => {
     obj[column.name] = column.defaultValue;
     return obj;
   }, {});
 
-  const encrypted = React.useRef([]);
+  const encrypted = React.useRef<any>([]);
 
   const [rows, setRows] = useState<RowProps[]>(() => {
     const value = getFieldValue(props.name) ?? props.value;
@@ -131,7 +132,7 @@ export function CommonItem(
     props.onChange?.(encrypted.current);
   };
 
-  const batchChange = (row, index) => {
+  const batchChange = (row: any, index: any) => {
     const newRows = cloneDeep(rows);
     newRows[index] = row;
     setRows(newRows);
@@ -160,6 +161,7 @@ export function CommonItem(
   };
 
   const headers = (
+    // @ts-ignore
     <Row gutter={14} type="flex" className={style.headRow}>
       {props.columns.map((item, index) => (
         <Col key={index} style={{ flex: item.flex ?? 1 }}>
@@ -206,9 +208,10 @@ export function CommonItem(
   const uniqValidator = (
     rule: any,
     value: string,
-    callback: (v?: boolean) => void
+    callback: (v?: any) => void
   ) => {
     const reg = /\[(\d+)\]\.(\w+)/;
+    // @ts-ignore
     const [, rowIndex, name] = reg.exec(rule.field);
     const valueList = rows
       .filter((_, index) => index !== Number(rowIndex))
@@ -248,6 +251,7 @@ export function CommonItem(
       {headers}
       {rows.map((row, index) => {
         return (
+          // @ts-ignore
           <Row type="flex" gutter={12} key={trackRows[index]}>
             {React.cloneElement(props.children as React.ReactElement, {
               rowIndex: index,
@@ -256,7 +260,7 @@ export function CommonItem(
               row: row,
               prefixId: `${props.name}[${index}]`,
               form: props.formElement.formUtils,
-              batchChange: (row) => {
+              batchChange: (row: any) => {
                 batchChange(row, index);
               },
               onChange: (value: string, name: string) =>

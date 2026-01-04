@@ -5,6 +5,12 @@ import {
   property,
 } from "@next-core/brick-kit";
 import { RuntimeApi_searchMicroAppStandalone } from "@next-sdk/micro-app-standalone-sdk";
+
+export interface HomeRedirectElementProps {
+  appId?: string;
+  redirectUrl?: string;
+}
+
 /**
  * @id basic-bricks.home-redirect
  * @name basic-bricks.home-redirect
@@ -27,7 +33,7 @@ import { RuntimeApi_searchMicroAppStandalone } from "@next-sdk/micro-app-standal
 
  * @noInheritDoc
  */
-export class HomeRedirectElement extends UpdatingElement {
+export class HomeRedirectElement extends UpdatingElement implements HomeRedirectElementProps {
   /**
    * @kind string
    * @required false

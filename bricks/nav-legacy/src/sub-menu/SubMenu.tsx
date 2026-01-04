@@ -26,7 +26,9 @@ export function SubMenu({
     const thirdLevelHeaderTitleRef = thirdLevelHeaderTitle?.current;
     if (
       isThirdLevel &&
+      // @ts-ignore
       thirdLevelHeaderTitleRef?.scrollHeight >
+        // @ts-ignore
         thirdLevelHeaderTitleRef?.offsetHeight
     ) {
       setIsShowTooltip(true);

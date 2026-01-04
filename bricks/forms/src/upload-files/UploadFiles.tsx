@@ -158,6 +158,7 @@ export function UploadFiles(props: UploadFilesProps): React.ReactElement {
           className={styles.uploadFiles}
           action={url}
           name={name}
+          // @ts-ignore
           method={method}
           data={data}
           accept={accept}
