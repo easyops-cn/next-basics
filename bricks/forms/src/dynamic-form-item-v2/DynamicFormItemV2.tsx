@@ -242,7 +242,10 @@ export const LegacyDynamicFormItemV2 = forwardRef(
                     <Row key={key} className={style.row}>
                       <Row gutter={[12, 8]} style={{ flex: 1 }}>
                         {columns?.map((column) => {
-                          const hidden = getRealValue(column.props?.hidden, [
+                          const props = column.props as
+                            | Record<string, any>
+                            | undefined;
+                          const hidden = getRealValue(props?.hidden, [
                             rowValue,
                             name,
                           ]);
