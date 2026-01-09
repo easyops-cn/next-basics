@@ -6,6 +6,7 @@ import { useRecentApps } from "@next-core/brick-kit";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
 import styles from "./AppBarBreadcrumb.module.css";
 import classnames from "classnames";
+import i18n from "i18next";
 
 export interface BasicBreadcrumbProps {
   breadcrumb?: BreadcrumbItemConf[];
@@ -31,14 +32,24 @@ export function AppBarBreadcrumb(
     <div className={classnames(styles.breadcrumbContainer, props.className)}>
       <Breadcrumb separator={props.separator || ">"}>
         {breadcrumbItems &&
-          breadcrumbItems.map((item: BreadcrumbItemConf, index: number) => {
-            return (
-              <Breadcrumb.Item key={index}>
-                {index === 0 && <HomeOutlined />}
-                {item.to ? <Link to={item.to}>{item.text}</Link> : item.text}
-              </Breadcrumb.Item>
-            );
-          })}
+          breadcrumbItems.map(
+            (item: BreadcrumbItemConf & { enText?: string }, index: number) => {
+              return (
+                <Breadcrumb.Item key={index}>
+                  {index === 0 && <HomeOutlined />}
+                  {item.to ? (
+                    <Link to={item.to}>
+                      {i18n.language === "en"
+                        ? item.enText || item.text
+                        : item.text}
+                    </Link>
+                  ) : (
+                    item.text
+                  )}
+                </Breadcrumb.Item>
+              );
+            }
+          )}
         {currentApp && !noCurrentApp ? (
           <Breadcrumb.Item>
             {!breadcrumbItems?.length &&
