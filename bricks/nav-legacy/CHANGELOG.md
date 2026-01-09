@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.5.0...@next-bricks/nav-legacy@1.5.1) (2026-01-09)
+
+
+### Bug Fixes
+
+* MONITOR-10409 监控各产品功能模块国际化 Closes MONITOR-10409 ([a95bf49](https://github.com/easyops-cn/next-basics/commit/a95bf4915ee848fd937ae78510e06277a2325ebd))
+
+
+
+
+
 # [1.5.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.4.8...@next-bricks/nav-legacy@1.5.0) (2025-12-30)
 
 
