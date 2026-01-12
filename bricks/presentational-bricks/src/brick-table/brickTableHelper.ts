@@ -1,5 +1,4 @@
 import {
-  eq,
   lt,
   lte,
   gt,
@@ -8,11 +7,98 @@ import {
   isEqual,
   forEach,
   includes,
-  isEmpty,
   isUndefined,
+  map,
+  isNil,
+  isEmpty,
+  find,
 } from "lodash";
 import { transformColor } from "@next-libs/basic-components";
-import { CellStatusProps } from "./index";
+import { BrickTableFields, CellStatusProps, CustomColumn } from "./index";
+import { SortOrder } from "antd/lib/table/interface";
+import { getHistory } from "@next-core/brick-kit";
+
+export const initColumnsSorterAndFilters = (
+  columns: CustomColumn[],
+  fields?: BrickTableFields,
+  sort?: string,
+  order?: string | number,
+  filters?: Record<string, string[]>
+): CustomColumn[] => {
+  let initedColumns = columns;
+
+  // 初始化列排序
+  if (columns) {
+    const history = getHistory();
+    const urlSearchParams = new URLSearchParams(history.location.search);
+
+    initedColumns = columns.map((item) => {
+      let initedItem = item;
+
+      if (isNil(item.key)) {
+        initedItem = { ...initedItem, key: item.dataIndex as string };
+      }
+      if (item.sorter) {
+        initedItem = {
+          ...initedItem,
+          sortOrder:
+            sort === item.key && !isNil(order)
+              ? (fields?.ascend ?? "ascend") === order
+                ? "ascend"
+                : "descend"
+              : undefined,
+        };
+      }
+      // 初始化表头过滤值
+      if (item.filters) {
+        const filteredValue =
+          urlSearchParams.get(item.key as string) ??
+          get(filters, item.key as string)?.join(",");
+        initedItem = {
+          ...initedItem,
+          ...(!isNil(filteredValue) && !isEmpty(filteredValue)
+            ? {
+                filtered: true,
+                filteredValue: filteredValue
+                  .split(",")
+                  .map(
+                    (v) =>
+                      (find(item.filters, (f) => String(f.value) === v)
+                        ?.value as React.Key) ?? v
+                  ),
+              }
+            : { filtered: false, filteredValue: [] }),
+        };
+      }
+      return initedItem;
+    });
+  }
+
+  return initedColumns;
+};
+
+export const getModifiedColumns = (
+  columns: CustomColumn[],
+  hiddenColumns?: Array<string | number>,
+  sortable?: boolean
+): CustomColumn[] => {
+  let modifiedColumns = columns;
+  if (columns && hiddenColumns) {
+    modifiedColumns = columns.filter((column) => {
+      return !hiddenColumns.includes(
+        column.key ?? (column.dataIndex as string)
+      );
+    });
+  }
+  if (sortable === false) {
+    modifiedColumns = map(modifiedColumns, (column) => ({
+      ...column,
+      sorter: false,
+    }));
+  }
+  return modifiedColumns;
+};
+
 export const compareFunMap: Record<string, any> = {
   $eq: isEqual,
   $lt: lt,
@@ -44,6 +130,7 @@ export function getCellStyle(
     borderLeft: `4px solid ${transformColor(ret.leftBorderColor)}`,
   };
 }
+
 export const getKeysOfData = (
   data: Record<string, any>[],
   rowKey: string,
@@ -61,6 +148,7 @@ export const getKeysOfData = (
     });
   }
 };
+
 export const getRowsOfData = (
   data: Record<string, any>[],
   childrenColumnName: string,

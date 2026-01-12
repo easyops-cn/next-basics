@@ -1,6 +1,11 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 import { InstanceSelector } from "./BrickInstanceSelector";
+import * as kit from "@next-core/brick-kit";
+
+jest.spyOn(kit, "getHistory").mockReturnValue({
+  location: {},
+} as any);
 
 describe("BrickInstanceSelector", () => {
   it("should work", () => {
