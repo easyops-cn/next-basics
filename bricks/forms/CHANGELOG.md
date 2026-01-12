@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.2...@next-bricks/forms@1.308.3) (2026-01-12)
+
+
+### Bug Fixes
+
+* 修复英文模式显示key的问题 Refs ([99c0e23](https://github.com/easyops-cn/next-basics/commit/99c0e23f78a78777a55ab4102982d0e9254a3eba))
+
+
+
+
+
 ## [1.308.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.1...@next-bricks/forms@1.308.2) (2026-01-09)
 
 
