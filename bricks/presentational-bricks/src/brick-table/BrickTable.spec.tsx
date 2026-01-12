@@ -2,8 +2,8 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import { BrickTable } from "./BrickTable";
 import { CustomColumn } from "./index";
-import { Table, ConfigProvider } from "antd";
-import { EasyopsEmpty } from "@next-core/brick-kit";
+import { Table } from "antd";
+import * as kit from "@next-core/brick-kit";
 
 jest.mock("@next-core/brick-kit", () => {
   return {
@@ -11,6 +11,9 @@ jest.mock("@next-core/brick-kit", () => {
     BrickAsComponent(): React.ReactElement {
       return <div>BrickAsComponent</div>;
     },
+    getHistory: jest.fn(() => ({
+      location: {},
+    })),
   };
 });
 

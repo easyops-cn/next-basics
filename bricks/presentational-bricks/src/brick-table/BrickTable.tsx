@@ -7,14 +7,18 @@ import { TableProps } from "antd/lib/table";
 import { ExpandableConfig } from "antd/lib/table/interface";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
-import { getCellStyle } from "./brickTableHelper";
+import {
+  initColumnsSorterAndFilters,
+  getModifiedColumns,
+  getCellStyle,
+} from "./brickTableHelper";
 import { pickBy, isNil, toPath, isEqual, isEmpty } from "lodash";
 import classNames from "classnames";
 import styles from "./BrickTable.module.css";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import update from "immutability-helper";
-import { CustomColumn, CustomColumnComponent } from "./index";
+import { BrickTableFields, CustomColumn, CustomColumnComponent } from "./index";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
 import { EasyopsEmpty } from "@next-core/brick-kit";
@@ -50,6 +54,12 @@ export interface BrickTableProps<RecordType = Record<string, unknown>>
     | "showHeader"
   > {
   columns: CustomColumn[];
+  fields?: BrickTableFields;
+  sort?: string;
+  order?: string | number;
+  filters?: Record<string, string[]>;
+  hiddenColumns?: Array<string | number>;
+  sortable?: boolean;
   configProps?: TableProps<RecordType>;
   error?: any;
   deleteEnabled?: boolean;
@@ -225,6 +235,12 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
   const {
     configProps,
     columns,
+    fields,
+    sort,
+    order,
+    filters,
+    hiddenColumns,
+    sortable,
     rowKey = "key",
     expandIconAsCell,
     expandIconColumnIndex,
@@ -303,7 +319,11 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
     if (columns) {
       columnTitleBrickDataMapRef.current.clear();
       useBrickItemBrickDataMapRef.current.clear();
-      const customColumns = columns.map((column, index) => {
+      const customColumns = getModifiedColumns(
+        initColumnsSorterAndFilters(columns, fields, sort, order, filters),
+        hiddenColumns,
+        sortable
+      ).map((column, index) => {
         const {
           component,
           valueSuffix,
@@ -495,6 +515,12 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
     }
   }, [
     columns,
+    fields,
+    sort,
+    order,
+    filters,
+    hiddenColumns,
+    sortable,
     childrenColumnName,
     expandIconAsCell,
     expandIconColumnIndex,

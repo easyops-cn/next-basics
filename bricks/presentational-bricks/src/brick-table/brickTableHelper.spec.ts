@@ -5,7 +5,12 @@ import {
   getRowsOfData,
   stripEmptyExpandableChildrenByName,
 } from "./brickTableHelper";
-import { cloneDeep, isEqual } from "lodash";
+import { cloneDeep } from "lodash";
+import * as kit from "@next-core/brick-kit";
+
+jest.spyOn(kit, "getHistory").mockReturnValue({
+  location: {},
+} as any);
 
 describe("getCellStyle processor", () => {
   it("should match correct color affect current columns", () => {

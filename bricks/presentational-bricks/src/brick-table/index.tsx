@@ -41,6 +41,7 @@ import {
   ExpandableConfig,
 } from "antd/lib/table/interface";
 import {
+  getModifiedColumns,
   compareFunMap,
   getKeysOfData,
   getRowsOfData,
@@ -67,14 +68,14 @@ export interface BrickTableElementProps {
   expandable?: ExpandableConfig<Record<string, unknown>> | false;
   expandedRowBrick?: {
     useBrick?: UseBrickConf;
-  }
+  };
   emptyUseBrick?: {
     useBrick?: UseBrickConf;
-  }
+  };
   expandIcon?: {
     collapsedIcon: MenuIcon;
     expandedIcon: MenuIcon;
-  }
+  };
   expandIconColumnIndex?: number;
   expandRowByClick?: boolean;
   optimizedColumns?: Array<string | number>;
@@ -199,6 +200,16 @@ export interface CellStatusProps {
     leftBorderColor: string;
     value: any;
   }>;
+}
+
+export interface BrickTableFields {
+  dataSource?: string; // 指定 dataSource 从哪里来，默认为列表接口返回格式是{list:[],page:1,pageSize:10,total:20}，即默认取自 list
+  total?: string; // 指定 total 从哪里来，默认为列表接口返回格式是{list:[],page:1,pageSize:10,total:20}，即默认取自 total
+  rowKey?: string; // 指定每一行的 key，不指定则默认为 index
+  page?: string; // 指定请求后台 page 参数 path
+  pageSize?: string; // 指定请求后台 pageSize 参数 path
+  ascend?: string | number; // 指定 ascend 排序对应字段，例如有些后台对应为 1 ，有些对应为 "asc"。这里默认为 "ascend"。
+  descend?: string | number; // 指定 descend 排序对应字段，例如有些后台对应为 0 ，有些对应为 "desc"。这里默认为 "descend"。
 }
 
 /**
@@ -358,7 +369,10 @@ export interface CellStatusProps {
  *
  * @noInheritDoc
  */
-export class BrickTableElement extends UpdatingElement implements BrickTableElementProps {
+export class BrickTableElement
+  extends UpdatingElement
+  implements BrickTableElementProps
+{
   /**
    * @detail {[pagePath]: xxx}
    * @description 页码变化,pagePath 可在 fields.page 中设置，默认为 page
@@ -1056,7 +1070,7 @@ export class BrickTableElement extends UpdatingElement implements BrickTableElem
   // 对外获取内部 _columns 的值
   // istanbul ignore next
   get processedColumns() {
-    return this.getModifyColumns();
+    return getModifiedColumns(this._columns, this.hiddenColumns, this.sortable);
   }
 
   private _originalDataSource: Record<string, any>[];
@@ -1073,15 +1087,7 @@ export class BrickTableElement extends UpdatingElement implements BrickTableElem
   private _selectUpdateEventDetailField = "";
   private _selectUpdateEventDetailExtra: any = {};
 
-  private _fields: {
-    dataSource?: string; // 指定 dataSource 从哪里来，默认为列表接口返回格式是{list:[],page:1,pageSize:10,total:20}，即默认取自 list
-    total?: string; // 指定 total 从哪里来，默认为列表接口返回格式是{list:[],page:1,pageSize:10,total:20}，即默认取自 total
-    rowKey?: string; // 指定每一行的 key，不指定则默认为 index
-    page?: string; // 指定请求后台 page 参数 path
-    pageSize?: string; // 指定请求后台 pageSize 参数 path
-    ascend?: string | number; // 指定 ascend 排序对应字段，例如有些后台对应为 1 ，有些对应为 "asc"。这里默认为 "ascend"。
-    descend?: string | number; // 指定 descend 排序对应字段，例如有些后台对应为 0 ，有些对应为 "desc"。这里默认为 "descend"。
-  } = {
+  private _fields: BrickTableFields = {
     page: "page",
     pageSize: "pageSize",
     dataSource: "list",
@@ -1756,24 +1762,6 @@ export class BrickTableElement extends UpdatingElement implements BrickTableElem
     this.expandedRowKeys = allKeys;
   }
 
-  getModifyColumns(): CustomColumn[] {
-    let columns = this._columns;
-    if (this._columns && this.hiddenColumns) {
-      columns = this._columns.filter((column) => {
-        return !this.hiddenColumns.includes(
-          column.key ?? (column.dataIndex as string)
-        );
-      });
-    }
-    if (this.sortable === false) {
-      columns = map(columns, (column) => {
-        column.sorter = false;
-        return column;
-      });
-    }
-    return columns;
-  }
-
   protected _render(): void {
     if (this.isConnected) {
       if (this.draggable) {
@@ -1795,7 +1783,13 @@ export class BrickTableElement extends UpdatingElement implements BrickTableElem
           <BrickTable
             emptyUseBrick={this.emptyUseBrick}
             dataSource={this._dataSource}
-            columns={this.getModifyColumns()}
+            columns={this._columns}
+            fields={this._fields}
+            sort={this.sort}
+            order={this.order}
+            filters={this.filters}
+            hiddenColumns={this.hiddenColumns}
+            sortable={this.sortable}
             configProps={this._finalConfigProps}
             error={this._error}
             onChange={this._handleOnChange}
@@ -1971,43 +1965,6 @@ export class BrickTableElement extends UpdatingElement implements BrickTableElem
       };
     } else {
       this._finalConfigProps.rowSelection = false;
-    }
-
-    // 初始化列排序
-    if (this._columns) {
-      this._columns = this._columns.map((item) => {
-        if (isNil(item.key)) {
-          item.key = item.dataIndex as string;
-        }
-        if (item.sorter) {
-          item.sortOrder = (this.sort === item.key &&
-            !isNil(this.order) &&
-            (this._fields.ascend === this.order
-              ? "ascend"
-              : "descend")) as SortOrder;
-        }
-        // 初始化表头过滤值
-        if (item.filters) {
-          const history = getHistory();
-          const urlSearchParams = new URLSearchParams(history.location.search);
-          const filteredValue =
-            urlSearchParams.get(item.key as string) ??
-            get(this.filters, item.key)?.join(",");
-          if (!isNil(filteredValue) && !isEmpty(filteredValue)) {
-            item.filtered = true;
-            item.filteredValue = filteredValue
-              .split(",")
-              .map(
-                (v) =>
-                  find(item.filters, (f) => String(f.value) === v)?.value ?? v
-              );
-          } else {
-            item.filtered = false;
-            item.filteredValue = [];
-          }
-        }
-        return item;
-      });
     }
   };
 
