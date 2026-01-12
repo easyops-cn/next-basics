@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.337.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.337.0...@next-bricks/presentational-bricks@1.337.1) (2026-01-12)
+
+
+### Bug Fixes
+
+* **BrickTable:** move columns processing logic into BrickTable component ([b918190](https://github.com/easyops-cn/next-basics/commit/b91819014cd1bfd0c7078570cda253f90e155f9b))
+
+
+
+
+
 # [1.337.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.336.10...@next-bricks/presentational-bricks@1.337.0) (2025-12-30)
 
 
