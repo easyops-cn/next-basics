@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/form-builder@0.4.0...@next-bricks/form-builder@0.4.1) (2026-01-14)
+
+**Note:** Version bump only for package @next-bricks/form-builder
+
+
+
+
+
 # [0.4.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/form-builder@0.3.5...@next-bricks/form-builder@0.4.0) (2025-12-30)
 
 

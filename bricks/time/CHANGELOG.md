@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.9.0...@next-bricks/time@1.9.1) (2026-01-14)
+
+**Note:** Version bump only for package @next-bricks/time
+
+
+
+
+
 # [1.9.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.8.2...@next-bricks/time@1.9.0) (2025-12-30)
 
 
