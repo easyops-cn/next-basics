@@ -39,7 +39,7 @@
     "build:webpack:property-editors": "webpack --config webpack.property-editors.js",
     "build:stories": "if [ -d stories ];then  rollup --config rollup.stories.js; else echo \" no stories \"; fi",
     "build:snippets": "if [ -d snippets ]; then rollup --config rollup.snippets.js; else echo \"no snippets.\"; fi",
-    "postbuild": "npm run build:types && ENABLE_GENERATE_DOC=true node scripts/post-build.js",
+    "postbuild": "ENABLE_GENERATE_DOC=true node scripts/post-build.js",
     "test": "cross-env NODE_ENV='test' jest",
     "test:ci": "cross-env NODE_ENV='test' CI=true jest",
     "build:types": "tsc --project tsconfig.types.json"
