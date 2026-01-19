@@ -4,13 +4,15 @@ import { BrickWrapper, property } from "@next-core/brick-kit";
 import { FormItemElement } from "@next-libs/forms";
 import { RowProps } from "../dynamic-common-item/DynamicCommonItem";
 import { DynamicUserSelectItem } from "./DynamicUserSelectItem";
+import i18n from "i18next";
+import { NS_FORMS, K } from "../i18n/constants";
 
 export const columns = [
   {
     name: "dstObjectId",
     selectProps: {
       allowClear: true,
-      placeholder: "关联资源",
+      placeholder: i18n.t(`${NS_FORMS}:${K.RELATED_RESOURCE}`),
       showSearch: true,
       optionFilterProp: "children",
       dropdownMatchSelectWidth: false,
@@ -22,7 +24,7 @@ export const columns = [
     rules: [
       {
         required: true,
-        message: "请选择关联资源",
+        message: i18n.t(`${NS_FORMS}:${K.PLEASE_SELECT_RELATED_RESOURCE}`),
       },
     ],
   },
@@ -30,7 +32,7 @@ export const columns = [
     name: "reverseQueryKey",
     selectProps: {
       allowClear: true,
-      placeholder: "关系路径",
+      placeholder: i18n.t(`${NS_FORMS}:${K.RELATION_PATH}`),
       showSearch: true,
       dropdownMatchSelectWidth: false,
       optionFilterProp: "children",
@@ -42,7 +44,7 @@ export const columns = [
     rules: [
       {
         required: true,
-        message: "请选择关系路径",
+        message: i18n.t(`${NS_FORMS}:${K.PLEASE_SELECT_RELATION_PATH}`),
       },
     ],
   },
@@ -51,11 +53,11 @@ export const columns = [
     rules: [
       {
         required: true,
-        message: "请选择负责人",
+        message: i18n.t(`${NS_FORMS}:${K.PLEASE_SELECT_PERSON_IN_CHARGE}`),
       },
     ],
     selectProps: {
-      placeholder: "负责人",
+      placeholder: i18n.t(`${NS_FORMS}:${K.PERSON_IN_CHARGE}`),
       mode: "multiple",
       allowClear: true,
       dropdownMatchSelectWidth: false,

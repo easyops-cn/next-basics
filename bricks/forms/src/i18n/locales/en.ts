@@ -186,6 +186,12 @@ const locale: Locale = {
   [K.UPLOAD_FAILED]: "Upload failed",
   [K.UPLOAD_IMAGE_ONLY]: "Only image files can be uploaded.",
   [K.UPLOAD_IMAGE_LIMIT]: "The uploaded file size exceeds the specified limit.",
+  [K.RELATED_RESOURCE]: "Related Resource",
+  [K.PLEASE_SELECT_RELATED_RESOURCE]: "Please select a related resource",
+  [K.RELATION_PATH]: "Relation Path",
+  [K.PLEASE_SELECT_RELATION_PATH]: "Please select a relation path",
+  [K.PERSON_IN_CHARGE]: "Person in Charge",
+  [K.PLEASE_SELECT_PERSON_IN_CHARGE]: "Please select a person in charge",
 };
 
 export default locale;

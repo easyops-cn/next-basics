@@ -170,6 +170,12 @@ const locale: Locale = {
   [K.UPLOAD_FAILED]: "上传失败",
   [K.UPLOAD_IMAGE_ONLY]: "仅支持上传图片文件",
   [K.UPLOAD_IMAGE_LIMIT]: "上传文件体积大于限定体积",
+  [K.RELATED_RESOURCE]: "关联资源",
+  [K.PLEASE_SELECT_RELATED_RESOURCE]: "请选择关联资源",
+  [K.RELATION_PATH]: "关系路径",
+  [K.PLEASE_SELECT_RELATION_PATH]: "请选择关系路径",
+  [K.PERSON_IN_CHARGE]: "负责人",
+  [K.PLEASE_SELECT_PERSON_IN_CHARGE]: "请选择负责人",
 };
 
 export default locale;
