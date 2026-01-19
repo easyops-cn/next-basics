@@ -2,6 +2,9 @@ import ReactDOM from "react-dom";
 import * as kit from "@next-core/brick-kit";
 import "./";
 
+jest.mock("antd/es/locale/en_US", () => ({}));
+jest.mock("antd/es/locale/zh_CN", () => ({}));
+
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const spyOnRender = jest.spyOn(ReactDOM, "render").mockImplementation(() => {});
 
@@ -9,9 +12,9 @@ const replaceMock = jest.fn();
 const spyOnHistory = jest.spyOn(kit, "getHistory").mockReturnValue({
   location: {
     pathname: "/developer",
-    search: "?q=a&page=1"
+    search: "?q=a&page=1",
   },
-  replace: replaceMock
+  replace: replaceMock,
 });
 const unmountComponentAtNode = jest
   .spyOn(ReactDOM, "unmountComponentAtNode")
@@ -52,7 +55,7 @@ describe("presentational-bricks.datetime-selector", () => {
 
     element.datetimeSelected({
       type: "specifiedDate",
-      value: { from: 1571673600000, to: 1571846399000 }
+      value: { from: 1571673600000, to: 1571846399000 },
     });
     expect(replaceMock.mock.calls[1][0]).toEqual(
       "?q=a&page=1&from=1571673600000&to=1571846399000"
