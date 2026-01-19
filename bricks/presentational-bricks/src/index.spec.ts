@@ -1,6 +1,9 @@
 import i18next from "i18next";
 import * as kit from "@next-core/brick-kit";
 
+jest.mock("antd/es/locale/en_US", () => ({}));
+jest.mock("antd/es/locale/zh_CN", () => ({}));
+
 const spyOnAddResourceBundle = (i18next.addResourceBundle = jest.fn());
 
 jest.spyOn(window.customElements, "define");

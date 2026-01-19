@@ -1,5 +1,9 @@
 import React from "react";
 import { TooltipPlacement } from "antd/lib/tooltip";
+import { ConfigProvider } from "antd";
+import i18next from "i18next";
+import enUS from "antd/es/locale/en_US";
+import zhCN from "antd/es/locale/zh_CN";
 
 import {
   DatetimeRange,
@@ -33,6 +37,10 @@ export function DatetimeSelector(
   props: DatetimeSelectorProps
 ): React.ReactElement {
   const { customTimeRange = [], type = "default", resolution, size } = props;
+
+  // 根据当前语言选择对应的 locale
+  const locale = i18next.language === "en" ? enUS : zhCN;
+
   const getInitDateRange = (): DateRangeProps => {
     const rangeList =
       type === "default"
@@ -70,16 +78,18 @@ export function DatetimeSelector(
   };
 
   return (
-    <DatetimeRange
-      type={type}
-      customTimeRange={customTimeRange}
-      onConfirm={handleConfirm}
-      initDateRange={getInitDateRange()}
-      placement={props.placement}
-      size={size}
-      selectNearDays={props.selectNearDays}
-      rangeDays={props.rangeDays}
-      format={props.format}
-    />
+    <ConfigProvider locale={locale}>
+      <DatetimeRange
+        type={type}
+        customTimeRange={customTimeRange}
+        onConfirm={handleConfirm}
+        initDateRange={getInitDateRange()}
+        placement={props.placement}
+        size={size}
+        selectNearDays={props.selectNearDays}
+        rangeDays={props.rangeDays}
+        format={props.format}
+      />
+    </ConfigProvider>
   );
 }
