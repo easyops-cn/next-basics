@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.337.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.337.2...@next-bricks/presentational-bricks@1.337.3) (2026-01-19)
+
+
+### Bug Fixes
+
+* MONITOR-10409 监控各产品功能模块国际化 Closes MONITOR-10409 ([74d2115](https://github.com/easyops-cn/next-basics/commit/74d211568a55d9a16d8072dc4b18d0b1c9066da6))
+
+
+
+
+
 ## [1.337.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.337.1...@next-bricks/presentational-bricks@1.337.2) (2026-01-14)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
