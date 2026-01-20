@@ -20,7 +20,7 @@ import { UseBrickConf } from "@next-core/brick-types";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { AutoCompleteItem } from "./autoCompleteItem";
 import { TimeRangePickerItem } from "./TimeRangePicker";
-
+import { PasteableSelect } from "./PasteableSelect";
 interface ColumnComponentProps {
   column: Column;
   field: FormListFieldData;
@@ -40,11 +40,10 @@ const getOptions = (
     <Select.Option key={op.value} value={op.value} label={op.label}>
       <div className={style.option}>
         <span className={style.label}>{op.label}</span>
-        {/* @ts-ignore */}
-        {suffix && suffix.useBrick && (
+        {/* 移除 @ts-ignore */}
+        {suffix && (suffix as any)?.useBrick && (
           <div className={style.suffixContainer} style={suffixStyle}>
-            {/* @ts-ignore */}
-            <BrickAsComponent useBrick={suffix.useBrick} data={op} />
+            <BrickAsComponent useBrick={(suffix as any).useBrick} data={op} />
           </div>
         )}
       </div>
@@ -106,17 +105,13 @@ export function ColumnComponent(
   );
 
   const disabled = useMemo(
-    // @ts-ignore
-    () => getRealValue(column.props?.disabled, [rowValue, rowIndex]),
-    // @ts-ignore
-    [column.props?.disabled, rowValue, rowIndex]
+    () => getRealValue((column.props as any)?.disabled, [rowValue, rowIndex]),
+    [(column.props as any)?.disabled, rowValue, rowIndex]
   );
 
   const hidden = useMemo(
-    // @ts-ignore
-    () => getRealValue(column.props?.hidden, [rowValue, rowIndex]),
-    // @ts-ignore
-    [column.props?.hidden, rowValue, rowIndex]
+    () => getRealValue((column.props as any)?.hidden, [rowValue, rowIndex]),
+    [(column.props as any)?.hidden, rowValue, rowIndex]
   );
 
   const rules = useMemo(
@@ -154,12 +149,13 @@ export function ColumnComponent(
     [column.rules, formValue, name, rowIndex, rowValue]
   );
 
-  let options = useMemo(
+  const options = useMemo(
     () =>
-      // @ts-ignore
-      getRealValueOptions(column.props?.options, [rowValue, rowIndex]) || [],
-    // @ts-ignore
-    [column.props?.options, rowValue, rowIndex]
+      getRealValueOptions((column.props as any)?.options, [
+        rowValue,
+        rowIndex,
+      ]) || [],
+    [(column.props as any)?.options, rowValue, rowIndex]
   );
 
   useEffect(() => {
@@ -264,33 +260,39 @@ export function ColumnComponent(
         allowClear,
         mode,
         showSearch,
-        groupBy,
+        groupBy: category,
         tokenSeparators,
         maxTagCount,
         popoverPositionType,
         suffix,
         suffixStyle,
       } = column.props || {};
+
       const searchProps = showSearch
         ? {
             showSearch: true,
             filterOption: (input: string, option: any) => {
-              return option.label
-                ?.toLowerCase()
-                .includes(input.trim().toLowerCase());
+              if (!option) return false;
+              const label =
+                option.label != null ? String(option.label).toLowerCase() : "";
+              const value =
+                option.value != null ? String(option.value).toLowerCase() : "";
+              const searchInput = (input || "").trim().toLowerCase();
+
+              return label.includes(searchInput) || value.includes(searchInput);
             },
           }
-        : {
-            showSearch: false,
-          };
-      // 如果options是二维数组 只要其中一个是二维数组 就需要重新赋值options
+        : { showSearch: false };
+      let currentOptions = options;
       if (
-        Array.isArray(options[rowIndex]) ||
-        Array.isArray(options[0]) ||
-        options.some((option) => Array.isArray(option))
+        Array.isArray(currentOptions[rowIndex]) ||
+        Array.isArray(currentOptions[0]) ||
+        currentOptions.some((option: any) => Array.isArray(option))
       ) {
-        options =
-          (options[rowIndex] as GeneralComplexOption<string | number>[]) ?? [];
+        currentOptions =
+          (currentOptions[rowIndex] as GeneralComplexOption<
+            string | number
+          >[]) ?? [];
       }
 
       return (
@@ -302,9 +304,10 @@ export function ColumnComponent(
           tooltip={getTooltip(column.tooltip)}
           hidden={hidden}
         >
-          <Select
-            className={suffix && style.suffixBrickSelect}
-            style={{ width: "100%" }}
+          <PasteableSelect
+            {...column.props}
+            {...searchProps}
+            options={currentOptions}
             placeholder={placeholder}
             disabled={disabled}
             allowClear={allowClear}
@@ -312,25 +315,16 @@ export function ColumnComponent(
             tokenSeparators={tokenSeparators}
             maxTagCount={maxTagCount}
             {...(popoverPositionType === "parent"
-              ? {
-                  getPopupContainer: (triggerNode) => triggerNode.parentElement,
-                }
+              ? { getPopupContainer: (n) => n.parentElement }
               : {})}
-            {...searchProps}
+            onChange={(val: string) => {
+              handleInputBlur(rowIndex, name, val);
+            }}
           >
-            {groupBy
-              ? getOptsGroups(
-                  options as GeneralComplexOption<string | number>[],
-                  groupBy,
-                  suffix,
-                  suffixStyle
-                )
-              : getOptions(
-                  options as GeneralComplexOption<string | number>[],
-                  suffix,
-                  suffixStyle
-                )}
-          </Select>
+            {category
+              ? getOptsGroups(currentOptions, category, suffix, suffixStyle)
+              : getOptions(currentOptions, suffix, suffixStyle)}
+          </PasteableSelect>
         </Form.Item>
       );
     }
