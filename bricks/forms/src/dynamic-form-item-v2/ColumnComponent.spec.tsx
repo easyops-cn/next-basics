@@ -14,6 +14,7 @@ import { ColumnComponent } from "./ColumnComponent";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
 import { Column } from "../interfaces";
 import { act } from "react-dom/test-utils";
+import { PasteableSelect } from "./PasteableSelect";
 
 const field = {
   name: 0,
@@ -191,10 +192,12 @@ describe("ColumnComponent", () => {
     expect(wrapper.find(Input)).toHaveLength(1);
   });
 
+  // 修改：select 测试使用 mount 来查找内部组件
   it("select should work", () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <ColumnComponent column={selectColumn} field={field} />
     );
+    expect(wrapper.find(PasteableSelect)).toHaveLength(1);
     expect(wrapper.find(Select)).toHaveLength(1);
     expect(wrapper.find(Select.Option)).toHaveLength(1);
     expect(wrapper.find(Select.OptGroup)).toHaveLength(0);
@@ -410,27 +413,31 @@ describe("ColumnComponent", () => {
     });
   });
 
+  // 修改：select with options function 测试
   it("select with options functionshould work", () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <ColumnComponent
         column={selectColumnWithOptionsFunction}
         field={field}
         rowIndex={0}
       />
     );
+    expect(wrapper.find(PasteableSelect)).toHaveLength(1);
     expect(wrapper.find(Select)).toHaveLength(1);
     expect(wrapper.find(Select.Option)).toHaveLength(1);
     expect(wrapper.find(Select.OptGroup)).toHaveLength(0);
   });
 
+  // 修改：select with two dimensional options 测试
   it("select with two dimensional options should work", () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <ColumnComponent
         column={selectColumnWithTwoDimensionalOptions}
         field={field}
         rowIndex={0}
       />
     );
+    expect(wrapper.find(PasteableSelect)).toHaveLength(1);
     expect(wrapper.find(Select)).toHaveLength(1);
     expect(wrapper.find(Select.Option)).toHaveLength(1);
     expect(wrapper.find(Select.OptGroup)).toHaveLength(0);
@@ -463,11 +470,12 @@ describe("ColumnComponent", () => {
     expect(wrapper.find(Select).prop("filterOption")).not.toBeFalsy();
   });
 
+  // 修改：select with suffix 测试
   it("select with suffix should work", () => {
     const wrapper = shallow(
       <ColumnComponent column={selectColumnWithSuffix} field={field} />
     );
-    expect(wrapper.find(Select)).toHaveLength(1);
+    expect(wrapper.find(PasteableSelect)).toHaveLength(1);
   });
 
   it("input.blur event handler should be called", () => {
