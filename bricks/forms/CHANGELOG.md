@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.6...@next-bricks/forms@1.308.7) (2026-01-20)
+
+
+### Bug Fixes
+
+* 动态表单项v2下拉选择支持粘贴过滤数据 ([c290ba1](https://github.com/easyops-cn/next-basics/commit/c290ba19167303bd1d6e63546db0b5ddb495d3c0))
+* 动态表单项v2测试文件优化 ([8ee1beb](https://github.com/easyops-cn/next-basics/commit/8ee1beb24dc777e827ac67b290312ba2ed9fbae4))
+* 测试修复 ([f8bceeb](https://github.com/easyops-cn/next-basics/commit/f8bceebba81caa7b23abced5fdddc4cf90927076))
+* 补充测试文件 ([1af7d63](https://github.com/easyops-cn/next-basics/commit/1af7d63028f46f74979d2f4145cde01f68ca0f3a))
+
+
+
+
+
 ## [1.308.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.5...@next-bricks/forms@1.308.6) (2026-01-19)
 
 **Note:** Version bump only for package @next-bricks/forms
