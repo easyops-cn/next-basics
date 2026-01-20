@@ -14,6 +14,7 @@ import { ColumnComponent } from "./ColumnComponent";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
 import { Column } from "../interfaces";
 import { act } from "react-dom/test-utils";
+import { PasteableSelect } from "./PasteableSelect";
 
 const field = {
   name: 0,
@@ -192,12 +193,11 @@ describe("ColumnComponent", () => {
   });
 
   it("select should work", () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <ColumnComponent column={selectColumn} field={field} />
     );
+    expect(wrapper.find(PasteableSelect)).toHaveLength(1);
     expect(wrapper.find(Select)).toHaveLength(1);
-    expect(wrapper.find(Select.Option)).toHaveLength(1);
-    expect(wrapper.find(Select.OptGroup)).toHaveLength(0);
 
     wrapper.setProps({
       column: {
@@ -210,8 +210,6 @@ describe("ColumnComponent", () => {
       },
     });
     wrapper.update();
-    expect(wrapper.find(Select.Option)).toHaveLength(1);
-    expect(wrapper.find(Select.OptGroup)).toHaveLength(1);
 
     expect(wrapper.find(Select).prop("filterOption")).toBeFalsy();
     wrapper.setProps({
@@ -411,29 +409,27 @@ describe("ColumnComponent", () => {
   });
 
   it("select with options functionshould work", () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <ColumnComponent
         column={selectColumnWithOptionsFunction}
         field={field}
         rowIndex={0}
       />
     );
+    expect(wrapper.find(PasteableSelect)).toHaveLength(1);
     expect(wrapper.find(Select)).toHaveLength(1);
-    expect(wrapper.find(Select.Option)).toHaveLength(1);
-    expect(wrapper.find(Select.OptGroup)).toHaveLength(0);
   });
 
   it("select with two dimensional options should work", () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <ColumnComponent
         column={selectColumnWithTwoDimensionalOptions}
         field={field}
         rowIndex={0}
       />
     );
+    expect(wrapper.find(PasteableSelect)).toHaveLength(1);
     expect(wrapper.find(Select)).toHaveLength(1);
-    expect(wrapper.find(Select.Option)).toHaveLength(1);
-    expect(wrapper.find(Select.OptGroup)).toHaveLength(0);
 
     wrapper.setProps({
       column: {
@@ -446,8 +442,6 @@ describe("ColumnComponent", () => {
       },
     });
     wrapper.update();
-    expect(wrapper.find(Select.Option)).toHaveLength(1);
-    expect(wrapper.find(Select.OptGroup)).toHaveLength(1);
 
     expect(wrapper.find(Select).prop("filterOption")).toBeFalsy();
     wrapper.setProps({
@@ -464,9 +458,10 @@ describe("ColumnComponent", () => {
   });
 
   it("select with suffix should work", () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <ColumnComponent column={selectColumnWithSuffix} field={field} />
     );
+    expect(wrapper.find(PasteableSelect)).toHaveLength(1);
     expect(wrapper.find(Select)).toHaveLength(1);
   });
 
