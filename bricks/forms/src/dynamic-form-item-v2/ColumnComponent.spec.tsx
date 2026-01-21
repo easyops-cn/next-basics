@@ -25,7 +25,6 @@ const field = {
 const inputColumn = {
   name: "input",
   label: "input",
-  // type: ComponentType.INPUT,
   type: "input",
   props: {
     placeholder: "input",
@@ -35,7 +34,6 @@ const inputColumn = {
 const selectColumn = {
   name: "select",
   label: "select",
-  // type: ComponentType.SELECT,
   type: "select",
   props: {
     options: [{ label: "a", value: "a" }],
@@ -45,7 +43,6 @@ const selectColumn = {
 const inputNumberColumn = {
   name: "inputNumber",
   label: "inputNumber",
-  // type: ComponentType.INPUT_NUMBER,
   type: "inputNumber",
   props: {},
 } as Column;
@@ -53,7 +50,6 @@ const inputNumberColumn = {
 const inputPasswordColumn = {
   name: "inputPassword",
   label: "inputPassword",
-  // type: ComponentType.INPUT_PASSWORD,
   type: "inputPassword",
   props: {},
 } as Column;
@@ -61,7 +57,6 @@ const inputPasswordColumn = {
 const cascaderColumn = {
   name: "cascader",
   label: "cascader",
-  // type: ComponentType.CASCADER,
   type: "cascader",
   props: {
     options: [{ label: "a", value: "a" }],
@@ -89,7 +84,6 @@ const autoCompleteColumn = {
 const selectColumnWithTwoDimensionalOptions = {
   name: "select",
   label: "select",
-  // type: ComponentType.SELECT,
   type: "select",
   props: {
     options: [
@@ -202,6 +196,7 @@ describe("ColumnComponent", () => {
           props: { ...selectColumn.props, mode: "multiple" },
         }}
         field={field}
+        rowIndex={0}
         handleInputBlur={handleInputBlur}
         onChange={onChange}
       />
@@ -209,10 +204,11 @@ describe("ColumnComponent", () => {
     expect(wrapper.find(PasteableSelect)).toHaveLength(1);
     expect(wrapper.find(Select)).toHaveLength(1);
 
-    // 模拟触发 Select 变化，验证 handleInputBlur 和 onChange 的数据格式
     const testVal = ["a", "b"];
     wrapper.find(PasteableSelect).prop("onChange")(testVal);
-    expect(handleInputBlur).toBeCalledWith(expect.any(Number), "select", "a,b");
+
+    // 验证 handleInputBlur 接收到的第一个参数是 0
+    expect(handleInputBlur).toBeCalledWith(0, "select", "a,b");
     expect(onChange).toBeCalledWith(["a", "b"]);
 
     wrapper.setProps({
@@ -315,7 +311,7 @@ describe("ColumnComponent", () => {
         rowIndex={0}
       />
     );
-    const tooltip = wrapper.find(Form.Item).prop("tooltip");
+    const tooltip: any = wrapper.find(Form.Item).prop("tooltip");
 
     // 验证 tooltip 是否为对象
     expect(typeof tooltip).toBe("object");
@@ -357,8 +353,7 @@ describe("ColumnComponent", () => {
         ...inputColumn,
         props: {
           ...inputColumn.props,
-          disabled: (row: Record<string, any>, index: number) =>
-            row?.input === "input",
+          disabled: (row: any, index: number) => row?.input === "input",
         },
       },
     });
@@ -388,7 +383,8 @@ describe("ColumnComponent", () => {
     );
 
     const validatorFn = jest.fn();
-    const customValidator = wrapper.find(Form.Item).prop("rules")[0].validator;
+    const customValidator: any = wrapper.find(Form.Item).prop("rules")![0]
+      .validator;
     customValidator({ message: "unique" }, "a", validatorFn);
     expect(validatorFn).toBeCalledWith("unique");
   });
@@ -398,7 +394,8 @@ describe("ColumnComponent", () => {
       ...inputColumn,
       rules: [
         {
-          validator: (rule, value, cb, fullValue) => cb(fullValue),
+          validator: (rule: any, value: any, cb: any, fullValue: any) =>
+            cb(fullValue),
         },
       ],
     };
@@ -415,7 +412,8 @@ describe("ColumnComponent", () => {
     );
 
     const validatorFn = jest.fn();
-    const customValidator = wrapper.find(Form.Item).prop("rules")[0].validator;
+    const customValidator: any = wrapper.find(Form.Item).prop("rules")![0]
+      .validator;
     customValidator({ message: "validator" }, "a", validatorFn);
     expect(validatorFn).toBeCalledWith({
       formValue,
