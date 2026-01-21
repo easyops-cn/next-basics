@@ -3,8 +3,8 @@ import { Select, Modal, SelectProps } from "antd";
 import _ from "lodash";
 interface PasteableSelectProps
   extends Omit<SelectProps<any>, "value" | "onChange"> {
-  value?: string | number | any[];
-  onChange?: (value: string) => void;
+  value?: any;
+  onChange?: (value: any) => void;
   options?: any[];
 }
 
@@ -67,28 +67,28 @@ export const PasteableSelect: React.FC<PasteableSelectProps> = (props) => {
 
     items.forEach((item) => {
       const safeItem = String(item || "").toLowerCase();
-
       const found = options?.find((opt: any) => {
         const optLabel =
           opt.label != null ? String(opt.label).toLowerCase() : "";
         const optValue =
           opt.value != null ? String(opt.value).toLowerCase() : "";
-
         return optLabel === safeItem || optValue === safeItem;
       });
 
       if (found) {
-        if (!nextValues.some((v) => String(v) === String(found.value)))
+        if (!nextValues.some((v) => String(v) === String(found.value))) {
           nextValues.push(found.value);
+        }
       } else if (mode === "tags") {
-        if (!nextValues.some((v) => String(v) === String(item)))
+        if (!nextValues.some((v) => String(v) === String(item))) {
           nextValues.push(item);
+        }
       } else {
         invalidItems.push(item);
       }
     });
 
-    onChange?.(nextValues.join(","));
+    onChange?.(nextValues);
     if (invalidItems.length > 0 && mode !== "tags") {
       Modal.warning({
         title: "提示",
@@ -123,14 +123,7 @@ export const PasteableSelect: React.FC<PasteableSelectProps> = (props) => {
         mode={mode}
         tokenSeparators={tokenSeparators}
         value={internalValue}
-        onChange={(val) => {
-          const result = Array.isArray(val)
-            ? val.join(",")
-            : val != null
-            ? String(val)
-            : "";
-          onChange?.(result);
-        }}
+        onChange={(val) => onChange?.(val)}
       >
         {children}
       </Select>

@@ -34,8 +34,7 @@ describe("PasteableSelect", () => {
     };
 
     wrapper.find("div").at(0).simulate("paste", pasteEvent);
-
-    expect(onChange).toBeCalledWith("apple,banana,100");
+    expect(onChange).toBeCalledWith(["apple", "banana", 100]);
   });
 
   it("should show Modal.warning for invalid items", () => {
@@ -80,7 +79,7 @@ describe("PasteableSelect", () => {
 
     // Tags 模式下不应该弹窗，且允许新数据
     expect(modalSpy).not.toBeCalled();
-    expect(onChange).toBeCalledWith("new_tag");
+    expect(onChange).toBeCalledWith(["new_tag"]);
     modalSpy.mockRestore();
   });
 
@@ -99,8 +98,6 @@ describe("PasteableSelect", () => {
     // 模拟 Antd 的 Select 触发 onChange (数组形式)
     const antdSelect = wrapper.find(Select);
     antdSelect.prop("onChange")([1, "2"]);
-
-    // 验证 internalValue 转换逻辑：将数组 join 传回
-    expect(onChange).toBeCalledWith("1,2");
+    expect(onChange).toBeCalledWith([1, "2"]);
   });
 });
