@@ -193,11 +193,27 @@ describe("ColumnComponent", () => {
   });
 
   it("select should work", () => {
+    const handleInputBlur = jest.fn();
+    const onChange = jest.fn();
     const wrapper = mount(
-      <ColumnComponent column={selectColumn} field={field} />
+      <ColumnComponent
+        column={{
+          ...selectColumn,
+          props: { ...selectColumn.props, mode: "multiple" },
+        }}
+        field={field}
+        handleInputBlur={handleInputBlur}
+        onChange={onChange}
+      />
     );
     expect(wrapper.find(PasteableSelect)).toHaveLength(1);
     expect(wrapper.find(Select)).toHaveLength(1);
+
+    // 模拟触发 Select 变化，验证 handleInputBlur 和 onChange 的数据格式
+    const testVal = ["a", "b"];
+    wrapper.find(PasteableSelect).prop("onChange")(testVal);
+    expect(handleInputBlur).toBeCalledWith(expect.any(Number), "select", "a,b");
+    expect(onChange).toBeCalledWith(["a", "b"]);
 
     wrapper.setProps({
       column: {

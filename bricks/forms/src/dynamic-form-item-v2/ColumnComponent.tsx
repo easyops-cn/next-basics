@@ -317,8 +317,14 @@ export function ColumnComponent(
             {...(popoverPositionType === "parent"
               ? { getPopupContainer: (n) => n.parentElement }
               : {})}
-            onChange={(val: string) => {
-              handleInputBlur(rowIndex, name, val);
+            onChange={(val: any) => {
+              const stringVal = Array.isArray(val)
+                ? val.join(",")
+                : val != null
+                ? String(val)
+                : "";
+              handleInputBlur(rowIndex, name, stringVal);
+              (props as any).onChange?.(val);
             }}
           >
             {category
