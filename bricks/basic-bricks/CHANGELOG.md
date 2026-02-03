@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.259.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.259.1...@next-bricks/basic-bricks@1.259.2) (2026-02-03)
+
+
+### Bug Fixes
+
+* popover组件新增configProps属性 Closes MONITOR-10409 ([422d17a](https://github.com/easyops-cn/next-basics/commit/422d17a48539d7973e4604423416f49973a8daa4))
+
+
+
+
+
 ## [1.259.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.259.0...@next-bricks/basic-bricks@1.259.1) (2026-01-14)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
