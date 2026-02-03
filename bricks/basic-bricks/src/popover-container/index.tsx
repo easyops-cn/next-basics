@@ -14,10 +14,10 @@ import { ActionType, AlignType } from "rc-trigger/lib/interface";
 
 export interface PopoverContainerElementProps {
   data?: any;
-  displayBrick?: { useBrick: UseBrickConf; data?: any; };
-  popoverTitleBrick?: { useBrick: UseBrickConf; };
+  displayBrick?: { useBrick: UseBrickConf; data?: any };
+  popoverTitleBrick?: { useBrick: UseBrickConf };
   align?: AlignType;
-  popoverBrick: { useBrick: UseBrickConf; data?: any; };
+  popoverBrick: { useBrick: UseBrickConf; data?: any };
   popoverIcon?: MenuIcon;
   placement?: TooltipPlacement;
   trigger?: ActionType | ActionType[];
@@ -61,7 +61,10 @@ export interface PopoverContainerElementProps {
 * | transformFrom | string         | -        | -       | 属性数据转换来自数据源的哪个字段，不填则为整个数据 |
  * @noInheritDoc
  */
-export class PopoverContainerElement extends UpdatingElement implements PopoverContainerElementProps {
+export class PopoverContainerElement
+  extends UpdatingElement
+  implements PopoverContainerElementProps
+{
   // 整体数据，可以配置整体数据，也可以单独配置数据
   /**
    * @kind any
@@ -302,6 +305,11 @@ export class PopoverContainerElement extends UpdatingElement implements PopoverC
   })
   transferVisible: boolean;
 
+  @property({
+    attribute: false,
+  })
+  configProps: Record<string, any> = {};
+
   /**
    * @detail any
    * @description 鼠标移动到元素上发出的事件，事件详情为用户设置的 data
@@ -376,6 +384,7 @@ export class PopoverContainerElement extends UpdatingElement implements PopoverC
             itemMouseEnter={this._itemMouseEnter}
             itemMouseLeave={this._itemMouseLeave}
             transferVisible={this.transferVisible}
+            configProps={this.configProps}
           />
         </BrickWrapper>,
         this

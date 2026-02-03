@@ -38,6 +38,7 @@ interface PopoverContainerProps {
   faded?: boolean;
   transferGraphAttrs?: boolean;
   zIndex?: number;
+  configProps?: Record<string, any>;
   itemMouseEnter?: () => void;
   itemMouseLeave?: () => void;
   transferVisible?: boolean;
@@ -175,13 +176,13 @@ export function PopoverContainer(
     >
       {props.triggerByIcon && displayBrickNode}
       <Popover
+        {...props.configProps}
         visible={visible}
         placement={props.placement ?? "bottom"}
         content={popoverBrickNode}
         trigger={trigger}
         overlayClassName={props.showPopoverBg ? "" : styles.customOverlay}
         onVisibleChange={onVisibleChange}
-        // @ts-ignore
         zIndex={props.zIndex ?? 1030}
         align={props.align}
         getPopupContainer={props.getPopupContainer}
