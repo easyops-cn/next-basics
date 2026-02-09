@@ -42,7 +42,7 @@ export const initColumnsSorterAndFilters = (
         initedItem = {
           ...initedItem,
           sortOrder:
-            sort === item.key && !isNil(order)
+            sort === initedItem.key && !isNil(order)
               ? (fields?.ascend ?? "ascend") === order
                 ? "ascend"
                 : "descend"
@@ -52,8 +52,8 @@ export const initColumnsSorterAndFilters = (
       // 初始化表头过滤值
       if (item.filters) {
         const filteredValue =
-          urlSearchParams.get(item.key as string) ??
-          get(filters, item.key as string)?.join(",");
+          urlSearchParams.get(initedItem.key as string) ??
+          get(filters, initedItem.key as string)?.join(",");
         initedItem = {
           ...initedItem,
           ...(!isNil(filteredValue) && !isEmpty(filteredValue)
