@@ -74,7 +74,7 @@ export function InputGroup(
       setSelectUnit(props.unit);
       return;
     }
-    if (props?.inputNumberMin) {
+    if (!isNil(props?.inputNumberMin)) {
       const min =
         (props.inputNumberMin * baseUnit.divisor) / suitableUnit.divisor;
       setMin(min);
@@ -121,7 +121,7 @@ export function InputGroup(
         <InputNumber
           placeholder={props.placeholder}
           value={inputNumber}
-          // @ts-ignore
+          // @ts-expect-error: type mismatch
           onChange={handleChange}
           min={min}
           style={props.inputBoxStyle}
