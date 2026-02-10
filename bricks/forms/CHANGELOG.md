@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.8...@next-bricks/forms@1.308.9) (2026-02-10)
+
+
+### Bug Fixes
+
+* **forms:** 修复 inputNumberMin 为 0 时的判断问题 ([0885294](https://github.com/easyops-cn/next-basics/commit/08852942b5208b207a9f75ab77b2cde4a3ba1f01))
+
+
+
+
+
 ## [1.308.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.7...@next-bricks/forms@1.308.8) (2026-01-21)
 
 
