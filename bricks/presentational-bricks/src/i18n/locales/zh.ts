@@ -46,6 +46,26 @@ const locale: Locale = {
   [K.CLUSTER_TYPE_PRE_RELEASE]: "预发布",
   [K.PLEASE_ENTER_THE_SEARCH_CONTENT]: "请输入搜索内容",
   [K.COUNT_ITEMS]: "{{count}} 项",
+  [K.EXPAND]: "展开",
+  [K.COLLAPSE]: "收起",
+  [K.TIP]: "提示",
+  [K.MAX_SELECTED_EXCEEDED]: "所选数量超过最大限制（{{max}}），请重新选择",
+  [K.GOT_IT]: "知道了",
+  [K.MAX_SELECT_COUNT]: "最多选择 {{max}} 个",
+  [K.ACTIONS]: "操作",
+  [K.CONFIRM]: "确定",
+  [K.CANCEL]: "取消",
+  [K.NO_SEARCH_RESULT]: "搜索无结果",
+  [K.ADD]: "添加",
+  [K.PLEASE_ADD_SERVICE_NODE]: "请添加服务节点",
+  [K.NOTICE]: "通知",
+  [K.WARNING]: "警告",
+  [K.URGENT]: "紧急",
+  [K.DATASOURCE_EMPTY_ERROR]: "参数“dataSource”为空",
+  [K.DELETE_CONFIRM_MESSAGE]: "确认要删除 <1>{{name}}</1> 吗？",
+  [K.DELETE_CONFIRM_DETAIL]:
+    "该删除操作将抹除所有与其相关的数据，请确认后在下方输入 <1>{{name}}</1> 来解锁确定按钮。",
+  [K.DELETE_CONFIRM_INPUT_HINT]: "请输入 {{name}}",
 };
 
 export default locale;
