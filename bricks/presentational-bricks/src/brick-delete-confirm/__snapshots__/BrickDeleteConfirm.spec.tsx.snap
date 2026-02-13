@@ -3,7 +3,7 @@
 exports[`BrickDeleteConfirm should work 1`] = `
 <Fragment>
   <Modal
-    cancelText="取消"
+    cancelText="CANCEL"
     confirmLoading={false}
     destroyOnClose={true}
     maskClosable={false}
@@ -14,7 +14,7 @@ exports[`BrickDeleteConfirm should work 1`] = `
         "loading": false,
       }
     }
-    okText="确定"
+    okText="CONFIRM"
     okType="danger"
     onCancel={[Function]}
     onOk={[Function]}

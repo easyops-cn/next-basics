@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { useState, useEffect, useRef, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import Icon from "@ant-design/icons";
 import { Table, Card, ConfigProvider } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,6 +23,7 @@ import { BrickTableFields, CustomColumn, CustomColumnComponent } from "./index";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
 import { EasyopsEmpty } from "@next-core/brick-kit";
+import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 
 const type = "DraggableBodyRow";
 
@@ -228,6 +230,8 @@ const getCustomComp = (
 };
 
 export function BrickTable(props: BrickTableProps): React.ReactElement {
+  const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
+
   if (props.error) {
     throw props.error;
   }
@@ -506,7 +510,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
         };
 
         customColumns.push({
-          title: "操作",
+          title: t(K.ACTIONS),
           render,
         });
       }

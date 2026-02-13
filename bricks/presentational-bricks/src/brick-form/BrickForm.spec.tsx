@@ -1,7 +1,7 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 import { Form } from "@ant-design/compatible";
-import { BrickForm, LegacyBrickForm } from "./BrickForm";
+import { BrickForm } from "./BrickForm";
 
 describe("ContractContainer", () => {
   const props = {
@@ -18,29 +18,30 @@ describe("ContractContainer", () => {
     onBrickFormRef: jest.fn(),
   };
   it("should work", () => {
-    const wrapper = shallow(<BrickForm {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = mount(<BrickForm {...props} />);
+    expect(wrapper.find(Form).length).toBe(1);
+    expect(wrapper.find("WithWrapperItem").length).toBe(1);
+    expect(wrapper.find("Button").length).toBe(2);
   });
 
   it("should trigger submit event", () => {
-    const mockFn = jest
-      .fn()
-      .mockImplementationOnce((fn) => fn(true))
-      .mockImplementation((fn) => fn(false, { field: "name" }));
     const mockSubmit = jest.fn();
     const newProps = {
       ...props,
-      form: {
-        validateFields: mockFn,
-      },
       onSubmit: mockSubmit,
     };
-    const wrapper = shallow(<LegacyBrickForm {...newProps} />);
+    const wrapper = mount(<BrickForm {...newProps} />);
     expect(props.onBrickFormRef).toHaveBeenCalled();
 
-    wrapper.find(Form).simulate("submit", { preventDefault: jest.fn() });
-    expect(mockFn).toHaveBeenCalled();
+    const instance = wrapper.find("LegacyBrickForm").instance() as any;
 
+    instance.props.form.validateFields = jest.fn((callback) => callback(true));
+    wrapper.find(Form).simulate("submit", { preventDefault: jest.fn() });
+    expect(mockSubmit).not.toHaveBeenCalled();
+
+    instance.props.form.validateFields = jest.fn((callback) =>
+      callback(false, { field: "name" })
+    );
     wrapper.find(Form).simulate("submit", { preventDefault: jest.fn() });
     expect(mockSubmit).toHaveBeenCalledWith({ field: "name" });
   });
@@ -48,13 +49,7 @@ describe("ContractContainer", () => {
   it("should trigger field change event", () => {
     const mockFn = jest.fn();
 
-    const form = {
-      getFieldDecorator: () => jest.fn(),
-    };
-
-    const wrapper = mount(
-      <LegacyBrickForm {...props} onFieldChange={mockFn} form={form} />
-    );
+    const wrapper = mount(<BrickForm {...props} onFieldChange={mockFn} />);
 
     wrapper.find("WithWrapperItem").invoke("onFieldChange")("new", "name");
 

@@ -6,27 +6,27 @@ exports[`BrickAlertLevel should work 1`] = `
     Object {
       "0": Object {
         "color": "blue",
-        "text": "通知",
+        "text": "NOTICE",
       },
       "1": Object {
         "color": "orange",
-        "text": "警告",
+        "text": "WARNING",
       },
       "2": Object {
         "color": "red",
-        "text": "紧急",
+        "text": "URGENT",
       },
       "critical": Object {
         "color": "red",
-        "text": "紧急",
+        "text": "URGENT",
       },
       "info": Object {
         "color": "blue",
-        "text": "通知",
+        "text": "NOTICE",
       },
       "warning": Object {
         "color": "orange",
-        "text": "警告",
+        "text": "WARNING",
       },
     }
   }

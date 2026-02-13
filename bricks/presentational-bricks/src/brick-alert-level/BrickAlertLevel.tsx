@@ -6,30 +6,32 @@ import {
   Color,
 } from "../brick-value-mapping/BrickValueMapping";
 import { AlertLevel } from "./index";
+import { t } from "../i18n";
+import { K } from "../i18n/constants";
 
 const mapping: { [key: string]: MappingValue } = {
   0: {
-    text: "通知",
+    text: t(K.NOTICE),
     color: Color.blue,
   },
   1: {
-    text: "警告",
+    text: t(K.WARNING),
     color: Color.orange,
   },
   2: {
-    text: "紧急",
+    text: t(K.URGENT),
     color: Color.red,
   },
   info: {
-    text: "通知",
+    text: t(K.NOTICE),
     color: Color.blue,
   },
   warning: {
-    text: "警告",
+    text: t(K.WARNING),
     color: Color.orange,
   },
   critical: {
-    text: "紧急",
+    text: t(K.URGENT),
     color: Color.red,
   },
 };

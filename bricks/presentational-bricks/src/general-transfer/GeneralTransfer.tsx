@@ -44,9 +44,9 @@ export function GeneralTransfer(
       props.onChange(targetKeys);
     } else {
       Modal.warning({
-        title: "提示",
-        content: `所选数量超过最大限制（${props.maxSelected}），请重新选择`,
-        okText: "知道了",
+        title: t(K.TIP),
+        content: t(K.MAX_SELECTED_EXCEEDED, { max: props.maxSelected }),
+        okText: t(K.GOT_IT),
       });
     }
   };
@@ -65,7 +65,7 @@ export function GeneralTransfer(
 
   const footer = (): React.ReactNode => {
     return (
-      <div className={cssStyle.footer}>最多选择 {props.maxSelected} 个</div>
+      <div className={cssStyle.footer}>{t(K.MAX_SELECT_COUNT, { max: props.maxSelected })}</div>
     );
   };
 

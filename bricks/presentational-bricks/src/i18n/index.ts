@@ -5,3 +5,5 @@ import zh from "./locales/zh";
 
 i18next.addResourceBundle("en", NS_PRESENTATIONAL_BRICKS, en);
 i18next.addResourceBundle("zh", NS_PRESENTATIONAL_BRICKS, zh);
+
+export const t = i18next.getFixedT(null, NS_PRESENTATIONAL_BRICKS);

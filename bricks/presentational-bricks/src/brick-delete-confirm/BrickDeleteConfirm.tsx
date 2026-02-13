@@ -1,7 +1,9 @@
 import React, { ChangeEvent, useState } from "react";
+import { useTranslation, Trans } from "react-i18next";
 import { Input, Modal } from "antd";
 import { ButtonProps } from "antd/lib/button";
 import style from "./index.module.css";
+import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 
 export interface LegacyBrickDeleteConfirmProps {
   deleteName: string;
@@ -26,11 +28,19 @@ export interface CardBodyState {
 const CardTitle = ({ name }: { name: string }) => {
   return (
     <div>
-      确认要删除 <span className={style.highLight}>{name}</span> 吗？
+      <Trans
+        i18nKey={K.DELETE_CONFIRM_MESSAGE}
+        ns={NS_PRESENTATIONAL_BRICKS}
+        values={{ name }}
+      >
+        Are you sure you want to delete{" "}
+        <span className={style.highLight}>{{ name }}</span>?
+      </Trans>
     </div>
   );
 };
 export function CardBody(props: CardBodyProps): React.ReactElement {
+  const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
   const [value, setValue] = useState(props.content);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,13 +51,21 @@ export function CardBody(props: CardBodyProps): React.ReactElement {
   return (
     <div>
       <div style={{ marginBottom: 15 }}>
-        该删除操作将抹除所有与其相关的数据，请确认后在下方输入{" "}
-        <span className={style.highLight}>{props.name}</span> 来解锁确定按钮。
+        <Trans
+          i18nKey={K.DELETE_CONFIRM_DETAIL}
+          ns={NS_PRESENTATIONAL_BRICKS}
+          values={{ name: props.name }}
+        >
+          This deletion will erase all related data. Please confirm and enter{" "}
+          <span className={style.highLight}>{{ name: props.name }}</span> below
+          to unlock the confirm button.
+        </Trans>
       </div>
       <Input
         name="deleteName"
         size="small"
         value={value}
+        placeholder={t(K.DELETE_CONFIRM_INPUT_HINT, { name: props.name })}
         onChange={handleChange}
       />
     </div>
@@ -57,6 +75,7 @@ export function CardBody(props: CardBodyProps): React.ReactElement {
 export function BrickDeleteConfirm(
   props: LegacyBrickDeleteConfirmProps
 ): React.ReactElement {
+  const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
   const [disabled, setDisabled] = useState(true);
   const [content, setContent] = useState("");
 
@@ -82,8 +101,8 @@ export function BrickDeleteConfirm(
         visible={props.visible}
         onOk={handleOk}
         onCancel={handleCancel}
-        okText="确定"
-        cancelText="取消"
+        okText={t(K.CONFIRM)}
+        cancelText={t(K.CANCEL)}
         okType="danger"
         okButtonProps={{ disabled: disabled, loading: props.loading }}
         destroyOnClose={true}
@@ -94,7 +113,7 @@ export function BrickDeleteConfirm(
           <CardBody
             name={props.deleteName}
             content={content}
-            handleChange={value => handleChange(value)}
+            handleChange={(value) => handleChange(value)}
           />
         }
       </Modal>

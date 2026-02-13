@@ -107,9 +107,9 @@ describe("TableTransfer", () => {
     );
     expect(changeFn).toBeCalledTimes(1);
     expect(spyOnModal).toBeCalledWith({
-      title: "提示",
-      content: `所选数量超过最大限制（3），请重新选择`,
-      okText: "知道了",
+      title: "TIP",
+      content: "MAX_SELECTED_EXCEEDED",
+      okText: "GOT_IT",
     });
   });
   it("should work", () => {

@@ -6,6 +6,8 @@ import { descriptionsItemProps } from "../interfaces/brick-collapse-card";
 import { get, find } from "lodash";
 import style from "./index.shadow.less";
 import { MenuIcon } from "@next-core/brick-types";
+import { t } from "../i18n";
+import { K } from "../i18n/constants";
 
 
 export interface BrickCollapseCardElementProps {
@@ -70,7 +72,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
   @property({
     attribute: false,
   })
-  expandInactiveText = "展开";
+  expandInactiveText = t(K.EXPAND);
 
   /**
    * @kind string
@@ -81,7 +83,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
   @property({
     attribute: false,
   })
-  expandActiveText = "收起";
+  expandActiveText = t(K.COLLAPSE);
 
   /**
    * @kind MenuIcon

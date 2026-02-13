@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Select } from "antd";
 import { debounce, isEmpty } from "lodash";
 
@@ -8,6 +9,7 @@ import { BrickOptionProps } from "../../interfaces";
 import { SelectProps } from "antd/lib/select";
 import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 import { handleHttpError } from "@next-core/brick-kit";
+import { NS_PRESENTATIONAL_BRICKS, K } from "../../../i18n/constants";
 
 export interface SearchInCmdb {
   objectId: string;
@@ -31,6 +33,7 @@ export function LegacyBrickSelect({
   value,
   searchInCmdb,
 }: LegacyBrickSelectProps): React.ReactElement {
+  const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
   const backendSearch = !!searchInCmdb;
   const beforeFirstRender = useRef(true);
   if (backendSearch && beforeFirstRender.current) {
@@ -87,7 +90,7 @@ export function LegacyBrickSelect({
       showSearch
       optionFilterProp="children"
       optionLabelProp="children"
-      notFoundContent="搜索无结果"
+      notFoundContent={t(K.NO_SEARCH_RESULT)}
       filterOption={false}
       value={value}
       onSearch={debounceSearch}

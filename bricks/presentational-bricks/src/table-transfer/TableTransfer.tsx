@@ -192,9 +192,9 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
       setDataSource(modifiedDataSource);
     } else {
       Modal.warning({
-        title: "提示",
-        content: `所选数量超过最大限制（${maxSelected}），请重新选择`,
-        okText: "知道了",
+        title: t(K.TIP),
+        content: t(K.MAX_SELECTED_EXCEEDED, { max: maxSelected }),
+        okText: t(K.GOT_IT),
       });
     }
   };

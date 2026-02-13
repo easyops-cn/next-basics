@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from "react";
 import { withTranslation, WithTranslation } from "react-i18next";
-import { NS_PRESENTATIONAL_BRICKS } from "../i18n/constants";
+import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 import { Form } from "@ant-design/compatible";
 import { Button, Card } from "antd";
 import {
@@ -178,12 +178,12 @@ export class LegacyBrickForm extends React.Component<LegacyBrickFormProps> {
           <Form.Item {...tailFormBtnLayout}>
             {this.props.showConfirm && (
               <Button type="primary" htmlType="submit">
-                {this.props.confirmText || "确定"}
+                {this.props.confirmText || this.props.t(K.CONFIRM)}
               </Button>
             )}
             {this.props.showCancel && (
               <Button style={{ marginLeft: 8 }} onClick={this.props.onCancel}>
-                {this.props.cancelText || "取消"}
+                {this.props.cancelText || this.props.t(K.CANCEL)}
               </Button>
             )}
           </Form.Item>

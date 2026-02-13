@@ -1,8 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { merge } from "lodash";
 
 import { DataType, isConditionSatisfied, ConditionType } from "@next-libs/cmdb-utils";
 import cssStyle from "./style.module.css";
+import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 
 export type DisplayType = "label" | "default";
 
@@ -26,13 +28,15 @@ export interface BrickConditionalDisplayProps {
 export function BrickConditionalDisplay(
   props: BrickConditionalDisplayProps
 ): React.ReactElement {
+  const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
+
   const renderDisplay = (
     data: DataType,
     value: number | string,
     rules: RuleProps[]
   ) => {
     if (data === null) {
-      return <span className={cssStyle.error}>参数“dataSource”为空</span>;
+      return <span className={cssStyle.error}>{t(K.DATASOURCE_EMPTY_ERROR)}</span>;
     } else {
       let display = <div className={cssStyle[props.type]}>{value}</div>;
       rules.forEach((rule) => {

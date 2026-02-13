@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Button, Modal } from "antd";
 
 import { WrapperFormItem } from "../wrapper-form-item/WrapperFormItem";
 import { BrickTable } from "../../../brick-table/BrickTable";
 // @ts-ignore
 import { CustomColumn } from "../../../brick-table/index";
+import { NS_PRESENTATIONAL_BRICKS, K } from "../../../i18n/constants";
 
 export interface BrickInstanceSelectProps {
   optionList: Record<string, any>[];
@@ -19,6 +21,7 @@ export interface BrickInstanceSelectProps {
 export function InstanceSelector(
   props: BrickInstanceSelectProps
 ): React.ReactElement {
+  const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
   const [selected, setSelected] = useState([...(props.optionList || [])]);
 
   const readyToAcceptPropsOptionList = useRef(false);
@@ -53,7 +56,7 @@ export function InstanceSelector(
   return (
     <div>
       <Button onClick={onAddClick} style={{ marginBottom: 10 }}>
-        添加
+        {t(K.ADD)}
       </Button>
 
       <BrickTable
@@ -63,7 +66,7 @@ export function InstanceSelector(
         onDelete={onDelete}
         onChange={null}
         configProps={{
-          locale: { emptyText: "请添加服务节点" },
+          locale: { emptyText: t(K.PLEASE_ADD_SERVICE_NODE) },
           pagination: false
         }}
         showCard={false}
