@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.338.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.337.4...@next-bricks/presentational-bricks@1.338.0) (2026-02-13)
+
+
+### Features
+
+* add i18n translations ([ce17b54](https://github.com/easyops-cn/next-basics/commit/ce17b54029e0f69cded7b847d9e519e6e7dec56e))
+
+
+
+
+
 ## [1.337.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.337.3...@next-bricks/presentational-bricks@1.337.4) (2026-02-09)
 
 
