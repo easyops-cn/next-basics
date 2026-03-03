@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.338.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.338.0...@next-bricks/presentational-bricks@1.338.1) (2026-03-03)
+
+
+### Bug Fixes
+
+* add eo-cmdb-instance-select Closes CI-1142 ([98fe0b4](https://github.com/easyops-cn/next-basics/commit/98fe0b4b14f815e2889c4f0521b58b41ce139862))
+
+
+
+
+
 # [1.338.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.337.4...@next-bricks/presentational-bricks@1.338.0) (2026-02-13)
 
 
