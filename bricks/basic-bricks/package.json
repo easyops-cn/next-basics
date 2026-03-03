@@ -6,8 +6,16 @@
   "license": "GPL-3.0",
   "files": [
     "dist",
-    "deploy"
+    "deploy",
+    "dist-types"
   ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./dist-types/jsx.d.ts",
+    "./*": {
+      "types": "./dist-types/*/index.d.ts"
+    }
+  },
   "nx": {
     "targets": {
       "build": {
@@ -15,7 +23,8 @@
           "{projectRoot}/dist",
           "{projectRoot}/deploy",
           "{projectRoot}/.pkgbuild",
-          "{projectRoot}/src/lazy-bricks"
+          "{projectRoot}/src/lazy-bricks",
+          "{projectRoot}/dist-types"
         ]
       }
     }
