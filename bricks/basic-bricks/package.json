@@ -23,8 +23,7 @@
           "{projectRoot}/dist",
           "{projectRoot}/deploy",
           "{projectRoot}/.pkgbuild",
-          "{projectRoot}/src/lazy-bricks",
-          "{projectRoot}/dist-types"
+          "{projectRoot}/src/lazy-bricks"
         ]
       }
     }
