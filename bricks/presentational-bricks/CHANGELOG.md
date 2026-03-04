@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.338.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.338.1...@next-bricks/presentational-bricks@1.338.2) (2026-03-04)
+
+
+### Bug Fixes
+
+* 树形构件搜索过滤后全选问题修复 ([45f1d8b](https://github.com/easyops-cn/next-basics/commit/45f1d8bbbaf0bc8a79ef977246653ec3fcdb96ea))
+
+
+
+
+
 ## [1.338.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.338.0...@next-bricks/presentational-bricks@1.338.1) (2026-03-03)
 
 
