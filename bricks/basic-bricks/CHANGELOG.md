@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.260.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.259.3...@next-bricks/basic-bricks@1.260.0) (2026-03-04)
+
+
+### Features
+
+* presentational-bricks、basic-bricks增加d.ts文件 Closes CI-1142 ([d571e2d](https://github.com/easyops-cn/next-basics/commit/d571e2d9c65631445600da374724fcdc7bf95118))
+* presentational-bricks、basic-bricks增加d.ts文件 Closes CI-1142 ([cc8b600](https://github.com/easyops-cn/next-basics/commit/cc8b60054340e41669e925154cc05d8033fa5ffd))
+
+
+
+
+
 ## [1.259.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.259.2...@next-bricks/basic-bricks@1.259.3) (2026-03-03)
 
 
