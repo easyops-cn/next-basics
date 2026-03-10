@@ -4,7 +4,6 @@ import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { CostTime } from "./CostTime";
 import { get } from "lodash";
 
-
 export interface CostTimeElementProps {
   cost?: number;
   startTime?: string | number;
@@ -15,21 +14,24 @@ export interface CostTimeElementProps {
     cost?: string;
     startTime?: string;
     endTime?: string;
-  }
+  };
 }
 
 /**
  * @id presentational-bricks.cost-time
  * @name presentational-bricks.cost-time
  * @docKind brick
- * @description 如：15秒、1天
+ * @description 耗时展示构件，将毫秒级时间自动转换为人类可读的时间文本（如"15秒"、"1天"），支持直接传入耗时或通过起止时间自动计算
  * @author lynette
  * @slots
  * @history
  * @memo
  * @noInheritDoc
  */
-export class CostTimeElement extends UpdatingElement implements CostTimeElementProps {
+export class CostTimeElement
+  extends UpdatingElement
+  implements CostTimeElementProps
+{
   connectedCallback(): void {
     this._render();
   }
@@ -88,7 +90,7 @@ export class CostTimeElement extends UpdatingElement implements CostTimeElementP
 
   /**
    * @required false
-   * @description 起始时间
+   * @description 起始时间，与 endTime 配合使用，当未传入 cost 时自动计算耗时
    * @group basic
    */
   @property({
@@ -98,7 +100,7 @@ export class CostTimeElement extends UpdatingElement implements CostTimeElementP
 
   /**
    * @required false
-   * @description 结束时间
+   * @description 结束时间，与 startTime 配合使用，当未传入 cost 时自动计算耗时
    * @group basic
    */
   @property({
@@ -108,7 +110,7 @@ export class CostTimeElement extends UpdatingElement implements CostTimeElementP
 
   /**
    * @required false
-   * @description 单位样式
+   * @description 时间单位文本的自定义样式，设置后将使用自定义渲染逻辑而非默认的 costTime 函数
    * @group ui
    */
   @property({

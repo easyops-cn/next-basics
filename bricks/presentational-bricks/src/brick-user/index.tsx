@@ -3,14 +3,13 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { BrickUser } from "./BrickUser";
 
-
 export interface BrickUserElementProps {
   username?: string;
   userNameOrId?: string;
   iconUrl?: string;
   hideAvatar?: boolean;
   hideUsername?: boolean;
-  size?: "large" | "small" | "default" ;
+  size?: "large" | "small" | "default";
   shape?: "circle" | "square";
   showNickname?: boolean;
   showNicknameOrUsername?: boolean;
@@ -23,17 +22,20 @@ export interface BrickUserElementProps {
  * @id presentational-bricks.brick-user
  * @name presentational-bricks.brick-user
  * @docKind brick
- * @description 展示用户头像加用户名
+ * @description 展示用户头像和用户名的构件，支持昵称显示、showKey 显示、自定义 Tooltip 及头像大小和形状配置
  * @author ice
  * @slots
  * @history
- * 1.152.0:新属性 `shwNickname`
+ * 1.152.0:新属性 `showNickname`
  * 1.62.0:新属性 `userNameOrId`
  * 1.47.0:新属性 `size`, `shape`
  * @memo
  * @noInheritDoc
  */
-export class BrickUserElement extends UpdatingElement implements BrickUserElementProps {
+export class BrickUserElement
+  extends UpdatingElement
+  implements BrickUserElementProps
+{
   /**
    * @kind string
    * @required true
@@ -107,7 +109,7 @@ export class BrickUserElement extends UpdatingElement implements BrickUserElemen
   shape: "circle" | "square";
 
   /**
-   * @kind "boolean"
+   * @kind boolean
    * @required false
    * @default false
    * @deprecated
@@ -116,7 +118,7 @@ export class BrickUserElement extends UpdatingElement implements BrickUserElemen
   @property({ type: Boolean })
   showNickname: boolean;
   /**
-   * @kind "boolean"
+   * @kind boolean
    * @required false
    * @default false
    * @description 当有昵称时显示昵称，无昵称时显示用户名
@@ -125,18 +127,18 @@ export class BrickUserElement extends UpdatingElement implements BrickUserElemen
   showNicknameOrUsername: boolean;
 
   /**
-   * @kind "boolean"
+   * @kind boolean
    * @required false
    * @default false
-   * @description 是否显示 `showKey` ，如果有则显示`alan(hero)` or `alan`
+   * @description 是否显示 showKey，启用后当用户拥有 showKey 时显示为 `name(showKey)` 格式（如 `alan(hero)`），否则仅显示用户名
    */
   @property({ type: Boolean })
   displayShowKey: boolean;
   /**
-   * @kind "number" | "string"
+   * @kind number | string
    * @required false
    * @default 0
-   * @description icon间距
+   * @description 头像与用户名之间的间距，支持数字（像素）或 CSS 字符串（如 `"0 8px"`）
    * @group ui
    */
   @property({ attribute: false })
@@ -146,7 +148,7 @@ export class BrickUserElement extends UpdatingElement implements BrickUserElemen
    * @kind string
    * @required false
    * @default -
-   * @description 自定义toolTip替换字符串 例如："发起人：#{name}"
+   * @description 自定义 Tooltip 替换字符串，支持 `#{name}` 和 `#{showKey}` 占位符，例如 `"发起人：#{name}"`
    * @group basic
    */
   @property({ attribute: false })

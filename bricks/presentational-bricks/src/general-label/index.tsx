@@ -11,7 +11,6 @@ import {
 import { GeneralLabel } from "./GeneralLabel";
 import { MenuIcon } from "@next-core/brick-types";
 
-
 export interface GeneralLabelElementProps {
   text?: string;
   prefixIcon?: MenuIcon;
@@ -35,7 +34,10 @@ export interface GeneralLabelElementProps {
  * @memo
  * @noInheritDoc
  */
-export class GeneralLabelElement extends UpdatingElement implements GeneralLabelElementProps {
+export class GeneralLabelElement
+  extends UpdatingElement
+  implements GeneralLabelElementProps
+{
   /**
    * @required false
    * @description 文字内容
@@ -74,15 +76,15 @@ export class GeneralLabelElement extends UpdatingElement implements GeneralLabel
 
   /**
    * @required false
-   * @description 是否使用原生 <a> 标签，通常用于外链的跳转
+   * @description 外链地址，使用原生 `<a>` 标签跳转，通常用于外部链接
    * @group advanced
    */
   @property()
   href: string;
 
   /**
-   * @detail any
-   * @description 点击 label 触发的事件，详情为编排者输入的 dataSource
+   * @detail 编排者通过 `dataSource` 属性传入的自定义数据（若未设置则回退到已废弃的 `data` 属性）
+   * @description 点击 label 时触发
    * @group advanced
    */
   @event({ type: "label.click" })
