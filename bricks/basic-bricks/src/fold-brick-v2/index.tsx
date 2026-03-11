@@ -26,7 +26,7 @@ export interface FoldBrickV2ElementProps {
  * @id basic-bricks.fold-brick-v2
  * @name basic-bricks.fold-brick-v2
  * @docKind brick
- * @description 折叠容器，只折叠单个内容，支持slot
+ * @description 折叠面板容器，支持自定义折叠展示名称、默认展开状态、面板类型（normal/primary），可选显示分割线，点击标题区域切换折叠/展开状态
  * @groupI18N
  * {
  *   "divider": {
@@ -36,7 +36,7 @@ export interface FoldBrickV2ElementProps {
  * }
  * @author momo
  * @slots
- * content:内容插槽
+ * content: 折叠/展开的内容区域，展开时显示，折叠时隐藏
  * @history
  * 1.87.0:新增属性 `isShowFoldIcon`, `type`
  * 1.64.0:新增属性 `showDivider`,`dividerOrientation`,`dividerDashed`,`show`
@@ -44,7 +44,10 @@ export interface FoldBrickV2ElementProps {
  * @memo
  * @noInheritDoc
  */
-export class FoldBrickV2Element extends UpdatingElement implements FoldBrickV2ElementProps {
+export class FoldBrickV2Element
+  extends UpdatingElement
+  implements FoldBrickV2ElementProps
+{
   private _id = uniqueId("foldBrickButton");
   private _mountPoint: HTMLElement;
   private _shadowRoot: ShadowRoot;
@@ -65,7 +68,7 @@ export class FoldBrickV2Element extends UpdatingElement implements FoldBrickV2El
    * @kind boolean
    * @required false
    * @default -
-   * @description 是否默认展开
+   * @description 是否默认展开，仅在初始化时生效，之后由 show 属性控制
    * @group basic
    */
   @property({
@@ -101,7 +104,7 @@ export class FoldBrickV2Element extends UpdatingElement implements FoldBrickV2El
    * @kind object
    * @required false
    * @default -
-   * @description 折叠展示的样式编写
+   * @description 折叠标题区域的自定义样式
    * @group ui
    */
   @property({
@@ -148,8 +151,8 @@ export class FoldBrickV2Element extends UpdatingElement implements FoldBrickV2El
   /**
    * @kind boolean
    * @required false
-   * @default
-   * @description 是否展开
+   * @default -
+   * @description 是否展开，初始值由 defaultShow 决定，之后通过点击标题区域或外部设置来控制
    * @group divider
    */
   @property({
@@ -182,8 +185,8 @@ export class FoldBrickV2Element extends UpdatingElement implements FoldBrickV2El
   foldIconStyle: any;
 
   /**
-   * @detail `Record<string, any>`
-   * @description 切换折叠时触发, detail boolean
+   * @detail 当前展开状态，true 表示展开，false 表示折叠
+   * @description 点击标题区域切换折叠/展开时触发
    */
   @event({ type: "fold.change", cancelable: true })
   foldChange: EventEmitter<boolean>;

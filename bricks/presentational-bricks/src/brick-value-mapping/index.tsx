@@ -20,11 +20,8 @@ export interface BrickValueMappingElementProps {
   value?: string | number;
   fields?: {
     value: string;
-  }
-  mapping?: Record<
-    string | number,
-    MappingValue
-  >;
+  };
+  mapping?: Record<string | number, MappingValue>;
   showTagCircle?: boolean;
   dataSource?: Record<string, any>;
   triggerClickEvent?: boolean;
@@ -84,9 +81,13 @@ export interface BrickValueMappingElementProps {
  * ```
  * @noInheritDoc
  */
-export class BrickValueMappingElement extends UpdatingElement implements BrickValueMappingElementProps {
+export class BrickValueMappingElement
+  extends UpdatingElement
+  implements BrickValueMappingElementProps
+{
   /**
-   * @description 点击事件
+   * @description 点击事件，需设置 `triggerClickEvent` 为 true 才会触发
+   * @detail { data: 通过 dataSource 传入的附加数据, value: 当前映射的原始值 }
    */
   @event({ type: "brick-value-mapping.click" })
   valueMappingClick: EventEmitter<{ data: any; value: string | number }>;
@@ -138,7 +139,7 @@ export class BrickValueMappingElement extends UpdatingElement implements BrickVa
 
   /**
    * @default false
-   * @description 文案是否超出隐藏
+   * @description 文案超出时是否隐藏溢出文本并在鼠标悬停时显示 Tooltip
    * @group other
    */
   @property({ type: Boolean })
