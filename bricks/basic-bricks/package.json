@@ -6,8 +6,9 @@
   "license": "GPL-3.0",
   "files": [
     "dist",
-    "deploy",
-    "dist-types"
+    "dist-types",
+    "docs",
+    "deploy"
   ],
   "exports": {
     "./package.json": "./package.json",
