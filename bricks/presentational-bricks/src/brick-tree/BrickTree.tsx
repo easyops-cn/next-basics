@@ -35,6 +35,7 @@ import classNames from "classnames";
 import i18n from "i18next";
 import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 
+const EMPTY_DATA_SOURCE: BrickTreeNodeProps[] = [];
 const { DirectoryTree } = Tree;
 
 export const compareFunMap: Record<string, any> = {
@@ -271,7 +272,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     selectedKeys: _selectedKeys,
     expandedKeys: _expandedKeys,
     configProps = {},
-    dataSource = [],
+    dataSource = EMPTY_DATA_SOURCE,
     searchable = false,
     searchParent = false,
     searchQ = "",
