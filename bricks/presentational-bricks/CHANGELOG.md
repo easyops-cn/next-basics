@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.339.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.2...@next-bricks/presentational-bricks@1.339.3) (2026-04-20)
+
+
+### Bug Fixes
+
+* **brick-tree:** fix infinite re-render when dataSource is undefined ([58dd7cb](https://github.com/easyops-cn/next-basics/commit/58dd7cbb8dc03e303cf3ded5c47b163c044919f1))
+
+
+
+
+
 ## [1.339.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.1...@next-bricks/presentational-bricks@1.339.2) (2026-03-11)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
