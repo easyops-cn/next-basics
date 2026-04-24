@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.339.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.3...@next-bricks/presentational-bricks@1.339.4) (2026-04-24)
+
+
+### Bug Fixes
+
+* **general-iframe:** add postMessage method for sending messages to iframe ([954e836](https://github.com/easyops-cn/next-basics/commit/954e836472546da532587b084da1a296406b6234))
+
+
+
+
+
 ## [1.339.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.2...@next-bricks/presentational-bricks@1.339.3) (2026-04-20)
 
 
