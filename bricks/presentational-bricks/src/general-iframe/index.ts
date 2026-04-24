@@ -28,9 +28,13 @@ export interface GeneralIframeElementProps {
   src?: string;
   enableMessageSubscribe?: boolean;
   messageOrigin?: string;
+  postMessage?(data: unknown): void;
 }
 
-export class GeneralIframeElement extends UpdatingElement implements GeneralIframeElementProps {
+export class GeneralIframeElement
+  extends UpdatingElement
+  implements GeneralIframeElementProps
+{
   /**
    * @detail any
    * @description iframe 加载完成时触发
@@ -86,6 +90,23 @@ export class GeneralIframeElement extends UpdatingElement implements GeneralIfra
   messageOrigin: string;
 
   private iframe: HTMLIFrameElement;
+  private _messageListenerRegistered = false;
+
+  private _ensureMessageListener(): void {
+    if (!this._messageListenerRegistered) {
+      window.addEventListener("message", this.onMessage);
+      this._messageListenerRegistered = true;
+    }
+  }
+
+  postMessage(data: unknown): void {
+    if (!this.iframe) {
+      throw new Error("iframe is not ready");
+    }
+    const targetOrigin = this.messageOrigin || new URL(this.iframe.src).origin;
+    this.iframe.contentWindow.postMessage(data, targetOrigin);
+    this._ensureMessageListener();
+  }
 
   private onMessage = (event: MessageEvent): void => {
     // istanbul ignore else
@@ -103,14 +124,11 @@ export class GeneralIframeElement extends UpdatingElement implements GeneralIfra
       this.style.display = "block";
     }
     this._render();
-
-    if (this.enableMessageSubscribe) {
-      window.addEventListener("message", this.onMessage);
-    }
   }
 
   disconnectedCallback(): void {
     window.removeEventListener("message", this.onMessage);
+    this._messageListenerRegistered = false;
   }
 
   protected _render(): void {
@@ -127,6 +145,10 @@ export class GeneralIframeElement extends UpdatingElement implements GeneralIfra
 
       Object.assign(this.iframe.style, defaultStyle, this.iframeStyle);
       this.iframe.src = this.src;
+    }
+
+    if (this.isConnected && this.enableMessageSubscribe) {
+      this._ensureMessageListener();
     }
   }
 }
