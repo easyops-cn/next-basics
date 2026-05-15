@@ -92,7 +92,7 @@ export const LegacyDynamicFormItemV2 = forwardRef(
     const [form] = Form.useForm();
     const [columns, setColumns] = React.useState<Column[]>([]);
     useEffect(() => {
-      setColumns(props.columns);
+      setColumns(props.columns || []);
     }, [props.columns]);
 
     useImperativeHandle(ref, () => ({
