@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.9...@next-bricks/forms@1.308.10) (2026-05-15)
+
+
+### Bug Fixes
+
+* **forms:** guard against undefined columns in DynamicFormItemV2 ([de635fa](https://github.com/easyops-cn/next-basics/commit/de635fa852a2cf5f98571f0193fd18a05382da34))
+
+
+
+
+
 ## [1.308.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.8...@next-bricks/forms@1.308.9) (2026-02-10)
 
 
