@@ -111,10 +111,13 @@ export const importFromExcel = async (
 
       // 如果提供了ImportFilter，则根据指定字段进行去重
       // ========== 新增：根据 importFilter 字段的 options 进行过滤 ==========
-      if (importFilter && importFilter.length > 0) {
-        // 构建字段配置映射
-        const filterFieldConfigs = importFilter
+      if (importFilter?.length) {
+        const filterFields = importFilter
           .split(",")
+          .map((fieldName) => fieldName.trim())
+          .filter(Boolean);
+
+        const filterFieldConfigs = filterFields
           .map((fieldName) => {
             const column = columns.find((col) => col.name === fieldName);
             if (!column) {
@@ -135,11 +138,15 @@ export const importFromExcel = async (
               options,
             };
           })
-          .filter((config) => config !== null);
+          .filter((config): config is NonNullable<typeof config> => config !== null);
+
+        if (filterFieldConfigs.length === 0) {
+          resolve(transformedData);
+          return;
+        }
 
         // 第一步：根据 options 过滤无效数据
         transformedData = transformedData.filter((row) => {
-          // 检查所有 filter 字段
           for (const config of filterFieldConfigs) {
             const value = row[config.fieldName];
 
@@ -152,16 +159,16 @@ export const importFromExcel = async (
             if (config.options.length === 0) {
               continue;
             }
-
             // 检查 value 是否在 options 中
-            const isValid = config.options.some((option) => {
-              // 支持不同的 option 结构
-              const optionValue =
-                option.value !== undefined ? option.value : option;
-              return String(optionValue) === String(value);
-            });
+            const optionValues = new Set(
+              config.options.map((option) =>
+                String(option.value !== undefined ? option.value : option)
+              )
+            );
+            const isValid = Array.isArray(value)
+              ? value.every((item) => optionValues.has(String(item)))
+              : optionValues.has(String(value));
 
-            // 如果值不在 options 中，过滤掉该行
             if (!isValid) {
               return false;
             }
@@ -173,19 +180,18 @@ export const importFromExcel = async (
         const uniqueData: Record<string, any>[] = [];
         const seen = new Set<string>();
 
+        const dedupeFields = filterFields.filter((field) =>
+          filterFieldConfigs.some((config) => config.fieldName === field)
+        );
+
         transformedData.forEach((row) => {
-          // 构建用于判断重复的键
-          const filterKey = importFilter
-            .split(",")
+          const filterKey = dedupeFields
             .map((field) => {
               const value = row[field];
-              return value === undefined || value === null
-                ? "__NULL__"
-                : String(value);
+              return value === undefined || value === null ? "__NULL__" : String(value);
             })
             .join("|");
 
-          // 如果未见过这个键，则添加到结果中
           if (!seen.has(filterKey)) {
             seen.add(filterKey);
             uniqueData.push(row);
