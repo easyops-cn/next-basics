@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.339.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.6...@next-bricks/presentational-bricks@1.339.7) (2026-06-02)
+
+
+### Bug Fixes
+
+* 修复 ant-tree-treenode 设置100% 导致页面出现横向滚动条 ([1b0bc13](https://github.com/easyops-cn/next-basics/commit/1b0bc13e98adf4a33c612fac94ab67110f24c800))
+
+
+
+
+
 ## [1.339.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.4...@next-bricks/presentational-bricks@1.339.6) (2026-04-24)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
