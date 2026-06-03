@@ -50,7 +50,7 @@ interface LegacyDynamicFormItemV2Props extends FormItemWrapperProps {
   onImport?: (value: Record<string, any>[]) => void;
   showImportExport?: boolean;
   exportExamples?: Record<string, string>[];
-  importFilter?: string[];
+  importFilter?: string;
   gridColumns?: number;
 }
 

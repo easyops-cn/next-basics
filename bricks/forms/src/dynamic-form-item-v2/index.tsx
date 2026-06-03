@@ -240,7 +240,7 @@ export class DynamicFormItemV2Element
    * @default false
    */
   @property({ attribute: false })
-  importFilter?: string[];
+  importFilter?: string;
 
   /**
    * @description 表单项的列数，设置后，表单项会以 grid 布局显示
