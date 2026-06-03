@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.11...@next-bricks/forms@1.308.12) (2026-06-03)
+
+
+### Bug Fixes
+
+* 解决动态表单项importFilter字段类型错误 ([9b4e1aa](https://github.com/easyops-cn/next-basics/commit/9b4e1aa10e238edcf570e0109b33cae0f654ff8e))
+
+
+
+
+
 ## [1.308.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.11-alpha.1...@next-bricks/forms@1.308.11) (2026-06-02)
 
 **Note:** Version bump only for package @next-bricks/forms
