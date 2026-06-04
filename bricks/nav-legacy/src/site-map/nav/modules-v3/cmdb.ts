@@ -125,10 +125,17 @@ export const getCategoryMap = (
   objectCategory: CmdbObjectApi_ListObjectCategoryResponseBody_list_item[]
 ) => {
   const modifyCategoryList: any = objectCategory.map((category: any) => {
-    const subCategoryList = Object.entries(category.child).map((item) => ({
-      name: item[1],
-      title: item[1],
+    const subCategoryNames = new Set<string>();
+    Object.entries(category.child).forEach((item) => {
+      const raw = item[1] as string;
+      const name = raw.split(".")[0];
+      subCategoryNames.add(name);
+    });
+    const subCategoryList = Array.from(subCategoryNames).map((name) => ({
+      name,
+      title: name,
       objectList: [],
+      subCategoryMap: {},
     }));
     const subCategoryMap = keyBy(subCategoryList, "name");
     return {
@@ -149,33 +156,51 @@ export const getGroupsByCategoryMap = (
   const result: Record<string, any> = cloneDeep(categoryMap);
   modelList.forEach((modelData) => {
     const pieces = modelData.category.split(".");
-    const category = pieces.shift();
-    const subcategory = pieces.join(".");
+    const category = pieces[0];
+    const subcategory = pieces[1] || "";
+    const subSubCategory = pieces.slice(2).join(".");
+
+    const modelItem = {
+      ...modelData,
+      to: parseTemplate(urlTemplates.modelUrlTemplate, modelData),
+      isFavourite: favouriteModels?.includes(modelData.objectId),
+    };
+
     if (!subcategory) {
       if (result?.[category]?.objectList) {
-        result[category].objectList.push({
-          ...modelData,
-          to: parseTemplate(urlTemplates.modelUrlTemplate, modelData),
-          isFavourite: favouriteModels?.includes(modelData.objectId),
-        });
+        result[category].objectList.push(modelItem);
+      }
+    } else if (!subSubCategory) {
+      if (result?.[category]?.["subCategoryMap"]?.[subcategory]) {
+        result[category]["subCategoryMap"][subcategory].isOpen = false;
+        result[category]["subCategoryMap"][subcategory]["objectList"].push(
+          modelItem
+        );
       }
     } else {
       if (result?.[category]?.["subCategoryMap"]?.[subcategory]) {
-        result[category]["subCategoryMap"][subcategory].isOpen = false;
-        result[category]["subCategoryMap"][subcategory]["objectList"].push({
-          ...modelData,
-          to: parseTemplate(urlTemplates.modelUrlTemplate, modelData),
-          isFavourite: favouriteModels?.includes(modelData.objectId),
-        });
+        const subCatMap =
+          result[category]["subCategoryMap"][subcategory].subCategoryMap;
+        if (!subCatMap[subSubCategory]) {
+          subCatMap[subSubCategory] = {
+            name: subSubCategory,
+            title: subSubCategory,
+            objectList: [],
+            isOpen: false,
+          };
+        }
+        subCatMap[subSubCategory].objectList.push(modelItem);
       }
     }
   });
-  // return Object.values(result);
   return Object.values(result).map((item) => ({
     name: item.name,
     title: item.title,
     objectList: item.objectList,
-    subCategory: Object.values(item.subCategoryMap),
+    subCategory: Object.values(item.subCategoryMap).map((sub: any) => ({
+      ...sub,
+      subCategory: Object.values(sub.subCategoryMap || {}),
+    })),
   }));
 };
 

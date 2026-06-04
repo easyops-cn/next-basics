@@ -72,10 +72,27 @@ export function filterBySearch(groupList, value: string | string[]): any[] {
       const filteredObjectListInSubCategory = filterCategory(
         subCategory.objectList
       );
-      if (filteredObjectListInSubCategory.length) {
+      const filteredSubSubCategory = (subCategory.subCategory || [])
+        .map((subSub) => {
+          const filteredSubSubObjectList = filterCategory(subSub.objectList);
+          if (filteredSubSubObjectList.length) {
+            return {
+              ...subSub,
+              objectList: filteredSubSubObjectList,
+              isOpen: true,
+            };
+          }
+          return null;
+        })
+        .filter(Boolean);
+      if (
+        filteredObjectListInSubCategory.length ||
+        filteredSubSubCategory.length
+      ) {
         filteredSubCategoryObjectList.push({
           ...subCategory,
           objectList: filteredObjectListInSubCategory,
+          subCategory: filteredSubSubCategory,
           isOpen: true,
         });
       }
@@ -94,18 +111,22 @@ export function SubCategory(props: {
   title: string;
   name: string;
   objectList: any[];
+  subCategory?: any[];
   isOpen: boolean;
   highlightChar?: string;
   updateCollect: (object: Record<string, any>) => void;
   favouriteObjectList: string[];
+  level?: number;
 }) {
   const {
     title,
     objectList,
+    subCategory,
     isOpen,
     highlightChar,
     updateCollect,
     favouriteObjectList,
+    level = 0,
   } = props;
   const [display, setDisplay] = useState(false);
   useEffect(() => {
@@ -116,7 +137,10 @@ export function SubCategory(props: {
   };
   return (
     <>
-      <div className={styles.subCategoryItemContainer}>
+      <div
+        className={styles.subCategoryItemContainer}
+        style={level > 0 ? { paddingLeft: level * 12 } : undefined}
+      >
         <Button type="link" onClick={handleToggle}>
           <div className={styles.toggleWrapper}>
             <span className={styles.categoryNameContainer}>{title}</span>
@@ -124,40 +148,61 @@ export function SubCategory(props: {
           </div>
         </Button>
         {display && (
-          <div className={styles.objectListContainer}>
-            {objectList.map((object, i) => (
-              <div className={styles.objectNameContainer} key={object.objectId}>
-                <Link to={object.to} key={i}>
-                  <RenderName
-                    name={object.name}
-                    highlightChar={highlightChar}
-                  />
-                </Link>
-                <Button
-                  type="text"
-                  onClick={() => {
-                    const { objectId, isFavourite } = object;
-                    const newFavouriteList = getNewFavouriteList(
-                      object.objectId,
-                      favouriteObjectList,
-                      !object.isFavourite
-                    );
-                    CmdbObjectApi_collect({
-                      objectIdList: [objectId],
-                      isCollect: !isFavourite,
-                    });
-                    updateCollect(newFavouriteList);
-                  }}
+          <>
+            {subCategory
+              ?.filter((sub) => sub.objectList?.length > 0)
+              .map((sub, i) => (
+                <SubCategory
+                  key={i}
+                  title={sub.title}
+                  name={sub.name}
+                  objectList={sub.objectList}
+                  subCategory={sub.subCategory}
+                  isOpen={sub.isOpen ?? false}
+                  highlightChar={highlightChar}
+                  updateCollect={updateCollect}
+                  favouriteObjectList={favouriteObjectList}
+                  level={level + 1}
+                />
+              ))}
+            <div className={styles.objectListContainer}>
+              {objectList.map((object, i) => (
+                <div
+                  className={styles.objectNameContainer}
+                  key={object.objectId}
                 >
-                  {object.isFavourite ? (
-                    <StarFilled style={{ color: "rgb(255,213,130)" }} />
-                  ) : (
-                    <StarOutlined className={styles.collectStar} />
-                  )}
-                </Button>
-              </div>
-            ))}
-          </div>
+                  <Link to={object.to} key={i}>
+                    <RenderName
+                      name={object.name}
+                      highlightChar={highlightChar}
+                    />
+                  </Link>
+                  <Button
+                    type="text"
+                    onClick={() => {
+                      const { objectId, isFavourite } = object;
+                      const newFavouriteList = getNewFavouriteList(
+                        object.objectId,
+                        favouriteObjectList,
+                        !object.isFavourite
+                      );
+                      CmdbObjectApi_collect({
+                        objectIdList: [objectId],
+                        isCollect: !isFavourite,
+                      });
+                      updateCollect(newFavouriteList);
+                    }}
+                  >
+                    {object.isFavourite ? (
+                      <StarFilled style={{ color: "rgb(255,213,130)" }} />
+                    ) : (
+                      <StarOutlined className={styles.collectStar} />
+                    )}
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </div>
     </>
@@ -283,12 +328,20 @@ export function ModelTree(props: {
         ?.filter(
           (v) =>
             v.objectList.length > 0 ||
-            v.subCategory.filter((c) => c.objectList.length > 0).length > 0
+            v.subCategory.filter(
+              (c) =>
+                c.objectList.length > 0 ||
+                c.subCategory?.some((sub) => sub.objectList?.length > 0)
+            ).length > 0
         )
         ?.map((category, i) => {
           const displaySubCategory =
             category.subCategory?.filter(
-              (subCategory) => subCategory.objectList.length
+              (subCategory) =>
+                subCategory.objectList.length ||
+                subCategory.subCategory?.some(
+                  (sub) => sub.objectList?.length > 0
+                )
             ) ?? [];
           return (
             <div className={styles.column} key={i}>
