@@ -398,12 +398,6 @@ export class BrickTreeElement
 
     // 新增规范化事件（向后兼容）
     this.dispatchEvent(
-      new CustomEvent("tree.select", {
-        detail: selectedKeys,
-      })
-    );
-    // 新增规范化事件（向后兼容）
-    this.dispatchEvent(
       new CustomEvent("tree.select.v2", {
         detail: { selectedKeys, info },
       })
