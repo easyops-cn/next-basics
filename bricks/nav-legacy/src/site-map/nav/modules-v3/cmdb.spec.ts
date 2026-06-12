@@ -54,11 +54,13 @@ describe("functions should work", () => {
             name: "RS",
             title: "RS",
             objectList: [],
+            subCategoryMap: {},
           },
           数据库变更: {
             name: "数据库变更",
             title: "数据库变更",
             objectList: [],
+            subCategoryMap: {},
           },
         },
       },
@@ -73,11 +75,13 @@ describe("functions should work", () => {
             name: "门户",
             title: "门户",
             objectList: [],
+            subCategoryMap: {},
           },
           服务监测: {
             name: "服务监测",
             title: "服务监测",
             objectList: [],
+            subCategoryMap: {},
           },
         },
       },
@@ -96,6 +100,7 @@ describe("functions should work", () => {
             objectId: "modelA",
             category: "平台资源",
             to: "next-cmdb-instance-management/next/modelA/list",
+            isFavourite: undefined,
           },
         ],
         subCategory: [
@@ -107,16 +112,20 @@ describe("functions should work", () => {
               {
                 name: "modelB",
                 objectId: "modelB",
-
                 category: "平台资源.RS",
                 to: "next-cmdb-instance-management/next/modelB/list",
+                isFavourite: undefined,
               },
             ],
+            subCategoryMap: {},
+            subCategory: [],
           },
           {
             name: "数据库变更",
             title: "数据库变更",
             objectList: [],
+            subCategoryMap: {},
+            subCategory: [],
           },
         ],
       },
@@ -129,6 +138,7 @@ describe("functions should work", () => {
             objectId: "modelC",
             to: "next-cmdb-instance-management/next/modelC/list",
             category: "应用资源",
+            isFavourite: undefined,
           },
         ],
         subCategory: [
@@ -142,13 +152,84 @@ describe("functions should work", () => {
                 objectId: "modelD",
                 category: "应用资源.门户",
                 to: "next-cmdb-instance-management/next/modelD/list",
+                isFavourite: undefined,
               },
             ],
+            subCategoryMap: {},
+            subCategory: [],
           },
           {
             name: "服务监测",
             title: "服务监测",
             objectList: [],
+            subCategoryMap: {},
+            subCategory: [],
+          },
+        ],
+      },
+    ]);
+  });
+
+  it("should work with 3-level category (sub-sub-category)", () => {
+    const modelListWith3Levels = [
+      ...modelList,
+      {
+        name: "modelE",
+        objectId: "modelE",
+        category: "平台资源.RS.消息队列",
+      },
+      {
+        name: "modelF",
+        objectId: "modelF",
+        category: "平台资源.RS.消息队列",
+      },
+      {
+        name: "modelG",
+        objectId: "modelG",
+        category: "平台资源.RS.缓存",
+      },
+    ];
+    const result = getGroupsByCategoryMap(
+      modelListWith3Levels,
+      categoryMap,
+      urlTemplates,
+      ["modelE"]
+    );
+    const rsSubCategory = result[0].subCategory[0];
+    expect(rsSubCategory.name).toBe("RS");
+    expect(rsSubCategory.subCategory).toEqual([
+      {
+        name: "消息队列",
+        title: "消息队列",
+        isOpen: false,
+        objectList: [
+          {
+            name: "modelE",
+            objectId: "modelE",
+            category: "平台资源.RS.消息队列",
+            to: "next-cmdb-instance-management/next/modelE/list",
+            isFavourite: true,
+          },
+          {
+            name: "modelF",
+            objectId: "modelF",
+            category: "平台资源.RS.消息队列",
+            to: "next-cmdb-instance-management/next/modelF/list",
+            isFavourite: false,
+          },
+        ],
+      },
+      {
+        name: "缓存",
+        title: "缓存",
+        isOpen: false,
+        objectList: [
+          {
+            name: "modelG",
+            objectId: "modelG",
+            category: "平台资源.RS.缓存",
+            to: "next-cmdb-instance-management/next/modelG/list",
+            isFavourite: false,
           },
         ],
       },
