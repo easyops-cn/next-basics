@@ -41,13 +41,31 @@ export const exportFormData = async (
   const headers = columns.map((col) => ({
     key: col.name,
     header: col.label || col.name,
+    type: (col as any).type,
+    mode: (col as any).props?.mode,
   }));
 
   // 处理数据，确保数据格式正确
   const exportData = formData.map((row) => {
     const exportRow: Record<string, any> = {};
     headers.forEach((header) => {
-      exportRow[header.header] = row[header.key];
+      let value = row[header.key];
+      
+      // 处理数组类型的值（如 select 多选、cascader 多选等）
+      if (Array.isArray(value)) {
+        // 对于多选模式，将数组转换为逗号分隔的字符串
+        if (header.type === 'select' && (header.mode === 'multiple' || header.mode === 'tags')) {
+          value = value.join(', ');
+        } else if (header.type === 'cascader') {
+          // Cascader 可能是多维数组，递归处理
+          value = flattenArray(value).join(', ');
+        } else {
+          // 其他数组类型也转换为字符串
+          value = value.join(', ');
+        }
+      }
+      
+      exportRow[header.header] = value;
     });
     return exportRow;
   });
@@ -57,6 +75,16 @@ export const exportFormData = async (
   const workbook = XLSXUtils.book_new();
   XLSXUtils.book_append_sheet(workbook, worksheet, "Data");
   XLSXWriteFile(workbook, `${fileName}.xlsx`);
+};
+
+// 辅助函数：将嵌套数组展平为一维数组
+const flattenArray = (arr: any[]): any[] => {
+  return arr.reduce((flat, item) => {
+    if (Array.isArray(item)) {
+      return flat.concat(flattenArray(item));
+    }
+    return flat.concat(item);
+  }, []);
 };
 
 export const importFromExcel = async (
