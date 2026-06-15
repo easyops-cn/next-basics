@@ -41,13 +41,33 @@ export const exportFormData = async (
   const headers = columns.map((col) => ({
     key: col.name,
     header: col.label || col.name,
+    type: (col as any).type,
+    mode: (col as any).props?.mode,
   }));
 
   // 处理数据，确保数据格式正确
   const exportData = formData.map((row) => {
     const exportRow: Record<string, any> = {};
     headers.forEach((header) => {
-      exportRow[header.header] = row[header.key];
+      let value = row[header.key];
+      
+      // 处理数组类型的值（如 select 多选、cascader 多选等）
+      if (Array.isArray(value)) {
+        // 对于多选模式，将数组转换为逗号加空格分隔的字符串
+        if (header.type === 'select' && (header.mode === 'multiple' || header.mode === 'tags')) {
+          value = value.length > 0 ? value.join(', ') : '';
+        } else if (header.type === 'cascader') {
+          value = JSON.stringify(value);
+        } else {
+          // 其他数组类型统一按逗号加空格分隔格式处理
+          value = value.length > 0 ? value.join(', ') : '';
+        }
+      } else if (value === undefined || value === null) {
+        // 处理未定义或null值，转换为空字符串
+        value = '';
+      }
+      
+      exportRow[header.header] = value;
     });
     return exportRow;
   });

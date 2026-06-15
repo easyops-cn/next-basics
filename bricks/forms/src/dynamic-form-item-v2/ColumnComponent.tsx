@@ -126,6 +126,7 @@ export function ColumnComponent(
                 formValue,
                 rowValue,
                 rowIndex,
+                column,
               }),
           };
         }
@@ -146,7 +147,7 @@ export function ColumnComponent(
         }
         return rule;
       }),
-    [column.rules, formValue, name, rowIndex, rowValue]
+    [column.rules, formValue, name, rowIndex, rowValue, column]
   );
 
   const options = useMemo(

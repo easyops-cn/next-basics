@@ -295,6 +295,7 @@ export interface BasicColumn {
           formValue: Record<string, any>[];
           rowValue: Record<string, any>;
           rowIndex: number;
+          column?: Column;
         }
       ) => Promise<void | any> | void;
     })[];

@@ -419,6 +419,7 @@ describe("ColumnComponent", () => {
       formValue,
       rowIndex,
       rowValue: formValue[rowIndex],
+      column,
     });
   });
 
