@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.12...@next-bricks/forms@1.308.13) (2026-06-15)
+
+
+### Bug Fixes
+
+* 优化cascader表单项导出 ([0aad730](https://github.com/easyops-cn/next-basics/commit/0aad73011edff30bfe071cc41a6628b1c1992ff4))
+* 优化动态表单项导出 ([94d4260](https://github.com/easyops-cn/next-basics/commit/94d4260653bcca9fd7613c0fd1e6272930914e9f))
+* 更新动态表单项测试用例 ([8caeeef](https://github.com/easyops-cn/next-basics/commit/8caeeefe9c3a460b0f11e9ebfd321aa7bb0d8104))
+
+
+
+
+
 ## [1.308.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.11...@next-bricks/forms@1.308.12) (2026-06-03)
 
 
