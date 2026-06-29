@@ -118,6 +118,259 @@ describe("brick-tag", () => {
     document.body.removeChild(element);
   });
 
+  it("should normalize string tagList", async () => {
+    const element = document.createElement("presentational-bricks.brick-tag");
+    Object.assign(element, {
+      showCard: false,
+      tagList: ["a", "b"],
+    });
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+
+    expect(
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+        "props"
+      ].children.props.tagList
+    ).toEqual([
+      { key: "a", label: "a" },
+      { key: "b", label: "b" },
+    ]);
+    document.body.removeChild(element);
+  });
+
+  it("should reset internal closed state when tagList is assigned again", async () => {
+    const element = document.createElement("presentational-bricks.brick-tag");
+    const tagList = [
+      { key: "a", label: "a" },
+      { key: "b", label: "b" },
+    ];
+    Object.assign(element, {
+      showCard: false,
+      closable: true,
+      tagList,
+    });
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.handleOnClose(tagList[0], [tagList[1]]);
+    expect(
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+        "props"
+      ].children.props.tagList
+    ).toEqual([tagList[1]]);
+
+    const reassignedTagList = [
+      { key: "a", label: "a" },
+      { key: "b", label: "b" },
+    ];
+    Object.assign(element, {
+      tagList: reassignedTagList,
+    });
+    await jest.runAllTimers();
+
+    expect(
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+        "props"
+      ].children.props.tagList
+    ).toEqual([
+      { ...reassignedTagList[0], icon: undefined },
+      { ...reassignedTagList[1], icon: undefined },
+    ]);
+    document.body.removeChild(element);
+  });
+
+  it(`should dispatch "tag.close.confirm" before close and confirm close by method`, async () => {
+    const closeListener = jest.fn((e) => {});
+    const confirmListener = jest.fn((e) => {});
+    const element = document.createElement("presentational-bricks.brick-tag");
+    Object.assign(element, {
+      showCard: false,
+      closable: true,
+      confirmBeforeClose: true,
+      tagList: [
+        { key: "a", label: "a" },
+        { key: "b", label: "b" },
+        { key: "c", label: "c" },
+      ],
+    });
+    element.addEventListener("tag.close", closeListener);
+    element.addEventListener("tag.close.confirm", confirmListener);
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    const current = { key: "a", label: "a" };
+    const tagList = [
+      { key: "b", label: "b" },
+      { key: "c", label: "c" },
+    ];
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.handleOnCloseConfirm(current, tagList);
+
+    expect(confirmListener).toHaveBeenCalledTimes(1);
+    expect(closeListener).not.toHaveBeenCalled();
+    expect(confirmListener.mock.calls[0][0].detail).toEqual({
+      current,
+      tagList,
+      requestId: "1",
+    });
+
+    (element as any).confirmClose("wrong-request-id");
+    expect(closeListener).not.toHaveBeenCalled();
+
+    (element as any).confirmClose("1");
+    expect(closeListener).toHaveBeenCalledWith(
+      expect.objectContaining({
+        detail: {
+          current,
+          tagList,
+        },
+      })
+    );
+    expect(
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+        "props"
+      ].children.props.tagList
+    ).toEqual(tagList);
+    document.body.removeChild(element);
+  });
+
+  it(`should keep multiple pending close requests by requestId`, async () => {
+    const closeListener = jest.fn((e) => {});
+    const confirmListener = jest.fn((e) => {});
+    const element = document.createElement("presentational-bricks.brick-tag");
+    const originalTagList = [
+      { key: "a", label: "a" },
+      { key: "b", label: "b" },
+      { key: "c", label: "c" },
+    ];
+    Object.assign(element, {
+      showCard: false,
+      closable: true,
+      confirmBeforeClose: true,
+      tagList: originalTagList,
+    });
+    element.addEventListener("tag.close", closeListener);
+    element.addEventListener("tag.close.confirm", confirmListener);
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.handleOnCloseConfirm(originalTagList[0], [
+      originalTagList[1],
+      originalTagList[2],
+    ]);
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.handleOnCloseConfirm(originalTagList[1], [
+      originalTagList[0],
+      originalTagList[2],
+    ]);
+
+    expect(confirmListener).toHaveBeenCalledTimes(2);
+    expect(confirmListener.mock.calls[0][0].detail.requestId).toBe("1");
+    expect(confirmListener.mock.calls[1][0].detail.requestId).toBe("2");
+
+    (element as any).confirmClose("1");
+    expect(closeListener.mock.calls[0][0].detail).toEqual({
+      current: originalTagList[0],
+      tagList: [originalTagList[1], originalTagList[2]],
+    });
+
+    (element as any).confirmClose("2");
+    expect(closeListener.mock.calls[1][0].detail).toEqual({
+      current: originalTagList[1],
+      tagList: [originalTagList[2]],
+    });
+    expect(
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+        "props"
+      ].children.props.tagList
+    ).toEqual([originalTagList[2]]);
+    document.body.removeChild(element);
+  });
+
+  it(`should clear duplicate pending close requests for the same tag`, async () => {
+    const closeListener = jest.fn((e) => {});
+    const element = document.createElement("presentational-bricks.brick-tag");
+    const originalTagList = [
+      { key: "a", label: "a" },
+      { key: "b", label: "b" },
+    ];
+    Object.assign(element, {
+      showCard: false,
+      closable: true,
+      confirmBeforeClose: true,
+      tagList: originalTagList,
+    });
+    element.addEventListener("tag.close", closeListener);
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.handleOnCloseConfirm(originalTagList[0], [
+      originalTagList[1],
+    ]);
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.handleOnCloseConfirm(originalTagList[0], [
+      originalTagList[1],
+    ]);
+
+    (element as any).confirmClose("1");
+    (element as any).confirmClose("2");
+
+    expect(closeListener).toHaveBeenCalledTimes(1);
+    expect(closeListener.mock.calls[0][0].detail).toEqual({
+      current: originalTagList[0],
+      tagList: [originalTagList[1]],
+    });
+    document.body.removeChild(element);
+  });
+
+  it(`should cancel pending close`, async () => {
+    const closeListener = jest.fn((e) => {});
+    const confirmListener = jest.fn((e) => {});
+    const element = document.createElement("presentational-bricks.brick-tag");
+    const originalTagList = [
+      { key: "a", label: "a" },
+      { key: "b", label: "b" },
+    ];
+    Object.assign(element, {
+      showCard: false,
+      closable: true,
+      confirmBeforeClose: true,
+      tagList: originalTagList,
+    });
+    element.addEventListener("tag.close", closeListener);
+    element.addEventListener("tag.close.confirm", confirmListener);
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.handleOnCloseConfirm(originalTagList[0], [
+      originalTagList[1],
+    ]);
+
+    (element as any).cancelClose("1");
+    (element as any).confirmClose("1");
+
+    expect(confirmListener).toHaveBeenCalledTimes(1);
+    expect(closeListener).not.toHaveBeenCalled();
+    expect(
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+        "props"
+      ].children.props.tagList
+    ).toEqual(originalTagList);
+
+    (element as any).confirmClose("1");
+    (element as any).cancelClose("1");
+    expect(closeListener).not.toHaveBeenCalled();
+    document.body.removeChild(element);
+  });
+
   it(`should dispatch "checked.update" and "checked.update.v2"  when handleOnClose has been called"`, async () => {
     const mockEventListener = jest.fn((e) => {});
     const mockEventListenerV2 = jest.fn((e) => {});
