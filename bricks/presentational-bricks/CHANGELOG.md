@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.339.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.7...@next-bricks/presentational-bricks@1.339.8) (2026-06-29)
+
+
+### Bug Fixes
+
+* support confirming brick tag close ([bca8df0](https://github.com/easyops-cn/next-basics/commit/bca8df032cba5eed576fee601b0157cc970c7a07))
+
+
+
+
+
 ## [1.339.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.6...@next-bricks/presentational-bricks@1.339.7) (2026-06-02)
 
 
