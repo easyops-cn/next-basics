@@ -100,6 +100,51 @@ export const BrickTagStory: Story = {
       ],
     },
     {
+      snippetId: "presentational-bricks.brick-tag[confirm-before-close]",
+      title: {
+        zh: "删除前二次确认",
+        en: "",
+      },
+      message: {
+        zh: "配置 confirmBeforeClose 后，点击关闭会先触发 tag.close.confirm，外部确认后调用 confirmClose 才会真正删除。",
+        en: "",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-tag",
+          properties: {
+            showCard: false,
+            closable: true,
+            confirmBeforeClose: true,
+            tagList: [
+              {
+                key: "confirm1",
+                label: "confirm1",
+              },
+              {
+                key: "confirm2",
+                label: "confirm2",
+              },
+              {
+                key: "confirm3",
+                label: "confirm3",
+              },
+            ],
+          },
+          events: {
+            "tag.close.confirm": {
+              action: "console.log",
+              args: ["${EVENT.detail}"],
+            },
+            "tag.close": {
+              action: "console.log",
+              args: ["${EVENT.detail}"],
+            },
+          },
+        },
+      ],
+    },
+    {
       description: {
         title: "多种颜色",
         message: "标签支持多彩标签、可选择标签、可删除标签。",

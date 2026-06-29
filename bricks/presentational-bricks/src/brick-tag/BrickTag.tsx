@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { Tag, Tooltip, TooltipProps } from "antd";
 import { TagProps } from "antd/lib/tag";
 import { CheckableTagProps } from "antd/lib/tag/CheckableTag";
@@ -30,6 +30,7 @@ export interface BrickTagProps extends TagProps {
   tagHoverStyle?: React.CSSProperties;
   handleOnChange?: (items: TagListType[]) => void;
   handleOnClose?: (current, tagList: TagListType[]) => void;
+  handleOnCloseConfirm?: (current, tagList: TagListType[]) => void;
   handleOnClick?: (tag: TagListType) => void;
   multipleCheck?: boolean;
   label?: string;
@@ -37,6 +38,7 @@ export interface BrickTagProps extends TagProps {
   showTagCircle?: boolean;
   shape?: "default" | "round";
   closable?: boolean;
+  confirmBeforeClose?: boolean;
   disabledTooltip?: string;
   cancelable?: boolean;
   tooltipProps?: TooltipProps;
@@ -55,6 +57,7 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
     showTagCircle,
     color,
     closable,
+    confirmBeforeClose,
     cancelable,
     tooltipProps,
     afterBrick,
@@ -62,6 +65,10 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
 
   const [checkedTag, setCheckedTag] = useState([]);
   const [closedTag, setClosedTag] = useState(tagList);
+
+  useLayoutEffect(() => {
+    setClosedTag(tagList || []);
+  }, [tagList]);
 
   useEffect(() => {
     setCheckedTag(
@@ -88,20 +95,25 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
       }
       nextCheckedTag = checked ? [key] : [];
     }
-    const nextCheckedItems = tagList?.filter((item) =>
+    const nextCheckedItems = closedTag?.filter((item) =>
       nextCheckedTag?.includes(item.key)
     );
-    props.handleOnChange(nextCheckedItems);
+    props.handleOnChange?.(nextCheckedItems);
   };
 
-  const onClose = (item) => {
+  const onClose = (item, e) => {
     const newClosedTag = differenceBy(closedTag, [item], "key");
+    if (confirmBeforeClose) {
+      e?.preventDefault?.();
+      props?.handleOnCloseConfirm?.(item, newClosedTag);
+      return;
+    }
     setClosedTag(newClosedTag);
-    props?.handleOnClose(item, newClosedTag);
+    props?.handleOnClose?.(item, newClosedTag);
   };
 
   const onClick = (item) => {
-    props?.handleOnClick(item);
+    props?.handleOnClick?.(item);
   };
 
   const onMouseEnter = (item, e) => {
@@ -162,10 +174,10 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
             [style.disabledTag]: disabled,
             [style.checkableTag]: TypeComponent === Tag.CheckableTag,
           })}
-          closable={closable}
-          {...(closable ? { onClose: () => onClose(item) } : {})}
-          color={!closable && specificColor}
           {...configProps}
+          closable={closable}
+          {...(closable ? { onClose: (e) => onClose(item, e) } : {})}
+          color={!closable && specificColor}
           {...restProps}
           onMouseEnter={(e) => onMouseEnter(item, e)}
           onMouseLeave={(e) => onMouseLeave(item, e)}
@@ -231,8 +243,8 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
     >
       {props.label && <span className={style.tagsLabel}>{props.label}</span>}
       {componentType === TagTypeProps.CheckableTag
-        ? renderTag(Tag.CheckableTag, tagList)
-        : renderTag(Tag, tagList)}
+        ? renderTag(Tag.CheckableTag, closedTag)
+        : renderTag(Tag, closedTag)}
       {afterBrick && afterBrick.useBrick && (
         <BrickAsComponent
           useBrick={afterBrick.useBrick}
