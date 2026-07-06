@@ -119,6 +119,7 @@ exports[`newSiteMap should work with ModelTree 1`] = `
           </GeneralIcon>
           <span
             className="categoryTitle"
+            title="平台资源"
           >
             平台资源
           </span>
@@ -142,11 +143,21 @@ exports[`newSiteMap should work with ModelTree 1`] = `
           >
             <Button
               onClick={[Function]}
+              style={
+                Object {
+                  "width": "100%",
+                }
+              }
               type="link"
             >
               <button
                 className="ant-btn ant-btn-link"
                 onClick={[Function]}
+                style={
+                  Object {
+                    "width": "100%",
+                  }
+                }
                 type="button"
               >
                 <LoadingIcon
@@ -174,6 +185,7 @@ exports[`newSiteMap should work with ModelTree 1`] = `
                 >
                   <span
                     className="categoryNameContainer"
+                    title="RS"
                   >
                     RS
                   </span>
@@ -452,6 +464,7 @@ exports[`newSiteMap should work with ModelTree 1`] = `
           </GeneralIcon>
           <span
             className="categoryTitle"
+            title="应用资源"
           >
             应用资源
           </span>
@@ -475,11 +488,21 @@ exports[`newSiteMap should work with ModelTree 1`] = `
           >
             <Button
               onClick={[Function]}
+              style={
+                Object {
+                  "width": "100%",
+                }
+              }
               type="link"
             >
               <button
                 className="ant-btn ant-btn-link"
                 onClick={[Function]}
+                style={
+                  Object {
+                    "width": "100%",
+                  }
+                }
                 type="button"
               >
                 <LoadingIcon
@@ -507,6 +530,7 @@ exports[`newSiteMap should work with ModelTree 1`] = `
                 >
                   <span
                     className="categoryNameContainer"
+                    title="门户"
                   >
                     门户
                   </span>
@@ -830,11 +854,21 @@ exports[`newSiteMap should work with SubCategory 1`] = `
   >
     <Button
       onClick={[Function]}
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
       type="link"
     >
       <button
         className="ant-btn ant-btn-link"
         onClick={[Function]}
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
         type="button"
       >
         <LoadingIcon
@@ -862,6 +896,7 @@ exports[`newSiteMap should work with SubCategory 1`] = `
         >
           <span
             className="categoryNameContainer"
+            title="门户"
           >
             门户
           </span>
