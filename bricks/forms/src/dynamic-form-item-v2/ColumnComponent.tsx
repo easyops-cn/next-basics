@@ -416,8 +416,20 @@ export function ColumnComponent(
     }
 
     case "autoComplete": {
-      const { placeholder, allowClear, options, isAppendMode } =
+      const { placeholder, allowClear, isAppendMode } =
         column.props || {};
+
+      let currentAutoCompleteOptions = options;
+      if (
+        Array.isArray(currentAutoCompleteOptions[rowIndex]) ||
+        Array.isArray(currentAutoCompleteOptions[0]) ||
+        currentAutoCompleteOptions.some((option: any) => Array.isArray(option))
+      ) {
+        currentAutoCompleteOptions =
+          (currentAutoCompleteOptions[rowIndex] as GeneralComplexOption<
+            string | number
+          >[]) ?? [];
+      }
 
       return (
         <Form.Item
@@ -429,7 +441,7 @@ export function ColumnComponent(
           hidden={hidden}
         >
           <AutoCompleteItem
-            options={options}
+            options={currentAutoCompleteOptions}
             disabled={disabled}
             allowClear={allowClear}
             placeholder={placeholder}
