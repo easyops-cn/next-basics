@@ -1,88 +1,96 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BrickCollapseCard should work when isActive is false 1`] = `
-<Collapse
-  activeKey=""
-  ghost={true}
+<ConfigProvider
+  locale={Object {}}
 >
-  <CollapsePanel
-    extra={
-      <span
-        className="toggleCollapse"
-      >
-        <span
-          className="expandText"
-        >
-          展开
-        </span>
-        <Icon
-          className="expandIcon"
-          type="down"
-        />
-      </span>
-    }
-    forceRender={true}
-    header={
-      <div
-        className="collapseTitle"
-      >
-        工具
-      </div>
-    }
-    key="content"
-    showArrow={false}
+  <Collapse
+    activeKey=""
+    ghost={true}
   >
-    <div
-      className="contentContainer"
+    <CollapsePanel
+      extra={
+        <span
+          className="toggleCollapse"
+        >
+          <span
+            className="expandText"
+          >
+            展开
+          </span>
+          <Icon
+            className="expandIcon"
+            type="down"
+          />
+        </span>
+      }
+      forceRender={true}
+      header={
+        <div
+          className="collapseTitle"
+        >
+          工具
+        </div>
+      }
+      key="content"
+      showArrow={false}
     >
-      <slot
-        id="contentSlot"
-        name="content"
-      />
-    </div>
-  </CollapsePanel>
-</Collapse>
+      <div
+        className="contentContainer"
+      >
+        <slot
+          id="contentSlot"
+          name="content"
+        />
+      </div>
+    </CollapsePanel>
+  </Collapse>
+</ConfigProvider>
 `;
 
 exports[`BrickCollapseCard should work when isActive is true 1`] = `
-<Collapse
-  activeKey="content"
-  ghost={true}
+<ConfigProvider
+  locale={Object {}}
 >
-  <CollapsePanel
-    extra={
-      <span
-        className="toggleCollapse"
-      >
-        <span
-          className="expandText"
-        >
-          收起
-        </span>
-        <Icon
-          className="expandIcon"
-          type="up"
-        />
-      </span>
-    }
-    forceRender={true}
-    header={
-      <slot
-        id="headerSlot"
-        name="header"
-      />
-    }
-    key="content"
-    showArrow={false}
+  <Collapse
+    activeKey="content"
+    ghost={true}
   >
-    <div
-      className="contentContainer"
+    <CollapsePanel
+      extra={
+        <span
+          className="toggleCollapse"
+        >
+          <span
+            className="expandText"
+          >
+            收起
+          </span>
+          <Icon
+            className="expandIcon"
+            type="up"
+          />
+        </span>
+      }
+      forceRender={true}
+      header={
+        <slot
+          id="headerSlot"
+          name="header"
+        />
+      }
+      key="content"
+      showArrow={false}
     >
-      <slot
-        id="contentSlot"
-        name="content"
-      />
-    </div>
-  </CollapsePanel>
-</Collapse>
+      <div
+        className="contentContainer"
+      >
+        <slot
+          id="contentSlot"
+          name="content"
+        />
+      </div>
+    </CollapsePanel>
+  </Collapse>
+</ConfigProvider>
 `;
