@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.13...@next-bricks/forms@1.308.14) (2026-07-06)
+
+
+### Bug Fixes
+
+* 优化动态表单项autoComplete组件支持按行号更新options ([b9bec9e](https://github.com/easyops-cn/next-basics/commit/b9bec9ed00c73a2395dd3e2191ff661aa7e48a7d))
+
+
+
+
+
 ## [1.308.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.12...@next-bricks/forms@1.308.13) (2026-06-15)
 
 
