@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.339.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.8...@next-bricks/presentational-bricks@1.339.9) (2026-07-06)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** mock antd ESM locales in brick-collapse-card tests and update snapshots ([6b18027](https://github.com/easyops-cn/next-basics/commit/6b180277c4445df0fdf78c058434563688089040))
+
+
+
+
+
 ## [1.339.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.7...@next-bricks/presentational-bricks@1.339.8) (2026-06-29)
 
 
