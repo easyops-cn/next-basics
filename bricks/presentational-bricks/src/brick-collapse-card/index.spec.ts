@@ -1,10 +1,15 @@
 import ReactDOM from "react-dom";
 import "./";
 
-const spyOnRender = jest.spyOn(ReactDOM, "render").mockImplementation(() => {});
+jest.mock("antd/es/locale/en_US", () => ({}));
+jest.mock("antd/es/locale/zh_CN", () => ({}));
+
+const spyOnRender = jest
+  .spyOn(ReactDOM, "render")
+  .mockImplementation(() => void 0);
 const unmountComponentAtNode = jest
   .spyOn(ReactDOM, "unmountComponentAtNode")
-  .mockImplementation((() => {}) as any);
+  .mockImplementation((() => void 0) as any);
 
 describe("presentational-bricks.brick-collapse-card", () => {
   it("should create a custom element", async () => {
@@ -19,10 +24,10 @@ describe("presentational-bricks.brick-collapse-card", () => {
     expect(spyOnRender).toBeCalled();
     Object.assign(element, {
       fields: {
-        title: "name"
+        title: "name",
       },
       dataSource: {
-        name: "lynette"
+        name: "lynette",
       },
       expandActiveText: "收起",
       expandInactiveText: "展开",
@@ -31,15 +36,15 @@ describe("presentational-bricks.brick-collapse-card", () => {
       isActive: true,
       title: "",
       containerStyle: {
-        background: "#ccc"
+        background: "#ccc",
       },
       headerStyle: {
-        padding: "10px"
+        padding: "10px",
       },
       contentStyle: {
-        padding: "20px"
+        padding: "20px",
       },
-      hasHeaderSlot: false
+      hasHeaderSlot: false,
     });
     document.body.removeChild(element);
     await jest.runAllTimers();
@@ -53,22 +58,22 @@ describe("presentational-bricks.brick-collapse-card", () => {
     await jest.runAllTimers();
     Object.assign(element, {
       fields: {
-        dataSource: "list[0]"
+        dataSource: "list[0]",
       },
       dataSource: {
         name: "lynette",
         list: [
           {
-            name: "root"
-          }
-        ]
+            name: "root",
+          },
+        ],
       },
       expandActiveText: "收起",
       expandInactiveText: "工具详情",
       expandActiveIcon: "up",
       expandInactiveIcon: "down",
       isActive: false,
-      title: "工具"
+      title: "工具",
     });
     await jest.runAllTimers();
     document.body.appendChild(element);
@@ -76,7 +81,7 @@ describe("presentational-bricks.brick-collapse-card", () => {
     const spyOnTogglePanel = jest.spyOn(element, "togglePanel");
     element.dispatchEvent(
       new MouseEvent("click", {
-        bubbles: true
+        bubbles: true,
       })
     );
     await jest.runAllTimers();

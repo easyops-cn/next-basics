@@ -4,6 +4,10 @@ import { Collapse } from "antd";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
 import classNames from "classnames";
+import enUS from "antd/es/locale/en_US";
+import zhCN from "antd/es/locale/zh_CN";
+import { ConfigProvider } from "antd";
+import i18next from "i18next";
 
 interface BrickCollapseCardProps {
   title: string;
@@ -105,25 +109,30 @@ const getHeaderNode = (props: BrickCollapseCardProps): React.ReactElement => {
 export function BrickCollapseCard(
   props: BrickCollapseCardProps
 ): React.ReactElement {
+  // 根据当前语言选择对应的 locale
+  const locale = i18next.language === "en" ? enUS : zhCN;
   return (
-    <Collapse activeKey={props.isActive ? "content" : ""} ghost={true}>
-      <Collapse.Panel
-        style={props.containerStyle}
-        forceRender={true}
-        key="content"
-        showArrow={false}
-        header={getHeaderNode(props)}
-        extra={getExtraNode(props)}
-      >
-        <div
-          className={classNames("contentContainer", {
-            verticalCenter: props.verticalCenter,
-          })}
-          style={props.contentStyle}
+    <ConfigProvider locale={locale}>
+      <Collapse activeKey={props.isActive ? "content" : ""} ghost={true}>
+        <Collapse.Panel
+          style={props.containerStyle}
+          forceRender={true}
+          key="content"
+          showArrow={false}
+          header={getHeaderNode(props)}
+          extra={getExtraNode(props)}
         >
-          <slot id="contentSlot" name="content" />
-        </div>
-      </Collapse.Panel>
-    </Collapse>
+          <div
+            className={classNames("contentContainer", {
+              verticalCenter: props.verticalCenter,
+            })}
+            style={props.contentStyle}
+          >
+            <slot id="contentSlot" name="content" />
+          </div>
+        </Collapse.Panel>
+      </Collapse>
+    </ConfigProvider>
   );
 }
+//

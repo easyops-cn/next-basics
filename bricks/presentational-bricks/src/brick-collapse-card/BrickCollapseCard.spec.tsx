@@ -2,6 +2,9 @@ import React from "react";
 import { mount, shallow } from "enzyme";
 import { BrickCollapseCard } from "./BrickCollapseCard";
 
+jest.mock("antd/es/locale/en_US", () => ({}));
+jest.mock("antd/es/locale/zh_CN", () => ({}));
+
 describe("BrickCollapseCard", () => {
   it("should work when isActive is false", () => {
     const wrapper = shallow(
