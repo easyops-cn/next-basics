@@ -141,9 +141,11 @@ export function SubCategory(props: {
         className={styles.subCategoryItemContainer}
         style={level > 0 ? { paddingLeft: level * 12 } : undefined}
       >
-        <Button type="link" onClick={handleToggle}>
+        <Button type="link" onClick={handleToggle} style={{ width: "100%" }}>
           <div className={styles.toggleWrapper}>
-            <span className={styles.categoryNameContainer}>{title}</span>
+            <span className={styles.categoryNameContainer} title={title}>
+              {title}
+            </span>
             {display ? <UpOutlined /> : <DownOutlined />}
           </div>
         </Button>
@@ -212,7 +214,9 @@ function combineText(node: any, newText: string, isHighlight?: boolean) {
   return (
     <>
       {node}
-      <span className={isHighlight ? styles.highlightText : ""}>{newText}</span>
+      <span className={isHighlight ? styles.highlightText : ""} title={newText}>
+        {newText}
+      </span>
     </>
   );
 }
@@ -377,7 +381,9 @@ export function ModelTree(props: {
                       style={{ marginRight: "4px" }}
                     />
                   )}
-                  <span className={styles.categoryTitle}>{category.title}</span>
+                  <span className={styles.categoryTitle} title={category.title}>
+                    {category.title}
+                  </span>
                 </div>
                 {displaySubCategory?.map((subCategory, i) => {
                   const props = {

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.6.0...@next-bricks/nav-legacy@1.6.1) (2026-07-06)
+
+
+### Bug Fixes
+
+* **nav-legacy:** merge sitemap subcategory layout fixes ([e4444a9](https://github.com/easyops-cn/next-basics/commit/e4444a9ae6b81fd8fdb914f30a70f6a99f31cfd1))
+
+
+
+
+
 # [1.6.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.5.2...@next-bricks/nav-legacy@1.6.0) (2026-06-04)
 
 

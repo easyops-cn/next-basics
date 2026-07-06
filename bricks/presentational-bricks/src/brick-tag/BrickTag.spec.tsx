@@ -6,6 +6,12 @@ import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { Tooltip } from "antd";
 import { TagTypeProps } from "../interfaces/brick-tag";
 
+jest.mock("@next-core/brick-kit", () => ({
+  BrickAsComponent(): React.ReactElement {
+    return <div>BrickAsComponent</div>;
+  },
+}));
+
 describe("BrickTag", () => {
   it("should work when componentType is CheckableTag", () => {
     const handleOnChange = jest.fn();
@@ -42,6 +48,9 @@ describe("BrickTag", () => {
     wrapper.find("CheckableTag").at(0).simulate("mouseleave");
     expect(wrapper.find("CheckableTag").at(0).prop("style").color).toBe("#fff");
     wrapper.find("CheckableTag").at(0).invoke("onChange")(true);
+    expect(handleOnChange).toHaveBeenCalled();
+    handleOnChange.mockClear();
+    wrapper.find("CheckableTag").at(0).invoke("onChange")(false);
     expect(handleOnChange).toHaveBeenCalled();
     wrapper.setProps({
       defaultCheckedTag: ["a"],
@@ -194,6 +203,36 @@ describe("BrickTag", () => {
     expect(handleOnChange).not.toBeCalled();
   });
 
+  it("should work without optional callbacks", () => {
+    const checkableWrapper = mount(
+      <BrickTag
+        componentType={TagTypeProps.CheckableTag}
+        tagList={[
+          { key: "a", label: "a" },
+          { key: "b", label: "b" },
+        ]}
+      />
+    );
+    const tagWrapper = mount(
+      <BrickTag
+        closable
+        tagList={[
+          { key: "a", label: "a" },
+          { key: "b", label: "b" },
+        ]}
+      />
+    );
+
+    expect(() => {
+      checkableWrapper.find("CheckableTag").at(0).invoke("onChange")(true);
+      tagWrapper.find("Tag").at(0).invoke("onClick")();
+      tagWrapper
+        .find("Tag")
+        .at(0)
+        .invoke("onClose")({ preventDefault: jest.fn() });
+    }).not.toThrow();
+  });
+
   it("should support tooltip", () => {
     const tooltip = "tip content";
     const props = {
@@ -247,5 +286,63 @@ describe("BrickTag", () => {
       .find("span.anticon-close.ant-tag-close-icon")
       .simulate("click");
     expect(handleOnClose).toHaveBeenCalled();
+  });
+
+  it("should request confirm before close", () => {
+    const handleOnClose = jest.fn();
+    const handleOnCloseConfirm = jest.fn();
+    const preventDefault = jest.fn();
+    const tagList = [
+      { key: "a", label: "a" },
+      { key: "b", label: "b" },
+    ];
+    const wrapper = mount(
+      <BrickTag
+        closable
+        confirmBeforeClose
+        tagList={tagList}
+        handleOnClose={handleOnClose}
+        handleOnCloseConfirm={handleOnCloseConfirm}
+      />
+    );
+
+    wrapper.find("Tag").at(0).invoke("onClose")({ preventDefault });
+    wrapper.update();
+
+    expect(preventDefault).toHaveBeenCalled();
+    expect(handleOnClose).not.toHaveBeenCalled();
+    expect(handleOnCloseConfirm).toHaveBeenCalledWith(tagList[0], [
+      tagList[1],
+    ]);
+    expect(wrapper.find("Tag").length).toEqual(2);
+  });
+
+  it("should not let configProps override internal onClose", () => {
+    const configOnClose = jest.fn();
+    const handleOnCloseConfirm = jest.fn();
+    const preventDefault = jest.fn();
+    const tagList = [
+      { key: "a", label: "a" },
+      { key: "b", label: "b" },
+    ];
+    const wrapper = mount(
+      <BrickTag
+        closable
+        confirmBeforeClose
+        configProps={{
+          onClose: configOnClose,
+        }}
+        tagList={tagList}
+        handleOnCloseConfirm={handleOnCloseConfirm}
+      />
+    );
+
+    wrapper.find("Tag").at(0).invoke("onClose")({ preventDefault });
+
+    expect(configOnClose).not.toHaveBeenCalled();
+    expect(preventDefault).toHaveBeenCalled();
+    expect(handleOnCloseConfirm).toHaveBeenCalledWith(tagList[0], [
+      tagList[1],
+    ]);
   });
 });

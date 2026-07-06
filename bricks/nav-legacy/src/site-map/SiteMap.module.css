@@ -176,6 +176,9 @@
 .toggleWrapper {
   overflow: hidden;
   text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  height: 22px;
   margin-left: -8px;
   border-radius: 6px;
   padding: 4px 10px 4px 8px;
@@ -186,6 +189,8 @@
 
   .categoryNameContainer {
     margin-right: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   svg {
@@ -204,6 +209,8 @@
     color: var(--color-secondary-text);
     display: block;
     font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &:hover {
       color: var(--color-brand-hover);
@@ -419,9 +426,6 @@
 
 .categoryTitle {
   max-width: 180px;
-  overflow: hidden;
-  display: inline-flex;
-  text-overflow: ellipsis;
   font-size: 16px;
   margin-left: 6px;
   color: var(--color-strong-text);
