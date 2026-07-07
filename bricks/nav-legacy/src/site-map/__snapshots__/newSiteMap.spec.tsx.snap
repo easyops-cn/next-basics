@@ -284,7 +284,9 @@ exports[`newSiteMap should work with ModelTree 1`] = `
               <RenderName
                 name="modelA"
               >
-                <span>
+                <span
+                  title="modelA"
+                >
                   modelA
                 </span>
               </RenderName>
@@ -629,7 +631,9 @@ exports[`newSiteMap should work with ModelTree 1`] = `
               <RenderName
                 name="modelC"
               >
-                <span>
+                <span
+                  title="modelC"
+                >
                   modelC
                 </span>
               </RenderName>

@@ -230,7 +230,7 @@ export function encode(keyword: string): string {
 export function RenderName(props: { name: string; highlightChar?: string }) {
   const { name, highlightChar } = props;
   if (!highlightChar) {
-    return <span>{name}</span>;
+    return <span title={name}>{name}</span>;
   }
   const _highlightChar = encode(highlightChar);
   const exp = new RegExp(_highlightChar, "ig");
