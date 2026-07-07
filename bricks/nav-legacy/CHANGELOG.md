@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.6.1...@next-bricks/nav-legacy@1.6.2) (2026-07-07)
+
+
+### Bug Fixes
+
+* **nav-legacy:** add title attribute to RenderName span element ([1021cdb](https://github.com/easyops-cn/next-basics/commit/1021cdbff7d7033d9798fc4fd217a4813b66741c))
+
+
+
+
+
 ## [1.6.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.6.0...@next-bricks/nav-legacy@1.6.1) (2026-07-06)
 
 
