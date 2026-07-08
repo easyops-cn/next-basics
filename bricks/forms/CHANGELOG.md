@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.14...@next-bricks/forms@1.308.15) (2026-07-08)
+
+
+### Bug Fixes
+
+* **forms:** append name to inform method label ([8d3f591](https://github.com/easyops-cn/next-basics/commit/8d3f59128108583941bfb8ce31b7e3d6b8682126))
+
+
+
+
+
 ## [1.308.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.13...@next-bricks/forms@1.308.14) (2026-07-06)
 
 
