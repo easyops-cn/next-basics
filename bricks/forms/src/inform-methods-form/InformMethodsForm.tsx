@@ -6,7 +6,6 @@ import { Checkbox } from "antd";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import { CustomSenderApi_listSupportInform } from "@next-sdk/msgsender-sdk";
 
-
 export interface InformMethodsFormItemProps {
   value?: string[];
   children?: React.ReactNode;
@@ -32,7 +31,9 @@ export const InformMethodsFormItem = forwardRef<
 
   const renderGroup = (): React.ReactElement => {
     const options = informMethodList.map((informMethods) => ({
-      label: (informMethods as any).description,
+      label: `${(informMethods as any).description}${
+        (informMethods as any).name ? `(${(informMethods as any).name})` : ""
+      }`,
       value: (informMethods as any).inform_type,
     }));
 
