@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.16](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.15...@next-bricks/forms@1.308.16) (2026-07-15)
+
+
+### Bug Fixes
+
+* **forms:** 修复回显文件下载按钮不显示的问题 ([25f0fb2](https://github.com/easyops-cn/next-basics/commit/25f0fb24d903346d0310f0c2ea338e9ed290099f))
+
+
+
+
+
 ## [1.308.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.14...@next-bricks/forms@1.308.15) (2026-07-08)
 
 
