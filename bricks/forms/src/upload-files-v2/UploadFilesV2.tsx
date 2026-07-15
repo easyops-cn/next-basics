@@ -69,6 +69,8 @@ export function addUid(value: UploadFileValueItem[]): FileItem[] {
   let fileList: FileItem[] = [];
   fileList = map(value, (file) => {
     file.uid = file.uid ?? uniqueId("-file");
+    // 回显文件需要标记为 done，否则 antd UploadList 不会渲染下载图标
+    file.status = file.status ?? "done";
     return file;
   });
   return fileList;

@@ -264,6 +264,29 @@ describe("UploadFilesV2", () => {
     expect(wrapper.find(".ant-upload-list-item").length).toBe(2);
   });
 
+  it("回显的文件应补上 status=done 以显示下载按钮", async () => {
+    const wrapper = mount(
+      <UploadFilesV2
+        url={url}
+        method="put"
+        value={[
+          {
+            uid: "-echo1",
+            name: "echo.png",
+            url: "echo.png",
+          },
+        ]}
+        showDownloadIcon
+      />
+    );
+    await act(async () => {
+      await jest.runAllTimers();
+    });
+    wrapper.update();
+    const listItem = wrapper.find("UploadList").prop("items");
+    expect((listItem as any[])[0].status).toBe("done");
+  });
+
   it("test maxNumber", async () => {
     const onChange = jest.fn();
     const wrapper = mount(
