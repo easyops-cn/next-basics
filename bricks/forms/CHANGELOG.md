@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.17](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.16...@next-bricks/forms@1.308.17) (2026-07-17)
+
+
+### Bug Fixes
+
+* **forms:** 修复 general-checkbox 组件级 disabled 属性不生效的问题 ([718a391](https://github.com/easyops-cn/next-basics/commit/718a39150e3aabf21b94e1ed73277ee2457cf35d))
+
+
+
+
+
 ## [1.308.16](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.15...@next-bricks/forms@1.308.16) (2026-07-15)
 
 
