@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.308.18](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.17...@next-bricks/forms@1.308.18) (2026-07-17)
+
+
+### Bug Fixes
+
+* **forms:** 修复 upload-files-v2 在 disabled 状态下仍展示拖拽区域的问题 ([948f91a](https://github.com/easyops-cn/next-basics/commit/948f91a01083691035172e7dfa3a4cb487c0e433))
+
+
+
+
+
 ## [1.308.17](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.16...@next-bricks/forms@1.308.17) (2026-07-17)
 
 
