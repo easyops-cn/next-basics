@@ -358,10 +358,11 @@ export function RealUploadFile(
   const uploadProps = {
     className: classNames({
       [styles.uploadContainerDisplayNone]:
-        props.hideDragBtnWhenAchieveMax &&
-        props.uploadDraggable &&
-        props.maxNumber &&
-        value?.length >= props.maxNumber,
+        (props.hideDragBtnWhenAchieveMax &&
+          props.uploadDraggable &&
+          props.maxNumber &&
+          value?.length >= props.maxNumber) ||
+        (props.disabled && props.uploadDraggable),
     }),
     method: props.method ?? "post",
     disabled: props.disabled || disabled,
