@@ -238,7 +238,7 @@ export function GeneralCheckboxItem(
         value={item.value}
         // @ts-ignore
         key={item.value}
-        disabled={!!item.disabled}
+        disabled={disabled || !!item.disabled}
         className={styles[`${checkboxColorStyle}`]}
       >
         {iconNode}
