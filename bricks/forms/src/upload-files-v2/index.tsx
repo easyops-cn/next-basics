@@ -45,10 +45,13 @@ export interface UploadFilesV2ElementProps {
   draggableUploadHint?: string;
   uploadButtonName?: string;
   uploadButtonProps?: UploadButtonProps;
+  showPreviewIcon?: boolean;
 }
 
-
-export class UploadFilesV2Element extends FormItemElement  implements UploadFilesV2ElementProps {
+export class UploadFilesV2Element
+  extends FormItemElement
+  implements UploadFilesV2ElementProps
+{
   /**
    * @group basicFormItem
    * @required true
@@ -137,6 +140,16 @@ export class UploadFilesV2Element extends FormItemElement  implements UploadFile
    */
   @property({ attribute: false })
   showDownloadIcon = false;
+
+  /**
+   * @group basicFormItem
+   * @required false
+   * @default false
+   * @description 是否展示预览图标，点击后触发`upload.files.preview`事件
+   *
+   */
+  @property({ attribute: false })
+  showPreviewIcon = false;
 
   /**
    * @group basicFormItem
@@ -321,6 +334,15 @@ export class UploadFilesV2Element extends FormItemElement  implements UploadFile
     this.downloadEvent.emit(value);
   };
 
+  /**
+   * @detail `{url?:string,response?:object,file?:object,uid:string,name:string}`
+   * @description 	点击预览图标发出的事件
+   */
+  @event({ type: "upload.files.preview" }) previewEvent: EventEmitter<any>;
+  private _handlePreview = (value: any): void => {
+    this.previewEvent.emit(value);
+  };
+
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
@@ -354,7 +376,9 @@ export class UploadFilesV2Element extends FormItemElement  implements UploadFile
             onError={this._handleError}
             onCustomError={this._handleCustomError}
             onDownload={this._handleDownload}
+            onPreview={this._handlePreview}
             showDownloadIcon={this.showDownloadIcon}
+            showPreviewIcon={this.showPreviewIcon}
             autoDownload={this.autoDownload}
             autoDownloadUrlTemplate={this.autoDownloadUrlTemplate}
             message={this.message}

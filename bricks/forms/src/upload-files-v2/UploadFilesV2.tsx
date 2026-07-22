@@ -21,6 +21,7 @@ interface UploadFilesV2Props extends FormItemWrapperProps {
   onError?: (file: any) => void;
   onRemove?: (file: any) => void;
   onDownload?: (file: any) => void;
+  onPreview?: (file: any) => void;
   onCustomError?: (type: string, file: any) => void;
   value?: UploadFileValueItem[];
   autoUpload?: boolean;
@@ -40,6 +41,7 @@ interface UploadFilesV2Props extends FormItemWrapperProps {
   hideDragBtnWhenAchieveMax?: boolean;
   uploadButtonProps?: UploadButtonProps;
   showDownloadIcon?: boolean;
+  showPreviewIcon?: boolean;
   autoDownload?: boolean;
   autoDownloadUrlTemplate?: string;
   // 文件名称校验格式（正则表达式）
@@ -310,6 +312,16 @@ export function RealUploadFile(
     props.onDownload?.(copyE);
   };
 
+  const handlePreview = (e: any) => {
+    // 与 handleDownload 保持一致：用 value 中剥过外层的 response 替换
+    const copyE = cloneDeep(e);
+    const fileInValue = value?.find((file) => file.uid === copyE.uid);
+    if (fileInValue) {
+      copyE.response = fileInValue.response;
+    }
+    props.onPreview?.(copyE);
+  };
+
   const uploadNode = () => {
     if (props.hideUploadButton && !props.uploadDraggable) {
       return null;
@@ -385,19 +397,40 @@ export function RealUploadFile(
       showInfo: false,
     },
     showUploadList: {
-      showDownloadIcon: props.showDownloadIcon,
+      showDownloadIcon: props.showDownloadIcon || props.showPreviewIcon,
       // eslint-disable-next-line react/display-name
       downloadIcon: (file: UploadFile): ReactNode => (
-        <GeneralIcon
-          icon={{
-            lib: "antd",
-            theme: "outlined",
-            icon: "download",
-          }}
-          style={{
-            display: "inline-block",
-          }}
-        />
+        <>
+          {props.showPreviewIcon && file.status !== "uploading" && (
+            <GeneralIcon
+              icon={{
+                lib: "antd",
+                theme: "outlined",
+                icon: "eye",
+              }}
+              style={{
+                display: "inline-block",
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handlePreview(file);
+              }}
+            />
+          )}
+          {props.showDownloadIcon && (
+            <GeneralIcon
+              icon={{
+                lib: "antd",
+                theme: "outlined",
+                icon: "download",
+              }}
+              style={{
+                display: "inline-block",
+              }}
+            />
+          )}
+        </>
       ),
       // eslint-disable-next-line react/display-name
       removeIcon: (file: UploadFile): ReactNode =>
@@ -437,10 +470,10 @@ export function RealUploadFile(
   return (
     <div ref={ref} className={styles.uploadContainer}>
       {props.uploadDraggable ? (
-        // @ts-ignore
+        // @ts-expect-error antd Upload.Dragger 类型定义与实际用法不匹配
         <Upload.Dragger {...uploadProps}>{uploadNode()}</Upload.Dragger>
       ) : (
-        // @ts-ignore
+        // @ts-expect-error antd Upload 类型定义与实际用法不匹配
         <Upload {...uploadProps}>{uploadNode()}</Upload>
       )}
     </div>
@@ -461,7 +494,9 @@ export function UploadFilesV2(props: UploadFilesV2Props): React.ReactElement {
         onError={props.onError}
         onCustomError={props.onCustomError}
         onDownload={props.onDownload}
+        onPreview={props.onPreview}
         showDownloadIcon={props.showDownloadIcon}
+        showPreviewIcon={props.showPreviewIcon}
         autoDownload={props.autoDownload}
         autoDownloadUrlTemplate={props.autoDownloadUrlTemplate}
         url={props.url}
