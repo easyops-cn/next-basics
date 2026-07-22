@@ -66,6 +66,8 @@
 
       /* 删除按钮 */
       :global(.ant-upload-list-item-card-actions) {
+        display: flex;
+        gap: 8px;
         :global(.ant-upload-list-item-card-actions-btn) {
           &:hover {
             background-color: transparent;
