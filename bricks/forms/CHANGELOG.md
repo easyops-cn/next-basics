@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.309.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.18...@next-bricks/forms@1.309.0) (2026-07-22)
+
+
+### Features
+
+* **forms:** upload-files-v2 新增文件预览图标功能 ([bde6769](https://github.com/easyops-cn/next-basics/commit/bde67690a98930d585c46353b17076f75a1ae8b8))
+
+
+
+
+
 ## [1.308.18](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.308.17...@next-bricks/forms@1.308.18) (2026-07-17)
 
 
