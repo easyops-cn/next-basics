@@ -336,7 +336,7 @@ export class UploadFilesV2Element
 
   /**
    * @detail `{url?:string,response?:object,file?:object,uid:string,name:string}`
-   * @description 	点击预览图标发出的事件
+   * @description   点击预览图标发出的事件
    */
   @event({ type: "upload.files.preview" }) previewEvent: EventEmitter<any>;
   private _handlePreview = (value: any): void => {
