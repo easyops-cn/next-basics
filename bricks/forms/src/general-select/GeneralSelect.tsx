@@ -13,7 +13,7 @@ import {
   handleHttpError,
   useProvider,
 } from "@next-core/brick-kit";
-import { Select, Tag } from "antd";
+import { Select, Tag, Tooltip } from "antd";
 import {
   formatOptions,
   FormItemWrapper,
@@ -25,12 +25,55 @@ import { debounce, groupBy, isNil, isEqual, trim, keyBy } from "lodash";
 import { GeneralOption } from "@next-libs/forms/dist/types/interfaces";
 import { maxTagCountType } from "./index";
 import classNames from "classnames";
-export const setTooltip = (event: React.MouseEvent) => {
-  const target = event?.target as HTMLDivElement;
-  if (target?.offsetWidth < target?.scrollWidth) {
-    target.setAttribute("title", target.innerText);
-  }
+
+/**
+ * 判断目标元素是否发生文本溢出（内容宽度超过容器可见宽度）。
+ */
+const isOverflow = (target: HTMLElement | null | undefined): boolean => {
+  return Boolean(target && target.offsetWidth < target.scrollWidth);
 };
+
+/**
+ * 使用 antd Tooltip 包裹内容，仅当文本溢出时才显示提示，
+ * 保持与原原生 `title` 行为一致。检测容器自身或其内部首个溢出的后代元素。
+ */
+const OverflowTooltip: React.FC<{
+  children: React.ReactElement;
+}> = ({ children }) => {
+  const containerRef = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+  const [title, setTitle] = useState("");
+
+  const handleMouseEnter = () => {
+    const root = containerRef.current;
+    const candidates = root
+      ? [root, ...Array.from(root.querySelectorAll<HTMLElement>("*"))]
+      : [];
+    const overflowed = candidates.find(isOverflow);
+    if (overflowed) {
+      setTitle(overflowed.innerText ?? "");
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+  };
+
+  return (
+    <Tooltip
+      visible={visible}
+      title={title}
+      mouseEnterDelay={0}
+      mouseLeaveDelay={0}
+    >
+      {React.cloneElement(children, {
+        ref: containerRef,
+        onMouseEnter: handleMouseEnter,
+        onMouseLeave: () => setVisible(false),
+      })}
+    </Tooltip>
+  );
+};
+
 export const match = (input: string, field: string | number) => {
   return field?.toString()?.toLowerCase()?.includes(input.trim().toLowerCase());
 };
@@ -183,6 +226,7 @@ export function GeneralSelectLegacy(
        * 2、value相同，但optionData更新了也会触发一次
        */
       if (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         checkedValue !== preOptionData?.value ||
         (!isNil(checkedValue) &&
@@ -251,10 +295,12 @@ export function GeneralSelectLegacy(
           }
         })();
       } else {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         props?.useBackend?.provider &&
           // eslint-disable-next-line no-console
           console.error(
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             `Please use "contract api" instead of "${props?.useBackend?.provider}".`
           );
@@ -328,44 +374,50 @@ export function GeneralSelectLegacy(
         })}
         disabled={op.disabled}
       >
-        <div
-          className={classNames(style.option, {
-            [style.wrapOption]: optionsWrap,
-          })}
-          onMouseEnter={setTooltip}
-        >
-          {mode !== "tags" && mode !== "multiple" && optionsMode === "tags" ? (
-            <Tag color={op.color} style={{ borderRadius: "5px" }}>
-              {op.label}
-            </Tag>
-          ) : (
-            <div className={style.textContainer}>
-              <span
-                className={classNames(style.label, {
-                  [style.wrapLabel]: optionsWrap,
-                })}
-              >
+        <OverflowTooltip>
+          <div
+            className={classNames(style.option, {
+              [style.wrapOption]: optionsWrap,
+            })}
+          >
+            {mode !== "tags" &&
+            mode !== "multiple" &&
+            optionsMode === "tags" ? (
+              <Tag color={op.color} style={{ borderRadius: "5px" }}>
                 {op.label}
-              </span>
-              {op.caption && (
-                <span className={style.caption}>{op.caption}</span>
-              )}
-            </div>
-          )}
+              </Tag>
+            ) : (
+              <div className={style.textContainer}>
+                <span
+                  className={classNames(style.label, {
+                    [style.wrapLabel]: optionsWrap,
+                  })}
+                >
+                  {op.label}
+                </span>
+                {op.caption && (
+                  <span className={style.caption}>{op.caption}</span>
+                )}
+              </div>
+            )}
 
-          {suffix
-            ? suffix.useBrick &&
-              showSuffix(op as GeneralComplexOption) && (
-                <div className={style.suffixContainer} style={suffixStyle}>
-                  <BrickAsComponent useBrick={suffix.useBrick} data={op} />
-                </div>
-              )
-            : suffixBrick && (
-                <div className={style.suffixContainer} style={suffixBrickStyle}>
-                  <BrickAsComponent useBrick={suffixBrick} data={op} />
-                </div>
-              )}
-        </div>
+            {suffix
+              ? suffix.useBrick &&
+                showSuffix(op as GeneralComplexOption) && (
+                  <div className={style.suffixContainer} style={suffixStyle}>
+                    <BrickAsComponent useBrick={suffix.useBrick} data={op} />
+                  </div>
+                )
+              : suffixBrick && (
+                  <div
+                    className={style.suffixContainer}
+                    style={suffixBrickStyle}
+                  >
+                    <BrickAsComponent useBrick={suffixBrick} data={op} />
+                  </div>
+                )}
+          </div>
+        </OverflowTooltip>
       </Select.Option>
     ));
   };
@@ -388,45 +440,74 @@ export function GeneralSelectLegacy(
     return <EasyopsEmpty {..._emptyProps} />;
   }, [emptyProps, requestStatus, props.useBackend]);
 
+  // Select 根 DOM 检测：已选中的值/tag 文本溢出时显示 antd Tooltip。
+  const selectWrapperRef = useRef<HTMLSpanElement | null>(null);
+  const [selectTooltipVisible, setSelectTooltipVisible] = useState(false);
+  const [selectTooltipTitle, setSelectTooltipTitle] = useState("");
+
   return (
-    <Select
-      ref={ref}
-      className={classNames(
-        { [style.suffixBrickSelect]: suffix || suffixBrick },
-        { [style.wrapHeight]: optionsWrap }
-      )}
-      {...searchProps}
-      value={checkedValue}
-      size={props.size}
-      maxTagCount={props.maxTagCount}
-      disabled={props.disabled}
-      defaultActiveFirstOption={defaultActiveFirstOption}
-      mode={props.mode as "multiple" | "tags"}
-      placeholder={props.placeholder}
-      onChange={handleChange}
-      onMouseEnter={setTooltip}
-      dropdownMatchSelectWidth={props.dropdownMatchSelectWidth}
-      allowClear={props.allowClear}
-      style={props.inputBoxStyle}
-      onSearch={handleSearch}
-      tokenSeparators={tokenSeparators}
-      {...(props.popoverPositionType === "parent"
-        ? { getPopupContainer: (triggerNode) => triggerNode.parentElement }
-        : {})}
-      dropdownStyle={{ padding: "2px", ...props.dropdownStyle }}
-      notFoundContent={notFoundContent}
-      loading={requestStatus === "loading"}
-      bordered={props.bordered}
-      onBlur={props.onBlur}
-      onFocus={() => {
-        props.onFocus?.();
-        handleSearchQuery("", "search");
+    <Tooltip
+      visible={selectTooltipVisible}
+      onVisibleChange={(open) => {
+        if (!open) {
+          setSelectTooltipVisible(false);
+          return;
+        }
+        const root = selectWrapperRef.current;
+        const candidates = root
+          ? [root, ...Array.from(root.querySelectorAll<HTMLElement>("*"))]
+          : [];
+        const overflowed = candidates.find(isOverflow);
+        if (overflowed) {
+          setSelectTooltipTitle(overflowed.innerText ?? "");
+          setSelectTooltipVisible(true);
+        } else {
+          setSelectTooltipVisible(false);
+        }
       }}
+      title={selectTooltipTitle}
+      overlayStyle={{ maxWidth: "70vw" }}
     >
-      {props.groupBy
-        ? getOptsGroups(options, props.groupBy)
-        : getOptions(options)}
-    </Select>
+      <span ref={selectWrapperRef} className={style.selectWrapper}>
+        <Select
+          ref={ref}
+          className={classNames(
+            { [style.suffixBrickSelect]: suffix || suffixBrick },
+            { [style.wrapHeight]: optionsWrap }
+          )}
+          {...searchProps}
+          value={checkedValue}
+          size={props.size}
+          maxTagCount={props.maxTagCount}
+          disabled={props.disabled}
+          defaultActiveFirstOption={defaultActiveFirstOption}
+          mode={props.mode as "multiple" | "tags"}
+          placeholder={props.placeholder}
+          onChange={handleChange}
+          dropdownMatchSelectWidth={props.dropdownMatchSelectWidth}
+          allowClear={props.allowClear}
+          style={props.inputBoxStyle}
+          onSearch={handleSearch}
+          tokenSeparators={tokenSeparators}
+          {...(props.popoverPositionType === "parent"
+            ? { getPopupContainer: (triggerNode) => triggerNode.parentElement }
+            : {})}
+          dropdownStyle={{ padding: "2px", ...props.dropdownStyle }}
+          notFoundContent={notFoundContent}
+          loading={requestStatus === "loading"}
+          bordered={props.bordered}
+          onBlur={props.onBlur}
+          onFocus={() => {
+            props.onFocus?.();
+            handleSearchQuery("", "search");
+          }}
+        >
+          {props.groupBy
+            ? getOptsGroups(options, props.groupBy)
+            : getOptions(options)}
+        </Select>
+      </span>
+    </Tooltip>
   );
 }
 

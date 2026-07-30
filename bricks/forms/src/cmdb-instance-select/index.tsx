@@ -61,8 +61,10 @@ export interface CmdbInstanceSelectElementProps {
   useBrickVisible?: boolean;
 }
 
-
-export class CmdbInstanceSelectElement extends FormItemElement  implements CmdbInstanceSelectElementProps {
+export class CmdbInstanceSelectElement
+  extends FormItemElement
+  implements CmdbInstanceSelectElementProps
+{
   /* =========================== Group: basic =========================== */
 
   /**
@@ -219,13 +221,13 @@ export class CmdbInstanceSelectElement extends FormItemElement  implements CmdbI
   showSearchTip?: boolean;
 
   /**
-   * @default false
+   * @default true
    * @required false
    * @description 下拉框中是否启用tooltip显示label全称,label过长时可使用
    * @group ui
    */
-  @property({ type: Boolean })
-  showTooltip?: boolean;
+  @property({ attribute: false })
+  showTooltip?: boolean = true;
 
   /* =========================== Group: style =========================== */
 

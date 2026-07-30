@@ -410,7 +410,7 @@ describe("GeneralSelect", () => {
         onSearch={mockSearch}
       />
     );
-    wrapper.invoke("onSearch")("1" as string);
+    wrapper.find(Select).invoke("onSearch")("1" as string);
     expect(mockSearch).toBeCalledWith("1");
   });
 });
