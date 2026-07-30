@@ -71,6 +71,11 @@
   }
 }
 
+.selectWrapper {
+  display: inline-block;
+  width: 100%;
+}
+
 :global(.ant-select-selector) .suffixContainer {
   margin-top: -1px;
 }
