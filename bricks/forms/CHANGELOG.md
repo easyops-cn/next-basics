@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.310.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.309.2...@next-bricks/forms@1.310.0) (2026-07-30)
+
+
+### Features
+
+* **forms:** general-select 溢出文本使用 antd Tooltip 展示 ([6c775bb](https://github.com/easyops-cn/next-basics/commit/6c775bb3b7b45daecea495421ed6fe7dfda4c851))
+
+
+
+
+
 ## [1.309.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.309.1...@next-bricks/forms@1.309.2) (2026-07-22)
 
 **Note:** Version bump only for package @next-bricks/forms
