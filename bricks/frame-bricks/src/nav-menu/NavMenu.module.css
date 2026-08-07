@@ -233,10 +233,6 @@
     }
   }
 
-  .simpleMenuItem:not(:last-child) {
-    margin-bottom: 0px;
-  }
-
   .simpleMenuItem:global(.ant-menu-item-active) {
     color: inherit;
     background-color: var(--v8-top-menu-item-hover) !important;
