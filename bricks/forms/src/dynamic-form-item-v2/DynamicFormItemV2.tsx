@@ -58,6 +58,7 @@ interface LegacyDynamicFormItemV2Ref {
   validateFields: FormInstance["validateFields"];
   columns: Column[];
   setColumns: React.Dispatch<React.SetStateAction<Column[]>>;
+  clearRowFieldValue: (rowIndex: number, fieldName: string) => void;
 }
 
 type DynamicFormValue = {
@@ -99,6 +100,17 @@ export const LegacyDynamicFormItemV2 = forwardRef(
       validateFields: form.validateFields,
       columns: columns,
       setColumns: setColumns,
+      clearRowFieldValue: (rowIndex: number, fieldName: string) => {
+        form.setFieldsValue({
+          [FORM_LIST_NAME]: {
+            [rowIndex]: { [fieldName]: undefined },
+          },
+        });
+        const newValues = form.getFieldValue(FORM_LIST_NAME);
+        if (newValues) {
+          onChange?.([...newValues]);
+        }
+      },
     }));
 
     useEffect(() => {
@@ -350,6 +362,7 @@ export const LegacyDynamicFormItemV2 = forwardRef(
 export interface upperDynamicFormItemV2Ref {
   columns: Column[];
   setColumns: React.Dispatch<React.SetStateAction<Column[]>>;
+  clearRowFieldValue: (rowIndex: number, fieldName: string) => void;
 }
 
 interface DynamicFormItemV2Props extends LegacyDynamicFormItemV2Props {
@@ -386,6 +399,9 @@ export function DynamicFormItemV2(
     },
     setColumns: (updater: React.SetStateAction<Column[]>) => {
       DynamicFormItemV2Ref.current?.setColumns?.(updater);
+    },
+    clearRowFieldValue: (rowIndex: number, fieldName: string) => {
+      DynamicFormItemV2Ref.current?.clearRowFieldValue?.(rowIndex, fieldName);
     },
   }));
 
