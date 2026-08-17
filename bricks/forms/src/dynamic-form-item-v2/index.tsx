@@ -153,6 +153,14 @@ export class DynamicFormItemV2Element
   private upperRef = React.createRef<upperDynamicFormItemV2Ref>();
 
   /**
+   * @description 清空指定行、指定表单项的值。rowIndex 为行索引（从 0 开始），fieldName 为列的 name 属性值
+   */
+  @method()
+  clearRowFieldValue(rowIndex: number, fieldName: string): void {
+    this.upperRef.current?.clearRowFieldValue?.(rowIndex, fieldName);
+  }
+
+  /**
    *
    * @description 当select表单项配置的props.options为二维数组时,用于更新指定的options; 若传入的options为null,则表示删除该options; 若传入的rowIndex为'all',则表示全覆盖更新
    */
