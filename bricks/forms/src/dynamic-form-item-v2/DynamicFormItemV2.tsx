@@ -101,15 +101,13 @@ export const LegacyDynamicFormItemV2 = forwardRef(
       columns: columns,
       setColumns: setColumns,
       clearRowFieldValue: (rowIndex: number, fieldName: string) => {
-        form.setFieldsValue({
-          [FORM_LIST_NAME]: {
-            [rowIndex]: { [fieldName]: undefined },
-          },
-        });
-        const newValues = form.getFieldValue(FORM_LIST_NAME);
-        if (newValues) {
-          onChange?.([...newValues]);
+        const listData = form.getFieldValue(FORM_LIST_NAME) || [];
+        let newListData = [...listData];
+        if (newListData[rowIndex]) {
+          newListData[rowIndex] = { ...newListData[rowIndex], [fieldName]: undefined };
         }
+        form.setFieldsValue({ [FORM_LIST_NAME]: newListData });
+        onChange?.([...newListData]);
       },
     }));
 
