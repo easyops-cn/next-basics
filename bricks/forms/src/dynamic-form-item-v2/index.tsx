@@ -153,11 +153,11 @@ export class DynamicFormItemV2Element
   private upperRef = React.createRef<upperDynamicFormItemV2Ref>();
 
   /**
-   * @description 清空指定行、指定表单项的值。rowIndex 为行索引（从 0 开始），fieldName 为列的 name 属性值
+   * @description 清空指定行、指定表单项的值。rowIndex 为行索引（从 0 开始），name 为列的 name 属性值
    */
   @method()
-  clearRowFieldValue(rowIndex: number, fieldName: string): void {
-    this.upperRef.current?.clearRowFieldValue?.(rowIndex, fieldName);
+  clearRowFieldValue(args: { rowIndex: number; name: string }): void {
+    this.upperRef.current?.clearRowFieldValue?.(args.rowIndex, args.name);
   }
 
   /**
