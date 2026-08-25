@@ -97,6 +97,7 @@ export const LegacyDynamicFormItemV2 = forwardRef(
     const [form] = Form.useForm();
     const [columns, setColumns] = React.useState<Column[]>([]);
     const isProcessingChanges = React.useRef(false);
+    const prevRowCount = React.useRef(0);
     useEffect(() => {
       setColumns(props.columns || []);
     }, [props.columns]);
@@ -136,7 +137,12 @@ export const LegacyDynamicFormItemV2 = forwardRef(
         | undefined;
       const allRows = allValues?.[FORM_LIST_NAME];
 
-      if (changedRows && allRows) {
+      // 行数变化（添加/删除行）时，跳过列级 onValuesChange 回调
+      const currentRowCount = allRows?.length ?? 0;
+      const isRowStructChange = currentRowCount !== prevRowCount.current;
+      prevRowCount.current = currentRowCount;
+
+      if (changedRows && allRows && !isRowStructChange) {
         const updatedRows = [...allRows];
         let hasUpdates = false;
 
