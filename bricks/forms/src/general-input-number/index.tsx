@@ -10,19 +10,6 @@ import { GeneralInputNumber } from "./GeneralInputNumber";
 import { FormItemElement } from "@next-libs/forms";
 import { UseBrickConf } from "@next-core/brick-types";
 
-/**
- * @id forms.general-input-number
- * @name forms.general-input-number
- * @docKind brick
- * @description 通用的数字输入框
- * @author jo
- * @slots
- * @history
- * @excludesInherit
- *  pattern
- * @memo
- * > Tips: 对于 event.detail 为 `Keyboard Event` 时， 由于 react 对于合成事件的处理，打印出来的整个 `Keyboard Event` 相关属性都为 null, 但可通过单独查看某个属性来得到值（如示例所示），相关详情信息可[查看 react 合成事件](https://zh-hans.reactjs.org/docs/events.html#event-pooling)。
- */
 export interface GeneralInputNumberElementProps {
   name?: string;
   value?: number | string;
@@ -36,12 +23,30 @@ export interface GeneralInputNumberElementProps {
 }
 
 
+/**
+ * @id forms.general-input-number
+ * @name forms.general-input-number
+ * @docKind brick
+ * @description 通用的数字输入框
+ * @description.en General number input box
+ * @author jo
+ * @slots
+ * @history
+ * @excludesInherit
+ *  pattern
+ * @memo
+ * > Tips: 对于 event.detail 为 `Keyboard Event` 时， 由于 react 对于合成事件的处理，打印出来的整个 `Keyboard Event` 相关属性都为 null, 但可通过单独查看某个属性来得到值（如示例所示），相关详情信息可[查看 react 合成事件](https://zh-hans.reactjs.org/docs/events.html#event-pooling)。
+ * @memo.en
+ * > Tips: When `event.detail` is a `Keyboard Event`, because of how react handles synthetic events, all the printed properties related to the `Keyboard Event` are null, but the value can be obtained by viewing an individual property (as shown in the example). For details, see [React SyntheticEvent](https://zh-hans.reactjs.org/docs/events.html#event-pooling).
+ */
+
 export class GeneralInputNumberElement extends FormItemElement  implements GeneralInputNumberElementProps {
   /* =========================== Group: basic =========================== */
 
   /**
    * @required true
    * @description 数字输入框字段名
+   * @description.en Field name of the number input box
    * @group basic
    */
   @property({ attribute: false }) declare name: string;
@@ -49,6 +54,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
   /**
    * @required false
    * @description 数字输入框初始值
+   * @description.en Initial value of the number input box
    * @editor number
    * @group basic
    */
@@ -60,6 +66,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
   /**
    * @required false
    * @description 数字输入框占位说明
+   * @description.en Placeholder text of the number input box
    * @group basic
    */
   @property({ attribute: false }) declare placeholder: string;
@@ -69,6 +76,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
   /**
    * @required false
    * @description 数字输入框字段说明
+   * @description.en Field description of the number input box
    * @group formLabel
    */
   @property({ attribute: false }) declare label: string;
@@ -78,6 +86,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
   /**
    * @required false
    * @description 是否必填项
+   * @description.en Whether it is required
    * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
@@ -85,6 +94,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
   /**
    * @required false
    * @description 校验文本信息
+   * @description.en Validation message
    * @editor message
    * @group formValidation
    */
@@ -92,6 +102,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
 
   /**
    * @description 数字输入框最小值
+   * @description.en Minimum value of the number input box
    * @group formValidation
    */
   @property({
@@ -102,6 +113,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
   /**
    * @kind number
    * @description 数字输入框最大值
+   * @description.en Maximum value of the number input box
    * @group formValidation
    */
   @property({
@@ -113,6 +125,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
 
   /**
    * @description 数字输入框步长
+   * @description.en Step of the number input box
    * @group advanced
    */
   @property({
@@ -122,6 +135,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
 
   /**
    * @description 数值精度
+   * @description.en Value precision
    * @group advanced
    */
   @property({
@@ -133,12 +147,14 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
 
   /**
    * @description 是否禁用
+   * @description.en Whether to disable it
    * @group ui
    */
   @property({ type: Boolean }) disabled?: boolean;
 
   /**
    * @description 是否只读
+   * @description.en Whether it is read-only
    * @group ui
    */
   @property({ type: Boolean }) readOnly?: boolean;
@@ -147,6 +163,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
 
   /**
    * @description 输入框样式
+   * @description.en Input box style
    * @group style
    */
   @property({
@@ -159,6 +176,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
    * @required false
    * @default -
    * @description 后置标签，支持在input框后面添加自定义构件 具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
+   * @description.en Addon after, supports adding a custom brick after the input box. For details, see [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
    * @group ui
    */
   @property({
@@ -172,6 +190,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
 
   /**
    * @description 输入改变，`event.detail` 是当前值
+   * @description.en Triggered on input change, `event.detail` is the current value
    */
   @event({ type: "general.input.change" }) changeEvent: EventEmitter<
     number | string
@@ -185,6 +204,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
   };
   /**
    * @description 	获得焦点时触发
+   * @description.en Triggered when focused
    */
   @event({ type: "general.input.focus" }) focusEvent: EventEmitter;
   private _handleFocus = (): void => {
@@ -192,6 +212,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
   };
   /**
    * @description 失焦时触发, 而且会传出当前输入框当前值
+   * @description.en Triggered when blurred, and the current value of the input box is emitted
    */
   @event({ type: "general.input.blur" }) blurEvent: EventEmitter<
     string | number
@@ -201,6 +222,7 @@ export class GeneralInputNumberElement extends FormItemElement  implements Gener
   };
   /**
    * @description 按下enter键触发，`event.detail` 为 [Keyboard Event](https://zh-hans.reactjs.org/docs/events.html#keyboard-events)
+   * @description.en Triggered when the enter key is pressed, `event.detail` is a [Keyboard Event](https://zh-hans.reactjs.org/docs/events.html#keyboard-events)
    */
   @event({ type: "general.input.press.enter" }) enterPressEvent: EventEmitter<
     Record<string, any>

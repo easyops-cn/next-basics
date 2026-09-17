@@ -12,22 +12,6 @@ import { groupBy, startsWith } from "lodash";
 import { FormItemElement } from "@next-libs/forms";
 import { UserOrUserGroupSelectValue } from "../interfaces";
 
-/**
- * @id forms.user-or-user-group-select
- * @name forms.user-or-user-group-select
- * @editor forms.general-select
- * @docKind brick
- * @description 支持配置选择用户／用户组，下拉框／弹框选择等
- * @author lynette
- * @slots
- * @history
- * 1.96.0:新增属性 `staticList`,`mergeUseAndUserGroup`
- * 1.31.0:新增 `optionsMode` 属性
- * 1.28.0:新增 `user.group.change` 事件
- * @excludesInherit
- *  pattern
- * @memo
- */
 export interface UserOrUserGroupSelectElementProps {
   name?: string;
   placeholder?: string;
@@ -38,6 +22,24 @@ export interface UserOrUserGroupSelectElementProps {
 }
 
 
+/**
+ * @id forms.user-or-user-group-select
+ * @name forms.user-or-user-group-select
+ * @editor forms.general-select
+ * @docKind brick
+ * @description 支持配置选择用户／用户组，下拉框／弹框选择等
+ * @description.en Supports configuring the selection of users/user groups, with dropdown or modal selection, etc.
+ * @author lynette
+ * @slots
+ * @history
+ * 1.96.0:新增属性 `staticList`,`mergeUseAndUserGroup`
+ * 1.31.0:新增 `optionsMode` 属性
+ * 1.28.0:新增 `user.group.change` 事件
+ * @excludesInherit
+ *  pattern
+ * @memo
+ */
+
 export class UserOrUserGroupSelectElement extends FormItemElement  implements UserOrUserGroupSelectElementProps {
   /* =========================== Group: basic =========================== */
 
@@ -45,12 +47,14 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
    * @required true
    * @default -
    * @description 下拉框字段名
+   * @description.en Field name of the dropdown
    * @group basic
    */
   @property({ attribute: false }) declare name: string;
 
   /**
    * @description 用户（组）选择构件中下拉框的初始值。按照我们平台的用户（组）数据，selectedUser 为 "USER" 模型中的 name，selectedUserGroup 为 "USER_GROUP" 模型中的 ":" + instanceId。值也可以为合并用户和用户组的 `string[]` 类型。
+   * @description.en Initial value of the dropdown in the user (group) select brick. According to our platform's user (group) data, selectedUser is the name in the "USER" model, and selectedUserGroup is ":" + instanceId in the "USER_GROUP" model. The value can also be a `string[]` type that merges users and user groups.
    * @group basic
    */
   @property({
@@ -61,6 +65,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
   /**
    * @required false
    * @description 下拉框占位说明
+   * @description.en Placeholder of the dropdown
    * @group basic
    */
   @property({ attribute: false }) declare placeholder: string;
@@ -70,6 +75,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
   /**
    * @required false
    * @description 下拉框字段说明
+   * @description.en Field label of the dropdown
    * @group formLabel
    */
   @property({ attribute: false }) declare label: string;
@@ -79,6 +85,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
   /**
    * @required false
    * @description 是否必填项
+   * @description.en Whether the field is required
    * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
@@ -90,6 +97,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
    * @required false
    * @default -
    * @description 是否禁用
+   * @description.en Whether to disable it
    * @group ui
    */
   @property({ attribute: false })
@@ -98,6 +106,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
   /**
    * @default false
    * @description 是否隐藏“快速选择我”按钮
+   * @description.en Whether to hide the "Select me quickly" button
    * @group ui
    */
   @property({
@@ -108,6 +117,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
   /**
    * @default false
    * @description 隐藏无效用户
+   * @description.en Hide invalid users
    * @group ui
    */
   @property({ type: Boolean })
@@ -116,6 +126,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
   /**
    * @default false
    * @description 是否隐藏搜索 icon，即不支持通过 cmdb 的 modal 选择器选择
+   * @description.en Whether to hide the search icon, i.e. not supporting selection through the cmdb modal selector
    * @group ui
    */
   @property({
@@ -128,6 +139,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
   /**
    * @default "all"
    * @description 支持选择用户、用户组或者两者
+   * @description.en Supports selecting users, user groups, or both
    * @editor radio
    * @editorProps {
    *   "optionType": "button",
@@ -163,6 +175,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
 
   /**
    * @description 固定白名单列表，该列表中的值用户不能取消。
+   * @description.en Fixed whitelist, the values in this list cannot be deselected by users.
    * @group advanced
    */
   @property({
@@ -173,6 +186,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
   /**
    * @default false
    * @description 是否合并用户和用户组数据，当设置为 true 时，`user.group.change` 事件的 detail 都为 `string[]` 格式。
+   * @description.en Whether to merge user and user group data. When set to true, the details of the `user.group.change` event are all in `string[]` format.
    * @group advanced
    */
   @property({
@@ -183,6 +197,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
   /**
    * @default false
    * @description 表单项值是否合并用户和用户组数据，当设置为 true 时，表单项值和 `user.group.change` 事件的 detail 都为 `string[]` 格式。
+   * @description.en Whether the form item value merges user and user group data. When set to true, both the form item value and the detail of the `user.group.change` event are in `string[]` format.
    * @group advanced
    */
   @property({
@@ -192,6 +207,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
 
   /**
    * @description 模型列表，不传该属性构件内部会发请求获取该列表，如果需要传该属性则优先使用外部传进来的数据，该数据来自"providers-of-cmdb.cmdb-object-api-get-object-ref" 如 demo 所示
+   * @description.en Model list. If this property is not passed, the brick will send a request internally to get the list. If this property is passed, the data passed from outside takes precedence. The data comes from "providers-of-cmdb.cmdb-object-api-get-object-ref", as shown in the demo
    * @group advanced
    */
   @property({ attribute: false })
@@ -199,6 +215,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
 
   /**
    * @description 按权限过滤的权限 action 列表
+   * @description.en List of permission actions for permission filtering
    * @group advanced
    */
   @property({
@@ -208,6 +225,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
 
   /**
    * @description 用户和用户组`search`接口的`query`，此参数比较适用于，两者接口需要参数相同的情况
+   * @description.en The `query` of the `search` API for users and user groups, more suitable for cases where both APIs require the same parameters
    * @group advanced
    */
   @property({
@@ -217,6 +235,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
 
   /**
    * @description 针对`USER/instance/_search`接口的`query`，此参数比较适用于，可能只需要针对用户做筛选的情况
+   * @description.en The `query` for the `USER/instance/_search` API, more suitable for cases where only users need to be filtered
    * @group advanced
    */
   @property({
@@ -226,6 +245,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
 
   /**
    * @description 针对`USER_GROUP/instance/_search`接口的`query`，此参数比较适用于，可能只需要针对用户组做筛选的情况
+   * @description.en The `query` for the `USER_GROUP/instance/_search` API, more suitable for cases where only user groups need to be filtered
    * @group advanced
    */
   @property({
@@ -235,6 +255,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
 
   /**
    * @description 是否多选，默认为多选
+   * @description.en Whether multiple selection is enabled, defaults to multiple selection
    * @group advanced
    */
   @property({
@@ -247,6 +268,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
    * @required false
    * @default
    * @description 数据源id
+   * @description.en Data source id
    */
   @property({ type: String })
   externalSourceId: string;
@@ -256,6 +278,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
   /**
    * @detail `string[]|{selectedUser: string[],selectedUserGroup: string[]}`
    * @description 当选择用户变化时触发
+   * @description.en Triggered when the selected users change
    */
   @event({ type: "user.group.change" }) changeEvent: EventEmitter<any>;
   private _handleChange = (value: any) => {
@@ -272,6 +295,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement  implements Us
   /**
    * @detail `string[]`
    * @description 当选择用户变化时触发
+   * @description.en Triggered when the selected users change
    */
   @event({ type: "user.group.change.v2" }) changeEventV2: EventEmitter<
     string[]

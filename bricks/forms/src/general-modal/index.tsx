@@ -30,33 +30,6 @@ export interface ChildeFormElement extends HTMLElement {
   validate?: () => void;
 }
 
-/**
-* @id forms.general-modal
-* @name forms.general-modal
-* @docKind brick
-* @description 既可以作为一个独立的模态框表单，也可以作为表单里面的某个表单项存在
-* @author
-* @slots
-* content:模态框里面的内容
-* @history
-* 1.65.0:新增属性 `okDisabled`
-* 1.74.0:新增属性 `notResetWhenClose`、`dataSource`、`disableAfterClick`，事件 `modal.open`、`modal.close`
-* 1.76.0:`open` 和 `close` 方法新增 `noEvent` 选项
-* @memo
-* 该构件既可以作为一个独立的模态框表单，也可以作为表单里面的某个表单项存在，具体查看实例。
-*
-* 1.当作为独立模态框表单，可由其他触发，比如按钮。与general-modal+general-form组合起来不一样的是，这个模态框表单已经默认有了提交按钮及校验失败模态框不关闭的能力
-*
-* 2.当作为表单里面的表单项存在，可用于某个字段较复杂配置的情况下，配置构件收集数据<br/>
-
-* > Tips: slots.content 中的构件，如果不是用 general-forms，那么希望点击确认按钮有校验操作，则需自己实现类似于 general-forms 中的 validate 方法；希望点击取消按钮有重置操作，则需自己实现类似于 general-forms 中的 reset 方法。
-
-* ### OpenCloseOption
-
-*| property | type      | required | default | description |
-*| -------- | --------- | -------- | ------- | ----------- |
-*| noEvent  | `boolean` | -        | -       | 不触发事件  |
-*/
 export interface GeneralModalElementProps {
   modalTitle?: string;
   modalWidth?: string | number;
@@ -77,12 +50,58 @@ export interface GeneralModalElementProps {
 }
 
 
+/**
+* @id forms.general-modal
+* @name forms.general-modal
+* @docKind brick
+* @description 既可以作为一个独立的模态框表单，也可以作为表单里面的某个表单项存在
+* @description.en It can exist either as a standalone modal form or as a form item within a form
+* @author
+* @slots
+* content:模态框里面的内容
+* @slots.en
+* content:Content inside the modal
+* @history
+* 1.65.0:新增属性 `okDisabled`
+* 1.74.0:新增属性 `notResetWhenClose`、`dataSource`、`disableAfterClick`，事件 `modal.open`、`modal.close`
+* 1.76.0:`open` 和 `close` 方法新增 `noEvent` 选项
+* @memo
+* 该构件既可以作为一个独立的模态框表单，也可以作为表单里面的某个表单项存在，具体查看实例。
+*
+* 1.当作为独立模态框表单，可由其他触发，比如按钮。与general-modal+general-form组合起来不一样的是，这个模态框表单已经默认有了提交按钮及校验失败模态框不关闭的能力
+*
+* 2.当作为表单里面的表单项存在，可用于某个字段较复杂配置的情况下，配置构件收集数据<br/>
+
+* > Tips: slots.content 中的构件，如果不是用 general-forms，那么希望点击确认按钮有校验操作，则需自己实现类似于 general-forms 中的 validate 方法；希望点击取消按钮有重置操作，则需自己实现类似于 general-forms 中的 reset 方法。
+
+* ### OpenCloseOption
+
+*| property | type      | required | default | description |
+*| -------- | --------- | -------- | ------- | ----------- |
+*| noEvent  | `boolean` | -        | -       | 不触发事件  |
+* @memo.en
+* This brick can exist either as a standalone modal form or as a form item within a form. See the examples for details.
+*
+* 1. When used as a standalone modal form, it can be triggered by other things, such as a button. Unlike the combination of general-modal + general-form, this modal form already has a submit button by default and the ability to keep the modal open when validation fails.
+*
+* 2. When used as a form item within a form, it can be used when a field requires relatively complex configuration, collecting data through configuration bricks.<br/>
+
+* > Tips: For bricks in slots.content, if general-forms is not used and you want the confirm button to trigger validation, you need to implement a validate method similar to the one in general-forms yourself; if you want the cancel button to trigger a reset, you need to implement a reset method similar to the one in general-forms yourself.
+
+* ### OpenCloseOption
+
+*| property | type      | required | default | description |
+*| -------- | --------- | -------- | ------- | ----------- |
+*| noEvent  | `boolean` | -        | -       | Does not trigger events  |
+*/
+
 export class GeneralModalElement extends FormItemElement  implements GeneralModalElementProps {
   /**
    * @kind string
    * @required false
    * @default -
    * @description 表单模态框标题
+   * @description.en The title of the form modal
    * @group basic
    */
   @property()
@@ -93,6 +112,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
    * @required false
    * @default `"520px"`
    * @description 表单模态框宽度
+   * @description.en The width of the form modal
    * @group basic
    */
   @property({
@@ -105,6 +125,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
    * @required false
    * @default -
    * @description 标题图标
+   * @description.en The title icon
    * @group advanced
    */
   @property({ attribute: false }) titleIcon?: MenuIcon | SrcIcon;
@@ -114,6 +135,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
    * @required false
    * @default -
    * @description 打开和关闭弹窗事件的 `detail` 的数据源
+   * @description.en The data source for the `detail` of the modal open and close events
    * @group advanced
    */
   @property({
@@ -126,6 +148,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
    * @required false
    * @default `"确定"`
    * @description 模态框确认按钮文字
+   * @description.en The text of the modal confirm button
    * @group basic
    */
   @property()
@@ -136,6 +159,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
    * @required false
    * @default `false`
    * @description 是否禁用确认按钮
+   * @description.en Whether to disable the confirm button
    * @group basic
    */
   @property({ type: Boolean })
@@ -146,6 +170,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
    * @required false
    * @default `"取消"`
    * @description 模态框取消按钮文字
+   * @description.en The text of the modal cancel button
    * @group advanced
    */
   @property()
@@ -156,6 +181,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
    * @required false
    * @default -
    * @description 点击打开模态框的按钮文字
+   * @description.en The text of the button used to open the modal
    * @group advanced
    */
   @property()
@@ -166,6 +192,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
    * @required false
    * @default `false`
    * @description 点击确定按钮后自动禁用
+   * @description.en Automatically disable after the confirm button is clicked
    * @group advanced
    */
   @property({ type: Boolean })
@@ -176,6 +203,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
    * @required false
    * @default `false`
    * @description 关闭模态框时不重置表单
+   * @description.en Do not reset the form when the modal is closed
    * @group advanced
    */
   @property({ type: Boolean })
@@ -186,6 +214,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
    * @required false
    * @default `"primary"`
    * @description 模态框确认按钮类型
+   * @description.en The type of the modal confirm button
    * @enums "link"|"default"|"primary"|"ghost"|"dashed"|"danger"
    * @group advanced
    */
@@ -197,6 +226,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
    * @required false
    * @default `false`
    * @description 是否点击背景关闭模态框
+   * @description.en Whether to close the modal by clicking the background
    * @group advanced
    */
   @property({
@@ -209,6 +239,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
    * @required -
    * @default false
    * @description 是否显示模态框
+   * @description.en Whether to display the modal
    * @group advanced
    */
   @property({
@@ -222,6 +253,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
    * @default -
    * @deprecated
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 modalTitle
+   * @description.en [Deprecated] Field mapping, used together with dataSource to obtain the runtime modalTitle
    * @group advanced
    */
   @property({
@@ -233,6 +265,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
 
   /**
    * @description 是否可堆叠，开启后每次打开抽屉会将新的抽屉置于上层（zIndex ++）。注意：仅初始设置有效。
+   * @description.en Whether it can be stacked. After enabling it, each time a drawer is opened, the new drawer is placed on top (zIndex ++). Note: only the initial setting is effective.
    */
   @property({ type: Boolean })
   stackable: boolean;
@@ -396,6 +429,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
   /**
    *
    * @description  当点击 modal 自带的取消按钮时发出该事件，事件的 detail 为构件的 dataSource 属性的当前值
+   * @description.en Emitted when the cancel button built into the modal is clicked, and the detail of the event is the current value of the `dataSource` property of the brick
    * @detail `Record<string, any>`
    */
   @event({ type: "basic-bricks.general-modal.cancel" })
@@ -403,6 +437,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
   /**
    *
    * @description  当点击 modal 自带的确认按钮时发出该事件，事件的 detail 为构件的 dataSource 属性的当前值
+   * @description.en Emitted when the confirm button built into the modal is clicked, and the detail of the event is the current value of the `dataSource` property of the brick
    * @detail `Record<string, any>`
    */
   @event({ type: "basic-bricks.general-modal.confirm" })
@@ -410,11 +445,13 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
   /**
    * @detail `Record<string, any>`
    * @description  打开 modal 时发出该事件，事件的 detail 为构件的 dataSource 属性的当前值
+   * @description.en Emitted when the modal is opened, and the detail of the event is the current value of the `dataSource` property of the brick
    */
   @event({ type: "modal.open" }) openEvent: EventEmitter<Record<string, any>>;
   /**
    * @params `option?: OpenCloseOption`
    * @description  弹出模态框
+   * @description.en Open the modal
    */
   @method()
   open(option?: OpenCloseOption): void {
@@ -428,12 +465,14 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
   /**
    * @detail `Record<string, any>`
    * @description  关闭 modal 时发出该事件，事件的 detail 为构件的 dataSource 属性的当前值
+   * @description.en Emitted when the modal is closed, and the detail of the event is the current value of the `dataSource` property of the brick
    */
   @event({ type: "modal.close" }) closeEvent: EventEmitter<Record<string, any>>;
   /**
    *
    * @params `option?: OpenCloseOption`
    * @description 关闭模态框
+   * @description.en Close the modal
    */
   @method()
   close(option?: OpenCloseOption): void {
@@ -447,6 +486,7 @@ export class GeneralModalElement extends FormItemElement  implements GeneralModa
   /**
    *
    * @description  更新该表单项数据。通常在子构件为 general-form 的时候，校验成功事件"validate.success"中进行更新数据，参考[通用表单](developers/brick-book/brick/forms.general-form)
+   * @description.en Update the data of this form item. Usually, when the child brick is general-form, the data is updated in the validation success event "validate.success". See [General Form](developers/brick-book/brick/forms.general-form)
    */
   @method()
   updateValue(value: any): void {

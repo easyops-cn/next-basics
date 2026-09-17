@@ -14,7 +14,7 @@ export const structsFormItemV2Story: Story = {
     zh: "可编辑表格v2",
   },
   description: {
-    en: "",
+    en: "Add or edit struct",
     zh: "添加/编辑结构体",
   },
   icon: {

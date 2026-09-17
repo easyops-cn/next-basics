@@ -10,11 +10,18 @@ import { GeneralSwitch } from "./GeneralSwitch";
 import { FormItemElement } from "@next-libs/forms";
 import { MenuIcon } from "@next-core/brick-types";
 
+export interface GeneralSwitchElementProps {
+  name?: string;
+  label?: string;
+}
+
+
 /**
  * @id forms.general-switch
  * @name forms.general-switch
  * @docKind brick
  * @description 通用的开关
+ * @description.en A general switch
  * @author ice
  * @slots
  * @history
@@ -24,11 +31,6 @@ import { MenuIcon } from "@next-core/brick-types";
  *  pattern
  * @memo
  */
-export interface GeneralSwitchElementProps {
-  name?: string;
-  label?: string;
-}
-
 
 export class GeneralSwitchElement extends FormItemElement  implements GeneralSwitchElementProps {
   /* =========================== Group: basic =========================== */
@@ -36,12 +38,14 @@ export class GeneralSwitchElement extends FormItemElement  implements GeneralSwi
   /**
    * @required true
    * @description 表单项字段名
+   * @description.en Field name of the form item
    * @group basic
    */
   @property({ attribute: false }) declare name: string;
 
   /**
    * @description 初始值
+   * @description.en Initial value
    * @group basic
    */
   @property({ type: Boolean })
@@ -52,6 +56,7 @@ export class GeneralSwitchElement extends FormItemElement  implements GeneralSwi
   /**
    * @required false
    * @description 表单项字段说明
+   * @description.en Field description of the form item
    * @group formLabel
    */
   @property({ attribute: false }) declare label: string;
@@ -61,6 +66,7 @@ export class GeneralSwitchElement extends FormItemElement  implements GeneralSwi
   /**
    * @default false
    * @description 是否禁用
+   * @description.en Whether to disable
    * @group ui
    */
   @property({ type: Boolean })
@@ -68,6 +74,7 @@ export class GeneralSwitchElement extends FormItemElement  implements GeneralSwi
 
   /**
    * @description 开关大小
+   * @description.en Size of the switch
    * @enums "default"|"small"
    * @editor radio
    * @editorProps {
@@ -90,6 +97,7 @@ export class GeneralSwitchElement extends FormItemElement  implements GeneralSwi
 
   /**
    * @description 选中时的图标
+   * @description.en Icon when checked
    * @group ui
    */
   @property({ attribute: false })
@@ -97,6 +105,7 @@ export class GeneralSwitchElement extends FormItemElement  implements GeneralSwi
 
   /**
    * @description 非选中时的图标
+   * @description.en Icon when unchecked
    * @group ui
    */
   @property({ attribute: false })
@@ -104,6 +113,7 @@ export class GeneralSwitchElement extends FormItemElement  implements GeneralSwi
 
   /**
    * @description 选中时的文本
+   * @description.en Text when checked
    * @group ui
    */
   @property({ attribute: false })
@@ -111,6 +121,7 @@ export class GeneralSwitchElement extends FormItemElement  implements GeneralSwi
 
   /**
    * @description 非选中时的文本
+   * @description.en Text when unchecked
    * @group ui
    */
   @property({ attribute: false })
@@ -120,6 +131,7 @@ export class GeneralSwitchElement extends FormItemElement  implements GeneralSwi
 
   /**
    * @description 开关改变时触发, `event.detail` 为当前选择的值
+   * @description.en Triggered when the switch changes; `event.detail` is the currently selected value
    */
   @event({ type: "general.switch.change" }) changeEvent: EventEmitter<boolean>;
 

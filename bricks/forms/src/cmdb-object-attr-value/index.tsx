@@ -13,11 +13,25 @@ import { isNil } from "lodash";
 import { NS_FORMS, K } from "../i18n/constants";
 import i18n from "i18next";
 import { IPRegex } from "./components/constants";
+export interface CmdbObjectAttrValueElementProps {
+  name?: string;
+  label?: string;
+  value?: string[];
+  valueType?: ValueType[];
+  required?: boolean;
+  disabled?: boolean;
+  isProtected?: boolean;
+  disableProtectedAttr?: boolean;
+  inputBoxStyle?: React.CSSProperties;
+}
+
+
 /**
 * @id forms.cmdb-object-attr-value
 * @name forms.cmdb-object-attr-value
 * @docKind brick
 * @description cmdb模型添加属性值，输出值类型
+* @description.en Add an attribute value to a cmdb model and output the value type
 * @author dophi
 * @slots
 * @history
@@ -40,18 +54,6 @@ import { IPRegex } from "./components/constants";
   * | "float";
 
 */
-export interface CmdbObjectAttrValueElementProps {
-  name?: string;
-  label?: string;
-  value?: string[];
-  valueType?: ValueType[];
-  required?: boolean;
-  disabled?: boolean;
-  isProtected?: boolean;
-  disableProtectedAttr?: boolean;
-  inputBoxStyle?: React.CSSProperties;
-}
-
 
 export class CmdbObjectAttrValueElement extends FormItemElement  implements CmdbObjectAttrValueElementProps {
   /**
@@ -59,6 +61,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement  implements Cmdb
    * @required true
    * @default -
    * @description 表单项字段名
+   * @description.en Field name of the form item
    */
   @property({ attribute: false }) declare name: string;
 
@@ -67,6 +70,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement  implements Cmdb
    * @required false
    * @default -
    * @description 表单项字段说明
+   * @description.en Field description of the form item
    */
   @property({ attribute: false }) declare label: string;
 
@@ -75,6 +79,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement  implements Cmdb
    * @required false
    * @default -
    * @description 值类型初始值
+   * @description.en Initial value of the value type
    */
   @property({
     attribute: false,
@@ -86,6 +91,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement  implements Cmdb
    * @required false
    * @default['str','int','date','datetime','enum','arr','struct','structs','ip','bool','float']
    * @description 模型属性值可选择的值类型
+   * @description.en Selectable value types of the model attribute value
    */
   @property({
     attribute: false,
@@ -97,6 +103,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement  implements Cmdb
    * @required false
    * @default false
    * @description 是否必填项
+   * @description.en Whether it is required
    */
   @property({ type: Boolean }) declare required: boolean;
 
@@ -105,6 +112,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement  implements Cmdb
    * @required false
    * @default -
    * @description 是否禁用
+   * @description.en Whether to disable
    */
   @property({
     type: Boolean,
@@ -115,6 +123,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement  implements Cmdb
    * @default
    * @required false
    * @description 是否受保护的属性
+   * @description.en Whether the attribute is protected
    */
   @property({
     type: Boolean,
@@ -125,6 +134,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement  implements Cmdb
    * @default
    * @required false
    * @description 是否禁用受保护的属性
+   * @description.en Whether to disable the protected attribute
    */
   @property({
     type: Boolean,
@@ -136,6 +146,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement  implements Cmdb
    * @required false
    * @default -
    * @description 输入框样式
+   * @description.en Input box style
    */
   @property({
     attribute: false,
@@ -157,6 +168,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement  implements Cmdb
   /**
    * @detail `Object`
    * @description 值类型表单项改变时触发
+   * @description.en Triggered when the value type form item changes
    */
   @event({ type: "forms.cmdb-object-attr-value.change" })
   changeEvent: EventEmitter<Record<string, any>>;

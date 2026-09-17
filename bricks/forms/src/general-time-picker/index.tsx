@@ -10,6 +10,17 @@ import { GeneralTimePicker } from "./GeneralTimePicker";
 import { FormItemElement } from "@next-libs/forms";
 import { TimePickerProps } from "antd/lib/time-picker";
 
+export interface GeneralTimePickerElementProps {
+  name?: string;
+  value?: string;
+  placeholder?: string;
+  label?: string;
+  required?: boolean;
+  message?: Record<string, string>;
+  configProps?: Partial<TimePickerProps>;
+}
+
+
 /**
  * @id forms.general-time-picker
  * @name forms.general-time-picker
@@ -28,17 +39,13 @@ import { TimePickerProps } from "antd/lib/time-picker";
  *| name           | params | description            |
  *| -------------- | ------ | ---------------------- |
  *| getFormElement | -      | 获得输入框所属表单元素 |
+ * @memo.en
+ * > Tips: When used in combination with `general-form`, if a value is assigned to the time picker through `values` under the form, the data type needs to be declared through `valueTypes`. Meanwhile, to make it more convenient to submit a specified time format to the backend, after the data is declared an option to format the time is also provided, separated by `|`. (as shown in the demo above)
+ *  ### METHODS
+ *| name           | params | description            |
+ *| -------------- | ------ | ---------------------- |
+ *| getFormElement | -      | Gets the form element the input belongs to |
  */
-export interface GeneralTimePickerElementProps {
-  name?: string;
-  value?: string;
-  placeholder?: string;
-  label?: string;
-  required?: boolean;
-  message?: Record<string, string>;
-  configProps?: Partial<TimePickerProps>;
-}
-
 
 export class GeneralTimePickerElement extends FormItemElement  implements GeneralTimePickerElementProps {
   /* =========================== Group: basic =========================== */
@@ -47,6 +54,7 @@ export class GeneralTimePickerElement extends FormItemElement  implements Genera
    * @group basic
    * @required true
    * @description 时间选择框字段名
+   * @description.en Field name of the time picker
    */
   @property({ attribute: false }) declare name: string;
 
@@ -54,6 +62,7 @@ export class GeneralTimePickerElement extends FormItemElement  implements Genera
    * @group basic
    * @required false
    * @description 时间选择框框初始值
+   * @description.en Initial value of the time picker
    * @editor input
    * @editorProps {
    *   "placeholder": "eg. 2012-03-04 05:06:07"
@@ -66,6 +75,7 @@ export class GeneralTimePickerElement extends FormItemElement  implements Genera
    * @group basic
    * @required false
    * @description 时间选择框占位说明
+   * @description.en Placeholder text of the time picker
    */
   @property({ attribute: false }) declare placeholder: string;
 
@@ -75,6 +85,7 @@ export class GeneralTimePickerElement extends FormItemElement  implements Genera
    * @group formLabel
    * @required false
    * @description 时间选择框字段说明
+   * @description.en Field description of the time picker
    */
   @property({ attribute: false }) declare label: string;
 
@@ -84,6 +95,7 @@ export class GeneralTimePickerElement extends FormItemElement  implements Genera
    * @group formValidation
    * @required false
    * @description 是否必填项
+   * @description.en Whether it is required
    */
   @property({ type: Boolean }) declare required: boolean;
 
@@ -92,6 +104,7 @@ export class GeneralTimePickerElement extends FormItemElement  implements Genera
    * @required false
    * @editor message
    * @description 校验文本信息
+   * @description.en Validation message
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
@@ -101,6 +114,7 @@ export class GeneralTimePickerElement extends FormItemElement  implements Genera
    * @group advanced
    * @required false
    * @description 透传 antd timePicker 属性 [timePickerProps](https://3x.ant.design/components/time-picker-cn/)
+   * @description.en Pass through the antd timePicker properties [timePickerProps](https://3x.ant.design/components/time-picker-cn/)
    */
   @property({ attribute: false })
   configProps: Partial<TimePickerProps>;
@@ -110,16 +124,19 @@ export class GeneralTimePickerElement extends FormItemElement  implements Genera
   /**
    * @detail `string`
    * @description 输入变化时被触发，时间变化时触发
+   * @description.en Triggered when the input changes, and when the time changes
    */
   @event({ type: "general.time.change" }) changeEvent: EventEmitter<string>;
   /**
    * @detail `string`
    * @description 面板打开时触发， 传出当前时间值
+   * @description.en Triggered when the panel opens; emits the current time value
    */
   @event({ type: "general.time.open" }) openEvent: EventEmitter<string>;
   /**
    * @detail `string`
    * @description 面板关闭时触发，传出当前时间值
+   * @description.en Triggered when the panel closes; emits the current time value
    */
   @event({ type: "general.time.close" }) closeEvent: EventEmitter<string>;
   private _handleChange = (value: string): void => {

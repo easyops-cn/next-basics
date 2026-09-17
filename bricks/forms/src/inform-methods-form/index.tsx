@@ -6,11 +6,19 @@ import { FormItemElement } from "@next-libs/forms";
 
 import { InformMethodsForm } from "./InformMethodsForm";
 
+export interface InformMethodsFormElementProps {
+  name?: string;
+  label?: string;
+  required?: boolean;
+}
+
+
 /**
  * @id forms.inform-methods-form
  * @name forms.inform-methods-form
  * @docKind brick
  * @description 选择通知方式
+ * @description.en Select the notification method
  * @author cyril
  * @slots
  * @history
@@ -19,12 +27,6 @@ import { InformMethodsForm } from "./InformMethodsForm";
  *  pattern
  * @memo
  */
-export interface InformMethodsFormElementProps {
-  name?: string;
-  label?: string;
-  required?: boolean;
-}
-
 
 export class InformMethodsFormElement extends FormItemElement  implements InformMethodsFormElementProps {
   /* =========================== Group: basic =========================== */
@@ -34,6 +36,7 @@ export class InformMethodsFormElement extends FormItemElement  implements Inform
    * @required true
    * @default -
    * @description 表单项字段名
+   * @description.en Field name of the form item
    * @group basic
    */
   @property({ attribute: false }) declare name: string;
@@ -46,6 +49,7 @@ export class InformMethodsFormElement extends FormItemElement  implements Inform
    * @default -
    * @group formLabel
    * @description 表单项字段说明
+   * @description.en Field description of the form item
    */
   @property({ attribute: false }) declare label: string;
 
@@ -57,6 +61,7 @@ export class InformMethodsFormElement extends FormItemElement  implements Inform
    * @default -
    * @group formValidation
    * @description 是否必填项
+   * @description.en Whether it is required
    */
   @property({ type: Boolean }) declare required: boolean;
 

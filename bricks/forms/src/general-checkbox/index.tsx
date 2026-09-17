@@ -19,14 +19,17 @@ export type CheckboxType = "default" | "icon";
 export interface OptionGroup {
   /**
    * 分组名称
+   * @description.en Group name
    */
   name: string;
   /**
    * 分组唯一键，必填，不可重复
+   * @description.en Unique key of the group, required and must not be repeated
    */
   key: string;
   /**
    * 分组下的选项
+   * @description.en Options under the group
    */
   options: (CheckboxOptionType | IconCheckboxItem)[];
 }
@@ -37,23 +40,6 @@ export interface LabeledValue {
   disabled: boolean;
 }
 
-/**
-* @id forms.general-checkbox
-* @name forms.general-checkbox
-* @docKind brick
-* @description 通用多选框
-* @author jo
-* @slots
-* @history
-* 1.146.0:新增属性 `type`，支持复选框选项`default``icon`样式
-* 1.145.0:新增属性 `isGroup``optionGroups`，支持选项分组
-* @excludesInherit
-*  placeholder
-*  pattern
-* @memo
-
-* > Tips: 多选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
-*/
 export interface GeneralCheckboxElementProps {
   name?: string;
   value?: CheckboxValueType[];
@@ -72,6 +58,27 @@ export interface GeneralCheckboxElementProps {
 }
 
 
+/**
+* @id forms.general-checkbox
+* @name forms.general-checkbox
+* @docKind brick
+* @description 通用多选框
+* @description.en General checkbox
+* @author jo
+* @slots
+* @history
+* 1.146.0:新增属性 `type`，支持复选框选项`default``icon`样式
+* 1.145.0:新增属性 `isGroup``optionGroups`，支持选项分组
+* @excludesInherit
+*  placeholder
+*  pattern
+* @memo
+
+* > Tips: 多选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
+* @memo.en
+* > Tips: When the checkbox is used together with general-form, setting the initial value through value is invalid; the initial value needs to be set in the [values](developers/brick-book/brick/forms.general-form) property of general-form.
+*/
+
 export class GeneralCheckboxElement extends FormItemElement  implements GeneralCheckboxElementProps {
   /* =========================== Group: basic =========================== */
 
@@ -80,6 +87,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
    * @required true
    * @default -
    * @description 多选框字段名
+   * @description.en Checkbox field name
    * @group basic
    */
   @property({ attribute: false }) declare name: string;
@@ -89,6 +97,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
    * @required -
    * @default -
    * @description 输入框当前选中始值
+   * @description.en Current initially selected value of the input box
    * @group basic
    */
   @property({
@@ -101,6 +110,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
    * @required false
    * @default -
    * @description 多选框选项表
+   * @description.en Checkbox option list
    * @group basic
    */
   @property({
@@ -113,6 +123,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
    * @required false
    * @default -
    * @description 多选框字段说明
+   * @description.en Checkbox field description
    * @group basic
    */
   @property({ attribute: false }) declare placeholder: string;
@@ -124,6 +135,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
    * @required false
    * @default -
    * @description 多选框字段说明
+   * @description.en Checkbox field description
    * @group formLabel
    */
   @property({ attribute: false }) declare label: string;
@@ -135,6 +147,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
    * @required false
    * @default -
    * @description 是否必填项
+   * @description.en Whether the field is required
    * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
@@ -144,6 +157,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
    * @required false
    * @default -
    * @description 校验文本信息
+   * @description.en Validation message text
    * @editor message
    * @group formValidation
    */
@@ -156,6 +170,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
    * @required false
    * @default default
    * @description 多选框样式类型(不支持分组复选框）
+   * @description.en Checkbox style type (grouped checkboxes are not supported)
    * @enums "default"|"icon"
    * @editor radio
    * @editorProps {
@@ -187,6 +202,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
    * @default false
    * @required false
    * @description 在icon模式下的优化样式，增加一种自定义样式，需设置 `type` 为 `icon` 才生效
+   * @description.en Optimized style in icon mode, which adds a custom style; takes effect only when `type` is set to `icon`
    * @group ui
    */
   @property({
@@ -197,6 +213,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
   /**
    * @required false
    * @description 用值1~24来表示每一列跨越的范围，如三个等宽的列可以设置`colSpan: 8`
+   * @description.en Use values 1~24 to represent the span of each column; for example, three equal-width columns can be set with `colSpan: 8`
    * @group ui
    */
   @property({
@@ -208,6 +225,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
    * @required false
    * @default false
    * @description 作为单个复选框使用时的禁用状态
+   * @description.en Disabled state when used as a single checkbox
    * @group ui
    */
   @property({
@@ -221,6 +239,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
    * @required false
    * @default false
    * @description 是否为分组复选框，若为 `true`，则可设置分组数据 `optionGroups`
+   * @description.en Whether it is a grouped checkbox; if `true`, the grouped data `optionGroups` can be set
    * @group advanced
    */
   @property({
@@ -233,6 +252,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
    * @required true
    * @default -
    * @description 多选框选项分组数据，需要设置 `isGroup` 为 `true` 才生效
+   * @description.en Checkbox option group data; takes effect only when `isGroup` is set to `true`
    * @group advanced
    */
   @property({
@@ -246,6 +266,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
    * @required false
    * @default -
    * @description 作为单个复选框使用时的选项文本
+   * @description.en Option text when used as a single checkbox
    * @group other
    */
   @property({
@@ -258,6 +279,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
   /**
    * @detail `any[] | boolean`
    * @description 复选框变化时触发，`event.detail` 为当前选中的值列表
+   * @description.en Triggered when the checkbox changes, `event.detail` is the list of currently selected values
    */
   @event({ type: "general.checkbox.change" }) changeEvent: EventEmitter<
     Record<string, any>
@@ -266,6 +288,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
   /**
    * @detail `CheckboxOptionType[]`
    * @description 复选框变化时触发，`event.detail` 为当前选中的值列表
+   * @description.en Triggered when the checkbox changes, `event.detail` is the list of currently selected values
    */
   @event({ type: "general.checkbox.change.v2" }) changeEventV2: EventEmitter<
     CheckboxOptionType[]
@@ -274,6 +297,7 @@ export class GeneralCheckboxElement extends FormItemElement  implements GeneralC
   /**
    * @detail `{options:CheckboxOptionType[],name:string}`
    * @description 复选框options变化时触发
+   * @description.en Triggered when the checkbox options change
    */
   @event({ type: "general.checkbox.options.change" })
   optionsChangeEvent: EventEmitter<{

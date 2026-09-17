@@ -78,11 +78,19 @@ export interface FormItemColumnsProps extends BaseColumnsProps {
   selectProps?: SelectProps;
   cascaderProps?: CascaderProps;
 }
+export interface DynamicFormItemElementProps {
+  name?: string;
+  label?: string;
+  columns?: FormItemColumnsProps[];
+}
+
+
 /**
 * @id forms.dynamic-form-item
 * @name forms.dynamic-form-item
 * @docKind brick
 * @description 多列显示可以动态增加或删除的表单项，目前支持 input 和 select 等多种类型
+* @description.en A form item displayed in multiple columns that can be dynamically added or deleted; currently supports multiple types such as input and select
 * @author jo
 * @slots
 * @history*
@@ -153,13 +161,69 @@ export interface FormItemColumnsProps extends BaseColumnsProps {
 *| fieldNames        | `{label: string, value: string, children: string}`                      | -        | -       | 自定义 options 中 label name children 的字段 |
 *| allowClear  | `boolean`                               | -        | true   | 是否支持清除                 |
 *| expandTrigger  | `click \| hover`                               | -        | 'click'   | 次级菜单的展开方式                 |
-*/
-export interface DynamicFormItemElementProps {
-  name?: string;
-  label?: string;
-  columns?: FormItemColumnsProps[];
-}
+* @memo.en
+* > Tips: For the validation properties of another form item, such as `required` and `message`, configure them in the form sub-item `columns.rules` of each column
+#### FormItemColumnsProps
 
+*| property    | type                              | required | default | description                                                                                                                       |
+*| ----------- | --------------------------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------- |
+*| name        | `string`                          | ✔️       | -       | Configure the name of the column                                                                                              |
+*| label       | `string`                          | -        | -       | Configure the label of the column, displayed at the head of the column                                               |
+*| rules       | `any[]`                          | -        | -       | Configure the validation rules of the column, same as [antd rules](https://3x.ant.design/components/form-cn/#%E6%A0%A1%E9%AA%8C%E8%A7%84%E5%88%99), and you can also refer to the types supported by rules in the table below|
+*| placeholder | `string`                          | -        | -       | Configure the placeholder of the column                                                                                        |
+*| type        | `input`\| `inputNumber`\| `select`\| `userSelect`\|`password`\|`cascader` | -        | input       | Configure the types supported by the form item|
+*| selectProps | `selectProps` | - | - | Configuration items when type = select; for details, see the `selectProps` field description in the table below|
+*| inputProps  | `inputProps` | - | -| Configuration items when type is input, inputNumber and password; for details, see the `inputProps` field description in the table below|
+*| disabled    | `boolean`                         | -        | -       | Whether the form sub-item of the column is disabled                                                                       |
+*| flex        |  `number` \| `string` | - | 1 | Configure the width of each column; the number represents the share of each column, for example, among three columns, if each column is configured with flex: 1, the three columns equally divide the width of the row, and if the first column is configured with flex: 2 and the other columns with flex: 1, the width of the first column is twice that of the other columns and the rest of the columns have the same width; for more details, see [flex](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex)|
+
+ *### Validation types supported by rules
+
+*| field    | type      | description                              |
+*| -------- | --------- | ---------------------------------------- |
+*| required | `boolean` | Whether it is required                |
+*| len      | `number`  | Field length validation             |
+*| max      | `number`  | Maximum length validation           |
+*| min      | `number`  | Minimum length validation           |
+*| pattern  | `RegExp`  | Regular expression validation      |
+*| uniq     | `boolean` | Built-in custom validation, which validates whether the value of the column is unique|
+
+*### InputProps
+
+*| property    | type                              | required | default | description                                                                                                                       |
+*| ----------- | --------------------------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------- |
+*| placeholder | `string`                          | -        | -       | Configure the placeholder of the column                                                                                        |
+*| disabled    | `boolean`                         | -        | -       | Whether the form sub-item of the column is disabled                                                                       |
+*| disabledHandler | `(row: any, index: number) => viod` | -  | -       | Control whether the form sub-item of each column in each row is disabled by passing in a function, `row` is the value of the form sub-item of each column in the current row, index is the row number, you can customize the disabled logic of each form item based on the above data, and return a `boolean` type to decide whether it is disabled
+*| max         | `number`                          | -        | -       | Set the maximum value of inputNumber|
+*| min         | `number`                          | -        | -       | Set the minimum value of inputNumber|
+*| step         | `number`                          | -        | -      | Set the step of inputNumber|
+
+
+*### SelectProps
+
+*| property    | type                                    | required | default | description                  |
+*| ----------- | --------------------------------------- | -------- | ------- | ---------------------------- |
+*| placeholder | `string`                                | -        | -       | Configure the placeholder of the column|
+*| disabled    | `boolean`                               | -        | -       | Whether the form sub-item of the column is disabled|
+*| disabledHandler | `(row: any, index: number) => viod` | -  | -       | Control whether the form sub-item of each column in each row is disabled by passing in a function, `row` is the value of the form sub-item of each column in the current row, index is the row number, you can customize the disabled logic of each form item based on the above data, and return a `boolean` type to decide whether it is disabled
+*| options     | `Array<{label: string, value: string}>` | ✔️       | -       | Dropdown candidates     |
+*| mode        | `multiple \| tags`                      | -        | -       | Set the mode of the dropdown to multiple or tags|
+*| maxTagCount        | number\| "responsive"                      | -        | -       | Maximum number of tags to display|
+*| allowClear  | `boolean`                               | -        | false   | Whether clearing is supported|
+
+*### CascaderProps
+
+*| property    | type                                    | required | default | description                  |
+*| ----------- | --------------------------------------- | -------- | ------- | ---------------------------- |
+*| placeholder | `string`                                | -        | -       | Configure the placeholder of the column|
+*| disabled    | `boolean`                               | -        | -       | Whether the form sub-item of the column is disabled|
+*| disabledHandler | `(row: any, index: number) => viod` | -  | -       | Control whether the form sub-item of each column in each row is disabled by passing in a function, `row` is the value of the form sub-item of each column in the current row, index is the row number, you can customize the disabled logic of each form item based on the above data, and return a `boolean` type to decide whether it is disabled
+*| options     | `CascaderOptionType[]` | ✔️       | -       | Candidate data source   |
+*| fieldNames        | `{label: string, value: string, children: string}`                      | -        | -       | Customize the label, name and children fields in options|
+*| allowClear  | `boolean`                               | -        | true   | Whether clearing is supported|
+*| expandTrigger  | `click \| hover`                               | -        | 'click'   | How the submenu is expanded|
+*/
 
 export class DynamicFormItemElement extends FormItemElement  implements DynamicFormItemElementProps {
   private manualEditedValue: any[];
@@ -167,6 +231,7 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
   /**
    * @required true
    * @description 表单项字段名
+   * @description.en Form item field name
    * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
@@ -174,12 +239,14 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
   /**
    * @required false
    * @description 表单项字段说明
+   * @description.en Form item field description
    * @group basicFormItem
    */
   @property({ attribute: false }) declare label: string;
 
   /**
    * @description 每一列表单项的配置， 详见下表
+   * @description.en Configuration of the form sub-item of each column, see the table below
    * @group basicFormItem
    */
   @property({
@@ -189,6 +256,7 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
 
   /**
    * @description 动态表单项的初始值，一般跟 `general-form` 搭配使用，则初始值的赋值在 `general-form` 的 `values` 属性上设置，具体格式如 demo 所示，把每一列 `name` 值作为 `key`，`value` 为该列的具体值
+   * @description.en Initial value of the dynamic form item, generally used together with `general-form`, in which case the initial value is assigned to the `values` property of `general-form`; the specific format is shown in the demo, where each column's `name` value is used as the `key` and `value` is the specific value of the column
    * @group basicFormItem
    */
   @property({
@@ -199,6 +267,7 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
   /**
    * @default false
    * @description 当为 `true` 时表单只剩下一行时不允许被删除，隐藏对应的删除按钮，当某一列必填时可以达到整个表单项也是必填的效果
+   * @description.en When it is `true`, the form is not allowed to be deleted when only one row remains and the corresponding delete button is hidden; when a column is required, the whole form item can also be made required
    * @group basicFormItem
    */
   @property({
@@ -209,6 +278,7 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
   /**
    * @default false
    * @description 是否禁止添加的按钮
+   * @description.en Whether the add button is disabled
    * @group ui
    */
   @property({
@@ -219,6 +289,7 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
   /**
    * @default false
    * @description 是否隐藏添加的按钮
+   * @description.en Whether the add button is hidden
    * @group ui
    */
   @property({
@@ -229,6 +300,7 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
   /**
    * @default false
    * @description 是否隐藏每一行删除的按钮
+   * @description.en Whether the delete button of each row is hidden
    * @group ui
    */
   @property({
@@ -239,6 +311,7 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
   /**
    * @default false
    * @description 是否禁止每一行删除的按钮
+   * @description.en Whether the delete button of each row is disabled
    * @group ui
    */
   @property({
@@ -249,6 +322,7 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
   /**
    * @kind (row:any , index: number) => boolean
    * @description 通过传入函数来控制每一行的的删除按钮是否 disabled， `row` 为当前行的每一列表单项的值， index 为行的序号，可根据以上数据自定义每一行的 disabled 逻辑, 返回 `boolean` 类型来决定是否 disabled
+   * @description.en Control whether the delete button of each row is disabled by passing in a function, `row` is the value of the form sub-item of each column in the current row, index is the row number, you can customize the disabled logic of each row based on the above data, and return a `boolean` type to decide whether it is disabled
    * @group other
    */
   @property({
@@ -259,6 +333,7 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
   /**
    * @default true
    * @description 是否在初始化完成后额外触发一次动态表单项的 onChange 事件, 该事件会传出当前的初始值给到用户，这里因为历史原因之前默认行为就是在初始化后会触发该事件，这里为了兼容之前的行为，默认值只能设置为 true。
+   * @description.en Whether to additionally trigger the onChange event of the dynamic form item once after initialization; this event passes the current initial value to the user, and here for historical reasons the previous default behavior was to trigger this event after initialization, so for compatibility with the previous behavior the default value can only be set to true.
    * @group other
    */
   @property({
@@ -270,6 +345,7 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
    * @default false
    * @deprecated
    * @description 是否显示背景样式,根据 UI 规范该表单项都会提供背景样式，故已废弃
+   * @description.en Whether to show the background style; according to the UI specification this form item always provides a background style, so it is deprecated
    * @group other
    */
   @property({
@@ -291,6 +367,7 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
   }
   /**
    * @description 修改每一列数据时触发，detail 该动态表单项全部的数据
+   * @description.en Triggered when the data of each column is modified, detail is all the data of this dynamic form item
    */
   @event({ type: "item.change" }) changeEvent: EventEmitter<
     Record<string, any>[]
@@ -300,6 +377,7 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
   };
   /**
    * @description 增加一行时触发
+   * @description.en Triggered when a row is added
    */
   @event({ type: "item.add" }) addEvent: EventEmitter;
   private _handleAdd = () => {
@@ -307,6 +385,7 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
   };
   /**
    * @description 删除某一行时触发，detail 为该行的数据
+   * @description.en Triggered when a row is deleted, detail is the data of that row
    */
   @event({ type: "item.remove" }) removeEvent: EventEmitter<
     Record<string, any>
@@ -314,6 +393,7 @@ export class DynamicFormItemElement extends FormItemElement  implements DynamicF
 
   /**
    * @description 可调用该方法设置动态表单项的值，可用在 forms 表单中在使用 `values` 赋值之后可通过该方法再次设置初始值
+   * @description.en Call this method to set the value of the dynamic form item; it can be used to set the initial value again through this method after assigning a value with `values` in a forms form
    */
   @method()
   setDynamicValue(value: any[]) {

@@ -22,22 +22,6 @@ export interface ComplexOption<T = string | number> {
   value: T;
 }
 export type maxTagCountType = "responsive" | number;
-/**
- * @id forms.general-select
- * @name forms.general-select
- * @docKind brick
- * @description
- * @author steve
- * @slots
- * @history
- * 1.33.0:新增属性 `suffix`，废弃属性 `suffixBrick`
- * 1.56.0:新增属性 `size`
- * 1.59.0:新增属性 `emptyOption`
- * 1.72.0:新增属性 `groupBy`
- * 1.77.0:新增属性 `tokenSeparators`
- * 1.200.0:新增属性 `emptyProps`
- * @memo
- */
 export interface GeneralSelectElementProps {
   name?: string;
   value?: any;
@@ -73,6 +57,23 @@ export interface GeneralSelectElementProps {
 }
 
 
+/**
+ * @id forms.general-select
+ * @name forms.general-select
+ * @docKind brick
+ * @description
+ * @author steve
+ * @slots
+ * @history
+ * 1.33.0:新增属性 `suffix`，废弃属性 `suffixBrick`
+ * 1.56.0:新增属性 `size`
+ * 1.59.0:新增属性 `emptyOption`
+ * 1.72.0:新增属性 `groupBy`
+ * 1.77.0:新增属性 `tokenSeparators`
+ * 1.200.0:新增属性 `emptyProps`
+ * @memo
+ */
+
 export class GeneralSelectElement extends FormItemElement  implements GeneralSelectElementProps {
   /* =========================== Group: basic =========================== */
 
@@ -81,6 +82,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 选择框 name 值, 即唯一 id
+   * @description.en Name value of the select box, i.e. the unique id
    * @group basic
    */
   @property({ attribute: false }) declare name: string;
@@ -90,6 +92,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 初始值
+   * @description.en Initial value
    * @group basic
    */
   @property({
@@ -100,6 +103,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
   /**
    * @required true
    * @description 候选项列表
+   * @description.en List of options
    * @group basic
    */
   @property({
@@ -112,6 +116,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 占位符
+   * @description.en Placeholder
    * @group basic
    */
   @property({ attribute: false }) declare placeholder: string;
@@ -123,6 +128,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 标签文字
+   * @description.en Label text
    * @group formLabel
    */
   @property({ attribute: false }) declare label: string;
@@ -134,6 +140,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 是否必填
+   * @description.en Whether it is required
    * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
@@ -143,6 +150,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 校验文本信息
+   * @description.en Validation message
    * @group formValidation
    */
   @property({ attribute: false }) declare message: Record<string, string>;
@@ -152,6 +160,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default false
    * @description 触发验证的时机
+   * @description.en Timing to trigger validation
    * @group formValidation
    */
   @property({ attribute: false }) declare validateTrigger: string;
@@ -163,6 +172,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default false
    * @description 是否禁用
+   * @description.en Whether to disable
    * @group ui
    */
   @property({
@@ -175,6 +185,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 是否只读
+   * @description.en Whether it is read-only
    * @group ui
    */
   @property({ type: Boolean })
@@ -185,6 +196,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default middle
    * @description 选择框大小
+   * @description.en Size of the select box
    * @enums "small"|"middle"|"large"
    * @editor radio
    * @editorProps {
@@ -214,6 +226,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default true
    * @description 支持清除选项
+   * @description.en Support clearing the selected option
    * @group ui
    */
   @property({
@@ -226,6 +239,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default true
    * @description 支持搜索
+   * @description.en Support search
    * @group ui
    */
   @property({
@@ -237,6 +251,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default true
    * @description 无边框样式
+   * @description.en Borderless style
    * @group ui
    */
   @property({
@@ -249,6 +264,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default false
    * @description 下拉框选项是否支持换行
+   * @description.en Whether the dropdown options support line wrapping
    * @group ui
    */
   @property({
@@ -261,6 +277,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 支持在文本后添加自定义构件 具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
+   * @description.en Support adding a custom brick after the text, see [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf) for details
    * @group ui
    */
   @property({
@@ -275,6 +292,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 设置后置构件容器的样式
+   * @description.en Set the style of the suffix brick container
    * @group ui
    */
   @property({
@@ -287,6 +305,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default true
    * @description 下拉菜单和选择器同宽
+   * @description.en The dropdown menu has the same width as the selector
    * @group ui
    */
   @property({
@@ -299,6 +318,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default false
    * @description 是否隐藏当前选中项的suffix构件
+   * @description.en Whether to hide the suffix brick of the currently selected item
    * @group ui
    */
   @property({
@@ -311,6 +331,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default single
    * @description 选择框模式， 多选 或 标签
+   * @description.en Select box mode: multiple or tags
    * @enums "multiple"|"tags"
    * @editor radio
    * @editorProps {
@@ -340,6 +361,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 在 mode 为 `多选` 和 `标签` 的模式下定义自动分词的分隔符
+   * @description.en Define the separators for automatic tokenization when mode is `multiple` or `tags`
    * @group ui
    */
   @property({
@@ -351,6 +373,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @kind maxTagCountType
    * @required false
    * @description 最多显示多少个 tag，响应式模式会对性能产生损耗
+   * @description.en Maximum number of tags to display; responsive mode causes a performance loss
    * @group ui
    */
   @property({
@@ -360,6 +383,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
 
   /**
    * @description 空候选项，将插入到候选项列表最前面
+   * @description.en Empty option, which will be inserted at the beginning of the option list
    * @group ui
    */
   @property({ attribute: false })
@@ -367,6 +391,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
 
   /**
    * @description 空option 时候可以自定义 EasyopsEmpty 配置实现自定义的无数据提示
+   * @description.en When there are no options, a custom EasyopsEmpty configuration can be set to implement a custom empty data prompt
    * @group ui
    */
   @property({ attribute: false })
@@ -379,6 +404,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default
    * @description 输入框样式
+   * @description.en Input box style
    * @group style
    */
   @property({
@@ -391,6 +417,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 设置下拉框容器的样式
+   * @description.en Set the style of the dropdown container
    * @group style
    */
   @property({
@@ -405,6 +432,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 基于 `options` 列表中的某个字段进行分组显示
+   * @description.en Group and display based on a field in the `options` list
    * @group advanced
    */
   @property({
@@ -417,6 +445,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description optionsMode为 tags 时，下拉选项支持标签样式,此模式不支持select本身的mode为tags、multiple
+   * @description.en When optionsMode is tags, the dropdown options support the tag style; this mode does not support the select's own mode being tags or multiple
    * @group advanced
    */
   @property({
@@ -429,6 +458,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 列表指定字段作为 label 和 value
+   * @description.en Specify fields in the list as label and value
    * @group advanced
    */
   @property({
@@ -441,6 +471,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required -
    * @default default
    * @description 下拉选项的渲染方式，`default` 为默认(表示渲染在 body 当中)，`parent` 表示渲染在该元素的父节点上，当发现下拉菜单跟随页面滚动，需要设置该属性为 `parent`
+   * @description.en Rendering method of the dropdown options: `default` is the default (rendered in the body), `parent` means rendering on the parent node of this element; when the dropdown menu is found to scroll with the page, set this property to `parent`
    * @group advanced
    */
   @property()
@@ -449,6 +480,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
   /**
    * @default 300
    * @description 设置防抖动搜索的时间间隔。
+   * @description.en Set the time interval for debounced search.
    * @group advanced
    */
   @property({ type: Number })
@@ -458,6 +490,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @default false
    * @required false
    * @description 搜索时是否同时根据value和label过滤options，否则只根据label过滤
+   * @description.en Whether to filter options by both value and label when searching, otherwise only by label
    * @group advanced
    */
   @property({ type: Boolean })
@@ -467,6 +500,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @default false
    * @required false
    * @description 搜索时是否根据caption过滤options
+   * @description.en Whether to filter options by caption when searching
    * @group advanced
    */
   @property({ type: Boolean })
@@ -476,6 +510,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @default false
    * @required false
    * @description 是否默认高亮第一个选项
+   * @description.en Whether to highlight the first option by default
    */
   @property({ type: Boolean })
   defaultActiveFirstOption: boolean;
@@ -484,6 +519,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 后端搜索
+   * @description.en Backend search
    * @group advanced
    */
   @property({
@@ -498,6 +534,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description 支持在文本后添加自定义构件 [UseBrickConf](http://docs.developers.easyops.cn/docs/brick-next/transform)
+   * @description.en Support adding a custom brick after the text [UseBrickConf](http://docs.developers.easyops.cn/docs/brick-next/transform)
    * @group other
    * @deprecated
    */
@@ -511,6 +548,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
    * @required false
    * @default -
    * @description [已废弃]设置后置构件容器的样式
+   * @description.en [Deprecated] Set the style of the suffix brick container
    * @deprecated
    * @group other
    */
@@ -524,6 +562,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
   /**
    * @detail `any`
    * @description 下拉选中变化时被触发，`event.detail` 为当前选择项的值
+   * @description.en Triggered when the dropdown selection changes; `event.detail` is the value of the currently selected item
    */
   @event({ type: "general.select.change" }) changeEvent: EventEmitter<
     Record<string, any>
@@ -531,6 +570,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
   /**
    * @detail `{label: string, value: any, [key: string]: any}	`
    * @description 下拉选中变化时被触发，`event.detail` 为当前整个选择项包含其他字段值(暂不支持 `mode`为 `tags`的场景)
+   * @description.en Triggered when the dropdown selection changes; `event.detail` is the entire currently selected option including other field values (the scenario where `mode` is `tags` is not supported yet)
    */
   @event({ type: "general.select.change.v2" }) changeEventV2: EventEmitter<
     Record<string, any>
@@ -538,6 +578,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
   /**
    * @detail `GeneralComplexOption`
    * @description value对应的选项数据变化时触发
+   * @description.en Triggered when the option data corresponding to value changes
    */
   @event({ type: "value.option.data.change" })
   optionDataChangeEvent: EventEmitter<
@@ -546,6 +587,7 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
   /**
    * @detail `{options:GeneralComplexOption[],name:string}`
    * @description 选项数据变化时触发
+   * @description.en Triggered when the option data changes
    */
   @event({ type: "general.select.options.change" })
   optionsChangeEvent: EventEmitter<{
@@ -555,22 +597,26 @@ export class GeneralSelectElement extends FormItemElement  implements GeneralSel
   /**
    * @detail `-`
    * @description 获得焦点时触发
+   * @description.en Triggered when focused
    */
   @event({ type: "general.select.focus" }) focusEvent: EventEmitter;
   /**
    * @detail `-`
    * @description 失焦时触发
+   * @description.en Triggered when blurred
    */
   @event({ type: "general.select.blur" }) blurEvent: EventEmitter;
   /**
    * @detail `string`
    * @description 搜索时被触发，`event.detail` 为当前输入的值
+   * @description.en Triggered when searching; `event.detail` is the currently entered value
    */
   @event({ type: "general.select.search" }) searchEvent: EventEmitter<string>;
 
   /**
    * @detail `string`
    * @description 搜索时被触发，带防抖动。
+   * @description.en Triggered when searching, with debounce.
    */
   @event({ type: "general.select.debounceSearch" })
   private _debounceSearchEvent: EventEmitter<string>;
