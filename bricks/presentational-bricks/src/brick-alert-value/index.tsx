@@ -14,6 +14,7 @@ export interface BrickAlertValueElementProps {
  * @name presentational-bricks.brick-alert-value
  * @docKind brick
  * @description 将告警数值组合触发条件，显示成 90%↑ 的模式
+ * @description.en Combines the alert value with the trigger condition and displays it in the pattern of 90%↑
  * @author ice
  * @slots
  * @history
@@ -26,6 +27,7 @@ export class BrickAlertValueElement extends UpdatingElement implements BrickAler
    * @required true
    * @default -
    * @description 告警事件
+   * @description.en Alert event
    */
   @property({
     attribute: false,

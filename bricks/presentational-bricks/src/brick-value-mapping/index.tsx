@@ -36,6 +36,7 @@ export interface BrickValueMappingElementProps {
  * @editor shared-editors.general-tag--editor
  * @docKind brick
  * @description 适用于将基本类型的数值转换成有意义的文本进行展示
+ * @description.en Suitable for converting values of basic types into meaningful text for display
  * @author ice
  * @slots
  * @history
@@ -79,6 +80,41 @@ export interface BrickValueMappingElementProps {
  * };
  * const value = "hello";
  * ```
+ * @memo.en
+ * ## Note
+ * > If you need conditional mapping for ranges, such as greater than, less than, etc., please use [conditional display](developers/brick-book/brick/presentational-bricks.brick-conditional-display)
+ *
+ * ## LinkProps
+ * ```typescript
+ * interface LinkProps {
+ *   to?: string;
+ *   href?: string;
+ *   innerRef?: string;
+ *   replace?: boolean;
+ *   target?: string;
+ * }
+ * ```
+ * ## Mapping rule description
+ *
+ * The mapping supports regex matching. The matching rules are as follows:
+ *
+ * 1. First, use `value` as the key to obtain the mapping. If it matches successfully, use that rule for display; if not, proceed to the next step
+ * 2. Use the key in the `mapping rule` as a regex to match `value`, and use the first rule that matches successfully
+ *
+ * For example
+ *
+ * ```typescript
+ * // The following will display `hi`
+ * const mapping = { hello: { text: "hi" }, ".*": { text: "anything else" } };
+ * const value = "hello";
+ *
+ * // The following will display `anything else`
+ * const mapping = {
+ *   www: { text: "world wide web" },
+ *   ".*": { text: "anything else" },
+ * };
+ * const value = "hello";
+ * ```
  * @noInheritDoc
  */
 export class BrickValueMappingElement
@@ -87,6 +123,7 @@ export class BrickValueMappingElement
 {
   /**
    * @description 点击事件，需设置 `triggerClickEvent` 为 true 才会触发
+   * @description.en Click event, only triggered when `triggerClickEvent` is set to true
    * @detail { data: 通过 dataSource 传入的附加数据, value: 当前映射的原始值 }
    */
   @event({ type: "brick-value-mapping.click" })
@@ -94,12 +131,14 @@ export class BrickValueMappingElement
 
   /**
    * @description 原始值
+   * @description.en Original value
    * @group basic
    */
   @property() value?: string | number;
 
   /**
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
+   * @description.en [Deprecated] Field mapping, used together with dataSource to obtain the value at runtime
    * @deprecated
    * @group other
    */
@@ -108,6 +147,7 @@ export class BrickValueMappingElement
   };
   /**
    * @description 映射规则
+   * @description.en Mapping rule
    * @group basic
    */
   @property({ attribute: false }) mapping: Record<
@@ -116,6 +156,7 @@ export class BrickValueMappingElement
   >;
   /**
    * @description 显示文字旁边的小圈圈，按照平台规范通常表示状态的标签可设置为 true
+   * @description.en Whether to display a small circle next to the text. According to platform conventions, labels that usually represent a status can be set to true
    * @group basic
    */
   @property({
@@ -125,6 +166,7 @@ export class BrickValueMappingElement
 
   /**
    * @description 替代 `data` 属性，click 事件时传出的数据
+   * @description.en Replaces the `data` property; the data emitted on the click event
    * @group basic
    */
   @property({ attribute: false }) dataSource?: Record<string, any>;
@@ -132,6 +174,7 @@ export class BrickValueMappingElement
   /**
    * @default false
    * @description 是否触发点击事件
+   * @description.en Whether to trigger the click event
    * @group other
    */
   @property({ type: Boolean })
@@ -140,6 +183,7 @@ export class BrickValueMappingElement
   /**
    * @default false
    * @description 文案超出时是否隐藏溢出文本并在鼠标悬停时显示 Tooltip
+   * @description.en Whether to hide the overflowing text when the text overflows and show a Tooltip on mouse hover
    * @group other
    */
   @property({ type: Boolean })
@@ -147,6 +191,7 @@ export class BrickValueMappingElement
 
   /**
    * @description 配置跳转链接，在 `triggerClickEvent` 为 false 生效
+   * @description.en Configure the jump link, effective when `triggerClickEvent` is false
    * @group other
    */
   @property({ attribute: false })
@@ -154,6 +199,7 @@ export class BrickValueMappingElement
 
   /**
    * @description [已废弃]可用于接收 useBrick 传递过来的数据
+   * @description.en [Deprecated] Can be used to receive the data passed from useBrick
    * @deprecated
    * @group other
    */

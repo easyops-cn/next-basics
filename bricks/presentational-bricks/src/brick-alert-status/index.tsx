@@ -18,6 +18,7 @@ export interface BrickAlertStatusElementProps {
  * @name presentational-bricks.brick-alert-status
  * @docKind brick
  * @description 将告警状态转换成文字表述
+ * @description.en Converts the alert status into a textual description
  * @author ice
  * @slots
  * @history
@@ -31,6 +32,7 @@ export class BrickAlertStatusElement extends UpdatingElement implements BrickAle
    * @required false
    * @default -
    * @description 告警状态
+   * @description.en Alert status
    */
   @property({ type: Number })
   status: number;
@@ -40,6 +42,7 @@ export class BrickAlertStatusElement extends UpdatingElement implements BrickAle
    * @required false
    * @default -
    * @description 告警恢复类型
+   * @description.en Alert recovery type
    */
   @property()
   recoverType: string;
@@ -49,6 +52,7 @@ export class BrickAlertStatusElement extends UpdatingElement implements BrickAle
    * @required false
    * @default -
    * @description 是否已恢复告警
+   * @description.en Whether the alert has been recovered
    */
   @property({ type: Boolean })
   isRecover: boolean;
@@ -58,6 +62,7 @@ export class BrickAlertStatusElement extends UpdatingElement implements BrickAle
    * @required false
    * @default -
    * @description [已废弃]数据来源
+   * @description.en [Deprecated] Data source
    */
   @property({ attribute: false })
   dataSource: any;
@@ -67,6 +72,7 @@ export class BrickAlertStatusElement extends UpdatingElement implements BrickAle
    * @required false
    * @default -
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 status 和 recoverType
+   * @description.en [Deprecated] Field mapping, used together with dataSource to get status and recoverType at runtime
    */
   @property({ attribute: false })
   fields: { status: string; recoverType: string; isRecover: string };

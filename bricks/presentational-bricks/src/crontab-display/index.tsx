@@ -16,6 +16,7 @@ export interface CrontabDisplayElementProps {
  * @name presentational-bricks.crontab-display
  * @docKind brick
  * @description 把定时器的时间人性化展示
+ * @description.en Displays the timer's time in a human-friendly way
  * @author jo
  * @slots
  * @history
@@ -28,6 +29,7 @@ export class CrontabDisplayElement extends UpdatingElement implements CrontabDis
    * @required true
    * @default -
    * @description 待转化成可阅读的定时时间， 格式为以空格为分隔的五位`* * * * * (每分钟)`, 按顺序分别代表分钟，小时，天，月，星期。
+   * @description.en The timer time to be converted into a readable form, in the format of a space-separated five-field `* * * * * (every minute)`, representing minute, hour, day, month, and weekday in order.
    */
   @property()
   value: string;
@@ -37,6 +39,7 @@ export class CrontabDisplayElement extends UpdatingElement implements CrontabDis
    * @required false
    * @default -
    * @description [已废弃]数据源
+   * @description.en [Deprecated] Data source
    */
   @property({ attribute: false })
   dataSource: Record<string, any>;
@@ -46,6 +49,7 @@ export class CrontabDisplayElement extends UpdatingElement implements CrontabDis
    * @required false
    * @default -
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时对应字段
+   * @description.en [Deprecated] Field mapping; used together with dataSource to obtain the corresponding field at runtime
    */
   @property({ attribute: false })
   fields: { value: string };

@@ -39,6 +39,7 @@ export interface ImageInfo {
  * @editor shared-editors.general-code--editor
  * @docKind brick
  * @description Markdown编辑构件
+ * @description.en Markdown editor brick
  * @author lynette
  * @slots
  * @history
@@ -54,6 +55,7 @@ export class MarkdownEditorElement extends FormItemElement implements MarkdownEd
    * @required false
    * @default -
    * @description markdown 编辑器的值
+   * @description.en Value of the markdown editor
    * @editor textarea
    * @group basic
    */
@@ -66,6 +68,7 @@ export class MarkdownEditorElement extends FormItemElement implements MarkdownEd
    * @required -
    * @default false
    * @description 支持上传图片，为 `true` 时需要设置 `bucketName`。对接平台统一资源存储。
+   * @description.en Support uploading images; when it is `true`, `bucketName` needs to be configured. Integrates with the platform's unified resource storage.
    * @group advanced
    */
   @property({
@@ -79,6 +82,7 @@ export class MarkdownEditorElement extends FormItemElement implements MarkdownEd
    * @default true
    * @group advanced
    * @description markdown 图片是否支持预览
+   * @description.en Whether markdown images support preview
    */
   @property({ attribute: false }) imagePreview: boolean;
 
@@ -87,6 +91,7 @@ export class MarkdownEditorElement extends FormItemElement implements MarkdownEd
    * @required -
    * @default -
    * @description 对象存储桶名字，请在业务编排的时候与后台同学商量创建，一般一个业务需求对应一个存储桶名称，相当于 namespace。需要上传图片的功能（`supportUploadImg:true`)时可用。
+   * @description.en Name of the object storage bucket; please discuss with the backend team to create it during business orchestration. Generally, one business requirement corresponds to one bucket name, which is equivalent to a namespace. Available when the image upload feature (`supportUploadImg:true`) is needed.
    * @group advanced
    */
   @property()
@@ -97,6 +102,7 @@ export class MarkdownEditorElement extends FormItemElement implements MarkdownEd
    * @required -
    * @default false
    * @description 为`true`时，上传图片不被压缩，调用oss接口传width=0和height=0，否则传width=1280和height=800
+   * @description.en When it is `true`, uploaded images are not compressed, and the oss API is called with width=0 and height=0; otherwise width=1280 and height=800 are passed
    * @group advanced
    */
   @property({
@@ -111,6 +117,7 @@ export class MarkdownEditorElement extends FormItemElement implements MarkdownEd
    * @required false
    * @default -
    * @description 预览容器的样式
+   * @description.en Style of the preview container
    * @group style
    */
   @property({
@@ -123,6 +130,7 @@ export class MarkdownEditorElement extends FormItemElement implements MarkdownEd
    * @required false
    * @default -
    * @description Editor容器的样式
+   * @description.en Style of the Editor container
    * @group style
    */
   @property({
@@ -135,6 +143,7 @@ export class MarkdownEditorElement extends FormItemElement implements MarkdownEd
    * @required false
    * @default -
    * @description Textarea 的样式
+   * @description.en Style of the Textarea
    * @group style
    */
   @property({
@@ -149,6 +158,7 @@ export class MarkdownEditorElement extends FormItemElement implements MarkdownEd
    * @required false
    * @default -
    * @description [已废弃]数据来源
+   * @description.en [Deprecated] Data source
    * @deprecated
    * @group other
    */
@@ -159,6 +169,7 @@ export class MarkdownEditorElement extends FormItemElement implements MarkdownEd
    * @required false
    * @default -
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
+   * @description.en [Deprecated] Field mapping, used together with dataSource to obtain the runtime value
    * @deprecated
    * @group other
    */
@@ -171,6 +182,7 @@ export class MarkdownEditorElement extends FormItemElement implements MarkdownEd
    * @required -
    * @default -
    * @description 输入框最小显示行数
+   * @description.en Minimum number of rows displayed in the input box
    * @group advanced
    */
   @property()
@@ -181,6 +193,7 @@ export class MarkdownEditorElement extends FormItemElement implements MarkdownEd
    * @required -
    * @default -
    * @description 输入框最大显示行数
+   * @description.en Maximum number of rows displayed in the input box
    * @group advanced
    */
   @property()
@@ -191,6 +204,7 @@ export class MarkdownEditorElement extends FormItemElement implements MarkdownEd
   /**
    * @detail string
    * @description 编辑 value 变化的值
+   * @description.en Value changed by editing
    */
   @event({ type: "markdown.value.change" })
   markdownValueChange: EventEmitter<string>;
@@ -198,6 +212,7 @@ export class MarkdownEditorElement extends FormItemElement implements MarkdownEd
   /**
    * @detail ImageInfo
    * @description 上传图片时触发的事件
+   * @description.en Event emitted when an image is uploaded
    */
   @event({ type: "image.upload" })
   UploadImage: EventEmitter<ImageInfo>;

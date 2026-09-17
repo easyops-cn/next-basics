@@ -38,14 +38,17 @@ export type TooltipPlacement =
 export interface TooltipConfig {
   /**
    * 气泡框位置，可选 `top` `left` `right` `bottom` `topLeft` `topRight` `bottomLeft` `bottomRight` `leftTop` `leftBottom` `rightTop` `rightBottom`
+   * @description.en Position of the Tooltip, options: `top` `left` `right` `bottom` `topLeft` `topRight` `bottomLeft` `bottomRight` `leftTop` `leftBottom` `rightTop` `rightBottom`
    */
   placement?: TooltipPlacement;
   /**
    * 箭头是否指向目标元素中心
+   * @description.en Whether the arrow points at the center of the target element
    */
   arrowPointAtCenter?: boolean;
   /**
    * 卡片样式
+   * @description.en Card style
    */
   overlayStyle?: React.CSSProperties;
 }
@@ -55,6 +58,7 @@ export interface TooltipConfig {
  * @name presentational-bricks.general-tooltip
  * @docKind brick
  * @description 普通的 tooltip
+ * @description.en A common tooltip
  * @author jo
  * @slots
  * @history
@@ -68,6 +72,7 @@ export class GeneralTooltipElement extends UpdatingElement implements GeneralToo
    * @kind string | string[]
    * @required true
    * @description 提示内容, 数组表示多行显示, 可根据平台提供的 transform 机制转换成所需的提示内容
+   * @description.en Tooltip content. An array means multiple lines. It can be transformed into the required tooltip content via the transform mechanism provided by the platform
    * @group basic
    */
   @property({
@@ -79,6 +84,7 @@ export class GeneralTooltipElement extends UpdatingElement implements GeneralToo
    * @kind MenuIcon
    * @required true
    * @description 图标配置 [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
+   * @description.en Icon configuration [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
    * @group basic
    */
   @property({
@@ -89,6 +95,7 @@ export class GeneralTooltipElement extends UpdatingElement implements GeneralToo
   /**
    * @required false
    * @description 文案
+   * @description.en Text
    * @group basic
    */
   @property()
@@ -97,6 +104,7 @@ export class GeneralTooltipElement extends UpdatingElement implements GeneralToo
   /**
    * @required false
    * @description 图标容器相关样式
+   * @description.en Style related to the icon container
    * @group ui
    */
   @property({
@@ -109,6 +117,7 @@ export class GeneralTooltipElement extends UpdatingElement implements GeneralToo
    * @required false
    * @default tooltip
    * @description 类型设置
+   * @description.en Type setting
    * @group basic
    */
   @property({
@@ -119,6 +128,7 @@ export class GeneralTooltipElement extends UpdatingElement implements GeneralToo
   /**
    * @required false
    * @description 提示内容的标题， 当 type = popover 时才生效
+   * @description.en Title of the tooltip content, effective only when type = popover
    * @group basic
    */
   @property()
@@ -127,6 +137,7 @@ export class GeneralTooltipElement extends UpdatingElement implements GeneralToo
   /**
    * @required false
    * @description tooltip的配置,配置属性见TooltipConfig
+   * @description.en Configuration of the tooltip. See TooltipConfig for the configuration properties
    * @group other
    */
   @property({ attribute: false })
@@ -136,6 +147,7 @@ export class GeneralTooltipElement extends UpdatingElement implements GeneralToo
    * @required false
    * @default true
    * @description 是否只在icon上hover才显示tooltip，仅在不设置`displayBrick`时有效
+   * @description.en Whether the tooltip is shown only when hovering over the icon, effective only when `displayBrick` is not set
    * @group other
    */
   @property({
@@ -146,6 +158,7 @@ export class GeneralTooltipElement extends UpdatingElement implements GeneralToo
   /**
    * @required false
    * @description 自定义展示内容构件，设置后`icon`和`text`会无效
+   * @description.en Custom display content brick. After setting, `icon` and `text` become invalid
    * @group basic
    */
   @property({
@@ -156,6 +169,7 @@ export class GeneralTooltipElement extends UpdatingElement implements GeneralToo
   /**
    * @required false
    * @description 内容是否收起以省略号展示
+   * @description.en Whether the content is collapsed and displayed with an ellipsis
    * @group other
    */
   @property({ type: Boolean })

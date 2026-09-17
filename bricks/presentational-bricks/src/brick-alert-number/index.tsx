@@ -13,6 +13,7 @@ export interface BrickAlertNumberElementProps {
  * @name presentational-bricks.brick-alert-number
  * @docKind brick
  * @description 数值 0 将带有绿色背景，1 带有黄色背景
+ * @description.en A value of 0 has a green background, and 1 has a yellow background
  * @author ice
  * @slots
  * @history
@@ -25,6 +26,7 @@ export class BrickAlertNumberElement extends UpdatingElement implements BrickAle
    * @required true
    * @default -
    * @description 告警数量
+   * @description.en Number of alerts
    */
   @property({
     attribute: false,

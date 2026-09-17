@@ -31,6 +31,7 @@ export interface EntryCardItemElementProps {
  * @name presentational-bricks.entry-card-item
  * @docKind brick
  * @description 可配置icon和title的卡片项
+ * @description.en Card item with configurable icon and title
  * @author lynette
  * @slots
  * @history
@@ -43,6 +44,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required true
    * @default -
    * @description 卡片信息数据源
+   * @description.en Data source of the card information
    */
   @property({
     attribute: false,
@@ -54,6 +56,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required false
    * @default -
    * @description 卡片 title
+   * @description.en Card title
    */
   @property()
   cardTitle: string;
@@ -63,6 +66,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required false
    * @default -
    * @description 卡片 description
+   * @description.en Card description
    */
   @property()
   description: string;
@@ -72,6 +76,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required true
    * @default -
    * @description 字段映射, 跟 dataSource 一起使用来获得运行时 cardTitle、 icon、iconColor
+   * @description.en Field mapping, used together with dataSource to get cardTitle, icon, and iconColor at runtime
    */
   @property({
     attribute: false,
@@ -87,6 +92,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required false
    * @default -
    * @description 卡片 icon
+   * @description.en Card icon
    */
   @property({
     attribute: false,
@@ -98,6 +104,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required false
    * @default -
    * @description icon 颜色
+   * @description.en Icon color
    */
   @property()
   iconColor: Color;
@@ -107,6 +114,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required false
    * @default -
    * @description icon 大小
+   * @description.en Icon size
    */
   @property()
   iconSize: Size;
@@ -116,6 +124,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required false
    * @default -
    * @description url target，如_blank
+   * @description.en url target, e.g. _blank
    */
   @property()
   target: string;
@@ -125,6 +134,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required false
    * @default -
    * @description 卡片跳转 url
+   * @description.en Redirect url of the card
    */
   @property()
   url: string;
@@ -134,6 +144,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required false
    * @default -
    * @description 卡片跳转 url 模板，支持模版变量
+   * @description.en Redirect url template of the card, supporting template variables
    */
   @property()
   urlTemplate: string;
@@ -143,6 +154,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required false
    * @default true
    * @description hover文字效果，`true`为蓝字高亮，`false`为黑字加粗
+   * @description.en Hover text effect; `true` for highlighted blue text, `false` for bold black text
    */
   @property({ attribute: false })
   hoverHighLight = true;
@@ -151,6 +163,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required false
    * @default true
    * @description 是否用 Card 包裹
+   * @description.en Whether to wrap with Card
    */
   @property({
     attribute: false,
@@ -162,6 +175,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required false
    * @default -
    * @description card样式
+   * @description.en Card style
    */
   @property({
     attribute: false,
@@ -172,6 +186,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required false
    * @default false
    * @description 是否禁用
+   * @description.en Whether to disable
    */
   @property({
     attribute: false,
@@ -183,6 +198,7 @@ export class EntryCardItemElement extends UpdatingElement implements EntryCardIt
    * @required false
    * @default -
    * @description 鼠标悬浮的提示
+   * @description.en Tooltip on mouse hover
    */
   @property() tip: string;
 

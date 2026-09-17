@@ -18,15 +18,22 @@ export interface GeneralListElementProps {
  * @name presentational-bricks.general-list
  * @docKind brick
  * @description 可配置具体每个item构件，常用于卡片列表
+ * @description.en Each item brick can be configured individually; commonly used for card lists
  * @author lynette
  * @slots
  * items:每个子项的 slot，例如可以搭配"presentational-bricks.card-item"使用。
+ * @slots.en
+ * items:Slot for each sub-item, for example it can be used together with "presentational-bricks.card-item".
  * @history
  * 1.19.0:新属性 `cardMinWidth`
  * @memo
  * ## 描述
  *
  * 通用列表，可以配置每个 item 构件。通常不会单独使用，而是搭配 dynamic template 使用，具体参考"general-list.general-card-list"中，具体事例看同[general-card-list](developers/brick-book/template/general-list.general-card-list)。
+ * @memo.en
+ * ## Description
+ *
+ * A general list in which each item brick can be configured. It is usually not used alone but together with a dynamic template; for details, refer to "general-list.general-card-list", and see [general-card-list](developers/brick-book/template/general-list.general-card-list) for a concrete example.
  * @noInheritDoc
  */
 export class GeneralListElement extends UpdatingElement implements GeneralListElementProps {
@@ -35,6 +42,7 @@ export class GeneralListElement extends UpdatingElement implements GeneralListEl
    * @required false
    * @default false
    * @description 是否卡片列表
+   * @description.en Whether it is a card list
    */
   @property({
     type: Boolean,
@@ -46,6 +54,7 @@ export class GeneralListElement extends UpdatingElement implements GeneralListEl
    * @required false
    * @default false
    * @description 是否在外层包一层卡片
+   * @description.en Whether to wrap an extra card around the outer layer
    */
   @property({
     type: Boolean,
@@ -57,6 +66,7 @@ export class GeneralListElement extends UpdatingElement implements GeneralListEl
    * @required false
    * @default -
    * @description 卡片项的宽度，非响应式卡片可设置该属性
+   * @description.en Width of the card item; can be set for non-responsive cards
    */
   @property()
   cardWidth: string;
@@ -66,6 +76,7 @@ export class GeneralListElement extends UpdatingElement implements GeneralListEl
    * @required false
    * @default 260px
    * @description 卡片项的最小宽度，响应式卡片可设置该属性
+   * @description.en Minimum width of the card item; can be set for responsive cards
    */
   @property()
   cardMinWidth: string;

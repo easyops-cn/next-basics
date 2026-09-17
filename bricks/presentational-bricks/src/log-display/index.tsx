@@ -17,6 +17,7 @@ export interface LogDisplayElementProps {
  * @editor shared-editors.general-code--editor
  * @docKind brick
  * @description 显示日志相关信息
+ * @description.en Displays log-related information
  * @author jo
  * @slots
  * @history
@@ -30,6 +31,7 @@ export class LogDisplayElement extends UpdatingElement implements LogDisplayElem
    * @required true
    * @default -
    * @description 日志的信息
+   * @description.en Log information
    */
   @property()
   value: string;
@@ -39,6 +41,7 @@ export class LogDisplayElement extends UpdatingElement implements LogDisplayElem
    * @required false
    * @default false
    * @description 是否显示信息拉取中的状态图标
+   * @description.en Whether to display the status icon while the information is being fetched
    */
   @property({
     type: Boolean,
@@ -50,6 +53,7 @@ export class LogDisplayElement extends UpdatingElement implements LogDisplayElem
    * @required false
    * @default false
    * @description 信息是否可能包含退格键，为 `true` 时自动处理退格键，以符合控制台的实际输出
+   * @description.en Whether the information may contain backspace characters; when `true`, backspace characters are handled automatically to match the actual console output
    */
   @property({ type: Boolean }) hasBackspace: boolean;
 
@@ -58,6 +62,7 @@ export class LogDisplayElement extends UpdatingElement implements LogDisplayElem
    * @required false
    * @default -
    * @description 容器的样式
+   * @description.en Style of the container
    */
   @property({ attribute: false })
   containerStyle: React.CSSProperties;

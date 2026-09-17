@@ -22,6 +22,7 @@ export interface BrickInputElementProps {
  * @editor forms.general-input--editor
  * @docKind brick
  * @description 输入框，只发起事件不更新url，注意与brick-general-search的区别
+ * @description.en Input box that only emits events and does not update the url; note the difference from brick-general-search
  * @author momo
  * @slots
  * @history
@@ -33,6 +34,7 @@ export class BrickInputElement extends UpdatingElement implements BrickInputElem
   /**
    * @detail Record<string,any>
    * @description 事件内容为{q: value}，其中 value 为输入的字符
+   * @description.en The event content is {q: value}, where value is the entered characters
    */
   @event({ type: "input.emit", cancelable: true }) inputEmit: EventEmitter<
     Record<string, any>
@@ -41,6 +43,7 @@ export class BrickInputElement extends UpdatingElement implements BrickInputElem
   /**
    * @detail Record<string,any>
    * @description 当搜索框的值变化时发出的事件，事件内容为{q: value}，其中 value 为输入的字符
+   * @description.en Event emitted when the value of the search box changes; the event content is {q: value}, where value is the entered characters
    */
   @event({ type: "input.change" }) inputChange: EventEmitter<
     Record<string, any>
@@ -66,6 +69,7 @@ export class BrickInputElement extends UpdatingElement implements BrickInputElem
    * @required false
    * @default -
    * @description 指定 key，从 url 获取默认值
+   * @description.en Specify the key to obtain the default value from the url
    */
   set defaultValKey(value: string) {
     this._defaultValKey = value;
@@ -77,6 +81,7 @@ export class BrickInputElement extends UpdatingElement implements BrickInputElem
    * @required false
    * @default -
    * @description 输入提示语
+   * @description.en Input placeholder text
    */
   @property()
   placeholder: string;
@@ -86,6 +91,7 @@ export class BrickInputElement extends UpdatingElement implements BrickInputElem
    * @required false
    * @default change
    * @description 触发方式，可选`change、enter`
+   * @description.en Trigger method, options are `change、enter`
    */
   @property({
     attribute: false,
@@ -97,6 +103,7 @@ export class BrickInputElement extends UpdatingElement implements BrickInputElem
    * @required false
    * @default ""
    * @description 搜索框的值
+   * @description.en Value of the search box
    */
   @property({
     attribute: false,
@@ -108,6 +115,7 @@ export class BrickInputElement extends UpdatingElement implements BrickInputElem
    * @required false
    * @default 500
    * @description 默认延迟时间
+   * @description.en Default delay time
    */
   @property({
     attribute: false,

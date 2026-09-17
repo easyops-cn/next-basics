@@ -30,6 +30,7 @@ export interface BasicIconElementProps {
  * 1.0.0: 新增构件 `presentational-bricks.basic-icon`
  * @docKind brick
  * @description 基础icon构件
+ * @description.en Basic icon brick
  * @noInheritDoc
  */
 export class BasicIconElement extends UpdatingElement implements BasicIconElementProps {
@@ -38,6 +39,7 @@ export class BasicIconElement extends UpdatingElement implements BasicIconElemen
    * @required true
    * @default -
    * @description 图标
+   * @description.en Icon
    * @group basic
    */
   @property({ attribute: false })
@@ -48,6 +50,7 @@ export class BasicIconElement extends UpdatingElement implements BasicIconElemen
    * @required false
    * @default 24px
    * @description 图标大小
+   * @description.en Icon size
    * @group basic
    */
   @property({ attribute: false })
@@ -58,6 +61,7 @@ export class BasicIconElement extends UpdatingElement implements BasicIconElemen
    * @required false
    * @default false
    * @description 是否渲染图标背景
+   * @description.en Whether to render the icon background
    * @group basic
    */
   @property({ type: Boolean })
@@ -68,6 +72,7 @@ export class BasicIconElement extends UpdatingElement implements BasicIconElemen
    * @required false
    * @default false
    * @description 是否hover的时候再展示
+   * @description.en Whether to display only on hover
    * @group basic
    */
   @property({ type: Boolean })
@@ -78,6 +83,7 @@ export class BasicIconElement extends UpdatingElement implements BasicIconElemen
    * @required false
    * @default
    * @description 图标背景
+   * @description.en Icon background
    * @group basic
    */
   @property()
@@ -88,6 +94,7 @@ export class BasicIconElement extends UpdatingElement implements BasicIconElemen
    * @required false
    * @default 46px
    * @description 图标背景大小
+   * @description.en Icon background size
    * @group basic
    */
   @property({ attribute: false })
@@ -98,6 +105,7 @@ export class BasicIconElement extends UpdatingElement implements BasicIconElemen
    * @required false
    * @default
    * @description 图标背景圆角大小
+   * @description.en Icon background border radius
    * @group basic
    */
   @property()
@@ -106,6 +114,7 @@ export class BasicIconElement extends UpdatingElement implements BasicIconElemen
   /**
    * @kind unknown
    * @description 数据源
+   * @description.en Data Source
    * @group basic
    */
   @property({ attribute: false })
@@ -114,6 +123,7 @@ export class BasicIconElement extends UpdatingElement implements BasicIconElemen
   /**
    * @detail `any`
    * @description 按钮被点击时触发, detail 为 dataSource 数据
+   * @description.en Triggered when the button is clicked, the detail is the dataSource data
    */
   @event({ type: "icon.click", cancelable: true })
   itemClick: EventEmitter<any>;

@@ -103,6 +103,7 @@ export interface DescriptionItem {
  * @name presentational-bricks.card-item
  * @docKind brick
  * @description 通用卡片项
+ * @description.en Generic card item
  * @author lynette
  * @slots
  * afterTitle: 标题后面的slot，通常搭配"presentational-bricks.brick-value-mapping"使用
@@ -111,6 +112,13 @@ export interface DescriptionItem {
  * topRightOperate:右上角操作区 slot，通常搭配"basic-bricks.general-custom-buttons"使用。卡片类型 cardLayoutType 为 "icon-as-background" | "icon-small-align-left" | "icon-align-left" | "icon-align-middle" | "block-icon-align-left"时可用。
  * bottomRightOperate:右下角操作区 slot，通常搭配"basic-bricks.general-custom-buttons"使用。卡片类型 cardLayoutType 为 "icon-as-background"（icon不设置） | "icon-small-align-left" | "icon-align-right" | "icon-align-left" 时可用。
  * afterDescription:描述列表后的slot，通常搭配"basic-bricks.brick-value-mapping"使用。卡片类型 cardLayoutType 为 "icon-as-background"（useAfterDescriptionSlot设置）时可用。
+ * @slots.en
+ * afterTitle: Slot after the title, usually used together with "presentational-bricks.brick-value-mapping"
+ * afterSubtitle: Slot after the subtitle, available when the card type cardLayoutType is "icon-small-align-left" | "icon-align-left" "
+ * operate:Operation area slot, usually used together with "basic-bricks.general-button".
+ * topRightOperate:Top-right operation area slot, usually used together with "basic-bricks.general-custom-buttons". Available when the card type cardLayoutType is "icon-as-background" | "icon-small-align-left" | "icon-align-left" | "icon-align-middle" | "block-icon-align-left".
+ * bottomRightOperate:Bottom-right operation area slot, usually used together with "basic-bricks.general-custom-buttons". Available when the card type cardLayoutType is "icon-as-background" (icon not set) | "icon-small-align-left" | "icon-align-right" | "icon-align-left".
+ * afterDescription:Slot after the description list, usually used together with "basic-bricks.brick-value-mapping". Available when the card type cardLayoutType is "icon-as-background" (set by useAfterDescriptionSlot).
  * @history
  * 1.171.0: `cardLayoutType` 增加 "block-icon-align-left" 类型，新增属性 `showImg`,`imgSrc`,`tagConfig.color`,`tagConfig.triangle`
  * 1.160.0: `cardLayoutType` 增加 "icon-align-middle" 类型
@@ -126,6 +134,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default "icon-as-background"
    * @description 卡片布局类型，具体样式看 Demo
+   * @description.en Card layout type, see the Demo for specific styles
    * @group basic
    */
   @property()
@@ -134,6 +143,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 字段映射, 跟 dataSource 一起使用来获得运行时 cardTitle、cardSubtitle、newDescription、topInformation、descriptionList、icon、iconColor、iconStyle、iconSize、iconOffsetX、iconOffsetY、iconOpacity、disabled
+   * @description.en Field mapping, used together with dataSource to obtain cardTitle, cardSubtitle, newDescription, topInformation, descriptionList, icon, iconColor, iconStyle, iconSize, iconOffsetX, iconOffsetY, iconOpacity and disabled at runtime
    * @group other
    */
   @property({
@@ -158,6 +168,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required true
    * @description 卡片信息数据源
+   * @description.en Card information data source
    * @group basic
    */
   @property({
@@ -168,6 +179,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 卡片跳转 url，支持模版变量
+   * @description.en Card redirect URL, template variables are supported
    * @group basic
    */
   @property()
@@ -176,6 +188,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @detail
    * @description 点击的 card-item 触发的事件，tips:点击卡片会先判断事件监听器能否传播到 class="listContainer cardListContainer"元素，是则触发自身的\_handleClick 方法触发事件，否则不会触发事件。
+   * @description.en Event triggered by clicking the card-item. Tips: when the card is clicked, it is first determined whether the event listener can propagate to the element with class="listContainer cardListContainer"; if so, its own \_handleClick method is called to trigger the event, otherwise the event is not triggered.
    */
   @event({ type: "presentational-bricks.card-item.click", cancelable: true })
   cardItemClick: EventEmitter<any>;
@@ -201,6 +214,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default false
    * @description 解决只有operateSlot时宽度不能占满
+   * @description.en Fixes the width not filling when there is only an operateSlot
    * @group ui
    */
   @property({
@@ -211,6 +225,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 卡片 title
+   * @description.en Card title
    * @group basic
    */
   @property()
@@ -219,6 +234,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 卡片 副标题
+   * @description.en Card subtitle
    * @group basic
    */
   @property()
@@ -227,6 +243,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 卡片 新的描述信息、存在时cardSubtitle、descriptionList属性不生效
+   * @description.en New card description; when it exists, the cardSubtitle and descriptionList properties do not take effect
    * @group basic
    */
   @property()
@@ -235,6 +252,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 卡片 顶部辅助信息
+   * @description.en Auxiliary information at the top of the card
    * @group basic
    */
   @property()
@@ -243,6 +261,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 描述信息
+   * @description.en Description information
    * @group basic
    */
   @property({
@@ -254,6 +273,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default 3
    * @description 描述信息的最大行数，默认为 3 行，当信息比较少的时候可以设成 3 行以下。UI 规范建议 3 或者 3 以下。
+   * @description.en The maximum number of lines of the description, 3 lines by default; it can be set to fewer than 3 lines when there is little information. The UI specification recommends 3 or fewer.
    * @group ui
    */
   @property({
@@ -264,6 +284,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 描述信息为数组的时候，默认显示每个`<li>`前面的小圈圈，不需要的时候可以隐藏
+   * @description.en When the description information is an array, the small circle in front of each `<li>` is shown by default and can be hidden when not needed
    * @group ui
    */
   @property({
@@ -274,6 +295,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 卡片跳转 url， url 优先于 urlTemplate 执行
+   * @description.en Card redirect URL; url takes precedence over urlTemplate
    * @group basic
    */
   @property()
@@ -282,6 +304,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 卡片跳转 href，优先于 url 执行
+   * @description.en Card redirect href, which takes precedence over url
    * @group basic
    */
   @property()
@@ -290,6 +313,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 卡片跳转 target，例如可以设置成 _blank
+   * @description.en Card redirect target, for example it can be set to _blank
    * @group basic
    */
   @property()
@@ -298,6 +322,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 卡片右下角的 icon, [详细配置](https://github.com/easyops-cn/next-core/blob/34a0808712ecaa925d0860d281ab23cf3bec7317/packages/brick-types/src/menu.ts#L104), 也可参照示例中的写法
+   * @description.en The icon in the bottom-right corner of the card, [detailed configuration](https://github.com/easyops-cn/next-core/blob/34a0808712ecaa925d0860d281ab23cf3bec7317/packages/brick-types/src/menu.ts#L104), you can also refer to the usage in the examples
    * @group basic
    */
   @property({
@@ -309,6 +334,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @kind Record<string, any>
    * @required false
    * @description 卡片右下角的 icon 的样式，例如需要调整 opacity、right、bottom 的时候可以使用
+   * @description.en The style of the icon in the bottom-right corner of the card, for example when opacity, right or bottom needs to be adjusted
    * @group ui
    */
   @property({
@@ -319,6 +345,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 卡片类型为 "icon-small-align-left" | "icon-align-right" | "icon-align-left" 的时候可以设置 icon 的颜色
+   * @description.en The color of the icon can be set when the card type is "icon-small-align-left" | "icon-align-right" | "icon-align-left"
    * @group ui
    */
   @property({
@@ -331,6 +358,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default 100px
    * @description 卡片类型为 "icon-as-background" 的时候可以设置 icon 的大小
+   * @description.en The size of the icon can be set when the card type is "icon-as-background"
    * @group ui
    */
   @property()
@@ -341,6 +369,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default 0
    * @description 卡片类型为 "icon-as-background" 的时候可以设置 icon 的 X 轴偏移量，向左为正数向右为负数
+   * @description.en The X-axis offset of the icon can be set when the card type is "icon-as-background"; positive values move left and negative values move right
    * @group basic
    */
   @property()
@@ -351,6 +380,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default 0
    * @description 卡片类型为 "icon-as-background" 的时候可以设置 icon 的 Y 轴偏移量，向上为正数向下为负数
+   * @description.en The Y-axis offset of the icon can be set when the card type is "icon-as-background"; positive values move up and negative values move down
    * @group basic
    */
   @property()
@@ -361,6 +391,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default 0.45
    * @description 卡片类型为 "icon-as-background" 的时候可以设置 icon 的透明度
+   * @description.en The opacity of the icon can be set when the card type is "icon-as-background"
    * @group ui
    */
   @property({
@@ -371,6 +402,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 右上角 tag 标签
+   * @description.en Tag in the top-right corner
    * @group other
    */
   @property({
@@ -389,6 +421,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 完全透传给 antd 的 Card 属性，详见：[antd卡片属性](https://ant.design/components/card-cn/#Card)
+   * @description.en Card properties passed through to antd completely, see: [antd card properties](https://ant.design/components/card-cn/#Card)
    * @group other
    */
   @property({ attribute: false }) configProps: CardProps;
@@ -397,6 +430,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default true
    * @description 卡片项是否显示外边框
+   * @description.en Whether the card item shows an outer border
    * @group ui
    */
   @property({
@@ -408,6 +442,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default false
    * @description 是否鼠标悬浮显示操作区
+   * @description.en Whether to show the operation area on mouse hover
    * @group basic
    */
   @property({
@@ -419,6 +454,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default false
    * @description 是否总是总是展示描述区域
+   * @description.en Whether to always show the description area
    * @group basic
    */
   @property({
@@ -430,6 +466,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default false
    * @description 指定描述区的显示形式，若descriptionList为数组时，应当指定为 `list`,若descriptionList为字符串时，应当指定为 `section`,单独使用卡片时无需设置该属性
+   * @description.en Specifies the display form of the description area: it should be specified as `list` when descriptionList is an array, and as `section` when descriptionList is a string. This property does not need to be set when the card is used alone
    * @group basic
    */
   @property()
@@ -439,6 +476,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default true
    * @description 卡片项是否hover浮起
+   * @description.en Whether the card item floats up on hover
    * @group ui
    */
   @property({
@@ -450,6 +488,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default false
    * @description 禁用卡片，禁用的卡片不可点击跳转。操作区配置了 slot 的卡片，请按需配置子构件的属性，例如将按钮设置成 disabled 等。
+   * @description.en Disables the card; a disabled card cannot be clicked to redirect. For cards whose operation area has a slot configured, configure the properties of the child bricks as needed, for example setting the button to disabled.
    * @group basic
    */
   @property({
@@ -461,6 +500,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default false
    * @description 反转背景色，背景色为icon传入的颜色，icon为白色。
+   * @description.en Reverses the background color; the background color becomes the color passed to icon, and the icon becomes white.
    * @group ui
    */
   @property({
@@ -471,6 +511,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 图片图标的src
+   * @description.en The src of the image icon
    * @group basic
    */
   @property({ attribute: false })
@@ -480,6 +521,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default false
    * @description 是否显示图片，默认显示图标，设置显示图片后，可配置 `imgSrc` 属性
+   * @description.en Whether to show an image; the icon is shown by default, and the `imgSrc` property can be configured after enabling image display
    * @group basic
    */
   @property({ type: Boolean })
@@ -488,6 +530,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
   /**
    * @required false
    * @description 图标是img时，可以设置 img 的大小，不设置时会铺满
+   * @description.en When the icon is an img, the size of the img can be set; it fills the area when not set
    * @group basic
    */
   @property({
@@ -499,6 +542,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @default  "circle"
    * @required false
    * @description 设置icon背景形状，仅在设置`bg`为true时有效
+   * @description.en Sets the background shape of the icon, only effective when `bg` is set to true
    * @group basic
    */
   @property({ attribute: false }) shape: "circle" | "square" | "round-square";
@@ -507,6 +551,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required true
    * @default true
    * @description 卡片是否使用a标签实现点击
+   * @description.en Whether the card uses an a tag for clicking
    * @group basic
    */
   @property({ attribute: false })
@@ -516,6 +561,7 @@ export class CardItemElement extends UpdatingElement implements CardItemElementP
    * @required false
    * @default false
    * @description 卡片类型 cardLayoutType 为 "icon-as-background" 是否使用afterDescription插槽
+   * @description.en Whether the afterDescription slot is used when the card type cardLayoutType is "icon-as-background"
    * @group basic
    */
   @property({ attribute: false })

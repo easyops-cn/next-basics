@@ -25,6 +25,7 @@ export interface GeneralPaginationElementProps {
  * @name presentational-bricks.general-pagination
  * @docKind brick
  * @description 通用分页构件
+ * @description.en General pagination brick
  * @author lynette
  * @slots
  * @history
@@ -35,6 +36,7 @@ export class GeneralPaginationElement extends UpdatingElement implements General
   /**
    * @detail {page: number}
    * @description 页码变化
+   * @description.en Page number change
    */
   @event({ type: "page.update" })
   pageUpdate: EventEmitter<{ page: number }>;
@@ -42,6 +44,7 @@ export class GeneralPaginationElement extends UpdatingElement implements General
   /**
    * @detail {page:1,pageSize:number}
    * @description 每页条数变化
+   * @description.en Page size change
    */
   @event({ type: "filter.update" })
   filterUpdate: EventEmitter<{ page: 1; pageSize: number }>;
@@ -114,6 +117,7 @@ export class GeneralPaginationElement extends UpdatingElement implements General
    * @required true
    * @default -
    * @description 页码，一般配置成 "${query.page=1|number}"
+   * @description.en Page number, usually configured as "${query.page=1|number}"
    */
   @property({
     attribute: false,
@@ -125,6 +129,7 @@ export class GeneralPaginationElement extends UpdatingElement implements General
    * @required true
    * @default -
    * @description 页码条数，一般配置成 "${query.pageSize=10|number}"
+   * @description.en Page size, usually configured as "${query.pageSize=10|number}"
    */
   @property({
     attribute: false,
@@ -136,6 +141,7 @@ export class GeneralPaginationElement extends UpdatingElement implements General
    * @required false
    * @default -
    * @description 一般来自于 dataSource
+   * @description.en Usually comes from dataSource
    */
   @property({
     attribute: false,
@@ -147,6 +153,7 @@ export class GeneralPaginationElement extends UpdatingElement implements General
    * @required false
    * @default false
    * @description 是否只显示 total
+   * @description.en Whether to display only total
    */
   @property({
     type: Boolean,
@@ -158,6 +165,7 @@ export class GeneralPaginationElement extends UpdatingElement implements General
    * @required false
    * @default -
    * @description [已废弃]数据源，通过 useResolves 从后台接口获取或者直接在 storyboard 中配置，这个分页器主要用来获取 total 数据
+   * @description.en [Deprecated] Data source, obtained from a backend API via useResolves or configured directly in the storyboard; this pagination is mainly used to obtain the total data
    */
   @property({
     attribute: false,
@@ -169,6 +177,7 @@ export class GeneralPaginationElement extends UpdatingElement implements General
    * @required false
    * @default -
    * @description ant-design 的 Pagination 相关配置项,具体查阅：[https://ant.design/components/pagination-cn/#API](https://ant.design/components/pagination-cn/#API)
+   * @description.en ant-design Pagination related configuration items, see: [https://ant.design/components/pagination-cn/#API](https://ant.design/components/pagination-cn/#API)
    * @group advanced
    */
   @property({
@@ -181,6 +190,7 @@ export class GeneralPaginationElement extends UpdatingElement implements General
    * @required false
    * @default { total: "total" }
    * @description [已废弃]指定 total 从哪里来，默认为列表接口返回格式是{list:[],page:1,pageSize:10,total:20}，即默认取自 total
+   * @description.en [Deprecated] Specifies where total comes from; the default list API response format is {list:[],page:1,pageSize:10,total:20}, i.e. it is taken from total by default
    * @deprecated
    * @group advanced
    */
@@ -196,6 +206,7 @@ export class GeneralPaginationElement extends UpdatingElement implements General
    * @required false
    * @default true
    * @description 是否更新 url 参数
+   * @description.en Whether to update the url parameters
    */
   @property({
     attribute: false,
@@ -207,6 +218,7 @@ export class GeneralPaginationElement extends UpdatingElement implements General
    * @required false
    * @default true
    * @description 是否在更新 url 参数时刷新页面, 默认为true
+   * @description.en Whether to refresh the page when updating the url parameters, default true
    */
   @property({
     attribute: false,

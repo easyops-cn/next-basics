@@ -26,6 +26,7 @@ export interface GeneralLabelElementProps {
  * @name presentational-bricks.general-label
  * @docKind brick
  * @description 可用来展示基本文案、前后缀图标，可配置点击事件和 url 的通用 label 构件
+ * @description.en General label brick that can display basic text and prefix/suffix icons, with configurable click events and url
  * @author lynette
  * @slots
  * @history
@@ -41,6 +42,7 @@ export class GeneralLabelElement
   /**
    * @required false
    * @description 文字内容
+   * @description.en Text content
    * @group basic
    */
   @property()
@@ -49,6 +51,7 @@ export class GeneralLabelElement
   /**
    * @required false
    * @description 前缀图标
+   * @description.en Prefix icon
    * @group basic
    */
   @property({
@@ -59,6 +62,7 @@ export class GeneralLabelElement
   /**
    * @required false
    * @description 后缀图标
+   * @description.en Suffix icon
    * @group basic
    */
   @property({
@@ -69,6 +73,7 @@ export class GeneralLabelElement
   /**
    * @required false
    * @description 链接的 URL
+   * @description.en URL of the link
    * @group basic
    */
   @property()
@@ -77,6 +82,7 @@ export class GeneralLabelElement
   /**
    * @required false
    * @description 外链地址，使用原生 `<a>` 标签跳转，通常用于外部链接
+   * @description.en External link address, navigated using the native `<a>` tag, usually used for external links
    * @group advanced
    */
   @property()
@@ -85,6 +91,7 @@ export class GeneralLabelElement
   /**
    * @detail 编排者通过 `dataSource` 属性传入的自定义数据（若未设置则回退到已废弃的 `data` 属性）
    * @description 点击 label 时触发
+   * @description.en Triggered when the label is clicked
    * @group advanced
    */
   @event({ type: "label.click" })
@@ -93,6 +100,7 @@ export class GeneralLabelElement
   /**
    * @required false
    * @description `label.click`事件的传出的数据
+   * @description.en Data emitted by the `label.click` event
    * @group advanced
    */
   @property({
@@ -103,6 +111,7 @@ export class GeneralLabelElement
   /**
    * @required false
    * @description `label.click`事件的详情
+   * @description.en Detail of the `label.click` event
    * @deprecated
    * @group advanced
    */

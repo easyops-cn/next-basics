@@ -16,6 +16,7 @@ export interface GeneralVideoElementProps {
  * @name presentational-bricks.general-video
  * @docKind brick
  * @description 播放视频或预览视频
+ * @description.en Play or preview a video
  * @author alren
  * @slots
  * @history
@@ -40,6 +41,7 @@ export class GeneralVideoElement extends UpdatingElement implements GeneralVideo
    * @required true
    * @default -
    * @description 视频的链接地址
+   * @description.en The link address of the video
    */
   @property()
   source: string;
@@ -49,6 +51,7 @@ export class GeneralVideoElement extends UpdatingElement implements GeneralVideo
    * @required true
    * @default -
    * @description 预览模式还是播放模式
+   * @description.en Preview mode or play mode
    */
   @property({
     type: Boolean,
@@ -60,6 +63,7 @@ export class GeneralVideoElement extends UpdatingElement implements GeneralVideo
    * @required false
    * @default -
    * @description 预览模式（preview=true）下的标题，如果不设置则从视频链接地址获取文件名字，如果设置为空字符串则表示不显示标题
+   * @description.en The title in preview mode (preview=true); if not set, the file name is obtained from the video link address, and if set to an empty string, the title is not displayed
    */
   @property()
   videoTitle: string;
@@ -69,6 +73,7 @@ export class GeneralVideoElement extends UpdatingElement implements GeneralVideo
    * @required true
    * @default -
    * @description 播放器高度
+   * @description.en Height of the player
    */
   @property()
   height: number;

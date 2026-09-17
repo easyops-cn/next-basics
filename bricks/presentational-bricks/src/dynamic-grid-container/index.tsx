@@ -31,6 +31,7 @@ export class DynamicGridContainerElement extends UpdatingElement implements Dyna
    * @required false
    * @default -
    * @description 使用的子构件配置
+   * @description.en The child brick configuration to use
    */
   @property({ attribute: false })
   useBrick: UseBrickConf;
@@ -40,6 +41,7 @@ export class DynamicGridContainerElement extends UpdatingElement implements Dyna
    * @required false
    * @default -
    * @description 传递给子构件的数据，应与 `useBrick` 一一对应,data数据中建议传入index作为唯一标识（eg: [{index: chart-01},{index:chart-02}]）
+   * @description.en Data passed to child bricks; should correspond one-to-one with `useBrick`. It is recommended to pass index in the data as a unique identifier (eg: [{index: chart-01},{index:chart-02}])
    */
   @property({ attribute: false })
   data: any[];
@@ -48,6 +50,7 @@ export class DynamicGridContainerElement extends UpdatingElement implements Dyna
    * @required false
    * @default -
    * @description 容器的样式
+   * @description.en Container style
    */
   @property({ attribute: false })
   containerStyle: React.CSSProperties;
@@ -55,6 +58,7 @@ export class DynamicGridContainerElement extends UpdatingElement implements Dyna
   /**
    * @detail `data`为输出的数据，
    * @description 当`useBrick`渲染完后触发
+   * @description.en Triggered after `useBrick` finishes rendering
    */
   @event({ type: "dynamic-grid-container.rendered" }) changEvent: EventEmitter;
   private _handleChange = (value: any): void => {

@@ -18,6 +18,7 @@ export type AlertLevel = 0 | 1 | 2 | "info" | "warning" | "critical";
  * @name presentational-bricks.brick-alert-level
  * @docKind brick
  * @description 将数值渲染成通用告警等级显示方式
+ * @description.en Renders a numeric value in the common alert level display style
  * @author ice
  * @slots
  * @history
@@ -30,6 +31,7 @@ export class BrickAlertLevelElement extends UpdatingElement implements BrickAler
    * @required false
    * @default -
    * @description 告警等级: 0 - 通知, 1 - 警告, 2 - 紧急
+   * @description.en Alert level: 0 - Notice, 1 - Warning, 2 - Urgent
    */
   @property({
     attribute: false,
@@ -41,6 +43,7 @@ export class BrickAlertLevelElement extends UpdatingElement implements BrickAler
    * @required false
    * @default -
    * @description [已废弃]数据来源
+   * @description.en [Deprecated] Data source
    */
   @property({
     attribute: false,
@@ -52,6 +55,7 @@ export class BrickAlertLevelElement extends UpdatingElement implements BrickAler
    * @required false
    * @default -
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
+   * @description.en [Deprecated] Field mapping, used together with dataSource to get the value at runtime
    */
   @property({
     attribute: false,

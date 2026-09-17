@@ -23,6 +23,7 @@ export interface BrickUserElementProps {
  * @name presentational-bricks.brick-user
  * @docKind brick
  * @description 展示用户头像和用户名的构件，支持昵称显示、showKey 显示、自定义 Tooltip 及头像大小和形状配置
+ * @description.en A brick that displays a user avatar and username, supporting nickname display, showKey display, custom Tooltip, and avatar size and shape configuration
  * @author ice
  * @slots
  * @history
@@ -42,6 +43,7 @@ export class BrickUserElement
    * @default -
    * @deprecated
    * @description [已废弃]用户名 (废弃属性，请使用 `userNameOrId`)
+   * @description.en [Deprecated] Username (deprecated property, please use `userNameOrId`)
    */
   @property()
   username: string;
@@ -51,6 +53,7 @@ export class BrickUserElement
    * @required true
    * @default -
    * @description 用户名或用户 instanceId
+   * @description.en Username or user instanceId
    * @group basic
    */
   @property({ attribute: false })
@@ -61,6 +64,7 @@ export class BrickUserElement
    * @required false
    * @default -
    * @description 用户头像 url
+   * @description.en User avatar url
    * @group ui
    */
   @property()
@@ -71,6 +75,7 @@ export class BrickUserElement
    * @required false
    * @default false
    * @description 是否隐藏头像
+   * @description.en Whether to hide the avatar
    * @group basic
    */
   @property({ type: Boolean })
@@ -81,6 +86,7 @@ export class BrickUserElement
    * @required false
    * @default false
    * @description 是否隐藏用户名
+   * @description.en Whether to hide the username
    * @group basic
    */
   @property({ type: Boolean })
@@ -91,6 +97,7 @@ export class BrickUserElement
    * @required false
    * @default "default"
    * @description 设置头像的大小
+   * @description.en Sets the size of the avatar
    * @enums "large"|"small"|"default"
    * @group ui
    */
@@ -102,6 +109,7 @@ export class BrickUserElement
    * @required false
    * @default "circle"
    * @description 指定头像的形状
+   * @description.en Specifies the shape of the avatar
    * @enums "circle"|"square"
    * @group ui
    */
@@ -114,6 +122,7 @@ export class BrickUserElement
    * @default false
    * @deprecated
    * @description [已废弃,最新用法以showNicknameOrUsername为准]是否展示昵称,当用户不含昵称昵称时不展示
+   * @description.en [Deprecated, use showNicknameOrUsername instead] Whether to display the nickname; not displayed when the user has no nickname
    */
   @property({ type: Boolean })
   showNickname: boolean;
@@ -122,6 +131,7 @@ export class BrickUserElement
    * @required false
    * @default false
    * @description 当有昵称时显示昵称，无昵称时显示用户名
+   * @description.en Displays the nickname when there is one, otherwise displays the username
    */
   @property({ type: Boolean })
   showNicknameOrUsername: boolean;
@@ -131,6 +141,7 @@ export class BrickUserElement
    * @required false
    * @default false
    * @description 是否显示 showKey，启用后当用户拥有 showKey 时显示为 `name(showKey)` 格式（如 `alan(hero)`），否则仅显示用户名
+   * @description.en Whether to display showKey; when enabled, if the user has a showKey it is displayed in the `name(showKey)` format (e.g. `alan(hero)`), otherwise only the username is displayed
    */
   @property({ type: Boolean })
   displayShowKey: boolean;
@@ -139,6 +150,7 @@ export class BrickUserElement
    * @required false
    * @default 0
    * @description 头像与用户名之间的间距，支持数字（像素）或 CSS 字符串（如 `"0 8px"`）
+   * @description.en Spacing between the avatar and the username, supporting a number (pixels) or a CSS string (e.g. `"0 8px"`)
    * @group ui
    */
   @property({ attribute: false })
@@ -149,6 +161,7 @@ export class BrickUserElement
    * @required false
    * @default -
    * @description 自定义 Tooltip 替换字符串，支持 `#{name}` 和 `#{showKey}` 占位符，例如 `"发起人：#{name}"`
+   * @description.en Custom Tooltip replacement string, supporting the `#{name}` and `#{showKey}` placeholders, e.g. `"Starter: #{name}"`
    * @group basic
    */
   @property({ attribute: false })

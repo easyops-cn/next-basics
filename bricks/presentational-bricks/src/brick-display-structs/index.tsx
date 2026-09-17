@@ -22,6 +22,7 @@ export interface FieldToDisplay {
  * @name presentational-bricks.brick-display-structs
  * @docKind brick
  * @description 可将结构体（数组）数据以字符串的形式展示，或只展示其中的一个字段
+ * @description.en Displays struct (array) data as a string, or displays only one of its fields
  * @author ice
  * @slots
  * @history
@@ -67,6 +68,7 @@ export class BrickDisplayStructsElement extends UpdatingElement implements Brick
    * @required false
    * @default -
    * @description [已废弃]数据来源
+   * @description.en [Deprecated] Data source
    */
   @property({
     attribute: false,
@@ -78,6 +80,7 @@ export class BrickDisplayStructsElement extends UpdatingElement implements Brick
    * @required false
    * @default -
    * @description 字[已废弃]段映射, 跟 dataSource 一起使用来获得运行时 value
+   * @description.en [Deprecated] Field mapping, used together with dataSource to get the value at runtime
    */
   @property({
     attribute: false,
@@ -89,6 +92,7 @@ export class BrickDisplayStructsElement extends UpdatingElement implements Brick
    * @required false
    * @default -
    * @description 要展示的值
+   * @description.en Value to display
    */
   @property({
     attribute: false,
@@ -100,6 +104,7 @@ export class BrickDisplayStructsElement extends UpdatingElement implements Brick
    * @required true
    * @default -
    * @description 展示类型, 定义类型如下
+   * @description.en Display type; the type definition is as follows
    */
   @property({
     attribute: false,
@@ -111,6 +116,7 @@ export class BrickDisplayStructsElement extends UpdatingElement implements Brick
    * @required false
    * @default -
    * @description 空文案
+   * @description.en Empty text
    */
   @property({
     attribute: false,

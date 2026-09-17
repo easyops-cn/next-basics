@@ -11,7 +11,7 @@ export const DynamicContentStory: Story = {
     zh: "模板动态内容",
   },
   description: {
-    en: "",
+    en: "Dynamic content component with template parsing, e.g. Total #{total}",
     zh: "支持解析模版的动态内容构件，例如：共 #{total} 条",
   },
   icon: {

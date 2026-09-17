@@ -10,7 +10,7 @@ export const BrickAlertLevelStory: Story = {
     zh: "告警等级",
   },
   description: {
-    en: "",
+    en: "Render a value as a generic alert level",
     zh: "将数值渲染成通用告警等级显示方式",
   },
   icon: {

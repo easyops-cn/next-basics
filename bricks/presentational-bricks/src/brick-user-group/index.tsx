@@ -26,6 +26,7 @@ export class BrickUserGroupElement extends UpdatingElement implements BrickUserG
    * @required false
    * @default "group"
    * @description 用户组类型, 代表头像模式还是文本模式
+   * @description.en User group type, representing avatar mode or text mode
    * @group basic
    */
   @property({ attribute: false })
@@ -36,6 +37,7 @@ export class BrickUserGroupElement extends UpdatingElement implements BrickUserG
    * @required false
    * @default ";"
    * @description 用户组分隔符，默认是分号；仅在 type 为 text 时有效
+   * @description.en User group separator, defaults to a semicolon; valid only when `type` is `text`
    * @group basic
    */
   @property({ attribute: false })
@@ -46,6 +48,7 @@ export class BrickUserGroupElement extends UpdatingElement implements BrickUserG
    * @required true
    * @default -
    * @description 用户名或用户 instanceId数组
+   * @description.en User names or an array of user instanceIds
    * @group basic
    */
   @property({ attribute: false })
@@ -56,6 +59,7 @@ export class BrickUserGroupElement extends UpdatingElement implements BrickUserG
    * @required false
    * @default false
    * @description 是否显示 `showKey` ，如果有则显示`alan(hero)` or `alan`
+   * @description.en Whether to display `showKey`; if present, display `alan(hero)` or `alan`
    */
   @property({ type: Boolean })
   displayShowKey: boolean;
