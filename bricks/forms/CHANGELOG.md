@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.310.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.310.4...@next-bricks/forms@1.310.5) (2026-09-17)
+
+
+### Bug Fixes
+
+* **forms:** 为 38 个构件补充英文描述 ([f819db5](https://github.com/easyops-cn/next-basics/commit/f819db594e36b63607305ab6185b795afc8a31dc))
+
+
+
+
+
 ## [1.310.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.310.3...@next-bricks/forms@1.310.4) (2026-08-25)
 
 **Note:** Version bump only for package @next-bricks/forms

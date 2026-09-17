@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.339.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.9...@next-bricks/presentational-bricks@1.339.10) (2026-09-17)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** 为 62 个构件补充英文描述 ([35db9c2](https://github.com/easyops-cn/next-basics/commit/35db9c2b01d592825df78733379e8b616e1a4c90))
+
+
+
+
+
 ## [1.339.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.8...@next-bricks/presentational-bricks@1.339.9) (2026-07-06)
 
 
