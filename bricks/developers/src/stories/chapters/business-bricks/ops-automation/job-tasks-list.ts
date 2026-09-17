@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/ops-automation/job-tasks-list.md";
+import docMDEn from "../../../docs/ops-automation/job-tasks-list.en.md";
 import { JOB_ID } from "../../../constants";
 
 export const story: Story = {
@@ -25,5 +26,5 @@ export const story: Story = {
       urlTemplate: "/"
     }
   },
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

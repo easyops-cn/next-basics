@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/cmdb-instances/instance-edit.md";
+import docMDEn from "../../../docs/cmdb-instances/instance-edit.en.md";
 import { CMDB_HOST_INSTANCE_ID } from "../../../constants";
 
 export const story: Story = {
@@ -31,5 +32,5 @@ export const story: Story = {
       }
     }
   },
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

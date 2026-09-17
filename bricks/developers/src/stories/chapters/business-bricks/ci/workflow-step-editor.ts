@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/ci/workflow-step-editor.md";
+import docMDEn from "../../../docs/ci/workflow-step-editor.en.md";
 
 export const plugin = {
   category: "default",
@@ -122,5 +123,5 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

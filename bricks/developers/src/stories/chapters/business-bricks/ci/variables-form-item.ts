@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/ci/variables-form-item.md";
+import docMDEn from "../../../docs/ci/variables-form-item.en.md";
 
 export const story: Story = {
   storyId: "ci.variables-form-item",
@@ -31,5 +32,5 @@ export const story: Story = {
       ],
     },
   },
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

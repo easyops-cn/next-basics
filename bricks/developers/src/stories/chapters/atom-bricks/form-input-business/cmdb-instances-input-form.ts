@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/cmdb-instances/cmdb-instances-input-form.md";
+import docMDEn from "../../../docs/cmdb-instances/cmdb-instances-input-form.en.md";
 
 import { CMDB_HOST_INSTANCE_ID } from "../../../constants";
 
@@ -154,7 +155,7 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };
 
 export default story;

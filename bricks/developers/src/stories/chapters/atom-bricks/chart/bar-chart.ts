@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/general-charts/bar-chart.md";
+import docMDEn from "../../../docs/general-charts/bar-chart.en.md";
 
 export const story: Story = {
   storyId: "general-charts.bar-chart",
@@ -37,5 +38,5 @@ export const story: Story = {
       },
     },
   },
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

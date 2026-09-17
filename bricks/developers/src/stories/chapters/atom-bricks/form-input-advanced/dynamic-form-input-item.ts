@@ -1,4 +1,5 @@
 import doc from "../../../docs/forms/dynamic-form-input-item.md";
+import docEn from "../../../docs/forms/dynamic-form-input-item.en.md";
 import { Story } from "../../../interfaces";
 
 const story: Story = {
@@ -118,7 +119,7 @@ const story: Story = {
       },
     },
   ],
-  doc,
+  doc: { zh: doc, en: docEn },
 };
 
 export default story;

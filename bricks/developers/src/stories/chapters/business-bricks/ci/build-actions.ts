@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/ci/build-actions.md";
+import docMDEn from "../../../docs/ci/build-actions.en.md";
 
 export const story: Story = {
   storyId: "ci.build-actions",
@@ -180,5 +181,5 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

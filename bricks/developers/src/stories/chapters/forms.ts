@@ -1,5 +1,6 @@
 import { Chapter } from "../interfaces";
 import generalFormMD from "../docs/forms/general-form.md";
+import generalFormMDEn from "../docs/forms/general-form.en.md";
 import generalInputMD from "../docs/forms/general-input.md";
 import generalSelectMD from "../docs/forms/general-select.md";
 
@@ -57,7 +58,7 @@ const chapter: Chapter = {
           }
         }
       },
-      doc: generalFormMD
+      doc: { zh: generalFormMD, en: generalFormMDEn },
     },
     {
       storyId: "general-input",

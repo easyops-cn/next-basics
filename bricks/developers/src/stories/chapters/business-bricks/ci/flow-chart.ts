@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/ci/flow-chart.md";
+import docMDEn from "../../../docs/ci/flow-chart.en.md";
 
 import { CI_FLOW_ID } from "../../../constants";
 
@@ -171,5 +172,5 @@ export const story: Story = {
       },
     },
   },
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

@@ -1,5 +1,6 @@
 import { Chapter } from "../interfaces";
 import BrickCollectionInstanceExecutionMD from "../docs/presentational-bricks/brick-collection-instance-execution.md";
+import BrickCollectionInstanceExecutionMDEn from "../docs/presentational-bricks/brick-collection-instance-execution.en.md";
 
 const chapter: Chapter = {
   title: {
@@ -16,7 +17,7 @@ const chapter: Chapter = {
       conf: {
         brick: "presentational-bricks.brick-collection-instance-execution"
       },
-      doc: BrickCollectionInstanceExecutionMD
+      doc: { zh: BrickCollectionInstanceExecutionMD, en: BrickCollectionInstanceExecutionMDEn },
     }
   ]
 };

@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/ci/pipeline-trigger.md";
+import docMDEn from "../../../docs/ci/pipeline-trigger.en.md";
 
 export const story: Story = {
   storyId: "ci.pipeline-trigger",
@@ -36,5 +37,5 @@ export const story: Story = {
       },
     },
   },
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import doc from "../../../docs/cmdb-object/model-icon-combination-modal.md";
+import docEn from "../../../docs/cmdb-object/model-icon-combination-modal.en.md";
 
 export const story: Story = {
   storyId: "cmdb-object.model-icon-combination-modal",
@@ -53,5 +54,5 @@ export const story: Story = {
       }
     }
   },
-  doc
+  doc: { zh: doc, en: docEn },
 };

@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import doc from "../../../docs/chart-v2/base-chart.md";
+import docEn from "../../../docs/chart-v2/base-chart.en.md";
 
 export const story: Story = {
   storyId: "chart-v2.base-chart",
@@ -44,5 +45,5 @@ export const story: Story = {
       },
     },
   ],
-  doc,
+  doc: { zh: doc, en: docEn },
 };

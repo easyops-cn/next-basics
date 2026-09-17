@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/cmdb-instances/delete-confirm.md";
+import docMDEn from "../../../docs/cmdb-instances/delete-confirm.en.md";
 
 import { CMDB_APP_INSTANCE_ID } from "../../../constants";
 
@@ -76,5 +77,5 @@ export const story: Story = {
       },
     },
   },
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

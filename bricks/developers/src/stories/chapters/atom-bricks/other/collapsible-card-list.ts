@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/general-list/collapsible-card-list.md";
+import docMDEn from "../../../docs/general-list/collapsible-card-list.en.md";
 
 export const story: Story = {
   storyId: "general-list.collapsible-card-list",
@@ -335,5 +336,5 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

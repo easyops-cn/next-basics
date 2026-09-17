@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/agile/issue-list.md";
+import docMDEn from "../../../docs/agile/issue-list.en.md";
 
 export const story: Story = {
   storyId: "agile.issue-list",
@@ -28,5 +29,5 @@ export const story: Story = {
       productUrlTemplate: "product/@{product[0].instanceId}"
     }
   },
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

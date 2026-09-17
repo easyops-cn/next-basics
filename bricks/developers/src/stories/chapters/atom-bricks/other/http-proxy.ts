@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/basic-providers/http-proxy.md";
+import docMDEn from "../../../docs/basic-providers/http-proxy.en.md";
 
 export const story: Story = {
   storyId: "basic-providers.provider-http-proxy",
@@ -179,6 +180,6 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
   previewColumns: 2,
 };

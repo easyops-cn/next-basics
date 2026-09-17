@@ -1,4 +1,5 @@
 import doc from "../../../docs/visit-history/recent-visit.md";
+import docEn from "../../../docs/visit-history/recent-visit.en.md";
 import { Story } from "../../../interfaces";
 
 export const story: Story = {
@@ -59,5 +60,5 @@ export const story: Story = {
       },
     },
   ],
-  doc,
+  doc: { zh: doc, en: docEn },
 };

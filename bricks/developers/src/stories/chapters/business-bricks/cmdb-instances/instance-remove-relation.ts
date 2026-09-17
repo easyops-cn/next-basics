@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/cmdb-instances/instance-remove-relation.md";
+import docMDEn from "../../../docs/cmdb-instances/instance-remove-relation.en.md";
 import {
   CMDB_HOST_INSTANCE_ID,
   CMDB_USER_INSTANCE_ID
@@ -38,5 +39,5 @@ export const story: Story = {
       }
     }
   },
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/cmdb-instances/cmdb-instances-filter-form.md";
+import docMDEn from "../../../docs/cmdb-instances/cmdb-instances-filter-form.en.md";
 
 const story: Story = {
   storyId: "cmdb-instances.cmdb-instances-filter-form",
@@ -243,7 +244,7 @@ const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };
 
 export default story;

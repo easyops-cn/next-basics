@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import doc from "../../../docs/topology-v2/general-topology.md";
+import docEn from "../../../docs/topology-v2/general-topology.en.md";
 
 const data = {
   nodes: [
@@ -529,5 +530,5 @@ export const story: Story = {
       },
     },
   ],
-  doc,
+  doc: { zh: doc, en: docEn },
 };

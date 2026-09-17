@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/tools/tool-execution-results-table.md";
+import docMDEn from "../../../docs/tools/tool-execution-results-table.en.md";
 import {
   TOOL_EXECUTE_TASK_ID,
   CMDB_HOST_INSTANCE_ID
@@ -62,5 +63,5 @@ export const story: Story = {
       }
     }
   },
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

@@ -4,13 +4,15 @@ import { K, NS_DEVELOPERS } from "../../i18n/constants";
 import { SmileTwoTone } from "@ant-design/icons";
 import { Button, Card, Divider, Empty } from "antd";
 import style from "./BrickDoc.module.css";
+import { localized, LocalizedDoc } from "../../share/localized";
 
 export interface BrickDocProps {
-  doc: string | null;
+  doc: LocalizedDoc;
 }
 
 export function BrickDoc({ doc }: BrickDocProps): React.ReactElement {
   const { t } = useTranslation(NS_DEVELOPERS);
+  const docText = localized(doc);
   const [rotate, setRotate] = useState(180);
 
   const handleCreateButtonClick = (): void => {
@@ -35,12 +37,12 @@ export function BrickDoc({ doc }: BrickDocProps): React.ReactElement {
   return (
     <>
       <Card className={style.brickDocCard}>
-        {doc ? (
+        {docText ? (
           <div
             className={style.brickDocContainer}
             // We trust `doc` which is written by developers.
             dangerouslySetInnerHTML={{
-              __html: doc,
+              __html: docText,
             }}
           />
         ) : (

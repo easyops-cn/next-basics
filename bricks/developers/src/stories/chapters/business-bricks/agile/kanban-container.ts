@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/agile/kanban-container.md";
+import docMDEn from "../../../docs/agile/kanban-container.en.md";
 
 export const story: Story = {
   storyId: "agile.kanban-container",
@@ -356,5 +357,5 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

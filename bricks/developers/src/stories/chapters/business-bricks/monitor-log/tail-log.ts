@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/monitor-log/tail-log.md";
+import docMDEn from "../../../docs/monitor-log/tail-log.en.md";
 import {
   CMDB_HOST_INSTANCE_ID,
   CMDB_HOST_INSTANCE_IP
@@ -33,5 +34,5 @@ export const story: Story = {
       filePath: "/var/log/messages"
     }
   },
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

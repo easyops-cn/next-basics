@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/ci/project-build-btn.md";
+import docMDEn from "../../../docs/ci/project-build-btn.en.md";
 
 export const story: Story = {
   storyId: "ci.project-build-btn",
@@ -44,5 +45,5 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

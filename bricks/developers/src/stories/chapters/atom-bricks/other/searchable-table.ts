@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/general-tables/searchable-table.md";
+import docMDEn from "../../../docs/general-tables/searchable-table.en.md";
 
 export const story: Story = {
   storyId: "general-tables.searchable-table",
@@ -162,5 +163,5 @@ export const story: Story = {
       },
     },
   },
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

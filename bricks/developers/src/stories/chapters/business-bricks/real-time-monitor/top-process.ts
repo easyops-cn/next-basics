@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/real-time-monitor/top-process.md";
+import docMDEn from "../../../docs/real-time-monitor/top-process.en.md";
 import { CMDB_HOST_INSTANCE_ID } from "../../../constants";
 
 export const story: Story = {
@@ -26,5 +27,5 @@ export const story: Story = {
       topN: "10"
     }
   },
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/tool-and-flow/base-manual-execution.md";
+import docMDEn from "../../../docs/tool-and-flow/base-manual-execution.en.md";
 import {
   TOOL_ID,
   TOOL_VERSION_ID,
@@ -502,5 +503,5 @@ export const story: Story = {
       }
     }
   ],
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

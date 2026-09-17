@@ -1,4 +1,5 @@
 import doc from "../../../docs/cmdb-instances/provider-query-adapter.md";
+import docEn from "../../../docs/cmdb-instances/provider-query-adapter.en.md";
 import { Story } from "../../../interfaces";
 
 export const story: Story = {
@@ -186,5 +187,5 @@ export const story: Story = {
       },
     },
   ],
-  doc,
+  doc: { zh: doc, en: docEn },
 };
