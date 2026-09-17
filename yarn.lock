@@ -2374,7 +2374,7 @@
     request "^2.88.2"
     request-promise-native "^1.0.9"
 
-"@next-core/brick-types@^2.97.0", "@next-core/brick-types@^2.98.1":
+"@next-core/brick-types@^2.102.0", "@next-core/brick-types@^2.97.0", "@next-core/brick-types@^2.98.1":
   version "2.98.1"
   resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.98.1.tgz#5eb97118ec53f5fd069cc1641f751e7df217a5aa"
   integrity sha512-DDGDiz5faeufNdRzINMoT2w2nhbFCiO9gbHeVGll2KN7YCDjdwA+NAQFNfrpJjEnTvLsMESwh9H08cWKI+ouHw==
@@ -2390,20 +2390,31 @@
     file-saver "^2.0.5"
     path-to-regexp "^6.2.1"
 
+"@next-core/brick-utils@^2.52.18":
+  version "2.52.18"
+  resolved "https://registry.npmjs.org/@next-core/brick-utils/-/brick-utils-2.52.18.tgz#410bfbbf7c023ddb47603f4ed02febe37612ff5c"
+  integrity sha512-CLupGmQOU1O+tIfqFEriDPx+mQcA+ggLfKikb7yT+rWiLaDPqBM2v1ugT4KWe1aQINfeh5JB1kDvgsPn5x4Qcw==
+  dependencies:
+    "@next-core/brick-types" "^2.102.0"
+    "@next-core/cook" "^1.10.9"
+    "@next-core/storyboard" "^0.6.20"
+    file-saver "^2.0.5"
+    path-to-regexp "^6.2.1"
+
 "@next-core/browserslist-config-next@^0.1.4":
   version "0.1.4"
   resolved "https://registry.npmjs.org/@next-core/browserslist-config-next/-/browserslist-config-next-0.1.4.tgz#6d6865acef70008c1162320509b0e61e799b93cd"
   integrity sha512-H4tFI2ePwflXNQk37eXM5s2Zqxa0WYPHOJkQO1M4nCIBlHMlFiZ/C+Bzf3ywpqaYsZiIMDGWtKzknZEhnnArkw==
 
-"@next-core/build-config-factory@^2.26.12":
-  version "2.26.12"
-  resolved "https://registry.npmjs.org/@next-core/build-config-factory/-/build-config-factory-2.26.12.tgz#40196e6aa4cf1f90d7b89ec452321667477806ec"
-  integrity sha512-o7wjw0hK2GPzQWBApPTyn4oAqkgqWLc11PEXXAihu6J4UCBI2FOBZe5OlX9vaq21lDli/S+/vbYFmr8U5JJu6Q==
+"@next-core/build-config-factory@^2.26.12", "@next-core/build-config-factory@^2.26.22":
+  version "2.26.22"
+  resolved "https://registry.npmjs.org/@next-core/build-config-factory/-/build-config-factory-2.26.22.tgz#d07f7f3ece95255a16c2a8f0d2a8411de6033fe3"
+  integrity sha512-u915KJAQeqJ0FF9/aqe6JPanmz59ER92nLph2N81JwOeH8iUhX0qRSkvHFC5nFH3o/wQdwONKLSeEVOuyG8neQ==
   dependencies:
-    "@next-core/brick-utils" "^2.52.10"
+    "@next-core/brick-utils" "^2.52.18"
     "@next-core/repo-config" "^0.2.5"
     "@next-core/typedoc-plugin-filter-inherit" "^1.2.5"
-    "@next-core/webpack-config-factory" "^2.25.1"
+    "@next-core/webpack-config-factory" "^2.25.2"
     change-case "^4.1.2"
     chokidar "^3.5.3"
     fs-extra "^10.1.0"
@@ -2443,6 +2454,14 @@
   dependencies:
     "@babel/parser" "^7.20.5"
     "@next-core/brick-types" "^2.98.1"
+
+"@next-core/cook@^1.10.9":
+  version "1.10.9"
+  resolved "https://registry.npmjs.org/@next-core/cook/-/cook-1.10.9.tgz#79fb810fe03e4372b7d937e3090621710d4179d6"
+  integrity sha512-zWP5948R5ca9gK6H8JvQCRkLoQr4TmjhCAIf92r4ONk66k1wlXvbmWhWMop4Tz1OMYnpbLmIdx7/jlWTZT6GXQ==
+  dependencies:
+    "@babel/parser" "^7.20.5"
+    "@next-core/brick-types" "^2.102.0"
 
 "@next-core/custom-antd-styles@^1.27.1":
   version "1.27.1"
@@ -2594,6 +2613,13 @@
   dependencies:
     "@next-core/brick-types" "^2.98.1"
 
+"@next-core/storyboard@^0.6.20":
+  version "0.6.20"
+  resolved "https://registry.npmjs.org/@next-core/storyboard/-/storyboard-0.6.20.tgz#026f2134303fc44a46f52d3bfa6f2ca83441a355"
+  integrity sha512-xfzlR+ySj9ZYNd6U26en/dO6K2ULpZ466SLEKZUp3hb6ews7PjIKlckiuOAzOSLY4UEga/2OdQ0ZROTrFVbwcA==
+  dependencies:
+    "@next-core/brick-types" "^2.102.0"
+
 "@next-core/supply@^1.2.2":
   version "1.2.2"
   resolved "https://registry.npmjs.org/@next-core/supply/-/supply-1.2.2.tgz#64542f151b10aada2dfd4e90cdf2a3bbe5318d33"
@@ -2610,6 +2636,46 @@
   version "2.25.1"
   resolved "https://registry.npmjs.org/@next-core/webpack-config-factory/-/webpack-config-factory-2.25.1.tgz#abe4f7fa3c93779d44f07cf9f9e7714906cb68e3"
   integrity sha512-n1PIkBL5dfyBzS+ilJY0Kyk916drcwU1h/HldS0ZeRkNpjCcH/UbK9YfN+eI/CNuURDgc8hOAy6Umi/81XNd4Q==
+  dependencies:
+    "@next-core/less-plugin-css-variables" "^0.2.8"
+    "@svgr/webpack" "^5.5.0"
+    babel-loader "^8.3.0"
+    change-case "^4.1.2"
+    clean-webpack-plugin "^4.0.0"
+    copy-webpack-plugin "^6.4.1"
+    css-loader "^5.2.7"
+    file-loader "^6.2.0"
+    html-loader "^1.3.2"
+    less "^3.13.1"
+    less-loader "^7.3.0"
+    markdown-loader "^6.0.0"
+    modify-source-webpack-plugin "^3.0.0"
+    neo-async "^2.6.2"
+    null-loader "^4.0.1"
+    postcss "^8.4.19"
+    postcss-loader "^4.3.0"
+    postcss-nested "^5.0.6"
+    postcss-preset-env "^7.8.3"
+    prismjs "^1.29.0"
+    raw-loader "^4.0.2"
+    schema-utils "^1.0.0"
+    source-map-loader "^1.1.3"
+    string-replace-loader "^3.1.0"
+    style-loader "^2.0.0"
+    terser-webpack-plugin "^1.4.5"
+    to-string-loader "^1.2.0"
+    url-loader "^4.1.1"
+    webpack "^4.46.0"
+    webpack-cli "^4.9.2"
+    webpack-merge "^5.8.0"
+    webpack-sources "^3.2.3"
+    webpack-virtual-modules "^0.4.6"
+    worker-loader "^3.0.8"
+
+"@next-core/webpack-config-factory@^2.25.2":
+  version "2.25.2"
+  resolved "https://registry.npmjs.org/@next-core/webpack-config-factory/-/webpack-config-factory-2.25.2.tgz#177f71a8f959d76453cc64da101dbe0e949b48a1"
+  integrity sha512-Ost4xeKzz32RMzpgttBvjzpSdjcd8AaHRDqmTyHILFSWPAnCP2PcqNVaRQ7vVEkfAXI3Rqk3TISq6ZEvHOcIWw==
   dependencies:
     "@next-core/less-plugin-css-variables" "^0.2.8"
     "@svgr/webpack" "^5.5.0"
@@ -2793,17 +2859,10 @@
   resolved "https://registry.npmjs.org/@next-libs/datetime/-/datetime-2.0.4.tgz#bdfc0ff323b585c1c9e55f68dda15ab8fbf4ab33"
   integrity sha512-kWzim/bvvLxQLBNDHEjeLKrZ6jEGMxv+y9TtKsyprRTXBDAHbmrA+yUnp6lhIcQZwokzm7k2ujXE7I9nPC/DJw==
 
-"@next-libs/forms@^3.6.2", "@next-libs/forms@^3.6.3":
-  version "3.6.3"
-  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.6.3.tgz#d55bba9bcc8ab023ca5678fef914868fa3df82ac"
-  integrity sha512-HpURPbCe3ZnlwAoq10ijwMgUtInfxUPq/0OJOlak51OWNFgzxgq4snyTsWlNyPOj1lsNoAqvRY2eTVqLJrzYyQ==
-  dependencies:
-    "@next-libs/basic-components" "^5.5.3"
-
-"@next-libs/forms@^3.6.5":
-  version "3.6.5"
-  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.6.5.tgz#3ba1e09487b7dfd81ec3aeabba030823ef939049"
-  integrity sha512-mhYvNTHN2cDfIFI4kD2ErirRk2qjK/LWYL5GWpYZuV6y5a0ihytFP7xvc75U2csdqf1kUlsV9VvQyf80p7wBLA==
+"@next-libs/forms@^3.6.2", "@next-libs/forms@^3.6.3", "@next-libs/forms@^3.6.5", "@next-libs/forms@^3.6.6":
+  version "3.6.6"
+  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.6.6.tgz#ad69fa8b59506c5ea6cc51253e296d5206501cd7"
+  integrity sha512-24g92xrEDr0GoYYF5qPd5/D6nnAFEsNztScfDe5Wt4/A+e5kPmsYeMg+r7SHte0Lk7i4gOxaqXKLyCs8NrM9bw==
   dependencies:
     "@next-libs/basic-components" "^5.5.3"
 
