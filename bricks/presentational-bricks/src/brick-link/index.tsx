@@ -40,6 +40,7 @@ export interface BrickLinkElementProps {
  * @name presentational-bricks.brick-link
  * @docKind brick
  * @description 将值渲染成跳转链接，支持url模板配置
+ * @description.en Render the value as a jump link, supports url template configuration
  * @author lynette
  * @slots
  * @history
@@ -61,6 +62,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default -
    * @description 链接的文字
+   * @description.en Link text
    * @group basic
    */
   @property()
@@ -71,6 +73,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default -
    * @description 链接的 URL
+   * @description.en URL of the link
    * @group basic
    */
   @property()
@@ -81,6 +84,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default -
    * @description 是否使用原生 <a> 标签，通常用于外链的跳转
+   * @description.en Whether to use the native <a> tag, usually used for external link jumps
    * @group basic
    */
   @property()
@@ -91,6 +95,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default -
    * @description 当将其配置成 `_blank` 时，默认在 label 后添加 external-link-alt icon
+   * @description.en When it is configured as `_blank`, an external-link-alt icon is added after the label by default
    * @group basic
    */
   @property()
@@ -101,6 +106,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default -
    * @description 提示
+   * @description.en Tooltip
    * @group basic
    */
   @property()
@@ -111,6 +117,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default -
    * @description 提示
+   * @description.en Tooltip
    * @group basic
    */
   @property({
@@ -123,6 +130,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default -
    * @description `link.click` 事件传出的数据， 替代之前的 `detail`
+   * @description.en Data emitted by the `link.click` event, replacing the previous `detail`
    * @group basic
    */
   @property({
@@ -135,6 +143,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default -
    * @description label颜色
+   * @description.en Label color
    * @group ui
    */
   @property()
@@ -145,6 +154,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default -
    * @description 鼠标进入label时显示下划线
+   * @description.en Show an underline when the mouse enters the label
    * @group ui
    */
   @property({ type: Boolean })
@@ -155,6 +165,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default -
    * @description 图标 [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
+   * @description.en Icon [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
    * @group ui
    */
   @property({
@@ -167,6 +178,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default false
    * @description 是否禁用
+   * @description.en Whether to disable
    * @group basic
    */
   @property({
@@ -179,6 +191,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default false
    * @description 是否隐藏target为_blank时label后的icon
+   * @description.en Whether to hide the icon after the label when target is _blank
    * @group ui
    */
   @property({
@@ -190,6 +203,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default false
    * @description url 为空时不跳转，但是会发出`link.click`点击事件
+   * @description.en Do not jump when url is empty, but the `link.click` click event is still emitted
    * @group basic
    */
   @property({
@@ -201,6 +215,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @default link
    * @required false
    * @description 链接类型：默认链接 - link 和 文本链接 - text
+   * @description.en Link type: default link - link and text link - text
    * @group ui
    */
   @property({
@@ -212,6 +227,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @default left
    * @required false
    * @description 链接图标位置：左边 - left 右边 - right
+   * @description.en Link icon position: left - left, right - right
    * @group ui
    */
   @property({
@@ -224,6 +240,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default false
    * @description [已废弃]是否使用原生 <a> 标签, 为了跟平台规范一致准备废弃该属性，统一采用 href 属性表示原生标签跳转。
+   * @description.en [Deprecated] Whether to use the native <a> tag; this property is to be deprecated to be consistent with platform specifications, and the href property is uniformly used to indicate native tag jumps.
    * @deprecated
    * @group basic
    */
@@ -237,6 +254,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default -
    * @description [已废弃]链接的文字在数据源上的字段
+   * @description.en [Deprecated] Field of the link text in the data source
    * @deprecated
    * @group basic
    */
@@ -248,6 +266,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default false
    * @description [已废弃]`link.click`事件的详情
+   * @description.en [Deprecated] Detail of the `link.click` event
    * @deprecated
    * @group basic
    */
@@ -261,6 +280,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
    * @required false
    * @default -
    * @description [已废弃]链接的 URL 的模板，可使用 #{a.b} 的标记使用数据源里的属性值
+   * @description.en [Deprecated] Template of the link URL; the #{a.b} marker can be used to use the property values in the data source
    * @deprecated
    * @group basic
    */
@@ -270,6 +290,7 @@ export class BrickLinkElement extends UpdatingElement implements BrickLinkElemen
   /**
    * @detail Record<string, any>
    * @description 点击 link 触发的事件，事件 detail 为传入的 dataSource
+   * @description.en Event triggered by clicking the link; the event detail is the passed-in dataSource
    */
   @event({ type: "link.click", cancelable: true }) linkClick: EventEmitter<any>;
 

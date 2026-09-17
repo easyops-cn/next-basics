@@ -51,6 +51,7 @@ export interface LogicalCondition
  * @name presentational-bricks.brick-conditional-display
  * @docKind brick
  * @description 按不同条件渲染，比如告警数为0是绿色，大于1时显示黄色
+ * @description.en Renders according to different conditions, for example green when the alert count is 0 and yellow when it is greater than 1
  * @author cyril
  * @slots
  * @history
@@ -82,12 +83,40 @@ export interface LogicalCondition
  *   extends Record<string | LogicalOperator, ConditionType[]> {}
  * ```
  *
+ * @memo.en
+ * This brick has a relatively complex configuration and is suitable for interval condition rules such as greater than and less than; for explicit value mappings, use [Basic value mapping](developers/brick-book/brick/presentational-bricks.brick-value-mapping)
+ * ```typescript
+ * enum ConditionOperator {
+ *   eq = "$eq",
+ *   ne = "$ne",
+ *   gt = "$gt",
+ *   gte = "$gte",
+ *   lt = "$lt",
+ *   lte = "$lte",
+ * }
+ *
+ * enum LogicalOperator {
+ *   and = "$and",
+ *   or = "$or",
+ * }
+ *
+ * type ConditionType =
+ *   | boolean
+ *   | number
+ *   | string
+ *   | Record<string | ConditionOperator, any>
+ *   | LogicalCondition;
+ *
+ * interface LogicalCondition
+ *   extends Record<string | LogicalOperator, ConditionType[]> {}
+ * ```
  * @noInheritDoc
  */
 export class BrickConditionalDisplayElement extends UpdatingElement implements BrickConditionalDisplayElementProps {
   /**
    * @required false
    * @description 展示规则, 具体请查看[Mongodb条件操作符](https://www.mongodb.com/docs/manual/reference/operator/query/)
+   * @description.en Display rules; see [MongoDB condition operators](https://www.mongodb.com/docs/manual/reference/operator/query/) for details
    * @group basic
    */
   @property({
@@ -98,6 +127,7 @@ export class BrickConditionalDisplayElement extends UpdatingElement implements B
   /**
    * @required false
    * @description [已废弃]显示的字段值，支持通过 path 指定
+   * @description.en [Deprecated] Field value to display; a path can be specified
    * @deprecated
    * @group other
    */
@@ -109,6 +139,7 @@ export class BrickConditionalDisplayElement extends UpdatingElement implements B
   /**
    * @required true
    * @description 数据
+   * @description.en Data
    * @group basic
    */
   @property({
@@ -121,6 +152,7 @@ export class BrickConditionalDisplayElement extends UpdatingElement implements B
    * @required false
    * @default "label"
    * @description 展示类型，label 表示通过标签的风格展示相关内容，default 表示默认的风格展示(display: block)
+   * @description.en Display type; label means displaying the related content in label style, default means displaying in the default style (display: block)
    * @group basic
    */
   @property({

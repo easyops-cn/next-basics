@@ -24,9 +24,15 @@ export interface BrickCalendarElementProps {
 
 /** panelEvent */
 export interface PanelEvent {
-  /** 日期 */
+  /**
+   * 日期
+   * @description.en Date
+   */
   date: moment.Moment;
-  /** 显示模式 month/year */
+  /**
+   * 显示模式 month/year
+   * @description.en Display mode month/year
+   */
   mode: CalendarMode;
 }
 
@@ -35,6 +41,7 @@ export interface PanelEvent {
  * @name 日历 calendar
  * @docKind brick
  * @description 按照日历形式展示数据的容器
+ * @description.en A container that displays data in calendar form
  * @author Alex
  * @history
  * 1.101.0:新增构件 `presentational-bricks.brick-calendar`
@@ -48,6 +55,16 @@ export interface PanelEvent {
  * | events        | BrickEventsMap | -        | -       | 事件                                               |
  * | transform     | string\|object | -        | -       | 属性数据转换                                     ! |
  * | transformFrom | string         | -        | -       | 属性数据转换来自数据源的哪个字段，不填则为整个数据 |
+ * @memo.en
+ * ### UseBrickConf
+ *
+ * | property      | type           | required | default | description                                                                                             |
+ * | ------------- | -------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------- |
+ * | brick         | string         | ✔️       | -       | Brick name                                                                                              |
+ * | properties    | object         | -        | -       | Brick properties                                                                                        |
+ * | events        | BrickEventsMap | -        | -       | Events                                                                                                  |
+ * | transform     | string\|object | -        | -       | Property data transform   !                                                                             |
+ * | transformFrom | string         | -        | -       | The field of the data source from which the property data is transformed; if not filled, the whole data |
  * @noInheritDoc
  */
 export class BrickCalendarElement extends UpdatingElement implements BrickCalendarElementProps {
@@ -57,6 +74,7 @@ export class BrickCalendarElement extends UpdatingElement implements BrickCalend
    * @required false
    * @default 当前日期
    * @description value  日历默认值.
+   * @description.en value  Default value of the calendar.
    */
   @property({ attribute: false })
   value: moment.Moment = moment();
@@ -68,6 +86,7 @@ export class BrickCalendarElement extends UpdatingElement implements BrickCalend
    * @required false
    * @default month
    * @description 初始模式.
+   * @description.en Initial mode.
    */
   @property({ attribute: false })
   mode: CalendarMode = "month";
@@ -78,6 +97,7 @@ export class BrickCalendarElement extends UpdatingElement implements BrickCalend
    * @required true
    * @default true
    * @description 是否全屏展示
+   * @description.en Whether to display fullscreen
    */
   @property({
     attribute: false,
@@ -90,6 +110,7 @@ export class BrickCalendarElement extends UpdatingElement implements BrickCalend
    * @required -
    * @default -
    * @description 自定义 brick 渲染日期单元格，返回内容会被追加到单元格
+   * @description.en Custom brick to render the date cell; the returned content is appended to the cell
    */
   @property({ attribute: false })
   dateCell: { useBrick: UseBrickConf };
@@ -100,6 +121,7 @@ export class BrickCalendarElement extends UpdatingElement implements BrickCalend
    * @required true
    * @default -
    * @description 自定义 brick 渲染日期单元格，返回内容会被追加到单元格
+   * @description.en Custom brick to render the date cell; the returned content is appended to the cell
    */
   @property({ attribute: false })
   monthCell: { useBrick: UseBrickConf };
@@ -111,6 +133,7 @@ export class BrickCalendarElement extends UpdatingElement implements BrickCalend
    * @required false
    * @default -
    * @description 数据源
+   * @description.en Data source
    */
   @property({
     __unstable_doNotDecorate: true,
@@ -159,12 +182,14 @@ export class BrickCalendarElement extends UpdatingElement implements BrickCalend
   /**
    * @detail [moment](https://momentjs.com)
    * @description 点击选择日期事件
+   * @description.en Date selection click event
    */
   @event({ type: "presentational.calendar.onSelect" })
   onSelect: EventEmitter<moment.Moment>;
   /**
    * @detail { date: [moment](https://momentjs.com); data: any }
    * @description 点击选择日期事件-v2
+   * @description.en Date selection click event - v2
    */
   @event({ type: "presentational.calendar.onSelect-v2" })
   onSelectV2: EventEmitter<{ date: moment.Moment; data: any }>;
@@ -193,12 +218,14 @@ export class BrickCalendarElement extends UpdatingElement implements BrickCalend
   /**
    * @detail [moment](https://momentjs.com)
    * @description 日期变化事件
+   * @description.en Date change event
    */
   @event({ type: "presentational.calendar.onChange" })
   onChange: EventEmitter<moment.Moment>;
   /**
    * @detail { date: [moment](https://momentjs.com); data: any }
    * @description 日期变化事件
+   * @description.en Date change event
    */
   @event({ type: "presentational.calendar.onChange-v2" })
   onChangeV2: EventEmitter<{ date: moment.Moment; data: any }>;
@@ -227,6 +254,7 @@ export class BrickCalendarElement extends UpdatingElement implements BrickCalend
   /**
    * @detail PanelEvent
    * @description 日期面板变化回调
+   * @description.en Date panel change callback
    */
   @event({ type: "presentational.calendar.onPanelChange" })
   onPanelChange: EventEmitter<PanelEvent>;

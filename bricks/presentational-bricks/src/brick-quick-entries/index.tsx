@@ -38,6 +38,7 @@ export interface TitleConfig {
  * @name presentational-bricks.brick-quick-entries
  * @docKind brick
  * @description 展示多个快捷入口
+ * @description.en Displays multiple quick entries
  * @author cyril
  * @slots
  * @history
@@ -78,6 +79,7 @@ export class BrickQuickEntriesElement extends UpdatingElement implements BrickQu
    * @required false
    * @default 1
    * @description 列数
+   * @description.en Number of columns
    */
   @property({
     attribute: false,
@@ -89,6 +91,7 @@ export class BrickQuickEntriesElement extends UpdatingElement implements BrickQu
    * @required false
    * @default 1
    * @description 行数
+   * @description.en Number of rows
    */
   @property({
     attribute: false,
@@ -100,6 +103,7 @@ export class BrickQuickEntriesElement extends UpdatingElement implements BrickQu
    * @required false
    * @default []
    * @description 快捷入口设置
+   * @description.en Quick entry settings
    */
   @property({
     attribute: false,
@@ -111,6 +115,7 @@ export class BrickQuickEntriesElement extends UpdatingElement implements BrickQu
    * @required false
    * @default -
    * @description 使用的子构件配置
+   * @description.en Child brick configuration to use
    */
   @property({ attribute: false })
   useBrick: UseBrickConf;
@@ -120,6 +125,7 @@ export class BrickQuickEntriesElement extends UpdatingElement implements BrickQu
    * @required false
    * @default -
    * @description 传递给子构件的数据，应与 `useBrick` 一一对应
+   * @description.en Data passed to the child brick, should correspond one-to-one with `useBrick`
    */
   @property({ attribute: false })
   data: any[];
@@ -129,6 +135,7 @@ export class BrickQuickEntriesElement extends UpdatingElement implements BrickQu
    * @required false
    * @default -
    * @description 为每个入口配置标题
+   * @description.en Configure a title for each entry
    */
   @property({ attribute: false })
   titleList: TitleConfig[];
@@ -138,6 +145,7 @@ export class BrickQuickEntriesElement extends UpdatingElement implements BrickQu
    * @required false
    * @default true
    * @description 是否显示卡片
+   * @description.en Whether to display the card
    */
   @property({
     type: Boolean,
@@ -150,6 +158,7 @@ export class BrickQuickEntriesElement extends UpdatingElement implements BrickQu
    * @required false
    * @default true
    * @description 是否显示分隔线
+   * @description.en Whether to display the divider
    */
   @property({
     attribute: false,
@@ -160,6 +169,7 @@ export class BrickQuickEntriesElement extends UpdatingElement implements BrickQu
    * @required false
    * @default -
    * @description 子项的容器的样式
+   * @description.en Style of the container of child items
    * @group advanced
    */
   @property({ attribute: false })
@@ -169,6 +179,7 @@ export class BrickQuickEntriesElement extends UpdatingElement implements BrickQu
    * @required false
    * @default "default"
    * @description （已废弃）值为 `multiCardGeneral`或 `multiCardNoLine`时为多卡片模式，`multiCardGeneral` 含分隔线，`multiCardNoLine` 无分隔线，样例见构件统计卡片 `general-charts.statistic-card`
+   * @description.en (Deprecated) When the value is `multiCardGeneral` or `multiCardNoLine`, it is in multi-card mode; `multiCardGeneral` includes dividers, `multiCardNoLine` has no dividers. See the statistic card brick `general-charts.statistic-card` for an example
    * @deprecated
    * @group advanced
    */
@@ -180,6 +191,7 @@ export class BrickQuickEntriesElement extends UpdatingElement implements BrickQu
    * @required false
    * @default -
    * @description 使用的子构件配置（已废弃，请使用 useBrick 替代）
+   * @description.en Child brick configuration to use (deprecated, please use useBrick instead)
    * @deprecated
    * @group advanced
    */
@@ -189,6 +201,7 @@ export class BrickQuickEntriesElement extends UpdatingElement implements BrickQu
   /**
    * @detail any
    * @description 节点弹窗内容项点击事件
+   * @description.en Click event of the popup content item of the node
    */
   @event({ type: "title.icon.click", cancelable: true })
   titleIconClick: EventEmitter<any>;

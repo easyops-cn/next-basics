@@ -15,6 +15,7 @@ export interface DynamicContentElementProps {
  * @name presentational-bricks.dynamic-content
  * @docKind brick
  * @description 支持解析模版的动态内容构件，例如：共 #{total} 条
+ * @description.en A dynamic content brick that supports template parsing, for example: a total of #{total} items
  * @author lynette
  * @slots
  * @history
@@ -27,6 +28,7 @@ export class DynamicContentElement extends UpdatingElement implements DynamicCon
    * @required true
    * @default -
    * @description 数据来源
+   * @description.en Data source
    */
   @property({ attribute: false })
   dataSource: Record<string, any>;
@@ -36,6 +38,7 @@ export class DynamicContentElement extends UpdatingElement implements DynamicCon
    * @required true
    * @default -
    * @description 动态模板内容。例如：共 #{total} 条。用`#{}`表示变量。
+   * @description.en Dynamic template content. For example: a total of #{total} items. Use `#{}` to represent a variable.
    */
   @property()
   dynamicContent: string;

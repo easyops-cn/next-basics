@@ -54,6 +54,7 @@ interface PendingClose {
  * @editor shared-editors.general-tag--editor
  * @docKind brick
  * @description 进行标记和分类的小标签，同时支持基本标签和可选中标签
+ * @description.en Small labels for marking and categorization, supporting both basic tags and checkable tags
  * @author lynette
  * @slots
  * @history
@@ -67,18 +68,21 @@ interface PendingClose {
 export class BrickTagElement extends UpdatingElement implements BrickTagElementProps {
   /**
    * @description 选中的 tag 的 key
+   * @description.en The key of the selected tag
    */
   @event({ type: "checked.update", cancelable: true })
   checkedUpdate: EventEmitter<string[]>;
 
   /**
    * @description 选中的 tag
+   * @description.en The selected tag
    */
   @event({ type: "checked.update.v2", cancelable: true })
   checkedUpdateV2: EventEmitter<{ label: string; key: string }[]>;
 
   /**
    * @description 当前关闭的 tag 和剩余的tagList
+   * @description.en The currently closed tag and the remaining tagList
    */
   @event({ type: "tag.close" }) tagClose: EventEmitter<{
     current: Record<string, any>;
@@ -87,6 +91,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description 请求关闭的 tag 和关闭后的 tagList，可用于外部二次确认
+   * @description.en The tag requested to close and the tagList after closing, usable for external secondary confirmation
    */
   @event({ type: "tag.close.confirm" }) tagCloseConfirm: EventEmitter<{
     current: Record<string, any>;
@@ -97,11 +102,13 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
   /**
    * @detail TagListType
    * @description 当前点击的tag
+   * @description.en The currently clicked tag
    */
   @event({ type: "tag.click" }) tagClick: EventEmitter<TagListType>;
 
   /**
    * @description 标签前的 label
+   * @description.en The label before the tags
    * @group basic
    */
   @property()
@@ -109,6 +116,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description 标签列表
+   * @description.en Tag list
    * @group basic
    */
   @property({
@@ -119,6 +127,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
   /**
    * @default false
    * @description 是否在标签内显示小圆点
+   * @description.en Whether to display a small dot inside the tag
    * @group basic
    */
   @property({
@@ -128,6 +137,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description 是否显示卡片
+   * @description.en Whether to display the card
    * @group basic
    */
   @property({
@@ -137,6 +147,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description 标签的颜色配置，当 `componentType=Tag` 且 `closable!=true` 时才有效，除了提供内置八种主题色，也支持直接赋色值（如 `#f5f5f5`）使用
+   * @description.en Color configuration of the tag, effective only when `componentType=Tag` and `closable!=true`; besides the eight built-in theme colors, a color value can also be assigned directly (e.g. `#f5f5f5`)
    * @group basic
    */
   @property()
@@ -144,6 +155,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description 是否能多选，多选场景下右上角会有小圆点提示
+   * @description.en Whether multiple selection is allowed; in multi-select scenarios a small dot is shown in the upper right corner
    * @group basic
    */
   @property({
@@ -153,6 +165,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description 数据源，通过 useResolves 从后台接口获取
+   * @description.en Data source, obtained from a backend API via useResolves
    * @deprecated
    * @group advanced
    */
@@ -164,6 +177,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
   /**
    * @default false
    * @description 标签是否可以关闭
+   * @description.en Whether the tag can be closed
    * @group basic
    */
   @property({
@@ -174,6 +188,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
   /**
    * @default false
    * @description 关闭标签前是否需要外部二次确认。开启后点击关闭会先触发 `tag.close.confirm`，确认后调用 `confirmClose` 才会真正关闭。
+   * @description.en Whether external secondary confirmation is required before closing a tag. When enabled, clicking close first triggers `tag.close.confirm`, and the tag is closed only after `confirmClose` is called upon confirmation.
    * @group basic
    */
   @property({
@@ -184,6 +199,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
   /**
    * @default "Tag"
    * @description 组件类型，对应 ant-design 中的基本标签和可选中标签
+   * @description.en Component type, corresponding to the basic tag and checkable tag in ant-design
    * @group advanced
    */
   @property({
@@ -193,6 +209,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description componentType 为`CheckableTag`的时候默认选中的标签 key
+   * @description.en The key of the tag selected by default when componentType is `CheckableTag`
    * @group advanced
    */
   @property({
@@ -202,6 +219,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description 标签是否可以取消单选，在 `componentType` 为 `CheckableTag` 且 `multipleCheck` 为 `false` 时生效。
+   * @description.en Whether the single selection of the tag can be canceled, effective when `componentType` is `CheckableTag` and `multipleCheck` is `false`.
    * @group advanced
    */
   @property({
@@ -211,6 +229,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description ant-design 相关配置项, [具体查阅](https://ant.design/components/tag-cn/#Tag) ，只有在 componentType=Tag 时才有效
+   * @description.en ant-design related configuration items, [see details](https://ant.design/components/tag-cn/#Tag), effective only when componentType=Tag
    * @group advanced
    */
   @property({
@@ -220,6 +239,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description 禁用标签的 tooltip
+   * @description.en Tooltip of the disabled tag
    * @group basic
    */
   @property()
@@ -227,6 +247,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description 标签的 tooltip 相关配置项, [具体查阅](https://ant.design/components/tooltip-cn/#API)
+   * @description.en Tooltip related configuration items of the tag, [see details](https://ant.design/components/tooltip-cn/#API)
    * @group advanced
    */
   @property({
@@ -236,6 +257,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description 这里可以规定从 dataSource 中的哪个字段取标签渲染的数据，例如 dataSource 返回的数据为 [{key:"1"},{key:"2"}]，则可写成 {label: "key", key: "key"}
+   * @description.en Specifies from which field in dataSource the data for rendering tags is taken. For example, if dataSource returns [{key:"1"},{key:"2"}], it can be written as {label: "key", key: "key"}
    * @deprecated
    * @group advanced
    */
@@ -256,6 +278,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
   /**
    * @default false
    * @description 文字是否超出省略
+   * @description.en Whether the text is ellipsized when it overflows
    * @group ui
    */
   @property({
@@ -265,6 +288,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description 标签的自定义样式
+   * @description.en Custom style of the tag
    * @group ui
    */
   @property({
@@ -274,6 +298,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description 标签选中的自定义样式
+   * @description.en Custom style of the checked tag
    * @group ui
    */
   @property({
@@ -283,6 +308,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description 标签 Hover 的自定义样式
+   * @description.en Custom style of the hovered tag
    * @group ui
    */
   @property({
@@ -292,6 +318,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
 
   /**
    * @description 最后一个tag后面使用子构件，具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
+   * @description.en Use a child brick after the last tag, see [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf) for details
    * @group advanced
    */
   @property({
@@ -485,6 +512,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
   /**
    * @params requestId
    * @description 确认关闭当前等待二次确认的标签。不传 requestId 时确认最近一次请求。
+   * @description.en Confirm closing the tag currently awaiting secondary confirmation. When requestId is not passed, the latest request is confirmed.
    */
   @method()
   confirmClose(requestId?: string): void {
@@ -499,6 +527,7 @@ export class BrickTagElement extends UpdatingElement implements BrickTagElementP
   /**
    * @params requestId
    * @description 取消关闭当前等待二次确认的标签。不传 requestId 时取消最近一次请求。
+   * @description.en Cancel closing the tag currently awaiting secondary confirmation. When requestId is not passed, the latest request is canceled.
    */
   @method()
   cancelClose(requestId?: string): void {

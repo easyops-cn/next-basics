@@ -15,6 +15,8 @@ export interface TextCollapseElementProps {
  * @history
  * @description 展示可折叠文本
  * 1.x.0: 新增构件 `presentational-bricks.text-collapse`
+ * @description.en Display collapsible text
+ * 1.x.0: Added brick `presentational-bricks.text-collapse`
  * @docKind brick
  * @noInheritDoc
  */
@@ -24,6 +26,7 @@ export class TextCollapseElement extends UpdatingElement implements TextCollapse
    * @required false
    * @default -
    * @description 文本
+   * @description.en Text
    */
   @property()
   text: string;
@@ -33,6 +36,7 @@ export class TextCollapseElement extends UpdatingElement implements TextCollapse
    * @required false
    * @default -
    * @description 行数
+   * @description.en Number of lines
    */
   @property()
   line: number;

@@ -35,6 +35,7 @@ export interface TimelineItem {
  * @name presentational-bricks.brick-timeline
  * @docKind brick
  * @description 垂直展示的时间流信息，常用于变更历史、工作动态等
+ * @description.en Timeline information displayed vertically, commonly used for change history, work updates, etc.
  * @author jo
  * @slots
  * @history
@@ -68,6 +69,36 @@ export interface TimelineItem {
  *   [key: string]: any
  * }
  * ```
+ * @memo.en
+ * ## useBrick
+ *
+ * When customizing the display of child bricks, the data format received by the child brick is:
+ *
+ * ```js
+ * export interface Data {
+ *   item: object; // single item data
+ *   index: number; // index
+ *   list: object[]; // all data
+ * }
+ * ```
+ *
+ * ## StatusColor
+ * ```js
+ * // According to the timeline UI specification, different colors represent different statuses; green usually indicates a completed or successful status, red indicates an alert or error status, blue indicates the current in-progress status, and gray indicates a normal status
+ * export type StatusColor = "green" | "red" | "gray" | "blue";
+ * ```
+ *
+ * ## TimelineItem
+ * ```js
+ * export interface TimelineItem {
+ *   title: string;
+ *   description: string;
+ *   time: string | number;
+ *   status: string;
+ *   link?: string;
+ *   [key: string]: any
+ * }
+ * ```
  * @noInheritDoc
  */
 export class BrickTimelineElement extends UpdatingElement implements BrickTimelineElementProps {
@@ -76,6 +107,7 @@ export class BrickTimelineElement extends UpdatingElement implements BrickTimeli
    * @required true
    * @default -
    * @description 数据源
+   * @description.en Data Source
    */
   @property({
     attribute: false,
@@ -87,6 +119,7 @@ export class BrickTimelineElement extends UpdatingElement implements BrickTimeli
    * @required true
    * @default -
    * @description 自定义构件
+   * @description.en Custom brick
    */
   @property({
     attribute: false,
@@ -98,6 +131,7 @@ export class BrickTimelineElement extends UpdatingElement implements BrickTimeli
    * @required false
    * @default -
    * @description 根据数据源状态值映射到相应的颜色
+   * @description.en Map the status value of the data source to the corresponding color
    */
   @property({
     attribute: false,
@@ -109,6 +143,7 @@ export class BrickTimelineElement extends UpdatingElement implements BrickTimeli
    * @required false
    * @default base
    * @description 平台内置的标准时间轴类型，支持内置的基本类型和内置的扩展类型，不使用 `useBrick` 配置第三方构件时，该字段才有效
+   * @description.en Built-in standard timeline type of the platform, supporting the built-in basic type and the built-in extension type; this field is valid only when `useBrick` is not used to configure a third-party brick
    */
   @property({
     attribute: false,
@@ -120,6 +155,7 @@ export class BrickTimelineElement extends UpdatingElement implements BrickTimeli
    * @required false
    * @default default
    * @description 时间轴时间的具体配置，值为`default`时可以是格式化的字符串 `date` 对象或者毫秒级的时间戳等，除了时间是秒为单位的，其他单位都可不用设置该属性
+   * @description.en Specific configuration of the timeline time; when the value is `default`, it can be a formatted string, a `date` object, or a millisecond-level timestamp, etc. Except when the time unit is seconds, this property does not need to be set for other units
    */
   @property({
     attribute: false,
@@ -131,6 +167,7 @@ export class BrickTimelineElement extends UpdatingElement implements BrickTimeli
    * @required false
    * @default true
    * @description 是否显示 card 边框
+   * @description.en Whether to display the card border
    */
   @property({
     attribute: false,
@@ -142,6 +179,7 @@ export class BrickTimelineElement extends UpdatingElement implements BrickTimeli
    * @required false
    * @default left
    * @description 时间轴和内容的相对位置，注意内置的标准时间轴类型不支持该字段的配置，只有使用 `useBrick` 配置第三方构件时可用
+   * @description.en Relative position of the timeline and the content; note that the built-in standard timeline type does not support this field, which is available only when `useBrick` is used to configure a third-party brick
    */
   @property()
   mode: BrickTimelineProps["mode"];
@@ -149,6 +187,7 @@ export class BrickTimelineElement extends UpdatingElement implements BrickTimeli
   /**
    * @detail Record<string, any>
    * @description 标题点击事件，事件详情为所对应的该项的数据(当配置该点击事件时，不要再配置 `TimelineItem` 中的跳转链接 `link` 属性，否则该点击事件无效会优先响应url跳转)
+   * @description.en Title click event; the event detail is the data of the corresponding item (when this click event is configured, do not configure the jump link `link` property in `TimelineItem`, otherwise this click event is invalid and url navigation takes priority)
    */
   @event({ type: "item.click" }) clickEvent: EventEmitter<ItemProps>;
   private _handleClick = (data: ItemProps) => {

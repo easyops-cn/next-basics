@@ -31,6 +31,7 @@ export interface MarkdownDisplayElementProps {
  * @editor shared-editors.general-code--editor
  * @docKind brick
  * @description Markdown展示
+ * @description.en Markdown display
  * @author lynette
  * @slots
  * @history
@@ -41,6 +42,7 @@ export class MarkdownDisplayElement extends UpdatingElement implements MarkdownD
   /**
    * @required false
    * @description markdown 展示内容
+   * @description.en Markdown content to display
    * @group basic
    */
   @property({ attribute: false }) value: string;
@@ -48,6 +50,7 @@ export class MarkdownDisplayElement extends UpdatingElement implements MarkdownD
   /**
    * @required false
    * @description [已废弃]数据来源
+   * @description.en [Deprecated] Data source
    * @deprecated
    * @group advanced
    */
@@ -56,6 +59,7 @@ export class MarkdownDisplayElement extends UpdatingElement implements MarkdownD
   /**
    * @required false
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
+   * @description.en [Deprecated] Field mapping, used together with dataSource to obtain the value at runtime
    * @deprecated
    * @group advanced
    */
@@ -67,6 +71,7 @@ export class MarkdownDisplayElement extends UpdatingElement implements MarkdownD
    * @required false
    * @default true
    * @description markdown 图片是否支持预览
+   * @description.en Whether markdown images support preview
    * @group basic
    */
   @property({ attribute: false }) imagePreview: boolean;
@@ -75,6 +80,7 @@ export class MarkdownDisplayElement extends UpdatingElement implements MarkdownD
    * @required false
    * @default true
    * @description 是否隐藏图片预览遮罩
+   * @description.en Whether to hide the image preview mask
    * @group basic
    */
   @property({ attribute: false }) hideImgPreviewMask: boolean;
@@ -83,6 +89,7 @@ export class MarkdownDisplayElement extends UpdatingElement implements MarkdownD
    * @kind boolean
    * @default -
    * @description 预览图片时，图片操作(放大、缩小等操作)是否在下方显示
+   * @description.en Whether image operations (zooming in, zooming out, etc.) are displayed at the bottom when previewing an image
    */
   @property({ type: Boolean })
   imagePreviewOperationInBottom: boolean;
@@ -91,6 +98,7 @@ export class MarkdownDisplayElement extends UpdatingElement implements MarkdownD
    * @kind boolean
    * @default -
    * @description 内容中链接打开位置，_blank为新窗口打开
+   * @description.en Position where links in the content are opened; _blank opens in a new window
    */
   @property({ type: String })
   linkTarget: string;
@@ -99,6 +107,7 @@ export class MarkdownDisplayElement extends UpdatingElement implements MarkdownD
    * @kind boolean
    * @default true
    * @description 是否启用代码块复制功能（语法高亮默认启用）
+   * @description.en Whether to enable the code block copy function (syntax highlighting is enabled by default)
    * @group basic
    */
   @property({ attribute: false })

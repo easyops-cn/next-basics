@@ -36,6 +36,8 @@ export type IllustrationMode = "feedback" | "guide";
  * 1.148.0: 新增构件 `presentational-bricks.brick-illustration`
  * @memo
  * >更多类型插画请移至[插画库](/next/developers/illustrations)
+ * @memo.en
+ * >For more types of illustrations, please refer to the [illustration library](/next/developers/illustrations)
  * @docKind brick
  * @noInheritDoc
  */
@@ -43,6 +45,7 @@ export class BrickIllustrationElement extends UpdatingElement implements BrickIl
   /**
    * @required true
    * @description 插画名称
+   * @description.en Illustration name
    */
   @property()
   name: string;
@@ -50,6 +53,7 @@ export class BrickIllustrationElement extends UpdatingElement implements BrickIl
   /**
    * @required false
    * @description 插画size,size默认为middle，推荐使用size控制插画尺寸，可通过imageStyle覆盖size实现自定义大小（不推荐）
+   * @description.en Illustration size; the default size is middle. It is recommended to use size to control the illustration size; size can be overridden via imageStyle to achieve a custom size (not recommended)
    * @default "middle"
    */
   @property({ attribute: false })
@@ -59,6 +63,7 @@ export class BrickIllustrationElement extends UpdatingElement implements BrickIl
    * @default "default"
    * @required true
    * @description 插画类型
+   * @description.en Illustration type
    * @group basic
    */
   @property()
@@ -67,6 +72,7 @@ export class BrickIllustrationElement extends UpdatingElement implements BrickIl
   /**
    * @required false
    * @description 插画头部内容
+   * @description.en Illustration header content
    * @group other
    */
   @property({ attribute: false })
@@ -75,6 +81,7 @@ export class BrickIllustrationElement extends UpdatingElement implements BrickIl
   /**
    * @required false
    * @description 插画底部内容
+   * @description.en Illustration footer content
    * @group other
    */
   @property({ attribute: false })
@@ -83,6 +90,7 @@ export class BrickIllustrationElement extends UpdatingElement implements BrickIl
   /**
    * @required false
    * @description 插画模式
+   * @description.en Illustration mode
    * @group other
    * @deprecated
    */
@@ -92,6 +100,7 @@ export class BrickIllustrationElement extends UpdatingElement implements BrickIl
   /**
    * @required false
    * @description 图片样式
+   * @description.en Image style
    * @group ui
    */
   @property({ attribute: false })
@@ -101,6 +110,7 @@ export class BrickIllustrationElement extends UpdatingElement implements BrickIl
    * @default true
    * @required false
    * @description 在插画库的default分类下，使用新版本的图标替换default分类下图标
+   * @description.en Under the default category of the illustration library, use the new version icons to replace the icons under the default category
    */
   @property({ attribute: false })
   useNewIllustration = true;

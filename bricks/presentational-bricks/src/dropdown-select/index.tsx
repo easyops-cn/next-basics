@@ -46,6 +46,7 @@ export interface DropdownSelectElementProps {
  * @name presentational-bricks.dropdown-select
  * @docKind brick
  * @description 用于菜单项较多时收纳相关菜单项
+ * @description.en Used to tuck away related menu items when there are many of them
  * @author jo
  * @slots
  * @history
@@ -57,6 +58,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
   /**
    * @detail {value: any; item: any}
    * @description 选项改变事件
+   * @description.en Option change event
    */
   @event({ type: "select.change", cancelable: true })
   selectChange: EventEmitter<{ value: any; item: any }>;
@@ -64,6 +66,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
   /**
    * @detail {value: any}
    * @description 多选选项选中事件
+   * @description.en Multiple-select option selection event
    */
   @event({ type: "multiple.select.change", cancelable: true })
   multipleSelectChange: EventEmitter<{ value: any }>;
@@ -71,6 +74,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
   /**
    * @required false
    * @description 选项列表，不能与 dataSource + label + optionTitle + optionContent + valuePath 同时使用
+   * @description.en Option list, cannot be used together with dataSource + label + optionTitle + optionContent + valuePath
    * @group basic
    */
   @property({ attribute: false }) options: Option[];
@@ -79,6 +83,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
    * @required false
    * @default []
    * @description 数据源
+   * @description.en Data source
    * @group other
    * @deprecated
    */
@@ -87,6 +92,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
   /**
    * @required false
    * @description 选中项的值，跟 `valuePath` 搭配使用，根据指定的字段路径与 value 的值得出当前选中项
+   * @description.en Value of the selected item, used together with `valuePath`; the currently selected item is derived from the specified field path and the value of value
    * @group basic
    */
   @property({ attribute: false }) value: any[];
@@ -95,6 +101,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
    * @required false
    * @default 使用 optionTitle 的值
    * @description 选中项显示的 label，支持模板替换，替换上下文为当前项 `item` 使用时需要带上 item 前缀 `#{item.xxx}`
+   * @description.en Label displayed for the selected item, supports template replacement; the replacement context is the current `item`, and the item prefix `#{item.xxx}` is required when using it
    * @group other
    * @deprecated
    */
@@ -104,6 +111,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
    * @required false
    * @default false
    * @description 是否禁用
+   * @description.en Whether to disable
    * @group basic
    */
   @property({ type: Boolean }) disabled?: boolean;
@@ -112,6 +120,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
    * @required false
    * @default false
    * @description 单选时，下拉内容区高度是否固定
+   * @description.en In single-select mode, whether the height of the dropdown content area is fixed
    * @group basic
    */
   @property({ type: Boolean }) heightFix?: boolean;
@@ -120,6 +129,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
    * @kind MenuIcon
    * @required false
    * @description 按钮 icon，支持[icon 图标库](developers/icon)，可直接复制图标图标的配置（antd、fa 及 easyops 三种库都支持），也可只取 icon 字段的值（仅支持 antd 库）。配置{ "lib": "antd", "icon": "edit" }与 "edit"等价 [类型定义](https://github.com/easyops-cn/next-core/blob/34a0808712ecaa925d0860d281ab23cf3bec7317/packages/brick-types/src/menu.ts#L104)
+   * @description.en Button icon, supports the [icon library](developers/icon). You can copy the icon configuration directly (all three libraries antd, fa and easyops are supported), or take only the value of the icon field (only the antd library is supported). The configuration { "lib": "antd", "icon": "edit" } is equivalent to "edit" [type definition](https://github.com/easyops-cn/next-core/blob/34a0808712ecaa925d0860d281ab23cf3bec7317/packages/brick-types/src/menu.ts#L104)
    * @group basic
    */
   @property({
@@ -131,6 +141,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
    * @required false
    * @default "default"
    * @description 设置下拉选择器按钮样式
+   * @description.en Set the dropdown select button style
    * @group ui
    */
   @property()
@@ -139,6 +150,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
   /**
    * @required false
    * @description label 的 fontSize
+   * @description.en Font size of the label
    * @group ui
    */
   @property() labelFontSize?: string;
@@ -146,6 +158,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
   /**
    * @required false
    * @description placeholder, 当没有当前项选中时显示
+   * @description.en placeholder, displayed when no item is currently selected
    * @group basic
    */
   @property() placeholder?: string;
@@ -154,6 +167,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
    * @required false
    * @default #{item}
    * @description 选项的标题，支持模板替换，使用跟 label 字段一样
+   * @description.en Title of the option, supports template replacement, used in the same way as the label field
    * @group other
    * @deprecated
    */
@@ -162,6 +176,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
   /**
    * @required false
    * @description 选项的内容，支持模板替换，使用跟 label 字段一样
+   * @description.en Content of the option, supports template replacement, used in the same way as the label field
    * @group other
    * @deprecated
    */
@@ -171,6 +186,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
    * @required false
    * @default item
    * @description 依据当前项 `item`，指定选项值的 path
+   * @description.en Specifies the path of the option value based on the current `item`
    * @group other
    * @deprecated
    */
@@ -180,6 +196,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
    * @required false
    * @default false
    * @description 是否支持多选，支持多选时，单选的value属性失效
+   * @description.en Whether multiple selection is supported; when multiple selection is enabled, the value property of single selection becomes invalid
    * @group basic
    */
   @property({ type: Boolean }) multipleSelect?: boolean;
@@ -188,6 +205,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
    * @required false
    * @default []
    * @description 多选的选中项
+   * @description.en Selected items for multiple selection
    * @group basic
    */
   @property({ attribute: false }) selectedKeys?: string[] = [];
@@ -196,6 +214,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
    * @required false
    * @default -
    * @description 下拉框提示信息
+   * @description.en Hint text of the dropdown
    */
   @property({ attribute: false })
   selectTipText: string;
@@ -203,6 +222,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
   /**
    * @required false
    * @description 下拉框样式
+   * @description.en Style of the dropdown
    */
   @property({ attribute: false })
   selectBoxStyle: React.CSSProperties;
@@ -211,6 +231,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
    * @required false
    * @default []
    * @description 多选的默认选中项
+   * @description.en Default selected items for multiple selection
    * @group basic
    */
   @property({ attribute: false }) defaultSelectedKeys?: string[] = [];
@@ -218,6 +239,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
   /**
    * @required false
    * @description 最小选择数量（多选）
+   * @description.en Minimum number of selected items (multiple selection)
    * @group basic
    */
   @property({ type: Number }) minSelectedItemLength?: number;
@@ -225,6 +247,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
   /**
    * @required false
    * @description 多选时，当前label仅支持显示从构件外部传入,multipleLabel属性仅在dropdownButtonType为multiple时生效
+   * @description.en In multiple-selection mode, the current label can only be passed in from outside the brick; the multipleLabel property is effective only when dropdownButtonType is multiple
    * @group basic
    */
   @property() multipleLabel?: string;
@@ -232,6 +255,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
   /**
    * @required false
    * @description 提示构件
+   * @description.en Tip brick
    * @group other
    */
   @property({
@@ -242,6 +266,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
   /**
    * @required false
    * @description 不展示label
+   * @description.en Do not display the label
    * @group other
    */
   @property({
@@ -252,6 +277,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
   /**
    * @required false
    * @description 额外的下拉开关样式
+   * @description.en Extra dropdown trigger style
    * @group other
    */
   @property({
@@ -262,6 +288,7 @@ export class DropdownSelectElement extends UpdatingElement implements DropdownSe
   /**
    * @required false
    * @description label 的构件配置
+   * @description.en Brick configuration of the label
    * @group ui
    */
   @property({

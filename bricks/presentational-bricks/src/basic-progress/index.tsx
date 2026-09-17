@@ -18,10 +18,12 @@ export interface BasicProgressElementProps {
 export interface ColorObj {
   /**
    * 进度范围最大值，值（value）小于等于最大值则为该颜色
+   * @description.en Maximum value of the progress range; the color is used when the value is less than or equal to the maximum
    */
   progress: string | number;
   /**
    * 颜色
+   * @description.en Color
    */
   color: Color;
 }
@@ -31,6 +33,7 @@ export interface ColorObj {
  * @name presentational-bricks.basic-progress
  * @docKind brick
  * @description 进度条展示
+ * @description.en Progress bar display
  * @author momo
  * @slots
  * @history
@@ -69,6 +72,7 @@ export class BasicProgressElement extends UpdatingElement implements BasicProgre
    * @kind number
    * @required true
    * @description 进度值（只负责确定颜色的值）
+   * @description.en Progress value (only used to determine the color)
    * @group basic
    */
   @property({ attribute: false })
@@ -79,6 +83,7 @@ export class BasicProgressElement extends UpdatingElement implements BasicProgre
    * @required circle
    * @default dashboard
    * @description 类型
+   * @description.en Type
    * @group basic
    */
   @property({ attribute: false })
@@ -88,6 +93,7 @@ export class BasicProgressElement extends UpdatingElement implements BasicProgre
    * @kind string
    * @required false
    * @description 展示内容
+   * @description.en Displayed content
    * @group basic
    */
   @property({ attribute: false })
@@ -97,6 +103,7 @@ export class BasicProgressElement extends UpdatingElement implements BasicProgre
    * @kind string
    * @required false
    * @description 描述值
+   * @description.en Description value
    * @group basic
    */
   @property({ attribute: false })
@@ -106,6 +113,7 @@ export class BasicProgressElement extends UpdatingElement implements BasicProgre
    * @kind string
    * @required false
    * @description 展示内容的颜色
+   * @description.en Color of the displayed content
    * @group ui
    */
   @property({ attribute: false })
@@ -115,6 +123,7 @@ export class BasicProgressElement extends UpdatingElement implements BasicProgre
    * @kind ColorObj[]
    * @required false
    * @description 颜色范围
+   * @description.en Color range
    * @group ui
    */
   @property({ attribute: false })
@@ -124,6 +133,7 @@ export class BasicProgressElement extends UpdatingElement implements BasicProgre
    * @kind string
    * @required false
    * @description 设定展示内容大小
+   * @description.en Set the size of the displayed content
    * @group ui
    */
   @property({ attribute: false })
@@ -133,6 +143,7 @@ export class BasicProgressElement extends UpdatingElement implements BasicProgre
    * @kind Record<string, any>
    * @required false
    * @description 透传[antd progress](https://3x.ant.design/components/progress-cn/)
+   * @description.en Pass through to [antd progress](https://3x.ant.design/components/progress-cn/)
    * @group other
    */
   @property({ attribute: false })

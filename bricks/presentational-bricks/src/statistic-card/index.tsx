@@ -32,6 +32,7 @@ export interface StatisticCardElementProps {
  * @name presentational-bricks.statistic-card
  * @docKind brick
  * @description 展示统计数据的卡片，一般在首页使用
+ * @description.en A card that displays statistics, generally used on the home page
  * @author william
  * @slots
  * @history
@@ -44,6 +45,7 @@ export class StatisticCardElement extends UpdatingElement implements StatisticCa
    * @required false
    * @default -
    * @description 标题
+   * @description.en Title
    */
   @property() cardTitle: string;
 
@@ -52,6 +54,7 @@ export class StatisticCardElement extends UpdatingElement implements StatisticCa
    * @required false
    * @default -
    * @description 数值
+   * @description.en Value
    */
   @property({ attribute: false }) value: string | number;
 
@@ -60,6 +63,7 @@ export class StatisticCardElement extends UpdatingElement implements StatisticCa
    * @required false
    * @default -
    * @description 图标配置 [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
+   * @description.en Icon configuration [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
    */
   @property({ attribute: false }) icon: MenuIcon | string;
 
@@ -68,6 +72,7 @@ export class StatisticCardElement extends UpdatingElement implements StatisticCa
    * @required false
    * @default -
    * @description 点击跳转的 url
+   * @description.en Redirect url on click
    */
   @property() url: string;
 
@@ -76,6 +81,7 @@ export class StatisticCardElement extends UpdatingElement implements StatisticCa
    * @required false
    * @default -
    * @description 鼠标悬浮的提示
+   * @description.en Tooltip on mouse hover
    */
   @property() tip: string;
 
@@ -84,6 +90,7 @@ export class StatisticCardElement extends UpdatingElement implements StatisticCa
    * @required false
    * @default -
    * @description 禁用状态
+   * @description.en Disabled state
    */
   @property({ type: Boolean }) disabled: boolean;
 
@@ -92,6 +99,7 @@ export class StatisticCardElement extends UpdatingElement implements StatisticCa
    * @required false
    * @default true
    * @description 是否用 Card 包裹
+   * @description.en Whether to wrap with Card
    */
   @property({ attribute: false }) showCard = true;
 
@@ -100,6 +108,7 @@ export class StatisticCardElement extends UpdatingElement implements StatisticCa
    * @required false
    * @default -
    * @description [已废弃]数据来源
+   * @description.en [Deprecated] Data source
    * @deprecated
    * @group advanced
    */
@@ -110,6 +119,7 @@ export class StatisticCardElement extends UpdatingElement implements StatisticCa
    * @required false
    * @default -
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时对应字段
+   * @description.en [Deprecated] Field mapping, used together with dataSource to obtain the corresponding fields at runtime
    * @deprecated
    * @group advanced
    */
@@ -127,6 +137,7 @@ export class StatisticCardElement extends UpdatingElement implements StatisticCa
    * @required false
    * @default -
    * @description [已废弃]点击跳转 url，支持模版变量
+   * @description.en [Deprecated] Redirect url on click, supporting template variables
    * @deprecated
    * @group advanced
    */
@@ -137,6 +148,7 @@ export class StatisticCardElement extends UpdatingElement implements StatisticCa
    * @required false
    * @default -
    * @description [已废弃]请使用 icon 代替
+   * @description.en [Deprecated] Please use icon instead
    * @deprecated
    * @group advanced
    */

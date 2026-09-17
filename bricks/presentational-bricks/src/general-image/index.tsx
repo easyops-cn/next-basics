@@ -38,6 +38,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
    * @default -
    * @required
    * @description 图片地址
+   * @description.en Image URL
    */
   @property()
   imgSrc: string;
@@ -46,6 +47,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
    * @default true
    * @required
    * @description 是否开启预览
+   * @description.en Whether to enable preview
    */
   @property({
     attribute: false,
@@ -56,6 +58,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
    * @default -
    * @required
    * @description 图像高度
+   * @description.en Image height
    */
   @property({
     attribute: false,
@@ -66,6 +69,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
    * @default -
    * @required
    * @description 图像样式
+   * @description.en Image style
    */
   @property({
     attribute: false,
@@ -76,6 +80,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
    * @default -
    * @required
    * @description 图像宽度
+   * @description.en Image width
    */
   @property({
     attribute: false,
@@ -87,6 +92,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
    * @default -
    * @required -
    * @description 数据源，搭配 extra 使用时会把该数据传入到自定义构件中使用
+   * @description.en Data source; when used together with extra, the data will be passed into the custom brick for use
    */
   @property({
     attribute: false,
@@ -97,6 +103,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
    * @default -
    * @required
    * @description 加载占位, 为 true 时使用默认占位
+   * @description.en Loading placeholder; when it is true, the default placeholder is used
    * @group advanced
    */
   @property()
@@ -106,6 +113,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
    * @default -
    * @required
    * @description 图像描述
+   * @description.en Image description
    * @group advanced
    */
   @property()
@@ -115,6 +123,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
    * @default -
    * @required
    * @description 加载失败容错地址
+   * @description.en Fallback URL when loading fails
    * @group advanced
    */
   @property()
@@ -125,6 +134,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
    * @default -
    * @required -
    * @description 支持在图片下方增加自定义构件
+   * @description.en Support adding a custom brick below the image
    * @group advanced
    */
   @property({
@@ -137,6 +147,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
    * @default -
    * @required -
    * @description 包裹自定义构件容器的样式
+   * @description.en Style of the container wrapping the custom brick
    * @group advanced
    */
   @property({
@@ -148,6 +159,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
    * @default -
    * @required
    * @description 是否显示预览
+   * @description.en Whether to display the preview
    * @group advanced
    */
   @property({ attribute: false }) visible: boolean;
@@ -155,6 +167,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
   /**
    * @detail boolean
    * @description 是否显示预览改变事件
+   * @description.en Event emitted when the preview visibility changes
    */
   @event({ type: "general-image.visible-change" })
   visibleChangeEventEmitter: EventEmitter;
@@ -174,6 +187,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
 
   /**
    * @description 打开预览
+   * @description.en Open the preview
    */
   @method() open(): void {
     this.visible = true;
@@ -181,6 +195,7 @@ export class GeneralImageElement extends UpdatingElement implements GeneralImage
 
   /**
    * @description 关闭预览
+   * @description.en Close the preview
    */
   @method() close(): void {
     this.visible = false;

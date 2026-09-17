@@ -20,6 +20,7 @@ export interface BrickUtilsElementProps {
  * @name presentational-bricks.brick-utils
  * @docKind brick
  * @description 在构件提供一些常用的工具函数可以直接方便使用
+ * @description.en Provides some common utility functions in the brick for convenient use
  * @author jo
  * @slots
  * @history
@@ -46,12 +47,14 @@ export class BrickUtilsElement extends UpdatingElement implements BrickUtilsElem
   /**
    * @required false
    * @description 复制成功/失败时的提示，默认为“复制成功/失败”
+   * @description.en Message shown on copy success or failure, defaults to “Copy succeeded/failed”
    * @group basic
    */
   @property({ attribute: false }) messages: { success: string; error: string };
   /**
    * @params string
    * @description 复制到系统粘贴
+   * @description.en Copy to the system clipboard
    */
   @method()
   copy(text: string): void {
@@ -72,6 +75,7 @@ export class BrickUtilsElement extends UpdatingElement implements BrickUtilsElem
   /**
    * @params (target: string, property: string)
    * @description 找到目标 DOM, 复制其属性
+   * @description.en Find the target DOM and copy its property
    */
   @method()
   copyTargetProperty(target: string, property: string): void {

@@ -55,6 +55,48 @@ export interface TemplateBreadcrumbElementProps {}
  * 注意上面示例，我们将`text`标记为`"#{name}"`，然后在该路由对应的`bricks[]`配置本构件，在`dataSource`赋值`name`字段即可动态渲染文本。
  *
  * 综上，此构件让面包屑的配置支持`#{variableName}`格式的模板标记，使用`dataSource`上的`variableName`的实际值，并支持`a.b`的多层嵌套。
+ * @memo.en
+ * In storyboard, we can configure breadcrumbs very conveniently, and breadcrumbs automatically chain the hierarchy. Sometimes we need to display dynamic names in the breadcrumb, such as the model name. In this case, we can configure the breadcrumb in the following format:
+ *
+ * ```json
+ * {
+ *   "path": "${APP.homepage}/:objectId",
+ *   "menu": {
+ *     "breadcrumb": {
+ *       "items": [
+ *         {
+ *           "text": "#{name}",
+ *           "to": "${APP.homepage}/${objectId}"
+ *         }
+ *       ]
+ *     }
+ *   },
+ *   "bricks": [
+ *     {
+ *       "brick": "presentational-bricks.template-breadcrumb",
+ *       "injectDeep": true,
+ *       "lifeCycle": {
+ *         "useResolves": [
+ *           {
+ *             "provider": "providers-of-cmdb\\.cmdb-object-api-get-detail",
+ *             "args": ["${objectId}"],
+ *             "transform": {
+ *               "dataSource": {
+ *                 "name": "@{name}"
+ *               }
+ *             }
+ *           }
+ *         ]
+ *       }
+ *     },
+ *     ...
+ *   ]
+ * }
+ * ```
+ *
+ * Note that in the example above, we mark `text` as `"#{name}"`, then configure this brick in the `bricks[]` corresponding to the route, and assign the `name` field in `dataSource` to render the text dynamically.
+ *
+ * In summary, this brick enables the breadcrumb configuration to support template markers in the `#{variableName}` format, using the actual value of `variableName` on `dataSource`, and supports multi-level nesting such as `a.b`.
  * @noInheritDoc
  */
 export class TemplateBreadcrumbElement extends HTMLElement implements TemplateBreadcrumbElementProps {
@@ -66,6 +108,7 @@ export class TemplateBreadcrumbElement extends HTMLElement implements TemplateBr
    * @required false
    * @default -
    * @description 解析模板时的数据源
+   * @description.en Data source used when parsing the template
    */
   @property({
     __unstable_doNotDecorate: true,

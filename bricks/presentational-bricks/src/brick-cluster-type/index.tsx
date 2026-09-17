@@ -19,6 +19,7 @@ export type ClusterType = "-1" | "0" | "1" | "2" | "3";
  * @name presentational-bricks.brick-cluster-type
  * @docKind brick
  * @description 集群类型专用展示：开发、测试、预发布、生产
+ * @description.en Dedicated display for cluster type: Development, Testing, Pre-release, Production
  * @author ice
  * @slots
  * @history
@@ -40,6 +41,7 @@ export class BrickClusterTypeElement extends UpdatingElement implements BrickClu
    * @required true
    * @default -
    * @description 集群类型: '-1' - 无, 0' - 开发, '1' - 测试, '2' - 生产, '3' - 预发布
+   * @description.en Cluster type: '-1' - None, 0' - Development, '1' - Testing, '2' - Production, '3' - Pre-release
    */
   @property({ attribute: false })
   value: ClusterType;
@@ -49,6 +51,7 @@ export class BrickClusterTypeElement extends UpdatingElement implements BrickClu
    * @required false
    * @default -
    * @description [已废弃]数据来源
+   * @description.en [Deprecated] Data source
    */
   @property({
     attribute: false,
@@ -60,6 +63,7 @@ export class BrickClusterTypeElement extends UpdatingElement implements BrickClu
    * @required false
    * @default -
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
+   * @description.en [Deprecated] Field mapping, used together with dataSource to get the value at runtime
    */
   @property({
     attribute: false,
@@ -71,6 +75,7 @@ export class BrickClusterTypeElement extends UpdatingElement implements BrickClu
    * @required false
    * @default true
    * @description 是否显示背景
+   * @description.en Whether to display the background
    */
   @property({ attribute: false })
   showBg = true;

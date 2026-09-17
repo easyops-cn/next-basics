@@ -34,6 +34,7 @@ export interface GeneralTransferElementProps {
  * @name presentational-bricks.general-transfer
  * @docKind brick
  * @description 双栏穿梭选择框
+ * @description.en Two-column transfer selection box
  * @author ice
  * @slots
  * @history
@@ -48,6 +49,16 @@ export interface GeneralTransferElementProps {
  *   itemsUnit: "项",
  * };
  * ```
+ * @memo.en
+ * ### DEFAULT_LOCALE
+ *
+ * ```typescript
+ * const DEFAULT_LOCALE = {
+ *   searchPlaceholder: "Search",
+ *   itemUnit: "item",
+ *   itemsUnit: "items",
+ * };
+ * ```
  * @noInheritDoc
  */
 export class GeneralTransferElement extends UpdatingElement implements GeneralTransferElementProps {
@@ -56,6 +67,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
    * @required true
    * @default -
    * @description 数据源，其中的数据将会被渲染到左边一栏中，targetKeys 中指定的除外
+   * @description.en Data source; the data in it will be rendered in the left column, except those specified in targetKeys
    */
   @property({ attribute: false })
   dataSource: any[];
@@ -65,6 +77,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
    * @required false
    * @default -
    * @description 两个穿梭框的自定义样式，常用来设置宽高
+   * @description.en Custom style of the two transfer boxes, commonly used to set width and height
    */
   @property({ attribute: false })
   listStyle: React.CSSProperties;
@@ -74,6 +87,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
    * @required false
    * @default -
    * @description 设置哪些项应该被选中
+   * @description.en Set which items should be selected
    */
   @property({ attribute: false })
   selectedKeys: string[];
@@ -83,6 +97,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
    * @required false
    * @default false
    * @description 是否禁用
+   * @description.en Whether to disable
    */
   @property({ type: Boolean })
   disabled: boolean;
@@ -92,6 +107,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
    * @required false
    * @default -
    * @description 最多选择数，当 `dataSource` 个数大于该值时，不显示全勾选框
+   * @description.en Maximum number of selections; when the number of `dataSource` items is greater than this value, the select-all checkbox is not shown
    */
   @property({ type: Number })
   maxSelected: number;
@@ -101,6 +117,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
    * @required false
    * @default false
    * @description 是否显示搜索框
+   * @description.en Whether to show the search box
    */
   @property({ type: Boolean })
   showSearch: boolean;
@@ -109,6 +126,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
    * @default -
    * @required false
    * @description 设置容器空状态时显示`empty`构件属性
+   * @description.en Set the `empty` brick property displayed when the container is in the empty state
    * @group advanced
    */
   @property({ attribute: false })
@@ -119,6 +137,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
    * @required false
    * @default -
    * @description 当 `dataSource` 中的每一项没有 key 或 title 字段时，须设置该属性。`key` 和 `title` 均须设置
+   * @description.en Set this property when each item in `dataSource` has no key or title field. Both `key` and `title` must be set
    * @group advanced
    */
   @property({ attribute: false })
@@ -129,6 +148,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
    * @required false
    * @default -
    * @description 显示在右侧框数据的 key 集合
+   * @description.en Set of keys of the data displayed in the right box
    * @group advanced
    */
   @property({ attribute: false })
@@ -139,6 +159,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
    * @required false
    * @default -
    * @description 标题集合，顺序从左至右
+   * @description.en Set of titles, ordered from left to right
    * @group advanced
    */
   @property({ attribute: false })
@@ -149,6 +170,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
    * @required false
    * @default -
    * @description 操作文案集合，顺序从上至下
+   * @description.en Set of operation texts, ordered from top to bottom
    * @group advanced
    */
   @property({ attribute: false })
@@ -159,6 +181,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
    * @required false
    * @default [DEFAULT_LOCALE](#default_locale)
    * @description 文案
+   * @description.en Texts
    * @group advanced
    */
   @property({ attribute: false })
@@ -169,6 +192,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
    * @required false
    * @default true
    * @description 当选项发生转移时，是否需要实时发出 `general.transfer.change` 事件
+   * @description.en Whether to emit the `general.transfer.change` event in real time when options are transferred
    * @group advanced
    */
   @property({ attribute: false })
@@ -177,6 +201,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
   /**
    * @detail string[]
    * @description 右侧框数据的 key 集合
+   * @description.en Set of keys of the data in the right box
    */
   @event({ type: "general.transfer.change" })
   generalTransferChange: EventEmitter<string[]>;
@@ -233,6 +258,7 @@ export class GeneralTransferElement extends UpdatingElement implements GeneralTr
 
   /**
    * @description 当 `realTimeNotification` 为 false 时，可以调用该方法来发出事件
+   * @description.en When `realTimeNotification` is false, this method can be called to emit the event
    */
   @method()
   notifyChange(): void {

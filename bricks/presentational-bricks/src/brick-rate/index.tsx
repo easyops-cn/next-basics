@@ -37,6 +37,7 @@ export class BrickRateElement extends UpdatingElement implements BrickRateElemen
    * @required false
    * @default  3
    * @description 等级级数
+   * @description.en Number of levels
    */
   @property({ attribute: false }) count = 3;
 
@@ -45,6 +46,7 @@ export class BrickRateElement extends UpdatingElement implements BrickRateElemen
    * @required false
    * @default 0
    * @description 默认等级
+   * @description.en Default level
    */
   @property({ attribute: false }) defaultValue = 0;
 
@@ -53,6 +55,7 @@ export class BrickRateElement extends UpdatingElement implements BrickRateElemen
    * @required false
    * @default -
    * @description 当前等级值
+   * @description.en Current level value
    */
   @property({ attribute: false }) value: number;
 
@@ -61,6 +64,7 @@ export class BrickRateElement extends UpdatingElement implements BrickRateElemen
    * @required false
    * @default  true
    * @description 是否禁用
+   * @description.en Whether it is disabled
    */
   @property({ attribute: false }) disabled = true;
 
@@ -70,6 +74,7 @@ export class BrickRateElement extends UpdatingElement implements BrickRateElemen
    *
    * @default  -
    * @description 是否允许半选
+   * @description.en Whether half selection is allowed
    */
   @property({ attribute: false }) allowHalf: boolean;
 
@@ -78,6 +83,7 @@ export class BrickRateElement extends UpdatingElement implements BrickRateElemen
    * @required false
    * @default  -
    * @description 等级颜色分类，每一级别对应的颜色
+   * @description.en Level color classification, the color corresponding to each level
    */
   @property({ attribute: false }) colors: any[];
 
@@ -86,6 +92,7 @@ export class BrickRateElement extends UpdatingElement implements BrickRateElemen
    * @required false
    * @default  -
    * @description 可选任意字符（非图标类）比如字母、数字、中文，表示等级图标
+   * @description.en Any character (non-icon type) such as letters, numbers or Chinese characters can be used to represent the level icon
    */
   @property() type: string;
 
@@ -94,6 +101,7 @@ export class BrickRateElement extends UpdatingElement implements BrickRateElemen
    * @required false
    * @default
    * @description  设置样式
+   * @description.en Configure the style
    */
   @property({ attribute: false }) rateStyle: Record<string, any>;
 
@@ -102,6 +110,7 @@ export class BrickRateElement extends UpdatingElement implements BrickRateElemen
    * @required false
    * @default -
    * @description 等级icon，优先级高于type，支持[icon 图标库](developers/icon)，可直接复制图标图标的配置（antd、fa 及 easyops 三种库都支持），也可只取 icon 字段的值（仅支持 antd 库）。配置{ "lib": "antd", "icon": "edit" }与 "edit"等价
+   * @description.en Level icon, with higher priority than type. Supports the [icon library](developers/icon). You can directly copy the icon configuration (all three libraries antd, fa and easyops are supported), or take only the value of the icon field (only the antd library is supported). The configuration { "lib": "antd", "icon": "edit" } is equivalent to "edit"
    */
   @property({
     attribute: false,
@@ -113,6 +122,7 @@ export class BrickRateElement extends UpdatingElement implements BrickRateElemen
    * @required false
    * @default -
    * @description 自定义每项的提示信息
+   * @description.en Custom tooltip for each item
    */
   @property({
     attribute: false,

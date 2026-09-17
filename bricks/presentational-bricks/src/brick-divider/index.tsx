@@ -19,6 +19,7 @@ export interface BrickDividerElementProps {
  * @name presentational-bricks.brick-divider
  * @docKind brick
  * @description 分割线
+ * @description.en Divider
  * @author dophi
  * @slots
  * @history
@@ -31,6 +32,7 @@ export class BrickDividerElement extends UpdatingElement implements BrickDivider
   /**
    * @required false
    * @description 标题
+   * @description.en Title
    * @group basic
    */
   @property()
@@ -40,6 +42,7 @@ export class BrickDividerElement extends UpdatingElement implements BrickDivider
    * @required false
    * @default "horizontal"
    * @description 水平|垂直|放射类型,注意`radiation`是个特殊的类型，该样式是特定的
+   * @description.en Horizontal|vertical|radiation type; note that `radiation` is a special type with its own specific style
    * @group basic
    */
   @property() type: "horizontal" | "vertical" | "radiation";
@@ -48,6 +51,7 @@ export class BrickDividerElement extends UpdatingElement implements BrickDivider
    * @required false
    * @default false
    * @description 是否虚线
+   * @description.en Whether the line is dashed
    * @group basic
    */
   @property({ type: Boolean }) dashed: boolean;
@@ -55,6 +59,7 @@ export class BrickDividerElement extends UpdatingElement implements BrickDivider
   /**
    * @required false
    * @description 分割线自定义样式
+   * @description.en Custom style of the divider
    * @group basic
    */
   @property({
@@ -67,6 +72,7 @@ export class BrickDividerElement extends UpdatingElement implements BrickDivider
    * @required false
    * @default "center"
    * @description 标题位置
+   * @description.en Title position
    * @group basic
    */
   @property()
@@ -76,6 +82,7 @@ export class BrickDividerElement extends UpdatingElement implements BrickDivider
    * @required false
    * @default  false
    * @description 文字是否显示为普通正文样式
+   * @description.en Whether the text is displayed in a normal body style
    * @group ui
    */
   @property({ type: Boolean })
@@ -84,6 +91,7 @@ export class BrickDividerElement extends UpdatingElement implements BrickDivider
   /**
    * @required  false
    * @description  当用于数值显示的情况，eg: 如果要展示"1/3"，那么传入就是[1,3], 该字段只适配于 type 为 `radiation`
+   * @description.en Used for numeric display, e.g. to display "1/3", pass [1,3]; this field is applicable only when type is `radiation`
    * @group basic
    */
   @property({ attribute: false })

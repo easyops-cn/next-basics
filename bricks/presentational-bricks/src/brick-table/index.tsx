@@ -125,71 +125,95 @@ export interface RowDisabledProps {
 }
 
 export interface CustomColumnComponent {
-  /** 构件名称 */
+  /**
+   * 构件名称
+   * @description.en Brick name
+   */
   brick: string | any;
-  /** 字段值、列表项和 index 对应所用构件的属性的 key */
+  /**
+   * 字段值、列表项和 index 对应所用构件的属性的 key
+   * @description.en The keys of the brick properties corresponding to the field value, the list item and the index
+   */
   fields?: {
     value?: string;
     item?: string;
     index?: string;
   };
-  /** 构件属性 */
+  /**
+   * 构件属性
+   * @description.en Brick properties
+   */
   properties?: Record<string, any>;
-  /** 事件 */
+  /**
+   * 事件
+   * @description.en Events
+   */
   events?: BrickEventsMap;
 }
 
 export interface CustomColumn extends ColumnProps<Record<string, any>> {
   /**
    * 支持为某列自定义展示构件
+   * @description.en Supports a custom display brick for a column
    */
   useBrick?: UseBrickConf;
   /**
    * 字段的值展示时的后缀
+   * @description.en Suffix displayed after the field value
    */
   valueSuffix?: string;
   /**
    * 支持为某列的表头自定义展示构件，可通过 DATA.title 获取标题文本
+   * @description.en Supports a custom display brick for the header of a column; the title text can be obtained via DATA.title
    */
   headerBrick?: {
     useBrick: UseBrickConf;
   };
   /**
    * 在渲染自定义构件的场景下额外设置单元格的状态样式， `dataIndex` 表示取哪一列的字段值作为判断数据，不填的话默认取当前列的字段，`mapping` 表示判断的条件，条件被成功匹配时用当前的样式。目前仅支持单元格 `leftBorderColor` 属性的设置
+   * @description.en Additionally sets the cell status style when rendering a custom brick; `dataIndex` indicates which column's field value is used as the judgment data, defaulting to the field of the current column when not set, and `mapping` indicates the judgment conditions, the current style being used when a condition is successfully matched. Currently only the `leftBorderColor` property of the cell is supported
    */
   cellStatus?: CellStatusProps;
   /**
    * 设置列的每个单元格样式
+   * @description.en Sets the style of each cell in the column
    */
   cellStyle?: React.CSSProperties;
   /**
    * [已废弃]支持为某列的标题自定义展示构件，可通过 DATA.title 获取标题文本
+   * @description.en [Deprecated] Supports a custom display brick for the title of a column; the title text can be obtained via DATA.title
    */
   titleUseBrick?: UseBrickConf;
   /**
    * [已废弃]支持为某列自定义展示构件
+   * @description.en [Deprecated] Supports a custom display brick for a column
    */
   component?: CustomColumnComponent;
   /**
    * 单元格内元素的垂直对齐方式
+   * @description.en Vertical alignment of the elements in the cell
    */
   verticalAlign?: "top" | "bottom";
   /**
    * 每条记录的控制列合并的值的 key
+   * @description.en The key of the value that controls column merging for each record
    */
   colSpanKey?: string;
   /**
    * 每条记录的控制行合并的值的 key
+   * @description.en The key of the value that controls row merging for each record
    */
   rowSpanKey?: string;
   /**
    * 自定义筛选菜单
+   * @description.en Custom filter menu
    */
   filterDropdownBrick?: {
     useBrick: UseBrickConf;
   };
   /**
    * 自定义筛选图标
+   * @description.en Custom filter icon
    */
   customFilterIcon?: MenuIcon;
 }
@@ -217,6 +241,7 @@ export interface BrickTableFields {
  * @name presentational-bricks.brick-table
  * @docKind brick
  * @description 当需要对数据进行排序、搜索、分页、自定义操作等复杂行为时
+ * @description.en When complex behaviors such as sorting, searching, pagination and custom operations are required for the data
  * @groupI18N
  * {
  *    "paginationAndFilter": {"en": "Pagination/Order/Filter", "zh": "分页/排序及搜索"},
@@ -367,6 +392,127 @@ export interface BrickTableFields {
  * | parentInChildKey | string | ✔️       | -       | 展平后，父级在子级的 key |
  *
  *
+ * @memo.en
+ * > Tips: In React, a boolean value is a valid child element, but it will not be rendered. If you want a boolean value to be displayed as `true`|`false` in a table cell, you can use a platform pipe to convert it, for example `@{someProperties|string}`. In more scenarios, you can combine it with [Basic Value Mapping Brick](developers/brick-book/brick/presentational-bricks.brick-value-mapping) to convert a boolean value into meaningful text for display.
+ *
+ * `<presentational-bricks.brick-table>` passes the following data source to the custom display brick of a column:
+ *
+ * | field       | type   | description    |
+ * | ----------- | ------ | -------------- |
+ * | cellData    | any    | Cell data      |
+ * | rowData     | any    | Whole row data |
+ * | columnIndex | number | Column index   |
+ *
+ * `<presentational-bricks.brick-table>` passes the following data source to the custom row expansion brick:
+ *
+ * | field    | type   | description    |
+ * | -------- | ------ | -------------- |
+ * | rowData  | any    | Whole row data |
+ * | rowIndex | number | Row index      |
+ *
+ * ### Default pagination configuration
+ *
+ * If you do not want pagination, configure it as follows:
+ *
+ * ```
+ * {
+ *    "pagination": false
+ * }
+ * ```
+ *
+ * If you want to override the default configuration, just override the corresponding items; for details of the related configuration items, see: [pagination](https://ant.design/components/pagination-cn/#API)
+ *
+ * ```
+ * {
+ *   "pagination": {
+ *      "pageSizeOptions": ["10","100","1000"]
+ *    }
+ * }
+ * ```
+ *
+ * | property        | type     | required | default            | description                                                  |
+ * | --------------- | -------- | -------- | ------------------ | ------------------------------------------------------------ |
+ * | current         | string   | -        | -                  | Page number, taken from the page properties                  |
+ * | pageSize        | string   | -        | -                  | Number of items per page, taken from the pageSize properties |
+ * | total           | object   | -        | -                  | Total count, taken from dataSource.total                     |
+ * | showSizeChanger | boolean  | -        | true               | Show the page size changer                                   |
+ * | pageSizeOptions | array    | -        | ["10", "20", "50"] | Page size options                                            |
+ * | showTotal       | function | -        | -                  | Rendered as "xx in total"                                    |
+ *
+ *
+ * ### Default rowSelection configuration
+ *
+ * Row selection is false by default and is not displayed when not configured. To enable it, configure it as follows; brick-table then configures the onChange event by default:
+ *
+ * ```
+ * {
+ *   "rowSelection": true
+ * }
+ * ```
+ *
+ * If you want to override or extend the default configuration, just override the corresponding items; for details of the related configuration items, see: [rowSelection](https://ant.design/components/table-cn/#rowSelection)
+ *
+ * ```
+ * {
+ *   "rowSelection": {
+ *       "columnWidth": "88px"
+ *    }
+ * }
+ * ```
+ *
+ * | property | type     | required | default | description                                       |
+ * | -------- | -------- | -------- | ------- | ------------------------------------------------- |
+ * | onChange | function | -        | -       | Select rows; the event "select.update" is emitted |
+ *
+ * ### Sort
+ *
+ * If a column needs to be sortable, set `sorter:true` for that column, for example:
+ *
+ * ```
+ * {
+ *   "columns": [
+ *     {
+ *       "title": "主机",
+ *       "key": "hostname",
+ *       "dataIndex": "hostname",
+ *       "sorter": true
+ *     }
+ *   ]
+ * }
+ * ```
+ *
+ * ## flattenTreeDataListAndCalcRowSpan custom processing function
+ *
+ * Flattens the tree data list according to `options.flattenConfigs` and generates the corresponding row merge data
+ *
+ * ### Params
+ *
+ * | param        | type                                       | required | default | description                                                             |
+ * | ------------ | ------------------------------------------ | -------- | ------- | ----------------------------------------------------------------------- |
+ * | treeDataList | Record<string, unknown>[]               | ✔️       | -       | Tree data list                                                          |
+ * | options      | FlattenTreeDataListAndCalcRowSpanOptions | ✔️       | -       | Function options                                                        |
+ * | depth        | number                                | -        | 0       | The current flattening depth, used to determine the flatten configuration of the current level in `options.flattenConfigs` |
+ *
+ * ### Returns
+ *
+ * | type                        | description                                                                                                                                                |
+ * | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+ * | Record<string, unknown>[] | The flattened list; in addition to flattening according to `options.flattenConfigs`, row merge data is also generated with `options.flattenConfigs[].parentInChildKey + "RowSpan"` as the key for the corresponding level |
+ *
+ * ### FlattenTreeDataListAndCalcRowSpanOptions
+ *
+ * | property             | type              | required | default | description                                    |
+ * | -------------------- | ----------------- | -------- | ------- | ---------------------------------------------- |
+ * | flattenConfigs       | FlattenConfig[] | ✔️       | -       | List of flatten configurations, corresponding one-to-one in parent-to-child order |
+ * | omitChildrenInParent | boolean       | -        | -       | Whether to omit the child list in the parent after flattening |
+ *
+ * ### FlattenConfig
+ *
+ * | property         | type     | required | default | description                                     |
+ * | ---------------- | -------- | -------- | ------- | ----------------------------------------------- |
+ * | childrenKey      | string | ✔️       | -       | The key of the child list at the corresponding level |
+ * | parentInChildKey | string | ✔️       | -       | The key of the parent in the child after flattening |
+ *
  * @noInheritDoc
  */
 export class BrickTableElement
@@ -376,6 +522,7 @@ export class BrickTableElement
   /**
    * @detail {[pagePath]: xxx}
    * @description 页码变化,pagePath 可在 fields.page 中设置，默认为 page
+   * @description.en Page number changes; pagePath can be set in fields.page and defaults to page
    */
   @event({ type: "page.update" }) pageUpdate: EventEmitter<
     Record<string, number>
@@ -384,6 +531,7 @@ export class BrickTableElement
   /**
    * @detail {[pagePath]:1,[pageSizePath]:xxx}
    * @description 每页条数变化 ,pagePath 可在 fields.page 中设置,pageSizePath 可在 fields.pageSize 中设置，默认为 pageSize
+   * @description.en Page size changes; pagePath can be set in fields.page and pageSizePath in fields.pageSize, defaulting to pageSize
    */
   @event({ type: "filter.update" }) filterUpdate: EventEmitter<
     Record<string, number>
@@ -392,6 +540,7 @@ export class BrickTableElement
   /**
    * @detail Record<string,any>[]
    * @description【谨慎使用】 勾选框变化，detail 中为所选的行数据,这个事件在后台分页的情况下，可能返回undefined
+   * @description.en [Use with caution] Checkbox changes; detail contains the selected row data. With backend pagination, this event may return undefined
    */
   @event({ type: "select.update" }) selectUpdate: EventEmitter<
     Record<string, any>[]
@@ -400,6 +549,7 @@ export class BrickTableElement
   /**
    * @detail Record<string,any>[]
    * @description 勾选框变化，detail 中为所选的行key集合
+   * @description.en Checkbox changes; detail contains the set of keys of the selected rows
    */
   @event({ type: "select.row.keys.update" }) selectRowKeysUpdate: EventEmitter<
     string[]
@@ -408,6 +558,7 @@ export class BrickTableElement
   /**
    * @detail {sort:string;order:string|number}
    * @description 排序变化，detail 中的 sort 为对应排序列的 key/dataIndex，order 为升序/降序
+   * @description.en Sort changes; sort in detail is the key/dataIndex of the corresponding sorted column, and order is ascending/descending
    */
   @event({ type: "sort.update", cancelable: true }) sortUpdate: EventEmitter<{
     sort: string;
@@ -417,6 +568,7 @@ export class BrickTableElement
   /**
    * @detail {expanded:boolean;record:Record<string,any>}
    * @description 点击展开图标时触发的事件，事件详情中`expanded`为是否展开，`record`被点击的行信息
+   * @description.en Event triggered when the expand icon is clicked; in the event detail, `expanded` indicates whether it is expanded and `record` is the information of the clicked row
    */
   @event({ type: "row.expand" }) rowExpand: EventEmitter<{
     expanded: boolean;
@@ -426,6 +578,7 @@ export class BrickTableElement
   /**
    * @detail {expandedRows:string[]| number[]}
    * @description 展开的行变化时触发的事件，事件详情为当前展开的所有行的`rowKey`集合
+   * @description.en Event triggered when the expanded rows change; the event detail is the set of `rowKey` of all currently expanded rows
    */
   @event({ type: "expand.rows.change" }) expandRowsChange: EventEmitter<{
     expandedRows: React.Key[];
@@ -434,6 +587,7 @@ export class BrickTableElement
   /**
    * @detail {data:Record<string,any>[]}
    * @description 表格行拖拽结束发生的事件，事件详情为拖拽后重新排序的所有行数据
+   * @description.en Event fired when table row dragging ends; the event detail is all row data reordered after dragging
    */
   @event({ type: "row.drag" }) rowDrag: EventEmitter<{
     data: Record<string, any>[];
@@ -442,6 +596,7 @@ export class BrickTableElement
 
   /**
    * @description 表头过滤变化的事件
+   * @description.en Event for header filter changes
    */
   @event({ type: "column.filters.update" }) columnFiltersUpdate: EventEmitter<
     Record<string, string[]>
@@ -452,6 +607,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 扩展自 ant-design 的 Column 相关配置项,具体查阅：[Column](https://ant.design/components/table-cn/#Column)
+   * @description.en Column-related configuration items extended from ant-design, see: [Column](https://ant.design/components/table-cn/#Column)
    * @group basic
    */
   @property({
@@ -470,6 +626,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 数据源，通过 useResolves 从后台接口获取或者直接在 storyboard 中配置
+   * @description.en Data source, obtained from backend APIs via useResolves or configured directly in the storyboard
    * @group basic
    */
   @property({
@@ -499,6 +656,7 @@ export class BrickTableElement
    * @required false
    * @default true
    * @description 是否显示外层卡片
+   * @description.en Whether to show the outer card
    * @group basic
    */
   @property({
@@ -510,6 +668,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 表格行是否可选择，具体查阅：[rowSelection](https://ant.design/components/table-cn/#rowSelection)
+   * @description.en Whether table rows are selectable, see: [rowSelection](https://ant.design/components/table-cn/#rowSelection)
    * @group basic
    */
   @property({
@@ -521,6 +680,7 @@ export class BrickTableElement
    * @required false
    * @default "key"
    * @description 指定每一行的 key，不指定则默认为索引 index。强烈建议设置该属性，否则在某些情况下可能行为不如预期。
+   * @description.en Specifies the key of each row, defaulting to the index if not specified. It is strongly recommended to set this property, otherwise the behavior may not be as expected in some cases.
    * @group basic
    */
   @property()
@@ -530,6 +690,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 隐藏相应列（输入对应的 dataIndex 或者 key 即可）
+   * @description.en Hides the corresponding columns (just enter the corresponding dataIndex or key)
    * @group basic
    */
   @property({
@@ -541,6 +702,7 @@ export class BrickTableElement
    * @required false
    * @default false
    * @description 是否显示已选择信息和清除按钮。仅在设置了`rowSelection`时有效。默认不显示
+   * @description.en Whether to show the selected information and the clear button. Only effective when `rowSelection` is set. Not shown by default
    * @group rowSelection
    */
   @property({
@@ -553,6 +715,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 表头过滤的过滤项，key 为 column 的 dataIndex，value 为过滤值集合。
+   * @description.en Filter items for header filtering; the key is the dataIndex of the column and the value is the set of filter values.
    * @group paginationAndFilter
    */
   @property({
@@ -564,6 +727,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description ant-design 的 Table 相关配置项,具体查阅：[Table](https://ant.design/components/table-cn/#Table)，其中分页配置和行选择配值在构件中设置了常用的默认配置，也可自行覆盖，具体描述见下表
+   * @description.en Table-related configuration items of ant-design, see: [Table](https://ant.design/components/table-cn/#Table). Common default configurations for pagination and row selection are set in this brick and can be overridden; see the table below for details
    * @group other
    */
   @property({
@@ -575,6 +739,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 被排序列的 dataIndex。通常来自于 url 参数，可以设置成 ${QUERY.sort}。
+   * @description.en The dataIndex of the sorted column. Usually comes from URL parameters and can be set to ${QUERY.sort}.
    * @group paginationAndFilter
    */
   @property()
@@ -584,6 +749,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 升序/降序，可以设置成 ${QUERY.order}。
+   * @description.en Ascending/descending, can be set to ${QUERY.order}.
    * @group paginationAndFilter
    */
   @property({
@@ -595,6 +761,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 配置每一行是否禁用，其中 `field` 表示数据源中的字段路径， `value` 表示与其字段比较的值， `operator` 表示两者比较的方法，结果为 `true` 时会禁用当前行, 需要注意的是该配置需要在 `rowSelection: true` 的前提下使用，并且设置 `rowKey` 属性赋予每行唯一的 key，防止顺序变化时造成的错误勾选（如上 demo 所示）
+   * @description.en Configures whether each row is disabled, where `field` is the field path in the data source, `value` is the value compared with that field, and `operator` is the method used to compare the two; the current row is disabled when the result is `true`. Note that this configuration must be used together with `rowSelection: true`, and the `rowKey` property should be set to give each row a unique key, preventing incorrect selections caused by order changes (as shown in the demo above)
    * @group rowSelection
    */
   @property({
@@ -608,6 +775,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 展开配置，详见 [expandable](https://4x.ant.design/components/table-cn/#expandable)，为 false 时禁用展开
+   * @description.en Expand configuration, see [expandable](https://4x.ant.design/components/table-cn/#expandable); expanding is disabled when it is false
    * @group expand
    */
   @property({
@@ -620,6 +788,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 自定义行展开的构件 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
+   * @description.en Brick for custom row expansion [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
    * @group expand
    */
   @property({
@@ -634,6 +803,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 自定义空状态的构件
+   * @description.en Brick for the custom empty state
    * @group expand
    */
   @property({
@@ -648,6 +818,7 @@ export class BrickTableElement
    * @required false
    * @default {collapsedIcon:{lib:'antd',icon:'down',theme:'outlined'},expandedIcon:{lib:'antd',icon:'right',theme:'outlined'}}
    * @description 自定义展开图标。
+   * @description.en Custom expand icon.
    * @group expand
    */
   @property({
@@ -662,6 +833,7 @@ export class BrickTableElement
    * @required false
    * @default true
    * @description 展开的图标是否为一个单元格，默认显示在第一列；设置为 false 的时候，可以通过`expandIconColumnIndex`属性设置展开的图标在哪一列
+   * @description.en Whether the expand icon occupies a cell, displayed in the first column by default; when set to false, the column in which the expand icon is displayed can be set with the `expandIconColumnIndex` property
    * @group expand
    */
   @property({
@@ -673,6 +845,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 展开的图标显示在哪一列，如果没有 rowSelection，默认显示在第一列，否则显示在选择框后面。当`expandIconAsCell`为 false 时，该属性生效。
+   * @description.en The column in which the expand icon is displayed. If there is no rowSelection, it is displayed in the first column by default; otherwise it is displayed after the checkbox. This property takes effect when `expandIconAsCell` is false.
    * @group expand
    */
   @property({
@@ -684,6 +857,7 @@ export class BrickTableElement
    * @required false
    * @default false
    * @description 通过点击行来展开子行
+   * @description.en Expand child rows by clicking the row
    * @group expand
    */
   @property({
@@ -695,6 +869,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 优化渲染的列（输入对应的 dataIndex），针对配置了 useBrick 的列。当前 antd 在更新 state 的时候，会全量渲染单元格，如果确定某一列在后续操作中不需要重新渲染，例如仅作为展示的单元格，可通过该属性设置以优化性能。注意，在树形表格中，当某一列内包含展开/收起按钮，则不应该设置该列。
+   * @description.en Columns to optimize rendering for (enter the corresponding dataIndex), for columns configured with useBrick. Currently antd re-renders all cells when updating state; if a column is known not to need re-rendering in subsequent operations, for example a display-only cell, this property can be set to optimize performance. Note that in a tree table, a column should not be set if it contains expand/collapse buttons.
    * @group advanced
    */
   @property({
@@ -706,6 +881,7 @@ export class BrickTableElement
    * @default -
    * @required false
    * @description 设置容器空状态时显示`empty`构件属性
+   * @description.en Sets the `empty` brick property displayed when the container is in the empty state
    * @group ui
    */
   @property({ attribute: false })
@@ -715,6 +891,7 @@ export class BrickTableElement
    * @required false
    * @default false
    * @description 树形数据展示时是否需要去除空数组
+   * @description.en Whether empty arrays need to be removed when displaying tree data
    * @group expand
    */
   @property({
@@ -726,6 +903,7 @@ export class BrickTableElement
    * @required false
    * @default false
    * @description 初始时，是否展开所有行
+   * @description.en Whether to expand all rows initially
    * @group expand
    */
   @property({
@@ -737,6 +915,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 展开的行的 rowKey
+   * @description.en The rowKey of the expanded rows
    * @group expand
    */
   @property({
@@ -750,6 +929,7 @@ export class BrickTableElement
    * @required false
    * @default false
    * @description 表格树形数据展示的时候，行选择父节点的时候是否同步勾选/取消勾选所有子节点，并且被同步勾选的子节点不能单独取消。注意，该属性必须设置 `rowKey` 属性。
+   * @description.en When displaying tree data in the table, whether checking a parent row also checks/unchecks all its child nodes, and the synchronously checked child nodes cannot be unchecked individually. Note that the `rowKey` property must be set.
    * @group expand
    */
   @property({
@@ -761,6 +941,7 @@ export class BrickTableElement
    * @required false
    * @default false
    * @description 是否默认选择所有行。注意，该属性必须设置 `rowKey` 属性。
+   * @description.en Whether all rows are selected by default. Note that the `rowKey` property must be set.
    * @group expand
    */
   @property({
@@ -772,6 +953,7 @@ export class BrickTableElement
    * @required false
    * @default false
    * @description 是否显示省略信息
+   * @description.en Whether to show the ellipsis information
    * @group basic
    */
   @property({ type: Boolean })
@@ -783,6 +965,7 @@ export class BrickTableElement
    * @required false
    * @default children
    * @description 指定树形结构的列名
+   * @description.en Specifies the column name of the tree structure
    * @group expand
    */
   @property({
@@ -794,6 +977,7 @@ export class BrickTableElement
    * @required false
    * @default true
    * @description 是否支持排序。默认开启，当对应列的sorter设置成true时则可排序。sortable为false时则排序都不生效。
+   * @description.en Whether sorting is supported. Enabled by default; sorting is available when the sorter of the corresponding column is set to true. When sortable is false, sorting does not take effect.
    * @group paginationAndFilter
    */
   @property({
@@ -806,6 +990,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 设置相关字段取自哪里，具体描述见下表
+   * @description.en Sets where the related fields are taken from; see the table below for details
    * @group advanced
    */
   @property({
@@ -820,6 +1005,7 @@ export class BrickTableElement
    * @required false
    * @default false
    * @description 是否前端进行搜索，配合`presentational-bricks.brick-input`使用
+   * @description.en Whether to search on the frontend, used together with `presentational-bricks.brick-input`
    * @group paginationAndFilter
    */
   @property({
@@ -831,6 +1017,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 前端搜索参数
+   * @description.en Frontend search parameter
    * @group paginationAndFilter
    */
   @property({
@@ -842,6 +1029,7 @@ export class BrickTableElement
    * @required false
    * @default false
    * @description 是否精确搜索
+   * @description.en Whether to perform an exact search
    * @group paginationAndFilter
    */
   @property({
@@ -853,6 +1041,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 进行前端搜索的字段，支持嵌套的写法如["name","value.a"]，不配置的时候默认为对所有 columns 的 dataIndex[]进行前端搜索
+   * @description.en Fields to search on the frontend, nested expressions such as ["name","value.a"] are supported; when not configured, all dataIndex[] of columns are searched on the frontend by default
    * @group paginationAndFilter
    */
   @property({
@@ -864,6 +1053,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 页码。后台搜索的时候一般不需要配置，列表接口返回格式通常为{list:[],page:1,pageSize:10,total:20}，即默认取自 page；前台搜索的时候，一般配置成 "${query.page=1|number}"
+   * @description.en Page number. It usually does not need to be configured for backend search, since the list API response format is typically {list:[],page:1,pageSize:10,total:20}, i.e. it is taken from page by default; for frontend search, it is usually configured as "${query.page=1|number}"
    * @group paginationAndFilter
    */
   @property({
@@ -875,6 +1065,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 页码条数。后台搜索的时候一般不需要配置，列表接口返回格式通常为{list:[],page:1,pageSize:10,total:20}，即默认取自 pageSize/page_size；前台搜索的时候，一般配置成 "${query.pageSize=10|number}"
+   * @description.en Page size. It usually does not need to be configured for backend search, since the list API response format is typically {list:[],page:1,pageSize:10,total:20}, i.e. it is taken from pageSize/page_size by default; for frontend search, it is usually configured as "${query.pageSize=10|number}"
    * @group paginationAndFilter
    */
   @property({
@@ -892,6 +1083,7 @@ export class BrickTableElement
    * @required false
    * @default { x: true }
    * @description 表格是否可滚动，也可以指定滚动区域的宽、高，配置项。详见 [scroll](https://ant.design/components/table-cn/#scroll)
+   * @description.en Whether the table can scroll; the width and height of the scroll area can also be specified. See [scroll](https://ant.design/components/table-cn/#scroll) for details
    * @group other
    */
   @property({
@@ -903,6 +1095,7 @@ export class BrickTableElement
    * @required false
    * @default "q"
    * @description 把过滤条件更新到 url 时的字段名
+   * @description.en The field name used when updating the filter conditions to the URL
    * @group paginationAndFilter
    */
   @property({ attribute: false })
@@ -913,6 +1106,7 @@ export class BrickTableElement
    * @default false
    * @description 表格行是否可拖拽，注意，如果是树形数据的表格，则各行需要设置__acceptType，并保证同层级的__acceptType值相同
    * [ { id: "parent1", __acceptType: "level-1", children: [ { id: "sub1", __acceptType: "parent1-sub" }, { id: "sub2", __acceptType: "parent1-sub" } ] }, { id: "parent2", __acceptType: "level-1", children: [ { id: "sub3", __acceptType: "parent2-sub" } ] } ]
+   * @description.en Whether table rows are draggable. Note that for a table with tree data, each row needs to be set with __acceptType, and rows at the same level must have the same __acceptType value
    * @group basic
    */
   @property({
@@ -924,6 +1118,7 @@ export class BrickTableElement
    * @required false
    * @default "DraggableBodyRow"
    * @description 指定元素的类型，只有类型相同的元素才能进行drop操作
+   * @description.en Specifies the type of the element; only elements of the same type can be dropped onto each other
    * @group basic
    */
   @property({
@@ -935,6 +1130,7 @@ export class BrickTableElement
    * @required false
    * @default false
    * @description 是否展示斑马纹
+   * @description.en Whether to display zebra stripes
    * @group ui
    */
   @property({
@@ -946,6 +1142,7 @@ export class BrickTableElement
    * @required false
    * @default false
    * @description 翻页时是否记住之前选中的项。注意，选中项的rowKey将保存在url中，如果不设置rowKey，该设置不生效。如果选择太多可能会造成url过长，请谨慎使用
+   * @description.en Whether to remember previously selected items when paging. Note that the rowKey of the selected items is saved in the URL; this setting does not take effect if rowKey is not set. Selecting too many items may make the URL too long, so use with caution
    * @group other
    */
   @property({ type: Boolean })
@@ -955,6 +1152,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 额外的行，通常为跨页勾选时，不在当前页的行
+   * @description.en Extra rows, usually rows that are not on the current page when selecting across pages
    * @group other
    */
   @property({ attribute: false })
@@ -964,6 +1162,7 @@ export class BrickTableElement
    * @required false
    * @default false
    * @description [已废弃]请用 tableDraggable 代替
+   * @description.en [Deprecated] Please use tableDraggable instead
    * @group other
    */
   @property({
@@ -975,6 +1174,7 @@ export class BrickTableElement
    * @required false
    * @default false
    * @description 当所有子节点选中时，自动选中父节点
+   * @description.en Automatically check the parent node when all child nodes are checked
    * @group expand
    */
   @property({ type: Boolean })
@@ -984,6 +1184,7 @@ export class BrickTableElement
    * @required -
    * @default -
    * @description 表格表头是否透明
+   * @description.en Whether the table header is transparent
    * @group ui
    */
   @property({ attribute: false })
@@ -993,6 +1194,7 @@ export class BrickTableElement
    * @required false
    * @default true
    * @description 是否显示表头
+   * @description.en Whether to show the header
    * @group ui
    */
   @property({
@@ -1004,6 +1206,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 是否显示分页
+   * @description.en Whether to show pagination
    * @group paginationAndFilter
    */
   @property({
@@ -1015,6 +1218,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 表格大小（antd原生size）
+   * @description.en Table size (antd native size)
    * @group ui
    */
   @property({
@@ -1026,6 +1230,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 选框类型（单选/多选）
+   * @description.en Checkbox type (single/multiple)
    * @group rowSelection
    */
   @property({
@@ -1037,6 +1242,7 @@ export class BrickTableElement
    * @required false
    * @default true
    * @description 是否更新 url 参数。设置为否之后，如果是后台进行分页/排序等功能，则需要结合事件进行编排。如果是前台进行分页/排序，则不需要。
+   * @description.en Whether to update URL parameters. When set to no, features such as backend pagination/sorting need to be orchestrated with events, while frontend pagination/sorting does not.
    * @group other
    */
   @property({
@@ -1048,6 +1254,7 @@ export class BrickTableElement
    * @required false
    * @default true
    * @description 更新 url 参数时是否触发页面重新渲染。仅在`shouldUpdateUrlParams`为true时有效。
+   * @description.en Whether page re-rendering is triggered when URL parameters are updated. Only effective when `shouldUpdateUrlParams` is true.
    * @group other
    */
   @property({
@@ -1100,6 +1307,7 @@ export class BrickTableElement
    * @default []
    * @required false
    * @description 指定选中项的 key 数组
+   * @description.en Specifies the array of keys of the selected items
    * @group rowSelection
    */
   @property({
@@ -1111,6 +1319,7 @@ export class BrickTableElement
    * @required false
    * @default false
    * @description 是否显示展开全部
+   * @description.en Whether to show Expand All
    * @group other
    */
   @property({
@@ -1122,6 +1331,7 @@ export class BrickTableElement
    * @required false
    * @default -
    * @description 列的 key 与对应构件配置的 map。一般在 columns 属性需要动态生成，且希望自定义列的构件（columns.useBrick）时使用。
+   * @description.en A map from column keys to the corresponding brick configuration. Usually used when the columns property needs to be generated dynamically and the brick of the column (columns.useBrick) should be customized.
    * @group advanced
    */
   @property({
@@ -1148,6 +1358,7 @@ export class BrickTableElement
 
   /**
    * @description 搜索过滤
+   * @description.en Search and filter
    */
   @method()
   filterSourceData(event: CustomEvent): void {
@@ -1753,6 +1964,7 @@ export class BrickTableElement
 
   /**
    * @description 展开所有行
+   * @description.en Expand all rows
    */
   @method()
   expandAll() {

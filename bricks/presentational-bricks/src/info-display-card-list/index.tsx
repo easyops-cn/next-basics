@@ -50,6 +50,7 @@ export class InfoDisplayCardListElement extends UpdatingElement implements InfoD
    * @required true
    * @default -
    * @description 列表数据
+   * @description.en List data
    */
   @property({
     attribute: false,
@@ -61,6 +62,7 @@ export class InfoDisplayCardListElement extends UpdatingElement implements InfoD
    * @required false
    * @default -
    * @description 卡片跳转 url，支持模版变量
+   * @description.en Card redirect url, supporting template variables
    */
   @property()
   urlTemplate: string;
@@ -70,6 +72,7 @@ export class InfoDisplayCardListElement extends UpdatingElement implements InfoD
    * @required false
    * @default -
    * @description 卡片跳转 url， url 优先于 urlTemplate 执行
+   * @description.en Card redirect url; url takes precedence over urlTemplate
    */
   @property()
   url: string;
@@ -79,6 +82,7 @@ export class InfoDisplayCardListElement extends UpdatingElement implements InfoD
    * @required false
    * @default -
    * @description 卡片跳转 target，例如可以设置成 _blank
+   * @description.en Card redirect target, for example it can be set to _blank
    */
   @property()
   target: string;
@@ -88,6 +92,7 @@ export class InfoDisplayCardListElement extends UpdatingElement implements InfoD
    * @required false
    * @default true
    * @description 是否显示列表的左侧icon
+   * @description.en Whether to display the icon on the left side of the list
    */
   @property({
     attribute: false,
@@ -99,6 +104,7 @@ export class InfoDisplayCardListElement extends UpdatingElement implements InfoD
    * @required false
    * @default -
    * @description 设置操作列，不设置就不显示
+   * @description.en Sets the operation column; not displayed if not set
    */
   @property({
     attribute: false,
@@ -110,6 +116,7 @@ export class InfoDisplayCardListElement extends UpdatingElement implements InfoD
    * @required false
    * @default -
    * @description 设置titleBrick，不设置就不显示
+   * @description.en Sets titleBrick; not displayed if not set
    */
   @property({
     attribute: false,
@@ -121,6 +128,7 @@ export class InfoDisplayCardListElement extends UpdatingElement implements InfoD
    * @required false
    * @default -
    * @description 设置iconBrick，不设置就不显示
+   * @description.en Sets iconBrick; not displayed if not set
    */
   @property({
     attribute: false,
@@ -132,6 +140,7 @@ export class InfoDisplayCardListElement extends UpdatingElement implements InfoD
    * @required false
    * @default -
    * @description 设置detailOfDescBrickConf，不设置显示为纯文本
+   * @description.en Sets detailOfDescBrickConf; displayed as plain text if not set
    */
   @property({
     attribute: false,
@@ -143,6 +152,7 @@ export class InfoDisplayCardListElement extends UpdatingElement implements InfoD
    * @required false
    * @default 16px
    * @description 设置卡片 title 的字体大小，默认为 16px
+   * @description.en Sets the font size of the card title, default 16px
    */
   @property({
     attribute: false,
@@ -154,6 +164,7 @@ export class InfoDisplayCardListElement extends UpdatingElement implements InfoD
    * @required false
    * @default 18px
    * @description 设置卡片右侧描述部分 desc 的字体大小，默认为18px
+   * @description.en Sets the font size of the desc part on the right side of the card, default 18px
    */
   @property({
     attribute: false,
@@ -165,6 +176,7 @@ export class InfoDisplayCardListElement extends UpdatingElement implements InfoD
    * @required false
    * @default false
    * @description list样式
+   * @description.en list style
    */
   @property({
     attribute: false,

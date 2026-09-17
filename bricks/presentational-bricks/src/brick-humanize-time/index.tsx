@@ -30,6 +30,7 @@ export interface LinkInfo {
  * @name presentational-bricks.brick-humanize-time
  * @docKind brick
  * @description 如：3天前、过去2小时等。也可显示消耗时间，如1小时2分钟，也可显示为链接
+ * @description.en For example: 3 days ago, 2 hours in the past, etc. It can also display elapsed time, such as 1 hour 2 minutes, or be displayed as a link
  * @author ice
  * @slots
  * @history
@@ -41,6 +42,7 @@ export class BrickHumanizeTimeElement extends UpdatingElement implements BrickHu
   /**
    * @required false
    * @description 时间截，或字符串，当为字符串时，应提供时间格式 `inputFormat`
+   * @description.en Timestamp or string; when it is a string, the time format `inputFormat` should be provided
    * @group basic
    */
   @property({
@@ -50,6 +52,7 @@ export class BrickHumanizeTimeElement extends UpdatingElement implements BrickHu
   /**
    * @required false
    * @description 字符串的时间格式，如 "YYYY-MM-DD", [时间格式参照表](https://dayjs.gitee.io/docs/zh-CN/parse/string-format)
+   * @description.en The time format of the string, e.g. "YYYY-MM-DD", [time format reference table](https://dayjs.gitee.io/docs/zh-CN/parse/string-format)
    * @group basic
    */
   @property()
@@ -58,6 +61,7 @@ export class BrickHumanizeTimeElement extends UpdatingElement implements BrickHu
   /**
    * @required false
    * @description 展示时间格式，如 "YYYY-MM-DD"，当设置该属性时，属性 `formatter` 无效 [时间格式参照表](https://dayjs.gitee.io/docs/zh-CN/parse/string-format)
+   * @description.en Display time format, e.g. "YYYY-MM-DD". When this property is set, the `formatter` property is invalid [time format reference table](https://dayjs.gitee.io/docs/zh-CN/parse/string-format)
    * @group basic
    */
   @property()
@@ -67,6 +71,7 @@ export class BrickHumanizeTimeElement extends UpdatingElement implements BrickHu
    * @required false
    * @default false
    * @description 是否展示为耗费时间，例如：'1 个月 20 天'
+   * @description.en Whether to display as elapsed time, e.g. '1 month 20 days'
    * @group basic
    */
   @property({
@@ -128,6 +133,7 @@ export class BrickHumanizeTimeElement extends UpdatingElement implements BrickHu
   /**
    * @required false
    * @description [已废弃]数据来源
+   * @description.en [Deprecated] Data source
    * @deprecated
    * @group other
    */
@@ -139,6 +145,7 @@ export class BrickHumanizeTimeElement extends UpdatingElement implements BrickHu
   /**
    * @required false
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时对应字段的值
+   * @description.en [Deprecated] Field mapping, used together with dataSource to obtain the value of the corresponding field at runtime
    * @deprecated
    * @group other
    */
@@ -151,6 +158,7 @@ export class BrickHumanizeTimeElement extends UpdatingElement implements BrickHu
    * @kind "full" | "default" | "relative" | "future" | "accurate" | "auto"
    * @required false
    * @description 枚举值：full, default, relative, future, accurate, auto [类型链接](https://github.com/easyops-cn/next-libs/blob/207fe7ee3ac010ab860c23cd062216c8ca612f0c/libs/datetime/src/humanizeTime.ts#L9)
+   * @description.en Enum values: full, default, relative, future, accurate, auto [type link](https://github.com/easyops-cn/next-libs/blob/207fe7ee3ac010ab860c23cd062216c8ca612f0c/libs/datetime/src/humanizeTime.ts#L9)
    * @group basic
    */
   @property({
@@ -160,6 +168,7 @@ export class BrickHumanizeTimeElement extends UpdatingElement implements BrickHu
 
   /**
    * @description value 值的单位是否为毫秒
+   * @description.en Whether the unit of value is milliseconds
    * @group advanced
    */
   @property({
@@ -169,6 +178,7 @@ export class BrickHumanizeTimeElement extends UpdatingElement implements BrickHu
 
   /**
    * @description value 值的单位是否为毫秒（此处属性 id 写错，实际表达意义为 isMillisecond）
+   * @description.en Whether the unit of value is milliseconds (the property id here is misspelled; it actually means isMillisecond)
    * @deprecated 请使用 `isMillisecond`
    */
   @property({
@@ -179,6 +189,7 @@ export class BrickHumanizeTimeElement extends UpdatingElement implements BrickHu
   /**
    * @required false
    * @description 跳转链接，默认为空
+   * @description.en Jump link, empty by default
    * @group advanced
    */
   @property({

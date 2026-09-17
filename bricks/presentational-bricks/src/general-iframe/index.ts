@@ -18,6 +18,7 @@ const defaultStyle = {
  * @name 普通 iframe
  * @docKind brick
  * @description 可嵌入外部网站通用构件
+ * @description.en General-purpose brick for embedding external websites
  * @author jo
  * @slots
  * @history
@@ -38,6 +39,7 @@ export class GeneralIframeElement
   /**
    * @detail any
    * @description iframe 加载完成时触发
+   * @description.en Triggered when the iframe finishes loading
    */
   @event({ type: "general-iframe.loaded" })
   generalIframeLoaded: EventEmitter<any>;
@@ -45,6 +47,7 @@ export class GeneralIframeElement
   /**
    * @detail any
    * @description iframe 接收到消息触发事件
+   * @description.en Event triggered when the iframe receives a message
    */
   @event({ type: "iframe.message" })
   iframeMessage: EventEmitter<unknown>;
@@ -54,6 +57,7 @@ export class GeneralIframeElement
    * @required true
    * @default -
    * @description 被嵌入网站的 url
+   * @description.en URL of the embedded website
    */
   @property()
   src: string;
@@ -63,6 +67,7 @@ export class GeneralIframeElement
    * @required false
    * @default -
    * @description iframe 相关样式
+   * @description.en Styles related to the iframe
    */
   @property({
     attribute: false,
@@ -74,6 +79,7 @@ export class GeneralIframeElement
    * @required false
    * @default false
    * @description 是否开启消息监听，开启后会收到消息会触发 iframe.message 事件
+   * @description.en Whether to enable message listening; once enabled, receiving a message triggers the iframe.message event
    */
   @property({
     type: Boolean,
@@ -85,6 +91,7 @@ export class GeneralIframeElement
    * @required false
    * @default -
    * @description 只对特定源接收信息，防止收到无相关的消息，不配置的话默认取的是 iframe.src 作为值
+   * @description.en Only receive messages from a specific origin, to prevent receiving irrelevant messages; if not configured, iframe.src is used as the value by default
    */
   @property()
   messageOrigin: string;

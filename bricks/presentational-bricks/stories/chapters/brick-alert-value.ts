@@ -10,7 +10,7 @@ export const BrickAlertValueStory: Story = {
     zh: "告警值",
   },
   description: {
-    en: "",
+    en: "Display an alert value combined with trigger conditions, e.g. 90%↑",
     zh: "将告警数值组合触发条件，显示成 90%↑ 的模式",
   },
   icon: {

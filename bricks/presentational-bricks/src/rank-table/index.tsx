@@ -28,14 +28,17 @@ export interface RankTableElementProps {
 export interface CustomColumn extends ColumnProps<Record<string, any>> {
   /**
    * 支持为某列自定义展示构件
+   * @description.en Support custom display bricks for a column
    */
   useBrick?: UseBrickConf;
   /**
    * 字段的值展示时的后缀
+   * @description.en Suffix when displaying the field value
    */
   valueSuffix?: string;
   /**
    * 支持为某列的表头自定义展示构件，可通过 DATA.title 获取标题文本
+   * @description.en Support custom display bricks for a column header; the title text can be obtained through DATA.title
    */
   headerBrick?: {
     useBrick: UseBrickConf;
@@ -43,6 +46,7 @@ export interface CustomColumn extends ColumnProps<Record<string, any>> {
 
   /**
    * 单元格内元素的垂直对齐方式
+   * @description.en Vertical alignment of elements within a cell
    */
   verticalAlign?: "top" | "bottom";
 }
@@ -54,6 +58,7 @@ export type UseBrick = {
 export interface Header {
   /**
    * 表格头部左边内容显示区域
+   * @description.en Content display area on the left side of the table header
    */
   title:
     | string
@@ -62,6 +67,7 @@ export interface Header {
       };
   /**
    * 表格头部右边内容显示区域
+   * @description.en Content display area on the right side of the table header
    */
   extra?:
     | string
@@ -104,6 +110,34 @@ export interface Header {
  * | events        | BrickEventsMap | -        | -       | 事件                                               |
  * | transform     | string\|object | -        | -       | 属性数据转换                                       |
  * | transformFrom | string         | -        | -       | 属性数据转换来自数据源的哪个字段，不填则为整个数据 |
+ * @memo.en
+ * ## dataSource Table data source
+ * | property      | type           | required | default | description                                        |
+ * | ------------- | -------------- | -------- | ------- | -------------------------------------------------- |
+ * | dataSource            | any                                                                              | -        | -        | Data source, obtained from a backend API through useResolves or configured directly in the storyboard |
+ *
+ * ## columns Table column configuration
+ * | property      | type           | required | default | description                                        |
+ * | ------------- | -------------- | -------- | ------- | -------------------------------------------------- |
+ * | columns               | CustomColumn[]      | -        | -        | Column-related configuration extended from ant-design, see: [https://ant.design/components/table-cn/#Column](https://ant.design/components/table-cn/#Column)                                                                                                |
+ *
+ * ### CustomColumn
+ * | property             | type                  | required | default | description                                                    |
+ * | -------------------- | --------------------- | -------- | ------- | -------------------------------------------------------------- |
+ * | valueSuffix          | string                | -        | -       | Suffix when displaying the field value               |
+ * | useBrick             | UseBrickConf          | -        | -       | Support custom display bricks for a column         |
+ * | titleUseBrick        | UseBrickConf          | -        | -       | Support custom display bricks for a column title; the title text can be obtained through DATA.title |
+ * | verticalAlign | `top` &#124; `bottom` | - | - | Vertical alignment of elements within a cell |
+ *
+ * ### UseBrickConf
+ *
+ * | property      | type           | required | default | description                                        |
+ * | ------------- | -------------- | -------- | ------- | -------------------------------------------------- |
+ * | brick         | string         | ✔️       | -       | Brick name                                     |
+ * | properties    | object         | -        | -       | Brick properties                               |
+ * | events        | BrickEventsMap | -        | -       | Event                                            |
+ * | transform     | string\|object | -        | -       | Property data transformation                 |
+ * | transformFrom | string         | -        | -       | Which field of the data source the property data transformation comes from; if not filled in, the whole data |
  */
 export class RankTableElement extends UpdatingElement implements RankTableElementProps {
   private _dataSource: Record<string, any>[];
@@ -114,6 +148,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
    * @required false
    * @default -
    * @description 表格表头，如不填将不会显示表头
+   * @description.en Table header; if not set, the header will not be displayed
    */
   @property({
     attribute: false,
@@ -124,6 +159,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
    * @required false
    * @default -
    * @description 扩展自 ant-design 的 Column 相关配置项,具体查阅：<a href="https://ant.design/components/table-cn/#Column" target="_blank">https://ant.design/components/table-cn/#Column</a>
+   * @description.en Column-related configuration extended from ant-design, see: <a href="https://ant.design/components/table-cn/#Column" target="_blank">https://ant.design/components/table-cn/#Column</a>
    */
   @property({
     __unstable_doNotDecorate: true,
@@ -147,6 +183,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
    * @required false
    * @default -
    * @description 数据源，通过 useResolves 从后台接口获取或者直接在 storyboard 中配置
+   * @description.en Data source, obtained from a backend API through useResolves or configured directly in the storyboard
    */
   @property({
     __unstable_doNotDecorate: true,
@@ -163,6 +200,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
    * @required false
    * @default -
    * @description ant-design 的 Table 相关配置项,具体查阅：[https://ant.design/components/table-cn/#Table](https://ant.design/components/table-cn/#Table)，其中分页配置和行选择配值在构件中设置了常用的默认配置，也可自行覆盖，具体描述见下表
+   * @description.en Table-related configuration of ant-design, see: [https://ant.design/components/table-cn/#Table](https://ant.design/components/table-cn/#Table). Among them, the Pagination configuration and the row selection configuration have common default settings in the brick and can also be overridden by yourself; see the table below for details
    * @group advanced
    */
   @property({
@@ -175,6 +213,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
    * @required false
    * @default -
    * @description 指定每一行的 key，不指定则默认为索引 index。强烈建议设置该属性，否则在某些情况下可能行为不如预期。
+   * @description.en Specify the key of each row; if not specified, the index is used by default. It is strongly recommended to set this property, otherwise the behavior may not be as expected in some cases.
    */
   @property()
   rowKey: string;
@@ -189,6 +228,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
    * @required false
    * @default { x: true }
    * @description 表格是否可滚动，也可以指定滚动区域的宽、高，配置项。详见 https://ant.design/components/table-cn/#scroll
+   * @description.en Whether the table is scrollable; the width and height of the scroll area can also be specified, configuration item. See https://ant.design/components/table-cn/#scroll for details
    * @group advanced
    */
   @property({
@@ -201,6 +241,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
    * @required false
    * @default -
    * @description 表格头部左边内容显示区域,如果设置了`header`，会覆盖设置其`title`参数
+   * @description.en Content display area on the left side of the table header; if `header` is set, its `title` parameter setting will be overridden
    */
   @property({
     attribute: false,
@@ -221,6 +262,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
    * @required false
    * @default -
    * @description 隐藏相应列（输入对应的 dataIndex 或者 key 即可）
+   * @description.en Hide the corresponding columns (just enter the corresponding dataIndex or key)
    */
   @property({
     attribute: false,
@@ -245,6 +287,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
    * @required false
    * @default true
    * @description 是否显示外层卡片
+   * @description.en Whether to display the outer card
    */
   @property({
     attribute: false,
@@ -256,6 +299,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
    * @required false
    * @default true
    * @description 是否展示表头
+   * @description.en Whether to display the table header
    */
   @property({
     attribute: false,
@@ -268,6 +312,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
    * @default default
    * @enums "default"|"small"
    * @description 根据容器的不同调整样式
+   * @description.en Adjust the style according to different containers
    */
   @property({ attribute: false })
   size: "default" | "small" = "default";
@@ -275,6 +320,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
   /**
    * @detail {sort:string;order:string|number}
    * @description 排序变化，detail 中的 sort 为对应排序列的 key/dataIndex，order 为升序/降序
+   * @description.en Sort change; sort in detail is the key/dataIndex of the corresponding sort column, and order is ascending/descending
    */
   @event({ type: "sort.update", cancelable: true }) sortUpdate: EventEmitter<{
     sort: string;
@@ -286,6 +332,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
    * @required false
    * @default true
    * @description 是否支持排序。默认开启，当对应列的sorter设置成true时则可排序。sortable为false时则排序都不生效。
+   * @description.en Whether sorting is supported. It is enabled by default; sorting is available when the sorter of the corresponding column is set to true. When sortable is false, sorting does not take effect at all.
    */
   @property({
     attribute: false,
@@ -297,6 +344,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
    * @required false
    * @default -
    * @description 被排序列的 dataIndex。通常来自于 url 参数，可以设置成 ${QUERY.sort}。
+   * @description.en dataIndex of the sorted column. It usually comes from url parameters and can be set to ${QUERY.sort}.
    */
   @property()
   sort: string;
@@ -306,6 +354,7 @@ export class RankTableElement extends UpdatingElement implements RankTableElemen
    * @required false
    * @default -
    * @description 升序/降序，可以设置成 ${QUERY.order}。
+   * @description.en Ascending/descending order, can be set to ${QUERY.order}.
    */
   @property({
     attribute: false,

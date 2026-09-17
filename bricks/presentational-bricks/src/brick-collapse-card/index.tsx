@@ -31,10 +31,14 @@ export interface BrickCollapseCardElementProps {
  * @name presentational-bricks.brick-collapse-card
  * @docKind brick
  * @description 详情折叠，有需要再展开，避免一开始太喧宾夺主，如工具详情
+ * @description.en Details collapse and expand only when needed, so as not to be too prominent at first, e.g. tool details
  * @author lynette
  * @slots
  * content:卡片展开的内容
  * header:header 自定义构件，需要同时把 hasHeaderSlot 设置成 true
+ * @slots.en
+ * content:Content of the expanded card
+ * header:Custom header brick, `hasHeaderSlot` must be set to true at the same time
  * @history
  * @memo
  * @noInheritDoc
@@ -48,6 +52,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @required true
    * @default -
    * @description 卡片标题
+   * @description.en Card title
    */
   @property()
   cardTitle: string;
@@ -57,6 +62,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @required false
    * @default -
    * @description 标题描述信息，仅在`titleWithIconAndDesc`为true时有效
+   * @description.en Title description, valid only when `titleWithIconAndDesc` is true
    */
   @property({
     attribute: false,
@@ -68,6 +74,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @required false
    * @default 展开
    * @description 卡片收起的时候右上角的文案
+   * @description.en Text in the upper right corner when the card is collapsed
    */
   @property({
     attribute: false,
@@ -79,6 +86,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @required false
    * @default 收起
    * @description 卡片展开的时候右上角的文案
+   * @description.en Text in the upper right corner when the card is expanded
    */
   @property({
     attribute: false,
@@ -90,6 +98,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @required false
    * @default up
    * @description 卡片展开的时候右上角的 icon，支持 ant-design 的 icon
+   * @description.en Icon in the upper right corner when the card is expanded, supports ant-design icons
    */
   @property({
     attribute: false,
@@ -101,6 +110,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @required false
    * @default down
    * @description 卡片收起的时候右上角的 icon，支持 ant-design 的 icon
+   * @description.en Icon in the upper right corner when the card is collapsed, supports ant-design icons
    */
   @property({
     attribute: false,
@@ -112,6 +122,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @required false
    * @default {lib: "easyops", category: "default", icon: "collapse-card-default"}
    * @description 卡片标题图标，仅在`titleWithIconAndDesc`为true时有效
+   * @description.en Card title icon, valid only when `titleWithIconAndDesc` is true
    */
   @property({
     attribute: false,
@@ -127,6 +138,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @required false
    * @default false
    * @description 是否可以设置标题图标和描述信息
+   * @description.en Whether the title icon and description can be configured
    */
   @property({
     attribute: false,
@@ -138,6 +150,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @required false
    * @default false
    * @description 卡片默认收起／展开
+   * @description.en Whether the card is collapsed or expanded by default
    */
   @property({
     type: Boolean,
@@ -149,6 +162,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @required false
    * @default false
    * @description header 是否为自定义的 slot
+   * @description.en Whether the header is a custom slot
    */
   @property({
     type: Boolean,
@@ -160,6 +174,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @required false
    * @default -
    * @description 容器自定义样式
+   * @description.en Custom container style
    * @group advanced
    */
   @property({
@@ -172,6 +187,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @required false
    * @default -
    * @description header 自定义样式
+   * @description.en Custom header style
    * @group advanced
    */
   @property({
@@ -184,6 +200,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @required false
    * @default -
    * @description 内容自定义样式
+   * @description.en Custom content style
    * @group advanced
    */
   @property({
@@ -196,6 +213,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @required false
    * @default false
    * @description 设置该属性后，卡片内容区的元素自动垂直居中
+   * @description.en After setting this property, elements in the card content area are automatically vertically centered
    * @group advanced
    */
   @property({
@@ -209,6 +227,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @default -
    * @deprecated
    * @description [已废弃]卡片标题，请使用cardTitle
+   * @description.en [Deprecated] Card title, please use cardTitle
    * @group advanced
    */
   @property({ __deprecated_and_for_compatibility_only: true })
@@ -220,6 +239,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @default -
    * @deprecated
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时对应字段的值
+   * @description.en [Deprecated] Field mapping, used together with dataSource to get the value of the corresponding field at runtime
    */
   @property({
     attribute: false,
@@ -232,6 +252,7 @@ export class BrickCollapseCardElement extends UpdatingElement implements BrickCo
    * @default -
    * @deprecated
    * @description [已废弃]数据来源
+   * @description.en [Deprecated] Data source
    */
   @property({
     attribute: false,

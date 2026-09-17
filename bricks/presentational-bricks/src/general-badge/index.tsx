@@ -31,6 +31,7 @@ export class GeneralBadgeElement extends UpdatingElement implements GeneralBadge
    * @required false
    * @default -
    * @description 文字内容，可以使用自定义构件来做复杂的展示。不设置时单独使用徽标。
+   * @description.en Text content. A custom brick can be used for complex display. When not set, the Badge is used alone.
    */
   @property({
     attribute: false,
@@ -42,6 +43,7 @@ export class GeneralBadgeElement extends UpdatingElement implements GeneralBadge
    * @required false
    * @default -
    * @description 在内容中使用Icon
+   * @description.en Use an Icon in the content
    */
   @property({
     attribute: false,
@@ -52,6 +54,7 @@ export class GeneralBadgeElement extends UpdatingElement implements GeneralBadge
    * @required false
    * @default false
    * @description 数据源，content 的数据默认来自都来自于此，也可以在content中单独设置数据源。
+   * @description.en Data Source. The data of content comes from here by default, and a separate data source can also be set in content.
    */
   @property({
     attribute: false,
@@ -63,6 +66,7 @@ export class GeneralBadgeElement extends UpdatingElement implements GeneralBadge
    * @required false
    * @default red
    * @description 徽标的颜色
+   * @description.en Color of the Badge
    */
   @property({
     attribute: false,
@@ -73,6 +77,7 @@ export class GeneralBadgeElement extends UpdatingElement implements GeneralBadge
    * @required false
    * @default -
    * @description 展示的数字，大于 overflowCount 时显示为 ${overflowCount}+，为 0 时隐藏
+   * @description.en The number to display; when it is greater than overflowCount it is displayed as ${overflowCount}+, and when it is 0 it is hidden
    */
   @property({
     attribute: false,
@@ -83,6 +88,7 @@ export class GeneralBadgeElement extends UpdatingElement implements GeneralBadge
    * @required false
    * @default 99
    * @description 展示封顶的数字值
+   * @description.en The maximum number value to display
    */
   @property({
     attribute: false,
@@ -93,6 +99,7 @@ export class GeneralBadgeElement extends UpdatingElement implements GeneralBadge
    * @required false
    * @default false
    * @description 不展示数字，只有一个小圆点.
+   * @description.en Do not display the number, only a small dot.
    * @group advanced
    */
   @property({
@@ -105,6 +112,7 @@ export class GeneralBadgeElement extends UpdatingElement implements GeneralBadge
    * @required false
    * @default -
    * @description 设置状态点的位置偏移，格式为 [x, y]
+   * @description.en Set the position offset of the status dot, in the format [x, y]
    * @group advanced
    */
   @property({
@@ -116,6 +124,7 @@ export class GeneralBadgeElement extends UpdatingElement implements GeneralBadge
    * @required false
    * @default false
    * @description 当数值为 0 时，是否展示徽标
+   * @description.en Whether to display the Badge when the value is 0
    */
   @property({
     type: Boolean,
@@ -126,6 +135,7 @@ export class GeneralBadgeElement extends UpdatingElement implements GeneralBadge
    * @required false
    * @default false
    * @description 是否禁用鼠标事件，通常配合按钮使用时设置
+   * @description.en Whether to disable mouse events, usually set when used together with a Button
    */
   @property({
     type: Boolean,

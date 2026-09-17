@@ -22,6 +22,7 @@ export interface CostTimeElementProps {
  * @name presentational-bricks.cost-time
  * @docKind brick
  * @description 耗时展示构件，将毫秒级时间自动转换为人类可读的时间文本（如"15秒"、"1天"），支持直接传入耗时或通过起止时间自动计算
+ * @description.en A brick for displaying elapsed time; it automatically converts millisecond-level time into human-readable time text (such as "15 seconds" and "1 day") and supports passing the cost directly or calculating it automatically from the start and end times
  * @author lynette
  * @slots
  * @history
@@ -81,6 +82,7 @@ export class CostTimeElement
   /**
    * @required false
    * @description 消耗时间（毫秒级）
+   * @description.en Elapsed time (in milliseconds)
    * @group basic
    */
   @property({
@@ -91,6 +93,7 @@ export class CostTimeElement
   /**
    * @required false
    * @description 起始时间，与 endTime 配合使用，当未传入 cost 时自动计算耗时
+   * @description.en Start time, used together with endTime; the elapsed time is calculated automatically when cost is not passed
    * @group basic
    */
   @property({
@@ -101,6 +104,7 @@ export class CostTimeElement
   /**
    * @required false
    * @description 结束时间，与 startTime 配合使用，当未传入 cost 时自动计算耗时
+   * @description.en End time, used together with startTime; the elapsed time is calculated automatically when cost is not passed
    * @group basic
    */
   @property({
@@ -111,6 +115,7 @@ export class CostTimeElement
   /**
    * @required false
    * @description 时间单位文本的自定义样式，设置后将使用自定义渲染逻辑而非默认的 costTime 函数
+   * @description.en Custom style for the time unit text; once set, custom rendering logic is used instead of the default costTime function
    * @group ui
    */
   @property({
@@ -121,6 +126,7 @@ export class CostTimeElement
   /**
    * @required false
    * @description [已废弃]数据源
+   * @description.en [Deprecated] Data source
    * @deprecated
    * @group other
    */
@@ -132,6 +138,7 @@ export class CostTimeElement
   /**
    * @required false
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时对应字段
+   * @description.en [Deprecated] Field mapping, used together with dataSource to get the corresponding field at runtime
    * @deprecated
    * @group other
    */

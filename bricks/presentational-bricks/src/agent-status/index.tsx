@@ -29,6 +29,7 @@ export enum AgentStatusType {
  * @name presentational-bricks.agent-status
  * @docKind brick
  * @description 以标签的方式来展示 agent 状态
+ * @description.en Displays the agent status as a label
  * @author ice
  * @slots
  * @history
@@ -41,6 +42,7 @@ export class AgentStatusElement extends UpdatingElement implements AgentStatusEl
    * @required -️
    * @default -
    * @description （已废弃）数据源
+   * @description.en (Deprecated) Data source
    */
   @property({ attribute: false })
   dataSource: any;
@@ -50,6 +52,7 @@ export class AgentStatusElement extends UpdatingElement implements AgentStatusEl
    * @required -️
    * @default -
    * @description （已废弃）字段映射, 跟 dataSource 一起使用来获得运行时 value
+   * @description.en (Deprecated) Field mapping, used together with dataSource to get the value at runtime
    */
   @property({ attribute: false })
   fields: { value: string };
@@ -59,6 +62,7 @@ export class AgentStatusElement extends UpdatingElement implements AgentStatusEl
    * @required -️
    * @default -
    * @description agent 状态
+   * @description.en Agent status
    */
   @property()
   value: AgentStatusType;
