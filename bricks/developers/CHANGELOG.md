@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.371.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.371.1...@next-bricks/developers@1.371.2) (2026-09-17)
+
+
+### Bug Fixes
+
+* **developers:** 修正 collectSharedTypeList 的陈旧测试断言 ([fc6b2cd](https://github.com/easyops-cn/next-basics/commit/fc6b2cdbc2ccd0eea1f1ccdc47b6dd246cd1a8c6))
+* **developers:** 构件库文档支持双语渲染并补内置 story book 英文文档 ([9e891f3](https://github.com/easyops-cn/next-basics/commit/9e891f3498fb9eb0be90140437e72dce8105f3b8))
+
+
+
+
+
 ## [1.371.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.371.0...@next-bricks/developers@1.371.1) (2026-01-14)
 
 **Note:** Version bump only for package @next-bricks/developers
