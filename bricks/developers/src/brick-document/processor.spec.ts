@@ -16,8 +16,10 @@ describe("processor", () => {
         [
           {
             type: "CSSProperties",
-            description:
-              "`CSSProperties` 包含的样式属性可查看该 [文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference)，需注意文档中的属性需要转为小驼峰命名的方式，具体可 [查看](https://zh-hans.reactjs.org/docs/dom-elements.html#style)",
+            description: {
+              zh: "`CSSProperties` 包含的样式属性可查看该 [文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference)，需注意文档中的属性需要转为小驼峰命名的方式，具体可 [查看](https://zh-hans.reactjs.org/docs/dom-elements.html#style)",
+              en: "See this [document](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference) for the style properties that `CSSProperties` supports. Note that the properties listed there need to be converted to lower camel case, see [here](https://reactjs.org/docs/dom-elements.html#style) for details.",
+            },
           },
         ],
       ],
@@ -68,8 +70,10 @@ describe("processor", () => {
         [
           {
             type: "CSSProperties",
-            description:
-              "`CSSProperties` 包含的样式属性可查看该 [文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference)，需注意文档中的属性需要转为小驼峰命名的方式，具体可 [查看](https://zh-hans.reactjs.org/docs/dom-elements.html#style)",
+            description: {
+              zh: "`CSSProperties` 包含的样式属性可查看该 [文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference)，需注意文档中的属性需要转为小驼峰命名的方式，具体可 [查看](https://zh-hans.reactjs.org/docs/dom-elements.html#style)",
+              en: "See this [document](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference) for the style properties that `CSSProperties` supports. Note that the properties listed there need to be converted to lower camel case, see [here](https://reactjs.org/docs/dom-elements.html#style) for details.",
+            },
           },
           {
             type: "ButtonType",
