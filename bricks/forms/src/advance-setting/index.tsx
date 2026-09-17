@@ -10,21 +10,6 @@ import { FormItemElement } from "@next-libs/forms";
 import { AdvanceSetting } from "./AdvanceSetting";
 import style from "./style.shadow.less";
 
-/**
- * @id forms.advance-setting
- * @name forms.advance-setting
- * @docKind brick
- * @description
- * @author momo
- * @slots
- * content:内容插槽
- * @history
- * 1.87.0:新增构件 `forms.advance-setting`
- * @excludesInherit
- *  placeholder
- *  pattern
- * @memo
- */
 export interface AdvanceSettingElementProps {
   foldName?: string;
   show?: boolean;
@@ -34,6 +19,23 @@ export interface AdvanceSettingElementProps {
 }
 
 
+/**
+ * @id forms.advance-setting
+ * @name forms.advance-setting
+ * @docKind brick
+ * @description
+ * @author momo
+ * @slots
+ * content:内容插槽
+ * @slots.en
+ * content:Content slot
+ * @history
+ * 1.87.0:新增构件 `forms.advance-setting`
+ * @excludesInherit
+ *  placeholder
+ *  pattern
+ * @memo
+ */
 export class AdvanceSettingElement extends FormItemElement  implements AdvanceSettingElementProps {
   private _mountPoint: HTMLElement;
   private _shadowRoot: ShadowRoot;
@@ -43,6 +45,7 @@ export class AdvanceSettingElement extends FormItemElement  implements AdvanceSe
    * @required true
    * @default -
    * @description 折叠展示名称
+   * @description.en Display name of the collapse
    */
   @property({
     attribute: false,
@@ -54,6 +57,7 @@ export class AdvanceSettingElement extends FormItemElement  implements AdvanceSe
    * @required false
    * @default true
    * @description 是否分割线
+   * @description.en Whether to show a divider
    */
   @property({ attribute: false })
   showDivider = true;
@@ -63,6 +67,7 @@ export class AdvanceSettingElement extends FormItemElement  implements AdvanceSe
    * @required false
    * @default true
    * @description 是否显示折叠图标
+   * @description.en Whether to show the collapse icon
    */
   @property({ attribute: false })
   showFoldIcon = true;
@@ -72,6 +77,7 @@ export class AdvanceSettingElement extends FormItemElement  implements AdvanceSe
    * @required false
    * @default -
    * @description 是否展开
+   * @description.en Whether to expand
    */
   @property({
     type: Boolean,
@@ -83,6 +89,7 @@ export class AdvanceSettingElement extends FormItemElement  implements AdvanceSe
    * @required false
    * @default center
    * @description 分割线标题的位置
+   * @description.en Position of the divider title
    * @group advanced
    */
   @property({
@@ -95,6 +102,7 @@ export class AdvanceSettingElement extends FormItemElement  implements AdvanceSe
    * @required false
    * @default false
    * @description 是否虚线
+   * @description.en Whether the divider is dashed
    * @group advanced
    */
   @property({
@@ -107,6 +115,7 @@ export class AdvanceSettingElement extends FormItemElement  implements AdvanceSe
    * @required false
    * @default -
    * @description 折叠展示的样式编写
+   * @description.en Style of the collapse
    * @group advanced
    */
   @property({
@@ -117,6 +126,7 @@ export class AdvanceSettingElement extends FormItemElement  implements AdvanceSe
   /**
    * @detail {show: true}
    * @description 展开时发生事件
+   * @description.en Triggered when expanded
    */
   @event({ type: "advance.setting.expand" }) expandEvent: EventEmitter<
     Record<string, any>
@@ -124,6 +134,7 @@ export class AdvanceSettingElement extends FormItemElement  implements AdvanceSe
   /**
    * @detail {show: false}
    * @description 折叠时发生事件
+   * @description.en Triggered when collapsed
    */
   @event({ type: "advance.setting.collapse" }) collapseEvent: EventEmitter<
     Record<string, any>

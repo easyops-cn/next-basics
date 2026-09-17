@@ -10,17 +10,6 @@ import { FormItemElement } from "@next-libs/forms";
 import { GeneralAutoComplete } from "./GeneralAutoComplete";
 import { OptionType } from "../interfaces";
 
-/**
- * @id forms.general-auto-complete
- * @name forms.general-auto-complete
- * @docKind brick
- * @description 输入框自动完成功能
- * @author ice
- * @slots
- * @history
- * 1.36.0:新增构件 `forms.general-auto-complete`
- * @memo
- */
 export interface GeneralAutoCompleteElementProps {
   name?: string;
   value?: string;
@@ -34,12 +23,26 @@ export interface GeneralAutoCompleteElementProps {
 }
 
 
+/**
+ * @id forms.general-auto-complete
+ * @name forms.general-auto-complete
+ * @docKind brick
+ * @description 输入框自动完成功能
+ * @description.en Auto-complete feature for the input box
+ * @author ice
+ * @slots
+ * @history
+ * 1.36.0:新增构件 `forms.general-auto-complete`
+ * @memo
+ */
+
 export class GeneralAutoCompleteElement extends FormItemElement  implements GeneralAutoCompleteElementProps {
   /* =========================== Group: basic =========================== */
 
   /**
    * @required true
    * @description 字段名
+   * @description.en Field name
    * @group basic
    */
   @property({ attribute: false }) declare name: string;
@@ -47,6 +50,7 @@ export class GeneralAutoCompleteElement extends FormItemElement  implements Gene
   /**
    * @required false
    * @description 当前值
+   * @description.en Current value
    * @group basic
    */
   @property()
@@ -55,6 +59,7 @@ export class GeneralAutoCompleteElement extends FormItemElement  implements Gene
   /**
    * @required true
    * @description 补全选项列表
+   * @description.en List of auto-complete options
    * @group basic
    */
   @property({ attribute: false })
@@ -64,6 +69,7 @@ export class GeneralAutoCompleteElement extends FormItemElement  implements Gene
    * @default false
    * @required false
    * @description 搜索时是否根据caption过滤options
+   * @description.en Whether to filter options by caption when searching
    * @group advanced
    */
   @property({ type: Boolean })
@@ -72,6 +78,7 @@ export class GeneralAutoCompleteElement extends FormItemElement  implements Gene
   /**
    * @required false
    * @description 占位说明
+   * @description.en Placeholder
    * @group basic
    */
   @property({ attribute: false }) declare placeholder: string;
@@ -82,6 +89,7 @@ export class GeneralAutoCompleteElement extends FormItemElement  implements Gene
    * @group formLabel
    * @required false
    * @description 字段说明
+   * @description.en Field description
    */
   @property({ attribute: false }) declare label: string;
 
@@ -90,6 +98,7 @@ export class GeneralAutoCompleteElement extends FormItemElement  implements Gene
   /**
    * @required false
    * @description 是否必填项
+   * @description.en Whether it is required
    * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
@@ -97,6 +106,7 @@ export class GeneralAutoCompleteElement extends FormItemElement  implements Gene
   /**
    * @required false
    * @description 校验文本信息
+   * @description.en Validation message text
    * @group formValidation
    */
   @property({ attribute: false }) declare message: Record<string, string>;
@@ -106,6 +116,7 @@ export class GeneralAutoCompleteElement extends FormItemElement  implements Gene
   /**
    * @required false
    * @description 是否禁用
+   * @description.en Whether it is disabled
    * @group ui
    */
   @property({ attribute: false }) declare disabled: boolean;
@@ -115,6 +126,7 @@ export class GeneralAutoCompleteElement extends FormItemElement  implements Gene
   /**
    * @required false
    * @description 输入框样式
+   * @description.en Input box style
    * @group style
    */
   @property({
@@ -137,6 +149,7 @@ export class GeneralAutoCompleteElement extends FormItemElement  implements Gene
   }
   /**
    * @description 补全输入框变化时触发
+   * @description.en Triggered when the auto-complete input box changes
    */
   @event({ type: "general.auto-complete.change" })
   changeEvent: EventEmitter<string>;
@@ -148,6 +161,7 @@ export class GeneralAutoCompleteElement extends FormItemElement  implements Gene
 
   /**
    * @description 鼠标失去焦点时触发
+   * @description.en Triggered when the mouse loses focus
    */
   @event({ type: "general.auto-complete.blur" })
   blurEvent: EventEmitter<string>;

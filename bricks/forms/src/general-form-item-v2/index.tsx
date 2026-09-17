@@ -11,6 +11,11 @@ import { FormItemElement } from "@next-libs/forms";
 import { GeneralFormItem } from "../general-form-item/GeneralFormItem";
 import { ControlBrickConfig } from "../interfaces";
 
+export interface GeneralFormItemV2ElementProps {
+  value?: unknown;
+}
+
+
 /**
  * @id forms.general-form-item-v2
  * @name forms.general-form-item-v2
@@ -23,27 +28,26 @@ import { ControlBrickConfig } from "../interfaces";
  *  placeholder
  * @memo
  */
-export interface GeneralFormItemV2ElementProps {
-  value?: unknown;
-}
-
 
 export class GeneralFormItemV2Element extends FormItemElement  implements GeneralFormItemV2ElementProps {
   /**
    * @required false
    * @description 表单项的值
+   * @description.en Value of the form item
    * @group basicFormItem
    */
   @property({ attribute: false }) value: unknown;
 
   /**
    * @description 表单控件构件配置
+   * @description.en Brick configuration of the form control
    * @group basicFormItem
    */
   @property({ attribute: false }) controlBrick?: ControlBrickConfig;
 
   /**
    * @description 当表单项的值通过 `forms.general-form` 的 `setInitValue` 方法修改时的事件，`detail` 为修改后的值
+   * @description.en Event triggered when the value of the form item is modified through the `setInitValue` method of `forms.general-form`; `detail` is the modified value
    */
   @event({ type: "general-form-item-v2.change" })
   changeEvent: EventEmitter<unknown>;

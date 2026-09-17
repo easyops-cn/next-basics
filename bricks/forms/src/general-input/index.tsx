@@ -9,22 +9,6 @@ import {
 import { GeneralInput, widthSize } from "./GeneralInput";
 import { FormItemElement } from "@next-libs/forms";
 
-/**
- * @id forms.general-input
- * @name forms.general-input
- * @docKind brick
- * @description 通用输入框
- * @author steve
- * @slots
- * @history
- * 1.61.0:新增属性 `addonBefore`,`addonAfter`
- * @memo
- *>Tips: 对于 event.detail 为 Keyboard Event 时， 由于 react 对于合成事件的处理，打印出来的整个 Keyboard Event 相关属性都为 null, 但可通过单独查看某个属性来得到值（如示例所示），相关详情信息可查看 [查看 react 合成事件](https://zh-hans.reactjs.org/docs/events.html#event-pooling)。
- *### METHODS
- *| name           | params | description            |
- *| -------------- | ------ | ---------------------- |
- *| getFormElement | -      | 获得输入框所属表单元素 |
- */
 export interface GeneralInputElementProps {
   name?: string;
   value?: string;
@@ -48,6 +32,30 @@ export interface GeneralInputElementProps {
 }
 
 
+/**
+ * @id forms.general-input
+ * @name forms.general-input
+ * @docKind brick
+ * @description 通用输入框
+ * @description.en General input
+ * @author steve
+ * @slots
+ * @history
+ * 1.61.0:新增属性 `addonBefore`,`addonAfter`
+ * @memo
+ *>Tips: 对于 event.detail 为 Keyboard Event 时， 由于 react 对于合成事件的处理，打印出来的整个 Keyboard Event 相关属性都为 null, 但可通过单独查看某个属性来得到值（如示例所示），相关详情信息可查看 [查看 react 合成事件](https://zh-hans.reactjs.org/docs/events.html#event-pooling)。
+ *### METHODS
+ *| name           | params | description            |
+ *| -------------- | ------ | ---------------------- |
+ *| getFormElement | -      | 获得输入框所属表单元素 |
+ * @memo.en
+ *>Tips: When event.detail is a Keyboard Event, because of how React handles synthetic events, all the printed properties related to the Keyboard Event are null, but the value can be obtained by viewing an individual property (as shown in the example). For details, see [React SyntheticEvent](https://zh-hans.reactjs.org/docs/events.html#event-pooling).
+ *### METHODS
+ *| name           | params | description            |
+ *| -------------- | ------ | ---------------------- |
+ *| getFormElement | -      | Gets the form element the input belongs to |
+ */
+
 export class GeneralInputElement extends FormItemElement  implements GeneralInputElementProps {
   /* =========================== Group: basic =========================== */
 
@@ -56,6 +64,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 输入框 name 值, 即唯一 id
+   * @description.en Name value of the input, i.e. the unique id
    * @group basic
    */
   @property({ attribute: false }) declare name: string;
@@ -65,6 +74,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 初始值
+   * @description.en Initial value
    * @group basic
    */
   @property()
@@ -75,6 +85,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 占位符
+   * @description.en Placeholder
    * @group basic
    */
   @property({ attribute: false }) declare placeholder: string;
@@ -86,6 +97,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 标签文字
+   * @description.en Label text
    * @group formLabel
    */
   @property({ attribute: false }) declare label: string;
@@ -97,6 +109,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 是否必填项
+   * @description.en Whether the form item is required
    * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
@@ -106,6 +119,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 校验文本信息
+   * @description.en Validation text message
    * @editor message
    * @group formValidation
    */
@@ -116,6 +130,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 最小长度
+   * @description.en Minimum length
    * @deprecated
    * @group formValidation
    */
@@ -129,6 +144,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 最大长度
+   * @description.en Maximum length
    * @deprecated
    * @group formValidation
    */
@@ -142,6 +158,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 最小长度
+   * @description.en Minimum length
    * @deprecated
    * @group formValidation
    */
@@ -155,6 +172,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 限制输入的最大长度
+   * @description.en Maximum length of the input
    * @group formValidation
    */
   @property({
@@ -169,6 +187,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 是否禁用
+   * @description.en Whether it is disabled
    * @group ui
    */
   @property({ attribute: false })
@@ -179,6 +198,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 是否只读
+   * @description.en Whether it is read-only
    * @group ui
    */
   @property({ type: Boolean })
@@ -189,6 +209,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default text
    * @description 输入框类型, 可输入 text / password 或者其他
+   * @description.en Input type; text / password or others can be entered
    * @editor radio
    * @editorProps {
    *   "optionType": "button",
@@ -222,6 +243,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 宽度调整 有XS/S/M/L/XL五种值
+   * @description.en Width adjustment, with five values: XS/S/M/L/XL
    * @editor radio
    * @editorProps {
    *   "optionType": "button",
@@ -260,6 +282,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default
    * @description 前置标签
+   * @description.en Prefix label
    * @group ui
    */
   @property()
@@ -270,6 +293,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default
    * @description 后置标签
+   * @description.en Suffix label
    * @group ui
    */
   @property()
@@ -280,6 +304,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 显示复制按钮
+   * @description.en Show the copy button
    * @group ui
    */
   @property({ type: Boolean })
@@ -287,6 +312,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
 
   /**
    * @description 可以点击清除图标删除内容
+   * @description.en The content can be deleted by clicking the clear icon
    * @group ui
    */
   @property({
@@ -301,6 +327,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default
    * @description 输入框样式
+   * @description.en Input style
    * @group style
    */
   @property({
@@ -313,6 +340,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @required false
    * @default -
    * @description 结合popover构件，当此构件为popoverBrick的内部构件时，popover构件会透穿 visible 属性,便于聚焦当前input框
+   * @description.en Used together with the popover brick; when this brick is an inner brick of popoverBrick, the popover brick passes through the visible property, making it easier to focus the current input
    */
   @property({ attribute: false })
   useBrickVisible: boolean;
@@ -322,6 +350,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
   /**
    * @detail string
    * @description 输入改变，`event.detail` 是当前值
+   * @description.en Input changed; `event.detail` is the current value
    */
   @event({ type: "general.input.change" }) changeEvent: EventEmitter<string>;
   private _handleChange = (value: string): void => {
@@ -334,6 +363,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
   /**
    * @detail object
    * @description 按下键盘键触发，`event.detail` 为 [Keyboard Event](https://zh-hans.reactjs.org/docs/events.html#keyboard-events)
+   * @description.en Triggered when a keyboard key is pressed; `event.detail` is a [Keyboard Event](https://zh-hans.reactjs.org/docs/events.html#keyboard-events)
    */
   @event({ type: "general.input.keydown" }) keydownEvent: EventEmitter<
     Record<string, any>
@@ -345,6 +375,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
   /**
    * @detail object
    * @description 释放键盘键触发，`event.detail` 为 [Keyboard Event](https://zh-hans.reactjs.org/docs/events.html#keyboard-events)
+   * @description.en Triggered when a keyboard key is released; `event.detail` is a [Keyboard Event](https://zh-hans.reactjs.org/docs/events.html#keyboard-events)
    */
   @event({ type: "general.input.keyup" }) keyupEvent: EventEmitter<
     Record<string, any>
@@ -356,6 +387,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
   /**
    * @detail null
    * @description 	获得焦点时触发
+   * @description.en Triggered when focused
    */
   @event({ type: "general.input.focus" }) focusEvent: EventEmitter;
   private _handleFocus = (): void => {
@@ -364,6 +396,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
   /**
    * @detail string
    * @description 失焦时触发, 而且会传出当前输入框当前值
+   * @description.en Triggered on blur; the current value of the input is also emitted
    */
   @event({ type: "general.input.blur" }) blurEvent: EventEmitter<string>;
 
@@ -374,6 +407,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
   /**
    * @detail object
    * @description 按下enter键触发，`event.detail` 为 [Keyboard Event](https://zh-hans.reactjs.org/docs/events.html#keyboard-events)
+   * @description.en Triggered when the enter key is pressed; `event.detail` is a [Keyboard Event](https://zh-hans.reactjs.org/docs/events.html#keyboard-events)
    */
   @event({ type: "general.input.press.enter" }) enterPressEvent: EventEmitter<
     Record<string, any>

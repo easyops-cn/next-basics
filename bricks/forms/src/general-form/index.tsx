@@ -23,20 +23,6 @@ import { FormAlignment } from "../interfaces";
 import { parseFormValues } from "./parseFormValues";
 
 export const LAYOUT_ENUMS = ["horizontal", "vertical", "inline"];
-/**
- * @id forms.general-form
- * @name forms.general-form
- * @docKind brick
- * @description
- * @author steve
- * @slots
- * items:表单项插槽
- * @history
- * 1.58.0  新增 `name` 属性
- * 1.63.0   新增 `resetFields` 方法
- * @memo
- * @noInheritDoc
- */
 export interface GeneralFormElementProps {
   values?: Record<string, any>;
   staticValues?: Record<string, any>;
@@ -52,6 +38,23 @@ export interface GeneralFormElementProps {
   formStyle?: React.CSSProperties;
 }
 
+/**
+ * @id forms.general-form
+ * @name forms.general-form
+ * @docKind brick
+ * @description
+ * @author steve
+ * @slots
+ * items:表单项插槽
+ * @slots.en
+ * items: Form item slot
+ * @history
+ * 1.58.0  新增 `name` 属性
+ * 1.63.0   新增 `resetFields` 方法
+ * @memo
+ * @noInheritDoc
+ */
+
 export class GeneralFormElement
   extends UpdatingElement implements  GeneralFormElementProps
 {
@@ -63,6 +66,7 @@ export class GeneralFormElement
   /**
    * @required false
    * @description 表单的初始值。当 `values` 有嵌套的层级时，需要按表单项的 `name` 平铺。如有源数据为 `{a: {b: 123}}` ，存在表单项的 `name` 为 `a.b`，要正确给该表单项赋值为 123， 那么 `values` 应该为 `{"a.b": 123}`
+   * @description.en Initial values of the Form. When `values` has nested levels, it needs to be flattened by the `name` of the form item. If the source data is `{a: {b: 123}}` and there is a form item whose `name` is `a.b`, to correctly assign 123 to that form item, `values` should be `{"a.b": 123}`
    * @group basic
    */
   @property({
@@ -85,6 +89,7 @@ export class GeneralFormElement
 
   /**
    * @description 静态值（在 `validate.success` 中将和表单值合并作为事件详情传递出去）
+   * @description.en Static values (merged with the Form values in `validate.success` and passed out as the Event detail)
    * @group basic
    */
   @property({
@@ -94,6 +99,7 @@ export class GeneralFormElement
 
   /**
    * @description 设置表单域内字段 id 的前缀
+   * @description.en Sets the prefix of the field id within the Form
    * @required false
    * @group basic
    */
@@ -105,6 +111,7 @@ export class GeneralFormElement
    * @required false
    * @default horizontal
    * @description 表单布局
+   * @description.en Form layout
    * @enums 'horizontal'|'vertical'|'inline'
    * @group ui
    */
@@ -132,6 +139,7 @@ export class GeneralFormElement
    * @required false
    * @default -
    * @description 标签对齐方式
+   * @description.en Label alignment
    * @editor radio
    * @editorProps {
    *   "optionType": "button",
@@ -161,6 +169,7 @@ export class GeneralFormElement
 
   /**
    * @description 标签列布局样式（仅当 `layout="horizontal"` 时有效）
+   * @description.en Label column layout style (only valid when `layout="horizontal"`)
    * @required false
    * @group ui
    */
@@ -187,6 +196,7 @@ export class GeneralFormElement
 
   /**
    * @description 输入控件列布局样式（仅当 `layout="horizontal"` 时有效）
+   * @description.en Input control column layout style (only valid when `layout="horizontal"`)
    * @required false
    * @group ui
    */
@@ -215,6 +225,7 @@ export class GeneralFormElement
   formUtils: WrappedFormUtils;
   /**
    * @description 对 `values` 属性的数据进行格式化，提供了表单提交后格式化表单项数据的功能。目前仅支持时间相关的表单项数据的格式化（因为时间相关的表单项构件提交后的数据为 moment 对象，需要根据不同场景格式化数据后才提交给后台），`{time: moment|YYYY-MM-DD}` 表示该字段为 moment 类型，数据提交后格式化为 `YYYY-MM-DD` 字符串的形式，详情如 `普通表单 demo` 所示
+   * @description.en Formats the data of the `values` property, providing the ability to format form item data after Form submission. Currently only formatting of time-related form item data is supported (because the data submitted by time-related form item bricks is a moment object, which needs to be formatted according to different scenarios before being submitted to the backend); `{time: moment|YYYY-MM-DD}` indicates that the field is of moment type, and after submission the data is formatted as a `YYYY-MM-DD` string, as shown in `普通表单 demo`
    * @group basic
    */
   @property({
@@ -226,6 +237,7 @@ export class GeneralFormElement
 
   /**
    * @description 是否不显示冒号
+   * @description.en Whether to hide the colon
    * @default false
    * @required false
    * @group ui
@@ -237,6 +249,7 @@ export class GeneralFormElement
 
   /**
    * @description 是否限制表单的最大宽度
+   * @description.en Whether to limit the maximum width of the Form
    * @group ui
    */
   @property({ type: Boolean })
@@ -244,6 +257,7 @@ export class GeneralFormElement
 
   /**
    * @description 表单达到最大宽度后的对齐方式
+   * @description.en Alignment after the Form reaches its maximum width
    * @group ui
    */
   @property({ attribute: false })
@@ -251,6 +265,7 @@ export class GeneralFormElement
 
   /**
    * @description 表单样式
+   * @description.en Form style
    * @group ui
    */
   @property({ attribute: false })
@@ -416,6 +431,7 @@ export class GeneralFormElement
 
   /**
    * @description 表单设置初始值
+   * @description.en Set initial values for the Form
    */
   @method()
   setInitValue(
@@ -443,6 +459,7 @@ export class GeneralFormElement
   /**
    *
    * @description 重置表单项的值，传入的是每个表单项的 `name`, 如果需要重置所有表单项传递 `null` 即可
+   * @description.en Resets the values of form items; the `name` of each form item is passed in, or pass `null` to reset all form items
    */
   @method()
   resetFields(names?: string[]): void {
@@ -485,6 +502,7 @@ export class GeneralFormElement
   }
   /**
    * @description 	验证表单
+   * @description.en Validate the Form
    */
   @method() validate(
     fieldsOrEvent?: string[] | Event,
@@ -507,6 +525,7 @@ export class GeneralFormElement
   }
   /**
    * @description 	校验用户修改过的指定表单项
+   * @description.en Validate the specified form items modified by the user
    */
   @method() validateTouchedField(
     field: string,
@@ -534,6 +553,7 @@ export class GeneralFormElement
 
   /**
    * @description 获取表单值
+   * @description.en Get Form values
    */
   @method() getFieldsValue(options?: {
     runInMicrotask?: boolean;
@@ -551,12 +571,14 @@ export class GeneralFormElement
   }
   /**
    * @description 表单验证成功时触发
+   * @description.en Triggered when Form validation succeeds
    */
   @event({ type: "validate.success" }) successEvent: EventEmitter<
     Record<string, any>
   >;
   /**
    * @description 表单验证报错时触发
+   * @description.en Triggered when Form validation fails
    */
   @event({ type: "validate.error" }) errorEvent: EventEmitter<
     Record<string, any>
@@ -564,6 +586,7 @@ export class GeneralFormElement
 
   /**
    * @description 表单项有修改时触发
+   * @description.en Triggered when a form item is modified
    */
   @event({ type: "values.change" }) valuesChangeEvent: EventEmitter<
     Record<string, any>

@@ -19,11 +19,23 @@ const BUTTON_TYPES = [
   "link",
 ];
 
+export interface GeneralButtonsElementProps {
+  submitText?: string;
+  showCancelButton?: boolean;
+  cancelText?: string;
+  disableAfterClick?: boolean;
+  loading?: boolean;
+  submitDisabled?: boolean;
+  submitTooltip?: string;
+}
+
+
 /**
  * @id forms.general-buttons
  * @name forms.general-buttons
  * @docKind brick
  * @description 用于general-forms的通用按钮，可以配置submit按钮和cancel按钮
+ * @description.en General buttons for general-forms, where the submit button and the cancel button can be configured
  * @author lynette
  * @slots
  * @history
@@ -43,16 +55,6 @@ const BUTTON_TYPES = [
  *  trim
  * @memo
  */
-export interface GeneralButtonsElementProps {
-  submitText?: string;
-  showCancelButton?: boolean;
-  cancelText?: string;
-  disableAfterClick?: boolean;
-  loading?: boolean;
-  submitDisabled?: boolean;
-  submitTooltip?: string;
-}
-
 
 export class GeneralButtonsElement extends FormItemElement  implements GeneralButtonsElementProps {
   /**
@@ -60,6 +62,7 @@ export class GeneralButtonsElement extends FormItemElement  implements GeneralBu
    * @required false
    * @default -
    * @description 提交按钮的文字，不设置则不显示提交按钮
+   * @description.en Text of the submit button; if it is not set, the submit button is not displayed
    * @group basic
    */
   @property()
@@ -70,6 +73,7 @@ export class GeneralButtonsElement extends FormItemElement  implements GeneralBu
    * @required false
    * @default `false`
    * @description 显示取消按钮
+   * @description.en Display the cancel button
    * @group basic
    */
   @property({
@@ -82,6 +86,7 @@ export class GeneralButtonsElement extends FormItemElement  implements GeneralBu
    * @required false
    * @default -
    * @description 取消按钮的文字，不设置则不显示取消按钮
+   * @description.en Text of the cancel button; if it is not set, the cancel button is not displayed
    * @group basic
    */
   @property()
@@ -92,6 +97,7 @@ export class GeneralButtonsElement extends FormItemElement  implements GeneralBu
    * @required false
    * @default `false`
    * @description 点击确定按钮后自动禁用
+   * @description.en Automatically disabled after clicking the confirm button
    * @group advanced
    */
   @property({ type: Boolean })
@@ -99,6 +105,7 @@ export class GeneralButtonsElement extends FormItemElement  implements GeneralBu
   /**
    * @detail -
    * @description 点击提交按钮触发的事件，tips:点击提交按钮会先自动触发表单的 validate 方法，参考[通用表单](developers/brick-book/brick/forms.general-form)
+   * @description.en Event triggered by clicking the submit button. tips: clicking the submit button automatically triggers the validate method of the Form first, see [General Form](developers/brick-book/brick/forms.general-form)
    */
 
   /**
@@ -106,6 +113,7 @@ export class GeneralButtonsElement extends FormItemElement  implements GeneralBu
    * @required false
    * @default `false`
    * @description 按钮加载动画
+   * @description.en Button loading animation
    * @group advanced
    */
   @property({
@@ -118,6 +126,7 @@ export class GeneralButtonsElement extends FormItemElement  implements GeneralBu
    * @required false
    * @default `false`
    * @description 禁用提交按钮
+   * @description.en Disable the submit button
    * @group advanced
    */
   @property({
@@ -130,6 +139,7 @@ export class GeneralButtonsElement extends FormItemElement  implements GeneralBu
    * @required false
    * @default -
    * @description 提交按钮文字提示
+   * @description.en Tooltip text of the submit button
    * @group advanced
    */
   @property()
@@ -140,6 +150,7 @@ export class GeneralButtonsElement extends FormItemElement  implements GeneralBu
    * @required -
    * @default `"primary"`
    * @description 提交按钮的类型
+   * @description.en Type of the submit button
    * @enums "default"|"primary"|"ghost"|"dashed"|"danger"|"link"
    * @group basic
    */
@@ -165,6 +176,7 @@ export class GeneralButtonsElement extends FormItemElement  implements GeneralBu
    * @kind `"default" | "primary" | "ghost" | "dashed" | "danger" | "link"`
    * @default `"link"`
    * @description 取消按钮的类型
+   * @description.en Type of the cancel button
    * @enums "default"|"primary"|"ghost"|"dashed"|"danger"|"link"
    * @group advanced
    */
@@ -188,6 +200,7 @@ export class GeneralButtonsElement extends FormItemElement  implements GeneralBu
 
   /**
    * @description 点击提交按钮触发的事件
+   * @description.en Event triggered by clicking the submit button
    * @detail -
    */
   @event({ type: "submit.button.click" }) submitEvent: EventEmitter;
@@ -202,6 +215,7 @@ export class GeneralButtonsElement extends FormItemElement  implements GeneralBu
   };
   /**
    * @description 点击取消按钮触发的事件
+   * @description.en Event triggered by clicking the cancel button
    * @detail -
    */
   @event({ type: "cancel.button.click" }) cancelEvent: EventEmitter;

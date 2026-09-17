@@ -14,7 +14,7 @@ export const story: Story = {
     zh: "普通表单",
   },
   description: {
-    en: "",
+    en: "General form container",
     zh: "通用表单容器",
   },
   icon: {

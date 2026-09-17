@@ -9,20 +9,6 @@ import {
 import { FormItemElement } from "@next-libs/forms";
 import { CrontabInput, CrontabType } from "./CrontabInput";
 
-/**
- * @id forms.crontab-input
- * @name forms.crontab-input
- * @docKind brick
- * @description 定时器任务表单项
- * @author jo
- * @slots
- * @history
- * 1.28.0:新增 `crontab.change` 事件
- * @excludesInherit
- *  placeholder
- *  pattern
- * @memo
- */
 export interface CrontabInputElementProps {
   name?: string;
   value?: string;
@@ -32,6 +18,22 @@ export interface CrontabInputElementProps {
 }
 
 
+/**
+ * @id forms.crontab-input
+ * @name forms.crontab-input
+ * @docKind brick
+ * @description 定时器任务表单项
+ * @description.en Crontab task form item
+ * @author jo
+ * @slots
+ * @history
+ * 1.28.0:新增 `crontab.change` 事件
+ * @excludesInherit
+ *  placeholder
+ *  pattern
+ * @memo
+ */
+
 export class CrontabInputElement extends FormItemElement  implements CrontabInputElementProps {
   /* =========================== Group: basic =========================== */
 
@@ -40,6 +42,7 @@ export class CrontabInputElement extends FormItemElement  implements CrontabInpu
    * @required true
    * @default -
    * @description 定时器字段名
+   * @description.en Field name of the crontab
    * @group basic
    */
   @property()
@@ -51,6 +54,7 @@ export class CrontabInputElement extends FormItemElement  implements CrontabInpu
    * @default * * * * *(每分钟)
    * @group basic
    * @description 定时器时间，格式为以空格为分隔的五位字符, 按顺序分别代表分钟，小时，天，月，星期。
+   * @description.en Crontab time, in the format of five space-separated characters that in order represent the minute, hour, day, month and day of week.
    */
   @property()
   value: string;
@@ -63,6 +67,7 @@ export class CrontabInputElement extends FormItemElement  implements CrontabInpu
    * @default -
    * @group formLabel
    * @description 定时器字段说明
+   * @description.en Field description of the crontab
    */
   @property({ attribute: false }) declare label: string;
 
@@ -73,6 +78,7 @@ export class CrontabInputElement extends FormItemElement  implements CrontabInpu
    * @required false
    * @default -
    * @description 是否必填项
+   * @description.en Whether it is required
    * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
@@ -85,6 +91,7 @@ export class CrontabInputElement extends FormItemElement  implements CrontabInpu
    * @default []
    * @group ui
    * @description 需要disabled的的输入框 "minute" | "hour" | "date" | "month" | "dow"
+   * @description.en Input boxes that need to be disabled: "minute" | "hour" | "date" | "month" | "dow"
    */
   @property({ attribute: false })
   disabledSet: CrontabType[] = [];
@@ -105,6 +112,7 @@ export class CrontabInputElement extends FormItemElement  implements CrontabInpu
   /**
    * @detail `string`
    * @description 定时器输入变化时触发，`event.detail` 为当前定时器选择的值
+   * @description.en Triggered when the crontab input changes; `event.detail` is the value currently selected in the crontab
    */
   @event({ type: "crontab.change" }) changeEvent: EventEmitter<string>;
   private _handleChange = (value: string): void => {

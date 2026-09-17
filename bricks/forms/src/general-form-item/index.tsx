@@ -14,6 +14,11 @@ import { ControlBrickConfig } from "../interfaces";
 
 import styles from "./index.shadow.less";
 
+export interface GeneralFormItemElementProps {
+  value?: unknown;
+}
+
+
 /**
  * @id forms.general-form-item
  * @name forms.general-form-item
@@ -22,6 +27,8 @@ import styles from "./index.shadow.less";
  * @author william
  * @slots
  * control:表单控件位置的插槽
+ * @slots.en
+ * control:Slot for the form control position
  * @history
  * 1.49.0:新增构件 `forms.general-form-item`
  * 1.53.0:新增 `control` 插槽，废弃 `control` 属性
@@ -29,21 +36,19 @@ import styles from "./index.shadow.less";
  *  placeholder
  * @memo
  */
-export interface GeneralFormItemElementProps {
-  value?: unknown;
-}
-
 
 export class GeneralFormItemElement extends FormItemElement  implements GeneralFormItemElementProps {
   /**
    * @required false
    * @description 表单项的值
+   * @description.en Value of the form item
    * @group basicFormItem
    */
   @property({ attribute: false }) value: unknown;
 
   /**
    * @description 表单控件配置（已废弃，请使用 control 插槽）
+   * @description.en Form control configuration (deprecated, please use the control slot)
    * @deprecated
    * @group basicFormItem
    */
@@ -85,6 +90,7 @@ export class GeneralFormItemElement extends FormItemElement  implements GeneralF
   }
   /**
    * @description 当表单项的值通过 `forms.general-form` 的 `setInitValue` 方法修改时的事件，`detail` 为修改后的值
+   * @description.en Event triggered when the value of the form item is modified through the `setInitValue` method of `forms.general-form`; `detail` is the modified value
    */
   @event({ type: "general-form-item.change" })
   changeEvent: EventEmitter<unknown>;

@@ -18,21 +18,6 @@ declare type SrcIcon = {
   imgStyle?: React.CSSProperties;
 };
 
-/**
- * @id forms.form-modal
- * @name forms.form-modal
- * @editor basic-bricks.general-modal--editor
- * @docKind brick
- * @description 表单模态框。要作为表单项，请使用 forms.general-form。
- * @author
- * @slots
- * @history
- * 1.94.0:新增构件 `forms.form-modal`
- * 1.95.0:新增属性 `dataSource`
- * 1.98.0:新增属性 `form`、`items`
- * @memo
- * @noInheritDoc
- */
 export interface FormModalElementProps {
   modalTitle?: string;
   items?: { useBrick: UseSingleBrickConf[] };
@@ -56,12 +41,30 @@ export interface FormModalElementProps {
 }
 
 
+/**
+ * @id forms.form-modal
+ * @name forms.form-modal
+ * @editor basic-bricks.general-modal--editor
+ * @docKind brick
+ * @description 表单模态框。要作为表单项，请使用 forms.general-form。
+ * @description.en Form modal. To use it as a form item, use forms.general-form.
+ * @author
+ * @slots
+ * @history
+ * 1.94.0:新增构件 `forms.form-modal`
+ * 1.95.0:新增属性 `dataSource`
+ * 1.98.0:新增属性 `form`、`items`
+ * @memo
+ * @noInheritDoc
+ */
+
 export class FormModalElement extends UpdatingElement  implements FormModalElementProps {
   /**
    * @kind string
    * @required false
    * @default -
    * @description 模态框标题
+   * @description.en Modal title
    */
   @property() modalTitle: string;
 
@@ -70,6 +73,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default -
    * @description 表单构件的 items 插槽的构件配置
+   * @description.en Brick configuration of the items slot of the form brick
    */
   @property({ attribute: false }) items: { useBrick: UseSingleBrickConf[] };
 
@@ -78,6 +82,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default -
    * @description 标题图标
+   * @description.en Title icon
    * @group basic
    */
   @property({ attribute: false }) titleIcon?: MenuIcon | SrcIcon;
@@ -87,6 +92,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default `{ useBrick: { brick: "forms.general-form", properties: { layout: "vertical" } } }`
    * @description 表单构件配置
+   * @description.en Form brick configuration
    */
   @property({ attribute: false }) form: {
     useBrick: Omit<UseSingleBrickConf, "brick">;
@@ -97,6 +103,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default -
    * @description 用于 `formBrick` 和 `itemBricks` 的 `transform` 的 `DATA` 上下文
+   * @description.en `DATA` context used for the `transform` of `formBrick` and `itemBricks`
    */
   @property({ attribute: false }) dataSource: any;
 
@@ -105,6 +112,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default `520`
    * @description 模态框宽度
+   * @description.en Modal width
    */
   @property({ attribute: false }) width: string | number;
 
@@ -113,6 +121,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default -
    * @description 确定按钮 loading
+   * @description.en OK button loading
    */
   @property({ type: Boolean }) confirmLoading: boolean;
 
@@ -121,6 +130,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default `true`
    * @description 是否显示右上角的关闭按钮
+   * @description.en Whether to show the close button in the upper right corner
    */
   @property({ attribute: false }) closable = true;
 
@@ -129,6 +139,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default `false`
    * @description 垂直居中展示模态框
+   * @description.en Display the modal vertically centered
    * @group advanced
    */
   @property({ type: Boolean }) centered: boolean;
@@ -138,6 +149,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default `"确定"`
    * @description 确认按钮文字
+   * @description.en OK button text
    * @group advanced
    */
   @property({ attribute: false }) okText: string;
@@ -147,6 +159,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default `"primary"`
    * @description 确认按钮类型
+   * @description.en OK button type
    * @group advanced
    */
   @property({ attribute: false }) okType: ButtonType;
@@ -156,6 +169,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default `"取消"`
    * @description 取消按钮文字
+   * @description.en Cancel button text
    * @group advanced
    */
   @property({ attribute: false }) cancelText: string;
@@ -165,6 +179,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default `true`
    * @description 点击蒙层是否允许关闭
+   * @description.en Whether clicking the mask is allowed to close the modal
    * @group advanced
    */
   @property({ type: Boolean }) maskClosable: boolean;
@@ -174,6 +189,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default `false`
    * @description 强制渲染模态框
+   * @description.en Force rendering of the modal
    * @group advanced
    */
   @property({ type: Boolean }) forceRender: boolean;
@@ -183,6 +199,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default -
    * @description 确认按钮 props，详细属性参见 <https://3x.ant.design/components/button-cn/>
+   * @description.en OK button props; for detailed properties, see <https://3x.ant.design/components/button-cn/>
    * @group advanced
    */
   @property({ attribute: false }) okButtonProps: ButtonProps;
@@ -192,6 +209,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default -
    * @description 取消按钮 props，详细属性参见 <https://3x.ant.design/components/button-cn/>
+   * @description.en Cancel button props; for detailed properties, see <https://3x.ant.design/components/button-cn/>
    * @group advanced
    */
   @property({ attribute: false }) cancelButtonProps: ButtonProps;
@@ -201,6 +219,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default `false`
    * @description 关闭时销毁模态框里的子元素
+   * @description.en Destroy the child elements in the modal when it is closed
    * @group advanced
    */
   @property({ type: Boolean }) destroyOnClose: boolean;
@@ -210,6 +229,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default true
    * @description 是否展示遮罩
+   * @description.en Whether to display the mask
    * @group advanced
    */
   @property({ attribute: false }) mask = true;
@@ -219,6 +239,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default -
    * @description [已废弃]表单构件的 items 插槽的构件配置，请使用 `items` 属性
+   * @description.en [Deprecated] Brick configuration of the items slot of the form brick; use the `items` property instead
    * @group advanced
    */
   @property({ attribute: false }) itemBricks: UseSingleBrickConf[]; // Deprecated
@@ -228,6 +249,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
    * @required false
    * @default `useBrick: { brick: "forms.general-form" { properties: { layout: "vertical" } } }`
    * @description [已废弃]表单构件配置，请使用 `form` 属性
+   * @description.en [Deprecated] Form brick configuration; use the `form` property instead
    * @group advanced
    */
   @property({ attribute: false }) formBrick: Omit<UseSingleBrickConf, "brick">; // Deprecated
@@ -248,10 +270,12 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
   }
   /**
    * @description 模态框打开
+   * @description.en Modal opened
    */
   @event({ type: "formModal.open" }) openEvent: EventEmitter;
   /**
    * @description 打开模态框
+   * @description.en Open the modal
    */
   @method() open(): void {
     this._visible = true;
@@ -267,10 +291,12 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
   }
   /**
    * @description 模态框关闭
+   * @description.en Modal closed
    */
   @event({ type: "formModal.close" }) closeEvent: EventEmitter;
   /**
    * @description 关闭模态框
+   * @description.en Close the modal
    */
   @method() close(): void {
     this._visible = false;
@@ -286,6 +312,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
   }
   /**
    * @description 模态框确定，默认自动关闭模态框，可以通过 `action: 'preventDefault'` 阻止
+   * @description.en Modal confirmed; the modal is closed automatically by default and can be prevented via `action: 'preventDefault'`
    */
   @event({ type: "formModal.ok", cancelable: true }) okEvent: EventEmitter;
   private _handleOk = (): void => {
@@ -304,6 +331,7 @@ export class FormModalElement extends UpdatingElement  implements FormModalEleme
   };
   /**
    * @description 模态框取消，默认自动关闭模态框，可以通过 `action: 'preventDefault'` 阻止
+   * @description.en Modal cancelled; the modal is closed automatically by default and can be prevented via `action: 'preventDefault'`
    */
   @event({ type: "formModal.cancel", cancelable: true })
   cancelEvent: EventEmitter;

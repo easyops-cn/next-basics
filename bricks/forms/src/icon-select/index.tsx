@@ -14,21 +14,6 @@ import { Colors } from "@next-libs/basic-components";
 
 export type Size = number | "large" | "small" | "default";
 
-/**
- * @id forms.icon-select
- * @name forms.icon-select
- * @docKind brick
- * @description 支持选择图标并且输出特定格式的数据
- * @author lynette
- * @slots
- * @history
- * 1.145.0:新增属性 `message`
- * 1.102.0:新增属性 `bg`,`setColor`，支持选择颜色
- * 1.67.0:新增构件 `forms.icon-select`
- * @excludesInherit
- *  pattern
- * @memo
- */
 export interface IconSelectElementProps {
   name?: string;
   label?: string;
@@ -40,11 +25,29 @@ export interface IconSelectElementProps {
 }
 
 
+/**
+ * @id forms.icon-select
+ * @name forms.icon-select
+ * @docKind brick
+ * @description 支持选择图标并且输出特定格式的数据
+ * @description.en Supports selecting icons and outputting data in a specific format
+ * @author lynette
+ * @slots
+ * @history
+ * 1.145.0:新增属性 `message`
+ * 1.102.0:新增属性 `bg`,`setColor`，支持选择颜色
+ * 1.67.0:新增构件 `forms.icon-select`
+ * @excludesInherit
+ *  pattern
+ * @memo
+ */
+
 export class IconSelectElement extends FormItemElement  implements IconSelectElementProps {
   /**
    * @group basicFormItem
    * @required true
    * @description 字段名
+   * @description.en Field name
    */
   @property({ attribute: false }) declare name: string;
 
@@ -52,6 +55,7 @@ export class IconSelectElement extends FormItemElement  implements IconSelectEle
    * @group basicFormItem
    * @required false
    * @description 字段说明
+   * @description.en Field description
    */
   @property({ attribute: false }) declare label: string;
 
@@ -59,6 +63,7 @@ export class IconSelectElement extends FormItemElement  implements IconSelectEle
    * @group basicFormItem
    * @required false
    * @description 值[MenuIcon]((http://docs.developers.easyops.cn/docs/brick-next/icon))
+   * @description.en Value [MenuIcon]((http://docs.developers.easyops.cn/docs/brick-next/icon))
    */
   @property({
     attribute: false,
@@ -69,6 +74,7 @@ export class IconSelectElement extends FormItemElement  implements IconSelectEle
    * @group basicFormItem
    * @required false
    * @description 是否禁用
+   * @description.en Whether it is disabled
    */
   @property({ type: Boolean })
   disabled: boolean;
@@ -77,6 +83,7 @@ export class IconSelectElement extends FormItemElement  implements IconSelectEle
    * @group basicFormItem
    * @required false
    * @description 是否必填项
+   * @description.en Whether it is required
    */
   @property({ type: Boolean }) declare required: boolean;
 
@@ -84,6 +91,7 @@ export class IconSelectElement extends FormItemElement  implements IconSelectEle
    * @group basicFormItem
    * @required false
    * @description 校验文本信息
+   * @description.en Validation message text
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
@@ -92,6 +100,7 @@ export class IconSelectElement extends FormItemElement  implements IconSelectEle
    * @required false
    * @default false
    * @description 是否可见
+   * @description.en Whether it is visible
    */
   @property({ type: Boolean })
   visible: boolean;
@@ -101,6 +110,7 @@ export class IconSelectElement extends FormItemElement  implements IconSelectEle
    * @required false
    * @default true
    * @description 是否显示背景。当 bg 为 false 时，选择颜色的输出为icon的字体颜色，数值为平台颜色变量，形如 `var(--theme-red-color)`。当 bg 为 true 时，选择颜色的输出为颜色描述字符串，形如 "green" | "red" | "blue" | "orange" | "cyan" | "purple" | "geekblue" | "gray"，可搭配 [card-item](developers/brick-book/brick/presentational-bricks.card-item) 等构件使用。
+   * @description.en Whether to display the background. When bg is false, the color selection output is the icon font color, and the value is a platform color variable, in the form of `var(--theme-red-color)`. When bg is true, the color selection output is a color description string, in the form of "green" | "red" | "blue" | "orange" | "cyan" | "purple" | "geekblue" | "gray", and can be used together with bricks such as [card-item](developers/brick-book/brick/presentational-bricks.card-item).
    */
   @property({ attribute: false })
   bg = true;
@@ -110,6 +120,7 @@ export class IconSelectElement extends FormItemElement  implements IconSelectEle
    * @required false
    * @default true
    * @description 是否支持设置颜色
+   * @description.en Whether setting the color is supported
    */
   @property({ attribute: false })
   setColor = true;
@@ -119,12 +130,14 @@ export class IconSelectElement extends FormItemElement  implements IconSelectEle
    * @required false
    * @editor color
    * @description 默认颜色
+   * @description.en Default color
    */
   @property({ attribute: false })
   defaultColor?: Colors;
 
   /**
    * @description 打开图标选择模态框
+   * @description.en Open the icon selection modal
    */
   @method()
   open(): void {
@@ -140,6 +153,7 @@ export class IconSelectElement extends FormItemElement  implements IconSelectEle
 
   /**
    * @description 关闭图标选择模态框
+   * @description.en Close the icon selection modal
    */
   @method()
   close(): void {
@@ -153,6 +167,7 @@ export class IconSelectElement extends FormItemElement  implements IconSelectEle
   /**
    * @detail [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
    * @description 	图标选择变化触发的事件
+   * @description.en The event triggered when icon selection changes
    */
   @event({ type: "icon.change" }) changeEvent: EventEmitter<
     Record<string, any>

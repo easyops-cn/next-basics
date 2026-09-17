@@ -13,20 +13,6 @@ import { CmdbModels } from "@next-sdk/cmdb-sdk";
 import { CmdbInstanceSelectPanelWrapper } from "./CmdbInstanceSelectPanelWrapper";
 import { FormItemElement } from "@next-libs/forms";
 
-/**
- * @id forms.cmdb-instance-select-panel
- * @name forms.cmdb-instance-select-panel
- * @docKind brick
- * @description 通过 instance-list-modal 选择 CMDB 实例
- * @author cyril
- * @slots
- * @history
- * 1.28.0:新增 `instance.select.change` 事件
- * @excludesInherit
- *  placeholder
- *  pattern
- * @memo
- */
 export interface CmdbInstanceSelectPanelElementProps {
   name?: string;
   value?: string[];
@@ -45,6 +31,22 @@ export interface CmdbInstanceSelectPanelElementProps {
 }
 
 
+/**
+ * @id forms.cmdb-instance-select-panel
+ * @name forms.cmdb-instance-select-panel
+ * @docKind brick
+ * @description 通过 instance-list-modal 选择 CMDB 实例
+ * @description.en Select CMDB instances via instance-list-modal
+ * @author cyril
+ * @slots
+ * @history
+ * 1.28.0:新增 `instance.select.change` 事件
+ * @excludesInherit
+ *  placeholder
+ *  pattern
+ * @memo
+ */
+
 export class CmdbInstanceSelectPanelElement extends FormItemElement  implements CmdbInstanceSelectPanelElementProps {
   /* =========================== Group: basic =========================== */
 
@@ -54,6 +56,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
    * @default -
    * @group basic
    * @description 下拉框字段名
+   * @description.en Field name of the dropdown
    */
   @property({ attribute: false }) declare name: string;
 
@@ -63,6 +66,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
    * @default []
    * @group basic
    * @description 默认选择实例的 ID 列表
+   * @description.en ID list of the instances selected by default
    */
   @property({ attribute: false })
   value: string[];
@@ -73,6 +77,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
    * @default -
    * @group basic
    * @description 模型 ID
+   * @description.en Model ID
    */
   @property({ attribute: false })
   objectId: string;
@@ -83,6 +88,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
    * @default -
    * @group basic
    * @description 模型列表
+   * @description.en Model list
    */
   @property({ attribute: false })
   objectList: Partial<CmdbModels.ModelCmdbObject>[];
@@ -95,6 +101,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
    * @default -
    * @group formLabel
    * @description 下拉框字段说明
+   * @description.en Field description of the dropdown
    */
   @property({ attribute: false }) declare label: string;
 
@@ -106,6 +113,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
    * @default 选择实例
    * @group ui
    * @description 添加实例按钮的文本
+   * @description.en Text of the add instance button
    */
   @property({ attribute: false })
   addButtonText: string;
@@ -116,6 +124,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
    * @default -
    * @group ui
    * @description 模型的属性 ID 数组，控制实例弹窗和已选表格的显示列
+   * @description.en Array of the attribute IDs of the model, controls the columns displayed in the instance modal and the selected table
    */
   @property({ attribute: false })
   fields: string[];
@@ -125,6 +134,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
    * @required false
    * @default false
    * @description 添加实例弹窗是否展示分页
+   * @description.en Whether pagination is shown in the add instance modal
    * @group ui
    */
   @property({ type: Boolean })
@@ -135,6 +145,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
    * @required false
    * @default 10
    * @description 添加实例弹窗的默认分页个数
+   * @description.en Default page size of the add instance modal
    * @group ui
    */
   @property({ type: Number })
@@ -145,6 +156,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
    * @required false
    * @default -
    * @description 添加实例弹窗的分页个数选项
+   * @description.en Page size options of the add instance modal
    * @group ui
    */
   @property({ attribute: false })
@@ -158,6 +170,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
    * @default -
    * @group advanced
    * @description 预设弹窗内实例的筛选条件，格式与参见请求数据中的 query
+   * @description.en Preset filter conditions for instances in the modal; for the format, refer to the query in the request data
    */
   @property({ attribute: false })
   instanceQuery: any;
@@ -166,6 +179,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
    * @default false
    * @required false
    * @description 弹窗左下方是否显示新建并绑定按钮
+   * @description.en Whether the create and bind button is shown at the bottom left of the modal
    */
   @property({ type: Boolean })
   showBindButton: boolean;
@@ -173,6 +187,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
    * @default false
    * @required false
    * @description 新建并绑定按钮是否禁用
+   * @description.en Whether the create and bind button is disabled
    */
   @property({ type: Boolean }) bindButtonDisabled: boolean;
 
@@ -181,6 +196,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
    * @required false
    * @group ui
    * @description 选择实例的弹窗左下方按钮文案
+   * @description.en Button text at the bottom left of the instance selection modal
    */
   @property({ attribute: false })
   bindButtonText: string;
@@ -190,6 +206,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
   /**
    * @detail `string[]`
    * @description 当选择项变化时触发，detail 为所有选择实例的实例 ID
+   * @description.en Triggered when the selection changes, detail is the instance IDs of all selected instances
    */
   @event({ type: "instance.select.change" }) changeEvent: EventEmitter<
     string[]
@@ -197,6 +214,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
   /**
    * @detail `any[]`
    * @description 当选择项变化时触发，detail 为所有选择实例的实例数据
+   * @description.en Triggered when the selection changes, detail is the instance data of all selected instances
    */
   @event({ type: "instance.select.change.v2" }) changeEventV2: EventEmitter<
     any[]
@@ -205,6 +223,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement  implements 
   /**
    * @detail
    * @description 点击新建并绑定按钮发出的事件
+   * @description.en Event emitted when the create and bind button is clicked
    */
   @event({ type: "bind.button.click" }) bindClickEvent: EventEmitter<
     Record<string, any>

@@ -15,11 +15,37 @@ import {
   SimpleModeConfig,
 } from "rc-tree-select/lib/interface";
 
+export interface TreeSelectElementProps {
+  name?: string;
+  label?: string;
+  treeData?: DataNode[];
+  value?: DefaultValueType;
+  disabled?: boolean;
+  showSearch?: boolean;
+  placeholder?: string;
+  searchPlaceholder?: string;
+  treeNodeFilterProp?: string;
+  inputBoxStyle?: React.CSSProperties;
+  allowClear?: boolean;
+  treeCheckable?: boolean;
+  treeCheckStrictly?: boolean;
+  multiple?: boolean;
+  dropdownStyle?: React.CSSProperties;
+  treeDataSimpleMode?: | boolean
+    | SimpleModeConfig;
+  treeNodeLabelProp?: string;
+  defaultExpandAll?: boolean;
+  defaultExpandedKeys?: string[];
+  showCheckedStrategy?: showCheckedStrategyType;
+}
+
+
 /**
  * @id forms.tree-select
  * @name forms.tree-select
  * @docKind brick
  * @description 树型选择构件
+ * @description.en Tree select brick
  * @author steve
  * @slots
  * @history
@@ -58,36 +84,13 @@ import {
  * }
  * ```
  */
-export interface TreeSelectElementProps {
-  name?: string;
-  label?: string;
-  treeData?: DataNode[];
-  value?: DefaultValueType;
-  disabled?: boolean;
-  showSearch?: boolean;
-  placeholder?: string;
-  searchPlaceholder?: string;
-  treeNodeFilterProp?: string;
-  inputBoxStyle?: React.CSSProperties;
-  allowClear?: boolean;
-  treeCheckable?: boolean;
-  treeCheckStrictly?: boolean;
-  multiple?: boolean;
-  dropdownStyle?: React.CSSProperties;
-  treeDataSimpleMode?: | boolean
-    | SimpleModeConfig;
-  treeNodeLabelProp?: string;
-  defaultExpandAll?: boolean;
-  defaultExpandedKeys?: string[];
-  showCheckedStrategy?: showCheckedStrategyType;
-}
-
 
 export class TreeSelectElement extends FormItemElement  implements TreeSelectElementProps {
   /**
    * @group basicFormItem
    * @required true
    * @description 字段名
+   * @description.en Field name
    */
   @property({ attribute: false }) declare name: string;
 
@@ -95,6 +98,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @group basicFormItem
    * @required false
    * @description 字段说明
+   * @description.en Field description
    */
   @property({ attribute: false }) declare label: string;
 
@@ -103,6 +107,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @required false
    * @default `[]`
    * @description 树选择控件的节点数据
+   * @description.en Node data of the tree select control
    */
   @property({ attribute: false }) treeData: DataNode[];
 
@@ -111,6 +116,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @required false
    * @default -
    * @description 树选择控件的值（仅当不在表单中使用时有效）
+   * @description.en The value of the tree select control (only valid when it is not used in a form)
    */
   @property({ attribute: false }) value: DefaultValueType;
 
@@ -119,6 +125,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @required false
    * @default `false`
    * @description 是否禁用
+   * @description.en Whether to disable it
    */
   @property({ type: Boolean }) disabled: boolean;
 
@@ -127,6 +134,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @required false
    * @default `false`
    * @description 是否支持搜索框
+   * @description.en Whether a search box is supported
    */
   @property({ type: Boolean }) showSearch: boolean;
 
@@ -134,6 +142,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @group basicFormItem
    * @required false
    * @description 选择框默认文字
+   * @description.en Default text of the select box
    */
   @property() declare placeholder: string;
 
@@ -141,6 +150,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @group basicFormItem
    * @required false
    * @description 搜索框默认文字
+   * @description.en Default text of the search box
    */
   @property() searchPlaceholder: string;
 
@@ -149,6 +159,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @required false
    * @default `'value'`
    * @description 输入项过滤对应的 treeNode 属性
+   * @description.en The treeNode property used for filtering input items
    */
   @property({ attribute: false }) treeNodeFilterProp: string;
 
@@ -156,6 +167,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @group ui
    * @required false
    * @description 选择框的样式
+   * @description.en The style of the select box
    */
   @property({ attribute: false }) inputBoxStyle: React.CSSProperties;
 
@@ -164,6 +176,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @required false
    * @default `false`
    * @description 显示清除按钮
+   * @description.en Display the clear button
    */
   @property({ type: Boolean }) allowClear: boolean;
 
@@ -172,6 +185,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @required false
    * @default `false`
    * @description 显示 checkbox
+   * @description.en Display checkbox
    * @group advanced
    */
   @property({ type: Boolean }) treeCheckable: boolean;
@@ -181,6 +195,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @required false
    * @default `false`
    * @description `checkable` 状态下节点选择完全受控（父子节点选中状态不再关联），会使得 `labelInValue` 强制为 `true`
+   * @description.en In the `checkable` state, node selection is fully controlled (the selected states of parent and child nodes are no longer associated), which forces `labelInValue` to be `true`
    */
   @property({ type: Boolean }) treeCheckStrictly: boolean;
 
@@ -189,6 +204,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @required false
    * @default `false`
    * @description 单选：`false`，多选：`true`（当设置 `treeCheckable` 时自动变为 `true`）
+   * @description.en Single select: `false`, multiple select: `true` (automatically becomes `true` when `treeCheckable` is set)
    */
   @property({ type: Boolean }) multiple: boolean;
 
@@ -197,6 +213,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @required false
    * @default `true`
    * @description 下拉菜单和选择器同宽。默认将设置 `min-width`
+   * @description.en The dropdown menu has the same width as the selector. `min-width` is set by default
    */
   @property({ attribute: false }) dropdownMatchSelectWidth = true;
 
@@ -204,6 +221,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @group ui
    * @required false
    * @description 下拉菜单的样式
+   * @description.en The style of the dropdown menu
    */
   @property({ attribute: false }) dropdownStyle: React.CSSProperties;
 
@@ -211,6 +229,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @group basicFormItem
    * @required false
    * @description 使用简单格式的 treeData，具体设置参考可设置的类型 (此时 treeData 应变为这样的数据结构: [{id:1, pId:0, value:'1', title:"test1",...},...], pId 是父节点的 id)
+   * @description.en Use treeData in a simple format. For details, refer to the configurable type (in this case, treeData should become a data structure like this: [{id:1, pId:0, value:'1', title:"test1",...},...], where pId is the id of the parent node)
    */
   @property({ attribute: false }) treeDataSimpleMode:
     | boolean
@@ -221,6 +240,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @required false
    * @default `'title'`
    * @description 作为显示的 treeNode 属性
+   * @description.en The treeNode property used for display
    */
   @property({ attribute: false }) treeNodeLabelProp: string;
 
@@ -228,6 +248,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @group basicFormItem
    * @required false
    * @description 默认展开所有树节点
+   * @description.en Expand all tree nodes by default
    */
   @property({ type: Boolean }) defaultExpandAll: boolean;
 
@@ -235,6 +256,7 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @group basicFormItem
    * @required false
    * @description 默认展开项
+   * @description.en Expanded items by default
    */
   @property({ attribute: false }) defaultExpandedKeys: string[];
 
@@ -242,12 +264,14 @@ export class TreeSelectElement extends FormItemElement  implements TreeSelectEle
    * @group showCheckedStrategy
    * @required false
    * @description 展示节点情况。默认只显示子节点
+   * @description.en How the nodes are displayed. Only child nodes are displayed by default
    */
   @property({ attribute: false }) showCheckedStrategy: showCheckedStrategyType =
     "child";
   /**
    * @detail `{value: DefaultValueType, label: any, extra: any}`
    * @description 输入变化时被触发，`event.detail` 为当前值
+   * @description.en Triggered when the input changes. `event.detail` is the current value
    */
   @event({ type: "treeSelect.change" }) changeEvent: EventEmitter<
     Record<string, any>

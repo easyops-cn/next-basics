@@ -24,23 +24,6 @@ export type RadioType =
   | "icon-square"
   | "custom";
 
-/**
- * @id forms.general-radio
- * @name forms.general-radio
- * @docKind brick
- * @description 通用的单选框
- * @author jo
- * @slots
- * @history
- * 1.207.0: `type` 属性新增  `icon-circle` 类型样式
- * 1.1.0: 构件 type 属性，添加`icon`图标类型样式
- * 1.0.0: 新增构件 `forms.general-radio`
- * @excludesInherit
- *  placeholder
- *  pattern
- * @memo
- * > Tips: 单选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
- */
 export interface GeneralRadioElementProps {
   name?: string;
   value?: any;
@@ -58,6 +41,27 @@ export interface GeneralRadioElementProps {
 }
 
 
+/**
+ * @id forms.general-radio
+ * @name forms.general-radio
+ * @docKind brick
+ * @description 通用的单选框
+ * @description.en General radio button
+ * @author jo
+ * @slots
+ * @history
+ * 1.207.0: `type` 属性新增  `icon-circle` 类型样式
+ * 1.1.0: 构件 type 属性，添加`icon`图标类型样式
+ * 1.0.0: 新增构件 `forms.general-radio`
+ * @excludesInherit
+ *  placeholder
+ *  pattern
+ * @memo
+ * > Tips: 单选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
+ * @memo.en
+ * > Tips: When the radio button is used together with general-form, setting the initial value through value is invalid; the initial value needs to be set in the [values](developers/brick-book/brick/forms.general-form) property of general-form.
+ */
+
 export class GeneralRadioElement extends FormItemElement  implements GeneralRadioElementProps {
   /* =========================== Group: basic =========================== */
 
@@ -66,6 +70,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
    * @required true
    * @default -
    * @description 下拉框字段名
+   * @description.en Dropdown field name
    * @group basic
    */
   @property({ attribute: false }) declare name: string;
@@ -75,6 +80,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
    * @required true
    * @default -
    * @description 单选框当前选中始值
+   * @description.en Current initially selected value of the radio button
    * @group basic
    */
   @property({ attribute: false })
@@ -84,6 +90,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
    * @required true
    * @default -
    * @description 单选框选项表，RadioType为default时，如果设置了tooltip值,可以设置tooltipIcon图标（MenuIcon 类型）,tooltipIcon颜色默认为--color-secondary-text。
+   * @description.en Radio button option list. When RadioType is default, if a tooltip value is set, the tooltipIcon (MenuIcon type) can be set; the tooltipIcon color defaults to --color-secondary-text.
    * @group basic
    */
   @property({
@@ -98,6 +105,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
    * @required false
    * @default -
    * @description 单选框字段说明
+   * @description.en Radio button field description
    * @group formLabel
    */
   @property({ attribute: false }) declare label: string;
@@ -109,6 +117,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
    * @required false
    * @default -
    * @description 是否必填项
+   * @description.en Whether the field is required
    * @group formValidation
    */
   @property({ type: Boolean }) declare required: boolean;
@@ -118,6 +127,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
    * @required false
    * @default -
    * @description 校验文本信息
+   * @description.en Validation message text
    * @editor message
    * @group formValidation
    */
@@ -130,6 +140,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
    * @required false
    * @default  false
    * @description 是否禁用
+   * @description.en Whether to disable it
    * @group ui
    */
   @property({ type: Boolean })
@@ -140,6 +151,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
    * @required false
    * @default default
    * @description 单选框样式类型
+   * @description.en Radio button style type
    * @enums "button"|"default"|"icon"|"icon-circle"|"icon-square"|"custom"
    * @group ui
    */
@@ -153,6 +165,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
    * @required false
    * @default -
    * @description 大小，只对按钮样式生效
+   * @description.en Size, only takes effect for the button style
    * @enums "large"|"middle"|"small"
    * @editor radio
    * @editorProps {
@@ -184,6 +197,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
    * @required -️
    * @default default
    * @description Ui样式，可选择 `dashboard` 样式，默认`default`
+   * @description.en UI style, the `dashboard` style can be selected, defaults to `default`
    * @editor radio
    * @editorProps {
    *   "optionType": "button",
@@ -215,6 +229,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
    * @required false
    * @default
    * @description 自定义radio的内容
+   * @description.en Custom content of the radio
    * @group ui
    */
   @property({
@@ -229,6 +244,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
    * @required false
    * @default -
    * @description 自定义radio的外层样式
+   * @description.en Custom outer style of the radio
    * @group style
    */
   @property({
@@ -241,6 +257,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
    * @required false
    * @default solid
    * @description 单选框样式
+   * @description.en Radio button style
    * @group style
    */
   @property({
@@ -253,6 +270,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
   /**
    * @detail `string | number`
    * @description 单选框变化时被触发，`event.detail` 为选项值
+   * @description.en Triggered when the radio button changes, `event.detail` is the option value
    */
   @event({ type: "general.radio.change" }) changeEvent: EventEmitter<
     Record<string, any>
@@ -261,6 +279,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
   /**
    * @detail `{label: string, value: any, [key: string]: any}	`
    * @description 单选框变化时被触发，`event.detail` 为当前整个选择项包含其他字段值
+   * @description.en Triggered when the radio button changes, `event.detail` is the whole currently selected option including other field values
    */
   @event({ type: "general.radio.change.v2" }) changeEventV2: EventEmitter<{
     label: string;
@@ -271,6 +290,7 @@ export class GeneralRadioElement extends FormItemElement  implements GeneralRadi
   /**
    * @detail `{options:{label: string, value: any, [key: string]: any},name:string}	`
    * @description 单选框选项列表变化时被触发
+   * @description.en Triggered when the radio button option list changes
    */
   @event({ type: "general.radio.options.change" }) optionsChange: EventEmitter<{
     options: {
