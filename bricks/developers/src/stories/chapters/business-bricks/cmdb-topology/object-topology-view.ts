@@ -1,6 +1,7 @@
 import { Story } from "../../../interfaces";
 import { OBJECT_TOPOLOGY_VIEW_ID } from "../../../constants";
 import doc from "../../../docs/cmdb-topology/object-topology-view.md";
+import docEn from "../../../docs/cmdb-topology/object-topology-view.en.md";
 
 export const story: Story = {
   storyId: "topology.object-topology-view",
@@ -54,5 +55,5 @@ export const story: Story = {
       }
     }
   },
-  doc
+  doc: { zh: doc, en: docEn },
 };

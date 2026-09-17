@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/ci/log-viewer.md";
+import docMDEn from "../../../docs/ci/log-viewer.en.md";
 
 export const story: Story = {
   storyId: "ci.log-viewer",
@@ -32,5 +33,5 @@ export const story: Story = {
       },
     },
   },
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

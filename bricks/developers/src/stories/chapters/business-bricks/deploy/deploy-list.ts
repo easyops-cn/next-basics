@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/deploy-history/deploy-history.md";
+import docMDEn from "../../../docs/deploy-history/deploy-history.en.md";
 
 export const story: Story = {
   storyId: "deploy-history.list",
@@ -27,5 +28,5 @@ export const story: Story = {
       linkUrl: "deploy/#{app_id}"
     }
   },
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

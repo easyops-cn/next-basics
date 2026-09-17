@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/tools/tool-output.md";
+import docMDEn from "../../../docs/tools/tool-output.en.md";
 
 export const story: Story = {
   storyId: "tools.tool-output",
@@ -23,5 +24,5 @@ export const story: Story = {
       execId: "201912_task15dd8a076c97b622279c"
     }
   },
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

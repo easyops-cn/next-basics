@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/tools/tool-execution-form.md";
+import docMDEn from "../../../docs/tools/tool-execution-form.en.md";
 import { TOOL_ID2 } from "../../../constants";
 
 export const story: Story = {
@@ -65,5 +66,5 @@ export const story: Story = {
       },
     },
   },
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

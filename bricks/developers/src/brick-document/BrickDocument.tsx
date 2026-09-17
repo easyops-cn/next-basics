@@ -25,6 +25,7 @@ import styles from "./BrickDocument.module.css";
 import { TypeDescItem } from "../interfaces";
 import * as gfm from "remark-gfm";
 import { collectSharedTypeList } from "./processor";
+import { localized } from "../share/localized";
 import { V3BrickDocTypes } from "../components/v3/V3Types";
 import { V3ProviderInterface } from "../components/v3/V3ProviderInterface";
 
@@ -255,7 +256,7 @@ export function BrickDocument(props: BrickDocumentProps): React.ReactElement {
         return (
           <span
             dangerouslySetInnerHTML={convertMarkdownLinkToHtmlLink(
-              value[column.key]
+              localized(value[column.key])
             )}
           />
         );
@@ -354,7 +355,7 @@ export function BrickDocument(props: BrickDocumentProps): React.ReactElement {
           </h3>
           {enums.description && (
             <ReactMarkdown
-              source={enums.description}
+              source={localized(enums.description)}
               // @ts-ignore
               plugins={[gfm]}
               linkTarget="_blank"
@@ -447,7 +448,7 @@ export function BrickDocument(props: BrickDocumentProps): React.ReactElement {
         </h3>
         {description && (
           <ReactMarkdown
-            source={description}
+            source={localized(description)}
             // @ts-ignore
             plugins={[gfm]}
             linkTarget="_blank"
@@ -473,7 +474,7 @@ export function BrickDocument(props: BrickDocumentProps): React.ReactElement {
           </h3>
           {type.description && (
             <ReactMarkdown
-              source={type.description}
+              source={localized(type.description)}
               // @ts-ignore
               plugins={[gfm]}
               linkTarget="_blank"
@@ -514,7 +515,7 @@ export function BrickDocument(props: BrickDocumentProps): React.ReactElement {
   };
 
   const renderMemo = (memo: string): React.ReactElement => {
-    return memo && <>{renderMarkDown(memo)}</>;
+    return memo && <>{renderMarkDown(localized(memo))}</>;
   };
 
   const renderProperties = (
@@ -648,7 +649,7 @@ export function BrickDocument(props: BrickDocumentProps): React.ReactElement {
               </Tag>
             </h3>
 
-            {renderMarkDown(item.description)}
+            {renderMarkDown(localized(item.description))}
           </React.Fragment>
         ))}
       </>

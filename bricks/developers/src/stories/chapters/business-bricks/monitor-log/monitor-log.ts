@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/monitor-log/search-template.md";
+import docMDEn from "../../../docs/monitor-log/search-template.en.md";
 import { CMDB_HOST_INSTANCE_ID } from "../../../constants";
 
 export const story: Story = {
@@ -26,5 +27,5 @@ export const story: Story = {
       }
     }
   ],
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

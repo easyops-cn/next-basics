@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/agile/comment-brick.md";
+import docMDEn from "../../../docs/agile/comment-brick.en.md";
 
 export const story: Story = {
   storyId: "agile.comment-brick",
@@ -122,5 +123,5 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

@@ -1,8 +1,9 @@
-import { StoryConf, Action } from "@next-core/brick-types";
+import { StoryConf, Action, I18nData } from "@next-core/brick-types";
 
 export interface TypeDescItem {
   type: string;
-  description: string;
+  /** 展示文案；纯代码等语言无关的内容可直接使用字符串 */
+  description: I18nData | string;
 }
 
 export interface TypeExtendItem {

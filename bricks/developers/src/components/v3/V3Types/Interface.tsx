@@ -4,6 +4,11 @@ import { GeneralType, GeneralTypeList } from "./GeneralType";
 import classNames from "classnames";
 import style from "./style.module.css";
 import { Tag } from "antd";
+import { i18nText } from "@next-core/brick-kit";
+
+/** 双语 description 对象按当前语言取值；字符串原样返回。 */
+const localized = (value: any): any =>
+  value && typeof value === "object" ? i18nText(value) : value;
 
 export function V3BrickDocInterface({
   interfaceDeclaration,
@@ -58,7 +63,7 @@ export function V3BrickDocInterface({
               <td style={{ textAlign: "center" }}>
                 {item.type === "indexSignature" || item.optional ? "" : "✅"}
               </td>
-              <td>{item.description}</td>
+              <td>{localized(item.description)}</td>
             </tr>
           ))}
         </tbody>

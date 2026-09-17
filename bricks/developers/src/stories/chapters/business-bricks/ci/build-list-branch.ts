@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/ci/build-list-event.md";
+import docMDEn from "../../../docs/ci/build-list-event.en.md";
 
 export const story: Story = {
   storyId: "ci.build-list-branch",
@@ -41,5 +42,5 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

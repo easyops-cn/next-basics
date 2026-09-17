@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/auto-collection/collection-history-list-template.md";
+import docMDEn from "../../../docs/auto-collection/collection-history-list-template.en.md";
 
 import { CMDB_AUTO_COLLECTION_CONFIG_ID } from "../../../constants";
 
@@ -25,5 +26,5 @@ export const story: Story = {
       collectionConfigId: CMDB_AUTO_COLLECTION_CONFIG_ID
     }
   },
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

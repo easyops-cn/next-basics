@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/agile/issue-card.md";
+import docMDEn from "../../../docs/agile/issue-card.en.md";
 
 export const story: Story = {
   storyId: "agile.issue-card",
@@ -169,5 +170,5 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

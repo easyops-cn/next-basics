@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/agile/tpl-issue-detail-drawer.md";
+import docMDEn from "../../../docs/agile/tpl-issue-detail-drawer.en.md";
 import { ISSUE_NAME } from '../../../constants';
 
 export const story: Story = {
@@ -47,5 +48,5 @@ export const story: Story = {
       }
     }
   ],
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

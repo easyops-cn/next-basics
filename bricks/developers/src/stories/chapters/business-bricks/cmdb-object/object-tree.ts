@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import doc from "../../../docs/cmdb-object/object-tree.md";
+import docEn from "../../../docs/cmdb-object/object-tree.en.md";
 
 export const story: Story = {
   storyId: "cmdb-object.object-tree",
@@ -51,5 +52,5 @@ export const story: Story = {
       ],
     },
   ],
-  doc,
+  doc: { zh: doc, en: docEn },
 };

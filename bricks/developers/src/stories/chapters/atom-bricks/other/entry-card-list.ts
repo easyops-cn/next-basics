@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/general-list/entry-card-list.md";
+import docMDEn from "../../../docs/general-list/entry-card-list.en.md";
 
 export const story: Story = {
   storyId: "general-list.entry-card-list",
@@ -194,5 +195,5 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

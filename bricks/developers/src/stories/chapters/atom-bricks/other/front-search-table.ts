@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/general-tables/front-search-table.md";
+import docMDEn from "../../../docs/general-tables/front-search-table.en.md";
 
 export const story: Story = {
   storyId: "general-tables.front-search-table",
@@ -173,5 +174,5 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

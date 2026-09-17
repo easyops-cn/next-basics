@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/cmdb-topology/instance-topology-view.md";
+import docMDEn from "../../../docs/cmdb-topology/instance-topology-view.en.md";
 import { CMDB_HOST_INSTANCE_ID } from "../../../constants";
 
 export const story: Story = {
@@ -33,5 +34,5 @@ export const story: Story = {
       }
     }
   },
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

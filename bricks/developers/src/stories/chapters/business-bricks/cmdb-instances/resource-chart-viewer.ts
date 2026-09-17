@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/cmdb-instances/resource-chart-viewer.md";
+import docMDEn from "../../../docs/cmdb-instances/resource-chart-viewer.en.md";
 
 export const story: Story = {
   storyId: "cmdb-instances.resource-chart-viewer",
@@ -55,5 +56,5 @@ export const story: Story = {
       }
     }
   ],
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

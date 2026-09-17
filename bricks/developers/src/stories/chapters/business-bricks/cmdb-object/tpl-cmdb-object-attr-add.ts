@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/forms/tpl-cmdb-object-attr-add.md";
+import docMDEn from "../../../docs/forms/tpl-cmdb-object-attr-add.en.md";
 
 export const story: Story = {
   storyId: "cmdb-object.tpl-cmdb-object-attr-add",
@@ -193,5 +194,5 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

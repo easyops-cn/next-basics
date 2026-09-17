@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/tools/enhanced-tools-input-form.md";
+import docMDEn from "../../../docs/tools/enhanced-tools-input-form.en.md";
 
 export const story: Story = {
   storyId: "tools.enhanced-tools-input-form",
@@ -29,5 +30,5 @@ export const story: Story = {
       ],
     },
   },
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

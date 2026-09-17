@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/ci/workflow-stage-editor.md";
+import docMDEn from "../../../docs/ci/workflow-stage-editor.en.md";
 
 export const story: Story = {
   storyId: "ci.workflow-stage-editor",
@@ -31,5 +32,5 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

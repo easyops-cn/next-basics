@@ -1,5 +1,6 @@
 import { Chapter } from "../interfaces";
 import instanceCreateModalMD from "../docs/cmdb-instances/instance-create-modal.md";
+import instanceCreateModalMDEn from "../docs/cmdb-instances/instance-create-modal.en.md";
 import instanceCreateMD from "../docs/cmdb-instances/instance-create.md";
 import instanceMultiCreateMD from "../docs/cmdb-instances/instance-multi-create.md";
 import InstanceEditMD from "../docs/cmdb-instances/instance-edit.md";
@@ -629,7 +630,7 @@ const chapter: Chapter = {
           },
         },
       },
-      doc: instanceCreateModalMD,
+      doc: { zh: instanceCreateModalMD, en: instanceCreateModalMDEn },
       actions: [
         {
           text: "Open Modal",

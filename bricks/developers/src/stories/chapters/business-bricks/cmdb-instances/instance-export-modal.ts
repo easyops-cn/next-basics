@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/cmdb-instances/instance-export-modal.md";
+import docMDEn from "../../../docs/cmdb-instances/instance-export-modal.en.md";
 
 export const story: Story = {
   storyId: "cmdb-instances.instance-export-modal",
@@ -48,5 +49,5 @@ export const story: Story = {
       ],
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

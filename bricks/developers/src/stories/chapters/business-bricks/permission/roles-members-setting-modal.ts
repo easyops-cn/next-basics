@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/permission/roles-members-setting-modal.md";
+import docMDEn from "../../../docs/permission/roles-members-setting-modal.en.md";
 
 export const story: Story = {
   storyId: "permission.roles-members-setting-modal",
@@ -83,5 +84,5 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };

@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/excel-utils/export-data.md";
+import docMDEn from "../../../docs/excel-utils/export-data.en.md";
 
 export const story: Story = {
   storyId: "excel-utils.export-data",
@@ -147,5 +148,5 @@ export const story: Story = {
       }
     }
   ],
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

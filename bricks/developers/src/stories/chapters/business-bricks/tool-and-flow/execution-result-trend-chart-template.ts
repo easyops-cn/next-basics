@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/tools/execution-result-trend-chart.md";
+import docMDEn from "../../../docs/tools/execution-result-trend-chart.en.md";
 import { TOOL_EXECUTE_TASK_ID2 } from "../../../constants";
 
 export const story: Story = {
@@ -24,5 +25,5 @@ export const story: Story = {
       execId: TOOL_EXECUTE_TASK_ID2
     }
   },
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

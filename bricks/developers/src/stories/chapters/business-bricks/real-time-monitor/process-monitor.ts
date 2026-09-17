@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/real-time-monitor/process-monitor.md";
+import docMDEn from "../../../docs/real-time-monitor/process-monitor.en.md";
 import {
   CMDB_HOST_INSTANCE_ID,
   CMDB_HOST_INSTANCE_IP
@@ -33,5 +34,5 @@ export const story: Story = {
       keyword: "cmdb_service"
     }
   },
-  doc: docMD
+  doc: { zh: docMD, en: docMDEn },
 };

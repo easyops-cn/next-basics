@@ -1,5 +1,6 @@
 import { Story } from "../../../interfaces";
 import docMD from "../../../docs/cmdb-instances/instance-list.md";
+import docMDEn from "../../../docs/cmdb-instances/instance-list.en.md";
 
 export const story: Story = {
   storyId: "cmdb-instances.instance-list",
@@ -42,5 +43,5 @@ export const story: Story = {
       ],
     },
   ],
-  doc: docMD,
+  doc: { zh: docMD, en: docMDEn },
 };
