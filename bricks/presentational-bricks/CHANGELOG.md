@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.339.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.10...@next-bricks/presentational-bricks@1.339.11) (2026-09-18)
+
+
+### Bug Fixes
+
+* **deps:** 在包内声明 @next-libs/forms 3.6.6，使构件包重新发版 ([c06515b](https://github.com/easyops-cn/next-basics/commit/c06515b1133fc234c12af36dc0b2604a5418a258)), closes [#571](https://github.com/easyops-cn/next-basics/issues/571)
+
+
+
+
+
 ## [1.339.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.9...@next-bricks/presentational-bricks@1.339.10) (2026-09-17)
 
 
