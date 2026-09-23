@@ -38,6 +38,17 @@ const locale: Locale = {
   [K.ALL_RESOURCES]: "全部资源",
   [K.SWITCH_ORG]: "切换组织",
   [K.SWITCH_ORG_SUCCESS]: "切换组织成功！",
+  [K.LICENSE_EXPIRES_IN_DAY]: "离 License 过期还有 {{count}} 天",
+  [K.PAGE_RENDER_SLOW_TIP]:
+    "您的页面存在性能问题, 当前页面渲染时间 {{renderTime}} 秒, 规定阈值为: {{suggestTime}} 秒, 您已超过。请您针对该页面进行性能优化!",
+  [K.VIEW_SUGGESTION]: "建议解决思路",
+  [K.LICENSE_EXPIRATION_NOTICE]: "提示",
+  [K.LICENSE_EXPIRATION_DESC_PREFIX]: "你的 org 即将在",
+  [K.LICENSE_EXPIRATION_DESC_SUFFIX]: "过期，请联系 EasyOps 续期。",
+  [K.OR_CLICK]: "或点击",
+  [K.APPLY_FOR_EXTENSION]: "一键申请延期",
+  [K.DO_NOT_REMIND_AGAIN]: "不再提示",
+  [K.EXTENSION_APPLIED]: "已申请延期",
 };
 
 export default locale;

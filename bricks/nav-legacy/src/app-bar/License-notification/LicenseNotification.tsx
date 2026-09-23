@@ -4,6 +4,8 @@ import { JsonStorage } from "@next-libs/storage";
 import { handleHttpError, getAuth } from "@next-core/brick-kit";
 import { CustomerApi_setOrgUpdating } from "@next-sdk/air-admin-service-sdk";
 import { notification, Button, message } from "antd";
+import i18next from "i18next";
+import { K, NS_NAV_LEGACY } from "../../i18n/constants";
 import styles from "./LicenseInfo.module.css";
 
 export const LICENSE_INFO = "license-info";
@@ -34,7 +36,7 @@ export function notificationFactory(expires: number) {
       await CustomerApi_setOrgUpdating({
         orgId: org,
       });
-      message.success("已申请延期");
+      message.success(i18next.t(`${NS_NAV_LEGACY}:${K.EXTENSION_APPLIED}`));
       handleClose();
     } catch (err) {
       handleHttpError(err);
@@ -45,7 +47,7 @@ export function notificationFactory(expires: number) {
     return (
       <Button type="link" onClick={handleClose} className={styles.closeBtn}>
         {" "}
-        不再提示{" "}
+        {i18next.t(`${NS_NAV_LEGACY}:${K.DO_NOT_REMIND_AGAIN}`)}{" "}
       </Button>
     );
   };
@@ -54,15 +56,15 @@ export function notificationFactory(expires: number) {
     return (
       <>
         <div style={{ marginTop: 15 }}>
-          你的 org 即将在{" "}
+          {i18next.t(`${NS_NAV_LEGACY}:${K.LICENSE_EXPIRATION_DESC_PREFIX}`)}{" "}
           <span className={styles.highlight}>
             {moment.unix(expires).format("YYYY-MM-DD")}
           </span>{" "}
-          过期，请联系 EasyOps 续期。{" "}
+          {i18next.t(`${NS_NAV_LEGACY}:${K.LICENSE_EXPIRATION_DESC_SUFFIX}`)}
         </div>
-        <span>或点击</span>
+        <span>{i18next.t(`${NS_NAV_LEGACY}:${K.OR_CLICK}`)}</span>
         <Button type="link" onClick={handleDelay}>
-          一键申请延期
+          {i18next.t(`${NS_NAV_LEGACY}:${K.APPLY_FOR_EXTENSION}`)}
         </Button>
       </>
     );
@@ -70,7 +72,7 @@ export function notificationFactory(expires: number) {
 
   return notification.warning({
     key: LICENSE_INFO,
-    message: "提示",
+    message: i18next.t(`${NS_NAV_LEGACY}:${K.LICENSE_EXPIRATION_NOTICE}`),
     duration: 0,
     description: renderContent(),
     btn: renderBtn(),

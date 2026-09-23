@@ -39,6 +39,18 @@ const locale: Locale = {
   [K.VIEW_ALL]: "View all",
   [K.SWITCH_ORG]: "Switching Organizations",
   [K.SWITCH_ORG_SUCCESS]: "Switching organizations succeeded!",
+  [K.LICENSE_EXPIRES_IN_DAY]: "License expires in {{count}} day",
+  [`${K.LICENSE_EXPIRES_IN_DAY}_other`]: "License expires in {{count}} days",
+  [K.PAGE_RENDER_SLOW_TIP]:
+    "Your page is running slowly. The current render time is {{renderTime}} seconds, exceeding the threshold of {{suggestTime}} seconds. Please optimize this page.",
+  [K.VIEW_SUGGESTION]: "View suggestions",
+  [K.LICENSE_EXPIRATION_NOTICE]: "Notice",
+  [K.LICENSE_EXPIRATION_DESC_PREFIX]: "Your org will expire on",
+  [K.LICENSE_EXPIRATION_DESC_SUFFIX]: ". Please contact EasyOps for renewal.",
+  [K.OR_CLICK]: "Or click",
+  [K.APPLY_FOR_EXTENSION]: "Apply for extension",
+  [K.DO_NOT_REMIND_AGAIN]: "Do not remind me again",
+  [K.EXTENSION_APPLIED]: "Extension applied",
 };
 
 export default locale;
