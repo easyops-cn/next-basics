@@ -52,4 +52,6 @@ export enum K {
 
 export type Locale = { [key in K]: string } & {
   [key in K as `${key}_other`]?: string;
+} & {
+  [key in K as `${key}_plural`]?: string;
 };
