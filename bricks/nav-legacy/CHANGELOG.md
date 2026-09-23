@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.6.2...@next-bricks/nav-legacy@1.7.0) (2026-09-23)
+
+
+### Features
+
+* **nav-legacy:** internationalize license tips and expiration notification ([927a186](https://github.com/easyops-cn/next-basics/commit/927a1863d7cf6f19055417f47691775e19d6bdae))
+
+
+
+
+
 ## [1.6.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.6.1...@next-bricks/nav-legacy@1.6.2) (2026-07-07)
 
 
