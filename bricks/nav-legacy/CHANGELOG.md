@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.7.0...@next-bricks/nav-legacy@1.7.1) (2026-09-23)
+
+
+### Bug Fixes
+
+* **nav-legacy:** add _plural key for host v3 compatibilityJSON mode ([8b487ea](https://github.com/easyops-cn/next-basics/commit/8b487ea309e814d8f42ef3d82afdc77350897de4))
+
+
+
+
+
 # [1.7.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/nav-legacy@1.6.2...@next-bricks/nav-legacy@1.7.0) (2026-09-23)
 
 
