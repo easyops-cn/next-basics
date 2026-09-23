@@ -2,8 +2,10 @@ import React from "react";
 import { NavTip } from "@next-core/brick-types";
 import { JsonStorage } from "@next-core/brick-utils";
 import { getAuth, getRuntime, useCurrentApp } from "@next-core/brick-kit";
+import { useTranslation } from "react-i18next";
 import moment from "moment";
 import { AppBarTips } from "../app-bar/AppBarTips/AppBarTips";
+import { K, NS_NAV_LEGACY } from "../i18n/constants";
 
 const storage = new JsonStorage(localStorage);
 
@@ -17,6 +19,7 @@ export function AppBarWrapper({
     `var(--app-bar-height)`
   );
   const currentApp = useCurrentApp();
+  const { t } = useTranslation(NS_NAV_LEGACY);
 
   const isV3 = React.useMemo(() => {
     const runtime = getRuntime();
@@ -67,7 +70,7 @@ export function AppBarWrapper({
           new CustomEvent<NavTip[]>("app.bar.tips", {
             detail: [
               {
-                text: `离 License 过期还有 ${validDaysLeft} 天`,
+                text: t(K.LICENSE_EXPIRES_IN_DAY, { count: validDaysLeft }),
                 tipKey: `license:${auth.org}`,
                 closable: true,
                 isCenter: true,
@@ -83,7 +86,7 @@ export function AppBarWrapper({
     return () => {
       window.removeEventListener("app.bar.tips", handleShowTips);
     };
-  }, [isV3, handleShowTips]);
+  }, [isV3, handleShowTips, t]);
 
   React.useEffect(() => {
     if (isV3) {
@@ -99,11 +102,10 @@ export function AppBarWrapper({
             new CustomEvent<NavTip[]>("app.bar.tips", {
               detail: [
                 {
-                  text: `您的页面存在性能问题, 当前页面渲染时间 ${getSecond(
-                    renderTime / 1000
-                  )} 秒, 规定阈值为: ${getSecond(
-                    (loadTime as number) / 1000
-                  )} 秒, 您已超过。请您针对该页面进行性能优化!`,
+                  text: t(K.PAGE_RENDER_SLOW_TIP, {
+                    renderTime: getSecond(renderTime / 1000),
+                    suggestTime: getSecond((loadTime as number) / 1000),
+                  }),
                   closable: false,
                   isCenter: true,
                   tipKey: `render:${auth.org}`,
@@ -111,7 +113,7 @@ export function AppBarWrapper({
                   ...(loadInfoPage
                     ? {
                         info: {
-                          label: "建议解决思路",
+                          label: t(K.VIEW_SUGGESTION),
                           url: loadInfoPage as string,
                         },
                       }
@@ -127,7 +129,7 @@ export function AppBarWrapper({
         window.removeEventListener("route.render", handelRouteRender);
       };
     }
-  }, [isV3, handleShowTips, currentApp]);
+  }, [isV3, handleShowTips, currentApp, t]);
 
   React.useEffect(() => {
     const mainElement = document.getElementById("main-mount-point");
