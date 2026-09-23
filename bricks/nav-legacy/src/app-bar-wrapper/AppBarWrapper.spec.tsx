@@ -143,6 +143,34 @@ describe("AppBarWrapper", () => {
     await i18next.changeLanguage("zh");
   });
 
+  it("license tips plural works under host compatibilityJSON v3 mode", async () => {
+    // 宿主容器在无 Intl.PluralRules 的环境以 v3 兼容模式运行（只认 `_plural` 后缀），
+    // 词条需同时提供 `_other`（v4）与 `_plural`（v3）双键。
+    await i18next.changeLanguage("en");
+    getFeatureFlags.mockReturnValue({
+      "migrate-to-brick-next-v3": true,
+    });
+    mockGetAuth.mockReturnValue({
+      license: {
+        validDaysLeft: 8,
+      },
+      isAdmin: true,
+    });
+    const v3 = i18next.t.bind(i18next);
+    // 模拟宿主：临时切换 compatibilityJSON
+    (i18next.options as any).compatibilityJSON = "v3";
+    try {
+      const { container, unmount } = render(
+        <AppBarWrapper isFixed={true} displayCenter={true} />
+      );
+      expect(container.textContent).toContain("License expires in 8 days");
+      unmount();
+    } finally {
+      delete (i18next.options as any).compatibilityJSON;
+      await i18next.changeLanguage("zh");
+    }
+  });
+
   it("license tips should follow language switching after mount", async () => {
     mockGetAuth.mockReturnValue({
       license: {

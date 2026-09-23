@@ -41,6 +41,9 @@ const locale: Locale = {
   [K.SWITCH_ORG_SUCCESS]: "Switching organizations succeeded!",
   [K.LICENSE_EXPIRES_IN_DAY]: "License expires in {{count}} day",
   [`${K.LICENSE_EXPIRES_IN_DAY}_other`]: "License expires in {{count}} days",
+  // 宿主容器在部分环境以 compatibilityJSON v3 运行（只认 `_plural`），
+  // 与 v4 的 `_other` 同时提供以兼容两种复数引擎。
+  [`${K.LICENSE_EXPIRES_IN_DAY}_plural`]: "License expires in {{count}} days",
   [K.PAGE_RENDER_SLOW_TIP]:
     "Your page is running slowly. The current render time is {{renderTime}} seconds, exceeding the threshold of {{suggestTime}} seconds. Please optimize this page.",
   [K.VIEW_SUGGESTION]: "View suggestions",
