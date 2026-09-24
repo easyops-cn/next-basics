@@ -40,6 +40,7 @@ import "./dynamic-user-select-item";
 import "./upload-files-v2";
 import "./lazy-bricks";
 // !Lazy: import "./dynamic-form-item-v2";
+// !Lazy: import "./dynamic-form-item-v3";
 import "./general-input-number-range";
 import "./general-link";
 import "./cmdb-cascader";

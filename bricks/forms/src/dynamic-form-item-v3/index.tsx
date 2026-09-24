@@ -8,36 +8,34 @@ import {
   method,
 } from "@next-core/brick-kit";
 import {
-  DynamicFormItemV2,
-  upperDynamicFormItemV2Ref,
-} from "./DynamicFormItemV2";
+  DynamicFormItemV3,
+  upperDynamicFormItemV3Ref,
+} from "./DynamicFormItemV3";
 import { FormItemElement, GeneralComplexOption } from "@next-libs/forms";
-import { Column, SelectProps } from "../interfaces";
+import { Column, SelectProps } from "../interfaces/dynamic-form-item-v3";
 import lodash from "lodash";
 
-export interface DynamicFormItemV2ElementProps {
-  columns?: Column[];
-}
-
 /**
- * @id forms.dynamic-form-item-v2
- * @name forms.dynamic-form-item-v2
+ * @id forms.dynamic-form-item-v3
+ * @name forms.dynamic-form-item-v3
  * @author nlicroshan
  * @history
- * 1.x.0: 新增构件 `forms.dynamic-form-item-v2`
+ * 1.x.0: 新增构件 `forms.dynamic-form-item-v3`
  * @excludesInherit
  *  placeholder
  *  pattern
  * @docKind brick
  */
+export interface DynamicFormItemV3ElementProps {
+  columns?: Column[];
+}
 
-export class DynamicFormItemV2Element
+export class DynamicFormItemV3Element
   extends FormItemElement
-  implements DynamicFormItemV2ElementProps
+  implements DynamicFormItemV3ElementProps
 {
   /**
    * @description 动态表单项的初始值
-   * @description.en Initial value of the dynamic form item
    * @group basicFormItem
    */
   @property({
@@ -47,7 +45,6 @@ export class DynamicFormItemV2Element
 
   /**
    * @description 每一列表单项的配置
-   * @description.en Configuration of the form item in each column
    * @group basicFormItem
    */
   @property({
@@ -58,7 +55,6 @@ export class DynamicFormItemV2Element
   /**
    * @kind boolean | ((row: Record<string, any>, index: number) => boolean)
    * @description 是否隐藏每一行删除的按钮
-   * @description.en Whether to hide the delete button of each row
    * @group ui
    */
   @property({
@@ -71,7 +67,6 @@ export class DynamicFormItemV2Element
   /**
    * @kind boolean | ((row: Record<string, any>, index: number) => boolean)
    * @description 是否禁止每一行删除的按钮
-   * @description.en Whether to disable the delete button of each row
    * @group ui
    */
   @property({
@@ -84,7 +79,6 @@ export class DynamicFormItemV2Element
   /**
    * @kind boolean | ((value: Record<string, any>[]) => boolean)
    * @description 是否隐藏添加的按钮
-   * @description.en Whether to hide the add button
    * @group ui
    */
   @property({
@@ -95,7 +89,6 @@ export class DynamicFormItemV2Element
   /**
    * @kind boolean | ((value: Record<string, any>[]) => boolean)
    * @description 是否禁止添加的按钮
-   * @description.en Whether to disable the add button
    * @group ui
    */
   @property({
@@ -105,7 +98,6 @@ export class DynamicFormItemV2Element
 
   /**
    * @description 动态表单样式
-   * @description.en Dynamic form style
    * @group ui
    */
   @property({ attribute: false })
@@ -113,7 +105,6 @@ export class DynamicFormItemV2Element
 
   /**
    * @description 表单项值改变时触发
-   * @description.en Triggered when the value of the form item changes
    */
   @event({ type: "item.change" }) changeEvent: EventEmitter<
     Record<string, any>[]
@@ -125,7 +116,6 @@ export class DynamicFormItemV2Element
   /**
    * @detail value: { detail: Record<string, any>, index: number }
    * @description 增加一行时触发，detail为该行的默认值，index为该行的位置
-   * @description.en Triggered when a row is added, detail is the default value of the row, index is the position of the row
    */
   @event({ type: "row.add" }) addEvent: EventEmitter;
   private _handleAdd = (value: {
@@ -138,7 +128,6 @@ export class DynamicFormItemV2Element
   /**
    * @detail value: { detail: Record<string, any>, index: number }
    * @description 移除一行时触发，detail为该行的值，index为该行的位置
-   * @description.en Triggered when a row is removed, detail is the value of the row, index is the position of the row
    */
   @event({ type: "row.remove" }) removeEvent: EventEmitter;
   private _handleRemove = (value: {
@@ -151,7 +140,6 @@ export class DynamicFormItemV2Element
   /**
    * @detail value: { rowIndex: number, name: string }
    * @description input类型表单项失焦时触发，返回所在行rowIndex，以及该输入框的name
-   * @description.en Triggered when an input type form item is blurred, returns the rowIndex of the row and the name of the input box
    */
   @event({ type: "input.blur" }) inputBlurEvent: EventEmitter;
   private _handleInputBlur = (value: {
@@ -162,11 +150,10 @@ export class DynamicFormItemV2Element
     this.inputBlurEvent.emit(value);
   };
 
-  private upperRef = React.createRef<upperDynamicFormItemV2Ref>();
+  private upperRef = React.createRef<upperDynamicFormItemV3Ref>();
 
   /**
    * @description 设置指定行、指定表单项的值。rowIndex 为行索引（从 0 开始），name 为列的 name 属性值，value 为要设置的值（传 null 清空）
-   * @description.en Set the value of the specified form item in the specified row. rowIndex is the row index (starting from 0), name is the value of the name property of the column, value is the value to set (pass null to clear)
    */
   @method()
   clearRowFieldValue(args: {
@@ -189,7 +176,6 @@ export class DynamicFormItemV2Element
   /**
    *
    * @description 当select表单项配置的props.options为二维数组时,用于更新指定的options; 若传入的options为null,则表示删除该options; 若传入的rowIndex为'all',则表示全覆盖更新
-   * @description.en When the props.options configured for a select form item is a two-dimensional array, it is used to update the specified options; if the passed options is null, it means deleting that options; if the passed rowIndex is 'all', it means a full overwrite update
    */
   @method()
   updateOptions(args: {
@@ -254,72 +240,7 @@ export class DynamicFormItemV2Element
   }
 
   /**
-   * @description 批量更新多行多列的 options。每项指定 rowIndex、name 和 options，
-   * 支持对不同行同一列设置不同的 options，也支持同时更新多个列。
-   * @example
-   * batchUpdateOptions({
-   *   updates: [
-   *     { rowIndex: 0, name: 'resource_name', options: [{ label: 'a', value: 'a' }] },
-   *     { rowIndex: 1, name: 'resource_name', options: [{ label: 'b', value: 'b' }] },
-   *     { rowIndex: 0, name: 'vm_name', options: [{ label: 'x', value: 'x' }] },
-   *   ]
-   * })
-   */
-  @method()
-  batchUpdateOptions(args: {
-    updates: Array<{
-      rowIndex: number;
-      name: string;
-      options: GeneralComplexOption<string | number>[];
-    }>;
-  }): void {
-    const { updates } = args;
-    if (!Array.isArray(updates) || updates.length === 0) return;
-
-    const { setColumns } = this.upperRef.current;
-
-    setColumns((prevColumns) => {
-      const nextColumns = lodash.cloneDeep(prevColumns);
-
-      for (const { rowIndex, name, options } of updates) {
-        const colIndex = nextColumns.findIndex((item) => item.name === name);
-        if (colIndex === -1) continue;
-
-        const col = nextColumns[colIndex];
-        const existingOptions =
-          ((col.props as SelectProps)?.options as
-            | GeneralComplexOption<string | number>[]
-            | GeneralComplexOption<string | number>[][]) || [];
-
-        // 确保 options 是二维数组
-        const options2D =
-          Array.isArray(existingOptions) &&
-          existingOptions.length > 0 &&
-          !Array.isArray(existingOptions[0])
-            ? [existingOptions as GeneralComplexOption<string | number>[]]
-            : ([...existingOptions] as GeneralComplexOption<
-                string | number
-              >[][]);
-
-        // 设置指定行的 options
-        options2D[rowIndex] = options;
-
-        nextColumns[colIndex] = {
-          ...col,
-          props: {
-            ...col.props,
-            options: options2D,
-          },
-        } as Column;
-      }
-
-      return nextColumns as Column[];
-    });
-  }
-
-  /**
    * @description 是否显示导入导出按钮
-   * @description.en Whether to show the import and export buttons
    * @group ui
    * @default false
    */
@@ -328,7 +249,6 @@ export class DynamicFormItemV2Element
 
   /**
    * @description 导出数据示例
-   * @description.en Example of the exported data
    * @group ui
    * @default false
    */
@@ -337,7 +257,6 @@ export class DynamicFormItemV2Element
 
   /**
    * @description 导入数据过滤项
-   * @description.en Filter item for import data
    * @group ui
    * @default false
    */
@@ -346,7 +265,6 @@ export class DynamicFormItemV2Element
 
   /**
    * @description 表单项的列数，设置后，表单项会以 grid 布局显示
-   * @description.en Number of columns of the form items; after being set, the form items are displayed in a grid layout
    * @group ui
    */
   @property({ type: Number })
@@ -354,7 +272,6 @@ export class DynamicFormItemV2Element
 
   /**
    * @description 导入数据时触发
-   * @description.en Triggered when data is imported
    */
   @event({ type: "import" }) importEvent: EventEmitter<Record<string, any>[]>;
   private _handleImport = (detail: Record<string, any>[]): void => {
@@ -362,7 +279,7 @@ export class DynamicFormItemV2Element
 
     // 新增规范化事件（向后兼容）
     this.dispatchEvent(
-      new CustomEvent("dynamic.form.item.v2.import", {
+      new CustomEvent("dynamic.form.item.v3.import", {
         detail,
       })
     );
@@ -386,7 +303,7 @@ export class DynamicFormItemV2Element
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <DynamicFormItemV2
+          <DynamicFormItemV3
             formElement={this.getFormElement()}
             name={this.name}
             label={this.label}
@@ -426,4 +343,4 @@ export class DynamicFormItemV2Element
   }
 }
 
-customElements.define("forms.dynamic-form-item-v2", DynamicFormItemV2Element);
+customElements.define("forms.dynamic-form-item-v3", DynamicFormItemV3Element);
