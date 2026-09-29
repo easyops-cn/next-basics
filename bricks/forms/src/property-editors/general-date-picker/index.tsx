@@ -5,8 +5,8 @@ import { getRuntime } from "@next-core/brick-kit";
 import type { EditorComponentProps } from "@next-bricks/visual-builder/property-editor";
 import { generalDatePickerSchema } from "./generalDatePicker.schema";
 
-function GeneralInputComponentFactory(React: typeof _React) {
-  return function GeneralButtonsComponent(
+function GeneralDatePickerComponentFactory(React: typeof _React) {
+  return function GeneralDatePickerComponent(
     props: EditorComponentProps
   ): React.ReactElement {
     const { SchemaFieldComponent, formilySchemaFormatter, scope } = props;
@@ -20,5 +20,5 @@ function GeneralInputComponentFactory(React: typeof _React) {
 
 getRuntime().customEditors.define(
   "forms.general-date-picker",
-  GeneralInputComponentFactory
+  GeneralDatePickerComponentFactory
 );
