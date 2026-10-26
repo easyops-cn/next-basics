@@ -2407,9 +2407,9 @@
   integrity sha512-H4tFI2ePwflXNQk37eXM5s2Zqxa0WYPHOJkQO1M4nCIBlHMlFiZ/C+Bzf3ywpqaYsZiIMDGWtKzknZEhnnArkw==
 
 "@next-core/build-config-factory@^2.26.12", "@next-core/build-config-factory@^2.26.22":
-  version "2.26.22"
-  resolved "https://registry.npmjs.org/@next-core/build-config-factory/-/build-config-factory-2.26.22.tgz#d07f7f3ece95255a16c2a8f0d2a8411de6033fe3"
-  integrity sha512-u915KJAQeqJ0FF9/aqe6JPanmz59ER92nLph2N81JwOeH8iUhX0qRSkvHFC5nFH3o/wQdwONKLSeEVOuyG8neQ==
+  version "2.27.0"
+  resolved "https://registry.npmjs.org/@next-core/build-config-factory/-/build-config-factory-2.27.0.tgz#35d7986cc38d0930b7011242d47ca1e1350d2bb0"
+  integrity sha512-pnhWCeLM0bxr+Q0tWxv8l7QIK5SzZQ8n8778kAHcfhSLt/bYEUjC/LCex3VASmlJ4WW+pwQVFDf9UZbXOQ5f+A==
   dependencies:
     "@next-core/brick-utils" "^2.52.18"
     "@next-core/repo-config" "^0.2.5"
@@ -2771,10 +2771,10 @@
     js-base64 "^3.7.7"
     marked "^2.1.3"
 
-"@next-libs/cmdb-instances@^7.31.0":
-  version "7.31.0"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-7.31.0.tgz#32279e916cd7c5f617e57ccc45c99a81f651cf8c"
-  integrity sha512-BKSZCdRpGbGRLX38HUcVv3Q+bsOhoIMdbgpp44Q0YaOgoBoZzSY6OCdGdfxKwyMJrePlHt1ehJwTuZlkKjW2zg==
+"@next-libs/cmdb-instances@^7.32.0":
+  version "7.32.0"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-7.32.0.tgz#1d3255bb8ff2127fe338b8234963a407b0575b4b"
+  integrity sha512-z6mhYlwpiadfZ18/AeO6O/zM/VjuUhdJtXdg9D1qrYOeNlsxjloVmcI+SS07s7z/7xwHZwQi59JKK6YUV1eruw==
   dependencies:
     "@next-core/brick-types" "^2.97.0"
     "@next-libs/basic-components" "^5.5.3"
