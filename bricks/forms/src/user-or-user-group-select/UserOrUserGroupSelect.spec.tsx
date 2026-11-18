@@ -18,7 +18,7 @@ jest.spyOn(brickKit, "getAuth").mockReturnValue({
   username: "tester",
 });
 jest.spyOn(brickKit, "getRuntime").mockReturnValue({
-  getMiscSettings: () => ({}),
+  getFeatureFlags: () => ({}),
 } as any);
 jest.mock("@next-sdk/cmdb-sdk");
 jest.mock("@next-sdk/permission-sdk");
@@ -34,13 +34,13 @@ const mockGetPermissionList = PermissionApi_getPermissionList as jest.Mock;
 describe("UserOrUserGroupSelect", () => {
   beforeEach(() => {
     (brickKit.getRuntime as jest.Mock).mockReturnValue({
-      getMiscSettings: () => ({}),
+      getFeatureFlags: () => ({}),
     });
   });
 
   it("should use slash between show key fields when enabled", async () => {
     (brickKit.getRuntime as jest.Mock).mockReturnValue({
-      getMiscSettings: () => ({ showKeyFieldWithSlash: true }),
+      getFeatureFlags: () => ({ showKeyFieldWithSlash: true }),
     });
     mockPostSearch.mockResolvedValue({
       list: [
