@@ -34,7 +34,12 @@ import {
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import { getInstanceNameKeys } from "@next-libs/cmdb-utils";
 import { InstanceListModal } from "@next-libs/cmdb-instances";
-import { getAuth, handleHttpError, useProvider } from "@next-core/brick-kit";
+import {
+  getAuth,
+  getRuntime,
+  handleHttpError,
+  useProvider,
+} from "@next-core/brick-kit";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { useTranslation } from "react-i18next";
 import {
@@ -109,6 +114,8 @@ export function LegacyUserSelectFormItem(
   const userGroupShowKey: string[] = getInstanceNameKeys(
     props.objectMap?.["USER_GROUP"]
   );
+  const showKeyFieldWithSlash =
+    getRuntime().getMiscSettings()?.showKeyFieldWithSlash === true;
   const { t } = useTranslation(NS_FORMS);
 
   const getLabel = (
@@ -123,7 +130,11 @@ export function LegacyUserSelectFormItem(
           if (index === 0) {
             return instanceData[key];
           } else {
-            return instanceData[key] ? "(" + instanceData[key] + ")" : "";
+            return instanceData[key]
+              ? showKeyFieldWithSlash
+                ? "/" + instanceData[key]
+                : "(" + instanceData[key] + ")"
+              : "";
           }
         })
         .join("");

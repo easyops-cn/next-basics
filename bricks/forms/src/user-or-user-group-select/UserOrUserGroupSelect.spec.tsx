@@ -17,6 +17,9 @@ import * as brickKit from "@next-core/brick-kit";
 jest.spyOn(brickKit, "getAuth").mockReturnValue({
   username: "tester",
 });
+jest.spyOn(brickKit, "getRuntime").mockReturnValue({
+  getMiscSettings: () => ({}),
+} as any);
 jest.mock("@next-sdk/cmdb-sdk");
 jest.mock("@next-sdk/permission-sdk");
 jest.mock("@next-libs/cmdb-instances", () => ({
@@ -29,6 +32,55 @@ const mockPostSearch = InstanceApi_postSearch as jest.Mock;
 const mockGetPermissionList = PermissionApi_getPermissionList as jest.Mock;
 
 describe("UserOrUserGroupSelect", () => {
+  beforeEach(() => {
+    (brickKit.getRuntime as jest.Mock).mockReturnValue({
+      getMiscSettings: () => ({}),
+    });
+  });
+
+  it("should use slash between show key fields when enabled", async () => {
+    (brickKit.getRuntime as jest.Mock).mockReturnValue({
+      getMiscSettings: () => ({ showKeyFieldWithSlash: true }),
+    });
+    mockPostSearch.mockResolvedValue({
+      list: [
+        {
+          instanceId: "instanceId",
+          name: "easyops",
+          nickname: "uwin",
+        },
+        {
+          instanceId: "instanceId1",
+          name: "tester",
+        },
+      ],
+    });
+
+    const wrapper = mount(
+      <UserOrUserGroupSelect
+        isMultiple={true}
+        objectList={[
+          {
+            objectId: "USER",
+            view: { show_key: ["name", "nickname"] },
+          },
+          {
+            objectId: "USER_GROUP",
+            view: { show_key: ["name"] },
+          },
+        ]}
+        value={{ selectedUser: ["easyops", "tester"] }}
+      />
+    );
+
+    await (global as any).flushPromises();
+    wrapper.update();
+    expect(wrapper.find(Select).prop("value")).toEqual([
+      { key: "easyops", label: "easyops/uwin" },
+      { key: "tester", label: "tester" },
+    ]);
+  });
+
   it("should work", async () => {
     mockPostSearch.mockResolvedValue({
       list: [
