@@ -114,8 +114,9 @@ export function LegacyUserSelectFormItem(
   const userGroupShowKey: string[] = getInstanceNameKeys(
     props.objectMap?.["USER_GROUP"]
   );
+  const runtime = getRuntime();
   const showKeyFieldWithSlash =
-    getRuntime().getMiscSettings()?.showKeyFieldWithSlash === true;
+    runtime.getFeatureFlags()?.showKeyFieldWithSlash === true;
   const { t } = useTranslation(NS_FORMS);
 
   const getLabel = (
