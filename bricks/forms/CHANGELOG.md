@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.311.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.310.9...@next-bricks/forms@1.311.0) (2026-11-18)
+
+
+### Features
+
+* **forms:** support slash show key for user select ([8a9cdf0](https://github.com/easyops-cn/next-basics/commit/8a9cdf0623791ca2394aae91a222e6b34d811bd7))
+
+
+
+
+
 ## [1.310.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.310.8...@next-bricks/forms@1.310.9) (2026-10-26)
 
 **Note:** Version bump only for package @next-bricks/forms
