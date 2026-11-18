@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.311.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.311.0...@next-bricks/forms@1.311.1) (2026-11-18)
+
+
+### Bug Fixes
+
+* **forms:** read slash show key from feature flags ([a485407](https://github.com/easyops-cn/next-basics/commit/a4854078ab56257b7e8cbdaf1d8e85887167315f))
+
+
+
+
+
 # [1.311.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.310.9...@next-bricks/forms@1.311.0) (2026-11-18)
 
 
