@@ -29,8 +29,10 @@ export interface GeneralInputElementProps {
   copyButton?: boolean;
   inputBoxStyle?: React.CSSProperties;
   useBrickVisible?: boolean;
+  labelDescription?: string;
+  labelDescriptionFontSize?: string | number;
+  labelDescriptionColor?: string;
 }
-
 
 /**
  * @id forms.general-input
@@ -42,6 +44,7 @@ export interface GeneralInputElementProps {
  * @slots
  * @history
  * 1.61.0:新增属性 `addonBefore`,`addonAfter`
+ * 1.311.0:新增属性 `labelDescription`,`labelDescriptionFontSize`,`labelDescriptionColor`，用于在标签后展示可设置字体大小和颜色的文字说明
  * @memo
  *>Tips: 对于 event.detail 为 Keyboard Event 时， 由于 react 对于合成事件的处理，打印出来的整个 Keyboard Event 相关属性都为 null, 但可通过单独查看某个属性来得到值（如示例所示），相关详情信息可查看 [查看 react 合成事件](https://zh-hans.reactjs.org/docs/events.html#event-pooling)。
  *### METHODS
@@ -56,7 +59,10 @@ export interface GeneralInputElementProps {
  *| getFormElement | -      | Gets the form element the input belongs to |
  */
 
-export class GeneralInputElement extends FormItemElement  implements GeneralInputElementProps {
+export class GeneralInputElement
+  extends FormItemElement
+  implements GeneralInputElementProps
+{
   /* =========================== Group: basic =========================== */
 
   /**
@@ -101,6 +107,40 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
    * @group formLabel
    */
   @property({ attribute: false }) declare label: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 标签后的文字说明
+   * @description.en Text description appended after the label
+   * @group formLabel
+   */
+  @property({ attribute: false })
+  labelDescription: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 标签文字说明的字体大小，如 12px
+   * @description.en Font size of the label text description, e.g. 12px
+   * @group formLabel
+   */
+  @property({ attribute: false })
+  labelDescriptionFontSize: string | number;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 标签文字说明的颜色
+   * @description.en Color of the label text description
+   * @editor color
+   * @group formLabel
+   */
+  @property({ attribute: false })
+  labelDescriptionColor: string;
 
   /* =========================== Group: formValidation =========================== */
 
@@ -447,7 +487,7 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
             inputBoxStyle={this.inputBoxStyle}
             copyButton={this.copyButton}
             onChange={this._handleChange}
-            // @ts-ignore
+            // @ts-expect-error native KeyboardEvent handler differs from React synthetic event type
             onKeyDown={this._handleKeyDown}
             onKeyUp={this._handleKeyUp}
             onFocus={this._handleFocus}
@@ -462,6 +502,9 @@ export class GeneralInputElement extends FormItemElement  implements GeneralInpu
             trim={this.trim}
             allowClear={this.allowClear}
             useBrickVisible={this.useBrickVisible}
+            labelDescription={this.labelDescription}
+            labelDescriptionFontSize={this.labelDescriptionFontSize}
+            labelDescriptionColor={this.labelDescriptionColor}
           />
         </BrickWrapper>,
         this
