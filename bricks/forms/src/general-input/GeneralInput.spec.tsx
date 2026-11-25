@@ -35,7 +35,7 @@ describe("GeneralInput", () => {
       target: {
         value: "good",
       },
-    });
+    } as any);
     expect(handleBlur).toBeCalledWith("good");
   });
 
@@ -86,5 +86,31 @@ describe("GeneralInput", () => {
       },
     } as any);
     expect(handleBlur).toBeCalledWith("good");
+  });
+
+  it("should render label description with font size and color", () => {
+    const wrapper = mount(
+      <GeneralInput
+        name="username"
+        label="hello"
+        labelDescription="optional"
+        labelDescriptionFontSize="12px"
+        labelDescriptionColor="red"
+      />
+    );
+    const description = wrapper
+      .find("span")
+      .filterWhere((node) => node.text() === "optional");
+    expect(description).toHaveLength(1);
+    expect(description.prop("style")).toMatchObject({
+      fontSize: "12px",
+      color: "red",
+    });
+  });
+
+  it("should not render label description when not provided", () => {
+    const wrapper = mount(<GeneralInput name="username" label="hello" />);
+    expect(wrapper.text()).toContain("hello");
+    expect(wrapper.text()).not.toContain("optional");
   });
 });

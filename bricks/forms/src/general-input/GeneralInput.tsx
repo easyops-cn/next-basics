@@ -37,8 +37,14 @@ interface InputGroupProps
   addonBefore?: string;
   addonAfter?: string;
   allowClear?: boolean;
+  labelDescription?: string;
+  labelDescriptionFontSize?: string | number;
+  labelDescriptionColor?: string;
   onChange?: (vevent: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
+  onPressEnter?: React.KeyboardEventHandler<HTMLInputElement>;
   useBrickVisible?: boolean;
 }
 
@@ -80,7 +86,7 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
   const input = (
     <Input
       value={value}
-      // @ts-ignore
+      // @ts-expect-error inputBoxStyle may be undefined, fallback to widthSize
       style={inputBoxStyle ?? { width: widthSize[size] }}
       ref={ref}
       allowClear={allowClear}
@@ -125,9 +131,33 @@ export function GeneralInput(props: GeneralInputProps): React.ReactElement {
     }
   }, [props.useBrickVisible]);
 
+  const {
+    label,
+    labelDescription,
+    labelDescriptionFontSize,
+    labelDescriptionColor,
+  } = props;
+
+  const labelNode = labelDescription ? (
+    <span>
+      {label}
+      <span
+        style={{
+          marginLeft: 4,
+          fontSize: labelDescriptionFontSize,
+          color: labelDescriptionColor,
+        }}
+      >
+        {labelDescription}
+      </span>
+    </span>
+  ) : (
+    label
+  );
+
   return (
-    // @ts-ignore
-    <FormItemWrapper {...props}>
+    // @ts-expect-error label accepts a React node while FormItemWrapper type is string
+    <FormItemWrapper {...props} label={labelNode}>
       <InputGroup
         {...props}
         onChange={handleChange}
