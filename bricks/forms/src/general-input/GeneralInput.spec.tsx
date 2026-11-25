@@ -35,7 +35,7 @@ describe("GeneralInput", () => {
       target: {
         value: "good",
       },
-    });
+    } as any);
     expect(handleBlur).toBeCalledWith("good");
   });
 

@@ -42,6 +42,9 @@ interface InputGroupProps
   labelDescriptionColor?: string;
   onChange?: (vevent: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
+  onPressEnter?: React.KeyboardEventHandler<HTMLInputElement>;
   useBrickVisible?: boolean;
 }
 

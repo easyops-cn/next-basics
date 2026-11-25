@@ -409,7 +409,7 @@ export class GeneralInputElement
     Record<string, any>
   >;
 
-  private _handleKeyDown = (e: KeyboardEvent): void => {
+  private _handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     this.keydownEvent.emit(e);
   };
   /**
@@ -421,7 +421,7 @@ export class GeneralInputElement
     Record<string, any>
   >;
 
-  private _handleKeyUp = (e: KeyboardEvent) => {
+  private _handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     this.keyupEvent.emit(e);
   };
   /**
@@ -452,7 +452,7 @@ export class GeneralInputElement
   @event({ type: "general.input.press.enter" }) enterPressEvent: EventEmitter<
     Record<string, any>
   >;
-  private _handlePressEnter = (e: KeyboardEvent) => {
+  private _handlePressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     this.enterPressEvent.emit(e);
   };
 
@@ -487,7 +487,6 @@ export class GeneralInputElement
             inputBoxStyle={this.inputBoxStyle}
             copyButton={this.copyButton}
             onChange={this._handleChange}
-            // @ts-expect-error native KeyboardEvent handler differs from React synthetic event type
             onKeyDown={this._handleKeyDown}
             onKeyUp={this._handleKeyUp}
             onFocus={this._handleFocus}
