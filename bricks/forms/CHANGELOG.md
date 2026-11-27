@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.311.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.311.2...@next-bricks/forms@1.311.3) (2026-11-27)
+
+
+### Bug Fixes
+
+* **deps:** bump @next-libs/crontab to ^2.0.11，使构件包携带 cron 描述修复重新发版（BUG-27555） ([6b7ca17](https://github.com/easyops-cn/next-basics/commit/6b7ca179291e53c3fbe6d6756b9d5a55373973bd))
+
+
+
+
+
 ## [1.311.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.311.1...@next-bricks/forms@1.311.2) (2026-11-25)
 
 

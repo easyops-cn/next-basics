@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.339.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.11...@next-bricks/presentational-bricks@1.339.12) (2026-11-27)
+
+
+### Bug Fixes
+
+* **deps:** bump @next-libs/crontab to ^2.0.11，使构件包携带 cron 描述修复重新发版（BUG-27555） ([6b7ca17](https://github.com/easyops-cn/next-basics/commit/6b7ca179291e53c3fbe6d6756b9d5a55373973bd))
+
+
+
+
+
 ## [1.339.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.339.10...@next-bricks/presentational-bricks@1.339.11) (2026-09-18)
 
 
