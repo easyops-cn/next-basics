@@ -2,7 +2,7 @@ import { Locale, K } from "../constants";
 
 const locale: Locale = {
   [K.FORMS]: "Forms",
-  [K.CMDB_INSTANCE_SELECT_PANEL_ADD_LINK]: "添加",
+  [K.CMDB_INSTANCE_SELECT_PANEL_ADD_LINK]: "添加1",
   [K.CMDB_INSTANCE_SELECT_PANEL_MODAL_TITLE]: "批量添加",
   [K.TO]: "到",
   [K.START_TIME_END_TIME_CANNOT_EQUAL]: "开始时间和结束时间不能相等",
